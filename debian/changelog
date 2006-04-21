@@ -1,0 +1,1093 @@
+ubiquity (0.99.61) dapper; urgency=low
+
+  * Rename from espresso to ubiquity, to better suggest an association with
+    Ubuntu. Log output now written to /var/log/installer/syslog rather than
+    using the package name.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Apr 2006 12:50:27 +0100
+
+espresso (0.99.60) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - Change programName passed to KAboutData to "Installer" to avoid
+      crashes creating kdialogs.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Apr 2006 03:00:50 +0100
+
+espresso (0.99.59) dapper; urgency=low
+
+  * Copy log files right at the end of the installation, rather than just
+    after copying the filesystem.
+  * Log which language packs we're keeping.
+  * Make sure to keep language packs even if the apt update fails.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Apr 2006 01:33:34 +0100
+
+espresso (0.99.58) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - Fix various QString/unicode compatibility problems.
+  * Fix QString/unicode compatibility problem in partman component.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 19 Apr 2006 16:43:15 +0100
+
+espresso (0.99.57) dapper; urgency=low
+
+  * Remove old (and broken anyway, see Malone #26436) code to embed Mozilla
+    into the welcome page, and drop the python-gnome2-extras dependency.
+  * KDE frontend:
+    - Remove bogus hostname, fullname, and name instance variables; fix
+      default hostname setting in info_loop() (closes: Malone #40143).
+    - Remove old set_locales function, which is no longer needed and
+      apparently causes a crash in pykde.
+    - Comment out translate_widgets call in constructor, which Jonathan says
+      sometimes causes a crash when creating kdialogs.
+  * GTK frontend:
+    - Add "Settings" category to .desktop file in order to move the menu
+      entry to System -> Applications.
+  * Fix going forward from autopartition question with the resize option
+    selected; back up properly from partman-partitioning/new_size question
+    on error (part of Malone #39062).
+  * Fix some spurious newlines in Indonesian and Polish translations.
+  * Automatic update of included source packages: partman-auto 45ubuntu9.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 19 Apr 2006 15:43:59 +0100
+
+espresso (0.99.56) dapper; urgency=low
+
+  * Set OVERRIDE_UNSUPPORTED_OS=1 while running grub-installer to force it
+    to use its default MBR selection method (closes: Malone #40131).
+  * Automatic update of included source packages: grub-installer
+    1.14ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 19 Apr 2006 12:04:10 +0100
+
+espresso (0.99.55) dapper; urgency=low
+
+  * GTK frontend:
+    - Add support for disabling xscreensaver as well as gnome-screensaver
+      (thanks, Daniele Favara; closes: Malone #40095).
+    - Set a window icon (closes: Malone #40052).
+  * Update various translations from Rosetta.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 19 Apr 2006 10:59:20 +0100
+
+espresso (0.99.54) dapper; urgency=low
+
+  * Change .desktop name and window title from "Install System Permanently"
+    to just "Install", to help with limited CD cover space.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 18 Apr 2006 21:47:53 +0100
+
+espresso (0.99.53) dapper; urgency=low
+
+   * sudo back to the live CD user to run gnome-session-save, otherwise it
+     fails due to having a different home directory
+
+ -- Matt Zimmerman <mdz@ubuntu.com>  Tue, 18 Apr 2006 09:14:06 -0700
+
+espresso (0.99.52) dapper; urgency=low
+
+  * KDE frontend:
+    - Fix unicode/qstring convertion problem
+      Closes Malone #39666
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Tue, 18 Apr 2006 12:24:52 +0100
+
+espresso (0.99.51) dapper; urgency=low
+
+  * GTK frontend:
+    - Add a separator above the dialog buttons.
+  * Add silo-installer integration for sparc.
+  * Add an icon (thanks, Pascal Klein; closes: Malone #32358).
+  * Automatic update of included source packages: choose-mirror
+    1.17ubuntu9, partman-base 78ubuntu2, silo-installer 1.03ubuntu1.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 18 Apr 2006 07:37:45 +0100
+
+espresso (0.99.50) dapper; urgency=low
+
+  * KDE frontend:
+    - Change title bar to "Install System Permanently".
+    - Reboot properly using ksmserver
+    - Show and return disk choices
+    - Add formatting to intro message
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 14 Apr 2006 02:57:02 +0100
+
+espresso (0.99.49) dapper; urgency=low
+
+  * GTK frontend:
+    - Change title bar to "Install System Permanently".
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 14 Apr 2006 02:57:02 +0100
+
+espresso (0.99.48) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Make the intro message a bit less scary, and make it clear that this is
+    a beta release.
+  * GTK frontend:
+    - Set a busy cursor while waiting for debconffiltered subprocesses.
+    - If GNOME is installed, reboot properly by telling gdm to reboot and
+      then killing the GNOME session (closes: Malone #38027).
+  * Consider ext2, jfs, reiserfs, and xfs partitions for the default root
+    partition selection as well as ext3 partitions.
+  * Stop treating extended partitions as ext3; this just seems dangerously
+    wrong.
+  * Make the default partition selection prefer partitions that were just
+    created in the advanced partitioner (closes: Malone #37581).
+  * Remove NoDisplay=true from .desktop files, now that espresso removes
+    itself from the target system.
+  * Automatic update of included source packages: base-installer
+    1.42ubuntu8, kbd-chooser 1.23ubuntu15.
+
+  [ Jonathan Riddell ]
+  * Remove gtk from kbd_chooser
+  * KDE Frontend:
+    - Make widget layout more consistent
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 14 Apr 2006 02:36:53 +0100
+
+espresso (0.99.47) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Fix mountpoints page
+    - Update mountpoints_to_summary
+    - Language page returns the selected language
+    - Widgets get translated into selected language
+    - Add Kubuntu logo
+    - Timezone page labels work
+
+  [ Colin Watson ]
+  * When removing packages that don't belong on the installed system, purge
+    their configuration too.
+  * Remove kernels that aren't appropriate for the current system, using
+    base-installer's kernel selection logic. This fixes 32-bit powerpc
+    systems, which otherwise would try to boot a 64-bit kernel by default.
+  * Rephrase all strings that talk about "Ubuntu" so that Kubuntu, Edubuntu,
+    and Xubuntu don't have branding problems. The boot splash image, desktop
+    wallpaper, and so on should be enough to indicate what you're
+    installing.
+  * GTK frontend:
+    - Go back to using 'gksudo --desktop %k' rather than sudo in the
+      .desktop file, now that it seems to be fixed; this gets us startup
+      notification for free.
+  * Automatic update of included source packages: kbd-chooser
+    1.23ubuntu14, localechooser 0.27ubuntu16, tzsetup 1:0.8ubuntu6.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 13 Apr 2006 16:33:14 +0100
+
+espresso (0.99.46) dapper; urgency=low
+
+  * Disable swap before starting gparted or qtparted. partman will enable it
+    again after mountpoint selection if any swap partitions were selected.
+  * Install debconf-get again, lost in the component packaging merge.
+  * Reconfigure the locale according to the selected country after the
+    timezone question.
+  * Set HOME=/root for debconffiltered processes. This fixes
+    yaboot-installer, since the hfsutils are run in /target and want to
+    write to $HOME/.hcwd.
+  * Fix calling of /lib/partman/update.d scripts. This should make the
+    manual partitioner work somewhat better.
+  * Automatic update of included source packages: localechooser
+    0.27ubuntu15.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Apr 2006 18:31:26 +0100
+
+espresso (0.99.45) dapper; urgency=low
+
+  * Fix validation to accept hyphens in hostname (thanks, Alexandre Otto
+    Strube; closes: Malone #39218).
+  * GTK frontend:
+    - Avoid crash if no partition is selected for a given mount point
+      (closes: Malone #39116).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Apr 2006 03:45:45 +0100
+
+espresso (0.99.44) dapper; urgency=low
+
+  * GTK frontend:
+    - Say "Selected region" rather than "Selected country".
+    - Set default hostname to <username>-desktop or <username>-laptop
+      depending on the result of laptop-detect, unless the hostname has been
+      edited by hand.
+    - Set initial language based on boot parameter from gfxboot or previous
+      espresso run (closes: Malone #39051).
+  * Depend on localechooser-data (>= 0.27ubuntu12) for a matching
+    languagelist (closes: Malone #39043).
+  * Silently skip languages rather than crashing if we can't find their
+    language code.
+  * Add ${shlibs:Depends} to espresso's and espresso-frontend-gtk's Depends
+    (closes: Malone #39115).
+  * Retranslate Cancel/Back/Forward buttons when changing language.
+  * Update translations from Rosetta: Arabic, Czech, French, Hungarian,
+    Lithuanian, Macedonian, Norwegian Bokmål, Dutch, Portuguese (Brazil),
+    Tagalog, Ukrainian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Apr 2006 17:40:35 +0100
+
+espresso (0.99.43) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Add /cdrom/casper/filesystem.squashfs to the list of filesystem images
+    we try to mount if casper didn't do it for us.
+  * Use choose-mirror and apt-setup to set up a standard
+    /etc/apt/sources.list.
+  * GTK frontend:
+    - Display more human-readable names for cities.
+    - Display the selected country (using the existing iso-codes
+      translations, which I hope should avoid most of the thorny
+      geopolitical issues).
+    - Stop depending on firefox; we don't display HTML any more.
+
+  [ Jonathan Riddell ]
+  * Make usersetup.py frontend independent
+  * KDE Frontend:
+    - Add user information validation
+    - Implement basics of timezone selection
+    - Enable non-root user error on startup
+    - Update mountpoints page
+    - Use KDE button order
+  * GTK Frontend:
+    - Disable Forward button on user information page if not all
+      fields are filled out
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Apr 2006 17:52:28 +0100
+
+espresso (0.99.42) dapper; urgency=low
+
+  * Disable pkgstriptranslations while building nested packages. Requires
+    pkgstriptranslations (>= 27) on the buildds.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  7 Apr 2006 10:24:13 +0100
+
+espresso (0.99.41) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Set debian-installer/country based on selected timezone.
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Make step label work
+    - Make back and cancel buttons work
+    - Enable and disable buttons at correct times
+    - Implement keyboard chooser
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  6 Apr 2006 22:39:35 +0100
+
+espresso (0.99.40) dapper; urgency=low
+
+  * Install localechooser's post-base-installer and prebaseconfig scripts as
+    executable again.
+  * Fix copying of /etc/network/interfaces and /etc/resolv.conf.
+  * Remove spurious (DOS-style!) newline from Ukrainian translation.
+  * Propagate selected keymap to installed system (closes: Malone #37748).
+  * Show the selected keymap on the summary page (although only the
+    machine-readable console keymap name for now).
+  * Automatic update of included source packages: debian-installer-utils
+    1.22ubuntu7, yaboot-installer 1.1.4ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  6 Apr 2006 16:16:42 +0100
+
+espresso (0.99.39) dapper; urgency=low
+
+  * Fix build failure on powerpc due to missing yaboot-installer directory.
+  * Automatic update of included source packages: grub-installer
+    1.14ubuntu3, kbd-chooser 1.23ubuntu13, localechooser 0.27ubuntu13,
+    tzsetup 1:0.8ubuntu5, user-setup 0.05ubuntu6.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  5 Apr 2006 21:35:13 +0100
+
+espresso (0.99.38) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Make espresso-frontend-gtk depend on espresso.
+  * Reorganise component packaging. Instead of having to modify each d-i
+    component to produce an espresso-* binary package (in most cases) and
+    having to do coordinated uploads of that package and espresso all the
+    time, we now include all the relevant d-i source packages in this one
+    (under d-i/source/), build them as part of our build process, and
+    include all the components in the espresso binary package. 'debian/rules
+    update' can be used to do automatic updates of these copied source
+    packages. This should ultimately simplify maintenance work as well as
+    making it much easier for third parties to make local changes to this
+    installer.
+  * All FilteredCommand implementations for components now belong to
+    espresso rather than to the component (because they were quite tightly
+    bound to espresso's UI frontends anyway) and will be removed from
+    component packages.
+  * Use debian-installer/dummy template (from debian-installer-utils) for
+    preseeding rather than espresso/dummy.
+  * Update translations from Rosetta: Catalan, German, Greek, Esperanto,
+    Spanish, Finnish, French, Hebrew, Hungarian, Polish, Russian, Slovak,
+    Swedish, Ukrainian.
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - Fix summary page
+    - Add progress dialogue
+  * Don't upgrade in apt-install (closes: Malone #35614).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  5 Apr 2006 15:14:00 +0100
+
+espresso (0.99.37) dapper; urgency=low
+
+  * GTK frontend:
+    - Remove bogus hostname, fullname, and name instance variables; fix
+      get_hostname() method.
+    - Pass desired filesystem type from gparted to partman (closes: Malone
+      #34921). Requires partman (>= 78ubuntu1+11).
+  * Fix logging functions not to use eval, so that they don't break when
+    asked to log something containing "'" characters.
+  * Add part_devices instance variables to the GTK and KDE frontends to
+    avoid horribleness when trying to map a partition label back to a device
+    name.
+  * Perform network configuration: we copy /etc/network/interfaces and
+    /etc/resolv.conf, write /etc/hostname and /etc/hosts afresh based on the
+    selected hostname, and write /etc/iftab afresh based on the interfaces
+    present (closes: Malone #33064). Eventually most of this should be
+    replaced by a call to netcfg, but that's difficult at the moment.
+  * Add explicit text with a language question to the language screen
+    (closes: Malone #36973).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat,  1 Apr 2006 13:24:21 +0100
+
+espresso (0.99.36.1) dapper; urgency=low
+
+  * Don't copy regular files or symlinks if they already exist in the target
+    (e.g. /etc/fstab).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 30 Mar 2006 14:43:50 +0100
+
+espresso (0.99.36) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - merge with GTK, adds disk selection page
+
+  [ Colin Watson ]
+  * Make life easier for components called from Install: support extra
+    environment variables returned from prepare(), and allow an existing
+    Debconf instance to be passed in the constructor.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 29 Mar 2006 10:25:04 +0100
+
+espresso (0.99.35) dapper; urgency=low
+
+  * Fix estimated install copying time. We no longer use cpio to do the
+    copying, but instead do the whole thing in-process. This lets us avoid
+    buffering issues.
+  * Avoid a long pause without any info message while updating apt's indices
+    before downloading language packs.
+  * GTK frontend:
+    - Enlarge primary text in progress windows, per the GNOME HIG.
+    - Turn debconf progress dialog into a normal progress window, since it
+      doesn't have any buttons.
+    - Allow the label above the keyboard test box to wrap.
+  * Update translations for most languages from Rosetta.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 28 Mar 2006 11:24:22 +0100
+
+espresso (0.99.34) dapper; urgency=low
+
+  * GTK frontend:
+    - Remove remaining Spanish strings. Make some of these translatable
+      using existing strings in partman; the rest will follow later.
+    - In manual partitioning, only mark partitions automatically mounted on
+      swap, /, /usr, /var, or /boot to be reformatted by default.
+    - Honour the desired type of a filesystem newly created in gparted in
+      preference to its current detected type.
+    - If a newly-created filesystem is selected, disable the Reformat
+      checkbox and force it on, as it makes no sense off.
+  * Exempt swap from duplicate mountpoint checks (part of Malone #34465).
+  * Fix crash when reporting that a partition is too small.
+  * Make the estimated install copying time a bit less madly wrong (it was
+    estimating based on the total file size rather than the amount left to
+    copy), although I think buffering on cpio's stdin is still causing it to
+    be pretty badly out most of the time.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 24 Mar 2006 20:00:34 +0000
+
+espresso (0.99.33) dapper; urgency=low
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Only add new mountpoint table rows if all current rows have been
+      filled (closes: Malone #34922).
+    - Fix widget names in mount point error handling (closes: Malone
+      #36154).
+    - Cope with the keyboard selector having no row selected.
+    - Cope with getting set_keyboard and set_keyboard_choices in either
+      order.
+    - Change "Format?" to "Reformat?" in mountpoint table.
+
+  [ Daniel Silverstone ]
+  * GTK frontend: Change breadcrumbs to a Step N-of-M display instead.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 23 Mar 2006 18:07:02 +0000
+
+espresso (0.99.32) dapper; urgency=low
+
+  [ Tollef Fog Heen ]
+  * Change dependency on espresso-keyboard-setup to espresso-kbd-chooser,
+    since that component moved to another package with a lower version
+    number and we don't like epochs.
+  * Make the keyboard selector work somewhat sanely -- call back to
+    kbd-chooser when the selection is changed.
+  * Fix choices_display_map to work correctly and map to the other value
+    instead of being an identity map.
+
+  [ Colin Watson ]
+  * Update Portuguese translation from Rosetta.
+  * GTK frontend:
+    - Prevent gnome-screensaver from kicking in while Espresso is running
+      (closes: Malone #34510 espresso-frontend-gtk task).
+    - Translate window title immediately when changing language.
+    - Make title of install progress bar translatable.
+    - Make sure that cancelling the installation at the summary page cancels
+      partman too.
+    - Make "Installation complete" translatable.
+  * Make sure that debconffilter never tries to call the same widget more
+    than once for a single command.
+  * Move more frontend-independent translation logic from the GTK frontend
+    to espresso.misc so that other frontends can use it.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 22 Mar 2006 10:48:13 +0000
+
+espresso (0.99.31) dapper; urgency=low
+
+  * Add a pile of translations (only about two per language, but better than
+    nothing) taken from elsewhere in the installer.
+  * GTK frontend:
+    - Fix immediate translation of widgets when changing language.
+    - Add a disk selector. Requires partman (>= 78ubuntu1+10).
+  * KDE frontend:
+    - Add disk selector stub methods. These need to be fleshed out.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 20 Mar 2006 10:15:16 +0000
+
+espresso (0.99.30) dapper; urgency=low
+
+  * GTK frontend:
+    - Move partitioning committal into the main installation progress bar.
+  * Remove text resizing based on the screen size, which as well as being
+    annoying was also implemented in a way that made our lives difficult for
+    internationalisation.
+  * Add internationalisation support for those strings that don't come from
+    d-i, with translations stored in debconf templates. I've only set this
+    up in the GTK frontend so far, but it should be straightforward to do
+    elsewhere. Requires espresso-locale (>= 0.27ubuntu11).
+  * Improve the final dialog text.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 Mar 2006 00:23:59 +0000
+
+espresso (0.99.29) dapper; urgency=low
+
+  * Fix variable/method name clash in Install's apt error handling.
+  * GTK frontend:
+    - Rename "Adjust..." to "Set Time...".
+    - Remove justification text on location page; instead, add brief
+      instructions at the top. Rename "Nearest city" to "Selected city".
+    - Make the password entry boxes smaller.
+    - Change the summary text box to a selectable label so that it gets the
+      standard dialog background colour. Add padding around the text.
+  * Change permissions of log file in /target to 600 to guard against any
+    possible leakage of sensitive data.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 14 Mar 2006 13:46:49 +0000
+
+espresso (0.99.28) dapper; urgency=low
+
+  * GTK frontend:
+    - Add an "Adjust..." button on the timezone screen which starts
+      time-admin to let you change the current time.
+  * Make espresso-gtkui.desktop use sudo for now, to work around gksudo
+    breakage on the live CD. This means we rely on the live CD having
+    passwordless sudo.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 10 Mar 2006 12:30:52 +0000
+
+espresso (0.99.27) dapper; urgency=low
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Set initial Forward button text in glade rather than in code.
+    - Change Forward button to say "Install" when on the summary page.
+    - Revamp identification page layout. Add callbacks to let user-setup
+      tell us about errors on this page more accurately.
+  * KDE frontend:
+    - Add guesswork/stub implementations for set_fullname(), set_username(),
+      username_error(), and password_error(), for use by user-setup.
+
+  [ Daniel Silverstone ]
+  * Make sure GTK gparted integration supports the new gparted.
+  * Depend on the new gparted.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  9 Mar 2006 17:32:11 +0000
+
+espresso (0.99.26) dapper; urgency=low
+
+  * GTK frontend:
+    - Add a test box to the keymap page. (Note that your keymap isn't
+      actually changed in the installer at the moment, so this won't work
+      yet.)
+    - Display the current time in the format used by the currently-selected
+      locale.
+  * GTK and KDE frontends:
+    - Move the keymap page after the location page, so that in future the
+      keymap page can be initialised using data for the selected country.
+  * Make espresso.tz.SystemTzInfo.dst() pretend that DST is not in effect if
+    we have no DST information, rather than returning the more correct None;
+    this allows fromutc() to be used reliably.
+  * Use espresso-yaboot to install yaboot on powerpc systems.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  9 Mar 2006 08:32:42 +0000
+
+espresso (0.99.25) dapper; urgency=low
+
+  * GTK frontend:
+    - Add a format checkbox to the mountpoints page (closes: Malone #32065).
+      Requires partman (>= 78ubuntu1+8).
+  * Patched up KDE frontend to avoid breaking it too badly (I hope) until
+    corresponding UI is added there too.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  8 Mar 2006 14:59:41 +0000
+
+espresso (0.99.24) dapper; urgency=low
+
+  * Fix espresso.tz.SystemTzInfo to work for datetime.datetime.now(tzinfo).
+  * GTK frontend:
+    - Improve headings and spacing on advanced partitioning pages.
+    - Remove more text that claims /home will not be formatted.
+    - Rearrange help text on advanced partitioning pages to allow for more
+      space on the screen where it matters.
+    - Show the current time in the selected timezone on the location page.
+    - Translate more strings from Spanish to English.
+    - Use HH:MM for UTC offsets rather than fractions of hours.
+    - Refer to UTC offsets as GMT offsets instead; it's not quite 100%
+      accurate, but (we think) more widely understood.
+    - Add a border around the timezone map.
+    - Change identification page heading to "Who are you?".
+    - Reorganise locale page so that the language select box is in the
+      middle rather than at the left-hand side, and shorter.
+    - Drop the notebook border.
+    - Remove the expander and the "Details" label from the summary page, per
+      feedback from the UI sprint.
+    - Make the first click on the timezone map zoom in but not select a
+      city; the second click will select a city.
+  * KDE frontend:
+    - Add get_mountpoints method, needed by partman.
+  * Remove old Guadalinex screenshots.
+  * Remove *.pyc and *.pyo on 'debian/rules clean'.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue,  7 Mar 2006 17:49:19 +0000
+
+espresso (0.99.23) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * Add KDE frontend, espresso-frontend-kde
+
+  [ Colin Watson ]
+  * Fix lots of file descriptor leaks.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  3 Mar 2006 16:44:09 +0000
+
+espresso (0.99.22) dapper; urgency=low
+
+  * Improve the appearance of several pages a bit.
+  * Automatically scroll language and keymap lists so that the selected
+    option is visible.
+  * Fix backup handling in GTK frontend (closes: Malone #32866).
+  * Allow cancelling installation by closing the window (closes: Malone
+    #32865).
+  * Catch IOError while downloading language packs.
+  * Put back get_mountpoints methods in frontends, as partman needs them.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  3 Mar 2006 14:59:43 +0000
+
+espresso (0.99.21) dapper; urgency=low
+
+  [ Tollef Fog Heen ]
+  * Allow prepare() methods in components to have access to the debconf
+    database.
+  * Add FilteredCommand.choices_display_map helper.
+  * Flesh out keymap page, using espresso-keyboard-setup.
+
+  [ Colin Watson ]
+  * Sort presented list of keymaps.
+  * Various pychecker-induced cleanups.
+  * Make sure that stdout from language pack maintainer scripts doesn't
+    interfere with Install's debconf protocol stream, and that a new debconf
+    frontend is started for them in the target system.
+  * Add set_fullname() and set_username() methods to the GTK frontend for
+    use by user-setup.
+  * Stop the installation progress bar on all return paths from
+    Install.run().
+  * Remove packages specific to the live CD after installation (relies on
+    having a desktop manifest for the live filesystem from the buildd, which
+    isn't done yet). Record packages that are dynamically installed and make
+    sure we don't remove those.
+  * Depend on python-apt.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  2 Mar 2006 13:33:51 +0000
+
+espresso (0.99.20) dapper; urgency=low
+
+  * Add support for cancellable progress bars.
+  * The Copy/Config split is more inconvenient than useful, so merge the two
+    steps into one, called simply Install.
+  * Install language packs according to the selected language.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  1 Mar 2006 14:13:17 +0000
+
+espresso (0.99.19) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * Add accessor methods to the GTK frontend for use by user-setup.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 28 Feb 2006 14:34:44 +0000
+
+espresso (0.99.18) dapper; urgency=low
+
+  * Rip all the /target unmounting code out of espresso.backend.copy and do
+    it in the main espresso program just before exiting.
+  * Parse /proc/mounts for mountpoints to unmount; this saves having to have
+    a get_mountpoints method in every frontend.
+  * Unmount /target before starting the frontend, since we will behave badly
+    if /target is still mounted from a previous installation attempt.
+
+  * Handle all PROGRESS commands entirely in debconffilter, without passing
+    them through to the debconf frontend.
+  * Add a PROGRESS REGION extension to debconffilter, and a ProgressPosition
+    class to keep track of progress bar regions; allows a single progress
+    bar to be subdivided into pieces for different stages.
+  * Hack FilteredCommand.run_command() to execute the command without any
+    debconffiltering glue if frontend is None; this allows nested
+    FilteredCommands to more or less work.
+  * Stop FilteredCommand.error() from running a UI loop; we assume that the
+    frontend's error_dialog() method runs synchronously.
+
+  * Move espresso/components/summary to a new scripts directory.
+  * Rework copy and configuration progress bars using debconffilter. This
+    fixes some responsiveness bugs, allows for localisation, and finally
+    unifies all progress bar handling.
+  * Add debconf template translation boilerplate.
+
+  * Move call_gparted from espresso.backend.part into the GTK frontend, as
+    it's widget-set-dependent. Unhardcode the path to gparted.
+  * Remove espresso/backend/, none of which is used any more except by the
+    netcloner and noui frontends which are both broken at the moment anyway.
+    The frontend/backend division is now between espresso.frontend and
+    espresso.components, mediated by debconffilter.
+
+  * Make espresso-frontend-gtk Architecture: any, due to the Evolution map
+    widget (closes: Malone #32874).
+  * Build Evolution map widget and Python bindings with -fPIC; should fix
+    build failure on amd64.
+  * Only enable the TimezoneMap.flash_selected_point handler when the
+    timezone map is visible.
+  * Remove text that claims /home will not be formatted; partly fixes Malone
+    #32534.
+  * Display an error dialog on GRUB installation failures (closes: Malone
+    #32047; grub has been seeded, so this shouldn't generally happen any
+    more anyway).
+  * Notice and exit on errors from the copy and configuration stages.
+  * Run 'make distclean' rather than 'make clean' on 'debian/rules clean'.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 27 Feb 2006 14:22:15 +0000
+
+espresso (0.99.17) dapper; urgency=low
+
+  * Add X-Ubuntu-Gettext-Domain=espresso to espresso-gtkui.desktop (although
+    it's useless until we get internationalisation set up properly).
+  * Open /var/log/installer/espresso with line-buffering so that error
+    messages appear there more quickly during testing.
+  * Fix debconffilter to handle SET and SUBST commands whose values consist
+    of more than one word.
+  * Add a "Ready to install" summary page. (It doesn't contain all the
+    necessary information yet, and it should run before partitioning is
+    committed rather than after, but that will be easy to fix later.)
+  * In the GTK frontend, display an error dialog and exit if running as
+    non-root.
+  * Restore some bits of autoconfiscation that bzr helped me lose.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 24 Feb 2006 14:44:28 +0000
+
+espresso (0.99.16) dapper; urgency=low
+
+  * Explicitly decode strings returned by debconf as UTF-8, since apparently
+    we get confused when running with the KDE frontend otherwise (which
+    presumably does something funky with Python's default encoding).
+  * Rename Changelog to Changelog.Guadalinex to avoid confusion. Ubuntu
+    changes (i.e. everything since renaming to espresso) go here.
+  * Add e-map widget, cut-and-pasted from evolution via gnome-system-tools
+    (ugh).
+  * Basic autoconfiscation for the above.
+  * Add initial Python bindings for e-map.
+  * Add an espresso.tz module for various bits of timezone handling.
+  * First cut at timezone map widget, based on a translation of code in
+    gnome-system-tools into Python. Depend on espresso-timezone.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 23 Feb 2006 13:26:13 +0000
+
+espresso (0.99.15) dapper; urgency=low
+
+  * Redirect sys.stderr to /var/log/installer/espresso so that we have a
+    better chance of diagnosing problems after the fact.
+  * Add FilteredCommand.value_index helper from oem-config.
+  * Add support for components optionally returning a third argument from
+    FilteredCommand.prepare(), interpreted as a dictionary of extra
+    environment variables to set for the subprocess.
+  * Add a language page, using espresso-locale. The locale is set in the
+    target system and used for debconf coprocesses, although not yet for
+    translatable strings in the Espresso core.
+  * Add a FilteredCommand.cleanup() hook that can be overridden by
+    components to perform cleanup tasks after their subprocess exits.
+  * Stop logging every single file we copy to /var/log/installer/espresso;
+    it creates massive log bloat and isn't very useful.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 21 Feb 2006 13:12:13 +0000
+
+espresso (0.99.14) dapper; urgency=low
+
+  * Set NoDisplay=true in espresso-gtkui.desktop so that it doesn't show up
+    on menus. I may remove this again once we've figured out how to make
+    espresso not install itself on the target system.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 Feb 2006 18:40:10 +0000
+
+espresso (0.99.13) dapper; urgency=low
+
+  * Remove the GTK frontend's reliance on step numbers entirely; refer to
+    widget names for each step instead. This makes it easier to add steps.
+  * Fix the GTK frontend's reboot button.
+  * Remove fstab configuration; partman does all this now, and trying to do
+    it ourselves breaks in the autopartitioning case.
+  * Make sure to block in progress_loop() until the final dialog has
+    finished, rather than continuing and (in some cases) trying to re-run
+    the partitioner.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 Feb 2006 18:20:19 +0000
+
+espresso (0.99.12) dapper; urgency=low
+
+  [ Tollef Fog Heen ]
+  * Use named constants rather than just numbers for the steps in gtkui.py
+  * Move the common parts (logo, photo and breadcrumb) outside the
+    notebook so they don't have to be kept in sync.  Adjust code to
+    highlight the correct one.
+  * Use named constants instead of just numbers which make inserting new
+    steps in the beginning possible.
+  * Begin implementing a keyboard selector.
+
+  [ Colin Watson ]
+  * Stop destroying the browser widget; following Tollef's changes, this
+    changes the number of pages in the notebook, causing much confusion.
+  * Use named constants in espresso.validation; construct returned list more
+    sensibly.
+  * Hide the disk selector until it becomes useful.
+  * More PEP 8 reformatting, this time in espresso.misc.
+  * Fix 'espresso <frontend-name>' not to try to do two installs.
+  * Provide a .desktop file for the GTK frontend.
+  * Remove Guadalinex-specific text from warning and abort dialogs.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Feb 2006 23:00:58 +0000
+
+espresso (0.99.11) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Stop auto-hiding the panel when running the GTK frontend.
+  * Stop logging how much time was spent in the installation; it makes it
+    unnecessarily painful to quit espresso if you try to run it as non-root.
+  * Get rid of the confirmation checkbox for automatic partitioning; partman
+    pops up a more detailed confirmation dialog for this now.
+  * Make ESPRESSO_DEBUG=1 imply DEBCONF_DEBUG='developer|filter' for ease of
+    debugging.
+  * Stop building espresso-frontend-cloner, espresso-guadalinex-artwork, and
+    espresso-guadalinex-doc for now, until they work again and are
+    better-tested.
+
+  [ Tollef Fog Heen ]
+  * Global reformatting to conform roughly to PEP 8 rather than a mish-mash
+    of difficult-to-read styles.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Feb 2006 12:54:43 +0000
+
+espresso (0.99.10) dapper; urgency=low
+
+  * Move the installation progress bar and the final message to separate
+    windows, per https://wiki.ubuntu.com/UbuntuExpress/GnomeUserInterface.
+  * Remove all the screenshots. We'll replace these with an animated demo
+    when that's ready.
+  * Avoid broken-image icons if logo or photo images aren't available.
+  * Hardcode a list of valid debconf commands in debconffilter and ignore
+    any we don't recognise. Works around most problems with multi-line
+    commands in partman for now.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 14 Feb 2006 21:58:54 +0000
+
+espresso (0.99.9) dapper; urgency=low
+
+  * Drop on_key_press handler from GTK frontend; setting has_default on the
+    Next button is cleaner, and having both that and a keypress handler
+    breaks things.
+  * Add a non-blocking mode to debconffilter, and watch the filter's input
+    from the GTK main loop. This allows the GTK user interface to update
+    while waiting for debconf commands.
+  * Log errors from user-setup-apply and grub-installer, although for now
+    it's unnecessarily painful to actually display them to the user.
+  * Reduce log noise in configuration stage.
+  * Try to disable gnome-volume-manager's automounting while mounting
+    partitions.
+  * Use the new stdio control interface in gparted 0.1-0ubuntu2 to apply
+    changes when going forward from the manual partitioning screen, undo
+    changes when going backward, and clean up gparted properly in either
+    case. Make sure to relaunch gparted when required, as we can now launch
+    it more than once.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 14 Feb 2006 16:06:00 +0000
+
+espresso (0.99.8) dapper; urgency=low
+
+  * Use new target-config hooks from espresso-casper rather than copying
+    xorg.conf and (wrongly) reconfiguring gnome-panel-data ourselves.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  3 Feb 2006 16:13:43 +0000
+
+espresso (0.99.7) dapper; urgency=low
+
+  * Refactor FilteredCommand.run_command() into several pieces, leaving a
+    wrapper there for convenience.
+  * Use new UserSetupApply class from user-setup 0.05ubuntu2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  2 Feb 2006 22:41:45 +0000
+
+espresso (0.99.6) dapper; urgency=low
+
+  * Initial work on porting to cdebconf (for speed and for increased
+    compatibility with d-i), not enabled by default yet until I've had a
+    chance to give it more testing.
+  * Don't display paths while copying the filesystem; it will cause a lot of
+    flickering when we make the counter update more often, and paths that
+    are only updated at semi-random points every few seconds during the
+    copying process are more confusing than interesting.
+  * Fix apt-install to install packages in /target, not /.
+  * Update the GTK interface much more frequently during the copying and
+    configuration processes.
+  * Fix various focus and default-dialog-action settings in the GTK
+    interface.
+  * Pad out the text in the debconf progress dialog a bit more.
+  * Refactor DebconfFilter.run() into several pieces.
+  * Rely on corrected return value from PartmanCommit.run_command().
+    Requires partman (>= 78ubuntu1+3).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  2 Feb 2006 17:56:29 +0000
+
+espresso (0.99.5) dapper; urgency=low
+
+  * Add get_hostname and get_mountpoints methods to frontends so that
+    components can get at them without the nasty vars file hack. Remove all
+    code handling the vars file.
+  * Build espresso in the binary-arch target. This time I've even tested it.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 31 Jan 2006 20:55:29 +0000
+
+espresso (0.99.4) dapper; urgency=low
+
+  * Make espresso Architecture: any; it has different dependencies on
+    different architectures.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 31 Jan 2006 14:31:18 +0000
+
+espresso (0.99.3) dapper; urgency=low
+
+  * Fix stupid debian/rules thinko affecting powerpc.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 31 Jan 2006 11:06:58 +0000
+
+espresso (0.99.2) dapper; urgency=low
+
+  * Fix cpio arguments.
+  * Drop espresso-yaboot dependency on powerpc for now, until it exists.
+  * Drop obsolete dependency on zenity.
+  * Convert debconffilter to use subprocess.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 31 Jan 2006 10:48:09 +0000
+
+espresso (0.99.1) dapper; urgency=low
+
+  * Rename to espresso to avoid confusion caused by somebody other than
+    Ubuntu being upstream for a project called "Ubuntu ...", to reduce
+    awkward branding considerations, and to clearly separate the work being
+    done on this project for Dapper from the work done by Guadalinex since
+    the focus is rather different.
+  * Change Maintainer to me.
+  * Rename lib directory in source to espresso so that pychecker can be used
+    more easily.
+  * Log to /var/log/installer/espresso instead of /var/log/<distro>-express.
+  * Change all uses of express/* debconf questions to real questions where
+    possible, and espresso/* where not.
+
+  * Add debconffilter.py from oem-config (this has been sent to debconf
+    upstream and may eventually make it in there instead). We'll use this
+    for d-i integration.
+  * Adjust debconffilter to filter out STOP.
+  * Add generic error question handling, METAGET filtering, SUBST filtering,
+    and PROGRESS filtering to debconffilter.
+  * Ignore unknown commands in debconffilter, since some programs (hi,
+    partman!) use multi-line commands despite them only working in cdebconf
+    by fluke.
+  * Add debconfcommunicator.py too; it's been committed to debconf upstream,
+    but it's useful here anyway for backports to breezy.
+  * Add rudimentary FilteredCommand class, a convenience wrapper around
+    DebconfFilter that makes it easier to test various things.
+  * Add filtered debconf progress bar handling in the GTK frontend.
+
+  * Add apt-install and udpkg compatibility shims.
+  * Call user-setup as a debconffilter coprocess while running the
+    corresponding UI step, replacing our own duplicated validation code.
+  * Call partman as a debconffilter coprocess while running the
+    autopartitioning UI step. Remove peez2 entirely, as this will replace it
+    once it's finished.
+  * Change gparted invocation to use new --installer=WID option.
+  * Replace hand-rolled partition formatting and mounting code with a call
+    to PartmanCommit.
+  * Copy from /rofs if it exists, rather than hunting through the CD for the
+    filesystem image. Requires casper 1.25.
+  * Run hook scripts in /usr/lib/espresso/target-config (filenames
+    containing '.' are ignored) so that casper can propagate appropriate
+    parts of its configuration to the target system.
+  * Remove all references to base-config; timezone configuration now
+    requires a .deb of the new tzsetup.
+  * Use espresso-grub for GRUB installation rather than doing it by hand.
+  * Drop dependency on yaboot | grub.
+
+  * Refer to ubuntu.com everywhere, not the deprecated ubuntulinux.org.
+  * Don't use full-screen mode.
+  * Don't keep the GTK user interface window on top; it's annoying during
+    development, and arguable at best in production.
+  * Remove the numbers from the breadcrumb trail at the top of the screen.
+  * Disable embedded web browser for now since this segfaults in current
+    dapper (Bugzilla #20338). For the time being, replace it with a scary
+    message telling users to be sure to BACK UP THEIR DATA FIRST.
+  * Translate strings in glade file and progress queue messages to English.
+    In the unlikely event that any of the strings remain basically
+    identical, I'll restore the original text as a Spanish translation.
+  * In general, don't send a progress queue message when completing a task,
+    only when starting one. There's no point constructing translatable text
+    that's only going to be on the screen for tiny fractions of a second
+    anyway.
+  * Strip newlines from lines in messages.txt.
+  * Get rid of almost-useless help button. In general, the UI should be made
+    self-explanatory rather than requiring extra clicks to get at help
+    information.
+
+  * Fix Config.get_locales() using DebconfCommunicator.
+  * Try fetching timezone from /etc/localtime as well as from /etc/timezone.
+  * Handle missing keymap and/or locale debconf questions.
+  * Fix kernel version detection.
+  * Use 'lsb_release -is' rather than reading /etc/lsb-release directly.
+  * Depend on lsb-release.
+  * Don't preselect a mount point for /home.
+  * Fix unmounting at end of installation.
+  * Remove ubuntu-express wrapper script; eventually we'll do whatever
+    unmounting is necessary during the partitioning step rather than turning
+    off swap for the whole installer (and partman should help with this
+    already).
+  * Install installer script as /usr/bin/espresso rather than
+    /usr/bin/installer.
+  * Quieten cpio a bit.
+
+  * Use dh_installdocs to install documentation.
+  * Remove unnecessary ${shlibs:Depends} dependencies.
+  * Fix broken use of debhelper; the author seemed to be confusing -A and
+    -a, and in any case we only build architecture-independent packages.
+  * Use dh_install instead of verbose code in debian/rules (which includes a
+    bashism anyway).
+  * Remove hardcoded svn commands in generate-doc.sh.
+  * Remove svn exclusion stuff in debian/rules; if building from a
+    Subversion checkout, you should use standard workarounds to avoid .svn
+    directories.
+  * Remove generated source code documentation for now; it's really not
+    terribly useful, certainly not in the espresso binary package, and
+    ultimately it should be generated as part of the build process if at
+    all.
+  * Rewrite descriptions to be better English and (I hope) more useful.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Jan 2006 13:25:43 +0000
+
+ubuntu-express (0.99-1) breezy; urgency=low
+
+  * New UI design for gtk frontend.
+  * Dual resolution supported (widget distribution and sizes are modified from
+    screen resolution).
+  * New grub configuration algorithm based on grub-installer scripts (from
+    debian package).
+  * Several bugfixes.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Wed, 30 Nov 2005 07:56:39 +0200
+
+ubuntu-express (0.98ubuntu1) breezy; urgency=low
+
+  * Added mountpoints validation and mountpoints preselection.
+  * Added remaining time to progress bar.
+  * Added a lot of source documentation and epydoc output fully updated.
+  * Added peez2 autopartitioning (using freespace and reusing linux filesystems
+    partition algorithms implemented).
+  * A lot of bugfixes.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Sun, 16 Oct 2005 11:05:34 +0200
+
+ubuntu-express (0.92ubuntu1) breezy; urgency=low
+
+  * Added new mountpoint selector.
+  * Some fixes to make lintian-friendly.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Tue, 06 Sep 2005 12:48:23 +0200
+
+ubuntu-express (0.91ubuntu1) breezy; urgency=low
+
+  * Validation module connected with gtk interface (for user and system input 
+    information).
+  * Gtk interface for validation module fully implemented.
+  * fixed several bugs reported from ubuntu-devel list.
+  * snapshots from quickguide updated.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Thu, 25 Aug 2005 16:50:48 +0200
+
+ubuntu-express (0.9ubuntu1) breezy; urgency=low
+
+  * Backend / frontend connection completed.
+  * Bootloader configuration (final implementations).
+  * gtkui.py module full rewrited.
+  * fixed a lot of bugs.
+  * single backend splitted into several separated backends.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Wed, 24 Aug 2005 15:43:53 +0200
+
+ubuntu-express (0.7ubuntu1) breezy; urgency=low
+
+  * Druid changed into notepad.
+  * Backend and frontend connection.
+  * Full bootloader support.
+  * Ubuntu Express scripts are now more modularized.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Tue, 16 Aug 2005 21:02:11 +0200
+
+ubuntu-express (0.4ubuntu2) breezy; urgency=low
+
+  * Some UI changes.
+  * A lot of stuff to get more stabililty between UE modules.
+  * some fixes related to branding.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Thu, 11 Aug 2005 11:31:20 +0200
+
+ubuntu-express (0.4ubuntu1) breezy; urgency=low
+
+  * Initial Release.
+
+ -- Javier Carranza <javier.carranza@interactors.coop>  Fri, 29 Jul 2005 17:04:51 +0200

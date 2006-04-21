@@ -1,0 +1,827 @@
+#! /bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+db_capb backup
+
+ETCDIR=/target/etc
+ARCH=`udpkg --print-architecture`
+PROTOCOL=
+MIRROR=
+DIRECTORY=
+COMPONENTS=
+DISTRIBUTION=
+INCLUDES=
+EXCLUDES=
+KERNEL=
+KERNEL_LIST=/tmp/available_kernels.txt
+KERNEL_MAJOR="$(uname -r | cut -d . -f 1,2)"
+KERNEL_VERSION="$(uname -r | cut -d - -f 1)"
+KERNEL_ABI="$(uname -r | cut -d - -f 1,2)"
+MACHINE="$(uname -m)"
+NUMCPUS=$(cat /var/numcpus 2>/dev/null) || true
+CPUINFO=/proc/cpuinfo
+SPEAKUP=/proc/speakup
+KEYRING=/usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+# Avoid debconf sending email during the base install process.
+DEBCONF_ADMIN_EMAIL=""
+export DEBCONF_ADMIN_EMAIL
+
+# Variables used to set the progress bar
+export PB_POSITION=0
+export PB_WAYPOINT_LENGTH=0
+
+SUBARCH="$(archdetect)"
+SUBARCH="${SUBARCH#*/}"
+
+log() {
+	logger -t base-installer "$@"
+}
+error() {
+	log "error: $*"
+}
+warning() {
+	log "warning: $*"
+}
+info() {
+	log "info: $*"
+}
+
+exit_error() {
+	error "exiting on error $1"
+	db_progress stop
+	db_input critical $1 || [ $? -eq 30 ]
+	db_go
+	exit 1
+}
+
+# See kernel/README for the architecture-specific functions expected here.
+if [ -f /usr/lib/base-installer/kernel.sh ]; then
+	. /usr/lib/base-installer/kernel.sh
+else
+	arch_get_kernel_flavour () {
+		warning "Unknown architecture '$ARCH'."
+		return 0
+	}
+	arch_check_usable_kernel () {
+		warning "Unknown architecture '$ARCH'."
+		return 0
+	}
+	arch_get_kernel () {
+		warning "Unknown architecture '$ARCH'."
+	}
+fi
+
+FLAVOUR="$(arch_get_kernel_flavour || true)"
+
+update_progress () {
+	# Updates the progress bar to a new position within the space allocated
+	# for the current waypoint. 
+	NW_POS=$(($PB_POSITION + $PB_WAYPOINT_LENGTH * $1 / $2))
+	db_progress SET $NW_POS
+}
+
+check_target () {
+	# Make sure something is mounted on the target.
+	# Partconf causes the latter format.
+	if ! grep -q '/target ' /proc/mounts && \
+			! grep -q '/target/ ' /proc/mounts; then
+		exit_error base-installer/no_target_mounted
+	fi
+	
+	# Warn about installation over an existing unix.
+	if [ -e /target/bin/sh -o -L /target/bin/sh ]; then
+		db_capb ""
+		db_input high base-installer/use_unclean_target || true
+		db_go || exit 10
+		db_capb backup
+		db_get base-installer/use_unclean_target
+		if [ "$RET" = false ]; then
+			db_reset base-installer/use_unclean_target
+			exit_error base-installer/unclean_target_cancel
+		fi
+		db_reset base-installer/use_unclean_target
+	fi
+}
+
+get_mirror_info () {
+	if db_get mirror/codename && [ "$RET" ] ; then
+		DISTRIBUTION=$RET
+	else
+		exit_error base-installer/no_codename
+	fi
+
+	if [ -f /cdrom/.disk/base_installable ]; then
+		PROTOCOL=file
+		MIRROR=""
+		DIRECTORY="/cdrom/"
+		if [ -s /cdrom/.disk/base_components ]; then
+			COMPONENTS=`grep -v '^#' /cdrom/.disk/base_components | tr '\n' , | sed 's/,$//'`
+		else
+			COMPONENTS="*"
+		fi
+		if [ -s /cdrom/.disk/base_include ]; then
+			INCLUDES=`grep -v '^#' /cdrom/.disk/base_include | tr '\n' , | sed 's/,$//'`
+		fi
+			
+		if [ -s /cdrom/.disk/base_exclude ]; then
+			EXCLUDES=`grep -v '^#' /cdrom/.disk/base_exclude | tr '\n' , | sed 's/,$//'`
+		fi
+
+		# Sanity check: an error reading /cdrom/.disk/base_components can cause
+		# ugly errors in debootstrap because $COMPONENTS will be empty.
+		if [ -z "$COMPONENTS" ]; then
+			exit_error base-installer/cannot_install
+		fi
+	else
+		mirror_error=""
+		
+		db_get mirror/protocol || mirror_error=1
+		PROTOCOL="$RET"
+
+		db_get mirror/$PROTOCOL/hostname || mirror_error=1
+		MIRROR="$RET"
+
+		db_get mirror/$PROTOCOL/directory || mirror_error=1
+		DIRECTORY="$RET"
+
+		COMPONENTS="main,restricted"
+
+		if [ "$mirror_error" = 1 ] || [ -z "$PROTOCOL" ] || [ -z "$MIRROR" ]; then
+			exit_error base-installer/cannot_install
+		fi
+	fi
+}
+
+install_base_system () {
+	db_progress INFO base-installer/progress/preparing
+
+	if [ "${INCLUDES}" ]; then
+		include="--include=${INCLUDES}"
+	fi
+	if [ "${EXCLUDES}" ]; then
+		exclude="--exclude=${EXCLUDES}"
+	fi
+	if type gpgv >/dev/null && [ -f "$KEYRING" ]; then
+		keyring="--keyring=${KEYRING}"
+	fi
+
+	test -d $ETCDIR || mkdir -p $ETCDIR
+
+	if [ -f /target/etc/fstab ] ; then
+		# programs in debootstrap may scrawl on the fstab,
+		# so make a backup to be restored later
+		copied_fstab=true
+		cp /target/etc/fstab /target/etc/fstab.orig
+		echo "# UNCONFIGURED FSTAB FOR BASE SYSTEM" >> /target/etc/fstab
+	fi
+
+	if [ "$PROTOCOL" = "http" ]; then
+		db_get mirror/http/proxy
+		http_proxy="$RET" || true
+		if [ "$http_proxy" ]; then
+			export http_proxy
+		fi
+	fi
+	
+	# run the scripts found in hook directory before debootstrap
+	partsdir="/usr/lib/base-installer.d"
+	if [ -d "$partsdir" ]; then
+		tmpfile=/tmp/base-installer-hook.log
+		info "Execution hook before debootstrap"
+		for script in `ls "$partsdir"/*`; do
+			base=$(basename $script | sed 's/[0-9]*//')
+			if ! db_progress INFO base-installer/progress/$base; then
+				db_subst base-installer/progress/fallback SCRIPT "$base"
+				db_progress INFO base-installer/progress/fallback
+		    	fi
+	
+		    	if [ -x "$script" ] ; then
+				info "Running $script"
+				if ! "$script" >"$tmpfile" 2>&1; then
+			    		log "warning: $script returned error code $?"
+				fi
+		    	else
+				error "Unable to execute $script"
+		    	fi
+		    	if [ -s "$tmpfile" ] ; then
+				logger -t base-installer < "$tmpfile"
+				rm -f "$tmpfile"
+		    	fi
+		done
+	fi
+
+	# clean up after any past debootstrap run
+	rm -f /target/var/lib/apt/* 2>/dev/null || true
+	
+	if search-path cdebootstrap; then
+		cdebootstrap || debootstrap_failed=$?
+	else
+		log-output -t debootstrap run-debootstrap \
+			--components="${COMPONENTS}" \
+			--debian-installer \
+			--resolve-deps \
+			${include} ${exclude} \
+			${keyring} \
+			${DISTRIBUTION} /target \
+			"$PROTOCOL://$MIRROR$DIRECTORY" \
+			|| debootstrap_failed=$?
+	fi
+
+	if [ true = "$copied_fstab" ] ; then
+		mv /target/etc/fstab.orig /target/etc/fstab
+	fi
+
+	if [ "$debootstrap_failed" ] ; then
+		exit_error base-installer/debootstrap-failed
+	fi
+
+	# Progress bar is now stepped to 100.
+}
+
+configure_apt () {
+	# let apt inside the chroot see the cdrom
+	if [ "$PROTOCOL" = file ] ; then
+		if [ -n "$DIRECTORY" ]; then
+			umount /target$DIRECTORY 2>/dev/null || true
+			if [ ! -e /target/$DIRECTORY ]; then
+				mkdir -p /target/$DIRECTORY
+			fi
+		fi
+		if [ "$KERNEL_MAJOR" = 2.2 ]; then
+			CDDEV=`grep -i /cdrom /proc/mounts | cut -d' ' -f 1 | grep loop || true`
+			if [ "" != "$CDDEV" ]  && \
+				db_get iso-scan/filename && [ "$RET" ] ; then
+				mount -r -o loop /hd-media/$RET /target/$DIRECTORY
+			elif db_get cdrom-detect/cdrom_device && [ -n "$RET" ]; then
+				umount $RET
+				mount -r -t iso9660 $RET /target/$DIRECTORY
+			else
+				warning "kernel 2.2.x failed to bind mount /target$DIRECTORY"
+			fi
+		elif ! mount -o bind $DIRECTORY /target$DIRECTORY; then
+			warning "failed to bind mount /target$DIRECTORY"
+		fi
+		# The bind mount is left mounted after this postinst exits,
+		# for future apt-install calls to use.
+	fi
+
+	# sources.list uses space to separate the components, not comma
+	COMPONENTS=`echo $COMPONENTS | tr , " "`
+	APTSOURCE="$PROTOCOL://$MIRROR$DIRECTORY"
+
+	[ ! -d /target/etc/apt ] && mkdir -p /target/etc/apt
+	# This assumes the file protocol is only used for CD (image) installs
+	if [ "$PROTOCOL" = file ] ; then
+		# Make apt-cdrom and apt not unmount/mount CD-ROMs;
+		# needed to support CD images (hd-media installs)
+		[ ! -d /target/etc/apt/apt.conf.d ] && mkdir -p /target/etc/apt/apt.conf.d
+		cat > /target/etc/apt/apt.conf.d/00NoMountCDROM << EOT
+APT::CDROM::NoMount "true";
+Acquire::cdrom {
+  mount "/cdrom";
+  "/cdrom/" {
+    Mount  "true";
+    UMount "true";
+  };
+}
+EOT
+		cat > /target/etc/apt/apt.conf.d/00IgnoreTimeConflict << EOT
+Acquire::gpgv::Options { "--ignore-time-conflict"; };
+EOT
+		# Scan CD-ROM or CD image; start with clean sources.list
+		: > /target/etc/apt/sources.list
+		if ! log-output -t base-installer chroot /target apt-cdrom add ; then
+			error "error while running apt-cdrom"
+		fi
+	else
+		echo "deb $APTSOURCE $DISTRIBUTION $COMPONENTS" > /target/etc/apt/sources.list
+		echo "deb $APTSOURCE $DISTRIBUTION-updates $COMPONENTS" >> /target/etc/apt/sources.list
+		if db_get apt-setup/security_host; then
+			SECMIRROR="$RET"
+		else
+			SECMIRROR="$MIRROR"
+		fi
+		echo "deb $PROTOCOL://$MIRROR/ubuntu $DISTRIBUTION-security $COMPONENTS" >> /target/etc/apt/sources.list
+	fi
+
+	# Make apt trust Debian CDs. This is not on by default (we think).
+	if [ ! -e /target/etc/apt/apt.conf ] || \
+	   ! grep -iq 'APT::Authentication::TrustCDROM' /target/etc/apt/apt.conf; then
+		echo "APT::Authentication::TrustCDROM \"true\";" >> /target/etc/apt/apt.conf
+	fi
+}
+
+create_devices () {
+	# RAID
+	if [ -e /proc/mdstat ] && grep -q ^md /proc/mdstat ; then
+		apt-install mdadm
+	fi
+	# LVM: create VG and LV devices
+	if pvdisplay | grep -iq "physical volume ---" && grep -q " device-mapper$" /proc/misc; then
+		apt-install lvm2
+		mount -t proc proc /target/proc
+		mkdir -p /target/dev/mapper
+		if [ ! -e /target/dev/mapper/control ] ; then
+			major=$(grep "[0-9] misc$" /proc/devices | sed 's/[ ]\+misc//')
+			minor=$(grep "[0-9] device-mapper$" /proc/misc | sed 's/[ ]\+device-mapper//')
+			mknod /target/dev/mapper/control c $major $minor
+		fi
+		chroot /target vgscan --mknodes || true
+		umount /target/proc
+	fi
+	# UML: create ubd devices
+	if grep -q "model.*UML" /proc/cpuinfo; then
+		chroot /target /bin/sh -c '(cd /dev; ./MAKEDEV ubd)'
+	fi
+}
+
+kernel_update_list () {
+	# Using 'uniq' to avoid listing the same kernel more then once.
+	(set +e;
+	 # Hack to get the metapackages in the right order; should be
+	 # replaced by something better at some point.
+	 chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|386\|686\|k7\|power\|itanium\|mckinley\|sparc\|hppa\)';
+	 chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-2\.';
+	 chroot /target apt-cache search ^linux-image-2. | sort -r) | \
+	cut -d" " -f1 | uniq > "$KERNEL_LIST.unfiltered"
+	kernels=`< "$KERNEL_LIST.unfiltered" tr '\n' ' ' | sed -e 's/ $//'`
+	for candidate in $kernels; do
+		if [ -n "$FLAVOUR" ]; then
+			if arch_check_usable_kernel "$candidate" "$FLAVOUR"; then
+				echo "$candidate"
+				info "kernel $candidate usable on $FLAVOUR"
+			else
+				info "kernel $candidate not usable on $FLAVOUR"
+			fi
+		else
+			info "could not determine kernel flavour"
+		fi
+	done > "$KERNEL_LIST"
+}
+
+kernel_present () {
+	grep -q "^$1\$" $KERNEL_LIST
+}
+
+pick_kernel () {
+	# Check for overrides
+	if db_get base-installer/kernel/override-image && [ "$RET" ]; then
+		if kernel_present "$RET"; then
+			KERNEL="$RET"
+			info "Using kernel '$KERNEL'"
+			db_set base-installer/kernel/image "$KERNEL"
+			return
+		else
+			warning "Kernel override '$RET' not present"
+		fi
+	fi
+
+	# Fetch the current default
+	if db_get base-installer/kernel/image-$KERNEL_MAJOR && [ "$RET" ]; then
+		KERNEL="$RET"
+	elif db_get base-installer/kernel/image && [ "$RET" ]; then
+		KERNEL="$RET"
+	fi
+
+	kernel_update_list
+
+	# For now, only present kernels we believe to be usable. We may have
+	# to rethink this later, but if there are no usable kernels it
+	# should be accompanied by an error message. The default must still
+	# be usable if possible.
+	kernels=`< "$KERNEL_LIST" tr '\n' ',' | sed -e 's/,$//'`
+
+	info "Found kernels '$kernels'"
+
+	if [ "$kernels" ] ; then
+		db_subst base-installer/kernel/which-kernel KERNELS "$kernels"
+	else
+		db_set base-installer/kernel/image "none"
+		db_input high base-installer/kernel/skip-install || true
+		db_go || true
+		db_get base-installer/kernel/skip-install
+		if [ "$RET" != true ]; then
+			exit_error base-installer/kernel/no-kernels-found
+		else
+			db_set base-installer/kernel/image "none"
+			KERNEL=none
+			return
+		fi
+	fi
+
+	if [ -n "$FLAVOUR" ]; then
+		arch_kernel=$(arch_get_kernel "$FLAVOUR")
+	else
+		arch_kernel=""
+	fi
+
+	got_arch_kernel=
+	if [ "$arch_kernel" ]; then
+		info "arch_kernel candidates: $arch_kernel"
+		# Walk through recommended list for this architecture in order.
+		for candidate in $arch_kernel; do
+			if kernel_present "$candidate"; then
+				# Recommended kernel for this architecture exists; use that.
+				info "arch_kernel: $candidate (present)"
+				KERNEL="$candidate"
+				break
+			else
+				info "arch_kernel: $candidate (absent)"
+			fi
+		done
+	fi
+
+	if kernel_present "$KERNEL"; then
+		# Current selection is available, nothing to do
+		:
+	else
+		# No recommendations available; guess by taking the first on
+		# the list. kernel_update_list orders the list in such a way
+		# that the metapackages always come first, in the right
+		# order.
+		KERNEL=$(echo "$kernels" | cut -d, -f1)
+	fi
+
+	if [ "$KERNEL" ] ; then
+		db_set base-installer/kernel/which-kernel "$KERNEL"
+	fi
+
+	db_input medium base-installer/kernel/which-kernel || [ $? -eq 30 ]
+	if ! db_go; then
+		db_progress stop
+		exit 10
+	fi
+
+	db_get base-installer/kernel/which-kernel
+	KERNEL=$RET
+
+	info "Using kernel '$KERNEL'"
+
+	# Pass the kernel name on
+	db_set base-installer/kernel/image "$KERNEL"
+}
+
+get_resume_partition () {
+	biggest_size=0
+	biggest_partition=
+	while read filename type size other; do
+		if [ "$type" != partition ]; then
+			continue
+		fi
+		if [ "$size" -gt "$biggest_size" ]; then
+			biggest_size="$size"
+			biggest_partition="$filename"
+		fi
+	done < /proc/swaps
+	echo "$biggest_partition"
+}
+
+select_initramfs_generator () {
+	irf_choices="$(echo $1 | sed "s/ */, /g")"
+	irf_default="${1%% *}"
+	db_subst base-installer/initramfs/generator GENERATORS "$irf_choices"
+	db_set base-installer/initramfs/generator "$irf_default"
+
+	db_input medium base-installer/initramfs/generator || [ $? -eq 30 ]
+	if ! db_go; then
+		db_progress stop
+		exit 10
+	fi
+
+	db_get base-installer/initramfs/generator
+	echo $RET
+}
+
+install_kernel () {
+	if [ "$KERNEL" = none ]; then
+		info "Not installing any kernel"
+		return
+	fi
+	
+	target_kernel_major="$(echo "$KERNEL" | sed 's/^kernel-image-//; s/^linux-image-//; s/-.*//' | cut -d . -f 1,2)"
+	case $target_kernel_major in
+		2.?)	;;
+		*)
+			# something went wrong; use major version of
+			# installation kernel
+			target_kernel_major="$(uname -r | cut -d . -f 1,2)"
+			;;
+	esac
+	if db_get "base-installer/kernel/linux/initrd-$target_kernel_major" ; then
+		if [ "$RET" = true ]; then
+			do_initrd=yes
+		else
+			do_initrd=no
+		fi
+	elif db_get base-installer/kernel/linux/initrd ; then
+		if [ "$RET" = "true" ]; then
+			do_initrd=yes
+		else
+			do_initrd=no
+		fi
+	else
+		warning "Failed to get debconf answer 'base-installer/kernel/linux/initrd'."
+		do_initrd=yes
+	fi
+
+	do_initramfs=no
+	if [ "$do_initrd" = yes ]; then
+		if db_get "base-installer/kernel/linux/initramfs-$target_kernel_major"; then
+			if [ "$RET" = true ]; then
+				do_initramfs=yes
+			fi
+		elif db_get base-installer/kernel/linux/initramfs; then
+			if [ "$RET" = true ]; then
+				do_initramfs=yes
+			fi
+		fi
+	fi
+
+	if db_get base-installer/kernel/linux/link_in_boot ; then
+		if [ "$RET" = "true" ]; then
+			link_in_boot=yes
+		else
+			link_in_boot=no
+		fi
+	else
+		warning "Failed to get debconf answer 'base-installer/kernel/linux/link_in_boot'."
+		link_in_boot=no
+	fi
+
+	info "Setting do_initrd='$do_initrd'."
+	info "Setting link_in_boot='$link_in_boot'."
+
+	if [ -f /target/etc/kernel-img.conf ]; then
+		# Backup old kernel-img.conf
+		mv /target/etc/kernel-img.conf /target/etc/kernel-img.conf.$$
+	fi
+
+	cat > /target/etc/kernel-img.conf <<EOF
+do_symlinks = yes
+relative_links = yes
+do_bootloader = no
+do_bootfloppy = no
+do_initrd = $do_initrd
+link_in_boot = $link_in_boot
+EOF
+
+	package=""
+	if [ "$do_initramfs" = yes ]; then
+		if db_get base-installer/kernel/linux/initramfs-generators; then
+			generators="$RET"
+			info "Available initramfs generator(s) '$generators'"
+			if echo "$generators" | grep -q " "; then
+				package="$(select_initramfs_generator "$generators")"
+			else
+				package="$generators"
+			fi
+		fi
+		case "$package" in
+		    initramfs-tools)
+			ramdiskconf=/target/etc/mkinitramfs/initramfs.conf
+			;;
+		    yaird)
+			ramdiskconf=
+			;;
+		    "")
+			db_subst base-installer/initramfs/no-generator
+			exit_error base-installer/initramfs/no-generator
+			;;
+		    *)
+			db_subst base-installer/initramfs/unsupported GENERATOR "$package"
+			exit_error base-installer/initramfs/unsupported
+			;;
+		esac
+	else
+		package=initrd-tools
+		ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
+	fi
+	echo "Selected initrd generator '$package'."
+
+	# Sarge does not have any initramfs generators, though custom images may
+	if [ "$DISTRIBUTION" = sarge ] ; then
+		if [ -z "$(chroot /target apt-cache show "$package" 2>/dev/null || true)" ] ; then
+			info "$package not available; falling back to initrd-tools."
+			do_initramfs=no
+			package=initrd-tools
+			ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
+		fi
+	fi
+
+	# TODO This should probably be restructured to better support
+	#      differences between initrd generators
+	if [ yes = "$do_initrd" ] ; then
+		info "Installing $package."
+
+		# Make sure the ramdisk creation tool is installed before we
+		# change its configuration
+		db_subst base-installer/section/install_kernel_package SUBST0 "$package"
+		db_progress INFO base-installer/section/install_kernel_package
+		if ! log-output -t base-installer apt-install "$package"; then
+			db_subst base-installer/kernel/failed-package-install PACKAGE "$package"
+			exit_error base-installer/kernel/failed-package-install
+		fi
+
+		if db_get "base-installer/kernel/linux/extra-packages-$target_kernel_major"; then
+			EXTRAS="$RET"
+		elif db_get base-installer/kernel/linux/extra-packages; then
+			EXTRAS="$RET"
+		else
+			EXTRAS=
+		fi
+		for package in $EXTRAS; do
+			info "Installing $package."
+			db_subst base-installer/section/install_kernel_package SUBST0 "$package"
+			db_progress INFO base-installer/section/install_kernel_package
+			# The package might not exist; don't worry about it.
+			log-output -t base-installer apt-install "$package" || true
+		done
+
+		if [ "$do_initramfs" = no ]; then
+			# Temporarily hardcode the root partition for initrd-tools
+			rootpart_devfs=$(mount | grep "on /target " | cut -d' ' -f1)
+			rootpartfs=$(mount | grep "on /target " | cut -d' ' -f5)
+			rootpart=$(mapdevfs $rootpart_devfs)
+			if [ -f $ramdiskconf ]; then
+				sed -e "s#^ROOT=.*#ROOT='$rootpart $rootpartfs'#" < $ramdiskconf > $ramdiskconf.new &&
+					mv $ramdiskconf.new $ramdiskconf
+			else
+				echo "ROOT='$rootpart $rootpartfs'" >> $ramdiskconf
+			fi
+		fi
+
+		# Set up a default resume partition.
+		resume_devfs="$(get_resume_partition)" || resume_devfs=
+		if [ "$resume_devfs" ] && [ -e "$resume_devfs" ]; then
+			resume="$(mapdevfs "$resume_devfs")" || resume=
+		else
+			resume=
+		fi
+		if [ -n "$ramdiskconf" -a "$resume" ]; then
+			if [ "$package" = initramfs-tools ]; then
+				mkdir -p /target/etc/mkinitramfs/conf.d
+				echo "RESUME=$resume" > /target/etc/mkinitramfs/conf.d/resume
+			elif [ -f $ramdiskconf ] ; then
+				sed -e "s@^#* *RESUME=.*@RESUME=$resume@" < $ramdiskconf > $ramdiskconf.new &&
+					mv $ramdiskconf.new $ramdiskconf
+			else
+				echo "RESUME=$resume" >> $ramdiskconf
+			fi
+		fi
+	else
+		info "Not installing $package."
+	fi
+
+	# Advance progress bar to 30% of allocated space for install_kernel
+	update_progress 30 100
+
+	# Install the kernel
+	info "Installing kernel '$KERNEL'."
+	db_subst base-installer/section/install_kernel_package SUBST0 "$KERNEL"
+	db_progress INFO base-installer/section/install_kernel_package
+	log-output -t base-installer apt-install "$KERNEL" || kernel_install_failed=$?
+
+	# Advance progress bar to 90% of allocated space for install_kernel
+	update_progress 90 100
+
+	# /proc/filesystems will accomodate this past the second bootup.
+	if [ "$do_initrd" = yes ] && [ "$do_initramfs" = no ]; then
+		sed -e 's/^ROOT=.*/ROOT=probe/' $ramdiskconf > $ramdiskconf.new &&
+			mv $ramdiskconf.new $ramdiskconf
+	fi
+
+	if [ -f /target/etc/kernel-img.conf.$$ ]; then
+		# Revert old kernel-img.conf
+		mv /target/etc/kernel-img.conf.$$ /target/etc/kernel-img.conf
+	fi
+
+	if [ "$kernel_install_failed" ]; then
+		db_subst base-installer/kernel/failed-install KERNEL "$KERNEL"
+		exit_error base-installer/kernel/failed-install
+	fi
+}
+
+install_pcmcia_modules () {
+	if [ "$KERNEL" = none ]; then
+		info "Not installing any pcmcia modules"
+		return
+	fi
+	# Note pcmcia modules are only separate for 2.4 kernels, which
+	# use the old kernel-image names.
+	pcmcia_package=$(echo "$KERNEL" | sed 's/^kernel-image/kernel-pcmcia-modules/')
+	info "Installing pcmcia modules package '$pcmcia_package'."
+	log-output -t base-installer apt-install "$pcmcia_package" || true
+}
+
+apt_update () {
+	log-output -t base-installer chroot /target apt-get update \
+		|| apt_update_failed=$?
+	
+	if [ "$apt_update_failed" ]; then
+		warning "apt update failed: $apt_update_failed"
+	fi
+}
+
+install_extra () {
+	info "Installing extra packages into /target/."
+	
+	if [ -f /var/lib/apt-install/queue ] ; then
+		# We need to install these one by one in case one fails.
+		PKG_COUNT=`cat /var/lib/apt-install/queue | wc -w`
+		CURR_PKG=0
+		for PKG in `cat /var/lib/apt-install/queue`; do
+			db_subst base-installer/section/install_extra_package SUBST0 "$PKG"
+			db_progress INFO base-installer/section/install_extra_package
+
+			if log-output -t base-installer apt-install $PKG; then
+				info "Installed $PKG successfully into /target/"
+			else
+				warning "Failed to install $PKG into /target/: $?"
+			fi
+
+			# Advance progress bar within space allocated for install_extra
+			CURR_PKG=$(($CURR_PKG + 1))
+			update_progress $CURR_PKG $PKG_COUNT
+		done
+	fi
+}
+
+post_install_hooks () {
+	partsdir="/usr/lib/post-base-installer.d"
+	if [ -d "$partsdir" ]; then
+		tmpfile=/tmp/post-base-installer-hook.log
+		info "Running post-base-installation hooks"
+		scriptcount=`ls "$partsdir"/* | wc -l`
+		scriptcur=0
+		for script in "$partsdir"/*; do
+			base="$(basename "$script" | sed 's/[0-9]*//')"
+			if ! db_progress INFO base-installer/progress/$base && \
+			   ! db_progress INFO prebaseconfig/progress/$base; then
+				db_subst base-installer/progress/fallback SCRIPT "$base"
+				db_progress INFO base-installer/progress/fallback
+			fi
+
+			if [ -x "$script" ]; then
+				info "Running $script"
+				if ! "$script" >"$tmpfile" 2>&1; then
+					log "warning: $script returned error code $?"
+				fi
+			else
+				error "Unable to execute $script"
+			fi
+			if [ -s "$tmpfile" ]; then
+				logger -t base-installer < "$tmpfile"
+				rm -f "$tmpfile"
+			fi
+
+			scriptcur="$(($scriptcur + 1))"
+			update_progress "$scriptcur" "$scriptcount"
+		done
+	fi
+}
+
+cleanup () {
+	info "Cleaning up"
+	rm -f $KERNEL_LIST
+}
+
+WAYPOINTS=""
+NUM_STEPS=0
+waypoint () {
+	WAYPOINTS="$WAYPOINTS $1:$2"
+	NUM_STEPS=$(($NUM_STEPS + $1)) || true
+}
+
+waypoint 1	check_target
+waypoint 1	get_mirror_info
+waypoint 100	install_base_system
+waypoint 1	configure_apt
+waypoint 3	apt_update
+waypoint 2	create_devices
+waypoint 5	post_install_hooks
+waypoint 1	pick_kernel
+waypoint 20	install_kernel
+case "$ARCH" in
+	i386*)
+		if [ -e /proc/bus/pccard/drivers ]; then
+			waypoint 1	install_pcmcia_modules
+		fi
+	;;
+esac
+waypoint 10	install_extra
+waypoint 0	cleanup
+
+db_progress START 0 $NUM_STEPS base-installer/progress/installing-debian
+for item in $WAYPOINTS; do
+	PB_WAYPOINT_LENGTH=$(echo $item | cut -d: -f 1)
+	WAYPOINT=$(echo $item | cut -d: -f 2)
+	# Not all of the section headers need exist.
+	db_progress INFO "base-installer/section/$WAYPOINT" || true
+	eval $WAYPOINT
+	PB_POSITION=$(($PB_POSITION + $PB_WAYPOINT_LENGTH)) || true
+	db_progress SET $PB_POSITION
+done
+db_progress STOP
+exit 0

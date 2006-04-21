@@ -1,0 +1,167 @@
+partman-efi (9.1) dapper; urgency=low
+
+  * Backport from trunk (the next sync from Debian can overwrite this):
+    - Build on i386, for i386-based Apple systems; restrict to systems with
+      EFI (i.e. /proc/efi or /sys/firmware/efi exist).
+    - Try to load efivars module on init to make sure that the kernel has a
+      chance to create /proc/efi if appropriate.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 21 Mar 2006 21:50:46 +0000
+
+partman-efi (9) unstable; urgency=low
+
+  * Matt Kraai
+    - Fix the spelling of "file system".
+  * Colin Watson
+    - Remove useless dependency on parted-udeb.
+    - Change "new Debian system" to "new system" to help with derivative
+      branding.
+    - Use 'rm -f' rather than more awkward test-then-remove constructions.
+  * Frans Pop
+    - Changed dependency from partman to partman-base.
+  * dann frazier
+    - Update Standards-Version to 3.6.2.2
+    - Update my e-mail address in Uploaders
+
+ -- dann frazier <dannf@debian.org>  Fri, 27 Jan 2006 15:00:53 -0700
+
+partman-efi (8) unstable; urgency=low
+
+  * Note that this includes fix(es) for variable substition bugs in translated
+    templates.
+  * Updated translations: 
+    - Bosnian (bs.po) by Safir Šećerović
+    - Welsh (cy.po) by Dafydd Harries
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Finnish (fi.po) by Tapio Lehtonen
+    - Gallegan (gl.po) by Hctor Fenndez Lpez
+    - Italian (it.po) by Stefano Canepa
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Dutch (nl.po) by Bart Cornelis
+    - Romanian (ro.po) by Eddy Petrisor
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  2 Feb 2005 17:30:29 -0500
+
+partman-efi (7) unstable; urgency=low
+
+  * Updated translations: 
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 20 Oct 2004 15:12:12 -0400
+
+partman-efi (6) unstable; urgency=low
+
+  * Updated translations: 
+    - Welsh (cy.po) by Dafydd Harries
+    - Hebrew (he.po) by Lior Kaplan
+    - Hungarian (hu.po) by VEROK Istvan
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrisor
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  6 Oct 2004 16:14:30 -0400
+
+partman-efi (5) unstable; urgency=low
+
+  * Jim Lieb
+    - remove format flag test in efi partition verification in finish.d/efi
+    - Closes: #268554
+  * Updated translations: 
+    - Czech (cs.po) by Miroslav Kure
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Indonesian (id.po) by Debian Indonesia Team
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Bøkmal, Norwegian (nb.po) by Bjorn Steensrud
+    - Dutch (nl.po) by Bart Cornelis
+    - Albanian (sq.po) by Elian Myftiu
+
+ -- Joey Hess <joeyh@debian.org>  Sun,  3 Oct 2004 13:42:50 -0400
+
+partman-efi (4) unstable; urgency=low
+
+  * Joey Hess
+    - Use a string in the filesystem list that is consistent with the others
+      used there. No string changes, but dropped an unused string.
+  * Updated translations: 
+    - Lithuanian (lt.po) by [unknown]
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 30 Sep 2004 13:44:06 -0400
+
+partman-efi (3) unstable; urgency=low
+
+  * Joey Hess
+    - Stop unsetting seen flags, that's not necessary and it breaks
+      preseeding.
+  * Jim Lieb
+    - Get file system type displayed properly
+    - remove extra menu label
+    - Closes: #268555
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Å eÄeroviÄ
+    - Catalan (ca.po) by Jordi Mallach
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek (el.po) by Greek Translation Team
+    - Spanish (es.po) by Javier Fernandez-Sanguino PeÃ±a
+    - Basque (eu.po) by Piarres Beobide EgaÃ±a
+    - Persian (fa.po) by Arash Bijanzadeh
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by French Team
+    - Hebrew (he.po) by Lior Kaplan
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by KÄstutis BiliÅ«nasn
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Norwegian (nb.po) by Axel Bojer
+    - Norwegian (nn.po) by HÃ¥vard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by AndrÃ© LuÃ­s Lopes
+    - Russian (ru.po) by Russian L10N Team
+    - Slovak (sk.po) by Peter KLFMANiK Mann
+    - Slovenian (sl.po) by Jure Äuhalev
+    - Swedish (sv.po) by Per Olofsson
+    - Turkish (tr.po) by Recai OktaÅ
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 29 Sep 2004 22:19:33 -0400
+
+partman-efi (2) unstable; urgency=high
+
+  * Jim Lieb
+    - Don't disable swap after formatting
+    - Set svn:executable on various files
+    - Reduce commit.d/_numbers from 51 to 50 to conform with others
+    - force bootable for fat filesystems used for efi
+  * Christian Perrier
+    - Rename templates file
+  * dann frazier
+    - Uploading with high priority, since partman-efi would be loaded but
+      wouldn't run w/o Jim's changes.
+
+ -- dann frazier <dannf@debian.org>  Thu, 26 Aug 2004 16:58:00 -0600
+
+partman-efi (1) unstable; urgency=high
+
+  * Jim Lieb
+    - Initial release
+    - use partman-palo as template and create same for EFI boot partitions
+      that are found on ia64 systems and x86 systems with EFI BIOS
+    - Translations are a simple global substitute i.e. s/palo/efi/g
+  * dann frazier
+    - Uploading with high urgency as not having this package will result
+      in users reaching the end of an install w/o having created an EFI
+      partitioning, which will cause the boot loader install to fail.
+
+ -- dann frazier <dannf@dannf.org>  Wed, 11 Aug 2004 03:45:10 -0600

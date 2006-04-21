@@ -1,0 +1,80 @@
+Template: base-installer/kernel/image
+Type: string
+Default: kernel-image
+Default[hppa]: kernel-image-2.4.27-32
+Default[i386]: kernel-image-2.4.27-2-386
+Default[ia64]: kernel-image-2.4.27-2-itanium-smp
+Default[s390]: kernel-image-2.4.27-2-s390
+Description: default kernel image if nothing better is found
+
+Template: base-installer/kernel/image-2.6
+Type: string
+Default: linux-image
+Description: default kernel image if nothing better is found (2.6)
+
+Template: base-installer/kernel/override-image
+Type: string
+Description: always use this kernel image (for preseeding)
+
+Template: base-installer/kernel/linux/initrd
+Type: boolean
+Default: true
+Default[s390]: false
+Default[hppa]: false
+Default[mips]: false
+Default[mipsel]: false
+Default[powerpc]: false
+Default[m68k]: false
+Default[sparc]: true
+Description: kernel needs an initrd (linux only)
+
+Template: base-installer/kernel/linux/initrd-2.6
+Type: boolean
+Default: true
+Default[s390]: false
+Default[hppa]: true
+Default[mips]: false
+Default[mipsel]: false
+Default[m68k]: false
+Default[sparc]: true
+Description: kernel needs an initrd (linux 2.6 only)
+
+Template: base-installer/kernel/linux/initramfs-2.6
+Type: boolean
+Default: true
+# This only indicates whether to use an initramfs or not (and will be
+# ignored unless the appropriate base-installer/kernel/linux/initrd*
+# is true).
+Description: use an initramfs (linux 2.6 only)
+
+Template: base-installer/kernel/linux/initramfs-generators
+Type: string
+Default: initramfs-tools
+# Space separated list of initrd generator packages to use. If you list more
+# than one for an architecture, the user will be asked to select one
+# (depending on priority). The generator listed first will be the default.
+# Note: if you add a new one, don't forget to support it in the postinst.
+Description: package to use to generate initramfs
+
+Template: base-installer/kernel/linux/extra-packages
+Type: string
+Default:
+Description: extra packages to install with init*-tools (linux only)
+
+Template: base-installer/kernel/linux/extra-packages-2.6
+Type: string
+Default: usplash
+Description: extra packages to install with init*-tools (linux 2.6 only)
+
+Template: base-installer/kernel/linux/link_in_boot
+Type: boolean
+Default: true
+Default[alpha]: false
+Default[i386]: false
+Default[amd64]: false
+Default[ia64]: false
+Default[mips]: false
+Default[mipsel]: false
+Default[m68k]: false
+Default[hppa]: true
+Description: kernel needs a link in /boot/ (linux only)

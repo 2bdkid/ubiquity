@@ -1,0 +1,68 @@
+Template: debian-installer/kbd-chooser/title
+Type: text
+# Main menu item. Please keep below 55 columns
+_Description: Select a keyboard layout
+
+Template: console-tools/archs
+Type: select
+# Translators, always translate with ${KBD-ARCHS-L10N}
+_Choices: ${KBD-ARCHS}
+_Description: Type of keyboard:
+ Please choose the type of keyboard to configure.
+
+Template: debian-installer/keymap
+Type: string
+Description: For internal use (keyboard chosen by user)
+
+Template: debian-installer/serial-console
+Type: boolean
+Default: false
+Description: For internal use (Is a serial console in use?)
+
+Template: debian-installer/uml-console
+Type: boolean
+Default: false
+Description: For internal use (Is a User Mode Linux console in use?)
+
+Template: kbd-chooser/no-keyboard
+Type: text
+# Translators, this is a menu choice. MUST BE UNDER 65 COLUMNS
+_Description: No keyboard to configure
+
+Template: kbd-chooser/skip-config
+Type: text
+# Translators, this is a menu choice. MUST BE UNDER 65 COLUMNS
+_Description: Do not configure keyboard; keep kernel keymap
+
+Template: prebaseconfig/progress/kbd-chooser
+Type: text
+# Prebaseconfig progress bar item
+_Description: Configuring keyboard ...
+
+Template: kbd-chooser/method
+Type: select
+Choices: ${choices}
+_Description: Your keyboard is:
+
+Template: kbd-chooser/try
+Type: detect-keyboard
+Choices: /usr/share/keymaps/decision-tree
+_Description: Find your keyboard
+
+Template: kbd-chooser/do_select
+Type: text
+_Description: Select from full keyboard list
+
+Template: kbd-chooser/do_try
+Type: text
+_Description: Find your layout by pressing some keys
+
+Template: kbd-chooser/test_kbd
+Type: string
+_Description: Press a few keys and verify that the right characters appear.
+ Test whether "${kbd}" is the correct keyboard map
+
+Template: kbd-chooser/do_test
+Type: text
+_Description: Test whether this layout is correct
+

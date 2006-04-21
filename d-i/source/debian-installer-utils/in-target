@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+. /lib/chroot-setup.sh
+
+chroot_setup
+
+DEBCONF_READFD=0
+export DEBCONF_READFD
+DEBCONF_WRITEFD=3
+export DEBCONF_WRITEFD
+DEBIAN_FRONTEND=passthrough
+export DEBIAN_FRONTEND
+ERRCODE=0
+log-output -t in-target chroot /target "$@" || ERRCODE=$?
+
+chroot_cleanup
+
+if [ "$ERRCODE" != 0 ]; then
+	exit 1
+else
+	exit 0
+fi

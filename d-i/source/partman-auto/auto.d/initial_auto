@@ -1,0 +1,41 @@
+#!/bin/sh
+
+. /usr/share/debconf/confmodule
+. /lib/partman/definitions.sh
+
+dev_to_partman () {
+	local dev_name="$1"
+	
+	local mapped_dev_name="$(mapdevfs $dev_name)"
+	if [ -n "$mapped_dev_name" ]; then
+		dev_name="$mapped_dev_name"
+	fi
+
+	for dev in $DEVICES/*; do
+		# mapdevfs both to allow for different ways to refer to the
+		# same device using devfs, and to allow user input in
+		# non-devfs form
+		if [ "$(mapdevfs $(cat $dev/device))" = "$dev_name" ]; then
+			echo $dev
+		fi
+	done
+}
+
+# Only run the first time.
+if [ -f /var/lib/partman/initial_auto ]; then
+	exit 0
+fi
+[ -d /var/lib/partman ] || mkdir /var/lib/partman
+touch /var/lib/partman/initial_auto
+
+# See if a disk to autopartition has been set.
+db_get partman-auto/disk
+# Try to filter out other choices such as "Manually edit partition table".
+# Difficult because of partman's debconf abuse ...
+case $RET in
+	/*/*)
+		disk=$(dev_to_partman "${RET%%: *}")
+		;;
+esac
+
+partman_newlayout "$disk"

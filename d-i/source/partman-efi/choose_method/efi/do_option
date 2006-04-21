@@ -1,0 +1,16 @@
+#!/bin/sh
+
+dev=$2
+id=$3
+
+[ -d $dev/$id ] || mkdir $dev/$id
+
+echo efi >$dev/$id/method
+>$dev/$id/format
+>$dev/$id/bootable
+>$dev/$id/efi_bootable
+
+rm -f $dev/$id/use_filesystem
+rm -f $dev/$id/filesystem
+
+exit 0

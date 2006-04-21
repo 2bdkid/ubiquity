@@ -1,0 +1,34 @@
+Source: localechooser
+Section: debian-installer
+Priority: optional
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Petter Reinholdtsen <pere@debian.org>, Christian Perrier <bubulle@debian.org>
+Build-Depends-Indep: debhelper (>= 4.2), dpkg-dev (>= 1.9), locales, iso-codes (>= 0.21-1), intltool-debian (>= 0.30+20040212), po-debconf
+Standards-Version: 3.6.2.1
+
+Package: localechooser
+XC-Package-Type: udeb
+Architecture: all
+Depends: cdebconf-udeb, iso-3166-udeb, di-utils (>= 1.15)
+XB-Installer-Menu-Item: 10
+Description: choose language/country/locale
+
+Package: localechooser-data
+Section: devel
+Priority: optional
+Architecture: all
+Depends: iso-codes
+Description: Lists of locales supported by the installer
+ This package contains lists of languages, countries, and locales supported
+ by the installer, for use by programs that create automatic installation
+ scripts.
+
+Package: oem-config-locale
+Section: admin
+Priority: extra
+Architecture: all
+Depends: localechooser-data, iso-codes, apt, locales (>= 2.3.7-1)
+Enhances: oem-config
+Description: Choose language/country/locale
+ This package provides a locale selection module for oem-config, using
+ similar code to that used in the installer.

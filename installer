@@ -1,0 +1,98 @@
+#!/usr/bin/python
+
+'''
+Installer
+
+This is a installer program for a Ubuntu or Metadistros Live system.
+This is the main program, but there is also a couple of libraries to
+help it to work. For example the frontends library.
+The way it works is simple. It detect the Frontend to use, then
+load the module for that frontend. After that, it makes some calls
+through the frontend in order to get the info necessary to install.
+
+Once it has the info, partitioning, format, copy de distro to the disk
+and configure everything.
+'''
+
+import sys
+import os
+import errno
+import ubiquity
+from ubiquity import misc
+
+cdebconf = False
+
+TARGET = '/target'
+
+log_file = '/var/log/installer/syslog'
+
+def install(type='gtkui'):
+    '''install(type='gtkui') -> none
+    
+    Get the type of frontend to use and load the module for that.
+    '''
+    mod = __import__('ubiquity.frontend', globals(), locals() , [type])
+    ui = getattr(mod, type)
+
+    unmount_target()
+    distro = misc.distribution().lower()
+    wizard = ui.Wizard(distro)
+    ret = wizard.run()
+    unmount_target()
+    if ret == 10:
+        wizard.do_reboot()
+
+def unmount_target():
+    paths = []
+    mounts = open('/proc/mounts')
+    for line in mounts:
+        path = line.split(' ')[1]
+        if path == '/target' or path.startswith('/target/'):
+            paths.append(path)
+    mounts.close()
+    paths.sort()
+    paths.reverse()
+    for path in paths:
+        misc.ex('umount', path)
+
+def prepend_path(directory):
+    if 'PATH' in os.environ and os.environ['PATH'] != '':
+        os.environ['PATH'] = '%s:%s' % (directory, os.environ['PATH'])
+    else:
+        os.environ['PATH'] = directory
+
+if __name__ == '__main__':
+    if not os.path.exists(os.path.dirname(log_file)):
+        os.makedirs(os.path.dirname(log_file))
+    # The frontend should take care of displaying a helpful message if we
+    # are being run without root privileges.
+    try:
+        sys.stderr = open(log_file, 'a', 1)
+        os.dup2(sys.stderr.fileno(), 2)
+    except IOError, err:
+        if err.errno != errno.EACCES:
+            raise
+
+    if cdebconf:
+        # Note that this needs to be set before DebconfCommunicate is
+        # imported by anything.
+        os.environ['DEBCONF_USE_CDEBCONF'] = '1'
+        prepend_path('/usr/lib/cdebconf')
+    prepend_path('/usr/lib/ubiquity/compat')
+
+    if 'UBIQUITY_DEBUG' in os.environ:
+        if 'DEBCONF_DEBUG' not in os.environ:
+            os.environ['DEBCONF_DEBUG'] = 'developer|filter'
+
+    # Clean up old state.
+    if os.path.exists("/var/lib/ubiquity/apt-installed"):
+        os.unlink("/var/lib/ubiquity/apt-installed")
+    if os.path.exists("/var/lib/ubiquity/remove-kernels"):
+        os.unlink("/var/lib/ubiquity/remove-kernels")
+
+    if len(sys.argv) == 2:
+        install(sys.argv[1])
+    else:
+        install()
+
+# vim:ai:et:sts=4:tw=80:sw=4:

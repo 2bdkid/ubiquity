@@ -1,0 +1,187 @@
+apt-setup (1:0.4ubuntu6) dapper; urgency=low
+
+  * Make sure to move our sources.list aside only for CD installs, not
+    netboot, and log a message when we do so (closes: Malone #28462).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 24 Jan 2006 11:00:40 +0000
+
+apt-setup (1:0.4ubuntu5) dapper; urgency=low
+
+  * Fix comment typo in Ubuntu mirror generator (closes: Malone #29231).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 23 Jan 2006 15:14:17 +0000
+
+apt-setup (1:0.4ubuntu4) dapper; urgency=low
+
+  * https://bugzilla.ubuntu.com/show_bug.cgi?id=6390 returned with the
+    rewritten apt-setup. Apply this change from the previous implementation,
+    since it turns out to still be relevant:
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 13 Dec 2005 19:34:13 +0000
+
+apt-setup (1:0.4ubuntu3) dapper; urgency=low
+
+  * Add security sources for restricted and universe, commented out unless
+    the respective components are enabled.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  9 Dec 2005 12:38:55 +0000
+
+apt-setup (1:0.4ubuntu2) dapper; urgency=low
+
+  * Backport from trunk:
+    - Fix reversed logic for universe and backports in Ubuntu mirror
+      generator.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  9 Dec 2005 12:32:28 +0000
+
+apt-setup (1:0.4ubuntu1) dapper; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  9 Dec 2005 12:21:17 +0000
+
+apt-setup (1:0.4) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Use the codename for the release in sources.list instead of the suite.
+    Requires: cdrom-detect >=1.11; choose-mirror >=1.16; iso-scan >=1.10.
+    Closes: #313235
+
+  [ Colin Watson ]
+  * Make apt-setup-verify preserve blank lines.
+  * Avoid double slashes in sources.list mirror lines.
+
+ -- Colin Watson <cjwatson@debian.org>  Fri,  9 Dec 2005 12:09:30 +0000
+
+apt-setup (1:0.3) unstable; urgency=low
+
+  * Yet another case of an upload needed to update code to match a value from
+    a choices list that was changed by someone without checking for the code
+    that dependned on that value.
+
+  [ Updated translations ]
+  * Danish (da.po) by Claus Hindsgaul
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Dutch (nl.po) by Bart Cornelis
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Tagalog (tl.po) by Eric Pareja
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Joey Hess <joeyh@debian.org>  Mon,  5 Dec 2005 19:40:39 -0500
+
+apt-setup (1:0.2ubuntu3) dapper; urgency=low
+
+  * Include debian/apt-mirror-setup.templates-ubuntu in output
+    apt-mirror-setup templates file.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  1 Dec 2005 14:16:11 +0000
+
+apt-setup (1:0.2ubuntu2) dapper; urgency=low
+
+  * Fix sources.list entries for Ubuntu security.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 25 Nov 2005 14:29:25 +0000
+
+apt-setup (1:0.2ubuntu1) dapper; urgency=low
+
+  * Install the Ubuntu mirror generator instead of Debian's.
+  * Set apt-setup/security_host to security.ubuntu.com.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 20 Nov 2005 15:46:19 +0000
+
+apt-setup (1:0.2) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Add strings for Ubuntu mirror generator to translation infrastructure,
+    per http://lists.debian.org/debian-boot/2005/10/msg01407.html and
+    followups.
+  * Clarify apt-setup/universe description a bit.
+
+  [ Joey Hess ]
+  * If setting up a mirror fails, allow the user to retry or change their
+    mirror.
+  * If setting up a CD fails, let the user know there was a problem instead of
+    quietly continuing without a main apt source.
+  * Add a comment before commented out lines to make clear why they are
+    commented out.
+
+  [ Christian Perrier ]
+  * Break Choices in single components in templates
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bengali (bn.po) by Baishampayan Ghose
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hindi (hi.po) by Nishant Sharma
+  * Icelandic (is.po) by David Steinn Geirsson
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 16 Nov 2005 17:31:02 -0500
+
+apt-setup (1:0.1) unstable; urgency=low
+
+  [ Joey Hess ]
+  * First release as a udeb broken out from base-config and rewritten.
+
+  * This means that apt mirror config uses d-i's mirror configs automatically.
+    Closes: #220269, #252121, #235980, #251007
+  * Issues with /dev/cdrom symlinks no longer apply, since that's taken
+    care of by d-i. Closes: #198759, #264375, #274615
+  * Issues with CD eject buttons no longer apply, since well, it currently
+    only supports loading in one CD. Closes: #215639, #215639, #240331
+    Closes: #333513
+    (TODO item exists for multiple CDs tho).
+  * Runs in the first stage so no issues with it running again and eating
+    configured sources or wanting to clear proxy settings.
+    Closes: #229048, #196625
+  * Will deal nicely with failure to reach security.debian.org.
+    Closes: #251413
+  * You can enter a mirror manually in choose-mirror and entry proxy info too.
+    Closes: #277481, #284794
+  * CD stuff works ok in noninteractive/preseeded modes. Closes: #282356
+  * Adds deb-src lines for everything, including security updates.
+    Closes: #269154.
+
+  [ Colin Watson ]
+  * Various small fixes.
+  * Call the main package apt-setup-udeb to allow for apt-setup.deb in the
+    future.
+  * Add translation infrastructure.
+  * Set epoch to supersede the base-config-based apt-setup-udeb in Ubuntu.
+  * Don't bother looking for security updates for unstable.
+  * Strip everything after the first dot from generator names when
+    constructing progress template names, to allow writing variants of a
+    generator with the same basic purpose as the original.
+  * Initial untested mirror generator for Ubuntu. Not added to translation
+    infrastructure yet, although the templates are there.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 27 Oct 2005 18:29:39 -0400

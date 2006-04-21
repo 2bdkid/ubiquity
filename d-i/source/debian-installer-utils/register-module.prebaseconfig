@@ -1,0 +1,42 @@
+#!/bin/sh
+QUEUE=/var/lib/register-module
+MODFILE=/target/etc/modules
+MODCONFDIR=/target/etc/modutils/
+
+create () {
+	if [ ! -e $1 ]; then
+		echo "# Local modules settings." > $1
+		echo "# Created by the Debian installer" >> $1
+		echo "" >> $1
+	fi
+}
+
+OLDIFS=$IFS
+
+for QUEUEFILE in $QUEUE/*; do
+	[ ! -e $QUEUEFILE ] && break
+	MODULE=$(basename $QUEUEFILE)
+
+	create $MODFILE
+	echo "$MODULE" >> $MODFILE
+
+	IFS=":"
+	while read TYPE PARAMS; do
+		case $TYPE in
+		options)
+			FILE=$MODCONFDIR/local
+			create $FILE
+			echo "options $MODULE $PARAMS" >> $FILE
+			;;
+		chandev)
+			FILE=$MODCONFDIR/local.chandev
+			create $FILE
+			echo "$PARAMS" >> $FILE
+			;;
+		esac
+	done < $QUEUEFILE
+	IFS=$OLDIFS
+	rm $QUEUEFILE
+done
+
+chroot /target update-modules < /dev/null 2>&1 | logger "register-modules"

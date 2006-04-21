@@ -1,0 +1,67 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+. /lib/partman/resize.sh
+
+dev=${1%//*}
+oldid=${1#*//}
+
+cd $dev
+
+bestsize=0
+bestid=
+
+check_virtual
+
+if \
+    [ "$virtual" = no -a -f $oldid/detected_filesystem ] \
+    && [ "$(cat $oldid/detected_filesystem)" = ntfs ]
+then
+    get_ntfs_resize_range
+else
+    get_resize_range
+fi
+
+if [ -z "$maxsize" ]; then
+    db_input critical partman-partitioning/impossible_resize || true
+    db_go || true
+    exit 1
+fi
+
+human_resize_range
+prefsize=$(( ($minsize + $maxsize) / 2 ))
+# ask_for_size will set the default size to $hcursize.
+hcursize=$(longint2human $prefsize)
+
+# perform_resizing might exit 100, so use a subshell to catch that
+if (ask_for_size); then
+    cd $dev
+    open_dialog PARTITIONS
+    while :; do
+	read_line num id size type fs path name
+	[ "$id" ] || break
+	if [ "$fs" = free ] && longint_le $bestsize $size; then
+	    bestsize=$size
+	    bestid=$id
+	fi
+    done
+    close_dialog
+    if ! longint_le $((2 * 1024 * 1024 * 1024)) $bestsize; then
+	db_input critical partman-auto/resize_insufficient_space
+	db_go || true
+	exit 1
+    fi
+
+    autopartition $dev $bestid
+
+    # accept the autopartitioning
+    exit 100
+else
+    code=$?
+    if [ "$code" -eq 1 ]; then
+	exit 254 # backup
+    else
+	# TODO: error?
+	exit 0
+    fi
+fi

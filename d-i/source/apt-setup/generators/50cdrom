@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+file="$1"
+
+if [ -n "$ROOT" ]; then
+	chroot=chroot
+else
+	chroot=
+fi
+
+tmp=$($chroot $ROOT tempfile)
+# apt-cdrom can be interactive, avoid that
+$chroot $ROOT apt-cdrom add \
+	-o Dir::Etc::SourceList=$tmp \
+	-o Acquire::gpgv::Options::=--ignore-time-conflict \
+	</dev/null
+cat $ROOT$tmp >> $file
+rm -f $ROOT$tmp $ROOT$tmp~
+
+if ! apt-setup-verify $file; then
+	db_input critical apt-setup/cdrom/failed || true
+	db_go || exit 10
+fi

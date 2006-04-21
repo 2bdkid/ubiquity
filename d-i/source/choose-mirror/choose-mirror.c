@@ -1,0 +1,604 @@
+#include <debian-installer.h>
+#include <cdebconf/debconfclient.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <assert.h>
+#include <ctype.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include "mirrors.h"
+#ifdef WITH_HTTP
+#include "mirrors_http.h"
+#endif
+#ifdef WITH_FTP
+#include "mirrors_ftp.h"
+#endif
+#if ! defined (WITH_HTTP) && ! defined (WITH_FTP)
+#error Must compile with at least one of FTP or HTTP
+#endif
+
+static struct debconfclient *debconf;
+static char *protocol = NULL;
+static char *country  = NULL;
+static int base_installable = 0;
+
+/*
+ * Returns a string on the form "DEBCONF_BASE/protocol/supplied". The
+ * calling function is responsible for freeing the string afterwards.
+ */
+static char *add_protocol(char *string) {
+	char *ret;
+
+	assert(protocol != NULL); /* Fetched by choose_protocol */
+	asprintf(&ret,DEBCONF_BASE "%s/%s",protocol,string);
+	return ret;
+}
+
+/*
+ * Generates a list, suitable to be passed into debconf, from a
+ * NULL-terminated string array.
+ */
+static char *debconf_list(char *list[]) {
+	int len, i, size = 1;
+	char *ret = 0;
+
+	for (i = 0; list[i] != NULL; i++) {
+		len = strlen(list[i]);
+		size += len;
+		ret = realloc(ret, size + 2);
+		memcpy(ret + size - len - 1, list[i], len);
+		if (list[i+1] != NULL) {
+			ret[size++ - 1] = ',';
+			ret[size++ - 1] = ' ';
+		}
+		ret[size -1] = '\0';
+	}
+	return ret;
+}
+
+/*
+ * Returns the correct mirror list, depending on whether protocol is
+ * set to http or ftp. Do NOT free the structure - it is a pointer to
+ * the static list in mirrors_protocol.h
+ */
+static struct mirror_t *mirror_list(void) {
+	assert(protocol != NULL);
+
+#ifdef WITH_HTTP
+	if (strcasecmp(protocol,"http") == 0) {
+		return mirrors_http;
+	}
+#endif
+#ifdef WITH_FTP
+	if (strcasecmp(protocol,"ftp") == 0) {
+		return mirrors_ftp;
+	}
+#endif
+	return 0; // should never happen
+}
+
+/* Returns an array of hostnames of mirrors in the specified country. */
+static char **mirrors_in(char *country) {
+	static char **ret;
+	int i, j, num = 1;
+	struct mirror_t *mirrors = mirror_list();
+
+	ret = malloc(num * sizeof(char *));
+	for (i = j = 0; mirrors[i].country != NULL; i++) {
+		if (j == num-1) {
+			num *= 2;
+			ret = realloc(ret,num * sizeof(char*));
+		}
+		if (strcmp(mirrors[i].country, country) == 0) {
+			ret[j++]=mirrors[i].site;
+		}
+	}
+	ret[j]=NULL;
+	return ret;
+}
+
+/* returns true if there is a mirror in the specificed country */
+static inline int has_mirror(char *country) {
+	char **mirrors;
+	if (strcmp(country, "enter information manually") == 0)
+		return 1;
+	mirrors = mirrors_in(country);
+	return (mirrors[0] == NULL) ? 0 : 1;
+}
+
+/* Returns the root of the mirror, given the hostname. */
+static char *mirror_root(char *mirror) {
+	int i;
+
+	struct mirror_t *mirrors = mirror_list();
+
+	for (i = 0; mirrors[i].site != NULL; i++)
+		if (strcmp(mirrors[i].site, mirror) == 0)
+			return mirrors[i].root;
+	return NULL;
+}
+
+/*
+ * Using the current debconf settings for a mirror, figure out which suite
+ * to use from the mirror and set mirror/suite.
+ *
+ * This is accomplished by downloading the Release file from the mirror.
+ * Suite selection tries each suite in turn, and stops at the first one that
+ * seems usable.
+ *
+ * If no Release file is found, returns false. That probably means the
+ * mirror is broken or unreachable.
+ */
+int find_suite (void) {
+	char *command;
+	FILE *f = NULL;
+	char *hostname, *directory;
+	int nbr_suites = sizeof(suites)/SUITE_LENGTH;
+	int i;
+	int ret = 0;
+
+	debconf_progress_start(debconf, 0, 1,
+			       DEBCONF_BASE "checking_title");
+	debconf_progress_info(debconf,
+			      DEBCONF_BASE "checking_download");
+
+	hostname = add_protocol("hostname");
+	debconf_get(debconf, hostname);
+	free(hostname);
+	hostname = strdup(debconf->value);
+	directory = add_protocol("directory");
+	debconf_get(debconf, directory);
+	free(directory);
+	directory = strdup(debconf->value);
+
+	/* Try each suite in turn until one is found that works. */
+	for (i=0; i <= nbr_suites && ! ret; i++) {
+		char *suite;
+
+		if (i == 0) {
+			/* First check for a preseeded suite. */
+			debconf_get(debconf, DEBCONF_BASE "suite");
+			if (strlen(debconf->value) > 0) {
+				suite = strdup(debconf->value);
+			}
+			else {
+				continue;
+			}
+		}
+		else {
+			suite = strdup(suites[i - 1]);
+		}
+
+		asprintf(&command, "wget -q %s://%s%s/dists/%s/Release -O - | grep ^Suite: | cut -d' ' -f 2",
+			 protocol, hostname, directory, suite);
+		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+		f = popen(command, "r");
+		free(command);
+
+		if (f != NULL) {
+			char buf[SUITE_LENGTH];
+			if (fgets(buf, SUITE_LENGTH - 1, f)) {
+				if (buf[strlen(buf) - 1] == '\n')
+					buf[strlen(buf) - 1] = '\0';
+				debconf_set(debconf, DEBCONF_BASE "suite", buf);
+				ret = 1;
+			}
+		}
+
+		pclose(f);
+		free(suite);
+	}
+
+	free(hostname);
+	free(directory);
+
+	debconf_progress_step(debconf, 1);
+	debconf_progress_stop(debconf);
+
+	return ret;
+}
+
+static int choose_country(void) {
+	if (country)
+		free(country);
+	country = NULL;
+
+	debconf_get(debconf, DEBCONF_BASE "country");
+	if (! strlen(debconf->value)) {
+		/* Not set yet. Seed with a default value. */
+		if ((debconf_get(debconf, "debian-installer/country") == 0) &&
+		    (debconf->value != NULL) ) {
+			country = strdup (debconf->value);
+			debconf_set(debconf, DEBCONF_BASE "country", country);
+		}
+	}
+	else {
+		country = debconf->value;
+	}
+
+	/* Ensure 'country' is set to something. */
+	if (country == NULL || *country == 0) {
+		country = "GB";
+	}
+
+#ifdef WITH_HTTP
+	if (strcasecmp(protocol,"http") == 0) {
+		if (has_mirror(country)) {
+			debconf_set(debconf, DEBCONF_BASE "http/countries", country);
+			debconf_fget(debconf, DEBCONF_BASE "country", "seen");
+			debconf_fset(debconf, DEBCONF_BASE "http/countries", "seen", debconf->value);
+		}
+		debconf_input(debconf, base_installable ? "medium" : "high", DEBCONF_BASE "http/countries");
+	}
+#endif
+#ifdef WITH_FTP
+	if (strcasecmp(protocol,"ftp") == 0) {
+		if (has_mirror(country)) {
+			debconf_set(debconf, DEBCONF_BASE "ftp/countries", country);
+			debconf_fget(debconf, DEBCONF_BASE "country", "seen");
+			debconf_fset(debconf, DEBCONF_BASE "http/countries", "seen", debconf->value);
+		}
+		debconf_input(debconf, base_installable ? "medium" : "high", DEBCONF_BASE "ftp/countries");
+	}
+#endif
+
+	return 0;
+}
+
+static int set_country(void) {
+	debconf_get(debconf, (strcasecmp(protocol,"http") == 0 ) ?
+		    DEBCONF_BASE "http/countries" : DEBCONF_BASE "ftp/countries");
+	country = strdup(debconf->value);
+	debconf_set(debconf, DEBCONF_BASE "country", country);
+	return 0;
+}
+
+static int choose_protocol(void) {
+#if defined (WITH_HTTP) && defined (WITH_FTP)
+	/* Both are supported, so ask. */
+	debconf_subst(debconf, DEBCONF_BASE "protocol", "protocols", "http, ftp");
+	debconf_input(debconf, "medium", DEBCONF_BASE "protocol");
+#endif
+	return 0;
+}
+
+static int get_protocol(void) {
+#if defined (WITH_HTTP) && defined (WITH_FTP)
+	debconf_get(debconf, DEBCONF_BASE "protocol");
+	protocol = strdup(debconf->value);
+#else
+#ifdef WITH_HTTP
+	debconf_set(debconf, DEBCONF_BASE "protocol", "http");
+	protocol = "http";
+#endif
+#ifdef WITH_FTP
+	debconf_set(debconf, DEBCONF_BASE "protocol", "ftp");
+	protocol = "ftp";
+#endif
+#endif /* WITH_HTTP && WITH_FTP */
+	return 0;
+}
+
+static int manual_entry;
+
+static int choose_mirror(void) {
+	char *list;
+	char *countryarchive;
+	int i;
+
+	debconf_get(debconf, DEBCONF_BASE "country");
+	manual_entry = ! strcmp(debconf->value, "enter information manually");
+	if (! manual_entry) {
+		char *mir = add_protocol("mirror");
+
+		countryarchive=malloc(strlen(country) +
+				      strlen(".archive.ubuntu.com") + 1);
+		for (i = 0; country[i]; ++i)
+			countryarchive[i] = tolower((unsigned char) country[i]);
+		strcpy(countryarchive + i, ".archive.ubuntu.com");
+
+		/* Prompt for mirror in selected country. */
+		list=debconf_list(mirrors_in(country));
+		debconf_subst(debconf, mir, "mirrors", list);
+		if (debconf_fget(debconf, mir, "seen") != 0 ||
+		    strcmp(debconf->value, "true") != 0)
+			debconf_set(debconf, mir, countryarchive);
+		free(list);
+		free(countryarchive);
+
+		debconf_input(debconf, base_installable ? "medium" : "high", mir);
+		free(mir);
+	}
+	else {
+		char *host = add_protocol("hostname");
+		char *dir = add_protocol("directory");
+
+		/* Manual entry. */
+		debconf_input(debconf, "critical", host);
+		debconf_input(debconf, "critical", dir);
+
+		free(host);
+		free(dir);
+	}
+
+	return 0;
+}
+
+static int choose_proxy(void) {
+	char *px = add_protocol("proxy");
+	char *command;
+	FILE *f = NULL;
+	char syn[32];
+	int  syns=0;
+
+	/* Ubuntu change: try to check if we can reach archive.ubuntu.com
+	 * before asking for a proxy. There might be several reasons why it
+	 * can fail but it is still wise to test. 
+	 * NOTE: this portion of code is not meant to track user installations
+	 *       and it temporarily hardcodes values. It also sets the
+	 *       /proc/sys/net/ipv4/tcp_syn_retries to 2 to reduce the delay
+	 *       time in case of connection failure and restore the original
+	 *       setting immediately after.
+	 */
+
+	/* be sure the string is all 0's */
+	memset(syn, '0', sizeof(syn));
+
+	/* get current setting */
+	asprintf(&command, "cat /proc/sys/net/ipv4/tcp_syn_retries");
+	f = popen(command, "r");
+	if (f != NULL) {
+		if (fgets(syn, 31, f)) {
+			syns=1;
+		}
+		pclose(f);
+	}
+	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+	free(command);
+
+	/* set ours */
+	if (syns > 0) {
+		asprintf(&command, "echo 1 > /proc/sys/net/ipv4/tcp_syn_retries");
+		f = popen(command, "r");
+		if (f != NULL) {
+			pclose(f);
+		}
+		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+		free(command);
+	}
+
+	asprintf(&command, "wget -q http://archive.ubuntu.com/ubuntu/dists/%s/Release -O - | grep ^Suite: | cut -d' ' -f 2", PREFERRED_DISTRIBUTION);
+
+	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+
+	f = popen(command, "r");
+	if (f != NULL) {
+		char suite[32];
+		if (fgets(suite, 31, f)) {
+			debconf_input(debconf, "low", px);
+		} else {
+			debconf_input(debconf, "critical", px);
+		}
+		pclose(f);
+	} else {
+		/* This is a nasty way to check whether we ought to have a
+		 * network connection; if we don't, it isn't worthwhile to
+		 * ask for a proxy. We should really change netcfg to write
+		 * out a flag somewhere.
+		 */
+		if (debconf_get(debconf, "netcfg/dhcp_options") == 0 && debconf->value != NULL && strncmp(debconf->value, "Do not configure", strlen("Do not configure")) == 0) {
+			debconf_input(debconf, "low", px);
+		} else {
+			debconf_input(debconf, "critical", px);
+		}
+	}
+	free(command);
+	free(px);
+
+	/* set default back */
+	if (syns > 0) {
+		asprintf(&command, "echo %s > /proc/sys/net/ipv4/tcp_syn_retries", syn);
+		f = popen(command, "r");
+		if (f != NULL) {
+			pclose(f);
+		}
+		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+		free(command);
+	}
+
+	return 0;
+}
+
+static int set_proxy(void) {
+	char *px = add_protocol("proxy");
+	char *proxy_var;
+
+	asprintf(&proxy_var, "%s_proxy", protocol);
+
+	debconf_get(debconf, px);
+	if (debconf->value != NULL && strlen(debconf->value)) {
+		setenv(proxy_var, debconf->value, 1);
+	}
+	else {
+		unsetenv(proxy_var);
+	}
+
+	free(proxy_var);
+	free(px);
+
+	return 0;
+}
+
+static int validate_mirror(void) {
+	char *mir;
+	char *host;
+	char *dir;
+	int valid;
+
+	mir = add_protocol("mirror");
+	host = add_protocol("hostname");
+	dir = add_protocol("directory");
+
+	if (! manual_entry) {
+		char *mirror;
+
+		/*
+		 * Copy information about the selected
+		 * mirror into mirror/{protocol}/{hostname,directory},
+		 * which is the standard location other
+		 * tools can look at.
+		 */
+		debconf_get(debconf, mir);
+		mirror = strdup(debconf->value);
+		debconf_set(debconf, host, mirror);
+		debconf_set(debconf, dir, mirror_root(mirror));
+		free(mirror);
+
+		valid = find_suite();
+	}
+	else {
+		/* check to see if the entered data is basically ok */
+		int ok = 1;
+		debconf_get(debconf, host);
+		if (debconf->value == NULL || strcmp(debconf->value, "") == 0 || strchr(debconf->value, '/') != NULL) {
+			ok = 0;
+		}
+		debconf_get(debconf, dir);
+		if (debconf->value == NULL || strcmp(debconf->value, "") == 0) {
+			ok = 0;
+		}
+
+		if (ok) {
+			valid = find_suite();
+		}
+		else {
+			valid = 0;
+		}
+	}
+
+	free(mir);
+	free(host);
+	free(dir);
+
+	if (valid) {
+		return 0;
+	}
+	else if (base_installable) {
+		/* We have the base system on the CD, so let's just carry on
+		 * and install that, setting suite to PREFERRED_DISTRIBUTION
+		 * if unset and codename = suite. Note that this is an
+		 * Ubuntu-specific change since (a) Debian netinst CDs etc.
+		 * may not be able to install a complete system from the
+		 * network and (b) codename != suite in Debian.
+		 */
+		di_log(DI_LOG_LEVEL_WARNING, "cannot validate mirror, but base system installable so carrying on");
+		debconf_get(debconf, DEBCONF_BASE "suite");
+		if (!*debconf->value) {
+			di_log(DI_LOG_LEVEL_INFO, "falling back to suite %s", PREFERRED_DISTRIBUTION);
+			debconf_set(debconf, DEBCONF_BASE "suite", PREFERRED_DISTRIBUTION);
+		}
+		debconf_get(debconf, DEBCONF_BASE "suite");
+		di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
+		debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
+		exit(0);
+	}
+	else {
+		debconf_input(debconf, "critical", DEBCONF_BASE "bad");
+		if (debconf_go(debconf) == 30)
+			exit(10); /* back up to menu */
+		else
+			return 1; /* back to beginning of questions */
+	}
+}
+
+/* Get the codename for the selected suite. */
+int get_codename (void) {
+	char *command;
+	FILE *f = NULL;
+	char *hostname, *directory, *suite;
+	int ret = 1;
+
+	hostname = add_protocol("hostname");
+	debconf_get(debconf, hostname);
+	free(hostname);
+	hostname = strdup(debconf->value);
+	directory = add_protocol("directory");
+	debconf_get(debconf, directory);
+	free(directory);
+	directory = strdup(debconf->value);
+
+	/* As suite has been determined previously, this should not fail */
+	debconf_get(debconf, DEBCONF_BASE "suite");
+	if (strlen(debconf->value) > 0) {
+		suite = strdup(debconf->value);
+
+		asprintf(&command, "wget -q %s://%s%s/dists/%s/Release -O - | grep ^Codename: | cut -d' ' -f 2",
+			 protocol, hostname, directory, suite);
+		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+		f = popen(command, "r");
+		free(command);
+
+		if (f != NULL) {
+			char buf[SUITE_LENGTH];
+			if (fgets(buf, SUITE_LENGTH - 1, f)) {
+				if (buf[strlen(buf) - 1] == '\n')
+					buf[strlen(buf) - 1] = '\0';
+				debconf_set(debconf, DEBCONF_BASE "codename", buf);
+				di_log(DI_LOG_LEVEL_INFO, "codename set to: %s", buf);
+				ret = 0;
+			}
+		}
+		pclose(f);
+	}
+
+	free(hostname);
+	free(directory);
+	free(suite);
+
+	if (ret != 0)
+		di_log(DI_LOG_LEVEL_ERROR, "Error getting codename");
+	return ret;
+}
+
+int main (void) {
+	/* Use a state machine with a function to run in each state */
+	int state = 0;
+	int (*states[])() = {
+		choose_protocol,
+		get_protocol,
+		choose_country,
+		set_country,
+		choose_mirror,
+		choose_proxy,
+		set_proxy,
+		validate_mirror,
+		get_codename,
+		NULL,
+	};
+	struct stat st;
+
+	debconf = debconfclient_new();
+	debconf_capb(debconf, "backup");
+	debconf_version(debconf, 2);
+
+	di_system_init("choose-mirror");
+
+	if (stat("/cdrom/.disk/base_installable", &st) == 0 ||
+	    getenv("OVERRIDE_BASE_INSTALLABLE") != NULL)
+		base_installable = 1;
+
+	while (state >= 0 && states[state]) {
+		if (states[state]() != 0) { /* back up to start */
+			state = 0;
+		}
+		else if (debconf_go(debconf)) { /* back up */
+			state = state - 1;
+		}
+		else {
+			state++;
+		}
+	}
+	return (state >= 0) ? 0 : 10; /* backed all the way out */
+}

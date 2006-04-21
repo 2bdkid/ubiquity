@@ -1,0 +1,30 @@
+#!/bin/sh
+
+[ -f /target/etc/fstab ] || exit 0
+
+fstab=$(
+    for i in /lib/partman/fstab.d/*; do
+	[ -x "$i" ] || continue
+	$i
+    done |
+    while read fs mp type options dump pass; do
+	echo $mp $fs $type $options $dump $pass
+    done |
+    sort |
+    while read mp fs type options dump pass; do
+	case "$mp" in
+	    (/*)
+		if udevinfo -q env -n "$mp" 2>/dev/null| grep 'ID_BUS=\(usb\|ieee1394\)'; then
+			printf "%-15s %-15s %-7s %-15s %-7s %s\n" "UUID=$(/lib/udev/vol_id -u $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+		else
+			printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+		fi
+		;;
+            (*)
+		printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+                ;;
+	esac
+    done
+)
+
+echo "$fstab" >>/target/etc/fstab

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+. /lib/partman/definitions.sh
+
+mypart=''
+mysize=0
+
+get_some_device_on_dev() {
+    db_subst partman-auto/text/use_device DEVICE $(device_name $dev)
+    db_metaget partman-auto/text/use_device description
+    printf "$dev\t$RET\n"
+}
+
+dev="$1"
+
+if [ -z "$dev" ]; then
+    for dev in $DEVICES/*; do
+	[ -d "$dev" ] || continue
+	get_some_device_on_dev
+    done
+else
+    get_some_device_on_dev
+fi

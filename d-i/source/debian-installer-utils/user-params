@@ -1,0 +1,47 @@
+#!/bin/sh
+CMDLINE=/proc/cmdline
+for item in $(cat $CMDLINE); do
+	var="${item%=*}"
+	
+	# BOOT_IMAGE is added by syslinux.
+	if [ "$var" = "BOOT_IMAGE" ]; then
+		continue
+	fi
+	
+	# init is not generally useful to pass on.
+	if [ "$var" = init ]; then
+		continue
+	fi
+
+	# ks is only useful to kickseed in the first stage.
+	if [ "$var" = ks ]; then
+		continue
+	fi
+
+	# Skip debconf variables.
+	varnoslash="${var##*/*}"
+	if [ "$varnoslash" = "" ]; then
+		continue
+	fi
+	
+	if [ "$item" = "--" ]; then
+		inuser=1
+		collect=""
+	elif [ "$inuser" ]; then
+		if [ -z "$collect" ]; then
+			collect="$item"
+		else
+			collect="$collect $item"
+		fi
+	fi
+done
+
+# Include default parameters.
+RET=`debconf-get debian-installer/add-kernel-opts || true`
+if [ "$RET" ]; then
+        collect="$collect $RET"
+fi
+
+for word in $collect; do
+	echo "$word"
+done

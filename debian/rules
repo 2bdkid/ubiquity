@@ -1,0 +1,164 @@
+#!/usr/bin/make -f
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+BUILDDIR=$(CURDIR)/debian/build
+
+DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU 2>/dev/null)
+
+# Take account of old dpkg-architecture output.
+ifeq ($(DEB_HOST_ARCH_CPU),)
+  DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
+  ifeq ($(DEB_HOST_ARCH_CPU),x86_64)
+    DEB_HOST_ARCH_CPU := amd64
+  endif
+endif
+
+ifneq (,$(findstring :$(DEB_HOST_ARCH_CPU):,:amd64:i386:))
+  bootloader-depends := grub, os-prober
+else
+ifeq ($(DEB_HOST_ARCH_CPU),powerpc)
+  bootloader-depends := yaboot, os-prober, hfsutils
+else
+ifeq ($(DEB_HOST_ARCH_CPU),sparc)
+  bootloader-depends := silo
+endif
+endif
+endif
+
+update:
+	$(MAKE) -C d-i update
+
+build: build-stamp
+
+build-stamp:
+	dh_testdir
+
+	./configure --prefix=/usr
+	$(MAKE)
+	$(MAKE) -C d-i build
+
+	mkdir -p $(BUILDDIR)/ubuntu
+	mkdir -p $(BUILDDIR)/guadalinex
+
+	# Ubuntu-doc
+	for file in $$(ls $(CURDIR)/glade/locale/ubuntu/*.po); do msgfmt -o $(BUILDDIR)/ubuntu/$$(basename $$file .po).mo $(CURDIR)/glade/locale/ubuntu/$$(basename $$file); done || true
+
+	# Guadalinex-doc
+	for file in $$(ls $(CURDIR)/glade/locale/guadalinex/*.po); do msgfmt -o $(BUILDDIR)/guadalinex/$$(basename $$file .po).mo $(CURDIR)/glade/locale/guadalinex/$$(basename $$file); done || true
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -fr build-stamp $(BUILDDIR)
+	find -type f \( -name \*.pyc -o -name \*.pyo \) -print0 | xargs -0r rm -f
+
+	$(MAKE) -C d-i clean
+	-$(MAKE) distclean
+
+	dh_clean debian/ubiquity.install
+
+install:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs -A
+
+	# For the meantime, everything automake wants to install is part of
+	# the GTK frontend.
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/ubiquity-frontend-gtk
+	$(MAKE) -C d-i install
+
+	cp debian/ubiquity.install-any debian/ubiquity.install
+ifneq (,$(wildcard debian/ubiquity.install-$(DEB_HOST_ARCH)))
+	cat debian/ubiquity.install-$(DEB_HOST_ARCH) >> debian/ubiquity.install
+endif
+	dh_install -A
+
+	# Bits of manual installation that can't be done by dh_install
+	install installer $(CURDIR)/debian/ubiquity/usr/bin/ubiquity
+	sed 's,/usr/lib/apt-setup,/usr/lib/ubiquity/apt-setup,g' \
+		d-i/source/apt-setup/apt-setup \
+		> debian/ubiquity/usr/lib/ubiquity/apt-setup/apt-setup
+	chmod +x debian/ubiquity/usr/lib/ubiquity/apt-setup/apt-setup
+	if [ -e "d-i/source/base-installer/kernel/$(DEB_HOST_ARCH).sh" ]; then \
+		install -m644 d-i/source/base-installer/kernel/$(DEB_HOST_ARCH).sh \
+			debian/ubiquity/usr/lib/ubiquity/base-installer/kernel.sh; \
+	fi
+	install d-i/source/kbd-chooser/debian/prebaseconfig \
+		debian/ubiquity/usr/lib/ubiquity/kbd-chooser/
+	install d-i/source/localechooser/post-base-installer \
+		d-i/source/localechooser/prebaseconfig \
+		debian/ubiquity/usr/lib/ubiquity/localechooser/
+	install d-i/source/tzsetup/prebaseconfig.d/*tzsetup \
+		debian/ubiquity/usr/lib/ubiquity/tzsetup/prebaseconfig
+	set -e; for x in user-setup user-setup-ask user-setup-apply; do \
+		sed 's,/usr/lib/user-setup,/usr/lib/ubiquity/user-setup,g' \
+			d-i/source/user-setup/$$x \
+			> debian/ubiquity/usr/lib/ubiquity/user-setup/$$x; \
+		chmod +x debian/ubiquity/usr/lib/ubiquity/user-setup/$$x; \
+	done
+ifeq ($(DEB_HOST_ARCH),powerpc)
+	dh_installdirs -pubiquity usr/lib/ubiquity/yaboot-installer
+	install d-i/source/yaboot-installer/debian/postinst \
+		debian/ubiquity/usr/lib/ubiquity/yaboot-installer/yaboot-installer
+endif
+ifeq ($(DEB_HOST_ARCH),sparc)
+	dh_installdirs -pubiquity usr/lib/ubiquity/silo-installer
+	install d-i/source/silo-installer/debian/silo-installer.postinst \
+		debian/ubiquity/usr/lib/ubiquity/silo-installer/silo-installer
+endif
+
+	for locale in $$(find $(BUILDDIR)/ubuntu/ -name \*.mo -exec basename {} .mo \;); do mkdir -p $(CURDIR)/debian/ubiquity-ubuntu-doc/usr/share/locale/$$locale/LC_MESSAGES/; mv $(BUILDDIR)/ubuntu/$$locale.mo $(CURDIR)/debian/ubiquity-ubuntu-doc/usr/share/locale/$$locale/LC_MESSAGES/ubuntu-installer.mo; done
+	for locale in $$(find $(BUILDDIR)/guadalinex/ -name \*.mo -exec basename {} .mo \;); do mkdir -p $(CURDIR)/debian/ubiquity-guadalinex-doc/usr/share/locale/$$locale/LC_MESSAGES/; mv $(BUILDDIR)/guadalinex/$$locale.mo $(CURDIR)/debian/ubiquity-guadalinex-doc/usr/share/locale/$$locale/LC_MESSAGES/guadalinex-installer.mo; done
+
+# Build architecture-independent files here.
+binary-indep: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs -i Changelog.Guadalinex
+	dh_installdocs -i
+#	dh_installexamples -i
+	dh_installdebconf -i
+#	dh_installman -i
+	dh_strip -i
+	dh_compress -i
+	dh_fixperms -i
+	dh_python -i
+	dh_installdeb -i
+	dh_shlibdeps -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+# Build architecture-dependent files here.
+binary-arch: install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs -a Changelog.Guadalinex
+	dh_installdocs -a
+#	dh_installexamples -a
+	dh_installdebconf -a
+	echo >> debian/ubiquity/DEBIAN/templates
+	cat d-i/templates >> debian/ubiquity/DEBIAN/templates
+#	dh_installman -a
+	dh_strip -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_python -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+ifdef bootloader-depends
+	dh_gencontrol -a -- -V'bootloader-depends=$(bootloader-depends)'
+else
+	dh_gencontrol -a
+endif
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install

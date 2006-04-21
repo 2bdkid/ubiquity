@@ -1,0 +1,344 @@
+Template: base-installer/use_unclean_target
+Type: boolean
+Default: true
+_Description: Proceed with installation to unclean target?
+ The target file system contains files from a past installation. These files
+ could cause problems with the installation process, and if you proceed,
+ some of the existing files may be overwritten.
+
+Template: base-installer/cannot_install
+Type: error
+_Description: Cannot install base system
+ The installer cannot figure out how to install the base system. No
+ installable CD-ROM was found and no valid mirror was configured.
+
+Template: base-installer/no_codename
+Type: error
+_Description: Debootstrap Error
+ Failed to determine the codename for the release.
+
+Template: base-installer/no_target_mounted
+Type: error
+_Description: No file system mounted on /target
+ Before the installation can proceed, a root file system must be mounted on
+ /target. The partitioner and formatter should have done this for you.
+
+Template: base-installer/unclean_target_cancel
+Type: error
+_Description: Not installing to unclean target
+ The installation to the target file system has been canceled. You should go
+ back and erase or format the target file system before proceeding with the
+ install.
+
+Template: base-installer/debootstrap-failed
+Type: error
+_Description: Failed to install the base system
+ The base system installation into /target/ failed.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/debootstrap/error-exitcode
+Type: error
+_Description: Base system installation error
+ The debootstrap program exited with an error (return value ${EXITCODE}).
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/debootstrap/error-abnormal
+Type: error
+_Description: Base system installation error
+ The debootstrap program exited abnormally.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/debootstrap/fallback-error
+Type: error
+_Description: Debootstrap Error
+ The following error occurred:
+ .
+ ${ERROR}
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/initramfs/generator
+Type: select
+Choices: ${GENERATORS}
+_Description: Tool to use to generate boot initrd:
+ The list shows the available tools. If you are unsure which to select,
+ you should select the default. If your system fails to boot, you can
+ retry the installation using the other options.
+
+Template: base-installer/initramfs/no-generator
+Type: error
+_Description: No initrd generator
+ The kernel that has been selected for installation needs an initrd to boot.
+ However, no package to generate that initrd is available that supports
+ your configuration. This would leave your system unable to boot.
+
+Template: base-installer/initramfs/unsupported
+Type: error
+_Description: Unsupported initrd generator
+ The package ${GENERATOR} that was selected to generate the
+ initrd is not supported.
+
+Template: base-installer/kernel/failed-install
+Type: error
+_Description: Unable to install the selected kernel
+ An error was returned while trying to install the kernel into the
+ target system.
+ .
+ Kernel package: '${KERNEL}'.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/kernel/which-kernel
+Type: select
+_Choices: ${KERNELS}, none
+_Description: Kernel to install:
+ The list shows the available kernels. Please choose one of them in order
+ to make the system bootable from the hard drive.
+
+Template: base-installer/kernel/skip-install
+Type: boolean
+Default: false
+_Description: Continue without installing a kernel?
+ No installable kernel was found in the defined APT sources.
+ .
+ You may try to continue without a kernel, and manually install your own
+ kernel later. This is only recommended for experts, otherwise you will
+ likely end up with a machine that doesn't boot.
+
+Template: base-installer/kernel/no-kernels-found
+Type: error
+_Description: Cannot install kernel
+ The installer cannot find a suitable kernel package to install. 
+
+Template: base-installer/kernel/failed-package-install
+Type: error
+_Description: Unable to install ${PACKAGE}
+ An error was returned while trying to install the ${PACKAGE} package
+ onto the target system.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
+Template: base-installer/debootstrap/error/nogetrel
+Type: error
+_Description: Debootstrap Error
+ Failed getting Release file ${SUBST0}.
+
+Template: base-installer/debootstrap/error/nogetrelsig
+Type: error
+_Description: Debootstrap Error
+ Failed getting Release signature file ${SUBST0}.
+
+Template: base-installer/debootstrap/error/unknownrelsig
+Type: error
+_Description: Debootstrap Error
+ Release file signed by unknown key (key id ${SUBST0})
+
+Template: base-installer/debootstrap/error/invalidrel
+Type: error
+_Description: Debootstrap Error
+ Invalid Release file: no valid components.
+
+Template: base-installer/debootstrap/error/missingrelentry
+Type: error
+_Description: Debootstrap Error
+ Invalid Release file: no entry for ${SUBST0}.
+
+Template: base-installer/debootstrap/error/couldntdl
+Type: error
+_Description: Debootstrap Error
+ Couldn't retrieve ${SUBST0}. This may be due to a network problem or a
+ bad CD, depending on your installation method.
+ .
+ If you are installing from CD-R or CD-RW, burning the CD at a lower
+ speed may help.
+
+Template: base-installer/progress/installing-debian
+Type: text
+_Description: Installing the base system
+
+Template: base-installer/progress/preparing
+Type: text
+_Description: Preparing to install the base system...
+
+Template: base-installer/progress/fallback
+Type: text
+_Description: Running ${SCRIPT}...
+
+Template: base-installer/debootstrap/section/downrel
+Type: text
+_Description: Retrieving Release file
+
+Template: base-installer/debootstrap/progress/downrelsig
+Type: text
+_Description: Retrieving Release file signature
+
+Template: base-installer/debootstrap/section/sizedebs
+Type: text
+_Description: Finding package sizes
+
+Template: base-installer/debootstrap/section/downpkgs
+Type: text
+_Description: Retrieving Packages files
+
+Template: base-installer/debootstrap/section/downmainpkgs
+Type: text
+_Description: Retrieving Packages file
+
+Template: base-installer/debootstrap/section/downdebs
+Type: text
+_Description: Retrieving packages
+
+Template: base-installer/debootstrap/section/extractpkgs
+Type: text
+_Description: Extracting packages
+
+Template: base-installer/debootstrap/section/instbase
+Type: text
+_Description: Installing the base system
+
+Template: base-installer/debootstrap/section/instcore
+Type: text
+_Description: Installing core packages
+
+Template: base-installer/debootstrap/section/unpackreq
+Type: text
+_Description: Unpacking required packages
+
+Template: base-installer/debootstrap/section/confreq
+Type: text
+_Description: Configuring required packages
+
+Template: base-installer/debootstrap/section/unpackbase
+Type: text
+_Description: Unpacking the base system
+
+Template: base-installer/debootstrap/section/confbase
+Type: text
+_Description: Configuring the base system
+
+Template: base-installer/debootstrap/fallback-info
+Type: text
+_Description: ${SECTION}: ${INFO}...
+
+Template: base-installer/debootstrap/info/validating
+Type: text
+_Description: Validating ${SUBST0}...
+
+Template: base-installer/debootstrap/info/retrieving
+Type: text
+_Description: Retrieving ${SUBST0}...
+
+Template: base-installer/debootstrap/info/extracting
+Type: text
+_Description: Extracting ${SUBST0}...
+
+Template: base-installer/debootstrap/info/unpacking
+Type: text
+_Description: Unpacking ${SUBST0}...
+
+Template: base-installer/debootstrap/info/configuring
+Type: text
+_Description: Configuring ${SUBST0}...
+
+Template: base-installer/debootstrap/info/releasesig
+Type: text
+_Description: Checking Release signature
+
+Template: base-installer/debootstrap/info/validrelsig
+Type: text
+_Description: Valid Release signature (key id ${SUBST0})
+
+Template: base-installer/debootstrap/info/resolvebase
+Type: text
+_Description: Resolving dependencies of base packages...
+
+Template: base-installer/debootstrap/info/resolvereq
+Type: text
+_Description: Resolving dependencies of required packages...
+
+Template: base-installer/debootstrap/info/checkingsizes
+Type: text
+_Description: Checking component ${SUBST0} on ${SUBST1}...
+
+Template: base-installer/debootstrap/info/instcore
+Type: text
+_Description: Installing core packages...
+
+Template: base-installer/debootstrap/info/unpackreq
+Type: text
+_Description: Unpacking required packages...
+
+Template: base-installer/debootstrap/info/confreq
+Type: text
+_Description: Configuring required packages...
+
+Template: base-installer/debootstrap/info/instbase
+Type: text
+_Description: Installing base packages...
+
+Template: base-installer/debootstrap/info/unpackbase
+Type: text
+_Description: Unpacking the base system...
+
+Template: base-installer/debootstrap/info/confbase
+Type: text
+_Description: Configuring the base system...
+
+Template: base-installer/debootstrap/info/basesuccess
+Type: text
+_Description: Base system installed successfully.
+
+Template: base-installer/debootstrap/fallback-warning
+Type: error
+_Description: Debootstrap warning
+ Warning: ${INFO}
+
+Template: base-installer/debootstrap/warning/retrying
+Type: text
+_Description: Retrying failed download of ${SUBST0}
+
+Template: base-installer/section/configure_apt
+Type: text
+_Description: Configuring APT sources...
+
+Template: base-installer/section/apt_update
+Type: text
+_Description: Updating the list of available packages...
+
+Template: base-installer/section/install_extra
+Type: text
+_Description: Installing extra packages...
+
+Template: base-installer/section/install_extra_package
+Type: text
+_Description: Installing extra packages - retrieving and installing ${SUBST0}...
+
+Template: base-installer/section/create_devices
+Type: text
+_Description: Creating device files...
+
+Template: base-installer/section/pick_kernel
+Type: text
+_Description: Selecting the kernel to install...
+
+Template: base-installer/section/install_kernel
+Type: text
+_Description: Installing the kernel...
+
+Template: base-installer/section/install_kernel_package
+Type: text
+_Description: Installing the kernel - retrieving and installing ${SUBST0}...
+
+Template: base-installer/section/install_pcmcia_modules
+Type: text
+_Description: Installing the PCMCIA modules
+
+Template: debian-installer/base-installer/title
+Type: text
+#  Item in the main menu to select this package
+# TRANSLATORS: <65 columns
+_Description: Install the base system
+

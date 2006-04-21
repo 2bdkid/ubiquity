@@ -1,0 +1,24 @@
+Source: tzsetup
+Section: debian-installer
+Priority: standard
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Joey Hess <joeyh@debian.org>, Petter Reinholdtsen <pere@debian.org>, Otavio Salvador <otavio@debian.org>, Christian Perrier <bubulle@debian.org>
+Build-Depends-Indep: debhelper (>= 4.1.13), po-debconf, locales
+Standards-Version: 3.6.2
+
+Package: tzsetup-udeb
+Architecture: all
+Depends: localechooser
+XC-Package-Type: udeb
+XB-Installer-Menu-Item: 62
+Description: choose timezone
+
+Package: oem-config-timezone
+Architecture: all
+Section: admin
+Priority: extra
+Replaces: oem-config (<< 0.10)
+Enhances: oem-config
+Description: Choose timezone
+ This package provides a timezone selection module for oem-config, using
+ similar code to that used in the installer.

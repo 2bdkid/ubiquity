@@ -1,0 +1,54 @@
+#!/usr/bin/make -f
+
+PACKAGE=kbd-chooser
+OCPACKAGE=oem-config-keyboard
+
+build: build-stamp
+build-stamp:
+	dh_testdir
+	$(MAKE)
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+	-$(MAKE) clean
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs -a
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/kbd-chooser
+	install -m0755 debian/prebaseconfig  debian/$(PACKAGE)/usr/lib/prebaseconfig.d/70kbd-chooser
+	install -m0755 debian/S55kbd-chooser debian/$(PACKAGE)/lib/debian-installer-startup.d/S55kbd-chooser
+	dh_install -p$(OCPACKAGE) kbd-chooser kbd-chooser-apply kbd-mode usr/lib/oem-config/
+	dh_install -p$(OCPACKAGE) oem-config/* usr/lib/oem-config/menu/
+
+binary-indep: 
+
+binary-arch: DH_OPTIONS=-a
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdocs -p$(OCPACKAGE)
+	dh_installchangelogs -p$(OCPACKAGE)
+	dh_installdebconf -p$(PACKAGE)
+	sed -e 's,Template: debian-installer/kbd-chooser/title,Template: oem-config/menu/keyboard,' \
+		< debian/$(PACKAGE)/DEBIAN/templates \
+		> debian/$(OCPACKAGE)/usr/lib/oem-config/menu/keyboard.templates
+	dh_python
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_makeshlibs
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

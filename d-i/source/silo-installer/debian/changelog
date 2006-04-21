@@ -1,0 +1,243 @@
+silo-installer (1.03ubuntu1) dapper; urgency=low
+
+  * Fabio M. Di Nitto
+    - Sync with Debian, UVF exception granted by mdz.
+    - Make silo-installer quite about installing on raid, since silo does
+      actually support raid1.
+
+ -- Fabio M. Di Nitto <fabbione@ubuntu.com>  Sun, 16 Apr 2006 09:43:46 +0200
+
+silo-installer (1.03) unstable; urgency=low
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Punjabi (Gurmukhi) (pa_IN.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Frans Pop <fjp@debian.org>  Fri, 27 Jan 2006 23:16:44 +0100
+
+silo-installer (1.02) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Apply patch from Jurij Smakov to improve silo checks in partman.
+    Closes: #286265.
+
+  [ Christian Perrier ]
+  * Rewrite the warning note short description for general consistency
+    with d-i writing style.
+  * Remove an extra space at the end of a line in the templates file
+    Thanks to Jens Seidel for noticing.
+
+  [ Colin Watson ]
+  * Change "new Debian boot partition" to "new boot partition", to reduce
+    branding problems for derivatives.
+
+  [ Frans Pop ]
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bengali (bn.po) by Baishampayan Ghose
+  * Catalan (ca.po) by Guillem Jover
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Greek (el.po) by quad-nrg.net
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Persian (fa.po) by Arash Bijanzadeh
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Icelandic (is.po) by David Steinn Geirsson
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagazy (mg.po) by Jaonary Rabarisoa
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian (nn.po)
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Thu, 12 Jan 2006 01:07:00 +0100
+
+silo-installer (1.01) unstable; urgency=low
+
+  * Matt Kraai
+    - Fix the spelling of "file system" and "boot loader".
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Belarusian (be.po) by Andrei Darashenka
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Catalan (ca.po) by Guillem Jover
+    - Greek (el.po) by Greek Translation Team
+    - Esperanto (eo.po) by Serge Leblanc
+    - Spanish (es.po) by Javier Fernández-Sanguino Peña
+    - Estonian (et.po) by Siim Põder
+    - Basque (eu.po) by Piarres Beobide
+    - Gallegan (gl.po) by Jacobo Tarrio
+    - Hebrew (he.po) by Lior Kaplan
+    - Italian (it.po) by Giuseppe Sacco
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Malagazy (mg.po) by Jaonary Rabarisoa
+    - Macedonian (mk.po) by Georgi Stanojevski
+    - Macedonian (pa_IN.po) by Amanpreet Singh Alam
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Romanian (ro.po) by Eddy Petrişor
+    - Russian (ru.po) by Yuri Kozlov
+    - Tagalog (tl.po) by Eric Pareja
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Vietnamese (vi.po) by Clytie Siddall
+    - Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+    - Xhosa (xh.po) by Canonical Ltd
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Frans Pop <fjp@debian.org>  Mon, 18 Jul 2005 21:27:22 +0200
+
+silo-installer (1.00) unstable; urgency=HIGH
+
+  * Joshua Kwan
+    - Yeesh. Build the package in binary-arch, not binary-indep.
+    - [ -n "$bootfs" ] instead of [ "$bootfs" ].
+    - Remove isinstallable and take care of apt-installing silo in
+      the postinst, since debootstrap no longer takes care of this.
+      (Closes: #262188)
+    - Install initrd stanzas for vmlinuz and vmlinuz.old. (closes: #283062)
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Mon, 31 Jan 2005 22:53:46 -0800
+
+silo-installer (0.0.6) unstable; urgency=low
+
+  * Joshua Kwan
+    - Convert to new debhelper udeb support.
+    - Fix more thinkos involving ${bootpart}.
+  * Martin Michlmayr
+    - Remove Moshe Zadka as uploader.
+    - Stop using df to find the /target partition (failed on 100 gb drives
+      due to field width issues), and make the file system type be found in
+      a way that is less prey to false positives.
+  * Colin Watson
+    - Fix 'findfs /' (mount outputs "on /target", not "on /target/").
+    - 'findfs /boot' now returns the empty string if /boot is on the root
+      partition. Cope with this.
+  * Updated translations:
+    - Arabic (ar.po) by Abdulaziz Al-Arfaj
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Basque (eu.po) by Piarres Beobide Egaña
+    - Gallegan (gl.po) by Héctor Fernández López
+    - Hebrew (he.po) by Lior Kaplan
+    - Indonesian (id.po) by Parlin Imanuel Toh
+    - Italian (it.po) by Davide Viti
+    - Norwegian (nb.po) by Bjørn Steensrud
+    - Norwegian (nn.po) by Håvard Korsvoll
+    - Polish (pl.po) by Bartosz Fenski
+    - Romanian (ro.po) by Eddy Petrisor
+    - Russian (ru.po) by Dmitry Beloglazov
+    - Swedish (sv.po) by André Dahlqvist
+    - Turkish (tr.po) by Osman Yüksel
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Mon, 19 Jul 2004 09:17:59 -0700
+
+silo-installer (0.0.5) unstable; urgency=low
+
+  * Joshua Kwan
+    - Brown paper bag shellscript bug leads to a cleaner rewrite by Peter
+      Samuelson. Thanks much!
+  * Updated translations: 
+    - Italian (it.po) by Davide Viti
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Tue, 23 Mar 2004 16:16:55 -0800
+
+silo-installer (0.0.4) unstable; urgency=low
+
+  * Joshua Kwan
+    - Fix logic in installing where root partition is not '1' or root
+      partition != boot partition. Thanks Peter Samuelson for alerting
+      me to these bugs.
+  * Updated translations: 
+    - Welsh (cy.po) by Dafydd Harries
+    - Greek (el.po) by Konstantinos Margaritis
+    - Polish (pl.po) by Bartosz Feński
+    - Swedish (sv.po) by André Dahlqvist
+    - Turkish (tr.po) by Osman Yüksel
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Mon, 22 Mar 2004 21:32:55 -0800
+
+silo-installer (0.0.3) unstable; urgency=HIGH
+
+  * High urgency to fix the rather broken version of silo-installer into
+    sarge a lot quicker so we can get some testing in.
+  * Translations:
+    - Konstantinos Margaritis
+      - Initial Greek translation (el.po)
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Wed, 17 Mar 2004 12:58:05 -0800
+
+silo-installer (0.0.2) unstable; urgency=low
+
+  * Joey Hess
+    - Add a dependency on di-utils-mapdevfs.
+  * Joshua Kwan
+    - Merge the completely different silo-installer 0.0.1 that is in
+      unstable. The one that is actually being used at the moment :(
+    - Add success message for when DEBCONF_PRIORITY is medium.
+    - If /boot is mounted separately, do not tell silo to use /boot/vmlinuz
+      but to use /vmlinuz (because it is all relative to /boot.)
+  * Translations:
+    - Dennis Stampfer
+      - Update/Initial German translation (de.po)
+    - Miguel Figueiredo
+      - Update Portuguese translation (pt.po)
+    - Nikolai Prokoschenko
+      - Update russian translation (ru.po)
+    - Jure Cuhalev
+      - Update Slovenian translation (sl.po)
+    - Jordi Mallach
+      - Update Catalan translation (ca.po)
+    - André Luís Lopes
+      - Updated Brazilian Portuguese translation (pt_BR.po)
+    - Håvard Korsvoll
+      - Update Norwegian Nynorsk translation (nn.po)
+    - Joshua Kwan
+      - Update French translation (fr.po)
+
+ -- Joshua Kwan <joshk@triplehelix.org>  Mon, 15 Mar 2004 19:44:55 -0800
+
+silo-installer (0.0.1) unstable; urgency=low
+
+  * First release
+
+ -- Ben Collins <bcollins@debian.org>  Thu, 26 Feb 2004 11:23:18 -0500

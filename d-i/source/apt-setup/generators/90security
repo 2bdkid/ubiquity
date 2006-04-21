@@ -1,0 +1,62 @@
+#!/bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+file="$1"
+
+db_get apt-setup/security_host
+host="$RET"
+if [ -z "$host" ]; then
+	exit
+fi
+
+# To determine if non-free and contrib should be included, grep
+# the file to see if they are listed in it.
+dists="main"
+for dist in contrib non-free restricted; do
+	if grep -q '^[^#]*'$dist $ROOT/etc/apt/sources.list.new; then
+		dists="$dists $dist"
+	fi
+done
+
+# mirror/codename is also set by cdrom methods
+db_get mirror/codename
+codename="$RET"
+
+# No updates for sid (unstable). Never mind.
+if [ "$codename" = sid ]; then
+	exit
+fi
+
+# FIXME what if choose-mirror isn't available, i.e. full CD install?
+db_fget mirror/http/proxy seen || true
+proxy="$RET"
+if [ -n "$proxy" ]; then
+	if ! grep -iq "Acquire::$protocol::Proxy" $ROOT/etc/apt/apt.conf.new; then
+		echo "Acquire::$protocol::Proxy \"$proxy\";" >> $ROOT/etc/apt/apt.conf.new
+	fi
+fi
+
+echo "deb http://$host/ubuntu $codename-security $dists" >> $file
+if ! apt-setup-verify $file; then
+	db_subst apt-setup/security-updates-failed SECURITY_HOST "$host"
+	db_input critical apt-setup/security-updates-failed || true
+	if ! db_go; then
+		exit 10 # back up
+	fi
+fi
+
+echo "deb-src http://$host/ubuntu $codename-security $dists" >> $file
+
+# Security sources for Ubuntu universe; not used much, but e.g. unsupported
+# binary packages from a supported source package will end up here.
+if db_get apt-setup/universe && [ "$RET" = true ]; then
+	COMMENT=
+else
+	COMMENT='# '
+fi
+cat >> $file <<EOF
+${COMMENT}deb http://$host/ubuntu $codename-security universe
+${COMMENT}deb-src http://$host/ubuntu $codename-security universe
+EOF
