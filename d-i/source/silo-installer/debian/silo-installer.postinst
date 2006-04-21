@@ -23,6 +23,11 @@ else
 	boot=""
 fi
 
+# force -t on raid
+if echo "$bootfs" | grep -q "/dev/md"; then
+	siloopt="-t"
+fi
+
 if [ -e "/target/boot/initrd.img" ]; then
 	initrd="initrd=${boot}/initrd.img"
 	initrdold="${initrd}.old"
@@ -67,7 +72,7 @@ ln -sf ../boot/silo.conf /target/etc/silo.conf
 ln -sf . /target/boot/boot
 ln -sf . /target/boot/etc
 
-if chroot /target /sbin/silo -f; then
+if chroot /target /sbin/silo -f $siloopt; then
 	db_input medium silo-installer/success || [ $? -eq 30 ]
 	db_go || true
 	exit 0

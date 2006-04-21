@@ -49,6 +49,7 @@ build-stamp:
 	# Guadalinex-doc
 	for file in $$(ls $(CURDIR)/glade/locale/guadalinex/*.po); do msgfmt -o $(BUILDDIR)/guadalinex/$$(basename $$file .po).mo $(CURDIR)/glade/locale/guadalinex/$$(basename $$file); done || true
 
+	cd ubiquity/frontend; kdepyuic liveinstaller.ui; cd ../..
 	touch build-stamp
 
 clean:
@@ -146,6 +147,7 @@ binary-arch: install
 	echo >> debian/ubiquity/DEBIAN/templates
 	cat d-i/templates >> debian/ubiquity/DEBIAN/templates
 #	dh_installman -a
+	dh_link -a
 	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a
