@@ -2136,6 +2136,14 @@ main_loop()
 int
 main(int argc, char *argv[])
 {
+        int i;
+
+        /* Close all extraneous file descriptors, including our pipe to
+         * debconf.
+         */
+        for (i = 3; i < 256; ++i)
+                close(i);
+
         logfile = fopen(logfile_name, "a+");
         if (logfile == NULL) {
                 fprintf(stderr, "Cannot append to the log file\n");

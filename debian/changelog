@@ -1,3 +1,41 @@
+ubiquity (0.99.66) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Make for loops in debian/rules exit properly on errors.
+  * Allow defining UBIQUITY_NO_GTK or UBIQUITY_NO_KDE during the build to
+    avoid making use of GTK- or KDE-specific build-dependencies
+    (respectively). This is useful to cut down on the number of
+    build-dependencies needed when testing on a live CD.
+  * If ubiquity is started with no arguments, try both the gtkui and kde-ui
+    frontends rather than just gtkui.
+  * Explicitly return Unicode strings from ubiquity.misc.get_string(),
+    simplifying the KDE frontend.
+  * Add a no-op anna-install shim for localechooser, ensuring that locales
+    are generated.
+  * Ignore errors from locale.setlocale(), although with the above
+    anna-install fix I hope this should not often be necessary (closes:
+    Malone #41132).
+  * KDE frontend:
+    - Fix set_username() to really set the username, not the full name.
+    - Fix automatic filling in of values on user information page.
+    - Don't crash on non-ASCII names (closes: Malone #40666).
+  * GTK and KDE frontends:
+    - Make the determination of whether to allow going forward from the user
+      information page a bit more reliable.
+  * Remove gettext use from ubiquity.misc.part_label(); we'll make those
+    translatable via debconf in the future, but for now this breaks the KDE
+    frontend.
+  * Reconfigure linux-restricted-modules-$KVER as well as linux-image-$KVER
+    (closes: Malone #40547).
+  * Automatic update of included source packages: partman-base
+    78ubuntu3.
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Remove broken import (closes: Malone #41169).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 25 Apr 2006 00:12:45 +0100
+
 ubiquity (0.99.65) dapper; urgency=low
 
   * KDE Frontend:

@@ -1,3 +1,10 @@
+partman-base (78ubuntu3) dapper; urgency=low
+
+  * Close all file descriptors other than 0, 1, and 2 on startup, so that we
+    don't hold a pipe to debconf open.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 25 Apr 2006 00:03:55 +0100
+
 partman-base (78ubuntu2) dapper; urgency=low
 
   * Backport from trunk (Anton Zinoviev):
