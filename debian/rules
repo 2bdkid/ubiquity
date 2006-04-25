@@ -52,14 +52,15 @@ endif
 	for file in $$(ls $(CURDIR)/glade/locale/guadalinex/*.po); do msgfmt -o $(BUILDDIR)/guadalinex/$$(basename $$file .po).mo $(CURDIR)/glade/locale/guadalinex/$$(basename $$file); done || true
 
 ifndef UBIQUITY_NO_KDE
-	cd ubiquity/frontend && kdepyuic liveinstaller.ui
+	cd ubiquity/frontend && kdepyuic liveinstaller.ui && kdepyuic crashdialog.ui
 endif
 	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
-	rm -fr build-stamp $(BUILDDIR) ubiquity/frontend/liveinstaller.py
+	rm -fr build-stamp $(BUILDDIR) ubiquity/frontend/liveinstaller.py \
+		ubiquity/frontend/crashdialog.py
 	find -type f \( -name \*.pyc -o -name \*.pyo \) -print0 | xargs -0r rm -f
 
 	$(MAKE) -C d-i clean
@@ -84,7 +85,15 @@ endif
 ifneq (,$(wildcard debian/ubiquity.install-$(DEB_HOST_ARCH)))
 	cat debian/ubiquity.install-$(DEB_HOST_ARCH) >> debian/ubiquity.install
 endif
-	dh_install -A
+ifdef UBIQUITY_NO_GTK
+	dh_install -Nubiquity-frontend-gtk
+else
+ifdef UBIQUITY_NO_KDE
+	dh_install -Nubiquity-frontend-kde
+else
+	dh_install
+endif
+endif
 
 	# Bits of manual installation that can't be done by dh_install
 	install installer $(CURDIR)/debian/ubiquity/usr/bin/ubiquity

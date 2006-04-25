@@ -2,7 +2,7 @@ Template: debian-installer/apt-setup-udeb/title
 Type: text
 #  Main menu item
 # MUST be kept below 55 characters/columns
-_Description: Configure apt
+_Description: Configure the package manager
 
 Template: apt-setup/progress/title
 Type: text
@@ -13,6 +13,10 @@ _Description: Configuring apt
 Template: apt-setup/progress/fallback
 Type: text
 _Description: Running ${SCRIPT}...
+
+Template: apt-setup/progress/local
+Type: text
+_Description: Scanning local repositories...
 
 Template: apt-setup/progress/security
 Type: text

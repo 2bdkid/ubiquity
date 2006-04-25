@@ -11,24 +11,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-12-02 01:32+0200\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-02-11 15:42+0200\n"
 "Last-Translator: Aigars Mahinovs <aigarius@laka.lv>\n"
 "Language-Team: locale@laka.lv <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
-"X-Poedit-Language: Latvian\n"
-"X-Poedit-Country: LATVIA\n"
 
 #. Type: text
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Konfigurēt APT"
+msgid "Configure the package manager"
+msgstr "Konfigurēt paku menedžeri"
 
 #. Type: text
 #. Description
@@ -47,18 +44,25 @@ msgstr "Palaižu ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+#, fuzzy
+msgid "Scanning local repositories..."
+msgstr "Skenēju drošības atjauninājumu glabātuvi..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
 msgstr "Skenēju drošības atjauninājumu glabātuvi..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Nevaru piekļūt drošības atjaununājumiem"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
@@ -70,7 +74,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
@@ -153,7 +157,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -243,12 +247,36 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Lietot programmatūru no \"universe\" komponentes?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"Dažas nebrīvās programmas ir pieejamas sapakotā formā. Lai gan šī "
+"programmatūra nav galvenās distribūcijas daļa, standarta paku vadības rīki "
+"var tik lietoti, lai to uzinstalētu. Šai programmatūrai ir dažādas licences, "
+"kas var aizliegt Jums lietot, modificēt vai izplatīt šo porgrammatūru."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
 msgstr "Lietot atpakaļpārveidotu programmatūru?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

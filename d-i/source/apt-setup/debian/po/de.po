@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -20,22 +20,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-11-16 17:35+0100\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-04-18 23:25+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: vim\n"
 
 #. Type: text
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Apt konfigurieren"
+msgid "Configure the package manager"
+msgstr "Den Paketmanager konfigurieren"
 
 #. Type: text
 #. Description
@@ -54,18 +54,24 @@ msgstr "Führe ${SCRIPT} aus ..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+msgid "Scanning local repositories..."
+msgstr "Durchsuche lokale Archive ..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr "Durchsuche das Sicherheitsaktualisierungsarchiv ..."
+msgstr "Durchsuche das Archiv für Sicherheitsaktualisierungen ..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Kann auf Sicherheitsaktualisierungen nicht zugreifen"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
@@ -77,7 +83,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
@@ -162,7 +168,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -206,7 +212,7 @@ msgstr ""
 "Der Installer konnte nicht auf den Spiegelserver zugreifen. Dies könnte ein "
 "Problem in Ihrem Netzwerk oder auch ein Problem des Spiegels sein. Sie "
 "können den Download wiederholen, einen anderen Spiegelserver wählen oder das "
-"Problem ignorieren und eine andere Installationsart versuchen."
+"Problem ignorieren und ohne die Pakete von diesem Server fortfahren."
 
 #. Type: boolean
 #. Description
@@ -254,12 +260,37 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Software von der »multiverse«-Komponente verwenden?"
+
+# FIXME: main distribution == Hauptdistribution oder bestimmter Abschnitt?
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:28
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"Einige non-free-Software ist paketiert verfügbar. Obwohl diese Software "
+"nicht Teil der Hauptdistribution ist, können Standard-"
+"Paketverwaltungsprogramme zum Installieren dieser verwendet werden. Diese "
+"Software hat verschiedene Lizenzen und (in einigen Fällen) "
+"Patenteinschränkungen, welche Sie an der Benutzung, Modifikation oder der "
+"Verbreitung der Programme hindern könnten."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
 msgstr "Zurückportierte Software verwenden?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

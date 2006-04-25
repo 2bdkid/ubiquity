@@ -6,15 +6,15 @@
 # Bulgarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005.
+# Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-11-02 15:01+0200\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-04-08 10:14+0300\n"
 "Last-Translator:  Ognyan Kulev <ogi@fmi.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,17 +26,16 @@ msgstr ""
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Настройване на apt"
+msgid "Configure the package manager"
+msgstr "Настройване на управлението на пакети"
 
 #. Type: text
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
-#, fuzzy
 msgid "Configuring apt"
-msgstr "Настройване на мрежа..."
+msgstr "Настройване на apt"
 
 #. Type: text
 #. Description
@@ -47,45 +46,54 @@ msgstr "Изпълнение на ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+msgid "Scanning local repositories..."
+msgstr "Сканиране за локално хранилище..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr ""
+msgstr "Сканиране за хранилище с обновявания по сигурността..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Няма достъп до обновените пакети, засягащи сигурността"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
 "investigate this later."
 msgstr ""
+"Обновени пакети, засягащи сигурността, не могат да бъдат достигнати в "
+"${SECURITY_HOST}, така че тези обновявания няма да бъдат налични в настоящия "
+"момент от време. Трябва да проучите този въпрос по-късно."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
 msgstr ""
+"Коментирани редове за ${SECURITY_HOST} са добавени към файла /etc/apt/"
+"sources.list."
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
-#, fuzzy
 msgid "Scanning the CD-ROM..."
-msgstr "Сканиране на компактдиск"
+msgstr "Сканиране на компактдиск..."
 
 #. Type: error
 #. Description
 #: ../apt-cdrom-setup.templates:7
-#, fuzzy
 msgid "apt configuration problem"
-msgstr "Настройване на apt"
+msgstr "Проблем с настройване на apt"
 
 #. Type: error
 #. Description
@@ -94,13 +102,14 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr ""
+"Провален е опитът за настройване на apt, така че да инсталира допълнителни "
+"пакети от компактдиск."
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
-#, fuzzy
 msgid "Scanning the mirror..."
-msgstr "Сканиране на флопидиска"
+msgstr "Сканиране на огледалото..."
 
 #. Type: boolean
 #. Description
@@ -152,7 +161,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -164,21 +173,19 @@ msgstr ""
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr ""
+msgstr "Опит отново"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Change mirror"
-msgstr "Опит отново, Смяна на огледален сървър, Прекъсване"
+msgstr "Смяна на огледало"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Ignore"
-msgstr "няма"
+msgstr "Игнориране"
 
 #. Type: select
 #. Description
@@ -189,7 +196,6 @@ msgstr "Грешка при изтеглянето на файл:"
 #. Type: select
 #. Description
 #: ../apt-mirror-setup.templates:33
-#, fuzzy
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
@@ -197,16 +203,16 @@ msgid ""
 "packages from this mirror."
 msgstr ""
 "Грешка при изтеглянето на файл от огледалния сървър. Това може да е проблем "
-"с Вашата мрежа или със сървъра. Можете да опитате отново да изтегляте, да "
-"изберете различен огледален сървър или да прекъснете и изберете друг начин "
-"на инсталация."
+"с Вашата мрежа или с огледалото. Можете да опитате отново да изтегляте, да "
+"изберете различно огледало или да игнорирате проблема и да продължите без "
+"всички пакети от огледалото."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr ""
+msgstr "Използване на ограничен софтуер?"
 
 #. Type: boolean
 #. Description
@@ -217,13 +223,18 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
+"В пакети е наличен известен несвободен софтуер. Въпреки че този софтуер не е "
+"част от основната дистрибуция, стандартните инструменти за управление на "
+"пакети могат да бъдат използвани за инсталирането му.  Този софтуер има "
+"разнообразни лицензи, които могат да попречат на използването, промяната или "
+"споделянето му."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr ""
+msgstr "Използване на софтуер от компонентата \"universe\"?"
 
 #. Type: boolean
 #. Description
@@ -233,20 +244,52 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
+"Наличен в пакети е допълнителен софтуер. Този софтуер е свободен и въпреки "
+"че не е част от основната дистрибуция, стандартните инструменти за "
+"управление на пакети могат да бъдат използвани за инсталирането му."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-msgid "Use backported software?"
-msgstr ""
+#, fuzzy
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Използване на софтуер от компонентата \"universe\"?"
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"В пакети е наличен известен несвободен софтуер. Въпреки че този софтуер не е "
+"част от основната дистрибуция, стандартните инструменти за управление на "
+"пакети могат да бъдат използвани за инсталирането му.  Този софтуер има "
+"разнообразни лицензи, които могат да попречат на използването, промяната или "
+"споделянето му."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
+msgid "Use backported software?"
+msgstr "Използване на софтуер backport?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
+"Има софтуер, които е прехвърлен обратно (backported) от разработваното "
+"течение, така че да работи с това издание. Въпреки че този софтуер не е "
+"преминал през толкова пълно тестване, колкото това издание, той включва по-"
+"нови версии на някои приложения, които могат да предоставят полезни свойства."

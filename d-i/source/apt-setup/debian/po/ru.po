@@ -10,14 +10,14 @@
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2005.
+# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-11-27 08:30+0300\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-04-17 21:08+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,8 @@ msgstr ""
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Настроить apt"
+msgid "Configure the package manager"
+msgstr "Настройка менеджера пакетов"
 
 #. Type: text
 #. Description
@@ -41,7 +41,7 @@ msgstr "Настроить apt"
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
 msgid "Configuring apt"
-msgstr "Настраивается apt..."
+msgstr "Настраивается apt"
 
 #. Type: text
 #. Description
@@ -52,18 +52,24 @@ msgstr "Запуск ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+msgid "Scanning local repositories..."
+msgstr "Просмотр локальных репозиториев..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
 msgstr "Просмотр репозитория обновлений безопасности..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Нет доступа к обновлениям безопасности"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
@@ -75,7 +81,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
@@ -158,7 +164,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Нужно ли сделать данное ПО доступным?"
@@ -247,12 +253,34 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Использовать ПО из раздела \"multiverse\"?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:28
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"В виде пакетов доступно некоторое несвободное ПО. Хотя, оно не является "
+"частью основного дистрибутива, для установки можно использовать стандартные "
+"утилиты. Данное ПО имеет различные лицензии, согласно которым вам иногда "
+"нельзя его использовать, изменять или распространять."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
 msgstr "Использовать заблаговременно перенесённое ПО?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

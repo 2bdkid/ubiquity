@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
 "PO-Revision-Date: 2005-10-15 20:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Nynorsk <en@li.org>\n"
@@ -31,8 +31,9 @@ msgstr ""
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Set opp apt"
+#, fuzzy
+msgid "Configure the package manager"
+msgstr "Set opp den logiske volumstyringa"
 
 #. Type: text
 #. Description
@@ -52,18 +53,25 @@ msgstr "Køyrer ${SCRIPT} ..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+#, fuzzy
+msgid "Scanning local repositories..."
+msgstr "Søkjer gjennom disketten"
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Får ikkje tilgang til tryggleiksoppdateringane"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
@@ -72,7 +80,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
@@ -155,7 +163,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Vel om programma skal vera tilgjengelege."
@@ -240,12 +248,35 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-msgid "Use backported software?"
+msgid "Use software from the \"multiverse\" component?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"Det finst ein del ufri programvare som verkar fint saman med Debian. Sjølv "
+"om programvaren ikkje er ein del av Debian, kan du installera han ved hjelp "
+"av Debian-verktøya. Program av denne typen kan ha fleire ulike lisensar som "
+"kan hindra deg i å bruka dei, endra dei eller dela dei med andre."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
+msgid "Use backported software?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

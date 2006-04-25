@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-04-06 17:27+0300\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-01-31 14:39+0200\n"
 "Last-Translator: Tapio Lehtonen <tale@debian.org>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,17 +28,16 @@ msgstr ""
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Tee apt:n asetukset"
+msgid "Configure the package manager"
+msgstr "Tee pakettienhallintaohjelman asetukset"
 
 #. Type: text
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
-#, fuzzy
 msgid "Configuring apt"
-msgstr "Tehdään verkkoasetukset..."
+msgstr "Tehdään apt:n asetukset"
 
 #. Type: text
 #. Description
@@ -49,45 +48,54 @@ msgstr "Suoritetaan ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+#, fuzzy
+msgid "Scanning local repositories..."
+msgstr "Selataan tietoturvapäivitysten varastoaluetta..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr ""
+msgstr "Selataan tietoturvapäivitysten varastoaluetta..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "Tietoturvapäivityksiin ei päästy käsiksi."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
 "investigate this later."
 msgstr ""
+"Tietoturvapäivityksiä palvelimella ${SECURITY_HOST} ei saatu käsiteltyä, "
+"joten noita päivityksiä ei ole nyt käytössä. Tämä pitää selvittää myöhemmin."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
 msgstr ""
+"Pois kommentoidut rivit palvelimelle ${SECURITY_HOST} on lisätty tiedostoon /"
+"etc/apt/sources.list."
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
-#, fuzzy
 msgid "Scanning the CD-ROM..."
 msgstr "Selataan romppua"
 
 #. Type: error
 #. Description
 #: ../apt-cdrom-setup.templates:7
-#, fuzzy
 msgid "apt configuration problem"
-msgstr "Apt:n asetukset"
+msgstr "Pulmia apt:n asetuksissa"
 
 #. Type: error
 #. Description
@@ -95,14 +103,13 @@ msgstr "Apt:n asetukset"
 msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
-msgstr ""
+msgstr "apt:n asetusten teko lisäpakettien asentamiseksi rompulta epäonnistui."
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
-#, fuzzy
 msgid "Scanning the mirror..."
-msgstr "Tutkitaan levykettä"
+msgstr "Selataan asennuspalvelinta..."
 
 #. Type: boolean
 #. Description
@@ -154,7 +161,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Haluatko tämän ohjelman olevan asennettavissa."
@@ -165,21 +172,19 @@ msgstr "Haluatko tämän ohjelman olevan asennettavissa."
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr ""
+msgstr "Yritä uudelleen"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Change mirror"
-msgstr "Yritä uudelleen, vaihda asennuspalvelinta, peru"
+msgstr "Vaihda asennuspalvelinta"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Ignore"
-msgstr "ei mikään"
+msgstr "Ohita"
 
 #. Type: select
 #. Description
@@ -190,7 +195,6 @@ msgstr "Tiedoston noutaminen epäonnistui:"
 #. Type: select
 #. Description
 #: ../apt-mirror-setup.templates:33
-#, fuzzy
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
@@ -198,16 +202,16 @@ msgid ""
 "packages from this mirror."
 msgstr ""
 "Asennin ei onnistunut noutamaan tiedostoa asennuspalvelimelta. Vika voi olla "
-"verkkoyhteydessä tai asennuspalvelimessa. Voit valita yritätkö asennusta "
-"uudelleen, käytätkö muuta asennuspalvelinta tai peruutatko ja käytät jotain "
-"muuta asennustapaa."
+"verkkoyhteydessä tai asennuspalvelimessa. Voit valita asennuksen yrittämisen "
+"uudelleen, muun asennuspalvelimen käytön tai pulman ohittamisen ja "
+"jatkamisen ilman tämän asennuspalvelimen kaikkia paketteja."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr ""
+msgstr "Käytä epävapaita ohjelmia?"
 
 #. Type: boolean
 #. Description
@@ -218,13 +222,18 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
+"Jotkin epävapaat ohjelmat ovat saatavilla asennuspaketteina. Vaikka nämä "
+"ohjelmat eivät kuulukaan pääjakeluun, tavanomaisia paketinhallintatyökaluja "
+"voidaan käyttää niiden asentamiseen. Näiden ohjelmien käyttöehdot "
+"vaihtelevat, mahdollisesti estäen niiden käytön, muuttamisen tai "
+"levittämisen."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr ""
+msgstr "Käytä ohjelmia universe-jakelusta."
 
 #. Type: boolean
 #. Description
@@ -234,20 +243,53 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
+"Joitakin lisäohjelmia on saatavilla asennuspaketteina. Nämä ohjelmat ovat "
+"vapaita. Vaikka ne eivät kuulukaan pääjakeluun, tavanomaisia "
+"paketinhallintatyökaluja voidaan käyttää niiden asentamiseen."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-msgid "Use backported software?"
-msgstr ""
+#, fuzzy
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Käytä ohjelmia universe-jakelusta."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"Jotkin epävapaat ohjelmat ovat saatavilla asennuspaketteina. Vaikka nämä "
+"ohjelmat eivät kuulukaan pääjakeluun, tavanomaisia paketinhallintatyökaluja "
+"voidaan käyttää niiden asentamiseen. Näiden ohjelmien käyttöehdot "
+"vaihtelevat, mahdollisesti estäen niiden käytön, muuttamisen tai "
+"levittämisen."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
+msgid "Use backported software?"
+msgstr ""
+"Käytetäänkö vanhaan järjestelmäversioon sovitettuja ohjelmia (backported)?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
+"Joitakin ohjelmia on sovitettu kehitysversiosta toimimaan tässä julkaisussa. "
+"Vaikkakaan näitä ohjelmia ei ole testattu yhtä perusteellisesti kuin "
+"julkaisun ohjelmia, niissä on joistakin sovelluksista uudemmat versiot, "
+"jotka saattavat tarjota hyödyllisiä ominaisuuksia."

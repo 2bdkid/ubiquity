@@ -4,18 +4,18 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Catalan messages for debian-installer.
-# Copyright 2002, 2003, 2004, 2005 Software in the Public Interest, Inc.
+# Copyright 2002, 2003, 2004, 2005, 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004.
+# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004, 2006.
 # Guillem Jover <guillem@debian.org>, 2005.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer 1.0\n"
+"Project-Id-Version: debian-installer 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-15 18:33-0700\n"
-"PO-Revision-Date: 2005-09-24 18:38+0300\n"
-"Last-Translator: Guillem Jover <guillem@debian.org>\n"
+"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"PO-Revision-Date: 2006-04-02 21:56+0200\n"
+"Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,17 +26,16 @@ msgstr ""
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-msgid "Configure apt"
-msgstr "Configura l'apt"
+msgid "Configure the package manager"
+msgstr "Configura el gestor de paquets"
 
 #. Type: text
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
-#, fuzzy
 msgid "Configuring apt"
-msgstr "S'està configurant la xarxa..."
+msgstr "S'està configurant apt"
 
 #. Type: text
 #. Description
@@ -47,45 +46,54 @@ msgstr "S'està executant ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
+msgid "Scanning local repositories..."
+msgstr "S'estan analitzant els dipòsits locals..."
+
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr ""
+msgstr "S'està analitzant el dipòsit d'actualitzacions de seguretat..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
 msgstr "No es pot accedir a les actualitzacions de seguretat"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
 "updates will not be made available to you at this time. You should "
 "investigate this later."
 msgstr ""
+"No s'ha pogut accedir a les actualitzacions de seguretat de "
+"${SECURITY_HOST}, així que aquestes actualitzacions no estaran disponibles "
+"ara mateix. Hauríeu d'investigar això més tard."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:29
+#: ../apt-setup-udeb.templates:33
 msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
 msgstr ""
+"S'han afegit entrades comentades per a ${SECURITY_HOST} al fitxer /etc/apt/"
+"sources.list."
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
-#, fuzzy
 msgid "Scanning the CD-ROM..."
-msgstr "S'està analitzant el CD-ROM"
+msgstr "S'està analitzant el CD-ROM..."
 
 #. Type: error
 #. Description
 #: ../apt-cdrom-setup.templates:7
-#, fuzzy
 msgid "apt configuration problem"
-msgstr "Configuració de l'apt"
+msgstr "Problema de configuració d'apt"
 
 #. Type: error
 #. Description
@@ -94,13 +102,14 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr ""
+"L'intent de configurar l'apt per a instal·lar paquets addicionals des del CD "
+"ha fallat."
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
-#, fuzzy
 msgid "Scanning the mirror..."
-msgstr "S'està analitzant el disquet"
+msgstr "S'està analitzant la rèplica..."
 
 #. Type: boolean
 #. Description
@@ -119,7 +128,7 @@ msgid ""
 msgstr ""
 "Hi ha un poc de programari no lliure (non-free) que s'ha preparat perquè "
 "funcione amb Debian. Encara que aquest programari no és de cap manera part "
-"de Debian, es poden utilitzar les eines comunes de Debian per instalar-ho. "
+"de Debian, es poden utilitzar les eines comunes de Debian per instal·lar-ho. "
 "Aquest programari té vàries llicències que vos poden impedir que "
 "l'utilitzeu, modifique o compartiu."
 
@@ -152,7 +161,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:28
+#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Seleccioneu si voleu que aquest programari siga disponible."
@@ -163,21 +172,19 @@ msgstr "Seleccioneu si voleu que aquest programari siga disponible."
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr ""
+msgstr "Reintenta"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Change mirror"
-msgstr "Reintenta, Canvia de rèplica, Cancel·la"
+msgstr "Canvia de rèplica"
 
 #. Type: select
 #. Choices
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Ignore"
-msgstr "cap"
+msgstr "Ignora"
 
 #. Type: select
 #. Description
@@ -188,24 +195,23 @@ msgstr "La descàrrega d'un fitxer ha fallat:"
 #. Type: select
 #. Description
 #: ../apt-mirror-setup.templates:33
-#, fuzzy
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"L'instal·lador no ha pogut descarregar un fitxer des de la rèplica. Això pot "
-"ser un problema amb la vostra xarxa o amb la rèplica. Podeu reintentar la "
-"descàrrega, seleccionar una rèplica diferent o cancel·lar i seleccionar un "
-"altre mètode d'instal·lació."
+"L'instal·lador no ha pogut accedir a la rèplica. Això pot ser un problema "
+"amb la vostra xarxa o amb la rèplica. Podeu reintentar la descàrrega, "
+"seleccionar una rèplica diferent o descartar el problema i continuar sense "
+"tots els paquets d'aquesta rèplica."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr ""
+msgstr "Voleu utilitzar programari restringit?"
 
 #. Type: boolean
 #. Description
@@ -216,13 +222,18 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
+"Hi ha programari no lliure que està disponible en paquets. Tot i que aquest "
+"programari no és part de la distribució principal, es poden utilitzar les "
+"eines de gestió de paquets estàndard per a instal·lar-ho. Aquest programari "
+"té diverses llicències que poden previndre que l'utilitzeu, el modifiqueu o "
+"el compartiu."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr ""
+msgstr "Voleu utilitzar programari del component «universe»?"
 
 #. Type: boolean
 #. Description
@@ -232,20 +243,54 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
+"Hi ha programari addicional que està disponible en paquets. Aquest "
+"programari és lliure i, tot i que no és part de la distribució principal, es "
+"pot instal·lar utilitzant les eines de gestió de paquets estàndards."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-msgid "Use backported software?"
-msgstr ""
+#, fuzzy
+msgid "Use software from the \"multiverse\" component?"
+msgstr "Voleu utilitzar programari del component «universe»?"
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates-ubuntu:28
+#, fuzzy
+msgid ""
+"Some non-free software is available in packaged form. Though this software "
+"is not a part of the main distribution, standard package management tools "
+"can be used to install it. This software has varying licenses and (in some "
+"cases) patent restrictions which may prevent you from using, modifying, or "
+"sharing it."
+msgstr ""
+"Hi ha programari no lliure que està disponible en paquets. Tot i que aquest "
+"programari no és part de la distribució principal, es poden utilitzar les "
+"eines de gestió de paquets estàndard per a instal·lar-ho. Aquest programari "
+"té diverses llicències que poden previndre que l'utilitzeu, el modifiqueu o "
+"el compartiu."
+
+# Backport = Retroversió, per ara, ja que ningú no proposa res millor. :) jm
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#: ../apt-mirror-setup.templates-ubuntu:41
+msgid "Use backported software?"
+msgstr "Voleu utilitzar programari amb retroversions?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
+"Hi ha programari que s'ha retroversionat des de l'arbre de desenvolupament "
+"per a que funcione amb aquest llançament. Tot i que aquest programari no ha "
+"passat per un procés de prova tan complet com el que conté el llançament, "
+"inclou noves versions d'algunes aplicacions que poden proveir funcionalitat "
+"útil."

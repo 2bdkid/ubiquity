@@ -20,8 +20,9 @@ for dist in contrib non-free restricted; do
 	fi
 done
 
-# mirror/codename is also set by cdrom methods
-db_get mirror/codename
+if ! db_get mirror/codename || [ -z "$RET" ]; then
+	db_get cdrom/codename
+fi
 codename="$RET"
 
 # No updates for sid (unstable). Never mind.
@@ -38,6 +39,7 @@ if [ -n "$proxy" ]; then
 	fi
 fi
 
+CODE=0
 echo "deb http://$host/ubuntu $codename-security $dists" >> $file
 if ! apt-setup-verify $file; then
 	db_subst apt-setup/security-updates-failed SECURITY_HOST "$host"
@@ -45,6 +47,7 @@ if ! apt-setup-verify $file; then
 	if ! db_go; then
 		exit 10 # back up
 	fi
+	CODE=9
 fi
 
 echo "deb-src http://$host/ubuntu $codename-security $dists" >> $file
@@ -60,3 +63,5 @@ cat >> $file <<EOF
 ${COMMENT}deb http://$host/ubuntu $codename-security universe
 ${COMMENT}deb-src http://$host/ubuntu $codename-security universe
 EOF
+
+exit $CODE
