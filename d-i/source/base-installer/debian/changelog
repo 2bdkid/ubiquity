@@ -1,3 +1,13 @@
+base-installer (1.42ubuntu11) dapper; urgency=low
+
+  * Backport from trunk (needed for netboot installs on clock-skewed
+    machines):
+    - Move 00IgnoreTimeConflict creation so it happens for any type of apt
+      source. Other settings of --ignore-time-conflict should be removed
+      from the rest of d-i eventually.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 25 Apr 2006 17:34:59 +0100
+
 base-installer (1.42ubuntu10) dapper; urgency=low
 
   * Run kernel_update_list before checking kernel overrides.
