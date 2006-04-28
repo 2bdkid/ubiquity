@@ -1,3 +1,23 @@
+ubiquity (0.99.70) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Ignore errors from locale.setlocale() in timezone component too (closes:
+    Malone #41846).
+  * Account for preseeding changes in partman-auto 45ubuntu10.
+  * Escape passwords when sending them to debconf (closes: Malone #37934).
+    Requires debconf (>= 1.4.72) and won't work with cdebconf yet.
+  * Automatic update of included source packages: debian-installer-utils
+    1.22ubuntu8, partman-auto 45ubuntu10.
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Order methods to match gtkui
+    - Some fixes to crashdialogue
+    - Don't show blank choices in set_disk_choices
+    - Delay auto-partitioning until after final step
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Apr 2006 21:24:16 +0100
+
 ubiquity (0.99.69) dapper; urgency=low
 
   * GTK frontend:

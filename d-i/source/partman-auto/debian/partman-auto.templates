@@ -29,6 +29,11 @@ _Description: Partitioning method:
  not like it.
 
 Template: partman-auto/disk
+Type: string
+# Only used for preseeding.
+Description: device to partition, in either devfs or non format
+
+Template: partman-auto/select_disk
 Type: select
 Choices: ${CHOICES}
 _Description: Device to partition

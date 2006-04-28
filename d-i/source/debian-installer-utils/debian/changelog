@@ -1,3 +1,12 @@
+debian-installer-utils (1.22ubuntu8) dapper; urgency=low
+
+  * user-params: Stop propagating vga= to installed system. We don't believe
+    that it's needed to display a console any more now that we've switched
+    to 640x400 by default, and it breaks suspend/resume. People can always
+    type it in again at the installed boot loader if need be.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 27 Apr 2006 16:56:25 +0100
+
 debian-installer-utils (1.22ubuntu7) dapper; urgency=low
 
   * Remove espresso-utils package (including archdetect), moved into

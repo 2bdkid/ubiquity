@@ -1,3 +1,19 @@
+partman-auto (45ubuntu10) dapper; urgency=low
+
+  * Rename disk selector question to partman-auto/select_disk, and restore
+    partman-auto/disk to its former use in preseeding. Trying to overload
+    the two turned out to be too complicated, since people who are
+    preseeding partman-auto/disk generally just want to apply a recipe to
+    the whole disk, and subsequent questions such as
+    partman-auto/automatically_partition are hard to preseed (closes: Malone
+    #40186).
+  * Adjust the way we ask partman-auto/select_disk to make it easier to
+    preseed.
+  * Update Ubuntu-specific and previously-untranslated translations from
+    Rosetta: Bulgarian, Italian, Kurdish, Latvian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Apr 2006 13:15:37 +0100
+
 partman-auto (45ubuntu9) dapper; urgency=low
 
   * partman_newlayout: Support exit code 254 from automatically_partition

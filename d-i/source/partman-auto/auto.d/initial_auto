@@ -30,12 +30,14 @@ touch /var/lib/partman/initial_auto
 
 # See if a disk to autopartition has been set.
 db_get partman-auto/disk
-# Try to filter out other choices such as "Manually edit partition table".
-# Difficult because of partman's debconf abuse ...
-case $RET in
-	/*/*)
-		disk=$(dev_to_partman "${RET%%: *}")
-		;;
-esac
+if [ -n "$RET" ]; then
+	disk="$RET"
 
-partman_newlayout "$disk"
+	id=$(dev_to_partman "$disk") || true
+	if [ -n "$id" ]; then
+		autopartition "$id"
+		exit 0
+	fi
+fi
+
+partman_newlayout

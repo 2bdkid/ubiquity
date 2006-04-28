@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-03-09 11:38+0100\n"
+"POT-Creation-Date: 2006-04-28 13:12+0100\n"
 "PO-Revision-Date: 2005-06-05 21:13+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
@@ -83,7 +83,7 @@ msgstr "Phương thức phân vùng:"
 # Description
 #. Type: select
 #. Description
-#: ../partman-auto.templates:34
+#: ../partman-auto.templates:39
 #, fuzzy
 msgid "Device to partition"
 msgstr "Sứa chứa đĩa cần phân vùng:"
@@ -92,7 +92,7 @@ msgstr "Sứa chứa đĩa cần phân vùng:"
 # Description
 #. Type: select
 #. Description
-#: ../partman-auto.templates:34
+#: ../partman-auto.templates:39
 msgid ""
 "This installer can guide you through partitioning a disk for use by Ubuntu, "
 "or if you prefer, you can do it manually. If you do choose to use the guided "
@@ -108,7 +108,7 @@ msgstr ""
 # Description
 #. Type: select
 #. Description
-#: ../partman-auto.templates:44
+#: ../partman-auto.templates:49
 msgid "Disk space to partition:"
 msgstr "Sứa chứa đĩa cần phân vùng:"
 
@@ -118,13 +118,13 @@ msgstr "Sứa chứa đĩa cần phân vùng:"
 # Description
 #. Type: select
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:54
 msgid "Partitioning scheme:"
 msgstr "Bố trí phân vùng:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:54
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -136,13 +136,13 @@ msgstr ""
 # Description
 #. Type: error
 #. Description
-#: ../partman-auto.templates:55
+#: ../partman-auto.templates:60
 msgid "Unusable free space"
 msgstr "Sức chứa còn rảnh mà không dùng được"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:55
+#: ../partman-auto.templates:60
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -157,7 +157,7 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:73
+#: ../partman-auto.templates:78
 msgid "Guided partitioning"
 msgstr "Hướng dẫn phân vùng"
 
@@ -166,7 +166,7 @@ msgstr "Hướng dẫn phân vùng"
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:83
 msgid "Use the largest continuous free space"
 msgstr "Dùng sức chứa còn rảnh liên tục lớn nhất."
 
@@ -179,7 +179,7 @@ msgstr "Dùng sức chứa còn rảnh liên tục lớn nhất."
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:86
+#: ../partman-auto.templates:91
 msgid "Erase entire disk: ${DEVICE}"
 msgstr "Xóa bỏ toàn bộ đĩa: ${DEVICE}"
 
@@ -188,7 +188,7 @@ msgstr "Xóa bỏ toàn bộ đĩa: ${DEVICE}"
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:96
 msgid "Manually edit partition table"
 msgstr "Tự sửa đổi bảng phân vùng."
 
@@ -197,7 +197,7 @@ msgstr "Tự sửa đổi bảng phân vùng."
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:101
 msgid "Automatically partition the free space"
 msgstr "Tự động phân vùng sức chứa còn rảnh."
 
@@ -206,7 +206,7 @@ msgstr "Tự động phân vùng sức chứa còn rảnh."
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:106
 msgid "All files in one partition (recommended for new users)"
 msgstr "Mọi tập tin trên một phân vùng (nên áp dụng cho người dùng mới)."
 
@@ -215,7 +215,7 @@ msgstr "Mọi tập tin trên một phân vùng (nên áp dụng cho người d�
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:111
 msgid "Desktop machine"
 msgstr "Máy vi tính chuẩn"
 
@@ -224,25 +224,25 @@ msgstr "Máy vi tính chuẩn"
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
+#: ../partman-auto.templates:116
 msgid "Multi-user workstation"
 msgstr "Máy trạm đa người dùng"
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:115
+#: ../partman-auto.templates:120
 msgid "Resize ${PARTITION} and use freed space"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:119
+#: ../partman-auto.templates:124
 msgid "Failed to create enough space for installation"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:119
+#: ../partman-auto.templates:124
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

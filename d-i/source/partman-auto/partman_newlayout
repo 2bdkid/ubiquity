@@ -30,7 +30,7 @@ ask_for_disk() {
     choices=$(
 	for dev in $DEVICES/*; do
             # raw devices
-	    printf "%s: %s\n" "$(cat $dev/device)" "$(device_name $dev)"
+	    printf "%s\t%s: %s\n" "$(cat $dev/device)" "$(cat $dev/device)" "$(device_name $dev)"
 	    # calculate biggest free
 	    [ -d $dev ] || continue
 	    cd $dev
@@ -53,12 +53,12 @@ ask_for_disk() {
 	fi
 	# add custom to menu selection
 	db_metaget partman-auto/text/custom_partitioning description
-	printf "custom: fakeoption\t%s\n" "$RET"
+	printf "custom\t%s\n" "$RET"
     )
     code=0
     targetdevice=""
     while [ -z "$targetdevice" ]; do
-	debconf_select critical partman-auto/disk "$choices" "custom: fakeoption" || code=$?
+	debconf_select critical partman-auto/select_disk "$choices" "custom" || code=$?
 	newlayout_exit
 	target="${RET%%: *}"
 	bigfree="${RET#*: }"
@@ -78,14 +78,7 @@ ask_for_disk() {
     done
 }
 
-# If there is something, it is from preseeding.
-dev="$1"
-# if preseeded we don't ask_for_disk.
-if [ -z "$dev" ]; then
-    STATE=1
-else
-    STATE=2
-fi
+STATE=1
 
 # check how many devices
 count=0
@@ -93,12 +86,11 @@ for devs in $DEVICES/*; do
  	count=$(($count + 1))
 done
 
-# if there is only one device and we are not preseeded
-# we autoselect the device, skip the question
+# If there is only one device, we autoselect the device, skip the question,
 # and jump to the next.
-if [ $count -le 1 ] && [ -z "$dev" ]; then
+if [ $count -le 1 ]; then
   STATE=2
-  dev="$devs"
+  targetdevice="$devs"
 fi
 
 while true; do
