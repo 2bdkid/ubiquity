@@ -1,3 +1,16 @@
+silo-installer (1.03ubuntu3) dapper; urgency=low
+
+  * Fabio M. Di Nitto
+    - When installing on raid make sure to call silo and silo -t.
+      This seems the only way to catch both cases in with OBP does the wrong
+      thing.
+    - Add quiet and splash boot option to default silo.conf:
+      + Make the boot less noisy.
+      + Enable usplash on machines with a gfx.
+      (Reported working by David. S. Miller)
+
+ -- Fabio M. Di Nitto <fabbione@ubuntu.com>  Sat, 29 Apr 2006 15:26:51 +0200
+
 silo-installer (1.03ubuntu2) dapper; urgency=low
 
   * Fabio M. Di Nitto

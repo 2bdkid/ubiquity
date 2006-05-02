@@ -29,8 +29,14 @@ dev_to_partman () {
 ask_for_disk() {
     choices=$(
 	for dev in $DEVICES/*; do
-            # raw devices
-	    printf "%s\t%s: %s\n" "$(cat $dev/device)" "$(cat $dev/device)" "$(device_name $dev)"
+	    # raw devices
+	    device="$(cat $dev/device)"
+	    case $device in
+		(/dev/mapper/*-*)
+		    continue
+		    ;;
+	    esac
+	    printf "%s\t%s: %s\n" "$device" "$device" "$(device_name $dev)"
 	    # calculate biggest free
 	    [ -d $dev ] || continue
 	    cd $dev
@@ -83,7 +89,13 @@ STATE=1
 # check how many devices
 count=0
 for devs in $DEVICES/*; do
- 	count=$(($count + 1))
+    device="$(cat $devs/device)"
+    case $device in
+	/dev/mapper/*-*)
+	    continue
+	    ;;
+    esac
+    count=$(($count + 1))
 done
 
 # If there is only one device, we autoselect the device, skip the question,

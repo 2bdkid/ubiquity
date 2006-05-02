@@ -16,6 +16,12 @@ dev="$1"
 if [ -z "$dev" ]; then
     for dev in $DEVICES/*; do
 	[ -d "$dev" ] || continue
+	device="$(cat $dev/device)"
+	case $device in
+	    /dev/mapper/*-*)
+		continue
+		;;
+	esac
 	get_some_device_on_dev
     done
 else

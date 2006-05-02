@@ -1,3 +1,37 @@
+ubiquity (0.99.71) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Fix line splitting in parted_server bindings, particularly affecting
+    partitions with whitespace in their names (closes: Malone #41768).
+  * Drop duplicate encode("UTF-8") calls while preseeding passwd/* (closes:
+    Malone #42097).
+  * Set LC_COLLATE=C for debconffiltered subprocesses; some other collation
+    orderings confuse partman into mounting partitions the wrong way round
+    (closes: Malone #40395).
+  * GTK frontend:
+    - Disable back/forward buttons while waiting for debconffiltered
+      subprocesses (closes: Malone #41948).
+    - Improve widget packing on resize (thanks, Xavier Claessens; closes:
+      Malone #40227).
+  * Automatic update of included source packages: partman-auto
+    45ubuntu11, silo-installer 1.03ubuntu3.
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Set busy cursor and disable buttons between steps
+    - Fix reboot
+    - Fix get_disk_choice, Closes Malone #41865
+    - Fix unicode problem in get_disk_choice, Closes Malone #41893
+    - Disable new_size_frame
+    - Make qtparted use python subprocess instead of KProcess
+    - Fix scrolling on crash dialogue
+
+  [ Stephan Hermann ]
+  * KDE Frontend:
+    - Fixed crash in kde-ui.py on amd64, closes Malone #41883
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue,  2 May 2006 17:31:54 +0100
+
 ubiquity (0.99.70) dapper; urgency=low
 
   [ Colin Watson ]
@@ -13,7 +47,7 @@ ubiquity (0.99.70) dapper; urgency=low
   * KDE Frontend:
     - Order methods to match gtkui
     - Some fixes to crashdialogue
-    - Don't show blank choices in set_disk_choices
+    - Don't show blank choices in set_disk_choices (closes: Malone #41868)
     - Delay auto-partitioning until after final step
 
  -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Apr 2006 21:24:16 +0100
