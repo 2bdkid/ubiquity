@@ -1,3 +1,20 @@
+localechooser (0.27ubuntu18) dapper; urgency=low
+
+  * Set default $LANGUAGE for English installs to just "en" rather than
+    "en_US:en_GB:en" (it will be prefixed with the appropriate en_* for the
+    selected country), since fallbacks from American to British English and
+    vice versa are too annoying (closes: Malone #10822). Previously fixed in
+    localechooser 0.04.0ubuntu9, but lost in localechooser 0.22ubuntu1.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  3 May 2006 10:36:40 +0100
+
+localechooser (0.27ubuntu17) dapper; urgency=low
+
+  * Use vi_VN (which is UTF-8) rather than the non-existent vi_VN.UTF-8 for
+    Vietnamese (bug misfiled as a comment in Malone #42260).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue,  2 May 2006 20:13:35 +0100
+
 localechooser (0.27ubuntu16) dapper; urgency=low
 
   * Set Thai console font to tis-phaisarn.f16 (closes: Malone #35022).
