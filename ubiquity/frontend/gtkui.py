@@ -105,7 +105,7 @@ class Wizard:
         self.size_widgets = []
         self.partition_widgets = []
         self.format_widgets = []
-        self.mountpoint_choices = ['swap', '/', '/home',
+        self.mountpoint_choices = ['', 'swap', '/', '/home',
                                    '/boot', '/usr', '/var']
         self.partition_choices = []
         self.mountpoints = {}
@@ -818,13 +818,12 @@ class Wizard:
             if len(selection.items()) == 0:
                 self.allow_go_forward(False)
             else:
-                mp = { 'swap' : 0, '/' : 1 }
-
                 # Setting default preselection values into ComboBox
                 # widgets and setting size values. In addition, next row
                 # is showed if they're validated.
                 for mountpoint, partition in selection.items():
-                    self.mountpoint_widgets[-1].set_active(mp[mountpoint])
+                    self.mountpoint_widgets[-1].set_active(
+                        self.mountpoint_choices.index(mountpoint))
                     self.size_widgets[-1].set_text(
                         self.set_size_msg(partition))
                     self.partition_widgets[-1].set_active(
@@ -847,6 +846,9 @@ class Wizard:
                 mountpoint.connect("changed", self.on_list_changed)
             for partition in self.partition_widgets:
                 partition.connect("changed", self.on_list_changed)
+
+        self.mountpoint_error_reason.hide()
+        self.mountpoint_error_image.hide()
 
         self.steps.next_page()
 
@@ -925,11 +927,14 @@ class Wizard:
                         self.locale))
 
         # showing warning messages
+        self.mountpoint_error_reason.set_text("\n".join(error_msg))
         if len(error_msg) != 0:
-            self.mountpoint_error_reason.set_text("\n".join(error_msg))
             self.mountpoint_error_reason.show()
             self.mountpoint_error_image.show()
             return
+        else:
+            self.mountpoint_error_reason.hide()
+            self.mountpoint_error_image.hide()
 
         gvm_automount_drives = '/desktop/gnome/volume_manager/automount_drives'
         gvm_automount_media = '/desktop/gnome/volume_manager/automount_media'

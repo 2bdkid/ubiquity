@@ -768,7 +768,7 @@ class Wizard:
         # For safety, if we somehow ended up improperly initialised
         # then go to manual partitioning.
         choice = self.get_disk_choice()
-        if self.manual_choice is None or unicode(choice, "utf-8") == self.manual_choice:
+        if self.manual_choice is None or choice == self.manual_choice:
             print " process_disk_selection going to gparted"
             self.gparted_loop()
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartAdvanced"])
@@ -1009,11 +1009,14 @@ class Wizard:
                         self.locale))
 
         # showing warning messages
+        self.userinterface.mountpoint_error_reason.setText("\n".join(error_msg))
         if len(error_msg) != 0:
-            self.userinterface.mountpoint_error_reason.setText("\n".join(error_msg))
             self.userinterface.mountpoint_error_reason.show()
             self.userinterface.mountpoint_error_image.show()
             return
+        else:
+            self.userinterface.mountpoint_error_reason.hide()
+            self.userinterface.mountpoint_error_image.hide()
         
         """
 
@@ -1464,12 +1467,12 @@ class Wizard:
 
     def set_autopartition_resize_min_percent (self, min_percent):
         print "  set_autopartition_resize_min_percent (self, min_percent):"
-        self.new_size_scale.setMinValue(min_percent)
-        self.new_size_scale.setMaxValue(100)
+        self.userinterface.new_size_scale.setMinValue(min_percent)
+        self.userinterface.new_size_scale.setMaxValue(100)
 
     def get_autopartition_resize_percent (self):
         print "  get_autopartition_resize_percent (self):"
-        return self.new_size_scale.value()
+        return self.userinterface.new_size_scale.value()
 
     def get_hostname (self):
         return unicode(self.userinterface.hostname.text())
