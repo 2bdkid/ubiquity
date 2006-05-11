@@ -43,6 +43,14 @@ for f in $fstab; do
     for m in /lib/partman/mount.d/*; do
 	[ -x "$m" ] || continue
 	if $m "$f"; then
+	    case $2 in
+		/)
+		    # create these before /var is mounted, so that udev can
+		    # use them
+		    installdir /target/var/lock
+		    installdir /target/var/run
+		;;
+	    esac
 	    continue 2
 	fi
     done
