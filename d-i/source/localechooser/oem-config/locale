@@ -43,15 +43,6 @@ if [ "$CODE" = 0 ]; then
 	fi
 fi
 
-# Even if we're backing up, we need to generate the new locale so that the
-# debconf frontend can be restarted using it.
-
-if ([ "$CODE" = 0 ] || [ "$CODE" = 10 ]) && \
-    [ "$LOCALE" ] && supported "$LOCALE"; then
-	locale-gen "$LOCALE"
-	locale-gen $EXTRAS
-fi
-
 # TODO: kbd/cyr handling?
 
 exit "$CODE"

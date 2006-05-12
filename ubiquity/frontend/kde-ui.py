@@ -364,7 +364,7 @@ class Wizard:
         #if isinstance(widget, gtk.Button) and widget.get_use_stock():
         #    widget.set_label(widget.get_label())
 
-        text = get_string('ubiquity/text/%s' % widget.name(), lang)
+        text = get_string(widget.name(), lang)
         if text is None:
             return
 
@@ -414,11 +414,13 @@ class Wizard:
         print "  set_current_page(self, current):"
         self.current_page = current
         current_name = self.step_name(current)
-        label_text = "Step %s of %d"
-        curstep = "<i>Unknown?</i>"
+        label_text = get_string("step_label", self.locale)
+        curstep = "<i>?</i>"
         if current_name in BREADCRUMB_STEPS:
             curstep = str(BREADCRUMB_STEPS[current_name])
-        self.userinterface.lblStepNofM.setText(label_text % (curstep, BREADCRUMB_MAX_STEP))
+        label_text = label_text.replace("${INDEX}", curstep)
+        label_text = label_text.replace("${TOTAL}", str(BREADCRUMB_MAX_STEP))
+        self.userinterface.step_label.setText(label_text)
 
     def gparted_loop(self):
         print "  gparted_loop(self):"
@@ -1237,6 +1239,8 @@ class Wizard:
         
         if self.progress_position.depth() == 0:
             total_steps = progress_max - progress_min
+            if progress_title is None:
+                progress_title = ""
             self.progressDialogue = QProgressDialog(progress_title, "Cancel", total_steps, self.userinterface, "progressdialog", True)
             #self.progressDialogue = KProgressDialog(self.userinterface, "progressdialog", progress_title, "", True)
             # FIXME jr self.debconf_progress_window.set_title(progress_title)

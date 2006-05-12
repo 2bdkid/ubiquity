@@ -1,3 +1,13 @@
+localechooser (0.27ubuntu19) dapper; urgency=low
+
+  * Stop running locale-gen on live CDs and in oem-config when changing
+    language. localedef is extremely memory-hungry, and it turns out that
+    it's possible to get correct debconf translations (which is all we
+    actually care about) by setting LANGUAGE instead (closes: Malone
+    #43071).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 12 May 2006 15:20:23 +0100
+
 localechooser (0.27ubuntu18) dapper; urgency=low
 
   * Set default $LANGUAGE for English installs to just "en" rather than

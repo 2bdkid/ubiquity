@@ -530,11 +530,6 @@ if [ "$LOCALE" != "C" ] ; then
 		LOCALE="$RET"
 	fi
 
-	# Live CD support; generate locale immediately if possible.
-	if type locale-gen; then
-		locale-gen "$LOCALE"
-	fi
-
 	# Ask for additional locales to be generated
 	CHOICES=
 	# *.UTF-8@euro locales are deprecated; don't use them.
