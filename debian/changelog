@@ -1,3 +1,35 @@
+ubiquity (0.99.81) dapper; urgency=low
+
+  [ Colin Watson ]
+  * Work around PyGTK bug in gtk.Dialog(): each button text must actually be
+    a subtype of str, which unicode isn't (closes: Malone #43012).
+  * New, more descriptive icon (thanks, Antônio Cláudio; closes: Malone
+    #41472).
+  * Add .desktop file translations from Rosetta: German, Spanish, Finnish,
+    French, Croatian, Hungarian, Italian, Korean, Kurdish, Polish,
+    Portuguese.
+  * Update translations from Rosetta: Belarusian, Frisian, Hungarian,
+    Kurdish, Latvian, Thai, Turkish, Chinese (Taiwan).
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - Show % indicator on resize slider
+    - Improve size/layout of some widgets
+    - Don't call get_translations multiple times (closes: Malone #44515)
+    - Format time properly in non-latin locales
+    - Make mountpoint comboboxes editable
+    - Resize qtparted to fit window (closes: Malone #43122)
+    - Quit qtparted cleanly
+    - Select values on mountpoints page correctly
+    - Remove debugging print lines
+    - Fix some i18n strings
+    - Enable/disable Cancel button in debconf progress dialogue
+    - Add spacers in disk selection
+    - Add Map Widget (closes: Malone #43678)
+  * Move world_map-960.png from ubiquity-frontend-gtk to ubiquity package
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 May 2006 12:00:04 +0100
+
 ubiquity (0.99.80) dapper; urgency=low
 
   * If we get an IOError when trying to tell gparted or qtparted to apply
