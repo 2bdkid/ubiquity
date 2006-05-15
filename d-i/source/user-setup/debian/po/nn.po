@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
 "PO-Revision-Date: 2005-10-15 20:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Nynorsk <en@li.org>\n"
@@ -26,15 +26,29 @@ msgstr ""
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Rotpassord:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 #, fuzzy
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
@@ -54,35 +68,19 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Merk at du ikkje vil kunne sjå passordet medan du skriv det inn."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Skriv inn det same root-passordet ein gong til for å kontrollera at du har "
 "skrive det inn rett."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-#, fuzzy
-msgid "Empty root password entered; using sudo."
-msgstr "Tomt passord"
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
 
 #. Type: boolean
 #. Description

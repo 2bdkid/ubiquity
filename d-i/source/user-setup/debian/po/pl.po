@@ -6,29 +6,46 @@
 # Polish messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Copyright (C) 2004-2005 Bartosz Feński <fenio@debian.org>
+# Copyright (C) 2004-2006 Bartosz Feński <fenio@debian.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-12-13 12:30+0100\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-11 12:27+0200\n"
 "Last-Translator: Bartosz Fenski <fenio@debian.org>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr "Umożliwić logowanie jako root?"
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+"Jeśli wybierzesz brak możliwości logowania jako root, zostanie utworzone "
+"konto użytkownika, które z użyciem polecenia 'sudo' służyć będzie do "
+"wykonywania czynności administracyjnych."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Hasło administratora (root):"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -44,38 +61,19 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Zwróć uwagę, że hasło nie będzie widoczne podczas wpisywania."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Proszę wpisać to samo hasło ponownie, aby upewnić się, że zostało wpisane "
 "poprawnie."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Wpisano puste hasło; używam sudo."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Wprowadziłeś puste hasło dla użytkownika root. Ponieważ jest to "
-"niebezpieczne, konto to zostalo zablokowane. Użytkownik którego stworzysz w "
-"następnym krokubędzie miał możliwość uzyskania praw root-a dzięki użyciu "
-"komendy 'sudo'"
 
 #. Type: boolean
 #. Description
@@ -106,8 +104,9 @@ msgid ""
 "'imurdock' or 'rms'."
 msgstr ""
 "Zwróć uwagę, że możesz utworzyć je później (podobnie jak każde dodatkowe "
-"konto) wpisując komendę 'adduser <nazwa>' jako root, gdzie <nazwa> jest "
-"(ośmio lub mniej znakową) nazwą użytkownika, na przykład 'jnowak' albo 'aga'."
+"konto) wpisując jako root polecenie 'adduser <nazwa>', gdzie <nazwa> jest "
+"(ośmio- lub mniej znakową) nazwą użytkownika, na przykład 'jnowak' albo "
+"'aga'."
 
 #. Type: string
 #. Description

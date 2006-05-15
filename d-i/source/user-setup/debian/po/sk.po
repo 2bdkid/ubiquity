@@ -11,23 +11,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-12-20 09:18+0100\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-11 07:34+0200\n"
 "Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
 "Language-Team:  Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr "Umožniť prihlásenie používateľa root?"
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+"Ak neumožníte prihlásenie používateľa root, tak sa vytvorí používateľské "
+"konto, ktorým budete môcť vykonávať správu systému pomocou príkazu 'sudo'."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Heslo používateľa root:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -43,13 +59,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Uvedomte si, že pri písaní sa heslo nezobrazuje."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
@@ -57,30 +73,11 @@ msgstr ""
 "Zadajte, prosím, znovu heslo pre root-a, aby ste sa presvedčili, že ste ho "
 "zadali správne."
 
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Bolo zadané prázdne heslo pre správcu. Bude použitý systém sudo."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Zadali ste prázdne heslo pre správcu (root). Keďže použitie prázdnych hesiel "
-"nie je bezpečné bude účet správcu root uzamknutý. Používateľovi, ktorý bude "
-"vytvorený v ďalšom kroku, bude umožnené získať administrátorské privilégia "
-"pomocou príkazu 'sudo'."
-
 #. Type: boolean
 #. Description
 #: ../user-setup-udeb.templates:49
 msgid "Create a normal user account now?"
-msgstr "Môžem teraz vytvoriť účet pro normálneho používateľa?"
+msgstr "Môže sa teraz vytvoriť účet pro normálneho používateľa?"
 
 #. Type: boolean
 #. Description
@@ -169,9 +166,9 @@ msgid ""
 "lower-case letter, which can be followed by any combination of numbers and "
 "more lower-case letters."
 msgstr ""
-"Používateľské meno, ktoré ste zadali, je neplatné. Používateľské mená musia "
-"začínať malým písmenom, za ktorým môže nasledovať ľubovoľná kombinácia čísel "
-"a malých písmen."
+"Zadali ste nesprávne používateľské meno. Používateľské mená musia začínať "
+"malým písmenom, za ktorým môže nasledovať ľubovoľná kombinácia čísel a "
+"malých písmen."
 
 #. Type: password
 #. Description
@@ -263,4 +260,4 @@ msgstr "Nastavenie používateľov a hesiel"
 #. Prebaseconfig progress bar item
 #: ../user-setup-udeb.templates:123
 msgid "Setting users and passwords..."
-msgstr "Nastavujú sa používatelia a heslá..."
+msgstr "Nastavenie používateľov a hesiel..."

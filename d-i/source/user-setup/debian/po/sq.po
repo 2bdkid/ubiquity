@@ -12,25 +12,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-06-23 19:48+0200\n"
-"Last-Translator:  Elian Myftiu <elian@alblinux.net>\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-03-08 13:39+0100\n"
+"Last-Translator:  Elian Myftiu <elian.myftiu@gmail.com>\n"
 "Language-Team: Debian L10n Albanian <debian-l10n-albanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Fjalëkalimi për root:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
-#, fuzzy
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -39,46 +52,27 @@ msgid ""
 "easily associated with you."
 msgstr ""
 "Duhet të caktosh një fjalëkalim për 'root', llogarinë administrative të "
-"sistemit.Një përdorues keqdashës apo i papërgatitur mund të krijojë pasoja "
-"katastrofike, kështu që duhet të zgjedhësh me kujdes një fjalëkalim i cili "
-"nuk është i lehtë për tu marrë me mend. Nuk duhet të jetë një fjalë gjetur "
-"në fjalor, apo një fjalë që ka lidhje me ju, si p.sh. emri apo mbiemri yt. "
-"Një fjalëkalim i mirë do përmbante një përzierje gërmash, numrash dhe "
-"shenjash pikësimi dhe do ndërrohej rregullisht. Ky fjalëkalim ndryshohet me "
-"anë të programit 'passwd' si root."
+"sistemit. Një përdorues keqdashës apo i papërgatitur me të drejta root mund "
+"të krijojë pasoja katastrofike, kështu që duhet të zgjedhësh me kujdes një "
+"fjalëkalim jo të lehtë për t'u marrë me mend. Nuk duhet të jetë një fjalë e "
+"gjetur në fjalorë, apo një fjalë që lidhet lehtë me ty."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr ""
 "Vër re që nuk do kesh mundësi ta shohësh fjalëkalimin ndërsa e shkruan."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Të lutem fut sërish të njëjtin fjalëkalim të root për të verifikuar që e ke "
 "shtypur saktë."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-#, fuzzy
-msgid "Empty root password entered; using sudo."
-msgstr "U përdor fjalëkalim bosh."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
 
 #. Type: boolean
 #. Description
@@ -115,9 +109,8 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../user-setup-udeb.templates:61
-#, fuzzy
 msgid "Full name for the new user:"
-msgstr "Fut një emër të plotë për përdoruesin e ri:"
+msgstr "Emri i plotë për përdoruesin e ri:"
 
 #. Type: string
 #. Description
@@ -138,13 +131,16 @@ msgid ""
 "program which displays or uses the user's real name. Your full name is a "
 "reasonable choice."
 msgstr ""
+"Të lutem shkruaj emrin e vërtetë për këtë përdorues. Këto të dhëna do të "
+"përdoren për shembull si origjinë e email-ave të nisur nga ky përdorues po "
+"ashtu dhe në programet që shfaqin apo përdorin emrin e vërtetë të "
+"përdoruesit. Emri yt i plotë është një zgjedhje e arsyeshme."
 
 #. Type: string
 #. Description
 #: ../user-setup-udeb.templates:72
-#, fuzzy
 msgid "Username for your account:"
-msgstr "Fut një emër përdoruesi në llogarinë tënde:"
+msgstr "Emri i përdoruesit për llogarinë tënde:"
 
 #. Type: string
 #. Description
@@ -162,9 +158,8 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../user-setup-udeb.templates:79
-#, fuzzy
 msgid "Invalid username"
-msgstr "U fut një emër përdoruesi i pavlefshëm."
+msgstr "Emër përdoruesi i pavlefshëm"
 
 #. Type: error
 #. Description
@@ -181,20 +176,18 @@ msgstr ""
 #. Type: password
 #. Description
 #: ../user-setup-udeb.templates:86
-#, fuzzy
 msgid "Choose a password for the new user:"
-msgstr "Fut një fjalëkalim për përdoruesin e ri:"
+msgstr "Zgjidh një fjalëkalim për përdoruesin e ri:"
 
 #. Type: password
 #. Description
 #: ../user-setup-udeb.templates:86
-#, fuzzy
 msgid ""
 "A good password will contain a mixture of letters, numbers and punctuation "
 "and should be changed at regular intervals."
 msgstr ""
 "Një fjalëkalim i mirë do përmbante një përzierje gërmash, numrash dhe "
-"shenjash pikësimi dhe do ndërrohej rregullisht."
+"shenjash pikësimi dhe duhet të ndërrohej rregullisht."
 
 #. Type: password
 #. Description
@@ -215,9 +208,8 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../user-setup-udeb.templates:98
-#, fuzzy
 msgid "Password input error"
-msgstr "Gabim në futjen e fjalëkalimit."
+msgstr "Gabim në futjen e fjalëkalimit"
 
 #. Type: error
 #. Description
@@ -229,9 +221,8 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../user-setup-udeb.templates:103
-#, fuzzy
 msgid "Empty password"
-msgstr "Fjalëkalimi për root:"
+msgstr "Fjalëkalim bosh"
 
 #. Type: error
 #. Description
@@ -240,6 +231,8 @@ msgid ""
 "You entered an empty password, which is not allowed. Please choose a non-"
 "empty password."
 msgstr ""
+"Nuk shkruajte një fjalëkalim, gjë që nuk lejohet. Të lutem zgjidh një "
+"fjalëkalim jo bosh."
 
 #. Type: boolean
 #. Description
@@ -250,7 +243,6 @@ msgstr "T'i aktivizoj fjalëkalimet hije?"
 #. Type: boolean
 #. Description
 #: ../user-setup-udeb.templates:110
-#, fuzzy
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -258,10 +250,10 @@ msgid ""
 "strongly recommended, except in a few cases such as NIS environments."
 msgstr ""
 "Fjalëkalimet hije (shadow passwords) sigurojnë më tepër sistemin tënd pasi "
-"asnjëri nuk është në gjendje të shikojë edhe fjalëkalimet e kriptuara. "
-"Fjalëkalimet ruhen në një skedë të veçantë e cila mund të lexohet vetëm nga "
-"programe të posaçëm. Këshillohet fuqimisht përdorimi i fjalëkalimeve hije. "
-"Gjithsesi, nëse je duke përdorur NIS mund ti krijosh probleme vetes."
+"asnjëri nuk është në gjendje të shikojë as fjalëkalimet e kriptuara. "
+"Fjalëkalimet ruhen në një file të veçantë i cila mund të lexohet vetëm nga "
+"programe të posaçëm. Përdorimi i fjalëkalimeve hije këshillohet fuqimisht, "
+"përveç disa rasteve të paktë, si p.sh. në mjediset NIS."
 
 #. Type: title
 #. Description
@@ -273,6 +265,5 @@ msgstr "Përgatit përdoruesit dhe fjalëkalimet"
 #. Description
 #. Prebaseconfig progress bar item
 #: ../user-setup-udeb.templates:123
-#, fuzzy
 msgid "Setting users and passwords..."
-msgstr "Përgatit përdoruesit dhe fjalëkalimet"
+msgstr "Duke rregulluar përdoruesit dhe fjalëkalimet..."

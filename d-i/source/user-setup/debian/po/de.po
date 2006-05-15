@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-11-28 19:43+0100\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-03-24 21:29+0100\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,15 +29,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: vim\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Root-Passwort:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -54,38 +68,19 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Hinweis: Sie werden das Passwort während der Eingabe nicht sehen."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Bitte geben Sie das selbe root-Passwort nochmal ein, um sicher zu gehen, "
 "dass Sie es richtig eingegeben haben."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Leeres Passwort wurde eingegeben; sudo wird benutzt."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Sie haben ein leeres root-Passwort eingegeben. Da leere Passwörter nicht "
-"sicher sind, wird das root-Passwort stattdessen gesperrt. Der User, den Sie "
-"im nächsten Schritt erstellen werden, wird durch eingabe des 'sudo' Befehls "
-"root-Privilegien erhalten können."
 
 #. Type: boolean
 #. Description
@@ -230,7 +225,7 @@ msgstr "Passworteingabefehler"
 msgid "The two passwords you entered were not the same. Please try again."
 msgstr ""
 "Die beiden Passwörter, die Sie eingegeben haben, sind nicht gleich. Bitte "
-"versuchen Sie es nocheinmal."
+"versuchen Sie es noch einmal."
 
 #. Type: error
 #. Description

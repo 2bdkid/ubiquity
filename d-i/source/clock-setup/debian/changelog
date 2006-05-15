@@ -1,0 +1,232 @@
+clock-setup (0.8build1) dapper; urgency=low
+
+  * Fake sync from Debian (UVF exception OK mdz@).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 20 Mar 2006 18:40:32 +0000
+
+clock-setup (0.8) unstable; urgency=low
+
+  [ Martin Michlmayr ]
+  * Add armeb to the Architecture field.
+
+  [ Colin Watson ]
+  * Fix DOS/Windows autodetection
+    (https://launchpad.net/distros/ubuntu/+bug/31928).
+
+  [ Frans Pop ]
+  * The output of os-prober can contain spaces, so we can't just use a for
+    loop; use a function to check the probed operating systems instead.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Frans Pop <fjp@debian.org>  Thu, 23 Feb 2006 16:14:26 +0100
+
+clock-setup (0.7) unstable; urgency=low
+
+  * Make sure no .svn directories get included in the package.
+
+  [ Updated translations ]
+  * Slovenian (sl.po) by Jure Cuhalev
+
+ -- Frans Pop <fjp@debian.org>  Sat, 28 Jan 2006 16:29:37 +0100
+
+clock-setup (0.6) unstable; urgency=low
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Dutch (pa_IN.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Mon, 23 Jan 2006 20:27:43 +0100
+
+clock-setup (0.5) unstable; urgency=low
+
+  * Add a little progress bar as the os-prober run can take a while.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bengali (bn.po) by Baishampayan Ghose
+  * Catalan (ca.po) by Guillem Jover
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hindi (hi.po) by Nishant Sharma
+  * Icelandic (is.po) by David Steinn Geirsson
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po)
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 17 Nov 2005 14:31:06 -0500
+
+clock-setup (0.4) unstable; urgency=low
+
+  [ Frans Pop ]
+  * UTC officially stands for "Coordinated Universal Time".
+
+  [ Joey Hess ]
+  * Source confmodule in prebaseconfig script. Thanks, Frans Pop.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 22 Sep 2005 07:12:57 +0200
+
+clock-setup (0.3) unstable; urgency=low
+
+  * Fix name of queston in prebaseconfig script.
+
+  * Updated translations: 
+    - German (de.po) by Holger Wansing
+
+ -- Joey Hess <joeyh@debian.org>  Mon,  8 Aug 2005 14:36:18 -0400
+
+clock-setup (0.2) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Add kfreebsd-i386 to arch list. Closes: #320579
+
+  [ Colin Watson ]
+  * Update GPL notices with the FSF's new address.
+
+  [ Otavio Salvador ]
+  * Add Standards-Version field.
+
+  [ Joey Hess ]
+  * Fix syntax errors in db_set commands.
+
+  * Updated translations: 
+    - German (de.po)
+    - Galician (gl.po) by Jacobo Tarrio
+    - Dutch (nl.po) by Frans Pop
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  3 Aug 2005 21:53:21 -0400
+
+clock-setup (0.1) unstable; urgency=low
+
+  * New udeb, loosely derived from base-config and Ubuntu's tzsetup
+    udeb.
+  * Use OS probing to avoid asking the confusing UTC question most of the
+    time. Closes: #240706
+  * Don't display system time, that's really a red herring as the point is
+    to choose how the time _should_ be stored, not how it is stored.
+    Closes: #259869, #270239
+    (Yes, this means some users will need to set their hardware clock
+    post-install. It might be added to this package, eventually.)
+  * Build on all arches except s390, which has none of this hwclock
+    nonsense. If other arches always use UTC, I can exclude them too..
+
+  * Updated translations: 
+    - Arabic (ar.po) by Ossama M. Khayat
+    - Belarusian (be.po) by Andrei Darashenka
+    - Bulgarian (bg.po) by Ognyan Kulev
+    - Bosnian (bs.po) by Safir Šećerović
+    - Catalan (ca.po) by Guillem Jover
+    - Czech (cs.po) by Miroslav Kure
+    - Welsh (cy.po) by Dafydd Harries
+    - Danish (da.po) by Claus Hindsgaul
+    - German (de.po) by Dennis Stampfer
+    - Greek, Modern (1453-) (el.po) by Greek Translation Team
+    - Esperanto (eo.po) by Serge Leblanc
+    - Spanish (es.po) by Javier Fernández-Sanguino Peña
+    - Estonian (et.po) by Siim Põder
+    - Basque (eu.po) by Piarre Beobide Egaña
+    - Persian (fa.po) by Arash Bijanzadeh
+    - Finnish (fi.po) by Tapio Lehtonen
+    - French (fr.po) by Christian Perrier
+    - Gallegan (gl.po) by Jacobo Tarrio
+    - Hebrew (he.po) by Lior Kaplan
+    - Hindi (hi.po) by Ravishankar Shrivastava
+    - Croatian (hr.po) by Krunoslav Gernhard
+    - Hungarian (hu.po) by VEROK Istvan
+    - Indonesian (id.po) by Arief S Fitrianto
+    - Italian (it.po) by Giuseppe Sacco
+    - Japanese (ja.po) by Kenshi Muto
+    - Korean (ko.po) by Changwoo Ryu
+    - Lithuanian (lt.po) by Kęstutis Biliūnas
+    - Latvian (lv.po) by Aigars Mahinovs
+    - Malagasy (mg.po) by Jaonary Rabarisoa
+    - Macedonian (mk.po) by Georgi Stanojevski
+    - Bokmål, Norwegian (nb.po) by Hans Fredrik Nordhaug
+    - Dutch (nl.po) by Bart Cornelis
+    - Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+    - Norwegian Nynorsk (pa_IN.po) by Amanpreet Singh Alam
+    - Polish (pl.po) by Bartosz Fenski
+    - Portuguese (pt.po) by Miguel Figueiredo
+    - Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+    - Romanian (ro.po) by Eddy Petrişor
+    - Russian (ru.po) by Yuri Kozlov
+    - Slovak (sk.po) by Peter Mann
+    - Slovenian (sl.po) by Jure Čuhalev
+    - Albanian (sq.po) by Elian Myftiu
+    - Swedish (sv.po) by Per Olofsson
+    - Tagalog (tl.po) by Eric Pareja
+    - Turkish (tr.po) by Recai Oktaş
+    - Ukrainian (uk.po) by Eugeniy Meshcheryakov
+    - Vietnamese (vi.po) by Clytie Siddall
+    - Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+    - Xhosa (xh.po) by Canonical Ltd
+    - Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+    - Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 28 Jul 2005 01:08:00 -0400

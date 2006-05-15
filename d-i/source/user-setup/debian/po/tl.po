@@ -4,10 +4,10 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Tagalog messages for debian-installer.
-# Copyright (C) 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2004, 2005, 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Ipinamamahagi ang talaksang ito alinsunod sa lisensiya ng debian-installer.
-# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005
+# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005, 2006
 # Rick Bahague, Jr. <rbahaguejr@gmail.com>, 2004
 # Reviewed by Roel Cantada on Feb-Mar 2005.
 # Sinuri ni Roel Cantada noong Peb-Mar 2005.
@@ -19,23 +19,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-11-27 15:38+0800\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-08 14:22+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr "Payagan makapasok bilang root?"
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+"Kung piliin niyong hindi payagang makapasok bilang root, may lilikhaing user "
+"account na bibigyan ng kakayahang maging root na gamit ang 'sudo' command."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Password ng root:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -52,7 +68,7 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr ""
 "Dapat mabatid na hindi niyo mababasa ang password habang ito'y inyong "
@@ -60,32 +76,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Pakibigay uli ang parehong password ng root upang matiyak na naipasok niyo "
 "ito ng tama."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Walang laman ang password na ibinigay para kay root; gagamit ng sudo."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Nagbigay ka ng password para kay root na wala ang laman.  Yamang ang "
-"password na ito ay di mainam, sa halip ang root password ay ikakandado.  Ang "
-"user na iyong lilikhain sa susunod na hakbang ay maaaring magkaroon ng "
-"pribilehiyong root sa pamamagitan ng 'sudo'."
 
 #. Type: boolean
 #. Description

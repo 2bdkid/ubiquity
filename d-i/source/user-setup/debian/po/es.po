@@ -9,15 +9,14 @@
 #
 # Contributors to the translation of debian-installer:
 # Teófilo Ruiz Suárez <teo@debian.org>, 2003.
-# Javier Fernández-Sanguino <jfs@debian.org>, 2003.
 # David Martínez Moreno <ender@debian.org>, 2003, 2005.
 # Carlos Alberto Martín Edo <carlos@dat.etsit.upm.es>, 2003
 # Carlos Valdivia Yagüe <valyag@dat.etsit.upm.es>, 2003
 # Rudy Godoy <rudy@kernel-panik.org>, 2003
 # Steve Langasek <vorlon@debian.org>, 2004
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2005
-# Javier Fernández-Sanguino <jfs@debian.org>, 2004-2005
 # Rubén Porras Campo <nahoo@inicia.es>, 2005
+# Javier Fernández-Sanguino <jfs@debian.org>, 2003-2006
 #
 # Equipo de traducción al español, por favor lean antes de traducir
 # los siguientes documentos:
@@ -38,23 +37,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-12-01 00:58+0100\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-03-20 09:28+0100\n"
 "Last-Translator: Javier Fernández-Sanguino Peña <jfs@debian.org>\n"
 "Language-Team:  Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Clave del superusuario:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -71,38 +84,19 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Tenga en cuenta que no podrá ver la contraseña mientras la introduce."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Por favor, introduzca la misma contraseña de superusuario de nuevo para "
 "verificar que la introdujo correctamente."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Ha introducido una contraseña vacía; se usará sudo."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Ha introducido una contraseña en blanco para el superusuario. Como las "
-"contraseñas en blanco no son seguras, se bloqueará la contraseña de "
-"superusuario. Al usuario que creará en el siguiente paso se le permitirá "
-"obtener permisos de superusuario a través de la orden «sudo»."
 
 #. Type: boolean
 #. Description
@@ -239,7 +233,7 @@ msgstr ""
 #. Description
 #: ../user-setup-udeb.templates:98
 msgid "Password input error"
-msgstr "Error al introducir la contraseña"
+msgstr "Se ha producido un error al introducir la contraseña"
 
 #. Type: error
 #. Description

@@ -136,18 +136,6 @@
                         <property name="layout_style">end</property>
                         <property name="visible">True</property>
                         <child>
-                            <widget class="GtkButton" id="button_ok">
-                                <property name="receives_default">True</property>
-                                <property name="label">gtk-ok</property>
-                                <property name="use_underline">True</property>
-                                <property name="events"></property>
-                                <property name="use_stock">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="visible">True</property>
-                            </widget>
-                            <packing/>
-                        </child>
-                        <child>
                             <widget class="GtkButton" id="button_cancel">
                                 <property name="receives_default">True</property>
                                 <property name="label">gtk-cancel</property>
@@ -160,6 +148,18 @@
                             <packing>
                                 <property name="position">1</property>
                             </packing>
+                        </child>
+                        <child>
+                            <widget class="GtkButton" id="button_ok">
+                                <property name="receives_default">True</property>
+                                <property name="label">gtk-ok</property>
+                                <property name="use_underline">True</property>
+                                <property name="events"></property>
+                                <property name="use_stock">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="visible">True</property>
+                            </widget>
+                            <packing/>
                         </child>
                     </widget>
                     <packing>

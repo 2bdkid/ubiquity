@@ -20,23 +20,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-12-30 14:56+0100\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-08 11:53+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-boot@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr "Tillåt inloggning som root?"
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+"Om du väljer att inte tillåta root att logga in kommer ett användarkonto att "
+"skapas och ges möjligheten att bli root genom kommandot \"sudo\"."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Root-lösenord:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -52,37 +68,18 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Notera att du inte kommer att kunna se lösenordet när du skriver det"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Ange samma root-lösenord igen för att bekräfta att du skrev det korrekt."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr "Tomt root-lösenord angavs; använder sudo."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
-"Du angav ett tomt root-lösenord. Eftersom tomma lösenord inte är säkert "
-"kommer root-lösenordet istället att låsas. Användaren du skapar i nästa steg "
-"kommer att tillåtas att få root-behörigheter genom att använda kommandot "
-"\"sudo\"."
 
 #. Type: boolean
 #. Description
@@ -140,8 +137,8 @@ msgid ""
 "program which displays or uses the user's real name. Your full name is a "
 "reasonable choice."
 msgstr ""
-"Ange användarens riktiga namn. Denna information kommer att användas för "
-"till exempel e-post som skickas av denna användare och i stort sett alla "
+"Ange användarens riktiga namn. Den här informationen kommer att användas för "
+"till exempel e-post som skickas av den här användaren och i stort sett alla "
 "program som visar eller använder användarens riktiga namn. Ditt fullständiga "
 "namn är ett rimligt val."
 

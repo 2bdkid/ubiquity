@@ -6,7 +6,7 @@
 # Debian Installer master translation file template
 #
 # Anubadok, the en2bn auto-translator by Golam Mortuza Hossain <golam@imsc.res.in>, 2005.
-# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005.
+# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005-2006.
 # Jamil Ahmed <jamil@bengalinux.org>, 2005.
 # Khandakar Mujahidul Islam <suzan@bengalinux.org>, 2005.
 # Progga <progga@BengaLinux.Org>, 2005.
@@ -16,24 +16,38 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-10-28 13:29+0530\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-02-26 04:29+0530\n"
 "Last-Translator: Baishampayan Ghose <b.ghose@gnu.org.in>\n"
 "Language-Team: Bangla <core@BengaLinux.Org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. Type: password
+#. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:21
-#, fuzzy
-msgid "Root password:"
-msgstr "গ্রাব-এর পাসওয়ার্ড:"
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
+#, fuzzy
+msgid "Root password:"
+msgstr "রুট পাসওয়ার্ড:"
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:28
 #, fuzzy
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
@@ -50,35 +64,20 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 #, fuzzy
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "লক্ষ্য করুন যে, আপনি ইচ্ছা করলে পরে এটি বাতিল করতে পারবেন।"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 #, fuzzy
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "অনুগ্রহপূর্বক পাসওয়ার্ডটি সঠিকভাবে টাইপ করেছেন কিনা তা নিশ্চিত হওয়ার জন্য আবার লিখুন।"
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
 
 #. Type: boolean
 #. Description

@@ -37,16 +37,6 @@ $USER:$PASSWD
 EOF
 }
 
-sudoers_admin_group () {
-	if [ -f $ROOT/etc/sudoers ]; then
-		cat <<EOF >>$ROOT/etc/sudoers
-
-# Members of the admin group may gain root privileges
-%admin	ALL=(ALL) ALL
-EOF
-	fi
-}
-
 add_to_aliases () {
 	if ! grep -qi ^root: $ROOT/etc/aliases 2>/dev/null; then
 		cat <<EOF >>$ROOT/etc/aliases
@@ -79,17 +69,12 @@ if ! root_password; then
 	else
 		db_get passwd/root-password
 		ROOT_PW="$RET"
-		if [ "$ROOT_PW" ]; then
-			# Clear the root password from the database, and set
-			# the password.
-			db_set passwd/root-password ''
-			db_set passwd/root-password-again ''
-			setpassword root "$ROOT_PW" false
-			ROOT_PW=
-		else
-			# Disable the root password.
-			echo 'root:*' | $chroot $ROOT chpasswd -e
-		fi
+		# Clear the root password from the database, and set the
+		# password.
+		db_set passwd/root-password ''
+		db_set passwd/root-password-again ''
+		setpassword root "$ROOT_PW" false
+		ROOT_PW=
 	fi
 fi
 
@@ -120,6 +105,11 @@ if [ "$RET" = true ] && ! is_system_user; then
 	USER="$RET"
 	db_get passwd/user-fullname
 
+	HOME_EXISTED=
+	if [ -d "$ROOT/home/$USER" ]; then
+		HOME_EXISTED=1
+	fi
+
 	if [ -x $ROOT/usr/sbin/adduser ]; then
 		$log $chroot $ROOT adduser --disabled-password --gecos "$RET" $UIDOPT "$USER" >/dev/null || true
 	else
@@ -135,6 +125,14 @@ if [ "$RET" = true ] && ! is_system_user; then
 	fi
 	setpassword "$USER" "$USER_PW" "$USER_PW_CRYPTED"
 
+	if [ "$HOME_EXISTED" ]; then
+		# The user's home directory already existed before we called
+		# adduser. This often means that a mount point under
+		# /home/$USER was selected in (and thus created by) partman,
+		# and the home directory may have ended up owned by root.
+		$log $chroot $ROOT chown "$USER:$USER" "/home/$USER" >/dev/null || true
+	fi
+
 	if [ -n "$USER" ]; then
 		for group in lpadmin scanner; do
 			$log $chroot $ROOT addgroup --system $group >/dev/null 2>&1 || true
@@ -142,14 +140,30 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for group in adm audio cdrom dialout floppy video plugdev dip lpadmin scanner; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
+		add_to_aliases "$USER"
+	fi
 
-		if ! root_password; then
-			sudoers_admin_group
+	db_get passwd/root-login
+	if [ "$RET" = false ] && [ -n "$USER" ]; then
+		# Ensure sudo is installed, and set up the user to be able
+		# to use it.
+		if [ ! -e $ROOT/etc/sudoers ]; then
+			# try to work in d-i and out; it's better to
+			# use apt-install in d-i
+			apt-install sudo 2>/dev/null || $log $chroot apt-get -q -y install sudo || true
+		fi
+		if [ -e $ROOT/etc/sudoers ]; then
 			$log $chroot $ROOT addgroup --system admin >/dev/null 2>&1 || true
 			$log $chroot $ROOT adduser "$USER" admin >/dev/null 2>&1 || true
-		fi
+			cat <<EOF >>$ROOT/etc/sudoers
 
-		add_to_aliases "$USER"
+# Members of the admin group may gain root privileges
+%admin ALL=(ALL) ALL
+EOF
+		else
+			# sudo failed to install, system won't be usable
+			exit 1
+		fi
 	fi
 fi
 

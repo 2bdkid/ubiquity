@@ -1,3 +1,111 @@
+user-setup (1.1ubuntu2) dapper; urgency=low
+
+  * Backport from trunk (closes: Malone #16640):
+    - Fix up permissions of user's home directory in case a mount point was
+      created underneath it by partman.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 May 2006 17:03:06 +0100
+
+user-setup (1.1ubuntu1) dapper; urgency=low
+
+  * Resynchronise with Debian for new root-login question (closes: Malone
+    #16139).
+  * Default passwd/root-login to false to match previous Ubuntu behaviour.
+  * As in previous Ubuntu versions, lock root password with "*", not "!".
+    I'm not sure what would happen if I changed this right before the
+    release of Dapper, but I don't want to find out.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 May 2006 15:49:57 +0100
+
+user-setup (1.1) unstable; urgency=low
+
+  [ Tollef Fog Heen ]
+  * Don't use perl to pass parameters to chpasswd.
+
+  [ Joey Hess ]
+  * Add passwd/root-login question (asked at medium priority), currently
+    defaulting to true.
+  * If root-login is false, skip root password prompts, lock the root account,
+    always make a user account, install sudo, and configure /etc/sudoers to
+    allow the user to become root. Closes: #344873
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bengali (bn.po) by Baishampayan Ghose
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Welsh (cy.po) by Dafydd Harries
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Sonam Rinchen
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hindi (hi.po) by Nishant Sharma
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Khmer (km.po) by Leang Chumsoben
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Punjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 17 Apr 2006 18:42:25 +0200
+
+user-setup (1.0) unstable; urgency=low
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Hindi (hi.po) by Nishant Sharma
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Punjabi (Gurmukhi) (pa_IN.po) by Amanpreet Singh Alam
+  * Romanian (ro.po) by Eddy Petrişor
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+  [ Christian Perrier ]
+  * Bump to 1.0 as is fairly stable now
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 24 Jan 2006 22:14:22 +0100
+
+user-setup (0.05ubuntu7) dapper; urgency=low
+
+  * Change button order in oem-config's glade file. Malone #40226.
+
+ -- Tollef Fog Heen <tfheen@ubuntu.com>  Mon, 15 May 2006 12:28:44 +0200
+
 user-setup (0.05ubuntu6) dapper; urgency=low
 
   * Remove Espresso integration, moved into espresso proper.

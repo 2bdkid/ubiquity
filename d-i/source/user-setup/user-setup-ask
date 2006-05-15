@@ -16,68 +16,55 @@ export ROOT
 # Main loop starts here. Use a state machine to allow jumping back to
 # previous questions.
 STATE=0
-WANT_ROOT_PW=
 while :; do
 	case "$STATE" in
 	0)
 		# Ask how the password files should be set up.
 		db_input low passwd/shadow || true
+		# Ask if root should be allowed to login.
+		db_input medium passwd/root-login || true
 	;;
 	1)
-		# Prompt for a root password if there is none.
-		if ! root_password; then
+		db_get passwd/root-login
+		if [ "$RET" = false ]; then
+			# root password will be locked
+			db_set passwd/root-password ""
+			db_set passwd/root-password-crypted "*"
+		elif ! root_password; then
 			# First check whether the root password was preseeded crypted
 			db_get passwd/root-password-crypted || true
 			if ! test "$RET" ; then
-			    if db_get passwd/root-password && [ "$RET" ]; then
-				# Preseeded root password.
-				:
 			    # No preseed of the root password hash
 			    # we will prompt the user
-			    elif db_input medium passwd/root-password; then
-				:
-			    elif [ "$WANT_ROOT_PW" ]; then
-				# Backing up.
-				STATE=0
-				continue
-			    else
-				# If the question wasn't asked, we assume
-				# that we're operating in the default Ubuntu
-				# mode of disabling the root password and
-				# allowing the initial user to use sudo.
-				db_set passwd/root-password ''
-				WANT_ROOT_PW=0
-				STATE=3
-				continue
-			    fi
-			    WANT_ROOT_PW=1
-			    # This may be customised to run at a slightly lower
+			    db_input critical passwd/root-password || true
+			    # Note that this runs at a slightly lower
 			    # priority, so it may not always be seen. If
 			    # it isn't, don't compare passwords.
 			    COMPARE_PW=''
-			    db_input medium passwd/root-password-again \
+			    db_input critical passwd/root-password-again \
 				&& COMPARE_PW=1 || true
 			fi
 		fi
 	;;
 	2)
-		# Verify and set a root password.
-		if ! root_password && [ "$WANT_ROOT_PW" = 1 ]; then
+		db_get passwd/root-login
+		if [ "$RET" = false ]; then
+			# root password will be locked
+			db_set passwd/root-password-again ""
+		elif ! root_password; then
 			# First check whether the root password was preseeded crypted
 			db_get passwd/root-password-crypted || true
 			if ! test "$RET" ; then
 			    # Compare the two passwords, loop back if not
-			    # identical.
+			    # identical, or if empty.
 			    db_get passwd/root-password
 			    ROOT_PW="$RET"
 			    if [ -z "$ROOT_PW" ]; then
-				# Root password empty; disable the root
-				# password and allow the initial user to use
-				# sudo.
-				db_fset user-setup/root-password-empty seen false
-				db_input medium user-setup/root-password-empty
-				WANT_ROOT_PW=0
-				STATE=3
+				db_fset user-setup/password-empty seen false
+				db_input critical user-setup/password-empty
+				db_fset passwd/root-password seen false
+				db_fset passwd/root-password-again seen false
+				STATE=0
 				continue
 			    fi
 			    db_get passwd/root-password-again
@@ -96,16 +83,13 @@ while :; do
 	3)
 		# Ask if a non-root user should be made, if there is not
 		# already one.
-		if ! is_system_user; then
-			if (db_get passwd/root-password-crypted && [ "$RET" ]) || \
-			   (db_get passwd/root-password && [ "$RET" ]); then
-				db_input medium passwd/make-user || true
-			else
-				# If there's no root password, don't leave
-				# the user in a position where they have no
-				# working account.
-				db_set passwd/make-user true
-			fi
+		db_get passwd/root-login
+		if [ "$RET" = false ]; then
+			# always make non-root user; this user will be able
+			# to sudo to root
+			db_set passwd/make-user true
+		elif ! is_system_user; then
+			db_input medium passwd/make-user || true
 		fi
 	;;
 	4)
@@ -123,7 +107,13 @@ while :; do
 			db_get passwd/username
 			if [ -z "$RET" ]; then
 				db_get passwd/user-fullname
-				userdefault=`echo $RET | sed 's/ .*//' | LC_ALL=C tr A-Z a-z`
+				case "$RET" in
+				    "Frans Pop")	userdefault="fjp";;
+				    "Martin Michlmayr")	userdefault="tbm";;
+				    *)
+					userdefault=`echo $RET | sed 's/ .*//' | LC_ALL=C tr A-Z a-z`
+					;;
+				esac
 				if test -n "$userdefault" && \
 				   LC_ALL=C expr "$userdefault" : '[a-z][-a-z0-9]*$' >/dev/null; then
 					db_set passwd/username "$userdefault"

@@ -4,39 +4,48 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of wo.po to Wolof
-# translation of wo.po to
-# translation of wo.po to
-# translation of wo.po to
-# translation of wo.po to
-# translation of wo.po to
-# translation of wo.po to
-# translation of wo.po to
 # translation of Debian Installer to Wolof
-# Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>, 2005.
+# Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>, 2005, 2006.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: wo\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-23 16:00+0000\n"
-"PO-Revision-Date: 2005-10-23 00:52+0000\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-10 23:49+0000\n"
 "Last-Translator: Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>\n"
-"Language-Team: Wolof <debian-boot@lists.debian.org>\n"
+"Language-Team: Wolof\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid "Allow login as root?"
+msgstr "Ndax nu mye ku ubbi jataay ci turu root?"
+
+#. Type: boolean
+#. Description
+#: ../user-setup-udeb.templates:22
+msgid ""
+"If you choose not to allow root to log in, then a user account will be "
+"created and given the power to become root using the 'sudo' command."
+msgstr ""
+"Boo tannee baña maye ku ubbi jataay ci turu root, kon deesna sos ab koontu "
+"jox ko dooley mu mana soppiku doon root bu jëfandikoo ndigël bii di 'sudo'."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Root password:"
 msgstr "Baatujall bu root:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -52,33 +61,18 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:21
+#: ../user-setup-udeb.templates:28
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Nga seetlu ne doo mana gis baaatujall bi boo koy tappe."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:35
+#: ../user-setup-udeb.templates:42
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
 "Dugëlaatal benn baatujall bi ngir seet baxam tappeewoon nga ko bu baax."
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid "Empty root password entered; using sudo."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../user-setup-udeb.templates:41
-msgid ""
-"You entered an empty root password. Since empty passwords are not secure, "
-"the root password will instead be locked. The user you create in the next "
-"step will be allowed to gain root privileges using the 'sudo' command."
-msgstr ""
 
 #. Type: boolean
 #. Description
@@ -271,6 +265,5 @@ msgstr "Sampu jëfandikookat yi ak baatijall yi"
 #. Description
 #. Prebaseconfig progress bar item
 #: ../user-setup-udeb.templates:123
-#, fuzzy
 msgid "Setting users and passwords..."
-msgstr "Sampu jëfandikookat yi ak baatijall yi"
+msgstr "Sos jëfandikookat yi ak baatijall yi..."
