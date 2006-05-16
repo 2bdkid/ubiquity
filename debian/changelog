@@ -1,3 +1,31 @@
+ubiquity (0.99.83) dapper; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE Frontend:
+    - Update timezone information when clicking on map
+    - i18n various strings, closes Malone #43818
+    - Allow line wrap on Reboot dialogue, closes Malone #43680
+    - Fix cancel button on debconf progress dialogue from jumping position
+
+  [ Colin Watson ]
+  * Avoid starting cardmgr while running hw-detect.
+  * Remove old partman state each time the installer is started.
+  * Rearrange partman component control flow to set the default resize
+    slider position straight away rather than waiting until the resize
+    option is selected (closes: Malone #39062).
+  * Round default resize slider position up rather than down.
+  * GTK frontend:
+    - Show % indicator on resize slider.
+  * Display the actual new partition size as well as the percentage of the
+    existing size on the resize slider.
+  * Add/update .desktop file translations from Rosetta: Breton, French,
+    Indonesian, Slovenian.
+  * Add/update translations from Rosetta: Greek, Spanish, Galician,
+    Hungarian, Occitan, Portuguese, Turkish, Vietnamese.
+  * Automatic update of included source packages: user-setup 1.1ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 16 May 2006 21:13:24 +0100
+
 ubiquity (0.99.82) dapper; urgency=low
 
   * Really remove /usr/share/ubiquity/pixmaps/world_map-960.png from
