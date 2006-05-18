@@ -66,18 +66,17 @@ GLADEDIR = os.path.join(PATH, 'glade')
 LOCALEDIR = "/usr/share/locale"
 
 BREADCRUMB_STEPS = {
-    "stepWelcome": 1,
-    "stepLanguage": 2,
-    "stepLocation": 3,
-    "stepKeyboardConf": 4,
-    "stepUserInfo": 5,
-    "stepPartDisk": 6,
-    "stepPartAuto": 6,
-    "stepPartAdvanced": 6,
-    "stepPartMountpoints": 6,
-    "stepReady": 7
+    "stepLanguage": 1,
+    "stepLocation": 2,
+    "stepKeyboardConf": 3,
+    "stepUserInfo": 4,
+    "stepPartDisk": 5,
+    "stepPartAuto": 5,
+    "stepPartAdvanced": 5,
+    "stepPartMountpoints": 5,
+    "stepReady": 6
 }
-BREADCRUMB_MAX_STEP = 7
+BREADCRUMB_MAX_STEP = 6
 
 WIDGET_STACK_STEPS = {
     "stepWelcome": 0,
@@ -119,6 +118,7 @@ class Wizard:
         # declare attributes
         self.distro = distro
         self.current_keyboard = None
+        self.got_disk_choices = False
         self.auto_mountpoints = None
         self.resize_min_size = None
         self.resize_max_size = None
@@ -223,7 +223,7 @@ class Wizard:
         # TODO cjwatson 2005-12-20: Disabled for now because this segfaults in
         # current dapper (https://bugzilla.ubuntu.com/show_bug.cgi?id=20338).
         #self.show_browser()
-        self.show_intro()
+        got_intro = self.show_intro()
         self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
     
         # Declare SignalHandler
@@ -253,8 +253,20 @@ class Wizard:
         self.app.connect(self.userinterface.timezone_city_combo, SIGNAL("activated(int)"), self.tzmap.city_combo_changed)
 
         self.app.connect(self.userinterface.new_size_scale, SIGNAL("valueChanged(int)"), self.update_new_size_label)
+
         # Start the interface
-        self.set_current_page(0)
+        if got_intro:
+            global BREADCRUMB_STEPS, BREADCRUMB_MAX_STEP
+            for step in BREADCRUMB_STEPS:
+                BREADCRUMB_STEPS[step] += 1
+            BREADCRUMB_STEPS["stepWelcome"] = 1
+            BREADCRUMB_MAX_STEP += 1
+            first_step = "stepWelcome"
+        else:
+            first_step = "stepLanguage"
+        self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS[first_step])
+        self.set_current_page(self.get_current_page())
+
         while self.current_page is not None:
             if not self.installing:
                 # Make sure any started progress bars are stopped.
@@ -299,7 +311,7 @@ class Wizard:
                 self.process_step()
             self.app.processEvents(1)
 
-	return self.returncode
+        return self.returncode
     
     def customize_installer(self):
         """Initial UI setup."""
@@ -399,6 +411,9 @@ class Wizard:
                 text = text + line + "<br>"
             self.userinterface.introLabel.setText(text)
             intro_file.close()
+            return True
+        else:
+            return False
     
     def step_name(self, step_index):
         if step_index < 0:
@@ -406,6 +421,7 @@ class Wizard:
         return self.userinterface.widgetStack.widget(step_index).name()
 
     def set_current_page(self, current):
+        global BREADCRUMB_STEPS, BREADCRUMB_MAX_STEP
         self.current_page = current
         current_name = self.step_name(current)
         label_text = get_string("step_label", self.locale)
@@ -606,7 +622,8 @@ class Wizard:
     def info_loop(self, widget):
         """check if all entries from Identification screen are filled."""
 
-        if widget.name() == 'username' and not self.hostname_edited:
+        if (widget is not None and widget.name() == 'username' and
+            not self.hostname_edited):
             if self.laptop:
                 hostname_suffix = '-laptop'
             else:
@@ -691,11 +708,11 @@ class Wizard:
         elif step == "stepKeyboardConf":
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepUserInfo"])
             #self.steps.next_page()
-            # XXX: Actually do keyboard config here
-            self.userinterface.next.setEnabled(False)
+            self.info_loop(None)
         # Identification
         elif step == "stepUserInfo":
             self.process_identification()
+            self.got_disk_choices = False
         # Disk selection
         elif step == "stepPartDisk":
             self.process_disk_selection()
@@ -1018,12 +1035,19 @@ class Wizard:
 
         if step == "stepLocation":
             self.userinterface.back.setEnabled(False)
+        elif step == "stepPartAuto":
+            if self.got_disk_choices:
+                new_step = "stepPartDisk"
+            else:
+                new_step = "stepUserInfo"
+            self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS[new_step])
+            changed_page = True
         elif step == "stepPartAdvanced":
             print >>self.qtparted_subp.stdin, "undo"
             self.qtparted_subp.stdin.close()
             self.qtparted_subp.wait()
             self.qtparted_subp = None
-            self.steps.set_current_page(self.steps.page_num(self.stepPartDisk))
+            self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartDisk"])
             changed_page = True
         elif step == "stepPartMountpoints":
             self.gparted_loop()
@@ -1272,6 +1296,8 @@ class Wizard:
         self.auto_mountpoints = auto_mountpoints
 
     def set_disk_choices (self, choices, manual_choice):
+        self.got_disk_choices = True
+
         children = self.userinterface.part_disk_frame.children()
         for child in children:
             if isinstance(child, QVBoxLayout):
@@ -1475,16 +1501,17 @@ class Wizard:
             # TODO self.previous_partitioning_page
             #self.live_installer.show()
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartDisk"])
-            nextText = get_string("continue", lang) + " >"
+            nextText = get_string("continue", self.locale) + " >"
             self.userinterface.next.setText(nextText)
             self.backup = True
             self.installing = False
 
-    def error_dialog (self, msg):
+    def error_dialog (self, msg, fatal=True):
         self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
         # TODO: cancel button as well if capb backup
         QMessageBox.warning(self.userinterface, "Error", msg, QMessageBox.Ok)
-        self.return_to_autopartitioning()
+        if fatal:
+            self.return_to_autopartitioning()
 
     def question_dialog (self, title, msg, option_templates):
         # I doubt we'll ever need more than three buttons.

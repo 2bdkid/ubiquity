@@ -1,3 +1,26 @@
+ubiquity (1.0.0) dapper; urgency=low
+
+  * When going forward to the username/password screen, only disable the
+    Forward button if not all the fields have been filled in (closes: Malone
+    #37870).
+  * KDE frontend:
+    - Fix crash when trying to go back from the manual partitioner.
+    - Fix crash when returning to autopartitioning (closes: Malone #45396).
+  * Fix going back from autopartitioning page if there's only one disk and
+    thus no disk selector (closes: Malone #39283).
+  * If there is no intro.txt installed, then silently skip the welcome
+    screen, and decrement the visible step numbers to match.
+  * Rename intro.txt to intro-beta.txt; we can put it back easily if need be
+    (closes: Malone #38718).
+  * Make apt-setup/security-updates-failed a non-fatal error, i.e. don't
+    throw the user back to autopartitioning if it happens.
+  * Add/update .desktop file translations from Rosetta: Japanese, Occitan,
+    Chinese (China).
+  * Update translations from Rosetta: Slovak.
+  * Let's call it 1.0.0!
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 18 May 2006 19:39:50 +0100
+
 ubiquity (0.99.84) dapper; urgency=low
 
   * Count /boot, /usr, and /var (and subdirectories) towards minimum size
