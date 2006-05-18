@@ -1,16 +1,18 @@
 USE_HTTP=1
-#USE_FTP=1
+USE_FTP=1
+TRANSLATE_HTTP=1
+#TRANSLATE_FTP=1
 
 CFLAGS=-Wall -g -D_GNU_SOURCE
 templates=debian/choose-mirror.templates-in
 
 ifeq (1,${USE_HTTP})
 CFLAGS:=$(CFLAGS) -DWITH_HTTP
-templates:=$(templates) debian/choose-mirror.templates.http-in
+templates:=$(templates) debian/choose-mirror.templates.http-tr
 endif
 ifeq (1,${USE_FTP})
 CFLAGS:=$(CFLAGS) -DWITH_FTP
-templates:=$(templates) debian/choose-mirror.templates.ftp-in
+templates:=$(templates) debian/choose-mirror.templates.ftp-tr
 endif
 templates:=$(templates) debian/choose-mirror.templates.both-in
 
@@ -50,6 +52,20 @@ debian/httplist-countries: $(MASTERLIST)
 debian/ftplist-countries: $(MASTERLIST)
 	./mirrorlist ftplist $^
 
+debian/choose-mirror.templates.http-tr: debian/choose-mirror.templates.http-in
+ifeq (1,${TRANSLATE_HTTP})
+	cat $< > $@
+else
+	sed 's/^_\([^[]*\).*/\1/' $< > $@
+endif
+
+debian/choose-mirror.templates.ftp-tr: debian/choose-mirror.templates.ftp-in
+ifeq (1,${TRANSLATE_FTP})
+	cat $< > $@
+else
+	sed 's/^_\([^[]*\).*/\1/' $< > $@
+endif
+
 debian/choose-mirror.templates: $(MASTERLIST) $(templates) debian/httplist-countries debian/ftplist-countries
 	# Grab ISO codes from iso-codes package
 	./get-iso-codes
@@ -88,6 +104,7 @@ clean:
 	rm -f debian/templates-countries debian/httplist-countries debian/ftplist-countries
 	rm -f demo demo.templates
 	rm -rf debian/iso-codes debian/pobuild
+	rm -f debian/choose-mirror.templates.http-tr debian/choose-mirror.templates.ftp-tr
 
 reallyclean: clean
 	rm -f debian/choose-mirror.templates

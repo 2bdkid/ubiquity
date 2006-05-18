@@ -456,6 +456,36 @@ static int validate_mirror(void) {
 		debconf_set(debconf, dir, mirror_root(mirror));
 		free(mirror);
 
+		if (base_installable) {
+			/* We have the base system on the CD, so instead of
+			 * trying to contact the mirror (which might take
+			 * some time to time out if there's no network
+			 * connection), let's just assume that the CD will
+			 * be sufficient to get a basic system up, setting
+			 * suite to PREFERRED_DISTRIBUTION if unset and
+			 * codename = suite. Note that this is an
+			 * Ubuntu-specific change since (a) Debian netinst
+			 * CDs etc. may not be able to install a complete
+			 * system from the network and (b) codename != suite
+			 * in Debian.
+			 *
+			 * We only do this for mirrors in our mirror list,
+			 * since we assume that those have a good chance of
+			 * not being typoed. For manually-entered mirrors,
+			 * we still do full mirror validation.
+			 */
+			di_log(DI_LOG_LEVEL_INFO, "base system installable from CD; skipping mirror check");
+			debconf_get(debconf, DEBCONF_BASE "suite");
+			if (!*debconf->value) {
+				di_log(DI_LOG_LEVEL_INFO, "falling back to suite %s", PREFERRED_DISTRIBUTION);
+				debconf_set(debconf, DEBCONF_BASE "suite", PREFERRED_DISTRIBUTION);
+			}
+			debconf_get(debconf, DEBCONF_BASE "suite");
+			di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
+			debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
+			exit(0);
+		}
+
 		valid = find_suite();
 	}
 	else {
@@ -484,25 +514,6 @@ static int validate_mirror(void) {
 
 	if (valid) {
 		return 0;
-	}
-	else if (base_installable) {
-		/* We have the base system on the CD, so let's just carry on
-		 * and install that, setting suite to PREFERRED_DISTRIBUTION
-		 * if unset and codename = suite. Note that this is an
-		 * Ubuntu-specific change since (a) Debian netinst CDs etc.
-		 * may not be able to install a complete system from the
-		 * network and (b) codename != suite in Debian.
-		 */
-		di_log(DI_LOG_LEVEL_WARNING, "cannot validate mirror, but base system installable so carrying on");
-		debconf_get(debconf, DEBCONF_BASE "suite");
-		if (!*debconf->value) {
-			di_log(DI_LOG_LEVEL_INFO, "falling back to suite %s", PREFERRED_DISTRIBUTION);
-			debconf_set(debconf, DEBCONF_BASE "suite", PREFERRED_DISTRIBUTION);
-		}
-		debconf_get(debconf, DEBCONF_BASE "suite");
-		di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
-		debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
-		exit(0);
 	}
 	else {
 		debconf_input(debconf, "critical", DEBCONF_BASE "bad");

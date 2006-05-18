@@ -4,6 +4,7 @@
 cd debian/sort-tmp
 for protocol in http ftp
 do
+    rm -f list.* sortedlist.*
     sed -n -e "/^Template: mirror\\/$protocol\\/countries/,/^Description:/p" ../choose-mirror/DEBIAN/templates |
     perl -p -e '
     chomp;
@@ -19,6 +20,7 @@ do
     $_="";'
     for file in list.*
     do
+        [ -e "$file" ] || continue
         lang=${file#list.}
 	unilang=$(grep "^$lang.* UTF-8" /usr/share/i18n/SUPPORTED | sed -e 's/[@. ].*//;q' )
         if [ -z "$unilang" ]; then
