@@ -1,3 +1,23 @@
+ubiquity (1.0.1) dapper; urgency=low
+
+  * Clear out all partman state immediately before each time we run partman,
+    and make sure /var/lib/partman/initial_auto exists before running
+    partman to commit manual partitioning in order to ensure that it never
+    attempts autopartitioning by mistake (closes: Malone #45597).
+  * Disable Forward on timezone page until a location is selected (closes:
+    Malone #45515).
+  * Load translations for partman-basicfilesystems/bad_mountpoint and
+    partman-target/no_root (bug misfiled as a comment in Malone #45200).
+  * Synchronise required space claimed in text alongside manual partitioner
+    and actually required in the minimal partitioning scheme; both are now
+    set to 2 GB (closes: Malone #45672).
+  * Add/update .desktop file translations from Rosetta: Breton, Greek,
+    Croatian, Lithuanian, Slovak, Tagalog, Chinese (China).
+  * Add/update translations from Rosetta: French, Croatian, Lithuanian,
+    Polish, Romanian, Chinese (Hong Kong).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 22 May 2006 14:40:30 +0100
+
 ubiquity (1.0.0) dapper; urgency=low
 
   * When going forward to the username/password screen, only disable the
