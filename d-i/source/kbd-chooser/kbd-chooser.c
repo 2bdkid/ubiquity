@@ -530,7 +530,7 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 	 */
         
 	if (debconf_get(client, "debconf/language")) {
-          lang = "";
+          lang = strdup("");
         } else {
           lang = strdup(client->value);
         }
@@ -875,22 +875,22 @@ keymap_ask (char *arch, char **keymap)
 		def = keymap_get (maplist_get (arch), ptr, NULL);
 		mydebconf_default_set (template, ptr, false);
 		txt_default = translate_keyboard_name (arch, ptr, false);
-		mydebconf_default_set ("kbd-chooser/method", txt_default, true);
+		mydebconf_default_set ("kbd-chooser/method", txt_default, false);
 	} else {
 		sprintf (template, "console-keymaps-%s/keymap", arch);
 		if (!debconf_get (client, template) && *client->value) {
-			di_info ("keymap_ask: default map: %s", *keymap);
                         *keymap = strdup(client->value);
+			di_info ("keymap_ask: default map: %s", *keymap);
 			txt_default = translate_keyboard_name (arch, *keymap, false);
 			di_info ("keymap_ask: trans: %s", *keymap);
-			mydebconf_default_set ("kbd-chooser/method", txt_default, true);
+			mydebconf_default_set ("kbd-chooser/method", txt_default, false);
 		} else {
 			di_info ("keymap_ask: no default map!");
 			txt_default = description_get ("kbd-chooser/no-keyboard");
 			if (access("/usr/share/keymaps/decision-tree", R_OK) == 0)
 				mydebconf_default_set ("kbd-chooser/method", txt_try, false);
 			else
-				mydebconf_default_set ("kbd-chooser/method", txt_select, true);
+				mydebconf_default_set ("kbd-chooser/method", txt_select, false);
 		}
 	}
 
@@ -1116,6 +1116,7 @@ main (int argc, char **argv)
 				state = GOBACK;
 			} else {
 				keymap_set (client, keymap);
+				debconf_set (client, "kbd-chooser/method", "");
 				state = CHOOSE_METHOD;
 			}
 			break;
@@ -1154,6 +1155,7 @@ main (int argc, char **argv)
 			} else {
 				di_info ("choose_keymap: keymap = %s", keymap);
 				keymap_set (client, keymap);
+				debconf_set (client, "kbd-chooser/method", "");
 				// state = QUIT;
 				state = CHOOSE_METHOD;
 			}
@@ -1173,10 +1175,12 @@ main (int argc, char **argv)
 				state = CHOOSE_METHOD;
 			else if (res)
 				state = CMD_GOBACK;
-			else
+			else {
 				/* Just returning may be misunderstood. */
+				debconf_set (client, "kbd-chooser/method", "");
 				// state = QUIT;
 				state = CHOOSE_METHOD;
+			}
 			break;
 
 		case QUIT:

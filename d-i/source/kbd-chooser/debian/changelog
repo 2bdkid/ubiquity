@@ -1,3 +1,12 @@
+kbd-chooser (1.23ubuntu18) dapper; urgency=low
+
+  * Explicitly reset kbd-chooser/method on the occasions when we need to do
+    so to avoid infinite loops, rather than forcibly resetting it nearly
+    every time; fixes preseeding (closes: Malone #31661).
+  * Fix segfault if localechooser hasn't been run yet.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 22 May 2006 21:43:08 +0100
+
 kbd-chooser (1.23ubuntu17) dapper; urgency=low
 
   * Change button order in oem-config's glade file.  Malone #40226.
