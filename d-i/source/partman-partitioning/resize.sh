@@ -6,7 +6,7 @@ check_virtual () {
 }
 
 get_ntfs_resize_range () {
-    local backupdev num dev size
+    local backupdev num bdev size
     open_dialog GET_VIRTUAL_RESIZE_RANGE $oldid
     read_line minsize cursize maxsize
     close_dialog
@@ -16,10 +16,21 @@ get_ntfs_resize_range () {
     backupdev=/var/lib/partman/backup/${dev#/var/lib/partman/devices/}
     if [ -f $backupdev/$oldid/view -a -f $backupdev/device ]; then
 	num=$(sed 's/^[^0-9]*\([0-9]*\)[^0-9].*/\1/' $backupdev/$oldid/view)
-	dev=$(cat $backupdev/device)
-	dev=${dev%/disc}/part$num
-	if [ -b $dev ]; then
-	    size=$(ntfsresize -f -i $dev \
+	bdev=$(cat $backupdev/device)
+	case $bdev in
+	    */disc)
+		bdev=${bdev%/disc}/part$num
+		;;
+	    /dev/[hs]d[a-z])
+		bdev=$bdev$num
+		;;
+	    *)
+		log "get_ntfs_resize_range: strange device name $bdev"
+		return
+		;;
+	esac
+	if [ -b $bdev ]; then
+	    size=$(ntfsresize -f -i $bdev \
 		| grep '^You might resize at' \
 		| sed 's/^You might resize at \([0-9]*\) bytes.*/\1/' \
 		| grep '^[0-9]*$')

@@ -161,7 +161,7 @@ get_resize_use_free_on_dev() {
 	bestpath="${cdr#* }"
     fi
 
-    if longint_le $((2 * 1024 * 1024 * 1024)) $totalfree; then
+    if longint_le $(( (2 * 1024 + 200) * 1024 * 1024 )) $totalfree; then
 	# enough space, no need to resize
 	exit 0
     fi

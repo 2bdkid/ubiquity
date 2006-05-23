@@ -1383,6 +1383,7 @@ class Wizard:
             min_percent = int(math.ceil(100 * min_size / max_size))
             self.userinterface.new_size_scale.setMinValue(min_percent)
             self.userinterface.new_size_scale.setMaxValue(100)
+            self.userinterface.new_size_scale.setValue(int((min_percent + 100) / 2))
 
     def get_autopartition_resize_percent (self):
         return self.userinterface.new_size_scale.value()
@@ -1659,7 +1660,10 @@ class TimezoneMap(object):
             return
 
     def get_tz_from_name(self, name):
-        return self.timezone_city_index[name]
+        if len(name) != 0:
+            return self.timezone_city_index[name]
+        else:
+            return None
 
     def city_combo_changed(self, index):
         city = str(self.frontend.userinterface.timezone_city_combo.currentText())

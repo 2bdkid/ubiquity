@@ -1,3 +1,17 @@
+partman-auto (45ubuntu13) dapper; urgency=low
+
+  * Add 200MB to the minimum partition size that resize_use_free will
+    create, to give a little extra breathing room.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 May 2006 19:39:54 +0100
+
+partman-auto (45ubuntu12) dapper; urgency=low
+
+  * Subtract a little over 2GB from the maximum size presented by
+    resize_use_free, to ensure sufficient space for installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 May 2006 18:21:49 +0100
+
 partman-auto (45ubuntu11) dapper; urgency=low
 
   * Don't show logical volumes (/dev/mapper/*-*) in the disk selector

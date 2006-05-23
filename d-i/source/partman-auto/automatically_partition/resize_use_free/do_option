@@ -28,6 +28,14 @@ if [ -z "$maxsize" ]; then
     exit 1
 fi
 
+# Limit to sizes that will allow enough room for the installation.
+maxsize=$(($maxsize - (2 * 1024 + 210) * 1024 * 1024))
+if ! longint_le $minsize $maxsize; then
+    db_input critical partman-partitioning/impossible_resize || true
+    db_go || true
+    exit 1
+fi
+
 human_resize_range
 prefsize=$(( ($minsize + $maxsize) / 2 ))
 # ask_for_size will set the default size to $hcursize.
@@ -46,7 +54,7 @@ if (ask_for_size); then
 	fi
     done
     close_dialog
-    if ! longint_le $((2 * 1024 * 1024 * 1024)) $bestsize; then
+    if ! longint_le $(( (2 * 1024 + 200) * 1024 * 1024 )) $bestsize; then
 	db_input critical partman-auto/resize_insufficient_space
 	db_go || true
 	exit 1

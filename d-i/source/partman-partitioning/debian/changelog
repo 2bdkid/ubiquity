@@ -1,3 +1,14 @@
+partman-partitioning (37ubuntu3) dapper; urgency=low
+
+  * Backport from trunk:
+    - Rename dev to bdev in get_ntfs_resize_range; bash clobbers the
+      existing contents of dev when 'local bdev' is executed, and we need
+      those contents.
+    - Handle /dev/hd* and /dev/sd* device names in get_ntfs_resize_range as
+      well as devfs-style device names.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 May 2006 19:27:36 +0100
+
 partman-partitioning (37ubuntu2) dapper; urgency=low
 
   * Offer resize option for HFS, HFS+, and HFSX (closes: Malone #33482).
