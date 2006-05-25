@@ -810,28 +810,36 @@ class Wizard:
         self.gparted_fstype = {}
 
         try:
-            try:
-                print >>self.gparted_subp.stdin, "apply"
-            except IOError:
-                return
-
-            # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
-            gparted_reply = self.gparted_subp.stdout.readline().rstrip('\n')
-            while gparted_reply.startswith('- '):
-                pre_log('info', 'gparted replied: %s' % gparted_reply)
-                words = gparted_reply[2:].strip().split()
-                if words[0].lower() == 'format' and len(words) >= 3:
-                    self.gparted_fstype[words[1]] = words[2]
-                gparted_reply = \
-                    self.gparted_subp.stdout.readline().rstrip('\n')
-
-            if not gparted_reply.startswith('0 '):
-                return
-        finally:
+            print >>self.gparted_subp.stdin, "apply"
+        except IOError:
             # Shut down gparted
             self.gparted_subp.stdin.close()
             self.gparted_subp.wait()
             self.gparted_subp = None
+            return
+
+        # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
+        gparted_reply = self.gparted_subp.stdout.readline().rstrip('\n')
+        while gparted_reply.startswith('- '):
+            pre_log('info', 'gparted replied: %s' % gparted_reply)
+            words = gparted_reply[2:].strip().split()
+            if words[0].lower() == 'format' and len(words) >= 3:
+                self.gparted_fstype[words[1]] = words[2]
+            gparted_reply = \
+                self.gparted_subp.stdout.readline().rstrip('\n')
+
+        if gparted_reply.startswith('1 '):
+            # Cancel
+            return
+
+        # Shut down gparted
+        self.gparted_subp.stdin.close()
+        self.gparted_subp.wait()
+        self.gparted_subp = None
+
+        if not gparted_reply.startswith('0 '):
+            # something other than OK or Cancel
+            return
 
         # Set up list of partition names for use in the mountpoints table.
         self.partition_choices = []
@@ -939,6 +947,8 @@ class Wizard:
         partitions = [w.get_active_text() for w in self.partition_widgets]
 
         for check in partitions:
+            if check in (None, '', ' '):
+                continue
             if partitions.count(check) > 1:
                 error_msg.append("A partition is assigned to more than one "
                                  "mount point.")
@@ -962,7 +972,7 @@ class Wizard:
                             break
                     else:
                         min_root = (MINIMAL_PARTITION_SCHEME['root'] +
-                                    MINIMAL_PARTITION_SCHEME['swap'] * 1024)
+                                    MINIMAL_PARTITION_SCHEME['swap'])
                     error_msg.append("The partition assigned to '/' is too "
                                      "small (minimum size: %d Mb)." % min_root)
                 elif check == validation.MOUNTPOINT_BADCHAR:
@@ -1032,10 +1042,11 @@ class Wizard:
             self.steps.set_current_page(self.steps.page_num(new_step))
             changed_page = True
         elif step == "stepPartAdvanced":
-            print >>self.gparted_subp.stdin, "undo"
-            self.gparted_subp.stdin.close()
-            self.gparted_subp.wait()
-            self.gparted_subp = None
+            if self.gparted_subp is not None:
+                print >>self.gparted_subp.stdin, "undo"
+                self.gparted_subp.stdin.close()
+                self.gparted_subp.wait()
+                self.gparted_subp = None
             self.steps.set_current_page(self.steps.page_num(self.stepPartDisk))
             changed_page = True
         elif step == "stepPartMountpoints":

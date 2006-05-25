@@ -796,29 +796,36 @@ class Wizard:
         self.gparted_fstype = {}
 
         try:
-            try:
-                print >>self.qtparted_subp.stdin, "apply"
-            except IOError:
-                return
-
-            # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
-            gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
-            while not gparted_reply.startswith('0 '):
-                if gparted_reply.startswith('- '):
-                    pre_log('info', 'gparted replied: %s' % gparted_reply)
-                    words = gparted_reply[2:].strip().split()
-                    if words[0].lower() == 'format' and len(words) >= 3:
-                        self.gparted_fstype[words[1]] = words[2]
-                gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
-
-            if not gparted_reply.startswith('0 '):
-                return
-
-        finally:
+            print >>self.qtparted_subp.stdin, "apply"
+        except IOError:
             # Shut down qtparted
             self.qtparted_subp.stdin.close()
             self.qtparted_subp.wait()
             self.qtparted_subp = None
+            return
+
+        # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
+        gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
+        while not gparted_reply.startswith('0 '):
+            if gparted_reply.startswith('- '):
+                pre_log('info', 'gparted replied: %s' % gparted_reply)
+                words = gparted_reply[2:].strip().split()
+                if words[0].lower() == 'format' and len(words) >= 3:
+                    self.gparted_fstype[words[1]] = words[2]
+            gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
+
+        if gparted_reply.startswith('1 '):
+            # Cancel
+            return
+
+        # Shut down qtparted
+        self.qtparted_subp.stdin.close()
+        self.qtparted_subp.wait()
+        self.qtparted_subp = None
+
+        if not gparted_reply.startswith('0 '):
+            # something other than OK or Cancel
+            return
 
         self.mountpoint_table = QGridLayout(self.userinterface.mountpoint_frame, 2, 4, 11, 6)
         mountText = "<b>" + get_string("mountpoint_label", self.locale) + "</b>"
@@ -973,6 +980,8 @@ class Wizard:
         partitions = [w.currentText() for w in self.partition_widgets]
 
         for check in partitions:
+            if check in (None, '', ' '):
+                continue
             if partitions.count(check) > 1:
                 error_msg.append("A partition is assigned to more than one "
                                  "mount point.")
@@ -996,7 +1005,7 @@ class Wizard:
                             break
                     else:
                         min_root = (MINIMAL_PARTITION_SCHEME['root'] +
-                                    MINIMAL_PARTITION_SCHEME['swap'] * 1024)
+                                    MINIMAL_PARTITION_SCHEME['swap'])
                     error_msg.append("The partition assigned to '/' is too "
                                      "small (minimum size: %d Mb)." % min_root)
                 elif check == validation.MOUNTPOINT_BADCHAR:
@@ -1047,10 +1056,11 @@ class Wizard:
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS[new_step])
             changed_page = True
         elif step == "stepPartAdvanced":
-            print >>self.qtparted_subp.stdin, "undo"
-            self.qtparted_subp.stdin.close()
-            self.qtparted_subp.wait()
-            self.qtparted_subp = None
+            if self.qtparted_subp is not None:
+                print >>self.qtparted_subp.stdin, "undo"
+                self.qtparted_subp.stdin.close()
+                self.qtparted_subp.wait()
+                self.qtparted_subp = None
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartDisk"])
             changed_page = True
         elif step == "stepPartMountpoints":
