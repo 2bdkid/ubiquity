@@ -1,3 +1,10 @@
+grub-installer (1.14ubuntu5) dapper; urgency=low
+
+  * Don't fall over if installing to an XFS root filesystem in
+    noninteractive mode (closes: Malone #46764).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 28 May 2006 14:43:00 +0100
+
 grub-installer (1.14ubuntu4) dapper; urgency=low
 
   * Return early from is_removable if the argument isn't a mount point

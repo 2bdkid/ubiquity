@@ -32,11 +32,8 @@ db_get localechooser/supported-locales
 EXTRAS="$(echo "$RET" | sed 's/,//g')"
 
 if [ "$CODE" = 0 ]; then
-	grep -v '^\(LANG\|LANGUAGE\)=' /etc/environment | (
-		echo "LANG=\"$LOCALE\""
-		echo "LANGUAGE=\"$LANGLIST\""
-	) > /etc/environment.new
-	mv /etc/environment.new /etc/environment
+	sed -i "s,^LANG=.*,LANG=\"$LOCALE\"," /etc/environment
+	sed -i "s,^LANGUAGE=.*,LANGUAGE=\"$LANGLIST\"," /etc/environment
 
 	if [ -e /etc/default/gdm ]; then
 		sed -i "s,^#*LANG=.*,LANG=$LOCALE,g" /etc/default/gdm
