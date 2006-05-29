@@ -88,6 +88,7 @@ STATE=1
 
 # check how many devices
 count=0
+firstdev=
 for devs in $DEVICES/*; do
     device="$(cat $devs/device)"
     case $device in
@@ -95,6 +96,7 @@ for devs in $DEVICES/*; do
 	    continue
 	    ;;
     esac
+    [ "$firstdev" ] || firstdev="$devs"
     count=$(($count + 1))
 done
 
@@ -102,7 +104,7 @@ done
 # and jump to the next.
 if [ $count -le 1 ]; then
   STATE=2
-  targetdevice="$devs"
+  targetdevice="$firstdev"
 fi
 
 while true; do
