@@ -19,7 +19,9 @@ import os
 import errno
 import shutil
 import subprocess
-import ubiquity
+
+sys.path.insert(0, '/usr/lib/ubiquity')
+
 from ubiquity import misc
 
 cdebconf = False

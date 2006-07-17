@@ -28,7 +28,11 @@ autopartitioning_failed () {
 unnamed=0
 
 decode_recipe () {
-    local ram line word min factor max fs -
+    local ignore ram line word min factor max fs -
+    ignore=''
+    if [ "$2" ]; then
+	ignore="${2}ignore"
+    fi
     unnamed=$(($unnamed + 1))
     ram=$(grep ^Mem: /proc/meminfo | { read x y z; echo $y; }) # in bytes
     if [ -z "$ram" ]; then
@@ -93,10 +97,16 @@ decode_recipe () {
 		esac
 		shift; shift; shift; shift
 		line="$min $factor $max $fs $*"
-		if [ "$scheme" ]; then
-		    scheme="${scheme}${NL}${line}"
+
+		# Exclude partitions that have ...ignore set
+		if [ "$ignore" ] && [ "$(echo $line | grep "$ignore")" ]; then
+		    :
 		else
-		    scheme="$line"
+		    if [ "$scheme" ]; then
+			scheme="${scheme}${NL}${line}"
+		    else
+			scheme="$line"
+		    fi
 		fi
 		line=''
 		;;
@@ -252,23 +262,8 @@ setup_partition () {
     return 0
 }
 
-choose_recipe () {
-    local recipes archdetect arch sub free_size choices min_size
-    
-    # Preseeding of recipes.
-    db_get partman-auto/expert_recipe
-    if [ -n "$RET" ]; then
-	echo "$RET" > /tmp/expert_recipe
-	db_set partman-auto/expert_recipe_file /tmp/expert_recipe
-    fi
-    db_get partman-auto/expert_recipe_file
-    if [ ! -z "$RET" ] && [ -e "$RET" ]; then
-        recipe="$RET"
-	decode_recipe $recipe
-	if [ $(min_size) -le $free_size ]; then
-	    return 0
-	fi
-    fi
+get_recipedir () {
+    local archdetect arch sub recipedir
 
     if [ -x /bin/archdetect ]; then
 	archdetect=$(archdetect)
@@ -283,11 +278,32 @@ choose_recipe () {
 	/lib/partman/recipes-$arch \
 	/lib/partman/recipes
     do
-        if [ -d $recipedir ]; then
+	if [ -d $recipedir ]; then
+	    echo $recipedir
 	    break
 	fi
     done
+}
 
+choose_recipe () {
+    local recipes recipedir free_size choices min_size
+    
+    # Preseeding of recipes.
+    db_get partman-auto/expert_recipe
+    if [ -n "$RET" ]; then
+	echo "$RET" > /tmp/expert_recipe
+	db_set partman-auto/expert_recipe_file /tmp/expert_recipe
+    fi
+    db_get partman-auto/expert_recipe_file
+    if [ ! -z "$RET" ] && [ -e "$RET" ]; then
+        recipe="$RET"
+	decode_recipe $recipe $2
+	if [ $(min_size) -le $free_size ]; then
+	    return 0
+	fi
+    fi
+
+    recipedir=$(get_recipedir)
     
     free_size=$1
     choices=''
@@ -296,7 +312,7 @@ choose_recipe () {
     old_default_recipe="$RET"
     for recipe in $recipedir/*; do
 	[ -f "$recipe" ] || continue
-	decode_recipe $recipe
+	decode_recipe $recipe $2
 	if [ $(min_size) -le $free_size ]; then
 	    choices="${choices}${recipe}${TAB}${name}${NL}"
 	    if [ no = "$default_recipe" ]; then

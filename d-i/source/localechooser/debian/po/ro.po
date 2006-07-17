@@ -3,7 +3,6 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of ro.po to Romanian
 # Romanian translation
 #
 #    Translators, if you are not familiar with the PO format, gettext
@@ -17,20 +16,21 @@
 #         or http://www.debian.org/intl/l10n/po-debconf/README-trans
 #
 #    Developers do not need to manually edit POT or PO files.
-# Eddy Petrişor <eddy.petrisor@gmail.com>, 2004, 2005.
 #
+# Eddy Petrişor <eddy.petrisor@gmail.com>, 2004, 2005, 2006.
+# Eddy Petrisor <eddy_petrisor@yahoo.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-11-20 18:34+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-25 22:07+0300\n"
 "Last-Translator: Eddy Petrişor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1))\n"
 
@@ -48,115 +48,123 @@ msgstr "Alegeţi limba / Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Se stochează limba..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Romania"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "alta"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "RO"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Alegeţi ţara sau regiunea:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "RO"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Pe baza limbii dvs., vă aflaţi probabil într-una din aceste ţări, sau "
 "regiuni."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Pe baza opţiunilor legate de limbă şi ţară, următorii parametri de "
-"localizare sunt suportaţi în Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Alegeţi o localizare:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"O localizare de siguranţă trebuie să fie aleasă deoarece, în prezent, nu "
-"există o localizare pentru limba şi ţara pe aţi selectat-o."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Localizare fără suport"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Valoare de localizare pe care aţi preconfigurat-o (${LOCALE}) nu este, în "
-"prezent, suportată în Ubuntu. Veţi fi întrebat de limbă, ţară şi ajustări "
-"pentru localizare."
+"Pe baza opţiunilor legate de limbă şi ţară, următorii parametri de "
+"localizare sunt prezenţi."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Alegeţi alte localizări care trebuie suportate:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Din această listă puteţi alege să instalaţi localizări adiţionale."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Alegeţi o ţară, teritoriu sau zonă:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- America de nord --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Pe baza limbii dvs., vă aflaţi probabil într-una din aceste ţări, sau "
-#~ "regiuni."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- America centrală --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- America de sud --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Caraibe --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Europa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Africa --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Oceanul Indian --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oceania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antarctica --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- alta --"

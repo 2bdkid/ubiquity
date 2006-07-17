@@ -39,12 +39,11 @@ for KERNEL_MAJOR in $MAJORS; do
 	WANT_KERNEL_STEM="${WANT_KERNEL_STEM#linux-image-}"
 	export KERNEL_MAJOR
 	export KERNEL_VERSION="$(echo "$WANT_KERNEL_STEM" | cut -d - -f 1)"
-	export KERNEL_ABI="$(echo "$WANT_KERNEL_STEM" | cut -d - -f 1,2)"
 
 	# Is the correct kernel flavour selected?
 
 	testname="arch_get_kernel_flavour $KERNEL_MAJOR exit code"
-	if GOT_FLAVOUR="$(arch_get_kernel_flavour)"; then
+	if GOT_FLAVOUR="$(arch_get_kernel_flavour)" && [ "$GOT_FLAVOUR" ] ; then
 		ok
 	else
 		notok

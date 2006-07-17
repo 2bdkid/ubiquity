@@ -3,26 +3,21 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer.po to Kurdish
-# Turkish messages for debian-installer.
-# Copyright (C) 2003, 2004 Software in the Public Interest, Inc.
+# Kurdish messages for debian-installer.
+# Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Erdal Ronahi <erdal.ronahi@gmail.com, pckurd@hotmail.com>, 2005.
-#
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-09-02 11:55+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-04-20 06:15+0000\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: Kurdish <gnu-ku-wergerandin@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural= n != 1\n"
-"X-Generator: KBabel 1.10\n"
 
 #. Type: text
 #. Description
@@ -139,12 +134,6 @@ msgstr "Afirandina mîhengên yaboot serneket"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr ""
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr ""
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -196,7 +185,7 @@ msgstr "Mountkirina pergala dosiyan proc di /target/proc de serneket."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
 
 #. Type: error
@@ -230,7 +219,7 @@ msgid ""
 " setenv auto-boot-timeout 5000\n"
 " setenv auto-boot? true"
 msgstr ""
-"·setenv·boot-device·${OF_BOOT_DEVICE}\n"
+" ·setenv·boot-device·${OF_BOOT_DEVICE}\n"
 "·setenv·boot-file·${OF_BOOT_FILE}\n"
 "·setenv·auto-boot-timeout·5000\n"
 "·setenv·auto-boot?·erê"
@@ -254,7 +243,7 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:97
 msgid " ${BOOT}"
-msgstr "·${BOOT}"
+msgstr " ·${BOOT}"
 
 #. Type: note
 #. Description
@@ -273,6 +262,5 @@ msgstr "yaboot di diskê sabît de saz dike"
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Boot loader a Yaboot saz dike"
+msgstr "Nûsazkirina boot loader Yaboot"

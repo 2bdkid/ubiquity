@@ -1,8 +1,8 @@
 /**
- * Copyright (C) 2002,2003, 2005-2006 Alastair McKinstry, <mckinstry@debian.org>
+ * Copyright (C) 2002,2003, 2005 Alastair McKinstry, <mckinstry@debian.org>
  * Released under the GPL
  *
- * $Id: kbd-chooser.c 33904 2006-01-09 18:46:38Z smarenka $
+ * $Id: kbd-chooser.c 37896 2006-06-08 00:13:38Z joeyh $
  */
 
 #include "config.h"
@@ -68,22 +68,18 @@ mydebconf_ask (char *priority, char *template, char **result)
 }
 
 /**
- * @brief    Set a default value for a question
- * @param The question
- * @param    The default to set
- * @param    if true: overwrite previous choice
+ * @brief Set a default value for a question if one not already there
  */
 int
-mydebconf_default_set (char *template, char *value, bool force)
+mydebconf_default_set (char *template, char *value)
 {
 	int res = 0;
 	struct debconfclient *client = mydebconf_client ();
-
 	if ((res = debconf_get (client, template)))
 		return res;
 
-	if (force || client->value == NULL || (strlen (client->value) == 0))
-		res = debconf_set (client, template, strdup (value));
+	if (client->value == NULL || (strlen (client->value) == 0))
+		res = debconf_set (client, template, value);
 	return res;
 }
 
@@ -271,7 +267,7 @@ maplist_select (maplist_t * maplist)
 	}
 	if (best > 0)	{
 		sprintf (template, "console-keymaps-%s/keymap", maplist->name);
-		mydebconf_default_set (template, preferred->name, false);
+		mydebconf_default_set (template, preferred->name);
 	}
 }
 
@@ -409,7 +405,6 @@ read_keymap_files (char *listdir)
 	}
 	ent = readdir (d);
 	for (; ent; ent = readdir (d))	{
-
 		if ((strcmp (ent->d_name, ".") == 0) ||
 		    (strcmp (ent->d_name, "..") == 0))
 			continue;
@@ -470,7 +465,7 @@ keyboards_sort (kbd_t ** keyboards)
  * @return the translation, to be freed by caller
  */
 char *
-template_get(const char *template, char *type)
+template_get(const char *template, const char *type)
 {
 	struct debconfclient *client = mydebconf_client();
 
@@ -505,7 +500,7 @@ skipspc(char *x)
  * @return the translation, to be freed by caller
  *
  * The current templates hold a per-arch list of keymap names and
- * their translations, in order to avoud having n*m templates. 
+ * their translations, in order to avoid having n*m templates. 
  * Unfortunately, this means that extracting the translated name of a
  * single keymap name is a bit of work.
  */
@@ -520,7 +515,7 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 	char *lim1,*lim2;
 
 	if (strcmp(arch, "no-keyboard") == 0 ||
-            strcmp(arch, "skip-config") == 0)
+	    strcmp(arch, "skip-config") == 0)
 		return strdup (name);
 
 	/*
@@ -528,12 +523,11 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 	 * language that's been set. Thus, in order to get the untranslated
 	 * string, temporarily set the language to something nonexistent.
 	 */
-        
-	if (debconf_get(client, "debconf/language")) {
-          lang = strdup("");
-        } else {
-          lang = strdup(client->value);
-        }
+
+	if (debconf_get(client, "debconf/language"))
+		lang = strdup("");
+	else
+		lang = strdup(client->value);
 
 	debconf_set (client, "debconf/language", strdup ("xx_XX"));
 
@@ -541,7 +535,7 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 	buf1 = template_get(template, "Choices");
 
 	debconf_set (client, "debconf/language", lang);
-        free(lang);
+	free(lang);
 	buf2 = template_get(template, "Choices");
 
 	if (!strcmp(buf1,buf2)) {
@@ -555,20 +549,20 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 	}
 	
 	p1 = buf1; p2 = buf2;
-        bufend1 = buf1+strlen(buf1)+1;
-        bufend2 = buf2+strlen(buf2)+1;
+	bufend1 = buf1+strlen(buf1)+1;
+	bufend2 = buf2+strlen(buf2)+1;
 	while (p1 && p2) {
-                for (lim1 = p1; *lim1 && *lim1 != ','; lim1++) {
-                        if (*lim1 == '\\')
-                                lim1++;
-                }
+		for (lim1 = p1; *lim1 && *lim1 != ','; lim1++) {
+			if (*lim1 == '\\')
+				lim1++;
+		}
 
-                for (lim2 = p2; *lim2 && *lim2 != ','; lim2++) {
-                        if (*lim2 == '\\')
-                                lim2++;
-                }
+		for (lim2 = p2; *lim2 && *lim2 != ','; lim2++) {
+			if (*lim2 == '\\')
+				lim2++;
+		}
 
-                *lim1 = '\0';
+		*lim1 = '\0';
 		*lim2 = '\0';
 		if (! strcmp (name, p1)) {
 			p2 = strdup (p2);
@@ -578,10 +572,10 @@ translate_keyboard_name(const char *arch, const char *name, bool to_c)
 		}
 
 		if (!(lim1 < bufend1 && lim2 < bufend2))
-                        break;
+			break;
  
-                p1 = skipspc(lim1+1);
-                p2 = skipspc(lim2+1);
+		p1 = skipspc(lim1+1);
+		p2 = skipspc(lim2+1);
 	}
 	/* not found */
 	free (buf1);
@@ -659,7 +653,6 @@ char *keyboard_parse (char *reply)
 
 /**
  * @brief set debian-installer/uml-console as to whether we are using a user mode linux console
- * This is then passed via prebaseconfig to base-config
  * @return 1 if present, 0 if absent, 2 if unknown.
  */
 sercon_state
@@ -680,7 +673,6 @@ check_if_uml_console (void)
 
 /**
  * @brief set debian-installer/serial console as to whether we are using a serial console
- * This is then passed via prebaseconfig to base-config
  * @return 1 if present, 0 if absent, 2 if unknown.
  */
 sercon_state
@@ -800,7 +792,7 @@ keyboard_select (char *curr_arch)
 		choices++;
 		s = insert_description (s, "no-keyboard", &first_entry_s);
 		t = insert_description (t, arch_descr, &first_entry_t);
-		mydebconf_default_set ("console-tools/archs", "no-keyboard", false);
+		mydebconf_default_set ("console-tools/archs", "no-keyboard");
 	} else {
 		// Add option to skip keyboard configuration (use kernel keymap)
 		debconf_metaget(client, "kbd-chooser/skip-config", "Description");
@@ -809,7 +801,7 @@ keyboard_select (char *curr_arch)
 		s = insert_description (s, "skip-config", &first_entry_s);
 		t = insert_description (t, arch_descr, &first_entry_t);
 		mydebconf_default_set ("console-tools/archs",  
-				      preferred ? preferred->name : "skip-config", false);
+				      preferred ? preferred->name : "skip-config");
 	}
 	debconf_subst (client, "console-tools/archs", "KBD-ARCHS", buf_s);
 	debconf_subst (client, "console-tools/archs", "KBD-ARCHS-L10N", buf_t);
@@ -873,24 +865,24 @@ keymap_ask (char *arch, char **keymap)
 	if (ptr) {
 		*keymap = ptr;
 		def = keymap_get (maplist_get (arch), ptr, NULL);
-		mydebconf_default_set (template, ptr, false);
+		mydebconf_default_set (template, ptr);
 		txt_default = translate_keyboard_name (arch, ptr, false);
-		mydebconf_default_set ("kbd-chooser/method", txt_default, false);
+		mydebconf_default_set ("kbd-chooser/method", txt_default);
 	} else {
 		sprintf (template, "console-keymaps-%s/keymap", arch);
 		if (!debconf_get (client, template) && *client->value) {
-                        *keymap = strdup(client->value);
+			*keymap = strdup(client->value);
 			di_info ("keymap_ask: default map: %s", *keymap);
 			txt_default = translate_keyboard_name (arch, *keymap, false);
 			di_info ("keymap_ask: trans: %s", *keymap);
-			mydebconf_default_set ("kbd-chooser/method", txt_default, false);
+			mydebconf_default_set ("kbd-chooser/method", txt_default);
 		} else {
 			di_info ("keymap_ask: no default map!");
 			txt_default = description_get ("kbd-chooser/no-keyboard");
 			if (access("/usr/share/keymaps/decision-tree", R_OK) == 0)
-				mydebconf_default_set ("kbd-chooser/method", txt_try, false);
+				mydebconf_default_set ("kbd-chooser/method", txt_try);
 			else
-				mydebconf_default_set ("kbd-chooser/method", txt_select, false);
+				mydebconf_default_set ("kbd-chooser/method", txt_select);
 		}
 	}
 
@@ -942,7 +934,7 @@ keymap_ask (char *arch, char **keymap)
 
 	*keymap = strdup(ptr); /* still points to debconf-internal data */
 	ptr = translate_keyboard_name (arch, *keymap, true);
-        free(*keymap);
+	free(*keymap);
 	*keymap = strdup(ptr);
 	free(ptr);
 	res = QUIT;
@@ -1003,12 +995,12 @@ keymap_select (char *arch, char **keymap)
 	ptr = default_keymap (arch);
 	if (ptr) {
 		keymap_get (maplist_get (arch), ptr, NULL);
-		mydebconf_default_set (template, ptr, false);
+		mydebconf_default_set (template, ptr);
 	}
 	res = mydebconf_ask ( "high", template, &ptr);
 	if (res != CMD_SUCCESS)
 		return res;
-        *keymap = strdup((strlen (ptr) == 0) ? "skip-config" : ptr);
+	*keymap = strdup((strlen (ptr) == 0) ? "skip-config" : ptr);
 
 	return CMD_SUCCESS;
 }
@@ -1028,7 +1020,7 @@ keymap_try (char **keymap)
 	res = mydebconf_ask ( "high", "kbd-chooser/try", &ptr);
 	if (res != CMD_SUCCESS)
 		return res;
-        *keymap = ((strlen (ptr) == 0) ? strdup("no-keyboard") : strdup(ptr));
+	*keymap = ((strlen (ptr) == 0) ? strdup("no-keyboard") : strdup(ptr));
 
 	return CMD_SUCCESS;
 }
@@ -1050,13 +1042,13 @@ keymap_set (struct debconfclient *client, const char *keymap)
 	/* Settings for revisiting this question */
 	if (!debconf_get(client, "console-tools/archs") && client->value &&
 	    strcmp(client->value, "no-keyboard") != 0) {
-                arch = strdup(client->value);
+		arch = strdup(client->value);
 		sprintf (template, "console-keymaps-%s/keymap", arch);
 		debconf_set (client, template, keymap);
-                free(arch);
+		free(arch);
 	}
 
-        system("kbd-chooser-apply");
+	system("kbd-chooser-apply");
 }
 
 
@@ -1065,7 +1057,7 @@ main (int argc, char **argv)
 {
 	char *kbd_priority, buf[LINESIZE], *arch;
 	char *keymap = strdup("no keymap");
-        char *tmp;
+	char *tmp;
 	state_t state = CHOOSE_METHOD;
 	struct debconfclient *client;
 	int res;
@@ -1099,14 +1091,14 @@ main (int argc, char **argv)
 				state = GOBACK;
 				break;
 			}
-                        tmp = strdup(client->value);
+			tmp = strdup(client->value);
 			state = keymap_ask(tmp, &keymap);
-                        free(tmp);
+			free(tmp);
 			break;
 
 		case CHOOSE_TRY: // The Press-a-few-keys method
-                        if (keymap)
-                                free(keymap);
+			if (keymap)
+				free(keymap);
 			res = keymap_try (&keymap);
 			if (res == CMD_GOBACK) {
 				state = CHOOSE_METHOD;
@@ -1145,8 +1137,8 @@ main (int argc, char **argv)
 			break;
 			
 		case CHOOSE_KEYMAP: // Then a keymap within that arch.
-                        if (keymap)
-                                free(keymap);
+			if (keymap)
+				free(keymap);
 			res = keymap_select (arch, &keymap);
 			if (res == CMD_GOBACK) {
 				state = CHOOSE_ARCH;
@@ -1167,10 +1159,10 @@ main (int argc, char **argv)
 				state = GOBACK;
 				break;
 			}
-                        tmp = strdup(client->value);
+			tmp = strdup(client->value);
 			keymap_set (client, keymap);
 			res = keymap_test (tmp, keymap);
-                        free(tmp);
+			free(tmp);
 			if (res == CMD_GOBACK)
 				state = CHOOSE_METHOD;
 			else if (res)

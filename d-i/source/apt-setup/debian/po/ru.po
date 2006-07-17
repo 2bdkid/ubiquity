@@ -15,9 +15,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-17 21:08+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-24 21:58+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -139,6 +139,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Нужно ли сделать данное ПО доступным в любом случае?"
@@ -164,6 +167,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -179,12 +185,16 @@ msgstr "Повторить"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "Сменить зеркало архива"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "Игнорировать"
@@ -211,6 +221,32 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "Использовать зеркало архива из сети?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"Зеркало архива из сети может использоваться в дополнении к ПО уже "
+"включённому в CD-ROM. Также оно может содержать более новые версии ПО."
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+"Если установка выполняется с netinst CD и вы выберите не использовать "
+"зеркало, то в конце установки вы получите очень минимальную базовую систему."
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -218,6 +254,7 @@ msgstr "Использовать ПО с ограничениями?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -239,6 +276,7 @@ msgstr "Использовать ПО из раздела \"universe\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -258,6 +296,7 @@ msgstr "Использовать ПО из раздела \"multiverse\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -280,6 +319,7 @@ msgstr "Использовать заблаговременно перенесё
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

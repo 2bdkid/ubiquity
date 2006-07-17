@@ -3,22 +3,24 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# Debian Installer master translation file template
+# Bangla translation of Debian-Installer.
+# Copyright (C) 2005, 2006, Debian Foundation.
+# This file is distributed under the same license as the Debian-Installer package.
 #
 # Anubadok, the en2bn auto-translator by Golam Mortuza Hossain <golam@imsc.res.in>, 2005.
-# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005.
+# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005-2006.
 # Jamil Ahmed <jamil@bengalinux.org>, 2005.
 # Khandakar Mujahidul Islam <suzan@bengalinux.org>, 2005.
-# Progga <progga@BengaLinux.Org>, 2005.
+# Progga <progga@BengaLinux.Org>, 2005, 2006.
 # Quazi Ashfaq-ur Rahman <quazi.ashfaq@gmail.com>, 2005.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-10-28 13:29+0530\n"
-"Last-Translator: Baishampayan Ghose <b.ghose@gnu.org.in>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-05-04 20:00+0600\n"
+"Last-Translator: Progga <progga@BengaLinux.Org>\n"
 "Language-Team: Bangla <core@BengaLinux.Org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,27 +28,27 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 #, fuzzy
 msgid "Checking the Ubuntu archive mirror"
 msgstr "ডেবিয়ান আর্কাইভ মিরর (mirror) যাচাই করা হচ্ছে"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
 msgstr "রিলিজ (release) ফাইল ডাউনলোড করা হচ্ছে..."
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
 msgstr "ত্রুটিপূর্ণ আর্কাইভ মিরর"
 
 # FIXME
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 #, fuzzy
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
@@ -55,40 +57,71 @@ msgstr ""
 "উল্লেখিত ডেবিয়ান আর্কাইভ মিররটি হয় পাওয়া যাচ্ছে না, অথবা তাতে কোন বৈধ রিলিজ "
 "(release) ফাইল নেই।  অনুগ্রহপূর্বক ভিন্ন কোন মিরর ব্যবহার করে চেষ্টা করুন।"
 
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "এই স্থাপত্যের কম্পিউটার সমর্থিত নয়"
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+#, fuzzy
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"উল্লেখিত ডেবিয়ান আর্কাইভ মিররটি সম্ভবত আপনার কম্পিউটার স্থাপত্যকে সমর্থন করে না।  "
+"অনুগ্রহপূর্বক ভিন্ন কোন মিরর ব্যবহার করে চেষ্টা করুন।"
+
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 #, fuzzy
 msgid "Choose a mirror of the Ubuntu archive"
 msgstr "ডেবিয়ান আর্কাইভের একটি মিরর বেছে নিন"
 
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
 msgstr "নিজ হাতে তথ্য ঢোকান"
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
-msgstr "GB[ Default value for http]"
+msgstr "GB"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 #, fuzzy
 msgid "Ubuntu archive mirror country:"
 msgstr "ডেবিয়ান আর্কাইভ মিররটি যে দেশে অবস্থিত:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 #, fuzzy
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
@@ -101,14 +134,16 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 #, fuzzy
 msgid "Ubuntu archive mirror:"
 msgstr "ডেবিয়ান আর্কাইভ মিরর:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 #, fuzzy
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
@@ -121,20 +156,23 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "সাধারণত,  <আপনার দেশের কোড>.archive.ubuntu.com একটি ভাল পছন্দ।"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 #, fuzzy
 msgid "Ubuntu archive mirror hostname:"
 msgstr "ডেবিয়ান আর্কাইভ মিরর-এর হোস্টনাম:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 #, fuzzy
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
@@ -142,7 +180,8 @@ msgstr "ডেবিয়ান যে মিরর থেকে ডাউনল�
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -152,14 +191,16 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 #, fuzzy
 msgid "Ubuntu archive mirror directory:"
 msgstr "ডেবিয়ান আর্কাইভ মিরর ডিরেক্টরি:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 #, fuzzy
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
@@ -169,13 +210,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
 msgstr "এইচ.টি.টি.পি. প্রক্সি তথ্য (কিছু না হলে ফাঁকা থাকবে):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -185,7 +226,8 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
@@ -195,23 +237,34 @@ msgstr ""
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
-msgstr "GB[ Default value for ftp]"
+msgstr "GB"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
 msgstr "এফ.টি.পি. প্রক্সি তথ্য (কিছু না থাকলে ফাঁকা রাখুন):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -221,17 +274,16 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
 msgstr "ফাইল ডাউনলোডের জন্য প্রোটোকল:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
-#, fuzzy
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"অনুগ্রহপূর্বক ফাইল ডাউনলোড প্রটোকল বেছে নিন।  কি লিখতে হবে সে ব্যাপারে অনিশ্চিত হলে "
-"\"http\" বেছে নিন; এটি সাধারণত ফায়ারওয়ালজনিত ঝামেলা থেকে মুক্ত।"
+"অনুগ্রহপূর্বক ফাইল ডাউনলোড করার প্রটোকল বেছে নিন।  কি লিখতে হবে সে ব্যাপারে "
+"অনিশ্চিত হলে \"http\" বেছে নিন; এটি সাধারণত ফায়ারওয়ালজনিত ঝামেলা থেকে মুক্ত।"

@@ -6,15 +6,15 @@
 # Bulgarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005.
+# Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-11-02 15:01+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-04-08 10:14+0300\n"
 "Last-Translator:  Ognyan Kulev <ogi@fmi.uni-sofia.bg>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,25 +23,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 msgid "Checking the Ubuntu archive mirror"
 msgstr "Проверка на огледалния сървър с архива на Ubuntu"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
 msgstr "Изтегляне на файла Release..."
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
 msgstr "Развален огледален сървър"
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
 "have a valid Release file on it. Please try a different mirror."
@@ -49,38 +49,68 @@ msgstr ""
 "Зададеният архив на Ubuntu може би не е достъпен или не съдържа валиден файл "
 "Release. Моля, опитайте с друг огледален сървър."
 
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "Архитектурата не се поддържа."
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"Зададеният архив на Ubuntu изглежда не поддържа архитектурата на Вашия "
+"компютър. Моля, опитайте с друг огледален сървър."
+
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 msgid "Choose a mirror of the Ubuntu archive"
 msgstr "Изберете огледален сървър с архива на Ubuntu"
 
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
 msgstr "ръчно въвеждане на информацията"
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
-msgstr "BG[ Подразбираща се стойност за http]"
+msgstr "BG"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid "Ubuntu archive mirror country:"
 msgstr "Държава на огледалния сървър с архив на Ubuntu:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
@@ -92,13 +122,15 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Ubuntu archive mirror:"
 msgstr "Огледален сървър на архива на Ubuntu:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
@@ -109,19 +141,22 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "Обикновено <кодът на вашата държава>.archive.ubuntu.com е добър избор."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Име на огледалния сървър с архива на Ubuntu:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr ""
@@ -129,7 +164,8 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -139,13 +175,15 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid "Ubuntu archive mirror directory:"
 msgstr "Директория на огледалния сървър с архива на Ubuntu:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
@@ -155,13 +193,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
 msgstr "Информация за http прокси (оставете празно, ако няма такова):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -171,7 +209,8 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
@@ -181,23 +220,34 @@ msgstr ""
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
-msgstr "BG[ Подразбираща се стойност за ftp]"
+msgstr "BG"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
 msgstr "Информация за FTP прокси (оставете празно, ако няма такова):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -207,18 +257,17 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
 msgstr "Протокол за изтегляне на файловете:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
-#, fuzzy
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"Моля, изберете протокол за сваляне на файловете. Ако не сте сигурни, "
+"Моля, изберете протокол за изтегляне на файлове. Ако не сте сигурни, "
 "изберете \"http\", който е по-малко чувствителен към проблеми, свързани със "
-"защитни стени."
+"защитни стени (firewalls)."

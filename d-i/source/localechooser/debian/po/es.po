@@ -9,15 +9,14 @@
 #
 # Contributors to the translation of debian-installer:
 # Teófilo Ruiz Suárez <teo@debian.org>, 2003.
-# Javier Fernández-Sanguino <jfs@debian.org>, 2003.
 # David Martínez Moreno <ender@debian.org>, 2003, 2005.
 # Carlos Alberto Martín Edo <carlos@dat.etsit.upm.es>, 2003
 # Carlos Valdivia Yagüe <valyag@dat.etsit.upm.es>, 2003
 # Rudy Godoy <rudy@kernel-panik.org>, 2003
 # Steve Langasek <vorlon@debian.org>, 2004
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2005
-# Javier Fernández-Sanguino <jfs@debian.org>, 2004-2005
 # Rubén Porras Campo <nahoo@inicia.es>, 2005
+# Javier Fernández-Sanguino <jfs@debian.org>, 2003-2006
 #
 # Equipo de traducción al español, por favor lean antes de traducir
 # los siguientes documentos:
@@ -37,9 +36,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-06-06 00:01+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-24 08:48+0200\n"
 "Last-Translator: Javier Fernández-Sanguino Peña <jfs@debian.org>\n"
 "Language-Team:  Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,115 +57,123 @@ msgstr "Escoja el idioma / Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Guardando el idioma..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Spain"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "otro"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "ES"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Elija su ubicación:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "ES"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Basándose en el idioma que ha elegido, es probable que esté en alguno de los "
 "siguientes ubicaciones."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Ubuntu incluye soporte de los siguientes parámetros de localización "
-"basándose en la elección que ha realizado de idioma y país."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Escoja una localización:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Se ha seleccionado una localización por omisión ya que no hay ninguna "
-"localización disponible para el idioma y país que ha seleccionado."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Localización no soportada"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"El valor de localización que ha preconfigurado (${LOCALE}) no está soportado "
-"actualmente dentro de Ubuntu. Se le preguntará su idioma, país y "
-"localización."
+"Se incluye soporte de los siguientes parámetros de localización basándose en "
+"la elección que ha realizado de idioma y país."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Elija los idiomas para los que desea soporte:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "En esta lista puede elegir idiomas adicionales que se instalarán."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Escoja un país, territorio o área:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- América del Norte --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Basándose en el idioma que ha elegido, es probable que esté en alguno de "
-#~ "los siguientes países o regiones."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- América Central --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- América del Sur --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Caribe --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Europa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Africa --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Oceano Índico --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oceanía --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antártida --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- otro --"

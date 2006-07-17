@@ -3,25 +3,24 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of uk.po to
 # translation of uk.po to Ukrainian
 # Ukrainian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005.
 #
+# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2005-07-21 22:12+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2005-11-24 17:44+0200\n"
 "Last-Translator: Eugeniy Meshcheryakov <eugen@univ.kiev.ua>\n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -71,40 +70,19 @@ msgstr "Метод розбивки:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-msgid "Device to partition"
-msgstr "Поділ дискового пристрою"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-"Цей встановлювач може допомогти вам у розбивці диску на розділи для "
-"використання системою Ubuntu або, якщо бажаєте, ви можете зробити це вручну. "
-"Якщо ви виберете розбивку диску за допомогою встановлювача, вам пізніше буде "
-"надана можливість побачити результати, змінити їх та навіть відмінити "
-"розбивку, якщо результати вам не сподобаються."
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
 msgstr "Дисковий простір для розбивки:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
 msgstr "Принцип розбивки:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -114,13 +92,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "Непридатний вільний простір"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -132,14 +110,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
 msgstr "Розбивка за допомогою встановлювача"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
 msgstr "Використати найбільший послідовний шматок вільного простору"
 
@@ -149,60 +127,89 @@ msgstr "Використати найбільший послідовний шм�
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
 msgstr "Стерти весь диск: ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
 msgstr "Редагувати таблицю розділів вручну"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "Автоматично розбити вільний простір"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
 msgstr "Всі файли в одному розділі (рекомендується для новаків)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "Настільний комп'ютер"
+#: ../partman-auto.templates:100
+msgid "Separate /home partition"
+msgstr "Окремий розділ для  /home"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "Багатокористувацька робоча станція"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr "Окремі розділи для /home, /usr, /var та /tmp"
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "Схема розбивки для малих дисків (< 1ГБ)"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr "Поділ дискового пристрою"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+#, fuzzy
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+"Цей встановлювач може допомогти вам у розбивці диску на розділи для "
+"використання системою Ubuntu або, якщо бажаєте, ви можете зробити це вручну. "
+"Якщо ви виберете розбивку диску за допомогою встановлювача, вам пізніше буде "
+"надана можливість побачити результати, змінити їх та навіть відмінити "
+"розбивку, якщо результати вам не сподобаються."
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
 msgstr "Змінити розмір ${PARTITION} та використати вивільнене місце"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr "Не вдалось вивільнити достатньо місця до встановлення системи"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

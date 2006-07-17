@@ -11,26 +11,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Debian-installer 1st-stage master file HR\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2006-05-20 06:32+0000\n"
-"Last-Translator: Ante KaramatiÊ <ivoks@ubuntu.com>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2005-03-05 21:51+0100\n"
+"Last-Translator: Krunoslav Gernhard <kruno@linux.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #. Type: text
 #. Description
 #: ../partman-auto.templates:3
 msgid "Please wait..."
-msgstr "Molim priËekajte..."
+msgstr "Molim priƒçekajte..."
 
 #. Type: text
 #. Description
 #: ../partman-auto.templates:7
 msgid "Computing the new partitions..."
-msgstr "Odreujem nove particije..."
+msgstr "Odreƒëujem nove particije..."
 
 #. Type: error
 #. Description
@@ -39,7 +39,7 @@ msgid ""
 "This probably happened because the selected disk or free space is too small "
 "to be automatically partitioned."
 msgstr ""
-"To se dogodilo vjerojatno zato πto su izabrani disk ili slobodan prostor "
+"To se dogodilo vjerojatno zato ≈°to su izabrani disk ili slobodan prostor "
 "premali za automatsko particioniranje."
 
 #. Type: error
@@ -55,87 +55,67 @@ msgid ""
 "This probably happened because there are too many (primary) partitions in "
 "the partition table."
 msgstr ""
-"To se dogodilo vjerojatno zato πto ima previπe (primarnih) particija u "
+"To se dogodilo vjerojatno zato ≈°to ima previ≈°e (primarnih) particija u "
 "particijskoj tablici."
 
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
 msgid "Partitioning method:"
-msgstr "NaËin particioniranja:"
+msgstr "Naƒçin particioniranja:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-msgid "Device to partition"
-msgstr "Diskovni prostor za particioniranje"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-"Program za instalaciju vas moæe automatski provesti kroz particioniranje "
-"diskova za Ubuntu, ili to moæete uËiniti ruËno. Ako uporabite automatski "
-"alat, ipak Êete kasnije moÊi vidjeti rezultate, popraviti ih, pa Ëak i "
-"poniπtiti ako vam ne odgovaraju."
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
 msgstr "Diskovni prostor za particioniranje:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
 msgstr "Shema particioniranja:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
 msgstr ""
-"Disk moæete particionirati rabeÊi jednu ili viπe razliËitih shema. Ako ste "
+"Disk mo≈æete particionirati rabeƒái jednu ili vi≈°e razliƒçitih shema. Ako ste "
 "nesigurni, izaberite prvu."
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "Neuporabljiv prostor"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
 msgstr ""
-"Particioniranje nije uspjelo jer izabrani slobodni prostor nije moguÊe "
-"koristiti. Vjerojatno ima previπe (primarnih) particija u particijskoj "
+"Particioniranje nije uspjelo jer izabrani slobodni prostor nije moguƒáe "
+"koristiti. Vjerojatno ima previ≈°e (primarnih) particija u particijskoj "
 "tablici."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
 msgstr "Automatsko particioniranje"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
-msgstr "Iskoristi najveÊi cjeloviti slobodan prostor"
+msgstr "Iskoristi najveƒái cjeloviti slobodan prostor"
 
 #. Type: text
 #. Description
@@ -143,63 +123,93 @@ msgstr "Iskoristi najveÊi cjeloviti slobodan prostor"
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
-msgstr "Obriπi cijeli disk: ${DEVICE}"
+msgstr "Obri≈°i cijeli disk: ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
-msgstr "RuËno uredi particijsku tablicu"
+msgstr "Ruƒçno uredi particijsku tablicu"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "Automatski particioniraj slobodan prostor"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
-msgstr "Sve datoteke na jednoj particiji (preporuËeno za novake)"
+msgstr "Sve datoteke na jednoj particiji (preporuƒçeno za novake)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "KuÊno raËunalo"
+#: ../partman-auto.templates:100
+#, fuzzy
+msgid "Separate /home partition"
+msgstr "formatiraj particiju"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "ViπekorisniËka radna stanica"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+#, fuzzy
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "Shema particioniranja:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr "Diskovni prostor za particioniranje"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+#, fuzzy
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+"Program za instalaciju vas mo≈æe automatski provesti kroz particioniranje "
+"diskova za Ubuntu, ili to mo≈æete uƒçiniti ruƒçno. Ako uporabite automatski "
+"alat, ipak ƒáete kasnije moƒái vidjeti rezultate, popraviti ih, pa ƒçak i "
+"poni≈°titi ako vam ne odgovaraju."
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
-msgstr "Promjeni veliËinu ${PARTITION) i koristi slobodan prostor"
+msgstr "Promjeni veliƒçinu ${PARTITION) i koristi slobodan prostor"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr "Neuspjeh pri izradi slobodnog porostora za instalaciju"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."
 msgstr ""
-"Promjena veliËine particije nije uspjela izraditi dovoljno slobodnog "
-"prostora za instalaciju. Morati Êe postaviti particije ruËno."
+"Promjena veliƒçine particije nije uspjela izraditi dovoljno slobodnog "
+"prostora za instalaciju. Morati ƒáe postaviti particije ruƒçno."

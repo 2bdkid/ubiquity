@@ -18,6 +18,8 @@ ifeq ($(DEB_HOST_ARCH_CPU),)
   endif
 endif
 
+PYTHON := $(shell pyversions -r)
+
 ifneq (,$(findstring :$(DEB_HOST_ARCH_CPU):,:amd64:i386:))
   bootloader-depends := grub
 else
@@ -39,7 +41,7 @@ build-stamp:
 	dh_testdir
 
 ifndef UBIQUITY_NO_GTK
-	./configure --prefix=/usr
+	PYTHON=$(PYTHON) ./configure --prefix=/usr
 	$(MAKE)
 endif
 	$(MAKE) -C d-i build
@@ -73,7 +75,9 @@ install:
 	# For the meantime, nearly everything automake wants to install is
 	# part of the GTK frontend.
 ifndef UBIQUITY_NO_GTK
-	$(MAKE) install DESTDIR=$(CURDIR)/debian/ubiquity-frontend-gtk
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/ubiquity-frontend-gtk \
+		pythondir=\$${prefix}/lib/ubiquity \
+		pyexecdir=\$${prefix}/lib/ubiquity
 	rm -rf debian/ubiquity-frontend-gtk/usr/share/applications \
 		debian/ubiquity-frontend-gtk/usr/share/ubiquity/pixmaps
 endif
@@ -108,20 +112,20 @@ endif
 	install d-i/source/clock-setup/debian/clock-setup.postinst \
 		debian/ubiquity/usr/lib/ubiquity/clock-setup/clock-setup
 	chmod +x debian/ubiquity/usr/lib/ubiquity/clock-setup/clock-setup
-	install d-i/source/clock-setup/prebaseconfig.d/10clock-setup \
-		debian/ubiquity/usr/lib/ubiquity/clock-setup/prebaseconfig
-	chmod +x debian/ubiquity/usr/lib/ubiquity/clock-setup/prebaseconfig
-	sed 's,\(prebaseconfig=\).*,\1/dev/null,' \
+	install d-i/source/clock-setup/finish-install.d/10clock-setup \
+		debian/ubiquity/usr/lib/ubiquity/clock-setup/finish-install
+	chmod +x debian/ubiquity/usr/lib/ubiquity/clock-setup/finish-install
+	sed 's,\(finish-install=\).*,\1/dev/null,' \
 		d-i/source/hw-detect/debian/hw-detect/bin/hw-detect \
 		> debian/ubiquity/bin/hw-detect
 	chmod +x debian/ubiquity/bin/hw-detect
-	install d-i/source/kbd-chooser/debian/prebaseconfig \
+	install d-i/source/kbd-chooser/debian/post-base-installer \
 		debian/ubiquity/usr/lib/ubiquity/kbd-chooser/
 	install d-i/source/localechooser/post-base-installer \
-		d-i/source/localechooser/prebaseconfig \
+		d-i/source/localechooser/finish-install \
 		debian/ubiquity/usr/lib/ubiquity/localechooser/
-	install d-i/source/tzsetup/prebaseconfig.d/*tzsetup \
-		debian/ubiquity/usr/lib/ubiquity/tzsetup/prebaseconfig
+	install d-i/source/tzsetup/finish-install.d/*tzsetup \
+		debian/ubiquity/usr/lib/ubiquity/tzsetup/finish-install
 	set -e; for x in user-setup user-setup-ask user-setup-apply; do \
 		sed 's,/usr/lib/user-setup,/usr/lib/ubiquity/user-setup,g' \
 			d-i/source/user-setup/$$x \
@@ -156,7 +160,8 @@ binary-indep: install
 	dh_strip -i
 	dh_compress -i
 	dh_fixperms -i
-	dh_python -i
+	dh_pycentral -pubiquity-frontend-kde
+	dh_python -i /usr/lib/ubiquity
 	dh_installdeb -i
 	dh_shlibdeps -i
 	dh_gencontrol -i
@@ -181,11 +186,11 @@ binary-arch: install
 	grep-dctrl -v -FTemplate base-installer/ d-i/templates \
 		>> debian/ubiquity/DEBIAN/templates
 #	dh_installman -a
-	dh_link -a
 	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a
-	dh_python -a
+	dh_pycentral -a
+	dh_python -a /usr/lib/ubiquity
 	dh_installdeb -a
 	dh_shlibdeps -a
 ifdef bootloader-depends

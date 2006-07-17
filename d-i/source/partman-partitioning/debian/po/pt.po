@@ -7,53 +7,12 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# 18-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 27-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 29-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 08-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 12-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f4u
-# 15-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 16-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f9u
-# 18-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1 typo
-# 21-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 5f2u
-# 13-06-2005 - Eduardo Silva <jobezone@yahoo.com> - +20 mensagens revistas
-# 14-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 19f
-# 27-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f3u
-# 28-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 03-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 07-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f
-# 10-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 11-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 19-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 25-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 27f133u - tzsetup
-# 26-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 30-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f18u
-# 14-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 7f14u
-# 18-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 35f42u
-# 31-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 8f3u
-# 2005-09-05 - Miguel Figueiredo <elmig@debianpt.org> - 7f2u
-# 2005-09-09 - Miguel Figueiredo <elmig@debianpt.org> - 6f
-# 2005-09-17 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-09-21 - Miguel Figueiredo <elmig@debianpt.org> - typo in varname fixed.
-# 2005-09-22 - Miguel Figueiredo <elmig@debianpt.org> - 1 ugly typo fixed.
-# 2005-09-23 - Miguel Figueiredo <elmig@debianpt.org> - 1f1u
-# 2005-10-01 - Miguel Figueiredo <elmig@debianpt.org> - 3f
-# 2005-10-07 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 2005-10-19 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-10-26 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 2005-11-04 - Miguel Figueiredo <elmig@debianpt.org> - 2f1u
-# 2005-11-13 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-11-14 - Miguel Figueiredo <elmig@debianpt.org> - 3f9u - new package apt-setup
-# 2005-11-14 - Miguel Figueiredo <elmig@debianpt.org> - 4f3u 
-# 2005-11-20 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 2005-11-20 - Miguel Figueiredo <elmig@debianpt.org> - 13f1u
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 18:29-0600\n"
-"PO-Revision-Date: 2005-10-01 16:38+0000\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-02 09:46+0000\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -81,23 +40,18 @@ msgstr "A calcular o novo estado da tabela de partições..."
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:15
-msgid "Write the changes to disk devices and copy the data?"
-msgstr "Escrever as alterações nos dispositivos de disco e copiar os dados?"
-
-#. Type: boolean
-#. Description
-#: ../partman-partitioning.templates:15
 msgid ""
-"Before the copy operation takes place, the changes have to be written to "
-"disk."
+"Before you can select a partition to copy, any previous changes have to be "
+"written to disk."
 msgstr ""
-"Antes da operação de cópia iniciar, as alterações têm ser escritas no disco."
+"Antes de poder escolher a partição a copiar, quaisquer alterações anteriores "
+"têm de ser escritas no disco."
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:15
-msgid "Please note that the copy operation may require a long time."
-msgstr "Por favor note que a operação de cópia pode demorar bastante tempo."
+msgid "Please note that the copy operation may take a long time."
+msgstr "Por favor note que a operação de cópia poderá demorar bastante tempo."
 
 #. Type: select
 #. Description
@@ -139,18 +93,18 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
-msgid "Write the changes to disk and resize the partition?"
-msgstr "Escrever as alterações no disco e redimensionar a partição?"
+msgid "Write previous changes to disk and continue?"
+msgstr "Escrever as alterações anteriores os disco e continuar?"
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
 msgid ""
-"Before the resize operation takes place, the changes have to be written to "
-"disk."
+"Before you can select a new partition size, any previous changes have to be "
+"written to disk."
 msgstr ""
-"Antes da operação de redimensionamento iniciar, as alterações têm de ser "
-"escritas no disco."
+"Antes de poder escolher um novo tamanho da partição, quaisquer alterações "
+"têm de ser escritas para o disco."
 
 #. Type: boolean
 #. Description
@@ -161,9 +115,9 @@ msgstr "Não pode desfazer esta operação."
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
-msgid "Please note that the resize operation may require a long time."
+msgid "Please note that the resize operation may take a long time."
 msgstr ""
-"Por favor tenha em atenção que redimensionar pode demorar bastante tempo."
+"Por favor que a operação de redimensionamento poderá demorar bastante tempo."
 
 #. Type: string
 #. Description

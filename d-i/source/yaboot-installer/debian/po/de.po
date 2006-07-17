@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -19,15 +19,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-21 22:08+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-11 21:01+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: vim\n"
 
 #. Type: text
 #. Description
@@ -45,7 +45,7 @@ msgstr "Installiere Yaboot-Bootloader"
 #. Description
 #: ../yaboot-installer.templates:12
 msgid "Yaboot installation failed.  Continue anyway?"
-msgstr "Yaboot-Installation fehlgeschlagen.  Dennoch fortfahren?"
+msgstr "Yaboot-Installation fehlgeschlagen. Dennoch fortfahren?"
 
 #. Type: boolean
 #. Description
@@ -55,10 +55,10 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to Yaboot, so continuing the installation may be possible."
 msgstr ""
-"Das yaboot-Paket konnte nicht nach /target/ installiert werden.  Die "
-"Installation von Yaboot als Bootloader ist unbedingt erforderlich.  Es "
-"könnte allerdings sein, dass Yaboot von diesem Problem nicht betroffen ist, "
-"deshalb ist das Fortsetzen der Installation vielleicht möglich."
+"Das yaboot-Paket konnte nicht nach /target/ installiert werden. Die "
+"Installation von Yaboot als Bootloader ist unbedingt erforderlich. Es könnte "
+"allerdings sein, dass Yaboot von diesem Problem nicht betroffen ist, deshalb "
+"ist das Fortsetzen der Installation vielleicht möglich."
 
 #. Type: text
 #. Description
@@ -154,13 +154,6 @@ msgstr "Erzeugen der Yaboot-Konfiguration schlug fehl"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "Die Yaboot-Hauptkonfiguration konnte nicht erzeugt werden."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr ""
-"Bitte überprüfen Sie die Systemmeldungen (syslog) für weitere Informationen."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -212,10 +205,10 @@ msgstr "Das proc-Dateisystem konnte nicht in /target/proc eingebunden werden."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
-"Bitte prüfen Sie die Logdateien oder die Ausgabe auf der dritten Konsole "
-"(tty3)."
+"Prüfen Sie /var/log/syslog oder die virtuelle Konsole 4 für genauere "
+"Informationen."
 
 #. Type: error
 #. Description
@@ -240,7 +233,7 @@ msgid ""
 msgstr ""
 "Einige Variablen müssen in der Pegasos OpenFirmware eingestellt sein, damit "
 "der Computer automatisch startet. Am Ende der Installation wird der Computer "
-"neu starten. Stellen Sie die folgenden Pegasos OpenFirmware-Variablen am "
+"neu starten. Stellen Sie die folgenden Pegasos-OpenFirmware-Variablen am "
 "Boot-Prompt ein, damit der Computer automatisch startet."
 
 #. Type: note
@@ -273,7 +266,8 @@ msgstr ""
 #: ../yaboot-installer.templates:97
 msgid ""
 "Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Alternativ können Sie auch von Hand booten, indem Sie folgendes "
+msgstr ""
+"Alternativ können Sie auch von Hand booten, indem Sie Folgendes eingeben:"
 
 #. Type: note
 #. Description

@@ -3,16 +3,14 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# Brazilian Portuguese messages for debian-installer.
-# Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-22 20:15-0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-11 12:36-0300\n"
 "Last-Translator: André Luís Lopes <andrelop@debian.org>\n"
 "Language-Team:  Debia-BR Project <debian-l10n-portuguese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -145,12 +143,6 @@ msgstr "Falha ao criar configuração do yaboot"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "A criação do arquivo de configuração principal do yaboot falhou."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Por favor, confira o syslog para maiores informações."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -202,9 +194,10 @@ msgstr "A montagem do sistema de arquivos proc em /target/proc falhou."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
-"Por favor, confira o log do sistema ou a saída no terceiro console (tty3)."
+"Confira o arquivo /var/log/syslog ou consulte o console 4 para maiores "
+"detalhes."
 
 #. Type: error
 #. Description

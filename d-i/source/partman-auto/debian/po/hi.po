@@ -11,6 +11,15 @@
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to Hindi
 #
 #
@@ -19,15 +28,15 @@
 #
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
-# Nishant Sharma <me@nishants.net>, 2005.
+# Nishant Sharma <me@nishants.net>, 2005, 2006.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2004-11-18 18:11+0530\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2006-01-22 14:03+0530\n"
 "Last-Translator: Nishant Sharma <me@nishants.net>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,6 +66,8 @@ msgid ""
 "This probably happened because the selected disk or free space is too small "
 "to be automatically partitioned."
 msgstr ""
+"ऐसा संभवतः इसलिए हुआ क्योंकि चुनी गयी डिस्क या मुक्त क्षेत्र स्वचालित विभाजन के लिए अत्यन्त "
+"छोटा है।"
 
 #. Type: error
 #. Description
@@ -71,6 +82,7 @@ msgid ""
 "This probably happened because there are too many (primary) partitions in "
 "the partition table."
 msgstr ""
+"ऐसा संभवतः इसलिए हुआ क्योंकि पार्टिशन टेबल में (प्राथमिक) पार्टिशन्स की संख्या बहुत अधिक है।"
 
 #. Type: select
 #. Description
@@ -80,36 +92,19 @@ msgstr "पार्टीशन करने की विधिः"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-#, fuzzy
-msgid "Device to partition"
-msgstr "पार्टीशन करने के लिए डिस्क जगहः"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
 msgstr "पार्टीशन करने के लिए डिस्क जगहः"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
 msgstr "पार्टीशन करने की स्कीमः"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -119,13 +114,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "अनुपयोगी रिक्त जगह"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -134,14 +129,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
 msgstr "मार्गदर्शन सहित पार्टीशन"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
 msgstr "अधिकतम कंटीन्यूअस रिक्त जगह का उपयोग करें"
 
@@ -151,60 +146,85 @@ msgstr "अधिकतम कंटीन्यूअस रिक्त जग
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
 msgstr "संपूर्ण डिस्क साफ करें: ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
 msgstr "पार्टीशन टेबल हस्तचालित संपादित करें"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "रिक्त जगह स्वचालित पार्टीशन करें"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
 msgstr "एक पार्टीशन में सभी फ़ाइलें (नए उपयोक्ताओं के लिए अनुसंशित)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "डेस्कटॉप मशीन"
+#: ../partman-auto.templates:100
+#, fuzzy
+msgid "Separate /home partition"
+msgstr "पार्टीशन फॉर्मेट करें"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "बहु-उपयोक्ता वर्कस्टेशन"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+#, fuzzy
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "पार्टीशन करने की स्कीमः"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

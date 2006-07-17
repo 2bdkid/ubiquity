@@ -6,16 +6,16 @@
 # Lithuanian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Kęstutis Biliūnas <kebil@kaunas.init.lt>, 2004, 2005.
+# Kęstutis Biliūnas <kebil@kaunas.init.lt>, 2004, 2005, 2006.
 # Marius Gedminas <mgedmin@b4net.lt>, 2004.
 # Darius Skilinskas <darius10@takas.lt>, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 03:56-0800\n"
-"PO-Revision-Date: 2005-07-26 10:28+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-04-30 18:31-0600\n"
+"PO-Revision-Date: 2006-06-02 09:51+0300\n"
 "Last-Translator: Kęstutis Biliūnas <kebil@kaunas.init.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,7 @@ msgstr "Interaktyvi aplinka (shell)"
 #. Description
 #: ../di-utils-shell.templates:3
 msgid "After this message, you will be running \"ash\", a Bourne-shell clone."
-msgstr ""
-"Po šio pranešimo, jūs vykdysite \"ash\" apvalkalą, Bourne-shell'o kloną."
+msgstr "Po šio pranešimo, vykdysite \"ash\" apvalkalą, Bourne-shell'o kloną."
 
 #. Type: note
 #. Description
@@ -58,14 +57,18 @@ msgstr "Grįžimui į įdiegiklio meniu naudokite \"exit\" komandą."
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-shell.templates:16
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-shell.templates:18
 msgid "Execute a shell"
 msgstr "Apvalkalo (shell) vykdymas"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-exit-installer.templates:4
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-exit-installer.templates:6
 msgid "Exit installer demo"
 msgstr "Išėjimas iš įdiegiklio demonstravimo"
 
@@ -73,7 +76,7 @@ msgstr "Išėjimas iš įdiegiklio demonstravimo"
 #. Description
 #: ../di-utils-reboot.templates:4
 msgid "Are you sure you want to exit now?"
-msgstr "Ar Jūs įsitikinę, kad norite išeiti (nutraukti) dabar?"
+msgstr "Ar įsitikinę, kad norite išeiti (nutraukti) dabar?"
 
 #. Type: boolean
 #. Description
@@ -81,13 +84,14 @@ msgstr "Ar Jūs įsitikinę, kad norite išeiti (nutraukti) dabar?"
 msgid ""
 "If you have not finished the install, your system may be left in an unusable "
 "state."
-msgstr ""
-"Jei Jūs nebaigėte įdiegimo, Jūsų sistema gali likti nepanaudojamoje būsenoje."
+msgstr "Jei nebaigėte įdiegimo, sistema gali likti nepanaudojamoje būsenoje."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-reboot.templates:11
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-reboot.templates:13
 msgid "Abort the installation"
 msgstr "Nutraukti įdiegimą"
 

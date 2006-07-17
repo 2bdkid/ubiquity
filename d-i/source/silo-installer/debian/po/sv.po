@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-28 18:33-0700\n"
-"PO-Revision-Date: 2005-12-30 14:56+0100\n"
+"PO-Revision-Date: 2006-02-25 00:50+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-boot@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid ""
 "unrelated to SILO, so continuing the installation may be possible."
 msgstr ""
 "Lyckades inte installera paketet \"silo\" i /target/. Att installera SILO "
-"som startladdare är ett nödvändigt steg. Men det kan också vara så att "
+"som starthanterare är ett nödvändigt steg. Men det kan också vara så att "
 "installationsproblemet inte är relaterat till SILO, i vilket fall det ändå "
 "kan vara möjligt att fortsätta installationen."
 
@@ -72,21 +72,21 @@ msgid ""
 "The SILO boot loader has been successfully installed on your new boot "
 "partition, and your system should now be able to boot itself."
 msgstr ""
-"Startladdaren (boot loader) SILO installerades framgångsrikt på din nya "
-"startpartition och ditt system bör nu kunna starta själv."
+"Starthanteraren SILO installerades framgångsrikt på din nya startpartition "
+"och ditt system bör nu kunna starta själv."
 
 #. Type: text
 #. Description
 #. Main menu text
 #: ../silo-installer.templates:23
 msgid "Install the SILO boot loader on a hard disk"
-msgstr "Installera startladdaren SILO på en hårddisk"
+msgstr "Installera starthanteraren SILO på en hårddisk"
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
 msgid "Unsupported boot filesystem type"
-msgstr "Ej supporterad typ av boot-filsystem"
+msgstr "Typen av uppstartsfilsystem stöds ej"
 
 #. Type: note
 #. Description
@@ -97,16 +97,16 @@ msgid ""
 "partitioning scheme the kernel is going to be installed on the ${SILO_PART} "
 "partition of type ${SILO_TYPE}."
 msgstr ""
-"För att SILO (Sparc Linux Loader) ska laddas korrekt måste kerneln finnas på "
-"en ext2, ext3 eller en ufs-formaterad partition. Den nuvarande "
-"konfigurationen är satt till att kerneln installeras på ${SILO_PART} som är "
-"en ${SILO_TYPE} partition."
+"För att SILO (Sparc Linux Loader) ska läsas in korrekt måste kärnan finnas "
+"på en ext2, ext3 eller en ufs-formaterad partition. Den nuvarande "
+"konfigurationen är satt till att kärnan installeras på ${SILO_PART} som är "
+"en ${SILO_TYPE}-partition."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:39
 msgid "Boot partition may cause problems with SILO"
-msgstr "Bootpartitionen kan skapa problem tillsammans med SILO"
+msgstr "Uppstartspartitionen kan skapa problem tillsammans med SILO"
 
 #. Type: note
 #. Description
@@ -116,9 +116,9 @@ msgid ""
 "impossible for SILO (Sparc Linux Loader) to boot a kernel placed farther "
 "than 1 GB from the beginning of the disk."
 msgstr ""
-"Denna maskin har troligtvis en firmware-bug som gör det omöjligt för SILO "
-"(Sparc Linux Loader) att starta en kernel som är placerad mer än 1GB från "
-"starten på disken."
+"Den här maskinen har troligtvis ett fel i firmware som gör det omöjligt för "
+"SILO (Sparc Linux Loader) att starta en kärna som är placerad mer än 1GB "
+"från starten på disken."
 
 #. Type: note
 #. Description
@@ -131,18 +131,18 @@ msgid ""
 "${SILO_PART} partition which extends up to ${SILO_OFF} mark. Keeping this "
 "configuration may result in an unbootable system."
 msgstr ""
-"För att undvika problem är det starkt rekommenderat att installera kerneln "
-"på en partition som fullständigt får plats på den första gigabyten av disken "
+"För att undvika problem är det starkt rekommenderat att installera kärnan på "
+"en partition som fullständigt får plats på den första gigabyte av disken "
 "(till exempel genom att skapa en liten /boot partition). I den nuvarande "
 "partitioneringen kommer den installeras på ${SILO_PART} partitionen som "
-"sträcker sig upp till ${SILO_OFF} markeringen. Fortsätta med detta kan "
+"sträcker sig upp till ${SILO_OFF} markeringen. Fortsätta med det kan "
 "resultera i att ditt system inte startar."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:53
 msgid "Unsupported partition table on the boot disk"
-msgstr "Ej supporterad partitionstabell på bootdisken"
+msgstr "Partitionstabellen på uppstartsdisken stöds ej"
 
 #. Type: note
 #. Description
@@ -153,8 +153,8 @@ msgid ""
 "to be installed on the ${SILO_PART} partition located on a disk with the "
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
-"SILO (Sparc Linux Loader) kan bara boot en kernel på en disk med \"sun\" "
-"partitionstabell. I nuvarande partitionsinställning kommer  kerneln att "
+"SILO (Sparc Linux Loader) kan bara starta upp en kärna på en disk med \"sun"
+"\"-partitionstabell. I nuvarande partitionsinställning kommer  kärnan att "
 "installeras på partitionen ${SILO_PART} som finns på en disk med "
 "partitionstypen \"${SILO_DISK}\"."
 
@@ -167,5 +167,5 @@ msgid ""
 "system."
 msgstr ""
 "Det är starkt rekommenderat att du går tillbaka till partitioneringen och "
-"löser detta problem. Om du fortsätter med denna konfiguration kan detta "
-"betyda att ditt system inte kommer att starta."
+"rättar till det här problemet. Om du fortsätter med den här konfigurationen "
+"kan det betyda att ditt system inte kommer att starta."

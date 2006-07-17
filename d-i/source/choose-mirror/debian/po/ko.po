@@ -6,13 +6,14 @@
 # Korean messages for debian-installer.
 # Copyright (C) 2003,2004,2005 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-11-02 00:21+0900\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-05-04 21:53+0900\n"
 "Last-Translator:  Sunjae park <darehanl@gmail.com>\n"
 "Language-Team:  Korean <debian-l10n-korean@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,68 +22,99 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 #, fuzzy
 msgid "Checking the Ubuntu archive mirror"
-msgstr "데비안 아카이브 미러를 확인합니다"
+msgstr "데비안 아카이브 미러를 확인 중입니다"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
 msgstr "Release 파일을 내려받는 중입니다 ..."
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
-msgstr "아카이브 미러가 틀렸습니다"
+msgstr "아카이브 미러가 잘못되었습니다"
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 #, fuzzy
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
 "have a valid Release file on it. Please try a different mirror."
 msgstr ""
-"지정하신 데비안 아카이브 미러가 없거나, 올바른 Release 파일이 그 안에 들어 있"
-"지 않습니다. 다른 미러를 시도해 보십시오."
+"지정하신 데비안 아카이브 미러가 없거나, 올바른 Release 파일을 갖고있지 않습니"
+"다. 다른 미러를 시도해 보십시오."
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "지원하지 않는 하드웨어 아키텍쳐입니다."
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+#, fuzzy
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"지정하신 데비안 아카이브 미러는 해당 아키텍쳐를 지원하지 않습니다.다른 미러"
+"를 시도해 보십시오."
 
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 #, fuzzy
 msgid "Choose a mirror of the Ubuntu archive"
 msgstr "데비안 아카이브의 미러를 선택하십시오"
 
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
 msgstr "수동으로 정보를 입력하십시오"
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
 msgstr "KR"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 #, fuzzy
 msgid "Ubuntu archive mirror country:"
 msgstr "데비안 아카이브 미러 국가:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 #, fuzzy
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
@@ -95,47 +127,53 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 #, fuzzy
 msgid "Ubuntu archive mirror:"
 msgstr "데비안 아카이브 미러:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 #, fuzzy
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
 "connection to you."
 msgstr ""
-"데비안 아카이브 미러를 선택하십시오. 어떤 미러가 가장 인터넷 연결상태가 좋은"
-"지 잘 모르겠으면, 해당 국가나 지역의 미러를 사용하십시오."
+"데비안 아카이브 미러를 선택하십시오. 가장 인터넷 연결상태가 좋은 미러가 어떤"
+"미러인 지를 모르겠으면 해당하는 국가나 지역에 있는 미러를 사용하십시오."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "보통, <국가 코드>.archive.ubuntu.com를 선택하는 것이 좋습니다."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 #, fuzzy
 msgid "Ubuntu archive mirror hostname:"
-msgstr "데비안 아카이브 미러 호스트 이름:"
+msgstr "데비안 아카이브 미러의 호스트명:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 #, fuzzy
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
-msgstr "데비안을 내려받을 미러의 호스트이름을 입력하십시오."
+msgstr "데비안을 내려받을 미러의 호스트명을 입력하십시오."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -143,14 +181,16 @@ msgstr "표준 [hostname]:[port] 형식을 사용해 다른 포트를 지정할 
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 #, fuzzy
 msgid "Ubuntu archive mirror directory:"
 msgstr "데비안 아카이브 미러 디렉토리:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 #, fuzzy
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
@@ -159,13 +199,13 @@ msgstr "데비안 아카이브 미러가 들어 있는 디렉토리를 입력하
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
 msgstr "HTTP 프록시 정보 (없으면 빈 칸):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -175,33 +215,45 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
-"프록시 정보는 \"http://<[[사용자][:암호]@호스트[:포트]\"의 표준 형태로 입력해"
-"야 합니다."
+"프록시 정보는 \"http://<[[사용자][:암호]@]호스트명[:포트]/\"의 표준 형태로 입"
+"력해야 합니다."
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
 msgstr "KR"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
 msgstr "FTP 프록시 정보 (없으면 빈 칸):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
@@ -211,17 +263,16 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
 msgstr "파일을 내려받을 때 사용할 프로토콜:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
-#, fuzzy
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"파일 내려받기 프로토콜을 선택하십시오. 잘 모르겠으면, \"http\"를 선택하십시"
-"오; http가 방화벽 관련한 문제에 가장 덜 민감합니다."
+"파일 내려받기 프로토콜을 선택하십시오. http가 방화벽 관련 문제를 덜 겪기때문"
+"에 잘 모르겠으면 \"http\"를 선택하십시오."

@@ -16,9 +16,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-20 18:32-0600\n"
-"PO-Revision-Date: 2006-01-11 22:30+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-19 21:23-0600\n"
+"PO-Revision-Date: 2006-06-06 09:02+0300\n"
 "Last-Translator: Recai Oktaş <roktas@omu.edu.tr>\n"
 "Language-Team: Debian L10n Turkish <debian-l10n-turkish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -197,12 +197,12 @@ msgstr "Bu bağlama noktası için geçersiz dosya sistemi:"
 #: ../partman-basicfilesystems.templates:73
 msgid ""
 "The file system type ${FILESYSTEM} cannot be mounted on ${MOUNTPOINT}, "
-"because it is not a fully-functional Unix filesystem. Please choose a "
+"because it is not a fully-functional Unix file system. Please choose a "
 "different file system, such as ${EXT2}."
 msgstr ""
 "${FILESYSTEM} tipindeki dosya sistemi ${MOUNTPOINT} noktasına bağlanamıyor, "
-"çünkü bu tam işlevsel bir Unix dosya sistemi değil.  Lütfen başka bir dosya "
-"sistemi seçin, mesela ${EXT2} gibi."
+"çünkü bu tam işlevsel bir Unix dosya sistemi değil.  Lütfen ${EXT2} gibi "
+"başka bir dosya sistemi seçin."
 
 #. Type: select
 #. Choices
@@ -215,48 +215,72 @@ msgstr "/ - kök dosya sistemi"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/boot - static files of the boot loader"
 msgstr "/boot - önyükleyiciye ait statik dosyalar"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/home - user home directories"
 msgstr "/home - kullanıcı ev dizinleri"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/tmp - temporary files"
 msgstr "/tmp - geçici dosyalar"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/usr - static data"
 msgstr "/usr - statik veriler"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/var - variable data"
 msgstr "/var - değişken veriler"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/srv - data for services provided by this system"
 msgstr "/srv - bu sistem tarafından sunulan hizmetlere ait veriler"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/opt - add-on application software packages"
 msgstr "/opt - sonradan eklenen yazılım paketleri"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/usr/local - local hierarchy"
 msgstr "/usr/local - yerel dizin hiyerarşisi"
@@ -474,36 +498,54 @@ msgstr "noatime - her erişimde inode erişim zamanlarını güncelleme"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "nodev - do not support character or block special devices"
 msgstr "nodev - karakter veya özel blok aygıtlarını göz ardı et"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "nosuid - ignore set-user-identifier or set-group-identifier bits"
 msgstr "nosuid - set-user-id veya set-group-id bitlerini göz ardı et"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "noexec - do not allow execution of any binaries"
 msgstr "noexec - ikili (binary) dosyaların çalıştırılmasına izin verme"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "usrquota - user disk quota accounting enabled"
 msgstr "usrquota - kullanıcı disk kota hesabını etkinleştir"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "grpquota - group disk quota accounting enabled"
 msgstr "grpquota - grup disk kota hesabını etkinleştir"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "user_xattr - support user extended attributes"
 msgstr "user_xattr - genişletilmiş kullanıcı özelliklerini destekle"
@@ -519,12 +561,18 @@ msgstr "ro - dosya sistemini salt-okunur olarak bağla"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:237
 msgid "sync - all input/output activities occur synchronously"
 msgstr "sync - tüm girdi/çıktı işlemleri eşzamanlı olarak oluşsun"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:237
 msgid "quiet - changing owner and permissions does not return errors"
 msgstr "quiet - dosya sahibi ve izinleri değiştiğinde hata verme"

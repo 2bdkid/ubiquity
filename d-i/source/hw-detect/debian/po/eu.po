@@ -3,43 +3,49 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of eu.po to librezale.org
-# translation of eu.po to Euskara
+# translation of eu.po to librezale
 # Basque messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Inaki Larranaga Murgoitio 2005
-# Piarres Beobide <pi@beobide.net>, 2004, 2005.
 #
+# Piarres Beobide <pi@beobide.net>, 2004, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-06-20 16:14+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-05-31 22:52+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
-"Language-Team: librezale.org <librezale@librezale.org>\n"
+"Language-Team: librezale <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Content-Transfer-Encoding=UTF-8Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "ez dago ethernet txartelik, ${CHOICES}, goikorik ez dago"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "ez dago ethernet txartelik"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "hauetako bat ere ez"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Ethernet txartelak behar duen kontrolatzailea:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -49,46 +55,46 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "FireWire Ethernet erabiltzen saiatu nahi al duzu?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
 "to it, this could be your primary Ethernet interface."
 msgstr ""
 "Ez da Ethernet txartelik atzeman, baina fireWire interfaze bat dago. Posible "
-"da nahi ez ziurra hardware zuzena konektatu ezkero hau zure Ethernet "
+"da, nahi ez gomendatua, hardware zuzena konektatuaz hau zure Ethernet "
 "interfaze nagusia izatea."
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Ez da Ethernet txartelik aurkitu"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Ez da Ethernet txartelik aurkitu sisteman."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Sare hardwarea atzematen"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
-msgstr "Atzeman sare hardwarea"
+msgstr "Sare hardwarea atzeman"
 
 #. Type: text
 #. Description
@@ -105,41 +111,41 @@ msgstr "Diskoak eta bestelako hardwarea atzematen"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "diska gailu gabe jarraitu, ${CHOICES}, hauetako bat ere ez"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "diska gailu gabe jarraitu"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
 msgstr "Diska gailuarentzat kontrolatzailea behar da:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
 msgstr ""
-"Diskari ez da atzeman. Zure Ethernet txartelak behar duen kontrolatzailearen "
-"izena badakizu, zerrendan hauta dezakezu."
+"Diskorik ez da atzeman. Zure Ethernet txartelak behar duen "
+"kontrolatzailearen izena badakizu, zerrendan hauta dezakezu."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
-msgstr "Ez dago partiziotan bana daitekeen euskarririk"
+msgstr "Ez dago partizioetan bana daitekeen euskarririk"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
-msgstr "Ez da aurkitu partiziotan bana daitekeen euskarririk."
+msgstr "Ez da aurkitu partizioetan bana daitekeen euskarririk."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Egiaztatu disko gogor bat makina honi konektatuta dagoela."
 
@@ -159,7 +165,7 @@ msgstr "'${MODULE}' modulua kargatzen '${CARDNAME}'txartelerako..."
 #. Description
 #: ../hw-detect.templates:11
 msgid "Starting PC card services..."
-msgstr "PC txartel-zerbitzuak abiarazten..."
+msgstr "PC txartel zerbitzuak abiarazten..."
 
 #. Type: multiselect
 #. Description
@@ -177,52 +183,34 @@ msgid ""
 msgstr ""
 "Zure hardwarearekin bat datozen Linux-eko nukleo-modulu hauek atzeman dira. "
 "Batzuk beharrezkoak ez direla baldin badakizu edo arazoak sortzen badituzte, "
-"ez kargatzea aukera dezakezu. Ziur ez bazaude, utzi denak hautatuta."
+"ez kargatzea aukera dezakezu. Ziur ez bazaude, utzi denak hautatua."
 
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Modulu-parametroen gonbita?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Modulu batzuek karga-denborako parametroak onartzen dituzte eragiketak "
-"pertsonalizatzeko. Nahi izanez gero, modulu-parametroak eska diezazkizuke "
-"modulu bakoitza kargatzean."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
-msgstr "PC txartel-zerbitzuak abiarazi nahi dituzu?"
+msgstr "PC txartel zerbitzuak abiarazi nahi dituzu?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
 msgstr ""
-"Ordenagailu honek PCMCIA interfazea eduki dezake. Adierazi PC txartel-"
+"Ordenagailu honek PCMCIA interfazea eduki dezake. Adierazi PC txartel "
 "zerbitzuak abiarazi nahi dituzun ala ez, PCMCIA txartelak erabili ahal "
 "izateko."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
-msgstr "PCMCIA baliabide-bitartearen aukerak:"
+msgstr "PCMCIA baliabide bitartearen aukerak:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -238,40 +226,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Hardware gehienetarako ez duzu ezer zehaztu behar hemen."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Modulu batzuk karga-denborako parametroak onartzen dituzte eragiketak "
-"pertsonalizatzeko. Parametro horiek askotan S/I ataka eta IRQ zenbakiak "
-"dira, eta horiek aldatu egiten dira makina batetik bestera, eta ezin dira "
-"hardwarearen arabera zehaztu. Kateak, adibidez, honen itxura izango du: "
-"\"irq=7 io=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Zer sartu ez badakizu, utzi hutsik."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "${MODULE} modulurako beste parametro batzuk:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -287,7 +254,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -297,19 +264,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Errorea gertatu da '${CMD_LINE_PARAM}' exekutatzean"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Behar diren kontrolatzaileak disketetik kargatu nahi dituzu?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

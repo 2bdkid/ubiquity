@@ -40,11 +40,12 @@ arch_check_usable_kernel () {
 	return 0
 }
 
-arch_get_kernel () {
-	if [ -n "$NUMCPUS" ] && [ "$NUMCPUS" -gt 1 ]; then
-		SMP=-smp
+arch_get_kernel_etch () {
+	if [ "$KERNEL_MAJOR" = 2.4 ]; then
+		# Kernel images are identical with Sarge
+		return
 	else
-		SMP=
+		imgbase=linux-image
 	fi
 
 	if [ "$1" = k7 ]; then
@@ -63,6 +64,7 @@ arch_get_kernel () {
 		fi
 		set 586tsc
 	fi
+
 	if [ "$1" = 686 ]; then
 		if [ "$SMP" ]; then
 			echo "linux-686$SMP"
@@ -86,4 +88,47 @@ arch_get_kernel () {
 	echo "linux-image-server"
 	echo "linux-server-bigiron"
 	echo "linux-image-server-bigiron"
+}
+
+arch_get_kernel_sarge () {
+	imgbase=kernel-image
+
+	if [ "$1" = k7 ]; then
+		if [ "$SMP" ]; then
+			echo "$imgbase-$KERNEL_MAJOR-k7$SMP"
+		fi
+		echo "$imgbase-$KERNEL_MAJOR-k7"
+		set k6
+	fi
+	if [ "$1" = k6 ]; then
+		if [ "$KERNEL_MAJOR" = 2.4 ]; then
+			echo "$imgbase-$KERNEL_MAJOR-k6"
+		fi
+		set 586tsc
+	fi
+
+	if [ "$1" = 686 ]; then
+		if [ "$SMP" ]; then
+			echo "$imgbase-$KERNEL_MAJOR-686$SMP"
+		fi
+		echo "$imgbase-$KERNEL_MAJOR-686"
+		set 586tsc
+	fi
+	if [ "$1" = 586tsc ]; then
+		if [ "$KERNEL_MAJOR" = 2.4 ]; then
+			echo "$imgbase-$KERNEL_MAJOR-586tsc"
+		fi
+		set 386
+	fi
+	echo "$imgbase-$KERNEL_MAJOR-386"
+}
+
+arch_get_kernel () {
+	if [ -n "$NUMCPUS" ] && [ "$NUMCPUS" -gt 1 ]; then
+		SMP=-smp
+	else
+		SMP=
+	fi
+
+	arch_get_kernel_etch "$1"
 }

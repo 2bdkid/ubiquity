@@ -3,238 +3,287 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of fr-new.po to French
-# translation of d-i.po to French
 # translation of fr.po to French
 # French messages for debian-installer.
 # Copyright (C) 2004 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Christian Perrier <bubulle@debian.org>, 2002-2004.
 # Pierre Machard <pmachard@debian.org>, 2002-2004.
 # Denis Barbier <barbier@debian.org>, 2002-2004.
 # Philippe Batailler <philippe.batailler@free.fr>, 2002-2004.
 # Michel Grentzinger <mic.grentz@online.fr>, 2003-2004.
-# Christian Perrier <bubulle@debian.org>, 2005.
-#
+# Christian Perrier <bubulle@debian.org>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-11-08 08:57+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-04-30 20:17+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 msgid "Checking the Ubuntu archive mirror"
-msgstr "Vérification du miroir de l'archive Ubuntu"
+msgstr "VÃ©rification du miroir de l'archive Ubuntu"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
-msgstr "Téléchargement du fichier « Release »..."
+msgstr "TÃ©lÃ©chargement du fichier Â«Â ReleaseÂ Â»..."
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
 msgstr "Miroir de l'archive Ubuntu corrompu"
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
 "have a valid Release file on it. Please try a different mirror."
 msgstr ""
-"Le miroir de l'archive Ubuntu indiqué est indisponible ou ne contient pas de "
-"fichier « Release ». Veuillez essayer d'utiliser un autre miroir de "
+"Le miroir de l'archive Ubuntu indiquÃ© est indisponible ou ne contient pas de "
+"fichier Â«Â ReleaseÂ Â». Veuillez essayer d'utiliser un autre miroir de "
+"l'archive."
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "Architecture non prise en charge"
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"Le miroir de l'archive Ubuntu indiquÃ© ne propose pas l'architecture "
+"matÃ©rielle que vous utilisez. Veuillez essayer d'utiliser un autre miroir de "
 "l'archive."
 
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 msgid "Choose a mirror of the Ubuntu archive"
 msgstr "Choisir un miroir de l'archive Ubuntu"
 
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
 msgstr "Saisie manuelle"
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
 msgstr "FR"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid "Ubuntu archive mirror country:"
-msgstr "Pays du miroir de l'archive Ubuntu :"
+msgstr "Pays du miroir de l'archive UbuntuÂ :"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
 "the best choice."
 msgstr ""
 "L'objectif est de trouver un miroir de l'archive Ubuntu qui soit proche de "
-"vous du point de vue du réseau. Gardez à l'esprit que le fait de choisir un "
-"pays proche, voire même votre pays, n'est peut-être pas le meilleur choix."
+"vous du point de vue du rÃ©seau. Gardez Ã  l'esprit que le fait de choisir un "
+"pays proche, voire mÃªme votre pays, n'est peut-Ãªtre pas le meilleur choix."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Ubuntu archive mirror:"
-msgstr "Miroir de l'archive Ubuntu :"
+msgstr "Miroir de l'archive UbuntuÂ :"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
 "connection to you."
 msgstr ""
 "Veuillez choisir un miroir de l'archive Ubuntu. Vous devriez utiliser un "
-"miroir situé dans votre pays ou votre région si vous ne savez pas quel "
-"miroir possède la meilleure connectivité Internet avec vous."
+"miroir situÃ© dans votre pays ou votre rÃ©gion si vous ne savez pas quel "
+"miroir possÃ¨de la meilleure connectivitÃ© Internet avec vous."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr ""
-"Généralement, <le_code_de_votre pays>.archive.ubuntu.com est un choix "
+"GÃ©nÃ©ralement, <le_code_de_votre pays>.archive.ubuntu.com est un choix "
 "pertinent."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid "Ubuntu archive mirror hostname:"
-msgstr "Nom d'hôte du miroir de l'archive Ubuntu :"
+msgstr "Nom d'hÃ´te du miroir de l'archive UbuntuÂ :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr ""
-"Veuillez indiquer le nom du miroir Ubuntu à partir duquel se fera le "
-"téléchargement."
+"Veuillez indiquer le nom du miroir Ubuntu Ã  partir duquel se fera le "
+"tÃ©lÃ©chargement."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
 msgstr ""
-"Un port différent peut être indiqué en utilisant le format normalisé "
-"[nom_d'hôte]:[port]."
+"Un port diffÃ©rent peut Ãªtre indiquÃ© en utilisant le format normalisÃ© "
+"[nom_d'hÃ´te]:[port]."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid "Ubuntu archive mirror directory:"
-msgstr "Répertoire du miroir de l'archive Ubuntu :"
+msgstr "RÃ©pertoire du miroir de l'archive UbuntuÂ :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
 msgstr ""
-"Veuillez indiquer le répertoire dans lequel se situe le miroir de l'archive "
+"Veuillez indiquer le rÃ©pertoire dans lequel se situe le miroir de l'archive "
 "Ubuntu."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
-msgstr "Mandataire HTTP (laisser vide si aucun) :"
+msgstr "Mandataire HTTP (laisser videÂ si aucun)Â :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
-"Si vous avez besoin d'utiliser un mandataire HTTP (souvent appelé « proxy ») "
-"pour accéder au monde extérieur, indiquez ses paramètres ici. Sinon, laissez "
+"Si vous avez besoin d'utiliser un mandataire HTTP (souvent appelÃ© Â«Â proxyÂ Â») "
+"pour accÃ©der au monde extÃ©rieur, indiquez ses paramÃ¨tres ici. Sinon, laissez "
 "ce champ vide."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
-"Les paramètres du mandataire doivent être indiqués avec la forme normalisée "
-"« http://[[utilisateur][:mot-de-passe]@]hôte[:port]/ »."
+"Les paramÃ¨tres du mandataire doivent Ãªtre indiquÃ©s avec la forme normalisÃ©e "
+"Â«Â http://[[utilisateur][:mot-de-passe]@]hÃ´te[:port]/Â Â»."
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
 msgstr "FR"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
-msgstr "Mandataire FTP (laisser vide si aucun) :"
+msgstr "Mandataire FTP (laisser videÂ si aucun)Â :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
-"Si vous avez besoin d'utiliser un mandataire FTP (souvent appelé « proxy ») "
-"pour accéder au monde extérieur, indiquez ses paramètres ici. Sinon, laissez "
+"Si vous avez besoin d'utiliser un mandataire FTP (souvent appelÃ© Â«Â proxyÂ Â») "
+"pour accÃ©der au monde extÃ©rieur, indiquez ses paramÃ¨tres ici. Sinon, laissez "
 "ce champ vide."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
-msgstr "Protocole de téléchargement des fichiers :"
+msgstr "Protocole de tÃ©lÃ©chargement des fichiersÂ :"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"Veuillez choisir le protocole à utiliser pour le téléchargement des "
-"fichiers. Si vous êtes indécis, choisissez « http », étant donné qu'il "
-"s'agit du protocole qui pose le moins de problème de filtrage par des pare-"
+"Veuillez choisir le protocole Ã  utiliser pour le tÃ©lÃ©chargement des "
+"fichiers. Si vous Ãªtes indÃ©cis, choisissez Â«Â httpÂ Â», Ã©tant donnÃ© qu'il "
+"s'agit du protocole qui pose le moins de problÃ¨me de filtrage par des pare-"
 "feux."

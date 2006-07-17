@@ -5,19 +5,17 @@
 # 
 # translation of eo.po to Esperanto 
 # Esperanto messages for debian-installer.
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Samuel Gimeno <sgimeno@gmail.com>, 2005.
-# Serge Leblanc <serge.leblanc@wanadoo.fr>, 2005.
+# Copyright (C) 2005,2006 Software in the Public Interest, Inc.
+# This file is distributed under the same license as debian-installer.
 #
+# Samuel Gimeno <sgimeno@gmail.com>, 2005.
+# Serge Leblanc <serge.leblanc@wanadoo.fr>, 2005-2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: eo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-07-18 21:00+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-11 21:40+0200\n"
 "Last-Translator: Serge Leblanc <serge.leblanc@wanadoo.fr>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -34,13 +32,13 @@ msgstr "Instalado de 'Yaboot'"
 #. Description
 #: ../yaboot-installer.templates:7
 msgid "Installing Yaboot boot loader"
-msgstr "Instalado de 'Yaboot' praŝargilo"
+msgstr "Instalado de 'yaboot'-ekŝargilo"
 
 #. Type: boolean
 #. Description
 #: ../yaboot-installer.templates:12
 msgid "Yaboot installation failed.  Continue anyway?"
-msgstr "'Yaboot' instalado malsukcesis. Ĉu tamene daŭrigu ?"
+msgstr "'Yaboot' instalado malsukcesis. Ĉu tamene daŭrigu?"
 
 #. Type: boolean
 #. Description
@@ -50,21 +48,21 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to Yaboot, so continuing the installation may be possible."
 msgstr ""
-"La 'yaboot'-a pako neeblas instalita en '/target/'. Instalu 'yaboot' tiel "
-"praŝargilo estas bezonata ago. Tamen la problemo ne dependus de 'yaboot', nu "
-"eble daŭrigus la instaladon."
+"La 'yaboot'-pako neeblas instalita en '/target/'-o. Instalu 'yaboot'-on tiel "
+"ekŝargilo estas bezonata ago. Tamen la problemo ne dependus de 'yaboot'-o, "
+"nu eble daŭrigus la instaladon."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:19
 msgid "Looking for bootstrap partitions"
-msgstr "Serĉi praŝargajn subdiskojn"
+msgstr "Serĉi ekŝargajn diskpartigojn"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr "Neniu praŝarga subdisko estas trovita"
+msgstr "Neniu trovita ekŝarga diskpartigo"
 
 #. Type: error
 #. Description
@@ -73,20 +71,20 @@ msgid ""
 "No hard disks were found which have an \"Apple_Bootstrap\" partition.  You "
 "must create an 819200-byte partition with type \"Apple_Bootstrap\"."
 msgstr ""
-"Neniu fiksdisko kun \"Apple_Bootstrap\" subdisko estas trovita. Vi nepre "
-"kreas 819200-bajtan subdiskon kun \"Apple_Bootstrap\" tipo."
+"Neniu fiksita disko kun \"Apple_Bootstrap\" diskpartigo estas trovita. Vi "
+"nepre kreas 819200-bajtan diskpartigon kun \"Apple_Bootstrap\" tipo."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:29
 msgid "Looking for root partition"
-msgstr "Serĉi radikan subdiskon"
+msgstr "Serĉi radikan diskpartigon"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:33
 msgid "No root partition found"
-msgstr "Neniu radika subdisko estas trovita"
+msgstr "Neniu trovita radika diskpartigo"
 
 #. Type: error
 #. Description
@@ -95,20 +93,20 @@ msgid ""
 "No partition is mounted as your new root partition. You must mount a root "
 "partition first."
 msgstr ""
-"Neniu subdisko estas surmetata tiel via nova radika subdisko. Vi unue "
-"surmetendu radikan subdiskon."
+"Neniu diskpartigo estas surmetata tiel via nova radika diskpartigo. Vi unue "
+"surmetendu radikan diskpartigon."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:39
 msgid "Looking for other operating systems"
-msgstr "Serĉi alian operaciumojn ..."
+msgstr "Serĉi alian operaciumojn..."
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Device for boot loader installation:"
-msgstr "Adaptilo kie instalontas praŝargon :"
+msgstr "Adaptilo kie instalontas ekŝargilon:"
 
 #. Type: select
 #. Description
@@ -119,15 +117,15 @@ msgid ""
 "destination partition from among these partitions that have the bootable "
 "flag set."
 msgstr ""
-"Yaboot (la Linuksa praŝargilo) bezonas instalitan por praŝargebli vian novan "
-"sistemon. Bonvolu elekti la celan subdiskon inter tiuj noĉitaj subdiskoj per "
-"praŝargebla flago."
+"Yaboot (la Linuksa ekŝargilo) bezonas instalitan por ekŝargebli vian novan "
+"sistemon. Bonvolu elekti la celan diskpartigon inter tiuj noĉitaj "
+"diskpartigoj per ekŝargebla flago."
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr "Atento : tio viŝos ĉiujn datumojn en elekta subdisko !"
+msgstr "Atentu: tio viŝos ĉiujn datumojn en elekta diskpartigo !"
 
 #. Type: text
 #. Description
@@ -147,29 +145,23 @@ msgstr "kreado de 'yaboot'-a akomodo malsukcesas"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "La kreado de ĉefa 'yaboot'-akomodada dosiero malsukcesis."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Bonvolu kontroli la 'syslog' dosieron por pli informo."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
 msgid "Installing yaboot into bootstrap partition"
-msgstr "Instali 'yaboot' sur praŝarga subdisko"
+msgstr "Instali 'yaboot'-on sur ekŝarga diskpartigo"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "Failed to install boot loader"
-msgstr "Instalado de praŝargilo malsukcesas"
+msgstr "Instalado de ekŝargilo malsukcesas"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "The installation of the yaboot boot loader failed."
-msgstr "La instalado de 'yaboot'-a praŝargilo malsukcesas."
+msgstr "La instalado de 'yaboot'-a ekŝargilo malsukcesas."
 
 #. Type: note
 #. Description
@@ -181,13 +173,13 @@ msgstr "Sukcese instalita 'yaboot'"
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The yaboot boot loader was successfully installed."
-msgstr "La 'yaboot' praŝargilo estas sukcesplene instalita."
+msgstr "La 'yaboot' ekŝargilo estas sukcesplene instalita."
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The new system is now ready to boot."
-msgstr "La nova sistemo estas nun preta por praŝargi."
+msgstr "La nova sistemo estas nun preta por ekŝargi."
 
 #. Type: error
 #. Description
@@ -204,21 +196,21 @@ msgstr "Surmetendado de 'proc'-a dosiersistemo en '/target/proc' malsukcesas"
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
-"Bonvolu kontroli la 'syslog' dosieron aŭ la trian konzolan eligon (tty3)."
+"Vidu '/var/log/syslog' aŭ la kvara virtuala konzolo por akiri detalojn."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Warning: Your system may be unbootable!"
-msgstr "Atento : via sistemo malaktivigeblus !"
+msgstr "Atentu: via sistemo malaktivigeblus !"
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
 msgid "Setting firmware variables for automatic boot"
-msgstr "Akomodi firmvarajn variablojn por aŭtomate praŝargi"
+msgstr "Akomodi firmvarajn variablojn por aŭtomate ekŝargi"
 
 #. Type: note
 #. Description
@@ -230,9 +222,9 @@ msgid ""
 "OpenFirmware variables to enable auto-booting:"
 msgstr ""
 "Kelkaj variabloj en la firmvaro 'Pegasos OpenFirmware' bezonas agordaĵon por "
-"aŭtomate praŝargi linukson. La sistemo reŝargiĝos post la instalado. Akomodu "
+"aŭtomate startigi Linukson. La sistemo reŝargiĝos post la instalado. Akomodu "
 "la sekvantaj variabloj dum la 'Pegasos OpenFirmware' invito por aktivigi la "
-"aŭtomatan praŝargon."
+"aŭtomatan ekŝargon."
 
 #. Type: note
 #. Description
@@ -263,12 +255,11 @@ msgstr ""
 #: ../yaboot-installer.templates:97
 msgid ""
 "Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Alimaniere, vi povos mane praŝargi la sistemon per enskribu :"
+msgstr "Alimaniere, vi povos mane ekŝargi la sistemon per enskribu:"
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
-#, fuzzy
 msgid " ${BOOT}"
 msgstr " ${BOOT}"
 
@@ -283,11 +274,11 @@ msgstr "dum la firmvara 'OpenFirmware' invito"
 #. Main menu item
 #: ../yaboot-installer.templates:120
 msgid "Install yaboot on a hard disk"
-msgstr "Instalu 'yaboot'-n en fiksdisko"
+msgstr "Instalu 'yaboot'-on en fiksita disko"
 
 #. Type: text
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
 msgid "Reinstall yaboot boot loader"
-msgstr "Reinstalu 'Yaboot' praŝargilon"
+msgstr "Reinstalu 'yaboot'-an ekŝargilon"

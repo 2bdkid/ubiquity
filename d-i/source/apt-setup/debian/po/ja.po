@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-18 19:48+0900\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-29 10:54+0900\n"
 "Last-Translator:  Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Debian L10n Japanese <debian-l10n-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -130,6 +130,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "利用できるようにしたいかどうかを選んでください。"
@@ -156,6 +159,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -171,12 +177,16 @@ msgstr "再試行"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "ミラーの変更"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "無視"
@@ -203,6 +213,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "ネットワークミラーを使いますか?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"ネットワークミラーは CD-ROM に収録されているソフトウェアを補完するのに利用で"
+"きます。これは利用可能なソフトウェアのより新しいバージョンとなることもありま"
+"す。"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+"netinst CD からインストールしており、ミラーを使うことを選ばない場合には、非常"
+"に小さな基本システムのみという形で終わることになります。"
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -210,6 +247,7 @@ msgstr "制限されたソフトウェアを使いますか?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -232,6 +270,7 @@ msgstr "\"universe\" コンポーネントからのソフトウェアを使い�
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -252,6 +291,7 @@ msgstr "\"multiverse\" コンポーネントからのソフトウェアを使い
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -275,6 +315,7 @@ msgstr "バックポートされたソフトウェアを使いますか?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

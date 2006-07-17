@@ -4,10 +4,10 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Tagalog messages for debian-installer.
-# Copyright (C) 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2004, 2005, 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Ipinamamahagi ang talaksang ito alinsunod sa lisensiya ng debian-installer.
-# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005
+# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005, 2006
 # Rick Bahague, Jr. <rbahaguejr@gmail.com>, 2004
 # Reviewed by Roel Cantada on Feb-Mar 2005.
 # Sinuri ni Roel Cantada noong Peb-Mar 2005.
@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-07-07 18:19+0800\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-04-19 18:23+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -29,19 +29,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "walang ethernet card, ${CHOICES}, wala sa itaas"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "walang ethernet card"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "wala sa itaas"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Driver na kailangan ng inyong Ethernet card:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -51,13 +58,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "May balak ba kayong gumamit ng FireWire ethernet?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -69,26 +76,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Walang nakitang Ethernet card"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Walang nakitang Ethernet card sa makina."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Hinahanap ang network hardware"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Hanapin ang network hardware"
 
@@ -107,19 +114,19 @@ msgstr "Hinahanap ang mga disk at iba pang hardware"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "magpatuloy na walang disk drive, ${CHOICES}, wala sa itaas"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "magpatuloy na walang disk drive"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
 msgstr "Driver na kailangan ng inyong disk drive:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
@@ -129,19 +136,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Walang media na maaaring i-partisyon"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Walang nahanap na media na maaaring i-partisyon."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Pakisuri na may hard disk na nakakabit sa makinang ito."
 
@@ -185,30 +192,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Prompt para sa module parameters?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"May mga modules na tumatanggap ng parameters sa pagpasok upang baguhin ang "
-"kanilang pagtakbo. Kung naisin niyo, maaari kayong tanungin para sa mga "
-"parameters ng module tuwing papasukin ang bawat module."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "Patakbuhin ang PC card services?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -218,13 +207,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "PCMCIA resource range options:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -241,39 +230,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Para sa karamihan ng hardware, hindi nangangailangan punuan ito."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"May mga modules na tumatanggap ng parameters sa pagpasok upang isaayos ang "
-"kanilang pagtakbo. Kadalasan ay itong mga parameters na ito ay ang I/O port "
-"at numerong IRQ na nagiiba-iba sa bawa't makina at hindi ito makukuha mula "
-"sa hardware. Halimbawa nito ay \"irq=7 io=0x220=\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Kung hindi niyo alam ang ilalagay, iwanan ang puwang na blanko."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Karagdagang mga parameter para sa module ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -289,7 +258,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -299,19 +268,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Error habang pinapatakbo ang '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Magpasok ng kulang na mga driver mula sa driver floppy?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

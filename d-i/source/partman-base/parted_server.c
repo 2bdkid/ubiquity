@@ -8,10 +8,19 @@
 #include <errno.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <signal.h>
 
 /**********************************************************************
    Logging
 **********************************************************************/
+
+/* This file is used as pid-file. */
+char pidfile_name[] = "/var/run/parted_server.pid";
+
+/* These are the communication fifos */
+char infifo_name[] = "/var/lib/partman/infifo";
+char outfifo_name[] = "/var/lib/partman/outfifo";
+char stopfifo_name[] = "/var/lib/partman/stopfifo";
 
 /* This file is used as log-file. */
 char logfile_name[] = "/var/log/partman";
@@ -42,7 +51,7 @@ char const program_name[] = "parted_server";
                 exit(1); \
         })
 
-/* For debugint purposes */
+/* For debugging purposes */
 #define traceline() log("Line: %i", __LINE__)
 
 #define assert(x) \
@@ -257,9 +266,9 @@ timered_file_system_resize(PedFileSystem *fs, PedGeometry *geom)
  * "error", etc., `message' is the text to be presented to the user
  * and `options' is an array of pointers to strings such "Yes", "No",
  * "Cancel", etc.; the last pointer is NULL.  The function returns the
- * index of the chosen by the user option or -1 if the option read in
+ * index of the option chosen by the user or -1 if the option read in
  * 5. was "unhandled".  The client responses with "unhandled" when the
- * user cansels the debconf dialog or when the dialog was not
+ * user cancels the debconf dialog or when the dialog was not
  * presented to the user because of the debconf priority. */
 int
 pseudo_exception(char *type, char *message, char **options)
@@ -292,7 +301,7 @@ pseudo_exception(char *type, char *message, char **options)
         critical_error("exception_handler: Bad option: \"%s\"", str);
 }
 
-/* The maximal meaningfull bit in PedExceptionOption.  In the current
+/* The maximal meaningful bit in PedExceptionOption.  In the current
    version of libparted (1.6) this is 7, but let us be safer. */
 #define MAXIMAL_OPTION 10
 #define POWER_MAXIMAL_OPTION 1024       /* 2 to the MAXIMAL_OPTION */
@@ -333,7 +342,7 @@ exception_handler(PedException *ex)
                        options[response]);
 }
 
-/* If we want to disable temporary the exception handler for some
+/* If we want to temporarily disable the exception handler for some
    commands, we use deactivate_exception_handler() before them and
    activate_exception_handler after them. */
 
@@ -373,7 +382,7 @@ struct devdisk {
    `devices[number_devices - 1]'.  `number_devices' is a small number
    so there is no need to use a hash table or some more advanced data
    structure.  Moreover a version of parted_server using the hash
-   implementation from libdebian-installer was in 200 bytes longer. */
+   implementation from libdebian-installer was 200 bytes longer. */
 
 unsigned number_devices = 0;
 struct devdisk *devices = NULL;
@@ -479,10 +488,9 @@ remember_geometries_named(const char *name)
                                 continue;
                         if (PED_PARTITION_FREESPACE & part->type)
                                 continue;
-                        ped_geometry_init(geometries+last,
+                        ped_geometry_init(geometries + last,
                                           disk->dev,
-                                          part->geom.start,
-                                          part->geom.length);
+                                          part->geom.start, part->geom.length);
                         last = last + 1;
                         if (last >= max_partition)
                                 critical_error("Too many partitions");
@@ -524,7 +532,7 @@ named_partition_is_virtual(const char *name, PedSector start, PedSector end)
                 log("yes");
                 return true;
         }
-        for (i=0; i<last; i++) {
+        for (i = 0; i < last; i++) {
                 if (start == geometries[i].start && end == geometries[i].end) {
                         log("no");
                         return false;
@@ -628,7 +636,7 @@ add_primary_partition(PedDisk *disk, PedFileSystemType *fs_type,
 {
         PedPartition *part;
         assert(disk != NULL);
-        log("add_primary_partition(disk(%lli),%lli-%lli)", 
+        log("add_primary_partition(disk(%lli),%lli-%lli)",
             disk->dev->length, start, end);
         if (has_extended_partition(disk)) {
                 /* Minimise the extended partition.  If there is an
@@ -689,7 +697,7 @@ resize_partition(PedDisk *disk, PedPartition *part,
         PedConstraint *constraint;
         PedSector old_start, old_end;
         bool result;
-        log("resize_partition(openfs=%s)", open_filesystem ? "true":"false");
+        log("resize_partition(openfs=%s)", open_filesystem ? "true" : "false");
         old_start = (part->geom).start;
         old_end = (part->geom).end;
         if (old_start == start && old_end == end)
@@ -834,8 +842,8 @@ partition_with_id(PedDisk *disk, char *id)
         log("partition_with_id(%s)", id);
         if (2 != sscanf(id, "%lli-%lli", &start, &end))
                 critical_error("Bad id %s", id);
-        start_sector = start / PED_SECTOR_SIZE;
-        end_sector = (end - PED_SECTOR_SIZE + 1) / PED_SECTOR_SIZE;
+        start_sector = start / PED_SECTOR_SIZE_DEFAULT;
+        end_sector = (end - PED_SECTOR_SIZE_DEFAULT + 1) / PED_SECTOR_SIZE_DEFAULT;
         if (disk == NULL)
                 return NULL;
         for (part = NULL;
@@ -917,9 +925,9 @@ partition_info(PedDisk *disk, PedPartition *part)
                 name = "";
         asprintf(&result, "%i\t%lli-%lli\t%lli\t%s\t%s\t%s\t%s",
                  part->num,
-                 (part->geom).start * PED_SECTOR_SIZE,
-                 (part->geom).end * PED_SECTOR_SIZE + PED_SECTOR_SIZE - 1,
-                 (part->geom).length * PED_SECTOR_SIZE, type, fs, path, name);
+                 (part->geom).start * PED_SECTOR_SIZE_DEFAULT,
+                 (part->geom).end * PED_SECTOR_SIZE_DEFAULT + PED_SECTOR_SIZE_DEFAULT - 1,
+                 (part->geom).length * PED_SECTOR_SIZE_DEFAULT, type, fs, path, name);
         free(path);
         return result;
 }
@@ -939,7 +947,7 @@ dump_info(FILE *dumpfile, PedDevice *dev, PedDisk *disk)
         fprintf(dumpfile, "Device: yes\n");
         fprintf(dumpfile, "Model: %s\n", dev->model);
         fprintf(dumpfile, "Path: %s\n", dev->path);
-        fprintf(dumpfile, "Sector size: %i\n", dev->sector_size);
+        fprintf(dumpfile, "Sector size: %lli\n", dev->sector_size);
         fprintf(dumpfile, "Sectors: %lli\n", dev->length);
         fprintf(dumpfile, "Sectors/track: %i\n", dev->bios_geom.sectors);
         fprintf(dumpfile, "Heads: %i\n", dev->bios_geom.heads);
@@ -1022,7 +1030,7 @@ command_open()
         open_out();
         if (device_opened(device_name)) {
                 static char *only_ok[] = { "OK", NULL };
-                log("Warning: the device is opened");
+                log("Warning: the device is already opened");
                 pseudo_exception("Warning",
                                  "The device is already opened.", only_ok);
         } else {
@@ -1086,7 +1094,7 @@ command_virtual()
         log("is virtual partition with id %s", id);
         part = partition_with_id(disk, id);
         oprintf("OK\n");
-        if (named_partition_is_virtual(device_name, 
+        if (named_partition_is_virtual(device_name,
                                        part->geom.start, part->geom.end)) {
                 oprintf("yes\n");
         } else {
@@ -1218,8 +1226,8 @@ command_partitions()
                 if (PED_PARTITION_FREESPACE & part->type
                     && ped_disk_type_check_feature(disk->type,
                                                    PED_DISK_TYPE_EXTENDED)
-                    && (part->geom).length
-                       < dev->bios_geom.sectors * dev->bios_geom.heads)
+                    && ((part->geom).length
+                        < dev->bios_geom.sectors * dev->bios_geom.heads))
                         continue;
                 /* Another hack :) */
                 if (0 == strcmp(disk->type->name, "dvh")
@@ -1541,7 +1549,7 @@ command_get_file_system()
         log("command_get_file_system: File system for partition %s", id);
         part = partition_with_id(disk, id);
         oprintf("OK\n");
-        if (named_partition_is_virtual(device_name, 
+        if (named_partition_is_virtual(device_name,
                                        part->geom.start, part->geom.end)) {
                 oprintf("none\n");
         } else {
@@ -1564,6 +1572,7 @@ command_change_file_system()
         PedPartition *part;
         char *s_fstype;
         PedFileSystemType *fstype;
+        PedPartitionFlag flag;
         scan_device_name();
         if (dev == NULL)
                 critical_error("The device %s is not opened.", device_name);
@@ -1572,12 +1581,25 @@ command_change_file_system()
                 critical_error("Expected partition id and file system");
         log("command_change_file_system(%s,%s)", id, s_fstype);
         part = partition_with_id(disk, id);
+        if (part == NULL) {
+                critical_error("Partition not found: %s", id);
+        }
         free(id);
         fstype = ped_file_system_type_get(s_fstype);
         free(s_fstype);
-        if (fstype == NULL)
-                critical_error("Bad file system type: %s", s_fstype);
-        ped_partition_set_system(part, fstype);
+        if (fstype == NULL) {
+                log("Filesystem %s not found, let's see if it is a flag",
+                    s_fstype);
+                flag = ped_partition_flag_get_by_name(s_fstype);
+                if (ped_partition_is_flag_available(part, flag)) {
+                        ped_partition_set_flag(part, flag, 1);
+                } else {
+                        critical_error("Bad file system or flag type: %s",
+                                       s_fstype);
+                }
+        } else {
+                ped_partition_set_system(part, fstype);
+        }
         oprintf("OK\n");
 }
 
@@ -1637,8 +1659,7 @@ command_create_file_system()
                 critical_error("Bad file system type: %s", s_fstype);
         ped_partition_set_system(part, fstype);
         deactivate_exception_handler();
-        if ((fs = timered_file_system_create(&(part->geom), fstype)) != NULL)
-        {
+        if ((fs = timered_file_system_create(&(part->geom), fstype)) != NULL) {
                 ped_file_system_close(fs);
                 ped_disk_commit_to_dev(disk);
         }
@@ -1731,16 +1752,16 @@ command_new_partition()
         free(s_fs_type);
 
         if (!strcasecmp(position, "full")) {
-                part_start = range_start / PED_SECTOR_SIZE;
-                part_end = ((range_end - PED_SECTOR_SIZE + 1)
-                            / PED_SECTOR_SIZE);
+                part_start = range_start / PED_SECTOR_SIZE_DEFAULT;
+                part_end = ((range_end - PED_SECTOR_SIZE_DEFAULT + 1)
+                            / PED_SECTOR_SIZE_DEFAULT);
         } else if (!strcasecmp(position, "beginning")) {
-                part_start = range_start / PED_SECTOR_SIZE;
-                part_end = (range_start + length) / PED_SECTOR_SIZE;
+                part_start = range_start / PED_SECTOR_SIZE_DEFAULT;
+                part_end = (range_start + length) / PED_SECTOR_SIZE_DEFAULT;
         } else if (!strcasecmp(position, "end")) {
-                part_start = (range_end - length) / PED_SECTOR_SIZE;
-                part_end = ((range_end - PED_SECTOR_SIZE + 1)
-                            / PED_SECTOR_SIZE);
+                part_start = (range_end - length) / PED_SECTOR_SIZE_DEFAULT;
+                part_end = ((range_end - PED_SECTOR_SIZE_DEFAULT + 1)
+                            / PED_SECTOR_SIZE_DEFAULT);
         } else
                 critical_error("Bad position: %s", position);
         free(position);
@@ -1818,8 +1839,8 @@ command_resize_partition()
                 critical_error("Expected new size");
         log("New size: %lli", new_size);
         start = (part->geom).start;
-        end = start + new_size / PED_SECTOR_SIZE - 1;
-        if (named_partition_is_virtual(device_name, 
+        end = start + new_size / PED_SECTOR_SIZE_DEFAULT - 1;
+        if (named_partition_is_virtual(device_name,
                                        part->geom.start, part->geom.end)) {
                 resize_partition(disk, part, start, end, false);
         } else {
@@ -1829,8 +1850,8 @@ command_resize_partition()
                 }
         }
         oprintf("OK\n");
-        oprintf("%lli-%lli\n", (part->geom).start * PED_SECTOR_SIZE,
-                (part->geom).end * PED_SECTOR_SIZE + PED_SECTOR_SIZE - 1);
+        oprintf("%lli-%lli\n", (part->geom).start * PED_SECTOR_SIZE_DEFAULT,
+                (part->geom).end * PED_SECTOR_SIZE_DEFAULT + PED_SECTOR_SIZE_DEFAULT - 1);
         free(id);
 }
 
@@ -1858,17 +1879,17 @@ command_virtual_resize_partition()
                 critical_error("Expected new size");
         log("New size: %lli", new_size);
         start = (part->geom).start;
-        end = start + new_size / PED_SECTOR_SIZE - 1;
+        end = start + new_size / PED_SECTOR_SIZE_DEFAULT - 1;
         /* ensure that the size is not less than the requested */
         do {
                 resize_partition(disk, part, start, end, false);
                 end = end + 1;
-        } while ((part->geom).length * PED_SECTOR_SIZE < new_size);
+        } while ((part->geom).length * PED_SECTOR_SIZE_DEFAULT < new_size);
         ped_disk_commit(disk);
         unchange_named(device_name);
         oprintf("OK\n");
-        oprintf("%lli-%lli\n", (part->geom).start * PED_SECTOR_SIZE,
-                (part->geom).end * PED_SECTOR_SIZE + PED_SECTOR_SIZE - 1);
+        oprintf("%lli-%lli\n", (part->geom).start * PED_SECTOR_SIZE_DEFAULT,
+                (part->geom).end * PED_SECTOR_SIZE_DEFAULT + PED_SECTOR_SIZE_DEFAULT - 1);
         free(id);
 }
 
@@ -1893,7 +1914,7 @@ command_get_resize_range()
         part = partition_with_id(disk, id);
         if (part == NULL)
                 critical_error("No such partition");
-        if (!named_partition_is_virtual(device_name, 
+        if (!named_partition_is_virtual(device_name,
                                         part->geom.start, part->geom.end)) {
                 fs = ped_file_system_open(&(part->geom));
                 if (NULL != fs && (fs->geom->start < (part->geom).start
@@ -1924,10 +1945,10 @@ command_get_resize_range()
         max_geom = ped_disk_get_max_partition_geometry(disk, part, constraint);
         if (part->type & PED_PARTITION_LOGICAL)
                 minimize_extended_partition(disk);
-        min_size = constraint->min_size * PED_SECTOR_SIZE;
-        current_size = (part->geom).length * PED_SECTOR_SIZE;
+        min_size = constraint->min_size * PED_SECTOR_SIZE_DEFAULT;
+        current_size = (part->geom).length * PED_SECTOR_SIZE_DEFAULT;
         if (max_geom)
-                max_size = max_geom->length * PED_SECTOR_SIZE;
+                max_size = max_geom->length * PED_SECTOR_SIZE_DEFAULT;
         else
                 max_size = current_size;
         oprintf("OK\n");
@@ -1968,10 +1989,10 @@ command_get_virtual_resize_range()
         max_geom = ped_disk_get_max_partition_geometry(disk, part, constraint);
         if (part->type & PED_PARTITION_LOGICAL)
                 minimize_extended_partition(disk);
-        min_size = constraint->min_size * PED_SECTOR_SIZE;
-        current_size = (part->geom).length * PED_SECTOR_SIZE;
+        min_size = constraint->min_size * PED_SECTOR_SIZE_DEFAULT;
+        current_size = (part->geom).length * PED_SECTOR_SIZE_DEFAULT;
         if (max_geom)
-                max_size = max_geom->length * PED_SECTOR_SIZE;
+                max_size = max_geom->length * PED_SECTOR_SIZE_DEFAULT;
         else
                 max_size = current_size;
         oprintf("OK\n");
@@ -2024,22 +2045,107 @@ command_copy_partition()
         free(srcid);
 }
 
-void command_get_disk_type()
+void
+command_get_disk_type()
 {
-	log("command_get_disk_type()");
-	scan_device_name();
-	open_out();
-	oprintf("OK\n");
-	deactivate_exception_handler();
-	if((disk == NULL) || (disk->type == NULL) 
-			  || (disk->type->name == NULL)) {
-		oprintf("unknown\n");
-	} else {
-		oprintf("%s\n", disk->type->name);
-	}
-	activate_exception_handler();
+        log("command_get_disk_type()");
+        scan_device_name();
+        open_out();
+        oprintf("OK\n");
+        deactivate_exception_handler();
+        if ((disk == NULL) || (disk->type == NULL)
+            || (disk->type->name == NULL)) {
+                oprintf("unknown\n");
+        } else {
+                oprintf("%s\n", disk->type->name);
+        }
+        activate_exception_handler();
 }
+
+void
+make_fifo(char* name)
+{
+    int status;
+    status = mkfifo(name, 0x644);
+    if ((status != 0))
+            if (errno != EEXIST) {
+                    perror("Cannot create FIFO");
+                    exit(252);
+            }
+}
+
+void
+make_fifos()
+{
+    make_fifo(infifo_name);
+    make_fifo(outfifo_name);
+    make_fifo(stopfifo_name);
+}   
+
+int
+write_pid_file()
+{
+        FILE *fd;
+        int status;
+        pid_t oldpid;
+        if ((fd = fopen(pidfile_name, "a+")) == NULL)
+                return -1;
+
+        status = fscanf(fd, "%d", &oldpid);
+        if (status != 0 && status != EOF) {
+        	// If kill(oldpid, 0) == 0 the process is still alive
+		// so we abort
+		if (kill(oldpid, 0) == 0) {
+			fprintf(stderr, "Not starting: process %d still exists\n", oldpid);
+			fclose(fd);
+			exit(250);
+		}
+	}
 	
+	// Truncate the pid file and continue
+	freopen(pidfile_name, "w", fd);
+        
+        fprintf(fd, "%d", (int)(getpid()));
+        fclose(fd);
+        return 0;
+}
+
+void
+cleanup_and_die()
+{
+        if (unlink(pidfile_name) != 0)
+                perror("Cannot unlink pid file");
+        if (unlink(infifo_name) != 0)
+                perror("Cannot unlink input FIFO");
+        if (unlink(outfifo_name) != 0)
+                perror("Cannot unlink output FIFO");
+        if (unlink(stopfifo_name) != 0)
+                perror("Cannot unlink stop FIFO");
+}
+
+void
+prnt_sig_hdlr(int signal)
+{
+        int status;
+        switch(signal) {
+                // SIGUSR1 signals that child is ready to take
+                // requests (i.e. has finished initialisation)
+                case SIGUSR1:
+                    exit(0);
+                    break;
+                // We'll only get SIGCHLD if our child has pre-deceased us
+                // In this case we should exit with its error code
+                case SIGCHLD:
+                    if (waitpid(-1, &status, WNOHANG) < 0) 
+                        exit(0);
+                    if (WIFEXITED(status))
+                        exit(WEXITSTATUS(status));
+                    break;
+                default:
+                    break;
+        }
+}
+
 /**********************************************************************
    Main
 **********************************************************************/
@@ -2124,8 +2230,8 @@ main_loop()
                         command_get_virtual_resize_range();
                 else if (!strcasecmp(str, "COPY_PARTITION"))
                         command_copy_partition();
-		else if (!strcasecmp(str, "GET_DISK_TYPE"))
-			command_get_disk_type();
+                else if (!strcasecmp(str, "GET_DISK_TYPE"))
+                        command_get_disk_type();
                 else
                         critical_error("Unknown command %s", str);
                 free(str);
@@ -2136,6 +2242,7 @@ main_loop()
 int
 main(int argc, char *argv[])
 {
+        struct sigaction act, oldact;
         int i;
 
         /* Close all extraneous file descriptors, including our pipe to
@@ -2144,11 +2251,50 @@ main(int argc, char *argv[])
         for (i = 3; i < 256; ++i)
                 close(i);
 
+        // Set up signal handling
+        act.sa_handler = prnt_sig_hdlr;
+        sigemptyset(&act.sa_mask);
+
+        // Set up signal handling for parent
+        if  ((sigaction(SIGCHLD, &act, &oldact) < 0) 
+          || (sigaction(SIGUSR1, &act, &oldact) < 0))
+        {
+            fprintf(stderr, "Could not set up signal handling for parent\n");
+            exit(251);
+        }
+        
+        // The parent process should wait; we die once child is
+        // initialised (signalled by a SIGUSR1)
+        if (fork()) {
+            while (1) { sleep(5); };
+        }
+
+        // Set up signal handling for child
+        if  ((sigaction(SIGCHLD, &oldact, NULL) < 0) 
+          || (sigaction(SIGUSR1, &oldact, NULL) < 0))
+        {
+            fprintf(stderr, "Could not set up signal handling for child\n");
+            exit(250);
+        }
+ 
+        // Continue as a daemon process
         logfile = fopen(logfile_name, "a+");
         if (logfile == NULL) {
                 fprintf(stderr, "Cannot append to the log file\n");
                 exit(255);
         }
+        if (write_pid_file() != 0) {
+                fprintf(stderr, "Cannot open pid file\n");
+                exit(254);
+        }
+        if (atexit(cleanup_and_die) != 0) {
+                fprintf(stderr, "Cannot set atexit routine\n");
+                exit(253);
+        }
+        make_fifos();
+        // Signal that we've finished initialising so that the parent process
+        // can die and the shell scripts can continue
+        kill(getppid(), SIGUSR1);
         ped_exception_set_handler(exception_handler);
         log("======= Starting the server");
         main_loop();

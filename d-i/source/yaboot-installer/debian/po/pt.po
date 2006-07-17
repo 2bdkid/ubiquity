@@ -7,53 +7,12 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# 18-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 27-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 29-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 08-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 12-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f4u
-# 15-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 16-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f9u
-# 18-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1 typo
-# 21-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 5f2u
-# 13-06-2005 - Eduardo Silva <jobezone@yahoo.com> - +20 mensagens revistas
-# 14-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 19f
-# 27-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f3u
-# 28-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 03-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 07-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f
-# 10-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 11-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 19-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 25-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 27f133u - tzsetup
-# 26-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 30-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f18u
-# 14-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 7f14u
-# 18-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 35f42u
-# 31-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 8f3u
-# 2005-09-05 - Miguel Figueiredo <elmig@debianpt.org> - 7f2u
-# 2005-09-09 - Miguel Figueiredo <elmig@debianpt.org> - 6f
-# 2005-09-17 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-09-21 - Miguel Figueiredo <elmig@debianpt.org> - typo in varname fixed.
-# 2005-09-22 - Miguel Figueiredo <elmig@debianpt.org> - 1 ugly typo fixed.
-# 2005-09-23 - Miguel Figueiredo <elmig@debianpt.org> - 1f1u
-# 2005-10-01 - Miguel Figueiredo <elmig@debianpt.org> - 3f
-# 2005-10-07 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 2005-10-19 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-10-26 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 2005-11-04 - Miguel Figueiredo <elmig@debianpt.org> - 2f1u
-# 2005-11-13 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-11-14 - Miguel Figueiredo <elmig@debianpt.org> - 3f9u - new package apt-setup
-# 2005-11-14 - Miguel Figueiredo <elmig@debianpt.org> - 4f3u 
-# 2005-11-20 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 2005-11-20 - Miguel Figueiredo <elmig@debianpt.org> - 13f1u
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-21 23:42+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-11 09:35+0000\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -186,12 +145,6 @@ msgstr "Falha ao criar a configuração do yaboot"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "A criação do ficheiro de configuração principal do yaboot falhou."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Por favor verifique o syslog para mais informações."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -243,9 +196,8 @@ msgstr "Falha ao montar o sistema de ficheiros proc em /target/proc."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr ""
-"Por favor verifique o log de sistema ou a saída na terceira consola (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "Para detalhes veja /var/log/syslog ou a consola virtual 4."
 
 #. Type: error
 #. Description

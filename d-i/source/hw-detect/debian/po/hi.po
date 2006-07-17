@@ -3,14 +3,6 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to 
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to Hindi
 #
 #
@@ -19,15 +11,15 @@
 #
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
-# Nishant Sharma <me@nishants.net>, 2005.
+# Nishant Sharma <me@nishants.net>, 2005, 2006.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-10-28 21:48+0530\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-03-12 22:52+0530\n"
 "Last-Translator: Nishant Sharma <me@nishants.net>\n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,19 +32,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "कोई इथरनेट कार्ड नहीं, ${CHOICES}, उपर्युक्त में से कोई नहीं"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "कोई इथरनेट कार्ड नहीं"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "उपर्युक्त में से कोई नहीं"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "आपके इथरनेट कार्ड के लिए आवश्यक ड्राइवरः"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -62,13 +61,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "क्या आप फायरवायर ईथरनेट प्रयोग करने की इच्छा रखते हैं?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -79,26 +78,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "इथरनेट कार्ड नहीं मिला"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "कम्प्यूटर में कोई ईथरनेट कार्ड नहीं मिला"
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "नेटवर्क हार्डवेयर खोज रहे हैं"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "नेटवर्क हार्डवेयर खोजें"
 
@@ -117,19 +116,19 @@ msgstr "डिस्क तथा अन्य हार्डवेयर ख�
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "बिना किसी डिस्क ड्राइव के जारी रखें, ${CHOICES}, उपर्युक्त में से कोई नहीं"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "बिना किसी डिस्क ड्राइव के जारी रखें"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
 msgstr "आपकी डिस्क ड्राइव के लिए आवश्यक ड्राइवरः"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
@@ -139,19 +138,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "कोई पार्टिशन योग्य मीडिया नहीं"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "कोई पार्टीशन योग्य मीडिया नहीं मिला."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "कृपया जाँचें कि इस मशीन में हार्ड डिस्क जुड़ी है."
 
@@ -194,29 +193,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "मॉड्यूल पैरामीटर्स हेतु पूछें?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"कुछ मॉड्यूल्स लोड करते समय अपने व्यवहार को परिवर्तित करने के लिए पैरामीटर्स स्वीकार करते "
-"हैं. यदि आप चाहें तो प्रत्येक माड्यूल को लोड करते समय पैरामीटर्स के लिए आपसे पूछा जा सकता है."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "पीसी कार्ड सेवाएँ प्रारंभ करें?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -226,13 +208,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "पीसीएमसीआईए संसाधन सीमा विकल्पः"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -247,38 +229,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "अधिकतर हार्डवेयर हेतु यहाँ आपको कुछ भी उल्लिखित करने की आवश्यकता नहीं है."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"कुछ मॉड्यूल्स लोड करते समय अपने व्यवहार को परिवर्तित करने के लिए पैरामीटर्स स्वीकार करते "
-"हैं. यह पैरामीटर्स अधिकतर आई/ओ पोर्ट व आईआऱक्यू अंक होते हैं जो मशीन दर मशीन बदल जाते हैं "
-"और हार्डवेयर से पता नहीं किए जा सकते हैं. उदाहरण के लिए \"irq=7 io=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "यदि आपको मालूम नहीं है कि यहाँ क्या भरना है, तो इसे खाली ही छोड़ दें."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "मॉड्यूल ${MODULE} हेतु अतिरिक्त पैरामीटर्स:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -293,7 +256,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -303,19 +266,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "'${CMD_LINE_PARAM}' को चलाने के दौरान त्रुटि हुई"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
 msgstr "अनुपलब्ध ड्राइवरों को ड्राइवर फ़्लॉपी से लोड करें?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

@@ -1,14 +1,7 @@
 DEB_HOST_ARCH ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-DEB_HOST_ARCH_CPU ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU 2>/dev/null)
 DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS 2>/dev/null)
 
 # Take account of old dpkg-architecture output.
-ifeq ($(DEB_HOST_ARCH_CPU),)
-  DEB_HOST_ARCH_CPU := $(shell dpkg-architecture -qDEB_HOST_GNU_CPU)
-  ifeq ($(DEB_HOST_ARCH_CPU),x86_64)
-    DEB_HOST_ARCH_CPU := amd64
-  endif
-endif
 ifeq ($(DEB_HOST_ARCH_OS),)
   DEB_HOST_ARCH_OS := $(subst -gnu,,$(shell dpkg-architecture -qDEB_HOST_GNU_SYSTEM))
   ifeq ($(DEB_HOST_ARCH_OS),gnu)
@@ -17,14 +10,15 @@ ifeq ($(DEB_HOST_ARCH_OS),)
 endif
 
 CC = gcc
-CFLAGS = -Wall -O2 -g
-CFLAGS_ARCH = -DARCH=$(DEB_HOST_ARCH) -DCPU=$(DEB_HOST_ARCH_CPU) -DCPU_TEXT='"$(DEB_HOST_ARCH)"' -DSYSTEM=$(DEB_HOST_ARCH_OS)
+CFLAGS = -W -Wall -Os -g
+CFLAGS_ARCH = -DCPU_TEXT='"$(DEB_HOST_ARCH)"'
 
 bindir=$(DESTDIR)/bin/
 hpdir=$(DESTDIR)/etc/hotplug.d
 udevdir=$(DESTDIR)/etc/udev/rules.d
 didir=$(DESTDIR)/lib/debian-installer.d
-pbcdir=$(DESTDIR)/usr/lib/prebaseconfig.d
+fidir=$(DESTDIR)/usr/lib/finish-install.d
+sharedir=$(DESTDIR)/usr/share/hw-detect/
 
 INSTALL=install
 INSTALL_DATA = ${INSTALL} -m 644
@@ -48,11 +42,16 @@ ifeq ($(DEB_HOST_ARCH_OS),linux)
 	$(INSTALL_DATA) net-hotplug.rules $(udevdir)/010_net-hotplug.rules
 	$(INSTALL) -d $(hpdir)/net
 	$(INSTALL) net-hotplug.sh $(hpdir)/net/hw-detect.hotplug
-	$(INSTALL) -d $(pbcdir)
-	$(INSTALL) hw-detect.prebaseconfig $(pbcdir)/30hw-detect
+	$(INSTALL) -d $(fidir)
+	$(INSTALL) hw-detect.finish-install $(fidir)/30hw-detect
 ifeq ($(DEB_HOST_ARCH),powerpc)
 	$(INSTALL) discover-mac-io.sh $(bindir)/discover-mac-io
 	$(INSTALL) discover-ibm.sh $(bindir)/discover-ibm
+endif
+ifeq ($(DEB_HOST_ARCH),sparc)
+	$(INSTALL) discover-sbus.sh $(bindir)/discover-sbus
+	$(INSTALL) -d $(sharedir)
+	$(INSTALL_DATA) sbus.list $(sharedir)/sbus.list
 endif
 else
 	$(INSTALL) detect-stub.sh $(bindir)/hw-detect

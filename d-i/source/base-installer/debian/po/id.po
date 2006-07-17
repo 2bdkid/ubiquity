@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-12-29 18:37-0700\n"
-"PO-Revision-Date: 2005-12-21 17:15+0700\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-06 18:29-0600\n"
+"PO-Revision-Date: 2006-04-07 11:15+0700\n"
 "Last-Translator: Parlin Imanuel Toh <pt@samip-online.com>\n"
 "Language-Team: Debian Indonesia Team <debian-l10n-id@gurame.fisika.ui.ac."
 "id>\n"
@@ -48,13 +48,17 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:11
+#. The base system is the minimal Debian system
+#. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
+#: ../base-installer.templates:13
 msgid "Cannot install base system"
 msgstr "Tak dapat memasang sistem dasar"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:11
+#. The base system is the minimal Debian system
+#. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
+#: ../base-installer.templates:13
 msgid ""
 "The installer cannot figure out how to install the base system. No "
 "installable CD-ROM was found and no valid mirror was configured."
@@ -64,19 +68,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:17
+#: ../base-installer.templates:19
 msgid "Failed to determine the codename for the release."
 msgstr "Gagal menentukan nama sandi untuk rilis ini."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:22
+#: ../base-installer.templates:24
 msgid "No file system mounted on /target"
-msgstr "Belum ada sistem berkas yang dikaitkan pada /target"
+msgstr "Tak ada sistem berkas yang dikaitkan pada /target"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:22
+#: ../base-installer.templates:24
 msgid ""
 "Before the installation can proceed, a root file system must be mounted on /"
 "target. The partitioner and formatter should have done this for you."
@@ -86,13 +90,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:28
+#: ../base-installer.templates:30
 msgid "Not installing to unclean target"
 msgstr "Tidak melanjutkan instalasi pada target yang tidak bersih"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:28
+#: ../base-installer.templates:30
 msgid ""
 "The installation to the target file system has been canceled. You should go "
 "back and erase or format the target file system before proceeding with the "
@@ -104,19 +108,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:35
+#: ../base-installer.templates:37
 msgid "Failed to install the base system"
 msgstr "Gagal memasang sistem dasar"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:35
+#: ../base-installer.templates:37
 msgid "The base system installation into /target/ failed."
 msgstr "Pemasangan sistem dasar ke /target/ gagal."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:42
+#: ../base-installer.templates:44
 msgid ""
 "The debootstrap program exited with an error (return value ${EXITCODE})."
 msgstr ""
@@ -124,39 +128,37 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:49
+#: ../base-installer.templates:51
 msgid "Base system installation error"
 msgstr "Kesalahan saat instalasi sistem dasar"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:49
+#: ../base-installer.templates:51
 msgid "The debootstrap program exited abnormally."
 msgstr "Program debootstrap selesai secara tidak normal."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:56
+#: ../base-installer.templates:58
 msgid "The following error occurred:"
 msgstr "Kesalahan berikut ini terjadi:"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:56
+#: ../base-installer.templates:58
 msgid "${ERROR}"
 msgstr "${ERROR}"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:66
-#, fuzzy
+#: ../base-installer.templates:68
 msgid "Tool to use to generate boot initrd:"
-msgstr "Alat yang ingin dipakai untuk membuat initramfs initrd:"
+msgstr "Alat yang ingin dipakai untuk membuat initrd:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:66
-#, fuzzy
+#: ../base-installer.templates:68
 msgid ""
 "The list shows the available tools. If you are unsure which to select, you "
 "should select the default. If your system fails to boot, you can retry the "
@@ -167,42 +169,45 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:73
+#: ../base-installer.templates:75
 msgid "No initrd generator"
-msgstr ""
+msgstr "Tak ada generator initrd"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:73
+#: ../base-installer.templates:75
 msgid ""
 "The kernel that has been selected for installation needs an initrd to boot. "
 "However, no package to generate that initrd is available that supports your "
 "configuration. This would leave your system unable to boot."
 msgstr ""
+"Kernel yang dipilih untuk instalasi memerlukan sebuah initrd untuk booting. "
+"Akan tetapi, tak tersedia paket untuk membuat initrd tersebut pada "
+"konfigurasi anda. Ini akan membuat sistem tak dapat booting."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:80
+#: ../base-installer.templates:82
 msgid "Unsupported initrd generator"
-msgstr ""
+msgstr "Generator initrd tak didukung"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:80
+#: ../base-installer.templates:82
 msgid ""
 "The package ${GENERATOR} that was selected to generate the initrd is not "
 "supported."
-msgstr ""
+msgstr "Paket ${GENERATOR} yang dipilih untuk membuat initrd tak didukung."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:86
+#: ../base-installer.templates:88
 msgid "Unable to install the selected kernel"
 msgstr "Tidak dapat memasang kernel yang dipilih"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:86
+#: ../base-installer.templates:88
 msgid ""
 "An error was returned while trying to install the kernel into the target "
 "system."
@@ -210,25 +215,26 @@ msgstr "Terjadi kesalahan saat mencoba memasang kernel pada sistem target."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:86
+#: ../base-installer.templates:88
 msgid "Kernel package: '${KERNEL}'."
 msgstr "Paket kernel: '${KERNEL}'."
 
 #. Type: select
 #. Choices
-#: ../base-installer.templates:96
-msgid "${KERNELS}, none"
-msgstr "${KERNELS}, none"
+#. For base-installer, "none" is an additionnal choice to a kernel list
+#: ../base-installer.templates:100
+msgid "none"
+msgstr "Tak ada"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:97
+#: ../base-installer.templates:101
 msgid "Kernel to install:"
 msgstr "Kernel yang ingin dipasang:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:97
+#: ../base-installer.templates:101
 msgid ""
 "The list shows the available kernels. Please choose one of them in order to "
 "make the system bootable from the hard drive."
@@ -238,13 +244,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:104
+#: ../base-installer.templates:108
 msgid "Continue without installing a kernel?"
 msgstr "Meneruskan tanpa instalasi kernel?"
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:104
+#: ../base-installer.templates:108
 msgid "No installable kernel was found in the defined APT sources."
 msgstr ""
 "Tidak ditemukan kernel yang dapat dipasang pada sumber-sumber APT yang telah "
@@ -252,7 +258,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:104
+#: ../base-installer.templates:108
 msgid ""
 "You may try to continue without a kernel, and manually install your own "
 "kernel later. This is only recommended for experts, otherwise you will "
@@ -264,25 +270,25 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:113
+#: ../base-installer.templates:117
 msgid "Cannot install kernel"
 msgstr "Tidak dapat memasang kernel"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:113
+#: ../base-installer.templates:117
 msgid "The installer cannot find a suitable kernel package to install."
 msgstr "Instaler tidak menemukan paket kernel yang cocok untuk dipasang."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:118
+#: ../base-installer.templates:122
 msgid "Unable to install ${PACKAGE}"
 msgstr "Tidak dapat memasang ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:118
+#: ../base-installer.templates:122
 msgid ""
 "An error was returned while trying to install the ${PACKAGE} package onto "
 "the target system."
@@ -290,49 +296,57 @@ msgstr "Terjadi kesalahan saat mencoba memasang ${PACKAGE} pada sistem target."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:118
+#: ../base-installer.templates:122
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr "Periksa /var/log/syslog atau lihat konsol maya no. 4."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:126
+#. SUBST0 is a Release file name.
+#: ../base-installer.templates:131
 msgid "Failed getting Release file ${SUBST0}."
 msgstr "Gagal mengambil berkas Release ${SUBST0}."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:131
+#. SUBST0 is a Release.gpg file name
+#: ../base-installer.templates:137
 msgid "Failed getting Release signature file ${SUBST0}."
 msgstr "Gagal mengambil berkas tanda tangan Release ${SUBST0}."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:136
+#. SUBST0 is a gpg key ID
+#: ../base-installer.templates:143
 msgid "Release file signed by unknown key (key id ${SUBST0})"
 msgstr "Berkas Release ditandatangani dengan kunci asing (id kunci ${SUBST0})"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:141
+#: ../base-installer.templates:148
 msgid "Invalid Release file: no valid components."
 msgstr "Berkas Release tidak sah: tak ada komponen yang sah."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:146
+#. SUBST0 is a filename
+#: ../base-installer.templates:154
 msgid "Invalid Release file: no entry for ${SUBST0}."
 msgstr "Berkas Release tidak sah: tak ada masukan (entry) untuk ${SUBST0}."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:151
+#. SUBST0 is a filename or package name
+#. Debootstrap is a program name: should not be translated
+#: ../base-installer.templates:161
 msgid "Debootstrap Error"
 msgstr "Kesalahan Debootstrap"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:151
+#. SUBST0 is a filename or package name
+#. Debootstrap is a program name: should not be translated
+#: ../base-installer.templates:161
 msgid ""
 "Couldn't retrieve ${SUBST0}. This may be due to a network problem or a bad "
 "CD, depending on your installation method."
@@ -342,7 +356,9 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:151
+#. SUBST0 is a filename or package name
+#. Debootstrap is a program name: should not be translated
+#: ../base-installer.templates:161
 msgid ""
 "If you are installing from CD-R or CD-RW, burning the CD at a lower speed "
 "may help."
@@ -352,271 +368,338 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:164
+#: ../base-installer.templates:174
 msgid "Preparing to install the base system..."
 msgstr "Sedang bersiap-siap memasang sistem dasar..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:168
+#: ../base-installer.templates:178
 msgid "Running ${SCRIPT}..."
 msgstr "Sedang menjalankan ${SCRIPT}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:172
+#. Release is a filename which should not be translated
+#: ../base-installer.templates:183
 msgid "Retrieving Release file"
 msgstr "Mengambil berkas Release"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:176
+#. Release is a filename which should not be translated
+#: ../base-installer.templates:188
 msgid "Retrieving Release file signature"
 msgstr "Mengambil tanda tangan berkas Release"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:180
+#. "packages" here can be translated
+#: ../base-installer.templates:193
 msgid "Finding package sizes"
 msgstr "Mencari ukuran paket"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:184
+#. Packages is a filename which should not be translated
+#: ../base-installer.templates:198
 msgid "Retrieving Packages files"
 msgstr "Mengambil berkas Packages"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:188
+#. Packages is a filename which should not be translated
+#: ../base-installer.templates:203
 msgid "Retrieving Packages file"
 msgstr "Mengambil berkas Packages"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:192
+#. "packages" here can be translated
+#: ../base-installer.templates:208
 msgid "Retrieving packages"
 msgstr "Mengambil paket-paket"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:196
+#. "packages" here can be translated
+#: ../base-installer.templates:213
 msgid "Extracting packages"
 msgstr "Membuka paket-paket"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:200
+#: ../base-installer.templates:217
 msgid "Installing the base system"
 msgstr "Memasang sistem dasar"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:204
+#. Core packages are packages that are part of the Debian base system
+#. The "core" packages are indeed packages that are specifically
+#. recorded as part of the base system. Other packages may
+#. be installed on the base system because of dependency resolution
+#: ../base-installer.templates:225
 msgid "Installing core packages"
 msgstr "Sedang memasang paket-paket inti..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:208
+#. Required packages are packages which installation is triggered
+#. by the dependency chain of core packages
+#. In short, they are "required" because at least one of the
+#. packages from the core packages depends on them
+#: ../base-installer.templates:233
 msgid "Unpacking required packages"
 msgstr "Sedang membuka paket-paket yang diperlukan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:212
+#: ../base-installer.templates:237
 msgid "Configuring required packages"
 msgstr "Sedang mempersiapkan paket-paket yang diperlukan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:216
+#. The base system is the minimal Debian system
+#. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
+#: ../base-installer.templates:243
 msgid "Unpacking the base system"
 msgstr "Memasang sistem dasar"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:220
+#. The base system is the minimal Debian system
+#. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
+#: ../base-installer.templates:249
 msgid "Configuring the base system"
 msgstr "Sedang mempersiapkan sistem dasar"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:224
+#: ../base-installer.templates:253
 msgid "${SECTION}: ${INFO}..."
 msgstr "${SECTION}: ${INFO}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:228
+#. SUBST0 is a package name
+#: ../base-installer.templates:258
 msgid "Validating ${SUBST0}..."
 msgstr "Sedang memeriksa keabsahan ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:232
+#. SUBST0 is a package name
+#: ../base-installer.templates:263
 msgid "Retrieving ${SUBST0}..."
 msgstr "Sedang mengambil ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:236
+#. SUBST0 is a package name
+#: ../base-installer.templates:268
 msgid "Extracting ${SUBST0}..."
 msgstr "Sedang membuka ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:240
+#. SUBST0 is a package name
+#: ../base-installer.templates:273
 msgid "Unpacking ${SUBST0}..."
 msgstr "Sedang membuka ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:244
+#. SUBST0 is a package name
+#: ../base-installer.templates:278
 msgid "Configuring ${SUBST0}..."
 msgstr "Sedang mempersiapkan ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:248
+#. Release is a filename which should not be translated
+#: ../base-installer.templates:283
 msgid "Checking Release signature"
 msgstr "Memeriksa tanda tangan Release"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:252
+#. SUBST0 is a gpg key id
+#. Release is a filename which should not be translated
+#: ../base-installer.templates:289
 msgid "Valid Release signature (key id ${SUBST0})"
 msgstr "Berkas Release sah: (id kunci ${SUBST0})"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:256
+#: ../base-installer.templates:293
 msgid "Resolving dependencies of base packages..."
 msgstr "Sedang mencari dependensi paket-paket dasar..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:260
+#. SUBST0 is a list of packages
+#: ../base-installer.templates:298
+msgid "Found additional base dependencies: ${SUBST0}"
+msgstr "Ditemukan dependensi basis tambahan: ${SUBST0}"
+
+#. Type: text
+#. Description
+#. SUBST0 is a list of packages
+#: ../base-installer.templates:303
+msgid "Found additional required dependencies: ${SUBST0}"
+msgstr "Ditemukan dependensi 'perlu' tambahan: ${SUBST0}"
+
+#. Type: text
+#. Description
+#. SUBST0 is a list of packages
+#: ../base-installer.templates:308
+msgid "Found packages in base already in required: ${SUBST0}"
+msgstr "Ditemukan paket pada basis yg telah ada pada 'perlu': ${SUBST0}"
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:312
 msgid "Resolving dependencies of required packages..."
 msgstr "Sedang mencari dependensi paket-paket yang diperlukan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:264
+#. SUBST0 is an archive component (main, etc)
+#. SUBST1 is a mirror
+#: ../base-installer.templates:318
 msgid "Checking component ${SUBST0} on ${SUBST1}..."
 msgstr "Sedang memeriksa komponen ${SUBST0} pada ${SUBST1}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:268
+#. Core packages are packages that are part of the Debian base system
+#. The "core" packages are indeed packages that are specifically
+#. recorded as part of the base system. Other packages may
+#. be installed on the base system because of dependency resolution
+#: ../base-installer.templates:326
 msgid "Installing core packages..."
 msgstr "Sedang memasang paket-paket inti..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:272
+#. Required packages are packages which installation is triggered
+#. by the dependency chain of core packages
+#. In short, they are "required" because at least one of the
+#. packages from the core packages depends on them
+#: ../base-installer.templates:334
 msgid "Unpacking required packages..."
 msgstr "Sedang membuka paket-paket yang diperlukan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:276
+#. Required packages are packages which installation is triggered
+#. by the dependency chain of core packages
+#. In short, they are "required" because at least one of the
+#. packages from the core packages depends on them
+#: ../base-installer.templates:342
 msgid "Configuring required packages..."
 msgstr "Sedang mengonfigurasikan paket-paket yang diperlukan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:280
+#: ../base-installer.templates:346
 msgid "Installing base packages..."
 msgstr "Sedang memasang paket-paket dasar..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:284
+#: ../base-installer.templates:350
 msgid "Unpacking the base system..."
 msgstr "Membuka dan memasang sistem dasar..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:288
+#: ../base-installer.templates:354
 msgid "Configuring the base system..."
 msgstr "Mempersiapkan sistem dasar..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:292
+#: ../base-installer.templates:358
 msgid "Base system installed successfully."
 msgstr "Sistem dasar telah berhasil dipasang."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:296
+#. Debootstrap is a program name: should not be translated
+#: ../base-installer.templates:363
 msgid "Debootstrap warning"
 msgstr "Peringatan Debootstrap"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:296
+#. Debootstrap is a program name: should not be translated
+#: ../base-installer.templates:363
 msgid "Warning: ${INFO}"
 msgstr "Peringatan: ${INFO}"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:301
+#. SUBST0 is an url
+#: ../base-installer.templates:369
 msgid "Retrying failed download of ${SUBST0}"
 msgstr "Mengulangi download ${SUBST0}"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:305
+#: ../base-installer.templates:373
 msgid "Configuring APT sources..."
 msgstr "Sedang mengonfigurasikan sumber-sumber APT"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:309
+#: ../base-installer.templates:377
 msgid "Updating the list of available packages..."
 msgstr "Sedang memperbaharui daftar paket-paket yang tersedia..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:313
+#: ../base-installer.templates:381
 msgid "Installing extra packages..."
 msgstr "Sedang memasang paket-paket tambahan..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:317
+#. SUBST0 is a package name
+#: ../base-installer.templates:386
 msgid "Installing extra packages - retrieving and installing ${SUBST0}..."
 msgstr "Memasang paket-paket ekstra - mengambil dan memasang ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:321
+#: ../base-installer.templates:390
 msgid "Creating device files..."
 msgstr "Membuat berkas-berkas piranti..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:325
+#: ../base-installer.templates:394
 msgid "Selecting the kernel to install..."
 msgstr "Sedang memilih kernel untuk dipasang..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:329
+#: ../base-installer.templates:398
 msgid "Installing the kernel..."
 msgstr "Sedang memasang kernel..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:333
+#. SUBST0 is a package name
+#: ../base-installer.templates:403
 msgid "Installing the kernel - retrieving and installing ${SUBST0}..."
 msgstr "Memasang kernel - mengambil dan memasang ${SUBST0}..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:337
+#: ../base-installer.templates:407
 msgid "Installing the PCMCIA modules"
 msgstr "Sedang memasang modul-modul PCMCIA"
 
@@ -624,6 +707,6 @@ msgstr "Sedang memasang modul-modul PCMCIA"
 #. Description
 #. Item in the main menu to select this package
 #. TRANSLATORS: <65 columns
-#: ../base-installer.templates:343
+#: ../base-installer.templates:413
 msgid "Install the base system"
 msgstr "Memasang sistem dasar"

@@ -3,7 +3,6 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of ro.po to Romanian
 # Romanian translation
 #
 #    Translators, if you are not familiar with the PO format, gettext
@@ -17,38 +16,46 @@
 #         or http://www.debian.org/intl/l10n/po-debconf/README-trans
 #
 #    Developers do not need to manually edit POT or PO files.
-# Eddy Petrişor <eddy.petrisor@gmail.com>, 2004, 2005.
 #
+# Eddy Petrişor <eddy.petrisor@gmail.com>, 2004, 2005, 2006.
+# Eddy Petrisor <eddy_petrisor@yahoo.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-11-20 18:34+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-05-05 21:34+0300\n"
 "Last-Translator: Eddy Petrişor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1))\n"
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "fără placă Ethernet, ${CHOICES}, nici una de mai sus"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "fără placă Ethernet"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "nici una de mai sus"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Driver necesar plăcii dvs. Ethernet:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -58,13 +65,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "Intenţionaţi să folosiţi Ethernet Firewire?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -77,26 +84,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Placă de reţea Ethernet negăsită"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Nu s-a găsit nici o placă de reţea Ethernet în sistem."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Se detectează componentele de reţea"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Detecţie a componentelor de reţea"
 
@@ -105,7 +112,7 @@ msgstr "Detecţie a componentelor de reţea"
 #. Main menu item
 #: ../disk-detect.templates:4
 msgid "Detect disks"
-msgstr "Detectează discurile"
+msgstr "Detectecţie de discuri"
 
 #. Type: text
 #. Description
@@ -115,19 +122,19 @@ msgstr "Se detectează discurile şi toate celelalte componente"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "continuare fără unitate de disc, ${CHOICES}, nici una de mai sus"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "continuare fără unitate de disc"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
 msgstr "Driver necesar plăcii unităţii de disc:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
@@ -137,19 +144,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Nu există mediu partiţionabil"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Nu s-a găsit nici un mediu partiţionabil."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Vă rugăm sa verificaţi că aveţi un disc fix ataşat la acestă maşină."
 
@@ -193,30 +200,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Se cer interactiv parametri modulelor?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Unele module acceptă la încărcare parametri pentru a le particulariza modul "
-"de operare. Dacă doriţi, voi solicita interactiv să introduceţi aceşti "
-"parametri odată cu încărcarea fiecărui modul în parte."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "Se pornesc serviciile asociate plăcilor PC?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -227,13 +216,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "Opţiuni legate de domeniul de resurse PCMCIA:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -250,39 +239,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Pentru majoritatea plăcilor nu trebuie specificat nimic."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Unele module acceptă la încărcare parametri pentru a le particulariza modul "
-"de operare. Aceşti parametri sunt, de regulă porturi I/O şi numere IRQ care "
-"variază de la o maşină la alta,şi nu pot fi detectate. Un exemplu de un "
-"asemenea şir: \"irq=7 io=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Dacă nu ştiţi ce să introduceţi, lăsaţi liber."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Parametri suplimentari pentru modulul ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -298,7 +267,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -308,19 +277,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Eroare în timpul rulării '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Se încarcă driver-ele lipsă de pe o dischetă cu driver-e?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

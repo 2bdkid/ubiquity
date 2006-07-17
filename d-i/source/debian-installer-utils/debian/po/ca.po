@@ -4,18 +4,18 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Catalan messages for debian-installer.
-# Copyright 2002, 2003, 2004, 2005 Software in the Public Interest, Inc.
+# Copyright 2002, 2003, 2004, 2005, 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004.
+# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004, 2006.
 # Guillem Jover <guillem@debian.org>, 2005.
-# 
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 03:56-0800\n"
-"PO-Revision-Date: 2005-02-19 23:31+0100\n"
-"Last-Translator: Guillem Jover <guillem@debian.org>\n"
+"Project-Id-Version: debian-installer 1.1\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-04-30 18:31-0600\n"
+"PO-Revision-Date: 2006-05-20 23:39+0200\n"
+"Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,8 +43,8 @@ msgid ""
 "easy to figure out. To get an idea of what Unix utilities are available to "
 "you, use the \"help\" command."
 msgstr ""
-"El sistema de fitxers arrel és un disk RAM. Els sistemes de fitxers del disc "
-"dur estan muntats en «/target». L'editor disponible és nano. És molt petit i "
+"El sistema de fitxers arrel és un disc RAM. Els sistemes de fitxers del disc "
+"dur estan muntats a «/target». L'editor disponible és nano. És molt petit i "
 "fàcil d'entendre. Per a fer-vos una idea de les utilitats de Unix que estan "
 "disponibles, feu servir l'ordre «help»."
 
@@ -52,19 +52,23 @@ msgstr ""
 #. Description
 #: ../di-utils-shell.templates:3
 msgid "Use the \"exit\" command to return to the installation menu."
-msgstr "Useu l'ordre «exit» per a tornar al menú d'instal·lació."
+msgstr "Empreu l'ordre «exit» per a tornar al menú d'instal·lació."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-shell.templates:16
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-shell.templates:18
 msgid "Execute a shell"
 msgstr "Executa un intèrpret d'ordres"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-exit-installer.templates:4
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-exit-installer.templates:6
 msgid "Exit installer demo"
 msgstr "Eixir de la demostració de l'instal·lador"
 
@@ -87,7 +91,9 @@ msgstr ""
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-reboot.templates:11
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-reboot.templates:13
 msgid "Abort the installation"
 msgstr "Avorta la instal·lació"
 

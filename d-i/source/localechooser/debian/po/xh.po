@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
 "PO-Revision-Date: 2005-06-13 14:08+0200\n"
 "Last-Translator: Canonical Ltd <translations@canonical.com>\n"
 "Language-Team: Xhosa <xh-translate@ubuntu.com>\n"
@@ -31,116 +31,125 @@ msgstr "Khetha ulwimi/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Igcina ulwimi..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr ""
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "ezinye"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "i-US"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Khetha indawo yesiganeko:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr ""
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Ngokusekelwe kulwimi lwakho, mhlawumbi umiswe kwelinye lamazwe okanye "
-"imimandla:"
+"imimandla."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-#, fuzzy
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Ngokusekelwe kulwimi lwakho lokukhetha kwakho imazwe, ubunjani obuthile "
-"obunokubalwa bendawo yesiganeko duxhaswe kwi-Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Khetha indawo yesiganeko:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 #, fuzzy
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Indawo yesiganeko ekungarhoxiselwa kuyo kufuneka ikhethwe ngokuba okwangoku "
-"akukho ndawo yesiganeko eyenzelwe ulwimi nelizwe olikhethileyo."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Indawo yesiganeko engaxhaswanga"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-#, fuzzy
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Ixabiso lendawo yesiganeko olihlwayele ngaphambili (${LOCALE}) alixhaswa "
-"okwangoku kwi-Ubuntu. Uya kukhokelelwa kulwimi, ilizwe kwakunye nemiselo "
-"yeendawo zesiganeko."
+"Ngokusekelwe kulwimi lwakho lokukhetha kwakho imazwe, ubunjani obuthile "
+"obunokubalwa bendawo yesiganeko duxhaswe kwi-Debian."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Khetha ezinye ii-locale eziza kuxhaswa:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Ungakhetha iilocale ezongeziweyo eziya kusekwa zisuka kolu luhlu."
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr ""
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr ""
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr ""
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr ""
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr ""
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr ""
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr ""
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr ""
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr ""
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr ""
+
+#: ../../countrylist:24
 #, fuzzy
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Ngokusekelwe kulwimi lwakho, mhlawumbi umiswe kwelinye lamazwe okanye "
-#~ "imimandla:"
+msgid "-- other --"
+msgstr "ezinye"

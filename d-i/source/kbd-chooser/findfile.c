@@ -71,7 +71,7 @@ findfile_in_dir(const char *fnam, char *dir, int recdepth, char **suf) {
 	DIR *d;
 	struct dirent *de;
 	char *ff, *fdir, *p, **sp;
-        const char *q;
+	const char *q;
 	struct decompressor *dc;
 	int secondpass = 0;
 

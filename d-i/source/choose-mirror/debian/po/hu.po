@@ -6,219 +6,263 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-05-05 01:44+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 msgid "Checking the Ubuntu archive mirror"
 msgstr "Ubuntu-tükör ellenőrzése"
 
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
 msgstr "'Release' fájl letöltése..."
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
 msgstr "Hibás tükör"
 
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
 "have a valid Release file on it. Please try a different mirror."
 msgstr ""
-"A megadott Ubuntu-tükör vagy elérhetetlennek bizonyult, vagy nem tartalmaz "
-"érvényes Release fájlt. Próbálkozzon meg egy másik tükör megadásával."
+"Az adott Ubuntu tükör vagy elérhetetlen vagy nem tartalmaz érvényes Release "
+"fájlt. Próbálj meg egy másik tükröt."
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "E géptípus nem támogatott"
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"Úgy fest, a megadott Ubuntu archívum tükör nem támogatja ezt a géptípust. "
+"Kérlek, válassz egy másik tükröt!"
 
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 msgid "Choose a mirror of the Ubuntu archive"
-msgstr "Válasszon ki egy Ubuntu-tükröt"
+msgstr "Válassz egy Ubuntu-tükröt"
 
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
 msgstr "információ megadása kézzel"
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
 msgstr "HU"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid "Ubuntu archive mirror country:"
-msgstr "Adott országbeli Ubuntu-tükör használata:"
+msgstr "A választandó Ubuntu tükör országa:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
 "the best choice."
 msgstr ""
-"A cél a hálózati topológia szerint közel eső Ubuntu-tükröt találni -- ez "
-"ugyanis nem mindig esik egybe a földrajzi közelséggel, így a közeli "
-"országokban (sőt, a saját országban) elhelyezkedő tükrök egyes esetekben nem "
-"feltétlenül jelentik a legjobb választást."
+"A cél a hálózaton legközelebbi Ubuntu-tükröt megtalálása -- néha "
+"előfordulhat, hogy a legközelebbi, adott esetben a saját ország nem a "
+"legjobb."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Ubuntu archive mirror:"
 msgstr "Ubuntu-tükör:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
 "connection to you."
 msgstr ""
-"Válasszon ki egy Ubuntu-tükröt. Ha egyébként nem ismer jó minőségű "
-"kapcsolattal ellátott tükröt, akkor érdemes egy országán belüli, esetleg az "
-"adott tájon fekvő tükröt választania."
+"Válassz egy Ubuntu-tükröt. Ha amúgy nincs jobb kapcsolat, érdemes egy saját "
+"országban lévőt választani."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
-msgstr ""
-"Általában az <az ön országkódja>.archive.ubuntu.com jó választásnak szokott "
-"bizonyulni."
+msgstr "Általában az <országkódod>.archive.ubuntu.com jó választás."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Ubuntu-tükör gépneve:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
-msgstr "Adja meg az Ubuntu letöltéséhez használt tükör gépnevét."
+msgstr "Add meg az Ubuntu letöltéséhez használt tükör gépnevét."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
-msgstr ""
+msgstr "Más port is megadható a szabvány [gazdagépnév]:[port] formában."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid "Ubuntu archive mirror directory:"
 msgstr "Ubuntu-tükör könyvtára:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
-msgstr "Adja meg az Ubuntu-tükröt tartalmazó könyvtárat."
+msgstr "Add meg az Ubuntu-tükröt tartalmazó könyvtárat."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
-msgstr "HTTP-proxy információ (hagyja üresen, ha nem szükséges):"
+msgstr "HTTP-proxy adatok (hagyd üresen, ha nincs):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
-"Ha a külvilágot egy HTTP-proxy révén éri el, itt adja meg a proxy adatait. "
-"Máskülönben hagyja üresen."
+"Ha a külvilág eléréséhez HTTP-proxy használata szükséges, itt add meg "
+"adatait. Amúgy hagyd üresen."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
-#, fuzzy
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
-"A proxy adatai általában a \"http://[[felhasználó][:jelszó]@]gépnév[:"
-"portszám]/\" alakban szerepelnek."
+"A proxy adatai a szabványos \"http://[[felhasználó][:jelszó]@]gépnév[:"
+"portszám]/\" formában adhatók meg."
 
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
 msgstr "HU"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
-msgstr "FTP-proxy információ (hagyja üresen, ha nem szükséges):"
+msgstr "FTP-proxy adatok (hagyd üresen, ha nincs):"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
-#, fuzzy
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
-"Ha a külvilágot egy HTTP-proxy révén éri el, itt adja meg a proxy adatait. "
-"Máskülönben hagyja üresen."
+"Ha a külvilág eléréséhez egy FTP proxy szükséges, a proxy adatait itt kell "
+"megadni. Amúgy üresen kell hagyni."
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
 msgstr "Fájlletöltési protokoll:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
-#, fuzzy
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"Válassza ki a fájlletöltéshez használt protokollt. Ha bizonytalan, válassza "
-"a \"http\" lehetőséget; az tűzfalakon át is problémamentesebben működik."
+"Válaszd ki a fájlletöltéshez használt protokollt. Kétség esetén, a \"http\" "
+"protokollt érdemes; ez kevésbé ütközik tűzfal gondokba."

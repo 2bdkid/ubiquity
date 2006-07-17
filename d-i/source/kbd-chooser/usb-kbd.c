@@ -4,7 +4,7 @@
  * Copyright (C) 2002,2003 Alastair McKinstry, <mckinstry@debian.org>
  * Released under the GPL
  *
- * $Id: usb-kbd.c 29653 2005-08-01 22:41:06Z fjp $
+ * $Id: usb-kbd.c 38612 2006-07-02 20:42:57Z fjp $
  */
 
 #include "config.h"
@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/utsname.h>
 #include <debian-installer.h>
 #include "xmalloc.h"
 #include "kbd-chooser.h"
@@ -55,10 +56,28 @@ static kbd_t *usb_preferred_keymap (kbd_t *keyboards, const char *subarch)
 	 * For other keyboard vendors and if architecture is x86 or powerpc (prep and chrp),
 	 * force the installer to display the list of AT keymaps. This is needed because, for
 	 * 2.6 kernels, we can not assume that a AT connector will be detected in at-kbd.c.
+	 *
+	 * UPDATE
+	 * Because of the changes in the input layer, we can now be sure that an
+	 * AT keyboard layout is needed, even if an USB keyboard is detected. So we force
+	 * any USB keyboard to AT and no longer include the option to select a USB keymap
+	 * for all arches except powerpc which still needs the usb keymaps as otherwise
+	 * the mode switch key (for accented characters) is mapped to the wrong key.
 	 */
+
+	// Always use AT keymaps for USB keyboards with 2.6 kernel (except for powerpc)
+	int skip_26_kernels = 0;
+#if defined (AT_KBD) && !defined(__powerpc__)
+	struct utsname buf;
+	uname(&buf);
+	if (strncmp(buf.release, "2.6", 3) == 0)
+		skip_26_kernels = 1;
+#endif
+
 	kbd_t *p;
 	usb_data *data;
 	int usb_present = 0;
+
 	for (p = keyboards; p != NULL; p = p->next) {
 		if (strcmp(p->name,"usb") == 0) {
 //			usb_present = 1;
@@ -69,11 +88,6 @@ static kbd_t *usb_preferred_keymap (kbd_t *keyboards, const char *subarch)
 			} else {
 				di_debug ("non-Apple USB keyboard detected\n");
 				p->present = UNKNOWN;     // Is this really an USB/Mac keyboard?
-#if (defined(__i386__) || defined(__amd64__)) && defined (AT_KBD)
-				di_debug ("Forcing keymap list to AT (x86)\n");
-				p->name = "at";           // Force installer to show AT keymaps
-				p->present = TRUE;
-#endif
 #if defined(__powerpc__) && defined (AT_KBD)
 				if (strstr (subarch, "mac") == NULL) {
 					di_debug ("Forcing keymap list to AT (powerpc)\n");
@@ -82,15 +96,32 @@ static kbd_t *usb_preferred_keymap (kbd_t *keyboards, const char *subarch)
 				}
 #endif
 			}
+			if ((strcmp(p->name,"usb") == 0) && (skip_26_kernels)) {
+				di_debug ("Forcing keymap list to AT (2.6 kernel)\n");
+				p->name = "at";           // Force installer to use AT keymap
+				p->present = TRUE;
+			}
 			if (strcmp(p->name,"usb") == 0)
 				usb_present = 1;
 		}
 	}
-	// Ensure at least 1 USB entry
+	// Ensure at least 1 USB entry, unless the arch uses AT for 2.6 kernels
 	if (!usb_present) {
-		di_debug ("Adding generic entry for USB keymaps\n");
-		p = usb_new_entry (keyboards);
-		keyboards = p;
+		if (!skip_26_kernels) {
+			di_debug ("Adding generic entry for USB keymaps\n");
+			p = usb_new_entry (keyboards);
+			keyboards = p;
+		} else {
+			/* Hack because on powerpc laptops no keyboard is detected at all
+			 * (they use ADB (Apple bus) keyboards) and keyboard configuration
+			 * actually depended on the generic USB entry being added, so we
+			 * now add a generic AT entry (yeah, ugly as hell)
+			 */
+			di_debug ("Adding generic entry for AT keymaps\n");
+			p = usb_new_entry (keyboards);
+			p->name = "at";   // Force installer to show AT keymaps
+			keyboards = p;
+		}
 	}
 	return keyboards;
 }

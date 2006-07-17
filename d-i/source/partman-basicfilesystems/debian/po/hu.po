@@ -6,19 +6,20 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-20 18:32-0600\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-19 21:23-0600\n"
+"PO-Revision-Date: 2006-05-31 23:05+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: text
@@ -27,22 +28,20 @@ msgstr ""
 msgid ""
 "Checking the ${TYPE} file system in partition #${PARTITION} of ${DEVICE}..."
 msgstr ""
-"${TYPE} fájlrendszer ellenőrzése (${DEVICE} eszköz ${PARTITION}. "
-"partícióján)..."
+"${TYPE} fájlrendszer ellenőrzése ${DEVICE} ${PARTITION}. partícióján..."
 
 #. Type: text
 #. Description
 #: ../partman-basicfilesystems.templates:7
 msgid "Checking the swap space in partition #${PARTITION} of ${DEVICE}..."
-msgstr "Cserehely ellenőrzése (${DEVICE} eszköz ${PARTITION}. partícióján)..."
+msgstr "Cserehely ellenőrzése ${DEVICE} ${PARTITION}. partícióján..."
 
 #. Type: text
 #. Description
 #: ../partman-basicfilesystems.templates:11
 msgid "Creating ${TYPE} file system in partition #${PARTITION} of ${DEVICE}..."
 msgstr ""
-"${TYPE} fájlrendszer létrehozása (${DEVICE} eszköz ${PARTITION}. "
-"partícióján)..."
+"${TYPE} fájlrendszer létrehozása ${DEVICE} ${PARTITION}. partícióján..."
 
 #. Type: text
 #. Description
@@ -51,14 +50,14 @@ msgid ""
 "Creating ${TYPE} file system for ${MOUNT_POINT} in partition #${PARTITION} "
 "of ${DEVICE}..."
 msgstr ""
-"${TYPE} fájlrendszer létrehozása (${DEVICE} eszköz ${PARTITION}. "
-"partícióján, csatlakoztatási pont: ${MOUNT_POINT})..."
+"${TYPE} fájlrendszer létrehozása ${MOUNT_POINT}-hoz ${DEVICE} ${PARTITION}. "
+"partícióján..."
 
 #. Type: text
 #. Description
 #: ../partman-basicfilesystems.templates:19
 msgid "Formatting swap space in partition #${PARTITION} of ${DEVICE}..."
-msgstr "Cserehely formázása (${DEVICE} eszköz ${PARTITION}. partícióján)..."
+msgstr "Cserehely formázása ${DEVICE} ${PARTITION}. partícióján..."
 
 #. Type: boolean
 #. Description
@@ -67,14 +66,14 @@ msgid ""
 "The test of the file system with type ${TYPE} in partition #${PARTITION} of "
 "${DEVICE} found uncorrected errors."
 msgstr ""
-"A felderítés javítatlan hibákat fedezett fel (${DEVICE} eszköz ${PARTITION}. "
-"partícióján levő ${TYPE} fájlrendszerben)."
+"Hibákat észleltem ${DEVICE} ${PARTITION}. partíciója ${TYPE} típusú "
+"fájlrendszerén."
 
 #. Type: boolean
 #. Description
 #: ../partman-basicfilesystems.templates:32
 msgid "Go back to the menu and correct errors?"
-msgstr "Visszalép a menübe és javítja a hibákat?"
+msgstr "Visszamész a menübe és javítod a hibákat?"
 
 #. Type: boolean
 #. Description
@@ -83,8 +82,7 @@ msgid ""
 "The test of the swap space in partition #${PARTITION} of ${DEVICE} found "
 "uncorrected errors."
 msgstr ""
-"A felderítés javítatlan hibákat fedezett fel (${DEVICE} eszköz ${PARTITION}. "
-"partícióján levő cserehelyen)."
+"Hibákat észleltem a ${DEVICE} ${PARTITION}. partícióján lévő cserehelyen."
 
 #. Type: boolean
 #. Description
@@ -93,8 +91,8 @@ msgid ""
 "If you do not go back to the partitioning menu and correct these errors, the "
 "partition will be used as is."
 msgstr ""
-"Ha nem megy vissza a partícionálómenübe és ott nem javítja a hibákat, a "
-"partíció a jelen állapotában kerül használatba."
+"Ha nem térsz vissza a partícionáló menübe és orvoslod e gondokat, a partíció "
+"így kerül használatba."
 
 #. Type: boolean
 #. Description
@@ -106,17 +104,20 @@ msgid ""
 "scarce. You may experience installation problems if you do not have enough "
 "physical memory."
 msgstr ""
+"Nincs cserehelyként használandó partíció kiválasztva. Cserehely biztosítása "
+"ajánlott, így a rendszer jobban használja a fizikai memóriát és jobban "
+"működik, ha az fogy. Ha kevés a fizikai memória, gondok adódhatnak a "
+"telepítéskor is."
 
 #. Type: boolean
 #. Description
 #: ../partman-basicfilesystems.templates:41
-#, fuzzy
 msgid ""
 "If you do not go back to the partitioning menu and assign a swap partition, "
 "the installation will continue without swap space."
 msgstr ""
-"Ha nem megy vissza a partícionálómenübe és ott nem ad meg egy "
-"csatlakoztatópontot, a partíció használatlanul marad."
+"Ha nem térsz vissza a partícionáló menübe és jelölsz ki cserepartíciót, a "
+"telepítés cserehely nélkül megy tovább."
 
 #. Type: error
 #. Description
@@ -131,8 +132,8 @@ msgid ""
 "The ${TYPE} file system creation in partition #${PARTITION} of ${DEVICE} "
 "failed."
 msgstr ""
-"${TYPE} fájlrendszer létrehozása meghiúsult (${DEVICE} eszköz ${PARTITION}. "
-"partícióján)."
+"${TYPE} fájlrendszer létrehozása meghiúsult ${DEVICE} ${PARTITION}. "
+"partícióján."
 
 #. Type: error
 #. Description
@@ -145,15 +146,13 @@ msgstr "Cserehely létrehozása meghiúsult"
 #: ../partman-basicfilesystems.templates:59
 msgid ""
 "The creation of swap space in partition #${PARTITION} of ${DEVICE} failed."
-msgstr ""
-"Cserehely létrehozása meghiúsult (${DEVICE} eszköz ${PARTITION}. "
-"partícióján)."
+msgstr "Cserehely létrehozása meghiúsult ${DEVICE} ${PARTITION}. partícióján."
 
 #. Type: boolean
 #. Description
 #: ../partman-basicfilesystems.templates:64
 msgid "Do you want to return to the partitioning menu?"
-msgstr "Visszatér a partícionálómenübe?"
+msgstr "Visszatérsz a partícionálómenübe?"
 
 #. Type: boolean
 #. Description
@@ -162,8 +161,8 @@ msgid ""
 "No mount point is assigned for ${FILESYSTEM} file system in partition #"
 "${PARTITION} of ${DEVICE}."
 msgstr ""
-"Csatlakoztatási pont nélküli ${FILESYSTEM} fáljlrendszer (${DEVICE} eszköz "
-"${PARTITION}. partícióján)."
+"Csatolási pont nélküli ${FILESYSTEM} fáljlrendszer ${DEVICE} ${PARTITION}. "
+"partícióján."
 
 #. Type: boolean
 #. Description
@@ -172,24 +171,26 @@ msgid ""
 "If you do not go back to the partitioning menu and assign a mount point from "
 "there, this partition will not be used at all."
 msgstr ""
-"Ha nem megy vissza a partícionálómenübe és ott nem ad meg egy "
-"csatlakoztatópontot, a partíció használatlanul marad."
+"Ha a partícionálómenüben nem adsz meg egy csatolási pontot, a partíció "
+"használatlanul marad."
 
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:73
-#, fuzzy
 msgid "Invalid file system for this mount point"
-msgstr "Partíció fájlrendszere:"
+msgstr "Érvénytelen fájlrendszer e csatolási ponton"
 
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:73
 msgid ""
 "The file system type ${FILESYSTEM} cannot be mounted on ${MOUNTPOINT}, "
-"because it is not a fully-functional Unix filesystem. Please choose a "
+"because it is not a fully-functional Unix file system. Please choose a "
 "different file system, such as ${EXT2}."
 msgstr ""
+"A ${FILESYSTEM} fájlrendszer típus nem csatolható ide: ${MOUNTPOINT}, mert "
+"ez nem egy teljes-értékű Unix fájlrendszer. Válassz más, például egy ${EXT2} "
+"fájlrendszert."
 
 #. Type: select
 #. Choices
@@ -202,51 +203,75 @@ msgstr "/ - a gyökérfájlrendszer"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/boot - static files of the boot loader"
 msgstr "/boot - a rendszerbetöltő statikus fájljai"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/home - user home directories"
 msgstr "/home - felhasználói könyvtárak"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/tmp - temporary files"
 msgstr "/tmp - átmeneti fájlok"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/usr - static data"
 msgstr "/usr - statikus adatok"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/var - variable data"
 msgstr "/var - változékony adatok"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/srv - data for services provided by this system"
 msgstr "/srv - a rendszer nyújtotta szolgáltatások adatai"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/opt - add-on application software packages"
 msgstr "/opt - külső alkalmazásszoftver-csomagok"
 
 #. Type: select
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:83
 msgid "/usr/local - local hierarchy"
-msgstr "/usr/local - saját fordítású szoftverek hierarchiája"
+msgstr "/usr/local - saját  hierarchia"
 
 #. Type: select
 #. Choices
@@ -270,33 +295,31 @@ msgstr "Kézi megadás"
 #. Choices
 #: ../partman-basicfilesystems.templates:88
 msgid "Do not mount it"
-msgstr "Ne csatlakoztassa fel"
+msgstr "Ne legyen felcsatolva"
 
 #. Type: string
 #. Description
 #: ../partman-basicfilesystems.templates:93
 msgid "Mount point for this partition:"
-msgstr "E partíció csatlakoztatási pontja:"
+msgstr "E partíció csatolási pontja:"
 
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:97
 msgid "Invalid mount point"
-msgstr "Érvénytelen csatlakoztatási pont"
+msgstr "Hibás csatolási pont"
 
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:97
 msgid "The mount point you entered is invalid."
-msgstr "A megadott csatlakoztatási pont érvénytelen."
+msgstr "A megadott csatolási pont érvénytelen."
 
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:97
 msgid "Mount points must start with \"/\". They cannot contain spaces."
-msgstr ""
-"Minden csatlakoztatási pont neve perjellel (/) kezdődik. A névben nem állhat "
-"szóköz."
+msgstr "A csatolási pontok \"/\"-rel kezdődnek. Szóköz tilos."
 
 #. Type: string
 #. Description
@@ -308,7 +331,7 @@ msgstr "A partíción levő fájlrendszer címkéje:"
 #. Description
 #: ../partman-basicfilesystems.templates:108
 msgid "Format the swap area:"
-msgstr "Cserehely megformázása:"
+msgstr "Cserehely formázása:"
 
 #. Type: text
 #. Description
@@ -349,7 +372,7 @@ msgstr "Fájlrendszer blokkjainak rendszergazda számára fenntartott százalék
 #. Up to 25 character positions
 #: ../partman-basicfilesystems.templates:142
 msgid "Typical usage:"
-msgstr "Jellemző felhasználás:"
+msgstr "Jellemző használat:"
 
 #. Type: text
 #. Description
@@ -362,7 +385,7 @@ msgstr "szokásos"
 #. Description
 #: ../partman-basicfilesystems.templates:155
 msgid "Typical usage of this partition:"
-msgstr "E partíció jellemző felhasználása:"
+msgstr "E partíció jellemző használata:"
 
 #. Type: select
 #. Description
@@ -371,9 +394,8 @@ msgid ""
 "Please specify how the file system is going to be used, so that optimal file "
 "system parameters can be chosen for that use."
 msgstr ""
-"Jellemezze a fájlrendszer tipikusnak szánt felhasználását, ezzel választva "
-"ki fájlrendszer-paraméterek lehetséges értékei közül a kívánt célnak "
-"legmegfelelőbbeket."
+"Jellemezd a fájlrendszer felhasználását, hogy így kerüljenek kiválasztásra "
+"az optimalizált fájlrendszer paraméterek."
 
 #. Type: select
 #. Description
@@ -390,7 +412,7 @@ msgstr ""
 #. This is an item in the menu "Partition settings"
 #: ../partman-basicfilesystems.templates:167
 msgid "Mount point:"
-msgstr "Csatlakoztatási pont:"
+msgstr "Csatolási pont:"
 
 #. Type: text
 #. Description
@@ -458,47 +480,61 @@ msgstr "swap"
 #. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "noatime - do not update inode access times at each access"
-msgstr "noatime - inode-ok legutóbbi elérési idejének feljegyzése elmarad"
+msgstr "noatime - ne frissítse az inode-ok elérési időpontját"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "nodev - do not support character or block special devices"
-msgstr ""
-"nodev - speciális (karakteres és blokkos) eszközfájlok támogatásának "
-"mellőzése"
+msgstr "nodev - ne támogasson karakter és blokk eszközfájlokat"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "nosuid - ignore set-user-identifier or set-group-identifier bits"
-msgstr ""
-"nosuid - fájlokon található felhasználóiazonosító- illetve csoportazonosító-"
-"kényszerítő bitek figyelmen kívül hagyása"
+msgstr "nosuid - ne nézze a setuid és setgid biteket"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "noexec - do not allow execution of any binaries"
-msgstr "noexec - futtatható bináris fájlok futtatásának tiltása"
+msgstr "noexec - binárisok futtatásának tiltása"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "usrquota - user disk quota accounting enabled"
 msgstr "usrquota - felhasználók lemezhasználati mértékének naplózása"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "grpquota - group disk quota accounting enabled"
 msgstr "grpquota - felhasználói csoportok lemezhasználati mértékének naplózása"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
 #: ../partman-basicfilesystems.templates:228
 msgid "user_xattr - support user extended attributes"
-msgstr ""
+msgstr "user_xattr - felhasználói attribútumok támogatása"
 
 #. Type: multiselect
 #. Choices
@@ -507,34 +543,35 @@ msgstr ""
 #. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:237
 msgid "ro - mount the file system read-only"
-msgstr "ro - fájlrendszer felcsatlakoztatása csak olvasható módban"
+msgstr "ro - fájlrendszer csak-olvasható csatolása"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:237
 msgid "sync - all input/output activities occur synchronously"
-msgstr ""
-"sync - a fájlrendszeren történő minden bemeneti/kimeneti művelet szinkron "
-"módon lesz végrehajtva"
+msgstr "sync - minden i/o művelet szinkronosan történik"
 
 #. Type: multiselect
 #. Choices
+#. Note to translators : Please keep your translations of the choices
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages) including the initial path
 #: ../partman-basicfilesystems.templates:237
 msgid "quiet - changing owner and permissions does not return errors"
-msgstr ""
-"quiet - fájlok tulajdonosának és jogosultságainak megváltoztatásakor "
-"felmerülő hibák nem eredményeznek hibaüzeneteket"
+msgstr "quiet - tulajdonos és jogok váltása sosem nem ad hibát"
 
 #. Type: multiselect
 #. Description
 #: ../partman-basicfilesystems.templates:238
 msgid "Mount options:"
-msgstr "Csatlakoztatási kapcsolók:"
+msgstr "Csatolási opciók:"
 
 #. Type: multiselect
 #. Description
 #: ../partman-basicfilesystems.templates:238
 msgid "Mount options can tune the behavior of the file system."
 msgstr ""
-"A felcsatlakoztatási kapcsolók a fájlrendszer viselkedésének hangolását "
-"szolgálják."
+"A csatolási opciók a fájlrendszer viselkedésének hangolását szolgálják."

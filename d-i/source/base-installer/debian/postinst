@@ -24,9 +24,12 @@ CPUINFO=/proc/cpuinfo
 SPEAKUP=/proc/speakup
 KEYRING=/usr/share/keyrings/ubuntu-archive-keyring.gpg
 
-# Avoid debconf sending email during the base install process.
+# Avoid debconf sending email during the base install process
 DEBCONF_ADMIN_EMAIL=""
 export DEBCONF_ADMIN_EMAIL
+
+# Avoid warnings from lvm2 tools about open file descriptors
+export LVM_SUPPRESS_FD_WARNINGS=1
 
 # Variables used to set the progress bar
 export PB_POSITION=0
@@ -106,13 +109,13 @@ check_target () {
 }
 
 get_mirror_info () {
-	if db_get mirror/codename && [ "$RET" ] ; then
-		DISTRIBUTION=$RET
-	else
-		exit_error base-installer/no_codename
-	fi
-
 	if [ -f /cdrom/.disk/base_installable ]; then
+		if db_get cdrom/codename && [ "$RET" ] ; then
+			DISTRIBUTION=$RET
+		else
+			exit_error base-installer/no_codename
+		fi
+
 		PROTOCOL=file
 		MIRROR=""
 		DIRECTORY="/cdrom/"
@@ -135,6 +138,12 @@ get_mirror_info () {
 			exit_error base-installer/cannot_install
 		fi
 	else
+		if db_get mirror/codename && [ "$RET" ] ; then
+			DISTRIBUTION=$RET
+		else
+			exit_error base-installer/no_codename
+		fi
+
 		mirror_error=""
 		
 		db_get mirror/protocol || mirror_error=1
@@ -189,7 +198,6 @@ install_base_system () {
 	partsdir="/usr/lib/base-installer.d"
 	if [ -d "$partsdir" ]; then
 		tmpfile=/tmp/base-installer-hook.log
-		info "Execution hook before debootstrap"
 		for script in `ls "$partsdir"/*`; do
 			base=$(basename $script | sed 's/[0-9]*//')
 			if ! db_progress INFO base-installer/progress/$base; then
@@ -198,9 +206,11 @@ install_base_system () {
 		    	fi
 	
 		    	if [ -x "$script" ] ; then
-				info "Running $script"
-				if ! "$script" >"$tmpfile" 2>&1; then
-			    		log "warning: $script returned error code $?"
+				# be careful to preserve exit code
+				if "$script" >"$tmpfile" 2>&1; then
+					:
+				else
+			    		warning "$script returned error code $?"
 				fi
 		    	else
 				error "Unable to execute $script"
@@ -321,18 +331,35 @@ create_devices () {
 	if [ -e /proc/mdstat ] && grep -q ^md /proc/mdstat ; then
 		apt-install mdadm
 	fi
-	# LVM: create VG and LV devices
-	if pvdisplay | grep -iq "physical volume ---" && grep -q " device-mapper$" /proc/misc; then
-		apt-install lvm2
-		mount -t proc proc /target/proc
+	# device-mapper
+	if grep -q " device-mapper$" /proc/misc; then
 		mkdir -p /target/dev/mapper
 		if [ ! -e /target/dev/mapper/control ] ; then
 			major=$(grep "[0-9] misc$" /proc/devices | sed 's/[ ]\+misc//')
 			minor=$(grep "[0-9] device-mapper$" /proc/misc | sed 's/[ ]\+device-mapper//')
 			mknod /target/dev/mapper/control c $major $minor
+
+			# check if root is on a dm-crypt device
+			rootdev=$(mount | grep "on /target " | cut -d' ' -f1)
+			rootnode=${rootdev#/dev/mapper/}
+			if [ $rootdev != $rootnode ] && \
+			   [ $(dmsetup table $rootnode | cut -d' ' -f3) = crypt ]; then
+				major=$(dmsetup -c --noheadings info $rootnode | cut -d':' -f2)
+				minor=$(dmsetup -c --noheadings info $rootnode | cut -d':' -f3)
+				mknod /target/dev/mapper/$rootnode b $major $minor
+			fi
 		fi
-		chroot /target vgscan --mknodes || true
-		umount /target/proc
+
+		# We can't check the root node directly as is done above because
+		# root could be on an LVM LV on top of an encrypted device
+		if dmsetup table | cut -d' ' -f4 | grep -q "crypt" 2>/dev/null; then
+			apt-install cryptsetup
+		fi
+
+		if pvdisplay | grep -iq "physical volume ---"; then
+			apt-install lvm2
+			in-target vgscan --mknodes || true
+		fi
 	fi
 	# UML: create ubd devices
 	if grep -q "model.*UML" /proc/cpuinfo; then
@@ -436,22 +463,25 @@ pick_kernel () {
 		done
 	fi
 
+	WHICH_KERNEL_PRIO=high
 	if kernel_present "$KERNEL"; then
-		# Current selection is available, nothing to do
-		:
+		# Current selection is available
+		WHICH_KERNEL_PRIO=medium
 	else
-		# No recommendations available; guess by taking the first on
-		# the list. kernel_update_list orders the list in such a way
-		# that the metapackages always come first, in the right
-		# order.
-		KERNEL=$(echo "$kernels" | cut -d, -f1)
+		# No recommendations available; try to guess.
+		kernels="$(echo "$kernels" | sed 's/,/\n/g')"
+
+		# Take the first on the list. kernel_update_list orders the
+		# list in such a way that the metapackages always come
+		# first, in the right order.
+		KERNEL=$(echo "$kernels" | head -n 1)
 	fi
 
 	if [ "$KERNEL" ] ; then
 		db_set base-installer/kernel/which-kernel "$KERNEL"
 	fi
 
-	db_input medium base-installer/kernel/which-kernel || [ $? -eq 30 ]
+	db_input $WHICH_KERNEL_PRIO base-installer/kernel/which-kernel || [ $? -eq 30 ]
 	if ! db_go; then
 		db_progress stop
 		exit 10
@@ -481,8 +511,29 @@ get_resume_partition () {
 	echo "$biggest_partition"
 }
 
+available_initramfs_generators () {
+	irf_list=""
+	db_get base-installer/kernel/linux/initramfs-generators || return 1
+
+	for irf in $RET; do
+		if LANG=C chroot /target apt-cache policy $irf 2>&1 | \
+			grep "Candidate:" | grep -v "(none)" >/dev/null 2>&1; then
+			if [ "$irf_list" ]; then
+				irf_list="$irf_list $irf"
+			else
+				irf_list="$irf"
+			fi
+		fi
+	done
+	info "Available initramfs generator(s): '$irf_list'"
+
+	[ "$irf_list" ] || return 1
+	echo "$irf_list"
+	return 0
+}
+
 select_initramfs_generator () {
-	irf_choices="$(echo $1 | sed "s/ */, /g")"
+	irf_choices="$(echo "$1" | sed "s/ \+/, /g")"
 	irf_default="${1%% *}"
 	db_subst base-installer/initramfs/generator GENERATORS "$irf_choices"
 	db_set base-installer/initramfs/generator "$irf_default"
@@ -497,7 +548,41 @@ select_initramfs_generator () {
 	echo $RET
 }
 
-install_kernel () {
+addmodule_easy () {
+	if [ -f "$CFILE" ]; then
+		if [ "$2" = 1 ]; then
+			echo -e "\n# Added by Debian Installer" >>$CFILE
+		fi
+		echo "$1" >> $CFILE
+	fi
+}
+
+addmodule_initrd_tools () {
+	CFILE='/target/etc/mkinitrd/modules'
+	addmodule_easy "$1" "$2"
+}
+
+addmodule_initramfs_tools () {
+	if [ -d /target/etc/initramfs-tools ]; then
+		CFILE='/target/etc/initramfs-tools/modules'
+	else
+		# old location
+		CFILE='/target/etc/mkinitramfs/modules'
+	fi
+	addmodule_easy "$1" "$2"
+}
+
+addmodule_yaird () {
+	CFILE='/target/etc/yaird/Default.cfg'
+	if [ -f "$CFILE" ]; then
+		if [ "$2" = 1 ]; then
+			sed -i "/END GOALS/s/^/\n\t\t#\n\t\t# Added by Debian Installer\n/" $CFILE
+		fi
+		sed -i "/END GOALS/s/^/\t\tMODULE $1\n/" $CFILE
+	fi
+}
+
+install_linux () {
 	if [ "$KERNEL" = none ]; then
 		info "Not installing any kernel"
 		return
@@ -572,52 +657,32 @@ EOF
 
 	package=""
 	if [ "$do_initramfs" = yes ]; then
-		if db_get base-installer/kernel/linux/initramfs-generators; then
-			generators="$RET"
-			info "Available initramfs generator(s) '$generators'"
+		if generators="$(available_initramfs_generators)"; then
 			if echo "$generators" | grep -q " "; then
 				package="$(select_initramfs_generator "$generators")"
 			else
 				package="$generators"
 			fi
 		fi
-		case "$package" in
-		    initramfs-tools)
-			ramdiskconf=/target/etc/mkinitramfs/initramfs.conf
-			;;
-		    yaird)
-			ramdiskconf=
-			;;
-		    "")
-			db_subst base-installer/initramfs/no-generator
-			exit_error base-installer/initramfs/no-generator
-			;;
-		    *)
-			db_subst base-installer/initramfs/unsupported GENERATOR "$package"
-			exit_error base-installer/initramfs/unsupported
-			;;
-		esac
 	else
 		package=initrd-tools
-		ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
 	fi
-	echo "Selected initrd generator '$package'."
 
 	# Sarge does not have any initramfs generators, though custom images may
-	if [ "$DISTRIBUTION" = sarge ] ; then
-		if [ -z "$(chroot /target apt-cache show "$package" 2>/dev/null || true)" ] ; then
+	if [ -z "$package" ] ; then
+		if [ "$DISTRIBUTION" = sarge ] ; then
 			info "$package not available; falling back to initrd-tools."
 			do_initramfs=no
 			package=initrd-tools
-			ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
+		else
+			# We can only get here if $do_initramfs=yes
+			exit_error base-installer/initramfs/no-generator
 		fi
 	fi
 
 	# TODO This should probably be restructured to better support
 	#      differences between initrd generators
 	if [ yes = "$do_initrd" ] ; then
-		info "Installing $package."
-
 		# Make sure the ramdisk creation tool is installed before we
 		# change its configuration
 		db_subst base-installer/section/install_kernel_package SUBST0 "$package"
@@ -626,7 +691,44 @@ EOF
 			db_subst base-installer/kernel/failed-package-install PACKAGE "$package"
 			exit_error base-installer/kernel/failed-package-install
 		fi
+		
+		# Figure out how to configure the ramdisk creation tool.
+		case "$package" in
+		    initramfs-tools)
+			if [ -d /target/etc/initramfs-tools/conf.d ]; then
+				ramdiskconf=/target/etc/initramfs-tools/conf.d/resume
+			elif [ -d /target/etc/mkinitramfs/conf.d ]; then
+				ramdiskconf=/target/etc/mkinitramfs/conf.d/resume
+			else
+				# old location
+				ramdiskconf=/target/etc/mkinitramfs/initramfs.conf
+			fi
+			;;
+		    yaird)
+			ramdiskconf=
+			;;
+		    initrd-tools)
+			ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
+			;;
+		    *)
+			db_subst base-installer/initramfs/unsupported GENERATOR "$package"
+			exit_error base-installer/initramfs/unsupported
+			;;
+		esac
 
+		# Add modules that have been queued for inclusion in the initrd
+		FIRSTMODULE=1
+		for QUEUEFILE in /var/lib/register-module/*.initrd; do
+			[ ! -e $QUEUEFILE ] && break
+			MODULE=$(basename $QUEUEFILE ".initrd")
+			addmodule_initrd_tools "$MODULE" $FIRSTMODULE
+			addmodule_initramfs_tools "$MODULE" $FIRSTMODULE
+			addmodule_yaird "$MODULE" $FIRSTMODULE
+			rm $QUEUEFILE
+			FIRSTMODULE=0
+		done
+
+		# Install any extra (kernel related) packages
 		if db_get "base-installer/kernel/linux/extra-packages-$target_kernel_major"; then
 			EXTRAS="$RET"
 		elif db_get base-installer/kernel/linux/extra-packages; then
@@ -663,10 +765,7 @@ EOF
 			resume=
 		fi
 		if [ -n "$ramdiskconf" -a "$resume" ]; then
-			if [ "$package" = initramfs-tools ]; then
-				mkdir -p /target/etc/mkinitramfs/conf.d
-				echo "RESUME=$resume" > /target/etc/mkinitramfs/conf.d/resume
-			elif [ -f $ramdiskconf ] ; then
+			if [ -f $ramdiskconf ] ; then
 				sed -e "s@^#* *RESUME=.*@RESUME=$resume@" < $ramdiskconf > $ramdiskconf.new &&
 					mv $ramdiskconf.new $ramdiskconf
 			else
@@ -677,19 +776,18 @@ EOF
 		info "Not installing $package."
 	fi
 
-	# Advance progress bar to 30% of allocated space for install_kernel
+	# Advance progress bar to 30% of allocated space for install_linux
 	update_progress 30 100
 
 	# Install the kernel
-	info "Installing kernel '$KERNEL'."
 	db_subst base-installer/section/install_kernel_package SUBST0 "$KERNEL"
 	db_progress INFO base-installer/section/install_kernel_package
 	log-output -t base-installer apt-install "$KERNEL" || kernel_install_failed=$?
 
-	# Advance progress bar to 90% of allocated space for install_kernel
+	# Advance progress bar to 90% of allocated space for install_linux
 	update_progress 90 100
 
-	# /proc/filesystems will accomodate this past the second bootup.
+	# /proc/filesystems will accomodate this when the initrd is rebuilt.
 	if [ "$do_initrd" = yes ] && [ "$do_initramfs" = no ]; then
 		sed -e 's/^ROOT=.*/ROOT=probe/' $ramdiskconf > $ramdiskconf.new &&
 			mv $ramdiskconf.new $ramdiskconf
@@ -728,7 +826,7 @@ apt_update () {
 }
 
 install_extra () {
-	info "Installing extra packages into /target/."
+	info "Installing queued packages into /target/."
 	
 	if [ -f /var/lib/apt-install/queue ] ; then
 		# We need to install these one by one in case one fails.
@@ -738,9 +836,7 @@ install_extra () {
 			db_subst base-installer/section/install_extra_package SUBST0 "$PKG"
 			db_progress INFO base-installer/section/install_extra_package
 
-			if log-output -t base-installer apt-install $PKG; then
-				info "Installed $PKG successfully into /target/"
-			else
+			if ! log-output -t base-installer apt-install $PKG; then
 				warning "Failed to install $PKG into /target/: $?"
 			fi
 
@@ -755,21 +851,23 @@ post_install_hooks () {
 	partsdir="/usr/lib/post-base-installer.d"
 	if [ -d "$partsdir" ]; then
 		tmpfile=/tmp/post-base-installer-hook.log
-		info "Running post-base-installation hooks"
 		scriptcount=`ls "$partsdir"/* | wc -l`
 		scriptcur=0
 		for script in "$partsdir"/*; do
 			base="$(basename "$script" | sed 's/[0-9]*//')"
 			if ! db_progress INFO base-installer/progress/$base && \
+			   ! db_progress INFO finish-install/progress/$base && \
 			   ! db_progress INFO prebaseconfig/progress/$base; then
 				db_subst base-installer/progress/fallback SCRIPT "$base"
 				db_progress INFO base-installer/progress/fallback
 			fi
 
 			if [ -x "$script" ]; then
-				info "Running $script"
-				if ! "$script" >"$tmpfile" 2>&1; then
-					log "warning: $script returned error code $?"
+				# be careful to preserve exit code
+				if "$script" >"$tmpfile" 2>&1; then
+					:
+				else
+					warning "$script returned error code $?"
 				fi
 			else
 				error "Unable to execute $script"
@@ -786,7 +884,6 @@ post_install_hooks () {
 }
 
 cleanup () {
-	info "Cleaning up"
 	rm -f $KERNEL_LIST
 }
 
@@ -805,7 +902,7 @@ waypoint 3	apt_update
 waypoint 2	create_devices
 waypoint 5	post_install_hooks
 waypoint 1	pick_kernel
-waypoint 20	install_kernel
+waypoint 20	install_linux
 case "$ARCH" in
 	i386*)
 		if [ -e /proc/bus/pccard/drivers ]; then

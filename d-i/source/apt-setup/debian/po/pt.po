@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-17 20:54+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-25 18:41+0000\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -127,10 +127,13 @@ msgstr ""
 "Algum software non-free foi preparado para funcionar com Debian. Embora este "
 "software não faça parte de Debian, as ferramentas standard de Debian podem "
 "ser usadas para instala-lo. Este software tem variadas licenças que podem "
-"prevenir que você possa usa-lo, moddifica-lo ou partilha-lo."
+"prevenir que você possa usa-lo, modifica-lo ou partilha-lo."
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Por favor escolha se o quer ter disponível de qualquer maneira."
@@ -157,6 +160,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -172,12 +178,16 @@ msgstr "Tentar novamente"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "Mudar de mirror"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "Ignorar"
@@ -204,6 +214,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "Utilizar um mirror de rede"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"Um mirror de rede pode ser utilizado para acrescentar software suplementar "
+"ao que é incluído no CD-ROM. Pode também trazer versões mais recentes do "
+"software disponível."
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+"Você está a instalar a partir de um CD netinst e escolheu não utilizar um "
+"mirror, irá ficar apenas com um sistema base muito mínimo."
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -211,6 +248,7 @@ msgstr "Utilizar software restrito?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -232,6 +270,7 @@ msgstr "Utilizar o software do componente \"universe\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -251,6 +290,7 @@ msgstr "Utilizar o software do componente \"multiverse\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -274,6 +314,7 @@ msgstr "Utilizar backports de software?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

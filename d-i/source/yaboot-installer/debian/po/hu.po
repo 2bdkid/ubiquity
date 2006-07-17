@@ -6,19 +6,20 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-20 00:11+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: text
@@ -37,8 +38,7 @@ msgstr "Yaboot rendszerbetöltő telepítése"
 #. Description
 #: ../yaboot-installer.templates:12
 msgid "Yaboot installation failed.  Continue anyway?"
-msgstr ""
-"Yaboot rendszerbetöltő telepítése sikertelenül zárult. Mégis továbblép?"
+msgstr "A Yaboot telepítése sikertelen. Mégis továbblépsz?"
 
 #. Type: boolean
 #. Description
@@ -48,10 +48,9 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to Yaboot, so continuing the installation may be possible."
 msgstr ""
-"A yaboot /target/ könyvtárba telepítése sikertelenül zárult. A yaboot "
-"rendszerbetöltőként telepítése pedig feltétlenül szükséges. Azért lehet, "
-"hogy a telepítés során felmerült problémának nincs köze az arcboot-hoz, ez "
-"esetben a telepítés folytatásának elvileg nincs akadálya."
+"A yaboot csomag /target/-be telepítése meghiúsult. A Yaboot telepítése pedig "
+"szükséges. Lehet, hogy e gond nem a Yaboot-hoz kötődik és a telepítés "
+"folytatása mégis lehetséges."
 
 #. Type: text
 #. Description
@@ -63,7 +62,7 @@ msgstr "Rendszerbetöltő partíciók felderítése"
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr "Rendszerbetöltő partíció felderítése sikertelen"
+msgstr "Nincs rendszerbetöltő partíció"
 
 #. Type: error
 #. Description
@@ -72,9 +71,8 @@ msgid ""
 "No hard disks were found which have an \"Apple_Bootstrap\" partition.  You "
 "must create an 819200-byte partition with type \"Apple_Bootstrap\"."
 msgstr ""
-"A felderítés nem talált \"Apple_Bootstrap\" partícióval ellátott "
-"merevlemezt. Készítsen egy 819200 bájt méretű, \"Apple_Bootstrap\" típusú "
-"partíciót."
+"Nincs \"Apple_Bootstrap\" partícióval ellátott merevlemez. Készíts egy "
+"819200 bájt méretű, \"Apple_Bootstrap\" típusú partíciót."
 
 #. Type: text
 #. Description
@@ -86,7 +84,7 @@ msgstr "Gyökérpartíció felderítése"
 #. Description
 #: ../yaboot-installer.templates:33
 msgid "No root partition found"
-msgstr "Gyökérpartíció felderítése sikertelen"
+msgstr "Nincs gyökér partíció"
 
 #. Type: error
 #. Description
@@ -94,9 +92,7 @@ msgstr "Gyökérpartíció felderítése sikertelen"
 msgid ""
 "No partition is mounted as your new root partition. You must mount a root "
 "partition first."
-msgstr ""
-"Nincs felcsatlakoztatva gyökérpartíció. A továbblépéshez csatlakoztasson fel "
-"egyet."
+msgstr "Nincs felcsatolva gyökérpartíció. A továbblépéshez csatolj fel egyet."
 
 #. Type: text
 #. Description
@@ -119,15 +115,15 @@ msgid ""
 "destination partition from among these partitions that have the bootable "
 "flag set."
 msgstr ""
-"A rendszer indítása a yaboot (Linux-kernelhez használt rendszerbetöltő) "
-"merevlemezre telepítésével válik lehetővé. Az alábbi, bejelölt "
-"rendszerindítási kapcsolójú partíciók közül válassza ki a yaboot helyét."
+"A rendszer indítása a yaboot (Linux rendszerbetöltő) merevlemezre "
+"telepítésével válik lehetővé. Az alábbi, bejelölt rendszerindítási "
+"kapcsolójú partíciók közül válaszd ki a yaboot helyét."
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr "Figyelem: a kiválasztott partíción levő összes adat el fog veszni!"
+msgstr "Figyelem: a kijelölt partíción levő összes adat elvész!"
 
 #. Type: text
 #. Description
@@ -147,15 +143,6 @@ msgstr "Yaboot-konfiguráció létrehozása sikertelen"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "A fő yaboot-konfigurációs fájl létrehozása nem sikerült."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-#, fuzzy
-msgid "Please check the syslog for more information."
-msgstr ""
-"További információt a harmadik konzolon vagy a /var/log/messages fájlban "
-"elérhető hibanaplóban talál."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -166,7 +153,7 @@ msgstr "Yaboot telepítése rendszerbetöltő partícióra"
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "Failed to install boot loader"
-msgstr "Rendszerbetöltő telepítése sikertelen"
+msgstr "A boot betöltő telepítése sikertelen"
 
 #. Type: error
 #. Description
@@ -178,41 +165,37 @@ msgstr "A yaboot rendszerbetöltő telepítése nem sikerült."
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "Successfully installed yaboot"
-msgstr "Yaboot telepítése sikerült"
+msgstr "A yaboot telepítése sikerült"
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The yaboot boot loader was successfully installed."
-msgstr "A yaboot rendszerbetöltő telepítése sikeresen megtörtént."
+msgstr "A yaboot rendszerbetöltő sikeresen települt."
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
-#, fuzzy
 msgid "The new system is now ready to boot."
-msgstr "A gép kész az új Debian GNU/Linux rendszer indítására."
+msgstr "Az új rendszer kész az indulásra"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Failed to mount /target/proc"
-msgstr "/target/proc felcsatlakoztatása sikertelen"
+msgstr "/target/proc csatolása sikertelen"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Mounting the proc file system on /target/proc failed."
-msgstr ""
-"A /target/proc ponton nem sikerült a proc fájlrendszert felcsatlakoztatni."
+msgstr "A proc fájlrendszer csatolása /target/proc-ra nem sikerült."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr ""
-"Részleteket a rendszernaplóban, vagy a harmadik konzolon (tty3) elérhető "
-"kimeneten találhat."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "A /var/log/syslog vagy a 4. virtális konzol adja a részleteket."
 
 #. Type: error
 #. Description
@@ -229,17 +212,15 @@ msgstr "Firmware-változók automatikus indításra beállítása"
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
-#, fuzzy
 msgid ""
 "Some variables need to be set in the Pegasos OpenFirmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
 "will reboot.  At the Pegasos OpenFirmware prompt, set the following "
 "OpenFirmware variables to enable auto-booting:"
 msgstr ""
-"A Debian automatikus indításához a Pegasos OpenFirmware-ben néhány változót "
-"kell beállítani. A telepítés végén a rendszer újra fog indulni. Az "
-"automatikus indítást az Pegasos OpenFirmware-parancssorban a következők "
-"megadásával érheti el:"
+"A Debian automatikus indításához a Pegasos OpenFirmware egyes változóit kell "
+"beállítani. A telepítés végén a rendszer újraindul. Az automatikus "
+"indításhoz a Pegasos OpenFirmware parancssorban az alábbiakat kell megadni:"
 
 #. Type: note
 #. Description
@@ -258,28 +239,25 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
-#, fuzzy
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
 "or reboot the system to proceed to the next stage of the installation."
 msgstr ""
-"Ezt csak egyszer kell elvégezni. Utána a \"boot\" paranccsal vagy a rendszer "
-"újraindításával léphet a Debian-telepítés következő szakaszába."
+"Ezt csak egyszer kell megtenni. Ezután a \"a boot\" parancs vagy az "
+"újraindítás a telepítő következő lépésére lép."
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
-#, fuzzy
 msgid ""
 "Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Ha viszont rendszermagját kézileg kívánja betölteni:"
+msgstr "Kézzel is lehetséges lesz az indítás így:"
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
-#, fuzzy
 msgid " ${BOOT}"
-msgstr " ${KERNEL_BOOT}"
+msgstr " ${BOOT}"
 
 #. Type: note
 #. Description
@@ -298,6 +276,5 @@ msgstr "Yaboot telepítése merevlemezre"
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Yaboot rendszerbetöltő telepítése"
+msgstr "Yaboot boot betöltő újratelepítése"

@@ -12,11 +12,11 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-05-19 22:51+0300\n"
-"Last-Translator: Lior Kaplan <webmaster@guides.co.il>\n"
-"Language-Team: Debian l10n Hebrew <webmaster@guides.co.il>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-05-16 16:43-0500\n"
+"Last-Translator: Lior Kaplan <kaplan@gmail.com>\n"
+"Language-Team: Hebrew\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -33,110 +33,125 @@ msgstr "בחירת שפה/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "שומר שפה..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Israel"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "אחר"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "IL"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "בחירת לוקל:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "IL"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr "לפי השפה שלך, אתה כנראה באחת מהמדינות או האיזורים הבאים."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"בהתבסס על בחירות השפה והמדינה שלך, הפרטמרים הבאים של הלוקל נתמכים באובונטו."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "בחירת לוקל:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"יש חובה לבחור לוקל גיבוי, בגלל שכרגע אין לוקל נתמך עבור השפה והמדינה שנבחרו."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "לוקל לא נתמך"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"הערך של הלוקל המבוקש ,(${LOCALE}) , אינו נתמך כעת ע\"י אובונטו. תתבקש להכניס "
-"ערך עבור השפה, המדינה והגדרות הלוקל."
+"בהתבסס על בחירות השפה והמדינה שלך, הפרטמרים הבאים של הלוקל (locale) נתמכים."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "בחר לוקלים נוספים לתמיכה:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "אתה רשאי לבחור לוקלים נוספים להתקנה מתוך הרשימה הבאה:"
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- צפון אמריקה --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- מרכז אמריקה --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- דרום אמריקה --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- הקריביים --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- אירופה --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- אסיה --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- אפריקה --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- האוקיאנוס ההודי --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- אוקינאווה --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- אנטרטיקה --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- אחר --"
+
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "בחר מדינה, טריטוריה או איזור:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr "לפי השפה שלך, אתה כנראה באחת מהמדינות או האיזורים הבאים."

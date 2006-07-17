@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-03-08 07:46+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-03-17 18:02+0000\n"
 "Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Welsh <daf@muse.19inch.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,19 +21,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "dim cerdyn ethernet, ${CHOICES}, dim o'r uchod"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "dim cerdyn ethernet"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "dim o'r uchod"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Y gyrrydd mae eich cerdyn Ethernet ei angen:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -43,13 +50,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -58,26 +65,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Ni chanfuwyd cerdyn Ethernet"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Ni chanfuwyd cerdyn Ethernet ar y system."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Yn chwilio am galedwedd rhwydwaith"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Canfod caledwedd rhwydwaith"
 
@@ -96,21 +103,21 @@ msgstr "Yn canfod disgiau a phob caledwedd arall"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
+#: ../disk-detect.templates:15
 #, fuzzy
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
+msgid "continue with no disk drive"
 msgstr "dim cerdyn ethernet, ${CHOICES}, dim o'r uchod"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 #, fuzzy
 msgid "Driver needed for your disk drive:"
 msgstr "Y gyrrydd mae eich cerdyn Ethernet ei angen:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 #, fuzzy
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
@@ -121,19 +128,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Dim cyfrwng rhaniadwy"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Ni chanfuwyd cyfrwng rhaniadwy."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr ""
 "Os gwelwch yn dda, gwiriwch fod disgen galed wedi ei gysylltu i'r peiriant "
@@ -179,30 +186,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Gofyn am baramedrau modylau?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Mae rhai modylau yn derbyn paramedrau wrth lwytho er mwyn rheoli eu "
-"gweithrediad. Os hoffech, gallwch gael eich gofyn am baramedrau modiwl wrth "
-"i bob fodiwl gael ei lwytho."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "Cychwyn gwasanaethau cerdyn PC?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -213,13 +202,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "Opsiynnau amrediad adnodd PCMCIA:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -235,40 +224,20 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr ""
 "Ar gyfer y rhan fwyaf o galedwedd does dim rhaid i chi benodi dim byd yma."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Mae rhai modulau yn derbyn paramedrau amser llwytho i gyflunio eu "
-"gweithrediad. Mae'r paramedreau yma yn aml yn cynnwyr porth M/A a rhifau IRQ "
-"sy'n newid o beiriant i beiriant a ni ellir eu dehongli o'r caledwedd Mae "
-"\"irq=7 io=0x220\" yn linyn paramedr nodweddiadol."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Os nad ydych chi'n gwybod beth i'w rhoi, gadewch e'n wag"
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Paramedrau ychwanegol ar gyfer y modiwl ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -284,7 +253,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -294,20 +263,20 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Gwall wrth rhedeg '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 #, fuzzy
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Llwyddio gyrryddion rhwydwaith o ddisgen hyblyg gyrryddion?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 #, fuzzy
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "

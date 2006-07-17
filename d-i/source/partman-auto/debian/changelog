@@ -1,3 +1,237 @@
+partman-auto (54ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  3 Jul 2006 13:38:35 +0100
+
+partman-auto (54) unstable; urgency=low
+
+  * Support preseeding of partman-auto-lvm/disk.
+
+  [ Updated translations ]
+  * Estonian (et.po) by Siim Põder
+  * Polish (pl.po) by Bartosz Fenski
+
+ -- Frans Pop <fjp@debian.org>  Mon, 26 Jun 2006 12:04:11 +0200
+
+partman-auto (53) unstable; urgency=low
+
+  * Do not run partman-auto on S/390. Main reason is that S/390 installations
+    will mostly use multiple disks. As partman-auto currently only supports
+    partitioning a single disk, running it is not very useful.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Khmer (km.po) by Khoem Sokhem
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Wed, 21 Jun 2006 13:52:38 +0200
+
+partman-auto (52) unstable; urgency=low
+
+  * Since partman-auto-lvm erases disks w/o warning when used, reword the
+    template to not say that the user will get a chance to undo things.
+    (See #368633)
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po)
+  * Esperanto (eo.po) by Serge Leblanc
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Khmer (km.po) by Leang Chumsoben
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Nepali (ne.po) by Shiva Pokharel
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 25 May 2006 17:13:20 -0400
+
+partman-auto (51) unstable; urgency=low
+
+  * Also set free_type in wipe_disk as that is needed by the function
+    create_primary_partitions. This allows partman-auto-lvm to actually create
+    the /boot partition as a primary partition.
+  * Allow to include definitions of partitions in regular recipes that should
+    only be used for a certain type of auto partitioning. This is useful to
+    allow e.g. a definition for a /boot partition to be included that is not
+    to be used for regular auto partitioning, but is needed for auto-lvm.
+    The actual implementation is in reverse as that seems more flexible: a
+    partition can be marked using "$<type>ignore" (where <type> is default or
+    lvm) and will then not be included. Multiple ignore marks are possible.
+    To implement this, the functions choose_recipe and decode_recipe now take
+    an extra argument indicating the type of autopartitioning being done.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Basque (eu.po) by Piarres Beobide
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Khmer (km.po) by hok kakada
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Tamil (ta.po) by Damodharan Rajalingam
+
+ -- Frans Pop <fjp@debian.org>  Sun,  9 Apr 2006 22:44:36 +0200
+
+partman-auto (50) unstable; urgency=low
+
+  [ Sven Luther ]
+  * [powerpc] Added lvm auto-partitioning support to prep and ibm_chrp
+    recipes.
+  * [powerpc] Added chrp_pegasos, oldworld and apus recipes.
+  * [powerpc] Fixed boot-prep -> prep renaming.
+    boot-prep died in libparted on january 2005, well before the sarge release.
+
+  [ Frans Pop ]
+  * recipes.sh: make code to select a recipe directory into separate function.
+
+  [ Martin Michlmayr ]
+  * Add support for the Broadcom BCM91480B evaluation board (aka "BigSur").
+  * Rename sb1-swarm-bn recipes to sb1-bcm91250a for consistency.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Fri, 17 Mar 2006 22:23:32 +0000
+
+partman-auto (49) unstable; urgency=low
+
+  * Enable auto-lvm in partitioning schemes for Sparc.
+
+  [ Updated translations ]
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Slovenian (sl.po) by Matej Kovačič
+
+ -- Frans Pop <fjp@debian.org>  Mon, 13 Feb 2006 12:38:08 +0100
+
+partman-auto (48) unstable; urgency=low
+
+  * Make sure no .svn directories get included in the package.
+
+ -- Frans Pop <fjp@debian.org>  Sat, 28 Jan 2006 17:16:38 +0100
+
+partman-auto (47) unstable; urgency=low
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Catalan (ca.po) by Jordi Mallach
+  * Greek, Modern (1453-) (el.po) by Konstantinos Margaritis
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Dutch (nl.po) by Bart Cornelis
+  * Punjabi (Gurmukhi) (pa_IN.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Jan 2006 21:55:44 +0100
+
+partman-auto (46) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Renamed multi_user scheme to just "multi" as in multiple partitions.
+    There are more uses for this scheme than multi user systems.
+  * Switch package to arch all and only include recipes for the given
+    architecture and any subarches in each package.
+  * Rules file cleanups.
+  * Control file cleanups.
+  * Change descriptions of home and multi recipes to just list the partitions
+    that are included. Closes: #287409, #288884
+  * Increase minimal size of / partition in home recipe to 500 mb.
+    Closes: #289419, #330079
+  * Double the weight of the root partition in the multi scheme from 400 to
+    800. This should increase the size allocated on reasonable size disks
+    from the previous 250 mb to something slightly more reasonable.
+    Closes: #328514
+
+  [ Steve Langasek ]
+  * Add a smalldisk recipe for alpha, so that systems with little disk space
+    can use a single ext2 partition for the whole install (closes: #261182).
+
+  [ Colin Watson ]
+  * Remove duplicated chrp_rs6k recipes and install a symlink instead.
+
+  [ Fabio M. Di Nitto ]
+  * Start implementing bits required to avoid code duplication with
+    partman-auto-lvm as per discussion on debian-boot mailing list.
+    (See http://lists.debian.org/debian-boot/2005/10/msg00842.html)
+  * Add lvmok{ } to recipes as per discussion on debian-boot mailing list.
+    NOTES:
+      - nobody objected to a tag/properties/flag name or proposed something
+        different. It is clearly ok to rename it if it doesn't fit.
+      - swap will stay out of LVM for now. In some cases it is known to break
+        suspend/resume. It seems not all kernels are able to resume from it.
+      - porters will have to adjust their recipes. I could only test
+        i386/amd64 (via recipes) and powerpc-powermac_newworld (via
+        recipes-powerpc-powermac_newworld).
+  * Move common code into auto-shared.sh shelllib and create 3 functions:
+    wipe_disk, create_primary_partitions (see comments in the file) and
+    create_partitions.
+  * Install auto-shared.sh in /lib/partman (chages debian/rules)
+  * Make perform_recipe and autopartition use auto-shared.sh.
+  * Make create_partitions set a var for all the devices that will be marked
+    as pv. This is actually only used by partman-auto-lvm, but it is generic
+    enough that could be used later on for other tasks.
+    NOTES: the above changes have been tested on i386/amd64/ppc and there is
+    no known breakage. The code is only moved around and none of the actual
+    recipes use method{ lvm } used by partman-auto-lvm to mark partitions as
+    pv volumes.
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Dec 2005 21:55:20 -0500
+
 partman-auto (45ubuntu16) dapper; urgency=low
 
   * Fix encoding of Croatian translation.

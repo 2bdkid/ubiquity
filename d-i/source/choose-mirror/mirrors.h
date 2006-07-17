@@ -11,7 +11,12 @@ struct mirror_t {
 
 /* This is the codename of the preferred distribution; the one that the
  * current version of d-i is targeted at installing. */
-#define PREFERRED_DISTRIBUTION "dapper"
+#define PREFERRED_DISTRIBUTION "edgy"
+
+/* The two strings defined below must match the strings used in the
+ * templates (http and ftp) for these options. */
+#define NO_MIRROR    "don't use a network mirror"
+#define MANUAL_ENTRY "enter information manually"
 
 #define SUITE_LENGTH 32
 

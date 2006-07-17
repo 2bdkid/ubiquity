@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-11 12:27+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-06-13 17:40+0200\n"
 "Last-Translator: Bartosz Fenski <fenio@debian.org>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
 "MIME-Version: 1.0\n"
@@ -132,6 +132,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Proszę wybrać czy chcesz mieć je mimo wszystko dostępne."
@@ -158,6 +161,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -174,12 +180,16 @@ msgstr "Ponów"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "Zmień serwer lustrzany"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "Ignoruj"
@@ -206,6 +216,30 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "Użyć sieciowego serwera lustrzanego?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"Sieciowy serwer lustrzany może uzupełnić oprogramowanie, które dostępne jest "
+"na płycie CD-ROM. Może też dostarczyć nowszych wersji oprogramowania."
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -213,6 +247,7 @@ msgstr "Użyć restrykcyjnego oprogramowania?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -235,6 +270,7 @@ msgstr "Użyć oprogramowania z części \"universe\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -249,14 +285,13 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid "Use software from the \"multiverse\" component?"
-msgstr "Użyć oprogramowania z części \"universe\"?"
+msgstr "Użyć oprogramowania z części \"multiverse\"?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -267,8 +302,8 @@ msgstr ""
 "Część niewolnego oprogramowania jest dostępna w postaci pakietów. Pomimo, że "
 "te programy nie są częścią głównej dystrybucji, standardowe narzędzia do "
 "zarządzania pakietami mogą je zainstalować. Oprogramowanie takie posiada "
-"różne licencje, które mogą ograniczać prawo do jego używania, modyfikowania "
-"lub rozpowszechniania."
+"różne licencje, a czasem również jest opatentowane i prawo do jego używania, "
+"modyfikowania lub rozpowszechniania. może być ograniczone."
 
 #. Type: boolean
 #. Description
@@ -279,6 +314,7 @@ msgstr "Użyć nowszych wersji oprogramowania dostosowanych do tego wydania?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

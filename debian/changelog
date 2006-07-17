@@ -1,3 +1,58 @@
+ubiquity (1.1.0) edgy; urgency=low
+
+  * Use try/finally in install.py to ensure that PROGRESS STOP is always
+    called; ignore errors from PROGRESS STOP (e.g. because debconf has gone
+    away due to a previous error).
+  * Support /UNIONFS (Knoppix) as well as /rofs as the read-only filesystem
+    source.
+  * Don't require entering a full name (see
+    http://www.hermann-uwe.de/blog/os-install-experiences-part-4-ubuntu).
+  * GTK frontend:
+    - Return None from location_from_point if point is None (thanks to Chris
+      Moore for the idea; closes: Malone #48885).
+  * KDE frontend:
+    - Add slightly more paranoia in case getNearestCity returns None.
+  * Don't show hw-detect/modprobe_error, and make it non-fatal (closes:
+    Malone #48524).
+  * Make it clear in the crash dialog that you should file a new bug, not
+    attach your details to an existing bug.
+  * Add passwd and adduser dependencies from user-setup.
+  * Take a copy of the supplied choice map in set_keyboard_choices.
+  * Save tracebacks from install.py and slurp them back into the traceback
+    displayed if install.py exits non-zero.
+  * Convert to new Python policy (python-central). Install Python
+    modules/extensions to /usr/lib/ubiquity/ubiquity rather than into the
+    public module path.
+  * Warn in the partitioner if you try to use XFS for /boot (closes: Malone
+    #47848).
+  * Warn in the partitioner if system filesystems are not reformatted
+    (closes: Malone #47046).
+  * Remove /usr/bin/espresso compatibility symlink.
+  * Use os._exit() rather than sys.exit() in the apt install progress child
+    process after forking, fixing a lot of strange "PROGRESS STOP" messages
+    in /var/log/installer/syslog and bizarre debconf exceptions. See also
+    Malone #53298.
+  * Use exceptions to communicate all failures in install.py, so that we get
+    more useful tracebacks.
+
+  * Automatic update of included source packages: apt-setup 1:0.11ubuntu1,
+    base-installer 1.63ubuntu2, choose-mirror 2.04ubuntu1, clock-setup
+    0.10ubuntu1, debian-installer-utils 1.32ubuntu1, grub-installer
+    1.17ubuntu1, hw-detect 1.38ubuntu1, kbd-chooser 1.29ubuntu1,
+    localechooser 1.20ubuntu3, partconf 1.16, partman-auto 54ubuntu1,
+    partman-base 90ubuntu1, partman-basicfilesystems 47ubuntu1,
+    partman-basicmethods 30, partman-ext3 41, partman-jfs 17,
+    partman-newworld 13, partman-palo 4, partman-partitioning 40ubuntu1,
+    partman-reiserfs 31, partman-target 42ubuntu1, partman-xfs 29,
+    silo-installer 1.04ubuntu1, tzsetup 1:0.10ubuntu1, user-setup
+    1.2ubuntu2, yaboot-installer 1.1.7ubuntu1.
+  * Handle move of prebaseconfig scripts to (variously) post-base-installer
+    or finish-install.
+  * Install search-path from debian-installer-utils; partman-auto needs it
+    now.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 18 Jul 2006 00:18:21 +0100
+
 ubiquity (1.0.12) dapper; urgency=low
 
   * Teach get_string to fetch translations for ll_CC locales (e.g.

@@ -4,76 +4,61 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005 Software in the Public Interest, Inc.
+# Copyright © 2005-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 18:29-0600\n"
-"PO-Revision-Date: 2005-08-21 14:21+0930\n"
+"POT-Creation-Date: 2006-04-07 23:43-0600\n"
+"PO-Revision-Date: 2006-04-18 15:52+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.6b36\n"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:3
 msgid "Resizing partition..."
-msgstr "Thay đổi kích thước phân vùng..."
+msgstr "Đang thay đổi kích cỡ phân vùng..."
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:7
 msgid "Copying partition..."
-msgstr "Sao chép phân vùng..."
+msgstr "Đang sao chép phân vùng..."
 
-# Type: text
-# Description
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:11
 msgid "Computing the new state of the partition table..."
-msgstr "Tính toán trạng thái mới của bảng phân vùng..."
-
-#. Type: boolean
-#. Description
-#: ../partman-partitioning.templates:15
-msgid "Write the changes to disk devices and copy the data?"
-msgstr "Ghi các thay đổi vào thiết bị đĩa và sao chép các dữ liệu không?"
+msgstr "Đang tính toán tính trạng mới của bảng phân vùng..."
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:15
 msgid ""
-"Before the copy operation takes place, the changes have to be written to "
-"disk."
-msgstr "Trước khi có thể sao chép gì, phải ghi các thay đổi vào đĩa."
+"Before you can select a partition to copy, any previous changes have to be "
+"written to disk."
+msgstr ""
+"Trước khi bạn có thể chọn phân vùng cần sao chép, thay đổi trước nào phải "
+"được ghi vào đĩa."
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:15
-msgid "Please note that the copy operation may require a long time."
-msgstr "Hãy ghi chú là việc sao chép có lẽ sẽ mất thời gian dài."
+msgid "Please note that the copy operation may take a long time."
+msgstr "Hãy ghi chú rằng thao tác sao chép có lẽ sẽ mất thời gian dài."
 
-# Type: select
-# Description
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:26
@@ -84,70 +69,59 @@ msgstr "Phân vùng nguồn:"
 #. Description
 #: ../partman-partitioning.templates:26
 msgid "Please choose the partition which contains the data you want to copy."
-msgstr "Hãy chọn vùng chứa dữ liệu cần sao chép."
+msgstr "Hãy chọn phân vùng chứa dữ liệu cần sao chép."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
 msgid "Copy operation failure"
-msgstr "Lỗi sao chép."
+msgstr "Việc sao chép bị lỗi"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
 msgid "The copy operation is aborted."
-msgstr "Hủy bỏ việc sao chép."
+msgstr "Việc sao chép bị hủy bỏ."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:38
 msgid "The resize operation is impossible"
-msgstr "Không thể thực hiện chức năng thay đổi kích thước."
+msgstr "Việc thay đổi kích cỡ không thể làm được"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:38
 msgid "Because of an unknown reason it is impossible to resize this partition."
-msgstr "Không thể thay đổi cỡ vùng này do lỗi lạ."
+msgstr "Vì lý do chưa biết, không thể thay đổi kích cỡ của phân vùng này."
 
-# Type: boolean
-# Description
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
-msgid "Write the changes to disk and resize the partition?"
-msgstr "Ghi thay đổi vào đĩa và thay đổi kích thước phân vùng?"
+msgid "Write previous changes to disk and continue?"
+msgstr "Ghi các thay đổi trước này vào đĩa và tiếp tục không?"
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
 msgid ""
-"Before the resize operation takes place, the changes have to be written to "
-"disk."
+"Before you can select a new partition size, any previous changes have to be "
+"written to disk."
 msgstr ""
-"Trước khi có thể thay đổi cỡ bằng cách nào, phải ghi các thay đổi vào đĩa."
+"Trước khi bạn có thể chọn kích cỡ phân vùng mới, thay đổi trước nào phải "
+"được ghi vào đĩa."
 
-# Type: boolean
-# Description
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
 msgid "You cannot undo this operation."
-msgstr "Không thể hoàn tác hành động này."
+msgstr "Không thể hoàn lại thao tác này."
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:43
-msgid "Please note that the resize operation may require a long time."
-msgstr "Hãy ghi chú là việc thay đổi cỡ có lẽ sẽ mất thời gian dài."
+msgid "Please note that the resize operation may take a long time."
+msgstr "Hãy ghi chú rằng việc thay đổi kích cỡ có lẽ sẽ mất thời gian dài."
 
 #. Type: string
 #. Description
@@ -156,66 +130,50 @@ msgid ""
 "The minimum size you can use is ${MINSIZE} or ${PERCENT} and the maximum "
 "size is ${MAXSIZE}."
 msgstr ""
-"Cỡ tối thiểu có thể dùng là ${MINSIZE} hay ${PERCENT} và cỡ tối đa là "
-"${MAXSIZE}."
+"Kích cỡ tối thiểu dùng được là ${MINSIZE} hay ${PERCENT} và kích cỡ tối đa "
+"là ${MAXSIZE}."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:68
 msgid "Too large size"
-msgstr "Cỡ quá lớn."
+msgstr "Cỡ quá lớn"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:72
 msgid "Too small size"
-msgstr "Cỡ quá nhỏ."
+msgstr "Cỡ quá nhỏ"
 
-# Type: error
-# Description
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:76
 msgid "Resize operation failure"
-msgstr "Lỗi thay đổi cỡ."
+msgstr "Việc thay đổi kích cỡ bị lỗi"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:76
 msgid "An error occurred while writing the changes to the storage devices."
-msgstr "Gặp lỗi khi ghi các thay đổi lên thiết bị lưu trữ."
+msgstr "Gặp lỗi khi ghi các thay đổi vào thiết bị lưu trữ."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:76
 msgid "The resize operation is aborted."
-msgstr "Việc thay đổi cỡ bị hủy bỏ."
+msgstr "Việc thay đổi kích cỡ bị hủy bỏ."
 
-# Type: string
-# Description
 #. Type: string
 #. Description
 #: ../partman-partitioning.templates:84
 msgid "New partition size:"
-msgstr "Cỡ mới của phân vùng:"
+msgstr "Cỡ phân vùng mới:"
 
-# Type: string
-# Description
 #. Type: string
 #. Description
 #: ../partman-partitioning.templates:84
 msgid "The maximum size you can use is ${MAXSIZE}."
-msgstr "Cỡ tối đa có thể dùng là ${MAXSIZE}."
+msgstr "Kích cỡ tối đa dùng được là ${MAXSIZE}."
 
 #. Type: string
 #. Description
@@ -227,40 +185,32 @@ msgid ""
 "maximum allowed size."
 msgstr ""
 "Gợi y: sử dụng \"20%\" (hay \"30%\", v.v.) cho 20% (30%, v.v. riêng từng) "
-"của các sức chứa còn rảnh sẵn sàng cho vùng này. Sử dụng \"max\" là viết tắt "
-"cho cỡ tối đa (maximum) có thể dùng."
+"của chỗ rỗng sẵn sàng trong phân vùng này. Sử dụng \"max\" là viết tắt cho "
+"kích cỡ _tối đa_ (maximum) dùng được."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:93
 msgid "Invalid size"
-msgstr "Cỡ không hợp lệ."
+msgstr "Cỡ không hợp lệ"
 
-# Type: select
-# Choices
 #. Type: select
 #. Choices
 #: ../partman-partitioning.templates:97
 msgid "Beginning"
 msgstr "Đầu"
 
-# Type: select
-# Choices
 #. Type: select
 #. Choices
 #: ../partman-partitioning.templates:97
 msgid "End"
-msgstr "Kết thúc"
+msgstr "Cuối"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:98
 msgid "Location for the new partition:"
-msgstr "Vị trí phân vùng mới:"
+msgstr "Địa điểm phân vùng mới:"
 
 #. Type: select
 #. Description
@@ -268,110 +218,80 @@ msgstr "Vị trí phân vùng mới:"
 msgid ""
 "Please choose whether you want the new partition to be created at the "
 "beginning or at the end of the available space."
-msgstr "Hãy chọn tạo vùng mới tại đầu hay cuối của sức chứa sẵn sàng."
+msgstr "Hãy chọn tạo phân vùng mới tại đầu hay cuối của chỗ sẵn sàng."
 
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:105
 msgid "File system for the new partition:"
 msgstr "Hệ thống tập tin cho phân vùng mới:"
 
-# Type: select
-# Choices
 #. Type: select
 #. Choices
 #: ../partman-partitioning.templates:109
 msgid "Primary"
 msgstr "Chính"
 
-# Type: select
-# Choices
 #. Type: select
 #. Choices
 #: ../partman-partitioning.templates:109
 msgid "Logical"
 msgstr "Hợp lý"
 
-# Type: select
-# Description
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:110
 msgid "Type for the new partition:"
-msgstr "Kiểu cho phân vùng mới:"
+msgstr "Kiểu phân vùng mới:"
 
-# Type: multiselect
-# Description
-# Type: multiselect
-# Description
 #. Type: multiselect
 #. Description
 #: ../partman-partitioning.templates:115
 msgid "Flags for the new partition:"
 msgstr "Các cờ cho phân vùng mới:"
 
-# Type: string
-# Description
 #. Type: string
 #. Description
 #: ../partman-partitioning.templates:119
 msgid "Partition name:"
 msgstr "Tên phân vùng:"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:124
 msgid "Partition table type:"
 msgstr "Kiểu bảng phân vùng:"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
 #: ../partman-partitioning.templates:124
 msgid "Select the type of partition table to use."
-msgstr "Chọn kiểu bảng phân vùng để dùng."
+msgstr "Hãy chọn kiểu bảng phân vùng cần dùng."
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:129
 msgid "Set the partition flags"
-msgstr "Đặt các cờ cho phân vùng"
+msgstr "Đặt các cờ phân vùng"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:133
 msgid "Name:"
 msgstr "Tên:"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:137
 msgid "Bootable flag:"
-msgstr "Cờ có thể khởi động:"
+msgstr "Cờ khả năng khởi động:"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:141
 msgid "on"
 msgstr "bật"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:145
@@ -382,38 +302,28 @@ msgstr "tắt"
 #. Description
 #: ../partman-partitioning.templates:149
 msgid "Resize the partition (currently ${SIZE})"
-msgstr ""
+msgstr "Thay đổi kích cỡ của phân vùng (hiện thời ${SIZE})"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:153
 msgid "Copy data from another partition"
-msgstr "Sao chép dữ liệu từ phân vùng khác."
+msgstr "Sao chép dữ liệu từ phân vùng khác"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:157
 msgid "Delete the partition"
-msgstr "Xóa bỏ phân vùng."
+msgstr "Xóa bỏ phân vùng"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:161
 msgid "Create a new partition"
-msgstr "Tạo phân vùng mới."
+msgstr "Tạo phân vùng mới"
 
-# Type: text
-# Description
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../partman-partitioning.templates:165
 msgid "Create a new empty partition table on this device"
-msgstr "Tạo bảng phân vùng trống mới lên thiết bị này."
+msgstr "Tạo bảng phân vùng trống mới lên thiết bị này"

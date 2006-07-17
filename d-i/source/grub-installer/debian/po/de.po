@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2006-01-12 22:48+0100\n"
+"PO-Revision-Date: 2006-04-29 17:42+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,9 @@ msgid ""
 msgstr ""
 "Warnung: Wenn der Installer ein anderes Betriebssystem auf Ihrem Computer "
 "nicht richtig erkennt, Sie aber den Master Boot Record verändern, werden Sie "
-"dieses vorläufig nicht mehr starten können."
+"dieses vorläufig nicht mehr starten können. Allerdings kann GRUB im "
+"Nachhinein manuell konfiguriert werden, so dass das Betriebssystem wieder "
+"startet."
 
 #. Type: boolean
 #. Description
@@ -118,9 +120,9 @@ msgid ""
 "floppy."
 msgstr ""
 "Das neu installierte System muss bootfähig gemacht werden, indem der GRUB-"
-"Bootloader auf einem bootbaren Medium installiert wird. Gewöhnlich wird dazu "
-"GRUB im Master Boot Record Ihrer ersten Festplatte installiert. Wenn Sie "
-"möchten, können Sie GRUB auch auf einer anderen Partition, Laufwerk oder "
+"Bootloader auf einem bootfähigen Medium installiert wird. Gewöhnlich wird "
+"dazu GRUB im Master Boot Record Ihrer ersten Festplatte installiert. Wenn "
+"Sie möchten, können Sie GRUB auch auf einer anderen Partition, Laufwerk oder "
 "auch auf einer Diskette installieren."
 
 #. Type: string
@@ -151,7 +153,7 @@ msgstr ""
 #. Description
 #: ../grub-installer.templates:54
 msgid "GRUB password:"
-msgstr "GRUB-Kennwort:"
+msgstr "GRUB-Passwort:"
 
 #. Type: password
 #. Description
@@ -182,7 +184,7 @@ msgstr ""
 #. Description
 #: ../grub-installer.templates:73
 msgid "GRUB installation failed.  Continue anyway?"
-msgstr "GRUB konnte nicht installiert werden.  Trotzdem fortfahren?"
+msgstr "GRUB konnte nicht installiert werden. Trotzdem fortfahren?"
 
 #. Type: boolean
 #. Description
@@ -192,7 +194,7 @@ msgid ""
 "loader is a required step.  The install problem might however be unrelated "
 "to GRUB, so continuing the installation may be possible."
 msgstr ""
-"Das Grub-Paket konnte nicht nach /target/ installiert werden.  Die "
+"Das Grub-Paket konnte nicht nach /target/ installiert werden. Die "
 "Installation von Grub als Bootloader ist jedoch erforderlich. Das Problem "
 "muss allerdings Grub nicht zwangsläufig betreffen, deshalb könnte es möglich "
 "sein, die Installation fortzusetzen."

@@ -6,14 +6,14 @@
 # Polish messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Copyright (C) 2004-2005 Bartosz Feński <fenio@debian.org>
+# Copyright (C) 2004-2006 Bartosz Feński <fenio@debian.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-12 18:59+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-24 13:39+0200\n"
 "Last-Translator: Bartosz Fenski <fenio@debian.org>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
 "MIME-Version: 1.0\n"
@@ -143,12 +143,6 @@ msgstr "Nie udało się utworzyć pliku konfiguracyjnego yaboot"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "Utworzenie głównego pliku konfiguracyjnego yaboot nie powiodło się."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Sprawdź dzienniki systemowe, by uzyskać więcej informacji."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -200,9 +194,8 @@ msgstr "Zamontowanie systemu plików proc na /target/proc nie powiodło się."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr ""
-"Proszę sprawdzić dziennik systemowy lub wyjście na trzeciej konsoli (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "Sprawdź /var/log/messages lub wirtualną konsolę nr 4 po szczegóły."
 
 #. Type: error
 #. Description
@@ -284,6 +277,5 @@ msgstr "Zainstaluj yaboot na dysku twardym"
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Instalowanie programu uruchomieniowego Yaboot"
+msgstr "Przeinstaluj program uruchomieniowy Yaboot"

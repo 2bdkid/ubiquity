@@ -4,32 +4,27 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005 Software in the Public Interest, Inc.
+# Copyright © 2005-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-07-05 17:09+0930\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-27 21:06+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.6b36\n"
 
-# Type: text
-# Description
-# This menu entry may be translated.
-# However, translators are required to keep "Choose language"
-# as an alternative separated by the "/" character
-# Example (french): Choisir la langue/Choose language
 #. Type: text
 #. Description
 #. This menu entry may be translated.
@@ -42,133 +37,129 @@ msgstr "Chọn ngôn ngữ/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Đang cất lưu ngôn ngữ..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
-msgstr "Viet Nam"
-
-# variable: do not translate
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
+msgstr "Vietnam"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "khác"
 
-# Type: text
-# Description
-# This menu entry may be translated.
-# However, translators are required to keep "Choose language"
-# as an alternative separated by the "/" character
-# Example (french): Choisir la langue/Choose language
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:91
-#, fuzzy
-msgid "Choose your location:"
-msgstr "Hãy chọn miền địa phương/Choose a locale:"
-
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
 msgstr "VI"
 
-# Type: select
-# Description
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
+#, fuzzy
+msgid "Choose your location:"
+msgstr "Chọn miền địa phương/Choose a locale:"
+
+#. Type: select
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
-"Dựa trên ngôn ngữ của bạn, rất có thể là bạn ở một trong các quốc gia hay "
+"Dựa trên ngôn ngữ của bạn, rất có thể là bạn ở một trong những quốc gia hay "
 "vùng lãnh thổ này."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
+#: ../localechooser.templates-in:112
+msgid "Choose a locale:"
+msgstr "Chọn miền địa phương/Choose a locale:"
+
+#. Type: select
+#. Description
+#: ../localechooser.templates-in:112
 msgid ""
 "Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
+"are supported."
 msgstr ""
-"Đựa vào ngôn ngữ và quốc gia đã chọn, những tham số miền địa phương được hỗ "
-"trợ trong Ubuntu."
-
-# Type: text
-# Description
-# This menu entry may be translated.
-# However, translators are required to keep "Choose language"
-# as an alternative separated by the "/" character
-# Example (french): Choisir la langue/Choose language
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid "Choose a locale:"
-msgstr "Hãy chọn miền địa phương/Choose a locale:"
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
-msgstr ""
-"Phải chọn miền địa phương dự trữ vì chưa có miền địa phương cho ngôn ngữ và "
-"quốc gia mà bạn đã chọn."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Chưa hỗ trợ miền địa phương ấy"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Giá trị miền địa phương mà bạn đã chèn trước (${LOCALE}) chưa được hỗ trợ "
-"trong Ubuntu. Sẽ nhắc bạn để thiết lập ngôn ngữ, quốc gia và miền địa phương."
+"Đựa vào ngôn ngữ và quốc gia đã chọn, những tham số miền địa phương theo đây "
+"được hỗ trợ."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
-msgstr "Hãy chọn những miền địa phương thêm cần hỗ trợ:"
+msgstr "Chọn miền địa phương thêm cần hỗ trợ :"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
-msgstr "Trong danh sách này, bạn có thể chọn miền địa phương thêm cần cài đặt."
+msgstr ""
+"Trong danh sách này, bạn có thể chọn một số miền địa phương thêm cần cài đặt."
+
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "— Châu Bắc Mỹ —"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "— Vùng Trung Mỹ —"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "— Châu Nam Mỹ —"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "— Ca-ri-bê —"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "— Châu Âu —"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "— Châu A —"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "— Châu Phi —"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "— Ấn Độ Dương —"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "— Úc và Niu Di-lan —"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "— Nam Cực —"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "— khác —"
 
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Chọn một quốc gia, vùng lãnh thổ hoặc khu vực:"
-
-# Type: select
-# Description
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Dựa trên ngôn ngữ của bạn, rất có thể là bạn ở một trong các quốc gia hay "
-#~ "vùng lãnh thổ này."

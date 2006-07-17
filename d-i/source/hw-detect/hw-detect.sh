@@ -15,10 +15,8 @@ NEWLINE="
 MISSING_MODULES_LIST=""
 SUBARCH="$(archdetect)"
 
-prebaseconfig=/usr/lib/prebaseconfig.d/30hw-detect
+finish_install=/usr/lib/finish-install.d/30hw-detect
 
-# This is a hack, but we don't have a better idea right now.
-# See Debian bug #136743
 if [ -x /sbin/depmod ]; then
 	depmod -a > /dev/null 2>&1 || true
 fi
@@ -34,8 +32,8 @@ log () {
 }
 
 is_not_loaded() {
-       ! ((cut -d" " -f1 /proc/modules | grep -q "^$1\$") || \
-          (cut -d" " -f1 /proc/modules | sed -e 's/_/-/g' | grep -q "^$1\$"))
+	! ((cut -d" " -f1 /proc/modules | grep -q "^$1\$") || \
+	   (cut -d" " -f1 /proc/modules | sed -e 's/_/-/g' | grep -q "^$1\$"))
 }
 
 is_available () {
@@ -45,7 +43,6 @@ is_available () {
 
 # Module as first parameter, description of device the second.
 missing_module () {
-	log "Missing module '$module'."
 	if ! in_list "$1" "$MISSING_MODULES_LIST"; then
 		if [ -n "$MISSING_MODULES_LIST" ]; then
 			MISSING_MODULES_LIST="$MISSING_MODULES_LIST, "
@@ -75,68 +72,58 @@ load_module() {
 	local devs=""
 	local olddevs=""
 	local newdev=""
-	local params=""
-    
-	if [ "$PROMPT_MODULE_PARAMS" = 1 ]; then
-		db_register hw-detect/module_params hw-detect/module_params/$module
-		db_subst hw-detect/module_params/$module MODULE "$module"
-		db_input low hw-detect/module_params/$module || [ $? -eq 30 ]
-		db_go
-		db_get hw-detect/module_params/$module
-		params="$RET"
-	fi
-	
+
 	old=`cat /proc/sys/kernel/printk`
 	echo 0 > /proc/sys/kernel/printk
-    
+
 	devs="$(snapshot_devs)"
-	if log-output -t hw-detect modprobe -v "$module" "$params"; then
-		if [ "$params" != "" ]; then
-			register-module "$module" "$params"
-		fi
-	
+	if log-output -t hw-detect modprobe -v "$module"; then
 		olddevs="$devs"
 		devs="$(snapshot_devs)"
 		newdevs="$(compare_devs "$olddevs" "$devs")"
 
-                # Make sure space is used as a delimiter.
-                IFS_SAVE="$IFS"
-                IFS=" "
+		# Make sure space is used as a delimiter.
+		IFS_SAVE="$IFS"
+		IFS=" "
 		if [ -n "$newdevs" -a -n "$cardname" ]; then
 			mkdir -p /etc/network
 			for dev in $newdevs; do
 				echo "${dev}:${cardname}" >> /etc/network/devnames
 			done
 		fi
-                IFS="$IFS_SAVE"
+		IFS="$IFS_SAVE"
 	else   
 		log "Error loading '$module'"
 		if [ "$module" != floppy ] && [ "$module" != ide-floppy ] && [ "$module" != ide-cd ]; then
-			db_subst hw-detect/modprobe_error CMD_LINE_PARAM "modprobe -v $module $params"
+			db_subst hw-detect/modprobe_error CMD_LINE_PARAM "modprobe -v $module"
 			db_input medium hw-detect/modprobe_error || [ $? -eq 30 ]
 			db_go
 		fi
 	fi
-    
+
 	echo $old > /proc/sys/kernel/printk
 }
 
 load_sr_mod () {
-	if is_not_loaded "sr_mod"; then
-		if is_available "sr_mod"; then
-			db_subst hw-detect/load_progress_step CARDNAME "SCSI CDROM support"
-			db_subst hw-detect/load_progress_step MODULE "sr_mod"
-			db_progress INFO hw-detect/load_progress_step
-			load_module sr_mod
-			register-module sr_mod
-		else
-			missing_module sr_mod "SCSI CDROM"
+	case "$(uname -r)" in
+	2.4*)
+		if is_not_loaded "sr_mod"; then
+			if is_available "sr_mod"; then
+				db_subst hw-detect/load_progress_step CARDNAME "SCSI CDROM support"
+				db_subst hw-detect/load_progress_step MODULE "sr_mod"
+				db_progress INFO hw-detect/load_progress_step
+				load_module sr_mod
+				register-module sr_mod
+			else
+				missing_module sr_mod "SCSI CDROM"
+			fi
 		fi
-	fi
+		;;
+	esac
 }
 
 blacklist_de4x5 () {
-	cat << EOF >> $prebaseconfig
+	cat << EOF >> $finish_install
 if [ -e /target/etc/discover.conf ]; then
 	touch /target/etc/discover-autoskip.conf
 	(echo "# blacklisted since tulip is used instead"; echo skip de4x5 ) >> /target/etc/discover-autoskip.conf
@@ -157,7 +144,6 @@ discover_version () {
 			DISCOVER_VERSION=1
 		fi
 	else
-		log "No discover available. Maybe using hotplug instead?"
 		DISCOVER_VERSION=
 	fi
 }
@@ -240,6 +226,9 @@ get_detected_hw_info() {
 			discover-ibm
 		fi
 	fi
+	if [ "${SUBARCH%%/*}" = sparc ]; then
+		discover-sbus
+	fi
 	discover_hw
 	if [ -d /proc/bus/usb ]; then
 		echo "usb-storage:USB storage"
@@ -263,20 +252,19 @@ get_ide_floppy_info() {
 }
 
 get_input_info() {
-	case "$(udpkg --print-architecture)" in
-		i386|ia64|amd64)
-			register-module psmouse
-		;;
-	esac
+	case "$(uname -r)" in
+	2.4*)
+		case "$(udpkg --print-architecture)" in
+			i386|ia64|amd64)
+				register-module psmouse
+			;;
+		esac
 	
-	case $SUBARCH in
-		powerpc/chrp*|powerpc/prep)
-			register-module psmouse
-			# TODO: below should be removed once rootskel 1.10 is in testing.
-			echo "i8042:i8042 PC Keyboard controller"
-			register-module i8042
-			echo "atkbd:AT keyboard support"
-			register-module atkbd
+		case $SUBARCH in
+			powerpc/chrp*|powerpc/prep)
+				register-module psmouse
+			;;
+		esac
 		;;
 	esac
 }
@@ -357,14 +345,13 @@ if [ -f /etc/pcmcia/cb_mod_queue ]; then
 	fi
 fi
 
-log "Detecting hardware..."
 db_progress INFO hw-detect/detect_progress_step
 
 # Load yenta_socket on 2.6 kernels, if hardware is available, so that
 # discover will see Cardbus cards.
 if [ -d /sys/bus/pci/devices ] && grep -q 0x060700 \
 	/sys/bus/pci/devices/*/class && \
-	! lsmod | grep -q ^yenta_socket; then
+	! grep -q ^yenta_socket /proc/modules; then
 	db_subst hw-detect/load_progress_step CARDNAME "Cardbus bridge"
 	db_subst hw-detect/load_progress_step MODULE "yenta_socket"
 	db_progress INFO hw-detect/load_progress_step
@@ -439,15 +426,6 @@ if [ "$LIST" ]; then
 	LIST="$RET"
 fi
 
-db_input low hw-detect/prompt_module_params || true
-db_go || exit 10 # back up
-db_get hw-detect/prompt_module_params
-if [ "$RET" = true ]; then
-	PROMPT_MODULE_PARAMS=1
-else
-	PROMPT_MODULE_PARAMS=0
-fi
-
 list_to_lines() {
 	echo "$LIST" | sed 's/, /\n/g'
 }
@@ -459,7 +437,6 @@ if [ "$LIST" ]; then
 	MODULE_STEPSIZE=$(expr $MODULE_STEPS / $(list_to_lines | wc -l))
 fi
 
-log "Loading modules..."
 IFS="$NEWLINE"
 
 for device in $(list_to_lines); do
@@ -477,7 +454,6 @@ for device in $(list_to_lines); do
 		db_subst hw-detect/load_progress_step CARDNAME "$cardname"
 		db_subst hw-detect/load_progress_step MODULE "$module"
 		db_progress INFO hw-detect/load_progress_step
-		log "Trying to load module '$module'"
 		if [ "$cardname" = "[Unknown]" ]; then
 			load_module "$module"
 		else
@@ -499,30 +475,47 @@ if [ -z "$LIST" ]; then
 	db_progress STEP $MODULE_STEPS
 fi
 
-# always load sd_mod and sr_mod if a scsi controller module was loaded.
-# sd_mod to find the disks, and sr_mod to find the CD-ROMs
-if [ -e /proc/scsi/scsi ] && ! grep -q "Attached devices: none" /proc/scsi/scsi; then
-	if grep -q 'Type:[ ]\+Direct-Access' /proc/scsi/scsi && \
-	   is_not_loaded "sd_mod" && \
-	   ! grep -q '^[^[:alpha:]]\+sd$' /proc/devices; then
-	   	if is_available "sd_mod"; then
-			db_subst hw-detect/load_progress_step CARDNAME "SCSI disk support"
-			db_subst hw-detect/load_progress_step MODULE "sd_mod"
-			db_progress INFO hw-detect/load_progress_step
-			load_module sd_mod
-			register-module sd_mod
-		else
-			missing_module sd_mod "SCSI disk"
-		fi
-	fi
-	db_progress STEP $OTHER_STEPSIZE
-	if grep -q 'Type:[ ]\+CD-ROM' /proc/scsi/scsi && \
-	   ! grep -q '^[^[:alpha:]]\+sr$' /proc/devices; then
-		load_sr_mod
-	fi
-	db_progress STEP $OTHER_STEPSIZE
+# If there is an ide bus, then register the ide CD modules so they'll be
+# available on the target system for base-config. Disk too, in case root is
+# not ide but ide is still used. udev should handle this for 2.6.
+if [ -e /proc/ide/ -a "`find /proc/ide/* -type d 2>/dev/null`" != "" ]; then
+	case "$(uname -r)" in
+	2.4*)
+		register-module ide-detect
+		register-module ide-cd
+		register-module ide-disk
+	;;
+	esac
 fi
 
+case "$(uname -r)" in
+2.4*)
+	# always load sd_mod and sr_mod if a scsi controller module was loaded.
+	# sd_mod to find the disks, and sr_mod to find the CD-ROMs
+	if [ -e /proc/scsi/scsi ] && ! grep -q "Attached devices: none" /proc/scsi/scsi; then
+		if grep -q 'Type:[ ]\+Direct-Access' /proc/scsi/scsi && \
+		   is_not_loaded "sd_mod" && \
+		   ! grep -q '^[^[:alpha:]]\+sd$' /proc/devices; then
+		   	if is_available "sd_mod"; then
+				db_subst hw-detect/load_progress_step CARDNAME "SCSI disk support"
+				db_subst hw-detect/load_progress_step MODULE "sd_mod"
+				db_progress INFO hw-detect/load_progress_step
+				load_module sd_mod
+				register-module sd_mod
+			else
+				missing_module sd_mod "SCSI disk"
+			fi
+		fi
+		db_progress STEP $OTHER_STEPSIZE
+		if grep -q 'Type:[ ]\+CD-ROM' /proc/scsi/scsi && \
+		   ! grep -q '^[^[:alpha:]]\+sr$' /proc/devices; then
+			load_sr_mod
+		fi
+		db_progress STEP $OTHER_STEPSIZE
+	fi
+	;;
+esac
+	
 if ! is_not_loaded ohci1394; then
 	# if firewire was found, try to enable firewire cd support
 	if is_not_loaded sbp2 && is_available scsi_mod; then
@@ -594,7 +587,13 @@ apply_pcmcia_resource_opts() {
 }
 
 # get pcmcia running if possible
-if [ -x /etc/init.d/pcmcia ]; then
+PCMCIA_INIT=
+if [ -x /etc/init.d/pcmciautils ]; then
+	PCMCIA_INIT=/etc/init.d/pcmciautils
+elif [ -x /etc/init.d/pcmcia ]; then
+	PCMCIA_INIT=/etc/init.d/pcmcia
+fi
+if [ "$PCMCIA_INIT" ]; then
 	if ! [ -e /var/run/cardmgr.pid ]; then
 		db_input medium hw-detect/start_pcmcia || true
 	fi
@@ -609,7 +608,7 @@ if [ -x /etc/init.d/pcmcia ]; then
 		db_progress INFO hw-detect/pcmcia_step
 		
 		if [ -e /var/run/cardmgr.pid ]; then
-			# Not using /etc/init.d/pcmcia stop as it
+			# Not using $PCMCIA_INIT stop as it
 			# uses sleep which is not available and is racey.
 			kill -9 $(cat /var/run/cardmgr.pid) 2>/dev/null || true
 			rm -f /var/run/cardmgr.pid
@@ -647,14 +646,14 @@ if [ -x /etc/init.d/pcmcia ]; then
 			echo /bin/hotplug-pcmcia >/proc/sys/kernel/hotplug
 		fi
 	    
-		CARDMGR_OPTS="-f" /etc/init.d/pcmcia start </dev/null 3<&0 2>&1 \
+		CARDMGR_OPTS="-f" $PCMCIA_INIT start </dev/null 3<&0 2>&1 \
 			| logger -t hw-detect
 	    
 		if [ "$HOTPLUG_TYPE" = fake ]; then
 			echo $saved_hotplug >/proc/sys/kernel/hotplug
 			rm -f /tmp/pcmcia-discover-snapshot
 		fi
-    
+
 		db_progress STEP $OTHER_STEPSIZE
 	fi
 	db_fset hw-detect/start_pcmcia seen true || true
@@ -687,16 +686,16 @@ gen_pcmcia_devnames() {
 
 have_pcmcia=0
 case "$(uname -r)" in
-  2.4*)
-    if [ -e "/proc/bus/pccard/drivers" ]; then
-      have_pcmcia=1
-    fi
-  ;;
-  2.6*)
-    if ls /sys/class/pcmcia_socket/* >/dev/null 2>&1; then
-      have_pcmcia=1
-    fi
-  ;;
+	2.4*)
+		if [ -e "/proc/bus/pccard/drivers" ]; then
+			have_pcmcia=1
+		fi
+	;;
+	2.6*)
+		if ls /sys/class/pcmcia_socket/* >/dev/null 2>&1; then
+			have_pcmcia=1
+		fi
+	;;
 esac
 
 # find Cardbus network cards on 2.6 kernels
@@ -731,15 +730,15 @@ if [ "$have_pcmcia" -eq 1 ] && ! grep -q pcmcia-cs /var/lib/apt-install/queue 2>
 	fi
 
 	echo "mkdir /target/etc/pcmcia 2>/dev/null || true" \
-		>>$prebaseconfig
+		>>$finish_install
 	echo "cp /etc/pcmcia/config.opts /target/etc/pcmcia/config.opts" \
-		>>$prebaseconfig
+		>>$finish_install
 
 	# Determine devnames.
-        if [ -f /var/run/stab ]; then
-                mkdir -p /etc/network
-	        gen_pcmcia_devnames < /var/run/stab
-        fi
+	if [ -f /var/run/stab ]; then
+		mkdir -p /etc/network
+		gen_pcmcia_devnames < /var/run/stab
+	fi
 fi
 
 # Ask for discover to be installed into /target/, to make sure the
@@ -748,38 +747,27 @@ fi
 # video hardware is in use.
 case "$DISCOVER_VERSION" in
 	2)
-		log "Detected discover version 2, installing discover."
 		apt-install discover || true
 		;;
 	1|'')
-		# This will break woody install, as discover1 is
-		# missing in woody.  We should try to find out which
-		# packages are available when selecting it for
-		# installation. [pere 2004-04-23]
-
-		log "Detected discover version 1, installing discover1."
 		apt-install discover1 || true
 		;;
 esac
 
 # Install udev/hotplug as well, as appropriate.
 if type udevd >/dev/null 2>&1; then
-	log "Detected udev support, installing udev."
 	apt-install udev || true
 elif [ -f /proc/sys/kernel/hotplug ]; then 
-	log "Detected hotplug support (and no udev), installing hotplug."
 	apt-install hotplug || true
 fi
 
 # TODO: should this really be conditional on hotplug support?
 if [ -f /proc/sys/kernel/hotplug ]; then
-	log "Detected hotplug support, installing usbutils."
 	apt-install usbutils || true
 fi
 
 # Install acpi (works only for 2.6 kernels)
 if [ -d /proc/acpi ]; then
-	log "Detected acpi support, installing acpi/acpid."
 	apt-install acpi || true
 	apt-install acpid || true
 fi

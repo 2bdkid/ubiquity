@@ -9,14 +9,15 @@
 # This file is distributed under the same licence as debian-installer.
 # Jaonary Rabarisoa  <jaonary@ifrance.com>, 2004.
 # Jaonary Rabarisoa <mpandikateny@linuxmg.org>, 2005.
-# Jaonary Rabarisoa <jaonary@free.fr>, 2005.
-#
+# Jaonary Rabarisoa <jaonary@free.fr>, 2005, 2006.
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: mg\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-11-24 22:28+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-05-08 22:17+0200\n"
 "Last-Translator: Jaonary Rabarisoa <jaonary@free.fr>\n"
 "Language-Team: Malagasy <jaonary@free.fr>\n"
 "MIME-Version: 1.0\n"
@@ -32,120 +33,134 @@ msgstr ""
 #. Example (french): Choisir la langue/Choose language
 #: ../localechooser.templates-in:7
 msgid "Choose language"
-msgstr "Fidio ny fiteny"
+msgstr "Fidio ny fiteny / Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Mitahiry ny fiteny..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Madagascar"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "hafa"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "MG"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "Fidio ny mpihazakam-paritra :"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "MG"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Araky ny fiteninao dia mety iray amin'ireto tany na fari-tany ireto no misy "
 "anao."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Araky ny fiteny sy ny tany izay nosafidianao, ireto avy ny << locale >>  azo "
-"ampiasaina ao amin'i Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Fidio ny mpihazakam-paritra :"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
+#, fuzzy
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Tokony hifidy << locale >> mitovitovy ianao satria mbola tsy misy ny << "
-"locale >> izay mifanaraka amin'ny fiteny ny tany izay nifidinao."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr " << Locale>> tsy azo ampiasaina"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Ny sandan'ny mpihazakam-paritra izay nampidirinao (${LOCALE}) dia mbola tsy "
-"azo ampiasaina ao amin'i Ubuntu. "
+"Araky ny fiteny sy ny tany izay nosafidianao, ireto avy ny << locale >>  azo "
+"ampiasaina ao amin'i Debian."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Fidio ireo \"locales\" hafa izay hampiasaina :"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Afaka mifidy \"locales\" fanampiny ao amin'ity lisitra ity ianao."
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Amerika Avaratra --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Amerika Afovoany --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Amerika Atsimo --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Karaiba --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Eropa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Azia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Afrika --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Ranomasina Indianina --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oseania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antartika --"
+
+#: ../../countrylist:24
+#, fuzzy
+msgid "-- other --"
+msgstr "hafa"
+
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Misafidiana tany, fari-tany na faritra"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Araky ny fiteninao dia mety iray amin'ireto tany na fari-tany ireto no "
-#~ "misy anao."

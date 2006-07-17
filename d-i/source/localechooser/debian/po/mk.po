@@ -6,21 +6,21 @@
 # translation of mk.po to
 # translation of mk.po to Macedonian
 # Macedonian strings from the debian-installer.
-# Georgi Stanojevski, <glisha@gmail.com>, 2004, 2005.
-# Georgi Stanojevski <georgis@unet.com.mk>, 2005.
 #
+# Georgi Stanojevski, <glisha@gmail.com>, 2004, 2005, 2006.
+# Georgi Stanojevski <georgis@unet.com.mk>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: mk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-07-20 20:56+0200\n"
-"Last-Translator: Georgi Stanojevski <georgis@unet.com.mk>\n"
-"Language-Team:  <en@li.org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-24 14:12+0200\n"
+"Last-Translator: Georgi Stanojevski <glisha@gmail.com>\n"
+"Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.1\n"
 
 #. Type: text
 #. Description
@@ -34,115 +34,124 @@ msgstr "Одбери јазик / Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Го зачувувам јазикот..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Macedonia, Republic of"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "друго"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "MK"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Одберете ја Вашата локација:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "MK"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Врз основа на Вашиот јазик, најверојатно живеете во една од овие држави или "
 "региони."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Врз основа на твојот јазик и држава, следните параметри во локалето се "
-"поддржани во Убунту."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Одбери локале:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Mора да се избере алтернативно локале бидејќи моментално нема локале за "
-"јазикот и државата која ја одбравте."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Неподржано локале"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Вредноста за локалето која ја одбра (${LOCALE}) не е моментално подржана во "
-"Убунту. Ќе бидеш прашан за поставки за јазик, држава и локале."
+"Врз основа на твојот јазик и држава, следните параметри за локалето се "
+"поддржани."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Одбери други локалиња кои сакаш да бидат поддржани:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
 "Од листава може да одбереш дополнителни локалиња кои ќе бидат инсталирани."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Одбери држава, територија или област:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Северна Америка --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Врз основа на твојот јазик, најверојатно живееш во една од овие држави "
-#~ "или региони."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Централна Америка --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Јужна Америка --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Карапски острови --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Европа --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Азија --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Африка --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Индиски океан --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Океанија --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Антартик --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- друго --"

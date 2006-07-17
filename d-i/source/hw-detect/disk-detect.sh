@@ -14,7 +14,9 @@ is_not_loaded() {
 }
 
 list_modules_dir() {
-	find $1 -type f | sed -e 's/\.k\?o$//' -e 's/.*\///'
+	if [ -d "$1" ]; then
+		find $1 -type f | sed -e 's/\.k\?o$//' -e 's/.*\///'
+	fi
 }
 
 list_disk_modules() {
@@ -23,6 +25,8 @@ list_disk_modules() {
 	list_modules_dir /lib/modules/*/kernel/drivers/ide
 	list_modules_dir /lib/modules/*/kernel/drivers/scsi
 	list_modules_dir /lib/modules/*/kernel/drivers/block
+	list_modules_dir /lib/modules/*/kernel/drivers/message/fusion
+	list_modules_dir /lib/modules/*/kernel/drivers/message/i2o
 }
 
 disk_found() {
@@ -33,7 +37,7 @@ disk_found() {
 				return 0
 			fi
 		else
-			# Essentially the same approch used by partitioner and
+			# Essentially the same approach used by partitioner and
 			# autopartkit to find their disks.
 			if [ -n "$(ls /dev/discs/ 2>/dev/null)" ]; then
 				return 0
@@ -50,55 +54,38 @@ disk_found() {
 module_probe() {
 	local module="$1"
 	local priority="$2"
-	local template="hw-detect/module_params"
+	local template=""
 	local question="$template/$module"
 	local modinfo=""
 	local devs=""
 	local olddevs=""
 	local newdev=""
-	local prompted_params=""
 	
-	db_register "$template" "$question"
-	db_subst "$question" MODULE "$module"
-	if db_input $priority "$question"; then
-		prompted_params=1
-	fi
-	db_go
-	db_get "$question"
-	local params="$RET"
-	
-	if ! log-output -t disk-detect modprobe -v "$module" "$params"; then
-		if [ -z "$params" ] && [ ! "$prompted_params" ]; then
-			# Prompt the user for parameters for the module.
-			template="hw-detect/retry_params"
-			db_unregister "$question"
-			db_register "$template" "$question"
-			db_subst "$question" MODULE "$module"
-			db_input critical "$question" || [ $? -eq 30 ]
-			db_go
-			db_get "$question"
-			params="$RET"
+	if ! log-output -t disk-detect modprobe -v "$module"; then
+		# Prompt the user for parameters for the module.
+		local template="hw-detect/retry_params"
+		db_unregister "$question"
+		db_register "$template" "$question"
+		db_subst "$question" MODULE "$module"
+		db_input critical "$question" || [ $? -eq 30 ]
+		db_go
+		db_get "$question"
+		local params="$RET"
 
-			if [ -n "$params" ] && \
-			   ! log-output -t disk-detect modprobe -v "$module" $params; then
+		if [ -n "$params" ]; then
+			if ! log-output -t disk-detect modprobe -v "$module" $params; then
 				db_unregister "$question"
 				db_subst hw-detect/modprobe_error CMD_LINE_PARAM "modprobe -v $module $params"
 				db_input critical hw-detect/modprobe_error || [ $? -eq 30 ]
 				db_go
 				false
+			else
+				# Module loaded successfully
+				if [ "$params" != "" ]; then
+					register-module "$module" "$params"
+				fi
 			fi
-		else
-			db_unregister "$question"
-			db_subst hw-detect/modprobe_error CMD_LINE_PARAM "modprobe -v $module $params"
-			db_input critical hw-detect/modprobe_error || [ $? -eq 30 ]
-			db_go
-			false
 		fi
-	fi
-
-	# Module loaded successfully
-	if [ "$params" != "" ]; then
-		register-module "$module" "$params"
 	fi
 }
 

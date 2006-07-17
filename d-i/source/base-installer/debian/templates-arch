@@ -31,7 +31,6 @@ Description: kernel needs an initrd (linux only)
 Template: base-installer/kernel/linux/initrd-2.6
 Type: boolean
 Default: true
-Default[s390]: false
 Default[hppa]: true
 Default[mips]: false
 Default[mipsel]: false
@@ -49,7 +48,7 @@ Description: use an initramfs (linux 2.6 only)
 
 Template: base-installer/kernel/linux/initramfs-generators
 Type: string
-Default: initramfs-tools
+Default: initramfs-tools yaird
 # Space separated list of initrd generator packages to use. If you list more
 # than one for an architecture, the user will be asked to select one
 # (depending on priority). The generator listed first will be the default.

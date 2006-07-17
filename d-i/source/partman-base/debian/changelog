@@ -1,3 +1,272 @@
+partman-base (90ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Jul 2006 12:37:16 +0100
+
+partman-base (90) unstable; urgency=low
+
+  * Don't use partman on RiscPC since it uses 4 different disk labels, and
+    only acorn-fdisk supports all of them.
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Mon, 03 Jul 2006 21:19:33 +0200
+
+partman-base (89) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Make humandev function not choke on /dev/cciss/c0d0 devices.
+
+  [ Colin Watson ]
+  * Add proper humandev parsing for /dev/cciss/c*d*[p*] device names.
+    Closes: #376001.
+
+ -- Frans Pop <fjp@debian.org>  Fri, 30 Jun 2006 13:42:15 +0200
+
+partman-base (88) unstable; urgency=low
+
+  * Sort /dev/hd* and /dev/sd* to the top of the list of devices to open,
+    along with /dev/ide/* and /dev/scsi/*.
+  * definitions.sh (humandev): Handle /dev/loop* as well as /dev/loop/*.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Czech (cs.po) by Miroslav Kure
+  * Macedonian (mk.po) by Georgi Stanojevski
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 28 Jun 2006 13:57:44 +0100
+
+partman-base (87ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Jun 2006 12:45:02 +0100
+
+partman-base (87) unstable; urgency=low
+
+  [ David Härdeman ]
+  * Create a generic confirm_changes() in definitions.sh.
+
+  [ Updated translations ]
+  * Estonian (et.po) by Siim Põder
+
+ -- Frans Pop <fjp@debian.org>  Fri, 23 Jun 2006 13:54:50 +0200
+
+partman-base (86) unstable; urgency=low
+
+  [ Bastian Blank ]
+  * Remove special installer item for s390.
+
+  [ David Härdeman ]
+  * Add support for locking partitions and devices.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Khmer (km.po) by Khoem Sokhem
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Frans Pop <fjp@debian.org>  Wed, 21 Jun 2006 13:54:46 +0200
+
+partman-base (85) unstable; urgency=low
+
+  * partman 1.7.1 will be a new soname, need to rebuild with it.
+  * parted_server: fix the pid file check code to not do the wrong thing
+    if the file exists but is empty
+
+  [ Updated translations ]
+  * Khmer (km.po) by Khoem Sokhem
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 31 May 2006 15:46:37 -0400
+
+partman-base (84) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Change build-depends for new parted 1.7;
+  * Ported code to use new PED_SECTOR_SIZE_DEFAULT macro;
+  * Fix trivial compilation warnings;
+  * Remove hard-coded libparted-udeb dependency since it's now handled by
+    debhelper using shlibs;
+
+  [ Joey Hess ]
+  * Fix build dep version. (I think..)
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Catalan (ca.po) by Jordi Mallach
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 29 May 2006 18:44:49 -0400
+
+partman-base (83) unstable; urgency=low
+
+  [ Mark Hymers ]
+  * Add more robust pid file and fifo handling.  Closes: #270136.
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 18 May 2006 17:45:10 -0500
+
+partman-base (82) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Old-style options for head/tail are no longer supported by new busybox.
+
+  [ Martin Michlmayr ]
+  * Remove (incomplete) BAST support.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po)
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Khmer (km.po) by Leang Chumsoben
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Frans Pop <fjp@debian.org>  Fri, 12 May 2006 15:28:51 +0200
+
+partman-base (81) unstable; urgency=low
+
+  [ Anton Zinoviev ]
+  * Some insignificant polishing (comments, indent).
+  * Raise the Debconf priority of the messages of libparted -- give the
+    errors at critical priority (was high), warnings at high (was medium)
+    and information at medium (was low).  Thanks to Joey Hess,
+    closes: #290929.
+
+  [ Max Vozeler ]
+  * definitions.sh (humandev): Handle dm-crypt volumes. Thanks to
+    David Härdemann <david@2gen.com>, closes: #361147.
+
+  [ Frans Pop ]
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Galician (gl.po) by Jacobo Tarrio
+  * Indonesian (id.po) by Parlin Imanuel Toh
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Khmer (km.po) by hok kakada
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Frans Pop <fjp@debian.org>  Sun,  9 Apr 2006 22:51:05 +0200
+
+partman-base (80) unstable; urgency=low
+
+  [ Martin Michlmayr]
+  * Add support for the Broadcom BCM91480B evaluation board (aka "BigSur").
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Fri, 17 Mar 2006 22:19:31 +0000
+
+partman-base (79) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Suppress error message in the case where /var/lib/partman already
+    exists.
+  * definitions.sh (humandev): Handle /dev/hd* and /dev/sd*, which may end
+    up being used on recent versions of the kernel and udev. /dev/hd*
+    requires the busybox patch in #346077.
+
+  [ Frans Pop ]
+  * Drop 'Provides: partman' as all dependencies have now been fixed and it
+    results in partman no longer being skipped if partconf is used.
+
+  [ Sven Luther ]
+  * prep and palo are flags, not filesystem. Fix parted-server so that
+    command_change_file_system does try to set the flag if setting the
+    filesystem failed (closes: #353432).
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hindi (hi.po) by Nishant Sharma
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Khmer (km.po) by Hok Kakada
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Matej Kovačič
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 17 Mar 2006 12:56:11 +0000
+
 partman-base (78ubuntu4) dapper; urgency=low
 
   * If PARTMAN_UPDATE_BEFORE_CONFIRM is set, run update.d scripts before

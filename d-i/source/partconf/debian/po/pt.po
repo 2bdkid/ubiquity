@@ -7,51 +7,17 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# 18-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 27-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 29-04-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 08-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f1u
-# 12-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f4u
-# 15-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 16-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f9u
-# 18-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1 typo
-# 21-05-2005 - Miguel Figueiredo <elmig@debianpt.org> - 5f2u
-# 13-06-2005 - Eduardo Silva <jobezone@yahoo.com> - +20 mensagens revistas
-# 14-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 19f
-# 27-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f3u
-# 28-06-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1u
-# 03-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 07-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 4f
-# 10-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2u
-# 11-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 19-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 2f
-# 25-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 27f133u - tzsetup
-# 26-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 30-07-2005 - Miguel Figueiredo <elmig@debianpt.org> - 6f18u
-# 14-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 7f14u
-# 18-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 35f42u
-# 31-08-2005 - Miguel Figueiredo <elmig@debianpt.org> - 8f3u
-# 2005-09-05 - Miguel Figueiredo <elmig@debianpt.org> - 7f2u
-# 2005-09-09 - Miguel Figueiredo <elmig@debianpt.org> - 6f
-# 2005-09-17 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-# 2005-09-21 - Miguel Figueiredo <elmig@debianpt.org> - typo in varname fixed.
-# 2005-09-22 - Miguel Figueiredo <elmig@debianpt.org> - 1 ugly typo fixed.
-# 2005-09-23 - Miguel Figueiredo <elmig@debianpt.org> - 1f1u
-# 2005-10-01 - Miguel Figueiredo <elmig@debianpt.org> - 3f
-# 2005-10-07 - Miguel Figueiredo <elmig@debianpt.org> - 3f2u
-# 2005-10-19 - Miguel Figueiredo <elmig@debianpt.org> - 1f
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"POT-Creation-Date: 2005-03-19 10:55-0700\n"
-"PO-Revision-Date: 2005-04-16 13:36+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-05-08 09:52+0200\n"
+"PO-Revision-Date: 2006-05-06 17:47+0000\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #. Type: error
 #. Description
@@ -87,19 +53,25 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../partconf.templates:15
-msgid "${PARTITIONS}, Finish, Abort"
-msgstr "${PARTITIONS}, Terminar, Abortar"
+#: ../partconf.templates:16
+msgid "Finish"
+msgstr "Terminar"
+
+#. Type: select
+#. Choices
+#: ../partconf.templates:16
+msgid "Abort"
+msgstr "Abortar"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:16
+#: ../partconf.templates:17
 msgid "Select a partition"
 msgstr "Seleccione uma partição"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:16
+#: ../partconf.templates:17
 msgid ""
 "These are the partitions that were detected in your system. Please select a "
 "partition to configure. No actual changes will be made until you select "
@@ -112,7 +84,7 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../partconf.templates:16
+#: ../partconf.templates:17
 msgid ""
 "The information shown is, in order: device name, size, file system, and "
 "mount point."
@@ -125,13 +97,13 @@ msgstr ""
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partconf.templates:29
-msgid "Leave the file system intact, ${FSCHOICES}, Create swap space"
-msgstr "Deixar o sistema de ficheiros intacto, ${FSCHOICES}, Criar espaço swap"
+#: ../partconf.templates:31
+msgid "Leave the file system intact"
+msgstr "Deixar o sistema de ficheiros intacto"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:31
+#: ../partconf.templates:33
 msgid ""
 "This partition seems to already have a file system (${FSTYPE}). You can "
 "choose to leave this file system intact, create a new file system, or create "
@@ -147,19 +119,19 @@ msgstr ""
 #. (separated by commas)
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partconf.templates:42
-msgid "${FSCHOICES}, Create swap space"
-msgstr "${FSCHOICES}, Criar espaço swap"
+#: ../partconf.templates:45
+msgid "Create swap space"
+msgstr "Criar espaço swap"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:44
+#: ../partconf.templates:47
 msgid "Action on ${PARTITION}:"
 msgstr "Acção em ${PARTITION}:"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:44
+#: ../partconf.templates:47
 msgid ""
 "This partition does not seem to have a file system. You can create a file "
 "system or swap space on it."
@@ -173,13 +145,25 @@ msgstr ""
 #. (separated by commas)
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partconf.templates:54
-msgid "/, /usr, /boot, /home, /var, /tmp, Don't mount it, Enter manually"
-msgstr "/,·/usr,·/boot,·/home,·/var,·/tmp, Não montar, Introduzir manualmente"
+#. "it" is a partition
+#: ../partconf.templates:62
+msgid "Don't mount it"
+msgstr "Não montar"
+
+#. Type: select
+#. Choices
+#. Note to translators : Please keep your translations of each choice
+#. (separated by commas)
+#. below a 65 columns limit (which means 65 characters
+#. in single-byte languages)
+#. What's to be "entered manually" is a mount point
+#: ../partconf.templates:62
+msgid "Enter manually"
+msgstr "Introduzir manualmente"
 
 #. Type: select
 #. Description
-#: ../partconf.templates:55
+#: ../partconf.templates:63
 msgid ""
 "When a partition is mounted, it is available to the users of the system. You "
 "always need a root (\"/\") partition, and it's often good to have a separate "
@@ -191,25 +175,25 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../partconf.templates:62
+#: ../partconf.templates:70
 msgid "Mount point for ${PARTITION}:"
 msgstr "Directório de montagem para ${PARTITION}:"
 
 #. Type: string
 #. Description
-#: ../partconf.templates:62
+#: ../partconf.templates:70
 msgid "Please enter where the partition should be mounted."
 msgstr "Por favor seleccione onde a partição deve ser montada."
 
 #. Type: boolean
 #. Description
-#: ../partconf.templates:68
+#: ../partconf.templates:76
 msgid "Do you want to unmount the partitions so you can make changes?"
 msgstr "Deseja desmontar as partições para que possa fazer alterações?"
 
 #. Type: boolean
 #. Description
-#: ../partconf.templates:68
+#: ../partconf.templates:76
 msgid ""
 "Since the partitions have already been mounted, you cannot do any changes."
 msgstr ""
@@ -217,13 +201,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partconf.templates:74
+#: ../partconf.templates:82
 msgid "Failed to unmount partitions"
 msgstr "Não foi possível desmontar as partições"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:74
+#: ../partconf.templates:82
 msgid ""
 "An error occurred while unmounting the partitions. The partition "
 "configuration process is aborted."
@@ -233,20 +217,20 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partconf.templates:80
+#: ../partconf.templates:88
 #, no-c-format
 msgid "Create %s file system"
 msgstr "Criar sistema de ficheiros %s"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:84
+#: ../partconf.templates:92
 msgid "No root partition (/)"
 msgstr "Não existe partição raíz (/)"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:84
+#: ../partconf.templates:92
 msgid ""
 "You need a root partition. Please assign a partition to the root mount point "
 "before continuing."
@@ -256,26 +240,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partconf.templates:90
+#: ../partconf.templates:98
 msgid "Partition assigned to ${MOUNT}"
 msgstr "Partição atribuída a ${MOUNT}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:90
+#: ../partconf.templates:98
 msgid "Mounting a partition on ${MOUNT} makes no sense. Please change this."
 msgstr ""
 "Montar uma partição em ${MOUNT} não faz sentido. Por favor altere isto."
 
 #. Type: error
 #. Description
-#: ../partconf.templates:95
+#: ../partconf.templates:103
 msgid "Several partitions assigned to ${MOUNT}"
 msgstr "Várias partições atribuídas a ${MOUNT}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:95
+#: ../partconf.templates:103
 msgid ""
 "You cannot assign several partitions to the same mount point. Please change "
 "all but one of them."
@@ -285,19 +269,19 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partconf.templates:102
+#: ../partconf.templates:110
 msgid "Ready to create file systems and mount partitions?"
 msgstr "Pronto para criar os sistemas de ficheiros e montar as partições?"
 
 #. Type: boolean
 #. Description
-#: ../partconf.templates:102
+#: ../partconf.templates:110
 msgid "File systems will be created and partitions mounted."
 msgstr "Os sistemas de ficheiros serão criados e as partições montadas."
 
 #. Type: boolean
 #. Description
-#: ../partconf.templates:102
+#: ../partconf.templates:110
 msgid ""
 "WARNING: This will destroy all data on the partitions you have assigned file "
 "systems to."
@@ -307,37 +291,37 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partconf.templates:110
+#: ../partconf.templates:118
 msgid "Failed to create swap space on ${PARTITION}"
 msgstr "Falhou a criação de espaço swap em ${PARTITION}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:110
+#: ../partconf.templates:118
 msgid "An error occurred when the swap space was created on ${PARTITION}."
 msgstr "Ocorreu um erro quando o espaço swap foi criado em ${PARTITION}."
 
 #. Type: error
 #. Description
-#: ../partconf.templates:118
+#: ../partconf.templates:126
 msgid "Failed to activate the swap space on ${PARTITION}"
 msgstr "Não foi possível activar o espaço swap em ${PARTITION}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:118
+#: ../partconf.templates:126
 msgid "An error occurred when the swap space on ${PARTITION} was activated."
 msgstr "Ocorreu um erro quando o espaço swap em ${PARTITION} foi activado."
 
 #. Type: error
 #. Description
-#: ../partconf.templates:126
+#: ../partconf.templates:134
 msgid "Failed to create ${FS} file system on ${PARTITION}"
 msgstr "Não foi possível criar o sistema de ficheiros ${FS} em ${PARTITION}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:126
+#: ../partconf.templates:134
 msgid ""
 "An error occurred when the ${FS} file system was created on ${PARTITION}."
 msgstr ""
@@ -346,19 +330,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partconf.templates:134
+#: ../partconf.templates:142
 msgid "Failed to mount ${PARTITION} on ${MOUNT}"
 msgstr "Não foi possível montar ${PARTITION} em ${MOUNT}"
 
 #. Type: error
 #. Description
-#: ../partconf.templates:134
+#: ../partconf.templates:142
 msgid "An error occurred when ${PARTITION} was mounted on ${MOUNT}."
 msgstr "Ocorreu um erro quando a ${PARTITION} foi montada em ${MOUNT}."
 
 #. Type: error
 #. Description
-#: ../partconf.templates:134
+#: ../partconf.templates:142
 msgid ""
 "Please check the error log on the third console or /var/log/messages for "
 "more information."
@@ -369,6 +353,6 @@ msgstr ""
 #. Type: text
 #. Description
 #. Main menu item
-#: ../partconf.templates:143
+#: ../partconf.templates:151
 msgid "Configure and mount partitions"
 msgstr "Configurar e montar partições"

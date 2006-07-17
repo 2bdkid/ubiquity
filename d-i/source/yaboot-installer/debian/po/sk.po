@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-26 07:58+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-19 19:22+0200\n"
 "Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
 "Language-Team:  Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -53,13 +53,13 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:19
 msgid "Looking for bootstrap partitions"
-msgstr "Hľadám štartovacie oblasti"
+msgstr "Hľadajú sa štartovacie oblasti"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr "Nebola nájdená štartovacia oblasť"
+msgstr "Nebola nájdená žiadna štartovacia oblasť"
 
 #. Type: error
 #. Description
@@ -75,7 +75,7 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:29
 msgid "Looking for root partition"
-msgstr "Hľadám koreňovú oblasť"
+msgstr "Hľadá sa koreňová oblasť"
 
 #. Type: error
 #. Description
@@ -97,7 +97,7 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:39
 msgid "Looking for other operating systems"
-msgstr "Zisťujem prítomnosť iných operačných systémov"
+msgstr "Zisťuje sa prítomnosť iných operačných systémov"
 
 #. Type: select
 #. Description
@@ -122,7 +122,7 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr "Upozornenie: zo zvolenej oblasti sa odstránia všetky údaje!"
+msgstr "Upozornenie: na zvolenej oblasti sa odstránia všetky údaje!"
 
 #. Type: text
 #. Description
@@ -142,17 +142,11 @@ msgstr "Chyba pri vytváraní yaboot konfigurácie"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "Zlyhalo vytváranie hlavného konfiguračného súboru yaboot-u."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Viac informácií nájdete v súbore /var/log/syslog."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
 msgid "Installing yaboot into bootstrap partition"
-msgstr "Inštalovať yaboot do zavádzacej oblasti"
+msgstr "Yaboot sa inštaluje na zavádzaciu oblasť"
 
 #. Type: error
 #. Description
@@ -164,7 +158,7 @@ msgstr "Chyba pri inštalácii zavádzača"
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "The installation of the yaboot boot loader failed."
-msgstr "Zlyhala inštalácia zavádzača yaboot."
+msgstr "Inštalácia zavádzača yaboot zlyhala."
 
 #. Type: note
 #. Description
@@ -199,9 +193,10 @@ msgstr "Zlyhalo pripájanie súborového systému proc do /target/proc."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
-"Pozrite si, prosím, systémový log alebo výpis na tretej konzole (tty3)."
+"Podrobnosti nájdete v súbore /var/log/syslog alebo na štvrtej virtuálnej "
+"konzole."
 
 #. Type: error
 #. Description
@@ -277,7 +272,7 @@ msgstr "v príkazovom režime OpenFirmware."
 #. Main menu item
 #: ../yaboot-installer.templates:120
 msgid "Install yaboot on a hard disk"
-msgstr "Inštalovať yaboot na pevný disk"
+msgstr "Inštalácia yaboot na pevný disk"
 
 #. Type: text
 #. Description

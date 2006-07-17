@@ -60,15 +60,20 @@ Template: debian-installer/consoledisplay
 Type: string
 Description: Internal use
 
-Template: prebaseconfig/progress/localechooser
+Template: finish-install/progress/localechooser
 Type: text
-# Prebaseconfig progress bar item
+# finish-install progress bar item
 _Description: Storing language...
 
 Template: countrychooser/country-name
 Type: select
+#flag:partial
 Choices: @countrylist@
-_Default: United States [ Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language ]
+# Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+# Example (german): Germany
+#   In this example, using "Deutschland" (the name of the country in German)
+#   would be WRONG
+_Default: United States
 # Notes to translators
 #  The country names are not part of this package
 #
@@ -87,39 +92,50 @@ _Description: Choose your location:
 
 Template: countrychooser/shortlist
 Type: select
+#flag:translate!:1
+# "other", here, is added to the list of countries that will be displayed
+# for users to choose among them
+# For instance, choosing "Italian" will show:
+# Italy, Switzerland, other
 __Choices: ${SHORTLIST}, other
+# Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language 
+# Example (german): DE
+#       (country code for Germany)
+_Default: US
 _Description: Choose your location:
-_Default: US[ Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language ]
  Based on your language, you are probably located in one of these
- locations:
+ locations.
 
 Template: debian-installer/locale
 Type: select
 Choices: ${LOCALELIST}
 _Description: Choose a locale:
  Based on your language and country choices, the following locale
- parameters are supported in Ubuntu.
+ parameters are supported.
 
 Template: debian-installer/fallbacklocale
 Type: select
 Choices: ${LOCALELIST}
-_Description: Choose a locale:
- A fallback locale must be chosen because there is currently no
- locale for the language and country you have selected.
+Description: fallback locale
 
 Template: debian-installer/country
 Type: string
 Description: Internal use
 
-Template: debian-installer/invalidlocale
-Type: note
-_Description: Unsupported locale
- The locale value you have preseeded (${LOCALE}) is currently not
- supported in Ubuntu. You will be prompted for language, country and
- locale settings.
+Template: localechooser/alreadyrun
+Type: boolean
+Description: Internal use
 
 Template: localechooser/supported-locales
 Type: multiselect
 Choices: ${LOCALELIST}
 _Description: Choose other locales to be supported:
  You may choose additional locales to be installed from this list.
+
+# This template does not really belong in localechooser, but it is probably
+# the best place for it. It is used to display the language currently being
+# installed during babelbox demo runs.
+# Note that the template is not marked translatable on purpose!
+Template: babelbox/info
+Type: title
+Description: Demo - ${LANGNAME}

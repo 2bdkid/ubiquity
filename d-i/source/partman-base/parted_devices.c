@@ -12,7 +12,7 @@
 #include <parted/parted.h>
 
 #ifdef __linux__
-int
+static int
 is_cdrom(const char *path)
 {
 	int fd;
@@ -44,7 +44,7 @@ main(int argc, char *argv[])
 			continue;
                 printf("%s\t%lli\t%s\n",
                        dev->path,
-		       dev->length * PED_SECTOR_SIZE,
+		       dev->length * PED_SECTOR_SIZE_DEFAULT,
                        dev->model);
         }
         return 0;

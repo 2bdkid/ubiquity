@@ -17,8 +17,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: et\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
 "PO-Revision-Date: 2005-06-08 11:11+0300\n"
 "Last-Translator: Siim Põder <windo@windowlicker.dyn.ee>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
@@ -32,19 +32,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "pole võrgukaarti, ${CHOICES}, mitte ükski nimetatuist"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "pole võrgukaarti"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "mitte ükski nimetatuist"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Võrgukaardile vajaminev draiver:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -54,13 +61,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "Kas plaanid kasutada FireWire ethernet'i?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -72,26 +79,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Võrgukaarti ei leitud."
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Süsteemist ei leitud ühtki võrgukaarti."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Võrguriistvara avastamine"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Avasta võrguriistvara"
 
@@ -110,21 +117,21 @@ msgstr "Avasta kettaid ja kogu riistvara"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
+#: ../disk-detect.templates:15
 #, fuzzy
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
+msgid "continue with no disk drive"
 msgstr "pole võrgukaarti, ${CHOICES}, mitte ükski nimetatuist"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 #, fuzzy
 msgid "Driver needed for your disk drive:"
 msgstr "Võrgukaardile vajaminev draiver:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 #, fuzzy
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
@@ -135,19 +142,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Pole partitsioneeritavat andmekandjat"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Ei leitud ühtki partitsioneeritavat andmekandjat."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Palun veendu, et arvutis on kõvaketas."
 
@@ -190,29 +197,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Kas küsida mooduli parameetreid?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Mõned moodulid võtavad laadimisel vastu parameetreid. Kui soovid, on "
-"võimalik iga mooduli laadimisel talle parameetreid sisestada."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "Käivitada PC kaardi teenused?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -222,13 +212,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "PCMCIA ressursivahemiku valikud:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -244,39 +234,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Enamiku riistvara puhul ei ole vaja siin midagi määrata."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Mõningatele moodulitele saab laadimise ajal parameetreid määrata. Tihtilugu "
-"on need näiteks I/O port ja IRQ number, mis võivad erinevatel arvutitel "
-"erineda ning mida ei saa riistvaraliselt kindlaks teha. Parameetersõna võiks "
-"välja näha näiteks nõnda \"irq=7 io=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Kui sa ei tea mida sisestada, ära sisesta midagi."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Lisaparameetrid moodulile ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -292,7 +262,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -302,20 +272,20 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Viga '${CMD_LINE_PARAM}' käivitamisel"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 #, fuzzy
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Kas laaadida võrgu draiverid flopikettalt?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 #, fuzzy
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "

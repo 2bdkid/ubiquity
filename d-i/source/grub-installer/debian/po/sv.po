@@ -14,14 +14,14 @@
 #
 # Swedish translation by:
 # Per Olofsson <pelle@debian.org>
-# Daniel Nylander <po@danielnylander.se>, 2005
+# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2006-01-12 08:20+0100\n"
+"PO-Revision-Date: 2006-05-13 09:38+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-boot@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgid ""
 "The following other operating systems have been detected on this computer: "
 "${OS_LIST}"
 msgstr ""
-"Följande andra operativsystem har identifierats på denna dator: ${OS_LIST}"
+"Följande andra operativsystem har identifierats på den här datorn: ${OS_LIST}"
 
 #. Type: boolean
 #. Description
@@ -47,15 +47,15 @@ msgid ""
 "operating systems or your new system."
 msgstr ""
 "Om alla dina operativsystem finns i ovanstående lista bör det vara säkert "
-"att installera startladdaren i huvudstartsektorn på din första hårddisk.När "
-"din dator startar kommer du att kunna välja att ladda en av dessa "
-"operativsystem eller ditt nya system."
+"att installera starthanteraren i huvudstartsektorn på din första hårddisk. "
+"När din dator startar kommer du att kunna välja att läsa in ett av de här "
+"operativsystemen eller ditt nya system."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:16
 msgid "Install the GRUB boot loader to the master boot record?"
-msgstr "Installera startladdaren GRUB i huvudstartsektorn?"
+msgstr "Installera starthanteraren GRUB i huvudstartsektorn?"
 
 #. Type: boolean
 #. Description
@@ -67,8 +67,8 @@ msgid ""
 msgstr ""
 "Det verkar som om den här installationen av Debian är det enda "
 "operativsystemet på den här datorn. I så fall bör det vara säkert att "
-"installera GRUB-startladdaren i huvudstartsektorn (Master Boot Record, MBR) "
-"på din första hårddisk."
+"installera starthanteraren GRUB i huvudstartsektorn (Master Boot Record, "
+"MBR) på din första hårddisk."
 
 #. Type: boolean
 #. Description
@@ -79,17 +79,17 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
-"Varning: Installationsprogrammet kan ha misslyckats med att hitta de andra "
-"operativsystem som finns installerade på datorn. Om så är fallet kommer "
-"dessa inte att kunna startas i fall GRUB installeras i huvudstartsektorn. "
-"Detta är dock bara temporärt, GRUB kan senare konfigureras för att boota "
-"dessa operativsystem."
+"Varning: Installeraren kan ha misslyckats med att hitta de andra "
+"operativsystem som finns installerade på datorn. Om så är fallet kommer de "
+"inte att kunna startas i fall GRUB installeras i huvudstartsektorn. Det är "
+"dock bara temporärt, GRUB kan senare konfigureras för att starta upp de här "
+"operativsystemen."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
 msgid "Install the GRUB boot loader to XFS file system?"
-msgstr "Installera startladdaren GRUB på ett XFS-filsystem?"
+msgstr "Installera starthanteraren GRUB på ett XFS-filsystem?"
 
 #. Type: boolean
 #. Description
@@ -98,7 +98,7 @@ msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
 msgstr ""
-"Installationen av GRUB-startladdaren misslyckas och låser sig ofta när /boot "
+"Installation av starthanteraren GRUB misslyckas ofta och låser sig när /boot "
 "är ett XFS-filsystem. I den här situationen rekommenderas att LILO används i "
 "stället."
 
@@ -106,7 +106,7 @@ msgstr ""
 #. Description
 #: ../grub-installer.templates:35
 msgid "Device for boot loader installation:"
-msgstr "Enhet för installation av startladdaren (boot loader):"
+msgstr "Enhet för installation av starthanteraren:"
 
 #. Type: string
 #. Description
@@ -119,10 +119,10 @@ msgid ""
 "floppy."
 msgstr ""
 "Du måste göra det nyligen installerade systemet startbart genom att "
-"installera startladdaren GRUB på en startbar enhet. Det vanliga sättet att "
-"göra detta är att installera GRUB i huvudstartsektorn på din första hårddisk."
-"Om du föredrar det så kan du installera GRUB någon annanstans på hårddisken, "
-"på en annan hårddisk eller till och med på en diskett."
+"installera starthanteraren GRUB på en startbar enhet. Det vanliga sättet att "
+"göra det här på är att installera GRUB i huvudstartsektorn på din första "
+"hårddisk. Om du föredrar det så kan du installera GRUB någon annanstans på "
+"hårddisken, på en annan hårddisk eller till och med på en diskett."
 
 #. Type: string
 #. Description
@@ -166,20 +166,20 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
-"GRUB bootladdaren erbjuder ett antal kraftfulla, interaktiva möjligheter som "
-"kan användas för att bryta sig in i ditt system om otillåtna användare har "
-"fysisk tillgång till maskinen. För att skydda sig mot detta kan du sätta en "
-"lösenord som måste matas in vid menykonfiguration eller inmatning till "
-"GRUB's via kommandolinje. Standard är att användare kan välja från menyn "
-"utan att mata in ett lösenord."
+"Starthanteraren GRUB erbjuder ett antal kraftfulla, interaktiva möjligheter "
+"som kan användas för att bryta sig in i ditt system om otillåtna användare "
+"har fysisk tillgång till maskinen. För att skydda sig mot det här kan du "
+"ställa in ett lösenord som måste matas in vid menykonfiguration eller "
+"inmatning till GRUB via kommandolinje. Standard är att användare kan välja "
+"från menyn utan att mata in ett lösenord."
 
 #. Type: password
 #. Description
 #: ../grub-installer.templates:54
 msgid "If you do not wish to set a GRUB password, leave this field blank."
 msgstr ""
-"Om du inte önskar att sätta ett lösenord för GRUB, lämna då detta fält "
-"blankt."
+"Om du inte önskar att ställa in ett lösenord för GRUB, lämna då det här "
+"fältet blankt."
 
 #. Type: boolean
 #. Description
@@ -196,8 +196,8 @@ msgid ""
 "to GRUB, so continuing the installation may be possible."
 msgstr ""
 "Misslyckades att installera paketet grub i /target/. Att installera GRUB som "
-"startladdare är ett obligatoriskt steg. Installationsproblemet kan dock vara "
-"obesläktat med GRUB så det kan ändå vara möjligt att fortsätta."
+"starthanterare är ett obligatoriskt steg. Installationsproblemet behöver "
+"inte vara relaterat till GRUB så det kan ändå vara möjligt att fortsätta."
 
 #. Type: error
 #. Description
@@ -209,7 +209,7 @@ msgstr "Kunde inte installera GRUB på ${BOOTDEV}"
 #. Description
 #: ../grub-installer.templates:80
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
-msgstr "Misslyckades att köra \"grub-install\" ${BOOTDEV}'."
+msgstr "Misslyckades att köra \"grub-install ${BOOTDEV}\"."
 
 #. Type: error
 #. Description
@@ -227,13 +227,13 @@ msgstr "Misslyckad körning av \"update-grub\"."
 #. Description
 #: ../grub-installer.templates:87
 msgid "This is a fatal error."
-msgstr "Detta är ett ödesdigert fel."
+msgstr "Det här är ett allvarligt fel."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:94
 msgid "Installing GRUB boot loader"
-msgstr "Installerar startladdaren GRUB"
+msgstr "Installerar starthanteraren GRUB"
 
 #. Type: text
 #. Description
@@ -257,7 +257,7 @@ msgstr "Fastställer startenhet för GRUB..."
 #. Description
 #: ../grub-installer.templates:110
 msgid "Running \"grub-install ${BOOTDEV}\"..."
-msgstr "Kör \"grub-install\" ${BOOTDEV}\"..."
+msgstr "Kör \"grub-install ${BOOTDEV}\"..."
 
 #. Type: text
 #. Description
@@ -276,11 +276,11 @@ msgstr "Uppdaterar /etc/kernel-img.conf..."
 #. Main menu item
 #: ../grub-installer.templates:123
 msgid "Install the GRUB boot loader on a hard disk"
-msgstr "Installera startladdaren GRUB på en hårddisk"
+msgstr "Installera starthanteraren GRUB på en hårddisk"
 
 #. Type: text
 #. Description
 #. Rescue menu item
 #: ../grub-installer.templates:128
 msgid "Reinstall GRUB boot loader"
-msgstr "Installera om startladdaren GRUB"
+msgstr "Installera om starthanteraren GRUB"

@@ -24,10 +24,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-09-23 19:03+0200\n"
-"Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-10 15:07+0200\n"
+"Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team:   Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,8 +84,8 @@ msgid ""
 "must create an 819200-byte partition with type \"Apple_Bootstrap\"."
 msgstr ""
 "Non è stato trovato alcun disco rigido dove sia presente una partizione "
-"\"Apple_Bootstrap\". Si deve creare una partizione di 819200 byte di tipo "
-"\"Apple_Bootstrap\"."
+"«Apple_Bootstrap». Si deve creare una partizione di 819200 byte di tipo "
+"«Apple_Bootstrap»."
 
 #. Type: text
 #. Description
@@ -160,12 +160,6 @@ msgid "The creation of the main yaboot configuration file failed."
 msgstr ""
 "La creazione del file principale di configurazione di yaboot è fallita."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Controllare il syslog per maggiori informazioni."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -217,8 +211,9 @@ msgstr "Il mount del file system proc su /target/proc è fallito."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr "Controllare i log di sistema o l'output sulla terza console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""
+"Controllare /var/log/syslog o la terza console virtuale per i dettagli."
 
 #. Type: error
 #. Description
@@ -268,7 +263,7 @@ msgid ""
 "or reboot the system to proceed to the next stage of the installation."
 msgstr ""
 "Questa operazione dovrà essere fatta solo la prima volta. Dopodiché sarà "
-"necessario eseguire il comando \"boot\" oppure riavviare il sistema per "
+"necessario eseguire il comando «boot» oppure riavviare il sistema per "
 "proseguire con la seconda fase dell'installazione di Debian."
 
 #. Type: note
@@ -301,6 +296,5 @@ msgstr "Installare yaboot su un disco rigido"
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Installazione del boot loader yaboot in corso"
+msgstr "Reinstallare il boot loader yaboot"

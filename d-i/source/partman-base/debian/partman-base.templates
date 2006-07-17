@@ -14,6 +14,28 @@ Template: partman/progress/init/update_partitions
 Type: text
 _Description: Detecting file systems...
 
+Template: partman-base/devicelocked
+Type: error
+#flag:translate!:3
+_Description: Device in use
+ No modifications can be made to the device ${DEVICE} for the
+ following reasons:
+ .
+ ${MESSAGE}
+
+Template: partman-base/partlocked
+Type: error
+#flag:translate!:3
+#flag:comment:2
+# This should be translated as "partition *number* ${PARTITION}"
+# In short, ${PARTITION} will indeed contain the partition
+# NUMBER and not the partition NAME
+_Description: Partition in use
+ No modifications can be made to the partition #${PARTITION} of
+ device ${DEVICE} for the following reasons:
+ .
+ ${MESSAGE}
+
 Template: partman/exception_handler
 Type: select
 Choices: ${CHOICES}
@@ -252,6 +274,10 @@ Template: partman/text/raid_device
 Type: text
 _Description: RAID%s device #%s
 
+Template: partman/text/dmcrypt_volume
+Type: text
+_Description: Encrypted volume (%s)
+
 Template: partman/text/lvm_lv
 Type: text
 _Description: LVM VG %s, LV %s
@@ -259,6 +285,14 @@ _Description: LVM VG %s, LV %s
 Template: partman/text/loopback
 Type: text
 _Description: Loopback (loop%s)
+
+Template: partman/text/dasd_disk
+Type: text
+_Description: DASD %s (%s)
+
+Template: partman/text/dasd_partition
+Type: text
+_Description: DASD %s (%s), partition #%s
 
 Template: partman/text/cancel_menu
 Type: text

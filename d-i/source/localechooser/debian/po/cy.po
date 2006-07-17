@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-03-08 07:46+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-03-17 18:02+0000\n"
 "Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Welsh <daf@muse.19inch.net>\n"
 "MIME-Version: 1.0\n"
@@ -31,116 +31,129 @@ msgstr "Dewiswch iaith/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Yn cadw'r iaith..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "United Kingdom"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "arall"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "GB"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "Dewiswch locale:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "GB"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Yn seiliedig ar eich iaith, rydych chi mwy na thebyg yn un o'r gwledydd neu "
 "ardaloedd canlynol."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Yn seiliedig ar eich dewisiadau iaith a gwlad, cynhelir y paramedrau locale "
-"canlynol yn Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Dewiswch locale:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
+#, fuzzy
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Rhaid dewis locale wrth gefn oherwydd does dim locale ar hyn o bryd ar gyfer "
-"y iaith a gwlad rydych chi wedi dewis."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Locale ni gynhelir"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Ni chynhelir y gwerth locale rydych wedi cynhedynnu ar hyn o bryd yn Ubuntu. "
-"Cewch eich gofyn am osodiadau iaith, gwlad a locale."
+"Yn seiliedig ar eich dewisiadau iaith a gwlad, cynhelir y paramedrau locale "
+"canlynol yn Debian."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Gogledd America --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Canol America --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- De America --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Y Carribî --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Ewrop --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Affrica --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Cefnfor India --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Ynysoedd y De --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Yr Antartig --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- arall --"
+
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Dewiswch wlad, diriogaeth neu ardal:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Yn seiliedig ar eich iaith, rydych chi mwy na thebyg yn un o'r gwledydd "
-#~ "neu ardaloedd canlynol."

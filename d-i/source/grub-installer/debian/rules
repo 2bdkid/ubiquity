@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-export DH_OPTIONS
-
 DEB_HOST_ARCH_OS ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS 2>/dev/null)
 # Take account of old dpkg-architecture output.
 ifeq ($(DEB_HOST_ARCH_OS),)
@@ -28,7 +26,6 @@ install: build
 	dh_testroot
 	dh_clean -k
 
-binary-arch: DH_OPTIONS=-a
 binary-arch: build install
 	dh_testdir
 	dh_testroot

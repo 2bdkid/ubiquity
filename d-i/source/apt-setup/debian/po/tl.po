@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-08 14:22+0800\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-15 23:13+0200\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -140,6 +140,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Piliin kung nais pa rin ninyong magamit ang mga ito."
@@ -166,6 +169,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -181,12 +187,16 @@ msgstr "Subukan muli"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "Palitan ang mirror"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "Huwag Pansinin"
@@ -213,6 +223,29 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+#, fuzzy
+msgid "Use a network mirror?"
+msgstr "huwag gumamit ng network mirror"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -220,6 +253,7 @@ msgstr "Gumamit ng software mula sa <<restricted>>?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -242,6 +276,7 @@ msgstr "Gumamit ng software mula sa component na <<universe>>?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -256,14 +291,13 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid "Use software from the \"multiverse\" component?"
-msgstr "Gumamit ng software mula sa component na <<universe>>?"
+msgstr "Gumamit ng software mula sa component na <<multiverse>>?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -274,8 +308,9 @@ msgstr ""
 "May mga software na di-malaya na naka-pakete na magagamit. Bagamat ang "
 "software na mga ito ay hindi bahagi ng pangunahing pamudmod, maaaring "
 "gumamit ng standard na tagapangasiwa ng mga pakete upang iluklok ang mga "
-"ito. Ang mga ito ay may iba't-ibang pahintulot na maaaring maging balakid sa "
-"inyong pag-gamit, pagbabago, o pamamahagi nito."
+"ito. Ang mga ito ay may iba't-ibang pahintulot at (sa ibang pagkakataon) mga "
+"patent restriction na maaaring maging balakid sa inyong pag-gamit, "
+"pagbabago, o pamamahagi nito."
 
 #. Type: boolean
 #. Description
@@ -286,6 +321,7 @@ msgstr "Gumamit ng software na <<backported>>?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

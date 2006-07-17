@@ -6,14 +6,14 @@
 # Polish messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Copyright (C) 2004-2005 Bartosz Feński <fenio@debian.org>
+# Copyright (C) 2004-2006 Bartosz Feński <fenio@debian.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-11-12 18:59+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-05-05 18:27+0200\n"
 "Last-Translator: Bartosz Fenski <fenio@debian.org>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "brak karty ethernet, ${CHOICES}, żadne z powyższych"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "brak karty ethernet"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "żaden z powyższych"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Sterownik wymagany przez Twoją kartę Ethernet:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -44,13 +51,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "Chcesz użyć FireWire Ethernet?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -62,26 +69,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Nie znaleziono karty sieciowej"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Nie znaleziono karty sieciowej w systemie."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Wykrywanie sprzętu sieciowego"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Wykryj sprzęt sieciowy"
 
@@ -100,19 +107,19 @@ msgstr "Wykrywanie dysków i innego sprzętu"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "kontynuuj bez dysku twardego, ${CHOICES}, żaden z powyższych"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "kontynuuj bez dysku twardego"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
 msgstr "Sterownik wymagany przez Twój dysk twardy:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
@@ -122,19 +129,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Brak urządzenia zdatnego do partycjonowania"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Nie znaleziono urządzenia zdatnego do partycjonowania."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Proszę sprawdzić czy twardy dysk jest podłączony do komputera."
 
@@ -154,7 +161,7 @@ msgstr "Ładowanie modułu '${MODULE}' dla '${CARDNAME}'..."
 #. Description
 #: ../hw-detect.templates:11
 msgid "Starting PC card services..."
-msgstr "Uruchamianie usług kard PC..."
+msgstr "Uruchamianie usług kart PC..."
 
 #. Type: multiselect
 #. Description
@@ -178,46 +185,28 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Pytać o parametry modułów?"
+msgid "Start PC card services?"
+msgstr "Uruchomić usługi kart PC?"
 
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
 msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Niektóre moduły akceptują parametry zmieniające ich funkcjonalność, podawane "
-"podczas ładowania. Jeśli chcesz możesz uaktywnić pytanie o te parametry przy "
-"każdym ładowanym module."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
-msgid "Start PC card services?"
-msgstr "Uruchomić usługi kard PC?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
-msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
 msgstr ""
 "Możliwe, że ten komputer posiada interfejs PCMCIA. Proszę wybrać czy usługi "
-"kard PC powinny być uruchamiane tak by zezwolić na używanie kart PCMCIA."
+"kart PC powinny być uruchamiane tak by zezwolić na używanie kart PCMCIA."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "Opcje zakresu zasobów PCMCIA:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -233,39 +222,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Dla większości sprzętu nie trzeba tutaj nic określać."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Niektóre moduły akceptują parametry, które w jakiś sposób zmieniają ich "
-"działanie. Zazwyczaj są to porty I/O i numery IRQ, które mogą być inne na "
-"różnych komputerach i nie da się ich wydobyć ze sprzętu. Przykładowy ciąg : "
-"\"irq=7 io=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Jeśli nie wiesz co wpisać, zostaw puste miejsce."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Podaj dodatkowe parametry dla modułu ${MODULE}"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -281,7 +250,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -291,19 +260,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Błąd podczas wykonywania '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Załadować brakujące sterowniki z dyskietki?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

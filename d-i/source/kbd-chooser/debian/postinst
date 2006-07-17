@@ -7,9 +7,4 @@ set -e
 kbd-chooser
 kbd-chooser-apply
 
-db_get debian-installer/serial-console
-if [ "$RET" = false ]; then
-	apt-install console-tools console-data console-common || true
-fi
-
 exit 0

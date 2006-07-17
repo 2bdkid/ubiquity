@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-05-28 21:09+0200\n"
-"Last-Translator:  Elian Myftiu <elian@alblinux.net>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-04-22 13:15+0200\n"
+"Last-Translator:  Elian Myftiu <elian.myftiu@gmail.com>\n"
 "Language-Team: Debian L10n Albanian <debian-l10n-albanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,19 +23,26 @@ msgstr ""
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "asnjë kartë rrjeti, ${CHOICES}, asnjë e të mësipërmëve"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "asnjë kartë rrjeti"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "asnjë e të mësipërmëve"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
 msgstr "Driver i duhur nga karta tënde Ethernet:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
@@ -45,13 +52,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
 msgstr "Synon të përdorësh Ethernet nga FireWire?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
@@ -63,26 +70,26 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
 msgstr "Karta Ethernet nuk u gjet"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
 msgstr "Nuk u gjet asnjë karte Ethernet në sistem."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Duke zbuluar skedën e rrjetit"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Gjej skedën e rrjetit"
 
@@ -91,7 +98,7 @@ msgstr "Gjej skedën e rrjetit"
 #. Main menu item
 #: ../disk-detect.templates:4
 msgid "Detect disks"
-msgstr ""
+msgstr "Zbulo disqet"
 
 #. Type: text
 #. Description
@@ -101,44 +108,41 @@ msgstr "Duke zbuluar disqet dhe të tjera pjesë të kompjuterit"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-#, fuzzy
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "asnjë kartë rrjeti, ${CHOICES}, asnjë e të mësipërmëve"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "vazhdo pa disk"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
-#, fuzzy
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
-msgstr "Driver i duhur nga karta tënde Ethernet:"
+msgstr "Nevojitet driver për diskun tënd:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
-#, fuzzy
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
 msgstr ""
-"Nuk u gjet asnjë kartë Ethernet. Nëse e njeh emrin e driver-it që i "
-"nevojitet kartës tënde Ethernet, mund ta zgjedhësh nga lista e mëposhtme."
+"Nuk u gjet asnjë disk. Nëse e njeh emrin e driver-it që i nevojitet diskut "
+"tënd, mund ta zgjedhësh nga lista."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Asnjë mjet i ndashëm"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
 msgstr "Nuk u gjet asnjë mjet i ndashëm."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
 msgstr "Të lutem kontrollo nëse ky kompjuter ka një disk të ngurtë të lidhur."
 
@@ -181,30 +185,12 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Të dal në caktimin e parametrave të moduleve?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Disa module pranojnë parametra të ngarkuar në çast për të përshtatur "
-"operacionet e tyre. Nëse dëshiron, mund të dalësh në caktimin e parametrave "
-"të tillë ndërsa secili modul ngarkohet."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
 msgstr "Ta nis shërbimin e kartave PC?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
@@ -214,13 +200,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
 msgstr "Mundësitë e shtrirjes së burimit të PCMCIA:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -236,39 +222,19 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "Në shumicën e rasteve, nuk duhet të specifikosh asgjë këtu."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Disa module pranojnë parametra të përcaktuar gjatë fazës së ngarkimit për të "
-"përshtatur operacionet e tyre. Këto parametra shpesh janë porta I/O dhe "
-"numrat e IRQ që ndryshojnë sipas kompjuterit dhe nuk mund të vendosen nga "
-"sistemi. Një parametër i zakonshëm ngjan me \"IRQ=7 IO=0x220\""
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Nëse nuk di çfarë të shkruash, lëre bosh."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Parametra shtesë për modulin ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -284,7 +250,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -294,26 +260,24 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Gabim gjatë ekzekutimit të '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
-#, fuzzy
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
-msgstr "Ti ngarkoj driver-at e rrjetit nga një disketë?"
+msgstr "Ti ngarkoj driver-at që mungojnë nga një disketë?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
-#, fuzzy
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "
 "drive before continuing."
 msgstr ""
-"Nuk u gjet asnjë kartë Ethernet. Për disa karta Ethernet mund të të duhet të "
-"ngarkosh driver rrjeti shtesë nga një disketë. Nëse ke një disketë të tillë "
-"tani, vendose në lexues përpara se të vazhdosh."
+"Nuk gjendet një driver për kompjuterin tënd. Mund të të duhet të ngarkosh "
+"driver-a nga një disketë. Nëse ke një disketë të tillë tani, vendose në "
+"lexues përpara se të vazhdosh."

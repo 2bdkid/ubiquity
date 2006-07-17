@@ -4,10 +4,10 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Tagalog messages for debian-installer.
-# Copyright (C) 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2004, 2005, 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Ipinamamahagi ang talaksang ito alinsunod sa lisensiya ng debian-installer.
-# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005
+# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005, 2006
 # Rick Bahague, Jr. <rbahaguejr@gmail.com>, 2004
 # Reviewed by Roel Cantada on Feb-Mar 2005.
 # Sinuri ni Roel Cantada noong Peb-Mar 2005.
@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-07-07 18:19+0800\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-19 18:23+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -39,117 +39,129 @@ msgstr "Pumili ng wika/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Iniimbak ang wika..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Philippines"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "iba pa"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "PH"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "Pumili ng lokalisasyon:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "PH"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Batay sa pinili niyong wika, kayo ay nasa isa sa mga bansa o lugar na ito."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Batay sa napili niyong wika at bansa, ang mga sumusunod na mga lokalisasyon "
-"ay suportado sa Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Pumili ng lokalisasyon:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Kinakailangan na pumili ng ibang lokalisasyon dahil walang lokalisasyon na "
-"mahanap sa kasalukuyan para sa wika at bansa na napili niyo."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Hindi suportadong lokalisasyon"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Ang halaga ng lokalisasyon na pinili niyo (${LOCALE}) ay hindi suportado sa "
-"kasalukuyan ng Ubuntu. Papipiliin kayo ng wika, bansa at halaga ng "
-"lokalisasyon."
+"Batay sa napili niyong wika at bansa, ang mga sumusunod na mga lokalisasyon "
+"ay suportado."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Pumili ng iba pang mga lokalisasyon na susuportahan:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
 "Maaaring pumili ng karagdagang mga lokalisasyon na iluluklok mula sa "
 "listahan."
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "Hilagang America"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "Gitnang America"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "Timog America"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "Caribbean"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "Europa"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "Asia"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "Africa"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "Karagatang Indian"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "Oceania"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "Antartiko"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "iba pa"
+
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Pumili ng bansa, teritoryo o lugar:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Batay sa pinili niyong wika, kayo ay nasa isa sa mga bansa o lugar na ito."

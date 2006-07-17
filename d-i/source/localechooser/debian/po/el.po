@@ -7,19 +7,19 @@
 # Greek messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # George Papamichelakis <george@step.gr>, 2004.
 # Emmanuel Galatoulas <galas@tee.gr>, 2004.
-# Konstantinos Margaritis <markos@debian.org>, 2004.
+# Konstantinos Margaritis <markos@debian.org>, 2004, 2006.
 # Greek Translation Team <debian-l10n-greek@lists.debian.org>, 2004, 2005.
-#
+# quad-nrg.net <galaxico@quad-nrg.net>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-09-15 21:29EEST\n"
-"Last-Translator: Greek Translation Team <debian-l10n-greek@lists.debian."
-"org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-02-14 13:32+0200\n"
+"Last-Translator: quad-nrg.net <galaxico@quad-nrg.net>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,8 +29,8 @@ msgstr ""
 "org>\n"
 "org>\n"
 "org>\n"
-"X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Type: text
 #. Description
@@ -40,121 +40,129 @@ msgstr ""
 #. Example (french): Choisir la langue/Choose language
 #: ../localechooser.templates-in:7
 msgid "Choose language"
-msgstr "Επιλογή Γλώσσας/Choose language"
+msgstr "Επιλογή Γλώσσας / Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Αποθήκευση γλώσσας..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Greece"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "άλλη"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "GR"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Επιλέξτε την τοποθεσία σας:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "GR"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Με βάση την επιλογή της γλώσσας, μάλλον βρίσκεστε σε μία από τις ακόλουθες "
-"τοποθεσίες:"
+"τοποθεσίες."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
+#: ../localechooser.templates-in:112
+msgid "Choose a locale:"
+msgstr "Επιλέξτε μια τοπικοποίηση:"
+
+#. Type: select
+#. Description
+#: ../localechooser.templates-in:112
 msgid ""
 "Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
+"are supported."
 msgstr ""
 "Βάσει των επιλογών σας για τη γλώσσα και τη χώρα, οι ακόλουθες παράμετροι "
-"τοπιοποίησης υποστηρίζονται στο Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid "Choose a locale:"
-msgstr "Επιλέξτε μια τοπιοποίηση:"
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
-msgstr ""
-"Πρέπει να επιλέξετε μια εναλλακτική τοπιοποίηση καθώς δεν αντιστοιχεί κάποια "
-"υπάρχουσα τοπιοποίηση στην επιλεγμένη γλώσσα και χώρα."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Μη υποστηριζόμενη τοπιοποίηση"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Η τιμή της τοπιοποίησης που έχετε προκαθορίσει (${LOCALE}) δεν υποστηρίζεται "
-"προς το παρόν στο Ubuntu. Θα ερωτηθείτε για τις ρυθμίσεις γλώσσας χώρας και "
-"τοπιοποίησης."
+"τοπικοποίησης υποστηρίζονται."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
-msgstr "Επιλέξτε άλλες εντοπιοτήτες που θα υποστηρίζονται:"
+msgstr "Επιλέξτε άλλες τοπικοποιήσεις που θα υποστηρίζονται:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
-"Μπορείτε να επιλέξετε επιπλέον εντοπιότητες για εγκατάσταση, από αυτή τη "
+"Μπορείτε να επιλέξετε επιπλέον τοπικοποιήσεις για εγκατάσταση, από αυτή τη "
 "λίστα."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Επιλέξτε μια χώρα ή περιοχή:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Βόρεια Αμερική --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Με βάση την επιλογή της γλώσσας, μάλλον βρίσκεστε σε μία από τις "
-#~ "ακόλουθες χώρες ή περιοχές."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Κεντρική Αμερική --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Νότια Αμερική --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Καραϊβική --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Ευρώπη --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Ασία --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Aφρική --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Ινδικός Ωκεανός --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Ωκεανία --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Ανταρκτική --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- άλλη --"

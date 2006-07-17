@@ -4,19 +4,21 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of debian-installer_packages_po.po to Arabic
+# Ossama M. Khayat <okhayat@yahoo.com>, 2006.
 # Arabic messages for debian-installer. Copyright (C) 2003 Software in the Public Interest, Inc. This file is distributed under the same license as debian-installer. Ossama M. Khayat <okhayat@yahoo.com>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-10-13 16:59+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-05-28 00:46+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==0 ? 1 : n==2 ? 2 : 3;\n"
 
 #. Type: text
 #. Description
@@ -30,111 +32,124 @@ msgstr "اختيار اللغة/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "لغة التخزين..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
-msgstr "Egypt"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
+msgstr "Kuwait"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "أخرى"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "KW"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
-msgstr "اختر المحليّة/Choose locale:"
+msgstr "اختيار المحليّة/Choose locale:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "EG"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr "بناءً على لغتك، أنت على الأرجح في أحد هذه الدّول أو الأقاليم."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-#, fuzzy
+#: ../localechooser.templates-in:112
+msgid "Choose a locale:"
+msgstr "اختيار المحليّة/Choose locale:"
+
+#. Type: select
+#. Description
+#: ../localechooser.templates-in:112
 msgid ""
 "Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr "وفقاً لخيارات اللغة والدولة، يتوفر الدعم للمحليّات التالية في ديبيان."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid "Choose a locale:"
-msgstr "اختر المحليّة/Choose locale:"
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
-msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
-msgstr ""
-"يجب اختيار محليّة رجوع لأنه ليس هناك حالياً محليّة للغة والدولة التي اخترتها."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "محليّة غير مدعومة"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-#, fuzzy
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"قيمة المحليّة التي اخترتها (${LOCALE}) غير مدعومة حالياً في ديبيان. سوف تسأل "
-"عن إعدادات اللغة، والدولة والمحليّة."
+"are supported."
+msgstr "وفقاً لخيارات اللغة والدولة الخاصة بك، يتوفر الدعم للمحليّات التالية."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "اختيار دعم المحليات الأخرى:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "قد ترغب باختيار محليات إضافية لتثبيتها من هذه القائمة."
 
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- أميركا الشماليّة --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- أميركا الوسطى --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- أميركا الجنوبيّة --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- الكاريبيان --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- أوروبا --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- آسيا --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- إفريقيا --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- المحيط الهندي --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- أوشينيا --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- القارة القطبية الجنوبية --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- أخرى --"
+
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "اختيار دولة، أو مقاطعة أو منطقة:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr "بناءً على لغتك، أنت على الأرجح في أحد هذه الدّول أو الأقاليم."

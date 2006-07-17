@@ -14,9 +14,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-04-06 17:27+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-01-31 14:39+0200\n"
 "Last-Translator: Tapio Lehtonen <tale@debian.org>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,118 +35,128 @@ msgstr "Kielen valinta/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Tallennetaan kieli..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Finland"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "muu"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "FI"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "Maa-asetuston valinta:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "FI"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Valitsemasi kielen perusteella olet luultavasti jossakin näistä maista tai "
 "alueista."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-#, fuzzy
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Valitsemasi kielen ja maan perusteella ovat seuraavat maa-asetuston "
-"parametrit tuettuja Debianissa."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Maa-asetuston valinta:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"On valittava toinen maa-asetusto varalle, koska tällä hetkellä ei ole maa-"
-"asetustoa valitsemillesi kielelle ja maalle."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Maa-asetustoa ei ole tuettu"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-#, fuzzy
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Esitäytetty maa-asetuston arvo (${LOCALE}) ei ole tuettu Debianissa. "
-"Kehoitteeseen on kirjoitettava kielen, maan ja maa-asetuston asetukset."
+"Valitsemasi kielen ja maan perusteella ovat seuraavat maa-asetuston "
+"parametrit tuettuja."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
-msgstr ""
+msgstr "Valitse muut tuettavat maa-asetustot:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
-msgstr ""
+msgstr "Tästä listasta voidaan valita lisää maa-asetustoja asennettaviksi."
+
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Pohjois-Amerikka --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Väli-Amerikka --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Etelä-Amerikka --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Karibia --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Eurooppa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Aasia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Afrikka --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Intian Valtameri --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oseania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Etelänapamanner --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- muu --"
 
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Valitse maa tai alue:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Valitsemasi kielen perusteella olet luultavasti jossakin näistä maista "
-#~ "tai alueista."

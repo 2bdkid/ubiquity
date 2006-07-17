@@ -3,22 +3,28 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of bs.po to Bosnian
 # Bosnian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Safir Secerovic <sapphire@linux.org.ba>, 2006.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-11-28 18:33-0700\n"
-"PO-Revision-Date: 2005-03-28 21:47CET\n"
-"Last-Translator: Safir Šećerović <sapphire@linux.org.ba>\n"
+"PO-Revision-Date: 2006-04-11 11:42+0100\n"
+"Last-Translator: Safir Secerovic <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 3\n"
+"X-Poedit-Language: Bosnian\n"
+"X-Poedit-Country: BOSNIA AND HERZEGOVINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #. Type: boolean
 #. Description
@@ -60,13 +66,12 @@ msgstr "Instalacija SILO-a uspješna"
 #. Type: note
 #. Description
 #: ../silo-installer.templates:16
-#, fuzzy
 msgid ""
 "The SILO boot loader has been successfully installed on your new boot "
 "partition, and your system should now be able to boot itself."
 msgstr ""
-"SILO boot loader je upješno instaliran na vaš novu Debian boot particiju i "
-"vaš sistem bi se trebao moći podignuti."
+"SILO boot loader je upješno instaliran na vaš novu boot particiju i vaš "
+"sistem bi se trebao moći podignuti."
 
 #. Type: text
 #. Description
@@ -78,9 +83,8 @@ msgstr "Instaliraj SILO boot loader na hard disk"
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
-#, fuzzy
 msgid "Unsupported boot filesystem type"
-msgstr "Koristiti nepodržani tip datotečnog sistema za /boot?"
+msgstr "Nepodržani boot tip datotečnog sistema"
 
 #. Type: note
 #. Description
@@ -91,13 +95,15 @@ msgid ""
 "partitioning scheme the kernel is going to be installed on the ${SILO_PART} "
 "partition of type ${SILO_TYPE}."
 msgstr ""
+"Kako bi se uspješno učitao od strane SILO (Sparc Linux Loader), kernel mora "
+"biti na ext2, ext3 ili ufs formatiranoj particiji. U trenutnoj particionoj "
+"šemi, kernel će biti instaliran na ${SILO_PART} particiji tipa ${SILO_TYPE}."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:39
-#, fuzzy
 msgid "Boot partition may cause problems with SILO"
-msgstr "Root particija mora biti ext2"
+msgstr "Boot particija može uzrokovati probleme sa SILO-m"
 
 #. Type: note
 #. Description
@@ -107,6 +113,8 @@ msgid ""
 "impossible for SILO (Sparc Linux Loader) to boot a kernel placed farther "
 "than 1 GB from the beginning of the disk."
 msgstr ""
+"Ova mašina izgleda pati od greške u firmwareu, što onemogućava SILO (Sparc "
+"Linux Loader) da podigne kernel smješten dalje od 1. GB od početka diska."
 
 #. Type: note
 #. Description
@@ -119,13 +127,18 @@ msgid ""
 "${SILO_PART} partition which extends up to ${SILO_OFF} mark. Keeping this "
 "configuration may result in an unbootable system."
 msgstr ""
+"Kako bi izbjegli probleme, jako se preporučuje instaliranje kernela na "
+"particiju koja cijela staje unutar prvog gigabajta diska (npr., kreiranjem "
+"manje /boot particije na početku diska). U trenutnoj particionoj šemi, ono "
+"će se instalirati na ${SILO_PART} particiju koja prelazi preko ${SILO_OFF} "
+"markera. Zadržavanje ove konfiguracije može rezultirati sistemom koji se ne "
+"može podići."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:53
-#, fuzzy
 msgid "Unsupported partition table on the boot disk"
-msgstr "Root particija nije na prvom disku"
+msgstr "Nepodržana particiona tabela na boot disku"
 
 #. Type: note
 #. Description
@@ -136,6 +149,10 @@ msgid ""
 "to be installed on the ${SILO_PART} partition located on a disk with the "
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
+"SILO (Sparc Linux Loader) može podići kernel samo s diska sa \"sun\" "
+"particionom tabelom. U trenutnoj particionoj šemi, kernel će biti instaliran "
+"na ${SILO_PART} particiju lociranu na disku sa particionom tabelom tipa "
+"\"${SILO_DISK}\"."
 
 #. Type: note
 #. Description
@@ -145,3 +162,6 @@ msgid ""
 "problem. Keeping the current configuration may result in an unbootable "
 "system."
 msgstr ""
+"Jako se preporučuje da se vratite na particionisanje i ispravite ovaj "
+"problem. Zadržavanje trenutne konfiguracije može rezultovati u sistemu koji "
+"se ne može podići."

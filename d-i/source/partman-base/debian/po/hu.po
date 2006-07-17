@@ -6,139 +6,164 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-27 18:28-0600\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-09 06:05-0600\n"
+"PO-Revision-Date: 2006-06-20 00:11+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:3
 msgid "Starting up the partitioner"
-msgstr "Partícionáló indítása folyamatban"
+msgstr "Partícionáló indítása"
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:11
 msgid "Scanning disks..."
-msgstr "Lemezek átvizsgálása folyamatban..."
+msgstr "Lemezek átnézése..."
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:15
 msgid "Detecting file systems..."
-msgstr "Fájlrendszerek felderítése folyamatban..."
+msgstr "Fájlrendszerek felderítése..."
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:20
+msgid "Device in use"
+msgstr "Használt eszköz"
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:20
+msgid ""
+"No modifications can be made to the device ${DEVICE} for the following "
+"reasons:"
+msgstr "${DEVICE} eszköz nem módosítható az alábbi okokból:"
+
+#. Type: error
+#. Description
+#: ../partman-base.templates:33
+msgid "Partition in use"
+msgstr "Használt partíció"
+
+#. Type: error
+#. Description
+#. This should be translated as "partition *number* ${PARTITION}"
+#. In short, ${PARTITION} will indeed contain the partition
+#. NUMBER and not the partition NAME
+#: ../partman-base.templates:33
+msgid ""
+"No modifications can be made to the partition #${PARTITION} of device "
+"${DEVICE} for the following reasons:"
+msgstr "${DEVICE} ${PARTITION}. partíciója nem módosítható az alábbi okokból:"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:31
+#: ../partman-base.templates:53
 msgid ""
 "This partitioner doesn't have information about the default type of the "
 "partition tables on your architecture.  Please send an e-mail message to "
 "debian-boot@lists.debian.org with information."
 msgstr ""
-"A partícionálónak nincs tudomása a gép architektúráján szokásosan használt "
-"partíciós táblák típusáról. Ha rendelkezik ilyen információval, kérjük "
-"juttassa el a debian-boot@lists.debian.org levelezőlistára."
+"E partícionáló nem ismeri e géptípus alap partíciós tábla típusát. Ha erről "
+"van adat, írd meg a debian-boot@lists.debian.org címre."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:31
+#: ../partman-base.templates:53
 msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
 msgstr ""
-"Figyelem, ha a libparted könyvtár nem támogatja az ilyen típusú partíciós "
-"táblákat, akkor a partícionáló nem fog helyesen működni."
+"Figyelem, ha a libparted nem támogatja e partíciós tábla típust, akkor e "
+"partícionáló nem fog helyesen működni."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:42
+#: ../partman-base.templates:64
 msgid "Continue with partitioning?"
-msgstr "Folytatja a partícionálást?"
+msgstr "Mehet a partícionálás?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:42
+#: ../partman-base.templates:64
 msgid ""
 "This partitioner is based on the library libparted which doesn't have "
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
-"E partícionáló a libparted könyvtárra épül, a libparted viszont nem "
-"támogatja a gép architektúráján használatos partíciós táblákat. Nagyon "
-"ajánlott most kilépnie a partícionálóból."
+"E partícionáló a libparted könyvtárra épül, de az nem támogatja e gépen "
+"használt partíciós táblákat. Nagyon ajánlott kilépni e partícionálóból."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:42
+#: ../partman-base.templates:64
 msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
 msgstr ""
-"Ha tudja, kérjük segítse a partícióstábla-típus libparted-beli támogatásának "
-"fejlesztését."
+"Ha tudod, kérjük segítsd e partíciós tábla-típus libparted-beli támogatását."
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:53
+#: ../partman-base.templates:75
 msgid ""
 "This is an overview of your currently configured partitions and mount "
 "points. Select a partition to modify its settings (file system, mount point, "
 "etc.), a free space to create partitions, or a device to initialise its "
 "partition table."
 msgstr ""
-"A jelenleg beállított partíciókat és csatlakoztatási pontokat összegző "
-"áttekintés látható. Egy partíciót kiválasztva lehetősége nyílik az arra "
-"érvényes beállítások (fájlrendszer, csatlakoztatási pont, stb.) "
-"megváltoztatására, egy szabad helyet kiválasztva újabb partíciót hozhat "
-"létre, egy eszközt kiválasztva pedig inicializálhatja annak partíciós "
-"tábláját."
+"Az a jelenleg konfigurált partíciók és csatolási pontok áttekintése. Válassz "
+"egy partíciót beállításai módosításához (fájlrendszer, csatolási pont, "
+"stb.), egy szabad területet partíció létrehozásához vagy egy eszközt "
+"partíciós tábla létrehozásához."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:58
+#: ../partman-base.templates:80
 msgid "Create new empty partition table on this device?"
-msgstr "Új (üres) partíciós táblát hoz létre ezen az eszközön?"
+msgstr "Új (üres) partíciós táblát nyitsz ezen az eszközön?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:58
+#: ../partman-base.templates:80
 msgid ""
 "You have selected an entire device to partition. If you proceed with "
 "creating a new partition table on the device, then all current partitions "
 "will be removed."
 msgstr ""
-"Az egész eszközt kijelölte partícionálásra. Ha megteszi az eszközön új "
-"partíciós táblát létrehozó következő lépést, akkor a rajta jelenleg levő "
-"összes partíció megszűnik."
+"Az egész eszközt kijelölted partícionálásra. Ha új partíciós táblát hozol "
+"létre, a mostaniak törlésre kerülnek."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:58
+#: ../partman-base.templates:80
 msgid "Note that you will be able to undo this operation later if you wish."
-msgstr ""
-"Ha később meggondolná magát, lehetősége lesz visszavonni ezt a műveletet."
+msgstr "Később visszavonhatod ezt a műveletet."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:68
+#: ../partman-base.templates:90
 msgid "Write a new empty partition table?"
-msgstr "Kiír egy új (üres) partíciós táblát?"
+msgstr "Új (üres) partíciós táblát írsz?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:68
+#: ../partman-base.templates:90
 msgid ""
 "Because of limitations in the current implementation of the Sun partition "
 "tables in libparted, the newly created partition table has to be written to "
@@ -150,33 +175,31 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:68
+#: ../partman-base.templates:90
 msgid ""
 "You will NOT be able to undo this operation later and all existing data on "
 "the disk will be irreversibly removed."
 msgstr ""
-"E műveletet később NEM vonhatja vissza és a lemezen található összes adat "
-"visszafordíthatatlanul el fog veszni."
+"E műveletet később NEM vonhatod vissza és a lemezen található összes adat "
+"visszavonhatatlanul elvész."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:68
+#: ../partman-base.templates:90
 msgid ""
 "Confirm whether you actually want to create a new partition table and write "
 "it to disk."
-msgstr ""
-"Erősítse meg, valóban létrehoz-e egy új partíciós táblát és azt a lemezre "
-"írja-e."
+msgstr "Erősítsd meg az új partíciós tábla létrehozását és lemezre írását."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:82
+#: ../partman-base.templates:104
 msgid "Continue with the installation?"
-msgstr "Folytatja a telepítést?"
+msgstr "Folytatod a telepítést?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:82
+#: ../partman-base.templates:104
 msgid ""
 "No partition table changes and no creation of file systems have been planned."
 msgstr ""
@@ -184,204 +207,204 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:82
+#: ../partman-base.templates:104
 msgid ""
 "If you plan on using already created file systems, be aware that existing "
 "files may prevent the successful installation of the base system."
 msgstr ""
-"Ha egyes meglevő fájlrendszereket változatlanul tovább kíván használni, jó "
-"tudnia, hogy az azokon már létező fájlok bizonyos esetekben meg is "
-"hiúsíthatják az alaprendszer telepítését."
+"Meglévő fájlrendszerek használata esetén, tudni kell, hogy a rajtuk lévő "
+"egyes fájlok meghiúsíthatják az alaprendszer telepítését."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:91
+#: ../partman-base.templates:113
 msgid "Write the changes to disks?"
-msgstr "Lemezre írja a változásokat?"
+msgstr "Lemezekre írjuk a változásokat?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:91
-#, fuzzy
+#: ../partman-base.templates:113
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
-msgstr "A felsorolt változások lemezre írása következik."
+msgstr ""
+"Folytatás esetén a felsorolt változtatások lemezre íródnak. Egyébként "
+"további változások kézi megadása válik lehetővé."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:91
+#: ../partman-base.templates:113
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
 msgstr ""
-"FIGYELEM: Az eltávolításra és a fájlrendszerek létrehozására kijelölt összes "
-"partíción idáig levő minden adat elveszik."
+"FIGYELEM: Ez az eltávolításra és a formázásra kijelölt összes partíció "
+"minden adatát törölni fogja."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:91
+#: ../partman-base.templates:113
 msgid "${ITEMS}"
 msgstr "${ITEMS}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:102
+#: ../partman-base.templates:124
 msgid "The following partitions are going to be formatted:"
 msgstr "Formázásra kijelölt partíciók:"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:107
+#: ../partman-base.templates:129
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
-msgstr "${DEVICE} eszköz ${PARTITION}. partíciója, fájlrendszer: ${TYPE}"
+msgstr "${DEVICE} ${PARTITION}. partíciója erre: ${TYPE}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:111
+#: ../partman-base.templates:133
 msgid "The partition tables of the following devices are changed:"
-msgstr "A következő eszközök partíciós táblái változtak:"
+msgstr "Az alábbi eszközök partíciós táblái változtak:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:116
+#: ../partman-base.templates:138
 msgid "What to do with this device:"
-msgstr "Kiválasztott eszköz kezelése:"
+msgstr "Kijelölt eszköz kezelése:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:121
+#: ../partman-base.templates:143
 msgid "How to use this free space:"
-msgstr "Kiválasztott szabad hely kezelése:"
+msgstr "E szabad hely kezelése:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:126
+#: ../partman-base.templates:148
 msgid "Partition settings:"
 msgstr "Partíció beállításai:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:126
+#: ../partman-base.templates:148
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
 msgstr ""
-"Szerkesztés: ${DEVICE} eszköz ${PARTITION}. partíciója. ${OTHERINFO} "
+"Szerkesztés alatt: ${DEVICE} ${PARTITION}. partíciója. ${OTHERINFO} "
 "${DESTROYED}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:131
+#: ../partman-base.templates:153
 msgid "This partition is formatted with the ${FILESYSTEM}."
 msgstr "Formattált partíció, fájlrendszere: ${FILESYSTEM}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:135
+#: ../partman-base.templates:157
 msgid "No existing file system was detected in this partition."
-msgstr "A partíció felderítése nem talált meglevő fájlrendszert."
+msgstr "A partíció felderítése nem talált fájlrendszert."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:139
+#: ../partman-base.templates:161
 msgid "All data in it WILL BE DESTROYED!"
 msgstr "A rajta levő minden adat EL FOG VESZNI!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:165
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "A partíció kezdete: ${FROMCHS}, vége: ${TOCHS}."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:147
+#: ../partman-base.templates:169
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "A szabad hely kezdete: ${FROMCHS}, vége: ${TOCHS}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:151
+#: ../partman-base.templates:173
 msgid "Please wait..."
-msgstr "Legyen türelemmel..."
+msgstr "Türelem..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:155
+#: ../partman-base.templates:177
 msgid "Partitions formatting"
 msgstr "Partíciók formattálása"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:159
+#: ../partman-base.templates:181
 msgid "Processing..."
-msgstr "Feldolgozás folyamatban..."
+msgstr "Feldolgozás..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:171
+#: ../partman-base.templates:193
 msgid "Done setting up the partition"
-msgstr "A partíción végzett műveletek befejezése"
+msgstr "Partíció beállítása kész"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:175
+#: ../partman-base.templates:197
 msgid "Finish partitioning and write changes to disk"
-msgstr "Partícionálás befejezése és változások lemezre kiírása"
+msgstr "Partícionálás lezárása és változások mentése"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:179
+#: ../partman-base.templates:201
 msgid "Undo changes to partitions"
-msgstr "Partíciókon történt változtatások visszavonása"
+msgstr "Partíciók változásainak visszavonása"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:183
+#: ../partman-base.templates:205
 msgid "Show Cylinder/Head/Sector information"
 msgstr "Cilinder/Fej/Szektor-adatok megjelenítése"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:187
+#: ../partman-base.templates:209
 #, no-c-format
 msgid "Dump partition info in %s"
-msgstr "Partícionálási adatok kiírása a következő helyre: %s"
+msgstr "Partíció adatok kiírása ide: %s"
 
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:192
+#: ../partman-base.templates:214
 msgid "FREE SPACE"
 msgstr "SZABAD HELY"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:197
+#: ../partman-base.templates:219
 msgid "unusable"
 msgstr "nemhaszn"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:202
+#: ../partman-base.templates:224
 msgid "primary"
 msgstr "elsődlgs"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:207
+#: ../partman-base.templates:229
 msgid "logical"
 msgstr "logikai"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:212
+#: ../partman-base.templates:234
 msgid "pri/log"
 msgstr "els/log"
 
@@ -392,7 +415,7 @@ msgstr "els/log"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:221
+#: ../partman-base.templates:243
 #, no-c-format
 msgid "#%s"
 msgstr "%s."
@@ -400,7 +423,7 @@ msgstr "%s."
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:226
+#: ../partman-base.templates:248
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "IDE%s mester (%s)"
@@ -408,7 +431,7 @@ msgstr "IDE%s mester (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:231
+#: ../partman-base.templates:253
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "IDE%s szolga (%s)"
@@ -416,7 +439,7 @@ msgstr "IDE%s szolga (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:236
+#: ../partman-base.templates:258
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "IDE%s mester, %s. partíció (%s)"
@@ -424,55 +447,76 @@ msgstr "IDE%s mester, %s. partíció (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:241
+#: ../partman-base.templates:263
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "IDE%s szolga, %s. partíció (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:245
+#: ../partman-base.templates:267
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "SCSI%s (%s,%s,%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:249
+#: ../partman-base.templates:271
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "SCSI%s (%s,%s,%s), %s. partíció (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:253
+#: ../partman-base.templates:275
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "RAID%s %s. eszköz"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:257
+#: ../partman-base.templates:279
+#, no-c-format
+msgid "Encrypted volume (%s)"
+msgstr "Titkosított kötet (%s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:283
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:261
+#: ../partman-base.templates:287
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:265
+#: ../partman-base.templates:291
+#, no-c-format
+msgid "DASD %s (%s)"
+msgstr "DASD %s (%s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:295
+#, no-c-format
+msgid "DASD %s (%s), partition #%s"
+msgstr "DASD %s (%s), partíció #%s"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:299
 msgid "Cancel this menu"
 msgstr "Visszalépés e menüből"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:270
+#: ../partman-base.templates:304
 msgid "Partition disks"
 msgstr "Lemezek partícionálása"

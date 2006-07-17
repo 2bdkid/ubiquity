@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-07-03 11:11+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-30 11:12+0200\n"
 "Last-Translator:  Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team:  Czech <provoz@debian.cz>\n"
 "MIME-Version: 1.0\n"
@@ -31,121 +31,130 @@ msgstr "Vybrat jazyk/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Ukládá se jazyk..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Czech Republic"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "jiná"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "CZ"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid "Choose your location:"
 msgstr "Vyberte místní nastavení:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "CZ"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
 "Soudě dle zvoleného jazyka se pravděpodobně nacházíte v některé z "
 "následujících zemí, nebo oblastí."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-#, fuzzy
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Na základě výběru jazyka a země jsou v Debianu podporovány tyto parametry "
-"místního nastavení."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Vyberte místní nastavení:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Protože pro zvolenou kombinaci jazyka a země neexistuje platné místní "
-"nastavení, musíte vybrat záchytnou možnost."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Nepodporované místní nastavení"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-#, fuzzy
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Přednastavené místní nastavení (${LOCALE}), momentálně není v Debianu "
-"podporováno. Nyní budete dotázáni na jazyk, zemi a nastavení místního "
-"prostředí."
+"Na základě výběru jazyka a země jsou podporovány následující parametry "
+"místního prostředí."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
-msgstr "Vyberte volitelná místní nastavení:"
+msgstr "Vyberte volitelná místní prostředí:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
-"Ze seznamu si můžete vybrat další místní nastavení, která chcete "
+"Ze seznamu si můžete vybrat další místní prostředí, která chcete "
 "nainstalovat."
+
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Severní Amerika --"
+
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Střední Amerika --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Jižní Amerika --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Karibik --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Evropa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asie --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Afrika --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Indický oceán --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oceánie --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antarktida --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- jiná --"
 
 #~ msgid "Choose a country, territory or area:"
 #~ msgstr "Vyberte zemi, území nebo oblast:"
-
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Soudě dle zvoleného jazyka se pravděpodobně nacházíte v některé z "
-#~ "následujících zemí, nebo oblastí."

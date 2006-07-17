@@ -6,80 +6,91 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-06-19 18:30-0600\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-07 18:28-0600\n"
+"PO-Revision-Date: 2006-05-05 01:44+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: select
 #. Choices
-#: ../ethdetect.templates:3
-msgid "no ethernet card, ${CHOICES}, none of the above"
-msgstr "ethernet-kártya nélkül, ${CHOICES}, egyik sem"
+#: ../ethdetect.templates:6
+msgid "no ethernet card"
+msgstr "ethernet-kártya nélkül"
+
+#. Type: select
+#. Choices
+#. "none of the above" should be understood as "none of the above choices"
+#: ../ethdetect.templates:6 ../disk-detect.templates:15
+msgid "none of the above"
+msgstr "egyik sem"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid "Driver needed by your Ethernet card:"
-msgstr "Ethernet-kártyájához szükséges meghajtómodul:"
+msgstr "Az Ethernet kártya meghajtója:"
 
 #. Type: select
 #. Description
-#: ../ethdetect.templates:5
+#: ../ethdetect.templates:8
 msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
 msgstr ""
-"A rendszer felderítése nem talált Ethernet-kártyát. Ha ismeri az Ethernet-"
-"kártyájához szükséges modul nevét, akkor válassza ki azt a listából."
+"Nem észleltem Ethernet kártyát. Ha tudod az Ethernet kártyádhoz szükséges "
+"meghajtója nevét, kiválaszthatod a listából."
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid "Do you intend to use FireWire Ethernet?"
-msgstr ""
+msgstr "FireWire Ethernetet használatát tervezed?"
 
 #. Type: boolean
 #. Description
-#: ../ethdetect.templates:12
+#: ../ethdetect.templates:15
 msgid ""
 "No Ethernet card was detected, but a FireWire interface is present. It's "
 "possible, though unlikely, that with the right FireWire hardware connected "
 "to it, this could be your primary Ethernet interface."
 msgstr ""
+"Nem érzékeltem Ethernet kártyát, de egy FireWire csatolót igen. Lehet, bár "
+"nem valószínű, hogy a helyes FireWire eszköz csatlakoztatásával ez lehet az "
+"elsődleges Ethernet csatoló."
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "Ethernet card not found"
-msgstr "Ethernet-kártya nem található"
+msgstr "Nem találtam Ethernet kártyát"
 
 #. Type: error
 #. Description
-#: ../ethdetect.templates:19
+#: ../ethdetect.templates:22
 msgid "No Ethernet card was found on the system."
-msgstr "A rendszeren Ethernet-kártya nem található."
+msgstr "Nem találtam Ethernet kártyát a gépen."
 
 #. Type: text
 #. Description
-#: ../ethdetect.templates:24
+#: ../ethdetect.templates:27
 msgid "Detecting network hardware"
 msgstr "Hálózati hardver felderítése"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../ethdetect.templates:29
+#: ../ethdetect.templates:32
 msgid "Detect network hardware"
 msgstr "Hálózati hardver felderítése"
 
@@ -88,74 +99,71 @@ msgstr "Hálózati hardver felderítése"
 #. Main menu item
 #: ../disk-detect.templates:4
 msgid "Detect disks"
-msgstr ""
+msgstr "Lemezek észlelése"
 
 #. Type: text
 #. Description
 #: ../disk-detect.templates:8
 msgid "Detecting disks and all other hardware"
-msgstr "Lemezek és egyéb hardvereszközök felderítése"
+msgstr "Lemezek és más eszközök észlelése"
 
 #. Type: select
 #. Choices
-#: ../disk-detect.templates:12
-#, fuzzy
-msgid "continue with no disk drive, ${CHOICES}, none of the above"
-msgstr "ethernet-kártya nélkül, ${CHOICES}, egyik sem"
+#: ../disk-detect.templates:15
+msgid "continue with no disk drive"
+msgstr "lemezmeghajtó nélkül"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
-#, fuzzy
+#: ../disk-detect.templates:17
 msgid "Driver needed for your disk drive:"
-msgstr "Ethernet-kártyájához szükséges meghajtómodul:"
+msgstr "Lemez meghajtóhoz szükséges meghajtómodul:"
 
 #. Type: select
 #. Description
-#: ../disk-detect.templates:14
-#, fuzzy
+#: ../disk-detect.templates:17
 msgid ""
 "No disk drive was detected. If you know the name of the driver needed by "
 "your disk drive, you can select it from the list."
 msgstr ""
-"A rendszer felderítése nem talált Ethernet-kártyát. Ha ismeri az Ethernet-"
-"kártyájához szükséges modul nevét, akkor válassza ki azt a listából."
+"Nem érzékeltem lemez meghajtót. A szükséges meghajtómodul nevének "
+"ismeretében kiválasztható a listából"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media"
 msgstr "Nincs partícionálható média"
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "No partitionable media were found."
-msgstr "A felderítés nem talált partícionálható médiát."
+msgstr "Nem találtam partícionálható médiát."
 
 #. Type: error
 #. Description
-#: ../disk-detect.templates:20
+#: ../disk-detect.templates:23
 msgid "Please check that a hard disk is attached to this machine."
-msgstr "Győződjön meg, hogy a géphez valóban csatlakozik merevlemez."
+msgstr "Ellenőrizd a merevlemez és gép tényleges csatlakozását!"
 
 #. Type: text
 #. Description
 #: ../hw-detect.templates:3
 msgid "Detecting hardware, please wait..."
-msgstr "Hardverfelderítés folyamatban, legyen türelemmel..."
+msgstr "Hardver felderítése; türelem..."
 
 #. Type: text
 #. Description
 #: ../hw-detect.templates:7
 msgid "Loading module '${MODULE}' for '${CARDNAME}'..."
-msgstr "Modul betöltése: '${MODULE}' ('${CARDNAME}' funkcióhoz)..."
+msgstr "'${MODULE}' betöltése ehhez: '${CARDNAME}'..."
 
 #. Type: text
 #. Description
 #: ../hw-detect.templates:11
 msgid "Starting PC card services..."
-msgstr "PC Card-szolgáltatások indítása folyamatban..."
+msgstr "PC kártya szolgáltatások indítása..."
 
 #. Type: multiselect
 #. Description
@@ -171,54 +179,35 @@ msgid ""
 "If you know some are unnecessary, or cause problems, you can choose not to "
 "load them. If you're unsure, you should leave them all selected."
 msgstr ""
-"A rendszer felderítése a következő Linux-rendszermagmodulokat találta "
-"hardveréhez illeszkedőnek. Ha ezek közt felesleges, vagy a rendszerével "
-"összeférhetetlen modulokra ismer, mellőzheti azok betöltését. Ha bizonytalan "
-"a választásban, egyelőre hagyja mindet kijelölve."
+"Az alábbi rendszermag modulok tűnnek a hardverhez illőnek. A szükségtelennek "
+"tűnőek vagy gondokat okozók mellőzhetők kijelölésük megszüntetésével. Kétség "
+"esetén először maradjanak kijelölve."
 
 #. Type: boolean
 #. Description
 #: ../hw-detect.templates:25
-msgid "Prompt for module parameters?"
-msgstr "Bekéreti a modulok paramétereit?"
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:25
-msgid ""
-"Some modules accept load-time parameters to customize their operation. If "
-"you'd like, you can be prompted for module parameters as each module is "
-"loaded."
-msgstr ""
-"Egyes modulok betöltésekor megadott paraméterekkel testre lehet szabni azok "
-"működését. Igény esetén minden egyes modul betöltésekor külön kérdést kaphat "
-"a megadandó paraméterekről."
-
-#. Type: boolean
-#. Description
-#: ../hw-detect.templates:33
 msgid "Start PC card services?"
-msgstr "Elindítja a PC Card-szolgáltatásokat?"
+msgstr "Elindítsam a PC kártya szolgáltatásokat?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:33
+#: ../hw-detect.templates:25
 msgid ""
 "This computer may have a PCMCIA interface. Please choose whether PC card "
 "services should be started in order to allow the use of PCMCIA cards."
 msgstr ""
-"A gépen valószínűleg van PCMCIA-csatoló. A PCMCIA-kártyák eléréséhez futnia "
-"kell a PC Card-szolgáltatásoknak, elindítja azokat?"
+"A gépen valószínűleg van PCMCIA-csatoló. Itt kell kiválasztani, hogy "
+"elinduljanak-e a PC kártya szolgáltatások."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "PCMCIA resource range options:"
-msgstr "PCMCIA-erőforrástartományok beállításai:"
+msgstr "PCMCIA erőforrástartományok beállításai:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -226,49 +215,27 @@ msgid ""
 "options will be added to /etc/pcmcia/config.opts. See the installation "
 "manual or the PCMCIA HOWTO for more information."
 msgstr ""
-"Egyes PCMCIA-hardverek működésre bírásához speciális erőforráskonfiguráló-"
-"beállítások szükségesek, ezek hiányában a számítógép akár le is fagyhat. "
-"Egyes Dell-laptopokon például az \"exclude port 0x800-0x8ff\" beállítás "
-"megadása szükséges. Az itt megadott beállítások az /etc/pcmcia/config.opts "
-"fájlba kerülnek. A témáról részletesebben a telepítési kézikönyvben, vagy a "
-"PCMCIA-HOGYAN iratban tájékozódhat."
+"Pár PCMCIA hardver különleges erőforrásbeállításokat igényel, különben "
+"fagyást okozhat. Például pár Dell laptop a \"exclude port 0x800-0x8ff\" "
+"beállítást igényli. E beállítások a /etc/pcmcia/config.opts fájlba kerülnek. "
+"További információk a telepítő kézikönyv vagy a PCMCIA HOGYAN (HOWTO) "
+"oldalain találhatók."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:40
+#: ../hw-detect.templates:32
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "A legtöbb hardver semmilyen egyéb beállítást nem igényel."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:51
-msgid ""
-"Some modules accept load-time parameters to customize their operation. These "
-"parameters are often I/O port and IRQ numbers that vary from machine to "
-"machine and cannot be determined from the hardware. An example string looks "
-"something like \"irq=7 io=0x220\""
-msgstr ""
-"Egyes modulok a működésük testreszabásához betöltéskor különféle "
-"paramétereket fogadhatnak el. Ilyen paraméterek lehetnek: I/O-portszámok "
-"vagy IRQ-számok. Ezek általában rendszerről rendszerre változnak, és csak a "
-"hardverre hagyatkozva nem lehet megállapítani a helyes értéküket. Ilyen "
-"paraméterezés lehet például az \"irq=7 io=0x220\" karakterlánc."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:51
-msgid "If you don't know what to enter, leave it blank."
-msgstr "Ha nem tud mit beírni, hagyja üresen."
-
-#. Type: string
-#. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid "Additional parameters for module ${MODULE}:"
-msgstr "További paraméterek a modul (${MODULE}) számára:"
+msgstr "További paraméterek a ${MODULE} modulhoz:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -276,49 +243,40 @@ msgid ""
 "cannot be determined from the hardware. An example string looks something "
 "like \"irq=7 io=0x220\""
 msgstr ""
-"A következő modul betöltése sikertelen maradt: ${MODULE}. Előfordulhat, hogy "
-"a modul működésre bírásához betöltéskor különféle paramétereket kell "
-"megadni; ez régebbi hardver esetében gyakori jelenség. Ilyen paraméterek "
-"lehetnek: I/O-portszámok vagy IRQ-számok. Ezek általában rendszerről "
-"rendszerre változnak, és csak a hardverre hagyatkozva nem lehet "
-"megállapítani a helyes értéküket. Ilyen paraméterezés lehet például az "
-"\"irq=7 io=0x220\" karakterlánc."
+"A ${MODULE} modul betöltése sikertelen. E modulhoz további paramétereket "
+"kell megadni; ez gyakori régebbi gépeknél. Ezek gyakran I/O portok és IRQ "
+"számok, melyek egyediek és nem határozhatók meg a hardver általános "
+"jellemzőiből. Példa: \"irq=7 io=0x220\""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:61
+#: ../hw-detect.templates:43
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
 msgstr ""
-"Ha nem tud mit beírni, próbálkozzon meg különféle dokumentációkból "
-"információhoz jutni, vagy hagyja üresen (amely esetben a modul nem fog "
-"betöltődni)."
+"Bizonytalanság esetén, az eszköz leírásához kell fordulni, vagy üresen "
+"hagyni a modul mellőzéséhez."
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:73
+#: ../hw-detect.templates:55
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Futtatási hiba: '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
-#, fuzzy
+#: ../hw-detect.templates:60
 msgid "Load missing drivers from a driver floppy?"
-msgstr ""
-"Modulokat tartalmazó hajlékonylemezről tölti be a hálózati meghajtókat?"
+msgstr "Hiányzó meghajtók betöltése flopiról?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:78
-#, fuzzy
+#: ../hw-detect.templates:60
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "
 "drive before continuing."
 msgstr ""
-"A rendszer felderítése nem talált Ethernet-kártyát. Egyes Ethernet-"
-"kártyákhoz további hálózatimeghajtó-modulokat kell egy erre szolgáló "
-"hajlékonylemezről betölteni. Ha rendelkezik ilyen lemezzel, a továbblépés "
-"előtt azt helyezze a lemezmeghajtóba."
+"Nem érhető el a szükséges meghajtó. Meghajtók betölthetők flopiról. Ha van "
+"ilyen flopid, tedd be most a folytatás előtt."

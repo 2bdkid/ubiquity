@@ -7,19 +7,19 @@
 # Greek messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # George Papamichelakis <george@step.gr>, 2004.
 # Emmanuel Galatoulas <galas@tee.gr>, 2004.
-# Konstantinos Margaritis <markos@debian.org>, 2004.
+# Konstantinos Margaritis <markos@debian.org>, 2004, 2006.
 # Greek Translation Team <debian-l10n-greek@lists.debian.org>, 2004, 2005.
-#
+# quad-nrg.net <galaxico@quad-nrg.net>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 03:56-0800\n"
-"PO-Revision-Date: 2005-09-15 21:29EEST\n"
-"Last-Translator: Greek Translation Team <debian-l10n-greek@lists.debian."
-"org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-04-30 18:31-0600\n"
+"PO-Revision-Date: 2005-12-27 03:08+0200\n"
+"Last-Translator: quad-nrg.net <galaxico@quad-nrg.net>\n"
 "Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,8 +29,8 @@ msgstr ""
 "org>\n"
 "org>\n"
 "org>\n"
-"X-Generator: KBabel 1.9.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Type: note
 #. Description
@@ -55,7 +55,7 @@ msgid ""
 "easy to figure out. To get an idea of what Unix utilities are available to "
 "you, use the \"help\" command."
 msgstr ""
-"Ο βασικός σύστημα αρχείων βρίσκεται σε ένα δίσκο μνήμης (RAM disk). Τα "
+"Το ριζικό σύστημα αρχείων βρίσκεται σε ένα δίσκο μνήμης (RAM disk). Τα "
 "συστήματα αρχείων του σκληρού δίσκου βρίσκονται προσαρτημένα στο \"/target"
 "\". Σας είναι διαθέσιμος ο nano, ένας εύκολος και συμπαγής κειμενογράφος. "
 "Για να αποκτήσετε μια ιδέα των εργαλείων που είναι διαθέσιμα προς χρήση, "
@@ -70,14 +70,18 @@ msgstr "Δώστε την εντολή \"exit\" για επιστροφή στο
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-shell.templates:16
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-shell.templates:18
 msgid "Execute a shell"
 msgstr "Εκτέλεση ενός κελύφους"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-exit-installer.templates:4
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-exit-installer.templates:6
 msgid "Exit installer demo"
 msgstr "Έξοδος από την επίδειξη της εγκατάστασης"
 
@@ -94,13 +98,15 @@ msgid ""
 "If you have not finished the install, your system may be left in an unusable "
 "state."
 msgstr ""
-"Αν δεν έχετε ολοκληρώσει την εγκατάσταση, το σύστημα πιθανόν να αφεθεί σε "
-"ημιτελή κατάσταση."
+"Αν δεν έχετε ολοκληρώσει την εγκατάσταση, το σύστημα πιθανόν να αφεθεί σε μη "
+"χρησιμοποιήσιμη κατάσταση."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-reboot.templates:11
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-reboot.templates:13
 msgid "Abort the installation"
 msgstr "Ακύρωση της εγκατάστασης"
 
@@ -109,4 +115,4 @@ msgstr "Ακύρωση της εγκατάστασης"
 #. Prebaseconfig progress bar item
 #: ../di-utils.templates:4
 msgid "Registering modules..."
-msgstr "Καταγραφή μονάδων λογισμικών ..."
+msgstr "Καταγραφή αρθρωμάτων λογισμικού ..."

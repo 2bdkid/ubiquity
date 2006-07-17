@@ -4,49 +4,44 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005 Software in the Public Interest, Inc.
+# Copyright © 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-08-21 14:21+0930\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-23 16:43+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.6b36\n"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:3
 msgid "Installing Yaboot"
-msgstr "Cài đặt Yaboot..."
+msgstr "Cài đặt Yaboot"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:7
 msgid "Installing Yaboot boot loader"
-msgstr "Cài đặt bộ tải khởi động Yaboot..."
+msgstr "Đang cài đặt bộ tải khởi động Yaboot..."
 
-# Type: boolean
-# Description
 #. Type: boolean
 #. Description
 #: ../yaboot-installer.templates:12
 msgid "Yaboot installation failed.  Continue anyway?"
-msgstr "Không cài đặt Yaboot được. Vẫn cứ tiếp tục không?"
+msgstr "Việc cài đặt Yaboot bị lỗi. Vẫn cứ tiếp tục không?"
 
 #. Type: boolean
 #. Description
@@ -56,27 +51,21 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to Yaboot, so continuing the installation may be possible."
 msgstr ""
-"Không cài đặt gói yaboot vào /target/ được. Cài đặt Yaboot như là trình tải "
-"khởi động là bước cần thiết. Tuy nhiên, có lẽ lỗi cài đặt không liên quan "
-"đến Yaboot thì có lẽ tiếp tục cài đặt."
+"Gói yaboot không cài đặt được vào </target/>. Cài đặt trình yaboot như là bộ "
+"tải khởi động là bước cần thiết. Tuy nhiên, lỗi cài đặt có lẽ không liên "
+"quan đến trình yaboot thì có lẽ sẽ có khả năng tiếp tục lại cài đặt."
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:19
 msgid "Looking for bootstrap partitions"
-msgstr "Tìm phân vùng bootstrap..."
+msgstr "Đang tìm phân vùng tải và khởi động..."
 
-# Type: error
-# Description
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr "Không tìm thấy phân vùng bootstrap."
+msgstr "Không tìm thấy phân vùng tải và khởi động"
 
 #. Type: error
 #. Description
@@ -85,27 +74,21 @@ msgid ""
 "No hard disks were found which have an \"Apple_Bootstrap\" partition.  You "
 "must create an 819200-byte partition with type \"Apple_Bootstrap\"."
 msgstr ""
-"Chưa tìm thấy đĩa cứng nào có vùng kiểu \"Apple_Bootstrap\", nên phải tạo "
-"một vùng cỡ 819200 byte có kiểu \"Apple_Bootstrap\"."
+"Không tìm thấy đĩa cứng có phân vùng kiểu « Apple_Bootstrap », nên bạn phải "
+"tạo một phân vùng có kích cỡ 819200 byte với kiểu « Apple_Bootstrap »."
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:29
 msgid "Looking for root partition"
-msgstr "Tìm phân vùng gốc..."
+msgstr "Đang tìm phân vùng gốc..."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:33
 msgid "No root partition found"
-msgstr "Không tìm thấy phân vùng gốc."
+msgstr "Không tìm thấy phân vùng gốc"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:33
@@ -113,33 +96,20 @@ msgid ""
 "No partition is mounted as your new root partition. You must mount a root "
 "partition first."
 msgstr ""
-"Chưa lắp vùng nào như là vùng gốc mới của bạn. Phải lắp vùng gốc trước hết."
+"Chưa gắn kết phân vùng nào như là phân vùng gốc mới. Phải gắn kết một phân "
+"vùng gốc trước tiên."
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:39
 msgid "Looking for other operating systems"
-msgstr "Tìm các hệ điều hành khác..."
+msgstr "Đang tìm hệ điều hành khác..."
 
-# #-#-#-#-#  templates.pot (PACKAGE VERSION)  #-#-#-#-#
-# Type: string
-# Description
-# #-#-#-#-#  templates.pot (PACKAGE VERSION)  #-#-#-#-#
-# Type: select
-# Description
-# #-#-#-#-#  templates.pot (PACKAGE VERSION)  #-#-#-#-#
-# Type: select
-# Description
-# #-#-#-#-#  templates.pot (PACKAGE VERSION)  #-#-#-#-#
-# Type: string
-# Description
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Device for boot loader installation:"
-msgstr "Thiết bị cần cài đặt bộ tảỉ khởi động:"
+msgstr "Thiết bị nơi cần cài đặt bộ tảỉ khởi động:"
 
 #. Type: select
 #. Description
@@ -150,90 +120,65 @@ msgid ""
 "destination partition from among these partitions that have the bootable "
 "flag set."
 msgstr ""
-"Cần phải cài đặt Yaboot (trình tải khởi động Linux) vào vùng đĩa cứng để làm "
-"cho hệ thống bạn có thể khởi động. Vậy hãy chọn vùng đích từ những vùng này "
-"đá lập cờ có thể khởi động."
+"Cần phải cài đặt Yaboot (bộ tải khởi động Linux) vào phân vùng đĩa cứng để "
+"cho hệ thống bạn khả năng khởi động. Vậy hãy chọn phân vùng đích từ những "
+"phân vùng này đã lập cờ khả năng khởi động."
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr "Cảnh báo: hành động này sẽ xóa bỏ mọi dữ liệu trên vùng đã chọn."
+msgstr ""
+"• Cảnh báo: hành động này sẽ xóa bỏ hoàn toàn mọi dữ liệu trên phân vùng đã "
+"chọn. •"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:55
 msgid "Creating yaboot configuration"
-msgstr "Tạo cấu hình Yaboot..."
+msgstr "Đang tạo cấu hình Yaboot..."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:59
 msgid "Failed to create yaboot configuration"
-msgstr "Không tạo cấu hình Yaboot được."
+msgstr "Việc tạo cấu hình Yaboot bị lỗi"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:59
 msgid "The creation of the main yaboot configuration file failed."
-msgstr "Không tạo tập tin cấu hình chính Yaboot được."
-
-# Type: error
-# Description
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-#, fuzzy
-msgid "Please check the syslog for more information."
-msgstr ""
-"Hãy kiểm bản ghi lỗi trên bàn giao tiếp thứ ba hoặc /var/log/messages để xem "
-"thông tin thêm."
+msgstr "Việc tạo tập tin cấu hình chính Yaboot bị lỗi."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
 msgid "Installing yaboot into bootstrap partition"
-msgstr "Cài đặt trình Yaboot vào vùng khởi động hệ thống..."
+msgstr "Đang cài đặt trình Yaboot vào phân vùng tải và khởi động..."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "Failed to install boot loader"
-msgstr "Không cài đặt bộ tải khởi động được."
+msgstr "Việc cài đặt bộ tải khởi động bị lỗi"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "The installation of the yaboot boot loader failed."
-msgstr "Không cài đặt bộ tải khởi động được."
+msgstr "Việc cài đặt bộ tải khởi động Yaboot bị lỗi"
 
-# Type: note
-# Description
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "Successfully installed yaboot"
-msgstr "Cài đặt Yaboot rồi."
+msgstr "Yaboot đã được cài đặt."
 
-# Type: note
-# Description
-# Type: note
-# Description
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The yaboot boot loader was successfully installed."
-msgstr "Cài đặt bộ tải khởi động Yaboot rồi."
+msgstr "Bộ tải khởi động Yaboot đã được cài đặt."
 
 #. Type: note
 #. Description
@@ -241,42 +186,37 @@ msgstr "Cài đặt bộ tải khởi động Yaboot rồi."
 msgid "The new system is now ready to boot."
 msgstr "Vậy hệ thống mới sẵn sàng để khởi động."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Failed to mount /target/proc"
-msgstr "Không lắp /target/proc được."
+msgstr "Việc lắp </target/proc> bị lỗi"
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Mounting the proc file system on /target/proc failed."
-msgstr "Không lắp hệ thống tập tin proc vào /target/proc được."
+msgstr "Việc lắp hệ thống tập tin proc vào </target/proc> bị lỗi."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
-"Hãy kiểm tra bản ghi hệ thống hay dữ liệu xuất bàn giao tiếp thứ ba (tty3)."
+"Hãy kiểm tra xem bản ghi hệ thống </var/log/syslog> hoặc xem bàn giao tiếp "
+"ảo 4 để tìm chi tiết."
 
-# Type: error
-# Description
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Warning: Your system may be unbootable!"
-msgstr "Cảnh báo: hệ thống của bạn có thể không khởi động được."
+msgstr "• Cảnh báo: có lẽ hệ thống của bạn sẽ không có khả năng khởi động. •"
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
 msgid "Setting firmware variables for automatic boot"
-msgstr "Đang lập những biến phần vững (firmware) để tự động khởi động"
+msgstr "Đang lập các biến phần vững (firmware) để tự động khởi động"
 
 #. Type: note
 #. Description
@@ -288,9 +228,9 @@ msgid ""
 "OpenFirmware variables to enable auto-booting:"
 msgstr ""
 "Cần phải lập một số biến trong Pegasos OpenFirmware để mà hệ thống bạn tự "
-"động khởi động Debian. Tại kết thúc cài đặt thì hệ thống sẽ khởi động lại. "
-"Khi xem dấu nhắc Pegasos OpenFirmware, bạn hãy lập những biến OpenFirmware "
-"theo đây để hiệu lực tự động khởi động:"
+"động khởi động. Tại kết thúc cài đặt, hệ thống sẽ khởi động lại. Tại dấu "
+"nhắc Pegasos OpenFirmware, bạn hãy lập những biến OpenFirmware theo đây để "
+"bật chạy tự động khởi động:"
 
 # Variable: do not translate/ biến: đừng dịch
 #. Type: note
@@ -314,19 +254,17 @@ msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
 "or reboot the system to proceed to the next stage of the installation."
 msgstr ""
-"Bạn sẽ chỉ cần phải làm như thế một lần thôi. Sau đó thì hãy nhập lệnh "
-"«boot» (khởi động) hay khởi động lại hệ thống để tiếp tục đến giai đoạn cài "
-"đặt Debian kế."
+"Bạn sẽ cần phải làm như thế chỉ một lần thôi. Sau đó, hãy gõ lệnh « boot "
+"» (khởi động) hoặc khởi động lại hệ thống để tiếp tục đến giai đoạn cài đặt "
+"kế tiếp."
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
 msgid ""
 "Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Hoặc bạn có thể tự khởi động hạt nhân bằng cách nhập:"
+msgstr "Hoặc bạn có thể tự khởi động hệ thống bằng cách gõ :"
 
-# Type: note
-# Description
 # Variable: do not translate/ biến: đừng dịch
 #. Type: note
 #. Description
@@ -334,30 +272,22 @@ msgstr "Hoặc bạn có thể tự khởi động hạt nhân bằng cách nh�
 msgid " ${BOOT}"
 msgstr " ${BOOT}"
 
-# Type: note
-# Description
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:97
 msgid "at the OpenFirmware prompt."
 msgstr "tại dấu nhắc OpenFirmware."
 
-# Type: text
-# Description
-# Main menu item
 #. Type: text
 #. Description
 #. Main menu item
 #: ../yaboot-installer.templates:120
 msgid "Install yaboot on a hard disk"
-msgstr "Cài đặt Yaboot lên đĩa cứng"
+msgstr "Cài đặt Yaboot vào đĩa cứng"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Cài đặt bộ tải khởi động Yaboot..."
+msgstr "Cài đặt lại bộ tải khởi động Yaboot"

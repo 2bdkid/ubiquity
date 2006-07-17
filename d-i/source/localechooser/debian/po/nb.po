@@ -13,14 +13,14 @@
 # Axel Bojer <axelb@skolelinux.no>, 2004.
 # Bjorn Steensrud <bjornst@powertech.no>, 2004.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005.
-# Bjørn Steensrud <bjornst@powertech.no>, 2005.
+# Bjørn Steensrud <bjornst@powertech.no>, 2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-08-08 15:27+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-07 14:16+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -40,112 +40,120 @@ msgstr "Velg språk/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Lagrer språkvalget ..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Norway"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "andre"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "NO"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Velg din lokalitet:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "NO"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
-msgstr "Ut fra språket du har valgt er du trolig i et av disse stedene:"
+"Based on your language, you are probably located in one of these locations."
+msgstr "Ut fra språket du har valgt er du trolig i et av disse stedene."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Basert på dine språk- og landvalg, er følgende lokaleparametre støttet i "
-"Ubuntu."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Velg et lokale:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Et reservelokale velges fordi det for øyeblikket ikke finnes et lokale for "
-"det språket og landet du har valgt."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Ustøttet lokale"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Lokalet (${LOCALE})  du har forhåndsinnstilt er for øyeblikket ikke støttet "
-"av Ubuntu. Du vil bli spurt om språk-, land- og lokaleinnstillinger."
+"Basert på dine språk- og landvalg, er følgende lokaleparametre støttet."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Velg andre lokaler som skal støttes:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Du kan velge flere lokaler å installere i denne lista."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Velg et land, territorium eller område:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Nord-Amerika --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Ut fra språket du har valgt er du trolig i et av disse landene, "
-#~ "territoriene eller områdene."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Mellom-Amerika --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Sør-Amerika --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Det Karibiske Hav --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Europa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Afrika --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Det Indiske Hav --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oseania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antarktika --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- andre --"

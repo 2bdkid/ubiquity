@@ -9,15 +9,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-15 16:20+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-28 00:46+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.2\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==0 ? 1 : n==2 ? 2 : 3;\n"
 
 #. Type: text
 #. Description
@@ -127,6 +128,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "رجاء اختر ما إذا كنت تريد توفيرها على أي حال."
@@ -152,6 +156,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -167,12 +174,16 @@ msgstr "إعادة المحاولة"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "تغيير المرآة"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "تجاهل"
@@ -198,6 +209,32 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "استخدام مرآة شبكية؟"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"يمكن للمرآة الشبكية الإضافة إلى البرامج الموجودة على القرص المدمج. وقد يوفر "
+"ذلك أيضاً النسخ الأحدث من هذه البرامج."
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+"إن كنت تقوم بالتثبيت من قرص مدمج خاص للتثبيت الشبكي netinst واخترت عدم "
+"استخدام مرآة، فسوف ينتهي بك الأمر بنظام بسيط جداً."
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -205,6 +242,7 @@ msgstr "استخدام البرامج المحظورة؟"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -226,6 +264,7 @@ msgstr "استخدام البرامج من المكوّن \"universe\"؟"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -240,14 +279,13 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid "Use software from the \"multiverse\" component?"
-msgstr "استخدام البرامج من المكوّن \"universe\"؟"
+msgstr "استخدام البرامج من المكوّن \"multiverse\"؟"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -255,10 +293,10 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
-"بعض البرامج الغير حرّة (مجانية) متوفّرة بنسق محزّم. مع أن هذه البرامج ليست جزءً "
+"بعض البرامج الغير حرّة (مجانية) متوفّرة بنسق حزم. مع أن هذه البرامج ليست جزءً "
 "من التوزيعة الأساسية، يمكن استخدام أدوات إدارة الحزم الاعتيادية لتثبيتها. "
-"لهذه البرامج رخص متنوعة والتي قد تمنعك من استخدمها، أو تعديلها، أو المشاركة "
-"بها."
+"لهذه البرامج رخص متنوعة والتي قد تمنعك في بعض الأوقات من استخدمها، أو "
+"تعديلها، أو المشاركة بها."
 
 #. Type: boolean
 #. Description
@@ -269,6 +307,7 @@ msgstr "استخدام برامج backport؟"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

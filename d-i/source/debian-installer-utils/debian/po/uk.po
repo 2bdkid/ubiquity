@@ -7,20 +7,20 @@
 # Ukrainian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005.
 #
+# Eugeniy Meshcheryakov <eugen@univ.kiev.ua>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-02-14 03:56-0800\n"
-"PO-Revision-Date: 2005-07-21 22:12+0300\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-04-30 18:31-0600\n"
+"PO-Revision-Date: 2006-02-22 15:54+0200\n"
 "Last-Translator: Eugeniy Meshcheryakov <eugen@univ.kiev.ua>\n"
 "Language-Team: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
@@ -45,7 +45,7 @@ msgid ""
 "easy to figure out. To get an idea of what Unix utilities are available to "
 "you, use the \"help\" command."
 msgstr ""
-"Коренева файлова система розміщена на RAM-диску. Файлові системи жорстких "
+"Коренева файлова система знаходиться на RAM-диску. Файлові системи жорстких "
 "дисків змонтовані в „/target“. У вашому розпорядженні - редактор nano. Він "
 "дуже маленький та простий. Щоб мати уяву про те, які програми Unix доступні, "
 "запустіть команду „help“."
@@ -54,21 +54,25 @@ msgstr ""
 #. Description
 #: ../di-utils-shell.templates:3
 msgid "Use the \"exit\" command to return to the installation menu."
-msgstr "Для повернення до меню установки, використовуйте команду „exit“."
+msgstr "Для повернення до меню встановлення, використовуйте команду „exit“."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-shell.templates:16
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-shell.templates:18
 msgid "Execute a shell"
 msgstr "Запустити командну оболонку"
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-exit-installer.templates:4
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-exit-installer.templates:6
 msgid "Exit installer demo"
-msgstr "Вийти із демонстрації програми установки"
+msgstr "Вийти із демонстрації програми встановлення"
 
 #. Type: boolean
 #. Description
@@ -89,7 +93,9 @@ msgstr ""
 #. Type: text
 #. Description
 #. Main menu item
-#: ../di-utils-reboot.templates:11
+#. The translation should not exceed 55 columns except for languages
+#. that are only supported in the graphical version of the installer
+#: ../di-utils-reboot.templates:13
 msgid "Abort the installation"
 msgstr "Перервати встановлення"
 

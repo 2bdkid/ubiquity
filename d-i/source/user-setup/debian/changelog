@@ -1,3 +1,73 @@
+user-setup (1.2ubuntu2) edgy; urgency=low
+
+  * Backport from trunk:
+    - Fix non-POSIX shell use that confuses busybox if the root password is
+      currently set to "!".
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 16 Jul 2006 10:56:39 +0100
+
+user-setup (1.2ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+  * Use "!" rather than "*" to lock the root password, in line with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Jul 2006 14:01:27 +0100
+
+user-setup (1.2) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Space-indentation cleanup in user-setup-ask.
+  * Switch from prebaseconfig.d to finish-install.d
+
+  [ Joey Hess ]
+  * Comment out STATE debugging message.
+  * Check for the passwd file before grepping it.
+
+  [ Colin Watson ]
+  * Be more paranoid about clearing passwords from the cdebconf database.
+  * Fix up permissions of user's home directory in case a mount point was
+    created underneath it by partman (closes:
+    https://launchpad.net/bugs/16640).
+
+  [ Joey Hess ]
+  * Rename finish-install template.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po)
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Italian (it.po) by Giuseppe Sacco
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malagasy (mg.po) by Jaonary Rabarisoa
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Nepali (ne.po) by Shiva Pokharel
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Jun 2006 22:13:44 -0400
+
+user-setup (1.1ubuntu4) dapper-security; urgency=low
+
+  * Refuse to apply an empty root password, which can happen if
+    user-setup-apply is run twice due to backing up from prebaseconfig's
+    final message (closes: Malone #48350).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Jul 2006 17:43:34 +0100
+
 user-setup (1.1ubuntu3) dapper; urgency=low
 
   * Fix breakage in Traditional Chinese translation (thanks, Tetralet).

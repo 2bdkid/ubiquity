@@ -1,3 +1,204 @@
+hw-detect (1.38ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 28 Jun 2006 13:21:11 +0100
+
+hw-detect (1.38) unstable; urgency=low
+
+  * Change ethdetect menu item number from 15 to 18. cdrom-detect, load-iso,
+    load-cdrom, ethdetect, and s390-netdevice are all changed due to this and
+    should transition together.
+    Closes: #373097
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 13 Jun 2006 20:31:08 -0400
+
+hw-detect (1.37) unstable; urgency=low
+
+  * prebaseconfig transition
+
+ -- Joey Hess <joeyh@debian.org>  Wed,  7 Jun 2006 22:02:51 -0400
+
+hw-detect (1.36) unstable; urgency=low
+
+  [ Frans Pop ]
+  * devnames-static.txt: update descriptions for some Sun Ethernet devices.
+
+  [ Joey Hess ]
+  * Remove code for i8042 and atkbd on powerpc, has been in rootskel for a
+    long time.
+  * Only register the psmouse module for 2.4 kernels, udev will handle it for
+    2.6.
+  * Only register ide-detect, ide-cd, and ide-disk for 2.4, ditto.
+  * Only register sr_mod and sd_mod for 2.4 as well.
+
+  [ Christian Perrier ]
+  * Split Choices fields in debconf templates. Will minimize translators errors.
+
+  [ Colin Watson ]
+  * Fix sysfs-update-devnames not to try to use 'local' outside a function,
+    which bash doesn't like.
+  * Use /etc/init.d/pcmciautils if available, so that pcmciautils-udeb and
+    pcmcia-cs-udeb don't have to contain the same file (and thus break if
+    pcmcia-cs-udeb accidentally gets unpacked into a 2.6 installer).
+
+  [ Joey Hess ]
+  * Removed some unnecessary and/or redundant debugging lines.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po)
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Khmer (km.po) by Khoem Sokhem
+  * Korean (ko.po) by Sunjae park
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Nepali (ne.po) by Shiva Pokharel
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Colin Watson <cjwatson@debian.org>  Wed,  7 Jun 2006 01:20:20 +0100
+
+hw-detect (1.35) unstable; urgency=low
+
+  * hwdetect.sh: look in /proc/modules instead of using lsmod.
+  * discover-sbus: queue SCSI sbus modules for inclusion in initrd and NIC
+    modules for addition to /etc/modules. Closes: #358532.
+  * Needs di-utils 1.26.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Sonam Rinchen
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Khmer (km.po) by Leang Chumsoben
+  * Polish (pl.po) by Bartosz Fenski
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Apr 2006 19:45:38 +0200
+
+hw-detect (1.34) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Remove most code that prompted for module parameters. The new model d-i
+    uses for module parameters is that the user should enter them on the
+    kernel command line at boot, using the form module.param=value. This
+    allows module parameters to be specified before udev loads modules during
+    boot. Closes: #271065
+  * Needs rootskel 1.30.
+
+  [ Frans Pop ]
+  * sbus.list: SUNW,qfe (Quattro HME) needs sunhme driver instead of sunqe.
+    See: #306476.
+  * sbus.list: add qec (QuadEthernet) which uses sunqe driver.
+
+  [ Joey Hess ]
+  * Rebuilt with new libdebian-installer to get correct udeb dependency
+    for archdetect.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Ognyan Kulev
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 18 Mar 2006 14:05:32 -0500
+
+hw-detect (1.33) unstable; urgency=low
+
+  [ Martin Michlmayr ]
+  * Add a description of Intel's IXP400 Ethernet driver.
+
+  [ Colin Watson ]
+  * Replace another udevsynthesize call with update-dev.
+  * Remove old DEB_HOST_ARCH_* and CFLAGS_ARCH cruft.
+  * Fix CFLAGS so that the apparently-intended version formerly in
+    debian/rules actually gets used; no impact on size, though.
+  * Offer disk devices from drivers/message/fusion and drivers/message/i2o
+    (https://launchpad.net/distros/ubuntu/+bug/22220).
+
+  [ Frans Pop ]
+  * Add support for detecting sbus devices on sparc now that we are not using
+    discover anymore. May need to be extended to also add the drivers to the
+    initramfs initrd or /etc/modules. Uses prtconf from sparc-utils-udeb.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Japanese (ja.po) by Kenshi Muto
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Punjabi (Gurmukhi) (pa_IN.po) by Amanpreet Singh Alam
+  * Romanian (ro.po) by Eddy Petrişor
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Cuhalev
+  * Albanian (sq.po) by Elian Myftiu
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Wed,  1 Feb 2006 15:40:33 +0100
+
 hw-detect (1.32ubuntu6) dapper; urgency=low
 
   * Backport from trunk:

@@ -3,32 +3,30 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of fr-new.po to French
-# translation of d-i.po to French
 # translation of fr.po to French
 # French messages for debian-installer.
 # Copyright (C) 2004 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Christian Perrier <bubulle@debian.org>, 2002-2004.
 # Pierre Machard <pmachard@debian.org>, 2002-2004.
 # Denis Barbier <barbier@debian.org>, 2002-2004.
 # Philippe Batailler <philippe.batailler@free.fr>, 2002-2004.
 # Michel Grentzinger <mic.grentz@online.fr>, 2003-2004.
-# Christian Perrier <bubulle@debian.org>, 2005.
-#
+# Christian Perrier <bubulle@debian.org>, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2005-10-19 06:46+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2006-05-26 06:28+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
-"X-Generator: KBabel 1.10.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -56,7 +54,7 @@ msgstr ""
 #. Description
 #: ../partman-auto.templates:17
 msgid "Failed to partition the selected disk"
-msgstr "Échec du partitionnement du disque choisi"
+msgstr "Ã‰chec du partitionnement du disque choisi"
 
 #. Type: error
 #. Description
@@ -65,88 +63,67 @@ msgid ""
 "This probably happened because there are too many (primary) partitions in "
 "the partition table."
 msgstr ""
-"Cet échec est probablement dû à un nombre trop important de partitions "
-"primaires dans la table de partitions."
+"Cet Ã©chec est probablement dÃ» Ã  un nombre trop important de partitions "
+"primaires dans la table des partitions."
 
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
 msgid "Partitioning method:"
-msgstr "Méthode de partitionnement :"
+msgstr "MÃ©thode de partitionnementÂ :"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-msgid "Device to partition"
-msgstr "Disque à partitionner"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-"Cet outil d'installation peut vous assister pour le partitionnement d'un "
-"disque dans le but d'y installer Ubuntu. Vous pouvez également effectuer ce "
-"partitionnement vous-même. Si vous choisissez le partitionnement assisté, "
-"vous aurez la possibilité de vérifier les choix effectués, de les "
-"personnaliser ou même de les abandonner s'ils ne vous conviennent pas."
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
-msgstr "Espace disque à partitionner :"
+msgstr "Espace disque Ã  partitionnerÂ :"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
-msgstr "Schéma de partitionnement :"
+msgstr "SchÃ©ma de partitionnementÂ :"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
 msgstr ""
-"Le disque peut être partitionné selon plusieurs schémas possibles. Dans le "
-"doute, choisissez celui qui est proposé en premier."
+"Le disque peut Ãªtre partitionnÃ© selon plusieurs schÃ©mas. Dans le doute, "
+"choisissez le premier."
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "Espace libre inutilisable"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
 msgstr ""
-"Le partitionnement a échoué car l'espace libre choisi ne peut pas être "
-"utilisé. Il existe probablement trop de partitions primaires dans la table "
+"Le partitionnement a Ã©chouÃ© car l'espace libre choisi ne peut pas Ãªtre "
+"utilisÃ©. Il existe probablement trop de partitions primaires dans la table "
 "de partitions."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
-msgstr "Partitionnement assisté"
+msgstr "Partitionnement assistÃ©"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
-msgstr "Utiliser le plus grand espace disponible possible"
+msgstr "Utiliser le plus grand espace disponible"
 
 #. Type: text
 #. Description
@@ -154,64 +131,91 @@ msgstr "Utiliser le plus grand espace disponible possible"
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
-msgstr "Utiliser tout le disque ${DEVICE}"
+msgstr "Effacer et utiliser tout le disque ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
-msgstr "Modifier manuellement la table de partitions"
+msgstr "Modifier manuellement la table des partitions"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "Partitionner automatiquement l'espace disponible"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
-msgstr "Tout dans une seule partition (recommandé pour les débutants)"
+msgstr "Tout dans une seule partition (recommandÃ© pour les dÃ©butants)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "Ordinateur de bureau"
+#: ../partman-auto.templates:100
+msgid "Separate /home partition"
+msgstr "Partition /home sÃ©parÃ©e"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "Station de travail multiutilisateur"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr "Partitions /home, /usr, /var et /tmp sÃ©parÃ©es"
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "SchÃ©ma de partitionnementÂ des petits disques (<1Â Go)"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr "Disque Ã  partitionner"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+"Cet outil d'installation peut vous assister pour le partitionnement d'un "
+"disque dans le but d'y installer Ubuntu. Vous pouvez Ã©galement effectuer ce "
+"partitionnement vous-mÃªme. Si vous choisissez le partitionnement assistÃ©, "
+"vous aurez la possibilitÃ© de vÃ©rifier et personnaliser les choix effectuÃ©s."
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
-msgstr "Redimensionner ${PARTITION} et utiliser l'espace libéré"
+msgstr "Redimensionner ${PARTITION} et utiliser l'espace libÃ©rÃ©"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr "Pas assez d'espace pour l'installation"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."
 msgstr ""
-"L'opération de redimensionnement n'a pas libéré assez d'espace pour "
-"l'installation. Il se peut que le redimensionnement ait échoué. Vous allez "
+"L'opÃ©ration de redimensionnement n'a pas libÃ©rÃ© assez d'espace pour "
+"l'installation. Il se peut que le redimensionnement ait Ã©chouÃ©. Vous allez "
 "devoir configurer vos partitions manuellement."

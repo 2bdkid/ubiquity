@@ -16,15 +16,17 @@ findfstype () {
 ARCH="$(archdetect)"
 
 case $ARCH in
-	i386/*)
-		MANUFACTURER="$(dmidecode -s system-manufacturer)"
-		case $MANUFACTURER in
-			Apple*)
-				log "GRUB not usable on Intel-based Macs yet; use elilo"
-				exit 1
-				;;
-		esac
-		;;
+    i386/*)
+	MANUFACTURER="$(dmidecode -s system-manufacturer)"
+	case $MANUFACTURER in
+	    Apple*)
+		if [ -d /sys/firmware/efi ]; then
+			log "GRUB not yet usable on Intel-based Macs booted using EFI"
+			exit 1
+		fi
+	    ;;
+	esac
+    ;;
 esac
 
 bootfs=$(findfs /boot)

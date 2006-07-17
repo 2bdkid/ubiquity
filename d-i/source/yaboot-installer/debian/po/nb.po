@@ -5,22 +5,20 @@
 # 
 # translation of nb.po to Norwegian Bokmål
 # translation of debian-installer.po to Norwegian Bokmål
-# Norwegian Bokmal messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Knut Yrvin <knuty@skolelinux.no>, 2004.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 # Axel Bojer <axelb@skolelinux.no>, 2004.
-# Bjorn Steensrud <bjornst@powertech.no>, 2004.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005.
-# Bjørn Steensrud <bjornst@powertech.no>, 2005.
+# Bjørn Steensrud <bjornst@powertech.no>, 2004,2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-11-23 20:57+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-06-20 22:27+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -151,12 +149,6 @@ msgstr "Klarte ikke å opprette et Yaboot-oppsett"
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "Klarte ikke å lage en ny hovedoppsettsfil for Yaboot."
 
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "Se i syslog etter mer informasjon."
-
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
@@ -208,8 +200,8 @@ msgstr "klarte ikke å montere proc-filsystemet på /target/proc."
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr "Sjekk systemloggen og/eller utskriften på det tredje konsollet (tty3)."
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "Detaljer finner du i /var/log/syslog eller på virtuelt konsoll 4."
 
 #. Type: error
 #. Description

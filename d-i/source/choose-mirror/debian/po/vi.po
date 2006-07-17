@@ -4,289 +4,271 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005 Software in the Public Interest, Inc.
+# Copyright © 2005-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-25 14:19+0000\n"
-"PO-Revision-Date: 2005-08-21 14:21+0930\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"PO-Revision-Date: 2006-05-06 17:55+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.6b36\n"
 
-# Type: text
-# Description
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:26
+#: ../choose-mirror-bin.templates-in:25
 msgid "Checking the Ubuntu archive mirror"
-msgstr "Kiểm tra nhân bản kho Ubuntu..."
+msgstr "Đang kiểm tra nhân bản kho Ubuntu..."
 
-# Type: text
-# Description
-# Type: text
-# Description
 #. Type: text
 #. Description
-#: ../choose-mirror.templates-in:30
+#: ../choose-mirror-bin.templates-in:29
 msgid "Downloading the Release file..."
-msgstr "Tải về tập tin Release (nhả)..."
+msgstr "Đang tải về tập tin Release..."
 
-# Type: error
-# Description
-# Type: error
-# Description
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
 msgstr "Nhân bản kho sai"
 
-# Type: error
-# Description
-# Type: error
-# Description
 #. Type: error
 #. Description
-#: ../choose-mirror.templates-in:34
+#: ../choose-mirror-bin.templates-in:33
 msgid ""
 "The specified Ubuntu archive mirror is either not available, or does not "
 "have a valid Release file on it. Please try a different mirror."
 msgstr ""
-"Máy nhân bản kho Ubuntu đã chọn hoặc không công bố hoặc không có tập tin Nhả "
-"(Release) hợp lệ. Hãy thử máy khác."
+"Máy nhân bản kho Ubuntu đã chọn hoặc không có sẵn hoặc không có tập tin "
+"Release (Phát hành) hợp lệ. Hãy thử một nhân bản khác."
 
-# Type: text
-# Description
-# main-menu
-# Type: text
-# Description
-# main-menu
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid "Architecture not supported"
+msgstr "Kiến trúc không được hỗ trợ"
+
+#. Type: error
+#. Description
+#: ../choose-mirror-bin.templates-in:39
+msgid ""
+"The specified Ubuntu archive mirror does not seem to support your "
+"architecture. Please try a different mirror."
+msgstr ""
+"Máy nhân bản kho Ubuntu đã chọn có vẻ không hỗ trợ kiến trúc của bạn. Vui "
+"lòng thử một nhân bản khác."
+
 #. Type: text
 #. Description
 #. main-menu
-#: ../choose-mirror.templates-in:41
+#: ../choose-mirror-bin.templates-in:46
 msgid "Choose a mirror of the Ubuntu archive"
 msgstr "Chọn một nhân bản kho Ubuntu"
 
-# Type: select
-# Choices
 # [NOTE] Translate the ISO country codes below into localised country names.
 #. Type: select
 #. Choices
-#: ../choose-mirror.templates.http-in:5 ../choose-mirror.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.http-in:5
+#: ../choose-mirror-bin.templates.ftp-in:5
 msgid "enter information manually"
-msgstr "tự nhập thông tin"
+msgstr "tự gõ thông tin"
 
-# Type: select
-# Default
-# Translators, you must not translate this value, but you can change it
-# to one of those listed above, e.g. msgstr "US".  Square brackets are
-# ignored and appear here only to distinguish this msgid from the same
-# one in the Choices field.
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.http-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu HTTP mirror. Please check
+#. that the country really has an Ubuntu HTTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for http]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.http-in:21
 msgid "GB[ Default value for http]"
-msgstr "JP[ giá trị mặc định cho http]"
+msgstr "JP"
 
-# Type: select
-# Description
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid "Ubuntu archive mirror country:"
-msgstr "Nơi đặt nhân bản kho Ubuntu:"
+msgstr "Quốc gia nhân bản kho Ubuntu:"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:11 ../choose-mirror.templates.ftp-in:11
+#: ../choose-mirror-bin.templates.http-in:22
+#: ../choose-mirror-bin.templates.ftp-in:22
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
 "the best choice."
 msgstr ""
-"Hãy tìm máy nhân bản kho Ubuntu mà gần bạn trên mạng -- chú ý: những quốc "
-"gia gần hơn, hay ngay cả quốc gia bạn, có lẽ không phải là sự chọn tốt nhất."
+"Mục đích là tìm máy nhân bản kho Ubuntu ở gần bạn trên mạng. Chú ý: những "
+"quốc gia gần hơn, ngay cả quốc gia bạn, có lẽ không phải là sự chọn tốt nhất."
 
-# Type: select
-# Description
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Ubuntu archive mirror:"
 msgstr "Nhân bản kho Ubuntu:"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
 "connection to you."
 msgstr ""
-"Hãy chọn một nơi Mạng nhân bản kho Ubuntu. Bạn nên sử dụng máy nhân bản "
-"trong quốc gia hay miền gần nhất, nếu bạn chưa biết máy nhân bản nào có "
-"đường dẫn Mạng nhanh nhất đến chỗ bạn."
+"Hãy chọn một máy nhân bản kho Ubuntu. Bạn nên sử dụng máy nhân bản trong "
+"quốc gia hay miền gần nhất, nếu bạn chưa biết máy nhân bản nào có đường dẫn "
+"Mạng tốt nhất đến chỗ bạn."
 
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.http-in:22 ../choose-mirror.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.http-in:32
+#: ../choose-mirror-bin.templates.ftp-in:32
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
-msgstr "Thông thường, <mà quốc gia bạn>.archive.ubuntu.com là lựa chọn tốt."
+msgstr ""
+"Thông thường, <[mã quốc gia gần nhất].archive.ubuntu.com> là lựa chọn tốt.\n"
+"v.d. <jp.archive.ubuntu.com> hay <hk.archive.ubuntu.com>"
 
-# Type: string
-# Description
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Tên máy nhân bản kho Ubuntu:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
-msgstr "Hãy go tên máy nhân bản cần tải gói Ubuntu xuống."
+msgstr "Hãy go tên máy của máy nhân bản nơi cần tải Ubuntu."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:31 ../choose-mirror.templates.ftp-in:31
+#: ../choose-mirror-bin.templates.http-in:41
+#: ../choose-mirror-bin.templates.ftp-in:41
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
-msgstr "Có thể ghi rõ một cổng khác dùng định dạng chuẩn: [tên_máy]:[cổng] "
+msgstr "Có thể ghi rõ một cổng xen kẽ có dạng chuẩn: [tên_máy]:[cổng] "
 
-# Type: string
-# Description
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid "Ubuntu archive mirror directory:"
 msgstr "Thư mục nhân bản kho Ubuntu:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:43 ../choose-mirror.templates.ftp-in:43
+#: ../choose-mirror-bin.templates.http-in:52
+#: ../choose-mirror-bin.templates.ftp-in:52
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
-msgstr "Hãy gõ thư mục có nhân bản kho Ubuntu."
+msgstr "Hãy gõ thư mục chứa nhân bản kho Ubuntu."
 
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
-msgstr "Thông tin máy ủy nhiệm HTTP (bỏ rỗng nếu không có):"
+msgstr "Thông tin ủy nhiệm HTTP (bỏ rỗng nếu không có):"
 
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49
+#: ../choose-mirror-bin.templates.http-in:58
 msgid ""
 "If you need to use a HTTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
 "Nếu bạn cần phải sử dụng máy ủy nhiệm HTTP để kết nối đến Mạng, hãy gõ thông "
-"tin ủy nhiệm ở đây. Không thì hãy bỏ rỗng."
+"tin ủy nhiệm vào đây. Không thì hãy bỏ rỗng."
 
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.http-in:49 ../choose-mirror.templates.ftp-in:49
-#, fuzzy
+#: ../choose-mirror-bin.templates.http-in:58
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
-"Hãy gõ thông tin ủy nhiệm theo dạng:\n"
-"http://[[người_dùng][:mật_khẩu]@]máy[:cổng]/\""
+"Hãy gõ thông tin ủy nhiệm có dạng chuẩn: <http://[[người_dùng][:mật_khẩu]@]"
+"máy[:cổng]/>."
 
-# Type: select
-# Default
-# Translators, you must not translate this value, but you can change it
-# to one of those listed above, e.g. msgstr "US".  Square brackets are
-# ignored and appear here only to distinguish this msgid from the same
-# one in the Choices field.
 #. Type: select
 #. Default
-#. Translators, you must not translate this value, but you can change it
-#. to one of those listed above, e.g. msgstr "US".  Square brackets are
-#. ignored and appear here only to distinguish this msgid from the same
-#. one in the Choices field.
-#: ../choose-mirror.templates.ftp-in:10
+#. Translators, you should put here the ISO 3166 code of a country
+#. which you know hosts at least one Ubuntu FTP mirror. Please check
+#. that the country really has an Ubuntu FTP mirror before putting a
+#. random value here
+#.
+#. First check that the country you mention here is listed in
+#. http://cvs.debian.org/ *checkout* /webwml/english/mirror/Mirrors.masterlist?rev=HEAD\&cvsroot=webwml&content-type=text/plain
+#. (remove the spaces between "*" and "/")
+#.
+#. BE CAREFUL to use the TWO LETTER ISO-3166 CODE and not anything else
+#.
+#. You do not need to translate what's between the square brackets
+#. You should even NOT put square brackets in translations:
+#. msgid "GB[ Default value for ftp]"
+#. msgstr "FR"
+#: ../choose-mirror-bin.templates.ftp-in:21
 msgid "GB[ Default value for ftp]"
-msgstr "JP[ giá trị mặc định cho ftp]"
+msgstr "JP"
 
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid "FTP proxy information (blank for none):"
-msgstr "Thông tin máy ủy nhiệm FTP (bỏ rỗng nếu không có):"
+msgstr "Thông tin ủy nhiệm FTP (bỏ rỗng nếu không có):"
 
-# Type: string
-# Description
 #. Type: string
 #. Description
-#: ../choose-mirror.templates.ftp-in:49
-#, fuzzy
+#: ../choose-mirror-bin.templates.ftp-in:58
 msgid ""
 "If you need to use a FTP proxy to access the outside world, enter the proxy "
 "information here. Otherwise, leave this blank."
 msgstr ""
-"Nếu bạn cần phải sử dụng máy ủy nhiệm HTTP để kết nối đến Mạng, hãy gõ thông "
-"tin ủy nhiệm ở đây. Không thì hãy bỏ rỗng."
+"Nếu bạn cần phải sử dụng máy ủy nhiệm FTP để kết nối đến Mạng, hãy gõ thông "
+"tin ủy nhiệm vào đây. Không thì hãy bỏ rỗng."
 
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
+#: ../choose-mirror-bin.templates.both-in:7
 msgid "Protocol for file downloads:"
-msgstr "Giao thức để tải về các tập tin:"
+msgstr "Giao thức tải về tập tin:"
 
-# Type: select
-# Description
 #. Type: select
 #. Description
-#: ../choose-mirror.templates.both-in:7
-#, fuzzy
+#: ../choose-mirror-bin.templates.both-in:7
 msgid ""
 "Please select the protocol to be used for downloading files. If unsure, "
 "select \"http\"; it is less prone to problems involving firewalls."
 msgstr ""
-"Hãy lưa chọn giao thức tải xuống tập tin. Nếu chưa chắc thì hãy chọn \"http"
-"\" vì nó gặp ít lỗi loại bức tường lửa hơn."
+"Hãy lưa chọn giao thức cần dùng khi tải về tập tin. Nếu chưa chắc, hãy chọn "
+"« http », vì nó gặp ít lỗi kiểu bức tường lửa hơn."

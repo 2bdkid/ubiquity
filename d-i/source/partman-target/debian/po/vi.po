@@ -4,25 +4,26 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005 Software in the Public Interest, Inc.
+# Copyright © 2005-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005.
-#
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2005-10-02 18:30-0600\n"
-"PO-Revision-Date: 2005-08-10 14:15+0930\n"
+"PO-Revision-Date: 2006-01-18 22:53+1030\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <debian-l10n-vietnamese@lists.debian.org>\n"
+"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: LocFactoryEditor 1.6b23\n"
 
 #. Type: note
 #. Description
@@ -32,9 +33,8 @@ msgid ""
 "to install your new system.  You need to choose which partition(s) will be "
 "used for the installation."
 msgstr ""
-"Khi phân vùng một đĩa cứng thì chia nó ra, trong trường hợp này để sắp xếp "
-"sức chứa cần thiết để cài đặt hệ thống mới. Bạn hãy chọn sử dụng những vùng "
-"nào cần dùng khi cài đặt."
+"Việc phân vùng đĩa cứng là chia nó ra để tạo chỗ cần thiết để cài đặt hệ "
+"thống mới. Bạn hãy chọn những phân vùng nào cần dùng khi cài đặt."
 
 # Type: note
 # Description
@@ -42,7 +42,7 @@ msgstr ""
 #. Description
 #: ../partman-target.templates:3
 msgid "Select a free space to create partitions in it."
-msgstr "Chọn không gian trống để tạo phân vùng."
+msgstr "Hãy chọn chỗ rỗng nơi cần tạo phân vùng."
 
 # Type: note
 # Description
@@ -53,7 +53,8 @@ msgid ""
 "Select a device to remove all partitions in it and create a new empty "
 "partition table."
 msgstr ""
-"Hãy chọn một thiết bị để loại bỏ mọi vùng trong nó và tạo bảng vùng rỗng mới."
+"Hãy chọn thiết bị nơi cần gỡ bỏ mọi phân vùng và tạo bảng phân vùng trống "
+"mới."
 
 #. Type: note
 #. Description
@@ -65,26 +66,25 @@ msgid ""
 "partition is a necessity.  \"Swap\" is scratch space for an operating "
 "system, which allows the system to use disk storage as \"virtual memory\"."
 msgstr ""
-"Hãy chọn một vùng cần loại bỏ, hoặc để ghi rõ cần sử dụng nó thế nào. Cần "
-"thiết ít nhất một vùng để chứa gốc hệ thống tập tin (mà có điểm lắp /). "
-"Thường cũng cần thiết một vùng trao đổi (swap) riêng. Sức chứa trao đổi "
-"(swap space) là sức chứa còn rảnh cho phép hệ điều hành sử dụng nó như là bộ "
-"nhớ ảo: « sức chứa nghĩ ». Máy vi tính không có đủ sức chứa trao đổi thì sẽ "
-"chạy chậm, nhất là khi thực hiện công việc phức tạp."
+"Hãy chọn một phân vùng, để gỡ bỏ nó hoặc để ghi rõ cách cần sử dụng nó. Cần "
+"thiết ít nhất một phân vùng để chứa gốc hệ thống tập tin (mà có điểm lắp « / "
+"»). Thường cũng cần thiết một phân vùng trao đổi (swap) riêng. Chỗ trao đổi "
+"(swap space) là chỗ làm việc cho hệ điều hành, mà cho phép hệ điều hành sử "
+"dụng sức chứa trên đĩa như là bộ nhớ ảo (virtual memory). (Máy vi tính không "
+"có đủ chỗ trao đổi thì sẽ chạy chậm, nhất là khi thực hiện công việc phức "
+"tạp, lấy thị dụ xử lý đồ họa lớn.)"
 
 #. Type: note
 #. Description
 #: ../partman-target.templates:3
-#, fuzzy
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
 "existing data in the partition.  Partitions that will be used in this way "
 "are marked with \"${KEEP}\" in the main partitioning menu."
 msgstr ""
-"Khi có vùng đã định dạng trước thì bạn có thể chọn giữ và sử dụng dữ liệu đã "
-"có trong nó. Các vùng cần dùng bằng cách này thì có nhãn \"${KEEP} trong "
-"trình đơn phân vùng chính. GHI CHÚ: trình cài đặt này không cho phép bạn cài "
-"đặt ở trên hệ thống GNU/Linux đã có, mà ghi đè lên tập tin hệ thống."
+"Trên phân vùng được định dạng sẵn, bạn có thể chọn giữ và sử dụng dữ liệu đã "
+"có. Phân vùng cần dùng bằng cách này thì có nhãn « ${KEEP} » trong trình đơn "
+"phân vùng chính."
 
 #. Type: note
 #. Description
@@ -96,10 +96,10 @@ msgid ""
 "marked with \"${DESTROY}\" in the main partitioning menu.  Otherwise it will "
 "be marked with \"${FORMAT}\"."
 msgstr ""
-"Thường bạn sẽ muốn định dạng vùng ấy với hệ thống tập tin mới tạo. GHI CHÚ: "
-"tất cả những dữ liệu trong vùng ấy sẽ bị xóa bỏ vĩnh viễn. Nếu bạn chọn định "
-"dạng một vùng đã định dạng trước thì nó sẽ có nhãn \"${DESTROY}\" trong "
-"trình đơn phân vùng chính. Không thì nó sẽ có nhãn \"${FORMAT}\"."
+"Thường bạn sẽ muốn định dạng phân vùng bằng hệ thống tập tin mới tạo. GHI "
+"CHÚ : tất cả các dữ liệu trong vùng này sẽ bị xóa bỏ hoàn toàn. Nếu bạn chọn "
+"định dạng một phân vùng được định dạng sẵn, nó sẽ có nhãn « ${DESTROY} » "
+"trong trình đơn phân vùng chính. Không thì nó sẽ có nhãn « ${FORMAT} ». "
 
 # Type: note
 # Description
@@ -120,11 +120,11 @@ msgid ""
 "the bootable flag for it. Such a partition will be marked with \"${BOOTABLE}"
 "\" in the main partitioning menu."
 msgstr ""
-"Để khởi động hệ thống mới thì sử dụng trình được gọi là bộ tải khởi động "
-"(boot loader). Có thể cài đặt nó hoặc vào mục khởi động chủ của đĩa cứng thứ "
-"nhất, hoặc vào một vùng. Khi trình khởi động được cài đặt vào vùng, phải lập "
-"cờ có thể khởi động cho nó. Vùng như vậy sẽ có nhãn \"${BOOTABLE}\" trong "
-"trình đơn phân vùng chính."
+"Để khởi động hệ thống mới, dùng phần mềm được gọi là bộ tải khởi động (boot "
+"loader). Có thể cài đặt nó hoặc vào mục ghi khởi động cái trên đĩa cứng thứ "
+"nhất, hoặc vào một phân vùng nào đó. Khi bộ tải khởi động được cài đặt vào "
+"phân vùng, bạn phải lập cờ « khả năng khởi động » (bootable) cho nó. Phân "
+"vùng như vậy sẽ có nhãn « ${BOOTABLE} » trong trình đơn phân vùng chính."
 
 #. Type: text
 #. Description
@@ -135,16 +135,16 @@ msgid ""
 "partition.  Such a partition will be marked with \"${BOOTABLE}\" in the main "
 "partitioning menu."
 msgstr ""
-"Để khởi động hệ thống mới thì sử dụng trình được gọi là bộ tải khởi động "
-"(boot loader). Nó được cài đặt vào một vùng khởi động. Bạn phải lập cờ có "
-"thể khởi động cho nó. Vùng như vậy sẽ có nhãn \"${BOOTABLE}\" trong trình "
-"đơn phân vùng chính."
+"Để khởi động hệ thống mới, dùng một trình được gọi là bộ tải khởi động (boot "
+"loader). Nó được cài đặt vào một phân vùng khởi động nào đó. Bạn phải lập cờ "
+"« khả năng khởi động » cho phân vùng này. Phân vùng như vậy sẽ có nhãn « "
+"${BOOTABLE} » trong trình đơn phân vùng chính."
 
 #. Type: error
 #. Description
 #: ../partman-target.templates:42
 msgid "Identical mount points for two file systems"
-msgstr "Hai hệ thống tập tin khác có cùng một điểm lắp."
+msgstr "Điểm lắp trùng cho hai hệ thống tập tin"
 
 #. Type: error
 #. Description
@@ -168,7 +168,7 @@ msgstr "Hãy sửa lỗi này bằng cách thay đổi điểm lắp."
 #. Description
 #: ../partman-target.templates:50
 msgid "No root file system"
-msgstr "Không có hê thống tập tin gốc."
+msgstr "Không có hê thống tập tin gốc"
 
 # Type: error
 # Description
@@ -178,7 +178,7 @@ msgstr "Không có hê thống tập tin gốc."
 #. Description
 #: ../partman-target.templates:50
 msgid "No root file system is defined."
-msgstr "Chưa định ra hệ thống tập tin gốc nào."
+msgstr "Chưa định ra hệ thống tập tin gốc."
 
 # Type: error
 # Description
@@ -194,7 +194,7 @@ msgstr "Hãy sửa lỗi này từ trình đơn phân vùng."
 #. Description
 #: ../partman-target.templates:57
 msgid "Do you want to resume partitioning?"
-msgstr "Bạn muốn tiếp tục lại việc tạo phân vùng không?"
+msgstr "Bạn có muốn tiếp tục lại tạo phân vùng không?"
 
 #. Type: boolean
 #. Description
@@ -203,8 +203,8 @@ msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
 msgstr ""
-"Khi cố gắng lắp hệ thống tập tin kiểu ${TYPE} trong thiết bị ${DEVICE} tại "
-"điểm lắp ${MOUNTPOINT} thì không thành công."
+"Việc cố gắng lắp hệ thống tập tin kiểu ${TYPE} trong thiết bị ${DEVICE} tại "
+"điểm lắp ${MOUNTPOINT} bị lỗi."
 
 # Type: boolean
 # Description
@@ -212,7 +212,7 @@ msgstr ""
 #. Description
 #: ../partman-target.templates:57
 msgid "You may resume partitioning from the partitioning menu."
-msgstr "Bạn có thể tiếp tục phân vùng từ trình đơn phân vùng."
+msgstr "Bạn có thể tiếp tục lại tạo phân vùng từ trình đơn phân vùng."
 
 # Type: select
 # Description
@@ -262,4 +262,4 @@ msgstr "không có hê thống tập tin"
 #. Description
 #: ../partman-target.templates:87
 msgid "Help on partitioning"
-msgstr "Trợ giúp phân vùng"
+msgstr "Trợ giúp về phân vùng"

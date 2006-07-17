@@ -10,8 +10,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
 "PO-Revision-Date: 2006-01-23 17:48-0600\n"
 "Last-Translator: Tetralet <tetralet@pchome.com.tw>\n"
 "Language-Team: Debian-user in Chinese [Big5] <debian-chinese-big5@lists."
@@ -45,9 +45,8 @@ msgstr "正在執行 ${SCRIPT}..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
-#, fuzzy
 msgid "Scanning local repositories..."
-msgstr "正在掃瞄安全更新資料庫..."
+msgstr "正在掃瞄本機的檔案資料庫..."
 
 #. Type: text
 #. Description
@@ -127,6 +126,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "請您選擇是否無論如何還是要使用它們。"
@@ -152,6 +154,9 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -167,12 +172,16 @@ msgstr "再次嘗試"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "更換鏡像站"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "忽略"
@@ -198,6 +207,28 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -205,6 +236,7 @@ msgstr "是否使用受限的軟體？"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -212,9 +244,9 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
-"有些 non-free 的軟體也能夠以套件的方式取得，雖然這些軟體並不包含主要的發行版"
-"本中，但還是可以使用標準的套件管理工具來安裝它們。這些軟體都有其不同的使用許"
-"可權，可能會禁止您使用、修改或將它們分享出來。"
+"有些 non-free 的軟體也能夠以套件的方式取得，雖然這些軟體並不包含於主要的發行"
+"版本中，但還是可以使用標準的套件管理工具來安裝它們。這些軟體都有其不同的使用"
+"許可權，可能會禁止您使用、修改或將它們分享出來。"
 
 #. Type: boolean
 #. Description
@@ -225,6 +257,7 @@ msgstr "是否使用 universe 軟體？"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -238,14 +271,13 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid "Use software from the \"multiverse\" component?"
-msgstr "是否使用 universe 軟體？"
+msgstr "是否使用 multiverse 軟體？"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -253,9 +285,9 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
-"有些 non-free 的軟體也能夠以套件的方式取得，雖然這些軟體並不包含主要的發行版"
-"本中，但還是可以使用標準的套件管理工具來安裝它們。這些軟體都有其不同的使用許"
-"可權，可能會禁止您使用、修改或將它們分享出來。"
+"有些 non-free 的軟體也能夠以套件的方式取得，雖然這些軟體並不包含於主要的發行"
+"版本中，但還是可以使用標準的套件管理工具來安裝它們。這些軟體都有其不同的使用"
+"許可權及（部份受到）專利限制，可能會禁止您使用、修改或將它們分享出來。"
 
 #. Type: boolean
 #. Description
@@ -266,6 +298,7 @@ msgstr "是否使用 backported 軟體？"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

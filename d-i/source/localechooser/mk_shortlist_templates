@@ -47,7 +47,7 @@ for LANG in $SHORTLIST_LANGS; do
 	field="Default"
     fi
     LANG_DEFAULT_COUNTRY=$(awk -v ITEM="$field:" -f template_get_item.awk \
-	$TEMPLATE_TMP | head -1 | sed "s/^$field:/Default:/")
+	$TEMPLATE_TMP | head -1)
 	
     echo "$LANG"
 
@@ -86,7 +86,7 @@ for LANG in $SHORTLIST_LANGS; do
     # Finally we add the description and translated description
     echo "$EN_DESCR" >>$TEMPLATE_NEW
     if [ ! "$LANG" = "en" ] ; then
-        print_trans "Description" "EN_DESCR" >>$TEMPLATE_NEW
+        print_trans "Description" "$EN_DESCR" >>$TEMPLATE_NEW
     fi
     echo "" >>$TEMPLATE_NEW
 done

@@ -6,19 +6,20 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2005-05-13 18:04+0100\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"PO-Revision-Date: 2006-04-12 00:29+0100\n"
+"Last-Translator: SZERVÑC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: boolean
@@ -28,42 +29,38 @@ msgid ""
 "The following other operating systems have been detected on this computer: "
 "${OS_LIST}"
 msgstr ""
-"A számítógép felderítése a következő operációs rendszereket találta: "
-"${OS_LIST}"
+"A számítógép felderítése az alábbi operációs rendszereket találta: ${OS_LIST}"
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:4
-#, fuzzy
 msgid ""
 "If all of your operating systems are listed above, then it should be safe to "
 "install the boot loader to the master boot record of your first hard drive. "
 "When your computer boots, you will be able to choose to load one of these "
 "operating systems or your new system."
 msgstr ""
-"Ha a lista a számítógépén található összes operációs rendszert tartalmazza, "
-"akkor a rendszerbetöltőt nyugodtan telepítheti az első merevlemezének fő "
-"rendszerbetöltő-rekordjába. A számítógép indulásakor választhat ezen "
-"operációs rendszerek egyike, vagy éppen az új Debian-rendszer indítása közt."
+"Ha a gépen lévő összes operációs rendszer a listában van, a boot betöltő "
+"nyugodtan telepíthető az 1. merevlemez MBR-jébe. A gép indulásakor lehet "
+"majd választani az új rendszer vagy netán e régebbiek között."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:16
 msgid "Install the GRUB boot loader to the master boot record?"
-msgstr "A GRUB rendszerbetöltőt a fő rendszerbetöltő-rekordba telepíti?"
+msgstr "A GRUB rendszerbetöltőt a fő boot rekordba telepíted?"
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:16
-#, fuzzy
 msgid ""
 "It seems that this new installation is the only operating system on this "
 "computer. If so, it should be safe to install the GRUB boot loader to the "
 "master boot record of your first hard drive."
 msgstr ""
-"Úgy tűnik, ezen a gépen a most telepített Debian lesz az egyetlen operációs "
-"rendszer. Ha ez tényleg így van, akkor a GRUB rendszerbetöltőt nyugodtan "
-"telepítheti az első merevlemezének fő rendszerbetöltő-rekordjába."
+"Úgy tűnik, e gépen a most telepített Debian lesz az egyetlen operációs "
+"rendszer. Ha így van, a GRUB boot betöltő célszerűen telepíthető az első "
+"merevlemez MBR-jébe."
 
 #. Type: boolean
 #. Description
@@ -74,16 +71,15 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
-"Figyelem: Ha a gépen van egyéb operációs rendszer is, de a felderítés azt "
-"nem találta meg; akkor a fő rendszerbetöltő-rekord módosítása azt "
-"átmenetileg indításképtelenné teheti, a GRUB rendszerbetöltőt azonban később "
-"sajátkezűleg rábírhatja annak indítására."
+"Figyelem: Ha a telepítő nem lelte meg a gépen lévő más operációs rendszert, "
+"az MBR módosításával az átmenetileg nem lesz indítható, de a GRUB-bal ez már "
+"beállítható."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
 msgid "Install the GRUB boot loader to XFS file system?"
-msgstr "A GRUB rendszerbetöltőt XFS fájlrendszerre telepíti?"
+msgstr "A GRUB rendszerbetöltőt XFS fájlrendszerre telepíted?"
 
 #. Type: boolean
 #. Description
@@ -92,9 +88,8 @@ msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
 msgstr ""
-"XFS fájlrendszerre helyezett /boot könyvtár esetén a GRUB rendszerbetöltő "
-"telepítése gyakran végződhet kudarccal vagy akár a rendszer lefagyásával. "
-"Ilyenkor tanácsos inkább a LILO rendszerbetöltőhöz folyamodni."
+"A GRUB boot betöltő telepítése gyakran sikertelen, néha lefagy, ha a /boot "
+"XFS-en van. Ilyen beállításnál a LILO ajánlott."
 
 #. Type: string
 #. Description
@@ -105,7 +100,6 @@ msgstr "A rendszerbetöltő erre az eszközre kerül:"
 #. Type: string
 #. Description
 #: ../grub-installer.templates:35
-#, fuzzy
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -113,17 +107,14 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
-"Az újonnan telepített Debian-rendszert indíthatóvá is kell tenni, ehhez a "
-"GRUB rendszerbetöltőt kell egy indításra képes eszközre telepíteni. Az "
-"esetek elsöprő többségében ilyenkor a GRUB-ot az első merevlemez fő "
-"rendszerbetöltő-rekordjába teszik. Igény esetén a GRUB-ot a lemezen máshová "
-"is telepítheti, esetleg egy másik lemezre is, sőt, akár egy hajlékonylemezre "
-"is."
+"Az újonnan telepített Debian rendszert a GRUB boot betöltő egy indítható "
+"eszközre telepítésével indíthatóvá kell tenni. Általában az 1. merevlemez "
+"MBR-jébe telepítjük a GRUB-ot, de a meghajtó más helyére vagy más meghajtóra "
+"vagy akár flopira is telepíthető."
 
 #. Type: string
 #. Description
 #: ../grub-installer.templates:35
-#, fuzzy
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -135,23 +126,19 @@ msgid ""
 "   your third drive (SCSI here);\n"
 " - \"(fd0)\" or \"/dev/fd0\" will install GRUB to a floppy."
 msgstr ""
-"Az eszközt vagy a GRUB \"(hdn,m)\"-jelölésével, vagy a /dev könyvtárban "
-"szereplő egyik eszközként adja meg. Például:\n"
-" - a \"(hd0)\" vagy a \"/dev/hda\" hatására a GRUB az első (IDE-) "
-"merevlemez\n"
-"   fő rendszerbetöltő-rekordjába kerül;\n"
-" - a \"(hd0,1)\" vagy a \"/dev/hda2\" az első IDE-meghajtó második\n"
-"   partícióját eredményezi;\n"
-" - a \"(hd2,4)\" vagy a \"/dev/sdc5\" a harmadik (itt: SCSI-) meghajtó első\n"
-"   kiterjesztett partícióját jelenti;\n"
-" - a \"(fd0)\" vagy a \"/dev/fd0\" megadása pedig a GRUB-ot egy\n"
-"   hajlékonylemezre telepíti."
+"Az eszközt a GRUB \"(hdn,m)\" leírásával vagy a /dev-ben lévő eszközként "
+"kell megadni. Alább pár példa:\n"
+" - \"(hd0)\" vagy \"/dev/hda\" az 1. merevlemez MBR-jébe telepít.\n"
+"- \"(hd0,1)\" vagy \"/dev/hda2\" az 1. IDE meghajtó 2. partíciója- \"(hd2,4)"
+"\" vagy \"/dev/sdc5\" a 3. meghajtó (itt SCSI) \n"
+"1. kiterjesztett partícióját fogja használni - \"(fd0)\" or \"/dev/fd0\" a "
+"GRUB-ot egy flopira fogja telepíteni"
 
 #. Type: password
 #. Description
 #: ../grub-installer.templates:54
 msgid "GRUB password:"
-msgstr ""
+msgstr "GRUB jelszó:"
 
 #. Type: password
 #. Description
@@ -164,19 +151,22 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
+"A GRUB sok interaktív képességgel bír, mellyel sérthető a rendszer, ha egy "
+"illetéktelen személy hozzáfér az induláskor. Ez kivédhető a menü "
+"szerkesztésekor vagy a GRUB parancs-soros felületébe való belépéskor kért "
+"jelszó megadásával. Alapban ez az indításra nem vonatkozik."
 
 #. Type: password
 #. Description
 #: ../grub-installer.templates:54
-#, fuzzy
 msgid "If you do not wish to set a GRUB password, leave this field blank."
-msgstr "Ha nem tud mit beírni, hagyja üresen."
+msgstr "Ha nem akarunk GRUB jelszót adni, hagyjuk üresen e mezőt."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:73
 msgid "GRUB installation failed.  Continue anyway?"
-msgstr "A GRUB telepítése sikertelenül zárult. Mégis továbblép?"
+msgstr "A GRUB telepítése sikertelen. Mégis továbblépsz?"
 
 #. Type: boolean
 #. Description
@@ -186,10 +176,9 @@ msgid ""
 "loader is a required step.  The install problem might however be unrelated "
 "to GRUB, so continuing the installation may be possible."
 msgstr ""
-"A grub csomag /target/ könyvtárba telepítése sikertelenül zárult. A GRUB "
-"rendszerbetöltőként telepítése pedig feltétlenül szükséges. Előfordulhat "
-"persze, hogy a telepítés során felmerült problémának nincs köze a GRUB-hoz, "
-"ez esetben a telepítés folytatásának elvileg nincs akadálya."
+"A grub csomag /target/-be telepítése meghiúsult. A GRUB telepítése pedig "
+"szükséges. Lehet, hogy e gond nem a GRUB-hoz kötődik és a telepítés "
+"folytatása mégis lehetséges."
 
 #. Type: error
 #. Description
@@ -201,7 +190,7 @@ msgstr "A GRUB ${BOOTDEV} eszközre telepítése sikertelenül zárult"
 #. Description
 #: ../grub-installer.templates:80
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
-msgstr "A 'grub-install ${BOOTDEV}' parancs végrehajtása hibát eredményezett."
+msgstr "A 'grub-install ${BOOTDEV}' hibát adott."
 
 #. Type: error
 #. Description
@@ -213,13 +202,13 @@ msgstr "A GRUB konfigurálása meghiúsult"
 #. Description
 #: ../grub-installer.templates:87
 msgid "Executing 'update-grub' failed."
-msgstr "Az 'update-grub' parancs végrehajtása hibát eredményezett."
+msgstr "Az 'update-grub' futtatása meghiúsult"
 
 #. Type: error
 #. Description
 #: ../grub-installer.templates:87
 msgid "This is a fatal error."
-msgstr "Ez a hiba megkerülhetetlen."
+msgstr "Ez egy végzetes hiba."
 
 #. Type: text
 #. Description
@@ -231,37 +220,37 @@ msgstr "A GRUB rendszerbetöltő telepítése"
 #. Description
 #: ../grub-installer.templates:98
 msgid "Looking for other operating systems..."
-msgstr "Egyéb operációs rendszerek felderítése folyamatban..."
+msgstr "Más operációs rendszerek keresése..."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:102
 msgid "Installing the 'grub' package..."
-msgstr "A 'grub' csomag telepítése folyamatban..."
+msgstr "A 'grub' csomag telepítése..."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:106
 msgid "Determining GRUB boot device..."
-msgstr "A GRUB rendszerbetöltőhöz használt eszköz felderítése folyamatban..."
+msgstr "A GRUB eszköz meghatározása..."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:110
 msgid "Running \"grub-install ${BOOTDEV}\"..."
-msgstr "A \"grub-install ${BOOTDEV}\" parancs futtatása folyamatban..."
+msgstr "A \"grub-install ${BOOTDEV}\" futtatása..."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:114
 msgid "Running \"update-grub\"..."
-msgstr "Az \"update-grub\" parancs futtatása folyamatban..."
+msgstr "Az \"update-grub\" futtatása..."
 
 #. Type: text
 #. Description
 #: ../grub-installer.templates:118
 msgid "Updating /etc/kernel-img.conf..."
-msgstr "Az /etc/kernel-img.conf frissítése folyamatban..."
+msgstr "A /etc/kernel-img.conf frissítése..."
 
 #. Type: text
 #. Description
@@ -274,6 +263,5 @@ msgstr "A GRUB rendszerbetöltő merevlemezre telepítése"
 #. Description
 #. Rescue menu item
 #: ../grub-installer.templates:128
-#, fuzzy
 msgid "Reinstall GRUB boot loader"
-msgstr "A GRUB rendszerbetöltő telepítése"
+msgstr "A GRUB boot betöltő újratelepítése"

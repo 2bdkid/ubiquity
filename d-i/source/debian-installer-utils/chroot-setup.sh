@@ -26,16 +26,6 @@ exit 0
 EOF
 	chmod a+rx /target/sbin/start-stop-daemon
 	
-	# Don't let apt fail because of back clock settings.
-	[ ! -d /target/etc/apt/apt.conf.d ] && mkdir -p /target/etc/apt/apt.conf.d
-	cat > /target/etc/apt/apt.conf.d/00ignore-time-conflict <<EOT
-Acquire {
-	gpgv {
-		Options {"--ignore-time-conflict";}
-	};
-}
-EOT
-
 	# Record the current mounts
 	mountpoints > /tmp/mount.pre
 
@@ -72,6 +62,7 @@ EOT
 
 	LANG=$(debconf-get debian-installer/locale || true)
 	export LANG
+	export PERL_BADLANG=0
 
 	# Unset variables that would make scripts in the target think
 	# that debconf is already running there.
@@ -88,14 +79,13 @@ chroot_cleanup () {
 	rm -f /target/usr/sbin/policy-rc.d
 	rm /target/sbin/start-stop-daemon
 	mv /target/sbin/start-stop-daemon.REAL /target/sbin/start-stop-daemon
-	rm -f /target/etc/apt/apt.conf.d/00ignore-time-conflict
 
 	# Undo the mounts done by the packages during installation.
 	# Reverse sorting to umount the deepest mount points first.
 	# Items with count of 1 are new.
 	for dir in $( (cat /tmp/mount.pre /tmp/mount.pre; mountpoints ) | \
-		     sort -r | uniq -c | grep "[[:space:]]1[[:space:]]" | \
-		     sed "s/[[:space:]]*[0-9][[:space:]]//"); do
+		     sort -r | uniq -c | grep "^[[:space:]]*1[[:space:]]" | \
+		     sed "s/^[[:space:]]*[0-9][[:space:]]//"); do
 		if ! umount $dir ; then
 			logger -t $0 "warning: Unable to umount '$dir'"
 		fi

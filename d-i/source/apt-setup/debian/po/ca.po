@@ -12,9 +12,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer 1.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-17 08:56-0600\n"
-"PO-Revision-Date: 2006-04-02 21:56+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-21 20:59-0600\n"
+"PO-Revision-Date: 2006-05-22 18:12+0200\n"
 "Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -128,12 +128,15 @@ msgid ""
 msgstr ""
 "Hi ha un poc de programari no lliure (non-free) que s'ha preparat perquè "
 "funcione amb Debian. Encara que aquest programari no és de cap manera part "
-"de Debian, es poden utilitzar les eines comunes de Debian per instal·lar-ho. "
-"Aquest programari té vàries llicències que vos poden impedir que "
-"l'utilitzeu, modifique o compartiu."
+"de Debian, es poden utilitzar les eines comunes de Debian per instal·lar-lo. "
+"Aquest programari té diverses llicències que vos poden impedir que "
+"l'utilitzeu, modifiqueu o compartiu."
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Seleccioneu si el voleu tenir disponible de tota manera."
@@ -156,11 +159,14 @@ msgstr ""
 "Hi ha programari addicional que s'ha preparat per a que funcioni amb Debian. "
 "Encara que aquest programari és lliure, depèn de programari no lliure (non-"
 "free) per a que funcioni. Aquest programari no és part de Debian, però les "
-"eines comunes de Debian es poden utilitzar per instal·lar-ho. Voleu que siga "
+"eines comunes de Debian es poden utilitzar per instal·lar-lo. Voleu que siga "
 "disponible?"
 
 #. Type: boolean
 #. Description
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
@@ -176,12 +182,16 @@ msgstr "Reintenta"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
 msgstr "Canvia de rèplica"
 
 #. Type: select
 #. Choices
+#. These are choices of actions so this is, at least in English,
+#. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
 msgstr "Ignora"
@@ -208,6 +218,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#: ../apt-mirror-setup.templates:42
+msgid "Use a network mirror?"
+msgstr "Voleu usar una rèplica de xarxa?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"A network mirror can be used to supplement the software that is included on "
+"the CD-ROM. This may also make newer versions of software available."
+msgstr ""
+"Es pot utilitzar una rèplica a la xarxa per a suplementar el programari que "
+"s'hi inclou al CD-ROM. Això també pot posar a l'abast versions noves del "
+"programari."
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:42
+msgid ""
+"If you are installing from a netinst CD and you choose not to use a mirror, "
+"you will end up with only a very minimal base system."
+msgstr ""
+"Si esteu instal·lant des d'un CD d'instal·lació per xarxa i seleccioneu no "
+"utilitzar una rèplica, acabareu amb només un sistema base mínim."
+
+#. Type: boolean
+#. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
@@ -215,6 +252,7 @@ msgstr "Voleu utilitzar programari restringit?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
@@ -224,7 +262,7 @@ msgid ""
 msgstr ""
 "Hi ha programari no lliure que està disponible en paquets. Tot i que aquest "
 "programari no és part de la distribució principal, es poden utilitzar les "
-"eines de gestió de paquets estàndard per a instal·lar-ho. Aquest programari "
+"eines de gestió de paquets estàndard per a instal·lar-lo. Aquest programari "
 "té diverses llicències que poden previndre que l'utilitzeu, el modifiqueu o "
 "el compartiu."
 
@@ -237,6 +275,7 @@ msgstr "Voleu utilitzar programari del component «universe»?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid ""
 "Some additional software is available in packaged form. This software is "
@@ -251,14 +290,13 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid "Use software from the \"multiverse\" component?"
-msgstr "Voleu utilitzar programari del component «universe»?"
+msgstr "Voleu utilitzar programari del component «multiverse»?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
-#, fuzzy
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -268,9 +306,9 @@ msgid ""
 msgstr ""
 "Hi ha programari no lliure que està disponible en paquets. Tot i que aquest "
 "programari no és part de la distribució principal, es poden utilitzar les "
-"eines de gestió de paquets estàndard per a instal·lar-ho. Aquest programari "
-"té diverses llicències que poden previndre que l'utilitzeu, el modifiqueu o "
-"el compartiu."
+"eines de gestió de paquets estàndard per a instal·lar-lo. Aquest programari "
+"té diverses llicències i (en alguns casos) restriccions de patents que poden "
+"previndre que l'utilitzeu, el modifiqueu o el compartiu."
 
 # Backport = Retroversió, per ara, ja que ningú no proposa res millor. :) jm
 #. Type: boolean
@@ -282,6 +320,7 @@ msgstr "Voleu utilitzar programari amb retroversions?"
 
 #. Type: boolean
 #. Description
+#. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Some software has been backported from the development tree to work with "

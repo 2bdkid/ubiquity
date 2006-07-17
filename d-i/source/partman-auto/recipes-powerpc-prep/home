@@ -1,13 +1,22 @@
 partman-auto/text/home_scheme ::
 
-8 1 1 boot-prep
+8 1 1 prep
 	$primary{ }
 	$bootable{ }
 	method{ prep } .
 
-300 4000 7000 ext3
+128 512 256 ext3
+	$defaultignore{ }
 	$primary{ }
+	method{ format }
+	format{ }
+	use_filesystem{ }
+	filesystem{ ext3 }
+	mountpoint{ /boot } .
+
+500 4000 7000 ext3
 	$lvmok{ }
+	$primary{ }
 	method{ format }
 	format{ }
 	use_filesystem{ }
@@ -15,7 +24,6 @@ partman-auto/text/home_scheme ::
 	mountpoint{ / } .
 
 64 512 300% linux-swap
-	$lvmok{ }
 	method{ swap }
 	format{ } .
 

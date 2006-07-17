@@ -31,11 +31,15 @@ import time
 import struct
 import socket
 import fcntl
+import traceback
 import debconf
 import apt_pkg
 from apt.package import Package
 from apt.cache import Cache
 from apt.progress import FetchProgress, InstallProgress
+
+sys.path.insert(0, '/usr/lib/ubiquity')
+
 from ubiquity import misc
 from ubiquity.components import language_apply, apt_setup, timezone_apply, \
                                 clock_setup, kbd_chooser_apply, \
@@ -160,7 +164,7 @@ class DebconfInstallProgress(InstallProgress):
                 del os.environ['DEBCONF_USE_CDEBCONF']
 
             res = pm.DoInstall(self.writefd)
-            sys.exit(res)
+            os._exit(res)
         self.child_pid = pid
         res = self.waitChild()
         return res
@@ -170,6 +174,17 @@ class DebconfInstallProgress(InstallProgress):
             self.db.progress('STOP')
             self.started = False
 
+class InstallStepError(Exception):
+    """Raised when an install step fails.
+
+    Attributes:
+        message -- message returned with exception
+
+    """
+
+    def __init__(self, message):
+        self.message = message
+
 class Install:
 
     def __init__(self):
@@ -177,6 +192,10 @@ class Install:
 
         if os.path.isdir('/rofs'):
             self.source = '/rofs'
+        elif os.path.isdir('/UNIONFS'):
+            # Klaus Knopper says this may not actually work very well
+            # because it'll copy the WHOLE WORLD (~12GB).
+            self.source = '/UNIONFS'
         else:
             self.source = '/source'
         self.target = '/target'
@@ -196,122 +215,122 @@ class Install:
         apt_pkg.Config.Clear("DPkg::Pre-Install-Pkgs")
         apt_pkg.InitSystem()
 
+    def excepthook(self, exctype, excvalue, exctb):
+        """Crash handler. Dump the traceback to a file so that it can be
+        read by the caller."""
+
+        if (issubclass(exctype, KeyboardInterrupt) or
+            issubclass(exctype, SystemExit)):
+            return
+
+        tbtext = ''.join(traceback.format_exception(exctype, excvalue, exctb))
+        print >>sys.stderr, "Exception during installation:"
+        print >>sys.stderr, tbtext
+        tbfile = open('/var/lib/ubiquity/install.trace', 'w')
+        print >>tbfile, tbtext
+        tbfile.close()
+
+        sys.exit(1)
+
     def run(self):
         """Run the install stage: copy everything to the target system, then
         configure it as necessary."""
 
         self.db.progress('START', 0, 100, 'ubiquity/install/title')
         self.db.progress('INFO', 'ubiquity/install/mounting_source')
-        if self.source == '/source':
-            if not self.mount_source():
+
+        try:
+            if self.source == '/source':
+                self.mount_source()
+
+            self.db.progress('SET', 1)
+            self.db.progress('REGION', 1, 78)
+            self.copy_all()
+
+            self.db.progress('SET', 78)
+            self.db.progress('INFO', 'ubiquity/install/cleanup')
+            if self.source == '/source':
+                self.umount_source()
+
+            self.db.progress('SET', 79)
+            self.db.progress('REGION', 79, 80)
+            self.run_target_config_hooks()
+
+            self.db.progress('SET', 80)
+            self.db.progress('REGION', 80, 81)
+            self.db.progress('INFO', 'ubiquity/install/locales')
+            self.configure_locales()
+
+            self.db.progress('SET', 81)
+            self.db.progress('REGION', 81, 82)
+            self.db.progress('INFO', 'ubiquity/install/network')
+            self.configure_network()
+
+            self.db.progress('SET', 82)
+            self.db.progress('REGION', 82, 83)
+            self.db.progress('INFO', 'ubiquity/install/apt')
+            self.configure_apt()
+
+            self.db.progress('SET', 83)
+            self.db.progress('REGION', 83, 87)
+            # Ignore failures from language pack installation.
+            try:
+                self.install_language_packs()
+            except InstallStepError:
+                pass
+            except IOError:
+                pass
+            except SystemError:
+                pass
+
+            self.db.progress('SET', 87)
+            self.db.progress('REGION', 87, 88)
+            self.db.progress('INFO', 'ubiquity/install/timezone')
+            self.configure_timezone()
+
+            self.db.progress('SET', 88)
+            self.db.progress('REGION', 88, 90)
+            self.db.progress('INFO', 'ubiquity/install/keyboard')
+            self.configure_keyboard()
+
+            self.db.progress('SET', 90)
+            self.db.progress('REGION', 90, 91)
+            self.db.progress('INFO', 'ubiquity/install/user')
+            self.configure_user()
+
+            self.db.progress('SET', 91)
+            self.db.progress('REGION', 91, 95)
+            self.db.progress('INFO', 'ubiquity/install/hardware')
+            self.configure_hardware()
+
+            self.db.progress('SET', 95)
+            self.db.progress('REGION', 95, 96)
+            self.remove_unusable_kernels()
+
+            self.db.progress('SET', 96)
+            self.db.progress('REGION', 96, 97)
+            self.db.progress('INFO', 'ubiquity/install/bootloader')
+            self.configure_bootloader()
+
+            self.db.progress('SET', 97)
+            self.db.progress('REGION', 97, 99)
+            self.db.progress('INFO', 'ubiquity/install/removing')
+            self.remove_extras()
+
+            self.db.progress('SET', 99)
+            self.db.progress('INFO', 'ubiquity/install/log_files')
+            self.copy_logs()
+
+            self.cleanup()
+
+            self.db.progress('SET', 100)
+        finally:
+            try:
                 self.db.progress('STOP')
-                return False
-
-        self.db.progress('SET', 1)
-        self.db.progress('REGION', 1, 78)
-        if not self.copy_all():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 78)
-        self.db.progress('INFO', 'ubiquity/install/cleanup')
-        if self.source == '/source':
-            if not self.umount_source():
-                self.db.progress('STOP')
-                return False
-
-        self.db.progress('SET', 79)
-        self.db.progress('REGION', 79, 80)
-        if not self.run_target_config_hooks():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 80)
-        self.db.progress('REGION', 80, 81)
-        self.db.progress('INFO', 'ubiquity/install/locales')
-        if not self.configure_locales():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 81)
-        self.db.progress('REGION', 81, 82)
-        self.db.progress('INFO', 'ubiquity/install/network')
-        if not self.configure_network():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 82)
-        self.db.progress('REGION', 82, 83)
-        self.db.progress('INFO', 'ubiquity/install/apt')
-        if not self.configure_apt():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 83)
-        self.db.progress('REGION', 83, 87)
-        # Ignore failures from language pack installation.
-        self.install_language_packs()
-
-        self.db.progress('SET', 87)
-        self.db.progress('REGION', 87, 88)
-        self.db.progress('INFO', 'ubiquity/install/timezone')
-        if not self.configure_timezone():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 88)
-        self.db.progress('REGION', 88, 90)
-        self.db.progress('INFO', 'ubiquity/install/keyboard')
-        if not self.configure_keyboard():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 90)
-        self.db.progress('REGION', 90, 91)
-        self.db.progress('INFO', 'ubiquity/install/user')
-        if not self.configure_user():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 91)
-        self.db.progress('REGION', 91, 95)
-        self.db.progress('INFO', 'ubiquity/install/hardware')
-        if not self.configure_hardware():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 95)
-        self.db.progress('REGION', 95, 96)
-        if not self.remove_unusable_kernels():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 96)
-        self.db.progress('REGION', 96, 97)
-        self.db.progress('INFO', 'ubiquity/install/bootloader')
-        if not self.configure_bootloader():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 97)
-        self.db.progress('REGION', 97, 99)
-        self.db.progress('INFO', 'ubiquity/install/removing')
-        if not self.remove_extras():
-            self.db.progress('STOP')
-            return False
-
-        self.db.progress('SET', 99)
-        self.db.progress('INFO', 'ubiquity/install/log_files')
-        if not self.copy_logs():
-            self.db.progress('STOP')
-            return False
-
-        self.cleanup()
-
-        self.db.progress('SET', 100)
-        self.db.progress('STOP')
-
-        return True
+            except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
+                pass
 
 
     def copy_all(self):
@@ -436,8 +455,6 @@ class Install:
         self.db.progress('SET', 100)
         self.db.progress('STOP')
 
-        return True
-
 
     def copy_logs(self):
         """copy log files into installed system."""
@@ -453,8 +470,6 @@ class Install:
             if not misc.ex('cp', '-a', log_file, target_log_file):
                 misc.pre_log('error', 'Failed to copy installation log file')
             os.chmod(target_log_file, stat.S_IRUSR | stat.S_IWUSR)
-
-        return True
 
 
     def mount_source(self):
@@ -473,7 +488,7 @@ class Install:
             if line.split()[2] == 'squashfs':
                 misc.ex('mount', '--bind', line.split()[1], self.source)
                 self.unionfs = True
-                return True
+                return
 
         # Manual Detection on non unionfs systems
         fsfiles = ['/cdrom/casper/filesystem.cloop',
@@ -490,26 +505,24 @@ class Install:
                     break
 
         if self.dev == '':
-            return False
+            raise InstallStepError("No source device found")
 
         misc.ex('losetup', self.dev, file)
         try:
             misc.ex('mount', self.dev, self.source)
         except Exception, e:
             print e
-        return True
 
 
     def umount_source(self):
         """umounting loop system from cloop or squashfs system."""
 
         if not misc.ex('umount', self.source):
-            return False
+            raise InstallStepError("Failed to unmount source device")
         if self.unionfs:
-            return True
+            return
         if not misc.ex('losetup', '-d', self.dev) and self.dev != '':
-            return False
-        return True
+            raise InstallStepError("Failed to detach loopback source device")
 
 
     def run_target_config_hooks(self):
@@ -536,13 +549,13 @@ class Install:
                 self.db.progress('STEP', 1)
             self.db.progress('STOP')
 
-        return True
-
 
     def configure_locales(self):
         """Apply locale settings to installed system."""
         dbfilter = language_apply.LanguageApply(None)
-        return (dbfilter.run_command(auto_process=True) == 0)
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("LanguageApply failed with code %d" % code)
 
 
     def configure_apt(self):
@@ -557,7 +570,9 @@ class Install:
         apt_conf_itc.close()
 
         dbfilter = apt_setup.AptSetup(None)
-        return (dbfilter.run_command(auto_process=True) == 0)
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("AptSetup failed with code %d" % code)
 
 
     def get_cache_pkg(self, cache, pkg):
@@ -627,7 +642,7 @@ class Install:
         try:
             lppatterns = self.db.get('pkgsel/language-pack-patterns').split()
         except debconf.DebconfError:
-            return True
+            return
 
         to_install = []
         for lp in langpacks:
@@ -656,12 +671,12 @@ class Install:
             if cache.update(fetchprogress) not in (0, True):
                 fetchprogress.stop()
                 self.db.progress('STOP')
-                return True
+                return
         except IOError, e:
             print >>sys.stderr, e
             sys.stderr.flush()
             self.db.progress('STOP')
-            return False
+            raise
         cache.open(None)
         self.db.progress('SET', 10)
 
@@ -687,32 +702,34 @@ class Install:
                 fetchprogress.stop()
                 installprogress.finishUpdate()
                 self.db.progress('STOP')
-                return True
+                return
         except IOError, e:
             print >>sys.stderr, e
             sys.stderr.flush()
             self.db.progress('STOP')
-            return False
+            raise
         except SystemError, e:
             print >>sys.stderr, e
             sys.stderr.flush()
             self.db.progress('STOP')
-            return False
+            raise
         self.db.progress('SET', 100)
 
         self.db.progress('STOP')
-        return True
 
 
     def configure_timezone(self):
         """Set timezone on installed system."""
 
         dbfilter = timezone_apply.TimezoneApply(None)
-        if dbfilter.run_command(auto_process=True) != 0:
-            return False
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("TimezoneApply failed with code %d" % code)
 
         dbfilter = clock_setup.ClockSetup(None)
-        return (dbfilter.run_command(auto_process=True) == 0)
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("ClockSetup failed with code %d" % code)
 
 
     def configure_keyboard(self):
@@ -725,7 +742,10 @@ class Install:
             pass
 
         dbfilter = kbd_chooser_apply.KbdChooserApply(None)
-        return (dbfilter.run_command(auto_process=True) == 0)
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError(
+                "KbdChooserApply failed with code %d" % code)
 
 
     def configure_user(self):
@@ -734,7 +754,9 @@ class Install:
         deleted and skel for this new user is copied to $HOME."""
 
         dbfilter = usersetup_apply.UserSetupApply(None)
-        return (dbfilter.run_command(auto_process=True) == 0)
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("UserSetupApply failed with code %d" % code)
 
 
     def get_resume_partition(self):
@@ -758,13 +780,14 @@ class Install:
         automatic configurations to get work."""
 
         dbfilter = hw_detect.HwDetect(None, self.db)
-        if dbfilter.run_command(auto_process=True) != 0:
-            return False
+        ret = dbfilter.run_command(auto_process=True)
+        if ret != 0:
+            raise InstallStepError("HwDetect failed with code %d" % code)
 
         self.db.progress('INFO', 'ubiquity/install/hardware')
 
         subprocess.call(['/usr/lib/ubiquity/debian-installer-utils'
-                         '/register-module.prebaseconfig'])
+                         '/register-module.post-base-installer'])
 
         resume = self.get_resume_partition()
         if resume is not None:
@@ -787,7 +810,6 @@ class Install:
         finally:
             self.chrex('umount', '/proc')
             self.chrex('umount', '/sys')
-        return True
 
 
     def get_all_interfaces(self):
@@ -900,8 +922,6 @@ class Install:
 
         iftab.close()
 
-        return True
-
 
     def configure_bootloader(self):
         """configuring and installing boot loader into installed
@@ -913,19 +933,23 @@ class Install:
         try:
             from ubiquity.components import grubinstaller
             dbfilter = grubinstaller.GrubInstaller(None)
-            ret = (dbfilter.run_command(auto_process=True) == 0)
+            ret = dbfilter.run_command(auto_process=True)
+            if ret != 0:
+                raise InstallStepError(
+                    "GrubInstaller failed with code %d" % code)
         except ImportError:
             try:
                 from ubiquity.components import yabootinstaller
                 dbfilter = yabootinstaller.YabootInstaller(None)
-                ret = (dbfilter.run_command(auto_process=True) == 0)
+                ret = dbfilter.run_command(auto_process=True)
+                if ret != 0:
+                    raise InstallStepError(
+                        "YabootInstaller failed with code %d" % code)
             except ImportError:
-                ret = False
+                raise InstallStepError("No bootloader installer found")
 
         misc.ex('umount', '-f', self.target + '/proc')
         misc.ex('umount', '-f', self.target + '/dev')
-
-        return ret
 
 
     def do_remove(self, to_remove, recursive=False):
@@ -1000,16 +1024,15 @@ class Install:
                 fetchprogress.stop()
                 installprogress.finishUpdate()
                 self.db.progress('STOP')
-                return True
+                return
         except SystemError, e:
             print >>sys.stderr, e
             sys.stderr.flush()
             self.db.progress('STOP')
-            return False
+            raise
         self.db.progress('SET', 5)
 
         self.db.progress('STOP')
-        return True
 
 
     def remove_unusable_kernels(self):
@@ -1031,13 +1054,15 @@ class Install:
 
         if len(remove_kernels) == 0:
             self.db.progress('STOP')
-            return True
+            return
 
         self.db.progress('SET', 1)
         self.db.progress('REGION', 1, 5)
-        if not self.do_remove(remove_kernels, recursive=True):
+        try:
+            self.do_remove(remove_kernels, recursive=True)
+        except:
             self.db.progress('STOP')
-            return False
+            raise
         self.db.progress('SET', 5)
 
         # Now we need to fix up kernel symlinks. Depending on the
@@ -1086,7 +1111,6 @@ class Install:
 
         self.db.progress('SET', 6)
         self.db.progress('STOP')
-        return True
 
 
     def remove_extras(self):
@@ -1119,14 +1143,13 @@ class Install:
         difference -= apt_installed
 
         if len(difference) == 0:
-            return True
+            return
 
         # Don't worry about failures removing packages; it will be easier
         # for the user to sort them out with a graphical package manager (or
         # whatever) after installation than it will be to try to deal with
         # them automatically here.
         self.do_remove(difference)
-        return True
 
 
     def cleanup(self):
@@ -1182,9 +1205,14 @@ class Install:
 
 
 if __name__ == '__main__':
-    if Install().run():
-        sys.exit(0)
-    else:
-        sys.exit(1)
+    if not os.path.exists('/var/lib/ubiquity'):
+        os.makedirs('/var/lib/ubiquity')
+    if os.path.exists('/var/lib/ubiquity/install.trace'):
+        os.unlink('/var/lib/ubiquity/install.trace')
+
+    install = Install()
+    sys.excepthook = install.excepthook
+    install.run()
+    sys.exit(0)
 
 # vim:ai:et:sts=4:tw=80:sw=4:

@@ -28,20 +28,7 @@ SHORTLISTS=/etc/shortlists
 if [ ! -f "$SHORTLISTS" ]; then
 	SHORTLISTS=/usr/share/localechooser/shortlists
 fi
-LANGUAGELISTFILE=/usr/share/languagelist
-if [ ! -f "$LANGUAGELISTFILE" ]; then
-	LANGUAGELISTFILE=/usr/share/localechooser/languagelist
-fi
-
-# This function installs a package (or marks it for install)
-# without failing if the install fails
-# It outputs a message to the log file
-pkginstall() {
-	if [ -n "$1" ] ; then
-		apt-install $1 || true
-		log "Requesting installation of package $1"
-	fi
-}
+LANGUAGELISTFILE=/usr/share/localechooser/languagelist
 
 error() {
 	logger -t localechooser "error: $@"
@@ -57,15 +44,21 @@ code2country() {
 	if [ -z "$1" ] ; then
 		echo
 	elif [ -n "$1" ] ; then
-		line=`grep "$1" $ISO3166TAB`
+		# Return a "safe default" in case the iso-3166 file
+		# isn't available
+		if [ -f "$ISO3166TAB" ] ; then
+			line=`grep "$1" "$ISO3166TAB"`
 
-		if [ -n "$line" ]; then
-			# Remember that country names may have
-			# spaces so the code is different than in
-			# country2code.
-			echo $line | cut -b 4-
+			if [ -n "$line" ]; then
+				# Remember that country names may have
+				# spaces so the code is different than in
+				# country2code.
+				echo $line | cut -b 4-
+			else
+				line="US	United States"
+			fi
 		else
-			echo
+			line="US	United States"
 		fi
 	else
 		error "Missing argument"
@@ -84,27 +77,26 @@ country2code() {
 	fi
 }
 
+# Note: this function does not properly support languages like pt_BR and zh_*;
+#	to support this, the languagelist would have to be modified
+# Note: this function is broken if C.UTF8 would be preseeded
 locale2langname() {
-	if [ ! -f $2 ] ; then
-		echo "$2 does not exist"
-		exit 1
-	fi
 	langpart="${1%%_*}"
 	if [ "$1" != "C" ]; then
-		# Match the language code with 5th field in languagelist
-		line=$(cat $2 | grep -v "^#" | cut -f1,5,6 -d\; | grep -v '^C;' | grep ";$langpart;")
+		# Match the language code with 3rd field in languagelist
+		line=$(grep -v "^#" $LANGUAGELISTFILE | cut -f1,3,4 -d\; | grep -v '^C;' | grep ";$langpart;")
 		if [ -n "$line" ] ; then
 			if [ "$(echo "$line" | grep -c '')" -gt 1 ]; then
 				# More than one match; try matching the
 				# country as well.
 				countrypart="${1#*_}"
 				countrypart="${countrypart%%[@.]*}"
-				countryline="$(echo "$line" | grep ";$countrypart\$" || true)"
+				countryline="$(echo "$line" | grep ";$countrypart\$" ||true)"
 				if [ "$countryline" ]; then
 					echo "${countryline%%;*}"
 					return
 				fi
-			fi	
+			fi
 			echo "${line%%;*}"
 		fi
 	else
@@ -112,7 +104,7 @@ locale2langname() {
 	fi
 }
 
-locale2countrycode(){
+locale2countrycode() {
 	if [ -n "$1" ] ; then
 		if echo $1 | grep -q "_"; then
 			echo $1 | cut -f2 -d_ | cut -f1 -d@ | cut -f1 -d\.
@@ -124,7 +116,7 @@ locale2countrycode(){
 	fi
 }
 
-locale2langcode(){
+locale2langcode() {
 	if [ -n "$1" ] ; then
 		if echo $1 | grep -q "_"; then
 			echo "${1%%_*}"
@@ -136,12 +128,61 @@ locale2langcode(){
 	fi
 }
 
+do_preseed() {
+	LOCALE="$1"
+	log "Locale has been preseeded to $LOCALE"
+
+	# Only mark variables seen if this one was preseeded seen.
+	db_fget $localecode seen
+	seenflag=$RET
+	db_fset $localecode seen "false" || true
+	
+	# Only populate debconf if this is a supported locale
+	# and if the language is supported in D-I
+	LANGUAGE=$(locale2langcode "$LOCALE")
+	LANGNAME=$(locale2langname "$LOCALE")
+	if [ -n "$LANGNAME" ] ; then
+		db_set ${langname_all} $LANGNAME
+		log "Set ${langname_all} = '$LANGNAME'"
+		db_fset ${langname_all} seen $seenflag || true
+		COUNTRY=$(locale2countrycode "$LOCALE")
+		if [ -n "$COUNTRY" ] ; then
+			if grep -q "^${LANGUAGE}_${COUNTRY}$" $SHORTLISTS ; then
+				db_set $shortlist-${LANGUAGE}_${COUNTRY} "$COUNTRY"
+				log "Set $shortlist-${LANGUAGE}_${COUNTRY} = '$COUNTRY'"
+				db_unregister $shortlist || true
+				db_register $shortlist-${LANGUAGE}_${COUNTRY} $shortlist
+				db_fset $shortlist seen $seenflag || true
+			elif grep -q "^$LANGUAGE$" $SHORTLISTS ; then
+				db_set $shortlist-$LANGUAGE "$COUNTRY"
+				log "Set $shortlist-$LANGUAGE = '$COUNTRY'"
+				db_unregister $shortlist || true
+				db_register $shortlist-$LANGUAGE $shortlist
+				db_fset $shortlist seen $seenflag || true
+			fi
+			db_fset $fulllist seen $seenflag || true
+			if grep -q "^$LOCALE$" $SUPPORTEDLOCALES ; then
+				db_set $localecode $LOCALE
+				db_fset $localecode seen $seenflag || true
+				log "Set $localecode = '$LOCALE'"
+			else
+				# The locale was invalid, empty it
+				LOCALE=""
+			fi
+		else
+			# The locale was invalid, empty it
+			LOCALE=""
+		fi
+	fi
+}
+
 # Reset all variables
 LANGNAME=""
 COUNTRY=""
 COUTRYNAME=""
 LOCALE=""
 LANGUAGE=""
+
 
 # BEGIN LANGUAGE SELECTION
 
@@ -157,66 +198,24 @@ else
 fi
 
 # Support preseeding of the locale all in one variable for convenience.
-db_get $localecode
-if [ "$RET" ] ; then
-	LOCALE="$RET"
-	log "Locale has been preseeded to $LOCALE"
-
-	# Only mark variables seen if this one was preseeded seen.
-	db_fget $localecode seen
-	seenflag=$RET
-	
-	# Only populate debconf if this is a supported locale
-	# and if the language is supported in D-I
-	LANGUAGE=$(locale2langcode "$LOCALE")
-	LANGNAME=$(locale2langname "$LOCALE" "$LANGUAGELISTFILE")
-	if [ -n "$LANGNAME" ] ; then
-		db_set ${langname_all} $LANGNAME
-		log "Set ${langname_all} = '$LANGNAME'"
-		db_fset ${langname_all} seen $seenflag || true
-		COUNTRY=$(locale2countrycode "$LOCALE")
-		if [ -n "$COUNTRY" ] ; then
-			if grep -q "${LANGUAGE}_${COUNTRY}" $SHORTLISTS ; then
-				db_set $shortlist-${LANGUAGE}_${COUNTRY} "$COUNTRY"
-				log "Set $shortlist-${LANGUAGE}_${COUNTRY} = '$COUNTRY'"
-				db_register $shortlist-${LANGUAGE}_${COUNTRY} $shortlist
-				# cdebconf handles this as intended, but
-				# debconf needs us to set the registered
-				# question too.
-				db_set $shortlist "$COUNTRY"
-				db_fset $shortlist seen $seenflag || true
-			elif grep -q "$LANGUAGE" $SHORTLISTS ; then
-				db_set $shortlist-$LANGUAGE "$COUNTRY"
-				log "Set $shortlist-$LANGUAGE = '$COUNTRY'"
-				db_register $shortlist-$LANGUAGE $shortlist
-				# cdebconf handles this as intended, but
-				# debconf needs us to set the registered
-				# question too.
-				db_set $shortlist "$COUNTRY"
-				db_fset $shortlist seen $seenflag || true
-			fi
-			db_fset $fulllist seen $seenflag || true
-			if grep -q "$LOCALE" $SUPPORTEDLOCALES ; then
-				db_set $localecode $LOCALE
-				db_fset $localecode seen $seenflag || true
-				log "Set $localecode = '$LOCALE'"
-			else
-				# The locale was invalid, empty it
-				LOCALE=""
-			fi
-		else
-			# The locale was invalid, empty it
-			LOCALE=""
-		fi
+# Only check for preseeding if this is the first time localechooser is run.
+db_get localechooser/alreadyrun
+if [ "$RET" != true ] ; then
+	if db_get $localecode && [ "$RET" ] ; then
+		do_preseed $RET
 	fi
+
+	# Prevent preseeding from being checked a second time
+	db_set localechooser/alreadyrun "true" || true
 fi
+
 
 # Find the display level
 #
 # No framebuffer and text interface      -->level 0 (only ASCII)
 # No framebuffer and other interface     -->level 1 (only Latin1)
-# Framebuffer and non graphical interface-->level 2 (no combining langs)
-# Framebuffer and graphical interface    -->level 3 (all langs)
+# Framebuffer and non graphical interface-->level 2 and 3 (no combining langs)
+# Framebuffer and graphical interface    -->level 4 (all langs)
 # Depending on these values, we use different templates with a different
 # list of languages. These lists are built at the package build-time
 # from the contents of the second field of languagelist entries
@@ -226,7 +225,7 @@ fi
 # smart enough to preseed it to a supported value
 # so the template uses all possible values
 if [ -z "$LANGNAME" ] ; then
-	log "Frontend in use: $DEBIAN_FRONTEND"
+	#log "Frontend in use: $DEBIAN_FRONTEND"
 	case $DEBIAN_FRONTEND in
 	    text)
 		# Stricto-sensu, the text interface could use all languages
@@ -261,9 +260,9 @@ if [ -z "$LANGNAME" ] ; then
 else
 	template=${langname_all}
 fi
-log "Language input template is $template"
+#log "Language input template is $template"
 
-db_input high $template || [ $? -eq 30 ]
+db_input critical $template || [ $? -eq 30 ]
 
 if db_go; then
 	db_get $template
@@ -271,12 +270,18 @@ if db_go; then
 		LANGNAME="$RET"
 		db_set ${langname_all} "$LANGNAME"
 		. languagemap
-		db_set "$languagecode" "$LANGUAGELIST"
+		if [ -z "$LANGUAGELIST" ] ; then
+			db_set "$languagecode" "$LANGUAGE"
+			log "Set $languagecode = '$LANGUAGE'"
+			LANGUAGELIST="$LANGUAGE"
+		else
+			db_set "$languagecode" "$LANGUAGELIST"
+			log "Set $languagecode = '$LANGUAGELIST'"
+		fi
 		db_set "$localecode"   "$LOCALE"
 		db_set "$fallbacklocalecode"   "$FALLBACKLOCALE"
- 		db_set "$countrycode"  "$COUNTRY"
+		db_set "$countrycode"  "$COUNTRY"
 		db_set "$consoledisplay"  "$CONSOLE"
-		log "Set $languagecode = '$LANGUAGELIST'"
 		log "Set $localecode = '$LOCALE'"
 		log "Set $fallbacklocalecode = '$FALLBACKLOCALE'"
 		log "Set $countrycode = '$COUNTRY'"
@@ -293,9 +298,9 @@ fi
 db_set "debconf/language" "$LANGUAGELIST"
 log "Set debconf/language = '$LANGUAGELIST'"
 
-# Install specific packages depending on selected language
+# Install specific packages depending on selected language   
 # Those we install here are those required immediately
-# Otherwise we will install them in prebaseconfig
+# Otherwise we will install them in finish-install
 if [ "$LOCALE" != "C" ] ; then
 	case "$LANGUAGE" in
 		ar|el|fa|he|ja|ko|ku|tr|vi|wo|zh)
@@ -303,7 +308,7 @@ if [ "$LOCALE" != "C" ] ; then
 		anna-install bterm-unifont
 		;;
 	esac
-fi
+fi     
 
 # BEGIN COUNTRY SELECTION
 
@@ -332,32 +337,37 @@ if [ "$LOCALE" != "C" ] ; then
 	fi
 fi
 
-# At this step we should have either xx, or xx_YY in LANGNAME
+# At this step we should have either xx, or xx_YY in LOCALE
 STATE=1
 LASTSTATE=3
-fullprio=high
-shortprio=high
+fullprio=critical
+shortprio=critical
 LANGUAGE_CHANGED=
 while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
 	case "$STATE" in
 	    1)
-		# If the locale includes a country, then
-		# don't display the short list, and only show the
-		# full list at medium priority.
 		askedshort=0
-		if echo $LOCALE | grep "_" >/dev/null 2>&1; then
-			fullprio=medium
-		else
+		# If the fallback locale does not include a 
+		# country code (and thus an underscore character)
+		# we must prompt for a country, thus show the full list only
+		# Use case: Esperanto
+		# The next "if"" test will be false and "askedshort"
+		# remains to 0-->no short country list question
+		# and the long list is shown at critical priority
+		# because we need a country
+		if echo $FALLBACKLOCALE | grep "_" >/dev/null 2>&1; then
+			# Otherwise, we prompt with the short list
+			# for languages that are listed in /etc/shortlists
+			# and with the full list for others, but only
+			# at medium priority then
 			if [ "$use_lang" ]; then
 				shortlist_template="$shortlist-$use_lang"
+				db_unregister $shortlist || true
 				db_register $shortlist_template $shortlist
-				# Set the default
-				db_fget $shortlist seen
-				if [ "$RET" = false ]; then
-					db_set $shortlist $COUNTRYCODE_LANGUAGECHOOSER
-				fi
 				db_input $shortprio $shortlist || [ $? -eq 30 ]
 				askedshort=1
+			else
+				fullprio=medium
 			fi
 		fi
 		;;
@@ -438,7 +448,7 @@ log "Set $countrycode = '$COUNTRYCODE'"
 # Locale refinement: we try to use the modifier inherited from language
 # selection. However, we do this only if the locale is valid.
  
-# No refinment if the locale was preseeded
+# No refinement if the locale was preseeded
 if [ "$LOCALE" != "C" ] ; then 
 	OLDLOCALE=$LOCALE
 	LOCALE=""
@@ -502,7 +512,7 @@ log "Set $localecode = '$LOCALE'"
 # list we got from languagechooser
 # We shouldn't just add this before the former list in case the country 
 # is changed several times.
-if [ "$COUNTRYCODE" != "$COUNTRYCODE_LANGUAGECHOOSER" -a -n "$COUNTRYCODE" -a -n "$LANGUAGE" -a "$LOCALE" != "C" ]; then
+if [ "$COUNTRYCODE" != "$COUNTRYCODE_LANGUAGECHOOSER" -a -n "$COUNTRYCODE" -a -n "$LANGUAGE" -a "$LOCALE" != "C" -a "$LANGUAGELIST" != "$LANGUAGE" ]; then
 	LANGUAGELIST=${LANGUAGE}_${COUNTRYCODE}:${LANGUAGELIST}
 	# Languagelist setting
 	db_set "$languagecode" "$LANGUAGELIST"
@@ -530,9 +540,7 @@ if [ "$LOCALE" != "C" ] ; then
 		done
 		db_subst $localecode LOCALELIST "$CHOICES"
 		db_input medium $localecode || [ $? -eq 30 ]
-		if db_go ; then
-			log "Locale set successfully"
-		else
+		if ! db_go; then
 			exit 10
 		fi
 		db_get $localecode
@@ -561,9 +569,7 @@ if [ "$LOCALE" != "C" ] ; then
 		fi
 	fi
 	db_input medium $supportedlocales || [ $? -eq 30 ]
-	if db_go; then
-		log "Supported locales successfully set"
-	else
+	if ! db_go; then
 		exit 10
 	fi
 fi

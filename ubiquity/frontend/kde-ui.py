@@ -520,10 +520,16 @@ class Wizard:
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
             self.installing = False
-            # TODO cjwatson 2006-05-23: figure out why Install crashed
-            raise RuntimeError, ("Install failed with exit code %s; see "
-                                 "/var/log/installer/syslog and "
-                                 "/var/log/syslog" % ret)
+            if os.path.exists('/var/lib/ubiquity/install.trace'):
+                tbfile = open('/var/lib/ubiquity/install.trace')
+                realtb = tbfile.read()
+                tbfile.close()
+                raise RuntimeError, ("Install failed with exit code %s\n%s" %
+                                     (ret, realtb))
+            else:
+                raise RuntimeError, ("Install failed with exit code %s; see "
+                                     "/var/log/installer/syslog and "
+                                     "/var/log/syslog" % ret)
 
         while self.progress_position.depth() != 0:
             self.debconf_progress_stop()
@@ -639,8 +645,7 @@ class Wizard:
             self.userinterface.hostname.blockSignals(False)
 
         complete = True
-        for name in ('fullname', 'username', 'password', 'verified_password',
-                     'hostname'):
+        for name in ('username', 'password', 'verified_password', 'hostname'):
             if getattr(self.userinterface, name).text() == '':
                 complete = False
         self.userinterface.next.setEnabled(complete)
@@ -812,12 +817,13 @@ class Wizard:
         # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
         gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
         while not gparted_reply.startswith('0 ') and not gparted_reply.startswith('1 '):
+            pre_log('info', 'gparted replied: %s' % gparted_reply)
             if gparted_reply.startswith('- '):
-                pre_log('info', 'gparted replied: %s' % gparted_reply)
                 words = gparted_reply[2:].strip().split()
                 if words[0].lower() == 'format' and len(words) >= 3:
                     self.gparted_fstype[words[1]] = words[2]
             gparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
+        pre_log('info', 'gparted replied: %s' % gparted_reply)
 
         if gparted_reply.startswith('1 '):
             # Cancel
@@ -1025,6 +1031,22 @@ class Wizard:
                     error_msg.append(get_string(
                         'partman-basicfilesystems/bad_mountpoint',
                         self.locale))
+                elif check == validation.MOUNTPOINT_XFSROOT:
+                    error_msg.append("XFS may not be used on the filesystem "
+                                     "containing /boot. Either use a "
+                                     "different filesystem for / or create a "
+                                     "non-XFS filesystem for /boot.")
+                elif check == validation.MOUNTPOINT_XFSBOOT:
+                    error_msg.append("XFS may not be used on the /boot "
+                                     "filesystem. Use a different filesystem "
+                                     "type for /boot.")
+                elif check == validation.MOUNTPOINT_UNFORMATTED:
+                    error_msg.append("Filesystems used by the system (/, "
+                                     "/boot, /usr, /var) must be reformatted "
+                                     "for use by this installer. Other "
+                                     "filesystems (/home, /media/*, "
+                                     "/usr/local, etc.) may be used without "
+                                     "reformatting.")
 
         # showing warning messages
         self.userinterface.mountpoint_error_reason.setText("\n".join(error_msg))
@@ -1491,7 +1513,7 @@ class Wizard:
 
 
     def set_keyboard_choices(self, choicemap):
-        self.keyboard_choice_map = choicemap
+        self.keyboard_choice_map = dict(choicemap)
         choices = choicemap.keys()
 
         self.userinterface.keyboardlistview.clear()
@@ -1804,6 +1826,8 @@ class MapWidget(QWidget):
             
     def updateCityIndicator(self):
         city = self.getNearestCity(self.width(), self.height(), self.x, self.y)
+        if city is None:
+            return
         self.cityIndicator.setText(city)
         self.cityIndicator.move(self.getPosition(self.cities[city][0], self.cities[city][1], self.width(), self.height()))
         self.cityIndicator.show()
@@ -1812,7 +1836,9 @@ class MapWidget(QWidget):
         pos = mouseEvent.pos()
 
         city = self.getNearestCity(self.width(), self.height(), pos.x(), pos.y());
-        if city == "Edinburgh":
+        if city is None:
+            return
+        elif city == "Edinburgh":
             self.city = "London"
         else:
             self.city = city

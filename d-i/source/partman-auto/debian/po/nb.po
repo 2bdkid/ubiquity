@@ -4,25 +4,23 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of nb.po to Norwegian Bokmål
-# translation of debian-installer.po to Norwegian bokmål
-# Norwegian Bokmal messages for debian-installer.
+# translation of debian-installer.po to Norwegian Bokmål
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Knut Yrvin <knuty@skolelinux.no>, 2004.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 # Axel Bojer <axelb@skolelinux.no>, 2004.
-# Bjorn Steensrud <bjornst@powertech.no>, 2004.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005.
-# Bjørn Steensrud <bjornst@powertech.no>, 2005.
+# Bjørn Steensrud <bjornst@powertech.no>, 2004,2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2004-10-01 10:18+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2006-05-31 11:25+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
-"Language-Team: Norwegian Bokmål <i18n-no@lister.ping.uio.no>\n"
+"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -75,40 +73,19 @@ msgstr "Partisjoneringsmetode:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-msgid "Device to partition"
-msgstr "Disk som skal partisjoneres"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-"Denne installereren kan lede deg gjennom partisjonering av en harddisk for "
-"bruk av Ubuntu, eller du kan gjøre det manuelt hvis du vil. Hvis du velger å "
-"bli ledet gjennom partisjoneringa, vil du likevel senere kunne se på "
-"resultatet, endre på det, og til og med angre partisjoneringa hvis du ikke "
-"er fornøyd."
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
 msgstr "Diskområdet som skal partisjoneres:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
 msgstr "Partisjoneringsoppsett:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -118,13 +95,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "Kan ikke bruke det ledige området"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -135,14 +112,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
 msgstr "Partisjonering med veiledning"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
 msgstr "Bruk området med størst sammenhengende ledig plass"
 
@@ -152,60 +129,87 @@ msgstr "Bruk området med størst sammenhengende ledig plass"
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
 msgstr "Slett hele harddisken: ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
 msgstr "Rediger partisjonstabellen manuelt"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "Partisjoner det ledige området automatisk"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
 msgstr "Alle filene på en partisjon (anbefales for nye brukere)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "Skrivebordsmaskin"
+#: ../partman-auto.templates:100
+msgid "Separate /home partition"
+msgstr "Egen /home-partisjon"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "Flerbrukermaskin"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr "Egne partisjoner for /home, /usr, /var og /tmp"
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "Partisjoneringsoppsett for liten disk (< 1 Gb)"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr "Disk som skal partisjoneres"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+"Denne installereren kan veilede deg gjennom partisjonering av en harddisk "
+"for bruk av Ubuntu, eller du kan gjøre det manuelt hvis du vil. Hvis du "
+"velger å bli ledet gjennom partisjoneringa, vil du likevel senere kunne se "
+"på resultatet og tilpasse det."
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
 msgstr "Endre størrelse på ${PARTITION} og bruk ledig plass"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr "Klarte ikke å frigjøre nok plass til installasjonen"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

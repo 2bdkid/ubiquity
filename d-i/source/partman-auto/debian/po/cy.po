@@ -10,9 +10,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-28 13:12+0100\n"
-"PO-Revision-Date: 2004-10-06 08:15+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-03 12:31+0100\n"
+"PO-Revision-Date: 2005-03-08 07:46+0000\n"
 "Last-Translator: Dafydd Harries <daf@muse.19inch.net>\n"
 "Language-Team: Welsh <daf@muse.19inch.net>\n"
 "MIME-Version: 1.0\n"
@@ -65,41 +65,19 @@ msgstr "Dull rhaniadu:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:39
-#, fuzzy
-msgid "Device to partition"
-msgstr "Gofod disg i'w rhaniadu:"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:39
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to see the results, "
-"customise it, and even undo the partitioning if you do not like it."
-msgstr ""
-"Gall y sefydlydd hwn eich arwain drwy rhaniadu disg er mwyn ei ddefnyddio "
-"gyda Ubuntu yn awtomatig, neu os hoffech, gallwch ei wneud e â llaw. Os "
-"ydych chi'n dewis defnyddio'r teclyn rhaniadu arweiniedig, cewch gyfle yn "
-"hwyrach i weld y canlyniadau, eu addasu nhw, a hyd yn oed datwneud y "
-"rhaniadu os nad ydych chi'n ei hoffi."
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:38
 msgid "Disk space to partition:"
 msgstr "Gofod disg i'w rhaniadu:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid "Partitioning scheme:"
 msgstr "Cynllun rhaniadu:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:54
+#: ../partman-auto.templates:43
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -109,13 +87,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid "Unusable free space"
 msgstr "Gofod rhydd ni ellir defnyddio"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:60
+#: ../partman-auto.templates:49
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -126,14 +104,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:78
+#: ../partman-auto.templates:67
 msgid "Guided partitioning"
 msgstr "Rhaniadu arweiniedig"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:83
+#: ../partman-auto.templates:72
 msgid "Use the largest continuous free space"
 msgstr "Defnyddio'r gofod rhydd parhaol mwyaf"
 
@@ -143,60 +121,91 @@ msgstr "Defnyddio'r gofod rhydd parhaol mwyaf"
 #. The string replacing ${DEVICE} may be very long, so make your translation
 #. as short as possible and keep the variable AT THE END
 #. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:91
+#: ../partman-auto.templates:80
 msgid "Erase entire disk: ${DEVICE}"
 msgstr "Dileu'r disg cyfan: ${DEVICE}"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:96
+#: ../partman-auto.templates:85
 msgid "Manually edit partition table"
 msgstr "Golygu'r tabl rhaniadau â llaw"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:101
+#: ../partman-auto.templates:90
 msgid "Automatically partition the free space"
 msgstr "Rhaniadu'r gofod rhydd yn awtomatig"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:106
+#: ../partman-auto.templates:95
 msgid "All files in one partition (recommended for new users)"
 msgstr "Pob ffeil ar un rhaniad (argymhellir ar gyfer defnyddwyr newydd)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:111
-msgid "Desktop machine"
-msgstr "Peiriant penbwrdd"
+#: ../partman-auto.templates:100
+#, fuzzy
+msgid "Separate /home partition"
+msgstr "fformadu'r rhaniad"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:116
-msgid "Multi-user workstation"
-msgstr "System aml-ddefnyddiwr"
+#: ../partman-auto.templates:105
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-auto.templates:120
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:110
+#, fuzzy
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "Cynllun rhaniadu:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+msgid "Device to partition"
+msgstr ""
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:115
+#, fuzzy
+msgid ""
+"This installer can guide you through partitioning a disk for use by Ubuntu, "
+"or if you prefer, you can do it manually. If you do choose to use the guided "
+"partitioning tool, you will still have a chance later to review and "
+"customise the results."
+msgstr ""
+"Gall y sefydlydd hwn eich arwain drwy rhaniadu disg er mwyn ei ddefnyddio "
+"gyda Ubuntu yn awtomatig, neu os hoffech, gallwch ei wneud e â llaw. Os "
+"ydych chi'n dewis defnyddio'r teclyn rhaniadu arweiniedig, cewch gyfle yn "
+"hwyrach i weld y canlyniadau, eu addasu nhw, a hyd yn oed datwneud y "
+"rhaniadu os nad ydych chi'n ei hoffi."
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:123
 msgid "Resize ${PARTITION} and use freed space"
 msgstr "Newid maint ${PARTITION} a defnyddio gofod a rhyddheir"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid "Failed to create enough space for installation"
 msgstr "Methwyd creu digon o ofod er mwyn sefydlu"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:124
+#: ../partman-auto.templates:127
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

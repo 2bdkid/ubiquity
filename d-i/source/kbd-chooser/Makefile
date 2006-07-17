@@ -91,7 +91,7 @@ debian/kbd-chooser.templates:  $(TEMPLATES)
 	# that po2debconf doesn't decide that it needs to run
 	# debconf-updatepo
 	touch -mr debian/kbd-chooser.templates-in $@
-
+	
 # loadkeys.o: separate rule since the flex output does not permit -Wall
 loadkeys.o:     loadkeys.c analyze.c
 	$(CC) -c $(DEFS) $<

@@ -18,9 +18,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-12-21 17:15+0700\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-07-10 11:38+0100\n"
+"PO-Revision-Date: 2006-04-07 11:15+0700\n"
 "Last-Translator: Parlin Imanuel Toh <pt@samip-online.com>\n"
 "Language-Team: Debian Indonesia Team <debian-l10n-id@gurame.fisika.ui.ac."
 "id>\n"
@@ -40,112 +40,121 @@ msgstr "Pilih bahasa/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Menyimpan bahasa..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Indonesia"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "lainnya"
 
 #. Type: select
+#. Default
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
+msgstr "ID"
+
+#. Type: select
 #. Description
-#: ../localechooser.templates-in:91
+#: ../localechooser.templates-in:105
 msgid "Choose your location:"
 msgstr "Pilih lokasi anda:"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
 msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
-msgstr "ID"
-
-#. Type: select
-#. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"Based on your language, you are probably located in one of these locations:"
-msgstr "Berdasarkan pilihan bahasa, kemungkinan Anda berada di negara berikut:"
+"Based on your language, you are probably located in one of these locations."
+msgstr "Berdasarkan pilihan bahasa, kemungkinan Anda berada di negara berikut."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Berdasarkan pilihan negara dan bahasa Anda, parameter bahasa lokal berikut "
-"ini telah didukung oleh Ubuntu"
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Pilih bahasa lokal:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Suatu bahasa lokal darurat/lainnya harus dipilih karena saat ini tidak ada "
-"bahasa lokal untuk negara dan bahasa yang Anda pilih"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Bahasa lokal tidak didukung"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Nilai lokal (${LOCALE}) yang telah Anda ajukan saat ini tidak didukung oleh "
-"Ubuntu. Anda akan diminta memasukkan lokal, negara, dan bahasa."
+"Berdasarkan pilihan bahasa dan negara Anda, parameter lokal berikut ini "
+"telah didukung."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Pilih bahasa lain:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Anda dapat memilih bahasa tambahan untuk diinstal."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Pilih suatu negara, teritorial atau daerah:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Amerika Utara --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Berdasarkan bahasa Anda, mungkin Anda berada di negara atau wilayah "
-#~ "berikut."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Amerika Tengah --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Amerika Selatan --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Karibia --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Eropa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Asia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Afrika --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- Samudera Indonesia --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Oseania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antartika --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- lainnya --"

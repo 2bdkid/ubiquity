@@ -5,9 +5,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include <ctype.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include "mirrors.h"
 #ifdef WITH_HTTP
 #include "mirrors_http.h"
@@ -22,7 +19,7 @@
 static struct debconfclient *debconf;
 static char *protocol = NULL;
 static char *country  = NULL;
-static int base_installable = 0;
+int show_progress = 1;
 
 /*
  * Returns a string on the form "DEBCONF_BASE/protocol/supplied". The
@@ -102,7 +99,7 @@ static char **mirrors_in(char *country) {
 /* returns true if there is a mirror in the specificed country */
 static inline int has_mirror(char *country) {
 	char **mirrors;
-	if (strcmp(country, "enter information manually") == 0)
+	if (strcmp(country, MANUAL_ENTRY) == 0)
 		return 1;
 	mirrors = mirrors_in(country);
 	return (mirrors[0] == NULL) ? 0 : 1;
@@ -139,10 +136,12 @@ int find_suite (void) {
 	int i;
 	int ret = 0;
 
-	debconf_progress_start(debconf, 0, 1,
-			       DEBCONF_BASE "checking_title");
-	debconf_progress_info(debconf,
-			      DEBCONF_BASE "checking_download");
+	if (show_progress) {
+		debconf_progress_start(debconf, 0, 1,
+				       DEBCONF_BASE "checking_title");
+		debconf_progress_info(debconf,
+				      DEBCONF_BASE "checking_download");
+	}
 
 	hostname = add_protocol("hostname");
 	debconf_get(debconf, hostname);
@@ -194,10 +193,26 @@ int find_suite (void) {
 	free(hostname);
 	free(directory);
 
-	debconf_progress_step(debconf, 1);
-	debconf_progress_stop(debconf);
+	if (show_progress) {
+		debconf_progress_step(debconf, 1);
+		debconf_progress_stop(debconf);
+	}
 
 	return ret;
+}
+
+static int base_on_cd = 0;
+static int check_base_on_cd(void) {
+	FILE *fp;
+	if ((fp = fopen("/cdrom/.disk/base_installable", "r"))) {
+		base_on_cd = 1;
+		fclose(fp);
+	}
+	else if (getenv("OVERRIDE_BASE_INSTALLABLE") != NULL)
+		base_on_cd = 1;
+	else
+		base_on_cd = 0;
+	return 0;
 }
 
 static int choose_country(void) {
@@ -223,35 +238,27 @@ static int choose_country(void) {
 		country = "GB";
 	}
 
-#ifdef WITH_HTTP
-	if (strcasecmp(protocol,"http") == 0) {
-		if (has_mirror(country)) {
-			debconf_set(debconf, DEBCONF_BASE "http/countries", country);
-			debconf_fget(debconf, DEBCONF_BASE "country", "seen");
-			debconf_fset(debconf, DEBCONF_BASE "http/countries", "seen", debconf->value);
-		}
-		debconf_input(debconf, base_installable ? "medium" : "high", DEBCONF_BASE "http/countries");
+	char *countries;
+	countries = add_protocol("countries");
+	if (has_mirror(country)) {
+		debconf_set(debconf, countries, country);
+		debconf_fget(debconf, DEBCONF_BASE "country", "seen");
+		debconf_fset(debconf, countries, "seen", debconf->value);
 	}
-#endif
-#ifdef WITH_FTP
-	if (strcasecmp(protocol,"ftp") == 0) {
-		if (has_mirror(country)) {
-			debconf_set(debconf, DEBCONF_BASE "ftp/countries", country);
-			debconf_fget(debconf, DEBCONF_BASE "country", "seen");
-			debconf_fset(debconf, DEBCONF_BASE "http/countries", "seen", debconf->value);
-		}
-		debconf_input(debconf, base_installable ? "medium" : "high", DEBCONF_BASE "ftp/countries");
-	}
-#endif
+	debconf_input(debconf, base_on_cd ? "medium" : "high", countries);
 
+	free (countries);
 	return 0;
 }
 
 static int set_country(void) {
-	debconf_get(debconf, (strcasecmp(protocol,"http") == 0 ) ?
-		    DEBCONF_BASE "http/countries" : DEBCONF_BASE "ftp/countries");
+	char *countries;
+	countries = add_protocol("countries");
+	debconf_get(debconf, countries);
 	country = strdup(debconf->value);
 	debconf_set(debconf, DEBCONF_BASE "country", country);
+
+	free (countries);
 	return 0;
 }
 
@@ -289,7 +296,7 @@ static int choose_mirror(void) {
 	int i;
 
 	debconf_get(debconf, DEBCONF_BASE "country");
-	manual_entry = ! strcmp(debconf->value, "enter information manually");
+	manual_entry = ! strcmp(debconf->value, MANUAL_ENTRY);
 	if (! manual_entry) {
 		char *mir = add_protocol("mirror");
 
@@ -308,7 +315,7 @@ static int choose_mirror(void) {
 		free(list);
 		free(countryarchive);
 
-		debconf_input(debconf, base_installable ? "medium" : "high", mir);
+		debconf_input(debconf, base_on_cd ? "medium" : "high", mir);
 		free(mir);
 	}
 	else {
@@ -456,7 +463,7 @@ static int validate_mirror(void) {
 		debconf_set(debconf, dir, mirror_root(mirror));
 		free(mirror);
 
-		if (base_installable) {
+		if (base_on_cd) {
 			/* We have the base system on the CD, so instead of
 			 * trying to contact the mirror (which might take
 			 * some time to time out if there's no network
@@ -528,7 +535,7 @@ static int validate_mirror(void) {
 int get_codename (void) {
 	char *command;
 	FILE *f = NULL;
-	char *hostname, *directory, *suite;
+	char *hostname, *directory, *suite = NULL;
 	int ret = 1;
 
 	hostname = add_protocol("hostname");
@@ -566,17 +573,73 @@ int get_codename (void) {
 
 	free(hostname);
 	free(directory);
-	free(suite);
+	if (suite)
+		free(suite);
 
 	if (ret != 0)
 		di_log(DI_LOG_LEVEL_ERROR, "Error getting codename");
 	return ret;
 }
 
-int main (void) {
+/* Check if the mirror carries the architecture that's being installed. */
+int check_arch (void) {
+	char *command;
+	FILE *f = NULL;
+	char *hostname, *directory, *suite = NULL;
+	int valid = 0;
+
+	hostname = add_protocol("hostname");
+	debconf_get(debconf, hostname);
+	free(hostname);
+	hostname = strdup(debconf->value);
+	directory = add_protocol("directory");
+	debconf_get(debconf, directory);
+	free(directory);
+	directory = strdup(debconf->value);
+
+	/* As suite has been determined previously, this should not fail */
+	debconf_get(debconf, DEBCONF_BASE "suite");
+	if (strlen(debconf->value) > 0) {
+		suite = strdup(debconf->value);
+
+		asprintf(&command, "wget -q %s://%s%s/dists/%s/main/binary-%s/Release -O - | grep Architecture",
+			 protocol, hostname, directory, suite, ARCH_TEXT);
+		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
+		f = popen(command, "r");
+		free(command);
+
+		if (f != NULL) {
+			char buf[SUITE_LENGTH];
+			if (fgets(buf, SUITE_LENGTH - 1, f))
+				if (strlen(buf) > 1)
+					valid = 1;
+		}
+		pclose(f);
+	}
+
+	free(hostname);
+	free(directory);
+	if (suite)
+		free(suite);
+
+	if (valid) {
+		return 0;
+	}
+	else {
+		di_log(DI_LOG_LEVEL_DEBUG, "Architecture not supported by selected mirror");
+		debconf_input(debconf, "critical", DEBCONF_BASE "noarch");
+		if (debconf_go(debconf) == 30)
+			exit(10); /* back up to menu */
+		else
+			return 1; /* back to beginning of questions */
+	}
+}
+
+int main (int argc, char **argv) {
 	/* Use a state machine with a function to run in each state */
 	int state = 0;
 	int (*states[])() = {
+		check_base_on_cd,
 		choose_protocol,
 		get_protocol,
 		choose_country,
@@ -586,19 +649,18 @@ int main (void) {
 		set_proxy,
 		validate_mirror,
 		get_codename,
+		check_arch,
 		NULL,
 	};
-	struct stat st;
+
+	if (argc > 1 && strcmp(argv[1], "-n") == 0)
+		show_progress=0;
 
 	debconf = debconfclient_new();
 	debconf_capb(debconf, "backup");
 	debconf_version(debconf, 2);
 
 	di_system_init("choose-mirror");
-
-	if (stat("/cdrom/.disk/base_installable", &st) == 0 ||
-	    getenv("OVERRIDE_BASE_INSTALLABLE") != NULL)
-		base_installable = 1;
 
 	while (state >= 0 && states[state]) {
 		if (states[state]() != 0) { /* back up to start */

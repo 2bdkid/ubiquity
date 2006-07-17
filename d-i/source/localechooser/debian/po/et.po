@@ -3,32 +3,17 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of et.po to Eesti
-#
-#
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-#
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Siim P√µder <windo@windowlicker.dyn.ee>, 2005.
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: et\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-01 18:06+0000\n"
-"PO-Revision-Date: 2005-06-08 11:11+0300\n"
-"Last-Translator: Siim P√µder <windo@windowlicker.dyn.ee>\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-05 18:28-0600\n"
+"PO-Revision-Date: 2006-06-22 11:21+0300\n"
+"Last-Translator: Siim Pıder <windo@windowlicker.dyn.ee>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Estonian\n"
-"X-Poedit-Country: ESTONIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #. Type: text
 #. Description
@@ -42,117 +27,126 @@ msgstr "Vali keel/Choose language"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
+#. finish-install progress bar item
 #: ../localechooser.templates-in:66
 msgid "Storing language..."
 msgstr "Salvestan keele..."
 
 #. Type: select
 #. Default
-#: ../localechooser.templates-in:71
-msgid ""
-"United States [ Translators: put here the ISO-3166 ENGLISH NAME of the "
-"country which should be selected as default for your language ]"
+#. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
+#. Example (german): Germany
+#. In this example, using "Deutschland" (the name of the country in German)
+#. would be WRONG
+#: ../localechooser.templates-in:76
+msgid "United States"
 msgstr "Estonia"
 
 #. Type: select
 #. Choices
-#: ../localechooser.templates-in:90
-msgid "${SHORTLIST}"
-msgstr "${SHORTLIST}"
-
-#. Type: select
-#. Choices
-#: ../localechooser.templates-in:90
+#. "other", here, is added to the list of countries that will be displayed
+#. for users to choose among them
+#. For instance, choosing "Italian" will show:
+#. Italy, Switzerland, other
+#: ../localechooser.templates-in:100
 msgid "other"
 msgstr "muu"
 
 #. Type: select
-#. Description
-#: ../localechooser.templates-in:91
-#, fuzzy
-msgid "Choose your location:"
-msgstr "Vali lokaat:"
-
-#. Type: select
 #. Default
-#: ../localechooser.templates-in:92
-msgid ""
-"US[ Translators: put here the ISO-3166 CODE of the country which should be "
-"selected as default for your language ]"
+#. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
+#. Example (german): DE
+#. (country code for Germany)
+#: ../localechooser.templates-in:104
+msgid "US"
 msgstr "EE"
 
 #. Type: select
-#. Default
-#: ../localechooser.templates-in:92
+#. Description
+#: ../localechooser.templates-in:105
+#, fuzzy
+msgid "Choose your location:"
+msgstr "Vali riik, territoorium vıi piirkond:"
+
+#. Type: select
+#. Description
+#: ../localechooser.templates-in:105
 #, fuzzy
 msgid ""
-"Based on your language, you are probably located in one of these locations:"
+"Based on your language, you are probably located in one of these locations."
 msgstr ""
-"Valitud keele p√µhjal asud t√µen√§oliselt √ºhes neist riikidest v√µi "
+"Valitud keele pıhjal asud tıen‰oliselt ¸hes neist riikidest vıi "
 "piirkondadest."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:99
-msgid ""
-"Based on your language and country choices, the following locale parameters "
-"are supported in Ubuntu."
-msgstr ""
-"Sinu keele- ja riigivalikute p√µhjal toetab Ubuntu j√§rgnevaid "
-"lokaadiparameetreid."
-
-#. Type: select
-#. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid "Choose a locale:"
 msgstr "Vali lokaat:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:106
+#: ../localechooser.templates-in:112
 msgid ""
-"A fallback locale must be chosen because there is currently no locale for "
-"the language and country you have selected."
+"Based on your language and country choices, the following locale parameters "
+"are supported."
 msgstr ""
-"Pead kahjuks valima tagavaralokaadi, kuna sinu keele- ja riigivalikule "
-"vastavat lokaati pole hetkel saadaval."
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid "Unsupported locale"
-msgstr "Ilma toetuseta lokaat"
-
-#. Type: note
-#. Description
-#: ../localechooser.templates-in:116
-msgid ""
-"The locale value you have preseeded (${LOCALE}) is currently not supported "
-"in Ubuntu. You will be prompted for language, country and locale settings."
-msgstr ""
-"Ubuntu ei toeta hetkel sinu eelsisestatud lokaadiv√§√§rtust (${LOCALE}). Sul "
-"palutakse teostada keele-, riigi- ja lokaadivalikud."
+"Sinu keele- ja riigivalikute pıhjal toetab Debian j‰rgnevaid "
+"lokaadiparameetreid."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "Choose other locales to be supported:"
 msgstr "Vali teised toetatatud lokaadid:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:124
+#: ../localechooser.templates-in:132
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
-"Sellest nimekirjast v√µid v√µid valida m√µned lisaks paigaldatavad lokaadid."
+"Sellest nimekirjast vıid vıid valida mıned lisaks paigaldatavad lokaadid."
 
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Vali riik, territoorium v√µi piirkond:"
+#: ../../countrylist:14
+msgid "-- North America --"
+msgstr "-- Pıhja-Ameerika --"
 
-#~ msgid ""
-#~ "Based on your language, you are probably located in one of these "
-#~ "countries or regions."
-#~ msgstr ""
-#~ "Valitud keele p√µhjal asud t√µen√§oliselt √ºhes neist riikidest v√µi "
-#~ "piirkondadest."
+#: ../../countrylist:15
+msgid "-- Central America --"
+msgstr "-- Kesk-Ameerika --"
+
+#: ../../countrylist:16
+msgid "-- South America --"
+msgstr "-- Lıuna-Ameerika --"
+
+#: ../../countrylist:17
+msgid "-- Caribbean --"
+msgstr "-- Kariibi meri --"
+
+#: ../../countrylist:18
+msgid "-- Europe --"
+msgstr "-- Euroopa --"
+
+#: ../../countrylist:19
+msgid "-- Asia --"
+msgstr "-- Aasia --"
+
+#: ../../countrylist:20
+msgid "-- Africa --"
+msgstr "-- Aafrika --"
+
+#: ../../countrylist:21
+msgid "-- Indian Ocean --"
+msgstr "-- India ookean --"
+
+#: ../../countrylist:22
+msgid "-- Oceania --"
+msgstr "-- Okeaania --"
+
+#: ../../countrylist:23
+msgid "-- Antarctica --"
+msgstr "-- Antarktika --"
+
+#: ../../countrylist:24
+msgid "-- other --"
+msgstr "-- muu --"

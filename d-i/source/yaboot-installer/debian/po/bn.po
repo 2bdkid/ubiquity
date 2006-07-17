@@ -3,22 +3,24 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# Debian Installer master translation file template
+# Bangla translation of Debian-Installer.
+# Copyright (C) 2005, 2006, Debian Foundation.
+# This file is distributed under the same license as the Debian-Installer package.
 #
 # Anubadok, the en2bn auto-translator by Golam Mortuza Hossain <golam@imsc.res.in>, 2005.
-# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005.
+# Baishampayan Ghose <b.ghose@gnu.org.in>, 2005-2006.
 # Jamil Ahmed <jamil@bengalinux.org>, 2005.
 # Khandakar Mujahidul Islam <suzan@bengalinux.org>, 2005.
-# Progga <progga@BengaLinux.Org>, 2005.
+# Progga <progga@BengaLinux.Org>, 2005, 2006.
 # Quazi Ashfaq-ur Rahman <quazi.ashfaq@gmail.com>, 2005.
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-20 18:34-0700\n"
-"PO-Revision-Date: 2005-10-28 13:29+0530\n"
-"Last-Translator: Baishampayan Ghose <b.ghose@gnu.org.in>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"PO-Revision-Date: 2006-05-04 20:00+0600\n"
+"Last-Translator: Progga <progga@BengaLinux.Org>\n"
 "Language-Team: Bangla <core@BengaLinux.Org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -122,7 +124,7 @@ msgid ""
 msgstr ""
 "আপনার সিস্টেমকে বুটযোগ্য করে তোলার জন্য Yaboot-কে (লিনাক্স বুট লোডার) কোন একটি "
 "হার্ড ডিস্ক পার্টিশনে ইনস্টল করতে হবে।  অনুগ্রহপূর্বক এই পার্টিশনগুলোর একটিকে গন্তব্য "
-"পার্টিশন হিসেবে বেছে নিন।  তবে যে পার্টিশনকে বেছে নিবেন, তার বুট ফ্ল্যাগ সক্রিয় "
+"পার্টিশন হিসেবে বেছে নিন।  তবে যে পার্টিশনকে বেছে নেবেন, তার বুট ফ্ল্যাগ সক্রিয় "
 "থাকতে হবে।"
 
 #. Type: select
@@ -148,12 +150,6 @@ msgstr "yaboot-এর কনফিগারেশন তৈরির চেষ�
 #: ../yaboot-installer.templates:59
 msgid "The creation of the main yaboot configuration file failed."
 msgstr "yaboot-এর মূল কনফিগারেশন ফাইল তৈরির চেষ্টা ব্যর্থ হয়েছে।"
-
-#. Type: error
-#. Description
-#: ../yaboot-installer.templates:59
-msgid "Please check the syslog for more information."
-msgstr "অনুগ্রহপূর্বক আরো তথ্য জানার জন্য syslog দেখুন।"
 
 #. Type: text
 #. Description
@@ -206,9 +202,8 @@ msgstr "proc ফাইল সিস্টেমকে /target/proc-এ মাউ
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-msgid "Please check the system log or the output on the third console (tty3)."
-msgstr ""
-"অনুগ্রহপূর্বক সিস্টেমের লগ পরীক্ষা করুন অথবা তৃতীয় কনসোল-এ (tty3) গিয়ে আউটপুট দেখুন।"
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "বিস্তারিত জানার জন্য /var/log/syslog পড়ুন অথবা চতুর্থ ভার্চুয়াল কনসোল দেখুন।"
 
 #. Type: error
 #. Description
@@ -290,6 +285,5 @@ msgstr "yaboot-কে একটি হার্ড ডিস্কে ইনস�
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "Yaboot বুট লোডার ইনস্টল করা হচ্ছে"
+msgstr "পুনরায় Yaboot বুট লোডার ইনস্টলকরণ"
