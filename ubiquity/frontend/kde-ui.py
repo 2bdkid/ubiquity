@@ -184,9 +184,8 @@ class Wizard:
         self.autopartition_buttongroup_texts = {}
         
         self.qtparted_vbox = QVBoxLayout(self.userinterface.qtparted_frame)
-        self.embed = QXEmbed(self.userinterface.qtparted_frame, "embed")
-        self.embed.setProtocol(QXEmbed.XPLAIN)
-        
+        self.embed = None
+
 
     def excepthook(self, exctype, excvalue, exctb):
         """Crash handler."""
@@ -354,15 +353,16 @@ class Wizard:
                          core_names=['ubiquity/text/%s' % q
                                      for q in self.language_questions])
 
-        self.translate_widget_chidren(parentWidget)
+        self.translate_widget_children(parentWidget)
 
-    def translate_widget_chidren(self, parentWidget=None):
+    def translate_widget_children(self, parentWidget=None):
         if parentWidget == None:
             parentWidget = self.userinterface
 
-        for widget in parentWidget.children():
-            self.translate_widget(widget, self.locale)
-            self.translate_widget_chidren(widget)
+        if parentWidget.children() != None:
+            for widget in parentWidget.children():
+                self.translate_widget(widget, self.locale)
+                self.translate_widget_children(widget)
 
     def translate_widget(self, widget, lang):
 
@@ -438,6 +438,11 @@ class Wizard:
         pre_log('info', 'gparted_loop()')
 
         disable_swap()
+
+        if self.embed is not None:
+            del self.embed
+        self.embed = QXEmbed(self.userinterface.qtparted_frame, "embed")
+        self.embed.setProtocol(QXEmbed.XPLAIN)
 
         self.qtparted_subp = subprocess.Popen(
             ['/usr/sbin/qtparted', '--installer'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
@@ -800,10 +805,34 @@ class Wizard:
             installText = get_string("live_installer", self.locale)
             self.userinterface.next.setText(installText)
 
+    def qtparted_crashed(self):
+        """qtparted crashed. Ask the user if they want to continue."""
+
+        # TODO cjwatson 2006-07-18: i18n
+        text = ('The advanced partitioner (qtparted) crashed. Further '
+                'information may be found in /var/log/installer/syslog, '
+                'or by running qtparted directly. Do you want to try the '
+                'advanced partitioner again, return to automatic '
+                'partitioning, or quit this installer?')
+        answer = QMessageBox.warning(self.userinterface, 'QTParted crashed',
+                                     text, 'Try again',
+                                     'Automatic partitioning', 'Quit', 0, 0)
+        if answer == 1:
+            self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartDisk"])
+        elif answer == 2:
+            self.current_page = None
+            self.quit()
+        else:
+            self.gparted_loop()
+
     def gparted_to_mountpoints(self):
         """Processing gparted to mountpoints step tasks."""
 
         self.gparted_fstype = {}
+
+        if self.qtparted_subp is None:
+            self.qtparted_crashed()
+            return
 
         try:
             print >>self.qtparted_subp.stdin, "apply"
@@ -812,6 +841,7 @@ class Wizard:
             self.qtparted_subp.stdin.close()
             self.qtparted_subp.wait()
             self.qtparted_subp = None
+            self.qtparted_crashed()
             return
 
         # read gparted output of format "- FORMAT /dev/hda2 linux-swap"
@@ -833,7 +863,9 @@ class Wizard:
         self.qtparted_subp.stdin.close()
         self.qtparted_subp.wait()
         self.qtparted_subp = None
-        self.qtparted_vbox.remove(self.embed)
+        if self.embed is not None:
+            del self.embed
+            self.embed = None
 
         if not gparted_reply.startswith('0 '):
             # something other than OK or Cancel
@@ -1100,7 +1132,9 @@ class Wizard:
                 self.qtparted_subp.stdin.close()
                 self.qtparted_subp.wait()
                 self.qtparted_subp = None
-                self.qtparted_vbox.remove(self.embed)
+                if self.embed is not None:
+                    del self.embed
+                    self.embed = None
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartDisk"])
             changed_page = True
         elif step == "stepPartMountpoints":
