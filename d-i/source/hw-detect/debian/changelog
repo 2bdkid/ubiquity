@@ -1,3 +1,19 @@
+hw-detect (1.38ubuntu3) edgy; urgency=low
+
+  * If /proc/sys/kernel/hotplug is empty or /sbin/udevsend, then
+    HOTPLUG_TYPE is always udev even if /etc/hotplug is present (closes:
+    Malone #53400).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 19 Jul 2006 07:35:48 +0100
+
+hw-detect (1.38ubuntu2) edgy; urgency=low
+
+  * Backport from trunk:
+    - Fix disk_found to return 1 (no disks found) if it falls off the end of
+      its loop.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 18 Jul 2006 15:29:49 +0100
+
 hw-detect (1.38ubuntu1) edgy; urgency=low
 
   * Resynchronise with Debian.
