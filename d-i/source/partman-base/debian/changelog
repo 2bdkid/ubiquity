@@ -1,3 +1,12 @@
+partman-base (90ubuntu2) edgy; urgency=low
+
+  * definitions.sh (debconf_select): Drop leading newline from constructed
+    choices list, and restore IFS in a few more places.
+  * definitions.sh (error_handler, confirm_changes): Use debconf's escape
+    capability if available to escape multi-line SUBST commands.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 24 Jul 2006 15:02:43 +0100
+
 partman-base (90ubuntu1) edgy; urgency=low
 
   * Resynchronise with Debian.

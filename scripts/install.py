@@ -92,23 +92,30 @@ class DebconfFetchProgress(FetchProgress):
 class DebconfInstallProgress(InstallProgress):
     """An object that reports apt's installation progress using debconf."""
 
-    def __init__(self, db, title, info, error):
+    def __init__(self, db, title, info, error=None):
         InstallProgress.__init__(self)
         self.db = db
         self.title = title
         self.info = info
         self.error_template = error
         self.started = False
+        # InstallProgress uses a non-blocking status fd; our run()
+        # implementation doesn't need that, and in fact we spin unless the
+        # fd is blocking.
+        flags = fcntl.fcntl(self.statusfd.fileno(), fcntl.F_GETFL)
+        fcntl.fcntl(self.statusfd.fileno(), fcntl.F_SETFL,
+                    flags & ~os.O_NONBLOCK)
 
     def startUpdate(self):
         self.db.progress('START', 0, 100, self.title)
         self.started = True
 
     def error(self, pkg, errormsg):
-        self.db.subst(self.error_template, 'PACKAGE', pkg)
-        self.db.subst(self.error_template, 'MESSAGE', errormsg)
-        self.db.input('critical', self.error_template)
-        self.db.go()
+        if self.error_template is not None:
+            self.db.subst(self.error_template, 'PACKAGE', pkg)
+            self.db.subst(self.error_template, 'MESSAGE', errormsg)
+            self.db.input('critical', self.error_template)
+            self.db.go()
 
     def statusChange(self, pkg, percent, status):
         self.percent = percent
@@ -121,52 +128,98 @@ class DebconfInstallProgress(InstallProgress):
         # TODO cjwatson 2006-02-28: InstallProgress.updateInterface doesn't
         # give us a handy way to spot when percentages/statuses change and
         # aren't pmerror/pmconffile, so we have to reimplement it here.
-        if self.statusfd != None:
-            try:
-                while not self.read.endswith("\n"):
-                    self.read += os.read(self.statusfd.fileno(),1)
-            except OSError, (err,errstr):
-                # resource temporarily unavailable is ignored
-                if err != errno.EAGAIN:
-                    print errstr
-            if self.read.endswith("\n"):
-                s = self.read
-                (status, pkg, percent, status_str) = s.split(":", 3)
-                if status == "pmerror":
-                    self.error(pkg, status_str)
-                elif status == "pmconffile":
-                    # we get a string like this:
-                    # 'current-conffile' 'new-conffile' useredited distedited
-                    match = re.compile("\s*\'(.*)\'\s*\'(.*)\'.*").match(status_str)
-                    if match:
-                        self.conffile(match.group(1), match.group(2))
-                else:
-                    self.statusChange(pkg, float(percent), status_str.strip())
-                self.read = ""
+        if self.statusfd is None:
+            return False
+        try:
+            while not self.read.endswith("\n"):
+                r = os.read(self.statusfd.fileno(),1)
+                if not r:
+                    return False
+                self.read += r
+        except OSError, (err,errstr):
+            print errstr
+        if self.read.endswith("\n"):
+            s = self.read
+            (status, pkg, percent, status_str) = s.split(":", 3)
+            if status == "pmerror":
+                self.error(pkg, status_str)
+            elif status == "pmconffile":
+                # we get a string like this:
+                # 'current-conffile' 'new-conffile' useredited distedited
+                match = re.compile("\s*\'(.*)\'\s*\'(.*)\'.*").match(status_str)
+                if match:
+                    self.conffile(match.group(1), match.group(2))
+            else:
+                self.statusChange(pkg, float(percent), status_str.strip())
+            self.read = ""
+        return True
 
     def run(self, pm):
-        pid = self.fork()
-        if pid == 0:
+        # Create a subprocess to deal with turning apt status messages into
+        # debconf protocol messages.
+        child_pid = self.fork()
+        if child_pid == 0:
             # child
+            os.close(self.writefd)
+            try:
+                while self.updateInterface():
+                    pass
+            except (KeyboardInterrupt, SystemExit):
+                pass # we're going to exit anyway
+            except:
+                traceback.print_exc(file=sys.stderr)
+            os._exit(0)
 
-            # Redirect stdout to stderr to avoid it interfering with our
-            # debconf protocol stream.
-            os.dup2(2, 1)
+        self.statusfd.close()
 
-            # Make sure all packages are installed non-interactively. We
-            # don't have enough passthrough magic here to deal with any
-            # debconf questions they might ask.
-            os.environ['DEBIAN_FRONTEND'] = 'noninteractive'
-            if 'DEBIAN_HAS_FRONTEND' in os.environ:
-                del os.environ['DEBIAN_HAS_FRONTEND']
-            if 'DEBCONF_USE_CDEBCONF' in os.environ:
-                # Probably not a good idea to use this in /target too ...
-                del os.environ['DEBCONF_USE_CDEBCONF']
+        # Redirect stdout to stderr to avoid it interfering with our
+        # debconf protocol stream.
+        saved_stdout = os.dup(1)
+        os.dup2(2, 1)
 
+        # Make sure all packages are installed non-interactively. We
+        # don't have enough passthrough magic here to deal with any
+        # debconf questions they might ask.
+        saved_environ_keys = ('DEBIAN_FRONTEND', 'DEBIAN_HAS_FRONTEND',
+                              'DEBCONF_USE_CDEBCONF')
+        saved_environ = {}
+        for key in saved_environ_keys:
+            if key in os.environ:
+                saved_environ[key] = os.environ[key]
+        os.environ['DEBIAN_FRONTEND'] = 'noninteractive'
+        if 'DEBIAN_HAS_FRONTEND' in os.environ:
+            del os.environ['DEBIAN_HAS_FRONTEND']
+        if 'DEBCONF_USE_CDEBCONF' in os.environ:
+            # Probably not a good idea to use this in /target too ...
+            del os.environ['DEBCONF_USE_CDEBCONF']
+
+        res = pm.ResultFailed
+        try:
             res = pm.DoInstall(self.writefd)
-            os._exit(res)
-        self.child_pid = pid
-        res = self.waitChild()
+        finally:
+            # Reap the status-to-debconf subprocess.
+            os.close(self.writefd)
+            while True:
+                try:
+                    (pid, status) = os.waitpid(child_pid, 0)
+                    if pid != child_pid:
+                        break
+                    if os.WIFEXITED(status) or os.WIFSIGNALED(status):
+                        break
+                except OSError:
+                    break
+
+            # Put back stdout.
+            os.dup2(saved_stdout, 1)
+            os.close(saved_stdout)
+
+            # Put back the environment.
+            for key in saved_environ_keys:
+                if key in saved_environ:
+                    os.environ[key] = saved_environ[key]
+                elif key in os.environ:
+                    del os.environ[key]
+
         return res
 
     def finishUpdate(self):
@@ -205,6 +258,7 @@ class Install:
 
         apt_pkg.InitConfig()
         apt_pkg.Config.Set("Dir", "/target")
+        apt_pkg.Config.Set("Dir::State::status", "/target/var/lib/dpkg/status")
         apt_pkg.Config.Set("APT::GPGV::TrustedKeyring",
                            "/target/etc/apt/trusted.gpg")
         apt_pkg.Config.Set("Acquire::gpgv::Options::",
@@ -555,7 +609,7 @@ class Install:
         dbfilter = language_apply.LanguageApply(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("LanguageApply failed with code %d" % code)
+            raise InstallStepError("LanguageApply failed with code %d" % ret)
 
 
     def configure_apt(self):
@@ -572,7 +626,7 @@ class Install:
         dbfilter = apt_setup.AptSetup(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("AptSetup failed with code %d" % code)
+            raise InstallStepError("AptSetup failed with code %d" % ret)
 
 
     def get_cache_pkg(self, cache, pkg):
@@ -685,8 +739,7 @@ class Install:
             self.db, 'ubiquity/langpacks/title', None,
             'ubiquity/langpacks/packages')
         installprogress = DebconfInstallProgress(
-            self.db, 'ubiquity/langpacks/title', 'ubiquity/install/apt_info',
-            'ubiquity/install/apt_error_install')
+            self.db, 'ubiquity/langpacks/title', 'ubiquity/install/apt_info')
 
         for lp in to_install:
             self.mark_install(cache, lp)
@@ -724,12 +777,12 @@ class Install:
         dbfilter = timezone_apply.TimezoneApply(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("TimezoneApply failed with code %d" % code)
+            raise InstallStepError("TimezoneApply failed with code %d" % ret)
 
         dbfilter = clock_setup.ClockSetup(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("ClockSetup failed with code %d" % code)
+            raise InstallStepError("ClockSetup failed with code %d" % ret)
 
 
     def configure_keyboard(self):
@@ -744,8 +797,7 @@ class Install:
         dbfilter = kbd_chooser_apply.KbdChooserApply(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError(
-                "KbdChooserApply failed with code %d" % code)
+            raise InstallStepError("KbdChooserApply failed with code %d" % ret)
 
 
     def configure_user(self):
@@ -756,7 +808,7 @@ class Install:
         dbfilter = usersetup_apply.UserSetupApply(None)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("UserSetupApply failed with code %d" % code)
+            raise InstallStepError("UserSetupApply failed with code %d" % ret)
 
 
     def get_resume_partition(self):
@@ -782,7 +834,7 @@ class Install:
         dbfilter = hw_detect.HwDetect(None, self.db)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
-            raise InstallStepError("HwDetect failed with code %d" % code)
+            raise InstallStepError("HwDetect failed with code %d" % ret)
 
         self.db.progress('INFO', 'ubiquity/install/hardware')
 
@@ -791,12 +843,20 @@ class Install:
 
         resume = self.get_resume_partition()
         if resume is not None:
-            configdir = os.path.join(self.target, 'etc/mkinitramfs/conf.d')
-            if not os.path.exists(configdir):
-                os.makedirs(configdir)
-            configfile = open(os.path.join(configdir, 'resume'), 'w')
-            print >>configfile, "RESUME=%s" % resume
-            configfile.close()
+            if os.path.exists(os.path.join(self.target,
+                                           'etc/initramfs-tools/conf.d')):
+                configdir = os.path.join(self.target,
+                                         'etc/initramfs-tools/conf.d')
+            elif os.path.exists(os.path.join(self.target,
+                                             'etc/mkinitramfs/conf.d')):
+                configdir = os.path.join(self.target,
+                                         'etc/mkinitramfs/conf.d')
+            else:
+                configdir = None
+            if configdir is not None:
+                configfile = open(os.path.join(configdir, 'resume'), 'w')
+                print >>configfile, "RESUME=%s" % resume
+                configfile.close()
 
         self.chrex('mount', '-t', 'proc', 'proc', '/proc')
         self.chrex('mount', '-t', 'sysfs', 'sysfs', '/sys')
@@ -936,7 +996,7 @@ class Install:
             ret = dbfilter.run_command(auto_process=True)
             if ret != 0:
                 raise InstallStepError(
-                    "GrubInstaller failed with code %d" % code)
+                    "GrubInstaller failed with code %d" % ret)
         except ImportError:
             try:
                 from ubiquity.components import yabootinstaller
@@ -944,7 +1004,7 @@ class Install:
                 ret = dbfilter.run_command(auto_process=True)
                 if ret != 0:
                     raise InstallStepError(
-                        "YabootInstaller failed with code %d" % code)
+                        "YabootInstaller failed with code %d" % ret)
             except ImportError:
                 raise InstallStepError("No bootloader installer found")
 

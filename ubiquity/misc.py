@@ -184,8 +184,8 @@ def get_filesystems(fstype={}):
     device_list = {}
 
     # building device_list dicts from "file -s" output from get_partitions
-    #   returned list (only devices formatted as ext3, fat, ntfs or swap are
-    #   parsed).
+    #   returned list (only devices formatted as ext3, fat, ntfs, xfs, or
+    #   swap are parsed).
     partition_list = get_partitions()
     for device in partition_list:
         device = '/dev/' + device
@@ -195,15 +195,17 @@ def get_filesystems(fstype={}):
             continue
         filesystem_pipe = subprocess.Popen(['file', '-s', device], stdout=subprocess.PIPE)
         filesystem = filesystem_pipe.communicate()[0]
-        if re.match('.*((ext3)|(swap)|(data)).*', filesystem, re.I):
-            if 'ext3' in filesystem.split() or 'data' in filesystem.split():
-                device_list[device] = 'ext3'
-            elif 'swap' in filesystem.split():
-                device_list[device] = 'linux-swap'
-            elif 'FAT' in filesystem.split():
-                device_list[device] = 'vfat'
-            elif 'NTFS' in filesystem.split():
-                device_list[device] = 'ntfs'
+        words = filesystem.split()
+        if 'ext3' in words:
+            device_list[device] = 'ext3'
+        elif 'swap' in words:
+            device_list[device] = 'linux-swap'
+        elif 'FAT' in words:
+            device_list[device] = 'vfat'
+        elif 'NTFS' in words:
+            device_list[device] = 'ntfs'
+        elif 'XFS' in words:
+            device_list[device] = 'xfs'
     return device_list
 
 

@@ -60,7 +60,7 @@ from ubiquity import filteredcommand, validation
 from ubiquity.misc import *
 from ubiquity.settings import *
 from ubiquity.components import language, kbd_chooser, timezone, usersetup, \
-                                partman, partman_commit, summary, install
+                                partman_auto, partman_commit, summary, install
 import ubiquity.emap
 import ubiquity.tz
 import ubiquity.progressposition
@@ -244,10 +244,10 @@ class Wizard:
             elif current_name == "stepUserInfo":
                 self.dbfilter = usersetup.UserSetup(self)
             elif current_name in ("stepPartDisk", "stepPartAuto"):
-                if isinstance(self.dbfilter, partman.Partman):
+                if isinstance(self.dbfilter, partman_auto.PartmanAuto):
                     pre_log('info', 'reusing running partman')
                 else:
-                    self.dbfilter = partman.Partman(self)
+                    self.dbfilter = partman_auto.PartmanAuto(self)
             elif current_name == "stepReady":
                 self.dbfilter = summary.Summary(self)
             else:
@@ -1010,7 +1010,15 @@ class Wizard:
 
         # Processing more validation stuff
         if len(self.mountpoints) > 0:
-            for check in validation.check_mountpoint(self.mountpoints,
+            # Supplement filesystem types from gparted FORMAT instructions
+            # with those detected from the disk.
+            validate_mountpoints = dict(self.mountpoints)
+            validate_filesystems = get_filesystems(self.gparted_fstype)
+            for device, (path, format, fstype) in validate_mountpoints.items():
+                if fstype is None:
+                    validate_mountpoints[device] = \
+                        (path, format, validate_filesystems[device])
+            for check in validation.check_mountpoint(validate_mountpoints,
                                                      self.size):
                 if check == validation.MOUNTPOINT_NOROOT:
                     error_msg.append(get_string(
@@ -1591,8 +1599,11 @@ class Wizard:
 
 
     def return_to_autopartitioning (self):
-        """Return from the install progress bar to autopartitioning."""
-        if self.installing:
+        """If the install progress bar is up but still at the partitioning
+        stage, then errors can safely return us to autopartitioning.
+        """
+
+        if self.installing and self.current_page is not None:
             # Go back to the autopartitioner and try again.
             # TODO self.previous_partitioning_page
             self.live_installer.show()

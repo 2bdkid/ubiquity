@@ -90,6 +90,7 @@ STATE=1
 count=0
 firstdev=
 for devs in $DEVICES/*; do
+    [ -d "$devs" ] || continue
     device="$(cat $devs/device)"
     case $device in
 	/dev/mapper/*-*)
