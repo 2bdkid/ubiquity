@@ -13,7 +13,7 @@ warning() {
 }
 
 # Ask if a mirror should be used if the base system can be installed from CD.
-if [ -e /cdrom/.disk/base_installable ]; then
+if [ -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; then
 	if search-path choose-mirror; then
 		db_input medium apt-setup/use_mirror || [ $? -eq 30 ]
 		db_go # or exit 10

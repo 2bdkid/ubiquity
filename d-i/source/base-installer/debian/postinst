@@ -342,10 +342,10 @@ create_devices () {
 			# check if root is on a dm-crypt device
 			rootdev=$(mount | grep "on /target " | cut -d' ' -f1)
 			rootnode=${rootdev#/dev/mapper/}
-			if [ $rootdev != $rootnode ] && \
-			   [ $(dmsetup table $rootnode | cut -d' ' -f3) = crypt ]; then
-				major=$(dmsetup -c --noheadings info $rootnode | cut -d':' -f2)
-				minor=$(dmsetup -c --noheadings info $rootnode | cut -d':' -f3)
+			if [ $rootdev != $rootnode ] && type dmsetup >/dev/null 2>&1 && \
+			   [ "$(dmsetup table $rootnode | cut -d' ' -f3)" = crypt ]; then
+				major="$(dmsetup -c --noheadings info $rootnode | cut -d':' -f2)"
+				minor="$(dmsetup -c --noheadings info $rootnode | cut -d':' -f3)"
 				mknod /target/dev/mapper/$rootnode b $major $minor
 			fi
 		fi
@@ -763,6 +763,12 @@ EOF
 			resume="$(mapdevfs "$resume_devfs")" || resume=
 		else
 			resume=
+		fi
+		if [ "$resume" ] && PATH="/lib/udev:$PATH" type vol_id >/dev/null 2>&1; then
+			resume_uuid="$(PATH="/lib/udev:$PATH" vol_id -u "$resume" || true)"
+			if [ "$resume_uuid" ]; then
+				resume="UUID=$resume_uuid"
+			fi
 		fi
 		if [ -n "$ramdiskconf" -a "$resume" ]; then
 			if [ -f $ramdiskconf ] ; then

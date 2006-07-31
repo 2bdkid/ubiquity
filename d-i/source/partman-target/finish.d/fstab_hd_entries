@@ -12,17 +12,16 @@ fstab=$(
     done |
     sort |
     while read mp fs type options dump pass; do
-	case "$mp" in
+	case "$fs" in
 	    (/*)
-		if udevinfo -q env -n "$mp" 2>/dev/null| grep 'ID_BUS=\(usb\|ieee1394\)'; then
-			printf "%-15s %-15s %-7s %-15s %-7s %s\n" "UUID=$(/lib/udev/vol_id -u $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+		uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)"
+		if [ "$uuid" ]; then
+		    printf "# %s\n" "$(mapdevfs $fs)"
+		    printf "%-15s %-15s %-7s %-15s %-7s %s\n" "UUID=$uuid" "${mp}" "$type" "$options" "$dump" "$pass"
 		else
-			printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+		    printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
 		fi
 		;;
-            (*)
-		printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
-                ;;
 	esac
     done
 )
