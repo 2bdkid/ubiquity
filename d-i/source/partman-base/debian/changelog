@@ -1,3 +1,14 @@
+partman-base (90ubuntu3) edgy; urgency=low
+
+  * If PARTMAN_SNOOP is set, then debconf_select dumps out its
+    key-to-displayed-text mapping to /var/lib/partman/snoop. This allows a
+    debconf-filtering agent such as Ubiquity to parse the list of choices
+    reliably. (This is, of course, a hack, and will be removed once debconf
+    is enhanced so that partman can simply substitute each key as an
+    untranslated choice.)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  3 Aug 2006 00:22:34 +0100
+
 partman-base (90ubuntu2) edgy; urgency=low
 
   * definitions.sh (debconf_select): Drop leading newline from constructed

@@ -64,10 +64,10 @@ if [ "$LEVEL" = "3" ] || [ "$LEVEL" = "4" ] ; then
 fi
 
 if [ "$LOCALE" != C ]; then
-	log-output -t localechooser chroot /target /usr/sbin/locale-gen "$LOCALE"
+	log-output -t localechooser chroot /target /usr/sbin/locale-gen "$LOCALE" || true
 fi
 if [ "$EXTRAS" ]; then
-	log-output -t localechooser chroot /target /usr/sbin/locale-gen $EXTRAS
+	log-output -t localechooser chroot /target /usr/sbin/locale-gen $EXTRAS || true
 fi
 
 exit 0

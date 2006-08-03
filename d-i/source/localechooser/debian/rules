@@ -7,7 +7,7 @@ OCPACKAGE=oem-config-locale
 build: build-stamp
 build-stamp:
 	dh_testdir
-	chmod u+x ./get-SUPPORTED ./mktemplates.country ./get-iso-codes ./mk_shortlist_templates
+	chmod u+x ./mktemplates.country ./get-iso-codes ./mk_shortlist_templates
 	$(MAKE)
 	touch build-stamp
 
@@ -16,7 +16,7 @@ clean:
 	dh_testroot
 	rm -f build-stamp
 	$(MAKE) clean
-	rm -rf debian/pobuild debian/iso-codes debian/short-tmp debian/locales debian/SUPPORTED-short
+	rm -rf debian/pobuild debian/iso-codes debian/short-tmp debian/locales
 	dh_clean
 
 install: build
@@ -33,9 +33,9 @@ install: build
 	dh_installdirs -p$(PACKAGE) etc
 	# The following while we have no other way to get SUPPORTED
 	# Should become useless when we will have it
-	install -m644 debian/SUPPORTED-short debian/$(PACKAGE)/etc/SUPPORTED-short
+	install -m644 /usr/share/i18n/SUPPORTED debian/$(PACKAGE)/usr/share/localechooser/SUPPORTED
 	install -m644 debian/short-tmp/shortlists debian/$(PACKAGE)/etc/shortlists
-	dh_install -p$(DATAPACKAGE) default-country languagelist regionmap debian/SUPPORTED-short debian/short-tmp/shortlists usr/share/localechooser
+	dh_install -p$(DATAPACKAGE) default-country languagelist regionmap debian/short-tmp/shortlists usr/share/localechooser
 	dh_install -p$(OCPACKAGE) localechooser languagemap usr/lib/oem-config/locale/
 	dh_install -p$(OCPACKAGE) oem-config/locale* usr/lib/oem-config/menu/
 

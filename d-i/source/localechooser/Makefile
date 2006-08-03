@@ -1,4 +1,4 @@
-all: debian/SUPPORTED-short debian/short-tmp/shortlists debian/templates check-scripts check-data check-utf8
+all: debian/short-tmp/shortlists debian/templates check-scripts check-data check-utf8
 
 LIST     = languagelist
 L10NLIST = languagelist.l10n
@@ -16,9 +16,6 @@ debian/iso-3166.tab:
 debian/templates: debian/templates.base debian/short-tmp/shortlists
 	./mk_shortlist_templates
 
-debian/SUPPORTED-short:
-	./get-SUPPORTED
-
 debian/short-tmp/shortlists: debian/iso-codes
 	./mkshort
 
@@ -33,7 +30,7 @@ check-utf8: $(L10NLIST)
 
 check-data:
 	# Check that the listed locale is supported, to make sure it will work.
-	@for locale in `grep -v "^#" $(LIST) | cut -d\; -f2 | grep _` ; do \
+	@for locale in `grep -v "^#" $(LIST) | cut -d\; -f5 | grep _` ; do \
 		if grep -q "^$$locale " /usr/share/i18n/SUPPORTED ; then \
 			: ; \
 		else \
@@ -48,5 +45,5 @@ demo: localechooser.templates localechooser
 	DEBIAN_FRONTEND=dialog DEBCONF_DEBUG=developer /usr/share/debconf/frontend ./localechooser
 
 clean:
-	$(RM) localechooser.templates debian/templates debian/templates.lang debian/templates.tmp debian/templates.base SUPPORTED-short debian/iso-3166.tab
+	$(RM) localechooser.templates debian/templates debian/templates.lang debian/templates.tmp debian/templates.base debian/iso-3166.tab
 	$(RM) -rf debian/short-tmp debian/iso-codes

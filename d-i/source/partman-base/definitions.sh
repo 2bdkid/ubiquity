@@ -61,6 +61,11 @@ debconf_select () {
 	default=''
 	# Debconf ignores spaces so we have to remove them from $choices
 	newchoices=''
+	case $PARTMAN_SNOOP in
+		?*)
+			> /var/lib/partman/snoop
+			;;
+	esac
 	IFS="$NL"
 	for x in $choices; do
 		local key option
@@ -77,6 +82,11 @@ debconf_select () {
 		if [ "$key" = "$default_choice" ]; then
 		    default="$option"
 		fi
+		case $PARTMAN_SNOOP in
+			?*)
+				echo "$key$TAB$option" >> /var/lib/partman/snoop
+				;;
+		esac
 	done
 	choices="$newchoices"
 	u=''

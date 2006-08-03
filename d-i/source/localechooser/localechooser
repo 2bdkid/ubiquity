@@ -20,15 +20,18 @@ supportedlocales="localechooser/supported-locales"
 
 # This is the iso_3166.tab file location
 ISO3166TAB=/usr/share/iso-codes/iso_3166.tab
-SUPPORTEDLOCALES=/etc/SUPPORTED-short
+SUPPORTEDLOCALES=/usr/share/localechooser/SUPPORTED
 if [ ! -f "$SUPPORTEDLOCALES" ]; then
-	SUPPORTEDLOCALES=/usr/share/localechooser/SUPPORTED-short
+	SUPPORTEDLOCALES=/usr/share/i18n/SUPPORTED
 fi
 SHORTLISTS=/etc/shortlists
 if [ ! -f "$SHORTLISTS" ]; then
 	SHORTLISTS=/usr/share/localechooser/shortlists
 fi
 LANGUAGELISTFILE=/usr/share/localechooser/languagelist
+
+newline='
+'
 
 error() {
 	logger -t localechooser "error: $@"
@@ -128,6 +131,28 @@ locale2langcode() {
 	fi
 }
 
+# Find the preferred locale given language, country, and encoding.
+preferred_locale() {
+	OLDIFS="$IFS"
+	IFS="$newline"
+	# Look for locales with the right encoding first.
+	for trylocale in $(grep "^$1_$2" $SUPPORTEDLOCALES || true); do
+		IFS="$OLDIFS"
+		if [ -z "$3" ] || [ "${trylocale#* }" = "$3" ]; then
+			echo "${trylocale% *}"
+			return
+		fi
+		IFS="$newline"
+	done
+	# Pick the first of any other available locales.
+	for trylocale in $(grep "^$1_$2" $SUPPORTEDLOCALES || true); do
+		IFS="$OLDIFS"
+		echo "${trylocale% *}"
+		return
+	done
+	IFS="$OLDIFS"
+}
+
 do_preseed() {
 	LOCALE="$1"
 	log "Locale has been preseeded to $LOCALE"
@@ -161,7 +186,7 @@ do_preseed() {
 				db_fset $shortlist seen $seenflag || true
 			fi
 			db_fset $fulllist seen $seenflag || true
-			if grep -q "^$LOCALE$" $SUPPORTEDLOCALES ; then
+			if grep -q "^$LOCALE " $SUPPORTEDLOCALES ; then
 				db_set $localecode $LOCALE
 				db_fset $localecode seen $seenflag || true
 				log "Set $localecode = '$LOCALE'"
@@ -322,8 +347,6 @@ log "Set $fulllist = '${COUNTRY_LANGUAGECHOOSER}'"
 # Keep track of values we have after language selection step
 LOCALE_LANGUAGECHOOSER=$LOCALE
 LANGUAGECODE_LANGUAGECHOOSER=$LANGUAGE
-# If present, keep track of charset or modifier we got previously
-EXTRA_LANGUAGECHOOSER=`echo $FALLBACKLOCALE | sed -e 's/^[^.@]*//'`
 
 FIRST_LANG="${LANGUAGELIST%%:*}"
 
@@ -455,39 +478,36 @@ if [ "$LOCALE" != "C" ] ; then
 
 	db_get $localecode
 	if [ -z "$LOG" -o -z "$RET" ] ; then
-		for entry in ${LANGUAGE}_${COUNTRYCODE}${EXTRA_LANGUAGECHOOSER} \
-		             ${LANGUAGE}_${COUNTRYCODE}; do
-			# Is the locale we inherited really a complete locale?
-			LOCALE_LANGUAGECHOOSER_COMPLETE=$(echo $OLDLOCALE | grep "_" || true)
-			if grep -q "^${entry}$" $SUPPORTEDLOCALES; then
-				# Special handling of cases where the locale
-				# in languagechooser is NOT the combination of
-				# language_COUNTRY. Used for Norwegian
-				# Bokmal transition in order to keep no_NO as
-				# locale. May be used in the future for other
-				# special cases, so we'd better keep this.
-				if \
-				    [ "$LANGUAGE" = "${LANGUAGECODE_LANGUAGECHOOSER}" \
-				      -a \
-				      "$COUNTRYCODE" = "${COUNTRYCODE_LANGUAGECHOOSER}" \
-				      -a \
-				      "${LANGUAGE}_${COUNTRYCODE}" != "$OLDLOCALE" \
-				      -a \
-				      -n "${LOCALE_LANGUAGECHOOSER_COMPLETE}" \
-				    ] ;  then
-					# Explanation: we revert back to the
-					# locale inherited from the language
-					# step if the country step did NOT
-					# induce change in language and country
-					# but the resulting locale is different
-					# from the one we had in first step.
-					LOCALE=$OLDLOCALE
-				else
-					LOCALE="${entry}"
-				fi
-				break
+		# Is the locale we inherited really a complete locale?
+		LOCALE_LANGUAGECHOOSER_COMPLETE=$(echo $OLDLOCALE | grep "_" || true)
+		PREFERRED_LOCALE="$(preferred_locale "$LANGUAGE" "$COUNTRYCODE" "$ENCODING")"
+		if [ "$PREFERRED_LOCALE" ]; then
+			# Special handling of cases where the locale
+			# in languagechooser is NOT the combination of
+			# language_COUNTRY. Used for Norwegian
+			# Bokmal transition in order to keep no_NO as
+			# locale. May be used in the future for other
+			# special cases, so we'd better keep this.
+			if \
+			    [ "$LANGUAGE" = "${LANGUAGECODE_LANGUAGECHOOSER}" \
+			      -a \
+			      "$COUNTRYCODE" = "${COUNTRYCODE_LANGUAGECHOOSER}" \
+			      -a \
+			      "${LANGUAGE}_${COUNTRYCODE}" != "$OLDLOCALE" \
+			      -a \
+			      -n "${LOCALE_LANGUAGECHOOSER_COMPLETE}" \
+			    ] ;  then
+				# Explanation: we revert back to the
+				# locale inherited from the language
+				# step if the country step did NOT
+				# induce change in language and country
+				# but the resulting locale is different
+				# from the one we had in first step.
+				LOCALE="$OLDLOCALE"
+			else
+				LOCALE="$PREFERRED_LOCALE"
 			fi
-		done
+		fi
 	else
 		# LOCALE was valid
 		LOCALE=$OLDLOCALE
@@ -495,7 +515,7 @@ if [ "$LOCALE" != "C" ] ; then
 	
 	# Fall back to a supported locale.
 	if [ -z "${LOCALE}" ]; then
-		if grep -q "^${FALLBACKLOCALE}$" $SUPPORTEDLOCALES; then
+		if grep -q "^${FALLBACKLOCALE} " $SUPPORTEDLOCALES; then
 			LOCALE="$FALLBACKLOCALE"
 		else
 			LOCALE=`echo $FALLBACKLOCALE | sed -e 's/[.@].*$//'`
@@ -525,20 +545,28 @@ fi
 # We will select from supported locales
 # for LANGUAGE_COUNTRY
 if [ "$LOCALE" != "C" ] ; then
-	POSSIBLELOCALES=$(grep -e "^${LANGUAGE}_${COUNTRYCODE}" $SUPPORTEDLOCALES || true)
+	POSSIBLELOCALES=$(grep -e "^${LANGUAGE}_${COUNTRYCODE}" $SUPPORTEDLOCALES | cut -d' ' -f1 || true)
 	if [ -z "$POSSIBLELOCALES" ] ; then
-		POSSIBLELOCALES=$(grep -e "^${LANGUAGE}_${COUNTRYCODE_LANGUAGECHOOSER}" $SUPPORTEDLOCALES || true)
+		POSSIBLELOCALES=$(grep -e "^${LANGUAGE}_${COUNTRYCODE_LANGUAGECHOOSER}" $SUPPORTEDLOCALES | cut -d' ' -f1 || true)
 	fi
 	if [ $(echo $POSSIBLELOCALES | wc -w) -gt 1 ] ; then
 		CHOICES=""
+		DEFAULT=""
 		for i in $POSSIBLELOCALES ; do
 			if [ -z "$CHOICES" ] ; then
 				CHOICES=$i
 			else
 				CHOICES="$CHOICES, $i"
 			fi
+			if [ -z "$ENCODING" ] || [ "$(grep -e "^$(echo "$i" | sed 's/\./\\./g') " $SUPPORTEDLOCALES | cut -d' ' -f2)" = "$ENCODING" ]; then
+				DEFAULT="$i"
+			fi
 		done
 		db_subst $localecode LOCALELIST "$CHOICES"
+		db_fget $localecode seen
+		if [ "$RET" = false ]; then
+			db_set $localecode "$DEFAULT"
+		fi
 		db_input medium $localecode || [ $? -eq 30 ]
 		if ! db_go; then
 			exit 10
@@ -550,7 +578,7 @@ if [ "$LOCALE" != "C" ] ; then
 	# Ask for additional locales to be generated
 	CHOICES=
 	# *.UTF-8@euro locales are deprecated; don't use them.
-	for i in $(grep -v '\.UTF-8@euro$' $SUPPORTEDLOCALES | grep -v "^$LOCALE$"); do
+	for i in $(grep -v '\.UTF-8@euro$' $SUPPORTEDLOCALES | cut -d' ' -f1 | grep -v "^$LOCALE$"); do
 		if [ -z "$CHOICES" ]; then
 			CHOICES="$i"
 		else

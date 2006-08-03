@@ -1,3 +1,15 @@
+localechooser (1.20ubuntu5) edgy; urgency=low
+
+  * Ignore failures from locale-gen.
+  * Backport from trunk:
+    - Fix check-data target.
+    - Fix incorrect field ordering in Finnish languagelist line.
+  * Add encoding field to languagelist file and use the full SUPPORTED file
+    rather than SUPPORTED-short, so that we can tell that (e.g.) se_NO and
+    vi_VN are really UTF-8 locales (closes: Malone #47742).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  3 Aug 2006 04:55:38 +0100
+
 localechooser (1.20ubuntu4) edgy; urgency=low
 
   * Backport from trunk:
