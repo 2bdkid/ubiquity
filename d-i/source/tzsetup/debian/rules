@@ -13,31 +13,27 @@ install: build
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_install -i
+	dh_install
 
 binary-arch: build install
 
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	dh_installdebconf -i
+	dh_installdebconf
 
 	# Merge in all templates.
 	echo >> debian/tzsetup-udeb/DEBIAN/templates
 	po2debconf debian/common.templates >> debian/tzsetup-udeb/DEBIAN/templates
-	sed -e 's,Template: debian-installer/tzsetup-udeb/title,Template: oem-config/menu/timezone,' \
-		< debian/tzsetup-udeb/DEBIAN/templates \
-		> debian/oem-config-timezone/usr/lib/oem-config/menu/timezone.templates
 
-	dh_installdocs -i
-	dh_installchangelogs -i
-	dh_compress -i
-	dh_fixperms -i
+	dh_installchangelogs
+	dh_compress
+	dh_fixperms
 	cp debian/tzsetup-udeb.isinstallable debian/tzsetup-udeb/DEBIAN/isinstallable
-	dh_installdeb -i
-	dh_gencontrol -i
-	dh_md5sums -i
-	dh_builddeb -i
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
 
 binary: binary-indep binary-arch
 .PHONY: build clean binary-indep binary-arch binary install

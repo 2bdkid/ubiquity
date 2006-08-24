@@ -2,7 +2,6 @@
 
 PACKAGE=localechooser
 DATAPACKAGE=localechooser-data
-OCPACKAGE=oem-config-locale
 
 build: build-stamp
 build-stamp:
@@ -36,18 +35,13 @@ install: build
 	install -m644 /usr/share/i18n/SUPPORTED debian/$(PACKAGE)/usr/share/localechooser/SUPPORTED
 	install -m644 debian/short-tmp/shortlists debian/$(PACKAGE)/etc/shortlists
 	dh_install -p$(DATAPACKAGE) default-country languagelist regionmap debian/short-tmp/shortlists usr/share/localechooser
-	dh_install -p$(OCPACKAGE) localechooser languagemap usr/lib/oem-config/locale/
-	dh_install -p$(OCPACKAGE) oem-config/locale* usr/lib/oem-config/menu/
 
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	dh_installdocs -p$(DATAPACKAGE) -p$(OCPACKAGE)
-	dh_installchangelogs -p$(DATAPACKAGE) -p$(OCPACKAGE)
+	dh_installdocs -p$(DATAPACKAGE)
+	dh_installchangelogs -p$(DATAPACKAGE)
 	dh_installdebconf -i
-	sed -e 's,Template: debian-installer/localechooser/title,Template: oem-config/menu/locale,' \
-		< debian/$(PACKAGE)/DEBIAN/templates \
-		> debian/$(OCPACKAGE)/usr/lib/oem-config/menu/locale.templates
 	dh_strip -i
 	dh_compress -i
 	dh_fixperms -i

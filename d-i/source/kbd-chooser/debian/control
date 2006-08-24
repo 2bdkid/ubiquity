@@ -11,12 +11,3 @@ XB-Installer-Menu-Item: 12
 Depends: ${shlibs:Depends}, ${misc:Depends}, console-keymaps, cdebconf-newt-detect-keys
 Description: Detect a keyboard and select layout
 XC-Package-Type: udeb
-
-Package: oem-config-keyboard
-Section: admin
-Architecture: i386 ia64 hppa alpha sparc mips mipsel arm m68k powerpc amd64
-Depends: ${shlibs:Depends}, console-data (>= 2002.12.04dbs-49ubuntu2)
-Enhances: oem-config
-Description: Detect a keyboard and select layout
- This package provides a keyboard selection module for oem-config, using
- the same code as is used in the installer.
