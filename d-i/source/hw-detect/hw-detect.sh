@@ -724,8 +724,8 @@ fi
 if [ "$have_pcmcia" -eq 1 ] && ! grep -q pcmcia-cs /var/lib/apt-install/queue 2>/dev/null; then
 	log "Detected PCMCIA, installing pcmcia-cs."
 	apt-install pcmcia-cs || true
-	if expr "$(uname -r)" : 2.6 >/dev/null && ! type cardmgr >/dev/null 2>&1; then
-		log "Detected PCMCIA and no cardmgr, installing pcmciautils."
+	if expr "$(uname -r)" : 2.6 >/dev/null; then
+		log "Detected PCMCIA, installing pcmciautils."
 		apt-install pcmciautils || true
 	fi
 
@@ -741,24 +741,21 @@ if [ "$have_pcmcia" -eq 1 ] && ! grep -q pcmcia-cs /var/lib/apt-install/queue 2>
 	fi
 fi
 
-# Ask for discover to be installed into /target/, to make sure the
-# required drivers are loaded. We need to do this even if d-i isn't using
-# discover, since X's maintainer scripts use discover to find out what
-# video hardware is in use.
-case "$DISCOVER_VERSION" in
-	2)
-		apt-install discover || true
-		;;
-	1|'')
-		apt-install discover1 || true
-		;;
-esac
-
-# Install udev/hotplug as well, as appropriate.
+# Install appropriate hardware detection tool into target.
 if type udevd >/dev/null 2>&1; then
 	apt-install udev || true
-elif [ -f /proc/sys/kernel/hotplug ]; then 
-	apt-install hotplug || true
+else
+	case "$DISCOVER_VERSION" in
+		2)
+			apt-install discover || true
+			;;
+		1|'')
+			apt-install discover1 || true
+			;;
+	esac
+	if [ -f /proc/sys/kernel/hotplug ]; then
+		apt-install hotplug || true
+	fi
 fi
 
 # TODO: should this really be conditional on hotplug support?
@@ -770,6 +767,11 @@ fi
 if [ -d /proc/acpi ]; then
 	apt-install acpi || true
 	apt-install acpid || true
+fi
+
+# If hardware has support for pmu, install pbbuttonsd
+if [ -d /sys/class/misc/pmu/ ]; then
+	apt-install pbbuttonsd || true
 fi
 
 db_progress SET $MAX_STEPS

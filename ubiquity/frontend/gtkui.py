@@ -56,6 +56,12 @@ try:
 except ImportError:
     from ubiquity.debconfcommunicator import DebconfCommunicator
 
+try:
+    import problem_report
+    import apport_utils
+except ImportError:
+    pass
+
 from ubiquity import filteredcommand, validation
 from ubiquity.misc import *
 from ubiquity.settings import *
@@ -148,9 +154,6 @@ class Wizard:
         # set custom language
         self.set_locales()
 
-        # If automatic partitioning fails, it may be disabled toggling on this variable:
-        self.discard_automatic_partitioning = False
-
         # load the interface
         self.glade = gtk.glade.XML('%s/ubiquity.glade' % GLADEDIR)
 
@@ -182,9 +185,35 @@ class Wizard:
         print >>sys.stderr, ("Exception in GTK frontend"
                              " (invoking crash handler):")
         print >>sys.stderr, tbtext
+
+        if 'problem_report' in sys.modules and 'apport_utils' in sys.modules:
+            try:
+                pr = problem_report.ProblemReport()
+                apport_utils.report_add_package_info(pr, 'ubiquity-frontend-gtk')
+                apport_utils.report_add_os_info(pr)
+                apport_utils.report_add_proc_info(pr)
+                pr['BugDisplayMode'] = 'file'
+                pr['ExecutablePath'] = '/usr/bin/ubiquity'
+                pr['PythonTraceback'] = tbtext
+                if os.path.exists('/var/log/installer/syslog'):
+                    pr['UbiquityInstallerSyslog'] = ('/var/log/installer/syslog',)
+                if os.path.exists('/var/log/syslog'):
+                    pr['UbiquitySyslog'] = ('/var/log/syslog',)
+                if os.path.exists('/var/log/partman'):
+                    pr['UbiquityPartman'] = ('/var/log/partman',)
+                reportfile = open(apport_utils.make_report_path(pr), 'w')
+                pr.write(reportfile)
+                reportfile.close()
+            except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
+                # Out of disk space? Fall back to our own crash handler.
+                pass
+
         self.crash_detail_label.set_text(tbtext)
         self.crash_dialog.run()
         self.crash_dialog.hide()
+
         sys.exit(1)
 
 
@@ -1219,22 +1248,6 @@ class Wizard:
             self.new_size_vbox.show()
         else:
             self.new_size_vbox.hide()
-
-
-##     def on_abort_dialog_close (self, widget):
-
-##         """ Disable automatic partitioning and reset partitioning method step. """
-
-##         sys.stderr.write ('\non_abort_dialog_close.\n\n')
-
-##         self.discard_automatic_partitioning = True
-##         self.on_drives_changed (None)
-
-    def on_abort_ok_button_clicked (self, widget):
-
-        """ Close this dialog. """
-
-        self.abort_dialog.hide ()
 
 
     # Callbacks provided to components.

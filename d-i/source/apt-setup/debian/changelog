@@ -1,3 +1,13 @@
+apt-setup (1:0.11ubuntu4) edgy; urgency=low
+
+  * Backport from trunk (Joey Hess):
+    - Fix broken proxy setting code in 90security. Closes: #378868
+      Some systems installed before this fix will have Acquire::http::proxy
+      "false" set in apt.conf, which leads to breakage in some situations.
+      Also, if a proxy was set, it would not be written to the file.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 30 Aug 2006 12:16:36 +0100
+
 apt-setup (1:0.11ubuntu3) edgy; urgency=low
 
   * Honour OVERRIDE_BASE_INSTALLABLE when deciding whether to run

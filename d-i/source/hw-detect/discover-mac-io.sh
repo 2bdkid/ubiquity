@@ -65,8 +65,10 @@ for dir in $(find "/proc/device-tree/" -type d); do
 						register-module dmasound_pmac
 						;;
 					2.6*)
-						# probably best to go for ALSA
-						register-module snd-powermac
+						# Loading snd-powermac locks up G5 systems
+						if  [ "$name" != i2s-a ]; then
+							register-module snd-powermac
+						fi
 						;;
 					esac
 				fi
