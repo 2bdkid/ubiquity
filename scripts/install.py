@@ -32,6 +32,7 @@ import struct
 import socket
 import fcntl
 import traceback
+import syslog
 import debconf
 import apt_pkg
 from apt.package import Package
@@ -167,7 +168,8 @@ class DebconfInstallProgress(InstallProgress):
             except (KeyboardInterrupt, SystemExit):
                 pass # we're going to exit anyway
             except:
-                traceback.print_exc(file=sys.stderr)
+                for line in traceback.format_exc().split('\n'):
+                    syslog.syslog(syslog.LOG_WARN, line)
             os._exit(0)
 
         self.statusfd.close()
@@ -279,8 +281,9 @@ class Install:
             return
 
         tbtext = ''.join(traceback.format_exception(exctype, excvalue, exctb))
-        print >>sys.stderr, "Exception during installation:"
-        print >>sys.stderr, tbtext
+        syslog.syslog(syslog.LOG_ERR, "Exception during installation:")
+        for line in tbtext.split('\n'):
+            syslog.syslog(syslog.LOG_ERR, line)
         tbfile = open('/var/lib/ubiquity/install.trace', 'w')
         print >>tbfile, tbtext
         tbfile.close()
@@ -309,25 +312,30 @@ class Install:
 
             self.db.progress('SET', 76)
             self.db.progress('REGION', 76, 77)
-            self.run_target_config_hooks()
-
-            self.db.progress('SET', 77)
-            self.db.progress('REGION', 77, 78)
             self.db.progress('INFO', 'ubiquity/install/locales')
             self.configure_locales()
 
+            self.db.progress('SET', 77)
+            self.db.progress('REGION', 77, 78)
+            self.db.progress('INFO', 'ubiquity/install/user')
+            self.configure_user()
+
             self.db.progress('SET', 78)
             self.db.progress('REGION', 78, 79)
-            self.db.progress('INFO', 'ubiquity/install/network')
-            self.configure_network()
+            self.run_target_config_hooks()
 
             self.db.progress('SET', 79)
             self.db.progress('REGION', 79, 80)
+            self.db.progress('INFO', 'ubiquity/install/network')
+            self.configure_network()
+
+            self.db.progress('SET', 80)
+            self.db.progress('REGION', 80, 81)
             self.db.progress('INFO', 'ubiquity/install/apt')
             self.configure_apt()
 
-            self.db.progress('SET', 80)
-            self.db.progress('REGION', 80, 84)
+            self.db.progress('SET', 81)
+            self.db.progress('REGION', 81, 85)
             # Ignore failures from language pack installation.
             try:
                 self.install_language_packs()
@@ -338,20 +346,15 @@ class Install:
             except SystemError:
                 pass
 
-            self.db.progress('SET', 84)
-            self.db.progress('REGION', 84, 85)
+            self.db.progress('SET', 85)
+            self.db.progress('REGION', 85, 86)
             self.db.progress('INFO', 'ubiquity/install/timezone')
             self.configure_timezone()
 
-            self.db.progress('SET', 85)
-            self.db.progress('REGION', 85, 87)
+            self.db.progress('SET', 86)
+            self.db.progress('REGION', 86, 88)
             self.db.progress('INFO', 'ubiquity/install/keyboard')
             self.configure_keyboard()
-
-            self.db.progress('SET', 87)
-            self.db.progress('REGION', 87, 88)
-            self.db.progress('INFO', 'ubiquity/install/user')
-            self.configure_user()
 
             self.db.progress('SET', 88)
             self.db.progress('REGION', 88, 92)
@@ -518,12 +521,13 @@ class Install:
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
 
-        for log_file in ('/var/log/installer/syslog', '/var/log/partman',
+        for log_file in ('/var/log/syslog', '/var/log/partman',
                          '/var/log/installer/version'):
             target_log_file = os.path.join(target_dir,
                                            os.path.basename(log_file))
             if not misc.ex('cp', '-a', log_file, target_log_file):
-                misc.pre_log('error', 'Failed to copy installation log file')
+                syslog.syslog(syslog.LOG_ERR,
+                              'Failed to copy installation log file')
             os.chmod(target_log_file, stat.S_IRUSR | stat.S_IWUSR)
 
 
@@ -536,7 +540,7 @@ class Install:
                 os.mkdir(self.source)
             except Exception, e:
                 print e
-            misc.pre_log('info', 'mkdir %s' % self.source)
+            syslog.syslog('mkdir %s' % self.source)
 
         # Autodetection on unionfs systems
         for line in open('/proc/mounts'):
@@ -601,7 +605,8 @@ class Install:
                               'SCRIPT', hookentry)
                 self.db.progress('INFO', 'ubiquity/install/target_hook')
                 # Errors are ignored at present, although this may change.
-                subprocess.call(hook)
+                subprocess.call(['log-output', '-t', 'ubiquity',
+                                 '--pass-stdout', hook])
                 self.db.progress('STEP', 1)
             self.db.progress('STOP')
 
@@ -692,8 +697,7 @@ class Install:
         if not langpacks:
             langpack_db = self.db.get('debian-installer/locale')
             langpacks = [langpack_db.split('_')[0]]
-        misc.pre_log('info',
-                     'keeping language packs for: %s' % ' '.join(langpacks))
+        syslog.syslog('keeping language packs for: %s' % ' '.join(langpacks))
 
         try:
             lppatterns = self.db.get('pkgsel/language-pack-patterns').split()
@@ -729,8 +733,8 @@ class Install:
                 self.db.progress('STOP')
                 return
         except IOError, e:
-            print >>sys.stderr, e
-            sys.stderr.flush()
+            for line in str(e).split('\n'):
+                syslog.syslog(syslog.LOG_WARN, line)
             self.db.progress('STOP')
             raise
         cache.open(None)
@@ -759,13 +763,13 @@ class Install:
                 self.db.progress('STOP')
                 return
         except IOError, e:
-            print >>sys.stderr, e
-            sys.stderr.flush()
+            for line in str(e).split('\n'):
+                syslog.syslog(syslog.LOG_WARN, line)
             self.db.progress('STOP')
             raise
         except SystemError, e:
-            print >>sys.stderr, e
-            sys.stderr.flush()
+            for line in str(e).split('\n'):
+                syslog.syslog(syslog.LOG_WARN, line)
             self.db.progress('STOP')
             raise
         self.db.progress('SET', 100)
@@ -840,8 +844,8 @@ class Install:
 
         self.db.progress('INFO', 'ubiquity/install/hardware')
 
-        subprocess.call(['/usr/lib/ubiquity/debian-installer-utils'
-                         '/register-module.post-base-installer'])
+        misc.ex('/usr/lib/ubiquity/debian-installer-utils'
+                '/register-module.post-base-installer')
 
         resume = self.get_resume_partition()
         if resume is not None:
@@ -1097,8 +1101,8 @@ class Install:
                 self.db.progress('STOP')
                 return
         except SystemError, e:
-            print >>sys.stderr, e
-            sys.stderr.flush()
+            for line in str(e).split('\n'):
+                syslog.syslog(syslog.LOG_ERR, line)
             self.db.progress('STOP')
             raise
         self.db.progress('SET', 5)
@@ -1231,14 +1235,7 @@ class Install:
 
     def chrex(self, *args):
         """executes commands on chroot system (provided by *args)."""
-
-        msg = ''
-        for word in args:
-            msg += str(word) + ' '
-        if not misc.ex('chroot', self.target, *args):
-            misc.pre_log('error', 'chroot ' + msg)
-            return False
-        return True
+        return misc.ex('chroot', self.target, *args)
 
 
     def copy_debconf(self, package):
@@ -1256,7 +1253,9 @@ class Install:
 
 
     def set_debconf(self, question, value):
-        dccomm = subprocess.Popen(['chroot', self.target,
+        dccomm = subprocess.Popen(['log-output', '-t', 'ubiquity',
+                                   '--pass-stdout',
+                                   'chroot', self.target,
                                    'debconf-communicate',
                                    '-fnoninteractive', 'ubiquity'],
                                   stdin=subprocess.PIPE,

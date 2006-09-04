@@ -14,14 +14,14 @@
 #
 # Swedish translation by:
 # Per Olofsson <pelle@debian.org>
-# Daniel Nylander <po@danielnylander.se>, 2005
+# Daniel Nylander <po@danielnylander.se>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 18:30-0600\n"
-"PO-Revision-Date: 2005-12-30 14:56+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-04 10:50+0000\n"
+"PO-Revision-Date: 2006-07-12 14:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-boot@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,8 +82,8 @@ msgid ""
 "are marked with \"${KEEP}\" in the main partitioning menu."
 msgstr ""
 "När partitionen redan är formaterad kan du välja att behålla och använda den "
-"befintliga datan på partitionen.  Partitioner som kommer att användas på "
-"detta sätt markeras med \"${KEEP}\" i huvudpartitioneringsmenyn."
+"befintliga datan på partitionen.  Partitioner som kommer att användas på det "
+"här sättet markeras med \"${KEEP}\" i huvudpartitioneringsmenyn."
 
 #. Type: note
 #. Description
@@ -117,12 +117,11 @@ msgid ""
 "the bootable flag for it. Such a partition will be marked with \"${BOOTABLE}"
 "\" in the main partitioning menu."
 msgstr ""
-"För att starta ditt nya Debiansystem används en så kallad startladdare (boot "
-"loader). Den kan installeras antingen i huvudstartsektorn på första "
-"hårddisken eller på en partition.  När startladdaren installeras på en "
-"partition måste du aktivera startbar-flaggan på partitionen. En sådan "
-"partition kommer att markeras med \"${BOOTABLE}\" i "
-"huvudpartitioneringsmenyn."
+"För att starta ditt nya Debiansystem används en så kallad starthanterare. "
+"Den kan installeras antingen i huvudstartsektorn på första hårddisken eller "
+"på en partition.  När starthanteraren installeras på en partition måste du "
+"aktivera startbar-flaggan på partitionen. En sådan partition kommer att "
+"markeras med \"${BOOTABLE}\" i huvudpartitioneringsmenyn."
 
 #. Type: text
 #. Description
@@ -133,10 +132,10 @@ msgid ""
 "partition.  Such a partition will be marked with \"${BOOTABLE}\" in the main "
 "partitioning menu."
 msgstr ""
-"För att starta ditt nya Debiansystem används en så kallad startladdare (boot "
-"loader).  Den installeras på en startpartition. Du måste aktivera startbar-"
-"flaggan på partitionen.  En sådan partition kommer att markeras med "
-"\"${BOOTABLE}\" i huvudpartitioneringsmenyn."
+"För att starta ditt nya Debiansystem används en så kallad starthanterare.  "
+"Den installeras på en startpartition. Du måste aktivera startbar-flaggan på "
+"partitionen.  En sådan partition kommer att markeras med \"${BOOTABLE}\" i "
+"huvudpartitioneringsmenyn."
 
 #. Type: error
 #. Description
@@ -158,7 +157,7 @@ msgstr ""
 #. Description
 #: ../partman-target.templates:42
 msgid "Please correct this by changing mount points."
-msgstr "Korrigera detta genom att ändra monteringspunkter."
+msgstr "Korrigera det här genom att ändra monteringspunkter."
 
 #. Type: error
 #. Description
@@ -176,7 +175,7 @@ msgstr "Inget rotfilsystem är definierat."
 #. Description
 #: ../partman-target.templates:50
 msgid "Please correct this from the partitioning menu."
-msgstr "Korrigera detta från partitioneringsmenyn."
+msgstr "Korrigera det här från partitioneringsmenyn."
 
 #. Type: boolean
 #. Description
@@ -203,35 +202,17 @@ msgstr "Du kan återuppta partitioneringen från partitioneringsmenyn."
 #. Type: select
 #. Description
 #: ../partman-target.templates:66
-msgid "File system for this partition:"
-msgstr "Filsystem på denna partition:"
-
-#. Type: select
-#. Description
-#: ../partman-target.templates:71
 msgid "How to use this partition:"
-msgstr "Hur denna partition ska användas:"
+msgstr "Hur den här partitionen ska användas:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:75
-msgid "File system:"
-msgstr "Filsystem:"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:79
+#: ../partman-target.templates:70
 msgid "Use as:"
 msgstr "Använd som:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:83
-msgid "no file system"
-msgstr "inget filsystem"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:87
+#: ../partman-target.templates:74
 msgid "Help on partitioning"
 msgstr "Hjälp för partitionering"

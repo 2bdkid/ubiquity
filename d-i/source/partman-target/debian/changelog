@@ -1,3 +1,88 @@
+partman-target (45ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Create /var/lock and /var/run on the root filesystem before /var is
+      mounted, so that udev can use them.
+    - Use UUID= fstab syntax for all partitions if a UUID is available, and
+      add a comment above each UUID to indicate the corresponding device at
+      install time.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 30 Aug 2006 11:22:43 +0100
+
+partman-target (45) unstable; urgency=low
+
+  * Remove partman-target/choose_filesystem,
+    partman-target/text/choose_filesystem, and
+    partman-target/text/no_file_system templates; none of these have been
+    used since partman-basicmethods started handling filesystems
+    (partman-target 25).
+  * Use list-devices to find CDs and floppies. Requires di-utils 1.33.
+  * Use sysfs and udevinfo if available to find usb-storage devices.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Giuseppe Sacco
+  * Korean (ko.po) by Sunjae park
+  * Dutch (nl.po) by Bart Cornelis
+  * Romanian (ro.po) by Eddy Petrişor
+  * Tagalog (tl.po) by Eric Pareja
+  * Simplified Chinese (zh_CN.po) by Carlos Z.F. Liu
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 29 Aug 2006 11:58:53 +0100
+
+partman-target (44) unstable; urgency=low
+
+  * finish.d/mount_partitions: partman-doc specifies that mount.d scripts
+    print the command needed to unmount the partition; avoid that this output
+    ends up in the syslog even though it is currently unused.
+
+  [ Updated translations ]
+  * Punjabi (pa.po) by A S Alam
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Jul 2006 22:17:56 +0200
+
+partman-target (43) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bengali (bn.po) by Progga
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po)
+  * Esperanto (eo.po) by Serge Leblanc
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Irish (ga.po) by Kevin Patrick Scannell
+  * Hungarian (hu.po) by SZERVÑC Attila
+  * Italian (it.po) by Giuseppe Sacco
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Khmer (km.po) by Leang Chumsoben
+  * Korean (ko.po) by Sunjae park
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Bokmål, Norwegian (nb.po) by Bjørn Steensrud
+  * Nepali (ne.po) by Shiva Pokharel
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Jure Čuhalev
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Thu, 13 Jul 2006 17:44:28 +0200
+
 partman-target (42ubuntu2) edgy; urgency=low
 
   * Use UUID= fstab syntax for all partitions if a UUID is available, and

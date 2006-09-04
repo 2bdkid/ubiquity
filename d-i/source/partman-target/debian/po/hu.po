@@ -6,39 +6,39 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Maintains: VI fsfhu
+# comm2: sas 321hu
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 18:30-0600\n"
-"PO-Revision-Date: 2004-10-05 22:24+0200\n"
-"Last-Translator: VEROK Istvan <vi@fsf.hu>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-04 10:50+0000\n"
+"PO-Revision-Date: 2006-08-19 14:42+0100\n"
+"Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
 #. Type: note
 #. Description
 #: ../partman-target.templates:3
-#, fuzzy
 msgid ""
 "Partitioning a hard drive consists of dividing it to create the space needed "
 "to install your new system.  You need to choose which partition(s) will be "
 "used for the installation."
 msgstr ""
-"Egy merevlemez partícionálása során azt az új Debian-rendszer számára "
-"megfelelő méretű logikai részekre osztja. Ki kell választania a Debian "
-"telepítésére szolgáló partíció(ka)t."
+"Egy merevlemez particionálása megosztásából áll egy új rendszer számára "
+"létrehozandó hely érdekében. Ki kell választani, a telepítésre használt 1 "
+"vagy több partíciót."
 
 #. Type: note
 #. Description
 #: ../partman-target.templates:3
 msgid "Select a free space to create partitions in it."
-msgstr "Szabad helyet kiválasztva abban partíciókat hozhat létre."
+msgstr "Válassz szabad helyet partíció létrehozásához"
 
 #. Type: note
 #. Description
@@ -47,13 +47,12 @@ msgid ""
 "Select a device to remove all partitions in it and create a new empty "
 "partition table."
 msgstr ""
-"Eszközt kiválasztva annak minden partícióját megszüntetheti és új, üres "
-"partíciós táblát helyezhet rá."
+"Válassz eszközt, melyen törlöd a partíciókat és új üres partíciós táblát "
+"hozol létre."
 
 #. Type: note
 #. Description
 #: ../partman-target.templates:3
-#, fuzzy
 msgid ""
 "Select a partition to remove it or to specify how it should be used. At a "
 "bare minimum, you need one partition to contain the root of the file system "
@@ -61,26 +60,21 @@ msgid ""
 "partition is a necessity.  \"Swap\" is scratch space for an operating "
 "system, which allows the system to use disk storage as \"virtual memory\"."
 msgstr ""
-"Partíciót kiválasztva azt törölheti, vagy megadhatja, hogy a Debian mit "
-"kezdjen vele. A Debian minimális igénye egy, a fájlrendszer gyökerét jelentő "
-"partíció (csatlakoztatási pontja: /). A legtöbb hozzáértő ezen felül egy "
-"külön cserepartíciót is szükségesnek tart. A \"csere\" az operációs rendszer "
-"szabad garázdálkodására fenntartott hely, amit a rendszer általában "
-"lemezalapú \"virtuális memória\" képében hasznosít."
+"Egy partíciót kiválasztva az törölhető vagy megadható felhasználása. "
+"Legalább 1, a fájlrendszer gyökerét tartalmazó partíció szükséges (melynek "
+"csatolási pontja /). A legtöbben a külön cserepartíciót is szükségesnek "
+"tartják. A \"cserehely\" \"virtuális memória\" feladatot tölt be."
 
 #. Type: note
 #. Description
 #: ../partman-target.templates:3
-#, fuzzy
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
 "existing data in the partition.  Partitions that will be used in this way "
 "are marked with \"${KEEP}\" in the main partitioning menu."
 msgstr ""
-"Már formázott partíciók adatai természetesen megőrizhetők és továbbra is "
-"használhatók. Az így kezelt partíciókat a fő partícionálómenüben \"${KEEP}\" "
-"jelzi. MEGJEGYZÉS: ez a telepítő nem képes egy meglevő GNU/Linux-rendszerbe "
-"\"beleülve\", annak bizonyos fájljait felülírva telepíteni."
+"Már formázott partíciók adatai megőrizhetők. Az így használt partíciók a "
+"\"${KEEP}\" jellel jelöltek a fő particionáló-menüben."
 
 #. Type: note
 #. Description
@@ -92,11 +86,10 @@ msgid ""
 "marked with \"${DESTROY}\" in the main partitioning menu.  Otherwise it will "
 "be marked with \"${FORMAT}\"."
 msgstr ""
-"Általában véve az újonnan létrehozott partíciókat fájlrendszerekkel kell "
-"megformázni. MEGJEGYZÉS: ettől a partíción található összes adat elveszik. "
-"Ha egy már formattált partíciót jelöl ki formázásra, azt a fő "
-"partícionálómenüben \"${DESTROY}\" jelzi. Egyéb esetben \"${FORMAT}\" "
-"jelzést kap."
+"Az új partíciókat általában újonnan létrehozott fájlrendszerrel formázzuk. "
+"MEGJEGYZÉS: a partíción lévő minden adat elvész. Ha újraformázol egy "
+"partíciót, a \"${DESTROY}\" jelzi a fő particionáló menüben. Amúgy "
+"\"${FORMAT}\" jelet kap."
 
 #. Type: note
 #. Description
@@ -107,7 +100,6 @@ msgstr "${ARCHITECTURE_HELP}"
 #. Type: text
 #. Description
 #: ../partman-target.templates:34
-#, fuzzy
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It can "
 "be installed either in the master boot record of the first hard disk, or in "
@@ -115,32 +107,29 @@ msgid ""
 "the bootable flag for it. Such a partition will be marked with \"${BOOTABLE}"
 "\" in the main partitioning menu."
 msgstr ""
-"Az új Debian-rendszer indítását egy ún. rendszerbetöltő végzi. Ezt vagy az "
-"első merevlemez fő indítórekordjába, vagy egy partícióra lehet telepíteni. "
-"Ha partícióra telepíti, akkor az adott partíció rendszerindító kapcsolóját "
-"be kell kapcsolni. Az ilyen partíciót a fő partícionálómenüben \"${BOOTABLE}"
-"\" jelzi."
+"Egy új rendszer indítását az ún. boot betöltő végzi. Telepíthető az 1. "
+"merevlemez MBR-jébe vagy egy partíción. Ha egy partícióra települ, azon be "
+"kell állítani a boot zászlót. Az ilyen partíciók a \"${BOOTABLE}\" jelet "
+"kapják a fő partícináló menüben."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:38
-#, fuzzy
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It is "
 "installed in a boot partition.  You must set the bootable flag for the "
 "partition.  Such a partition will be marked with \"${BOOTABLE}\" in the main "
 "partitioning menu."
 msgstr ""
-"Az új Debian-rendszer indítását egy ún. rendszerbetöltő végzi. Ezt egy "
-"partícióra lehet telepíteni. Az adott partíció rendszerindító kapcsolóját be "
-"kell kapcsolni. Az ilyen partíciót a fő partícionálómenüben \"${BOOTABLE}\" "
-"jelzi."
+"Egy új rendszer indítását az ún. boot betöltő végzi. Ez egy boot partícióra "
+"települ, melyen be kell állítani a boot zászlót. Az ilyen partíciók a "
+"\"${BOOTABLE}\" jelet kapják a fő partícináló menüben."
 
 #. Type: error
 #. Description
 #: ../partman-target.templates:42
 msgid "Identical mount points for two file systems"
-msgstr "Két fájlrendszer ugyanazt a csatlakoztatási pontot használja"
+msgstr "Azonos csatolási pont 2 fájlrendszerhez"
 
 #. Type: error
 #. Description
@@ -148,15 +137,13 @@ msgstr "Két fájlrendszer ugyanazt a csatlakoztatási pontot használja"
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
 "and ${PART2}."
-msgstr ""
-"Két fájlrendszer (${PART1} és ${PART2}) számára ugyanaz a csatlakoztatási "
-"pont (${MOUNTPOINT}) van kijelölve."
+msgstr "${PART1} és ${PART2} egy csatolási ponthoz rendelt (${MOUNTPOINT})."
 
 #. Type: error
 #. Description
 #: ../partman-target.templates:42
 msgid "Please correct this by changing mount points."
-msgstr "Módosítsa a megadott csatlakoztatási pontokat."
+msgstr "Módosítsd a megadott csatolási pontokat."
 
 #. Type: error
 #. Description
@@ -168,19 +155,19 @@ msgstr "Nincs gyökér-fájlrendszer"
 #. Description
 #: ../partman-target.templates:50
 msgid "No root file system is defined."
-msgstr "Nem adott meg gyökér-fájlrendszert."
+msgstr "Nincs gyökér-fájlrendszer megadva"
 
 #. Type: error
 #. Description
 #: ../partman-target.templates:50
 msgid "Please correct this from the partitioning menu."
-msgstr "A partícionálómenüben adjon meg egyet."
+msgstr "A particionáló menüben adj meg egyet."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:57
 msgid "Do you want to resume partitioning?"
-msgstr "Folytatja a partícionálási folyamatot?"
+msgstr "Folytatod a particionálást?"
 
 #. Type: boolean
 #. Description
@@ -189,47 +176,28 @@ msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
 msgstr ""
-"${DEVICE} eszközön levő ${TYPE} fájlrendszer ${MOUNTPOINT} pontra "
-"felcsatlakoztatása meghiúsult."
+"${DEVICE} ${TYPE} fájlrendszere ${MOUNTPOINT} pontra csatolása meghiúsult."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:57
 msgid "You may resume partitioning from the partitioning menu."
-msgstr "A partícionálási folyamatot a partícionálómenüben folytathatja."
+msgstr "A particionálást a particionáló-menüben folytathatod."
 
 #. Type: select
 #. Description
 #: ../partman-target.templates:66
-msgid "File system for this partition:"
-msgstr "Partíció fájlrendszere:"
-
-#. Type: select
-#. Description
-#: ../partman-target.templates:71
 msgid "How to use this partition:"
-msgstr "Partíció felhasználási módja:"
+msgstr "Partíció felhasználása:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:75
-msgid "File system:"
-msgstr "Fájlrendszer:"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:79
+#: ../partman-target.templates:70
 msgid "Use as:"
-msgstr "Felhasználás:"
+msgstr "Használat:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:83
-msgid "no file system"
-msgstr "nincs fájlrendszer"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:87
+#: ../partman-target.templates:74
 msgid "Help on partitioning"
-msgstr "Partícionálási súgó megtekintése"
+msgstr "Particionálási súgó"

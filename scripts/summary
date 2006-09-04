@@ -14,6 +14,24 @@ db_subst ubiquity/summary USERNAME "$RET"
 db_get time/zone # actually continent/city (usually)
 db_subst ubiquity/summary LOCATION "$RET"
 
+db_capb escape
+db_get ubiquity/partman-made-changes
+if [ "$RET" = true ]; then
+	db_metaget partman/confirm Extended_description
+else
+	db_metaget partman/confirm_nochanges Extended_description
+fi
+db_subst ubiquity/summary PARTMAN_CHANGES \
+	"$(printf %s "$RET" | debconf-escape -e)"
+db_capb
+
+if [ -x /usr/share/grub-installer/grub-installer ]; then
+	db_metaget ubiquity/summary/grub Description
+	db_subst ubiquity/summary EXTRAS "$RET"
+else
+	db_subst ubiquity/summary EXTRAS ''
+fi
+
 db_input high ubiquity/summary || true
 db_go
 

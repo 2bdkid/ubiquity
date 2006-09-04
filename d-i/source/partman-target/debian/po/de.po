@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -19,9 +19,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-10-02 18:30-0600\n"
-"PO-Revision-Date: 2005-10-08 23:00+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-04 10:50+0000\n"
+"PO-Revision-Date: 2006-07-19 21:45+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +135,7 @@ msgid ""
 "partitioning menu."
 msgstr ""
 "Damit Ihr Computer Ihr neues System starten kann, wird ein so genannter "
-"Bootloader benötigt. Er wird in einer startbaren Partition installiert. Sie "
+"Bootloader benötigt. Er wird in einer bootfähigen Partition installiert. Sie "
 "müssen das »bootable«-Flag für die Partition aktivieren. Eine solche "
 "Partition wird im Hauptpartitionsmenü mit »${BOOTABLE}« gekennzeichnet."
 
@@ -177,7 +177,7 @@ msgstr "Es wurde kein Root-Dateisystem festgelegt."
 #. Description
 #: ../partman-target.templates:50
 msgid "Please correct this from the partitioning menu."
-msgstr "Bitte beheben Sie dies im Partitions-Menü."
+msgstr "Bitte beheben Sie dies im Partitionsmenü."
 
 #. Type: boolean
 #. Description
@@ -199,40 +199,22 @@ msgstr ""
 #. Description
 #: ../partman-target.templates:57
 msgid "You may resume partitioning from the partitioning menu."
-msgstr "Sie können die Partitionierung im Partitions-Menü fortsetzen."
+msgstr "Sie können die Partitionierung im Partitionsmenü fortsetzen."
 
 #. Type: select
 #. Description
 #: ../partman-target.templates:66
-msgid "File system for this partition:"
-msgstr "Dateisystem für diese Partition:"
-
-#. Type: select
-#. Description
-#: ../partman-target.templates:71
 msgid "How to use this partition:"
 msgstr "Zweck der Partition:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:75
-msgid "File system:"
-msgstr "Dateisystem:"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:79
+#: ../partman-target.templates:70
 msgid "Use as:"
 msgstr "Benutzen als:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:83
-msgid "no file system"
-msgstr "Kein Dateisystem"
-
-#. Type: text
-#. Description
-#: ../partman-target.templates:87
+#: ../partman-target.templates:74
 msgid "Help on partitioning"
 msgstr "Hilfe zur Partitionierung"

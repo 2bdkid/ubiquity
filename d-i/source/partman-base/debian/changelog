@@ -1,3 +1,25 @@
+partman-base (90ubuntu5) edgy; urgency=low
+
+  * Don't shut down parted_server in PARTMAN_NO_COMMIT mode: it has
+    uncommitted changes in memory, so needs to stay running.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  4 Sep 2006 15:08:42 +0100
+
+partman-base (90ubuntu4) edgy; urgency=low
+
+  * Backport from trunk:
+    - Don't lose backup capability when finding out current capabilities.
+  * If PARTMAN_NO_COMMIT is set, then stop parted_server and exit rather
+    than running commit.d and finish.d scripts. Add a new partman-commit
+    script which starts up parted_server again and runs these separately
+    (this also honours PARTMAN_UPDATE_BEFORE_COMMIT rather than
+    PARTMAN_UPDATE_BEFORE_CONFIRM; see changelog entry for 78ubuntu4). This
+    allows Ubiquity to defer the commit stage until after displaying an
+    installation summary to the user without having to leave partman
+    running.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  4 Sep 2006 14:42:42 +0100
+
 partman-base (90ubuntu3) edgy; urgency=low
 
   * If PARTMAN_SNOOP is set, then debconf_select dumps out its

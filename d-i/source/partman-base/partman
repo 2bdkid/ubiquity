@@ -87,6 +87,10 @@ while true; do
 	skip_choose_partition=no
     done
 
+    if [ "$PARTMAN_NO_COMMIT" ]; then
+	exit 0
+    fi
+
     for s in /lib/partman/commit.d/*; do
 	if [ -x $s ]; then
 	    $s || continue 2

@@ -1,3 +1,40 @@
+ubiquity (1.1.12) edgy; urgency=low
+
+  * Install apt-setup cdrom generator.
+  * Send all log messages to syslog rather than stderr. Use log-output from
+    di-utils for external processes where necessary.
+  * Remove several obsolete functions from ubiquity.misc.
+  * Fix misc.ex to use subprocess.call properly rather than smashing
+    arguments together and invoking them via the shell.
+  * Remove duplicate logging from Install.chrex.
+  * Remove /var/log/installer/syslog from all error messages etc., as
+    everything goes to /var/log/syslog now. /var/log/syslog is now copied to
+    /var/log/installer/syslog on the target system.
+  * Automatically set UBIQUITY_NO_GTK or UBIQUITY_NO_KDE to disable building
+    frontends as appropriate if tools are missing (pygtk-codegen-2.0 for the
+    GTK frontend, kdepyuic for the KDE frontend). This should never happen
+    in normal builds, but saves typing when building test versions.
+  * Teach DebconfFilter to send escaped replies when CAPB escape is set.
+  * Fix substitution variable for full name in ubiquity/summary.
+  * I never really understood the whole control flow around the summary
+    page, and I wrote it! Take advantage of the partman-commit script added
+    in partman-base 90ubuntu4, so that instead we shut down partman, run the
+    summary page, and then start it back up to commit changes. The
+    PartmanCommit component is now used for both automatic and manual
+    partitioning, and is simply called directly from progress_loop; and the
+    Summary component no longer needs to be run with a temporary debconf
+    database.
+  * Configure locales and the user account before running target-config
+    hooks (closes: Malone #50319).
+  * GTK frontend: Put a button on the summary page to allow the user to
+    install GRUB to somewhere other than the MBR of the first hard disk
+    (closes: Malone #41579).
+  * Install list-devices, since a fair bit of backend code now uses it.
+  * Automatic update of included source packages: debian-installer-utils
+    1.35ubuntu2, partman-base 90ubuntu5, partman-target 45ubuntu1.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  4 Sep 2006 22:54:02 +0100
+
 ubiquity (1.1.11) edgy; urgency=low
 
   * Automatic update of included source packages: apt-setup

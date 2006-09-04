@@ -1,0 +1,96 @@
+#!/bin/sh
+set -e
+
+. /lib/partman/definitions.sh
+
+cleanup () {
+    if [ -f /var/run/parted_server.pid ]; then
+	stop_parted_server
+    fi
+}
+trap cleanup EXIT
+
+db_capb backup
+
+# Measure the width of partman/text/number here to make things faster.
+# number_width is used only in visual.d/number
+db_metaget partman/text/number description
+RET=$(printf "$RET" '')
+RET=$(stralign 50 "$RET" | sed 's/[^ ]//g')
+number_width=$((2 + 50 - ${#RET}))
+export number_width
+
+
+# Here is maybe not a good place to set deci (TODO)
+#db_metaget partman/text/deci description
+#deci="$RET"
+#export deci
+
+# The comma has special meaning for debconf.  Lets force dot untill we
+# discover where the comma has to be escaped..
+deci='.'
+
+# If porting this to Debian, be careful! Debian's partman starts automatic
+# partitioning from an init.d script (rather than auto.d as in Ubuntu),
+# which will probably have undesirable consequences unless care is taken to
+# suppress it.
+initcount=`ls /lib/partman/init.d/* | wc -l`
+db_progress START 0 $initcount partman/progress/init/title
+for s in /lib/partman/init.d/*; do
+    if [ -x $s ]; then
+	base=$(basename $s | sed 's/[0-9]*//')
+	echo $base >&2
+	# Not every init script has, or needs, its own progress
+	# template. Add them to slow init scripts only.
+	if ! db_progress INFO partman/progress/init/$base; then
+	    db_progress INFO partman/progress/init/fallback
+	fi
+	if ! $s; then
+	    db_progress STOP
+	    exit 10
+	fi
+    fi
+    db_progress STEP 1
+done
+db_progress STOP
+
+# Hack to handle information fed into partman by an external agent (i.e.
+# Ubiquity).
+if [ "$PARTMAN_UPDATE_BEFORE_COMMIT" ]; then
+    for dev in /var/lib/partman/devices/*; do
+	[ -d "$dev" ] || continue
+	cd $dev
+	partitions=
+	open_dialog PARTITIONS
+	while { read_line partinfo; [ "$partinfo" ]; }; do
+	    if [ "$partitions" ]; then
+		partitions="$partitions
+$partinfo"
+	    else
+		partitions="$partinfo"
+	    fi
+	done
+	close_dialog
+
+	IFS="$NL"
+	for partinfo in $partitions; do
+	    restore_ifs
+	    for u in /lib/partman/update.d/*; do
+		[ -x "$u" ] || continue
+		$u $dev $partinfo
+	    done
+	done
+    done
+fi
+
+for s in /lib/partman/commit.d/*; do
+    if [ -x $s ]; then
+	$s
+    fi
+done
+
+for s in /lib/partman/finish.d/*; do
+    if [ -x $s ]; then
+	$s
+    fi
+done

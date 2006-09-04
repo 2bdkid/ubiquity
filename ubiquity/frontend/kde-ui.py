@@ -38,6 +38,7 @@ import glob
 import subprocess
 import math
 import traceback
+import syslog
 import xml.sax.saxutils
 
 import gettext
@@ -120,6 +121,7 @@ class Wizard:
         self.resize_min_size = None
         self.resize_max_size = None
         self.manual_choice = None
+        self.manual_partitioning = False
         self.password = ''
         self.hostname_edited = False
         self.mountpoint_widgets = []
@@ -138,16 +140,15 @@ class Wizard:
         self.progress_position = ubiquity.progressposition.ProgressPosition()
         self.progress_cancelled = False
         self.previous_partitioning_page = None
+        # TODO cjwatson 2006-09-04: replace this by a button
+        self.summary_device = ''
         self.installing = False
         self.returncode = 0
         self.language_questions = ('live_installer', 'welcome_heading_label',
                                    'welcome_text_label', 'step_label',
                                    'cancel', 'back', 'next')
 
-        devnull = open('/dev/null', 'w')
-        self.laptop = subprocess.call(["laptop-detect"], stdout=devnull,
-                                      stderr=subprocess.STDOUT) == 0
-        devnull.close()
+        self.laptop = ex("laptop-detect")
         self.qtparted_subp = None
 
         # set default language
@@ -189,9 +190,14 @@ class Wizard:
             return
 
         tbtext = ''.join(traceback.format_exception(exctype, excvalue, exctb))
+        syslog.syslog(syslog.LOG_ERR,
+                      "Exception in KDE frontend (invoking crash handler):")
+        for line in tbtext.split('\n'):
+            syslog.syslog(syslog.LOG_ERR, line)
         print >>sys.stderr, ("Exception in KDE frontend"
                              " (invoking crash handler):")
         print >>sys.stderr, tbtext
+
         dialog = CrashDialog(self.userinterface)
         dialog.connect(dialog.beastie_url, SIGNAL("leftClickedURL(const QString&)"), self.openURL)
         dialog.crash_detail.setText(tbtext)
@@ -200,7 +206,7 @@ class Wizard:
 
     def openURL(self, url):
         #need to run this else kdesu can't run Konqueror
-        subprocess.call(['su', 'ubuntu', 'xhost', '+localhost'])
+        ex('su', 'ubuntu', 'xhost', '+localhost')
         KRun.runURL(KURL(url), "text/html")
 
     def run(self):
@@ -279,7 +285,7 @@ class Wizard:
                 self.dbfilter = usersetup.UserSetup(self)
             elif current_name in ("stepPartDisk", "stepPartAuto"):
                 if isinstance(self.dbfilter, partman_auto.PartmanAuto):
-                    pre_log('info', 'reusing running partman')
+                    syslog.syslog('reusing running partman')
                 else:
                     self.dbfilter = partman_auto.PartmanAuto(self)
             elif current_name == "stepReady":
@@ -432,7 +438,7 @@ class Wizard:
     def qtparted_loop(self):
         """call qtparted and embed it into the interface."""
 
-        pre_log('info', 'qtparted_loop()')
+        syslog.syslog('qtparted_loop()')
 
         disable_swap()
 
@@ -443,7 +449,9 @@ class Wizard:
         self.embed.setProtocol(QXEmbed.XPLAIN)
 
         self.qtparted_subp = subprocess.Popen(
-            ['/usr/sbin/qtparted', '--installer'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
+            ['log-output', '-t', 'ubiquity', '--pass-stdout',
+             '/usr/sbin/qtparted', '--installer'],
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
         qtparted_winid = self.qtparted_subp.stdout.readline().rstrip('\n')
         self.embed.embed( int(qtparted_winid) )
         self.qtparted_vbox.addWidget(self.embed)
@@ -514,15 +522,22 @@ class Wizard:
     def progress_loop(self):
         """prepare, copy and config the system in the core install process."""
 
-        pre_log('info', 'progress_loop()')
+        syslog.syslog('progress_loop()')
 
         self.current_page = None
 
-        if self.progress_position.depth() != 0:
-            # A progress bar is already up for the partitioner. Use the rest
-            # of it.
-            (start, end) = self.progress_position.get_region()
-            self.debconf_progress_region(end, 100)
+        self.debconf_progress_start(
+            0, 100, get_string('ubiquity/install/title', self.locale))
+        self.debconf_progress_region(0, 15)
+
+        # turn off kded media watcher here?
+
+        dbfilter = partman_commit.PartmanCommit(self, self.manual_partitioning)
+        if dbfilter.run_command(auto_process=True) != 0:
+            # TODO cjwatson 2006-09-03: return to partitioning?
+            return
+
+        self.debconf_progress_region(15, 100)
 
         dbfilter = install.Install(self)
         ret = dbfilter.run_command(auto_process=True)
@@ -536,7 +551,6 @@ class Wizard:
                                      (ret, realtb))
             else:
                 raise RuntimeError, ("Install failed with exit code %s; see "
-                                     "/var/log/installer/syslog and "
                                      "/var/log/syslog" % ret)
 
         while self.progress_position.depth() != 0:
@@ -569,9 +583,9 @@ class Wizard:
         # can't seem to be able to call dcop from kdesu (even if I su back to ubuntu user)
         #if (os.path.exists("/usr/bin/ksmserver") and
         #    os.path.exists("/usr/bin/dcop")):
-        #    subprocess.call(["dcop", "ksmserver", "ksmserver", "logout", "1", "1", "1"])
+        #    ex("dcop", "ksmserver", "ksmserver", "logout", "1", "1", "1")
         #else:
-        subprocess.call(["reboot"])
+        ex("reboot")
 
     def quit(self):
         """quit installer cleanly."""
@@ -709,8 +723,12 @@ class Wizard:
         """Process and validate the results of this step."""
 
         # setting actual step
-        step = self.step_name(self.get_current_page())
-        pre_log('info', 'Step_before = %s' % step)
+        step_num = self.get_current_page()
+        step = self.step_name(step_num)
+        syslog.syslog('Step_before = %s' % step)
+
+        if step.startswith("stepPart"):
+            self.previous_partitioning_page = step_num
 
         # Welcome
         if step == "stepWelcome":
@@ -748,10 +766,17 @@ class Wizard:
         # Ready to install
         elif step == "stepReady":
             # FIXME self.live_installer.hide()
+            self.current_page = None
+            self.installing = True
             self.progress_loop()
+            return
 
         step = self.step_name(self.get_current_page())
-        pre_log('info', 'Step_after = %s' % step)
+        syslog.syslog('Step_after = %s' % step)
+
+        if step == "stepReady":
+            installText = get_string("live_installer", self.locale)
+            self.userinterface.next.setText(installText)
 
     def process_identification (self):
         """Processing identification step tasks."""
@@ -804,17 +829,16 @@ class Wizard:
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepPartAdvanced"])
         else:
             # TODO cjwatson 2006-01-10: extract mountpoints from partman
+            self.manual_partitioning = False
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepReady"])
-            installText = get_string("live_installer", self.locale)
-            self.userinterface.next.setText(installText)
 
     def qtparted_crashed(self):
         """qtparted crashed. Ask the user if they want to continue."""
 
         # TODO cjwatson 2006-07-18: i18n
         text = ('The advanced partitioner (qtparted) crashed. Further '
-                'information may be found in /var/log/installer/syslog, '
-                'or by running qtparted directly. Do you want to try the '
+                'information may be found in /var/log/syslog, or by '
+                'running qtparted directly. Do you want to try the '
                 'advanced partitioner again, return to automatic '
                 'partitioning, or quit this installer?')
         answer = QMessageBox.warning(self.userinterface, 'QTParted crashed',
@@ -850,13 +874,13 @@ class Wizard:
         # read qtparted output of format "- FORMAT /dev/hda2 linux-swap"
         qtparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
         while not qtparted_reply.startswith('0 ') and not qtparted_reply.startswith('1 '):
-            pre_log('info', 'qtparted replied: %s' % qtparted_reply)
+            syslog.syslog('qtparted replied: %s' % qtparted_reply)
             if qtparted_reply.startswith('- '):
                 words = qtparted_reply[2:].strip().split()
                 if words[0].lower() == 'format' and len(words) >= 3:
                     self.qtparted_fstype[words[1]] = words[2]
             qtparted_reply = self.qtparted_subp.stdout.readline().rstrip('\n')
-        pre_log('info', 'qtparted replied: %s' % qtparted_reply)
+        syslog.syslog('qtparted replied: %s' % qtparted_reply)
 
         if qtparted_reply.startswith('1 '):
             # Cancel
@@ -1043,7 +1067,7 @@ class Wizard:
                                                  format_value, fstype)
         else:
             self.mountpoints = mountpoints
-        pre_log('info', 'mountpoints: %s' % self.mountpoints)
+        syslog.syslog('mountpoints: %s' % self.mountpoints)
 
         # Checking duplicated devices
         partitions = [w.currentText() for w in self.partition_widgets]
@@ -1115,16 +1139,9 @@ class Wizard:
         else:
             self.userinterface.mountpoint_error_reason.hide()
             self.userinterface.mountpoint_error_image.hide()
-        
-        # turn off kded media watcher here?
 
-        if partman_commit.PartmanCommit(self).run_command(auto_process=True) != 0:
-            return
-
-        # Since we've successfully committed partitioning, the install
-        # progress bar should now be displayed, so we can go straight on to
-        # the installation now.
-        self.progress_loop()
+        self.manual_partitioning = True
+        self.steps.next_page()
 
     def on_back_clicked(self):
         """Callback to set previous screen."""
@@ -1168,6 +1185,7 @@ class Wizard:
             self.qtparted_loop()
         elif step == "stepReady":
             self.userinterface.next.setText("Next >")
+            self.userinterface.widgetStack.raiseWidget(self.previous_partitioning_page)
         if not changed_page:
             self.userinterface.widgetStack.raiseWidget(self.get_current_page() - 1)
         if self.dbfilter is not None:
@@ -1194,7 +1212,8 @@ class Wizard:
         tz = self.tzmap.get_selected_tz_name()
         if tz is not None:
             time_admin_env['TZ'] = tz
-        time_admin_subp = subprocess.Popen(["kcmshell", "clock"], env=time_admin_env)
+        time_admin_subp = subprocess.Popen(["log-output", "-t", "ubiquity",
+                                            "kcmshell", "clock"], env=time_admin_env)
         #gobject.child_watch_add(time_admin_subp.pid, self.on_time_admin_exit,
         #                        invisible)
 
@@ -1333,9 +1352,25 @@ class Wizard:
 
     def debconffilter_done (self, dbfilter):
         # TODO cjwatson 2006-02-10: handle dbfilter.status
+        if dbfilter is None:
+            name = 'None'
+        else:
+            name = dbfilter.__class__.__name__
+        if self.dbfilter is None:
+            currentname = 'None'
+        else:
+            currentname = self.dbfilter.__class__.__name__
+        syslog.syslog(syslog.LOG_DEBUG,
+                      "debconffilter_done: %s (current: %s)" %
+                      (name, currentname))
         if dbfilter == self.dbfilter:
             self.dbfilter = None
-            self.app.exit()
+            if isinstance(dbfilter, summary.Summary):
+                # The Summary component is just there to gather information,
+                # and won't call run_main_loop() for itself.
+                self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+            else:
+                self.app.exit()
 
     def set_language_choices (self, choices, choice_map):
         self.language_choice_map = dict(choice_map)
@@ -1498,72 +1533,6 @@ class Wizard:
     def get_mountpoints (self):
         return dict(self.mountpoints)
 
-    def confirm_partitioning_dialog (self, title, description):
-        # TODO cjwatson 2006-03-10: Duplication of page logic; I think some
-        # of this can go away once we reorganise page handling not to invoke
-        # a main loop for each page.
-        self.userinterface.setCursor(QCursor(Qt.WaitCursor))
-        installText = get_string("live_installer", self.locale)
-        self.userinterface.next.setText(installText) # TODO i18n
-        self.previous_partitioning_page = self.get_current_page()
-        self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepReady"])
-
-        save_dbfilter = self.dbfilter
-        save_backup = self.backup
-        self.dbfilter = summary.Summary(self, description)
-        self.backup = False
-
-        # Since the partitioner is still running, we need to use a different
-        # database to run the summary page. Fortunately, nothing we set in
-        # the summary script needs to persist, so we can just use a
-        # throwaway database.
-        save_replace, save_override = None, None
-        if 'DEBCONF_DB_REPLACE' in os.environ:
-            save_replace = os.environ['DEBCONF_DB_REPLACE']
-        if 'DEBCONF_DB_OVERRIDE' in os.environ:
-            save_override = os.environ['DEBCONF_DB_OVERRIDE']
-        os.environ['DEBCONF_DB_REPLACE'] = 'configdb'
-        os.environ['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
-        self.dbfilter.run_command(auto_process=True)
-        if save_replace is None:
-            del os.environ['DEBCONF_DB_REPLACE']
-        else:
-            os.environ['DEBCONF_DB_REPLACE'] = save_replace
-        if save_override is None:
-            del os.environ['DEBCONF_DB_OVERRIDE']
-        else:
-            os.environ['DEBCONF_DB_OVERRIDE'] = save_override
-
-        self.dbfilter = save_dbfilter
-
-        if self.current_page is None:
-            # installation cancelled; partman should return ASAP after this
-            return False
-
-        if self.backup:
-            self.userinterface.widgetStack.raiseWidget(self.previous_partitioning_page)
-            self.userinterface.next.setText("Next >")
-            return False
-        # TODO should this not just force self.backup = False?
-        self.backup = save_backup
-
-        # The user said OK, so we're going to start the installation proper
-        # now. We therefore have to put up the installation progress bar,
-        # return control to partman to do the partitioning in a region of
-        # that, and then let whatever started partman drop through to
-        # progress_loop.
-        # Yes, the control flow is pretty tortuous here. Sorry!
-
-        #self.live_installer.hide()
-        self.current_page = None
-        self.debconf_progress_start(
-            0, 100, get_string('ubiquity/install/title', self.locale))
-        self.debconf_progress_region(0, 15)
-        self.installing = True
-
-        return True
-
-
     def set_keyboard_choices(self, choicemap):
         self.keyboard_choice_map = dict(choicemap)
         choices = choicemap.keys()
@@ -1600,6 +1569,16 @@ class Wizard:
 
     def set_summary_text (self, text):
         self.userinterface.ready_text.setText(text)
+        # TODO cjwatson 2006-09-04: turn DEVICE into a button to launch GRUB
+        # configuration
+
+    def set_summary_device (self, device):
+        # TODO cjwatson 2006-09-04: set text of device button
+        self.summary_device = device
+
+    def get_summary_device (self):
+        # TODO cjwatson 2006-09-04: get text of device button
+        return self.summary_device
 
     def return_to_autopartitioning (self):
         """If the install progress bar is up but still at the partitioning
