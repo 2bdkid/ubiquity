@@ -1,0 +1,13 @@
+#! /bin/sh
+set -e
+
+. /usr/share/debconf/confmodule
+
+mkdir -p /target/etc/default
+cp -a /etc/default/console-setup /target/etc/default/
+
+apt-install console-setup || true
+
+debconf-copydb -p ^console-setup/ configdb target_configdb
+
+exit 0

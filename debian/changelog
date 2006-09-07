@@ -1,3 +1,28 @@
+ubiquity (1.1.13) edgy; urgency=low
+
+  * Rename configure.in to configure.ac.
+  * Drop backward compatibility for base-config/language-packs preseeding
+    from Breezy.
+  * Move from kbd-chooser to console-setup
+    (https://launchpad.net/distros/ubuntu/+spec/sane-installer-keyboard). We
+    still need to add a UI element for the keyboard variant, and
+    translations of layout and variant names are missing, but it mostly
+    seems to work.
+  * Strip Fonts and Keyboard directories from our copy of console-setup;
+    they're very large, and not needed since we don't actually build
+    console-setup, but just copy a few scripts from it.
+  * Add a ubiquity/install/filesystem-images template, which can be
+    preseeded to mount and copy a different filesystem image. If multiple
+    space-separated images are given, then they will be overlaid using
+    unionfs
+    (https://launchpad.net/distros/ubuntu/+spec/live-cd-stacked-filesystems).
+  * Unset DEBIAN_HAS_FRONTEND in apt-install to make sure that debconf-using
+    packages start up a new noninteractive frontend.
+  * Bump debhelper build-dependency to 5.0.37.2 and python-central to 0.5
+    for new Python policy, per lintian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  7 Sep 2006 19:43:46 +0100
+
 ubiquity (1.1.12) edgy; urgency=low
 
   * Install apt-setup cdrom generator.
