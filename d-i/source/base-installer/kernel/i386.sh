@@ -25,6 +25,7 @@ arch_check_usable_kernel () {
 	if expr "$1" : '.*-server.*' >/dev/null; then return 0; fi
 	if expr "$1" : '.*-386.*' >/dev/null; then return 0; fi
 	if [ "$2" = 386 ]; then return 1; fi
+	if expr "$1" : '.*-generic.*' >/dev/null; then return 0; fi
 	if expr "$1" : '.*-586.*' >/dev/null; then return 0; fi
 	if [ "$2" = 586tsc ]; then return 1; fi
 	if [ "$2" = 686 ]; then
@@ -49,36 +50,18 @@ arch_get_kernel_etch () {
 	fi
 
 	if [ "$1" = k7 ]; then
-		if [ "$SMP" ]; then
-			echo "linux-k7$SMP"
-			echo "linux-image-k7$SMP"
-		fi
-		echo "linux-k7"
-		echo "linux-image-k7"
 		set k6
 	fi
 	if [ "$1" = k6 ]; then
-		if [ "$KERNEL_MAJOR" = 2.4 ]; then
-			echo "linux-k6"
-			echo "linux-image-k6"
-		fi
 		set 586tsc
 	fi
 
 	if [ "$1" = 686 ]; then
-		if [ "$SMP" ]; then
-			echo "linux-686$SMP"
-			echo "linux-image-686$SMP"
-		fi
-		echo "linux-686"
-		echo "linux-image-686"
 		set 586tsc
 	fi
 	if [ "$1" = 586tsc ]; then
-		if [ "$KERNEL_MAJOR" = 2.4 ]; then
-			echo "linux-586tsc"
-			echo "linux-image-586tsc"
-		fi
+		echo "linux-generic"
+		echo "linux-image-generic"
 		set 386
 	fi
 	echo "linux-386"

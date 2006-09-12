@@ -1,3 +1,35 @@
+console-setup (1.7ubuntu8) edgy; urgency=low
+
+  * Add setupcon --force option and use it in postinst (Anton Zinoviev,
+    http://lists.alioth.debian.org/pipermail/pkg-kbd-devel/2006-August/000278.html).
+  * Check $DISPLAY rather than /proc/self/fd/2 in /etc/init.d/keyboard-setup
+    and /etc/init.d/console-setup; use setupcon --force.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 11 Sep 2006 09:47:36 +0100
+
+console-setup (1.7ubuntu7) edgy; urgency=low
+
+  * Handle debian-installer/locale not being available (closes: Malone
+    #59718).
+  * Remove stray Keyboard/amiga.ekmap in source package.
+  * Fix a potential infinite loop in the config script while moving past the
+    variant question with an unsupported layout.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 10 Sep 2006 12:07:53 +0100
+
+console-setup (1.7ubuntu6) edgy; urgency=low
+
+  * If there's no console-setup configuration when console-setup.config
+    runs, then:
+    - If there is an xorg.conf, set the defaults from there.
+    - Failing that, if debian-installer/keymap is set, try to guess correct
+      defaults from that using the same algorithm as formerly applied by
+      xserver-xorg.config. The only serious change I made to the algorithm
+      is that it now maps (mac-usb-)uk to plain gb, not gb(intl), since
+      that's closer to what UK keyboard users generally expect.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  8 Sep 2006 00:13:26 +0100
+
 console-setup (1.7ubuntu5) edgy; urgency=low
 
   * Only call setupcon from postinst script if /lib/debian-installer exists,

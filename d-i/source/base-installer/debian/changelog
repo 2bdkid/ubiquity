@@ -1,3 +1,14 @@
+base-installer (1.63ubuntu4) edgy; urgency=low
+
+  * Track changes in kernel targets in linux-source-2.6.17 2.6.17-7.19:
+    - amd64: amd64-generic -> generic, amd64-server -> server, amd64-k8 and
+      amd64-xeon removed;
+    - i386: (686, k7) -> generic;
+    - hppa, ia64: -smp targets removed (all kernels for these architectures
+      are SMP-capable now).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  8 Sep 2006 01:49:54 +0100
+
 base-installer (1.63ubuntu3) edgy; urgency=low
 
   * Backport from trunk:

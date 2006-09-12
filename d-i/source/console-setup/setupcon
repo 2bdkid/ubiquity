@@ -42,6 +42,9 @@ while [ "$1" ]; do
 	-v|--verbose)
 	    verbose_option=yes
 	    ;;
+	--force)
+	    force=yes
+	    ;;
 	--save)
 	    save=yes
 	    ;;
@@ -53,6 +56,7 @@ Sets up the font and the keyboard on Linux console.
   -k, --keyboard-only  setup the keyboard only, do not setup the font
   -f, --font-only      setup the font only, do not setup the keyboard
   -v, --verbose        explain what is being doing, try it if s.t. goes wrong
+      --force          do not check whether we are on the console
       --save           copy the font and the ACM in /etc/console-setup,
                          update /etc/console-setup/boottime.kmap.gz
   -h, --help           display this help and exit
@@ -115,16 +119,18 @@ if which ckbcomp-mini >/dev/null && [ "$CHARMAP" != UTF-8 ]; then
     fi
 fi
 
-case `readlink /proc/self/fd/2` in
-    /dev/tty[0-9]*|/dev/tty|/dev/vc/[0-9]*|/dev/console)
-	;;
-    *)
-	if [ "$VERBOSE_OUTPUT" = yes ]; then
-	    echo We are not on the Linux console, exiting.
-	fi
-	exit 0 
-	;;
-esac
+if [ "$force" != yes ]; then
+    case `readlink /proc/self/fd/2` in
+	/dev/tty[0-9]*|/dev/vc/[0-9]*|/dev/console)
+	    ;;
+	*)
+	    if [ "$VERBOSE_OUTPUT" = yes ]; then
+		echo We are not on the Linux console, exiting.
+	    fi
+	    exit 0 
+	    ;;
+    esac
+fi
 
 #-----------------------#
 #       OUTPUT          #

@@ -19,17 +19,11 @@ arch_check_usable_kernel () {
 }
 
 arch_get_kernel () {
-	CPUS="$(grep ^processor "$CPUINFO" | tail -n 1 | cut -d: -f2)"
-
 	case $1 in
 		parisc)		family=hppa32 ;;
 		parisc64)	family=hppa64 ;;
 	esac
 
-	if [ -z "$CPUS" ] || [ "$CPUS" -ne 0 ]; then
-		echo "linux-$family-smp"
-		echo "linux-image-$family-smp"
-	fi
 	echo "linux-$family"
 	echo "linux-image-$family"
 }

@@ -64,6 +64,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 CONFIGFILE=/etc/default/console-setup
+XORGCONFIGFILE=/etc/X11/xorg.conf
 
 ## FONTSETS ## Will be replaced by assignment for $fontsets:
 
@@ -240,9 +241,10 @@ fi
 
 if [ "$LC_CTYPE"  -a "$LC_CTYPE" != C ]; then
     locale=$LC_CTYPE
-else
-    db_get debian-installer/locale
+elif db_get debian-installer/locale; then
     locale="$RET"
+else
+    locale=C
 fi
 
 case "$locale" in
@@ -652,7 +654,7 @@ esac
 
 default_layout=''
 default_variant=''
-layout_priority=''
+layout_priority=critical
 case "$locale" in
     # Keyboards for countries
     *_AL*)
@@ -981,14 +983,97 @@ esac
 ######################################################################
 
 # Load the config file, if it exists.
+got_x_config=no
+got_full_config=no
 if [ -e $CONFIGFILE ]; then
     . $CONFIGFILE || true
-    
+    got_x_config=yes
+    got_full_config=yes
+elif [ -e $XORGCONFIGFILE ]; then
+    XKBMODEL="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbModel"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
+    XKBLAYOUT="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbLayout"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
+    XKBVARIANT="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbVariant"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
+    XKBOPTIONS="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbOptions"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
+    got_x_config=yes
+    layout_priority=medium
+elif db_get debian-installer/keymap && [ "$RET" ]; then
+    # This is a desperation measure, but required for migration from
+    # pre-console-setup systems without X installed. We just have to copy
+    # the guesswork formerly done by xserver-xorg.config.
+    got_x_config=yes
+    layout_priority=medium
+
+    di_keymap="${RET##mac-usb-}"
+    di_keymap="${di_keymap%%-latin1}"
+
+    XKBMODEL="$default_model"
+    XKBLAYOUT=''
+    XKBVARIANT=''
+    XKBOPTIONS=''
+    case "$di_keymap" in
+	be2) XKBLAYOUT="be";;
+	bg) XKBLAYOUT="bg"; XKBVARIANT="bds";;
+	br) XKBLAYOUT="us"; XKBVARIANT="intl"; XKBMODEL="pc104";;
+	br-abnt2) XKBLAYOUT="br"; XKBVARIANT="abnt2"; XKBMODEL="abnt2";;
+	by) XKBLAYOUT="by";;
+	cf) XKBLAYOUT="ca"; XKBVARIANT="fr";;
+	croat) XKBLAYOUT="hr";;
+	cz-lat2) XKBLAYOUT="cz";;
+	de-latin1-nodeadkeys) XKBLAYOUT="de"; XKBVARIANT="nodeadkeys";;
+	de) XKBLAYOUT="de";;
+	dvorak) XKBLAYOUT="us"; XKBVARIANT="dvorak"; XKBMODEL="pc104";;
+	dk) XKBLAYOUT="dk";;
+	es) XKBLAYOUT="es";;
+	et) XKBLAYOUT="ee";;
+	fi) XKBLAYOUT="fi";;
+	fr-latin9) XKBLAYOUT="fr"; XKBVARIANT="latin9";;
+	fr_CH) XKBLAYOUT="ch"; XKBVARIANT="fr";;
+	fr) XKBLAYOUT="fr";;
+	hebrew) XKBLAYOUT="il";;
+	hu) XKBLAYOUT="hu";;
+	gb) XKBLAYOUT="gb";;
+	is) XKBLAYOUT="is";;
+	it) XKBLAYOUT="it";;
+	jp106) XKBLAYOUT="jp"; XKBVARIANT="jp106";;
+	la) XKBLAYOUT="latam";;
+	lt) XKBLAYOUT="lt";; 
+	lv-latin4) XKBLAYOUT="lv";;
+	# XXX should these be XKBMODEL="macintosh"?
+	mac-us-std) XKBLAYOUT="us";;
+	mac-de2-ext) XKBLAYOUT="de"; XKBVARIANT="nodeadkeys";;
+	mac-fr2-ext) XKBLAYOUT="fr";;
+	mac-fr3) XKBLAYOUT="fr";;
+	mac-es) XKBLAYOUT="es";;
+	mk) XKBLAYOUT="mk";;
+	nl) XKBLAYOUT="nl";;
+	no) XKBLAYOUT="no";;
+	pl) XKBLAYOUT="pl";;
+	pt) XKBLAYOUT="pt";;
+	ro) XKBLAYOUT="ro";;
+	ru) XKBLAYOUT="ru";;
+	se) XKBLAYOUT="se";;
+	sg) XKBLAYOUT="ch"; XKBVARIANT="de";;
+	sk-qwerty) XKBLAYOUT="sk"; XKBVARIANT="qwerty";;
+	slovene) XKBLAYOUT="si";;
+	sr-cy) XKBLAYOUT="cs";;
+	trf|trfu) XKBLAYOUT="tr"; XKBVARIANT="f";;
+	trq|trqu) XKBLAYOUT="tr";;
+	ua) XKBLAYOUT="ua";;
+	uk) XKBLAYOUT="gb";;
+	us) XKBLAYOUT="us"; XKBMODEL="pc104";;
+	*) got_x_config=no; layout_priority=critical;;
+    esac
+fi
+
+if [ "$got_full_config" = yes ]; then
     default_ttys="$ACTIVE_CONSOLES"
     default_charmap="$CHARMAP"
     default_codeset="$CODESET"
     default_fontface="$FONTFACE"
     default_fontsize="$FONTSIZE"
+fi
+
+if [ "$got_x_config" = yes ]; then
     default_model="$XKBMODEL"
 
     case "$XKBLAYOUT" in
@@ -1089,9 +1174,11 @@ if [ -e $CONFIGFILE ]; then
 		unsupported_layout=yes;;
 	esac
     done
+fi
 
-    # Store values from config file into debconf db.
+# Store values from config file into debconf db.
     
+if [ "$got_full_config" = yes ]; then
     db_set console-setup/ttys "$default_ttys"
     db_set console-setup/charmap "$default_charmap"
     db_set console-setup/codeset "$default_codeset"
@@ -1099,6 +1186,8 @@ if [ -e $CONFIGFILE ]; then
     db_set console-setup/fontsize-text "$default_fontsize"
     db_set console-setup/fontsize-fb "$default_fontsize"
     db_set console-setup/fontsize "$default_fontsize"
+fi
+if [ "$got_x_config" = yes ]; then
     db_set console-setup/toggle "$default_toggle"
     db_set console-setup/switch "$default_switch"
     db_set console-setup/altgr "$default_altgr"
@@ -1188,7 +1277,7 @@ while :; do
 		    STATE=$(($STATE - 1))
 		fi
 	    elif \
-		ask_debconf console-setup/layout critical \
+		ask_debconf console-setup/layout $layout_priority \
 		    layout "$default_layout"
 	    then
 		layout="$RET"
@@ -1217,11 +1306,14 @@ while :; do
 		# skip the question without making Debconf loop
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    elif \
-		ask_debconf console-setup/variant critical \
+		ask_debconf console-setup/variant $layout_priority \
                     "variant\*${layout}" "$default_variant"
 	    then
 		variant="$RET"
 		adjust_layout=:
+		STATE=$(($STATE + 1))
+	    else
+		STATE=$(($STATE - 1))
 	    fi
 	    if $adjust_layout; then
 		case "$layout" in
@@ -1269,9 +1361,6 @@ while :; do
 		else
 		    db_set console-setup/variantcode ",$variant"
 		fi
-		STATE=$(($STATE + 1))
-	    else
-		STATE=$(($STATE - 1))
 	    fi
 	    ;;
 	6)
