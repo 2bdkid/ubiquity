@@ -3,7 +3,7 @@ Section: utils
 Priority: optional
 Maintainer: Console utilities maintainers <pkg-kbd-devel@lists.alioth.debian.org>
 Uploaders: Anton Zinoviev <zinoviev@debian.org>
-Build-Depends-Indep: debhelper (>= 5), perl, po-debconf, libxml-parser-perl, xkeyboard-config, keymapper (>= 0.5.3-5)
+Build-Depends-Indep: debhelper (>= 5), perl, po-debconf, libxml-parser-perl, xkb-data (>= 0.8-7ubuntu2), keymapper (>= 0.5.3-5)
 Build-Depends: debhelper (>= 5), perl, libxml-parser-perl
 Standards-Version: 3.7.2
 
@@ -11,7 +11,7 @@ Package: console-setup
 Section: utils
 Architecture: all
 Recommends: kbd (>= 0.99-12) | console-tools (>= 1:0.2.3-16)
-Depends: debconf (>= 0.5) | debconf-2.0, console-terminus (>= 4.16), xkeyboard-config, lsb-base (>= 3.0-6)
+Depends: debconf (>= 0.5) | debconf-2.0, console-terminus (>= 4.16), xkb-data (>= 0.8-7ubuntu2), lsb-base (>= 3.0-6)
 Description: Setup the font and the keyboard on the console
  The package provides the Linux console with the same versatile
  keyboard configuration that X Window uses.  As a result there is no

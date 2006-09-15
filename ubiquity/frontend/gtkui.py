@@ -355,7 +355,9 @@ class Wizard:
         else:
             return
 
-        gobject.spawn_async(command,
+        env = dict(os.environ)
+        env['LC_ALL'] = 'C'
+        gobject.spawn_async(command, env=env,
                             flags=(gobject.SPAWN_SEARCH_PATH |
                                    gobject.SPAWN_STDOUT_TO_DEV_NULL),
                             child_setup=drop_privileges)
@@ -1145,6 +1147,12 @@ class Wizard:
                                      "filesystems (/home, /media/*, "
                                      "/usr/local, etc.) may be used without "
                                      "reformatting.")
+                elif check == validation.MOUNTPOINT_NEEDPOSIX:
+                    error_msg.append("FAT and NTFS filesystems may not be "
+                                     "used on filesystems used by the system "
+                                     "(/, /boot, /home, /usr, /var, etc.). "
+                                     "It is usually best to mount them "
+                                     "somewhere under /media/.")
 
         # showing warning messages
         self.mountpoint_error_reason.set_text("\n".join(error_msg))

@@ -118,8 +118,8 @@ while true; do
 	    ;;
 	2)
 	    code=0
-	    echo "partman-auto/automatically_partition" > /lib/partman/automatically_partition/question
 	    ask_user /lib/partman/automatically_partition "$targetdevice" || code=$?
+	    echo "partman-auto/automatically_partition" > /lib/partman/automatically_partition/question
 	    if [ "$code" = 255 ]; then
 		if [ $count -le 1 ]; then
 		    rm -f /var/lib/partman/initial_auto

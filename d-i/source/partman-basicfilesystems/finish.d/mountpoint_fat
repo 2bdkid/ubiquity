@@ -20,7 +20,7 @@ for dev in $DEVICES/*; do
 	[ -f $id/acting_filesystem ] || continue
 	filesystem=$(cat $id/acting_filesystem)
 	case $filesystem in
-	    fat16|fat32)
+	    fat16|fat32|ntfs)
 		[ -f "$id/mountpoint" ] || continue
 		mountpoint="$(cat "$id/mountpoint")"
 		# Check for FAT file systems mounted in places where POSIX

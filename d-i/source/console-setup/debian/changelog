@@ -1,3 +1,12 @@
+console-setup (1.7ubuntu9) edgy; urgency=low
+
+  * Switch build-dependency and dependency back to xkb-data, now that it's
+    fixed. Make the dependencies versioned until after Edgy is released to
+    avoid problems with partially-upgraded systems where only the broken
+    xkb-data is installed.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 13 Sep 2006 10:24:20 +0100
+
 console-setup (1.7ubuntu8) edgy; urgency=low
 
   * Add setupcon --force option and use it in postinst (Anton Zinoviev,
