@@ -107,13 +107,13 @@ scan_disk () {
     echo "$partitions" | while { read num oldid size type fs path name; [ "$oldid" ]; }; do
 	case $fs in
 	    free)
-		totalfree=$(($totalfree + $size))
+		totalfree="$(expr "$totalfree" + "$size")"
 		;;
 
 	    linux-swap|ext2|ext3|fat32)
 		get_resize_range
 		if [ "$cursize" ] && [ "$minsize" ]; then
-		    thisfree=$(($cursize - $minsize))
+		    thisfree="$(expr "$cursize" - "$minsize")"
 		    if longint_le $bestfree $thisfree; then
 			bestfree=$thisfree
 			bestpart=$dev//$oldid
@@ -133,7 +133,7 @@ scan_disk () {
 		    get_ntfs_resize_range
 		fi
 		if [ "$cursize" ] && [ "$minsize" ]; then
-		    thisfree=$(($cursize - $minsize))
+		    thisfree="$(expr "$cursize" - "$minsize")"
 		    if longint_le $bestfree $thisfree; then
 			bestfree=$thisfree
 			bestpart=$dev//$oldid
@@ -161,7 +161,7 @@ get_resize_use_free_on_dev() {
 	bestpath="${cdr#* }"
     fi
 
-    if longint_le $(( (2 * 1024 + 200) * 1024 * 1024 )) $totalfree; then
+    if longint_le "$(expr \( 2 \* 1024 + 200 \) \* 1024 \* 1024)" $totalfree; then
 	# enough space, no need to resize
 	exit 0
     fi
@@ -179,7 +179,7 @@ else
 fi
 
 if [ "$bestpart" ] && [ "$bestpart" != none ] && \
-    longint_le $((3 * 1024 * 1024 * 1024)) $bestfree; then
+    longint_le "$(expr 3 \* 1024 \* 1024 \* 1024)" $bestfree; then
     log "Found resizable partition '$bestpart' ($bestpath) with $bestfree bytes free"
     db_subst partman-auto/text/resize_use_free PARTITION "$(humandev "$bestpath")"
     db_metaget partman-auto/text/resize_use_free description

@@ -1,3 +1,12 @@
+ubiquity (1.1.21) edgy; urgency=low
+
+  * Handle partman-partitioning/impossible_resize errors while trying to set
+    up the auto-resize slider; we now back up and disable the auto-resize
+    option (closes: Malone #58500).
+  * Automatic update of included source packages: partman-auto 54ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 21 Sep 2006 11:37:02 +0100
+
 ubiquity (1.1.20) edgy; urgency=low
 
   * Only return 30 in reply to a PROGRESS command if the progresscancel

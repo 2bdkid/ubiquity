@@ -127,11 +127,11 @@ while true; do
 		else
 		    STATE=$(($STATE - 1))
 		fi
-	    elif [ "$code" = 254 ]; then
-		# backup from do_option script
-		continue
 	    elif [ "$code" -ge 100 ]; then
 		exit $code
+	    elif [ "$code" = 99 ]; then
+		# backup from do_option script
+		continue
 	    else
 		STATE=$(($STATE + 1))
 	    fi

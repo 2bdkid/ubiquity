@@ -1,3 +1,14 @@
+partman-auto (54ubuntu4) edgy; urgency=low
+
+  * Use expr rather than shell arithmetic in resize_use_free, since dash
+    doesn't support 64-bit arithmetic.
+  * Change backup exit code from automatically_partition do_option scripts
+    from 254 to 99, to match similar changes in Debian.
+  * Support backup from partman-partitioning/impossible_resize errors in
+    resize_use_free.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 21 Sep 2006 11:26:08 +0100
+
 partman-auto (54ubuntu3) edgy; urgency=low
 
   * Ask partman-auto/init_automatically_partition rather than
