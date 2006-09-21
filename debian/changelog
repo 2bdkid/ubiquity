@@ -1,3 +1,38 @@
+ubiquity (1.1.20) edgy; urgency=low
+
+  * Only return 30 in reply to a PROGRESS command if the progresscancel
+    capability is set (closes: Malone #48005).
+  * Don't crash if a progress bar is set up to have the same start and end
+    points (closes: Malone #56789).
+  * Fix timezone component to deal with frontend.get_timezone returning None
+    (closes: Malone #42865).
+  * Use more sensible default cities for languages with country shortlists
+    (i.e. the intended default rather than the first in alphabetical order
+    of country code), working around a missing feature in debconf.
+  * Pick a sensible default city for countries with multiple zones but no
+    explicit default city (closes: Malone #43914).
+  * Remove obsolete Recommends: gparted from ubiquity; ubiquity-frontend-gtk
+    already depends on it.
+  * Feed not-yet-formatted partition state back into gparted when starting
+    it up, so that newly-created partitions aren't listed as "unknown" when
+    you go back (requires gparted 0.2.5-1.1ubuntu8; closes: Malone #40404).
+  * Fix use of gobject.spawn_async in
+    gnome-screensaver-command/xscreensaver-command, broken in 1.1.19.
+  * Make sure that "Restart now" is the default option on the final dialog
+    (closes: Malone #61517).
+  * Log warnings in various cases when partitions are ignored on the
+    mountpoints page.
+  * GTK frontend: For some reason GtkTable doesn't seem to queue a resize
+    itself when you attach children to it, so the mountpoints table was
+    showing up blank the first time through. Worked around this.
+  * Add/update translations from Rosetta: Arabic, Belarusian, Bulgarian,
+    Breton, Danish, German, Greek, Spanish, Basque, Finnish, French, Hindi,
+    Hungarian, Icelandic, Italian, Georgian, Korean, Kurdish, Latvian,
+    Nepali, Norwegian Nynorsk, Occitan, Portuguese (Brazil), Russian,
+    Serbian, Tagalog.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 21 Sep 2006 02:44:03 +0100
+
 ubiquity (1.1.19) edgy; urgency=low
 
   * Reconfigure usplash (closes: Malone #59320).

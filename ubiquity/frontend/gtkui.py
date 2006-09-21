@@ -113,6 +113,7 @@ class Wizard:
         self.manual_partitioning = False
         self.password = ''
         self.hostname_edited = False
+        self.gparted_fstype = {}
         self.mountpoint_widgets = []
         self.size_widgets = []
         self.partition_widgets = []
@@ -355,9 +356,11 @@ class Wizard:
         else:
             return
 
-        env = dict(os.environ)
-        env['LC_ALL'] = 'C'
-        gobject.spawn_async(command, env=env,
+        env = ['LC_ALL=C']
+        for key, value in os.environ.iteritems():
+            if key != 'LC_ALL':
+                env.append('%s=%s' % (key, value))
+        gobject.spawn_async(command, envp=env,
                             flags=(gobject.SPAWN_SEARCH_PATH |
                                    gobject.SPAWN_STDOUT_TO_DEV_NULL),
                             child_setup=drop_privileges)
@@ -494,12 +497,16 @@ class Wizard:
         self.embedded.add(socket)
         window_id = str(socket.get_id())
 
-        self.gparted_fstype = {}
+        args = ['log-output', '-t', 'ubiquity', '--pass-stdout',
+                'gparted', '--installer', window_id]
+        for part in self.gparted_fstype:
+            args.extend(['--filesystem',
+                         '%s:%s' % (part, self.gparted_fstype[part])])
+        syslog.syslog(syslog.LOG_DEBUG, 'Running gparted: %s' % ' '.join(args))
 
         # Save pid to kill gparted when install process starts
         self.gparted_subp = subprocess.Popen(
-            ['log-output', '-t', 'ubiquity', '--pass-stdout',
-             'gparted', '--installer', window_id],
+            args,
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
 
 
@@ -1004,6 +1011,9 @@ class Wizard:
             # they're validated.
             for mountpoint, partition in selection.items():
                 if partition.split('/')[2] not in self.size:
+                    syslog.syslog(syslog.LOG_WARNING,
+                                  "No size available for partition %s; "
+                                  "skipping" % partition)
                     continue
                 if partition not in self.partition_choices:
                     # TODO cjwatson 2006-05-27: I don't know why this might
@@ -1011,6 +1021,9 @@ class Wizard:
                     # (https://launchpad.net/bugs/46910). Figure out why. In
                     # the meantime, ignoring this partition is better than
                     # crashing.
+                    syslog.syslog(syslog.LOG_WARNING,
+                                  "Partition %s not in /proc/partitions?" %
+                                  partition)
                     continue
                 if mountpoint in self.mountpoint_choices:
                     self.mountpoint_widgets[-1].set_active(
@@ -1032,6 +1045,10 @@ class Wizard:
                     self.add_mountpoint_table_row()
                 else:
                     break
+
+        # For some reason, GtkTable doesn't seem to queue a resize itself
+        # when you attach children to it.
+        self.mountpoint_table.queue_resize()
 
         # We defer connecting up signals until now to avoid the changed
         # signal firing while we're busy populating the table.
