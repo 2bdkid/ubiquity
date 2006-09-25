@@ -1,3 +1,43 @@
+console-setup (1.7ubuntu12) edgy; urgency=low
+
+  * Don't run the init script (and thereby setupcon) on upgrade; just print
+    a message telling you to run setupcon from a virtual console if you want
+    to update your console configuration (closes: Malone #61723).
+  * Update debian-installer/keymap handling from trunk (Anton Zinoviev).
+    Drop /etc/X11/xorg.conf upgrade handling, also per trunk, as I've been
+    convinced that that is much less safe due to the prevalence of GNOME/KDE
+    keymap overrides, and furthermore it made it more difficult to have
+    ubiquity tell console-setup just to guess a default from the locale.
+  * Drop the priority of the model and layout questions to medium if a
+    configuration file already exists, since they'll have been asked at
+    medium first time round and if we then ask them at critical the second
+    time round they will be unexpectedly shown (closes: Malone #59883).
+  * Backport from trunk:
+    - config.proto: Handle properly the case when the user backs up from the
+      first Debconf question.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 23 Sep 2006 00:40:48 +0100
+
+console-setup (1.7ubuntu11) edgy; urgency=low
+
+  * Fix default layout for Bosnian and default variant for Hindi.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 22 Sep 2006 15:57:23 +0100
+
+console-setup (1.7ubuntu10) edgy; urgency=low
+
+  * console-setup Depends: perl; something in ckbcomp is causing perl to
+    'use utf8' implicitly, and some of the necessary modules aren't in
+    perl-base (closes: Malone #60203).
+  * Allow preseeding of console-setup/modelcode, console-setup/layoutcode,
+    console-setup/variantcode, console-setup/optionscode, and
+    console-setup/fontsize.
+  * Don't set up the console font at boot time if usplash is running, since
+    that seems to trigger a kernel bug that corrupts the usplash display
+    (closes: Malone #60483).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 21 Sep 2006 01:01:54 +0100
+
 console-setup (1.7ubuntu9) edgy; urgency=low
 
   * Switch build-dependency and dependency back to xkb-data, now that it's

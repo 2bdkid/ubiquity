@@ -12,11 +12,20 @@ case "$1" in
         ;;
     start|force-reload|restart|reload)
 	if [ -z "$DISPLAY" ]; then
-	    log_begin_msg "Setting up console font and keymap..."
-	    if setupcon --force; then
-		log_end_msg 0
+	    if pidof usplash >/dev/null; then
+		log_begin_msg "Setting up console keymap..."
+		if setupcon -k --force; then
+		    log_end_msg 0
+		else
+		    log_end_msg $?
+		fi
 	    else
-		log_end_msg $?
+		log_begin_msg "Setting up console font and keymap..."
+		if setupcon --force; then
+		    log_end_msg 0
+		else
+		    log_end_msg $?
+		fi
 	    fi
 	fi
 	;;

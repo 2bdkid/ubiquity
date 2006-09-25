@@ -188,7 +188,7 @@ install: build
 	rm -rf `find debian/bdf2psf -name .svn`
 # common
 	dh_installinit --no-start --name keyboard-setup -- start 06 S .
-	dh_installinit --name console-setup -- start 49 S .
+	dh_installinit --no-start --name console-setup -- start 49 S .
 
 # Build architecture-independent files here.
 .PHONY : binary-indep

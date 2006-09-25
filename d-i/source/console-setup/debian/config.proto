@@ -811,7 +811,7 @@ case "$locale" in
 	default_layout=ara # Arabic
 	;;
     bs_*)
-	default_layout=bs  # Bosnia and Herzegovina
+	default_layout=ba  # Bosnia and Herzegovina
 	;;
     de_*)
 	default_layout=de  # Germany
@@ -829,7 +829,7 @@ case "$locale" in
 	;;
     hi_*)
 	default_layout=in  # India
-	default_variant=dev # Devangari
+	default_variant=deva # Devangari
 	;;
     hr_*)
 	default_layout=hr  # Croatia
@@ -980,36 +980,21 @@ case "$arch" in
 	;;
 esac    
 
-######################################################################
+#######################################################################
 
-# Load the config file, if it exists.
-got_x_config=no
-got_full_config=no
-if [ -e $CONFIGFILE ]; then
-    . $CONFIGFILE || true
-    got_x_config=yes
-    got_full_config=yes
-elif [ -e $XORGCONFIGFILE ]; then
-    XKBMODEL="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbModel"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
-    XKBLAYOUT="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbLayout"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
-    XKBVARIANT="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbVariant"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
-    XKBOPTIONS="$(sed -ne 's/^[[:space:]]\+Option[[:space:]]\+"XkbOptions"[[:space:]]\+"\([^"]\+\)"/\1/ip' $XORGCONFIGFILE | head -n1)"
-    got_x_config=yes
-    layout_priority=medium
-elif db_get debian-installer/keymap && [ "$RET" ]; then
-    # This is a desperation measure, but required for migration from
-    # pre-console-setup systems without X installed. We just have to copy
-    # the guesswork formerly done by xserver-xorg.config.
-    got_x_config=yes
-    layout_priority=medium
+# Use the value of debian-installer/keymap to get better default
+# layout.  Lower the priority of the Debconf question to medium.
 
+# This is a desperation measure, but required for migration from
+# pre-console-setup systems without X installed. We just have to copy
+# the guesswork formerly done by xserver-xorg.config.
+
+if db_get debian-installer/keymap && [ "$RET" ]; then
     di_keymap="${RET##mac-usb-}"
     di_keymap="${di_keymap%%-latin1}"
 
-    XKBMODEL="$default_model"
     XKBLAYOUT=''
     XKBVARIANT=''
-    XKBOPTIONS=''
     case "$di_keymap" in
 	be2) XKBLAYOUT="be";;
 	bg) XKBLAYOUT="bg"; XKBVARIANT="bds";;
@@ -1025,7 +1010,7 @@ elif db_get debian-installer/keymap && [ "$RET" ]; then
 	dk) XKBLAYOUT="dk";;
 	es) XKBLAYOUT="es";;
 	et) XKBLAYOUT="ee";;
-	fi) XKBLAYOUT="fi";;
+	'fi') XKBLAYOUT="fi";;
 	fr-latin9) XKBLAYOUT="fr"; XKBVARIANT="latin9";;
 	fr_CH) XKBLAYOUT="ch"; XKBVARIANT="fr";;
 	fr) XKBLAYOUT="fr";;
@@ -1038,7 +1023,6 @@ elif db_get debian-installer/keymap && [ "$RET" ]; then
 	la) XKBLAYOUT="latam";;
 	lt) XKBLAYOUT="lt";; 
 	lv-latin4) XKBLAYOUT="lv";;
-	# XXX should these be XKBMODEL="macintosh"?
 	mac-us-std) XKBLAYOUT="us";;
 	mac-de2-ext) XKBLAYOUT="de"; XKBVARIANT="nodeadkeys";;
 	mac-fr2-ext) XKBLAYOUT="fr";;
@@ -1061,19 +1045,68 @@ elif db_get debian-installer/keymap && [ "$RET" ]; then
 	ua) XKBLAYOUT="ua";;
 	uk) XKBLAYOUT="gb";;
 	us) XKBLAYOUT="us"; XKBMODEL="pc104";;
-	*) got_x_config=no; layout_priority=critical;;
+    esac
+
+    # Currently the following two lines are meaningless but stay here
+    # in case some wants to use the real XkbLayout and XkbVariant for
+    # the non-Latin layouts
+    XKBLAYOUT=${XKBLAYOUT#*,}
+    XKBVARIANT=${XKBVARIANT#*,}
+
+    case "$XKBLAYOUT" in
+	'')
+	    layout_priority=critical
+	    ;;
+	bg)
+	    # since there are two incompatible layouts and the console
+	    # provides only one of them
+	    default_layout="$XKBLAYOUT"
+	    default_variant="$XKBVARIANT"
+	    layout_priority=high
+	    ;;
+	*)
+	    default_layout="$XKBLAYOUT"
+	    default_variant="$XKBVARIANT"
+	    layout_priority=medium
+	    ;;
     esac
 fi
+    
+# Get defaults from debconf, to allow preseeding.
+if db_get console-setup/modelcode && [ "$RET" ]; then
+    default_model="$RET"
+fi
+if db_get console-setup/layoutcode && [ "$RET" ]; then
+    default_layout="$RET"
+    layout_priority=medium
+    db_set console-setup/ask_detect false
+    db_fset console-setup/ask_detect seen true
+fi
+if db_get console-setup/variantcode && [ "$RET" ]; then
+    default_variant="$RET"
+fi
+if db_get console-setup/optionscode && [ "$RET" ]; then
+    XKBOPTIONS="$RET"
+    got_xkboptions=yes
+fi
+if db_get console-setup/fontsize && [ "$RET" ]; then
+    db_set console-setup/fontsize-text "$RET"
+    db_set console-setup/fontsize-fb "$RET"
+fi
 
-if [ "$got_full_config" = yes ]; then
+# Load the config file, if it exists.
+if [ -e $CONFIGFILE ]; then
+    . $CONFIGFILE || true
+    
+    got_full_config=yes
+    got_xkboptions=yes
+    model_priority=medium
+    layout_priority=medium
     default_ttys="$ACTIVE_CONSOLES"
     default_charmap="$CHARMAP"
     default_codeset="$CODESET"
     default_fontface="$FONTFACE"
     default_fontsize="$FONTSIZE"
-fi
-
-if [ "$got_x_config" = yes ]; then
     default_model="$XKBMODEL"
 
     case "$XKBLAYOUT" in
@@ -1091,15 +1124,15 @@ if [ "$got_x_config" = yes ]; then
 	    default_variant="$XKBVARIANT"
 	    ;;
     esac
+fi
 
+if [ "$got_xkboptions" = yes ]; then
     default_toggle='No toggling'
     default_switch='No temporary switch'
     default_altgr='No AltGr key'
     default_compose='No compose key'
     for option in `echo $XKBOPTIONS | sed 's/,/ /g'`; do
 	case "$option" in
-	    '')
-		;;
 	    grp:caps_toggle)
 		default_toggle='Caps Lock';;
 	    grp:toggle)
@@ -1176,9 +1209,9 @@ if [ "$got_x_config" = yes ]; then
     done
 fi
 
-# Store values from config file into debconf db.
-    
 if [ "$got_full_config" = yes ]; then
+    # Store values from config file into debconf db.
+    
     db_set console-setup/ttys "$default_ttys"
     db_set console-setup/charmap "$default_charmap"
     db_set console-setup/codeset "$default_codeset"
@@ -1187,14 +1220,14 @@ if [ "$got_full_config" = yes ]; then
     db_set console-setup/fontsize-fb "$default_fontsize"
     db_set console-setup/fontsize "$default_fontsize"
 fi
-if [ "$got_x_config" = yes ]; then
+if [ "$got_xkboptions" = yes ]; then
     db_set console-setup/toggle "$default_toggle"
     db_set console-setup/switch "$default_switch"
     db_set console-setup/altgr "$default_altgr"
     db_set console-setup/compose "$default_compose"
 fi
 
-######################################################################
+#######################################################################
 
 STATE=1
 old_state=0
@@ -1741,6 +1774,6 @@ while :; do
     old_state=$starting_state
 done
 
-if [ $STATE -eq 1 ]; then
+if [ $STATE -eq 0 ]; then
     exit 10
 fi

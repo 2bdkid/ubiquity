@@ -15,6 +15,9 @@ for dev in $DEVICES/*; do
     cd $dev
     open_dialog PARTITIONS
     while { read_line num id size type fs path name; [ "$id" ]; }; do
+	if udevinfo -q env -n "$path" 2>/dev/null | egrep -q 'ID_PATH=(pci-[^-]*-)?(ieee1394|usb)'; then
+	    continue
+	fi
 	[ -f $id/detected_filesystem ] || continue
 	fs=$(cat $id/detected_filesystem)
 	if [ "$name" ]; then

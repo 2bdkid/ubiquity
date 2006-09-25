@@ -138,6 +138,11 @@ fi
 if [ -f /usr/share/console-setup-mini/console-setup.config ] && \
    [ -d /lib/debian-installer ]; then
     setupcon --force
+else
+    cat >&2 <<EOF
+Your console configuration will be updated the next time your system boots.
+If you want to update it now, run 'setupcon' from a virtual console.
+EOF
 fi
 
 #DEBHELPER#

@@ -135,4 +135,7 @@ for dev in $founddevs; do
     fi
 done
 
-populate_media usb auto rw,user,noauto $USBDEVICES
+# See https://launchpad.net/bugs/60552
+if [ "$USBDEVICES" ]; then
+    logger -t partman-target "USB automounting disabled (would have handled: $USBDEVICES)"
+fi
