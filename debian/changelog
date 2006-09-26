@@ -1,3 +1,15 @@
+ubiquity (1.1.24) edgy; urgency=low
+
+  * Mark console-setup/layout and console-setup/variant as unseen before
+    starting console-setup, to avoid incorrect variant choices (although I
+    think there's also a console-setup bug here in that the variants are
+    being substituted in the wrong order).
+  * Depend on a version of console-setup without the misguided
+    /etc/X11/xorg.conf handling.
+  * Automatic update of included source packages: partman-target 45ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 26 Sep 2006 23:29:53 +0100
+
 ubiquity (1.1.23) edgy; urgency=low
 
   * Move /etc/default/console-setup aside before running the keyboard
