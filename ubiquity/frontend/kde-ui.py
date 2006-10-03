@@ -115,7 +115,7 @@ class Wizard:
         
         # declare attributes
         self.distro = distro
-        self.current_keyboard = None
+        self.current_layout = None
         self.got_disk_choices = False
         self.auto_mountpoints = None
         self.resize_min_size = None
@@ -261,7 +261,7 @@ class Wizard:
         self.app.connect(self.userinterface.back, SIGNAL("clicked()"), self.on_back_clicked)
         self.app.connect(self.userinterface.cancel, SIGNAL("clicked()"), self.on_cancel_clicked)
         self.app.connect(self.userinterface.widgetStack, SIGNAL("aboutToShow(int)"), self.on_steps_switch_page)
-        self.app.connect(self.userinterface.keyboardlistview, SIGNAL("selectionChanged()"), self.on_keyboard_selected)
+        self.app.connect(self.userinterface.keyboardlayoutview, SIGNAL("selectionChanged()"), self.on_keyboard_layout_selected)
         
         self.app.connect(self.userinterface.fullname, SIGNAL("textChanged(const QString &)"), self.on_fullname_changed)
         self.app.connect(self.userinterface.username, SIGNAL("textChanged(const QString &)"), self.on_username_changed)
@@ -598,8 +598,8 @@ class Wizard:
 
         quitAnswer = QMessageBox.question(self.userinterface, titleText, quitText, rebootButtonText, quitButtonText)
 
-        if quitAnswer == 1:
-            self.reboot();
+        if quitAnswer == 0:
+            self.reboot()
 
     def reboot(self, *args):
         """reboot the system after installing process."""
@@ -745,11 +745,14 @@ class Wizard:
         else:
             self.app.exit()
 
-    def on_keyboard_selected(self):
+    def on_keyboard_layout_selected(self):
         if isinstance(self.dbfilter, console_setup.ConsoleSetup):
-            keyboard = self.get_keyboard()
-            if keyboard is not None:
-                self.dbfilter.apply_keyboard(keyboard)
+            layout = self.get_keyboard()
+            if layout is not None:
+                self.dbfilter.change_layout(layout)
+                # TODO cjwatson 2006-10-02: This should go away once we have
+                # a separate variant selection widget.
+                self.dbfilter.apply_keyboard(layout)
 
     def process_step(self):
         """Process and validate the results of this step."""
@@ -1103,8 +1106,12 @@ class Wizard:
                         "No partition selected for %s." % mountpoint_value)
                     break
                 else:
-                    mountpoints[partition_id] = (mountpoint_value,
-                                                 format_value, fstype)
+                    # TODO cjwatson 2006-09-26: Replace None with flags once
+                    # qtparted can export the list of flags set on formatted
+                    # filesystems (or just ignore until
+                    # ubiquity-advanced-partitioner happens!).
+                    mountpoints[partition_id] = \
+                        (mountpoint_value, format_value, fstype, None)
         else:
             self.mountpoints = mountpoints
         syslog.syslog('mountpoints: %s' % self.mountpoints)
@@ -1126,10 +1133,11 @@ class Wizard:
             # with those detected from the disk.
             validate_mountpoints = dict(self.mountpoints)
             validate_filesystems = get_filesystems(self.qtparted_fstype)
-            for device, (path, format, fstype) in validate_mountpoints.items():
+            for device, (path, format, fstype,
+                         flags) in validate_mountpoints.items():
                 if fstype is None and device in validate_filesystems:
                     validate_mountpoints[device] = \
-                        (path, format, validate_filesystems[device])
+                        (path, format, validate_filesystems[device], None)
             for check in validation.check_mountpoint(validate_mountpoints,
                                                      self.size):
                 if check == validation.MOUNTPOINT_NOROOT:
@@ -1139,7 +1147,7 @@ class Wizard:
                     error_msg.append("Two file systems are assigned the same "
                                      "mount point.")
                 elif check == validation.MOUNTPOINT_BADSIZE:
-                    for mountpoint, format, fstype in \
+                    for mountpoint, format, fstype, flags in \
                             self.mountpoints.itervalues():
                         if mountpoint == 'swap':
                             min_root = MINIMAL_PARTITION_SCHEME['root']
@@ -1175,6 +1183,10 @@ class Wizard:
                                      "(/, /boot, /home, /usr, /var, etc.). "
                                      "It is usually best to mount them "
                                      "somewhere under /media/.")
+                elif check == validation.MOUNTPOINT_NONEWWORLD:
+                    error_msg.append(get_string(
+                        'partman-newworld/no_newworld',
+                        'extended:%s' % self.locale))
 
         # showing warning messages
         self.userinterface.mountpoint_error_reason.setText("\n".join(error_msg))
@@ -1584,29 +1596,42 @@ class Wizard:
         return dict(self.mountpoints)
 
     def set_keyboard_choices(self, choices):
-        self.userinterface.keyboardlistview.clear()
+        self.userinterface.keyboardlayoutview.clear()
         for choice in sorted(choices):
-            self.userinterface.keyboardlistview.insertItem( KListViewItem(self.userinterface.keyboardlistview, choice) )
+            self.userinterface.keyboardlayoutview.insertItem( KListViewItem(self.userinterface.keyboardlayoutview, choice) )
 
-        if self.current_keyboard is not None:
-            self.set_keyboard(self.current_keyboard)
+        if self.current_layout is not None:
+            self.set_keyboard(self.current_layout)
 
-    def set_keyboard (self, keyboard):
-        self.current_keyboard = keyboard
+    def set_keyboard (self, layout):
+        self.current_layout = layout
 
-        iterator = QListViewItemIterator(self.userinterface.keyboardlistview)
+        iterator = QListViewItemIterator(self.userinterface.keyboardlayoutview)
         while iterator.current():
-            if unicode(iterator.current().text(0)) == keyboard:
-                self.userinterface.keyboardlistview.setSelected(iterator.current(), True)
+            if unicode(iterator.current().text(0)) == layout:
+                self.userinterface.keyboardlayoutview.setSelected(iterator.current(), True)
+                self.userinterface.keyboardlayoutview.ensureItemVisible(iterator.current())
                 break
             iterator += 1
 
     def get_keyboard (self):
-        selection = self.userinterface.keyboardlistview.selectedItem()
+        selection = self.userinterface.keyboardlayoutview.selectedItem()
         if selection is None:
             return None
         else:
             return unicode(selection.text(0))
+
+    def set_keyboard_variant_choices(self, choices):
+        # TODO cjwatson 2006-10-02: fill in variant selection widget
+        pass
+
+    def set_keyboard_variant(self, variant):
+        # TODO cjwatson 2006-10-02: set current variant
+        pass
+
+    def get_keyboard_variant(self):
+        # TODO cjwatson 2006-10-02: return current variant
+        return None
 
     def set_summary_text (self, text):
         i = text.find("\n")
