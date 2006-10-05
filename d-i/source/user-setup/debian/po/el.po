@@ -3,7 +3,7 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of el.po to Greek
+# translation of el.po to el
 # Greek messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
@@ -13,48 +13,47 @@
 # Konstantinos Margaritis <markos@debian.org>, 2004, 2006.
 # Greek Translation Team <debian-l10n-greek@lists.debian.org>, 2004, 2005.
 # quad-nrg.net <galaxico@quad-nrg.net>, 2005, 2006.
+# quad-nrg.net <yodesy@quad-nrg.net>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 23:43-0600\n"
-"PO-Revision-Date: 2006-02-14 13:32+0200\n"
-"Last-Translator: quad-nrg.net <galaxico@quad-nrg.net>\n"
-"Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-04 14:24+0100\n"
+"PO-Revision-Date: 2006-09-27 17:50+0300\n"
+"Last-Translator: quad-nrg.net <yodesy@quad-nrg.net>\n"
+"Language-Team: el <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid "Allow login as root?"
-msgstr ""
+msgstr "Να επιτρέπεται η είσοδος σαν χρήστης root;"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid ""
 "If you choose not to allow root to log in, then a user account will be "
 "created and given the power to become root using the 'sudo' command."
 msgstr ""
+"Αν επιλέξετε να μην επιτρέψεται η είσοδος στο σύστημα σαν χρήστης root, θα "
+"δημιουργηθεί ένας άλλος λογαριασμός χρήστη με την δυνατότητα να γίνεται "
+"χρήστης root χρησιμοποιώντας την εντολή 'sudo'."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid "Root password:"
 msgstr "Κωδικός του χρήστη root:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -72,13 +71,33 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001 ../user-setup-udeb.templates:12001
+msgid ""
+"A good password will contain a mixture of letters, numbers and punctuation "
+"and should be changed at regular intervals."
+msgstr ""
+"Ένας καλός κωδικός θα πρέπει να περιέχει ένα μείγμα από χαρακτήρες, αριθμούς "
+"και σημεία στίξης και θα πρέπει να αλλάζει σε τακτά χρονικά διαστήματα."
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Ο κωδικός δε θα φαίνεται κατά την πληκτρολόγηση του."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:42
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001 ../user-setup-udeb.templates:13001
+msgid "Re-enter password to verify:"
+msgstr "Ξαναδώστε τον κωδικό για επιβεβαίωση:"
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
@@ -88,13 +107,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid "Create a normal user account now?"
 msgstr "Θέλετε να δημιουργήσετε έναν απλό χρήστη τώρα;"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "It's a bad idea to use the root account for normal day-to-day activities, "
 "such as the reading of electronic mail, because even a small mistake can "
@@ -108,10 +127,10 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "Note that you may create it later (as well as any additional account) by "
-"typing 'adduser <username>' as root, where <username> is an user name, like "
+"typing 'adduser <username>' as root, where <username> is an username, like "
 "'imurdock' or 'rms'."
 msgstr ""
 "Σημειώστε ότι μπορείτε αν θέλετε να δημιουργήσετε το λογαριασμό (ή και "
@@ -121,13 +140,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid "Full name for the new user:"
 msgstr "Το πλήρες όνομα του νέου χρήστη:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "A user account will be created for you to use instead of the root account "
 "for non-administrative activities."
@@ -138,7 +157,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "Please enter the real name of this user. This information will be used for "
 "instance as default origin for emails sent by this user as well as any "
@@ -153,13 +172,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid "Username for your account:"
 msgstr "Εισάγετε το όνομα χρήστη του λογαριασμού σας:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid ""
 "Select a username for the new account. Your first name is a reasonable "
 "choice. The username should start with a lower-case letter, which can be "
@@ -171,15 +190,15 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid "Invalid username"
 msgstr "Μη έγκυρο όνομα χρήστη"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid ""
-"The user name you entered is invalid. Note that usernames must start with a "
+"The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
 "more lower-case letters."
 msgstr ""
@@ -187,31 +206,31 @@ msgstr ""
 "θα πρέπει να αρχίζει με πεζό γράμμα και να ακολουθείται από οποιονδήποτε "
 "συνδυασμό αριθμών και πεζών γραμμάτων."
 
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid "Reserved username"
+msgstr "Δεσμευμένο όνομα χρήστη"
+
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid ""
+"The username you entered (${USERNAME}) is reserved for use by the system. "
+"Please select a different one."
+msgstr ""
+"Το όνομα χρήστη που εισάγατε (${USERNAME}) είναι δεσμευμένο για χρήση από το "
+"σύστημα. Παρακαλώ διαλέξτε ένα διαφορετικό."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
+#: ../user-setup-udeb.templates:12001
 msgid "Choose a password for the new user:"
 msgstr "Διαλέξτε έναν κωδικό πρόσβασης για το νέο χρήστη:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
-msgid ""
-"A good password will contain a mixture of letters, numbers and punctuation "
-"and should be changed at regular intervals."
-msgstr ""
-"Ένας καλός κωδικός θα πρέπει να περιέχει ένα μείγμα από χαρακτήρες, αριθμούς "
-"και σημεία στίξης και θα πρέπει να αλλάζει σε τακτά χρονικά διαστήματα."
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
-msgid "Re-enter password to verify:"
-msgstr "Ξαναδώστε τον κωδικό για επιβεβαίωση:"
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
+#: ../user-setup-udeb.templates:13001
 msgid ""
 "Please enter the same user password again to verify you have typed it "
 "correctly."
@@ -219,25 +238,25 @@ msgstr "Παρακαλώ ξαναδώστε τον ίδιο κωδικό για 
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "Password input error"
 msgstr "Σφάλμα κατά την εισαγωγή του κωδικού"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "The two passwords you entered were not the same. Please try again."
 msgstr "Οι δύο κωδικοί που δώσατε διαφέρουν. Παρακαλώ ξαναπροσπαθήστε."
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid "Empty password"
 msgstr "Κενός κωδικός πρόσβασης"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid ""
 "You entered an empty password, which is not allowed. Please choose a non-"
 "empty password."
@@ -247,13 +266,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid "Enable shadow passwords?"
 msgstr "Θέλετε να ενεργοποιήσετε τους σκιώδεις κωδικούς;"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -268,13 +287,13 @@ msgstr ""
 
 #. Type: title
 #. Description
-#: ../user-setup-udeb.templates:118
+#: ../user-setup-udeb.templates:17001
 msgid "Set up users and passwords"
 msgstr "Ρύθμιση χρηστών και κωδικών πρόσβασης"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
-#: ../user-setup-udeb.templates:123
+#. finish-install progress bar item
+#: ../user-setup-udeb.templates:18001
 msgid "Setting users and passwords..."
 msgstr "Ρύθμιση χρηστών και κωδικών πρόσβασης..."

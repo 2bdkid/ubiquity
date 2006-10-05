@@ -4,7 +4,7 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2005-2006 Software in the Public Interest, Inc.
+# Copyright © 2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
@@ -14,26 +14,26 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 23:43-0600\n"
-"PO-Revision-Date: 2006-04-18 15:52+0930\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-04 14:24+0100\n"
+"PO-Revision-Date: 2006-09-21 18:04+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
-"Language-Team: Vietnamese <gnomevi-list@lists.sourceforge.net>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0\n"
-"X-Generator: LocFactoryEditor 1.6b36\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: LocFactoryEditor 1.6fc1\n"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid "Allow login as root?"
 msgstr "Cho phép đăng nhập dưới quyền người chủ (root) không?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid ""
 "If you choose not to allow root to log in, then a user account will be "
 "created and given the power to become root using the 'sudo' command."
@@ -43,13 +43,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid "Root password:"
 msgstr "Mật khẩu chủ:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -67,13 +67,33 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001 ../user-setup-udeb.templates:12001
+msgid ""
+"A good password will contain a mixture of letters, numbers and punctuation "
+"and should be changed at regular intervals."
+msgstr ""
+"Mật khẩu tốt chứa phối hợp chữ, con số và chấm câu, và nên được thay đổi "
+"theo định kỷ."
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Ghi chú là bạn sẽ không thể xem mật khẩu trong khi gõ."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:42
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001 ../user-setup-udeb.templates:13001
+msgid "Re-enter password to verify:"
+msgstr "Hãy gỏ lại mật khẩu cần xác nhận:"
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
@@ -81,13 +101,13 @@ msgstr "Hãy gõ lại mật khẩu người chủ này, để xác nhận đã 
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid "Create a normal user account now?"
 msgstr "Tạo một tài khoản người dùng chuẩn bây giờ chứ?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "It's a bad idea to use the root account for normal day-to-day activities, "
 "such as the reading of electronic mail, because even a small mistake can "
@@ -101,10 +121,10 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "Note that you may create it later (as well as any additional account) by "
-"typing 'adduser <username>' as root, where <username> is an user name, like "
+"typing 'adduser <username>' as root, where <username> is an username, like "
 "'imurdock' or 'rms'."
 msgstr ""
 "Ghi chú rằng bạn có thể tạo nó sau này (cùng với tài khoản thêm) bằng cách "
@@ -113,13 +133,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid "Full name for the new user:"
 msgstr "Họ tên của người dùng mới:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "A user account will be created for you to use instead of the root account "
 "for non-administrative activities."
@@ -129,7 +149,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "Please enter the real name of this user. This information will be used for "
 "instance as default origin for emails sent by this user as well as any "
@@ -143,13 +163,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid "Username for your account:"
 msgstr "Tên người dùng cho tài khoản bạn:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid ""
 "Select a username for the new account. Your first name is a reasonable "
 "choice. The username should start with a lower-case letter, which can be "
@@ -161,15 +181,15 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid "Invalid username"
 msgstr "Tên người dùng không hợp lệ"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid ""
-"The user name you entered is invalid. Note that usernames must start with a "
+"The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
 "more lower-case letters."
 msgstr ""
@@ -177,31 +197,31 @@ msgstr ""
 "bắt đầu với chữ thường, với bất cứ phối hợp con số và chữ thường nào theo "
 "sau."
 
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid "Reserved username"
+msgstr "Tên người dùng dành riêng"
+
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid ""
+"The username you entered (${USERNAME}) is reserved for use by the system. "
+"Please select a different one."
+msgstr ""
+"Bạn đã nhập một tên người dùng (${USERNAME}) được dành riêng cho hệ thống "
+"dùng. Hãy chọn tên khác."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
+#: ../user-setup-udeb.templates:12001
 msgid "Choose a password for the new user:"
 msgstr "Hãy chọn mật khẩu cho người dùng mới:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
-msgid ""
-"A good password will contain a mixture of letters, numbers and punctuation "
-"and should be changed at regular intervals."
-msgstr ""
-"Mật khẩu tốt chứa phối hợp chữ, con số và chấm câu, và nên được thay đổi "
-"theo định kỷ."
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
-msgid "Re-enter password to verify:"
-msgstr "Hãy gỏ lại mật khẩu cần xác nhận:"
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
+#: ../user-setup-udeb.templates:13001
 msgid ""
 "Please enter the same user password again to verify you have typed it "
 "correctly."
@@ -210,25 +230,25 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "Password input error"
 msgstr "Lỗi nhập mật khẩu"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "The two passwords you entered were not the same. Please try again."
 msgstr "Bạn đã gõ hai mật khẩu khác nhau. Hãy thử lại."
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid "Empty password"
 msgstr "Mật khẩu rỗng"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid ""
 "You entered an empty password, which is not allowed. Please choose a non-"
 "empty password."
@@ -238,13 +258,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid "Enable shadow passwords?"
 msgstr "Bật mật khẩu bóng không?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -258,13 +278,13 @@ msgstr ""
 
 #. Type: title
 #. Description
-#: ../user-setup-udeb.templates:118
+#: ../user-setup-udeb.templates:17001
 msgid "Set up users and passwords"
 msgstr "Thiết lập người dùng và mật khẩu"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
-#: ../user-setup-udeb.templates:123
+#. finish-install progress bar item
+#: ../user-setup-udeb.templates:18001
 msgid "Setting users and passwords..."
 msgstr "Đang lập các người dùng và mật khẩu..."

@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Debian-installer 1st-stage master file HR\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 23:43-0600\n"
-"PO-Revision-Date: 2005-03-05 21:51+0100\n"
-"Last-Translator: Krunoslav Gernhard <kruno@linux.hr>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-04 14:24+0100\n"
+"PO-Revision-Date: 2006-09-25 23:55+0200\n"
+"Last-Translator: Josip Rodin <joy+ditrans@linux.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,28 +22,29 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid "Allow login as root?"
-msgstr ""
+msgstr "Dopustiti logiranje kao root?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid ""
 "If you choose not to allow root to log in, then a user account will be "
 "created and given the power to become root using the 'sudo' command."
 msgstr ""
+"Ako ne dopustite rootu da se ulogira, tada će se napraviti korisnički račun "
+"koji će dobiti sposobnost da postane root koristeći naredbu 'sudo'."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid "Root password:"
-msgstr "Korijenska zaporka:"
+msgstr "Lozinka root korisnika:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
-#, fuzzy
+#: ../user-setup-udeb.templates:5001
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -51,39 +52,57 @@ msgid ""
 "It should not be a word found in dictionaries, or a word that could be "
 "easily associated with you."
 msgstr ""
-"Morate postaviti zaporku za korijenskog korisnika, račun administratora "
-"sustava. Zlonamjeran ili nestručan korisnik koji ima korijenski pristup može "
-"izazvati golemu štetu, pa se pobrinite da korijensku zaporku ne bude "
-"jednostavno odgonetnuti. To ne bi trebala biti obična riječ, ili riječ koju "
-"je lako povezati s vama. Dobru zaporku sastavit ćete od slova, brojaka i "
-"interpunkcija i redovito ćete je mijenjati. Korijensku zaporku možete "
-"promijeniti pomoću programa \"passwd\", prijavljeni kao korijenski korisnik."
+"Morate postaviti lozinku za root korisnika, račun administratora sustava. "
+"Zlonamjeran ili nestručan korisnik koji ima root pristup može izazvati "
+"golemu štetu, pa se pobrinite da korijensku lozinku ne bude jednostavno "
+"odgonetnuti. To ne bi trebala biti obična riječ, ili riječ koju je lako "
+"povezati s vama."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001 ../user-setup-udeb.templates:12001
+msgid ""
+"A good password will contain a mixture of letters, numbers and punctuation "
+"and should be changed at regular intervals."
+msgstr ""
+"Dobra lozinka se treba sastojati od slova, brojaka i interpunkcija i treba "
+"se redovito mijenjati."
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001
 msgid "Note that you will not be able to see the password as you type it."
-msgstr "Primijetite da nećete moći vidjeti zaporku tipkajući je."
+msgstr "Primijetite da nećete moći vidjeti lozinku tipkajući je."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:42
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001 ../user-setup-udeb.templates:13001
+msgid "Re-enter password to verify:"
+msgstr "Iznova unesite lozinku za potvrdu:"
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
 msgstr ""
-"Molim unesite istu korijensku zaporku kao potvrdu da ste je ispravno "
+"Molim unesite istu korijensku lozinku kao potvrdu da ste je ispravno "
 "utipkali."
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid "Create a normal user account now?"
 msgstr "Načini i običan korisnički račun?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "It's a bad idea to use the root account for normal day-to-day activities, "
 "such as the reading of electronic mail, because even a small mistake can "
@@ -96,10 +115,10 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "Note that you may create it later (as well as any additional account) by "
-"typing 'adduser <username>' as root, where <username> is an user name, like "
+"typing 'adduser <username>' as root, where <username> is an username, like "
 "'imurdock' or 'rms'."
 msgstr ""
 "Možete ga načiniti i kasnije (kao i bilo koji dodatni korisnički račun) tako "
@@ -108,14 +127,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
-#, fuzzy
+#: ../user-setup-udeb.templates:8001
 msgid "Full name for the new user:"
-msgstr "Unesite puno ime novoga korisnika:"
+msgstr "Unesite puno ime novog korisnika:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "A user account will be created for you to use instead of the root account "
 "for non-administrative activities."
@@ -125,45 +143,47 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "Please enter the real name of this user. This information will be used for "
 "instance as default origin for emails sent by this user as well as any "
 "program which displays or uses the user's real name. Your full name is a "
 "reasonable choice."
 msgstr ""
+"Molim upišite pravo ime ovog korisnika. Ova informacija će se koristiti "
+"naprimjer kao zadani izvor za e-mailove koje taj korisnik pošalje, kao i u "
+"bilo kojem programu koji prikazuje ili koristi pravo ime korisnika. Vaše "
+"puno ime je razumani izbor za upisati ovdje."
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
-#, fuzzy
+#: ../user-setup-udeb.templates:9001
 msgid "Username for your account:"
-msgstr "Unesite korisničko ime za vaš račun:"
+msgstr "Unesite ime za vaš korisnički račun:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid ""
 "Select a username for the new account. Your first name is a reasonable "
 "choice. The username should start with a lower-case letter, which can be "
 "followed by any combination of numbers and more lower-case letters."
 msgstr ""
-"Izaberite korisničko ime za novi korisnički račun. Vaše ime je uobičajeni "
-"izabir. Korisničko ime treba započinjati malim slovom, a može se sastojati "
-"od bilo koje kombinacije brojaka i malih slova."
+"Izaberite ime za novi korisnički račun. Vaše ime je uobičajeni izabir. "
+"Korisničko ime treba započinjati malim slovom, a može se sastojati od bilo "
+"koje kombinacije brojaka i malih slova."
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
-#, fuzzy
+#: ../user-setup-udeb.templates:10001
 msgid "Invalid username"
-msgstr "Uneseno nevaljano korisničko ime."
+msgstr "Neispravno korisničko ime"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid ""
-"The user name you entered is invalid. Note that usernames must start with a "
+"The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
 "more lower-case letters."
 msgstr ""
@@ -171,99 +191,94 @@ msgstr ""
 "započinjati malim slovima, a mogu se sastojati od bilo koje kombinacije "
 "brojaka i malih slova."
 
-#. Type: password
+#. Type: error
 #. Description
-#: ../user-setup-udeb.templates:86
-#, fuzzy
-msgid "Choose a password for the new user:"
-msgstr "Unesite zaporku za novoga korisnika:"
+#: ../user-setup-udeb.templates:11001
+msgid "Reserved username"
+msgstr "Rezervirano korisničko ime"
 
-#. Type: password
+#. Type: error
 #. Description
-#: ../user-setup-udeb.templates:86
-#, fuzzy
+#: ../user-setup-udeb.templates:11001
 msgid ""
-"A good password will contain a mixture of letters, numbers and punctuation "
-"and should be changed at regular intervals."
+"The username you entered (${USERNAME}) is reserved for use by the system. "
+"Please select a different one."
 msgstr ""
-"Dobru zaporku sastavit ćete od slova, brojaka i interpunkcija i redovito "
-"ćete je mijenjati."
+"Korisničko ime koje ste upisali (${USERNAME}) je rezervirano za sistemsku "
+"upotrebu. Molim odredite drugo."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:92
-msgid "Re-enter password to verify:"
-msgstr "Iznova unesite zaporku za potvrdu:"
+#: ../user-setup-udeb.templates:12001
+msgid "Choose a password for the new user:"
+msgstr "Unesite lozinku za novoga korisnika:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:92
+#: ../user-setup-udeb.templates:13001
 msgid ""
 "Please enter the same user password again to verify you have typed it "
 "correctly."
 msgstr ""
-"Molim unesite istu korisničku zaporku kao potvrdu da ste je ispravno "
+"Molim unesite istu korisničku lozinku kao potvrdu da ste je ispravno "
 "utipkali."
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
-#, fuzzy
+#: ../user-setup-udeb.templates:14001
 msgid "Password input error"
-msgstr "Pogreška pri unošenju zaporke"
+msgstr "Pogreška pri unošenju lozinke"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "The two passwords you entered were not the same. Please try again."
-msgstr "Zaporke koje ste unijeli nisu jednake. Molim pokušajte iznova."
+msgstr "Lozinke koje ste unijeli nisu jednake. Molim pokušajte iznova."
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
-#, fuzzy
+#: ../user-setup-udeb.templates:15001
 msgid "Empty password"
-msgstr "Korijenska zaporka:"
+msgstr "Prazna lozinka"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid ""
 "You entered an empty password, which is not allowed. Please choose a non-"
 "empty password."
 msgstr ""
+"Unijeli ste praznu lozinku, što nije dozvoljeno. Molim odaberite lozinku."
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid "Enable shadow passwords?"
-msgstr "Omogući sjenkaste zaporke?"
+msgstr "Omogući 'shadow' lozinke?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
-#, fuzzy
+#: ../user-setup-udeb.templates:16001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
 "can only be read by special programs. The use of shadow passwords is "
 "strongly recommended, except in a few cases such as NIS environments."
 msgstr ""
-"Sjenkaste zaporke čine vaš sustav sigurnijim, jer nitko ne može vidjeti čak "
-"niti enkriptirane zaporke. Sve one su spremljene u posebnu datoteku koju "
-"mogu čitati samo posebni programi. Uporaba sjenkastih zaporki se ozbiljno "
-"preporuča. Međutim, ako ćete koristiti NIS, možete upasti u nevolje."
+"'Shadow' lozinke čine vaš sustav sigurnijim jer nitko ne može vidjeti čak "
+"niti enkriptirane lozinke. Sve one su spremljene u posebnu datoteku koju "
+"mogu čitati samo posebni programi. Uporaba 'shadow' lozinki se najtoplije "
+"preporuča, osim u par slučajeva kao npr. ako ste u NIS okruženju."
 
 #. Type: title
 #. Description
-#: ../user-setup-udeb.templates:118
+#: ../user-setup-udeb.templates:17001
 msgid "Set up users and passwords"
-msgstr "Postavi korisnike i zaporke"
+msgstr "Postavi korisnike i lozinke"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
-#: ../user-setup-udeb.templates:123
-#, fuzzy
+#. finish-install progress bar item
+#: ../user-setup-udeb.templates:18001
 msgid "Setting users and passwords..."
-msgstr "Postavi korisnike i zaporke"
+msgstr "Postavljanje korisnika i lozinki..."

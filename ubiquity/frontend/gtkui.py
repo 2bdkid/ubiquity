@@ -615,7 +615,10 @@ class Wizard:
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
             self.installing = False
-            if os.path.exists('/var/lib/ubiquity/install.trace'):
+            if ret == 3:
+                # error already handled by Install
+                sys.exit(ret)
+            elif os.path.exists('/var/lib/ubiquity/install.trace'):
                 tbfile = open('/var/lib/ubiquity/install.trace')
                 realtb = tbfile.read()
                 tbfile.close()
@@ -1721,7 +1724,7 @@ class Wizard:
             self.backup = True
             self.installing = False
 
-    def error_dialog (self, msg, fatal=True):
+    def error_dialog (self, title, msg, fatal=True):
         # TODO: cancel button as well if capb backup
         self.allow_change_step(True)
         if self.current_page is not None:
@@ -1730,6 +1733,7 @@ class Wizard:
             transient = self.debconf_progress_window
         dialog = gtk.MessageDialog(transient, gtk.DIALOG_MODAL,
                                    gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
+        dialog.set_title(title)
         dialog.run()
         dialog.hide()
         if fatal:

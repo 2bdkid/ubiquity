@@ -1,3 +1,33 @@
+debian-installer-utils (1.36ubuntu1) edgy; urgency=low
+
+  * Resynchronise with Debian.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  5 Oct 2006 09:08:17 +0100
+
+debian-installer-utils (1.36) unstable; urgency=low
+
+  [ Colin Watson ]
+  * log-output: Use static functions where appropriate.
+  * log-output: When using --pass-stdout, pass stdout file descriptor
+    through directly, without the need for a stdout handler function.
+    Without this, long lines on stdout get broken into 1024-byte pieces.
+
+  [ Frans Pop ]
+  * Log actions by anna-install.
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Colin Watson <cjwatson@debian.org>  Tue,  3 Oct 2006 23:42:44 +0100
+
 debian-installer-utils (1.35ubuntu2) edgy; urgency=low
 
   * Backport from trunk:

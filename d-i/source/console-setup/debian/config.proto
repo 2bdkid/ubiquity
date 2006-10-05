@@ -64,7 +64,6 @@ set -e
 . /usr/share/debconf/confmodule
 
 CONFIGFILE=/etc/default/console-setup
-XORGCONFIGFILE=/etc/X11/xorg.conf
 
 ## FONTSETS ## Will be replaced by assignment for $fontsets:
 
@@ -1408,6 +1407,10 @@ while :; do
 		fi
 		db_beginblock
 		if [ "$latin" = no ]; then
+		    db_get console-setup/toggle
+		    if [ "$RET" = 'No toggling' ]; then
+			db_reset console-setup/toggle
+		    fi
 		    db_input high console-setup/toggle || true
 		    db_input medium console-setup/switch || true
 		fi

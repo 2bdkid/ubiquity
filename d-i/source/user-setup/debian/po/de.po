@@ -14,14 +14,14 @@
 # Jan Luebbe <jluebbe@lasnet.de>, 2003.
 # Thorsten Sauter <tsauter@gmx.net>, 2003.
 #
-# This file is maintained by Dennis Stampfer <seppy@debian.org>
+# This file is maintained by Jens Seidel <jensseidel@users.sf.net>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 23:43-0600\n"
-"PO-Revision-Date: 2006-04-18 23:25+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-04 14:24+0100\n"
+"PO-Revision-Date: 2006-09-24 21:56+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -31,30 +31,30 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid "Allow login as root?"
 msgstr "root das Anmelden erlauben?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:22
+#: ../user-setup-udeb.templates:4001
 msgid ""
 "If you choose not to allow root to log in, then a user account will be "
 "created and given the power to become root using the 'sudo' command."
 msgstr ""
-"Wenn Sie auswählen, das root das Anmelden verwehrt werden soll, wird ein "
+"Wenn Sie auswählen, dass root das Anmelden verwehrt werden soll, wird ein "
 "Benutzerkonto angelegt und mit dem Recht versehen, root mittels des »sudo«-"
 "Kommandos zu werden."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid "Root password:"
 msgstr "Root-Passwort:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#: ../user-setup-udeb.templates:5001
 msgid ""
 "You need to set a password for 'root', the system administrative account. A "
 "malicious or unqualified user with root access can have disastrous results, "
@@ -71,13 +71,33 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:28
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001 ../user-setup-udeb.templates:12001
+msgid ""
+"A good password will contain a mixture of letters, numbers and punctuation "
+"and should be changed at regular intervals."
+msgstr ""
+"Ein gutes Passwort enthält eine Mixtur aus Buchstaben, Zahlen und "
+"Sonderzeichen und wird in regelmäßigen Abständen geändert."
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:5001
 msgid "Note that you will not be able to see the password as you type it."
 msgstr "Hinweis: Sie werden das Passwort während der Eingabe nicht sehen."
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:42
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001 ../user-setup-udeb.templates:13001
+msgid "Re-enter password to verify:"
+msgstr "Bitte geben Sie das Passwort nochmals zur Bestätigung ein:"
+
+#. Type: password
+#. Description
+#: ../user-setup-udeb.templates:6001
 msgid ""
 "Please enter the same root password again to verify that you have typed it "
 "correctly."
@@ -87,13 +107,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid "Create a normal user account now?"
 msgstr "Soll jetzt ein normales Benutzerkonto erstellt werden?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "It's a bad idea to use the root account for normal day-to-day activities, "
 "such as the reading of electronic mail, because even a small mistake can "
@@ -107,10 +127,10 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:49
+#: ../user-setup-udeb.templates:7001
 msgid ""
 "Note that you may create it later (as well as any additional account) by "
-"typing 'adduser <username>' as root, where <username> is an user name, like "
+"typing 'adduser <username>' as root, where <username> is an username, like "
 "'imurdock' or 'rms'."
 msgstr ""
 "Beachten Sie, dass Sie das Benutzerkonto auch später durch Eingabe von "
@@ -120,13 +140,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid "Full name for the new user:"
 msgstr "Voller Name des neuen Benutzers:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "A user account will be created for you to use instead of the root account "
 "for non-administrative activities."
@@ -136,7 +156,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:61
+#: ../user-setup-udeb.templates:8001
 msgid ""
 "Please enter the real name of this user. This information will be used for "
 "instance as default origin for emails sent by this user as well as any "
@@ -144,18 +164,18 @@ msgid ""
 "reasonable choice."
 msgstr ""
 "Bitte geben Sie den vollen Namen des Benutzers an. Diese Information wird z."
-"B. im Absender von E-Mails die er verschickt oder in Programmen die den "
+"B. im Absender von E-Mails, die er verschickt, oder in Programmen, die den "
 "Namen des Benutzers anzeigen, verwendet. Ihr kompletter Name wäre sinnvoll."
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid "Username for your account:"
 msgstr "Benutzername für Ihr Konto:"
 
 #. Type: string
 #. Description
-#: ../user-setup-udeb.templates:72
+#: ../user-setup-udeb.templates:9001
 msgid ""
 "Select a username for the new account. Your first name is a reasonable "
 "choice. The username should start with a lower-case letter, which can be "
@@ -167,15 +187,15 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid "Invalid username"
 msgstr "Ungültiger Benutzername"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:79
+#: ../user-setup-udeb.templates:10001
 msgid ""
-"The user name you entered is invalid. Note that usernames must start with a "
+"The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
 "more lower-case letters."
 msgstr ""
@@ -184,31 +204,31 @@ msgstr ""
 "Kombination aus Zahlen oder weiteren klein geschriebenen Buchstaben ergänzt "
 "werden kann."
 
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid "Reserved username"
+msgstr "Reservierter Benutzername"
+
+#. Type: error
+#. Description
+#: ../user-setup-udeb.templates:11001
+msgid ""
+"The username you entered (${USERNAME}) is reserved for use by the system. "
+"Please select a different one."
+msgstr ""
+"Der von Ihnen eingegebene Benutzername (${USERNAME}) ist für das System "
+"reserviert. Bitte wählen Sie einen anderen."
+
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
+#: ../user-setup-udeb.templates:12001
 msgid "Choose a password for the new user:"
 msgstr "Wählen Sie ein Passwort für den neuen Benutzer:"
 
 #. Type: password
 #. Description
-#: ../user-setup-udeb.templates:86
-msgid ""
-"A good password will contain a mixture of letters, numbers and punctuation "
-"and should be changed at regular intervals."
-msgstr ""
-"Ein gutes Passwort enthält eine Mixtur aus Buchstaben, Zahlen und "
-"Sonderzeichen und wird in regelmäßigen Abständen geändert."
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
-msgid "Re-enter password to verify:"
-msgstr "Bitte geben Sie das Passwort nochmals zur Bestätigung ein:"
-
-#. Type: password
-#. Description
-#: ../user-setup-udeb.templates:92
+#: ../user-setup-udeb.templates:13001
 msgid ""
 "Please enter the same user password again to verify you have typed it "
 "correctly."
@@ -218,13 +238,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "Password input error"
 msgstr "Passworteingabefehler"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:98
+#: ../user-setup-udeb.templates:14001
 msgid "The two passwords you entered were not the same. Please try again."
 msgstr ""
 "Die beiden Passwörter, die Sie eingegeben haben, sind nicht gleich. Bitte "
@@ -232,13 +252,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid "Empty password"
 msgstr "Leeres Passwort"
 
 #. Type: error
 #. Description
-#: ../user-setup-udeb.templates:103
+#: ../user-setup-udeb.templates:15001
 msgid ""
 "You entered an empty password, which is not allowed. Please choose a non-"
 "empty password."
@@ -248,13 +268,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid "Enable shadow passwords?"
 msgstr "Shadow-Passwörter benutzen?"
 
 #. Type: boolean
 #. Description
-#: ../user-setup-udeb.templates:110
+#: ../user-setup-udeb.templates:16001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -269,13 +289,13 @@ msgstr ""
 
 #. Type: title
 #. Description
-#: ../user-setup-udeb.templates:118
+#: ../user-setup-udeb.templates:17001
 msgid "Set up users and passwords"
 msgstr "Benutzer und Passwörter einrichten"
 
 #. Type: text
 #. Description
-#. Prebaseconfig progress bar item
-#: ../user-setup-udeb.templates:123
+#. finish-install progress bar item
+#: ../user-setup-udeb.templates:18001
 msgid "Setting users and passwords..."
 msgstr "Benutzer und Passwörter einrichten ..."
