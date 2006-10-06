@@ -147,6 +147,8 @@ class Wizard:
         self.language_questions = ('live_installer', 'welcome_heading_label',
                                    'welcome_text_label', 'step_label',
                                    'cancel', 'back', 'next')
+        self.allowed_change_step = True
+        self.allowed_go_forward = True
 
         self.laptop = ex("laptop-detect")
         self.qtparted_subp = None
@@ -158,9 +160,6 @@ class Wizard:
         dbfilter.db.shutdown()
 
         self.debconf_callbacks = {}    # array to keep callback functions needed by debconf file descriptors
-    
-        # To get a "busy mouse":
-        self.userinterface.setCursor(QCursor(Qt.WaitCursor))
     
         # TODO jr 2006-04-19: sometimes causes pykde crash when creating
         # kdialogs
@@ -254,7 +253,7 @@ class Wizard:
         # current dapper (https://bugzilla.ubuntu.com/show_bug.cgi?id=20338).
         #self.show_browser()
         got_intro = self.show_intro()
-        self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+        self.allow_change_step(True)
     
         # Declare SignalHandler
         self.app.connect(self.userinterface.next, SIGNAL("clicked()"), self.on_next_clicked)
@@ -326,13 +325,10 @@ class Wizard:
                 self.dbfilter = None
 
             if self.dbfilter is not None and self.dbfilter != old_dbfilter:
-                self.userinterface.setCursor(QCursor(Qt.WaitCursor))
+                self.allow_change_step(False)
                 self.dbfilter.start(auto_process=True)
             else:
-                self.userinterface.next.setEnabled(True)
-                if not (current_name == "stepWelcome" or current_name == "stepLanguage"):
-                    self.userinterface.back.setEnabled(True)
-                self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+                self.allow_change_step(True)
 
             self.app.exec_loop()
     
@@ -350,7 +346,7 @@ class Wizard:
         #iconLoader = KIconLoader()
         #icon = iconLoader.loadIcon("system", KIcon.Small)
         #self.userinterface.logo_image.setPixmap(icon)
-        self.userinterface.back.setEnabled(False)
+        self.userinterface.back.hide()
 
         self.update_new_size_label(self.userinterface.new_size_scale.value())
         """
@@ -440,6 +436,22 @@ class Wizard:
 
         elif isinstance(widget, QWidget) and widget.name() == UbiquityUI:
             widget.setCaption(text)
+
+
+    def allow_change_step(self, allowed):
+        if allowed:
+            cursor = QCursor(Qt.ArrowCursor)
+        else:
+            cursor = QCursor(Qt.WaitCursor)
+        self.userinterface.setCursor(cursor)
+        self.userinterface.back.setEnabled(allowed)
+        self.userinterface.next.setEnabled(allowed and self.allowed_go_forward)
+        self.allowed_change_step = allowed
+
+    def allow_go_forward(self, allowed):
+        self.userinterface.next.setEnabled(allowed and self.allowed_change_step)
+        self.allowed_go_forward = allowed
+
 
     def show_intro(self):
         """Show some introductory text, if available."""
@@ -562,12 +574,14 @@ class Wizard:
             0, 100, get_string('ubiquity/install/title', self.locale))
         self.debconf_progress_region(0, 15)
 
-        # TODO: turn off kded media watcher here?
+        ex('dcop', 'kded', 'kded', 'unloadModule', 'medianotifier')
 
         dbfilter = partman_commit.PartmanCommit(self, self.manual_partitioning)
         if dbfilter.run_command(auto_process=True) != 0:
             # TODO cjwatson 2006-09-03: return to partitioning?
             return
+
+        ex('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
 
         self.debconf_progress_region(15, 100)
 
@@ -615,12 +629,9 @@ class Wizard:
     def do_reboot(self):
         """Callback for main program to actually reboot the machine."""
 
-        # can't seem to be able to call dcop from kdesu (even if I su back to ubuntu user)
-        #if (os.path.exists("/usr/bin/ksmserver") and
-        #    os.path.exists("/usr/bin/dcop")):
-        #    ex("dcop", "ksmserver", "ksmserver", "logout", "1", "1", "1")
-        #else:
-        ex("reboot")
+        ex('dcop', 'ksmserver', 'ksmserver', 'logout',
+           # ShutdownConfirmNo, ShutdownTypeReboot, ShutdownModeForceNow
+           '0', '1', '2')
 
     def quit(self):
         """quit installer cleanly."""
@@ -705,7 +716,7 @@ class Wizard:
         for name in ('username', 'password', 'verified_password', 'hostname'):
             if getattr(self.userinterface, name).text() == '':
                 complete = False
-        self.userinterface.next.setEnabled(complete)
+        self.allow_go_forward(complete)
 
     def on_hostname_insert_text(self):
         self.hostname_edited = True
@@ -728,10 +739,12 @@ class Wizard:
     def on_next_clicked(self):
         """Callback to control the installation process between steps."""
 
+        if not self.allowed_change_step or not self.allowed_go_forward:
+            return
+
+        self.allow_change_step(False)
+
         step = self.step_name(self.get_current_page())
-        self.userinterface.setCursor(QCursor(Qt.WaitCursor))
-        self.userinterface.next.setEnabled(False)
-        self.userinterface.back.setEnabled(False)
         if step == "stepKeyboardConf":
             self.userinterface.fullname_error_image.hide()
             self.userinterface.fullname_error_reason.hide()
@@ -781,8 +794,8 @@ class Wizard:
         elif step == "stepLanguage":
             self.translate_widgets()
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepLocation"])
-            self.userinterface.back.setEnabled(True)
-            self.userinterface.next.setEnabled(self.get_timezone() is not None)
+            self.userinterface.back.show()
+            self.allow_go_forward(self.get_timezone() is not None)
         # Location
         elif step == "stepLocation":
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepKeyboardConf"])
@@ -874,8 +887,6 @@ class Wizard:
         else:
             # TODO cjwatson 2006-01-10: extract mountpoints from partman
             self.manual_partitioning = False
-            self.userinterface.next.setEnabled(True)
-            self.userinterface.back.setEnabled(True)
             self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepReady"])
 
     def qtparted_crashed(self):
@@ -993,7 +1004,7 @@ class Wizard:
 
         # Setting a default partition preselection
         if len(selection.items()) == 0:
-            self.userinterface.next.setEnabled(False)
+            self.allow_go_forward(False)
         else:
             # Setting default preselection values into ComboBox widgets and
             # setting size values. In addition, the next row is shown if
@@ -1208,17 +1219,20 @@ class Wizard:
             self.userinterface.mountpoint_error_image.hide()
 
         self.manual_partitioning = True
-        self.userinterface.next.setEnabled(True)
-        self.userinterface.back.setEnabled(True)
         self.userinterface.widgetStack.raiseWidget(WIDGET_STACK_STEPS["stepReady"])
 
     def on_back_clicked(self):
         """Callback to set previous screen."""
 
+        if not self.allowed_change_step:
+            return
+
+        self.allow_change_step(False)
+
         self.backup = True
 
         # Enabling next button
-        self.userinterface.next.setEnabled(True)
+        self.allow_go_forward(True)
         # Setting actual step
         step = self.step_name(self.get_current_page())
         self.userinterface.setCursor(QCursor(Qt.WaitCursor))
@@ -1226,7 +1240,7 @@ class Wizard:
         changed_page = False
 
         if step == "stepLocation":
-            self.userinterface.back.setEnabled(False)
+            self.userinterface.back.hide()
         elif step == "stepPartAuto":
             if self.got_disk_choices:
                 new_step = "stepPartDisk"
@@ -1437,7 +1451,7 @@ class Wizard:
             if isinstance(dbfilter, summary.Summary):
                 # The Summary component is just there to gather information,
                 # and won't call run_main_loop() for itself.
-                self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+                self.allow_change_step(True)
             else:
                 self.app.exit()
 
@@ -1698,7 +1712,7 @@ class Wizard:
             self.installing = False
 
     def error_dialog (self, title, msg, fatal=True):
-        self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+        self.allow_change_step(True)
         # TODO: cancel button as well if capb backup
         QMessageBox.warning(self.userinterface, title, msg, QMessageBox.Ok)
         if fatal:
@@ -1708,7 +1722,7 @@ class Wizard:
         # I doubt we'll ever need more than three buttons.
         assert len(option_templates) <= 3, option_templates
 
-        self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
+        self.allow_change_step(True)
         buttons = []
         for option_template in option_templates:
             text = get_string(option_template, self.locale)
@@ -1738,12 +1752,7 @@ class Wizard:
         """
     # Run the UI's main loop until it returns control to us.
     def run_main_loop (self):
-        self.userinterface.setCursor(QCursor(Qt.ArrowCursor))
-        if not self.installing:
-            self.userinterface.next.setEnabled(True)
-        step = self.step_name(self.get_current_page())
-        if not (step == "stepWelcome" or step == "stepLanguage") and not self.installing:
-            self.userinterface.back.setEnabled(True)
+        self.allow_change_step(True)
         self.app.exec_loop()
 
     # Return control to the next level up.

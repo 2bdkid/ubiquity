@@ -1,3 +1,11 @@
+debian-installer-utils (1.36ubuntu2) edgy; urgency=low
+
+  * Work around some weirdness in di_exec that caused log-output sometimes
+    to hang in poll(). We now install a no-op SIGCHLD handler to make sure
+    that poll() returns EINTR when the subsidiary process exits.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  6 Oct 2006 21:28:47 +0100
+
 debian-installer-utils (1.36ubuntu1) edgy; urgency=low
 
   * Resynchronise with Debian.

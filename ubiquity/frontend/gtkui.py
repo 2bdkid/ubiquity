@@ -290,6 +290,11 @@ class Wizard:
                 self.allow_change_step(False)
                 self.dbfilter.start(auto_process=True)
             else:
+                # Non-debconf steps don't have a mechanism for turning this
+                # back on, so we do it here. process_step should block until
+                # the next step has started up; this will block the UI, but
+                # that's probably unavoidable for now. (We only use this for
+                # gparted, which has its own UI loop.)
                 self.allow_change_step(True)
             gtk.main()
 
@@ -342,14 +347,6 @@ class Wizard:
 
     def poke_screensaver(self):
         """Attempt to make sure that the screensaver doesn't kick in."""
-        def drop_privileges():
-            if 'SUDO_GID' in os.environ:
-                gid = int(os.environ['SUDO_GID'])
-                os.setregid(gid, gid)
-            if 'SUDO_UID' in os.environ:
-                uid = int(os.environ['SUDO_UID'])
-                os.setreuid(uid, uid)
-
         if os.path.exists('/usr/bin/gnome-screensaver-command'):
             command = ["gnome-screensaver-command", "--poke"]
         elif os.path.exists('/usr/bin/xscreensaver-command'):
@@ -510,6 +507,11 @@ class Wizard:
         self.gparted_subp = subprocess.Popen(
             args,
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, close_fds=True)
+
+        # Wait for gparted to start up before enabling back/forward buttons
+        gparted_reply = ''
+        while gparted_reply != '- READY':
+            gparted_reply = self.gparted_subp.stdout.readline().rstrip('\n')
 
 
     def set_size_msg(self, widget):
@@ -769,6 +771,11 @@ class Wizard:
     def on_next_clicked(self, widget):
         """Callback to control the installation process between steps."""
 
+        if not self.allowed_change_step or not self.allowed_go_forward:
+            return
+
+        self.allow_change_step(False)
+
         step = self.step_name(self.steps.get_current_page())
 
         if step == "stepUserInfo":
@@ -777,11 +784,10 @@ class Wizard:
             self.hostname_error_box.hide()
 
         if self.dbfilter is not None:
-            self.allow_change_step(False)
             self.dbfilter.ok_handler()
             # expect recursive main loops to be exited and
             # debconffilter_done() to be called when the filter exits
-        else:
+        elif gtk.main_level() > 0:
             gtk.main_quit()
 
     def on_keyboard_layout_selected(self, start_editing, *args):
@@ -1211,6 +1217,11 @@ class Wizard:
     def on_back_clicked(self, widget):
         """Callback to set previous screen."""
 
+        if not self.allowed_change_step:
+            return
+
+        self.allow_change_step(False)
+
         self.backup = True
 
         # Enabling next button
@@ -1251,11 +1262,10 @@ class Wizard:
             self.steps.prev_page()
 
         if self.dbfilter is not None:
-            self.allow_change_step(False)
             self.dbfilter.cancel_handler()
             # expect recursive main loops to be exited and
             # debconffilter_done() to be called when the filter exits
-        else:
+        elif gtk.main_level() > 0:
             gtk.main_quit()
 
 
@@ -1430,7 +1440,7 @@ class Wizard:
                 # The Summary component is just there to gather information,
                 # and won't call run_main_loop() for itself.
                 self.allow_change_step(True)
-            else:
+            elif gtk.main_level() > 0:
                 gtk.main_quit()
 
 
@@ -1782,7 +1792,8 @@ class Wizard:
 
     # Return control to the next level up.
     def quit_main_loop (self):
-        gtk.main_quit()
+        if gtk.main_level() > 0:
+            gtk.main_quit()
 
 
 # Much of this timezone map widget is a rough translation of
