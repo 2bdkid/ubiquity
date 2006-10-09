@@ -287,11 +287,19 @@ else
 fi
 #log "Language input template is $template"
 
+db_fget ${langname_all} seen
+if [ "$RET" = true ]; then
+	db_get ${langname_all}
+	PREVIOUS_LANGUAGE="$RET"
+else
+	PREVIOUS_LANGUAGE=
+fi
+
 db_input critical $template || [ $? -eq 30 ]
 
 if db_go; then
 	db_get $template
-	if [ "$RET" ] ; then
+	if [ "$RET" ] && [ "$RET" != "$PREVIOUS_LANGUAGE" ]; then
 		LANGNAME="$RET"
 		db_set ${langname_all} "$LANGNAME"
 		. languagemap
@@ -313,6 +321,8 @@ if db_go; then
 		log "Set $consoledisplay = '$CONSOLE'"
 	else
 		# Error, not sure how to handle it
+		# (Alternatively, the user might have picked the same
+		# language as before.)
 		:
 	fi
 else

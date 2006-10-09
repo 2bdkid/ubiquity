@@ -1,3 +1,36 @@
+ubiquity (1.1.30) edgy; urgency=low
+
+  * Add /usr/lib/ubiquity/console-setup/locale wrapper that overrides the
+    output of locale with the value of debian-installer/locale if set; this
+    encourages console-setup to select an appropriate keyboard layout
+    (closes: Malone #60067).
+  * Don't set PARTMAN_UPDATE_BEFORE_COMMIT for automatic partitioning.
+  * Run partman-commit while generating the installation summary to make
+    sure that we have a partitioning summary even for manual partitioning
+    (closes: Malone #61572). Take care to stop partman-commit proceeding
+    past the confirmation question.
+  * Don't reset the locale or run localechooser again if the country
+    selected on the timezone page isn't one for which we have a locale in
+    the current language (closes: Malone #61387).
+
+  * Add/update .desktop file translations from Rosetta: Arabic, Belarusian,
+    Czech, Kashubian, Spanish, Estonian, French, Frisian, Irish,
+    Luxembourgish, Lithuanian, Macedonian, Malay, Portuguese (Brazil),
+    Slovak, Swedish, Tajik, Ukrainian, Chinese (Taiwan).
+  * Add/update translations from Rosetta: Afrikaans, Amharic, Bulgarian,
+    Bengali, Breton, Catalan, Czech, Kashubian, Welsh, Danish, German,
+    Divehi, Dzongkha, Greek, Esperanto, Spanish, Basque, Persian, Finnish,
+    French, Irish, Galician, Hebrew, Hindi, Croatian, Hungarian, Indonesian,
+    Icelandic, Italian, Japanese, Georgian, Khmer, Kurdish, Kirghiz,
+    Lithuanian, Latvian, Malagasy, Macedonian, Malay, Norwegian Bokmål,
+    Dutch, Occitan, Polish, Portuguese, Portuguese (Brazil), Romanian,
+    Russian, Northern Sami, Slovak, Slovenian, Serbian, Swedish, Tamil,
+    Thai, Tagalog, Turkish, Chinese (China), Chinese (Hong Kong).
+  * Automatic update of included source packages: base-installer
+    1.63ubuntu5, localechooser 1.20ubuntu7, partman-base 90ubuntu6.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  9 Oct 2006 21:15:10 +0100
+
 ubiquity (1.1.29) edgy; urgency=low
 
   * Move drop_privileges helper function into ubiquity.misc.

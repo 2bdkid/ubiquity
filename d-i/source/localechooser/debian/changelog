@@ -1,3 +1,11 @@
+localechooser (1.20ubuntu7) edgy; urgency=low
+
+  * If the language question was already marked as seen and the answer
+    didn't change, then don't recalculate the locale (closes: Malone #63569;
+    also see Malone #60067).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  9 Oct 2006 10:40:02 +0100
+
 localechooser (1.20ubuntu6) edgy; urgency=low
 
   * Remove oem-config-locale package, moved into oem-config proper.

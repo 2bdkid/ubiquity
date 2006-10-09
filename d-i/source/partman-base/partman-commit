@@ -81,6 +81,11 @@ $partinfo"
 	    done
 	done
     done
+
+    if ! confirm_changes "partman"; then
+	trap - EXIT
+	exit 10
+    fi
 fi
 
 for s in /lib/partman/commit.d/*; do
