@@ -1086,7 +1086,7 @@ $items"
 		fi
 	else
 		if [ "$formatted_previously" = no ]; then
-			db_input medium $template/confirm_nochanges
+			db_input critical $template/confirm_nochanges
 			db_go || true
 			db_get $template/confirm_nochanges
 			if [ "$RET" = false ]; then

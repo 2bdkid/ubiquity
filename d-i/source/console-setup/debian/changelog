@@ -1,3 +1,22 @@
+console-setup (1.7ubuntu18) edgy; urgency=low
+
+  * Change the default font to VGA where supported; Terminus does not seem
+    to have widespread aesthetic appeal.
+  * Use jp(latin),jp rather than us,jp by default for Japanese, and set the
+    model to jp106 (closes: Malone #63915).
+  * Build-depend on keymapper (>= 0.5.3-7) for improved Alt-handling logic.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Oct 2006 02:42:15 +0100
+
+console-setup (1.7ubuntu17) edgy; urgency=low
+
+  * Only default to Canadian layout for fr_CA; use U.S. English for other
+    *_CA locales (closes: Malone #64418).
+  * Install kbdnames-maker in /usr/share/console-setup, to make it easier
+    for non-Perl programs to use KeyboardNames.pl.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 11 Oct 2006 12:52:36 +0100
+
 console-setup (1.7ubuntu16) edgy; urgency=low
 
   * Backport from trunk (Anton Zinoviev, closes: Malone #63921):

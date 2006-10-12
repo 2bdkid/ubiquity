@@ -1,3 +1,20 @@
+partman-base (90ubuntu8) edgy; urgency=low
+
+  * Backport from trunk:
+    - init.d/parted: Don't process /dev/md*; partman-md will take care of
+      that later, and doing it here means that we sometimes end up with
+      duplicate /dev/md0 versus /dev/md/0 entries in the partition tree.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Oct 2006 12:40:35 +0100
+
+partman-base (90ubuntu7) edgy; urgency=low
+
+  * Set the priority of partman*/confirm_nochanges questions back to
+    critical; having it at medium breaks LVM and RAID configuration (closes:
+    Malone #63721).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Oct 2006 11:43:28 +0100
+
 partman-base (90ubuntu6) edgy; urgency=low
 
   * Ask the confirmation question on the PARTMAN_UPDATE_BEFORE_COMMIT path,

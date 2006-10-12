@@ -678,8 +678,11 @@ case "$locale" in
     *_BY*)
 	default_layout=by  # Belarus
 	;;
-    *_CA*)
+    fr_CA*)
 	default_layout=ca  # Canada
+	;;
+    *_CA*)
+	default_layout=us  # U.S. English
 	;;
     *_CH*)
 	default_layout=ch  # Switzerland
@@ -1018,7 +1021,7 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 	gb) XKBLAYOUT="gb";;
 	is) XKBLAYOUT="is";;
 	it) XKBLAYOUT="it";;
-	jp106) XKBLAYOUT="jp"; XKBVARIANT="jp106";;
+	jp106) XKBLAYOUT="jp"; XKBVARIANT="jp106"; XKBMODEL="jp106";;
 	la) XKBLAYOUT="latam";;
 	lt) XKBLAYOUT="lt";; 
 	lv-latin4) XKBLAYOUT="lv";;
@@ -1110,7 +1113,7 @@ if [ -e $CONFIGFILE ]; then
 
     case "$XKBLAYOUT" in
 	# TODO: make s.t. to not forget to update this list
-	cs,cs|us,am|us,ara|us,ben|us,bd|us,bg|us,bt|us,by|us,deva|us,ge|us,gh|us,gr|us,guj|us,guru|us,il|us,in|us,ir|us,iku|us,jp|us,kan|us,kh|us,la|us,lao|us,lk|us,mk|us,mm|us,mn|us,mv|us,mal|us,ori|us,pk|us,ru|us,scc|us,sy|us,syr|us,tel|us,th|us,tj|us,tam|us,ua|us,uz)
+	cs,cs|us,am|us,ara|us,ben|us,bd|us,bg|us,bt|us,by|us,deva|us,ge|us,gh|us,gr|us,guj|us,guru|us,il|us,in|us,ir|us,iku|jp,jp|us,jp|us,kan|us,kh|us,la|us,lao|us,lk|us,mk|us,mm|us,mn|us,mv|us,mal|us,ori|us,pk|us,ru|us,scc|us,sy|us,syr|us,tel|us,th|us,tj|us,tam|us,ua|us,uz)
 	    default_layout=${XKBLAYOUT#*,}
 	    default_variant="${XKBVARIANT#*,}"
 	    unsupported_layout=no
@@ -1351,7 +1354,7 @@ while :; do
 		case "$layout" in
 		    # TODO: make s.t. to not forget to update this list
                     # Don't forget to update also the list in kbdcompiler
-		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|jp|kan|kh|la|lao|lk|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
+		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|kan|kh|la|lao|lk|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
 			latin=no
 			real_layout=us,$layout
 			;;
@@ -1364,6 +1367,18 @@ while :; do
 			    *)
 				latin=no
 				real_layout=cs,cs
+				;;
+			esac
+			;;
+		    jp)
+			case "$variant" in
+			    latin)
+				latin=yes
+				real_layout=$layout
+				;;
+			    *)
+				latin=no
+				real_layout=jp,jp
 				;;
 			esac
 			;;
@@ -1390,6 +1405,8 @@ while :; do
 				"latin,$variant"
 			    ;;
 		    esac
+		elif [ "$real_layout" = jp,jp ]; then
+		    db_set console-setup/variantcode "latin,$variant"
 		else
 		    db_set console-setup/variantcode ",$variant"
 		fi
@@ -1676,10 +1693,10 @@ while :; do
 			default_fontface=Fixed
 			;;
 		    CyrKoi)
-			default_fontface=Terminus
+			default_fontface=VGA
 			;;
 		    CyrSlav)
-			default_fontface=Terminus
+			default_fontface=VGA
 			;;
 		    Ethiopian)
 			default_fontface=Goha
@@ -1697,16 +1714,16 @@ while :; do
 			default_fontface=Fixed
 			;;
 		    Lat15)
-			default_fontface=Terminus
+			default_fontface=VGA
 			;;
 		    Lat2)
-			default_fontface=Terminus
+			default_fontface=VGA
 			;;
 		    Lat38)
 			default_fontface=Fixed
 			;;
 		    Lat7)
-			default_fontface=Terminus
+			default_fontface=VGA
 			;;
 		    Thai)
 			default_fontface=Fixed

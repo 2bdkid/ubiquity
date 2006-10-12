@@ -311,7 +311,8 @@ static int choose_mirror(void) {
 		debconf_subst(debconf, mir, "mirrors", list);
 		if (debconf_fget(debconf, mir, "seen") != 0 ||
 		    strcmp(debconf->value, "true") != 0)
-			debconf_set(debconf, mir, countryarchive);
+			if (mirror_root(countryarchive))
+			    debconf_set(debconf, mir, countryarchive);
 		free(list);
 		free(countryarchive);
 

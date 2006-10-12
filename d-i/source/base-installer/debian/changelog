@@ -1,3 +1,13 @@
+base-installer (1.63ubuntu6) edgy; urgency=low
+
+  * Backport from trunk:
+    - AMD CPU family 15 systems (i.e. K8) should be allowed to install K7
+      kernels.
+  * Backport from trunk (Sven Luther):
+    - [powerpc] Added support for IBM Power5+ cpus.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Oct 2006 02:55:27 +0100
+
 base-installer (1.63ubuntu5) edgy; urgency=low
 
   * Stop installing usplash along with initramfs-tools. We now rely on the
