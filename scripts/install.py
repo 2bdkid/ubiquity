@@ -371,13 +371,13 @@ class Install:
             self.configure_keyboard()
 
             self.db.progress('SET', 88)
-            self.db.progress('REGION', 88, 92)
+            self.db.progress('REGION', 88, 89)
+            self.remove_unusable_kernels()
+
+            self.db.progress('SET', 89)
+            self.db.progress('REGION', 89, 93)
             self.db.progress('INFO', 'ubiquity/install/hardware')
             self.configure_hardware()
-
-            self.db.progress('SET', 92)
-            self.db.progress('REGION', 92, 93)
-            self.remove_unusable_kernels()
 
             self.db.progress('SET', 93)
             self.db.progress('REGION', 93, 94)
@@ -704,6 +704,11 @@ class Install:
         if ret != 0:
             raise InstallStepError("LanguageApply failed with code %d" % ret)
 
+        # fontconfig configuration needs to be adjusted based on the
+        # selected locale (from language-selector-common.postinst). Ignore
+        # errors.
+        self.chrex('fontconfig-voodoo', '--auto', '--quiet')
+
 
     def configure_apt(self):
         """Configure /etc/apt/sources.list."""
@@ -987,6 +992,50 @@ class Install:
                        '--quiet', '--remove', '/usr/sbin/update-initramfs')
             self.chrex('update-initramfs', '-u')
 
+        # Fix up kernel symlinks now that the initrd exists. Depending on
+        # the architecture, these may be in / or in /boot.
+        bootdir = os.path.join(self.target, 'boot')
+        if self.db.get('base-installer/kernel/linux/link_in_boot') == 'true':
+            linkdir = bootdir
+            linkprefix = ''
+        else:
+            linkdir = self.target
+            linkprefix = 'boot'
+
+        # Remove old symlinks. We'll set them up from scratch.
+        re_symlink = re.compile('vmlinu[xz]|initrd.img$')
+        for entry in os.listdir(linkdir):
+            if re_symlink.match(entry) is not None:
+                filename = os.path.join(linkdir, entry)
+                if os.path.islink(filename):
+                    os.unlink(filename)
+        if linkdir != self.target:
+            # Remove symlinks in /target too, which may have been created on
+            # the live filesystem. This isn't necessary, but it may help
+            # avoid confusion.
+            for entry in os.listdir(self.target):
+                if re_symlink.match(entry) is not None:
+                    filename = os.path.join(self.target, entry)
+                    if os.path.islink(filename):
+                        os.unlink(filename)
+
+        # Create symlinks. Prefer our current kernel version if possible,
+        # but if not (perhaps due to a customised live filesystem image),
+        # it's better to create some symlinks than none at all.
+        re_image = re.compile('(vmlinu[xz]|initrd.img)-')
+        for entry in os.listdir(bootdir):
+            match = re_image.match(entry)
+            if match is not None:
+                imagetype = match.group(1)
+                linksrc = os.path.join(linkprefix, entry)
+                linkdst = os.path.join(linkdir, imagetype)
+                if os.path.exists(linkdst):
+                    if entry.endswith('-' + self.kernel_version):
+                        os.unlink(linkdst)
+                    else:
+                        continue
+                os.symlink(linksrc, linkdst)
+
 
     def get_all_interfaces(self):
         """Get all non-local network interfaces."""
@@ -1128,6 +1177,13 @@ class Install:
         misc.ex('umount', '-f', self.target + '/dev')
 
 
+    def broken_packages(self, cache):
+        brokenpkgs = set()
+        for pkg in cache.keys():
+            if cache._depcache.IsInstBroken(cache._cache[pkg]):
+                brokenpkgs.add(pkg)
+        return brokenpkgs
+
     def do_remove(self, to_remove, recursive=False):
         self.db.progress('START', 0, 5, 'ubiquity/install/title')
         self.db.progress('INFO', 'ubiquity/install/find_removables')
@@ -1155,27 +1211,30 @@ class Install:
                         # of the broken packages are in the set of packages
                         # to remove anyway, then go ahead and try to remove
                         # them too.
-                        brokenpkgs = set()
-                        for pkg in cache.keys():
-                            if cache._depcache.IsInstBroken(cache._cache[pkg]):
-                                brokenpkgs.add(pkg)
+                        brokenpkgs = self.broken_packages(cache)
                         broken_removed = set()
-                        if recursive or brokenpkgs <= to_remove:
-                            for pkg in brokenpkgs:
-                                cachedpkg2 = self.get_cache_pkg(cache, pkg)
+                        while brokenpkgs and (recursive or
+                                              brokenpkgs <= to_remove):
+                            broken_removed_inner = set()
+                            for pkg2 in brokenpkgs:
+                                cachedpkg2 = self.get_cache_pkg(cache, pkg2)
                                 if cachedpkg2 is not None:
-                                    broken_removed.add(pkg)
+                                    broken_removed_inner.add(pkg2)
                                     try:
                                         cachedpkg2.markDelete(autoFix=False,
                                                               purge=True)
                                     except SystemError:
                                         apt_error = True
                                         break
+                            broken_removed |= broken_removed_inner
+                            if apt_error or not broken_removed_inner:
+                                break
+                            brokenpkgs = self.broken_packages(cache)
                         if apt_error or cache._depcache.BrokenCount > 0:
                             # That didn't work. Revert all the removals we
                             # just tried.
-                            for pkg in broken_removed:
-                                self.get_cache_pkg(cache, pkg).markKeep()
+                            for pkg2 in broken_removed:
+                                self.get_cache_pkg(cache, pkg2).markKeep()
                             cachedpkg.markKeep()
                         else:
                             removed.add(pkg)
@@ -1183,7 +1242,7 @@ class Install:
                     else:
                         removed.add(pkg)
                     assert cache._depcache.BrokenCount == 0
-            if len(removed) == 0:
+            if not removed:
                 break
             to_remove -= removed
 
@@ -1215,7 +1274,7 @@ class Install:
         """Remove unusable kernels; keeping them may cause us to be unable
         to boot."""
 
-        self.db.progress('START', 0, 6, 'ubiquity/install/title')
+        self.db.progress('START', 0, 5, 'ubiquity/install/title')
 
         self.db.progress('INFO', 'ubiquity/install/find_removables')
 
@@ -1240,52 +1299,6 @@ class Install:
             self.db.progress('STOP')
             raise
         self.db.progress('SET', 5)
-
-        # Now we need to fix up kernel symlinks. Depending on the
-        # architecture, these may be in / or in /boot.
-        bootdir = os.path.join(self.target, 'boot')
-        if self.db.get('base-installer/kernel/linux/link_in_boot') == 'true':
-            linkdir = bootdir
-            linkprefix = ''
-        else:
-            linkdir = self.target
-            linkprefix = 'boot'
-
-        # Remove old symlinks. We'll set them up from scratch.
-        re_symlink = re.compile('vmlinu[xz]|initrd.img$')
-        for entry in os.listdir(linkdir):
-            if re_symlink.match(entry) is not None:
-                filename = os.path.join(linkdir, entry)
-                if os.path.islink(filename):
-                    os.unlink(filename)
-        if linkdir != self.target:
-            # Remove symlinks in /target too, which may have been created on
-            # the live filesystem. This isn't necessary, but it may help
-            # avoid confusion.
-            for entry in os.listdir(self.target):
-                if re_symlink.match(entry) is not None:
-                    filename = os.path.join(self.target, entry)
-                    if os.path.islink(filename):
-                        os.unlink(filename)
-
-        # Create symlinks. Prefer our current kernel version if possible,
-        # but if not (perhaps due to a customised live filesystem image),
-        # it's better to create some symlinks than none at all.
-        re_image = re.compile('(vmlinu[xz]|initrd.img)-')
-        for entry in os.listdir(bootdir):
-            match = re_image.match(entry)
-            if match is not None:
-                imagetype = match.group(1)
-                linksrc = os.path.join(linkprefix, entry)
-                linkdst = os.path.join(linkdir, imagetype)
-                if os.path.exists(linkdst):
-                    if entry.endswith('-' + self.kernel_version):
-                        os.unlink(linkdst)
-                    else:
-                        continue
-                os.symlink(linksrc, linkdst)
-
-        self.db.progress('SET', 6)
         self.db.progress('STOP')
 
 
