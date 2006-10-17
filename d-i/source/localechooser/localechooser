@@ -222,6 +222,14 @@ else
 	db_set debconf/language C
 fi
 
+db_fget ${langname_all} seen
+if [ "$RET" = true ]; then
+	db_get ${langname_all}
+	PREVIOUS_LANGUAGE="$RET"
+else
+	PREVIOUS_LANGUAGE=
+fi
+
 # Support preseeding of the locale all in one variable for convenience.
 # Only check for preseeding if this is the first time localechooser is run.
 db_get localechooser/alreadyrun
@@ -286,14 +294,6 @@ else
 	template=${langname_all}
 fi
 #log "Language input template is $template"
-
-db_fget ${langname_all} seen
-if [ "$RET" = true ]; then
-	db_get ${langname_all}
-	PREVIOUS_LANGUAGE="$RET"
-else
-	PREVIOUS_LANGUAGE=
-fi
 
 db_input critical $template || [ $? -eq 30 ]
 

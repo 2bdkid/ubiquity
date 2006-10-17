@@ -1,3 +1,12 @@
+ubiquity (1.2.4) edgy; urgency=low
+
+  * Use update-initramfs -c -k "$(uname -r)" rather than update-initramfs
+    -u, as the latter gets very confused if we need to remove kernels, as on
+    powerpc (really closes: Malone #66406).
+  * Automatic update of included source packages: localechooser 1.20ubuntu8.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 17 Oct 2006 13:14:41 +0100
+
 ubiquity (1.2.3) edgy; urgency=low
 
   [ Colin Watson ]
@@ -15,7 +24,7 @@ ubiquity (1.2.3) edgy; urgency=low
 
   [ Michael Vogt ]
   * Run fontconfig-voodoo to tweak fontconfig configuration for the selected
-    language.
+    language (closes: Malone #49334).
 
  -- Colin Watson <cjwatson@ubuntu.com>  Mon, 16 Oct 2006 23:49:28 +0100
 
