@@ -1,3 +1,19 @@
+console-setup (1.7ubuntu19) edgy; urgency=low
+
+  * If upgrading from an older version than this one, check for the Terminus
+    font face and change it to VGA (if you do like it, you can change it
+    back and it won't be touched again). If Terminus was in use, also check
+    for the 12x6 font size and change it to 16, since that was apparently
+    selected due to a strange use-of-debconf bug.
+  * Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+    tty, since the current tty might belong to X and changing X's tty out of
+    raw mode is a very bad idea (closes: Malone #66929; requires kbd 1.12-15
+    or console-tools 1:0.2.3dbs-62ubuntu10).
+  * Adjust the default keyboard model for Brazilian (closes: Malone #66774)
+    and Japanese (closes: Malone #66719) layouts.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 20 Oct 2006 20:16:09 +0100
+
 console-setup (1.7ubuntu18) edgy; urgency=low
 
   * Change the default font to VGA where supported; Terminus does not seem

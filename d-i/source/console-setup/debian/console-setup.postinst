@@ -72,6 +72,22 @@ if [ "$1" = "configure" ]; then
 	acm_option=''
     fi
 
+    if which dpkg >/dev/null && \
+       dpkg --compare-versions "$2" lt 1.7ubuntu19; then
+	# Try to fix up some old mistakes.
+	if [ "$fontface" = Terminus ]; then
+	    # Terminus was used for a while during the Ubuntu Edgy
+	    # development cycle, but we don't want to default to it any
+	    # more. However, if people set it back, then we won't argue.
+	    fontface=VGA
+	    if [ "$fontsize" = 12x6 ]; then
+		# This appears to have been selected by mistake due to some
+		# obscure bug in our use of debconf.
+		fontsize=16
+	    fi
+	fi
+    fi
+
     if [ ! -e $CONFIGFILE ]; then
 	cat /usr/share/doc/console-setup/examples/console-setup \
 	    /usr/share/doc/console-setup-mini/examples/console-setup \

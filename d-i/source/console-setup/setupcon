@@ -240,7 +240,7 @@ fi
 #        INPUT          #
 #-----------------------#
 
-if [ "$font_only" != yes ]; then
+if [ "$font_only" != yes ] && [ "$ACTIVE_CONSOLES" ]; then
     # On Mac PPC machines, we may need to set kernel vars first.  We need
     # to mount /proc to do that, but we need it set up before sulogin may
     # be run in checkroot, which will need the keyboard to log in...
@@ -256,13 +256,16 @@ if [ "$font_only" != yes ]; then
 	fi
     fi
     
-    if which kbd_mode >/dev/null; then
-	if [ "$CHARMAP" = UTF-8 ] || [ -z "$ACM" ]; then
-	    kbd_mode -u
-	else
-	    kbd_mode -a
-	fi	
-    fi
+    for console in $ACTIVE_CONSOLES; do
+	[ -w $console ] || continue
+	if which kbd_mode >/dev/null; then
+	    if [ "$CHARMAP" = UTF-8 ] || [ -z "$ACM" ]; then
+		kbd_mode -u <$console
+	    else
+		kbd_mode -a <$console
+	    fi	
+	fi
+    done
     
     if which loadkeys >/dev/null; then
 	if which ckbcomp >/dev/null; then

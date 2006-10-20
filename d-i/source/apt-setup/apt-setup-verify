@@ -29,6 +29,19 @@ valid () {
 	tmp=$($chroot $ROOT tempfile)
 	echo "$line" > $ROOT$tmp
 	
+	# If the base system can be installed from CD, don't bother
+	# validating the mirror; it can take a long time, most users won't
+	# care just now, and the situation can be repaired later once the
+	# system is installed.
+	if [ -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; then
+		case $line in
+			'deb http'*|'deb ftp'*|'deb-src http'*|'deb-src ftp'*)
+				rm -f $ROOT$tmp
+				return 0
+				;;
+		esac
+	fi
+
 	if $chroot $ROOT apt-get -o APT::Get::List-Cleanup=false \
 		-o Dir::Etc::sourcelist=$tmp update
 	then

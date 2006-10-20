@@ -1,3 +1,12 @@
+apt-setup (1:0.11ubuntu5) edgy; urgency=low
+
+  * Don't bother validating network mirrors if the base system can be
+    installed from CD; apt's failure mode is sufficiently graceful nowadays
+    that we can let the user sort out problems after installation (closes:
+    Malone #14599, #35364).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 18 Oct 2006 18:47:47 +0100
+
 apt-setup (1:0.11ubuntu4) edgy; urgency=low
 
   * Backport from trunk (Joey Hess):

@@ -995,6 +995,7 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
     di_keymap="${RET##mac-usb-}"
     di_keymap="${di_keymap%%-latin1}"
 
+    XKBMODEL=''
     XKBLAYOUT=''
     XKBVARIANT=''
     case "$di_keymap" in
@@ -1067,6 +1068,9 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 	    layout_priority=high
 	    ;;
 	*)
+	    if [ "$XKBMODEL" ]; then
+		default_model="$XKBMODEL"
+	    fi
 	    default_layout="$XKBLAYOUT"
 	    default_variant="$XKBVARIANT"
 	    layout_priority=medium
@@ -1320,6 +1324,25 @@ while :; do
 	    else
 		STATE=$(($STATE - 1))
 	    fi
+	    # Adjust the keyboard model for some layouts requiring extra keys.
+	    case $model in
+		pc105|abnt2|jp106)
+		    case $layout in
+			br)
+			    model=abnt2
+			    db_set console-setup/modelcode "$model"
+			    ;;
+			jp)
+			    model=jp106
+			    db_set console-setup/modelcode "$model"
+			    ;;
+			*)
+			    model=pc105
+			    db_set console-setup/modelcode "$model"
+			    ;;
+		    esac
+		    ;;
+	    esac
 	    ;;
 	5)
 	    adjust_layout=false

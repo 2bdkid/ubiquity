@@ -1,3 +1,12 @@
+partman-base (90ubuntu9) edgy; urgency=low
+
+  * definitions.sh: Initialise formatted_previously at the right time
+    (closes: Malone #66895).
+  * init.d/update_partitions, partman-commit: Restore IFS even if a disk has
+    no partitions. Fixes missing substitution into confirmation question.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 20 Oct 2006 12:31:22 +0100
+
 partman-base (90ubuntu8) edgy; urgency=low
 
   * Backport from trunk:
