@@ -1,32 +1,56 @@
 #!/bin/sh
+### BEGIN INIT INFO
+# Provides:          console-screen
+# Required-Start:    $local_fs $remote_fs
+# Default-Start:     S
+# Short-Description: Set console font and keymap
+### END INIT INFO
 
 set -e
 
 test -f /bin/setupcon || exit 0
 
-. /lib/lsb/init-functions
+if [ -f /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+else
+    log_action_begin_msg () {
+	echo -n "$@... "
+    }
+
+    log_action_end_msg () {
+	if [ "$1" -eq 0 ]; then 
+	    echo done.
+	else
+	    echo failed.
+	fi
+    }
+fi
+
+# Are we running from init?
+run_by_init()
+{
+    ([ "$previous" ] && [ "$runlevel" ]) || [ "$runlevel" = S ]
+}
 
 case "$1" in
     stop)
         # console-setup isn't a daemon
         ;;
     start|force-reload|restart|reload)
-	if [ -z "$DISPLAY" ]; then
-	    if pidof usplash >/dev/null; then
-		log_begin_msg "Setting up console keymap..."
-		if setupcon -k --force; then
-		    log_end_msg 0
-		else
-		    log_end_msg $?
-		fi
-	    else
-		log_begin_msg "Setting up console font and keymap..."
-		if setupcon --force; then
-		    log_end_msg 0
-		else
-		    log_end_msg $?
-		fi
-	    fi
+	log_action_begin_msg "Setting up console font and keymap"
+	# Only use --save if we aren't in the boot sequence, to avoid
+	# slowing down the boot too much. Outside the boot sequence, this
+	# means that 'dpkg-reconfigure console-setup' automatically saves
+	# the font and keymap.
+	if run_by_init; then
+	    save=
+	else
+	    save=--save
+	fi
+	if setupcon --force $save; then
+	    log_action_end_msg 0
+	else
+	    log_action_end_msg $?
 	fi
 	;;
     *)

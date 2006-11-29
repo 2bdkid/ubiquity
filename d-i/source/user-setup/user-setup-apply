@@ -140,7 +140,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for group in lpadmin scanner; do
 			$log $chroot $ROOT addgroup --system $group >/dev/null 2>&1 || true
 		done
-		for group in adm audio cdrom dialout floppy video plugdev dip lpadmin scanner; do
+		for group in adm audio cdrom dialout floppy video plugdev dip netdev powerdev lpadmin scanner; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
 		add_to_aliases "$USER"
@@ -166,6 +166,12 @@ EOF
 		else
 			# sudo failed to install, system won't be usable
 			exit 1
+		fi
+		# Configure gksu to use sudo, via an alternative, if it's
+		# installed and the alternative is registered.
+		if $chroot update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
+			$log $chroot update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-sudo
+			$log $chroot update-gconf-defaults
 		fi
 	fi
 else

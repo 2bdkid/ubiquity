@@ -1,23 +1,45 @@
 #!/bin/sh
+### BEGIN INIT INFO
+# Provides:          keymap
+# Required-Start:    mountkernfs udev
+# Default-Start:     S
+# Short-Description: Set preliminary keymap
+# Description:       Set the console keyboard as early as possible
+#                    so during the file systems checks the administrator
+#                    can interact.  At this stage of the boot process
+#                    only the ASCII symbols are supported.
+### END INIT INFO
 
 set -e
 
 test -f /bin/setupcon || exit 0
 
-. /lib/lsb/init-functions
+if [ -f /lib/lsb/init-functions ]; then
+    . /lib/lsb/init-functions
+else
+    log_action_begin_msg () {
+	echo -n "$@... "
+    }
+
+    log_action_end_msg () {
+	if [ "$1" -eq 0 ]; then 
+	    echo done.
+	else
+	    echo failed.
+	fi
+    }
+fi
 
 case "$1" in
     stop)
         # keyboard-setup isn't a daemon
         ;;
     start|force-reload|restart|reload)
-	if [ -z "$DISPLAY" ]; then
-	    log_begin_msg "Setting preliminary keymap..."
-	    if setupcon -k --force; then
-		log_end_msg 0
-	    else
-		log_end_msg $?
-	    fi
+	log_action_begin_msg "Setting preliminary keymap"
+	if setupcon -k --force; then
+	    log_action_end_msg 0
+	else
+	    log_action_end_msg $?
 	fi
 	;;
     *)

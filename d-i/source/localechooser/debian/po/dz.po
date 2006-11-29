@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: dz\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-05 18:28-0600\n"
-"PO-Revision-Date: 2006-06-26 09:54+0530\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-10-16 01:20+0530\n"
 "Last-Translator: Jurmey Rabgay <jur_gay@yahoo.com>\n"
 "Language-Team: Dzongkha <pgeyleg@dit.gov.bt>\n"
 "MIME-Version: 1.0\n"
@@ -39,19 +39,22 @@ msgstr "སྐད་ཡིག་གདམ་ཁ་རྐྱབས།/Choose lang
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "སྐད་ཡིག་གསོག་འཇོག་འབད་དོ་་་་་"
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
-msgstr "ཡུ་ན་ཡེ་ཊེཊི སིཊེཊིསི།"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
+msgstr "འབྲུག་"
 
 #. Type: select
 #. Choices
@@ -59,7 +62,7 @@ msgstr "ཡུ་ན་ཡེ་ཊེཊི སིཊེཊིསི།"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "གཞན།"
 
@@ -68,35 +71,34 @@ msgstr "གཞན།"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "ཡུ་ཨེསི"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
-msgid "Choose your location:"
-msgstr "ལོ་ཀེལ་གདམ་ཁ་རྐྱབས:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "རྒྱལ་ཁབ་གཅིག་གདམ་ཁ་རྐྱབས་ མངའ་ཁོངས་ཡང་ཅིན་ས་ཁོངས:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr ""
 "ཁྱོད་ཀྱི་སྐད་ཡིག་ལུ་གཞི་བཞགཔ་ད་ ཁྱོད་འ་ནི་རྒྱལ་ཁབ་དང་ཡང་ཅིན་ལུང་ཕྱོགས་ཚུ་ནང་ལས་འོང་ནི་བཟུམ་ཅི་འདུག།"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "ལོ་ཀེལ་གདམ་ཁ་རྐྱབས:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -104,13 +106,13 @@ msgstr "རྒྱལ་ཁབ་ཀྱི་གདམ་ཁ་དང་ཁྱོ
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "རྒྱབ་སྐྱོར་གྱི་དོན་ལུ་ལོ་ཀེལ་གཞན་མི་ཅིག་གདམ་ཁ་རྐྱབས:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "གཞི་བཙུགས་འབད་ནིའི་དོན་ལུ་ཐོ་ཡིག་འདི་ལས་ཁྱོད་ཀྱིས་ཁ་སྐོང་ལོ་ཀེལ་ཚུ་གདམ་ཁ་རྐྱབས་གནང་།"
 
@@ -157,6 +159,3 @@ msgstr "-- ཨེན་ཊར་ཊི་ཀ --"
 #: ../../countrylist:24
 msgid "-- other --"
 msgstr "-- གཞན --"
-
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "རྒྱལ་ཁབ་གཅིག་གདམ་ཁ་རྐྱབས་ མངའ་ཁོངས་ཡང་ཅིན་ས་ཁོངས:"

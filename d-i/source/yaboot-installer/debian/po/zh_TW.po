@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-01-23 17:48-0600\n"
-"Last-Translator: Tetralet <tetralet@pchome.com.tw>\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-01 22:24+0800\n"
+"Last-Translator: Tetralet <tetralet@gmail.com>\n"
 "Language-Team: Debian-user in Chinese [Big5] <debian-chinese-big5@lists."
 "debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -114,7 +114,7 @@ msgid ""
 "destination partition from among these partitions that have the bootable "
 "flag set."
 msgstr ""
-"為了讓您的系統能夠開機，yaboot (Linux 的開機程式) 必須要安裝至硬碟的分割區"
+"為了讓您的系統能夠開機，必須將 yaboot (Linux 的開機程式) 安裝至硬碟的分割區"
 "上。請在這些已設定為可開機的分割區中選擇一個分割區來進行安裝。"
 
 #. Type: select
@@ -203,65 +203,41 @@ msgstr "警告：您的系統可能會無法開機！"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
-msgstr "替自動開機設定韌體參數"
+msgstr "正在替自動開機設定韌體參數"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"為了讓系統能自動開機，您必須在 Pegasos OpenFirmware 中設定一些參數。在安裝結"
-"束之時，系統將會重新開機。在 Pegasos OpenFirmware 的提示文字上，設定以下的 "
-"OpenFirmware 參數來啟用自動開機："
+"您必須在 Genesi 的韌體中設定一些參數才能讓您的系統能夠自動開機。在安裝結束"
+"後，系統將會重新開機。之後，在韌體的提示文字上，設定以下的韌體參數來啟用自動"
+"開機："
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"這些動作只需進行一次。之後，輸入 \"boot\" 指令或重新啟動系統來繼續進行安裝作"
-"業的下一個階段。"
+"這些動作只需進行一次。之後，輸入 boot 指令或重新啟動系統就能進入您新安裝好的"
+"系統。"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "而或者，您也可以在 在 OpenFirmware 的提示文字上，輸入："
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "來手動啟動您的系統。"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr ""
+"而或者，您也可以藉由手動來讓 Kernel 開機，方法是在韌體的提示文字上輸入："
 
 #. Type: text
 #. Description

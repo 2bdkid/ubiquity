@@ -36,7 +36,7 @@ CONFIGFILE=/etc/default/console-setup
 
 if [ "$1" = "configure" ]; then
     
-    db_get console-setup/codeset
+    db_get console-setup/codesetcode
     codeset="$RET"
     db_get console-setup/fontface
     fontface="$RET"
@@ -45,8 +45,12 @@ if [ "$1" = "configure" ]; then
 
     fontname=$codeset-$fontface$fontsize.psf.gz
     
-    db_get console-setup/charmap
-    charmap="$RET"
+    if which ckbcomp-mini >/dev/null; then
+	charmap=UTF-8
+    else
+	db_get console-setup/charmap
+	charmap="${RET:-UTF-8}"
+    fi
 
     db_get console-setup/ttys
     ttys="$RET"
@@ -151,14 +155,8 @@ EOF
 fi
 
 # In d-i debhelper doesn't use /etc/init.d scripts :-)
-if [ -f /usr/share/console-setup-mini/console-setup.config ] && \
-   [ -d /lib/debian-installer ]; then
-    setupcon --force
-else
-    cat >&2 <<EOF
-Your console configuration will be updated the next time your system boots.
-If you want to update it now, run 'setupcon' from a virtual console.
-EOF
+if [ -f /usr/share/console-setup-mini/console-setup.config ]; then
+    setupcon --force --save
 fi
 
 #DEBHELPER#

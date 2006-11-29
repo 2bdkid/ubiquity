@@ -7,17 +7,17 @@
 # Russian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
 # Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-30 09:01+0300\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-08-23 21:28+0400\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -40,18 +40,21 @@ msgstr "Выбор языка / Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
-msgstr "Запись языка..."
+msgstr "Сохранение параметров языка..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Russian Federation"
 
 #. Type: select
@@ -60,7 +63,7 @@ msgstr "Russian Federation"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "другая"
 
@@ -69,36 +72,35 @@ msgstr "другая"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "RU"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
-msgid "Choose your location:"
-msgstr "Выберите локаль:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Выберите страну, область или регион:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr ""
 "Судя по выбранному языку, вы находитесь в одной из нижеуказанных стран или "
 "регионов."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Выберите локаль:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -108,13 +110,13 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "Выберите другие локали, которые требуются:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Вы можете выбрать дополнительно устанавливаемые локали из списка."
 
@@ -161,6 +163,3 @@ msgstr "-- Антарктида --"
 #: ../../countrylist:24
 msgid "-- other --"
 msgstr "-- другая --"
-
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Выберите страну, область или регион:"

@@ -1,3 +1,104 @@
+hw-detect (1.43ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Depend on pciutils-udeb for lspci.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 22 Nov 2006 12:01:12 +0000
+
+hw-detect (1.43) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Andrei Darashenka
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Khmer (km.po) by Khoem Sokhem
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Macedonian (mk.po) by Georgi Stanojevski
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Dutch (nl.po) by Bart Cornelis
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrișor
+  * Albanian (sq.po) by Elian Myftiu
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 14:54:27 +0200
+
+hw-detect (1.42) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Improve sbus detection based on a scan of kernel code:
+    - qlogic_isp has been renamed to qlogicpti.
+    - Better sunlance, sunhme, esp, and qlogicpti detection.
+    - Add sunbmac detection.
+    - David Miller says that espdma is unnecessary for esp detection.
+  * Use list-devices to check for disks if parted_devices if unavailable.
+    Requires di-utils 1.33.
+
+  [ Joey Hess ]
+  * Finally install libc6-i686, if the machine's CPU can support it.
+    Libc guys tell me this is safe enough that it should be the default.
+  * Patch from Aurelien Jarno to install libc6-sparcv9[b] if the CPU supports
+    it.
+  * Improve wording of the pcmcia question.
+
+  [ Joshua Kwan ]
+  * Remove myself from Uploaders, I seriously lack the time for this..
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Italian (it.po) by Giuseppe Sacco
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Bart Cornelis
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Romanian (ro.po) by Eddy Petrişor
+  * Russian (ru.po) by Yuri Kozlov
+  * Northern Sami (se.po) by Børre Gaup
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Recai Oktaş
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Frans Pop <fjp@debian.org>  Sat, 16 Sep 2006 11:38:58 +0200
+
 hw-detect (1.41ubuntu2) edgy; urgency=low
 
   * Backport from trunk:

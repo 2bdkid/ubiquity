@@ -1,14 +1,79 @@
-tzsetup (1:0.10ubuntu2) edgy; urgency=low
+tzsetup (1:0.14) unstable; urgency=low
 
-  * Remove oem-config-timezone package, moved into oem-config proper.
+  [ Petter Reinholdtsen ]
+  * Remove myself as uploader.
 
- -- Colin Watson <cjwatson@ubuntu.com>  Tue, 22 Aug 2006 16:57:22 +0100
+  [ Frans Pop ]
+  * Copy timezone file from /target instead of d-i environment. Duh!
 
-tzsetup (1:0.10ubuntu1) edgy; urgency=low
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Panjabi (pa.po) by A S Alam
 
-  * Resynchronise with Debian.
+ -- Frans Pop <fjp@debian.org>  Wed, 29 Nov 2006 01:41:51 +0100
 
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Jun 2006 17:41:00 +0100
+tzsetup (1:0.13) unstable; urgency=low
+
+  * Make /target/etc/localtime a copy of instead of a symlink to the timezone
+    in line with what tzconfig now does (see #346342). Closes: #395524.
+    I suspect this also fixes the occasional reports we've had of the clock
+    being wrong after reboot. Closes: #397576, #397649.
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Safir Secerovic
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by rizoye-xerzi
+
+ -- Frans Pop <fjp@debian.org>  Wed, 22 Nov 2006 13:16:54 +0100
+
+tzsetup (1:0.12) unstable; urgency=low
+
+  * Add missing debconf dependency.
+  * Remove standards-version and add Lintian override for it.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Andrei Darashenka
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Romanian (ro.po) by Eddy Petrișor
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 16:28:31 +0200
+
+tzsetup (1:0.11) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Put debhelper in Build-Depends rather than in Build-Depends-Indep.
+  * tzdata 2006l changes the description of Europe/Samara to "Moscow+01 -
+    Samara, Udmurtia"; since the comma is best avoided here, update our
+    description to "Moscow+01 - Samara" as Wikipedia says that Udmurtia is
+    on the "Samara Time Zone". tzdata 2006l also adds Europe/Volgograd
+    described as "Moscow+00 - Caspian Sea", which I've omitted since it's
+    been on Moscow time since 1992.
+
+  [ Frans Pop ]
+  * Move configuration of target system forward to post-base-installer.d to
+    prevent problems e.g. if tzdata is updated during pkgsel (#391529).
+
+  [ Updated translations ]
+  * Greek, Modern (1453-) (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by André Luís Lopes
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Mon,  9 Oct 2006 00:18:05 +0200
 
 tzsetup (1:0.10) unstable; urgency=low
 
@@ -59,44 +124,6 @@ tzsetup (1:0.9) unstable; urgency=low
 
  -- Frans Pop <fjp@debian.org>  Mon, 20 Mar 2006 18:29:16 +0100
 
-tzsetup (1:0.8ubuntu6) dapper; urgency=low
-
-  * Fix oem-config-timezone to actually work rather than crash.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 13 Apr 2006 14:08:30 +0100
-
-tzsetup (1:0.8ubuntu5) dapper; urgency=low
-
-  * Remove espresso-timezone package, moved into espresso proper.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Wed,  5 Apr 2006 15:58:53 +0100
-
-tzsetup (1:0.8ubuntu4) dapper; urgency=low
-
-  * Make the Espresso module select a correct default timezone for countries
-    with custom defaults in debian/common.templates.in.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Wed, 29 Mar 2006 13:31:04 +0100
-
-tzsetup (1:0.8ubuntu3) dapper; urgency=low
-
-  * Build-depend on locales for /usr/share/zoneinfo/zone.tab.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 23 Feb 2006 14:57:39 +0000
-
-tzsetup (1:0.8ubuntu2) dapper; urgency=low
-
-  * Add an espresso-timezone package, providing tzsetup as an Espresso
-    module.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 23 Feb 2006 13:04:51 +0000
-
-tzsetup (1:0.8ubuntu1) dapper; urgency=low
-
-  * Resynchronise with Debian.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Wed, 25 Jan 2006 10:13:41 +0000
-
 tzsetup (1:0.8) unstable; urgency=low
 
   * Move dh_install arguments to debian/tzsetup-udeb.install.
@@ -136,12 +163,6 @@ tzsetup (1:0.8) unstable; urgency=low
   * Traditional Chinese (zh_TW.po) by Tetralet
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 23 Jan 2006 10:27:31 +0000
-
-tzsetup (1:0.7ubuntu1) dapper; urgency=low
-
-  * Add oem-config-timezone, providing tzsetup as an oem-config module.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Mon, 16 Jan 2006 15:11:44 +0000
 
 tzsetup (1:0.7) unstable; urgency=low
 

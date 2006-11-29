@@ -3,29 +3,12 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to 
+# translation of hi.po to Hindi
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -33,19 +16,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2004-11-18 18:11+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"Project-Id-Version: hi\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-30 22:58+0000\n"
+"PO-Revision-Date: 2006-10-13 19:07+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants dot net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: boolean
 #. Description
@@ -53,7 +34,7 @@ msgstr ""
 msgid ""
 "The following other operating systems have been detected on this computer: "
 "${OS_LIST}"
-msgstr ""
+msgstr "इस संगणक पर निम्न अन्य प्रचालन तंत्र पाये गये हैं: ${OS_LIST}"
 
 #. Type: boolean
 #. Description
@@ -64,12 +45,15 @@ msgid ""
 "When your computer boots, you will be able to choose to load one of these "
 "operating systems or your new system."
 msgstr ""
+"यदि आपके समस्त प्रचालन तंत्र ऊपर सूूचीबद्ध हैं तो प्रथम हार्ड ड्राइव में बूट लोडर संस्थापित "
+"करना सुरक्षित रहना चाहि। जब आपका संगणक बूट होगा तब आप इनमें से कोई भी प्रचालन तंत्र  "
+"या अपना नया तंत्र चुन सकेंगे।ए"
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:16
 msgid "Install the GRUB boot loader to the master boot record?"
-msgstr ""
+msgstr "ग्रब बूट लोडर को मास्टर बूट रिकॉर्ड पर संस्थापित करें?"
 
 #. Type: boolean
 #. Description
@@ -79,6 +63,9 @@ msgid ""
 "computer. If so, it should be safe to install the GRUB boot loader to the "
 "master boot record of your first hard drive."
 msgstr ""
+"ऐसा प्रतीत होता है कि यह नया संस्थापन ही इस सिस्टम पर एक प्रचालन तंत्र है. यदि ऐसा है, "
+"तो ग्रब बूटलोडर को आपकी प्रथम हार्ड ड्राइव के मास्टर बूट रिकॉर्ड में संस्थापित करना सुरक्षत "
+"होना चाहिए."
 
 #. Type: boolean
 #. Description
@@ -89,12 +76,15 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
+"चेतावनी: यदि संस्थापक इस कम्प्यूटर पर उपस्थित अन्य प्रचालन तंत्र का पता लगाने में असफल रहा "
+"है, तो मास्टर बूट रिकॉर्ड परिवर्तित होने से वह प्रचालन तंत्र अस्थाई रूप से बूट नहीं हो "
+"पायेगा, हालाँकि आप बाद में उसे बूट करने के लिए ग्रब कॉन्फिगरेशन को ठीक कर सकते हैं."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
 msgid "Install the GRUB boot loader to XFS file system?"
-msgstr ""
+msgstr "ग्रब बूट लोडर को एक्स एफ एस फाइलसिस्टम पर संस्थापित करें?"
 
 #. Type: boolean
 #. Description
@@ -103,12 +93,14 @@ msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
 msgstr ""
+"कई बार ग्रब बूटलोडर का संस्थापन या तो असफल हो जाता है या फिर अटक जाता है यदि /boot "
+"एक एक्सएफएस फाइलतंत्र पर है तो. ऐसी स्थिति में LILO का प्रयोग करने की संस्तुति का जाती है."
 
 #. Type: string
 #. Description
 #: ../grub-installer.templates:35
 msgid "Device for boot loader installation:"
-msgstr ""
+msgstr "बूटलोडर के संस्थापन के लिए उपकरण:"
 
 #. Type: string
 #. Description
@@ -120,6 +112,10 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
+"आपको बूटयोग्य उपकरण में ग्रब बूटलोडर संस्थापित करके अपने नये तंत्र को बूटयोग्य बनाना है. "
+"आमतौर पर इसके लिए ग्रब को प्रथम हार्ड ड्राइव के मास्टर बूट रिकॉर्ड में संस्थापित किया "
+"जाता है. यदि आप चाहें तो ग्रब को ड्राइव में किसी और स्थान पर संस्थापित कर सकते हैं, या "
+"फिर किसी और ड्राइव, यहाँ तक कि एक फ्लॉपी में भी संस्थापित कर सकते हैं."
 
 #. Type: string
 #. Description
@@ -135,12 +131,21 @@ msgid ""
 "   your third drive (SCSI here);\n"
 " - \"(fd0)\" or \"/dev/fd0\" will install GRUB to a floppy."
 msgstr ""
+"उपकरणों को ग्रब की संकेत पद्धति \"(hdn,m)\" या फिर /dev में एक उपकरण के द्वारा वर्णित "
+"किया जा सकता है. नीचे कुछ उदाहरण दिए गए हैं: \n"
+" - \"(hd0)\" या \"/dev/hda\" ग्रब को प्रथम हार्डड्राइव (आईडीई) के\n"
+"   मास्टर बूट रिकॉर्ड में संस्थापित करेंगे;\n"
+" - \"(hd0,1)\" या \"/dev/hda2\" आपकी प्रथम आईडीई ड्राइव के दूसरे\n"
+"   पार्टिशन को प्रयोग करेंगे;\n"
+" - \"(hd2,4)\" या \"/dev/sdc5\" आपकी तीसरी ड्राइव (यहाँ पर एससीएसआई)\n"
+"   के प्रथम एक्सटेंडेड पार्टिशन को प्रयोग करेंगे;\n"
+" - \"(fd0)\" या \"/dev/fd0\" ग्रब को एक फ्लॉपी में संस्थापित करेंगे."
 
 #. Type: password
 #. Description
 #: ../grub-installer.templates:54
 msgid "GRUB password:"
-msgstr ""
+msgstr "ग्रब कूटशब्द:"
 
 #. Type: password
 #. Description
@@ -153,19 +158,23 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
+"ग्रब बूटलोडर की कई शक्तिशाली संवाद आधारित विशेषताएँ हैं जिनका प्रयोग आपके सिस्टम को "
+"संकटग्रस्त करने के लिए हो सकता है यदि आपकी मशीन बूट होते समय किसी अनाधिकृत उपयोक्ता की "
+"पहुँच में है. इससे बचने के लिए, आप एक कूटशब्द नियत कर सकते हैं जोकि किसी भी मेन्यू प्रविष्टि "
+"को परिवर्तित करने या ग्रब कमांड-लाइन इंटरफेस में प्रवेश करने से पहले पूछा जाएगा. ऐसा होने "
+"पर भी, कोई भी उपयोक्ता किसी भी मेन्यू प्रविष्टि को बिना कूटशब्द प्रविष्ट किया चला सकेगा."
 
 #. Type: password
 #. Description
 #: ../grub-installer.templates:54
-#, fuzzy
 msgid "If you do not wish to set a GRUB password, leave this field blank."
-msgstr "यदि आपको यह मालूम नहीं है कि क्या भरा जाना है, इसे खाली ही छोड़ दें."
+msgstr "यदि आप ग्रब के लिए कूटशब्द नहीं चाहते हैं तो इसे खाली  छोड़ दें."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:73
 msgid "GRUB installation failed.  Continue anyway?"
-msgstr ""
+msgstr "ग्रब का संस्थापन असफल. फिर भी जारी रखें?"
 
 #. Type: boolean
 #. Description
@@ -175,18 +184,21 @@ msgid ""
 "loader is a required step.  The install problem might however be unrelated "
 "to GRUB, so continuing the installation may be possible."
 msgstr ""
+"ग्रब पैकेज को /target में संस्थापित करना असफल रहा. ग्रब को बूटलोडर की तरह संस्थापित "
+"करना एक आवश्यक चरण है. यह संस्थापन समस्या ग्रब से संबंधित नहीं भी हो सकती है, अतः "
+"संस्थापन जारी रखना संभव हो सकता है."
 
 #. Type: error
 #. Description
 #: ../grub-installer.templates:80
 msgid "Unable to install GRUB in ${BOOTDEV}"
-msgstr ""
+msgstr "${BOOTDEV} में ग्रब को संस्थापित करने में असमर्थ"
 
 #. Type: error
 #. Description
 #: ../grub-installer.templates:80
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
-msgstr ""
+msgstr "'grub-install ${BOOTDEV}' का कार्यान्वयन असफल"
 
 #. Type: error
 #. Description
@@ -198,7 +210,7 @@ msgstr "ग्रब कॉन्फ़िगर करने में अक�
 #. Description
 #: ../grub-installer.templates:87
 msgid "Executing 'update-grub' failed."
-msgstr ""
+msgstr "'update-grub' का कार्यान्वयन असफल."
 
 #. Type: error
 #. Description
@@ -208,57 +220,56 @@ msgstr "यह गंभीर त्रुटि है"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:94
+#: ../grub-installer.templates:105
 msgid "Installing GRUB boot loader"
 msgstr "ग्रब बूट लोडर संस्थापित किया जा रहा है"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:98
+#: ../grub-installer.templates:109
 msgid "Looking for other operating systems..."
 msgstr "अन्य आपरेटिंग सिस्टम के लिए देखा जा रहै है..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:102
+#: ../grub-installer.templates:113
 msgid "Installing the 'grub' package..."
 msgstr "'ग्रब' पैकेज संस्थापित किया जा रहा है..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:106
+#: ../grub-installer.templates:117
 msgid "Determining GRUB boot device..."
 msgstr "ग्रब बूट उपकरण का पता लगाया जा रहा है..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:110
+#: ../grub-installer.templates:121
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "चलाया जा रहा है \"grub-install ${BOOTDEV}\"..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:114
+#: ../grub-installer.templates:125
 msgid "Running \"update-grub\"..."
 msgstr "चलाया जा रहा है \"update-grub\"..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:118
+#: ../grub-installer.templates:129
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "अद्यतन किया जा रहा है /etc/kernel-img.conf..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:123
+#: ../grub-installer.templates:134
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "हार्ड डिस्क में ग्रब बूट लोडर को संस्थापित करें"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:128
-#, fuzzy
+#: ../grub-installer.templates:139
 msgid "Reinstall GRUB boot loader"
-msgstr "ग्रब बूट लोडर संस्थापित किया जा रहा है"
+msgstr "ग्रब बूट लोडर पुनः संस्थापित करें"

@@ -3,12 +3,12 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
+# translation of hi.po to Hindi
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -16,37 +16,33 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
+"Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
 "POT-Creation-Date: 2006-05-21 20:59-0600\n"
-"PO-Revision-Date: 2006-03-12 22:52+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2006-10-05 01:55+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-#, fuzzy
 msgid "Configure the package manager"
-msgstr "लॉज़िकल वॉल्यूम प्रबंधक कॉन्फ़िगर करें"
+msgstr "पैकेज प्रबंधक कॉन्फ़िगर करें"
 
 #. Type: text
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
-#, fuzzy
 msgid "Configuring apt"
-msgstr "नेटवर्क कॉन्फ़िगर किया जा रहा है..."
+msgstr "एपीटी कॉन्फ़िगर किया जा रहा है..."
 
 #. Type: text
 #. Description
@@ -57,21 +53,20 @@ msgstr "${SCRIPT} प्रक्रिया में है..."
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
-#, fuzzy
 msgid "Scanning local repositories..."
-msgstr "फ़्लॉपी को स्कैन किया जा रहा है"
+msgstr "स्थानीय भंडार का निरीक्षण कर रहे हैं... "
 
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr ""
+msgstr "सुरक्षा अपडेट कोष का निरीक्षण कर रहे हैं..."
 
 #. Type: error
 #. Description
 #: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
-msgstr ""
+msgstr "सुरक्षा अपडेट को नहीं पा सके"
 
 #. Type: error
 #. Description
@@ -81,6 +76,8 @@ msgid ""
 "updates will not be made available to you at this time. You should "
 "investigate this later."
 msgstr ""
+"${SECURITY_HOST} पर स्थित सुरक्षा अपडेट तक नहीं पहुँचा जा सका, अतः वे अपडेट इस समय "
+"आपको उपलब्ध नहीं होंगे. आपको बाद में इसकी जाँच अवश्य करनी चाहिए."
 
 #. Type: error
 #. Description
@@ -89,20 +86,20 @@ msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
 msgstr ""
+"${SECURITY_HOST} के लिए कमेंट आउट की गई प्रविष्टियाँ /etc/apt/sources.list फाइल में "
+"जोड़ दी गईं हैं."
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
-#, fuzzy
 msgid "Scanning the CD-ROM..."
-msgstr "सीडी-रॉम स्कैन किया जा रहा है"
+msgstr "सीडी-रॉम स्कैन किया जा रहा है..."
 
 #. Type: error
 #. Description
 #: ../apt-cdrom-setup.templates:7
-#, fuzzy
 msgid "apt configuration problem"
-msgstr "नेटवर्क कान्फ़िगरेशन असफल"
+msgstr "एपीटी कॉन्फिगुरेशन में समस्या"
 
 #. Type: error
 #. Description
@@ -111,19 +108,19 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr ""
+"सीडी से अतिरिक्त पैकेज संस्थापित करने के लिए एपीटी को कॉन्फ़िगर करने का प्रयास असफल हुआ."
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
-#, fuzzy
 msgid "Scanning the mirror..."
-msgstr "फ़्लॉपी को स्कैन किया जा रहा है"
+msgstr "मिरर ी को स्कैन किया जा रहा ...है"
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:8
 msgid "Use non-free software?"
-msgstr ""
+msgstr "नॉन-फ्री सॉफ्टवेयर प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -134,6 +131,10 @@ msgid ""
 "to install it. This software has varying licenses which may prevent you from "
 "using, modifying, or sharing it."
 msgstr ""
+"कुछ नॉन-फ्री सॉफ्टवेयरों को डेबियन के साथ काम करने लायक बनाया गया है. यह सॉफ्टवेयर "
+"डेबियन का भाग नहीं है, फिर भी मानक डेबियन औजारों की सहायता से इनको संस्थापित किया जा "
+"सकता है. इन सॉफ्टवेयरों के लाइसेंस भिन्न हैं जोकि आपको इनके प्रयोग, परिवर्तन व वितरण से "
+"रोक सकते हैं."
 
 #. Type: boolean
 #. Description
@@ -142,13 +143,13 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
-msgstr ""
+msgstr "कृपया चुनें कि आप फिर भी इनको उपलब्ध रखना चाहेंगे."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:19
 msgid "Use contrib software?"
-msgstr ""
+msgstr "कॉन्ट्रिब सॉफ्टवेयर प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -159,6 +160,9 @@ msgid ""
 "software is not a part of Debian, but standard Debian tools can be used to "
 "install it."
 msgstr ""
+"कुछ अतिरिक्त सॉफ्टवेयरों को डेबियन के साथ कार्य करने योग्य बनाया गया है. हालाँकि ये "
+"सॉफ्टवेयर फ्री हैं, फिर भी ये नॉन-फ्री सॉफ्टवेयरों पर निर्भर करते हैं. यह सॉफ्टवेयर डेबियन का "
+"भाग नहीं हैं फिरभी इन्हें मानक डेबियन औजारों की सहायता से संस्थापित किया जा सकता है."
 
 #. Type: boolean
 #. Description
@@ -166,10 +170,9 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
-#, fuzzy
 msgid ""
 "Please choose whether you want this software to be made available to you."
-msgstr "आप नया पार्टिशन उपलब्ध स्थान के प्रारंभ में बनाना चाहते हैं या अंत में?"
+msgstr "चुनें कि आप यह सॉफ्टवेयर उपलब्ध चाहते हैं या नहीं."
 
 #. Type: select
 #. Choices
@@ -177,25 +180,23 @@ msgstr "आप नया पार्टिशन उपलब्ध स्थ�
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr ""
+msgstr "पुन: प्रयास करें"
 
 #. Type: select
 #. Choices
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Change mirror"
-msgstr "फिर से कोशिश करें, मिरर बदलें, रद्द करें"
+msgstr "मिरर बदलें"
 
 #. Type: select
 #. Choices
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Ignore"
-msgstr "कुछ नहीं"
+msgstr "छोड़ दें"
 
 #. Type: select
 #. Description
@@ -206,22 +207,21 @@ msgstr "फ़ाइल डाउनलोड करने में असफ�
 #. Type: select
 #. Description
 #: ../apt-mirror-setup.templates:33
-#, fuzzy
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"संस्थापक मिरर से एक फाइल डाउनलोड करने में असफल रहा। समस्या या तो आपके नेटवर्क मे हो "
-"सकती है, या फिर मिरर में। आप इनमें से चुन सकते हैं - पुनः डाउनलोड का प्रयास, अन्य मिरर "
-"चुनना या रद्द करके संस्थापन को कोई और ढंग।"
+"संस्थापक मिरर से संपर्क करने में असफल रहा। समस्या या तो आपके नेटवर्क मे हो सकती है, या फिर "
+"मिरर में। आप इनमें से चुन सकते हैं - पुनः डाउनलोड का प्रयास, अन्य मिरर चुनना या रद्द करके "
+"संस्थापन को कोई और ढंग।"
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:42
 msgid "Use a network mirror?"
-msgstr ""
+msgstr "नेटवर्क मिरर का प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -230,6 +230,8 @@ msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
 msgstr ""
+"सीडी-रॉम पर उपलब्ध सॉफ्टवेयर के अलावा अन्य सॉफ्टवेयर एक नेटवर्क मिरर से उपलब्ध हो सकते "
+"हैं. इससे सॉफ्टवेयर के नये वरज़न भी उपलब्ध हो सकते हैं."
 
 #. Type: boolean
 #. Description
@@ -238,13 +240,15 @@ msgid ""
 "If you are installing from a netinst CD and you choose not to use a mirror, "
 "you will end up with only a very minimal base system."
 msgstr ""
+"यदि आप नेटइंस्ट सीडी से संस्थापन कर रहे हैं और मिरर का प्रयोग न करने का चयन करते हैं, तो "
+"आपको निम्तर आधार तंत्र ही संस्थापित मिलेगा."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr ""
+msgstr "क्या रिस्ट्रिक्टेड सॉफ्टवेयर का प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -256,13 +260,17 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
+"कुछ नॉन-फ्री सॉफ्टवेयर पैकेजों के रूप में उपलब्ध हैं. हालाँकि ये सॉफ्टवेयर मुख्य डिस्ट्रीब्यूशन का "
+"हिस्सा नहीं है, फिर भी मानक पैकेज प्रबंधन औजारों का प्रयोग करके इन्हें संस्थापित किया जा "
+"सकता है. इन सॉफ्टवेयरो के लाइसेंस भिन्न प्रकार के हैं जोकि आपको इन्हें प्रयोग, परिवर्तित या "
+"वितरित करने से रोक सकते है."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr ""
+msgstr "क्या \"universe\" अवयव से सॉफ्टवेयर का प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -273,13 +281,16 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
+"कुछ अतिरिक्त सॉफ्टवेयर पेकेजों के रूप में उपलब्ध हैं. यह सॉफ्टवेयर मुक्त हैं, हालाँकि मुख्य "
+"डिस्ट्रीब्यूश का भाग नहीं है, इन्हें मानक पैकेज प्रबंधन औजारों का प्रयोग करके संस्थापित किया "
+"जा सकता है."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid "Use software from the \"multiverse\" component?"
-msgstr ""
+msgstr "क्या \"multiverse\" अवयव के सॉफ्टवेयर प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -292,13 +303,17 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
+"कुछ नॉन-फ्री सॉफ्टवेयर पैकेज के रूप में उपलब्ध हैं. हालाँकि ये सॉफ्टवेयर मुख्य डिस्ट्रीब्यूशन का "
+"भाग नहीं हैं, फिर भी इन्हें मानक पैकेज प्रबंधन औजारों की सहायता से संस्थापित किया जा सकता "
+"है. इन सॉफ्टवेयरों के लाइसेन्स भिन्न हैं (और कुछ स्थितियों में) पेटेंट बंधन आपको इनका प्रयोग, "
+"परिवर्तन या वितरण करने से प्रतिबंधित कर सकते हैं."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
-msgstr ""
+msgstr "बैकपोर्टेड सॉफ्टवेयर का प्रयोग करें?"
 
 #. Type: boolean
 #. Description
@@ -310,3 +325,6 @@ msgid ""
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
+"कुछ सॉफ्टवेयर विकास वृक्ष से इस रिलीज़ के साथ कार्य करने के लिए बैकपोर्ट िकए गये हैं. हालाँकि "
+"इन सॉफ्टवेयर का उतना पूर्ण परीक्षण नहीं हुआ है जितना कि इस रिलीज़ के सॉफ्टवेयर का हुआ है, "
+"फिर भी इसमें कुछ अनुप्रयोगों के नये वर्ज़न शामिल हैं जो कुछ उपयोगी विशेषताएँ प्रदान कर सकते हैं."

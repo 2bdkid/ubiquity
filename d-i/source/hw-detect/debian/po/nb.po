@@ -4,29 +4,26 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of nb.po to Norwegian Bokmål
-# translation of debian-installer.po to Norwegian Bokmål
-# Norwegian Bokmal messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Knut Yrvin <knuty@skolelinux.no>, 2004.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 # Axel Bojer <axelb@skolelinux.no>, 2004.
-# Bjorn Steensrud <bjornst@powertech.no>, 2004.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005.
-# Bjørn Steensrud <bjornst@powertech.no>, 2005, 2006.
-#
+# Bjørn Steensrud <bjornst@powertech.no>, 2004,2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-07 18:28-0600\n"
-"PO-Revision-Date: 2006-05-04 21:19+0200\n"
+"POT-Creation-Date: 2006-08-27 22:52+0000\n"
+"PO-Revision-Date: 2006-10-07 20:49+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: select
 #. Choices
@@ -54,7 +51,7 @@ msgid ""
 "No Ethernet card was detected. If you know the name of the driver needed by "
 "your Ethernet card, you can select it from the list."
 msgstr ""
-"Fant ikke et nettverskort. Velg fra listen om driveren til kortet er kjent."
+"Fant ikke et nettverkskort. Velg fra listen om driveren til kortet er kjent."
 
 #. Type: boolean
 #. Description
@@ -198,21 +195,20 @@ msgstr "Vil du starte tjenester for PC-kort?"
 #. Description
 #: ../hw-detect.templates:25
 msgid ""
-"This computer may have a PCMCIA interface. Please choose whether PC card "
-"services should be started in order to allow the use of PCMCIA cards."
+"Please choose whether PC card services should be started in order to allow "
+"the use of PCMCIA cards."
 msgstr ""
-"Denne maskinen har kanskje et PCMCIA-grensesnitt. Velg om PC-kort-tjenester "
-"skal startes for å tillate bruk av PCMCIA-kort."
+"Velg om PC-kort-tjenester skal startes for å tillate bruk av PCMCIA-kort."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid "PCMCIA resource range options:"
 msgstr "Valgmuligheter for PCMCIA-ressursområde:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -220,27 +216,27 @@ msgid ""
 "options will be added to /etc/pcmcia/config.opts. See the installation "
 "manual or the PCMCIA HOWTO for more information."
 msgstr ""
-"Noe PCMCIA-maskinvare trenger spesiell ressursoppsett for å virke. Ellers "
-"kan datamaskinen fryse. Noen maskiner som f.eks. bærebare fra Dell trenger å "
-"angi «overser port 0x800-0x8ff» her. Disse valgene legges til /etc/pcmcia/"
+"Noe PCMCIA-maskinvare trenger spesielt ressursoppsett for å virke. Ellers "
+"kan datamaskinen fryse. Noen maskiner som f.eks. bærbare fra Dell trenger å "
+"angi «exclude port 0x800-0x8ff» her. Disse valgene legges til /etc/pcmcia/"
 "config.opts. Se installasjonsveiledningen eller PCMCIA HOWTO for mer "
 "informasjon."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "For det meste av maskinvaren er det unødvendig å angi noe her."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "Skriv inn eventuelle tilleggsparametere for modulen ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -256,7 +252,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -266,19 +262,19 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:55
+#: ../hw-detect.templates:54
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Det oppsto en feil under kjøringen av «${CMD_LINE_PARAM}»"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:60
+#: ../hw-detect.templates:59
 msgid "Load missing drivers from a driver floppy?"
 msgstr "Laste manglende drivere fra en floppydisk?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:60
+#: ../hw-detect.templates:59
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

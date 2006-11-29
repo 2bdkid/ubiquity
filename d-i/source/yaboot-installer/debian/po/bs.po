@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
 "PO-Revision-Date: 2006-04-11 11:42+0100\n"
 "Last-Translator: Safir Secerovic <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
@@ -213,18 +213,19 @@ msgstr "Upozorenje: Vaš sistem se neće moći podići!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Postavljam varijable firmwarea za automatsko podizanje"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
+#, fuzzy
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
 "Neke varijable se trebaju postaviti Pegasos OpenFirmware-u kako bi Vaš "
 "sistem automatski podizao.  Na kraju instalacije, sistem će se ponovo "
@@ -233,24 +234,11 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
+#, fuzzy
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
 "Ovo trebate uraditi samo jedanput.  Nakon toga, ukucajte \"boot\" naredbu "
 "ili ponovo podignite sistem kako biste nastavili sa sljedećom fazom "
@@ -260,22 +248,12 @@ msgstr ""
 #  Description
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
+#, fuzzy
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Alternativno, možete podići sistem ručno unoseći:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "na OpenFirmware promptu."
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr "Alternativno, možete podići kernel ručno unoseći :"
 
 #. Type: text
 #. Description

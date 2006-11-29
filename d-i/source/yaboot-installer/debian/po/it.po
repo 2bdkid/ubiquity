@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-10 15:07+0200\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-03 22:17+0200\n"
 "Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team:   Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -223,67 +223,44 @@ msgstr "Attenzione: il sistema potrebbe non essere avviabile!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Impostazione delle variabili del firmware per l'avvio automatico"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"Alcune variabili di Pegasos OpenFirmware vanno impostate per poter avviare "
-"il sistema Debian in automatico. Al termine della installazione il sistema "
-"verrà riavviato. Al prompt di Pegasos OpenFirmware le seguenti variabili "
-"dovranno essere impostate per permettere l'avvio automatico:"
+"Alcune variabili vanno impostate nel firmware Genesi per poter avviare il "
+"sistema in automatico. Al termine della installazione il sistema verrà "
+"riavviato. Al prompt del firmware le seguenti variabili dovranno essere "
+"impostate per permettere l'avvio automatico:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
 "Questa operazione dovrà essere fatta solo la prima volta. Dopodiché sarà "
 "necessario eseguire il comando «boot» oppure riavviare il sistema per "
-"proseguire con la seconda fase dell'installazione di Debian."
+"accedere al nuovo sistema installato."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Diversamente sarà possibile avviare il kernel a mano scrivendo:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "al prompt di OpenFirmware."
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr ""
+"Diversamente sarà possibile avviare il kernel a mano scrivendo, al prompt di "
+"boot del firmware:"
 
 #. Type: text
 #. Description

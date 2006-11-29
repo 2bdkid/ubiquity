@@ -1,3 +1,170 @@
+localechooser (1.30ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add a localechooser-data package containing lists useful for packages
+      that create automatic installation scripts.
+    - Always support English, unless preseeded otherwise.
+    - Check whether the language has changed after asking the country
+      question, and recalculate a number of things if so.
+    - Drop fallbacks for Norwegian Bokmål and Nynorsk.
+    - Simplify use of locale-gen using the new command-line argument
+      facility in Ubuntu's locales package.
+    - Move Portuguese above Portuguese (Brazil) in languagelist.l10n.
+    - Add encoding field to languagelist file and use the full SUPPORTED
+      file rather than SUPPORTED-short.
+    - If the language question was already marked as seen and the answer
+      didn't change, then don't recalculate the locale.
+  * Drop wording change in location question. I think the wording in Debian
+    is sufficiently better now than it was back in the dawn of time when we
+    changed this that we no longer need to carry around a giant diff for all
+    the resulting translation changes.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 27 Nov 2006 13:44:11 +0000
+
+localechooser (1.30) unstable; urgency=low
+
+  * Added localized name for Amharic
+  * Re-activate Belarusian after it reached 100% again
+  [ Updated translations ]
+    * Bulgarian (bg.po) by Damyan Ivaniv
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 15 Nov 2006 06:39:26 +0100
+
+localechooser (1.29) unstable; urgency=low
+
+  * Re-activate Northern Sami to keep that option for Debian-Edu
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 29 Oct 2006 18:21:12 +0100
+
+localechooser (1.28) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Add Urdu to the localized language list (commented)
+  * Write /etc/environment again to circumvent #389466
+    This will reopen #379052
+  * Languages (hopefully temporarily) disabled because not enough complete
+    - Welsh
+    - Kazakh
+    - Northern Sami
+    - Malagasy
+    - Persian
+    - Icelandic
+    - Georgian
+
+  [ Frans Pop ]
+  * Add Lintian override for standards-version.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Andrei Darashenka
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Hindi (hi.po) by Nishant Sharma
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Romanian (ro.po) by Eddy Petri?or
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 15:01:11 +0200
+
+localechooser (1.27) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Don't display "no translations available" template for floppy based
+    installs if selected language is English.
+
+  [ Christian Perrier ]
+  * Desactivate Irish (too incomplete translation now)
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Tamil (ta.po) by Damodharan Rajalingam
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 13 Oct 2006 19:31:28 +0200
+
+localechooser (1.26) unstable; urgency=low
+
+  * Desactivate Xhosa (too incomplete translation now)
+  * Desactivate Belarusian (too incomplete translation now)
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+
+ -- Christian Perrier <bubulle@debian.org>  Sat,  7 Oct 2006 22:15:49 +0200
+
+localechooser (1.25) unstable; urgency=low
+
+  * Warn users about temporary use of English during floppy-based installs
+    Closes: #269972, #286018
+
+  [ Updated translations ]
+    * Basque (eu.po) by Piarres Beobide
+    * Indonesian (id.po) by Arief S Fitrianto
+    * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Christian Perrier <bubulle@debian.org>  Thu,  7 Sep 2006 20:21:52 +0200
+
+localechooser (1.24) unstable; urgency=low
+
+  * Do not configure console-cyrillic anymor efor languages using it
+    Closes: #384323
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 1 Sep 2006 07:27:41 +0200
+
+localechooser (1.23) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Stop writing the locale to /etc/environment. Closes: #379052.
+
+  [ Christian Perrier ]
+  * Add Telugu to the localized language list (commented)
+  * Activate Gujarati in the language list
+
+  [ Philip Hands ]
+  * add isinstallable: to delay configuration if auto-install/enabled=true
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 27 Aug 2006 11:39:07 +0200
+
+localechooser (1.22) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Fix the Default field for countrychooser/country-name so that it uses
+    brackets to be different from "United States" we have elsewhere as
+    translatable string. Fixes the default choice for the long country list.
+
+ -- Frans Pop <fjp@debian.org>  Sun, 30 Jul 2006 21:29:35 +0200
+
+localechooser (1.21) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Change ACM for Irish to UTF-8 to match its default locale encoding.
+  * Add Guernsey, the Isle of Man, and Jersey to regionmap.
+  * Fix mk_shortlist_templates to avoid literal "EN_DESCR" showing up in
+    templates files when countrychooser/shortlist is untranslated in the
+    associated language.
+  * Fix mktemplates.country to avoid bashisms and reliance on multiple
+    counterintuitive backslash expansions.
+  * Unregister shortlist templates before registering new ones, to ensure
+    that the question gets effectively reset. The debconf specification does
+    not say what happens when you re-register an existing template, and
+    cdebconf and debconf have different (reasonable) interpretations;
+    unregistration forces the old question to go away.
+  * Fix check-data target.
+  * Fix incorrect field ordering in Finnish languagelist line.
+
+  [ Christian Perrier ]
+  * Safe calls to validlocale and gen-locale. Closes: #379502
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 24 Jul 2006 17:55:34 +0200
+
 localechooser (1.20ubuntu8) edgy; urgency=low
 
   * Fetch the previous language before processing preseeding, so that

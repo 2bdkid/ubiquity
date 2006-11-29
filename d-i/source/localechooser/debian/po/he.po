@@ -3,23 +3,25 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of he.po to Hebrew
 # Hebrew messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# <>, 2004.
-# 
-# 
+#
+#
+# Lior Kaplan <kaplan@debian.org>, 2004-2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-05-16 16:43-0500\n"
-"Last-Translator: Lior Kaplan <kaplan@gmail.com>\n"
-"Language-Team: Hebrew\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-09-15 17:06+0300\n"
+"Last-Translator: Lior Kaplan <kaplan@debian.org>\n"
+"Language-Team: Hebrew <debian-hebrew-common@lists.alioth.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -34,18 +36,21 @@ msgstr "בחירת שפה/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "שומר שפה..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Israel"
 
 #. Type: select
@@ -54,7 +59,7 @@ msgstr "Israel"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "אחר"
 
@@ -63,49 +68,48 @@ msgstr "אחר"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "IL"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
-msgid "Choose your location:"
-msgstr "בחירת לוקל:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "בחר מדינה, טריטוריה או אזור:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
-msgstr "לפי השפה שלך, אתה כנראה באחת מהמדינות או האיזורים הבאים."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
+msgstr "לפי השפה שלך, אתה כנראה באחת מהמדינות או האזורים הבאים."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "בחירת לוקל:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
 msgstr ""
-"בהתבסס על בחירות השפה והמדינה שלך, הפרטמרים הבאים של הלוקל (locale) נתמכים."
+"בהתבסס על בחירות השפה והמדינה שלך, הפרמטרים הבאים של הלוקל (locale) נתמכים."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "בחר לוקלים נוספים לתמיכה:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "אתה רשאי לבחור לוקלים נוספים להתקנה מתוך הרשימה הבאה:"
 
@@ -139,19 +143,16 @@ msgstr "-- אפריקה --"
 
 #: ../../countrylist:21
 msgid "-- Indian Ocean --"
-msgstr "-- האוקיאנוס ההודי --"
+msgstr "-- אוקיינוס ההודי --"
 
 #: ../../countrylist:22
 msgid "-- Oceania --"
-msgstr "-- אוקינאווה --"
+msgstr "-- אוקייניה --"
 
 #: ../../countrylist:23
 msgid "-- Antarctica --"
-msgstr "-- אנטרטיקה --"
+msgstr "-- אנטארקטיקה --"
 
 #: ../../countrylist:24
 msgid "-- other --"
 msgstr "-- אחר --"
-
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "בחר מדינה, טריטוריה או איזור:"

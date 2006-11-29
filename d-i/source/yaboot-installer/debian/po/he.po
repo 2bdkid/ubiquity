@@ -3,23 +3,25 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of he.po to Hebrew
 # Hebrew messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# <>, 2004.
-# 
-# 
+#
+#
+# Lior Kaplan <kaplan@debian.org>, 2004-2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-05-20 12:36-0500\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-09-26 23:23+0300\n"
 "Last-Translator: Lior Kaplan <kaplan@debian.org>\n"
-"Language-Team: Hebrew\n"
+"Language-Team: Hebrew <debian-hebrew-common@lists.alioth.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -55,13 +57,13 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:19
 msgid "Looking for bootstrap partitions"
-msgstr "מחפש מחיצות בעלות רצועת איתחול"
+msgstr "מחפש מחיצות בעלות רצועת אתחול"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr "לא נמצאו מחיצות בעלות רצועת איתחול"
+msgstr "לא נמצאו מחיצות בעלות רצועת אתחול"
 
 #. Type: error
 #. Description
@@ -152,12 +154,7 @@ msgstr "מתקין את yaboot לתוך רצועת האתחול"
 #. Description
 #: ../yaboot-installer.templates:72
 msgid "Failed to install boot loader"
-msgstr ""
-"#-#-#-#-#  he.po (debian-installer)  #-#-#-#-#\n"
-"כשלון בהתקנת מנהל האתחול#-#-#-#-#  he.po (debian-installer)  #-#-#-#-#\n"
-"#-#-#-#-#  he.po (yaboot-installer)  #-#-#-#-#\n"
-"כשלון בהתקנת מנהל האתחול#-#-#-#-#  he.po (vmelilo-installer)  #-#-#-#-#\n"
-"כשלון בהתקנת מנהל האתחול\t"
+msgstr "כישלון בהתקנת מנהל האתחול"
 
 #. Type: error
 #. Description
@@ -198,96 +195,65 @@ msgstr "עיגון מערכת הקבצים מסוג proc ב- /target/proc נכש
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-#, fuzzy
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
-msgstr "בדוק את /target/var/log/bootstrap.log בשביל פרטים נוספים."
+msgstr ""
+"בדוק את /var/log/syslog או את הקונסול הווירטואלי מספר 4 בשביל פרטים נוספים."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Warning: Your system may be unbootable!"
-msgstr ""
-"#-#-#-#-#  he.po (quik-installer)  #-#-#-#-#\n"
-"אזהרה: יתכן שהמערכת שלך אינה ניתנת לאתחול!#-#-#-#-#  he.po (yaboot-"
-"installer)  #-#-#-#-#\n"
-"אזהרה: יתכן שהמערכת שלך אינה ניתנת לאתחול!#-#-#-#-#  he.po (vmelilo-"
-"installer)  #-#-#-#-#\n"
-"אזהרה: יתכן שהמערכת שלך אינה ניתנת לאתחול!"
+msgstr "אזהרה: יתכן שהמערכת שלך אינה ניתנת לאתחול!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "הגדרת משתני קושחה (firmware) בשביל אתחול אוטומטי"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"כמה משתנים צריכים להקבע ב-Pegasos·OpenFirmware כדי שהמערכת שלך תאתחל את "
-"דביאן אוטומטית. בסוף ההתקנה, המערכת שלך תאותחל מחדש. בבקשת הקלט של "
-"Pegasos·OpenFirmware, תוכל לקבוע את משתני OpenFirmware הבאים כדי לאפשר אתחול "
-"אוטומטי:"
+"כמה משתנים צריכים להיקבע בקושחת Genesi כדי שהמערכת שלך תאותחל אוטומטית. בסוף "
+"ההתקנה, המערכת שלך תאותחל מחדש. בבקשת הקלט של קושחת Genesi, תוכל לקבוע את "
+"המשתנים הבאים כדי לאפשר אתחול אוטומטי:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"את הפעולה הזאת תצטרך לעשות רק פעם אחת. לאחר מכן, הכנס את הפקודה boot או אתחל "
-"את המערכת כדי להמשיך לשלב ההתקנה הבא."
+"את פעולה זאת תצטרך לעשות רק פעם אחת. לאחר מכן, הכנס את הפקודה \"boot\" או "
+"אתחל את המערכת כדי להמשיך למערכת החדשה שלך."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "לחלופין, תוכל לאתחל את המערכת ידנית ע\"י הכנסה של:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "בשורת הקלט של OpenFirmware."
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr ""
+"לחלופין, תוכל לאתחל את הקרנל ידנית על ידי הכנסה של הטקסט הבא בבקשת הקלט של "
+"הקושחה:"
 
 #. Type: text
 #. Description
 #. Main menu item
 #: ../yaboot-installer.templates:120
 msgid "Install yaboot on a hard disk"
-msgstr "מתקין את yaboot על-גבי הכונן הקשיח"
+msgstr "התקנת yaboot על-גבי הכונן הקשיח"
 
 #. Type: text
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "מתקין את מנהל האתחול yaboot."
+msgstr "התקן מחדש את מנהל האתחול yaboot"

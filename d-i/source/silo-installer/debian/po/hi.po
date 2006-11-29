@@ -3,29 +3,12 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to 
+# translation of hi.po to Hindi
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
 # translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -33,19 +16,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-28 18:33-0700\n"
-"PO-Revision-Date: 2004-11-18 18:11+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"Project-Id-Version: hi\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-19 21:24-0600\n"
+"PO-Revision-Date: 2006-10-17 01:04+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: boolean
 #. Description
@@ -61,6 +42,9 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to SILO, so continuing the installation may be possible."
 msgstr ""
+"/target/ में सिलो पैकेज का संस्थापन असफल रहा. बूटलोडर की भाँति सिलोट का संस्थापन एक "
+"आवश्यक चरण है. संस्थापन की यह समस्यासिलोूट से संबद्ध नहीं भी हो सकती है, अतः संस्थापन को "
+"जारी रखना संभव हो सकता है."
 
 #. Type: error
 #. Description
@@ -72,7 +56,7 @@ msgstr "सिलो संस्थापना असफल रहा."
 #. Description
 #: ../silo-installer.templates:11
 msgid "Running \"/sbin/silo\" failed with error code \"${ERRCODE}\"."
-msgstr ""
+msgstr "\"/sbin/silo\" का क्रियान्वयन त्रुटि कोड \"${ERRCODE}\" के साथ असफल हुआ."
 
 #. Type: note
 #. Description
@@ -87,6 +71,8 @@ msgid ""
 "The SILO boot loader has been successfully installed on your new boot "
 "partition, and your system should now be able to boot itself."
 msgstr ""
+"सिलो बूटलोडर आपके नये बूट पार्टिशन पर सफलतापूर्वक संस्थापित हो गया है, और आपका सिस्टम "
+"स्वयं बूट होने के लिए समर्थ है."
 
 #. Type: text
 #. Description
@@ -98,9 +84,8 @@ msgstr "हार्ड डिस्क में सिलो बूट लो�
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
-#, fuzzy
-msgid "Unsupported boot filesystem type"
-msgstr "कोई रूट फ़ाइल सिस्टम नहीं"
+msgid "Unsupported boot file system type"
+msgstr "असमर्थित बूरूट फ़ाइल सिस्टप्रकारीं"
 
 #. Type: note
 #. Description
@@ -111,13 +96,15 @@ msgid ""
 "partitioning scheme the kernel is going to be installed on the ${SILO_PART} "
 "partition of type ${SILO_TYPE}."
 msgstr ""
+"सिलो (स्पार्क लिनक्स लोडर) द्वारा सफलतापूर्वक लोड होने के लिए कर्नेल का ext2, ext3 या "
+"ufs से फॉर्मेट किए गए पार्टिशन पर स्थित होना आवश्यक है. वर्तमान पार्टिशनिंग व्यवस्था में "
+"कर्नेल ${SILO_TYPE} प्रकार के पार्टिशन ${SILO_PART} पर संस्थापित होने जा रहा है."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:39
-#, fuzzy
 msgid "Boot partition may cause problems with SILO"
-msgstr "रूट पार्टीशन को ext2 होना चाहिए"
+msgstr "बूट पार्टीशनSILO के साथ समस्या उत्पन्न कर सकता हैए"
 
 #. Type: note
 #. Description
@@ -127,6 +114,9 @@ msgid ""
 "impossible for SILO (Sparc Linux Loader) to boot a kernel placed farther "
 "than 1 GB from the beginning of the disk."
 msgstr ""
+"इस मशीन के एक फर्मवेयर बग से ग्रस्त होने की संभावना है जिसके कारण सिलो (स्पार्क लिनक्स "
+"लोडर) उस कर्नेल को लोड करने में असमर्थ होगा जो कि हार्ड डिस्क के प्रथम 1 जीबी के बाहर "
+"स्थित हो."
 
 #. Type: note
 #. Description
@@ -139,13 +129,17 @@ msgid ""
 "${SILO_PART} partition which extends up to ${SILO_OFF} mark. Keeping this "
 "configuration may result in an unbootable system."
 msgstr ""
+"समस्याओं से बचने के लिए इस बात की कड़ी संस्तुति की जाती है कि आप कर्नेल को उस पार्टिशन में "
+"संस्थापित करें जो कि डिस्क के प्रथम 1 जीबी में पूरी तरह आ जाता हो (उदाहरण के लिए डिस्क के "
+"प्रारंभ में एक छोटा /boot पार्टिशन बना कर). वर्तमान विभाजन योजना में यह पार्टिशन "
+"${SILO_PART} में संस्थापित होने जा रहा है जोकि ${SILO_OFF} चिन्ह तक फैला है. यही "
+"कॉनफ़िगरेशन रखने पर सिस्टम बूट योग्य न रहने का जोखिम है."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:53
-#, fuzzy
 msgid "Unsupported partition table on the boot disk"
-msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ?"
+msgstr "बूट डिस्क पर असमर्थित पार्टिशन टेबल"
 
 #. Type: note
 #. Description
@@ -156,6 +150,9 @@ msgid ""
 "to be installed on the ${SILO_PART} partition located on a disk with the "
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
+"सिलो (स्पार्क लिनक्स लोडर) केवल तभी कर्नेल को एक डिस्क से बूट कर सकता है जबकि उस डिस्क "
+"का पार्टिशन टेबल \"sun\" हो. वर्तमान पार्टिशनिंग व्यवस्था में कर्नेल  \"${SILO_DISK}\" "
+"पार्टिशन टेबल वाली डिस्क के पार्टिशन ${SILO_PART} पर संस्थापित होने जा रहा है."
 
 #. Type: note
 #. Description
@@ -165,3 +162,12 @@ msgid ""
 "problem. Keeping the current configuration may result in an unbootable "
 "system."
 msgstr ""
+"इस बात की कड़ी संस्तुति की जाती है कि आप पार्टिशनिंग में वापस जाएँ और इस समस्या को सही "
+"करें. वर्तमान कॉन्फिगरेशन रखने की परिणति एक बूट न होने योग्य तंत्र में हो सकती है."
+
+#. Type: note
+#. Description
+#: ../silo-installer.templates:27
+#, fuzzy
+msgid "Unsupported boot filesystem type"
+msgstr "कोई रूट फ़ाइल सिस्टम नहीं"

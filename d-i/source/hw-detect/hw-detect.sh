@@ -774,6 +774,28 @@ if [ -d /sys/class/misc/pmu/ ]; then
 	apt-install pbbuttonsd || true
 fi
 
+# Install optimised libc based on CPU type.
+case "$(udpkg --print-architecture)" in
+	i386)
+		case "$(grep '^cpu family' /proc/cpuinfo | cut -d: -f2)" in
+			" 6"|" 15")
+				# intel 686 or Amd k6.
+				apt-install libc6-i686 || true
+	                ;;
+		esac
+	;;
+	sparc)
+		if grep -q '^type.*: sun4u' /proc/cpuinfo ; then
+			# sparc v9 or v9b
+			if grep -q '^cpu.*: .*UltraSparc III' /proc/cpuinfo; then
+				apt-install libc6-sparcv9b || true
+			else
+				apt-install libc6-sparcv9 || true
+			fi
+		fi
+	;;
+esac
+
 db_progress SET $MAX_STEPS
 db_progress STOP
 

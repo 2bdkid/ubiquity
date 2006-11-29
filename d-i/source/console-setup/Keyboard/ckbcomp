@@ -1876,7 +1876,7 @@ if (! $symbols) {
 
 ########### COMPUTE ARCH ###########################################
 
-if ($keycodes =~ /(^|\+|\|)macintosh(\([^\)]*\))?($|\+|\|)/) {
+if ($keycodes =~ /(^|\+|\|)macintosh\(old\)($|\+|\|)/) {
     $arch = 'macintosh';
 } elsif ($keycodes =~ /(^|\+|\|)ataritt(\([^\)]*\))?($|\+|\|)/) {
     $arch = 'ataritt';
@@ -2881,7 +2881,7 @@ my %at_scancodes = (
     118 => -1,  # Japanese
     119 => -1,  # Japanese
     120 => -1,  # Japanese
-    123 => 89,  # Brasilian ABNT2
+    123 => -1,
     124 => -1,  # fake key
     125 => -1,  # fake key
     126 => -1,  # fake key
@@ -2894,7 +2894,7 @@ my %at_scancodes = (
     144 => -1,  # Japanese
     156 => -1,  # fake key
     208 => -1,  # Japanese
-    211 => -1,  # Japanese
+    211 => 89,  # Brasilian ABNT2
 );
 
 if ($compact) {

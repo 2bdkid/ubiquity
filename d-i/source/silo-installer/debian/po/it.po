@@ -24,10 +24,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-28 18:33-0700\n"
-"PO-Revision-Date: 2006-04-02 10:34+0200\n"
-"Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-19 21:24-0600\n"
+"PO-Revision-Date: 2006-05-20 18:45+0200\n"
+"Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team:   Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,8 +63,7 @@ msgstr "Installazione di Silo fallita"
 #: ../silo-installer.templates:11
 msgid "Running \"/sbin/silo\" failed with error code \"${ERRCODE}\"."
 msgstr ""
-"L'esecuzione di \"/sbin/silo\"  è fallita con il codice di errore "
-"\"${ERRCODE}\"."
+"L'esecuzione di «/sbin/silo»  è fallita con il codice di errore «${ERRCODE}»."
 
 #. Type: note
 #. Description
@@ -92,7 +91,7 @@ msgstr "Installazione del boot loader SILO su un disco rigido"
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
-msgid "Unsupported boot filesystem type"
+msgid "Unsupported boot file system type"
 msgstr "Tipo di file system di avvio non supportato"
 
 #. Type: note
@@ -161,9 +160,9 @@ msgid ""
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
 "SILO (Sparc Linux Loader) può solo avviare il kernel da un disco con tabella "
-"di partizione \"sun\". Nell'attuale schema di partizionamento il kernel sarà "
+"di partizione «sun». Nell'attuale schema di partizionamento il kernel sarà "
 "installato sulla partizione ${SILO_PART} che si trova su un disco con "
-"tabella delle partizioni di tipo \"${SILO_DISK}."
+"tabella delle partizioni di tipo «${SILO_DISK}»."
 
 #. Type: note
 #. Description
@@ -176,3 +175,9 @@ msgstr ""
 "Si raccomanda di tornare indietro al partizionamento e correggere il "
 "problema. Mantenere la configurazione corrente potrebbe risultare in un "
 "sistema non avviabile."
+
+#. Type: note
+#. Description
+#: ../silo-installer.templates:27
+msgid "Unsupported boot filesystem type"
+msgstr "Tipo di file system di avvio non supportato"

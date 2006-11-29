@@ -4,6 +4,7 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of lv.po to Latvian
+# Aigars Mahinovs <aigarius@debian.org>, 2006.
 # Latvian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
@@ -11,13 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-28 17:51+0100\n"
-"PO-Revision-Date: 2006-02-11 15:42+0200\n"
-"Last-Translator: Aigars Mahinovs <aigarius@laka.lv>\n"
-"Language-Team: locale@laka.lv <locale@laka.lv>\n"
+"POT-Creation-Date: 2006-05-18 17:01-0600\n"
+"PO-Revision-Date: 2006-09-08 19:09+0200\n"
+"Last-Translator: Aigars Mahinovs <aigarius@debian.org>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #. Type: text
 #. Description
@@ -35,7 +39,7 @@ msgstr "Lejupielādēju Release failu..."
 #. Description
 #: ../choose-mirror-bin.templates-in:33
 msgid "Bad archive mirror"
-msgstr "Slikts arhīva spoguļserveris"
+msgstr "Nederīgs arhīva spoguļserveris"
 
 #. Type: error
 #. Description
@@ -51,18 +55,17 @@ msgstr ""
 #. Description
 #: ../choose-mirror-bin.templates-in:39
 msgid "Architecture not supported"
-msgstr ""
+msgstr "Arhitektūra nav atbalstīta"
 
 #. Type: error
 #. Description
-#: ../choose-mirror-bin.templates-in:39
-#, fuzzy
+#: ../choose-mirror-bin.templates-in:40
 msgid ""
 "The specified Ubuntu archive mirror does not seem to support your "
 "architecture. Please try a different mirror."
 msgstr ""
-"Šis Ubuntu arhīva spoguļserveris ir nepieejams vai arī nesatur korektu "
-"Release failu. Lūdzu izmēģiniet citu serveri."
+"Šis Ubuntu arhīva spoguļserveris neatbalsta jūsu datora arhitektūru. Lūdzu "
+"izmēģiniet citu serveri."
 
 #. Type: text
 #. Description
@@ -115,8 +118,8 @@ msgid ""
 "the network -- be aware that nearby countries, or even your own, may not be "
 "the best choice."
 msgstr ""
-"Mērķis ir atrast Ubuntu arhīva spoguļserveri, kas ir Jums tuvāks Internetā. "
-"Ir iespējams, ka serveri blakus valstīs vai pat serveri Jūsu valstī var arī "
+"Mērķis ir atrast Ubuntu arhīva spoguļserveri, kas ir jums tuvāks Internetā. "
+"Ir iespējams, ka serveri blakus valstīs vai pat serveri jūsu valstī var arī "
 "nebūt optimāli."
 
 #. Type: select
@@ -135,29 +138,28 @@ msgid ""
 "country or region if you do not know which mirror has the best Internet "
 "connection to you."
 msgstr ""
-"Izvēlaties Ubuntu arhīva spoguļserveri. Ja Jūs nezinat, līdz kuram "
-"spoguļserverim Jums ir vislabākais pieslēgums, lietojiet to, kas ir vistuvāk "
-"Jums geogrāfiski."
+"Izvēlaties Ubuntu arhīva spoguļserveri. Ja nezināt, līdz kuram "
+"spoguļserverim ir vislabākais pieslēgums, lietojiet to, kas ir vistuvāk "
+"geogrāfiski."
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp-in:30
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
-msgstr ""
-"Parasti <jūsu valsts divu burtu kods>.archive.ubuntu.com ir laba izvēle."
+msgstr "Parasti <valsts divu burtu kods>.archive.ubuntu.com ir laba izvēle."
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp-in:39
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Ubuntu arhīva spoguļservera vārds:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp-in:39
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr "Ievadiet Ubuntu spoguļservera vārdu"

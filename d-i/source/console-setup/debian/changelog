@@ -1,3 +1,149 @@
+console-setup (1.13ubuntu3) feisty; urgency=low
+
+  * Remove ch(fr) from keymap tree again; it's not distinguishable from ch
+    without checking shift key state, which keymapper currently doesn't do.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 29 Nov 2006 11:28:48 +0000
+
+console-setup (1.13ubuntu2) feisty; urgency=low
+
+  * Make Keyboard/keymaptree executable again.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 28 Nov 2006 20:09:22 +0000
+
+console-setup (1.13ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+    - If the detect-keyboard debconf plugin is available
+      (cdebconf-newt-detect-keys in the installer), then offer to use it to
+      detect the keyboard layout.
+    - Ship KeyboardNames.pl and kbdnames-maker in /usr/share/console-setup.
+    - Only default to Canadian layout for fr_CA; use U.S. English for other
+      *_CA locales.
+    - Fix default layout for Bosnian and default variant for Hindi.
+    - Set default charmap for d-i to UTF-8.
+    - Remove unhelpful defaults for several questions.
+    - Adjust the default keyboard model for Brazilian and Japanese layouts.
+    - Allow preseeding of console-setup/modelcode, console-setup/layoutcode,
+      console-setup/variantcode, console-setup/optionscode, and
+      console-setup/fontsize.
+    - Use jp(latin),jp rather than us,jp by default for Japanese.
+    - Reset console-setup/toggle to the default if it's set to "No toggling"
+      and you select a non-Latin layout.
+    - Change the default font from Terminus to VGA where supported.
+    - Skip now-unnecessary console check in init scripts.
+    - Fix up font face and size on upgrading from old versions in Edgy.
+    - Add a few bits of installer integration to console-setup-udeb borrowed
+      from kbd-chooser.
+    - console-setup Depends: perl; something in ckbcomp is causing perl to
+      'use utf8' implicitly, and some of the necessary modules aren't in
+      perl-base.
+    - Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+      tty, since the current tty might belong to X and changing X's tty out
+      of raw mode is a very bad idea.
+  * Restore udeb generation.
+
+  * Map fr_CH to ch(fr) (Swiss French).
+  * Include ch(fr) in keymap tree.
+  * Fix codeset question priority for Esperanto.
+  * Remove X and usplash checks in keyboard-setup and console-setup init
+    scripts, since neither are needed following the fix in console-setup
+    1.7ubuntu19.
+  * Allow setupcon to be run on install again, for the same reason.
+  * Automatically save the font and keymap to /etc in
+    /etc/init.d/console-setup if it isn't being run from init; this allows
+    us to tolerate XKB data being moved to /usr. Similarly, ensure that the
+    font and keymap are saved to /etc during initial installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 24 Nov 2006 18:09:32 +0000
+
+console-setup (1.13) unstable; urgency=low
+
+  * Unfuzzy the translations.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Mon, 13 Nov 2006 21:24:44 +0200
+
+console-setup (1.12) unstable; urgency=low
+
+  * standards.equivalents: approximate symbols used by some popular
+    console applications.
+  * New German translation.  Thanks to Matthias Julius, closes: #396815.
+  * Updated French translation.  Thanks to Jean-Luc Coulon, closes: #398023.
+  * Allign the choices of console-setup/codeset.
+  * Updated Fonts/bdf/georgian16.psf (author: Gia Shervashidze).  Update
+    provided by Vladimer Sichinava.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Mon, 13 Nov 2006 17:30:40 +0200
+
+console-setup (1.11) unstable; urgency=low
+
+  * Instead of X keycode 123 (<KPDC>) map X keycode 211 (<AB11>) to kernel
+    keycode 89.  Thanks to Rafael Almeida, closes: #394962.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Tue, 24 Oct 2006 21:08:24 +0300
+
+console-setup (1.10) unstable; urgency=low
+
+  * Update ckbcomp for the new xkb-data (now not all xkb_keycodes in
+    keycodes/macintosh are old macintosh).
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Mon, 23 Oct 2006 11:54:06 +0300
+
+console-setup (1.9) unstable; urgency=low
+
+  * Remove the udebs in order to make the migration from unstable to
+    testing automatic.
+  * Update the version of the Terminus font from 4.16 to 4.20.  (This is
+    not important for Debian, since in Debian the Terminus font is
+    provided by the console-terminus package.)
+  * New mini-font georgian16.bdf to be used for the Georgian letters in
+    Fixed16, author: Gia Shervashidze.  Thanks to Vladimer Sichinava.
+  * Add FAQ.  Thanks to Thue Janus Kristensen, closes: #389963, #389970.
+  * Fix two problems reported by Martin-Éric Racine.  Closes: #393850.
+    - console-setup-mini should not ask questions in debconf for the encoding
+      since only UTF-8 is supported.
+    - make the purpose of the codeset question clearer.
+  * Use user-friendly choices in the codeset question.
+  * Updated Bulgarian translation of the templates.
+  * Add some capital Greek letters to standard.equivalents and approximate
+    BOX DRAWINGS HEAVY HORIZONTAL by BOX DRAWINGS LIGHT HORIZONTAL.
+  * Make the bullet to be the first symbol in useful.set - it is used by w3m.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Fri, 20 Oct 2006 01:53:11 +0300
+
+console-setup (1.8) unstable; urgency=low
+
+  * setupcon: new option --force to skip the 'are we on the console'
+    check.  To be used for d-i because there /proc/self/fd/2 points to
+    pipe.  Thanks to Tollef Fog Heen.
+  * config.proto: Handle C locale with debian-installer/locale not being
+    available.  Thanks to Colin Watson for the bug report and the patch,
+    closes: #386835.
+  * config.proto: Handle properly the case when the user backs up from the
+    first Debconf question.  In the template file change "none" to "this
+    default value is completely ignored".  Thanks to Colin Watson, 
+    closes: #386837.
+  * Handle properly the cs layout in config.proto and kbdcompiler.  Thanks
+    to Colin Watson, closes: #386838.
+  * Supply correct debian/po/POTFILES.in.  Thanks to Thomas Huriaux,
+    closes: #387631.
+  * Use /lib/lsb/init-functions in the init scripts when available.
+    Thanks to Colin Watson, closes: #386844.
+  * config.proto: Try to use the value of debian-installer/keymap to get
+    default keyboard layout and variant and when that is possible ask the
+    corresponding Debconf questions with medium instead of critical
+    priority.  Thanks to Colin Watson, closes: #386836.
+  * config.proto(ask_debconf): when the provided default value is
+    unavailable, try to use the empty string.  Useful when asking for the
+    keyboard variant.
+  * Add README.Debian for console-setup.
+  * Add boot script order header to the init scripts.  Thanks to
+    Martin-Éric Racine, closes: #386545.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Tue, 19 Sep 2006 11:56:15 +0300
+
 console-setup (1.7ubuntu19) edgy; urgency=low
 
   * If upgrading from an older version than this one, check for the Terminus

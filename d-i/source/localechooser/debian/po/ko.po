@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-30 21:44+0900\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-07-25 00:05+0900\n"
 "Last-Translator:  Sunjae park <darehanl@gmail.com>\n"
 "Language-Team:  Korean <debian-l10n-korean@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -33,18 +33,21 @@ msgstr "언어를 고르십시오/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "언어 정보를 저장하는 중입니다..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Korea, Republic of"
 
 #. Type: select
@@ -53,7 +56,7 @@ msgstr "Korea, Republic of"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "기타"
 
@@ -62,36 +65,35 @@ msgstr "기타"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "KR"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
-msgid "Choose your location:"
-msgstr "로케일을 고르십시오:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "국가 혹은 지역을 선택하십시오:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr ""
 "지금 사용하는 언어를 보면, 아마도 현재 위치는 다음 국가 혹은 지역 중의 하나"
 "일 것입니다."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "로케일을 고르십시오:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -99,13 +101,13 @@ msgstr "언어와 국가 선택에 따라 데비안에서는 다음 로케일 �
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "지원할 다른 로케일 선택:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "이 목록에서 설치할 로케일은 추가로 선택할 수 있습니다."
 
@@ -152,6 +154,3 @@ msgstr "-- 남극 --"
 #: ../../countrylist:24
 msgid "-- other --"
 msgstr "-- 기타 --"
-
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "국가 혹은 지역을 선택하십시오:"

@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-30 20:17+0200\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-07-02 08:05+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -41,18 +41,21 @@ msgstr "Choisir la langue/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "Enregistrement de la langue..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "France"
 
 #. Type: select
@@ -61,7 +64,7 @@ msgstr "France"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "Autre"
 
@@ -70,34 +73,35 @@ msgstr "Autre"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "FR"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-msgid "Choose your location:"
-msgstr "Choisissez votre emplacement géographique :"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Choisissez un pays, territoire ou lieu géographique :"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr ""
-"D'après votre langue, vous êtes probablement situé dans un des emplacements "
-"géographiques suivants."
+"D'après votre choix de langue, vous êtes probablement situé dans un des pays "
+"ou régions suivants."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Paramètres régionaux :"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -107,13 +111,13 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "Autres paramètres régionaux gérés :"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
 "Vous pouvez choisir des paramètres régionaux supplémentaires qui seront "

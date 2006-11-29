@@ -251,12 +251,19 @@ install_base_system () {
 }
 
 configure_apt () {
+	[ ! -d /target/etc/apt/apt.conf.d ] && mkdir -p /target/etc/apt/apt.conf.d
+	
+	# Make apt trust Debian CDs. This is not on by default (we think).
+	# This will be left in place on the installed system.
+	cat > /target/etc/apt/apt.conf.d/00trustcdrom <<EOT
+APT::Authentication::TrustCDROM "true";
+EOT
+
 	# Avoid clock skew causing gpg verification issues.
 	# This file will be left in place until the end of the install.
 	cat > /target/etc/apt/apt.conf.d/00IgnoreTimeConflict << EOT
 Acquire::gpgv::Options { "--ignore-time-conflict"; };
 EOT
-
 	# let apt inside the chroot see the cdrom
 	if [ "$PROTOCOL" = file ] ; then
 		if [ -n "$DIRECTORY" ]; then
@@ -287,12 +294,11 @@ EOT
 	COMPONENTS=`echo $COMPONENTS | tr , " "`
 	APTSOURCE="$PROTOCOL://$MIRROR$DIRECTORY"
 
-	[ ! -d /target/etc/apt ] && mkdir -p /target/etc/apt
 	# This assumes the file protocol is only used for CD (image) installs
 	if [ "$PROTOCOL" = file ] ; then
 		# Make apt-cdrom and apt not unmount/mount CD-ROMs;
 		# needed to support CD images (hd-media installs)
-		[ ! -d /target/etc/apt/apt.conf.d ] && mkdir -p /target/etc/apt/apt.conf.d
+		# This file will be left in place until the end of the install.
 		cat > /target/etc/apt/apt.conf.d/00NoMountCDROM << EOT
 APT::CDROM::NoMount "true";
 Acquire::cdrom {
@@ -317,12 +323,6 @@ EOT
 			SECMIRROR="$MIRROR"
 		fi
 		echo "deb $PROTOCOL://$MIRROR/ubuntu $DISTRIBUTION-security $COMPONENTS" >> /target/etc/apt/sources.list
-	fi
-
-	# Make apt trust Debian CDs. This is not on by default (we think).
-	if [ ! -e /target/etc/apt/apt.conf ] || \
-	   ! grep -iq 'APT::Authentication::TrustCDROM' /target/etc/apt/apt.conf; then
-		echo "APT::Authentication::TrustCDROM \"true\";" >> /target/etc/apt/apt.conf
 	fi
 }
 
@@ -352,7 +352,8 @@ create_devices () {
 
 		# We can't check the root node directly as is done above because
 		# root could be on an LVM LV on top of an encrypted device
-		if dmsetup table | cut -d' ' -f4 | grep -q "crypt" 2>/dev/null; then
+		if type dmsetup >/dev/null 2>&1 && \
+		   dmsetup table | cut -d' ' -f4 | grep -q "crypt" 2>/dev/null; then
 			apt-install cryptsetup
 		fi
 
@@ -655,25 +656,25 @@ do_initrd = $do_initrd
 link_in_boot = $link_in_boot
 EOF
 
-	package=""
+	rd_generator=""
 	if [ "$do_initramfs" = yes ]; then
 		if generators="$(available_initramfs_generators)"; then
 			if echo "$generators" | grep -q " "; then
-				package="$(select_initramfs_generator "$generators")"
+				rd_generator="$(select_initramfs_generator "$generators")"
 			else
-				package="$generators"
+				rd_generator="$generators"
 			fi
 		fi
 	else
-		package=initrd-tools
+		rd_generator=initrd-tools
 	fi
 
 	# Sarge does not have any initramfs generators, though custom images may
-	if [ -z "$package" ] ; then
+	if [ -z "$rd_generator" ] ; then
 		if [ "$DISTRIBUTION" = sarge ] ; then
-			info "$package not available; falling back to initrd-tools."
+			info "$rd_generator not available; falling back to initrd-tools."
 			do_initramfs=no
-			package=initrd-tools
+			rd_generator=initrd-tools
 		else
 			# We can only get here if $do_initramfs=yes
 			exit_error base-installer/initramfs/no-generator
@@ -685,33 +686,23 @@ EOF
 	if [ yes = "$do_initrd" ] ; then
 		# Make sure the ramdisk creation tool is installed before we
 		# change its configuration
-		db_subst base-installer/section/install_kernel_package SUBST0 "$package"
+		db_subst base-installer/section/install_kernel_package SUBST0 "$rd_generator"
 		db_progress INFO base-installer/section/install_kernel_package
-		if ! log-output -t base-installer apt-install "$package"; then
-			db_subst base-installer/kernel/failed-package-install PACKAGE "$package"
+		if ! log-output -t base-installer apt-install "$rd_generator"; then
+			db_subst base-installer/kernel/failed-package-install PACKAGE "$rd_generator"
 			exit_error base-installer/kernel/failed-package-install
 		fi
 		
 		# Figure out how to configure the ramdisk creation tool.
-		case "$package" in
-		    initramfs-tools)
-			if [ -d /target/etc/initramfs-tools/conf.d ]; then
-				ramdiskconf=/target/etc/initramfs-tools/conf.d/resume
-			elif [ -d /target/etc/mkinitramfs/conf.d ]; then
-				ramdiskconf=/target/etc/mkinitramfs/conf.d/resume
-			else
-				# old location
-				ramdiskconf=/target/etc/mkinitramfs/initramfs.conf
-			fi
-			;;
-		    yaird)
-			ramdiskconf=
+		case "$rd_generator" in
+		    initramfs-tools|yaird)
+			rd_conf=
 			;;
 		    initrd-tools)
-			ramdiskconf=/target/etc/mkinitrd/mkinitrd.conf
+			rd_conf=/target/etc/mkinitrd/mkinitrd.conf
 			;;
 		    *)
-			db_subst base-installer/initramfs/unsupported GENERATOR "$package"
+			db_subst base-installer/initramfs/unsupported GENERATOR "$rd_generator"
 			exit_error base-installer/initramfs/unsupported
 			;;
 		esac
@@ -729,12 +720,12 @@ EOF
 		done
 
 		# Install any extra (kernel related) packages
+		EXTRAS=
 		if db_get "base-installer/kernel/linux/extra-packages-$target_kernel_major"; then
-			EXTRAS="$RET"
-		elif db_get base-installer/kernel/linux/extra-packages; then
-			EXTRAS="$RET"
-		else
-			EXTRAS=
+			EXTRAS="$EXTRAS $RET"
+		fi
+		if db_get base-installer/kernel/linux/extra-packages; then
+			EXTRAS="$EXTRAS $RET"
 		fi
 		for package in $EXTRAS; do
 			info "Installing $package."
@@ -744,20 +735,38 @@ EOF
 			log-output -t base-installer apt-install "$package" || true
 		done
 
-		if [ "$do_initramfs" = no ]; then
+		if [ "$do_initramfs" = no ] && [ "$rd_conf" ]; then
 			# Temporarily hardcode the root partition for initrd-tools
 			rootpart_devfs=$(mount | grep "on /target " | cut -d' ' -f1)
 			rootpartfs=$(mount | grep "on /target " | cut -d' ' -f5)
 			rootpart=$(mapdevfs $rootpart_devfs)
-			if [ -f $ramdiskconf ]; then
-				sed -e "s#^ROOT=.*#ROOT='$rootpart $rootpartfs'#" < $ramdiskconf > $ramdiskconf.new &&
-					mv $ramdiskconf.new $ramdiskconf
+			if [ -f $rd_conf ]; then
+				sed -e "s#^ROOT=.*#ROOT='$rootpart $rootpartfs'#" < $rd_conf > $rd_conf.new &&
+					mv $rd_conf.new $rd_conf
 			else
-				echo "ROOT='$rootpart $rootpartfs'" >> $ramdiskconf
+				echo "ROOT='$rootpart $rootpartfs'" >> $rd_conf
 			fi
 		fi
 
 		# Set up a default resume partition.
+		case $rd_generator in
+		    initramfs-tools)
+			if [ -d /target/etc/initramfs-tools/conf.d ]; then
+				resumeconf=/target/etc/initramfs-tools/conf.d/resume
+			elif [ -d /target/etc/mkinitramfs/conf.d ]; then
+				resumeconf=/target/etc/mkinitramfs/conf.d/resume
+			else
+				# old location
+				resumeconf=/target/etc/mkinitramfs/initramfs.conf
+			fi
+			;;
+		    initrd-tools)
+			resumeconf="$rd_conf"
+			;;
+		    *)
+			resumeconf=
+			;;
+		esac
 		resume_devfs="$(get_resume_partition)" || resume_devfs=
 		if [ "$resume_devfs" ] && [ -e "$resume_devfs" ]; then
 			resume="$(mapdevfs "$resume_devfs")" || resume=
@@ -770,12 +779,12 @@ EOF
 				resume="UUID=$resume_uuid"
 			fi
 		fi
-		if [ -n "$ramdiskconf" -a "$resume" ]; then
-			if [ -f $ramdiskconf ] ; then
-				sed -e "s@^#* *RESUME=.*@RESUME=$resume@" < $ramdiskconf > $ramdiskconf.new &&
-					mv $ramdiskconf.new $ramdiskconf
+		if [ -n "$resumeconf" ] && [ "$resume" ]; then
+			if [ -f $resumeconf ] ; then
+				sed -e "s@^#* *RESUME=.*@RESUME=$resume@" < $resumeconf > $resumeconf.new &&
+					mv $resumeconf.new $resumeconf
 			else
-				echo "RESUME=$resume" >> $ramdiskconf
+				echo "RESUME=$resume" >> $resumeconf
 			fi
 		fi
 	else
@@ -794,9 +803,10 @@ EOF
 	update_progress 90 100
 
 	# /proc/filesystems will accomodate this when the initrd is rebuilt.
-	if [ "$do_initrd" = yes ] && [ "$do_initramfs" = no ]; then
-		sed -e 's/^ROOT=.*/ROOT=probe/' $ramdiskconf > $ramdiskconf.new &&
-			mv $ramdiskconf.new $ramdiskconf
+	if [ "$do_initrd" = yes ] && [ "$do_initramfs" = no ] && \
+	   [ "$rd_conf" ]; then
+		sed -e 's/^ROOT=.*/ROOT=probe/' $rd_conf > $rd_conf.new &&
+			mv $rd_conf.new $rd_conf
 	fi
 
 	if [ -f /target/etc/kernel-img.conf.$$ ]; then

@@ -3,32 +3,17 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of et.po to Eesti
-#
-#
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-#
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Siim Põder <windo@windowlicker.dyn.ee>, 2005.
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: et\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2006-06-18 20:38+0300\n"
-"Last-Translator: Siim Põder <windo@windowlicker.dyn.ee>\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-30 22:58+0000\n"
+"PO-Revision-Date: 2006-10-03 23:32+0300\n"
+"Last-Translator: Siim Põder <windo@p6drad-teel.net>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Estonian\n"
-"X-Poedit-Country: ESTONIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #. Type: boolean
 #. Description
@@ -41,7 +26,6 @@ msgstr "Arvutist avastati ka teisi operatsioonisüsteeme: ${OS_LIST}"
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:4
-#, fuzzy
 msgid ""
 "If all of your operating systems are listed above, then it should be safe to "
 "install the boot loader to the master boot record of your first hard drive. "
@@ -49,10 +33,10 @@ msgid ""
 "operating systems or your new system."
 msgstr ""
 "Kui nimekirjas on kõik sinu arvutis olevad operatsioonisüsteemid, peaks "
-"alglaaduri kõvaketta peamisesse alglaadimiskirjesse (MBR-i) paigaldamine "
-"ohutu olema. Kui su arvuti taaskäivitub, esitatakse sulle valik kõigist "
-"nimekirjas olevatest operatsioonisüsteemidest - nende hulgas on ka su uus "
-"Debiani süsteem."
+"alglaaduri esimese kõvaketta peamisesse alglaadimiskirjesse (MBR-i) "
+"paigaldamine ohutu olema. Kui su arvuti taaskäivitub, esitatakse sulle valik "
+"kõigist nimekirjas olevatest operatsioonisüsteemidest - nende hulgas on ka "
+"su uus süsteem."
 
 #. Type: boolean
 #. Description
@@ -63,15 +47,14 @@ msgstr "Paigaldada GRUB alglaadur MBR'i?"
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:16
-#, fuzzy
 msgid ""
 "It seems that this new installation is the only operating system on this "
 "computer. If so, it should be safe to install the GRUB boot loader to the "
 "master boot record of your first hard drive."
 msgstr ""
-"Paistab, et käesolev Debian'i paigaldus on selle arvuti ainus "
-"operatsioonisüsteem. Kui see on nii, peaks alglaaduri GRUB esimese kõvaketta "
-"MBR'i salvestamine ohutu olema."
+"Paistab, et käesolev paigaldus on selle arvuti ainus operatsioonisüsteem. "
+"Kui see on nii, peaks alglaaduri GRUB esimese kõvaketta MBR'i salvestamine "
+"ohutu olema."
 
 #. Type: boolean
 #. Description
@@ -112,7 +95,6 @@ msgstr "Seade, kuhu alglaadur paigaldada:"
 #. Type: string
 #. Description
 #: ../grub-installer.templates:35
-#, fuzzy
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -120,15 +102,14 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
-"Sa pead oma äsjapaigaldatud Debian'i käivitatavaks tegema. Selleks on vaja "
+"Sa pead oma äsjapaigaldatud süsteemi käivitatavaks muutma. Selleks on vaja "
 "käivitatavale seadmele paigaldada alglaadur GRUB. Tavaliselt paigaldatakse "
-"GRUB esimese kõvaketta MBR'i, kuid soovi korral võid ta ka mujale "
-"paigaldada, kas üldse teisele kõvakettale või lausa flopile."
+"GRUB esimese kõvaketta MBR'i, kuid soovi korral võid ta ka kettal piires "
+"mujale paigaldada, samuti kas üldse teisele kõvakettale või lausa flopile."
 
 #. Type: string
 #. Description
 #: ../grub-installer.templates:35
-#, fuzzy
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -231,56 +212,56 @@ msgstr "See on saatuslik viga."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:94
+#: ../grub-installer.templates:105
 msgid "Installing GRUB boot loader"
 msgstr "Alglaaduri GRUB paigaldamine"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:98
+#: ../grub-installer.templates:109
 msgid "Looking for other operating systems..."
 msgstr "Teiste võimalike operatsioonisüsteemide otsimine..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:102
+#: ../grub-installer.templates:113
 msgid "Installing the 'grub' package..."
 msgstr "Paketi 'grub' paigaldamine..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:106
+#: ../grub-installer.templates:117
 msgid "Determining GRUB boot device..."
 msgstr "GRUB alglaadimisseadme määramine..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:110
+#: ../grub-installer.templates:121
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "\"grub-install ${BOOTDEV}\" käivitamine..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:114
+#: ../grub-installer.templates:125
 msgid "Running \"update-grub\"..."
 msgstr "\"update-grub\" käivitamine..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:118
+#: ../grub-installer.templates:129
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "/etc/kernel-img.conf uuendamine..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:123
+#: ../grub-installer.templates:134
 msgid "Install the GRUB boot loader on a hard disk"
-msgstr "Paigalda alglaadur GRUB kõvakettale"
+msgstr "Alglaadur GRUB kõvakettale paigaldamine"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:128
+#: ../grub-installer.templates:139
 msgid "Reinstall GRUB boot loader"
-msgstr "Seadista GRUB alglaadur uuesti"
+msgstr "GRUB alglaaduri uuesti seadistamine"

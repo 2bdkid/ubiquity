@@ -12,7 +12,7 @@
 # David Martínez Moreno <ender@debian.org>, 2003, 2005.
 # Carlos Alberto Martín Edo <carlos@dat.etsit.upm.es>, 2003
 # Carlos Valdivia Yagüe <valyag@dat.etsit.upm.es>, 2003
-# Rudy Godoy <rudy@kernel-panik.org>, 2003
+# Rudy Godoy <rudy@kernel-panik.org>, 2003-2006
 # Steve Langasek <vorlon@debian.org>, 2004
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2005
 # Rubén Porras Campo <nahoo@inicia.es>, 2005
@@ -21,7 +21,7 @@
 # Equipo de traducción al español, por favor lean antes de traducir
 # los siguientes documentos:
 #
-# - El proyecto de traducción de Debian al españl
+# - El proyecto de traducción de Debian al español
 #   http://www.debian.org/intl/spanish/
 #   especialmente las notas de traducción en
 #   http://www.debian.org/intl/spanish/notas
@@ -33,12 +33,23 @@
 # Si tiene dudas o consultas sobre esta traducción consulte con el último
 # traductor (campo Last-Translator) y ponga en copia a la lista de
 # traducción de Debian al español (debian-l10n-spanish@lists.debian.org)
+#
+# NOTAS: 
+#
+# - Se ha traducido en este fichero 'boot loader' de forma homogénea por
+# 'cargador de arranque' aunque en el manual se utiliza éste término y
+# también 'gestor de arranque'
+#
+# - 'array' no está traducido aún. La traducción como 'arreglo' suena
+# fatal (y es poco conocida)
+#
+#  
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-24 08:48+0200\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-10-15 23:14-0500\n"
 "Last-Translator: Javier Fernández-Sanguino Peña <jfs@debian.org>\n"
 "Language-Team:  Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -58,18 +69,21 @@ msgstr "Escoja el idioma / Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "Guardando el idioma..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Spain"
 
 #. Type: select
@@ -78,7 +92,7 @@ msgstr "Spain"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "otro"
 
@@ -87,34 +101,35 @@ msgstr "otro"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "ES"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-msgid "Choose your location:"
-msgstr "Elija su ubicación:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Escoja un país, territorio o área:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr ""
-"Basándose en el idioma que ha elegido, es probable que esté en alguno de los "
-"siguientes ubicaciones."
+"Basándose en el idioma que ha elegido, es probable que se encuentre en "
+"alguno de los siguientes países o regiones."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Escoja una localización:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -124,13 +139,13 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "Elija los idiomas para los que desea soporte:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "En esta lista puede elegir idiomas adicionales que se instalarán."
 
@@ -164,7 +179,7 @@ msgstr "-- Africa --"
 
 #: ../../countrylist:21
 msgid "-- Indian Ocean --"
-msgstr "-- Oceano Índico --"
+msgstr "-- Océano Índico --"
 
 #: ../../countrylist:22
 msgid "-- Oceania --"

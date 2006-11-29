@@ -19,14 +19,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-07 11:15+0700\n"
-"Last-Translator: Parlin Imanuel Toh <pt@samip-online.com>\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-08-28 13:00+0700\n"
+"Last-Translator: Arief S Fitrianto <arief@gurame.fisika.ui.ac.id>\n"
 "Language-Team: Debian Indonesia Team <debian-l10n-id@gurame.fisika.ui.ac."
 "id>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
 
 #. Type: text
 #. Description
@@ -41,18 +43,21 @@ msgstr "Pilih bahasa/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "Menyimpan bahasa..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Indonesia"
 
 #. Type: select
@@ -61,7 +66,7 @@ msgstr "Indonesia"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "lainnya"
 
@@ -70,32 +75,34 @@ msgstr "lainnya"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "ID"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-msgid "Choose your location:"
-msgstr "Pilih lokasi anda:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Pilih suatu negara, teritorial atau daerah:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
-msgstr "Berdasarkan pilihan bahasa, kemungkinan Anda berada di negara berikut."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
+msgstr ""
+"Berdasarkan bahasa Anda, mungkin Anda berada di negara atau wilayah berikut."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Pilih bahasa lokal:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -105,15 +112,15 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
-msgstr "Pilih bahasa lain:"
+msgstr "Pilih bahasa lain yang ingin dipakai:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
-msgstr "Anda dapat memilih bahasa tambahan untuk diinstal."
+msgstr "Anda dapat memilih bahasa tambahan untuk diinstal dari daftar berikut."
 
 #: ../../countrylist:14
 msgid "-- North America --"

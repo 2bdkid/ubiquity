@@ -24,10 +24,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-01-11 18:34-0700\n"
-"PO-Revision-Date: 2006-05-15 13:09+0200\n"
-"Last-Translator: Giuseppe Sacco <eppesuig@debian.org>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-08-30 22:58+0000\n"
+"PO-Revision-Date: 2006-10-08 15:02+0200\n"
+"Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team:   Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,10 +84,11 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
-"Attenzione: se l'installatore fallisce nel riconoscimento di un altro "
-"sistema operativo presente su questo computer, la modifica del master boot "
-"record renderà il sistema operativo temporaneamente non avviabile, sebbene "
-"GRUB possa essere configurato successivamente per avviarlo."
+"Attenzione: se il programma di installazione fallisce nel riconoscimento di "
+"un altro sistema operativo presente su questo computer, la modifica del "
+"master boot record renderà il sistema operativo temporaneamente non "
+"avviabile, sebbene GRUB possa essere configurato successivamente per "
+"avviarlo."
 
 #. Type: boolean
 #. Description
@@ -236,56 +237,56 @@ msgstr "Questo è un errore fatale."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:94
+#: ../grub-installer.templates:105
 msgid "Installing GRUB boot loader"
 msgstr "Installazione del boot loader GRUB"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:98
+#: ../grub-installer.templates:109
 msgid "Looking for other operating systems..."
 msgstr "Ricerca di altri sistemi operativi in corso."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:102
+#: ../grub-installer.templates:113
 msgid "Installing the 'grub' package..."
 msgstr "Installazione del pacchetto 'grub' in corso."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:106
+#: ../grub-installer.templates:117
 msgid "Determining GRUB boot device..."
 msgstr "Determinazione del dispositivo di avvio di GRUB in corso."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:110
+#: ../grub-installer.templates:121
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "Esecuzione di «grub-install ${BOOTDEV}» in corso."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:114
+#: ../grub-installer.templates:125
 msgid "Running \"update-grub\"..."
 msgstr "Esecuzione di «update-grub» in corso."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:118
+#: ../grub-installer.templates:129
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "Aggiornamento di /etc/kernel-img.conf in corso."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:123
+#: ../grub-installer.templates:134
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "Installare il boot loader GRUB su un disco rigido"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:128
+#: ../grub-installer.templates:139
 msgid "Reinstall GRUB boot loader"
 msgstr "Reinstallazione del boot loader GRUB"

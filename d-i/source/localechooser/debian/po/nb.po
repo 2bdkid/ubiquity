@@ -5,22 +5,20 @@
 # 
 # translation of nb.po to Norwegian Bokmål
 # translation of debian-installer.po to Norwegian Bokmål
-# Norwegian Bokmal messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Knut Yrvin <knuty@skolelinux.no>, 2004.
 # Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
 # Axel Bojer <axelb@skolelinux.no>, 2004.
-# Bjorn Steensrud <bjornst@powertech.no>, 2004.
 # Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005.
-# Bjørn Steensrud <bjornst@powertech.no>, 2005, 2006.
+# Bjørn Steensrud <bjornst@powertech.no>, 2004,2005, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2006-04-07 14:16+0200\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-06-20 22:27+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@powertech.no>\n"
 "Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
 "MIME-Version: 1.0\n"
@@ -41,18 +39,21 @@ msgstr "Velg språk/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "Lagrer språkvalget ..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Norway"
 
 #. Type: select
@@ -61,7 +62,7 @@ msgstr "Norway"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "andre"
 
@@ -70,32 +71,35 @@ msgstr "andre"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
+#: ../localechooser.templates-in:116
 msgid "US"
 msgstr "NO"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-msgid "Choose your location:"
-msgstr "Velg din lokalitet:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Velg et land, territorium eller område:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
-msgstr "Ut fra språket du har valgt er du trolig i et av disse stedene."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
+msgstr ""
+"Ut fra språket du har valgt er du trolig i et av disse landene, territoriene "
+"eller områdene."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Velg et lokale:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
@@ -104,13 +108,13 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
 msgstr "Velg andre lokaler som skal støttes:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr "Du kan velge flere lokaler å installere i denne lista."
 

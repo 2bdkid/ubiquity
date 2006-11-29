@@ -65,6 +65,10 @@ set -e
 
 CONFIGFILE=/etc/default/console-setup
 
+## PACKAGE ## Will be replaced by assignment for $package
+
+# package=console-setup
+
 ## FONTSETS ## Will be replaced by assignment for $fontsets:
 
 # fontsets='Arabic-Fixed15
@@ -90,6 +94,28 @@ CONFIGFILE=/etc/default/console-setup
 # layout*el*Greek
 # ...
 # variant*it*nodeadkeys*Eliminate dead keys'
+
+## CODESETS ##
+
+codesets='Arabic*. Arabic
+Armenian*# Armenian
+CyrKoi*# Cyrillic - KOI8-R and KOI8-U
+CyrAsia*# Cyrillic - non-Slavic languages
+CyrSlav*# Cyrillic - Slavic languages (also Bosnian and Serbian Latin)
+Ethiopian*. Ethiopic
+Georgian*# Georgian
+Greek*# Greek
+Hebrew*# Hebrew
+Lao*# Lao
+Lat15*# Latin1 and Latin5 - western Europe and Turkic languages
+Lat2*# Latin2 - central Europe and Romanian
+Lat38*# Latin3 and Latin8 - Chichewa; Esperanto; Irish; Maltese and Welsh
+Lat7*# Latin7 - Lithuanian; Latvian; Maori and Marshallese
+Vietnamese*. Latin - Vietnamese
+Thai*# Thai
+Uni1*. Combined - Latin; Slavic Cyrillic; Hebrew; basic Arabic
+Uni2*. Combined - Latin; Slavic Cyrillic; Greek
+Uni3*. Combined - Latin; Slavic and non-Slavic Cyrillic'
 
 db_capb backup
 CAPB="$RET"
@@ -127,6 +153,12 @@ ask_debconf () {
     default_description=`echo "$kbdnames" |  
         grep "^$prefix\*${default_code}\*" |
         sed -e "s/^$prefix\*${default_code}\*//"`
+    if [ -z "$default_description" ]; then
+	# Vor XkbVariant the empty string is usualy a sensible default
+	default_description=`echo "$kbdnames" |  
+            grep "^$prefix\*\*" |
+            sed -e "s/^$prefix\*\*//"`
+    fi
     if [ -n "$default_description" ]; then
 	db_default $template "$default_description"
     fi
@@ -234,13 +266,25 @@ available_fontsizes () {
 	uniq
 }
 
+decode_codeset () {
+    echo "$codesets" | \
+	grep -F "$**" | \
+	sed 's/.*[*]//'
+}
+
+encode_codeset () {
+    echo "$codesets" | \
+	grep -F "*$*" | \
+	sed 's/[*].*//'
+}
+
 if which locale >/dev/null; then
     eval `locale`
 fi
 
 if [ "$LC_CTYPE"  -a "$LC_CTYPE" != C ]; then
     locale=$LC_CTYPE
-elif db_get debian-installer/locale; then
+elif db_get debian-installer/locale && [ "$RET" ]; then
     locale="$RET"
 else
     locale=C
@@ -327,7 +371,7 @@ case "$locale" in
 	default_codeset=Lat15
 	codeset_priority=low
 	;;
-    eo_*)
+    eo|eo_*)
 	default_codeset=Lat38
 	codeset_priority=low
 	;;
@@ -649,7 +693,7 @@ case "$locale" in
 	;;
 esac
 
-
+default_codeset="`decode_codeset $default_codeset`"
 
 default_layout=''
 default_variant=''
@@ -683,6 +727,10 @@ case "$locale" in
 	;;
     *_CA*)
 	default_layout=us  # U.S. English
+	;;
+    fr_CH*)
+	default_layout=ch  # Switzerland
+	default_variant=fr # French
 	;;
     *_CH*)
 	default_layout=ch  # Switzerland
@@ -1110,10 +1158,11 @@ if [ -e $CONFIGFILE ]; then
     layout_priority=medium
     default_ttys="$ACTIVE_CONSOLES"
     default_charmap="$CHARMAP"
-    default_codeset="$CODESET"
     default_fontface="$FONTFACE"
     default_fontsize="$FONTSIZE"
     default_model="$XKBMODEL"
+
+    default_codeset="`decode_codeset $CODESET`"
 
     case "$XKBLAYOUT" in
 	# TODO: make s.t. to not forget to update this list
@@ -1316,7 +1365,7 @@ while :; do
 		    STATE=$(($STATE - 1))
 		fi
 	    elif \
-		ask_debconf console-setup/layout $layout_priority \
+		ask_debconf console-setup/layout "$layout_priority" \
 		    layout "$default_layout"
 	    then
 		layout="$RET"
@@ -1364,7 +1413,7 @@ while :; do
 		# skip the question without making Debconf loop
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    elif \
-		ask_debconf console-setup/variant $layout_priority \
+		ask_debconf console-setup/variant "$layout_priority" \
                     "variant\*${layout}" "$default_variant"
 	    then
 		variant="$RET"
@@ -1375,12 +1424,6 @@ while :; do
 	    fi
 	    if $adjust_layout; then
 		case "$layout" in
-		    # TODO: make s.t. to not forget to update this list
-                    # Don't forget to update also the list in kbdcompiler
-		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|kan|kh|la|lao|lk|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
-			latin=no
-			real_layout=us,$layout
-			;;
 		    cs)
 			case "$variant" in
 			    latin*)
@@ -1404,6 +1447,12 @@ while :; do
 				real_layout=jp,jp
 				;;
 			esac
+			;;
+		    # TODO: make s.t. to not forget to update this list
+		    # Don't forget to update also the list in kbdcompiler
+		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|kan|kh|la|lao|lk|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
+			latin=no
+			real_layout=us,$layout
 			;;
 		    *)
 			latin=yes
@@ -1671,31 +1720,41 @@ while :; do
 	    fi
 	    ;;		    
 	7)
-	    # add commas
-	    choices=`echo "$charmaps" | sed -e 's/$/,/g' | sort `
-	    # remove newlines
-	    choices=`echo $choices | sed -e 's/,$//' `
-	    db_subst console-setup/charmap CHOICES "$choices"
-	    db_default console-setup/charmap "$default_charmap"
-	    db_input $charmap_priority console-setup/charmap || true
-	    if db_go; then
-		STATE=$(($STATE + 1))
+	    if [ "$package" = console-setup-mini ]; then
+		if [ "$STATE" -ge "$old_state" ]; then
+		    STATE=$(($STATE + 1))
+		else
+		    STATE=$(($STATE - 1))
+		fi
+		charmap=UTF-8
 	    else
-		STATE=$(($STATE - 1))
+		# add commas
+		choices=`echo "$charmaps" | sed -e 's/$/,/g' | sort `
+		# remove newlines
+		choices=`echo $choices | sed -e 's/,$//' `
+		db_subst console-setup/charmap CHOICES "$choices"
+		db_default console-setup/charmap "$default_charmap"
+		db_input $charmap_priority console-setup/charmap || true
+		if db_go; then
+		    STATE=$(($STATE + 1))
+		else
+		    STATE=$(($STATE - 1))
+		fi
+		db_get console-setup/charmap
+		charmap=$RET
 	    fi
-	    db_get console-setup/charmap
-	    charmap=$RET
 	    ;;
 	8)
 	    db_default console-setup/codeset "$default_codeset"
 	    db_input $codeset_priority console-setup/codeset || true
 	    if db_go; then
+		db_get console-setup/codeset
+		codeset="`encode_codeset $RET`"
+		db_set console-setup/codesetcode "$codeset"
 		STATE=$(($STATE + 1))
 	    else
 		STATE=$(($STATE - 1))
 	    fi
-	    db_get console-setup/codeset
-	    codeset=$RET
 	    ;;
 	9)
 	    fontfaces=`available_fontfaces`

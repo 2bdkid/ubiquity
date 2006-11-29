@@ -5,7 +5,7 @@
 # 
 # Simplified Chinese translation for Debian Installer.
 #
-# Copyright (C) 2003, 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2003-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 # Translated by bbbush (2004), Carlos Z.F. Liu (2004,2005,2006) and
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-03 04:50+1200\n"
-"Last-Translator: Carlos Z.F. Liu <carlosliu@users.sourceforge.net>\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-17 20:51-0500\n"
+"Last-Translator: Ming Hua <minghua@rice.edu>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -164,7 +164,7 @@ msgstr "安装 Yaboot 启动引导器失败。"
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "Successfully installed yaboot"
-msgstr "安装 yaboot"
+msgstr "安装 yaboot 成功"
 
 #. Type: note
 #. Description
@@ -204,65 +204,40 @@ msgstr "警告：您的系统可能将无法启动！"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
-msgstr "正在为自动启动设置 firmware 变量"
+msgstr "正在为自动启动设置固件变量"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"要使系统能自动启动您的系统，您需要在 Pegasos OpenFirmware 中设置一些变量。在"
-"安装结束后，系统将会重启。在出现 Pegasos OpenFirmware 提示符后，请设置以下几"
-"个 OpenFirmware 变量以开启自动启动功能："
+"要使系统能自动启动您的系统，您需要在 Genesi 固件中设置一些变量。在安装结束"
+"后，系统将会重启。在出现固件提示符后，请设置以下几个固件变量以开启自动启动功"
+"能："
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"此过程只需要被执行一次。然后，请输入“boot”命令或重启系统以进行下一阶段安装程"
-"序。"
+"此过程只需要被执行一次。然后，请输入“boot”命令或重启系统以进入您新安装好的系"
+"统。"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "另外，您还可以通过输入以下内容来手工启动系统："
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "在 Open Firmware 提示符之后。"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr "另外，您可以在固件提示符下输入以下内容来手工启动内核："
 
 #. Type: text
 #. Description

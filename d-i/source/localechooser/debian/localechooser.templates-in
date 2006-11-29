@@ -6,6 +6,15 @@ Type: text
 # Example (french): Choisir la langue/Choose language
 _Description: Choose language
 
+Template: localechooser/no-translations-yet
+Type: note
+Description: Translations temporarily not available
+ Because of the low available space on the installation media, translations
+ will not be available immediately.
+ .
+ The installation will continue in English until the installer
+ loads packages that include translations from a CD or the network.
+
 Template: languagechooser/language-name-ascii
 Type: select
 Choices: @languagenames_ascii@
@@ -50,15 +59,15 @@ Description: Choose a language:
 
 Template: debian-installer/language
 Type: string
-Description: Internal use
+Description: for internal use only
 
 Template: languagechooser/locale
 Type: string
-Description: Internal use
+Description: for internal use; can be preseeded
 
 Template: debian-installer/consoledisplay
 Type: string
-Description: Internal use
+Description: for internal use only
 
 Template: finish-install/progress/localechooser
 Type: text
@@ -70,10 +79,13 @@ Type: select
 #flag:partial
 Choices: @countrylist@
 # Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-# Example (german): Germany
-#   In this example, using "Deutschland" (the name of the country in German)
-#   would be WRONG
-_Default: United States
+# DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+# Example (german): 
+# msgid "United States[ default country ]"
+# msgstr "Germany"
+#   "Deutschland" would be WRONG
+#   "Deutschland[ default country ]" ALSO
+_Default: United States[ default country ]
 # Notes to translators
 #  The country names are not part of this package
 #
@@ -88,7 +100,7 @@ _Default: United States
 #
 # This file MUST use UTF-8 encoding as it is merged with some
 # other translations which use UTF-8
-_Description: Choose your location:
+_Description: Choose a country, territory or area:
 
 Template: countrychooser/shortlist
 Type: select
@@ -102,9 +114,9 @@ __Choices: ${SHORTLIST}, other
 # Example (german): DE
 #       (country code for Germany)
 _Default: US
-_Description: Choose your location:
- Based on your language, you are probably located in one of these
- locations.
+_Description: Choose a country, territory or area:
+ Based on your language, you are probably located in one of these countries
+ or regions.
 
 Template: debian-installer/locale
 Type: select
@@ -116,15 +128,15 @@ _Description: Choose a locale:
 Template: debian-installer/fallbacklocale
 Type: select
 Choices: ${LOCALELIST}
-Description: fallback locale
+Description: for internal use only
 
 Template: debian-installer/country
 Type: string
-Description: Internal use
+Description: for internal use; can be preseeded
 
 Template: localechooser/alreadyrun
 Type: boolean
-Description: Internal use
+Description: for internal use only
 
 Template: localechooser/supported-locales
 Type: multiselect

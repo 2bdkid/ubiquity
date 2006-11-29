@@ -7,17 +7,17 @@
 # Russian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
 # Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-12 22:19+0300\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-09-28 21:18+0400\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -211,67 +211,44 @@ msgstr "Осторожно! Ваша система может перестат�
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
-msgstr "Установка переменных firmware для автозагрузки"
+msgstr "Установка переменных микропрограммы для автозагрузки"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
 "Для автоматического запуска системы требуется установить некоторые "
-"переменные в Pegasos OpenFirmware. В конце установки система будет "
-"перезагружена. Из приглашения Pegasos OpenFirmware установите следующие "
-"переменные для автозагрузки:"
+"переменные в микропрограмме Genesi. В конце установки система будет "
+"перезагружена. Из приглашения микропрограммы установите следующие переменные "
+"для автозагрузки:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"Это необходимо сделать только один раз. После этого, чтобы перейти к "
-"следующему этапу установки, введите команду \"boot\" или перезагрузите "
-"систему."
+"Это необходимо сделать только один раз. После этого, введите команду \"boot"
+"\" или перезагрузите компьютер, чтобы продолжить в только что установленной "
+"системе."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Или вы можете загрузить систему вручную с помощью команд:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "из приглашения OpenFirmware."
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr ""
+"Или вы можете загрузить ядро вручную введя в приглашении микропрограммы "
+"следующее:"
 
 #. Type: text
 #. Description

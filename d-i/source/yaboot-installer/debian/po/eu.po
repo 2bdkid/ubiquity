@@ -14,15 +14,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-11 00:37+0200\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-09-27 10:00+0200\n"
 "Last-Translator: Piarres Beobide <pi@beobide.net>\n"
 "Language-Team: librezale <librezale@librezale.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Content-Transfer-Encoding=UTF-8Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #. Type: text
 #. Description
@@ -210,68 +211,43 @@ msgstr "Abisua: baliteke zure sistema ezin abiarazi izatea!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Firmwarearen aldagaiak ezartzen automatikoki abiarazteko"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"Aldagai batzuk Pegasos OpenFirmware-n ezarri behar dira zure sistemak Debian "
-"automatikoki abiaraz dezan.  Instalazioaren amaieran, sistema berrabiarazi "
-"egingo da. Pegasos OpenFirmware prompt gonbitean, ezarri OpenFirmware-ren "
-"aldagai hauek automatikoki abiaraztea gaitzeko:"
+"Aldagai batzuk Genesi OpenFirmware-n ezarri behar dira zure sistemak Debian "
+"automatikoki abiarazi dezan.  Instalazioaren amaieran, sistema berrabiarazi "
+"egingo da. Firmware prompt gonbitean, ezarri Firmware-aren aldagai hauek "
+"automatikoki abiaraztea gaitzeko:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
 "Hau behin egitea nahikoa da. Ondoren, sartu \"boot\" komandoa edo "
-"berrabiarazi sistema Debian instalatzeko hurrengo atalera joateko."
+"berrabiarazi sistema instalatu berri duzun sistema abiarazteko."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
 msgstr ""
-"Bestela, sistema eskuz berrabiarazteko gaitasuna izango duzuhonako hau "
-"sartuaz:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "OpenFirmware-ren gonbitean."
+"Bestela, nukleoa eskuz abiarazi dezakezu hau sartuz firmware gonbitean hau "
+"idatziz:"
 
 #. Type: text
 #. Description

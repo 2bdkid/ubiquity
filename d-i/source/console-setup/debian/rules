@@ -12,6 +12,10 @@ main_build:
 
 debian/console-setup.config debian/console-setup-mini.config: debian/config.proto main_build
 	awk ' \
+/## *PACKAGE *##/ { \
+    printf "package=$(notdir $(basename $@))"; \
+    next; \
+} \
 /## *FONTSETS *##/ { \
     printf "fontsets='\''"; \
     system("cd Fonts && ls *.psf | sed '\''s/.psf$$//'\''"); \
@@ -32,14 +36,14 @@ debian/console-setup.config debian/console-setup-mini.config: debian/config.prot
 } \
 { \
    print; \
-}' debian/config.proto >debian/console-setup.config
-	cp debian/console-setup.config debian/console-setup-mini.config
+}' debian/config.proto >$@
 
 build: main_build debian/console-setup.config debian/console-setup-mini.config
 
 .PHONY : clean
 clean:
 	dh_testdir
+	debconf-updatepo
 	-$(MAKE) maintainer-clean
 	-rm -f build main_build
 	-rm -f debian/*.config
@@ -47,11 +51,30 @@ clean:
 	dh_clean
 
 .PHONY : install
-install: build
+install: install-main install-mini install-bdf2psf install-udeb
+
+.PHONY : install-main
+install-main: build
 	dh_testdir
 	dh_testroot
-	dh_clean -k
-# console-setup-mini
+	dh_clean -pconsole-setup -k
+	$(MAKE) etcdir=debian/console-setup/etc \
+		prefix=debian/console-setup/usr install
+	rm debian/console-setup/usr/share/consolefonts/*-Terminus*.psf.gz
+	rm -rf debian/console-setup/etc/console-setup/ckb/
+	install -d debian/console-setup/usr/share/doc/console-setup/examples/
+	mv debian/console-setup/etc/default/console-setup \
+		debian/console-setup/usr/share/doc/console-setup/examples/
+	dh_installinit --no-start --name keyboard-setup -- start 06 S .
+	dh_installinit --name console-setup -- start 49 S .
+	rm -rf `find debian/console-setup -name .cvsignore`
+	rm -rf `find debian/console-setup -name .svn`
+
+.PHONY : install-mini
+install-mini: build
+	dh_testdir
+	dh_testroot
+	dh_clean -pconsole-setup-mini -k
 	dh_install -pconsole-setup-mini Keyboard/*.ekmap.gz \
 		usr/share/console-setup-mini
 	dh_install -pconsole-setup-mini Fonts/Arabic-VGA16.psf.gz \
@@ -101,6 +124,30 @@ install: build
 	cp config debian/console-setup-mini/usr/share/doc/console-setup-mini/examples/console-setup
 	rm -rf `find debian/console-setup-mini -name .cvsignore`
 	rm -rf `find debian/console-setup-mini -name .svn`
+
+.PHONY : install-bdf2psf
+install-bdf2psf: build
+	dh_testdir
+	dh_testroot
+	dh_clean -pbdf2psf -k
+	dh_install -pbdf2psf Fonts/bdf2psf usr/bin/
+	dh_install -pbdf2psf Fonts/*.equivalents Fonts/*.set \
+		Fonts/fontsets usr/share/bdf2psf
+	rm -rf `find debian/bdf2psf -name .cvsignore`
+	rm -rf `find debian/bdf2psf -name .svn`
+
+.PHONY : install-udeb
+install-udeb: build
+	dh_testdir
+	dh_testroot
+	dh_clean -pconsole-setup-amiga-ekmap -k
+	dh_clean -pconsole-setup-ataritt-ekmap -k
+	dh_clean -pconsole-setup-macintoshold-ekmap -k
+	dh_clean -pconsole-setup-pc-ekmap -k
+	dh_clean -pconsole-setup-sun4-ekmap -k
+	dh_clean -pconsole-setup-sun5-ekmap -k
+	dh_clean -pconsole-setup-fonts-udeb -k
+	dh_clean -pconsole-setup-udeb -k
 # console-setup-*-ekmap
 	dh_install -pconsole-setup-amiga-ekmap Keyboard/amiga.ekmap.gz \
 		usr/share/console-setup-mini
@@ -170,25 +217,6 @@ install: build
 	cp config debian/console-setup-udeb/usr/share/doc/console-setup-mini/examples/console-setup
 	rm -rf `find debian/console-setup-udeb -name .cvsignore`
 	rm -rf `find debian/console-setup-udeb -name .svn`
-# console-setup
-	$(MAKE) etcdir=debian/console-setup/etc \
-		prefix=debian/console-setup/usr install
-	rm debian/console-setup/usr/share/consolefonts/*-Terminus*.psf.gz
-	rm -rf debian/console-setup/etc/console-setup/ckb/
-	install -d debian/console-setup/usr/share/doc/console-setup/examples/
-	mv debian/console-setup/etc/default/console-setup \
-		debian/console-setup/usr/share/doc/console-setup/examples/
-	rm -rf `find debian/console-setup -name .cvsignore`
-	rm -rf `find debian/console-setup -name .svn`
-# bdf2psf
-	dh_install -pbdf2psf Fonts/bdf2psf usr/bin/
-	dh_install -pbdf2psf Fonts/*.equivalents Fonts/*.set \
-		Fonts/fontsets usr/share/bdf2psf
-	rm -rf `find debian/bdf2psf -name .cvsignore`
-	rm -rf `find debian/bdf2psf -name .svn`
-# common
-	dh_installinit --no-start --name keyboard-setup -- start 06 S .
-	dh_installinit --no-start --name console-setup -- start 49 S .
 
 # Build architecture-independent files here.
 .PHONY : binary-indep
@@ -198,6 +226,7 @@ binary-indep: build install
 	dh_installxfonts
 	dh_installdebconf
 	dh_installdocs -pconsole-setup README*
+	dh_installdocs -pconsole-setup FAQ
 	dh_install -p console-setup copyright.fonts \
 		 usr/share/doc/console-setup
 	dh_installdocs -pconsole-setup-mini

@@ -12,21 +12,23 @@
 # Translators:
 # * Parlin Imanuel Toh (parlin_i@yahoo.com), 2004-2005.
 # * I Gede Wijaya S (gwijayas@yahoo.com), 2004.
-# * Arief S F (arief@gurame.fisika.ui.ac.id), 2004.
+# * Arief S F (arief@gurame.fisika.ui.ac.id), 2004-2006
 # * Setyo Nugroho (setyo@gmx.net), 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-04-07 11:15+0700\n"
-"Last-Translator: Parlin Imanuel Toh <pt@samip-online.com>\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-21 13:35+0700\n"
+"Last-Translator: Arief S Fitrianto <arief@gurame.fisika.ui.ac.id>\n"
 "Language-Team: Debian Indonesia Team <debian-l10n-id@gurame.fisika.ui.ac."
 "id>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Indonesian\n"
+"X-Poedit-Country: INDONESIA\n"
 
 #. Type: text
 #. Description
@@ -214,67 +216,43 @@ msgstr "Perhatian: Sistem Anda mungkin tidak dapat diboot!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Menata variabel firmware untuk boot otomatis"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"Beberapa variabel perlu diatur pada Pegasos OpenFirmware agar sistem Anda "
-"dapat booting secara otomatis. Pada akhir instalasi, sistem akan reboot. "
-"Pada prompt Pegasos OpenFirmware, atur variabel OpenFirmware berikut ini "
-"untuk menghidupkan booting otomatis:"
+"Beberapa variabel perlu diatur pada Firmware Genesi agar sistem Anda dapat "
+"booting secara otomatis. Pada akhir instalasi, sistem akan boot-ulang. Pada "
+"prompt Firmware, atur variabel FIrmware berikut ini untuk menghipupkan "
+"booting otomatis:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
 "Anda hanya perlu melakukan ini sekali. Setelah itu, masukkan perintah \"boot"
-"\" atau reboot sistem untuk melanjutkan tahap instalasi berikutnya."
+"\" atau boot-ulang sistem untuk memproses sistem baru Anda."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
 msgstr ""
-"Alternatif lain, Anda dapat melakukan boot secara manual dengan argumen: "
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "pada prompt OpenFirmware."
+"Alternatif lain, Anda dapat melakukan boot secara manual dengan mengetik "
+"pada prompt: "
 
 #. Type: text
 #. Description

@@ -7,16 +7,16 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Tommi Vainikainen <thv+debian@iki.fi>, 2003 - 2004
-# Tapio Lehtonen <tale@debian.org>, 2004 - 2005
+# Tapio Lehtonen <tale@debian.org>, 2004 - 2006
 # Thanks to lokalisointi-laatu@linux-aktivaattori.org.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-01-31 14:39+0200\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-09-27 08:09+0300\n"
 "Last-Translator: Tapio Lehtonen <tale@debian.org>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -213,66 +213,43 @@ msgstr "Varoitus: Järjestelmä ei ehkä pysty käynnistymään!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Asetetaan laiteohjelmiston muuttujat automaattikäynnistystä varten"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"Joidenkin muuttujien arvot Pegasos OpenFirmwaressa on asetettava, jotta "
+"Joidenkin muuttujien arvot Genesi-laiteohjelmistossa on asetettava, jotta "
 "järjestelmä käynnistyisi automaattisesti. Järjestelmä käynnistyy uudelleen "
-"asennuksen lopuksi. Aseta seuraavat muuttujat Pegasos OpenFirmwaren "
-"kehotteessa, jotta automaattikäynnistys toimii:"
+"asennuksen lopuksi. Aseta seuraavat muuttujat laiteohjelmiston kehotteessa, "
+"jotta automaattikäynnistys toimii:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"Tämä on tehtävä vain yhden kerran. Käytä sitten komentoa \"boot\" tai "
-"käynnistä järjestelmä uudelleen edetäksesi seuraavaan asennuksen vaiheeseen."
+"Tämä on tehtävä vain yhden kerran. Käytä sitten komentoa \"boot\"tai "
+"käynnistä järjestelmä uudelleen päästäksesi uuteen asennettuun järjestelmään."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr "Tai voit käynnistää ytimen itse komennolla:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "OpenFirmwaren kehoitteessa."
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr ""
+"Vaihtoehtona on käynnistää ydin itse kirjoittamalla laiteohjelmiston "
+"kehoitteeseen:"
 
 #. Type: text
 #. Description

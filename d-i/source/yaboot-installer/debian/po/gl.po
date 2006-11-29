@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-19 10:33+0200\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-08 17:00+0200\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <trasno@ceu.fi.udc.es>\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr ""
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr "Aviso: isto ha borrar todos os datos da partición seleccionada"
+msgstr "Aviso: isto ha borrar tódolos datos da partición seleccionada"
 
 #. Type: text
 #. Description
@@ -206,68 +206,43 @@ msgstr "Aviso: Pode que non se poida iniciar o seu sistema"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "A configurar as variables do firmware para o inicio automático"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"É necesario estabrecer algunhas variables en Pegasos OpenFirmware para que o "
-"seu sistema arrinque automaticamente. Ao rematar a instalación, o sistema "
-"hase reiniciar. No indicativo de Pegasos OpenFirmware, estabreza as "
-"seguintes variables de OpenFirmware para permitir o inicio automático:"
+"É necesario establecer algunhas variables no firmware Genesi para que o seu "
+"sistema arrinque automaticamente. Ao rematar a instalación, o sistema hase "
+"reiniciar. No indicativo do firmware, estableza as seguintes variables do "
+"firmware para permitir o inicio automático:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
 "Só ha ter que facer isto unha vez. Despois, introduza a orde \"boot\" ou "
-"reinicie o sistema para continuar coa seguinte etapa da instalación."
+"reinicie o sistema para iniciar o seu sistema recén instalado."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
 msgstr ""
-"De xeito alternativo, tamén ha poder iniciar o sistema manualmente "
-"introducindo :"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "no indicativo de OpenFirmware."
+"De xeito alternativo, ha poder iniciar o núcleo manualmente introducindo no "
+"indicativo do firmware:"
 
 #. Type: text
 #. Description

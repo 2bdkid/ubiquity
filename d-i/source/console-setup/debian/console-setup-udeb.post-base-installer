@@ -3,8 +3,9 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-mkdir -p /target/etc/default
+mkdir -p /target/etc/default /target/etc/console-setup
 cp -a /etc/default/console-setup /target/etc/default/
+cp -a /etc/console-setup/*.gz /target/etc/console-setup/
 
 apt-install console-setup || true
 

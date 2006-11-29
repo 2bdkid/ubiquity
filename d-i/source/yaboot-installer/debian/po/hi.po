@@ -3,12 +3,12 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
+# translation of hi.po to Hindi
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -16,19 +16,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
+"Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-03-12 22:52+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-06 02:35+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -56,18 +54,21 @@ msgid ""
 "boot loader is a required step.  The install problem might however be "
 "unrelated to Yaboot, so continuing the installation may be possible."
 msgstr ""
+"याबूट पैकेज /target में संस्थापित होने से असफल रह गययाबूट क्विक बूटलोडर का संस्थापन एक "
+"आवश्यक चरण है. संस्थापन की सयाबूट या क्विक से असंबद्ध भी हो सकती है, इसलिए संस्थापन को "
+"जारी रखना संभव हो सकता है."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:19
 msgid "Looking for bootstrap partitions"
-msgstr ""
+msgstr "बूटस्ट्रैप पार्टिशनों को खोज रहे हैं"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:23
 msgid "No bootstrap partition found"
-msgstr ""
+msgstr "कोई भी बूटस्ट्रैप पार्टिशन नहीं पाया गया."
 
 #. Type: error
 #. Description
@@ -76,6 +77,8 @@ msgid ""
 "No hard disks were found which have an \"Apple_Bootstrap\" partition.  You "
 "must create an 819200-byte partition with type \"Apple_Bootstrap\"."
 msgstr ""
+"कोई भी हार्डडिस्क नहीं मिलीं जिनमें कि \"Apple_Bootstrap\" पार्टिशन हो. आपको एक "
+"819200-बाइट का \"Apple_Bootstrap\" प्रकार का पार्टिशन  अवश्य ही बनाना है."
 
 #. Type: text
 #. Description
@@ -96,18 +99,20 @@ msgid ""
 "No partition is mounted as your new root partition. You must mount a root "
 "partition first."
 msgstr ""
+"कोई भी पार्टिशन आपके नये रूट पार्टिशन की तरह माउंट नहीं है. आपको सबसे पहले एक रूट "
+"पार्टिशन को माउंट करना चाहिए."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:39
 msgid "Looking for other operating systems"
-msgstr ""
+msgstr "अन्य प्रचालन तंत्रों की उपस्थिति के लिए जाँच रहे हैं"
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Device for boot loader installation:"
-msgstr ""
+msgstr "बूटलोडर के संस्थापन के लिए उपकरण:"
 
 #. Type: select
 #. Description
@@ -118,36 +123,39 @@ msgid ""
 "destination partition from among these partitions that have the bootable "
 "flag set."
 msgstr ""
+"आपके तंत्र को बूट करने योग्य बनाने के लिए याबूट (लिनक्स बूट लोडर) को एक हार्डडिस्क "
+"पार्टिशन में संस्थापित करना होगा. कृपया इन पार्टिशनों के मध्य, जिनके बूट फ्लैग सेट हैं, उनमें से "
+"लक्ष्य पार्टिशन का चुनाव करें."
 
 #. Type: select
 #. Description
 #: ../yaboot-installer.templates:45
 msgid "Warning: this will erase all data on the selected partition!"
-msgstr ""
+msgstr "चेतावनी: यह चुने गये पार्टिशन से सारा डाटा मिटा देगा!"
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:55
 msgid "Creating yaboot configuration"
-msgstr ""
+msgstr "याबूट कॉन्फ़िगरेशन बना रहे हैं"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:59
 msgid "Failed to create yaboot configuration"
-msgstr ""
+msgstr "याबूट कॉन्फिगरेशन को बनाना असफल"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:59
 msgid "The creation of the main yaboot configuration file failed."
-msgstr ""
+msgstr "मुख्य याबूट कॉन्फ़िगरेशन फाइल की रचना असफल रही."
 
 #. Type: text
 #. Description
 #: ../yaboot-installer.templates:68
 msgid "Installing yaboot into bootstrap partition"
-msgstr ""
+msgstr "याबूट को बूटस्ट्रैप पार्टिशन में संस्थापित कर रहे हैं"
 
 #. Type: error
 #. Description
@@ -171,92 +179,74 @@ msgstr "याबूट सफलता पूर्वक संस्थाप
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The yaboot boot loader was successfully installed."
-msgstr ""
+msgstr "याबूट बूटलोडर सफलतापूर्वक संस्थापित किया गया."
 
 #. Type: note
 #. Description
 #: ../yaboot-installer.templates:81
 msgid "The new system is now ready to boot."
-msgstr ""
+msgstr "नया तंत्र बूट करने के लिए तैयार है."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Failed to mount /target/proc"
-msgstr ""
+msgstr "/target/proc को आरूढ़ करने में असफल."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Mounting the proc file system on /target/proc failed."
-msgstr ""
+msgstr "proc फाइलतंत्र को /target/proc पर माउंट करने में असफल."
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
-#, fuzzy
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
-msgstr "विस्तृत सूचना के लिए /var/log/messages या वर्चुअल कंसोल ३ देखें।"
+msgstr "विस्तृत सूचना के लिए /var/log/messages या वर्चुअल कंसोल 4 देखें।"
 
 #. Type: error
 #. Description
 #: ../yaboot-installer.templates:88
 msgid "Warning: Your system may be unbootable!"
-msgstr ""
+msgstr "चेतावनी: आपका सिस्टम बूट न होने योग्य हो सकता है!"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
-msgstr ""
+msgstr "स्वचालित बूट के लिए फर्मवेयर प्राचल नियत कर रहे हैं"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
+"आपके सिस्टम को स्वतः बूट करने के लिए जेनेसी फर्मवेयर के कुछ प्राचलों को सेट करना पड़ेगा. "
+"संस्थापना के अंत में सिस्टम रीबूट होगा. ऑटो-बूटिंग को समर्थ करने के लिए फर्मवेयर के प्रॉम्पट "
+"पर निम्न प्राचलों को सेट करें:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
+"आपको यह केवल एक ही बार करना है। इसके बाद अपने नये संस्थापित तंत्र में जारी रखने के लिए  "
+"\"boot\" कमांड चलाएँ या तंत्र को रीबूट करें।"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-#, fuzzy
-msgid " ${BOOT}"
-msgstr " ${KERNEL_BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr ""
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
+msgstr "वैकल्पिक रूप से, आप फर्मवेयर प्रॉम्पट पर लिख कर कर्नेल हस्तचालित बूट कर सकते हैं।"
 
 #. Type: text
 #. Description
@@ -269,6 +259,5 @@ msgstr "हार्ड डिस्क में याबूट को सं�
 #. Description
 #. Rescue menu item
 #: ../yaboot-installer.templates:125
-#, fuzzy
 msgid "Reinstall yaboot boot loader"
-msgstr "याबूट बूट लोडर संस्थापित किया जा रहा है"
+msgstr "याबूट बूट लोडर पुनः संस्थापित करें"

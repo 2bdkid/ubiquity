@@ -12,7 +12,7 @@
 # David Martínez Moreno <ender@debian.org>, 2003, 2005.
 # Carlos Alberto Martín Edo <carlos@dat.etsit.upm.es>, 2003
 # Carlos Valdivia Yagüe <valyag@dat.etsit.upm.es>, 2003
-# Rudy Godoy <rudy@kernel-panik.org>, 2003
+# Rudy Godoy <rudy@kernel-panik.org>, 2003-2006
 # Steve Langasek <vorlon@debian.org>, 2004
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2005
 # Rubén Porras Campo <nahoo@inicia.es>, 2005
@@ -21,7 +21,7 @@
 # Equipo de traducción al español, por favor lean antes de traducir
 # los siguientes documentos:
 #
-# - El proyecto de traducción de Debian al españl
+# - El proyecto de traducción de Debian al español
 #   http://www.debian.org/intl/spanish/
 #   especialmente las notas de traducción en
 #   http://www.debian.org/intl/spanish/notas
@@ -33,12 +33,23 @@
 # Si tiene dudas o consultas sobre esta traducción consulte con el último
 # traductor (campo Last-Translator) y ponga en copia a la lista de
 # traducción de Debian al español (debian-l10n-spanish@lists.debian.org)
+#
+# NOTAS: 
+#
+# - Se ha traducido en este fichero 'boot loader' de forma homogénea por
+# 'cargador de arranque' aunque en el manual se utiliza éste término y
+# también 'gestor de arranque'
+#
+# - 'array' no está traducido aún. La traducción como 'arreglo' suena
+# fatal (y es poco conocida)
+#
+#  
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-07 18:28-0600\n"
-"PO-Revision-Date: 2006-08-13 23:34+0200\n"
+"POT-Creation-Date: 2006-08-27 22:52+0000\n"
+"PO-Revision-Date: 2006-10-15 23:14-0500\n"
 "Last-Translator: Javier Fernández-Sanguino Peña <jfs@debian.org>\n"
 "Language-Team:  Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -219,22 +230,21 @@ msgstr "¿Desea iniciar los servicios de tarjetas de PC?"
 #. Description
 #: ../hw-detect.templates:25
 msgid ""
-"This computer may have a PCMCIA interface. Please choose whether PC card "
-"services should be started in order to allow the use of PCMCIA cards."
+"Please choose whether PC card services should be started in order to allow "
+"the use of PCMCIA cards."
 msgstr ""
-"Este ordenador parece tener una interfaz PCMCIA. Por favor, indique si los "
-"servicios de tarjeta PC deberían iniciarse para poder utilizar tarjetas "
-"PCMCIA."
+"Por favor, indique si deberían iniciarse los servicios de tarjeta PC para "
+"poder utilizar tarjetas PCMCIA."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid "PCMCIA resource range options:"
 msgstr "Opciones del rango de recursos PCMCIA:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -251,20 +261,20 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:32
+#: ../hw-detect.templates:31
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "No necesita especificar nada aquí para la mayoría del hardware."
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid "Additional parameters for module ${MODULE}:"
 msgstr ""
 "Por favor, introduzca los parámetros adicionales para el módulo ${MODULE}:"
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -281,30 +291,30 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../hw-detect.templates:43
+#: ../hw-detect.templates:42
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
 msgstr ""
-"Consulte la documentación si no sabe qué escribir o déjelo en blanco para "
-"que no se cargue el módulo."
+"Consulte la documentación si no sabe qué escribir o deje en blanco para que "
+"no se cargue el módulo."
 
 #. Type: error
 #. Description
-#: ../hw-detect.templates:55
+#: ../hw-detect.templates:54
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "Se ha producido un error mientras se ejecutaba '${CMD_LINE_PARAM}'"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:60
+#: ../hw-detect.templates:59
 msgid "Load missing drivers from a driver floppy?"
 msgstr ""
 "¿Desea cargar los controladores que faltan de un disquete de controladores?"
 
 #. Type: boolean
 #. Description
-#: ../hw-detect.templates:60
+#: ../hw-detect.templates:59
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
 "from a driver floppy. If you have such a floppy available now, put it in the "

@@ -3,27 +3,31 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of ku-neu.po to Kurdish
 # Kurdish messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
+# Erdal Ronahi <erdal.ronahi@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: ku-neu\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-06 18:29-0600\n"
-"PO-Revision-Date: 2006-04-20 06:15+0000\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-10-16 03:50+0100\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
-"Language-Team: Kurdish <gnu-ku-wergerandin@lists.sourceforge.net>\n"
+"Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural= n != 1\n"
 
 #. Type: boolean
 #. Description
 #: ../base-installer.templates:4
 msgid "Proceed with installation to unclean target?"
-msgstr ""
+msgstr "Sazkirina di hedefa nepakûj were domandin?"
 
 #. Type: boolean
 #. Description
@@ -33,6 +37,9 @@ msgid ""
 "could cause problems with the installation process, and if you proceed, some "
 "of the existing files may be overwritten."
 msgstr ""
+"Di sîstema dosiyan ya hedef de pelên sazkirineke din hene. Dibe ku di "
+"sazkirinê de ev dosya pirsgirêk derdixin. Heke bidomînî, dibe ku ser çend "
+"dosiyê heyî dê were nivîsandin."
 
 #. Type: error
 #. Description
@@ -56,13 +63,13 @@ msgstr ""
 #. Description
 #: ../base-installer.templates:19
 msgid "Failed to determine the codename for the release."
-msgstr ""
+msgstr "Navê kod yê aîdî guhertoyê ye nehate diyarkirin."
 
 #. Type: error
 #. Description
 #: ../base-installer.templates:24
 msgid "No file system mounted on /target"
-msgstr ""
+msgstr "Tu pergala dosyeyan nehate dîtin"
 
 #. Type: error
 #. Description
@@ -71,12 +78,14 @@ msgid ""
 "Before the installation can proceed, a root file system must be mounted on /"
 "target. The partitioner and formatter should have done this for you."
 msgstr ""
+"Berî ku tu sazkirinê bidomînî divê tu li ser /target pergala dosyeyên kok "
+"girê bide. Diviyabû dabeşker û teşekerê ev kar dêvila te kiribûya."
 
 #. Type: error
 #. Description
 #: ../base-installer.templates:30
 msgid "Not installing to unclean target"
-msgstr ""
+msgstr "Di hedefa nepakûj de nayê sazkirin"
 
 #. Type: error
 #. Description
@@ -86,6 +95,9 @@ msgid ""
 "back and erase or format the target file system before proceeding with the "
 "install."
 msgstr ""
+"Sazkirina li ser pergala dosyeyên hedef hate betalkirin. Berî ku tu "
+"sazkirinê bidomînî divê tu vegere û pergala dosyeyên hedef jê bibî yan jî "
+"teşe bike."
 
 #. Type: error
 #. Description
@@ -104,7 +116,7 @@ msgstr "Sazkirina pergala bingehî di /target/ de serneket."
 #: ../base-installer.templates:44
 msgid ""
 "The debootstrap program exited with an error (return value ${EXITCODE})."
-msgstr ""
+msgstr "debootstrap bi çewtiyekê bi dawî hat (koda çewtiyê ${EXITCODE})."
 
 #. Type: error
 #. Description
@@ -116,44 +128,41 @@ msgstr "Çewtiya sazkirina pergala bingehî"
 #. Description
 #: ../base-installer.templates:51
 msgid "The debootstrap program exited abnormally."
-msgstr ""
+msgstr "debootstrap bi awayekî ne li bendê bi dawî bû."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:58
+#: ../base-installer.templates:59
 msgid "The following error occurred:"
 msgstr "Ev çewtî derket holê:"
 
-#. Type: error
-#. Description
-#: ../base-installer.templates:58
-msgid "${ERROR}"
-msgstr "${ERROR}"
-
 #. Type: select
 #. Description
-#: ../base-installer.templates:68
+#: ../base-installer.templates:69
 msgid "Tool to use to generate boot initrd:"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:68
+#: ../base-installer.templates:69
 msgid ""
 "The list shows the available tools. If you are unsure which to select, you "
 "should select the default. If your system fails to boot, you can retry the "
 "installation using the other options."
 msgstr ""
+"Amûrên heyî di lîsteyê de dixuyin. Heke tu nizanî tu yê kîjanî hilbijêrî, "
+"divê tu ya standard hilbijêrî. Heke pergala te venebe hewl bide bi "
+"vebijêrkên din re sazkirinê dubare bike."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:75
+#: ../base-installer.templates:76
 msgid "No initrd generator"
-msgstr ""
+msgstr "Hilberînerê initrd tuneye"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:75
+#: ../base-installer.templates:76
 msgid ""
 "The kernel that has been selected for installation needs an initrd to boot. "
 "However, no package to generate that initrd is available that supports your "
@@ -162,54 +171,56 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:82
+#: ../base-installer.templates:83
 msgid "Unsupported initrd generator"
-msgstr ""
+msgstr "Hilberînera initrrd ya nayê destekkirin"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:82
+#: ../base-installer.templates:83
 msgid ""
 "The package ${GENERATOR} that was selected to generate the initrd is not "
 "supported."
 msgstr ""
+"Pakêta hate hilbijartin ya ${GENERATOR} ji bo hilberandina initrd nayê "
+"destekkirin."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:88
+#: ../base-installer.templates:89
 msgid "Unable to install the selected kernel"
 msgstr "Nikare kernelê hilbijartî saz bike"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:88
+#: ../base-installer.templates:89
 msgid ""
 "An error was returned while trying to install the kernel into the target "
 "system."
-msgstr ""
+msgstr "Dema li pergala hedef sazkirina kakil dihate ceribandin çewtî çêbû."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:88
+#: ../base-installer.templates:89
 msgid "Kernel package: '${KERNEL}'."
 msgstr "Paketa kernelê: '${KERNEL}'."
 
 #. Type: select
 #. Choices
-#. For base-installer, "none" is an additionnal choice to a kernel list
-#: ../base-installer.templates:100
+#. For base-installer, "none" is an additional choice to a kernel list
+#: ../base-installer.templates:101
 msgid "none"
 msgstr "tune"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:101
+#: ../base-installer.templates:102
 msgid "Kernel to install:"
 msgstr "Kernel were sazkirin:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:101
+#: ../base-installer.templates:102
 msgid ""
 "The list shows the available kernels. Please choose one of them in order to "
 "make the system bootable from the hard drive."
@@ -217,19 +228,19 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:108
+#: ../base-installer.templates:109
 msgid "Continue without installing a kernel?"
 msgstr "Bê sazkirina kernelê bidomîne?"
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:108
+#: ../base-installer.templates:109
 msgid "No installable kernel was found in the defined APT sources."
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:108
+#: ../base-installer.templates:109
 msgid ""
 "You may try to continue without a kernel, and manually install your own "
 "kernel later. This is only recommended for experts, otherwise you will "
@@ -238,25 +249,25 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:117
+#: ../base-installer.templates:118
 msgid "Cannot install kernel"
 msgstr "Nikare kernelê saz bike"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:117
+#: ../base-installer.templates:118
 msgid "The installer cannot find a suitable kernel package to install."
-msgstr ""
+msgstr "Bernameya sazkirinê pakêteke kakil ya guncav nedît."
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:122
+#: ../base-installer.templates:123
 msgid "Unable to install ${PACKAGE}"
 msgstr "Nikare ${PACKAGE} saz bike"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:122
+#: ../base-installer.templates:123
 msgid ""
 "An error was returned while trying to install the ${PACKAGE} package onto "
 "the target system."
@@ -264,49 +275,51 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:122
+#: ../base-installer.templates:123
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
+"Ji bo agahiyên kîtekît yan li pela /var/log/syslog binihêrî yan jî konsola "
+"çaran binihêrî."
 
 #. Type: error
 #. Description
 #. SUBST0 is a Release file name.
-#: ../base-installer.templates:131
+#: ../base-installer.templates:132
 msgid "Failed getting Release file ${SUBST0}."
-msgstr ""
+msgstr "Pelê Release ya ${SUBST0} nehate stendin."
 
 #. Type: error
 #. Description
 #. SUBST0 is a Release.gpg file name
-#: ../base-installer.templates:137
+#: ../base-installer.templates:138
 msgid "Failed getting Release signature file ${SUBST0}."
-msgstr ""
+msgstr "Pelê îmzeyan ${SUBST0} ya aîdî pelê Release ye nehate stendin."
 
 #. Type: error
 #. Description
 #. SUBST0 is a gpg key ID
-#: ../base-installer.templates:143
+#: ../base-installer.templates:144
 msgid "Release file signed by unknown key (key id ${SUBST0})"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:148
+#: ../base-installer.templates:149
 msgid "Invalid Release file: no valid components."
-msgstr ""
+msgstr "Pelê Release ya nederbasdar: hêmanên derbasdar tuneye."
 
 #. Type: error
 #. Description
 #. SUBST0 is a filename
-#: ../base-installer.templates:154
+#: ../base-installer.templates:155
 msgid "Invalid Release file: no entry for ${SUBST0}."
-msgstr ""
+msgstr "Pelê Release ya nederbasdar: Ji bo ${SUBST0} ketanên pêwist tuneye."
 
 #. Type: error
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:161
+#: ../base-installer.templates:162
 msgid "Debootstrap Error"
 msgstr "Çewtiya debootstrap"
 
@@ -314,7 +327,7 @@ msgstr "Çewtiya debootstrap"
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:161
+#: ../base-installer.templates:162
 msgid ""
 "Couldn't retrieve ${SUBST0}. This may be due to a network problem or a bad "
 "CD, depending on your installation method."
@@ -324,7 +337,7 @@ msgstr ""
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:161
+#: ../base-installer.templates:162
 msgid ""
 "If you are installing from CD-R or CD-RW, burning the CD at a lower speed "
 "may help."
@@ -332,68 +345,68 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:174
+#: ../base-installer.templates:175
 msgid "Preparing to install the base system..."
 msgstr "Ji bo sazkirina pergala bingehî amade dike..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:178
+#: ../base-installer.templates:179
 msgid "Running ${SCRIPT}..."
-msgstr "${SCRIPT} dimeşîne..."
+msgstr "Dixebitîne ${SCRIPT}..."
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:183
+#: ../base-installer.templates:184
 msgid "Retrieving Release file"
 msgstr "Dosiya release tîne"
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:188
+#: ../base-installer.templates:189
 msgid "Retrieving Release file signature"
 msgstr "Îmzeya dosiya release tîne"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:193
+#: ../base-installer.templates:194
 msgid "Finding package sizes"
 msgstr "Mezinahiya paketan dibîne"
 
 #. Type: text
 #. Description
 #. Packages is a filename which should not be translated
-#: ../base-installer.templates:198
+#: ../base-installer.templates:199
 msgid "Retrieving Packages files"
 msgstr "Dosiyên paketan tîne"
 
 #. Type: text
 #. Description
 #. Packages is a filename which should not be translated
-#: ../base-installer.templates:203
+#: ../base-installer.templates:204
 msgid "Retrieving Packages file"
 msgstr "Dosiya paketan tîne"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:208
+#: ../base-installer.templates:209
 msgid "Retrieving packages"
 msgstr "Paketan tîne"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:213
+#: ../base-installer.templates:214
 msgid "Extracting packages"
 msgstr "Paketan derdixe"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:217
+#: ../base-installer.templates:218
 msgid "Installing the base system"
 msgstr "Pergala bingehî ava dike"
 
@@ -403,9 +416,9 @@ msgstr "Pergala bingehî ava dike"
 #. The "core" packages are indeed packages that are specifically
 #. recorded as part of the base system. Other packages may
 #. be installed on the base system because of dependency resolution
-#: ../base-installer.templates:225
+#: ../base-installer.templates:226
 msgid "Installing core packages"
-msgstr "Paketên bingehî saz dike"
+msgstr "Paketên bingehî tê sazkirin"
 
 #. Type: text
 #. Description
@@ -413,21 +426,21 @@ msgstr "Paketên bingehî saz dike"
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:233
+#: ../base-installer.templates:234
 msgid "Unpacking required packages"
 msgstr "Paketên pêwîst vedike"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:237
+#: ../base-installer.templates:238
 msgid "Configuring required packages"
-msgstr "Paketên pêwîst saz dike"
+msgstr "Paketên pêwîst tên sazkirin"
 
 #. Type: text
 #. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:243
+#: ../base-installer.templates:244
 msgid "Unpacking the base system"
 msgstr "Pergala bingehî ji paketa xwe derdixe"
 
@@ -435,55 +448,55 @@ msgstr "Pergala bingehî ji paketa xwe derdixe"
 #. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:249
+#: ../base-installer.templates:250
 msgid "Configuring the base system"
-msgstr "Pergala bingehî saz dike"
+msgstr "Pergala bingehî tê sazkirin"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:253
+#: ../base-installer.templates:254
 msgid "${SECTION}: ${INFO}..."
 msgstr "${SECTION}: ${INFO}..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:258
+#: ../base-installer.templates:259
 msgid "Validating ${SUBST0}..."
 msgstr "${SUBST0} dinirxîne..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:263
+#: ../base-installer.templates:264
 msgid "Retrieving ${SUBST0}..."
 msgstr "${SUBST0} tîne..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:268
+#: ../base-installer.templates:269
 msgid "Extracting ${SUBST0}..."
 msgstr "${SUBST0} derdixe..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:273
+#: ../base-installer.templates:274
 msgid "Unpacking ${SUBST0}..."
 msgstr "Paketa ${SUBST0} vedike..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:278
+#: ../base-installer.templates:279
 msgid "Configuring ${SUBST0}..."
-msgstr "${SUBST0} saz dike..."
+msgstr "${SUBST0} tê sazkirin..."
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:283
+#: ../base-installer.templates:284
 msgid "Checking Release signature"
 msgstr "Îmzeya release kontrol dike"
 
@@ -491,50 +504,52 @@ msgstr "Îmzeya release kontrol dike"
 #. Description
 #. SUBST0 is a gpg key id
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:289
+#: ../base-installer.templates:290
 msgid "Valid Release signature (key id ${SUBST0})"
 msgstr "Îmzeya release ya derbasdar (key·id·${SUBST0})"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:293
+#: ../base-installer.templates:294
 msgid "Resolving dependencies of base packages..."
-msgstr ""
+msgstr "Girêdayînên pakêtên bingehîn têne veçirandin..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:298
+#: ../base-installer.templates:299
 msgid "Found additional base dependencies: ${SUBST0}"
-msgstr ""
+msgstr "Girêdayînên pakêtên bingehîn yên pêvek hate dîtin: ${SUBST0}"
 
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:303
+#: ../base-installer.templates:304
 msgid "Found additional required dependencies: ${SUBST0}"
-msgstr ""
+msgstr "Girêdayînên pakêtên pêwist yên pêvek hate dîtin: ${SUBST0}"
 
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:308
+#: ../base-installer.templates:309
 msgid "Found packages in base already in required: ${SUBST0}"
 msgstr ""
+"Girêdayînên bingehîn yên hatine dîtin jixwe di lîsteya pakêtên pêwist de ye: "
+"${SUBST0}"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:312
+#: ../base-installer.templates:313
 msgid "Resolving dependencies of required packages..."
-msgstr ""
+msgstr "Girêdayînên pakêtên pêwist têne veçirandin..."
 
 #. Type: text
 #. Description
 #. SUBST0 is an archive component (main, etc)
 #. SUBST1 is a mirror
-#: ../base-installer.templates:318
+#: ../base-installer.templates:319
 msgid "Checking component ${SUBST0} on ${SUBST1}..."
-msgstr ""
+msgstr "Hêmana ${SUBST0} ya li ser ${SUBST1} e tê kontrolkirin..."
 
 #. Type: text
 #. Description
@@ -542,9 +557,9 @@ msgstr ""
 #. The "core" packages are indeed packages that are specifically
 #. recorded as part of the base system. Other packages may
 #. be installed on the base system because of dependency resolution
-#: ../base-installer.templates:326
+#: ../base-installer.templates:327
 msgid "Installing core packages..."
-msgstr "Paketên cevherî saz dike..."
+msgstr "Paketên cevherî tên sazkirin..."
 
 #. Type: text
 #. Description
@@ -552,7 +567,7 @@ msgstr "Paketên cevherî saz dike..."
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:334
+#: ../base-installer.templates:335
 msgid "Unpacking required packages..."
 msgstr "Paketên pêwîst vedike..."
 
@@ -562,115 +577,115 @@ msgstr "Paketên pêwîst vedike..."
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:342
+#: ../base-installer.templates:343
 msgid "Configuring required packages..."
-msgstr "Paketên pêwîst saz dike..."
+msgstr "Paketên pêwîst tên sazkirin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:346
+#: ../base-installer.templates:347
 msgid "Installing base packages..."
 msgstr "Paketên bingehî ava dike..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:350
+#: ../base-installer.templates:351
 msgid "Unpacking the base system..."
 msgstr "Pergala bingehî ji paketa xwe derdixe..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:354
+#: ../base-installer.templates:355
 msgid "Configuring the base system..."
-msgstr "Pergala bingehî saz dike..."
+msgstr "Pergala bingehî tê sazkirin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:358
+#: ../base-installer.templates:359
 msgid "Base system installed successfully."
 msgstr "Sazkirina pergala bingehî serkeft."
 
 #. Type: error
 #. Description
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:363
+#: ../base-installer.templates:364
 msgid "Debootstrap warning"
 msgstr "Hişyara debootstrap"
 
 #. Type: error
 #. Description
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:363
+#: ../base-installer.templates:364
 msgid "Warning: ${INFO}"
 msgstr "Hişyar: ${INFO}"
 
 #. Type: text
 #. Description
 #. SUBST0 is an url
-#: ../base-installer.templates:369
+#: ../base-installer.templates:370
 msgid "Retrying failed download of ${SUBST0}"
-msgstr ""
+msgstr "Pêngava daxistina ${SUBST0} ya neserketî tê dubarekirin"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:373
+#: ../base-installer.templates:374
 msgid "Configuring APT sources..."
-msgstr "Çavkaniyên APT saz dike..."
+msgstr "Çavkaniyên APT tên sazkirin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:377
+#: ../base-installer.templates:378
 msgid "Updating the list of available packages..."
 msgstr "Lîsteya paketên amade rojane dike..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:381
+#: ../base-installer.templates:382
 msgid "Installing extra packages..."
-msgstr "Paketên ekstra saz dike..."
+msgstr "Paketên ekstra tên sazkirin..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:386
+#: ../base-installer.templates:387
 msgid "Installing extra packages - retrieving and installing ${SUBST0}..."
-msgstr "Paketên ekstra saz dike - ${SUBST0} tîne û saz dike..."
+msgstr "Paketên ekstra tên sazkirin - ${SUBST0} tên anîn û sazkirin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:390
+#: ../base-installer.templates:391
 msgid "Creating device files..."
-msgstr "Dosyiên amûran diafirîne..."
+msgstr "Dosyiên amûran tên afirandin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:394
+#: ../base-installer.templates:395
 msgid "Selecting the kernel to install..."
 msgstr "Kernel dê were saz kirin dihilbijêre..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:398
+#: ../base-installer.templates:399
 msgid "Installing the kernel..."
 msgstr "Kernelê saz dike..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:403
+#: ../base-installer.templates:404
 msgid "Installing the kernel - retrieving and installing ${SUBST0}..."
-msgstr ""
+msgstr "Kakil tê parastin - ${SUBST0}tê stendin û tê sazkirin..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:407
+#: ../base-installer.templates:408
 msgid "Installing the PCMCIA modules"
-msgstr ""
+msgstr "Modulên PCMCIA tê sazkirin"
 
 #. Type: text
 #. Description
 #. Item in the main menu to select this package
 #. TRANSLATORS: <65 columns
-#: ../base-installer.templates:413
+#: ../base-installer.templates:414
 msgid "Install the base system"
 msgstr "Pergala bingehî saz dike"

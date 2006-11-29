@@ -3,7 +3,7 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of el.po to Greek
+# translation of el.po to el
 # Greek messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
@@ -13,23 +13,19 @@
 # Konstantinos Margaritis <markos@debian.org>, 2004, 2006.
 # Greek Translation Team <debian-l10n-greek@lists.debian.org>, 2004, 2005.
 # quad-nrg.net <galaxico@quad-nrg.net>, 2005, 2006.
+# quad-nrg.net <yodesy@quad-nrg.net>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-02-14 13:32+0200\n"
-"Last-Translator: quad-nrg.net <galaxico@quad-nrg.net>\n"
-"Language-Team: Greek <debian-l10n-greek@lists.debian.org>\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-09-27 17:50+0300\n"
+"Last-Translator: quad-nrg.net <yodesy@quad-nrg.net>\n"
+"Language-Team: el <debian-l10n-greek@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"org>\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
 #. Type: text
@@ -225,70 +221,45 @@ msgstr "Προειδοποίηση: Το σύστημά σας πιθανόν ν
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "Καθορίζονται οι παράμετροι του firmware για αυτόματη εκκίνηση"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"Πρέπει να καθοριστούν ορισμένες μεταβλητές στο λογισμικό Pegasos "
-"OpenFirmware για να μπορέσει το σύστημα σας να εκκινήσει αυτόματα το "
-"σύστημα.  Στο τέλος αυτού του σταδίου της εγκατάστασης, θα γίνει "
-"επανεκκίνηση και το λογισμικό θα προσπαθήσει να κάνει αυτόματη εκκίνηση. "
-"Αυτό θα σας φέρει στην γραμμή εντολών του Pegasos OpenFirmware, όπου "
-"μπορείτε να ορίσετε τις ακόλουθες μεταβλητές:"
+"Θα πρέπει να καθοριστούν ορισμένες μεταβλητές στο firmware του συστήματος "
+"Genesi για να μπορεί το σύστημά σας να εκκινείται αυτόματα. Στο τέλος της "
+"εγκατάστασης θα γίνει επανεκκίνηση του συστήματος. Στο προτρεπτικό του "
+"firmware ρυθμίστε τις ακόλουθες μεταβλητές του ώστε να ενεργοποιήσετε την "
+"αυτόματη εκκίνηση:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"Αυτή η εργασία χρειάζεται να γίνει μόνο μία φορά. Στη συνέχεια δώστε την "
-"εντολή \"boot\" ή επανεκκινήστε το σύστημα, για να συνεχίσετε στο επόμενο "
-"στάδιο της εγκατάστασης."
+"Αυτό χρειάζεται να το κάνετε μόνο μία φορά. Στη συνέχεια, εισάγετε την "
+"εντολή \"boot\" ή επανεκκινήστε το σύστημα για να περάσετε στην καινούρια "
+"σας εγκατάσταση."
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
 msgstr ""
-"Εναλλακτικά, μπορείτε να εκκινήσετε το σύστημα χειροκίνητα πληκτρολογώντας: "
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "στην προτροπή του OpenFirmware."
+"Εναλλακτικά, θα έχετε την δυνατότητα να εκκινήσετε τον πυρήνα με το χέρι "
+"εισάγοντας στο προτρεπτικό του firwmare:"
 
 #. Type: text
 #. Description

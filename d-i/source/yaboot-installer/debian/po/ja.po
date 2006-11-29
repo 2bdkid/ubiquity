@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-29 18:32-0600\n"
-"PO-Revision-Date: 2006-06-06 12:21+0900\n"
+"POT-Creation-Date: 2006-09-26 10:53+0000\n"
+"PO-Revision-Date: 2006-10-02 21:18+0900\n"
 "Last-Translator:  Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Debian L10n Japanese <debian-l10n-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -207,67 +207,43 @@ msgstr "警告: あなたのシステムは起動できない恐れがありま�
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid "Setting firmware variables for automatic boot"
 msgstr "自動起動するためのファームウェア変数を設定しています"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Some variables need to be set in the Pegasos OpenFirmware in order for your "
+"Some variables need to be set in the Genesi firmware in order for your "
 "system to boot automatically.  At the end of the installation, the system "
-"will reboot.  At the Pegasos OpenFirmware prompt, set the following "
-"OpenFirmware variables to enable auto-booting:"
+"will reboot.  At the firmware prompt, set the following firmware variables "
+"to enable auto-booting:"
 msgstr ""
-"あなたのシステムで Debian を自動的に起動するために、Pegasos OpenFirmware にい"
+"あなたのシステムで Debian を自動的に起動するために、Genesi ファームウェアにい"
 "くつかの変数を設定する必要があります。このインストールの終わりに、システムは"
-"再起動します。Pegasos OpenFirmware プロンプトでは、自動起動できるように、次の"
-"ように OpenFirmware 変数を設定します:"
+"再起動します。ファームウェアプロンプトでは、自動起動できるように、次のように"
+"ファームウェア変数を設定します:"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
-msgid ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-msgstr ""
-" setenv boot-device ${OF_BOOT_DEVICE}\n"
-" setenv boot-file ${OF_BOOT_FILE}\n"
-" setenv auto-boot-timeout 5000\n"
-" setenv auto-boot? true"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
 "You will only need to do this once.  Afterwards, enter the \"boot\" command "
-"or reboot the system to proceed to the next stage of the installation."
+"or reboot the system to proceed to your newly installed system."
 msgstr ""
-"これを 1 度だけ行う必要があります。そのあとで、インストールの次の段階に進むた"
-"めに、\"boot\" コマンドを入力するかシステムを再起動します。"
+"これを 1 度だけ行う必要があります。そのあとで、新しいインストールシステムに進"
+"むために、\"boot\" コマンドを入力するかシステムを再起動します。"
 
 #. Type: note
 #. Description
-#: ../yaboot-installer.templates:97
+#: ../yaboot-installer.templates:98
 msgid ""
-"Alternatively, you will be able to boot the system manually by entering:"
+"Alternatively, you will be able to boot the kernel manually by entering, at "
+"the firmware prompt:"
 msgstr ""
-"または、次のように主動で入力することでシステムをブートすることができます:"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid " ${BOOT}"
-msgstr " ${BOOT}"
-
-#. Type: note
-#. Description
-#: ../yaboot-installer.templates:97
-msgid "at the OpenFirmware prompt."
-msgstr "を OpenFirmware プロンプトで入力。"
+"または、ファームウェアプロンプトで次のように主動で入力することで、カーネルを"
+"ブートすることができます:"
 
 #. Type: text
 #. Description

@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Debian-installer 1st-stage master file HR\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-10 11:38+0100\n"
-"PO-Revision-Date: 2005-03-05 21:51+0100\n"
-"Last-Translator: Krunoslav Gernhard <kruno@linux.hr>\n"
+"POT-Creation-Date: 2006-09-07 22:52+0000\n"
+"PO-Revision-Date: 2006-09-25 23:55+0200\n"
+"Last-Translator: Josip Rodin <joy+ditrans@linux.hr>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,18 +33,21 @@ msgstr "Izaberi jezik/Choose language"
 #. Type: text
 #. Description
 #. finish-install progress bar item
-#: ../localechooser.templates-in:66
+#: ../localechooser.templates-in:75
 msgid "Storing language..."
 msgstr "Spremam jezik..."
 
 #. Type: select
 #. Default
 #. Translators: put here the ISO-3166 ENGLISH NAME of the country which should be selected as default for your language
-#. Example (german): Germany
-#. In this example, using "Deutschland" (the name of the country in German)
-#. would be WRONG
-#: ../localechooser.templates-in:76
-msgid "United States"
+#. DO NOT TRANSLATE "[ default country ]", it is here only for technical purpose
+#. Example (german):
+#. msgid "United States[ default country ]"
+#. msgstr "Germany"
+#. "Deutschland" would be WRONG
+#. "Deutschland[ default country ]" ALSO
+#: ../localechooser.templates-in:88
+msgid "United States[ default country ]"
 msgstr "Croatia"
 
 #. Type: select
@@ -53,7 +56,7 @@ msgstr "Croatia"
 #. for users to choose among them
 #. For instance, choosing "Italian" will show:
 #. Italy, Switzerland, other
-#: ../localechooser.templates-in:100
+#: ../localechooser.templates-in:112
 msgid "other"
 msgstr "druga"
 
@@ -62,58 +65,52 @@ msgstr "druga"
 #. Translators: put here the ISO-3166 CODE of the country which should be selected as default for your language
 #. Example (german): DE
 #. (country code for Germany)
-#: ../localechooser.templates-in:104
-#, fuzzy
+#: ../localechooser.templates-in:116
 msgid "US"
-msgstr ""
-"#-#-#-#-#  hr.po (Debian-installer 1st-stage master file HR)  #-#-#-#-#\n"
-"HR\n"
-"#-#-#-#-#  hr.po (Debian-installer 1st-stage master file HR)  #-#-#-#-#\n"
-"Amerika"
+msgstr "HR"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
-msgid "Choose your location:"
-msgstr "Izaberi lokalne postavke:"
+#: ../localechooser.templates-in:117
+msgid "Choose a country, territory or area:"
+msgstr "Izaberite državu, teritorij ili područje:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:105
-#, fuzzy
+#: ../localechooser.templates-in:117
 msgid ""
-"Based on your language, you are probably located in one of these locations."
+"Based on your language, you are probably located in one of these countries "
+"or regions."
 msgstr "Prema vašem jeziku, vjerojatno ste u nekoj od ovih država ili regija."
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
+#: ../localechooser.templates-in:124
 msgid "Choose a locale:"
 msgstr "Izaberi lokalne postavke:"
 
 #. Type: select
 #. Description
-#: ../localechooser.templates-in:112
-#, fuzzy
+#: ../localechooser.templates-in:124
 msgid ""
 "Based on your language and country choices, the following locale parameters "
 "are supported."
 msgstr ""
-"Prema vašemu izabiru jezika i države, Debian podržava slijedeće lokalne "
-"odrednice."
+"Prema vašemu izboru jezika i države, sljedeći parametri lokacije (locale) su "
+"podržani."
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "Choose other locales to be supported:"
-msgstr ""
+msgstr "Odaberite druge lokacije koje treba podržavati:"
 
 #. Type: multiselect
 #. Description
-#: ../localechooser.templates-in:132
+#: ../localechooser.templates-in:144
 msgid "You may choose additional locales to be installed from this list."
 msgstr ""
+"S ovog popisa možete odabrati dodatne locale definicije za instalirati."
 
 #: ../../countrylist:14
 msgid "-- North America --"
@@ -158,6 +155,3 @@ msgstr "-- Antarktik --"
 #: ../../countrylist:24
 msgid "-- other --"
 msgstr "-- druga --"
-
-#~ msgid "Choose a country, territory or area:"
-#~ msgstr "Izaberite državu, teritorij ili područje:"

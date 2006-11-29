@@ -3,70 +3,66 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of be.po to Byelarusian
+# translation of be-20061012.po to Belarussian
 #
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt#
-# , 2004.
-# , 2005.
-# Andrei Darashenka <adorosh2@it.org.by>, 2005.
 #
+# Andrei Darashenka <adorosh2@it.org.by>, 2005, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: be\n"
+"Project-Id-Version: be-20061012\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
 "POT-Creation-Date: 2006-05-21 20:59-0600\n"
-"PO-Revision-Date: 2005-04-09 14:08+0300\n"
+"PO-Revision-Date: 2006-10-15 02:08+0200\n"
 "Last-Translator: Andrei Darashenka <adorosh2@it.org.by>\n"
-"Language-Team: Byelarusian <be@li.org>\n"
+"Language-Team: Belarussian <be@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
-#, fuzzy
 msgid "Configure the package manager"
-msgstr "Настроіць"
+msgstr "Настройка менэджэра пакетаў"
 
 #. Type: text
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
-#, fuzzy
 msgid "Configuring apt"
-msgstr "Сканфігураваць базавую сістэму перад перазагрузкай"
+msgstr "Настройка apt"
 
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:15
 msgid "Running ${SCRIPT}..."
-msgstr "Выконваецца ${SCRIPT}..."
+msgstr "Запуск ${SCRIPT}..."
 
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:19
 msgid "Scanning local repositories..."
-msgstr ""
+msgstr "Прагляд мясцовых сховішчаў..."
 
 #. Type: text
 #. Description
 #: ../apt-setup-udeb.templates:23
 msgid "Scanning the security updates repository..."
-msgstr ""
+msgstr "Прагляд сховішчаў з аднаўленнямі бяспекі..."
 
 #. Type: error
 #. Description
 #: ../apt-setup-udeb.templates:33
 msgid "Cannot access security updates"
-msgstr ""
+msgstr "Аднаўленні бяспекі недаступныя"
 
 #. Type: error
 #. Description
@@ -76,6 +72,9 @@ msgid ""
 "updates will not be made available to you at this time. You should "
 "investigate this later."
 msgstr ""
+"Немагчыма атрымаць доступ да аднаўленняў бяспекі на ${SECURITY_HOST}, таму "
+"зараз гэтыя аднаўленні будуць недаступныя. Раім пазней заняцца гэтым "
+"пытаннем."
 
 #. Type: error
 #. Description
@@ -84,19 +83,20 @@ msgid ""
 "Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
 "sources.list file."
 msgstr ""
+"Запісы для ${SECURITY_HOST} даданыя да /etc/apt/sources.list пад знакам "
+"каментару."
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
 msgid "Scanning the CD-ROM..."
-msgstr ""
+msgstr "Прагляд CD-ROM..."
 
 #. Type: error
 #. Description
 #: ../apt-cdrom-setup.templates:7
-#, fuzzy
 msgid "apt configuration problem"
-msgstr "Загана аўтаматычнага канфігуравання сеткі"
+msgstr "Праблема настройкі apt"
 
 #. Type: error
 #. Description
@@ -105,19 +105,20 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr ""
+"Не атрымалася настроіць apt, каб паставіць дадатковыя пакеты з кампакт-"
+"дыску. "
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
 msgid "Scanning the mirror..."
-msgstr ""
+msgstr "Прагляд люстэрка..."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:8
-#, fuzzy
 msgid "Use non-free software?"
-msgstr "Настроіць"
+msgstr "Ужываць зняволеныя праграмы?"
 
 #. Type: boolean
 #. Description
@@ -128,6 +129,10 @@ msgid ""
 "to install it. This software has varying licenses which may prevent you from "
 "using, modifying, or sharing it."
 msgstr ""
+"Частка несвабоднага (зняволенага) праграмовага забеспячэння можа працаваць з "
+"Debian. Няхай гэтыя праграмы і ня могуць быць часткай Debian, але іх можна "
+"ўсталяваць з дапамогай стандартных прыладаў Debian. Ліцэнзіі, што кіруюць "
+"гэтымі праграмамі, могуць забараняць іх ужытак, мадыфікацыю альбо распаўсюд. "
 
 #. Type: boolean
 #. Description
@@ -136,13 +141,13 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
-msgstr ""
+msgstr "Калі ласка, вызначцеся, ці дазваляеце Вы гэта."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:19
 msgid "Use contrib software?"
-msgstr ""
+msgstr "Выкарыстоўваць праграмы з \"contrib\"?"
 
 #. Type: boolean
 #. Description
@@ -153,6 +158,10 @@ msgid ""
 "software is not a part of Debian, but standard Debian tools can be used to "
 "install it."
 msgstr ""
+"Існуе яшчэ адзін кляс праграмаў, прыдатных для працы ў Debian. Хай сабе гэта "
+"і вольныя праграмы, але яны патрабуюць зняволеных праграмаў для сваёй працы, "
+"і таму не могуць быць часткай Debian. Іх можна ўсталяваць з дапамогай "
+"стандартных прыладаў Debian."
 
 #. Type: boolean
 #. Description
@@ -160,10 +169,9 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
-#, fuzzy
 msgid ""
 "Please choose whether you want this software to be made available to you."
-msgstr "у."
+msgstr "Калі ласка, вызначцеся: ці хочаце вы мець доступ да такіх праграмаў."
 
 #. Type: select
 #. Choices
@@ -171,25 +179,23 @@ msgstr "у."
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr ""
+msgstr "Ізноў"
 
 #. Type: select
 #. Choices
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Change mirror"
-msgstr "Зноў, Змяніць люстэрку, Адмяніць"
+msgstr "Змяніць люстэрка"
 
 #. Type: select
 #. Choices
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
-#, fuzzy
 msgid "Ignore"
-msgstr "адсутнічае"
+msgstr "Не зважаць"
 
 #. Type: select
 #. Description
@@ -206,12 +212,16 @@ msgid ""
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
+"Праграма ўстаноўкі ня здолела далучыцца да люстэрка.  Магчыма, гэта праблемы "
+"з вашай сеткай, альбо з люстэркам. Вы маеце выбар: паспрабаваць зноў, "
+"пазначыць іншае люстэрка, альбо не зважаць на праблему і працягваць без "
+"пакетаў з гэтага люстэрка."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:42
 msgid "Use a network mirror?"
-msgstr ""
+msgstr "Ужываць сеткавае люстэрка?"
 
 #. Type: boolean
 #. Description
@@ -220,6 +230,8 @@ msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
 msgstr ""
+"Сеткавае люстэрка можа быць выкарыстана для падтрымкі праграмаў, якія "
+"ўваходзяць у CD-ROM. Таксама гэта дасць доступ да новых версіяў."
 
 #. Type: boolean
 #. Description
@@ -228,13 +240,15 @@ msgid ""
 "If you are installing from a netinst CD and you choose not to use a mirror, "
 "you will end up with only a very minimal base system."
 msgstr ""
+"Калі вы робіце ўстаноўку з дыску \"netinst\" і адмовіліся ад люстэрка, у "
+"выніку атрымаецца вельмі сціплая базавая сістэма."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr ""
+msgstr "Ужываць праграмы з абмежаваннямі?"
 
 #. Type: boolean
 #. Description
@@ -246,13 +260,17 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
+"Некаторыя зняволеныя праграмы даступныя ў форме пакетаў. Нягледзячы на тое,"
+"што такія праграмы не могуць быць часткай Debian, іх можна ўсталяваць з "
+"дапамогай стандартных прыладаў Debian. Ліцэнзіі, што кіруюць такімі "
+"праграмамі, могуць забараняць іх ужытак, мадыфікацыю або распаўсюд."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr ""
+msgstr "Ужываць праграмы з \"universe\"?"
 
 #. Type: boolean
 #. Description
@@ -263,13 +281,16 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
+"Некаторыя дадатковыя праграмы даступныя ў выглядзе пакетаў. Гэтыя праграмы "
+"з'яўляюцца свабоднымі. Нягледзячы на тое, што яны не з'яўляюцца часткай "
+"Debian, такія праграмы можна ўсталяваць з дапамогай стандартных прыладаў."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid "Use software from the \"multiverse\" component?"
-msgstr ""
+msgstr "Ужываць праграмы з \"multiverse\"?"
 
 #. Type: boolean
 #. Description
@@ -282,13 +303,18 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
+"Некаторыя зняволеныя праграмы даступныя ў выглядзе пакетаў. Хаця яны й не "
+"з'яўляюцца часткай асноўнага дыстрыбутыву, стандартныя прылады кіравання "
+"пакетамі могуць працаваць з імі. Ліцэнзіі (і ў некаторых выпадках патэнты),"
+"што кіруюць такімі праграмамі, могуць забараняць іх ужыванне, мадыфікацыю "
+"або распаўсюд."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
-msgstr ""
+msgstr "Ужываць адаптаваныя праграмы?"
 
 #. Type: boolean
 #. Description
@@ -300,3 +326,8 @@ msgid ""
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
+"Некаторыя пакеты, што знаходзяцца ў распрацоўцы, адмыслова адаптаваныя дзеля "
+"працы з гэтым рэлізам. З аднаго боку, яны не паспелі прайсці такой "
+"дасканалай праверкі, як пакеты рэлізу. З іншага боку, яны ўключаюць больш "
+"новыя версіі некаторых праграмаў і могуць прадстаўляць новыя карысныя "
+"магчымасці."

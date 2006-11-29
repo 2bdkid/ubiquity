@@ -2,13 +2,14 @@ Source: tzsetup
 Section: debian-installer
 Priority: standard
 Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
-Uploaders: Joey Hess <joeyh@debian.org>, Petter Reinholdtsen <pere@debian.org>, Otavio Salvador <otavio@debian.org>, Christian Perrier <bubulle@debian.org>
-Build-Depends-Indep: debhelper (>= 4.1.13), po-debconf, locales
-Standards-Version: 3.6.2
+Uploaders: Joey Hess <joeyh@debian.org>, Otavio Salvador <otavio@debian.org>, Christian Perrier <bubulle@debian.org>
+Build-Depends: debhelper (>= 4.1.13)
+Build-Depends-Indep: po-debconf
+XS-Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/tzsetup
 
 Package: tzsetup-udeb
 Architecture: all
-Depends: localechooser
+Depends: ${misc:Depends}, localechooser
 XC-Package-Type: udeb
 XB-Installer-Menu-Item: 62
 Description: choose timezone

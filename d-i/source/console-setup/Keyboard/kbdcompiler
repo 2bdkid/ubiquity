@@ -24,7 +24,7 @@ if ($ARGV[2]) {
 }
 
 # Don't forget to update also the list in config.proto
-my $nonlatin = ' am ara ben bd bg bt by cs deva ge gh gr guj guru \
+my $nonlatin = ' am ara ben bd bg bt by deva ge gh gr guj guru \
                  il in ir iku jp kan kh la lao lk mk mm mn mv mal \
                  ori pk ru scc sy syr tel th tj tam ua uz ';
 
@@ -71,18 +71,38 @@ for my $layout (values %KeyboardNames::layouts) {
 			    ? "us,$layout"
 			    : $layout));
     if (! -f "$dir/$model-$layout") {
-	execute ("./ckbcomp -compact -I. -I${xkbdir} -rules xorg"
-		 ." -model $model -layout $actual_layout"
-		 ." >$dir/$model-$layout")
-	    and die "$0: ckbcomp failed\n" if (! -f "$dir/$model-$layout");
+	if ($layout eq 'cs') {
+	    execute ("./ckbcomp -compact -I. -I${xkbdir} -rules xorg"
+		     ." -model $model"
+		     ." -layout $actual_layout -variant latin,"
+		     ." >$dir/$model-$layout");
+	} else {
+	    execute ("./ckbcomp -compact -I. -I${xkbdir} -rules xorg"
+		     ." -model $model -layout $actual_layout"
+		     ." >$dir/$model-$layout");
+	}
+	die "$0: ckbcomp failed\n" if (! -f "$dir/$model-$layout");
     }
     if (-f "$dir/$model-$layout") {
 	read_temp_kmap $layout;
     }
     for my $variant (values %{$KeyboardNames::variants{$layout}}) {
-	my $actual_variant = (($actual_layout =~ /,/)
-			      ? ",$variant"
-			      : $variant);
+	my $actual_variant;
+	if ($actual_layout eq 'cs,cs') {
+	    if ($variant =~ /latin/) {
+		$actual_variant = "$variant,$variant";
+	    } elsif ($variant eq 'yz') {
+		$actual_variant = "latinyz,$variant";
+	    } elsif ($variant eq 'alternatequotes') {
+		$actual_variant = "latinalternatequotes,$variant";
+	    } else {
+		$actual_variant = "latin,$variant";
+	    }
+	} elsif ($actual_layout =~ /,/) {
+	    $actual_variant = ",$variant";
+	} else {
+	    $actual_variant = $variant;
+	}
 	if (! -f "$dir/$model-$layout:$variant") {
 	    execute ("./ckbcomp -compact -I. -I${xkbdir} -rules xorg"
 		     ." -model $model"

@@ -3,32 +3,17 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of et.po to Eesti
-#
-#
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-#
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Siim Põder <windo@windowlicker.dyn.ee>, 2005.
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: et\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-11-28 18:33-0700\n"
-"PO-Revision-Date: 2005-06-08 11:11+0300\n"
-"Last-Translator: Siim Põder <windo@windowlicker.dyn.ee>\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-19 21:24-0600\n"
+"PO-Revision-Date: 2006-10-03 23:32+0300\n"
+"Last-Translator: Siim Põder <windo@p6drad-teel.net>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Estonian\n"
-"X-Poedit-Country: ESTONIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #. Type: boolean
 #. Description
@@ -69,13 +54,12 @@ msgstr "SILO paigaldamine edukas"
 #. Type: note
 #. Description
 #: ../silo-installer.templates:16
-#, fuzzy
 msgid ""
 "The SILO boot loader has been successfully installed on your new boot "
 "partition, and your system should now be able to boot itself."
 msgstr ""
-"Alglaadur SILO on edukalt su uuele Debiani alglaaduripartitsioonile "
-"paigaldatud. Su süsteem peaks nüüd end alglaadida suutma."
+"Alglaadur SILO on edukalt su uuele alglaaduripartitsioonile paigaldatud. Su "
+"süsteem peaks nüüd end alglaadida suutma."
 
 #. Type: text
 #. Description
@@ -87,9 +71,8 @@ msgstr "Paigalda alglaadur SILO kõvakettale"
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
-#, fuzzy
-msgid "Unsupported boot filesystem type"
-msgstr "Kasutada /boot jaoks toetamata failisüsteemi?"
+msgid "Unsupported boot file system type"
+msgstr "Toetamata alglaaduri failisüsteemi tüüp"
 
 #. Type: note
 #. Description
@@ -100,13 +83,16 @@ msgid ""
 "partitioning scheme the kernel is going to be installed on the ${SILO_PART} "
 "partition of type ${SILO_TYPE}."
 msgstr ""
+"Et SILO (Sparc Linux Loader) võiks tuuma üles laadida, peab tuum asuma kas "
+"ext2, ext3 või ufs failisüsteemiga partitsioonil. Käesoleva "
+"partitsioneerimisskeemi kohaselt paigutataks kernel  ${SILO_TYPE} tüüpi "
+"partitsioonile ${SILO_PART}."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:39
-#, fuzzy
 msgid "Boot partition may cause problems with SILO"
-msgstr "Juurpartitsioon peab olema ext2"
+msgstr "Alglaaduri partitsioon võib SILO-ga muret põhjustada"
 
 #. Type: note
 #. Description
@@ -116,6 +102,9 @@ msgid ""
 "impossible for SILO (Sparc Linux Loader) to boot a kernel placed farther "
 "than 1 GB from the beginning of the disk."
 msgstr ""
+"On väga võimalik, et selle masina püsivaras peituva apsaka tõttu pole SILO "
+"(Sparc Linux Loader) võimeline laadima tuuma, mis asub ketta algusest enam "
+"kui 1 GB kaugemal."
 
 #. Type: note
 #. Description
@@ -128,13 +117,18 @@ msgid ""
 "${SILO_PART} partition which extends up to ${SILO_OFF} mark. Keeping this "
 "configuration may result in an unbootable system."
 msgstr ""
+"Edasiste murede vältimiseks on ülimalt soovitatav paigaldada tuum "
+"paritsioonile, mis mahub tervenisti ketta esimese GB peale (näiteks ketta "
+"algusesse väikest /boot partitisooni luues). Käesoleva "
+"partitsioneermisskeemi kohaslet paigaldatakse tuum partitsioonile "
+"${SILO_PART}, mis ulatub aga kuni ${SILO_OFF} märgini. Säärase seadistusega "
+"jätkamine võib tõkestada süsteemi alglaetavuse."
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:53
-#, fuzzy
 msgid "Unsupported partition table on the boot disk"
-msgstr "Juurpartitsioon ei asu esimesel kettal"
+msgstr "Alglaaduri kettal on toetamata partitsioonitabel"
 
 #. Type: note
 #. Description
@@ -145,6 +139,10 @@ msgid ""
 "to be installed on the ${SILO_PART} partition located on a disk with the "
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
+"SILO (Sparc Linux Loader) oskab tuuma laadida vaid \"sun\" tüüpi "
+"partitsioonitabelika kettalt. Käesolevas seadistuses paigaldataks tuum "
+"partitsioonile ${SILO_PART}, mis asub \"${SILO_DISK}\" tüüpi "
+"partitsioonitabeliga kettal."
 
 #. Type: note
 #. Description
@@ -154,3 +152,13 @@ msgid ""
 "problem. Keeping the current configuration may result in an unbootable "
 "system."
 msgstr ""
+"On ülimalt soovitatav minna tagasi partitsioneerimise juurde ja see mure "
+"lahendada. Säärase seadistusega jätkamine võib tõkestada süsteemi "
+"alglaetavuse."
+
+#. Type: note
+#. Description
+#: ../silo-installer.templates:27
+#, fuzzy
+msgid "Unsupported boot filesystem type"
+msgstr "Kasutada /boot jaoks toetamata failisüsteemi?"
