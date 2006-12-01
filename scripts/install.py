@@ -552,6 +552,8 @@ class Install:
                                                'initial-status.gz'), 'w')
             while True:
                 data = status.read(65536)
+                if not data:
+                    break
                 status_gz.write(data)
             status_gz.close()
             status.close()
@@ -1191,11 +1193,12 @@ class Install:
     def broken_packages(self, cache):
         brokenpkgs = set()
         for pkg in cache.keys():
-            # Apparently sometimes the cache goes a bit bonkers ...
-            if pkg not in cache._cache:
+            try:
+                if cache._depcache.IsInstBroken(cache._cache[pkg]):
+                    brokenpkgs.add(pkg)
+            except KeyError:
+                # Apparently sometimes the cache goes a bit bonkers ...
                 continue
-            if cache._depcache.IsInstBroken(cache._cache[pkg]):
-                brokenpkgs.add(pkg)
         return brokenpkgs
 
     def do_remove(self, to_remove, recursive=False):
