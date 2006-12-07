@@ -78,6 +78,7 @@ scan_disk () {
 	    # partitions), then we won't have room to create the extra one
 	    # demanded by the standard recipes.
 	    if [ "$primaries" -ge 4 ]; then
+		log "Too many primary partitions already exist on $dev"
 		echo '0 0 none none'
 		return
 	    fi
@@ -85,6 +86,7 @@ scan_disk () {
 	    # If there are no logical partitions, then we will need an extra
 	    # primary partition slot to create an extended partition.
 	    if [ "$logicals" -eq 0 ] && [ "$primaries" -ge 3 ]; then
+		log "Too many primary partitions already exist on $dev without an extended partition"
 		echo '0 0 none none'
 		return
 	    fi
@@ -162,7 +164,7 @@ get_resize_use_free_on_dev() {
     fi
 
     if longint_le "$(expr \( 2 \* 1024 + 200 \) \* 1024 \* 1024)" $totalfree; then
-	# enough space, no need to resize
+	log "enough free space ($totalfree) on $dev, no need to resize"
 	exit 0
     fi
 }
@@ -178,10 +180,13 @@ else
     get_resize_use_free_on_dev
 fi
 
-if [ "$bestpart" ] && [ "$bestpart" != none ] && \
-    longint_le "$(expr 3 \* 1024 \* 1024 \* 1024)" $bestfree; then
+if [ -z "$bestpart" ] || [ "$bestpart" = none ]; then
+    log "Found no resizable partitions"
+elif longint_le "$(expr 3 \* 1024 \* 1024 \* 1024)" $bestfree; then
     log "Found resizable partition '$bestpart' ($bestpath) with $bestfree bytes free"
     db_subst partman-auto/text/resize_use_free PARTITION "$(humandev "$bestpath")"
     db_metaget partman-auto/text/resize_use_free description
     printf "%s\t%s" "$bestpart" "$RET"
+else
+    log "Found resizable partition '$bestpart' ($bestpath), but not offering because only $bestfree bytes free"
 fi

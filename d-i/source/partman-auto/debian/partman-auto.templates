@@ -22,25 +22,65 @@ Template: partman-auto/init_automatically_partition
 Type: select
 Choices: ${CHOICES}
 _Description: Partitioning method:
- This installer can guide you through partitioning a disk for use by
- Ubuntu, or if you prefer, you can do it manually. If you do choose to
- use the guided partitioning tool, you will still have a chance later to
- review and customise the results.
+ The installer can guide you through partitioning a disk (using different
+ standard schemes) or, if you prefer, you can do it manually. With guided
+ partitioning you will still have a chance later to review and customise
+ the results.
+ .
+ If you choose guided partitioning for an entire disk, you will next be
+ asked which disk should be used.
+
+Template: partman-auto/purge_lvm_from_device
+Type: boolean
+Default: false
+_Description: Remove existing logical volume data?
+ The selected device already contains logical volumes and/or
+ volume groups from a previous LVM installation, which must be removed
+ from the disk before creating any partitions.
+ .
+ Note that this will also permanently erase any data currently on the
+ logical volumes.
+
+Template: partman-auto/cannot_purge_lvm_from_device
+Type: error
+_Description: LVM physical volume already exists on the selected device
+ The selected device already contains one or more LVM physical
+ volumes which cannot be removed. It is therefore not possible to
+ automatically partition this device.
 
 Template: partman-auto/disk
 Type: string
-# Only used for preseeding.
-Description: device to partition, in either devfs or non format
+Description: for internal use; can be preseeded
+ Device to partition, in either devfs or non format
+
+Template: partman-auto/method
+Type: string
+Description: for internal use; can be preseeded
+ Method to use for partitioning
 
 Template: partman-auto/automatically_partition
 Type: select
 Choices: ${CHOICES}
-_Description: Disk space to partition:
+_Description: Partitioning method:
+ If you choose guided partitioning for an entire disk, you will next be
+ asked which disk should be used.
 
 Template: partman-auto/choose_recipe
 Type: select
 Choices: ${CHOICES}
+#flag:comment:2
+# "Selected for partitioning" can be either an entire disk
+# of "the largest continuous free space" on an existing disk
+# TRANSLATORS, please take care to choose something appropriate for both
+#
+# It is followed by a variable giving the chosen disk, hence the colon
+# at the end of the sentence. Please keep it.
+#flag:translate!:3
 _Description: Partitioning scheme:
+ Selected for partitioning:
+ .
+ ${TARGET}
+ .
  The disk can be partitioned using one of several different schemes.
  If you are unsure, choose the first one.
 
@@ -54,12 +94,13 @@ Template: partman-auto/expert_recipe_file
 Type: string
 # Not translatable, this is for use by custom distributions that want
 # to force the use of their own recipe.
-Description: file to load for expert recipe
+Description: for internal use; can be preseeded
+ File to load for expert recipe
 
 Template: partman-auto/expert_recipe
 Type: string
-# Only useful for preseeding, so not translated.
-Description: expert recipe content
+Description: for internal use; can be preseeded
+ Expert recipe content
 
 Template: partman-auto/text/automatically_partition
 Type: text
@@ -69,20 +110,32 @@ _Description: Guided partitioning
 Template: partman-auto/text/use_biggest_free
 Type: text
 # TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-_Description: Use the largest continuous free space
+_Description: Guided - use the largest continuous free space
 
 Template: partman-auto/text/use_device
 Type: text
 # TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-# The string replacing ${DEVICE} may be very long, so make your translation
-# as short as possible and keep the variable AT THE END
-# for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-_Description: Erase entire disk: ${DEVICE}
+_Description: Guided - use entire disk
+
+Template: partman-auto/select_disk
+Type: select
+Choices: ${CHOICES}
+_Description: Select disk to partition:
+ Note that all data on the disk you select will be erased, but not before
+ you have confirmed that you really want to make the changes.
+
+Template: partman-auto/select_disks
+Type: multiselect
+Choices: ${CHOICES}
+_Description: Select disk(s) to partition:
+ Note that all data on the disk(s) you select will be erased, but not before
+ you have confirmed that you really want to make the changes.
 
 Template: partman-auto/text/custom_partitioning
 Type: text
 # TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-_Description: Manually edit partition table
+# This is a method for partioning - as in guided (automatic) versus manual
+_Description: Manual
 
 Template: partman-auto/text/auto_free_space
 Type: text
@@ -109,18 +162,9 @@ Type: text
 # TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
 _Description: Small-disk (< 1GB) partitioning scheme
 
-Template: partman-auto/select_disk
-Type: select
-Choices: ${CHOICES}
-_Description: Device to partition
- This installer can guide you through partitioning a disk for use by
- Ubuntu, or if you prefer, you can do it manually. If you do choose to
- use the guided partitioning tool, you will still have a chance later to
- review and customise the results.
-
 Template: partman-auto/text/resize_use_free
 Type: text
-_Description: Resize ${PARTITION} and use freed space
+_Description: Guided - resize ${PARTITION} and use freed space
 
 Template: partman-auto/resize_insufficient_space
 Type: error

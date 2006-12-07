@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-03 12:31+0100\n"
-"PO-Revision-Date: 2006-05-28 16:43+0200\n"
+"POT-Creation-Date: 2006-10-19 10:51+0000\n"
+"PO-Revision-Date: 2006-10-12 07:26+0200\n"
 "Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
 "Language-Team:  Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -60,24 +60,100 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
+msgid ""
+"The installer can guide you through partitioning a disk (using different "
+"standard schemes) or, if you prefer, you can do it manually. With guided "
+"partitioning you will still have a chance later to review and customise the "
+"results."
+msgstr ""
+"Tento inštalačný program vás môže sprevádzať rozdeľovaním disku (použitím "
+"rôznych spôsobov rozdelenia), no môžete to urobiť aj manuálne. Pri zvolení "
+"sprevádzania rozdeľovaním máte stále možnosť pozrieť si neskôr výsledok a "
+"rozdelenie upraviť."
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid "Remove existing logical volume data?"
+msgstr "Odstrániť údaje existujúcich logických zväzkov?"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"The selected device already contains logical volumes and/or volume groups "
+"from a previous LVM installation, which must be removed from the disk before "
+"creating any partitions."
+msgstr ""
+"Zvolené zariadenie už obsahuje z predchádzajúcej inštalácie LVM logické "
+"zväzky a/alebo skupiny zväzkov, ktoré sa musia odstrániť z disku pred "
+"vytvorením akýchkoľvek oblastí."
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"Note that this will also permanently erase any data currently on the logical "
+"volumes."
+msgstr ""
+"Uvedomte si, že sa odstránia aj všetky údaje nachádzajúce sa na logických "
+"zväzkoch."
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid "LVM physical volume already exists on the selected device"
+msgstr "Na zvolenom zariadení už existuje fyzický zväzok LVM"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid ""
+"The selected device already contains one or more LVM physical volumes which "
+"cannot be removed. It is therefore not possible to automatically partition "
+"this device."
+msgstr ""
+"Zvolené zariadenie už obsahuje jeden alebo viac LVM fyzických zväzkov, ktoré "
+"sa nedajú odstrániť. Z toho dôvodu nie je možné automatické rozdeľovanie "
+"tohto zariadenia."
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:64
 msgid "Partitioning method:"
 msgstr "Spôsob rozdeľovania:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:38
-msgid "Disk space to partition:"
-msgstr "Diskový priestor na rozdelenie:"
+#: ../partman-auto.templates:64
+msgid ""
+"If you choose guided partitioning for an entire disk, you will next be asked "
+"which disk should be used."
+msgstr ""
+"Ak si zvolíte sprievodcu rozdeľovania pre celý disk, tak v ďalšom kroku si "
+"budete musieť zvoliť disk, ktorý chcete použiť."
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#: ../partman-auto.templates:79
 msgid "Partitioning scheme:"
 msgstr "Spôsob rozdeľovania:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#. "Selected for partitioning" can be either an entire disk
+#. of "the largest continuous free space" on an existing disk
+#. TRANSLATORS, please take care to choose something appropriate for both
+#.
+#. It is followed by a variable giving the chosen disk, hence the colon
+#. at the end of the sentence. Please keep it.
+#: ../partman-auto.templates:79
+msgid "Selected for partitioning:"
+msgstr "Označené na rozdelenie:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:79
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -87,13 +163,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid "Unusable free space"
 msgstr "Nepoužiteľné voľné miesto"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -104,104 +180,115 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:67
+#: ../partman-auto.templates:108
 msgid "Guided partitioning"
 msgstr "Sprievodca rozdeľovaním"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:72
-msgid "Use the largest continuous free space"
-msgstr "Použiť najväčšie súvislé voľné miesto"
+#: ../partman-auto.templates:113
+msgid "Guided - use the largest continuous free space"
+msgstr "Sprievodca - použiť najväčšie súvislé voľné miesto"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#. The string replacing ${DEVICE} may be very long, so make your translation
-#. as short as possible and keep the variable AT THE END
-#. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:80
-msgid "Erase entire disk: ${DEVICE}"
-msgstr "Zmazať celý disk: ${DEVICE}"
+#: ../partman-auto.templates:118
+msgid "Guided - use entire disk"
+msgstr "Sprievodca - použiť celý disk"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid "Select disk to partition:"
+msgstr "Zvoľte disk na rozdelenie:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid ""
+"Note that all data on the disk you select will be erased, but not before you "
+"have confirmed that you really want to make the changes."
+msgstr ""
+"Uvedomte si, že všetky údaje na zvolenom disku sa odstránia, ale až po "
+"potvrdení, že naozaj chcete vykonať tieto zmeny."
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid "Select disk(s) to partition:"
+msgstr "Zvoľte disk(y) na rozdelenie:"
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid ""
+"Note that all data on the disk(s) you select will be erased, but not before "
+"you have confirmed that you really want to make the changes."
+msgstr ""
+"Uvedomte si, že všetky údaje na zvolených diskoch sa odstránia, ale až po "
+"potvrdení, že naozaj chcete vykonať tieto zmeny."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:85
-msgid "Manually edit partition table"
-msgstr "Manuálne upraviť tabuľku oblastí"
+#. This is a method for partioning - as in guided (automatic) versus manual
+#: ../partman-auto.templates:138
+msgid "Manual"
+msgstr "Manuálne"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:90
+#: ../partman-auto.templates:143
 msgid "Automatically partition the free space"
 msgstr "Automaticky rozdeliť voľné miesto"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:95
+#: ../partman-auto.templates:148
 msgid "All files in one partition (recommended for new users)"
 msgstr "Všetky súbory na jednej oblasti (pre začiatočníkov)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:100
+#: ../partman-auto.templates:153
 msgid "Separate /home partition"
 msgstr "Samostatná oblasť /home"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:105
+#: ../partman-auto.templates:158
 msgid "Separate /home, /usr, /var, and /tmp partitions"
 msgstr "Samostatné oblasti /home, /usr, /var a /tmp"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:110
+#: ../partman-auto.templates:163
 msgid "Small-disk (< 1GB) partitioning scheme"
 msgstr "Schéma rozdeľovania pre malé disky (< 1GB)"
 
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid "Device to partition"
-msgstr "Zariadenie na rozdelenie:"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to review and "
-"customise the results."
-msgstr ""
-"Tento inštalačný program vás môže sprevádzať rozdeľovaním disku, na ktorom "
-"chcete používať Ubuntu, no môžete to urobiť aj manuálne. Pri zvolení "
-"sprevádzania rozdeľovaním máte stále možnosť pozrieť si neskôr výsledok a "
-"rozdelenie upraviť."
-
 #. Type: text
 #. Description
-#: ../partman-auto.templates:123
-msgid "Resize ${PARTITION} and use freed space"
+#: ../partman-auto.templates:167
+#, fuzzy
+msgid "Guided - resize ${PARTITION} and use freed space"
 msgstr "Zmeniť veľkosť oblasti ${PARTITION} a použiť voľné miesto"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid "Failed to create enough space for installation"
 msgstr "Nepodarilo sa uvoľniť dostatok voľného miesta na inštaláciu."
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-03 12:31+0100\n"
-"PO-Revision-Date: 2006-06-06 20:40+0700\n"
+"POT-Creation-Date: 2006-10-19 10:51+0000\n"
+"PO-Revision-Date: 2006-10-12 14:29+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n@opentle.org>\n"
 "MIME-Version: 1.0\n"
@@ -56,24 +56,93 @@ msgstr "อาจเป็นเพราะมีจำนวนพาร์ท
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
+msgid ""
+"The installer can guide you through partitioning a disk (using different "
+"standard schemes) or, if you prefer, you can do it manually. With guided "
+"partitioning you will still have a chance later to review and customise the "
+"results."
+msgstr ""
+"โปรแกรมติดตั้งนี้จะพาคุณสู่ขั้นตอนต่างๆ ของการแบ่งพาร์ทิชันในดิสก์ (โดยใช้วิธีแบ่งแบบปกติ) "
+"หรือคุณจะแบ่งพาร์ทิชันเองก็ได้ถ้าคุณต้องการ ถ้าคุณเลือกใช้เครื่องมือแนะแนวทางการแบ่งพาร์ทิชัน "
+"คุณยังมีโอกาสที่จะดูผลการแบ่ง แล้วปรับค่าในภายหลัง"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid "Remove existing logical volume data?"
+msgstr "จะลบข้อมูลใน logical volume เดิมหรือไม่?"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"The selected device already contains logical volumes and/or volume groups "
+"from a previous LVM installation, which must be removed from the disk before "
+"creating any partitions."
+msgstr ""
+"อุปกรณ์ที่เลือกมี logical volume และ/หรือ กลุ่มโวลุมจากการติดตั้ง LVM ครั้งก่อนอยู่ "
+"ซึ่งต้องลบออกจากดิสก์ก่อนที่จะสร้างพาร์ทิชันใดๆ"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"Note that this will also permanently erase any data currently on the logical "
+"volumes."
+msgstr "สังเกตว่า การลบนี้จะลบข้อมูลใดๆ ที่มีอยู่ใน logical volume ทิ้งอย่างถาวร"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid "LVM physical volume already exists on the selected device"
+msgstr "มี LVM physical volume อยู่ในอุปกรณ์ที่เลือกอยู่ก่อนแล้ว"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid ""
+"The selected device already contains one or more LVM physical volumes which "
+"cannot be removed. It is therefore not possible to automatically partition "
+"this device."
+msgstr ""
+"อุปกรณ์ที่คุณเลือก ได้มี LVM physical volume ตั้งแต่หนึ่งโวลุมขึ้นไปอยู่ก่อนแล้ว "
+"ซึ่งไม่สามารถลบออกได้ จึงไม่สามารถแบ่งพาร์ทิชันโดยอัตโนมัติในอุปกรณ์นี้ได้"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:64
 msgid "Partitioning method:"
 msgstr "วิธีแบ่งพาร์ทิชัน:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:38
-msgid "Disk space to partition:"
-msgstr "พื้นที่ว่างในดิสก์ที่จะแบ่งพาร์ทิชัน:"
+#: ../partman-auto.templates:64
+msgid ""
+"If you choose guided partitioning for an entire disk, you will next be asked "
+"which disk should be used."
+msgstr "ถ้าคุณเลือกการแบ่งพาร์ทิชันแบบแนะแนวทาง คุณจะถูกถามถึงดิสก์ที่จะใช้ในขั้นต่อไป"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#: ../partman-auto.templates:79
 msgid "Partitioning scheme:"
 msgstr "แนวทางการแบ่งพาร์ทิชัน:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#. "Selected for partitioning" can be either an entire disk
+#. of "the largest continuous free space" on an existing disk
+#. TRANSLATORS, please take care to choose something appropriate for both
+#.
+#. It is followed by a variable giving the chosen disk, hence the colon
+#. at the end of the sentence. Please keep it.
+#: ../partman-auto.templates:79
+msgid "Selected for partitioning:"
+msgstr "สิ่งที่เลือกไว้เพื่อแบ่งพาร์ทิชัน:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:79
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -81,13 +150,13 @@ msgstr "คุณสามารถแบ่งพาร์ทิชันได
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid "Unusable free space"
 msgstr "พื้นที่ว่างที่ใช้ไม่ได้"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -98,104 +167,114 @@ msgstr ""
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:67
+#: ../partman-auto.templates:108
 msgid "Guided partitioning"
 msgstr "แนะแนวทางการแบ่งพาร์ทิชัน"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:72
-msgid "Use the largest continuous free space"
-msgstr "ใช้พื้นที่ว่างต่อเนื่องที่ใหญ่ที่สุด"
+#: ../partman-auto.templates:113
+msgid "Guided - use the largest continuous free space"
+msgstr "แนะแนว - ใช้พื้นที่ว่างต่อเนื่องที่ใหญ่ที่สุด"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#. The string replacing ${DEVICE} may be very long, so make your translation
-#. as short as possible and keep the variable AT THE END
-#. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:80
-msgid "Erase entire disk: ${DEVICE}"
-msgstr "ลบข้อมูลทั้งดิสก์: ${DEVICE}"
+#: ../partman-auto.templates:118
+msgid "Guided - use entire disk"
+msgstr "แนะแนว - ใช้เนื้อที่ทั้งดิสก์"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid "Select disk to partition:"
+msgstr "เลือกดิสก์ที่จะแบ่งพาร์ทิชัน:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid ""
+"Note that all data on the disk you select will be erased, but not before you "
+"have confirmed that you really want to make the changes."
+msgstr ""
+"สังเกตว่า ข้อมูลในดิสก์ที่คุณเลือก จะถูกลบทิ้งทั้งหมด แต่จะไม่มีการลบ "
+"ถ้าคุณยังไม่ได้ยืนยันว่าต้องการทำจริงๆ"
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid "Select disk(s) to partition:"
+msgstr "เลือกดิสก์ที่จะแบ่งพาร์ทิชัน:"
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid ""
+"Note that all data on the disk(s) you select will be erased, but not before "
+"you have confirmed that you really want to make the changes."
+msgstr ""
+"สังเกตว่า ข้อมูลในดิสก์ที่คุณเลือก จะถูกลบทิ้งทั้งหมด แต่จะไม่มีการลบ "
+"ถ้าคุณยังไม่ได้ยืนยันว่าต้องการทำจริงๆ"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:85
-msgid "Manually edit partition table"
-msgstr "แก้ตารางพาร์ทิชันเอง"
+#. This is a method for partioning - as in guided (automatic) versus manual
+#: ../partman-auto.templates:138
+msgid "Manual"
+msgstr "แบ่งเอง"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:90
+#: ../partman-auto.templates:143
 msgid "Automatically partition the free space"
 msgstr "แบ่งพาร์ทิชันโดยอัตโนมัติในพื้นที่ว่าง"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:95
+#: ../partman-auto.templates:148
 msgid "All files in one partition (recommended for new users)"
 msgstr "ทุกแฟ้มในพาร์ทิชันเดียว (แนะนำสำหรับผู้ใช้ใหม่)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:100
+#: ../partman-auto.templates:153
 msgid "Separate /home partition"
 msgstr "แยกพาร์ทิชัน /home"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:105
+#: ../partman-auto.templates:158
 msgid "Separate /home, /usr, /var, and /tmp partitions"
 msgstr "แยกพาร์ทิชัน /home, /usr, /var และ /tmp"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:110
+#: ../partman-auto.templates:163
 msgid "Small-disk (< 1GB) partitioning scheme"
 msgstr "แนวทางการแบ่งพาร์ทิชันในดิสก์ขนาดเล็ก (< 1GB)"
 
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid "Device to partition"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-#, fuzzy
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to review and "
-"customise the results."
-msgstr ""
-"โปรแกรมติดตั้งนี้จะพาคุณสู่ขั้นตอนต่างๆ ของการแบ่งพาร์ทิชันในดิสก์เพื่อใช้กับเดเบียน "
-"หรือคุณจะแบ่งพาร์ทิชันเองก็ได้ถ้าคุณต้องการ ถ้าคุณเลือกใช้เครื่องมือแนะแนวทางการแบ่งพาร์ทิชัน "
-"คุณยังมีโอกาสที่จะดูผลการแบ่ง แล้วปรับค่าในภายหลัง"
-
 #. Type: text
 #. Description
-#: ../partman-auto.templates:123
-msgid "Resize ${PARTITION} and use freed space"
+#: ../partman-auto.templates:167
+msgid "Guided - resize ${PARTITION} and use freed space"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid "Failed to create enough space for installation"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

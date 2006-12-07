@@ -3,29 +3,31 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of he.po to Hebrew
 # Hebrew messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# <>, 2004.
-# 
-# 
+#
+#
+# Lior Kaplan <kaplan@debian.org>, 2004-2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-09 06:05-0600\n"
-"PO-Revision-Date: 2006-05-20 12:36-0500\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-10-02 10:09+0200\n"
 "Last-Translator: Lior Kaplan <kaplan@debian.org>\n"
-"Language-Team: Hebrew\n"
+"Language-Team: Hebrew <debian-hebrew-common@lists.alioth.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:3
 msgid "Starting up the partitioner"
-msgstr "מפעיל את מנהל החלוקה למחיצות"
+msgstr "הפעלת מנהל החלוקה למחיצות"
 
 #. Type: text
 #. Description
@@ -42,9 +44,8 @@ msgstr "בודק מערכות קבצים..."
 #. Type: error
 #. Description
 #: ../partman-base.templates:20
-#, fuzzy
 msgid "Device in use"
-msgstr "רכיב:"
+msgstr "רכיב בשימוש"
 
 #. Type: error
 #. Description
@@ -52,14 +53,13 @@ msgstr "רכיב:"
 msgid ""
 "No modifications can be made to the device ${DEVICE} for the following "
 "reasons:"
-msgstr ""
+msgstr "לא ניתן לבצע שינויים להתקן ${DEVICE} מהסיבות הבאות:"
 
 #. Type: error
 #. Description
 #: ../partman-base.templates:33
-#, fuzzy
 msgid "Partition in use"
-msgstr "סכמת חלוקה למחיצות:"
+msgstr "מחיצה בשימוש"
 
 #. Type: error
 #. Description
@@ -67,12 +67,12 @@ msgstr "סכמת חלוקה למחיצות:"
 #. In short, ${PARTITION} will indeed contain the partition
 #. NUMBER and not the partition NAME
 #: ../partman-base.templates:33
-#, fuzzy
 msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
 msgstr ""
-"יצירת איזור ה-SWAP במחיצה במחיצה מספר ${PARTITION} בהתקן ${DEVICE} נכשלה."
+"לא ניתן לבצע שינויים למחיצה מספר ${PARTITION} של התקן ${DEVICE} מהסיבות "
+"הבאות:"
 
 #. Type: boolean
 #. Description
@@ -83,7 +83,7 @@ msgid ""
 "debian-boot@lists.debian.org with information."
 msgstr ""
 "למחלק המחיצות אין מידע על סוג ברירת המחדל לטבלת מחיצות על הארכיטקטורה שלך. "
-"אנא שלח דואל לכתובת debian-boot@lists.debian.org עם המידע."
+"אנא שלח דואר אלקטרוני לכתובת debian-boot@lists.debian.org עם המידע."
 
 #. Type: boolean
 #. Description
@@ -109,7 +109,7 @@ msgid ""
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
-"מחלק המחיצות מבוסס על הספריה libparted, שלא מכילה תמיכה בסוג טבלת המחיצות "
+"מחלק המחיצות מבוסס על הספרייה libparted, שלא מכילה תמיכה בסוג טבלת המחיצות "
 "שבשימוש בארכיטקטורה שלך. מומלץ שתצא ממחלק המחיצות."
 
 #. Type: boolean
@@ -118,7 +118,7 @@ msgstr ""
 msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
-msgstr "אם אתה יכול, עזור להוסיף תמיכה לסוג טבלת המחיצות  ל-libparted."
+msgstr "אם אתה יכול, עזור להוסיף תמיכה לסוג טבלת המחיצות ל-libparted."
 
 #. Type: select
 #. Description
@@ -130,8 +130,8 @@ msgid ""
 "partition table."
 msgstr ""
 "זהו המבנה הנוכחי של המחיצות ונקודות העגינה שמוגדרות. בחר במחיצה על-מנת "
-"להתאים את הגדרותיה או בחר במרחב הפנוי כדי להוסיף מחיצה חדשה, או בהתקן כדי "
-"לאתחל את טבלה המחיצות שלו."
+"להתאים את הגדרותיה (מערכת קבצים, נקודת עגינה וכו') או בחר בשטח הפנוי כדי "
+"להוסיף מחיצה חדשה, או בהתקן כדי לאתחל את טבלה המחיצות שלו."
 
 #. Type: boolean
 #. Description
@@ -216,13 +216,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid "Write the changes to disks?"
 msgstr "לכתוב את השינויים לדיסק הקשיח?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
@@ -232,7 +232,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
@@ -240,133 +240,135 @@ msgstr ""
 "אזהרה: פעולה זו תשמיד את כל המידע הקיים על-גבי המחיצות שהוסרו, או מחיצות "
 "שנבחרו לפרמוט."
 
-#. Type: boolean
-#. Description
-#: ../partman-base.templates:113
-msgid "${ITEMS}"
-msgstr "${ITEMS}"
-
 #. Type: text
 #. Description
-#: ../partman-base.templates:124
+#: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
 msgstr "המחיצות הבאות יאותחלו:"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:129
+#: ../partman-base.templates:130
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
-msgstr "מחיצה מספר ${PARTITION} על התקן ${DEVICE} כ-${TYPE}"
+msgstr "מחיצה מספר ${PARTITION} על התקן ${DEVICE} מסוג ${TYPE}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:133
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr "${DEVICE} מסוג ${TYPE}"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
 msgid "The partition tables of the following devices are changed:"
 msgstr "טבלת המחיצות של ההתקנים הבאים שונתה:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:138
+#: ../partman-base.templates:145
 msgid "What to do with this device:"
 msgstr "מה לעשות עם ההתקן:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:150
 msgid "How to use this free space:"
-msgstr "כיצד להשתמש במקום הפנוי:"
+msgstr "כיצד להשתמש בשטח הפנוי:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid "Partition settings:"
 msgstr "הגדרת המחיצות:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
 msgstr ""
-"אתה עורך את המחיצה #${PARTITION} על ${DEVICE}. ${OTHERINFO} ${DESTROYED}"
+"אתה עורך את המחיצה #${PARTITION} של ${DEVICE}. ${OTHERINFO} ${DESTROYED}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:153
+#: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
 msgstr "המחיצה מכילה את ${FILESYSTEM}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:157
+#: ../partman-base.templates:164
 msgid "No existing file system was detected in this partition."
-msgstr "לא אותרה מערכת קבצים קיימת על המחיצה הנוכחית."
+msgstr "לא אותרה מערכת קבצים קיימת על המחיצה הזאת."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:161
+#: ../partman-base.templates:168
 msgid "All data in it WILL BE DESTROYED!"
-msgstr "כל המידע בתוכו יהרס!"
+msgstr "כל המידע בתוכו ייהרס!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:165
+#: ../partman-base.templates:172
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
-msgstr "המחיצה מתחילה ב-${FROMCHS} ומסתימית ב-${TOCHS}."
+msgstr "המחיצה מתחילה ב-${FROMCHS} ומסתיימת ב-${TOCHS}."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:169
+#: ../partman-base.templates:176
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
-msgstr "המרחב הפנוי מתחיל ב-${FROMCHS} ומסתיים ב-${TOCHS}."
+msgstr "השטח הפנוי מתחיל ב-${FROMCHS} ומסתיים ב-${TOCHS}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:173
+#: ../partman-base.templates:180
 msgid "Please wait..."
 msgstr "אנא המתן..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:177
+#: ../partman-base.templates:184
 msgid "Partitions formatting"
 msgstr "פרמוט מחיצות"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:181
+#: ../partman-base.templates:188
 msgid "Processing..."
 msgstr "מבצע..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:193
+#: ../partman-base.templates:200
 msgid "Done setting up the partition"
 msgstr "סיום הגדרת המחיצה"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:197
+#: ../partman-base.templates:204
 msgid "Finish partitioning and write changes to disk"
 msgstr "סיום פעולת הגדרת המחיצות וכתיבת המידע לכונן"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:201
+#: ../partman-base.templates:208
 msgid "Undo changes to partitions"
-msgstr "בטל את השינויים שבוצעו למחיצות"
+msgstr "ביטול השינויים שבוצעו למחיצות"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:205
+#: ../partman-base.templates:212
 msgid "Show Cylinder/Head/Sector information"
 msgstr "הצגת מידע פיזי (Cylinder/Head/Sector)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:209
+#: ../partman-base.templates:216
 #, no-c-format
 msgid "Dump partition info in %s"
 msgstr "הכוון את מידע המחיצות לתוך %s"
@@ -374,35 +376,35 @@ msgstr "הכוון את מידע המחיצות לתוך %s"
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:214
+#: ../partman-base.templates:221
 msgid "FREE SPACE"
-msgstr "מרחב פנוי"
+msgstr "שטח פנוי"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:219
+#: ../partman-base.templates:226
 msgid "unusable"
 msgstr "לא שמיש"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:224
+#: ../partman-base.templates:231
 msgid "primary"
 msgstr "ראשית"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:229
+#: ../partman-base.templates:236
 msgid "logical"
 msgstr "לוגית"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:234
+#: ../partman-base.templates:241
 msgid "pri/log"
 msgstr "ראש/לוג"
 
@@ -413,7 +415,7 @@ msgstr "ראש/לוג"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:243
+#: ../partman-base.templates:250
 #, no-c-format
 msgid "#%s"
 msgstr "%s."
@@ -421,7 +423,7 @@ msgstr "%s."
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:248
+#: ../partman-base.templates:255
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "IDE%s master (%s)"
@@ -429,7 +431,7 @@ msgstr "IDE%s master (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:253
+#: ../partman-base.templates:260
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "IDE%s slave (%s)"
@@ -437,7 +439,7 @@ msgstr "IDE%s slave (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:258
+#: ../partman-base.templates:265
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "IDE%s master, מחיצה מספר %s (%s)"
@@ -445,76 +447,76 @@ msgstr "IDE%s master, מחיצה מספר %s (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:263
+#: ../partman-base.templates:270
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "IDE%s slave, מחיצה מספר%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:267
+#: ../partman-base.templates:274
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "SCSI%s (%s,%s,%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:271
+#: ../partman-base.templates:278
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "SCSI%s (%s,%s,%s), מחיצה מספר%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:275
+#: ../partman-base.templates:282
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "RAID%s device #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:279
+#: ../partman-base.templates:286
 #, no-c-format
 msgid "Encrypted volume (%s)"
-msgstr "כרך מוצפן (%s)"
+msgstr "נפח מוצפן (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:283
+#: ../partman-base.templates:290
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:287
+#: ../partman-base.templates:294
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "לולאה פנימית (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:291
+#: ../partman-base.templates:298
 #, no-c-format
 msgid "DASD %s (%s)"
-msgstr ""
+msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:295
-#, fuzzy, no-c-format
+#: ../partman-base.templates:302
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "SCSI%s (%s,%s,%s), מחיצה מספר%s (%s)"
+msgstr "DASD %s (%s), מחיצה מספר%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:299
+#: ../partman-base.templates:306
 msgid "Cancel this menu"
 msgstr "בטל תפריט זה"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:304
+#: ../partman-base.templates:311
 msgid "Partition disks"
 msgstr "חלוקה למחיצות"

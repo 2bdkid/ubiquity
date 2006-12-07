@@ -4,6 +4,7 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of lv.po to Latvian
+# Aigars Mahinovs <aigarius@debian.org>, 2006.
 # Latvian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
@@ -11,19 +12,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lv\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-09 06:05-0600\n"
-"PO-Revision-Date: 2006-02-11 15:42+0200\n"
-"Last-Translator: Aigars Mahinovs <aigarius@laka.lv>\n"
-"Language-Team: locale@laka.lv <locale@laka.lv>\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-09-08 19:09+0200\n"
+"Last-Translator: Aigars Mahinovs <aigarius@debian.org>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.2\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:3
 msgid "Starting up the partitioner"
-msgstr "Sāknēju partīciju pārvaldības rīku"
+msgstr "Palaižu partīciju pārvaldības rīku"
 
 #. Type: text
 #. Description
@@ -40,9 +44,8 @@ msgstr "Detektēju failu sistēmas..."
 #. Type: error
 #. Description
 #: ../partman-base.templates:20
-#, fuzzy
 msgid "Device in use"
-msgstr "Iekārta:"
+msgstr "Iekārta tiek lietota"
 
 #. Type: error
 #. Description
@@ -50,14 +53,13 @@ msgstr "Iekārta:"
 msgid ""
 "No modifications can be made to the device ${DEVICE} for the following "
 "reasons:"
-msgstr ""
+msgstr "Izmaiņu veikšana iekārtā ${DEVICE} nav iespējama jo:"
 
 #. Type: error
 #. Description
 #: ../partman-base.templates:33
-#, fuzzy
 msgid "Partition in use"
-msgstr "Dalīšanas shēma:"
+msgstr "Partīcija tiek lietota"
 
 #. Type: error
 #. Description
@@ -65,12 +67,12 @@ msgstr "Dalīšanas shēma:"
 #. In short, ${PARTITION} will indeed contain the partition
 #. NUMBER and not the partition NAME
 #: ../partman-base.templates:33
-#, fuzzy
 msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
 msgstr ""
-"Apmaiņas telpas izveide uz ${DEVICE} #${PARTITION} partīcijas nav izdevusies."
+"Izmaiņu veikšana iekārtas ${DEVICE} partīcijā ar numuru ${PARTITION} nav "
+"iespējama, jo:"
 
 #. Type: boolean
 #. Description
@@ -80,9 +82,9 @@ msgid ""
 "partition tables on your architecture.  Please send an e-mail message to "
 "debian-boot@lists.debian.org with information."
 msgstr ""
-"Šim partīciju pārvaldības rīkam nav informācijas par jūsu datora "
-"arhitektūras noklusētajiem partīciju tabulas tipiem. Lūdzu nosūtiet e-pastu "
-"ar šo informāciju uz debian-boot@lists.debian.org."
+"Šim partīciju pārvaldības rīkam nav informācijas par šī datora arhitektūras "
+"noklusētajiem partīciju tabulas tipiem. Lūdzu nosūtiet e-pastu ar šo "
+"informāciju uz debian-boot@lists.debian.org."
 
 #. Type: boolean
 #. Description
@@ -91,8 +93,8 @@ msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
 msgstr ""
-"Piezīme: Ja konkrētās partīcijas tipu neatbalsta libparted, šāda tipa "
-"partīcija jebkurā gadījumā nestrādās korekti."
+"Piezīme: Ja konkrētās partīciju tabulas tipu neatbalsta libparted, šāda tipa "
+"partīcionēšana jebkurā gadījumā nestrādās korekti."
 
 #. Type: boolean
 #. Description
@@ -108,9 +110,9 @@ msgid ""
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
-"Dalīšanas rīks izmanto libparted bibliorēku, kurā šobrīd nav iekļauts jūsu "
-"datora arhitektūras partīciju tabulas atbalsts. Jums noteikti nevajadzētu "
-"turpināt partīciju veidošanu, izejiet no dalīšanas rīka."
+"Šis dalīšanas rīks izmanto libparted bibliorēku, kurā šobrīd nav iekļauts "
+"jūsu datora arhitektūras partīciju tabulas atbalsts. Jums noteikti "
+"nevajadzētu turpināt partīciju veidošanu, izejiet no dalīšanas rīka."
 
 #. Type: boolean
 #. Description
@@ -222,13 +224,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid "Write the changes to disks?"
 msgstr "Saglabāt izmaiņas diskā?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
@@ -238,7 +240,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
@@ -246,52 +248,54 @@ msgstr ""
 "UZMANĪBU: Visi dati un jebkuras partīcijas kuru jūs esat izdzēsuši vai "
 "grasaties izveidot no jauna tiks iznīcināti."
 
-#. Type: boolean
-#. Description
-#: ../partman-base.templates:113
-msgid "${ITEMS}"
-msgstr "${ITEMS}"
-
 #. Type: text
 #. Description
-#: ../partman-base.templates:124
+#: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
 msgstr "Tiks formatētas sekojošas partīcijas:"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:129
+#: ../partman-base.templates:130
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
 msgstr "partīcija #${PARTITION} uz ${DEVICE} kā ${TYPE}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:133
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr "${DEVICE} kā ${TYPE}"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
 msgid "The partition tables of the following devices are changed:"
 msgstr "sekojošu ierīču partīciju tabulas ir izmainītas:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:138
+#: ../partman-base.templates:145
 msgid "What to do with this device:"
 msgstr "Ko darīt ar šo ierīci:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:150
 msgid "How to use this free space:"
 msgstr "Kā izmantot šo brīvo vietu:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid "Partition settings:"
 msgstr "Particijas parametri:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
@@ -301,79 +305,79 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:153
+#: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
 msgstr "Šī partīcija ir formatēta kā ${FILESYSTEM}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:157
+#: ../partman-base.templates:164
 msgid "No existing file system was detected in this partition."
 msgstr "Esošas failu sistēmas šajā partīcijā nav atrastas."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:161
+#: ../partman-base.templates:168
 msgid "All data in it WILL BE DESTROYED!"
 msgstr "Visi dati TIKS IZNĪCINĀTI!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:165
+#: ../partman-base.templates:172
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "Partīcija sākās ${FROMCHS} un beidzās ${TOCHS}."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:169
+#: ../partman-base.templates:176
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "Brīvā diska vieta sākas ${FROMCHS} un beidzas ${TOCHS}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:173
+#: ../partman-base.templates:180
 msgid "Please wait..."
 msgstr "Lūdzu uzgaidiet..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:177
+#: ../partman-base.templates:184
 msgid "Partitions formatting"
 msgstr "Particiju formatēšana"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:181
+#: ../partman-base.templates:188
 msgid "Processing..."
 msgstr "Apstrādāju..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:193
+#: ../partman-base.templates:200
 msgid "Done setting up the partition"
 msgstr "Partīcija sagatavota"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:197
+#: ../partman-base.templates:204
 msgid "Finish partitioning and write changes to disk"
 msgstr "Beigt dalīšanu un saglabāt izmaiņas"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:201
+#: ../partman-base.templates:208
 msgid "Undo changes to partitions"
 msgstr "Atcelt partīciju izmaiņas"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:205
+#: ../partman-base.templates:212
 msgid "Show Cylinder/Head/Sector information"
 msgstr "Aplūkot Cylinder/Head/Sector informāciju"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:209
+#: ../partman-base.templates:216
 #, no-c-format
 msgid "Dump partition info in %s"
 msgstr "Saglabāt partīciju informāciju %s"
@@ -381,35 +385,35 @@ msgstr "Saglabāt partīciju informāciju %s"
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:214
+#: ../partman-base.templates:221
 msgid "FREE SPACE"
 msgstr "BRĪVĀ VIETA"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:219
+#: ../partman-base.templates:226
 msgid "unusable"
 msgstr "neizmant"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:224
+#: ../partman-base.templates:231
 msgid "primary"
 msgstr "primārā"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:229
+#: ../partman-base.templates:236
 msgid "logical"
 msgstr "loģiskā"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:234
+#: ../partman-base.templates:241
 msgid "pri/log"
 msgstr "pri/log"
 
@@ -420,15 +424,15 @@ msgstr "pri/log"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:243
+#: ../partman-base.templates:250
 #, no-c-format
 msgid "#%s"
-msgstr "#%s"
+msgstr "Nr.%s"
 
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:248
+#: ../partman-base.templates:255
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "IDE%s master (%s)"
@@ -436,7 +440,7 @@ msgstr "IDE%s master (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:253
+#: ../partman-base.templates:260
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "IDE%s slave (%s)"
@@ -444,7 +448,7 @@ msgstr "IDE%s slave (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:258
+#: ../partman-base.templates:265
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "IDE%s master, partīcija #%s (%s)"
@@ -452,76 +456,76 @@ msgstr "IDE%s master, partīcija #%s (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:263
+#: ../partman-base.templates:270
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "IDE%s slave, partīcija #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:267
+#: ../partman-base.templates:274
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "SCSI%s (%s,%s,%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:271
+#: ../partman-base.templates:278
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "SCSI%s (%s,%s,%s), partīcija #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:275
+#: ../partman-base.templates:282
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "RAID%s ierīce #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:279
-#, fuzzy, no-c-format
+#: ../partman-base.templates:286
+#, no-c-format
 msgid "Encrypted volume (%s)"
-msgstr "Konfigurēt šifrētos sējumus"
+msgstr "Šifrēts sējums (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:283
+#: ../partman-base.templates:290
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:287
+#: ../partman-base.templates:294
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "Atcilpa (cilpa%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:291
+#: ../partman-base.templates:298
 #, no-c-format
 msgid "DASD %s (%s)"
-msgstr ""
+msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:295
-#, fuzzy, no-c-format
+#: ../partman-base.templates:302
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "SCSI%s (%s,%s,%s), partīcija #%s (%s)"
+msgstr "DASD %s (%s), partīcija #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:299
+#: ../partman-base.templates:306
 msgid "Cancel this menu"
 msgstr "Atcelt šo izvēlni"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:304
+#: ../partman-base.templates:311
 msgid "Partition disks"
-msgstr "Izveidot partīcijas"
+msgstr "Disku sadalīšana partīcijās"

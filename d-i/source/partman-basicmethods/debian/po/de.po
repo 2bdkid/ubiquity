@@ -7,21 +7,21 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
 # Jan Luebbe <jluebbe@lasnet.de>, 2003.
 # Thorsten Sauter <tsauter@gmx.net>, 2003.
 #
-# This file is maintained by Dennis Stampfer <seppy@debian.org>
+# This file is maintained by Jens Seidel <jensseidel@users.sf.net>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-31 18:31-0600\n"
-"PO-Revision-Date: 2004-10-01 15:09GMT\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-05-05 18:29-0600\n"
+"PO-Revision-Date: 2006-08-23 23:49+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,8 @@ msgstr "Zurück zum Menü?"
 #. Description
 #: ../partman-basicmethods.templates:3
 msgid "No file system is specified for partition #${PARTITION} of ${DEVICE}."
-msgstr "Es wurde kein Dateisystem für #${PARTITION} auf ${DEVICE} angegeben."
+msgstr ""
+"Es wurde kein Dateisystem für Partition ${PARTITION} auf ${DEVICE} angegeben."
 
 #. Type: boolean
 #. Description
@@ -62,7 +63,7 @@ msgstr "Partition nicht benutzen"
 #. up to 25 character positions
 #: ../partman-basicmethods.templates:16
 msgid "Format the partition:"
-msgstr "Partition formatieren"
+msgstr "Partition formatieren:"
 
 #. Type: text
 #. Description
@@ -110,7 +111,7 @@ msgstr "Vorhandene Daten erhalten und benutzen"
 
 #. Type: text
 #. Description
-#. short variant of `keep and use the existing format'
+#. short variant of `keep and use the existing data'
 #: ../partman-basicmethods.templates:51
 msgid "keep"
 msgstr "Beibehalten"

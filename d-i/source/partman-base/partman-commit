@@ -4,9 +4,9 @@ set -e
 . /lib/partman/definitions.sh
 
 cleanup () {
-    if [ -f /var/run/parted_server.pid ]; then
-	stop_parted_server
-    fi
+	if [ -f /var/run/parted_server.pid ]; then
+		stop_parted_server
+	fi
 }
 trap cleanup EXIT
 
@@ -37,67 +37,66 @@ deci='.'
 initcount=`ls /lib/partman/init.d/* | wc -l`
 db_progress START 0 $initcount partman/progress/init/title
 for s in /lib/partman/init.d/*; do
-    if [ -x $s ]; then
-	base=$(basename $s | sed 's/[0-9]*//')
-	echo $base >&2
-	# Not every init script has, or needs, its own progress
-	# template. Add them to slow init scripts only.
-	if ! db_progress INFO partman/progress/init/$base; then
-	    db_progress INFO partman/progress/init/fallback
+	if [ -x $s ]; then
+		base=$(basename $s | sed 's/[0-9]*//')
+		# Not every init script has, or needs, its own progress
+		# template. Add them to slow init scripts only.
+		if ! db_progress INFO partman/progress/init/$base; then
+			db_progress INFO partman/progress/init/fallback
+		fi
+		if ! $s; then
+			db_progress STOP
+			exit 10
+		fi
 	fi
-	if ! $s; then
-	    db_progress STOP
-	    exit 10
-	fi
-    fi
-    db_progress STEP 1
+	db_progress STEP 1
 done
 db_progress STOP
 
 # Hack to handle information fed into partman by an external agent (i.e.
 # Ubiquity).
 if [ "$PARTMAN_UPDATE_BEFORE_COMMIT" ]; then
-    for dev in /var/lib/partman/devices/*; do
-	[ -d "$dev" ] || continue
-	cd $dev
-	partitions=
-	open_dialog PARTITIONS
-	while { read_line partinfo; [ "$partinfo" ]; }; do
-	    if [ "$partitions" ]; then
-		partitions="$partitions
+	for dev in /var/lib/partman/devices/*; do
+		[ -d "$dev" ] || continue
+		cd $dev
+		partitions=
+		open_dialog PARTITIONS
+		while { read_line partinfo; [ "$partinfo" ]; }; do
+			if [ "$partitions" ]; then
+				partitions="$partitions
 $partinfo"
-	    else
-		partitions="$partinfo"
-	    fi
-	done
-	close_dialog
+			else
+				partitions="$partinfo"
+			fi
+		done
+		close_dialog
 
-	IFS="$NL"
-	for partinfo in $partitions; do
-	    restore_ifs
-	    for u in /lib/partman/update.d/*; do
-		[ -x "$u" ] || continue
-		$u $dev $partinfo
-	    done
-	    IFS="$NL"
+		IFS="$NL"
+		for partinfo in $partitions; do
+			restore_ifs
+			for u in /lib/partman/update.d/*; do
+				[ -x "$u" ] || continue
+				$u $dev $partinfo
+			done
+			IFS="$NL"
+		done
+		restore_ifs
 	done
-	restore_ifs
-    done
 
-    if ! confirm_changes "partman"; then
-	trap - EXIT
-	exit 10
-    fi
+	if ! confirm_changes "partman"; then
+		trap - EXIT
+		exit 10
+	fi
 fi
 
 for s in /lib/partman/commit.d/*; do
-    if [ -x $s ]; then
-	$s
-    fi
+	if [ -x $s ]; then
+		$s
+	fi
 done
 
 for s in /lib/partman/finish.d/*; do
-    if [ -x $s ]; then
-	$s
-    fi
+	if [ -x $s ]; then
+		$s
+	fi
 done

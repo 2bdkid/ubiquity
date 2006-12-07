@@ -3,12 +3,8 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -16,19 +12,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
+"Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-09 06:05-0600\n"
-"PO-Revision-Date: 2006-03-12 22:52+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-10-22 22:15+0200\n"
+"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -51,9 +45,8 @@ msgstr "फ़ाइल सिस्टम का पता लगाया ज�
 #. Type: error
 #. Description
 #: ../partman-base.templates:20
-#, fuzzy
 msgid "Device in use"
-msgstr "उपकरणः"
+msgstr "उपकरण प्रयोग में"
 
 #. Type: error
 #. Description
@@ -61,14 +54,13 @@ msgstr "उपकरणः"
 msgid ""
 "No modifications can be made to the device ${DEVICE} for the following "
 "reasons:"
-msgstr ""
+msgstr "उपकरण ${DEVICE} में निम्नलिखित कारणों से कोई भी परिवर्तन नहीं किया जा सकाः"
 
 #. Type: error
 #. Description
 #: ../partman-base.templates:33
-#, fuzzy
 msgid "Partition in use"
-msgstr "पार्टीशन करने की स्कीमः"
+msgstr "पार्टीशन उपयोग में है"
 
 #. Type: error
 #. Description
@@ -76,11 +68,12 @@ msgstr "पार्टीशन करने की स्कीमः"
 #. In short, ${PARTITION} will indeed contain the partition
 #. NUMBER and not the partition NAME
 #: ../partman-base.templates:33
-#, fuzzy
 msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
-msgstr "स्वैप जगह को पार्टीशनः #${PARTITION} में, उपकरणः ${DEVICE} में बनाने में असफल."
+msgstr ""
+"उपकरण ${DEVICE} के पार्टिशन #${PARTITION} , मेपरिवर्तन करने मेंननिम्न कारणों से े मे: "
+"असफल."
 
 #. Type: boolean
 #. Description
@@ -90,6 +83,8 @@ msgid ""
 "partition tables on your architecture.  Please send an e-mail message to "
 "debian-boot@lists.debian.org with information."
 msgstr ""
+"आपके संघटन के अनुरूप विभाजन तालिका इस विभाजक के संज्ञान में नहीं है। कृपया सूचना के साथ इस "
+"पते पर ई-मेल करें debian-boot@lists.debian.org"
 
 #. Type: boolean
 #. Description
@@ -98,14 +93,14 @@ msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
 msgstr ""
-"यदि पार्टिशन टेबल का प्रकार libparted द्वारा समर्थित नहीं है, तो यह पार्टिशनर भली "
-"प्रकार काम नहीं करेगा।"
+"यदि विभाजन तालिका का प्रकार libparted द्वारा समर्थित नहीं है, तो यह विभाजकिशनर "
+"भली प्रकार काम नहीं करेगा।"
 
 #. Type: boolean
 #. Description
 #: ../partman-base.templates:64
 msgid "Continue with partitioning?"
-msgstr "पार्टीशनिंग जारी रखें?"
+msgstr "पार्टीशनिंग जारी रखें?libparted "
 
 #. Type: boolean
 #. Description
@@ -115,6 +110,8 @@ msgid ""
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
+"यह विभाजक libparted पर आधारित है जोकि आपके संघटन के अनुरूप विभाजन तालिका के लिए "
+"समर्थित नहीं है। आपको इस विभाजक को प्रयोग नहीं करना चाहिए।"
 
 #. Type: boolean
 #. Description
@@ -134,6 +131,9 @@ msgid ""
 "etc.), a free space to create partitions, or a device to initialise its "
 "partition table."
 msgstr ""
+"यह आपके वर्तमान पार्टिशन्स व माउंट प्वाइंट्स का उपरिदृश्य है।यदि आपको किसी पार्टिशन में "
+"बदलाव करना है (फाइलसिस्टम, माउन्ट प्वाइंट आदि), मुक्त स्थान में पार्टिशन बनाने हैं, अथवा "
+"किसी उपकरण पर पार्टिशन टेबल बनाना है तो उसे चुनें।"
 
 #. Type: boolean
 #. Description
@@ -149,12 +149,14 @@ msgid ""
 "creating a new partition table on the device, then all current partitions "
 "will be removed."
 msgstr ""
+"आपने एक पूरे उपकरण को विभाजन के लिए चुना है। यदि आप इस पर नया पार्टिशन टेबल बनाते हैंतो "
+"सभी वर्तमान पार्टिशन मिटा दिये जाएँगे।"
 
 #. Type: boolean
 #. Description
 #: ../partman-base.templates:80
 msgid "Note that you will be able to undo this operation later if you wish."
-msgstr "टीप लें कि इस प्रक्रिया को बाद में यदि आप चाहें तो वापस ले सकते हैं."
+msgstr "ज्ञात रहे कि  कि इस प्रक्रिया को बाद में यदि आप चाहें तो वापस ले सकते हैं."
 
 #. Type: boolean
 #. Description
@@ -170,6 +172,8 @@ msgid ""
 "tables in libparted, the newly created partition table has to be written to "
 "the disk immediately."
 msgstr ""
+"लिबपार्टेड वर्तमान में सन पार्टिशन टेबल को पूर्णतया समर्थित नहीं करती है इसलिए नये बनाए "
+"गये पार्टिशनोंको तुरंत ही डिस्क पर लिखना होगा।"
 
 #. Type: boolean
 #. Description
@@ -212,25 +216,28 @@ msgid ""
 "If you plan on using already created file systems, be aware that existing "
 "files may prevent the successful installation of the base system."
 msgstr ""
+"यदि आप पहले से ही बने हुए फाइलसिस्टमों को प्रयोग करते हैं तो ध्यान रहे कि पहले से उपस्थित "
+"फाइलेआधार तंत्र के सफल संस्थापन में बाधा उत्पन्न कर सकती हैं।"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid "Write the changes to disks?"
 msgstr "परिवर्तनों को डिस्क में लिखें?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
-#, fuzzy
+#: ../partman-base.templates:114
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
-msgstr "यदि आप जारी रखते हैं, निम्नलिखित परिवर्तन डिस्क में लिखे जाएँगे."
+msgstr ""
+"यदि आप जारी रखते हैं, निम्नलिखित परिवर्तन डिस्क में लिख दिए जाएँगे। अन्यथा आप आगे के "
+"परिवर्तन हस्तचालित कर सकते हैं।"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
@@ -238,134 +245,136 @@ msgstr ""
 "चेतावनीः इससे आपके द्वारा मिटाए गए पार्टीशन के तथा फॉर्मेट किए जाने वाले पार्टीशन के सभी "
 "डाटा मिट जाएँगे."
 
-#. Type: boolean
-#. Description
-#: ../partman-base.templates:113
-msgid "${ITEMS}"
-msgstr "${ITEMS}"
-
 #. Type: text
 #. Description
-#: ../partman-base.templates:124
+#: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
 msgstr "निम्न पार्टीशन्स फॉर्मेट किए जाएँगेः"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:129
+#: ../partman-base.templates:130
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
-msgstr "पार्टीशन #${PARTITION} इस उपकरण काः ${DEVICE} इस प्रकार में: ${TYPE}"
+msgstr "${DEVICE} उपकरण के पार्टिशन #${PARTITION} को ${TYPE} प्रकार से"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:133
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr " का ${DEVICE} को ${TYPE} की भाँति "
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
 msgid "The partition tables of the following devices are changed:"
 msgstr "निम्न उपकरणों के पार्टीशन टेबल बदले गएः"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:138
+#: ../partman-base.templates:145
 msgid "What to do with this device:"
 msgstr "इस उपकरण के साथ क्या किया जाएः"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:150
 msgid "How to use this free space:"
 msgstr "इस रिक्त स्थान को कैसे इस्तेमाल किया जाए"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid "Partition settings:"
 msgstr "पार्टीशन सेटिंग्सः"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
 msgstr ""
-"आप संपादन कर रहे हैं पार्टीशन #${PARTITION} इस उपकरण काः ${DEVICE}. ${OTHERINFO} "
+"आप ${DEVICE} उपकरण का पार्टिशन #${PARTITION} सम्पादित कर रहे हैं. ${OTHERINFO} "
 "${DESTROYED}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:153
+#: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
-msgstr "यह पार्टीशन फॉर्मेटेड है ${FILESYSTEM} के साथ."
+msgstr "यह पार्टीशन ${FILESYSTEM} के साथ फॉर्मेट किया हुआ है. "
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:157
+#: ../partman-base.templates:164
 msgid "No existing file system was detected in this partition."
-msgstr "इस पार्टीशन में कोई उपलब्ध फ़ाइल सिस्टम नहीं मिला."
+msgstr "इस पार्टीशन में कोई भी ध फ़ाइल सिस्टविद्यमान म नहीं मिला."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:161
+#: ../partman-base.templates:168
 msgid "All data in it WILL BE DESTROYED!"
 msgstr "इसमें के सभी डाटा नष्ट हो जाएँगे!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:165
+#: ../partman-base.templates:172
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "पार्टीशन प्रारंभ होता है ${FROMCHS} से तथा खत्म होता है ${TOCHS} पर."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:169
+#: ../partman-base.templates:176
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "रिक्त स्थान प्रारंभ होता है ${FROMCHS} से तथा खत्म होता है ${TOCHS} पर."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:173
+#: ../partman-base.templates:180
 msgid "Please wait..."
-msgstr "कृपया इंतजार करें...."
+msgstr "कृपया प्रतीक्षा करें...."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:177
+#: ../partman-base.templates:184
 msgid "Partitions formatting"
 msgstr "पार्टीशन फार्मेट किया जा रहा है..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:181
+#: ../partman-base.templates:188
 msgid "Processing..."
 msgstr "प्रक्रिया में..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:193
+#: ../partman-base.templates:200
 msgid "Done setting up the partition"
 msgstr "पार्टीशन सेट किया जाना सम्पन्न हुआ"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:197
+#: ../partman-base.templates:204
 msgid "Finish partitioning and write changes to disk"
 msgstr "पार्टीशन किया जाना पूर्ण करें तथा परिवर्तनों को डिस्क पर लिखें"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:201
+#: ../partman-base.templates:208
 msgid "Undo changes to partitions"
 msgstr "पार्टीशनों में किए गए परिवर्तनों को रद्द कर पुरानी स्थिति बहाल करें"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:205
+#: ../partman-base.templates:212
 msgid "Show Cylinder/Head/Sector information"
 msgstr "सिलिंडर/हेड/सेक्टर जानकारी दिखाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:209
+#: ../partman-base.templates:216
 #, no-c-format
 msgid "Dump partition info in %s"
 msgstr "पार्टीशन इन्फो %s में डम्प करें"
@@ -373,35 +382,35 @@ msgstr "पार्टीशन इन्फो %s में डम्प क�
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:214
+#: ../partman-base.templates:221
 msgid "FREE SPACE"
 msgstr "रिक्त जगह"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:219
+#: ../partman-base.templates:226
 msgid "unusable"
 msgstr "अनुपयोगी"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:224
+#: ../partman-base.templates:231
 msgid "primary"
 msgstr "प्रायमरी"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:229
+#: ../partman-base.templates:236
 msgid "logical"
 msgstr "लॉज़िकल"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:234
+#: ../partman-base.templates:241
 msgid "pri/log"
 msgstr "प्राय/लॉज़ि"
 
@@ -412,7 +421,7 @@ msgstr "प्राय/लॉज़ि"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:243
+#: ../partman-base.templates:250
 #, no-c-format
 msgid "#%s"
 msgstr "#%s"
@@ -420,7 +429,7 @@ msgstr "#%s"
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:248
+#: ../partman-base.templates:255
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "आईडीई%s मास्टर (%s)"
@@ -428,7 +437,7 @@ msgstr "आईडीई%s मास्टर (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:253
+#: ../partman-base.templates:260
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "आईडीई%s स्लेव (%s)"
@@ -436,7 +445,7 @@ msgstr "आईडीई%s स्लेव (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:258
+#: ../partman-base.templates:265
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "आईडीई%s मास्टर, पार्टीशन #%s (%s)"
@@ -444,76 +453,76 @@ msgstr "आईडीई%s मास्टर, पार्टीशन #%s (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:263
+#: ../partman-base.templates:270
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "आईडीई%s स्लेव, पार्टीशन #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:267
+#: ../partman-base.templates:274
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "एससीएसआई%s (%s,%s,%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:271
+#: ../partman-base.templates:278
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "एससीएसआई%s (%s,%s,%s), पार्टीशन #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:275
+#: ../partman-base.templates:282
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "आरएआईडी%s उपकरण #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:279
-#, fuzzy, no-c-format
+#: ../partman-base.templates:286
+#, no-c-format
 msgid "Encrypted volume (%s)"
-msgstr "नेटवर्क कॉन्फ़िगर करें"
+msgstr "कूटबद्ध वॉल्यूम (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:283
+#: ../partman-base.templates:290
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "एलवीएम वीजी %s, एलवी %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:287
+#: ../partman-base.templates:294
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "लूपबैक (लूप%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:291
+#: ../partman-base.templates:298
 #, no-c-format
 msgid "DASD %s (%s)"
-msgstr ""
+msgstr "डीएएसडी %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:295
-#, fuzzy, no-c-format
+#: ../partman-base.templates:302
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "एससीएसआई%s (%s,%s,%s), पार्टीशन #%s (%s)"
+msgstr "डीएएसडी %s (%s), पार्टीशन #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:299
+#: ../partman-base.templates:306
 msgid "Cancel this menu"
 msgstr "इस मेन्यू को रद्द करें"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:304
+#: ../partman-base.templates:311
 msgid "Partition disks"
 msgstr "पार्टीशन डिस्क"

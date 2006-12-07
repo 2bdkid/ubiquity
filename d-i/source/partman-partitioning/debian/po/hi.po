@@ -3,12 +3,12 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of debian-installer_packages_po.po to Hindi
-#
-#
+# translation of hi.po to Hindi
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
+# translation of debian-installer_packages_po.po to
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
-#
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
@@ -16,19 +16,17 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-07 23:43-0600\n"
-"PO-Revision-Date: 2006-03-12 22:52+0530\n"
-"Last-Translator: Nishant Sharma <me@nishants.net>\n"
-"Language-Team:  <en@li.org>\n"
+"Project-Id-Version: hi\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-16 04:56+0000\n"
+"PO-Revision-Date: 2006-10-15 03:10+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 2\n"
-"X-Poedit-Language: Hindi\n"
-"X-Poedit-Country: INDIA\n"
-"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: 2X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.2\n"
 
 #. Type: text
 #. Description
@@ -55,12 +53,13 @@ msgid ""
 "Before you can select a partition to copy, any previous changes have to be "
 "written to disk."
 msgstr ""
+"इससे पहले कि आप कोई पार्टिशन नकल के लिए चुनें, पिछले सभी परिवर्तन डिस्क पर लिखने ही होंगे."
 
 #. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:15
 msgid "Please note that the copy operation may take a long time."
-msgstr ""
+msgstr "कृपया ज्ञात रहे कि नकल करने की प्रक्रिया लम्बा समय ले सकती है."
 
 #. Type: select
 #. Description
@@ -96,88 +95,96 @@ msgstr "नया आकार दिया जाना संभव नही�
 #. Description
 #: ../partman-partitioning.templates:38
 msgid "Because of an unknown reason it is impossible to resize this partition."
-msgstr ""
+msgstr "किसी अज्ञात कारण से इस पार्टिशन का आकार बदलना संभव नहीं है."
+
+#. Type: error
+#. Description
+#: ../partman-partitioning.templates:38
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr "विस्तृत सूचना के लिए /var/log/messages या वर्चुअल कंसोल 4 देखें।"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:43
-#, fuzzy
+#: ../partman-partitioning.templates:45
 msgid "Write previous changes to disk and continue?"
-msgstr "परिवर्तनों को डिस्क में लिखें?"
+msgstr "पिछले परिवर्तनों को डिस्क में लिख कर आगे बढ़ें?"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:43
+#: ../partman-partitioning.templates:45
 msgid ""
 "Before you can select a new partition size, any previous changes have to be "
 "written to disk."
 msgstr ""
+"इससे पहले कि आप पार्टिशन का नया आकार चुनें, सभी पिछले परिवर्तन डिस्क पर लिखने ही होंगे."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:43
+#: ../partman-partitioning.templates:45
 msgid "You cannot undo this operation."
-msgstr ""
+msgstr "आप इस क्रिया के परिवर्तनों से वापस नहीं जा पाएँगे."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:43
+#: ../partman-partitioning.templates:45
 msgid "Please note that the resize operation may take a long time."
-msgstr ""
+msgstr "कृपया ज्ञात हो कि पार्टिशन का आकार बदलने की प्रक्रिया लम्बा समय ले सकती है."
 
 #. Type: string
 #. Description
-#: ../partman-partitioning.templates:54
+#: ../partman-partitioning.templates:56
 msgid ""
 "The minimum size you can use is ${MINSIZE} or ${PERCENT} and the maximum "
 "size is ${MAXSIZE}."
 msgstr ""
+"प्रयोग करने योग्य निम्नतम आकार  ${MINSIZE} या ${PERCENT}है  और अधिकतम आकार "
+"${MAXSIZE} है."
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:68
+#: ../partman-partitioning.templates:70
 msgid "Too large size"
 msgstr "बहुत बड़ा आकार"
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:72
+#: ../partman-partitioning.templates:74
 msgid "Too small size"
 msgstr "बहुत छोटा आकार"
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:76
+#: ../partman-partitioning.templates:78
 msgid "Resize operation failure"
 msgstr "नया आकार देने की प्रक्रिया असफल रही"
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:76
+#: ../partman-partitioning.templates:78
 msgid "An error occurred while writing the changes to the storage devices."
-msgstr ""
+msgstr "भंडारण उपकरण पर परिवर्तनों को लिखते समय एक त्रुटि हुई."
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:76
+#: ../partman-partitioning.templates:78
 msgid "The resize operation is aborted."
 msgstr "नया आकार देने की प्रक्रिया छोड़ी गई."
 
 #. Type: string
 #. Description
-#: ../partman-partitioning.templates:84
+#: ../partman-partitioning.templates:86
 msgid "New partition size:"
 msgstr "नया पार्टीशन आकार:"
 
 #. Type: string
 #. Description
-#: ../partman-partitioning.templates:84
+#: ../partman-partitioning.templates:86
 msgid "The maximum size you can use is ${MAXSIZE}."
 msgstr "अधिकतम आकार जो आप इस्तेमाल कर सकते हैं वह हैः ${MAXSIZE}."
 
 #. Type: string
 #. Description
-#: ../partman-partitioning.templates:84
+#: ../partman-partitioning.templates:86
 #, no-c-format
 msgid ""
 "Hint: Use \"20%\" (or \"30%\", etc.) for 20% (resp. 30%, etc.) of the "
@@ -190,31 +197,31 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-partitioning.templates:93
+#: ../partman-partitioning.templates:95
 msgid "Invalid size"
 msgstr "अवैध आकार"
 
 #. Type: select
 #. Choices
-#: ../partman-partitioning.templates:97
+#: ../partman-partitioning.templates:99
 msgid "Beginning"
 msgstr "प्रारंभ"
 
 #. Type: select
 #. Choices
-#: ../partman-partitioning.templates:97
+#: ../partman-partitioning.templates:99
 msgid "End"
 msgstr "अंत"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:98
+#: ../partman-partitioning.templates:100
 msgid "Location for the new partition:"
 msgstr "नए पार्टीशन के लिए स्थानः"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:98
+#: ../partman-partitioning.templates:100
 msgid ""
 "Please choose whether you want the new partition to be created at the "
 "beginning or at the end of the available space."
@@ -222,108 +229,108 @@ msgstr "आप नया पार्टिशन उपलब्ध स्थ�
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:105
+#: ../partman-partitioning.templates:107
 msgid "File system for the new partition:"
 msgstr "नए पार्टीशन हेतु फ़ाइल सिस्टम:"
 
 #. Type: select
 #. Choices
-#: ../partman-partitioning.templates:109
+#: ../partman-partitioning.templates:111
 msgid "Primary"
 msgstr "प्रायमरी"
 
 #. Type: select
 #. Choices
-#: ../partman-partitioning.templates:109
+#: ../partman-partitioning.templates:111
 msgid "Logical"
 msgstr "लॉज़िकल"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:110
+#: ../partman-partitioning.templates:112
 msgid "Type for the new partition:"
 msgstr "नए पार्टीशन के लिए प्रकारः"
 
 #. Type: multiselect
 #. Description
-#: ../partman-partitioning.templates:115
+#: ../partman-partitioning.templates:117
 msgid "Flags for the new partition:"
 msgstr "नए पार्टीशन के लिए फ्लैग्सः"
 
 #. Type: string
 #. Description
-#: ../partman-partitioning.templates:119
+#: ../partman-partitioning.templates:121
 msgid "Partition name:"
 msgstr "पार्टीशन नामः"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:124
+#: ../partman-partitioning.templates:126
 msgid "Partition table type:"
 msgstr "पार्टीशन टेबल प्रकारः"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:124
+#: ../partman-partitioning.templates:126
 msgid "Select the type of partition table to use."
 msgstr "इस्तेमाल के लिए पार्टीशन टेबल प्रकार चुनें."
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:129
+#: ../partman-partitioning.templates:131
 msgid "Set the partition flags"
 msgstr "पार्टीशन फ्लैग नियत करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:133
+#: ../partman-partitioning.templates:135
 msgid "Name:"
 msgstr "नाम:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:137
+#: ../partman-partitioning.templates:139
 msgid "Bootable flag:"
 msgstr "बूटेबल फ्लैगः"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:141
+#: ../partman-partitioning.templates:143
 msgid "on"
 msgstr "चालू"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:145
+#: ../partman-partitioning.templates:147
 msgid "off"
 msgstr "बन्द"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:149
+#: ../partman-partitioning.templates:151
 msgid "Resize the partition (currently ${SIZE})"
-msgstr ""
+msgstr "पार्टिशन का आकार बदलें (वर्तमान ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:153
+#: ../partman-partitioning.templates:155
 msgid "Copy data from another partition"
 msgstr "अन्य पार्टीशन से डाटा नक़ल करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:157
+#: ../partman-partitioning.templates:159
 msgid "Delete the partition"
 msgstr "पार्टीशन मिटाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:161
+#: ../partman-partitioning.templates:163
 msgid "Create a new partition"
 msgstr "नया पार्टीशन बनाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:165
+#: ../partman-partitioning.templates:167
 msgid "Create a new empty partition table on this device"
 msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ"

@@ -12,10 +12,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wo\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-09 06:05-0600\n"
-"PO-Revision-Date: 2006-04-10 23:49+0000\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-09-05 19:50+0000\n"
 "Last-Translator: Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>\n"
-"Language-Team: Wolof\n"
+"Language-Team: Wolof <debian-boot@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,9 +42,8 @@ msgstr "Mingi lambutu sistem u fiise yi..."
 #. Type: error
 #. Description
 #: ../partman-base.templates:20
-#, fuzzy
 msgid "Device in use"
-msgstr "Periferik:"
+msgstr "Periferik bi ñuy jëfandikoo"
 
 #. Type: error
 #. Description
@@ -52,14 +51,13 @@ msgstr "Periferik:"
 msgid ""
 "No modifications can be made to the device ${DEVICE} for the following "
 "reasons:"
-msgstr ""
+msgstr "Maneesula def benn coppat ci periferik ${DEVICE} ngir yii sabab:"
 
 #. Type: error
 #. Description
 #: ../partman-base.templates:33
-#, fuzzy
 msgid "Partition in use"
-msgstr "Plaaŋ bu xaajale bi:"
+msgstr "Partisoŋ bi ñuy jëfandikoo"
 
 #. Type: error
 #. Description
@@ -67,11 +65,12 @@ msgstr "Plaaŋ bu xaajale bi:"
 #. In short, ${PARTITION} will indeed contain the partition
 #. NUMBER and not the partition NAME
 #: ../partman-base.templates:33
-#, fuzzy
 msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
-msgstr "Sos barab bob swap bi ci partisoŋ #${PARTITION} bu ${DEVICE} antuwul."
+msgstr ""
+"Maneesula def benn coppat ci partisoŋ ${PARTITION} bu periferik ${DEVICE} "
+"ngir yii sabab:"
 
 #. Type: boolean
 #. Description
@@ -226,13 +225,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid "Write the changes to disks?"
 msgstr "Ndax nu bind coppat yi ci disk bi?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
@@ -242,7 +241,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
@@ -250,52 +249,54 @@ msgstr ""
 "WATTANDIKU: Lii dana far mboolem li newoon ci partisoŋ yi ngay far ak yi "
 "ngay formaate yéppu."
 
-#. Type: boolean
-#. Description
-#: ../partman-base.templates:113
-msgid "${ITEMS}"
-msgstr "${ITEMS}"
-
 #. Type: text
 #. Description
-#: ../partman-base.templates:124
+#: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
 msgstr "Paritsoŋ yii di ñëw deesna leen formaate:"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:129
+#: ../partman-base.templates:130
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
 msgstr "partisoŋ #${PARTITION} bici ${DEVICE} kom ${TYPE}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:133
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr "${DEVICE} di ${TYPE}"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
 msgid "The partition tables of the following devices are changed:"
 msgstr "Taabal u partisoŋ yu periferik yii soppeesna leen:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:138
+#: ../partman-base.templates:145
 msgid "What to do with this device:"
 msgstr "Lu nuy def periferik bii:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:150
 msgid "How to use this free space:"
 msgstr "Nu nuy Jëfandikoo barab yu féex yi:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid "Partition settings:"
 msgstr "Reglaas i partisoŋ bi:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
@@ -304,79 +305,79 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:153
+#: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
 msgstr "Bii partisoŋ formaateesnako ak ${FILESYSTEM}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:157
+#: ../partman-base.templates:164
 msgid "No existing file system was detected in this partition."
 msgstr "Dajeeful benn sistem u fiise ci bii partisoŋ."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:161
+#: ../partman-base.templates:168
 msgid "All data in it WILL BE DESTROYED!"
 msgstr "Mbooleem li ci nekkoon DEESNA KO FAR!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:165
+#: ../partman-base.templates:172
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "Partisoŋ bi mi ngi tambulee ${FROMCHS}  yam ci ${TOCHS}."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:169
+#: ../partman-base.templates:176
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "Barab bu féex bi mi ngi tambulee ${FROMCHS} yam ${TOCHS}."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:173
+#: ../partman-base.templates:180
 msgid "Please wait..."
 msgstr "Xaaral tuuti..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:177
+#: ../partman-base.templates:184
 msgid "Partitions formatting"
 msgstr "Mi ngi formaate partisoŋ bi"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:181
+#: ../partman-base.templates:188
 msgid "Processing..."
 msgstr "Mi ngi def liggéey bi..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:193
+#: ../partman-base.templates:200
 msgid "Done setting up the partition"
 msgstr "Reglaas u partisoŋ bi eggna"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:197
+#: ../partman-base.templates:204
 msgid "Finish partitioning and write changes to disk"
 msgstr "Jeexal xaajale disk bi ta bind coppat yi ci disk bi"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:201
+#: ../partman-base.templates:208
 msgid "Undo changes to partitions"
 msgstr "Dindi coppat yi ci partisoŋ yi"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:205
+#: ../partman-base.templates:212
 msgid "Show Cylinder/Head/Sector information"
 msgstr "Wane imformasioŋ yu Cileendar/Teet/Sektór yi"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:209
+#: ../partman-base.templates:216
 #, no-c-format
 msgid "Dump partition info in %s"
 msgstr "Yobbu rappoor u partisoŋbi ca %s"
@@ -384,35 +385,35 @@ msgstr "Yobbu rappoor u partisoŋbi ca %s"
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:214
+#: ../partman-base.templates:221
 msgid "FREE SPACE"
 msgstr "BARAB BUFÉEX"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:219
+#: ../partman-base.templates:226
 msgid "unusable"
 msgstr "bu amul njariñ"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:224
+#: ../partman-base.templates:231
 msgid "primary"
 msgstr "pirimeer"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:229
+#: ../partman-base.templates:236
 msgid "logical"
 msgstr "logik"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:234
+#: ../partman-base.templates:241
 msgid "pri/log"
 msgstr "pri/log"
 
@@ -423,7 +424,7 @@ msgstr "pri/log"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:243
+#: ../partman-base.templates:250
 #, no-c-format
 msgid "#%s"
 msgstr "#%s"
@@ -431,7 +432,7 @@ msgstr "#%s"
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:248
+#: ../partman-base.templates:255
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "IDE%s saŋg (%s)"
@@ -439,7 +440,7 @@ msgstr "IDE%s saŋg (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:253
+#: ../partman-base.templates:260
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "IDE%s jaam (%s)"
@@ -447,7 +448,7 @@ msgstr "IDE%s jaam (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:258
+#: ../partman-base.templates:265
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "IDE%s saŋg, partisoŋ #%s (%s)"
@@ -455,76 +456,76 @@ msgstr "IDE%s saŋg, partisoŋ #%s (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:263
+#: ../partman-base.templates:270
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "IDE%s jaam, partisoŋ #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:267
+#: ../partman-base.templates:274
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "SCSI%s (%s,%s,%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:271
+#: ../partman-base.templates:278
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "SCSI%s (%s,%s,%s), partisoŋ #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:275
+#: ../partman-base.templates:282
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "RAID%s periferik #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:279
+#: ../partman-base.templates:286
 #, no-c-format
 msgid "Encrypted volume (%s)"
 msgstr "Wolim buñu kiripte (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:283
+#: ../partman-base.templates:290
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:287
+#: ../partman-base.templates:294
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "Loopback (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:291
+#: ../partman-base.templates:298
 #, no-c-format
 msgid "DASD %s (%s)"
-msgstr ""
+msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:295
-#, fuzzy, no-c-format
+#: ../partman-base.templates:302
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "SCSI%s (%s,%s,%s), partisoŋ #%s (%s)"
+msgstr "DASD %s (%s), partisoŋ #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:299
+#: ../partman-base.templates:306
 msgid "Cancel this menu"
 msgstr "Neenal bii menu"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:304
+#: ../partman-base.templates:311
 msgid "Partition disks"
 msgstr "Xaajale disk yi"

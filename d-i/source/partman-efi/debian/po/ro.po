@@ -3,7 +3,7 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of ro.po to Romanian
+# translation of ro.po to Română
 # Romanian translation
 #
 #    Translators, if you are not familiar with the PO format, gettext
@@ -18,25 +18,25 @@
 #
 #    Developers do not need to manually edit POT or PO files.
 #
-# Eddy Petrişor <eddy.petrisor@gmail.com>, 2004, 2005, 2006.
+# Eddy Petrișor <eddy.petrisor@gmail.com>, 2004, 2005, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-31 18:30-0600\n"
-"PO-Revision-Date: 2005-11-20 18:34+0200\n"
-"Last-Translator: Eddy Petrişor <eddy.petrisor@gmail.com>\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-31 15:32-0700\n"
+"PO-Revision-Date: 2006-10-14 00:17+0300\n"
+"Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.1\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
 "2:1))\n"
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:3
+#: ../partman-efi.templates:1001
 msgid ""
 "In order to start your new system, the firmware on your Itanium system loads "
 "the boot loader from its private EFI partition on the hard disk.  The boot "
@@ -45,42 +45,44 @@ msgid ""
 "Most installations place the EFI partition on the first primary partition of "
 "the same hard disk that holds the root file system."
 msgstr ""
-"Pentru a porni noul dvs. sistem, firmware-ul  de pe sistemul dvs. Itanium ia "
-"încărcătorul de sistem de pe partiţia sa privată EFI de pe discul fix. "
-"Încărcătorul de sistem porneşte apoi sistemul de operare de pe aceiaşi "
-"partiţie. O partiţie EFI este formatată cu sistemul de fişiere FAT16 şi are "
-"fanionul \"bootable\" activat. Majoritatea instalărilor plasează partiţia "
-"EFI pe prima partiţie primară a aceluiaşi disc fix care conţine sistemul de "
-"fişiere rădăcină."
+"Pentru a porni noul dumneavoastră sistem, firmware-ul  de pe sistemul "
+"dumneavoastră Itanium ia încărcătorul de sistem de pe partiţia sa privată "
+"EFI de pe discul fix. Încărcătorul de sistem porneşte apoi sistemul de "
+"operare de pe aceiaşi partiţie. O partiţie EFI este formatată cu sistemul de "
+"fişiere FAT16 şi are fanionul \"bootable\" activat. Majoritatea instalărilor "
+"plasează partiţia EFI pe prima partiţie primară a aceluiaşi disc fix care "
+"conţine sistemul de fişiere rădăcină."
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../partman-efi.templates:2001 ../partman-efi.templates:4001
+msgid "EFI boot partition"
+msgstr "Partiţie de pornire EFI"
 
 #. Type: boolean
 #. Description
-#: ../partman-efi.templates:11
+#: ../partman-efi.templates:3001
 msgid "Go back to the menu and resume partitioning?"
 msgstr "Vă întoarceţi la meniu şi reluaţi partiţionarea?"
 
 #. Type: boolean
 #. Description
-#: ../partman-efi.templates:11
+#: ../partman-efi.templates:3001
 msgid "No EFI partition was found."
 msgstr "Nu s-a găsit nici o partiţie EFI."
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:16
-msgid "EFI boot partition"
-msgstr "Partiţie de pornire EFI"
-
-#. Type: text
-#. Description
 #. short variant of 'EFI boot partition'
 #. Up to 10 character positions
-#: ../partman-efi.templates:22
+#: ../partman-efi.templates:5001
 msgid "EFIboot"
 msgstr "EFIboot"
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:30
+#: ../partman-efi.templates:7001
 msgid "EFI-fat16"
 msgstr "EFI-fat16"

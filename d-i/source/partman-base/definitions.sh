@@ -98,6 +98,12 @@ debconf_select () {
         done
         u=${u#, }
 	restore_ifs
+	# TODO: This can be preseeded without having to use translated
+	# values (which are often inappropriate for preseeding across many
+	# machines due to including e.g. disk capacities) but it's nasty;
+	# you have to use runes like
+	# "20some_device__________/var/lib/partman/devices/=dev=sda". We
+	# could do with an abbreviated syntax.
 	if [ -n "$default" ]; then
 	        db_set $template "$default"
 	fi
@@ -703,7 +709,7 @@ humandev () {
 	        type=$(/sbin/dmsetup table "$1" | head -n 1 | cut -d " " -f3)
 	    fi
 
-	    if [ $type = crypt ]; then
+	    if [ "$type" = crypt ]; then
 	        mapping=${1#/dev/mapper/}
 	        db_metaget partman/text/dmcrypt_volume description
 	        printf "$RET" $mapping
@@ -793,7 +799,9 @@ enable_swap () {
 	close_dialog
     done
     for path in $swaps; do
-	swapon $path || true
+	if ! grep -q "$path" /proc/swaps; then
+	    swapon $path 2>/dev/null || true
+	fi
     done
     cd "$startdir"
 }
@@ -826,6 +834,12 @@ default_disk_label () {
 	    fi;;	    
 	arm)
 	    case "$sub" in
+		iop32x)
+		    echo msdos;;
+		iop33x)
+		    echo msdos;;
+		ixp4xx)
+		    echo msdos;;
 		riscstation)
 		    echo msdos;;
 		netwinder)
@@ -833,6 +847,8 @@ default_disk_label () {
 		ads)
 		    echo msdos;;
 		nslu2)
+		    echo msdos;;
+		versatile)
 		    echo msdos;;
 		*)
 		    echo UNKNOWN;;
@@ -996,7 +1012,7 @@ partman_unlock_unit() {
 
 # List the changes that are about to be committed and let the user confirm first
 confirm_changes () {
-	local template dev x part partitions num id size type fs path name filesystem partitems items formatted_previously
+	local template dev x part partitions num id size type fs path name filesystem partdesc partitems items formatted_previously
 	template="$1"
 
 	# Compute the changes we are going to do
@@ -1042,10 +1058,16 @@ confirm_changes () {
 				continue
 			}
 			filesystem=$(cat $id/visual_filesystem)
-			db_subst partman/text/confirm_item TYPE "$filesystem"
-			db_subst partman/text/confirm_item PARTITION "$num"
-			db_subst partman/text/confirm_item DEVICE $(humandev $(cat device))
-			db_metaget partman/text/confirm_item description
+			# Special case d-m devices to use a different description
+			if cat device | grep -q "/dev/mapper" ; then
+				partdesc="partman/text/confirm_unpartitioned_item"
+			else
+				partdesc="partman/text/confirm_item"
+				db_subst $partdesc PARTITION "$num"
+			fi
+			db_subst $partdesc TYPE "$filesystem"
+			db_subst $partdesc DEVICE $(humandev $(cat device))
+			db_metaget $partdesc description
 		    
 			items="${items}   ${RET}
 "

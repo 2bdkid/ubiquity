@@ -1,3 +1,10 @@
 #!/bin/sh
 
-partman_newlayout
+. /lib/partman/definitions.sh
+
+code=99 # signals a retry
+while [ $code = 99 ]; do
+	ask_user /lib/partman/automatically_partition
+	code=$?
+done
+exit $code

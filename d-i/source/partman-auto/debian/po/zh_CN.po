@@ -5,18 +5,19 @@
 # 
 # Simplified Chinese translation for Debian Installer.
 #
-# Copyright (C) 2003, 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2003-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Translated by Carlos Z.F. Liu (2004,2005,2006) and Ming Hua (2005,2006).
+# Translated by bbbush (2004), Carlos Z.F. Liu (2004,2005,2006) and
+# Ming Hua (2005,2006).
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-03 12:31+0100\n"
-"PO-Revision-Date: 2005-11-23 21:05-0600\n"
-"Last-Translator: Carlos Z.F. Liu <carlosliu@users.sourceforge.net>\n"
+"POT-Creation-Date: 2006-10-19 10:51+0000\n"
+"PO-Revision-Date: 2006-10-17 20:51-0500\n"
+"Last-Translator: Ming Hua <minghua@rice.edu>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,24 +60,93 @@ msgstr "可能是因为分区表中存在过多(主)分区。"
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
+msgid ""
+"The installer can guide you through partitioning a disk (using different "
+"standard schemes) or, if you prefer, you can do it manually. With guided "
+"partitioning you will still have a chance later to review and customise the "
+"results."
+msgstr ""
+"安装程序能够指导您采用各种标准方案进行磁盘分区。如果您喜欢，您也可以手动操"
+"作。如果选择了分区向导，稍后您还是有机会检查和修改分区设置结果。"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid "Remove existing logical volume data?"
+msgstr "移除现有的逻辑卷数据？"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"The selected device already contains logical volumes and/or volume groups "
+"from a previous LVM installation, which must be removed from the disk before "
+"creating any partitions."
+msgstr ""
+"您所选择的设备上已经包含了由以前的 LVM 安装过程所建立的逻辑卷或卷组。在创建任"
+"何新分区之前，这些逻辑卷或卷组都必须被移除。"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"Note that this will also permanently erase any data currently on the logical "
+"volumes."
+msgstr "注意这同时会把这些逻辑卷上的全部数据都永久删除。"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid "LVM physical volume already exists on the selected device"
+msgstr "所选的设备上已存在 LVM 物理卷"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+msgid ""
+"The selected device already contains one or more LVM physical volumes which "
+"cannot be removed. It is therefore not possible to automatically partition "
+"this device."
+msgstr ""
+"您所选择的设备已经包含了一个或多个无法移除的 LVM 物理卷。因此不可能对此设备进"
+"行自动分区。"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:64
 msgid "Partitioning method:"
 msgstr "分区方法："
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:38
-msgid "Disk space to partition:"
-msgstr "要分区的磁盘空间："
+#: ../partman-auto.templates:64
+msgid ""
+"If you choose guided partitioning for an entire disk, you will next be asked "
+"which disk should be used."
+msgstr ""
+"如果您选择使用分区向导对整个磁盘进行分区，下一步将询问您要使用哪个磁盘。"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#: ../partman-auto.templates:79
 msgid "Partitioning scheme:"
 msgstr "分区方案："
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#. "Selected for partitioning" can be either an entire disk
+#. of "the largest continuous free space" on an existing disk
+#. TRANSLATORS, please take care to choose something appropriate for both
+#.
+#. It is followed by a variable giving the chosen disk, hence the colon
+#. at the end of the sentence. Please keep it.
+#: ../partman-auto.templates:79
+msgid "Selected for partitioning:"
+msgstr "已选择要分区："
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:79
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
@@ -85,13 +155,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid "Unusable free space"
 msgstr "不可用的空闲空间"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
@@ -100,104 +170,115 @@ msgstr "分区失败的原因是无法使用被选的空闲空间。分区表中
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:67
+#: ../partman-auto.templates:108
 msgid "Guided partitioning"
 msgstr "分区向导"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:72
-msgid "Use the largest continuous free space"
-msgstr "使用最大的连续空闲空间"
+#: ../partman-auto.templates:113
+msgid "Guided - use the largest continuous free space"
+msgstr "向导 - 使用最大的连续空闲空间"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#. The string replacing ${DEVICE} may be very long, so make your translation
-#. as short as possible and keep the variable AT THE END
-#. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:80
-msgid "Erase entire disk: ${DEVICE}"
-msgstr "清空整个磁盘：${DEVICE}"
+#: ../partman-auto.templates:118
+msgid "Guided - use entire disk"
+msgstr "向导 - 使用整个磁盘"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid "Select disk to partition:"
+msgstr "请选择要分区的磁盘："
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid ""
+"Note that all data on the disk you select will be erased, but not before you "
+"have confirmed that you really want to make the changes."
+msgstr ""
+"注意您所选择的磁盘上的全部数据都将会被删除，但是您还有确认是真的要做这些改动"
+"的机会。"
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid "Select disk(s) to partition:"
+msgstr "请选择要分区的磁盘："
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid ""
+"Note that all data on the disk(s) you select will be erased, but not before "
+"you have confirmed that you really want to make the changes."
+msgstr ""
+"注意您所选择的磁盘上的全部数据都将会被删除，但是您还有确认是真的要做这些改动"
+"的机会。"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:85
-msgid "Manually edit partition table"
-msgstr "手动编辑分区表"
+#. This is a method for partioning - as in guided (automatic) versus manual
+#: ../partman-auto.templates:138
+msgid "Manual"
+msgstr "手动"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:90
+#: ../partman-auto.templates:143
 msgid "Automatically partition the free space"
 msgstr "对空闲空间进行自动分区"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:95
+#: ../partman-auto.templates:148
 msgid "All files in one partition (recommended for new users)"
-msgstr "将所有文件放在同一个分区中(推荐新手使用)"
+msgstr "将所有文件放在同一个分区中 (推荐新手使用)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:100
+#: ../partman-auto.templates:153
 msgid "Separate /home partition"
 msgstr "将 /home 放在单独的分区"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:105
+#: ../partman-auto.templates:158
 msgid "Separate /home, /usr, /var, and /tmp partitions"
 msgstr "将 /home、/usr、/var 和 /tmp 都分别放在单独的分区"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:110
+#: ../partman-auto.templates:163
 msgid "Small-disk (< 1GB) partitioning scheme"
 msgstr "小硬盘(< 1GB)分区方案"
 
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid "Device to partition"
-msgstr "要分区的磁盘空间"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-#, fuzzy
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to review and "
-"customise the results."
-msgstr ""
-"安装程序能够指导您对 Ubuntu 将要使用的磁盘进行分区，如果您喜欢，也可以手动进"
-"行。如果选择了分区向导，稍后您还是有机会看到分区结果，并可以自定义修改它。如"
-"果您不喜欢这个结果，也可以撤消分区动作。"
-
 #. Type: text
 #. Description
-#: ../partman-auto.templates:123
-msgid "Resize ${PARTITION} and use freed space"
+#: ../partman-auto.templates:167
+#, fuzzy
+msgid "Guided - resize ${PARTITION} and use freed space"
 msgstr "调整${PARTITION}分区的大小并使用空闲出的空间。"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid "Failed to create enough space for installation"
 msgstr "无法为安装创建足够的磁盘空间"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

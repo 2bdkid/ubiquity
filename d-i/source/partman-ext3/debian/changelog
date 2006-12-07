@@ -1,3 +1,51 @@
+partman-ext3 (43) unstable; urgency=low
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Andrei Darashenka
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Romanian (ro.po) by Eddy Petrișor
+  * Tamil (ta.po) by Damodharan Rajalingam
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Tue, 24 Oct 2006 15:58:25 +0200
+
+partman-ext3 (42) unstable; urgency=low
+
+  * Don't use libparted to create ext3 partitions for now. As libparted can't
+    create resizable filesystems and ext2prepare is too buggy to use for etch,
+    we will always use mkfs.ext3 directly in etch, although that doesn't give
+    us a progress bar. This will also give us dir_index by default.
+    Closes: #358001.
+  * Add dependency on debconf.
+  * Remove standards-version and add Lintian override for it.
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * German (de.po) by Jens Seidel
+  * Greek (el.po) by quad-nrg.net
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Tapio Lehtonen
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Nishant Sharma
+  * Croatian (hr.po) by Josip Rodin
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Marathi (mr.po) by Priti D. Patil
+  * Dutch (nl.po) by Bart Cornelis
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Northern Sami (se.po) by Børre Gaup
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Fri,  6 Oct 2006 03:10:55 +0200
+
 partman-ext3 (41) unstable; urgency=low
 
   [ Colin Watson ]

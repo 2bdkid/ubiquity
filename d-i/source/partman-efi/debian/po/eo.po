@@ -5,19 +5,17 @@
 # 
 # translation of eo.po to Esperanto 
 # Esperanto messages for debian-installer.
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Samuel Gimeno <sgimeno@gmail.com>, 2005.
-# Serge Leblanc <serge.leblanc@wanadoo.fr>, 2005.
+# Copyright (C) 2005 Software in the Public Interest, Inc.
+# This file is distributed under the same license as debian-installer.
 #
+# Samuel Gimeno <sgimeno@gmail.com>, 2005.
+# Serge Leblanc <serge.leblanc@wanadoo.fr>, 2005-2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: eo\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-05-31 18:30-0600\n"
-"PO-Revision-Date: 2005-07-18 21:00+0200\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2006-10-31 15:32-0700\n"
+"PO-Revision-Date: 2006-05-16 17:10+0200\n"
 "Last-Translator: Serge Leblanc <serge.leblanc@wanadoo.fr>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +24,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:3
+#: ../partman-efi.templates:1001
 msgid ""
 "In order to start your new system, the firmware on your Itanium system loads "
 "the boot loader from its private EFI partition on the hard disk.  The boot "
@@ -35,41 +33,43 @@ msgid ""
 "Most installations place the EFI partition on the first primary partition of "
 "the same hard disk that holds the root file system."
 msgstr ""
-"Via 'Itanium' sistema firmvaro ŝargas praŝargilon el ĝia privata 'EFI' fiksa "
-"diskpartigo por praŝargi vian novan sistemon. La praŝargilo poste ŝargas la "
-"operaciumon el la sama diskpartigo. 'EFI'-a diskpartigo uzas la 'FAT16' "
-"dosieraranĝo kaj estendas deklarata kia praĝargebla. Plejmulto de instaladoj "
+"Via 'Itanium'-sistema firmvaro ŝargas ekŝargilon el ĝia privata fiksa 'EFI'-"
+"diskpartigo por ekŝargi vian novan sistemon. La ekŝargilo poste ŝargas la "
+"operaciumon el la sama diskpartigo. 'EFI'-diskpartigo uzas la 'FAT16'-a "
+"dosieraranĝo kaj estendas deklarata kia ekŝargebla. Plejmulto de instaladoj "
 "lokas la 'EFI'-diskpartigon sur la unua elementa diskpartigo el la sama "
-"fiksdisko kies la radika dosiersistemo."
+"fiksita disko kies la radika dosiersistemo."
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../partman-efi.templates:2001 ../partman-efi.templates:4001
+msgid "EFI boot partition"
+msgstr "'EFI'-ekŝarga diskpartigo"
 
 #. Type: boolean
 #. Description
-#: ../partman-efi.templates:11
+#: ../partman-efi.templates:3001
 msgid "Go back to the menu and resume partitioning?"
-msgstr "Retroiru al menuo kaj rekomencu diskpartigadon ?"
+msgstr "Retroiru al menuo kaj rekomencu diskpartigadon?"
 
 #. Type: boolean
 #. Description
-#: ../partman-efi.templates:11
+#: ../partman-efi.templates:3001
 msgid "No EFI partition was found."
 msgstr "Neniu 'EFI'-diskpartigo estas trovita."
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:16
-msgid "EFI boot partition"
-msgstr "'EFI'-praŝarga diskpartigo"
-
-#. Type: text
-#. Description
 #. short variant of 'EFI boot partition'
 #. Up to 10 character positions
-#: ../partman-efi.templates:22
+#: ../partman-efi.templates:5001
 msgid "EFIboot"
-msgstr "'EFI'-praŝargo"
+msgstr "'EFI'-ekŝargo"
 
 #. Type: text
 #. Description
-#: ../partman-efi.templates:30
+#: ../partman-efi.templates:7001
 msgid "EFI-fat16"
 msgstr "EFI-fat16"

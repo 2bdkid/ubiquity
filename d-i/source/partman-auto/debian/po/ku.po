@@ -3,21 +3,25 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of ku-neu.po to Kurdish
 # Kurdish messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
+# Erdal Ronahi <erdal.ronahi@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: ku-neu\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-07-03 12:31+0100\n"
-"PO-Revision-Date: 2006-04-20 06:15+0000\n"
+"POT-Creation-Date: 2006-10-19 10:51+0000\n"
+"PO-Revision-Date: 2006-10-21 15:08+0100\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
-"Language-Team: Kurdish <gnu-ku-wergerandin@lists.sourceforge.net>\n"
+"Language-Team: Kurdish <ku@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural= n != 1\n"
 
 #. Type: text
 #. Description
@@ -29,7 +33,7 @@ msgstr "Ji kerema xwe bisekine..."
 #. Description
 #: ../partman-auto.templates:7
 msgid "Computing the new partitions..."
-msgstr "Dabeşên nu dihesibîne..."
+msgstr "Partîsiyonên nu dihesibîne..."
 
 #. Type: error
 #. Description
@@ -39,13 +43,13 @@ msgid ""
 "to be automatically partitioned."
 msgstr ""
 "Bi îhtimalê ev derket holê ji ber ku disk an cihê vala yê hilbijartê ji bo "
-"dabeşkirina bixweser gelek biçûk e."
+"partîsiyonkirina bixweser gelek biçûk e."
 
 #. Type: error
 #. Description
 #: ../partman-auto.templates:17
 msgid "Failed to partition the selected disk"
-msgstr "Dabeşkirina diska hilbijartî serneket"
+msgstr "partîsiyonkirina diska hilbijartî serneket"
 
 #. Type: error
 #. Description
@@ -54,150 +58,237 @@ msgid ""
 "This probably happened because there are too many (primary) partitions in "
 "the partition table."
 msgstr ""
-"Bi îhtimalê ev derket holê ji ber ku hejmara dabeşan (yên primary) di "
-"tabloya dabeşan zêde ye."
+"Bi îhtimalê ev derket holê ji ber ku hejmara partîsiyonan (yên primary) di "
+"tabloya partîsiyonan zêde ye."
 
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
+#, fuzzy
+msgid ""
+"The installer can guide you through partitioning a disk (using different "
+"standard schemes) or, if you prefer, you can do it manually. With guided "
+"partitioning you will still have a chance later to review and customise the "
+"results."
+msgstr ""
+"Bernameya sazkirinê ji bo dabeşkirina dîskeke wê ji aliyê Ubuntuyê ve were "
+"bikaranîn dikarî bibe alîkar. Heke tu bixwazî tu dikarî vî karî bi destan jî "
+"bike.Heke tu di dabeşkirinê de amûra ku wê ji te re rêberiyê bike hilbijêrî "
+"wê fersendekê bide te da ku tu encamên wê bibîne û ji bo ku tu karibî taybet "
+"bikî."
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+#, fuzzy
+msgid "Remove existing logical volume data?"
+msgstr "Logical volumes biafirîne"
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"The selected device already contains logical volumes and/or volume groups "
+"from a previous LVM installation, which must be removed from the disk before "
+"creating any partitions."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-auto.templates:36
+msgid ""
+"Note that this will also permanently erase any data currently on the logical "
+"volumes."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+#, fuzzy
+msgid "LVM physical volume already exists on the selected device"
+msgstr "Volumên fizîkî yên heyî di amûra hilbijartî de"
+
+#. Type: error
+#. Description
+#: ../partman-auto.templates:46
+#, fuzzy
+msgid ""
+"The selected device already contains one or more LVM physical volumes which "
+"cannot be removed. It is therefore not possible to automatically partition "
+"this device."
+msgstr ""
+"Cîhaza ku hatiye hilbijartin yan tenê cîldeke fîzîkî û yan jî gelek cîldên "
+"fîzîkî dihundirîne. Ne gengaz e ku tu vê cîhazê bikar bîne û dabeşkirina "
+"bixweber pêk bîne."
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:64
 msgid "Partitioning method:"
-msgstr "Awayê dabeşkirinê:"
+msgstr "Awayê partîsiyonkirinê:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:38
-msgid "Disk space to partition:"
-msgstr "Cihê diskê were dabeşkirin:"
+#: ../partman-auto.templates:64
+msgid ""
+"If you choose guided partitioning for an entire disk, you will next be asked "
+"which disk should be used."
+msgstr ""
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#: ../partman-auto.templates:79
 msgid "Partitioning scheme:"
-msgstr "Plana dabeşkirinê:"
+msgstr "Plana partîsiyonkirinê:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:43
+#. "Selected for partitioning" can be either an entire disk
+#. of "the largest continuous free space" on an existing disk
+#. TRANSLATORS, please take care to choose something appropriate for both
+#.
+#. It is followed by a variable giving the chosen disk, hence the colon
+#. at the end of the sentence. Please keep it.
+#: ../partman-auto.templates:79
+msgid "Selected for partitioning:"
+msgstr "Ji bo partîsiyonkirinê hatiye hilbijartin:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:79
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
 msgstr ""
-"Ji bo dabeşkirina vê diskê çend planên cuda hene. Heke tu baş nezanî, ya "
-"yekemîn hilbijêre."
+"Ji bo partîsiyonkirina vê diskê çend planên cuda hene. Heke tu baş nezanî, "
+"ya yekemîn hilbijêre."
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid "Unusable free space"
 msgstr "Cihê vala nayê bikaranîn"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:49
+#: ../partman-auto.templates:89
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
 msgstr ""
+"Qada ku tu hilbijartiye ji ber ku ne di rewşeke bikêrhatî ye karê "
+"dabeşkirinê bi ser neket.Wer dixuye ku di tabloya dabeşkirinê de gelek beşên "
+"yekemîn heye."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:67
+#: ../partman-auto.templates:108
 msgid "Guided partitioning"
-msgstr "Dabeşkirina bi alîkariyê"
+msgstr "Partîsiyonkirina bi alîkariyê"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:72
-msgid "Use the largest continuous free space"
+#: ../partman-auto.templates:113
+#, fuzzy
+msgid "Guided - use the largest continuous free space"
 msgstr "Cihê vala yê hevgirtî yê herî mezin bi kar bîne"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#. The string replacing ${DEVICE} may be very long, so make your translation
-#. as short as possible and keep the variable AT THE END
-#. for example "Erase entire disk: IDE0 master - Maxtor 46L489"
-#: ../partman-auto.templates:80
-msgid "Erase entire disk: ${DEVICE}"
-msgstr "Diskê bi tevahî pakij bike: ${DEVICE}"
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:85
-msgid "Manually edit partition table"
-msgstr "Tabloya dabeşan bi destê xwe biguherîne"
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:90
-msgid "Automatically partition the free space"
-msgstr "Cihê vala bixweser dabeş bike"
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:95
-msgid "All files in one partition (recommended for new users)"
-msgstr "Hemû dosiyan di dabeşekê de (ji bo bikarhênerên nû tê tawsiye kirin)"
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:100
-#, fuzzy
-msgid "Separate /home partition"
-msgstr "dabeşê format bike"
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:105
-msgid "Separate /home, /usr, /var, and /tmp partitions"
-msgstr ""
-
-#. Type: text
-#. Description
-#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:110
-#, fuzzy
-msgid "Small-disk (< 1GB) partitioning scheme"
-msgstr "Plana dabeşkirinê:"
+#: ../partman-auto.templates:118
+msgid "Guided - use entire disk"
+msgstr "Bi alîkarî - hemû diskê bi kar bîne"
 
 #. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid "Device to partition"
-msgstr "Amura were dabeşkirin"
-
-#. Type: select
-#. Description
-#: ../partman-auto.templates:115
-msgid ""
-"This installer can guide you through partitioning a disk for use by Ubuntu, "
-"or if you prefer, you can do it manually. If you do choose to use the guided "
-"partitioning tool, you will still have a chance later to review and "
-"customise the results."
-msgstr ""
-
-#. Type: text
 #. Description
 #: ../partman-auto.templates:123
-msgid "Resize ${PARTITION} and use freed space"
+msgid "Select disk to partition:"
+msgstr "Diska ku were partîsiyonkirin hilbijêre:"
+
+#. Type: select
+#. Description
+#: ../partman-auto.templates:123
+msgid ""
+"Note that all data on the disk you select will be erased, but not before you "
+"have confirmed that you really want to make the changes."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid "Select disk(s) to partition:"
+msgstr "Disk(an) ku were partîsiyonkirin hilbijêre:"
+
+#. Type: multiselect
+#. Description
+#: ../partman-auto.templates:130
+msgid ""
+"Note that all data on the disk(s) you select will be erased, but not before "
+"you have confirmed that you really want to make the changes."
+msgstr ""
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#. This is a method for partioning - as in guided (automatic) versus manual
+#: ../partman-auto.templates:138
+msgid "Manual"
+msgstr "Rêber"
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:143
+msgid "Automatically partition the free space"
+msgstr "Cihê vala bixweser partîsiyon bike"
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:148
+msgid "All files in one partition (recommended for new users)"
+msgstr ""
+"Hemû dosiyan di partîsiyonekê de (ji bo bikarhênerên nû tê tawsiye kirin)"
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:153
+msgid "Separate /home partition"
+msgstr "Beşa home / ya cihê"
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:158
+msgid "Separate /home, /usr, /var, and /tmp partitions"
+msgstr "Beşên cihê yên /home, /usr, /var, û /tmp"
+
+#. Type: text
+#. Description
+#. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
+#: ../partman-auto.templates:163
+msgid "Small-disk (< 1GB) partitioning scheme"
+msgstr "Dabeşkirina dîska biçûl (>1GB)"
+
+#. Type: text
+#. Description
+#: ../partman-auto.templates:167
+msgid "Guided - resize ${PARTITION} and use freed space"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid "Failed to create enough space for installation"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:127
+#: ../partman-auto.templates:171
 msgid ""
 "The resize operation did not create enough free space for the installation. "
 "Resizing may have failed. You will have to set up partitions manually."

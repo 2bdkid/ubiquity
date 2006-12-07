@@ -110,6 +110,7 @@ _Description: Continue with the installation?
 Template: partman/confirm
 Type: boolean
 Default: false
+#flag:translate!:4
 _Description: Write the changes to disks?
  If you continue, the changes listed below will be written to the disks.
  Otherwise, you will be able to make further changes manually.
@@ -127,6 +128,12 @@ Template: partman/text/confirm_item
 Type: text
 # for example: "partition #6 of IDE0 master as ext3 journaling file system"
 _Description: partition #${PARTITION} of ${DEVICE} as ${TYPE}
+
+Template: partman/text/confirm_unpartitioned_item
+Type: text
+# for devices which have no partitions
+# for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+_Description: ${DEVICE} as ${TYPE}
 
 Template: partman/text/confirm_partitem_header
 Type: text

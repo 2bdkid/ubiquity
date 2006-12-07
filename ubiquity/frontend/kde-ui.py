@@ -64,7 +64,6 @@ BREADCRUMB_STEPS = {
     "stepLocation": 2,
     "stepKeyboardConf": 3,
     "stepUserInfo": 4,
-    "stepPartDisk": 5,
     "stepPartAuto": 5,
     "stepPartAdvanced": 5,
     "stepPartMountpoints": 5,
@@ -78,15 +77,14 @@ WIDGET_STACK_STEPS = {
     "stepLocation": 2,
     "stepKeyboardConf": 3,
     "stepUserInfo": 4,
-    "stepPartDisk": 5,
-    "stepPartAuto": 6,
-    "stepPartAdvanced": 7,
-    "stepPartMountpoints": 8,
-    "stepReady": 9
+    "stepPartAuto": 5,
+    "stepPartAdvanced": 6,
+    "stepPartMountpoints": 7,
+    "stepReady": 8
 }
 
 class UbiquityUI(UbiquityUIBase):
-    
+
     def setWizard(self, wizardRef):
         self.wizard = wizardRef
 
@@ -101,25 +99,27 @@ class Wizard:
         about=KAboutData("kubuntu-ubiquity","Installer","0.1","Live CD Installer for Kubuntu",KAboutData.License_GPL,"(c) 2006 Canonical Ltd", "http://wiki.kubuntu.org/KubuntuUbiquity", "jriddell@ubuntu.com")
         about.addAuthor("Jonathan Riddell", None,"jriddell@ubuntu.com")
         KCmdLineArgs.init(["./installer"],about)
-        
+
         self.app = KApplication()
-        
+
         self.userinterface = UbiquityUI(None, "Ubiquity")
         self.userinterface.setWizard(self)
         self.app.setMainWidget(self.userinterface)
         self.userinterface.show()
-        
+
         # declare attributes
         self.distro = distro
         self.current_layout = None
-        self.got_disk_choices = False
+        self.password = ''
+        self.hostname_edited = False
         self.auto_mountpoints = None
         self.resize_min_size = None
         self.resize_max_size = None
+        self.resize_choice = None
         self.manual_choice = None
         self.manual_partitioning = False
-        self.password = ''
-        self.hostname_edited = False
+        self.new_size_value = None
+        self.new_size_scale = None
         self.mountpoint_widgets = []
         self.size_widgets = []
         self.partition_widgets = []
@@ -157,26 +157,25 @@ class Wizard:
         dbfilter.db.shutdown()
 
         self.debconf_callbacks = {}    # array to keep callback functions needed by debconf file descriptors
-    
+
         # TODO jr 2006-04-19: sometimes causes pykde crash when creating
         # kdialogs
         self.translate_widgets()
 
         self.map_vbox = QVBoxLayout(self.userinterface.map_frame)
-        
+
         self.customize_installer()
-        
-        self.part_disk_vbox = QVBoxLayout(self.userinterface.part_disk_frame)
-        self.part_disk_buttongroup = QButtonGroup(self.userinterface.part_disk_frame)
-        self.part_disk_buttongroup_texts = {}
-        
+
         self.autopartition_vbox = QVBoxLayout(self.userinterface.autopartition_frame)
         self.autopartition_buttongroup = QButtonGroup(self.userinterface.autopartition_frame)
         self.autopartition_buttongroup_texts = {}
-        
+        self.autopartition_extras = {}
+        self.autopartition_extra_buttongroup = {}
+        self.autopartition_extra_buttongroup_texts = {}
+
         self.qtparted_vbox = QVBoxLayout(self.userinterface.qtparted_frame)
         self.embed = None
-        
+
         self.mount_vbox = QVBoxLayout(self.userinterface.mountpoint_frame_parent)
         self.mountpoint_scrollview = QScrollView(self.userinterface.mountpoint_frame_parent)
         self.mount_vbox.addWidget(self.mountpoint_scrollview)
@@ -196,7 +195,7 @@ class Wizard:
         self.ready_text.setReadOnly(True)
         self.ready_text.setTextFormat(Qt.RichText)
         summary_vbox.addWidget(self.ready_text)
-        
+
         logo = QPixmap("/usr/lib/ubiquity/ubiquity/frontend/kde-distro-logo.png")
         self.userinterface.logo_image_2.setPixmap(logo)
         self.userinterface.logo_image_3.setPixmap(logo)
@@ -251,7 +250,7 @@ class Wizard:
         #self.show_browser()
         got_intro = self.show_intro()
         self.allow_change_step(True)
-    
+
         # Declare SignalHandler
         self.app.connect(self.userinterface.next, SIGNAL("clicked()"), self.on_next_clicked)
         self.app.connect(self.userinterface.back, SIGNAL("clicked()"), self.on_back_clicked)
@@ -259,27 +258,25 @@ class Wizard:
         self.app.connect(self.userinterface.widgetStack, SIGNAL("aboutToShow(int)"), self.on_steps_switch_page)
         self.app.connect(self.userinterface.keyboardlayoutview, SIGNAL("selectionChanged()"), self.on_keyboard_layout_selected)
         self.app.connect(self.userinterface.keyboardvariantview, SIGNAL("selectionChanged()"), self.on_keyboard_variant_selected)
-        
+
         self.app.connect(self.userinterface.fullname, SIGNAL("textChanged(const QString &)"), self.on_fullname_changed)
         self.app.connect(self.userinterface.username, SIGNAL("textChanged(const QString &)"), self.on_username_changed)
         self.app.connect(self.userinterface.password, SIGNAL("textChanged(const QString &)"), self.on_password_changed)
         self.app.connect(self.userinterface.verified_password, SIGNAL("textChanged(const QString &)"), self.on_verified_password_changed)
         self.app.connect(self.userinterface.hostname, SIGNAL("textChanged(const QString &)"), self.on_hostname_changed)
         self.app.connect(self.userinterface.hostname, SIGNAL("textChanged(const QString &)"), self.on_hostname_insert_text)
-        
+
         self.app.connect(self.userinterface.fullname, SIGNAL("selectionChanged()"), self.on_fullname_changed)
         self.app.connect(self.userinterface.username, SIGNAL("selectionChanged()"), self.on_username_changed)
         self.app.connect(self.userinterface.password, SIGNAL("selectionChanged()"), self.on_password_changed)
         self.app.connect(self.userinterface.verified_password, SIGNAL("selectionChanged()"), self.on_verified_password_changed)
         self.app.connect(self.userinterface.hostname, SIGNAL("selectionChanged()"), self.on_hostname_changed)
-        
+
         self.app.connect(self.userinterface.language_treeview, SIGNAL("selectionChanged()"), self.on_language_treeview_selection_changed)
 
         self.app.connect(self.userinterface.timezone_time_adjust, SIGNAL("clicked()"), self.on_timezone_time_adjust_clicked)
 
         self.app.connect(self.userinterface.timezone_city_combo, SIGNAL("activated(int)"), self.tzmap.city_combo_changed)
-
-        self.app.connect(self.userinterface.new_size_scale, SIGNAL("valueChanged(int)"), self.update_new_size_label)
 
         # Start the interface
         if got_intro:
@@ -310,11 +307,8 @@ class Wizard:
                 self.dbfilter = console_setup.ConsoleSetup(self)
             elif current_name == "stepUserInfo":
                 self.dbfilter = usersetup.UserSetup(self)
-            elif current_name in ("stepPartDisk", "stepPartAuto"):
-                if isinstance(self.dbfilter, partman_auto.PartmanAuto):
-                    syslog.syslog('reusing running partman')
-                else:
-                    self.dbfilter = partman_auto.PartmanAuto(self)
+            elif current_name == "stepPartAuto":
+                self.dbfilter = partman_auto.PartmanAuto(self)
             elif current_name == "stepReady":
                 self.dbfilter = summary.Summary(self, self.manual_partitioning)
             else:
@@ -327,7 +321,7 @@ class Wizard:
                 self.allow_change_step(not self.installing)
 
             self.app.exec_loop()
-    
+
             if self.installing:
                 self.progress_loop()
             elif self.current_page is not None and not self.backup:
@@ -335,7 +329,7 @@ class Wizard:
             self.app.processEvents(1)
 
         return self.returncode
-    
+
     def customize_installer(self):
         """Initial UI setup."""
 
@@ -344,7 +338,6 @@ class Wizard:
         #self.userinterface.logo_image.setPixmap(icon)
         self.userinterface.back.hide()
 
-        self.update_new_size_label(self.userinterface.new_size_scale.value())
         """
 
         PIXMAPSDIR = os.path.join(PATH, 'pixmaps', self.distro)
@@ -395,7 +388,7 @@ class Wizard:
         #    widget.set_label(widget.get_label())
 
         text = get_string(widget.name(), lang)
-        
+
         if widget.name() == "next":
             text = get_string("continue", lang) + " >"
         elif widget.name() == "back":
@@ -451,9 +444,9 @@ class Wizard:
 
     def show_intro(self):
         """Show some introductory text, if available."""
-    
+
         intro = os.path.join(PATH, 'intro.txt')
-    
+
         if os.path.isfile(intro):
             intro_file = open(intro)
             text = ""
@@ -464,7 +457,7 @@ class Wizard:
             return True
         else:
             return False
-    
+
     def step_name(self, step_index):
         if step_index < 0:
             step_index = 0
@@ -807,10 +800,6 @@ class Wizard:
         # Identification
         elif step == "stepUserInfo":
             self.process_identification()
-            self.got_disk_choices = False
-        # Disk selection
-        elif step == "stepPartDisk":
-            self.process_disk_selection()
         # Automatic partitioning
         elif step == "stepPartAuto":
             self.process_autopartitioning()
@@ -858,19 +847,6 @@ class Wizard:
             self.userinterface.hostname_error_reason.setText("\n".join(error_msg))
             self.userinterface.hostname_error_reason.show()
         else:
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartDisk"])
-
-    def process_disk_selection (self):
-        """Process disk selection before autopartitioning. This step will be
-        skipped if only one disk is present."""
-
-        # For safety, if we somehow ended up improperly initialised
-        # then go to manual partitioning.
-        choice = self.get_disk_choice()
-        if self.manual_choice is None or choice == self.manual_choice:
-            self.qtparted_loop()
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartAdvanced"])
-        else:
             self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
 
     def process_autopartitioning(self):
@@ -880,7 +856,7 @@ class Wizard:
 
         # For safety, if we somehow ended up improperly initialised
         # then go to manual partitioning.
-        choice = self.get_autopartition_choice()
+        choice = self.get_autopartition_choice()[0]
         if self.manual_choice is None or choice == self.manual_choice:
             self.qtparted_loop()
             self.set_current_page(WIDGET_STACK_STEPS["stepPartAdvanced"])
@@ -902,7 +878,7 @@ class Wizard:
                                      text, 'Try again',
                                      'Automatic partitioning', 'Quit', 0, 0)
         if answer == 1:
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartDisk"])
+            self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
         elif answer == 2:
             self.current_page = None
             self.quit()
@@ -968,7 +944,7 @@ class Wizard:
         sizeText = "<b>" + get_string("size_label", self.locale) + "</b>"
         partitionText = "<b>" + get_string("device_label", self.locale) + "</b>"
         reformatText = "<b>" + get_string("format_label", self.locale) + "</b>"
-        
+
         mountLabel = QLabel(mountText, self.userinterface.mountpoint_frame)
         sizeLabel = QLabel(sizeText, self.userinterface.mountpoint_frame)
         partitionLabel = QLabel(partitionText, self.userinterface.mountpoint_frame)
@@ -1245,17 +1221,13 @@ class Wizard:
         # Setting actual step
         step = self.step_name(self.get_current_page())
         self.userinterface.setCursor(QCursor(Qt.WaitCursor))
-        
+
         changed_page = False
 
         if step == "stepLocation":
             self.userinterface.back.hide()
         elif step == "stepPartAuto":
-            if self.got_disk_choices:
-                new_step = "stepPartDisk"
-            else:
-                new_step = "stepUserInfo"
-            self.set_current_page(WIDGET_STACK_STEPS[new_step])
+            self.set_current_page(WIDGET_STACK_STEPS["stepUserInfo"])
             changed_page = True
         elif step == "stepPartAdvanced":
             if self.qtparted_subp is not None:
@@ -1271,7 +1243,7 @@ class Wizard:
                     self.qtparted_vbox.remove(self.embed)
                     del self.embed
                     self.embed = None
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartDisk"])
+            self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
             changed_page = True
         elif step == "stepPartMountpoints":
             self.qtparted_loop()
@@ -1318,22 +1290,22 @@ class Wizard:
         self.translate_widget(self.userinterface.step_label, self.locale)
         syslog.syslog('switched to page %s' % self.step_name(newPageID))
 
-    def on_autopartition_resize_toggled (self, enable):
+    def on_autopartition_toggled (self, choice, enable):
         """Update autopartitioning screen when the resize button is
         selected."""
 
-        if enable:
-            self.userinterface.new_size_frame.show()
-        else:
-            self.userinterface.new_size_frame.hide()
+        if choice in self.autopartition_extras:
+            self.autopartition_extras[choice].setEnabled(enable)
 
     def update_new_size_label(self, value):
+        if self.new_size_value is None:
+            return
         if self.resize_max_size is not None:
             size = value * self.resize_max_size / 100
             text = '%d%% (%s)' % (value, format_size(size))
         else:
             text = '%d%%' % value
-        self.userinterface.new_size_value.setText(text)
+        self.new_size_value.setText(text)
 
 
     # Callbacks provided to components.
@@ -1342,13 +1314,13 @@ class Wizard:
         self.debconf_fd_counter = 0
         self.socketNotifierRead = QSocketNotifier(from_debconf, QSocketNotifier.Read, self.app, "read-for-" + str(from_debconf))
         self.app.connect(self.socketNotifierRead, SIGNAL("activated(int)"), self.watch_debconf_fd_helper_read)
-        
+
         self.socketNotifierWrite = QSocketNotifier(from_debconf, QSocketNotifier.Write, self.app, "read-for-" + str(from_debconf))
         self.app.connect(self.socketNotifierWrite, SIGNAL("activated(int)"), self.watch_debconf_fd_helper_write)
 
         self.socketNotifierException = QSocketNotifier(from_debconf, QSocketNotifier.Exception, self.app, "read-for-" + str(from_debconf))
         self.app.connect(self.socketNotifierException, SIGNAL("activated(int)"), self.watch_debconf_fd_helper_exception)
-        
+
         self.debconf_callbacks[from_debconf] = process_input
         self.current_debconf_fd = from_debconf
         """
@@ -1516,10 +1488,10 @@ class Wizard:
 
     def get_username(self):
         return unicode(self.userinterface.username.text())
-  
+
     def get_password(self):
         return unicode(self.userinterface.password.text())
-  
+
     def get_verified_password(self):
         return unicode(self.userinterface.verified_password.text())
 
@@ -1536,48 +1508,8 @@ class Wizard:
     def set_auto_mountpoints(self, auto_mountpoints):
         self.auto_mountpoints = auto_mountpoints
 
-    def set_disk_choices (self, choices, manual_choice):
-        self.got_disk_choices = True
-
-        children = self.userinterface.part_disk_frame.children()
-        for child in children:
-            if isinstance(child, QVBoxLayout):
-                pass
-            else:
-                self.part_disk_vbox.remove(child)
-                child.hide()
-
-        self.manual_choice = manual_choice
-        firstbutton = None
-        for choice in choices:
-            if choice == '':
-                spacer = QSpacerItem(10, 10, QSizePolicy.Fixed, QSizePolicy.Fixed)
-                self.part_disk_vbox.addItem(spacer)
-            else:
-                button = QRadioButton(choice, self.userinterface.part_disk_frame)
-                self.part_disk_buttongroup.insert(button)
-                id = self.part_disk_buttongroup.id(button)
-                #Qt changes the string by adding accelarators, 
-                #so keep pristine string here as is returned later to partman
-                self.part_disk_buttongroup_texts[id] = choice
-                if firstbutton is None:
-                    firstbutton = button
-                self.part_disk_vbox.addWidget(button)
-                button.show()
-
-        if firstbutton is not None:
-            firstbutton.setChecked(True)
-
-        # make sure we're on the disk selection page
-        self.set_current_page(WIDGET_STACK_STEPS["stepPartDisk"])
-
-        return True
-
-    def get_disk_choice (self):
-        id = self.part_disk_buttongroup.id( self.part_disk_buttongroup.selected() )
-        return unicode(self.part_disk_buttongroup_texts[id])
-
-    def set_autopartition_choices (self, choices, resize_choice, manual_choice):
+    def set_autopartition_choices (self, choices, extra_options,
+                                   resize_choice, manual_choice):
         children = self.userinterface.autopartition_frame.children()
         for child in children:
             if isinstance(child, QVBoxLayout):
@@ -1586,48 +1518,105 @@ class Wizard:
                 self.autopartition_vbox.remove(child)
                 child.hide()
 
+        self.resize_choice = resize_choice
         self.manual_choice = manual_choice
         firstbutton = None
         for choice in choices:
             button = QRadioButton(choice, self.userinterface.autopartition_frame)
             self.autopartition_buttongroup.insert(button)
             id = self.autopartition_buttongroup.id(button)
-            
+
             #Qt changes the string by adding accelarators, 
             #so keep pristine string here as is returned later to partman
             self.autopartition_buttongroup_texts[id] = choice
             if firstbutton is None:
                 firstbutton = button
             self.autopartition_vbox.addWidget(button)
-            
-            if choice == resize_choice:
-                self.on_autopartition_resize_toggled(button.isChecked())
-                self.app.connect(button, SIGNAL('toggled(bool)'), self.on_autopartition_resize_toggled)
-            
+
+            if choice in extra_options:
+                indent_hbox = QHBoxLayout(self.autopartition_vbox)
+                indent_hbox.addSpacing(10)
+                if choice == resize_choice:
+                    new_size_hbox = QHBoxLayout(indent_hbox)
+                    new_size_label = QLabel("New partition size:",
+                                            new_size_hbox, 'new_size_label')
+                    self.translate_widget(new_size_label, self.locale)
+                    new_size_hbox.addWidget(new_size_label)
+                    new_size_scale_vbox = QVBoxLayout(new_size_hbox)
+                    self.new_size_value = QLabel(new_size_scale_vbox)
+                    new_size_scale_vbox.addWidget(self.new_size_value)
+                    self.new_size_scale = QSlider(Qt.Horizontal,
+                                                  new_size_scale_vbox)
+                    self.new_size_scale.setMaxValue(100)
+                    self.new_size_scale.setSizePolicy(QSizePolicy.Expanding,
+                                                      QSizePolicy.Minimum)
+                    self.app.connect(self.new_size_scale,
+                                     SIGNAL("valueChanged(int)"),
+                                     self.update_new_size_label)
+                    new_size_scale_vbox.addWidget(self.new_size_scale)
+                    self.resize_min_size, self.resize_max_size = \
+                        extra_options[choice]
+                    if (self.resize_min_size is not None and
+                        self.resize_max_size is not None):
+                        min_percent = int(math.ceil(
+                            100 * self.resize_min_size / self.resize_max_size))
+                        self.new_size_scale.setMinValue(min_percent)
+                        self.new_size_scale.setMaxValue(100)
+                        self.new_size_scale.setValue(
+                            int((min_percent + 100) / 2))
+                elif choice != manual_choice:
+                    disk_vbox = QVBoxLayout(indent_hbox)
+                    disk_buttongroup = QButtonGroup(indent_hbox)
+                    disk_buttongroup_texts = {}
+                    extra_firstbutton = None
+                    for extra in extra_options[choice]:
+                        if extra == '':
+                            disk_vbox.addSpacing(10)
+                        else:
+                            extra_button = QRadioButton(extra, disk_vbox)
+                            disk_buttongroup.insert(extra_button)
+                            extra_id = disk_buttongroup.id(extra_button)
+                            # Qt changes the string by adding accelerators,
+                            # so keep the pristine string here to be
+                            # returned to partman later.
+                            disk_buttongroup_texts[extra_id] = extra
+                            if extra_firstbutton is None:
+                                extra_firstbutton = extra_button
+                            disk_vbox.addWidget(extra_button)
+                    self.autopartition_extra_buttongroup[choice] = \
+                        disk_buttongroup
+                    self.autopartition_extra_buttongroup_texts[choice] = \
+                        disk_buttongroup_texts
+                indent_hbox.show()
+                self.autopartition_extras[choice] = indent_hbox
+
+            self.on_autopartition_toggled(choice, button.isChecked())
+            self.app.connect(button, SIGNAL('toggled(bool)'),
+                             lambda enable:
+                                 self.on_autopartition_toggled(choice, enable))
+
             button.show()
         if firstbutton is not None:
             firstbutton.setChecked(True)
-        if resize_choice not in choices:
-            self.on_autopartition_resize_toggled(False)
 
         # make sure we're on the autopartitioning page
         self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
 
     def get_autopartition_choice (self):
-        id = self.autopartition_buttongroup.id( self.autopartition_buttongroup.selected() )
-        return unicode(self.autopartition_buttongroup_texts[id])
+        id = self.autopartition_buttongroup.selectedId()
+        choice = unicode(self.autopartition_buttongroup_texts[id])
 
-    def set_autopartition_resize_bounds (self, min_size, max_size):
-        self.resize_min_size = min_size
-        self.resize_max_size = max_size
-        if min_size is not None and max_size is not None:
-            min_percent = int(math.ceil(100 * min_size / max_size))
-            self.userinterface.new_size_scale.setMinValue(min_percent)
-            self.userinterface.new_size_scale.setMaxValue(100)
-            self.userinterface.new_size_scale.setValue(int((min_percent + 100) / 2))
-
-    def get_autopartition_resize_percent (self):
-        return self.userinterface.new_size_scale.value()
+        if choice == self.resize_choice:
+            # resize choice should have been hidden otherwise
+            assert self.new_size_scale is not None
+            return choice, self.new_size_scale.value()
+        elif (choice != self.manual_choice and
+              choice in self.autopartition_extra_buttongroup):
+            disk_id = self.autopartition_extra_buttongroup[choice].selectedId()
+            disk_texts = self.autopartition_extra_buttongroup_texts[choice]
+            return choice, unicode(disk_texts[id])
+        else:
+            return choice, None
 
     def get_hostname (self):
         return unicode(self.userinterface.hostname.text())
@@ -1721,9 +1710,8 @@ class Wizard:
 
         if self.installing and self.current_page is not None:
             # Go back to the autopartitioner and try again.
-            # TODO self.previous_partitioning_page
             #self.live_installer.show()
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartDisk"])
+            self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
             nextText = get_string("continue", self.locale) + " >"
             self.userinterface.next.setText(nextText)
             self.backup = True
@@ -1971,7 +1959,7 @@ class MapWidget(QWidget):
         painter.drawPoint(point.x()-1, point.y()+1)
         painter.drawPoint(point.x()+1, point.y()+1)
         painter.drawPoint(point.x(), point.y()+2)
-        
+
 
     def getPosition(self, la, lo, w, h):
         x = (w * (180.0 + lo) / 360.0)
@@ -1990,7 +1978,7 @@ class MapWidget(QWidget):
         dist = 1.0e10
         for city in self.cities:
             pos = self.getPosition(self.cities[city][0], self.cities[city][1], self.width(), self.height())
-            
+
             d = (pos.x()-x)*(pos.x()-x) + (pos.y()-y)*(pos.y()-y)
             if d < dist:
                 dist = d
@@ -2003,7 +1991,7 @@ class MapWidget(QWidget):
         self.y = mouseEvent.pos().y()
         if not self.timer.isActive():
             self.timer.start(25, True)
-            
+
     def updateCityIndicator(self):
         city = self.getNearestCity(self.width(), self.height(), self.x, self.y)
         if city is None:

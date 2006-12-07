@@ -286,7 +286,11 @@ get_recipedir () {
 }
 
 choose_recipe () {
-    local recipes recipedir free_size choices min_size
+    local recipes recipedir free_size choices min_size type target
+
+    type=$1
+    target="$2"
+    free_size=$3
     
     # Preseeding of recipes.
     db_get partman-auto/expert_recipe
@@ -297,22 +301,24 @@ choose_recipe () {
     db_get partman-auto/expert_recipe_file
     if [ ! -z "$RET" ] && [ -e "$RET" ]; then
         recipe="$RET"
-	decode_recipe $recipe $2
+	decode_recipe $recipe $type
 	if [ $(min_size) -le $free_size ]; then
 	    return 0
+	else
+	    logger -t partman-auto \
+		"Expert recipe too large ($(min_size) > $free_size); skipping"
 	fi
     fi
 
     recipedir=$(get_recipedir)
     
-    free_size=$1
     choices=''
     default_recipe=no
     db_get partman-auto/choose_recipe
     old_default_recipe="$RET"
     for recipe in $recipedir/*; do
 	[ -f "$recipe" ] || continue
-	decode_recipe $recipe $2
+	decode_recipe $recipe $type
 	if [ $(min_size) -le $free_size ]; then
 	    choices="${choices}${recipe}${TAB}${name}${NL}"
 	    if [ no = "$default_recipe" ]; then
@@ -330,6 +336,7 @@ choose_recipe () {
        return 1
     fi
  
+    db_subst partman-auto/choose_recipe TARGET "$target"
     debconf_select medium partman-auto/choose_recipe "$choices" "$default_recipe"
     if [ "$?" = 255 ]; then
 	exit 0
@@ -341,6 +348,8 @@ expand_scheme() {
     # Make factors small numbers so we can multiply on them.
     # Also ensure that fact, max and fs are valid
     # (Ofcourse in valid recipes they must be valid.)
+    # TODO: if factsum ever becomes zero, we'll crash. This happens when the
+    # whole recipe is used up and there's still disk space left to allocate.
     factsum=$(($(factor_sum) - $(min_size)))
     scheme=$(
         foreach_partition '

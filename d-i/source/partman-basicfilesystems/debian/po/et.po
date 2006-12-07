@@ -3,32 +3,17 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of et.po to Eesti
-#
-#
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-#
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-# Siim Põder <windo@windowlicker.dyn.ee>, 2005.
-#
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: et\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-04-22 23:50-0600\n"
-"PO-Revision-Date: 2005-06-08 11:11+0300\n"
-"Last-Translator: Siim Põder <windo@windowlicker.dyn.ee>\n"
+"POT-Creation-Date: 2006-05-19 21:23-0600\n"
+"PO-Revision-Date: 2006-10-03 23:32+0300\n"
+"Last-Translator: Siim Põder <windo@p6drad-teel.net>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Estonian\n"
-"X-Poedit-Country: ESTONIA\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: KBabel 1.9.1\n"
 
 #. Type: text
 #. Description
@@ -115,17 +100,21 @@ msgid ""
 "scarce. You may experience installation problems if you do not have enough "
 "physical memory."
 msgstr ""
+"Sa pole saalealana kasutamiseks ühtki partitsiooni valinud. Saaleala "
+"kasutamine on soovitatav, et süsteem saaks füüsilist mälu tõhusamalt "
+"rakendada ning edukalt toimida ka juhul, kui füüsilist mälu hakkab väheks "
+"jääma. Juhul, kui süsteemis pole piisavalt füüsilist mälu, võib paigaldamise "
+"käigus probleeme esineda."
 
 #. Type: boolean
 #. Description
 #: ../partman-basicfilesystems.templates:41
-#, fuzzy
 msgid ""
 "If you do not go back to the partitioning menu and assign a swap partition, "
 "the installation will continue without swap space."
 msgstr ""
-"Kui sa ei lähe tagasi partitsioneerimise menüüsse ja ei määra haakepunkti, "
-"jääb see partitsioon täielikult kasutamata."
+"Kui sa ei lähe tagasi partitsioneerimise menüüsse ja ei määra saaleala-"
+"partitsiooni, jätkub paigaldamine ilma saalealata."
 
 #. Type: error
 #. Description
@@ -186,9 +175,8 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:73
-#, fuzzy
 msgid "Invalid file system for this mount point"
-msgstr "Selle partitsiooni failisüsteem:"
+msgstr "Antud haakepunktile sobimatu failisüsteem"
 
 #. Type: error
 #. Description
@@ -198,6 +186,9 @@ msgid ""
 "because it is not a fully-functional Unix file system. Please choose a "
 "different file system, such as ${EXT2}."
 msgstr ""
+"${FILESYSTEM}-tüüpi failisüsteemi ei saa haakepunkti ${MOUNTPOINT} külge "
+"haakida, kuna tegemist pole täielikult Unix'i funktsionaalsust toetava "
+"failisüsteemiga. Palun vali mõni teine failisüsteem, näiteks ${EXT2}."
 
 #. Type: select
 #. Choices

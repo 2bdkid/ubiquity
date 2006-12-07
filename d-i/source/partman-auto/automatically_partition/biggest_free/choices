@@ -5,7 +5,8 @@
 mypart=''
 mysize=0
 
-get_biggest_free_on_dev() {
+for dev in $DEVICES/*; do
+    [ -d $dev ] || continue
     cd $dev
     open_dialog PARTITIONS
     while { read_line num id size type fs path name; [ "$id" ]; }; do
@@ -15,18 +16,7 @@ get_biggest_free_on_dev() {
 	fi
     done
     close_dialog
-}
-
-dev="$1"
-
-if [ -z "$dev" ]; then
-    for dev in $DEVICES/*; do
-	[ -d $dev ] || continue
-	get_biggest_free_on_dev
-    done
-else
-    get_biggest_free_on_dev
-fi
+done
 
 if [ "$mypart" ]; then
     db_metaget partman-auto/text/use_biggest_free description

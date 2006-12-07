@@ -3,26 +3,25 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of ta.po to 
+# translation of ta.po to Tamil
+# Tamil messages for debian-installer.
+# Copyright (C) 2003 Software in the Public Interest, Inc.
+# This file is distributed under the same license as debian-installer.
 #
-# Debian Installer master translation file template
-# Don't forget to properly fill-in the header of PO files
-#
-# Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt
-#
+# drtvasudevan <agnihot3@gmail.com>, 2006.
+# Damodharan Rajalingam <rdamodharan@gmail.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-09 06:05-0600\n"
-"PO-Revision-Date: 2006-05-10 19:19+0530\n"
-"Last-Translator: Damodharan Rajalingam <r.damodharan@yahoo.co.in>\n"
-"Language-Team:  <tamil-DI@yahoogroups.com>\n"
+"POT-Creation-Date: 2006-08-30 10:57+0000\n"
+"PO-Revision-Date: 2006-10-12 01:25+0530\n"
+"Last-Translator: Damodharan Rajalingam <rdamodharan@gmail.com>\n"
+"Language-Team: Tamil <tamil-DI@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -45,9 +44,8 @@ msgstr "கோப்பு அமைப்புகள் கண்டறிய�
 #. Type: error
 #. Description
 #: ../partman-base.templates:20
-#, fuzzy
 msgid "Device in use"
-msgstr "சாதனம்:"
+msgstr "பயன் படும் சாதனம்"
 
 #. Type: error
 #. Description
@@ -55,14 +53,13 @@ msgstr "சாதனம்:"
 msgid ""
 "No modifications can be made to the device ${DEVICE} for the following "
 "reasons:"
-msgstr ""
+msgstr "பின்வரும் காரணங்களால்${DEVICE} சாதனத்தில் மாறுதல்கள் செய்ய இயலாது:"
 
 #. Type: error
 #. Description
 #: ../partman-base.templates:33
-#, fuzzy
 msgid "Partition in use"
-msgstr "பகிர்தலுக்கான திட்டமுறை:"
+msgstr "பயன் படும் பகிர்வு"
 
 #. Type: error
 #. Description
@@ -74,6 +71,8 @@ msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
 msgstr ""
+"பின்வரும் காரணங்களால் சாதனம் ${DEVICE} த்தின் பகிர்வு எண் #${PARTITION} இல் மாறுதல்கள் "
+"செய்ய இயலாது:"
 
 #. Type: boolean
 #. Description
@@ -83,6 +82,8 @@ msgid ""
 "partition tables on your architecture.  Please send an e-mail message to "
 "debian-boot@lists.debian.org with information."
 msgstr ""
+"உங்கள் கட்டமைப்பில் உள்ள முன்னிருப்பு வகை பகிர்வு அட்டவணை குறித்து பகிர்வி க்கு தகவல் "
+"இல்லை. இது பற்றி debian-boot@lists.debian.org-க்கு மின் அஞ்சல் செய்தி அனுப்பவும்.."
 
 #. Type: boolean
 #. Description
@@ -91,6 +92,8 @@ msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
 msgstr ""
+"முன்னிருப்பு வகை பகிர்வு அட்டவணை லிப் பார்டட் (libparted) ஆல் ஆதரிக்கப் படவில்லையானால் "
+"இந்த பகிர்வி சரியாக வேலை செய்யாது என அறியவும்."
 
 #. Type: boolean
 #. Description
@@ -106,6 +109,9 @@ msgid ""
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
+"இந்த பகிர்வி லிப் பார்டட் (libparted) நூலகத்தை ஆதாரமாக கொண்டது. இதனால் உங்கள் "
+"கட்டமைப்பில் உள்ள முன்னிருப்பு வகை பகிர்வு அட்டவணை ஆதரிக்கப் படவில்லை. இந்த "
+"பகிர்வியிலிருந்து வெளியேரும்படி பலமாக பரிந்துரை செய்யப் படுகிறது."
 
 #. Type: boolean
 #. Description
@@ -114,6 +120,7 @@ msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
 msgstr ""
+"இயலுமாயின் லிப் பார்டட் (libparted) உங்கள் பகிர்வு அட்டவணை வகையை ஆதரிக்க உதவுங்கள்"
 
 #. Type: select
 #. Description
@@ -124,12 +131,16 @@ msgid ""
 "etc.), a free space to create partitions, or a device to initialise its "
 "partition table."
 msgstr ""
+"இது உங்களது தற்போதைய பகிர்வுகள், மேலேற்றப் புள்ளி ஆகியவற்றின் வடிவமைப்பு. கோப்பு "
+"அமைப்பு, மேலேற்றப் புள்ளி முதலிய அமைப்புகளை மாற்ற ஒரு பகிர்வு,அல்லது பகிர்வுகள் "
+"உருவாக்க வெற்று இடம் அல்லது பகிர்வு அட்டவணையை துவக்க ஒரு சாதனம் இவற்றில் ஒன்றை "
+"தேர்ந்தெடுங்கள்."
 
 #. Type: boolean
 #. Description
 #: ../partman-base.templates:80
 msgid "Create new empty partition table on this device?"
-msgstr "இந்த சாதனத்தில் புதிய பகிர்வை உருவாக்கவா?"
+msgstr "இந்த சாதனத்தில் புதிய பகிர்வு அட்டவணையை உருவாக்கவா?"
 
 #. Type: boolean
 #. Description
@@ -140,13 +151,13 @@ msgid ""
 "will be removed."
 msgstr ""
 "ஒரு முழு சாதனத்தையும் பகிர்வு செய்ய தேர்ந்தெடுத்துள்ளீர்கள். தொடர்ந்தால் இதில் உள்ள மற்ற "
-"பிரிவிணைகள் நீக்கப்படும்."
+"பிரிவுகள் நீக்கப்படும்."
 
 #. Type: boolean
 #. Description
 #: ../partman-base.templates:80
 msgid "Note that you will be able to undo this operation later if you wish."
-msgstr "நீங்கள் விரும்பினால் இந்த செயலை மீட்க இயலும் என்பதை குறித்துக் கொள்ளவும்."
+msgstr "பின்னால் நீங்கள் விரும்பினால் இந்த செயலை மீட்க இயலும் என்பதை குறித்துக் கொள்ளவும்."
 
 #. Type: boolean
 #. Description
@@ -172,7 +183,7 @@ msgid ""
 "You will NOT be able to undo this operation later and all existing data on "
 "the disk will be irreversibly removed."
 msgstr ""
-"தங்களது இந்த செயலை மீண்டும் திருத்த வாய்ப்பிருக்கது. மேலும் வட்டிலிருக்கும் தகவல்கள் "
+"தங்களது இந்த செயலை மீண்டும் திருத்த *வாய்ப்பிருக்காது*. மேலும் வட்டிலிருக்கும் தகவல்கள் "
 "திரும்பபெற இயலாத வண்ணம் அழிக்கப்படும்."
 
 #. Type: boolean
@@ -182,7 +193,7 @@ msgid ""
 "Confirm whether you actually want to create a new partition table and write "
 "it to disk."
 msgstr ""
-"புதிய பகிர்வை உருவாகி அதை வட்டிற்க்கு எழுத விரும்புகிறீன்களா என்பதை உறுதி செய்யவும்."
+"புதிய பகிர்வை உருவாகி அதை வன்வட்டிற்கு எழுத விரும்புகிறீர்களா என்பதை உறுதி செய்யவும்."
 
 #. Type: boolean
 #. Description
@@ -196,7 +207,7 @@ msgstr "நிறுவலை தொடரவா?"
 msgid ""
 "No partition table changes and no creation of file systems have been planned."
 msgstr ""
-"பகிர்வு அட்டவணை மாற்றங்களோ அல்லது கோப்பு அமைப்பு உருவாகுதோ ஏதும் திட்டமிடப்படவில்லை."
+"பகிர்வு அட்டவணை மாற்றங்களோ அல்லது கோப்பு அமைப்பு உருவாகுவதோ ஏதும் திட்டமிடப்படவில்லை."
 
 #. Type: boolean
 #. Description
@@ -205,163 +216,165 @@ msgid ""
 "If you plan on using already created file systems, be aware that existing "
 "files may prevent the successful installation of the base system."
 msgstr ""
-"ஏற்கனவே இருக்கும் கோபு அமைப்பை பயனபடுத்த விரும்பினால் ஏற்கனவே அதில் இருக்கும் கோப்புகள் "
+"ஏற்கனவே இருக்கும் கோப்பு அமைப்பை பயன் படுத்த விரும்பினால் ஏற்கனவே அதில் இருக்கும் கோப்புகள் "
 "நிறுவல் வெற்றிபெறுவதற்கு தடையாக இருக்கலாம் என்பதை மனதில் கொள்க."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid "Write the changes to disks?"
-msgstr "மாற்றங்களை வட்டில் எழுதவா?"
+msgstr "மாற்றங்களை வன்வட்டில் எழுதவா?"
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "If you continue, the changes listed below will be written to the disks. "
 "Otherwise, you will be able to make further changes manually."
 msgstr ""
-"நீங்கள் தொடர்ந்தால் கீழுள்ள மாற்றங்கள் வட்டிற்க்கு எழுதப்படும். இல்லையெனில் தாங்கள் மேலும் "
-"மாறங்களை செய்ய இயலும்."
+"நீங்கள் தொடர்ந்தால் கீழுள்ள மாற்றங்கள் வன்வட்டிற்கு எழுதப்படும். இல்லையெனில் தாங்கள் மேலும் "
+"மாற்றங்களை செய்ய இயலும்."
 
 #. Type: boolean
 #. Description
-#: ../partman-base.templates:113
+#: ../partman-base.templates:114
 msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
 msgstr ""
 "எச்சரிக்கை: இது தாங்கள் நீக்கிய மற்றும் ஒழுங்குபடுத்தவுள்ள பகிர்வுகளில் உள்ள தகவல்கள் "
-"அனைத்தையும் அழித்துவிடும்."
-
-#. Type: boolean
-#. Description
-#: ../partman-base.templates:113
-msgid "${ITEMS}"
-msgstr "${ITEMS}"
+"அனைத்தையும் *அழித்து* விடும்."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:124
+#: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
 msgstr "பின்வரும் பகிர்வுகள் ஒழுங்குபடுத்தப்படும்:"
 
 #. Type: text
 #. Description
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
-#: ../partman-base.templates:129
+#: ../partman-base.templates:130
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
 msgstr "${DEVICE}-ன் பகிர்வு #${PARTITION}-ஐ ${TYPE}-ஆக"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:133
+#. for devices which have no partitions
+#. for example: "LVM VG Debian, LV Root as ext3 journaling file system"
+#: ../partman-base.templates:136
+msgid "${DEVICE} as ${TYPE}"
+msgstr "${DEVICE} as ${TYPE}"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:140
 msgid "The partition tables of the following devices are changed:"
 msgstr "பின்வரும் சாதனங்களின் பகிர்வு அட்டவணைகள் மாற்றப்பட்டுள்ளன:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:138
+#: ../partman-base.templates:145
 msgid "What to do with this device:"
 msgstr "இந்த சாதனத்தை என்ன செய்வது:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:143
+#: ../partman-base.templates:150
 msgid "How to use this free space:"
 msgstr "வெற்றிடத்தை எப்படி உபயோகிப்பது:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid "Partition settings:"
 msgstr "பகிர்வு அமைவுகள்:"
 
 #. Type: select
 #. Description
-#: ../partman-base.templates:148
+#: ../partman-base.templates:155
 msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
 msgstr ""
-"நீங்கள் ${DEVICE}-ல் உள்ள  பகிர்வு#${PARTITION}-ஐ திருத்துகிறீர்கள்.${OTHERINFO} "
+"நீங்கள் ${DEVICE}-ல் உள்ள பகிர்வு#${PARTITION}-ஐ திருத்துகிறீர்கள்.${OTHERINFO} "
 "${DESTROYED}"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:153
+#: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
 msgstr "இந்த பகிர்வு ${FILESYSTEM} கொண்டு ஒழுங்கிடப்பட்டுள்ளது."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:157
+#: ../partman-base.templates:164
 msgid "No existing file system was detected in this partition."
 msgstr "இந்த பகிர்வில் கோப்பு அமைப்பு ஏதும் இருப்பதாக தெரியவில்லை."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:161
+#: ../partman-base.templates:168
 msgid "All data in it WILL BE DESTROYED!"
-msgstr "இதிலுள்ள அனைத்து தகவகல்களும் அழிக்கப்படும்!"
+msgstr "இதிலுள்ள அனைத்து தகவல்களும் *அழிக்கப்படும்*!"
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:165
+#: ../partman-base.templates:172
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
 msgstr "பகிர்வு ${FROMCHS}'ல் துவங்கி ${TOCHS}'ல் முடிகிறது."
 
 #. Type: note
 #. Description
-#: ../partman-base.templates:169
+#: ../partman-base.templates:176
 msgid "The free space starts from ${FROMCHS} and ends at ${TOCHS}."
-msgstr "${FROMCHS} துவங்கி ${TOCHS} வரை காலியாக உள்ளது"
+msgstr "${FROMCHS} துவங்கி ${TOCHS} வரை காலி இடமாக உள்ளது"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:173
+#: ../partman-base.templates:180
 msgid "Please wait..."
-msgstr "பொறுத்திறுக்கவும்"
+msgstr "பொறுத்திருக்கவும்..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:177
+#: ../partman-base.templates:184
 msgid "Partitions formatting"
-msgstr "ஒழுங்குபடுத்தப்படும் பகிர்வுகள்"
+msgstr "ஒழுங்கு படுத்தப்படும் பகிர்வுகள்"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:181
+#: ../partman-base.templates:188
 msgid "Processing..."
-msgstr "செயல்படுத்தப்படுகிறது..."
+msgstr "செயல் படுத்தப்படுகிறது..."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:193
+#: ../partman-base.templates:200
 msgid "Done setting up the partition"
 msgstr "பகிர்வு செய்தாகிவிட்டது."
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:197
+#: ../partman-base.templates:204
 msgid "Finish partitioning and write changes to disk"
-msgstr "பகிர்தலை முடித்துவிட்டு மாற்றங்களை வட்டில் எழுதவும்"
+msgstr "பகிர்தலை முடித்துவிட்டு மாற்றங்களை வன்வட்டில் எழுதவும்"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:201
+#: ../partman-base.templates:208
 msgid "Undo changes to partitions"
-msgstr "பகிர்வுகளுக்கு செய்யப்பட்ட மாற்றங்களை மீள்"
+msgstr "பகிர்வுகளுக்கு செய்யப்பட்ட மாற்றங்களை மீட்க"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:205
+#: ../partman-base.templates:212
 msgid "Show Cylinder/Head/Sector information"
 msgstr "உருளை/தலை/பகுதி விவரங்களை காண்பி"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:209
+#: ../partman-base.templates:216
 #, no-c-format
 msgid "Dump partition info in %s"
 msgstr "பகிர்வு தகவலை %s-ல் இடு"
@@ -369,37 +382,37 @@ msgstr "பகிர்வு தகவலை %s-ல் இடு"
 #. Type: text
 #. Description
 #. Keep short
-#: ../partman-base.templates:214
+#: ../partman-base.templates:221
 msgid "FREE SPACE"
 msgstr "வெற்று இடம்"
 
 #. Type: text
 #. Description
 #. "unusable free space".  No more than 8 symbols.
-#: ../partman-base.templates:219
+#: ../partman-base.templates:226
 msgid "unusable"
 msgstr "பயன்படுத்த முடியாதது"
 
 #. Type: text
 #. Description
 #. "primary partition".  No more than 8 symbols.
-#: ../partman-base.templates:224
+#: ../partman-base.templates:231
 msgid "primary"
 msgstr "முதன்மை"
 
 #. Type: text
 #. Description
 #. "logical partition".  No more than 8 symbols.
-#: ../partman-base.templates:229
+#: ../partman-base.templates:236
 msgid "logical"
-msgstr "ஏரண"
+msgstr "தர்க்க ரீதியான"
 
 #. Type: text
 #. Description
 #. "primary or logical".  No more than 8 symbols.
-#: ../partman-base.templates:234
+#: ../partman-base.templates:241
 msgid "pri/log"
-msgstr "முதன்மை/ஏரண"
+msgstr "முதன்மை/தர்க்க"
 
 #. Type: text
 #. Description
@@ -408,7 +421,7 @@ msgstr "முதன்மை/ஏரண"
 #. %s.
 #. No %s
 #. N. %s
-#: ../partman-base.templates:243
+#: ../partman-base.templates:250
 #, no-c-format
 msgid "#%s"
 msgstr "#%s"
@@ -416,7 +429,7 @@ msgstr "#%s"
 #. Type: text
 #. Description
 #. For example IDE0 master (hda)
-#: ../partman-base.templates:248
+#: ../partman-base.templates:255
 #, no-c-format
 msgid "IDE%s master (%s)"
 msgstr "IDE%s முதன்மை (%s)"
@@ -424,7 +437,7 @@ msgstr "IDE%s முதன்மை (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 slave (hdd)
-#: ../partman-base.templates:253
+#: ../partman-base.templates:260
 #, no-c-format
 msgid "IDE%s slave (%s)"
 msgstr "IDE%s அடிமை (%s)"
@@ -432,7 +445,7 @@ msgstr "IDE%s அடிமை (%s)"
 #. Type: text
 #. Description
 #. For example IDE1 master, partition #5 (hdc5)
-#: ../partman-base.templates:258
+#: ../partman-base.templates:265
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
 msgstr "IDE%s முதன்மை, பகிர்வு #%s (%s)"
@@ -440,76 +453,76 @@ msgstr "IDE%s முதன்மை, பகிர்வு #%s (%s)"
 #. Type: text
 #. Description
 #. For example IDE2 slave, partition #5 (hdf5)
-#: ../partman-base.templates:263
+#: ../partman-base.templates:270
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
 msgstr "IDE%s அடிமை, பகிர்வு #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:267
+#: ../partman-base.templates:274
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s) (%s)"
 msgstr "SCSI%s (%s%s%s) (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:271
+#: ../partman-base.templates:278
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
 msgstr "SCSI%s (%s%s%s), பகிர்வு #%s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:275
+#: ../partman-base.templates:282
 #, no-c-format
 msgid "RAID%s device #%s"
 msgstr "ரெய்டு%s சாதனம் #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:279
+#: ../partman-base.templates:286
 #, no-c-format
 msgid "Encrypted volume (%s)"
-msgstr ""
+msgstr "குறிமுறையாக்கப்பட்ட தொகுதி (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:283
+#: ../partman-base.templates:290
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:287
+#: ../partman-base.templates:294
 #, no-c-format
 msgid "Loopback (loop%s)"
-msgstr ""
+msgstr "லூப்பேக் (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:291
+#: ../partman-base.templates:298
 #, no-c-format
 msgid "DASD %s (%s)"
-msgstr ""
+msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:295
-#, fuzzy, no-c-format
+#: ../partman-base.templates:302
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "SCSI%s (%s%s%s), பகிர்வு #%s (%s)"
+msgstr "DASD %s (%s), பகிர்வு #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:299
+#: ../partman-base.templates:306
 msgid "Cancel this menu"
-msgstr "இந்த பட்டியை நிராகரி"
+msgstr "இந்த பட்டியை ரத்து செய்"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:304
+#: ../partman-base.templates:311
 msgid "Partition disks"
-msgstr "வட்டை பகிர்"
+msgstr "வட்டுகளை பகிர்"
