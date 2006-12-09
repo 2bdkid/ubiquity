@@ -254,6 +254,11 @@ class Wizard:
         else:
             first_step = self.stepLanguage
         self.set_current_page(self.steps.page_num(first_step))
+        if got_intro:
+            # intro_label was the only focusable widget, but got can-focus
+            # removed, so we end up with no input focus and thus pressing
+            # Enter doesn't activate the default widget. Work around this.
+            self.next.grab_focus()
 
         while self.current_page is not None:
             if not self.installing:
@@ -450,13 +455,9 @@ class Wizard:
         intro = os.path.join(PATH, 'intro.txt')
 
         if os.path.isfile(intro):
-            widget = gtk.Label()
-            widget.set_line_wrap(True)
             intro_file = open(intro)
-            widget.set_markup(intro_file.read().rstrip('\n'))
+            self.intro_label.set_markup(intro_file.read().rstrip('\n'))
             intro_file.close()
-            self.stepWelcome.add(widget)
-            widget.show()
             return True
         else:
             return False
@@ -787,12 +788,19 @@ class Wizard:
         elif gtk.main_level() > 0:
             gtk.main_quit()
 
+    def on_keyboardlayoutview_row_activated(self, treeview, path, view_column):
+        self.next.activate()
+
     def on_keyboard_layout_selected(self, start_editing, *args):
         if isinstance(self.dbfilter, console_setup.ConsoleSetup):
             layout = self.get_keyboard()
             if layout is not None:
                 self.current_layout = layout
                 self.dbfilter.change_layout(layout)
+
+    def on_keyboardvariantview_row_activated(self, treeview, path,
+                                             view_column):
+        self.next.activate()
 
     def on_keyboard_variant_selected(self, start_editing, *args):
         if isinstance(self.dbfilter, console_setup.ConsoleSetup):
@@ -1251,6 +1259,9 @@ class Wizard:
         elif gtk.main_level() > 0:
             gtk.main_quit()
 
+
+    def on_language_treeview_row_activated (self, treeview, path, view_column):
+        self.next.activate()
 
     def on_language_treeview_selection_changed (self, selection):
         (model, iterator) = selection.get_selected()
