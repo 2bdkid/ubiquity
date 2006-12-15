@@ -1,3 +1,66 @@
+localechooser (1.33ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add a localechooser-data package containing lists useful for packages
+      that create automatic installation scripts.
+    - Always support English, unless preseeded otherwise.
+    - Check whether the language has changed after asking the country
+      question, and recalculate a number of things if so.
+    - Drop fallbacks for Norwegian Bokmål and Nynorsk.
+    - Simplify use of locale-gen using the new command-line argument
+      facility in Ubuntu's locales package.
+    - Move Portuguese above Portuguese (Brazil) in languagelist.l10n.
+    - Add encoding field to languagelist file and use the full SUPPORTED
+      file rather than SUPPORTED-short.
+    - If the language question was already marked as seen and the answer
+      didn't change, then don't recalculate the locale.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 15 Dec 2006 10:34:14 +0000
+
+localechooser (1.33) unstable; urgency=low
+
+  * Switch default font used in graphical installer based on selected
+    language.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+
+ -- Frans Pop <fjp@debian.org>  Mon, 11 Dec 2006 23:40:46 +0100
+
+localechooser (1.32) unstable; urgency=low
+
+  [ Colin Watson ]
+  * If there's no default country for the selected language, leave the
+    default for countrychooser/country-name alone.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Kurdish (ku.po) by rizoye-xerzi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Punjabi (pa.po) by A S Alam
+
+ -- Christian Perrier <bubulle@debian.org>  Tue,  5 Dec 2006 18:47:54 +0100
+
+localechooser (1.31) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Re-activate Georgian after it reached 100% again
+  * Activate Malayalam
+
+  [ Colin Watson ]
+  * Fix check for selected language when trying to display "no translations
+    available" template.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Malayalam (ml.po) by Praveen A
+  * Punjabi (pa.po) by A S Alam
+  * Slovenian (sl.po) by Matej Kovacic
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 16 Nov 2006 08:12:21 +0100
+
 localechooser (1.30ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

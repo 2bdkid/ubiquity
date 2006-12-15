@@ -31,35 +31,27 @@ arch_check_usable_kernel () {
 }
 
 arch_get_kernel () {
-	# The APUS kernels are in a separate source package, so may
-	# sometimes have a different version number.
-	apusversion=2.4.27
-
 	if [ "$1" = "powerpc64" ]; then
 		SMP=-smp
 	else
 		SMP=
 	fi
 
-	case "$1" in
-		apus)	echo "kernel-image-$apusversion-apus" ;;
+	case "$KERNEL_MAJOR" in
+		2.6)
+			if [ "$SMP" ]; then
+				echo "linux-$1$SMP"
+				echo "linux-image-$1$SMP"
+			fi
+			echo "linux-$1"
+			echo "linux-image-$1"
+			;;
 		*)
-			case "$KERNEL_MAJOR" in
-				2.6)
-					if [ "$SMP" ]; then
-						echo "linux-$1$SMP"
-						echo "linux-image-$1$SMP"
-					fi
-					echo "linux-$1"
-					echo "linux-image-$1"
-					;;
-				*)
-					if [ "$1" = powerpc ] && [ "$SMP" ]; then
-						# 2.4 only has powerpc-smp.
-						echo "kernel-image-$KERNEL_MAJOR-$1$SMP"
-					fi
-					echo "kernel-image-$KERNEL_MAJOR-$1"
-					;;
-			esac
+			if [ "$1" = powerpc ] && [ "$SMP" ]; then
+				# 2.4 only has powerpc-smp.
+				echo "kernel-image-$KERNEL_MAJOR-$1$SMP"
+			fi
+			echo "kernel-image-$KERNEL_MAJOR-$1"
+			;;
 	esac
 }

@@ -77,7 +77,7 @@ debconf_select () {
 		else
 			debconf_select_lead="> "
 		fi
-		option=$(echo "${x#*$TAB}" | sed 's/ *$//g' | sed "s/^ /$debconf_select_lead/g")
+		option=$(echo "${x#*$TAB}" | sed "s/ *\$//g; s/^ /$debconf_select_lead/g")
 		newchoices="${newchoices:+${newchoices}${NL}}${key}${TAB}${option}"
 		if [ "$key" = "$default_choice" ]; then
 		    default="$option"
@@ -94,7 +94,7 @@ debconf_select () {
 	# escape the commas and leading whitespace but keep them unescaped
 	# in $choices
         for x in $choices; do
-                u="$u, `echo ${x#*$TAB} | sed 's/,/\\\\,/g' | sed 's/^ /\\\\ /'`"
+                u="$u, `echo ${x#*$TAB} | sed 's/,/\\\\,/g; s/^ /\\\\ /'`"
         done
         u=${u#, }
 	restore_ifs
@@ -720,7 +720,7 @@ humandev () {
 	        # occurance of one single dash to split the string into vg and
 	        # lv, and then replace two dashes next to each other with one.
 	        vglv=${1#/dev/mapper/}
-	        vglv=`echo "$vglv" | sed -e 's/\([^-]\)-\([^-]\)/\1 \2/' | sed -e 's/--/-/g'`
+	        vglv=`echo "$vglv" | sed 's/\([^-]\)-\([^-]\)/\1 \2/; s/--/-/g'`
 	        vg=`echo "$vglv" | cut -d" " -f1`
 	        lv=`echo "$vglv" | cut -d" " -f2`
 	        db_metaget partman/text/lvm_lv description
@@ -846,8 +846,6 @@ default_disk_label () {
 		    echo msdos;;
 		ads)
 		    echo msdos;;
-		nslu2)
-		    echo msdos;;
 		versatile)
 		    echo msdos;;
 		*)
@@ -855,7 +853,7 @@ default_disk_label () {
 	    esac;;
 	armeb)
 	    case "$sub" in
-		nslu2)
+		ixp4xx)
 		    echo msdos;;
 		*)
 		    echo UNKNOWN;;
@@ -899,6 +897,8 @@ default_disk_label () {
 		# Broadcom SB1 evaluation boards
 		sb1-bcm91250a | sb1a-bcm91480b)
 		    echo msdos;;
+		qemu-mips32)
+		    echo msdos;;
 		*)
 		    echo UNKNOWN;;
 	    esac;;
@@ -915,6 +915,8 @@ default_disk_label () {
 		cobalt)
 		    echo msdos;;
 		bcm947xx)
+		    echo msdos;;
+		qemu-mips32)
 		    echo msdos;;
 		*)
 		    echo UNKNOWN;;

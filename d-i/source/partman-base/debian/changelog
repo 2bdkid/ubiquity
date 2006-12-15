@@ -1,3 +1,97 @@
+partman-base (100ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Close all file descriptors other than 0, 1, and 2 on startup, so that
+      we don't hold a pipe to debconf open.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 15 Dec 2006 10:13:25 +0000
+
+partman-base (100) unstable; urgency=low
+
+  * parted_devices: Consider /dev/fd* as floppy devices too.
+  * parted_server: Fix segfault if GET_MAX_PRIMARY is called on a disk where
+    ped_disk_new failed.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Kurdish (ku.po) by rizoye-xerzi
+  * Slovenian (sl.po) by Matej Kovačič
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 13 Dec 2006 17:20:01 +0000
+
+partman-base (99ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Close all file descriptors other than 0, 1, and 2 on startup, so that
+      we don't hold a pipe to debconf open.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 12 Dec 2006 14:07:07 +0000
+
+partman-base (99) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Add a GET_MAX_PRIMARY command to find out how many primary partitions
+    are allowed on a disk; this is useful for some possible autopartitioning
+    sanity checks.
+
+  [ Frans Pop ]
+  * Run partman-auto init scripts separately to avoid progress bar conflicts.
+    partman-auto is mostly interactive and should have the freedom to run
+    progress bars.
+
+  [ Colin Watson ]
+  * Skip choose_partition if an auto.d script exits with an exit code
+    greater than 100 (except for 255, which backs up to the main menu).
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Panjabi (pa.po) by A S Alam
+
+ -- Frans Pop <fjp@debian.org>  Fri,  8 Dec 2006 01:09:27 +0100
+
+partman-base (98) unstable; urgency=low
+
+  [ Thiemo Seufer ]
+  * definitions.sh: Add support for qemu-mips32.
+
+  [ Joey Hess ]
+  * parted_devices: Don't list floppy devices.
+
+  [ Martin Michlmayr ]
+  * Remove the obsolete definition for nslu2.
+
+  [ Colin Watson ]
+  * definitions.sh: Coalesce multiple sed calls for efficiency.
+  * definitions.sh: Initialise formatted_previously at the right time.
+  * init.d/update_partitions: Restore IFS even if a disk has no partitions.
+    Fixes missing substitution into confirmation question.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by rizoye-xerzi
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Slovenian (sl.po) by Matej Kovačič
+
+ -- Frans Pop <fjp@debian.org>  Wed, 22 Nov 2006 15:14:13 +0100
+
 partman-base (97ubuntu2) feisty; urgency=low
 
   * choose_partition/finish/do_option: Remove no-longer-used Ubiquity

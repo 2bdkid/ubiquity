@@ -63,10 +63,17 @@ scan_disk () {
     read_line uses_extended
     close_dialog
 
+    open_dialog GET_MAX_PRIMARY
+    read_line max_primary
+    close_dialog
+    if [ -z "$max_primary" ]; then
+	log "Unable to get maximum primary partition count on $dev"
+	echo '0 0 none none'
+	return
+    fi
+
     # TODO: This should all be checked later to take account of recipes
     # other than the defaults for the supported Ubuntu architectures.
-    # TODO: We hardcode a maximum primary partition count of 4; a command
-    # should be added to parted_server to extract this.
     if [ "$uses_extended" = yes ]; then
 	primary_logical="$(echo "$partitions" | count_primary_logical)"
 	if [ "$primary_logical" ]; then
@@ -77,7 +84,7 @@ scan_disk () {
 	    # If we already have four primary partitions (counting extended
 	    # partitions), then we won't have room to create the extra one
 	    # demanded by the standard recipes.
-	    if [ "$primaries" -ge 4 ]; then
+	    if [ "$primaries" -ge "$max_primary" ]; then
 		log "Too many primary partitions already exist on $dev"
 		echo '0 0 none none'
 		return
@@ -85,7 +92,8 @@ scan_disk () {
 
 	    # If there are no logical partitions, then we will need an extra
 	    # primary partition slot to create an extended partition.
-	    if [ "$logicals" -eq 0 ] && [ "$primaries" -ge 3 ]; then
+	    if [ "$logicals" -eq 0 ] && \
+	       [ "$primaries" -ge "$(($max_primary - 1))" ]; then
 		log "Too many primary partitions already exist on $dev without an extended partition"
 		echo '0 0 none none'
 		return

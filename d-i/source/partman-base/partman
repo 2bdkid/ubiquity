@@ -42,7 +42,7 @@ while true; do
 
 	for s in /lib/partman/init.d/*; do
 		if [ -x $s ]; then
-			#logger -t "Running init.d/$s
+			#logger -t partman "Running init.d/$s"
 
 			base=$(basename $s | sed 's/[0-9]*//')
 			# Not every init script has, or needs, its own progress
@@ -62,16 +62,19 @@ while true; do
 	skip_choose_partition=no
 	for s in /lib/partman/auto.d/*; do
 		if [ -x $s ]; then
+			#logger -t partman "Running auto.d/$s"
 			$s
 			exitcode=$?
 			if [ $exitcode -eq 255 ]; then
 				abort 10 # back up to main menu
 			elif [ $exitcode -ge 100 ]; then
 				# Partitioning complete; go straight to
-				# confirmation.
+				# confirmation. (To present choose_partition
+				# so that the user can edit the results of
+				# manual partitioning, just exit 0 instead.)
 				skip_choose_partition=yes
 			elif [ $exitcode -ne 0 ]; then
-				abort 10
+				continue 2
 			fi
 		fi
 	done
@@ -97,14 +100,14 @@ while true; do
 
 	for s in /lib/partman/commit.d/*; do
 		if [ -x $s ]; then
-			#logger -t "Running commit.d/$s
+			#logger -t partman "Running commit.d/$s"
 			$s || continue 2
 		fi
 	done
 
 	for s in /lib/partman/finish.d/*; do
 		if [ -x $s ]; then
-			#logger -t "Running finish.d/$s
+			#logger -t partman "Running finish.d/$s"
 			$s || {
 				status=$?
 				if [ "$status" = 1 ]; then

@@ -8,14 +8,15 @@
 # This file is distributed under the same license as debian-installer.
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
+# Damyan Ivanov <dam@modsoftsys.com>, 2006.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
 "POT-Creation-Date: 2006-10-19 10:51+0000\n"
-"PO-Revision-Date: 2006-04-08 10:14+0300\n"
-"Last-Translator:  Ognyan Kulev <ogi@fmi.uni-sofia.bg>\n"
+"PO-Revision-Date: 2006-10-31 12:37+0200\n"
+"Last-Translator:  Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,25 +63,22 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../partman-auto.templates:24
-#, fuzzy
 msgid ""
 "The installer can guide you through partitioning a disk (using different "
 "standard schemes) or, if you prefer, you can do it manually. With guided "
 "partitioning you will still have a chance later to review and customise the "
 "results."
 msgstr ""
-"Този инсталатор може автоматично да разделя диск за ползване от Debian, но "
-"ако предпочитате, можете да направите това и ръчно. Ако изберете "
-"автоматичното разделяне на устройство, ще можете по-късно да видите "
-"резултата и да го донастроите, включително и да се откажете от предложеното "
-"разделяне."
+"Този инсталатор може автоматично да разделя диск за ползване от Debian по "
+"различни стандартни схеми, но ако предпочитате, можете да направите това и "
+"ръчно. Ако изберете автоматично разделяне, по-късно ще имате възможност да "
+"прегледате и промените предложената схема."
 
 #. Type: boolean
 #. Description
 #: ../partman-auto.templates:36
-#, fuzzy
 msgid "Remove existing logical volume data?"
-msgstr "Не е намерен логически том"
+msgstr "Премахване на съществуващите данни за логически том?"
 
 #. Type: boolean
 #. Description
@@ -90,6 +88,9 @@ msgid ""
 "from a previous LVM installation, which must be removed from the disk before "
 "creating any partitions."
 msgstr ""
+"Избраното устройство съдържа логически томове и/или логически групи от "
+"предишна инсталация на LVM. Тези томове/групи трябва да бъдат премахнати "
+"преди създаването на нови дялове."
 
 #. Type: boolean
 #. Description
@@ -98,25 +99,25 @@ msgid ""
 "Note that this will also permanently erase any data currently on the logical "
 "volumes."
 msgstr ""
+"Забележка: това ще изтрие безвъзвратно всички данни на логическите томове."
 
 #. Type: error
 #. Description
 #: ../partman-auto.templates:46
-#, fuzzy
 msgid "LVM physical volume already exists on the selected device"
-msgstr "Съществуващи физически томове върху избраното устройство"
+msgstr "Върху избраното устройство вече има физически томов на LVM"
 
 #. Type: error
 #. Description
 #: ../partman-auto.templates:46
-#, fuzzy
 msgid ""
 "The selected device already contains one or more LVM physical volumes which "
 "cannot be removed. It is therefore not possible to automatically partition "
 "this device."
 msgstr ""
-"Избраното устройство вече съдържа един или няколко физически тома. Не е "
-"възможно да се извърши автоматично разделяне на това устройство чрез LVM."
+"Избраното устройство вече съдържа един или няколко физически тома на LVM, "
+"които не могат да бъдат премахнати. Поради това не е възможно да се извърши "
+"автоматично разделяне на това устройство."
 
 #. Type: select
 #. Description
@@ -131,6 +132,8 @@ msgid ""
 "If you choose guided partitioning for an entire disk, you will next be asked "
 "which disk should be used."
 msgstr ""
+"Ако изберете автоматично разделяне на цял диск, по-нататък ще имате "
+"възможност да изберете кой диск да бъде използван за разделянето."
 
 #. Type: select
 #. Description
@@ -147,9 +150,8 @@ msgstr "Схема за разделяне:"
 #. It is followed by a variable giving the chosen disk, hence the colon
 #. at the end of the sentence. Please keep it.
 #: ../partman-auto.templates:79
-#, fuzzy
 msgid "Selected for partitioning:"
-msgstr "Диск за разделяне:"
+msgstr "За разделяне:"
 
 #. Type: select
 #. Description
@@ -189,23 +191,21 @@ msgstr "Автоматично разделяне"
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
 #: ../partman-auto.templates:113
-#, fuzzy
 msgid "Guided - use the largest continuous free space"
-msgstr "Използване на най-голямото непрекъснато свободно пространство"
+msgstr "Автоматично - използване на най-голямото свободно място"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
 #: ../partman-auto.templates:118
 msgid "Guided - use entire disk"
-msgstr ""
+msgstr "Автоматично - използване на целия диск"
 
 #. Type: select
 #. Description
 #: ../partman-auto.templates:123
-#, fuzzy
 msgid "Select disk to partition:"
-msgstr "Диск за разделяне:"
+msgstr "Изберете диск за разделяне:"
 
 #. Type: select
 #. Description
@@ -214,13 +214,14 @@ msgid ""
 "Note that all data on the disk you select will be erased, but not before you "
 "have confirmed that you really want to make the changes."
 msgstr ""
+"Обърнете внимание, че всички данни на избрания диск ще бъдат изтрити, но "
+"едва след като потвърдите промените."
 
 #. Type: multiselect
 #. Description
 #: ../partman-auto.templates:130
-#, fuzzy
 msgid "Select disk(s) to partition:"
-msgstr "Диск за разделяне:"
+msgstr "Диск(ове) за разделяне:"
 
 #. Type: multiselect
 #. Description
@@ -229,6 +230,8 @@ msgid ""
 "Note that all data on the disk(s) you select will be erased, but not before "
 "you have confirmed that you really want to make the changes."
 msgstr ""
+"Обърнете внимание, че всички данни на избрания диск (или дискове) ще бъдат "
+"изтрити, но едва след като потвърдите промените."
 
 #. Type: text
 #. Description
@@ -236,7 +239,7 @@ msgstr ""
 #. This is a method for partioning - as in guided (automatic) versus manual
 #: ../partman-auto.templates:138
 msgid "Manual"
-msgstr ""
+msgstr "Ръчно"
 
 #. Type: text
 #. Description

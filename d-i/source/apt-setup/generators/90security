@@ -26,10 +26,10 @@ if [ "$host" = security.ubuntu.com ]; then
 	fi
 fi
 
-# To determine if non-free and contrib should be included, grep
-# the file to see if they are listed in it.
+# To determine if restricted should be included, grep the file to see if it
+# is listed in it.
 dists="main"
-for dist in contrib non-free restricted; do
+for dist in restricted; do
 	if grep -q '^[^#]*'$dist $ROOT/etc/apt/sources.list.new; then
 		dists="$dists $dist"
 	fi

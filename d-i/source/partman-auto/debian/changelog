@@ -1,3 +1,68 @@
+partman-auto (62ubuntu2) feisty; urgency=low
+
+  * resize_use_free: Return early from scan_disk if GET_MAX_PRIMARY returns
+    nothing.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 15 Dec 2006 10:15:31 +0000
+
+partman-auto (62ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust default partition sizes for Ubuntu.
+    - Accept autopartitioning automatically rather than showing
+      choose_partition.
+    - Drop priority of partman-auto/choose_recipe question to medium.
+    - Offer resize_use_free autopartitioning method.
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+  * Use new GET_MAX_PRIMARY command rather than hardcoding a maximum of four
+    primary partitions.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 12 Dec 2006 17:23:28 +0000
+
+partman-auto (62) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove /boot partition from powerpc-prep recipes as kernel is installed on
+    prep partition, not in /boot. Closes: #401271.
+  * Move init.d scripts to auto.d to avoid progress bar conflicts.
+    Requires partman-base 99. Closes: #391676.
+
+  [ Colin Watson ]
+  * Propagate ask_user exit code from initial_auto, so that backup works.
+
+  [ Updated translations ]
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Galician (gl.po) by Jacobo Tarrio
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Panjabi (pa.po) by A S Alam
+
+ -- Frans Pop <fjp@debian.org>  Fri,  8 Dec 2006 18:31:06 +0100
+
+partman-auto (61) unstable; urgency=low
+
+  [ Martin Michlmayr ]
+  * Increase the minimimum amount of swap created from 64 to 96 MB.  This
+    is needed for installations on systems with 32 MB RAM and only a 1 GB
+    drive.  Closes: #399951.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Estonian (et.po) by Siim Põder
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by rizoye-xerzi
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Fri, 24 Nov 2006 13:00:18 +0100
+
 partman-auto (60ubuntu2) feisty; urgency=low
 
   * Propagate exit code from automatically_partition scripts so that

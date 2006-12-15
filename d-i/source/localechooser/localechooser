@@ -331,7 +331,7 @@ else
 fi
 
 [ -f /etc/lsb-release ] && . /etc/lsb-release
-if [ "$X_INSTALLATION_MEDIUM" = "floppy" ] && [ $LANGUAGE != en]; then
+if [ "$X_INSTALLATION_MEDIUM" = "floppy" ] && [ $LANGUAGE != en ]; then
 	db_input high localechooser/no-translations-yet || true
 	db_go || true
 fi
@@ -351,14 +351,21 @@ if [ "$LOCALE" != "C" ] ; then
 	esac
 fi     
 
+# Switch font for graphical installer
+if type gtk-set-font >/dev/null 2>&1; then
+	gtk-set-font || true
+fi
+
 # BEGIN COUNTRY SELECTION
 
 # This is needed later in the script
 COUNTRYCODE_LANGUAGECHOOSER=$COUNTRY
 COUNTRY_LANGUAGECHOOSER=$(code2country $COUNTRY)
-# Set correct default
-db_set $fulllist "${COUNTRY_LANGUAGECHOOSER}"
-log "Set $fulllist = '${COUNTRY_LANGUAGECHOOSER}'"
+if [ "$COUNTRY_LANGUAGECHOOSER" ]; then
+	# Set correct default
+	db_set $fulllist "${COUNTRY_LANGUAGECHOOSER}"
+	log "Set $fulllist = '${COUNTRY_LANGUAGECHOOSER}'"
+fi
 
 # Keep track of values we have after language selection step
 LOCALE_LANGUAGECHOOSER=$LOCALE
@@ -459,7 +466,9 @@ while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
 		db_set "$countrycode" "$COUNTRY"
 		COUNTRYCODE_LANGUAGECHOOSER="$COUNTRY"
 		COUNTRY_LANGUAGECHOOSER="$(code2country "$COUNTRY")"
-		db_set "$fulllist" "$COUNTRY_LANGUAGECHOOSER"
+		if [ "$COUNTRY_LANGUAGECHOOSER" ]; then
+			db_set "$fulllist" "$COUNTRY_LANGUAGECHOOSER"
+		fi
 		LOCALE_LANGUAGECHOOSER="$LOCALE"
 		LANGUAGECODE_LANGUAGECHOOSER="$LANGUAGE"
 		EXTRA_LANGUAGECHOOSER="$(echo "$FALLBACKLOCALE" | sed -e 's/^[^.@]*//')"
