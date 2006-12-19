@@ -235,16 +235,6 @@ Location: Perth, Western Australia
 Sponsor: Tower Net / EFTel http://www.tower.net.au/
 Archive-architecture: i386
 
-Site: sunsite.ust.hk
-Type: leaf
-Archive-ftp: /pub/debian/
-Archive-architecture: !amd64
-Maintainer: ftpadmin@sunsite.ust.hk
-Country: HK Hong Kong
-Location: Hong Kong
-Sponsor: University of Science and Technology Hong Kong http://www.ust.hk/
-Sponsor: Sun Microsystems SunSITEs http://www.sun.com/
-
 Site: ftp.kulnet.kuleuven.ac.be
 Type: leaf
 Archive-ftp: /debian/
@@ -258,19 +248,20 @@ Country: BE Belgium
 Location: Leuven
 Sponsor: Katholieke Universiteit Leuven http://www.kuleuven.ac.be/
 
-Site: mirrors.dotsrc.org
+Site: ftp.dk.debian.org
+Alias: mirrors.dotsrc.org
 Type: leaf
 Archive-ftp: /debian/
 Archive-http: /debian/
-Archive-rsync: /debian/
+Archive-rsync: debian/
 NonUS-ftp: /debian-non-US/
 NonUS-http: /debian-non-US/
-NonUS-rsync: /debian-non-US/
+NonUS-rsync: debian-non-US/
 CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
-CDImage-rsync: /debian-cd/
+CDImage-rsync: debian-cd/
 Mirrors-from: ftp.nl.debian.org
-Maintainer: Martin Dalum <mirror@dotsrc.org>
+Maintainer: Dotsrc staff <mirror@dotsrc.org>
 Country: DK Denmark
 Location: Aalborg
 Sponsor: dotsrc.org - Open Source Software Project Hosting http://dotsrc.org
@@ -279,16 +270,16 @@ Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel 
 Site: debian.efis.ucr.ac.cr
 Type: leaf
 Archive-architecture: !amd64
-Archive-http: /debian/
-Archive-nfs: /home/ftp/debian/
-NonUS-http: /debian-non-US/
-NonUS-nfs: /home/ftp/debian/non-US/
+X-Archive-http: /debian/
+X-Archive-nfs: /home/ftp/debian/
+X-NonUS-http: /debian-non-US/
+X-NonUS-nfs: /home/ftp/debian/non-US/
 Maintainer: Marcelo Magallon <mmagallo@efis.ucr.ac.cr>
 Country: CR Costa Rica
 Location: San Jose
 Sponsor: Physics Department, University of Costa Rica http://www.efis.ucr.ac.cr/
-Comment: contact the maintainer to get NFS access; not fast enough for
-        people outside Central America
+Comment: contact the maintainer to get NFS access; not fast enough for people outside Central America
+X-Comment: mirror not available/Simon Paillard 2006-25-10, see bug #395239
 
 Site: ftp.it.debian.org
 Alias: ftp.bofh.it
@@ -687,7 +678,7 @@ Sponsor: DKUUG http://www.dkuug.dk/
 
 Site: freedom.dicea.unifi.it
 Type: leaf
-Archive-ftp: /ftp/pub/linux/debian/
+Archive-ftp: /pub/linux/debian/
 Archive-http: /ftp/pub/linux/debian/
 Archive-nfs: /var/ftp/
 NonUS-ftp: /pub/linux/debian-non-US/
@@ -900,19 +891,6 @@ Maintainer: mirrorsupport@eduserv.org.uk
 Country: GB Great Britain
 Sponsor: Eduserv Internet for JISC National Mirror Service http://www.mirror.ac.uk/
 
-Site: ftp.minet.net
-Type: leaf
-CDImage-ftp: /pub/distrib/debian-cd/
-Archive-ftp: /debian/
-Archive-architecture: !amd64
-NonUS-ftp: /debian-non-US/
-Mirrors-from: ftp.de.debian.org
-Maintainer: Eric Leclercq <ftp@minet.net>
-Country: FR France
-Location: Evry
-Sponsor: MiNET / Institut National des T&eacute;l&eacute;communications http://www.int-evry.fr/
-Comment: the CD image mirror is not automated yet and only carries i386 images
-
 Site: ftp.is.co.za
 Type: leaf
 Archive-ftp: /debian/
@@ -925,17 +903,6 @@ Maintainer: Oskar Pearson <oskar@qualica.com>, ftp-admin@is.co.za
 Country: ZA South Africa
 Location: Johannesburg
 Sponsor: The Internet Solution http://www.is.co.za/
-Archive-architecture: i386
-
-Site: ftp.index.hu
-Type: leaf
-NonUS-ftp: /debian-non-US/
-Archive-ftp: /debian/
-Mirrors-from: ftp.hu.debian.org
-Maintainer: Laszlo Csosza <tr@inventra.hu>, support@mail.index.hu
-Country: HU Hungary
-Location: Budapest
-Sponsor: Index.hu Informatikai Rt. http://www.index.hu/
 Archive-architecture: i386
 
 Site: ftp.dti.ad.jp
@@ -1064,19 +1031,6 @@ Maintainer: Antonin Sprinzl <Antonin.Sprinzl@tuwien.ac.at>
 Country: AT Austria
 Location: Vienna
 Sponsor: Information Technology Services, Vienna University of Technology http://gd.tuwien.ac.at/
-
-Site: ftp.info.iut-tlse3.fr
-Alias: www.info.iut-tlse3.fr
-Type: Push-Secondary
-NonUS-http: /debian-non-US/
-NonUS-ftp: /debian-non-US/
-Archive-http: /debian/
-Archive-ftp: /debian/
-Mirrors-from: ftp.fr.debian.org
-Maintainer: Patrick Magnaud <patrick@info.iut-tlse3.fr>
-Country: FR France
-Sponsor: D&eacute;partement Informatique de Toulouse Rangueil http://www.info.iut-tlse3.fr/
-Archive-architecture: amd64 i386 m68k
 
 Site: ftp.latnet.lv
 Type: leaf
@@ -1321,15 +1275,6 @@ Country: JP Japan
 Location: Fukuoka
 Sponsor: GFD-Dennou Club (&#22320;&#29699;&#27969;&#20307;&#38651;&#33075;&#20534;&#27005;&#37096;) http://www.gfd-dennou.org/
 Comment: Recommended for SINET (Science Information Network: http://www.sinet.ad.jp/) users only!
-
-Site: natasha.stmarytx.edu
-Type: leaf
-Archive-http: /debian/
-Mirrors-from: newsamosa.debian.org
-Maintainer: J. Currey <jcurrey@alvin.stmarytx.edu>
-Country: US United States
-Location: San Antonio, Texas
-Sponsor: St. Mary's University http://www.stmarytx.edu/
 
 Site: ftp2.fr.debian.org
 Alias: ftp.oleane.net
@@ -1599,21 +1544,6 @@ Country: CZ Czech Republic
 Location: Prague
 Sponsor: Silicon Hill, Czech Technical University Prague http://www.sh.cvut.cz/
 
-Site: ftp.tku.edu.tw
-Type: leaf
-Archive-ftp: /OS/Linux/distributions/debian/
-Archive-architecture: alpha arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sh sparc
-Archive-http: /OS/Linux/distributions/debian/
-NonUS-ftp: /OS/Linux/distributions/debian/non-US/
-NonUS-http: /OS/Linux/distributions/debian/non-US/
-CDImage-ftp: /OS/Linux/ISO-IMAGE/debian/
-CDImage-http: /OS/Linux/ISO-IMAGE/debian/
-Mirrors-from: ftp.debian.org
-Maintainer: tkuftp@ftp.tku.edu.tw
-Country: TW Taiwan
-Location: TamSui
-Sponsor: Network management section, Information Processing Center, TamKang University http://www.ipcnet.tku.edu.tw/
-
 Site: gladiator.real-time.com
 Type: leaf
 Archive-ftp: /linux/debian/
@@ -1642,17 +1572,6 @@ Maintainer: ftpadmin@kernel.org
 Country: US United States
 Location: Santa Clara, California
 Sponsor: Linux Kernel Archives http://www.kernel.org/
-
-Site: mirrors.rcn.net
-Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-Maintainer: Clayton O'Neill <mirrors-staff@lists.rcn.net>, mirrors@rcn.com
-Country: US United States
-Location: Fairfax, Virginia
-Sponsor: RCN http://www.rcn.com/
-Comment: has OC3+ speed connectivity
-Archive-architecture: i386
 
 Site: ftp.keystealth.org
 Type: leaf
@@ -1756,19 +1675,6 @@ Maintainer: Alister Winfield <alister@ticklers.org>, debian-mirror@ticklers.org
 Country: GB Great Britain
 Location: London
 Comment: 100 Mbit link
-
-Site: debian.marked.no
-Type: leaf
-Aliases: ftp.marked.no
-Archive-ftp: /debian/
-Archive-http: /debian/
-Archive-architecture: !amd64
-NonUS-ftp: /debian-non-US/
-Mirrors-from: ftp.no.debian.org
-Maintainer: Geir Helland <gh@marked.no>
-Country: NO Norway
-Location: Oslo
-Sponsor: Markedsnett AS http://www.marked.no/
 
 Site: ftp.rediris.es
 Type: leaf
@@ -1930,9 +1836,8 @@ Sponsor: Holland Hosting http://www.hoho.nl/
 
 Site: www.zentek-international.com
 Type: leaf
-Archive-http: /mirrors/debian/debian/
-Archive-architecture: !amd64
-WWW-http: /mirrors/debian/
+Archive-http: /mirrors/debian/
+Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
 Mirrors-from: debian.org.hk
 Maintainer: Jason Lim <jcl@zentek-international.com>, support@zentek-international.com
 Country: HK Hong Kong
@@ -1954,15 +1859,6 @@ Maintainer: Guy Brand <guybrand@chimie.u-strasbg.fr>, ftpmaint@crc.u-strasbg.fr
 Country: FR France
 Sponsor: Universite Louis Pasteur, Strasbourg http://www.u-strasbg.fr/
 Sponsor: Transtec http://www.transtec.fr/
-
-Site: archive.progeny.com
-Type: Push-Primary
-Maintainer: Progeny System Administrators <archive@progeny.com>
-Country: US United States
-Location: Indianapolis, Indiana
-Sponsor: Progeny Linux Systems http://www.progeny.com/
-Sponsor: 100 Mbps hosting provided by n|Frame Internet. http://www.nframe.net/
-Comment: Will be decommissoned on October 22nd 2006
 
 Site: kebo.vlsm.org
 Alias: surabaya.vlsm.org
@@ -2075,15 +1971,6 @@ Country: AU Australia
 Location: Perth
 Sponsor: iiNet Limited http://www.iinet.net.au/
 
-Site: www.dk.debian.org
-Aliases: m00.opasia.dk
-Aliases: www.debian.o.dyndns.dk
-Type: Push-Primary
-WWW-http: /
-Maintainer: Flemming Mahler Larsen <mahler@tdconline.dk>
-Country: DK Denmark
-Sponsor: Opasia http://www.opasia.dk/
-
 Site: www.cn.debian.org
 Alias: debian.linuxforum.net
 Type: leaf
@@ -2125,20 +2012,6 @@ Comment: includes i386/alpha/sparc architectures, will add some more on demand.
   Gets updated 1:00AM (GMT+2). Bandwidth is 2+1Mb to Lithuanian providers and
   academic network.
 
-Site: debian.3wsi.net
-Type: leaf
-Archive-http: /debian/
-NonUS-http: /debian-non-US/
-Mirrors-from: http.us.debian.org
-Maintainer: Nasir Simbolon <nasir@3wsi.com>
-Country: ID Indonesia
-Location: World Trade Center, Jakarta
-Sponsor: Infracell / 3WSI https://3wsi.com/
-Archive-architecture: amd64 i386
-Comment: i386 and some other debs.
- 128 Kbps through Metronet to IIX and Internet (not reachable from everywhere).
- Updated nightly.
-
 Site: linux.csua.berkeley.edu
 Aliases: screwdriver.csua.berkeley.edu
 Type: leaf
@@ -2146,12 +2019,12 @@ Archive-ftp: /debian/
 Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
 Archive-http: /debian/
 Archive-rsync: debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-NonUS-rsync: debian-non-US/
-CDImage-ftp: /debian-cd/
-CDImage-http: /debian-cd/
-CDImage-rsync: debian-cd/
+X-NonUS-ftp: /debian-non-US/
+X-NonUS-http: /debian-non-US/
+X-NonUS-rsync: debian-non-US/
+X-CDImage-ftp: /debian-cd/
+X-CDImage-http: /debian-cd/
+X-CDImage-rsync: debian-cd/
 Mirrors-from: ftp.us.debian.org, non-us.debian.org
 Maintainer: CSUA System Administrators <root@CSUA.Berkeley.EDU>
 Country: US United States
@@ -2202,7 +2075,7 @@ Alias: debianx.vlsm.org
 Type: leaf
 WWW-http: /
 Mirrors-from: www.jp.debian.org
-Maintainer: "Rahmat M. Samik-Ibrahim" <rms46@vlsm.org>
+Maintainer: "Rahmat M Samik-Ibrahim" <rmsi.vlsm.org@gmail.com>
 Location: Depok
 Country: ID Indonesia
 Sponsor: vLSM.org http://www.vlsm.org/
@@ -2522,21 +2395,6 @@ Location: Athens
 Sponsor: National Technical University of Athens http://www.ntua.gr/
 Archive-architecture: amd64 i386 sparc
 
-Site: ftp.ipv6.opentransit.net
-Type: leaf
-Archive-ftp: /debian/
-Archive-architecture: !mipsel
-Archive-http: /debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-Mirrors-from: ftp.uk.debian.org
-Maintainer: Fabien Tassin <fta@opentransit.net>
-Country: FR France
-Location: Paris
-Sponsor: OpenTransit http://www.opentransit.net/
-Comment: *only* available in IPv6 for now (IPv4 possible upon request)
- - 100Mb available in native IPv6 (and IPv4...)
-
 Site: techweb.rfa.org
 Aliases: chameleon.techweb.rfa.org
 Type: leaf
@@ -2614,16 +2472,6 @@ Maintainer: Jason Andrade <jason@dstc.edu.au>, support@planetmirror.com
 Country: AU Australia
 Sponsor: PlanetMirror http://www.planetmirror.com/
 
-Site: lyre.mit.edu
-Type: leaf
-Archive-http: /debian/
-Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
-Mirrors-from: debian.lcs.mit.edu
-Maintainer: Adam Powell <hazelsct@debian.org>
-Country: US United States
-Location: Cambridge, Massachusetts
-Sponsor: MIT http://www.mit.edu/
-
 Site: debian.udsu.ru
 Alias: ftp.udsu.ru
 Type: leaf
@@ -2640,27 +2488,22 @@ Sponsor: Udmurtia State University http://www.udsu.ru/
 Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sh sparc
 Comment: 1Mbit/s bandwidth
 
-Site: debian.lami.univ-evry.fr
-Aliases: ftp.lami.univ-evry.fr
-Aliases: ns.lami.univ-evry.fr
+Site: debian.ibisc.univ-evry.fr
 Type: leaf
 Archive-ftp: /debian/
-X-Archive-http: /debian/
-Archive-rsync: debian/
+Archive-http: /debian/
 NonUS-ftp: /debian-non-US/
 NonUS-http: /debian-non-US/
-NonUS-rsync: debian-non-US/
-CDImage-ftp: /debian-cd/
-CDImage-http: /debian-cd/
-CDImage-rsync: debian-cd/
+X-CDImage-ftp: /debian-cd/
+X-CDImage-http: /debian-cd/
 Mirrors-from: ftp.fi.debian.org
 Maintainer: Olivier Michel <debian@lami.univ-evry.fr>
 Country: FR France
 Location: Evry
-Sponsor: LaMI, CNRS, Genopole, Universite d'Evry http://www.lami.univ-evry.fr/
-Archive-architecture: i386 sparc
+Sponsor: IBISC, CNRS, Genopole, Universite d'Evry http://www.ibisc.univ-evry.fr/
+Archive-architecture: amd64 i386
 Comment: on 155Mbit, updated nightly
-X-Comment: http unavailble and commented out; aba/2005-08-15
+X-Comment: out of date debian-cd
 
 Site: sft.if.usp.br
 Alias: fma.if.usp.br
@@ -2729,16 +2572,6 @@ Mirrors-from: ftp.debian.org, non-us.debian.org
 Maintainer: Tzeng Jin-Shan <tjs@cdpa.nsysu.edu.tw>
 Country: TW Taiwan
 Sponsor: NSYSU Campus Dorm-net Promotion Association http://www.cdpa.nsysu.edu.tw/
-
-Site: mirror.ipartners.pl
-Type: leaf
-Archive-ftp: /pub/debian/
-Archive-architecture: !amd64
-NonUS-ftp: /pub/debian-non-US/
-Mirrors-from: ftp.debian.org, non-us.debian.org
-Maintainer: Jim Paterson <lsd@ikp.pl>, ftpd@ikp.pl
-Country: PL Poland
-Sponsor: Internet Partners http://www.ipartners.pl/
 
 Site: mirror.anl.gov
 Type: leaf
@@ -2811,30 +2644,6 @@ Location: Kiev
 Archive-architecture: i386
 Comment: Updated nightly (01:00 EET). Available to .ua only.
 
-Site: ftp.kreonet.re.kr
-Aliases: yellow.kreonet.re.kr
-Aliases: blue.kreonet.re.kr
-Type: leaf
-Archive-ftp: /pub/Linux/debian/
-Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
-Archive-http: /pub/Linux/debian/
-Archive-rsync: debian/
-NonUS-ftp: /pub/Linux/debian-non-US/
-NonUS-http: /pub/Linux/debian-non-US/
-NonUS-rsync: debian-non-US/
-CDImage-ftp: /pub/Linux/debian-cd/
-CDImage-http: /pub/Linux/debian-cd/
-CDImage-rsync: debian-cd/
-Old-ftp: /pub/Linux/debian-archive/
-Old-http: /pub/Linux/debian-archive/
-Old-rsync: debian-archive/
-Mirrors-from: archive.progeny.com, non-us.debian.org
-Maintainer: Sang-yong Suh <sysuh@ftp.kreonet.re.kr>, Sang-yong Suh <sysuh@kigam.re.kr>, ftpadmin@kreonet.re.kr
-Country: KR Korea
-Location: Daejeon
-Sponsor: KREONET http://www.kreonet.re.kr/
-Comment: connections from outside .kr severely limited
-
 Site: debian.goldweb.com.au
 Type: leaf
 Archive-http: /debian/
@@ -2905,7 +2714,7 @@ CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
 Security-ftp: /debian-security/
 Security-http: /debian-security/
-Mirrors-from: archive.progeny.com, ftp.belnet.be
+Mirrors-from: syncproxy.eu.debian.org, ftp.belnet.be
 Maintainer: Peter Visser <Peter.Visser@Essent.nl>, <ino.kabelcom@essent.nl>
 Country: NL Netherlands
 Location: Zwolle
@@ -2995,18 +2804,6 @@ Maintainer: Ignacio Solis <mirrormanager@sluglug.ucsc.edu>
 Country: US United States
 Location: Santa Cruz, California
 Sponsor: UC Santa Cruz http://www.ucsc.edu/
-
-Site: cdn.mirror.garr.it
-Type: leaf
-Archive-http: /mirrors/debian/
-NonUS-http: /mirrors/debian/non-US/
-Jigdo-http: /mirrors/debian-jigdo/
-Mirrors-from: ftp.de.debian.org
-Maintainer: mirror-service@garr.it
-Country: IT Italy
-Location: Milano
-Sponsor: GARR/CILEA http://mirror.garr.it/
-Archive-architecture: alpha arm hppa i386 ia64 sparc
 
 Site: mi.mirror.garr.it
 Type: leaf
@@ -3188,20 +2985,6 @@ Country: CA Canada
 Location: Ottawa
 Sponsor: National Research Council Canada http://www.nrc.ca/
 
-Site: debian.ihug.com.au
-Alias: ftp.ihug.com.au
-Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-Mirrors-from: ftp.wa.au.debian.org
-Maintainer: Eddy Murphy <edmurphy@staff.ihug.com.au>, ftpmaster@ihug.com.au
-Country: AU Australia
-Location: Surry Hills, Sydney
-Sponsor: ihug, The Internet Group http://www.ihug.com.au/
-Archive-architecture: i386
-
 Site: ftp.ie.debian.org
 Alias: debian.heanet.ie
 Alias: debian.ipv6.heanet.ie
@@ -3284,22 +3067,6 @@ Archive-architecture: amd64 hurd-i386 i386
 Comment: Machine has 400Mb/s to the outside world, though
  only has a 100Mb/s ethernet card.
 
-Site: cudlug.cudenver.edu
-Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-CDImage-ftp: /debian-cd/
-CDImage-http: /debian-cd/
-Jigdo-ftp: /debian-cd/
-Jigdo-http: /debian-cd/
-Mirrors-from: archive.progeny.com
-Maintainer: Willis Sarka <wlsarka@ouray.cudenver.edu>
-Country: US United States
-Location: Denver, Colorado
-Sponsor: Colorado University Denver Linux Users Group http://cudlug.cudenver.edu/
-Archive-architecture: alpha amd64 hurd-i386 i386 ia64 powerpc sparc
-Comment: CD images via ISOs and jigdo for Woody (3.0_r0), and jigdo for Potato (2.2_rev7)
-
 Site: ftp.softnet.tuc.gr
 Alias: antirix.softnet.tuc.gr
 Type: leaf
@@ -3369,28 +3136,6 @@ Location: Minneapolis, Minnesota
 Sponsor: Geeks Organizations http://www.geeks.org/
 Sponsor: Vector Internet Services, Inc. http://www.visi.com/
 Archive-architecture: amd64 i386
-
-Site: mirrors.engr.arizona.edu
-Type: leaf
-Archive-http: /debian/
-Mirrors-from: ftp.us.debian.org
-Maintainer: Joshua Bernstein <bjosh@engr.arizona.edu>
-Country: US United States
-Location: Tucson, Arizona
-Sponsor: University of Arizona, College of Engineering and Mines http://www.arizona.edu/
-Archive-architecture: i386
-
-Site: mirrors.terrabox.com
-Type: leaf
-Archive-ftp: /debian/
-Archive-architecture: !amd64
-Archive-http: /debian/
-Archive-rsync: debian/
-Mirrors-from: ftp.us.debian.org
-Maintainer: Brian Wolfe <brianw@terrabox.com>
-Country: US United States
-Location: Dallas, Texas
-Sponsor: Terrabox.com http://www.terrabox.com/
 
 Site: ftp.crihan.fr
 Type: leaf
@@ -3473,7 +3218,7 @@ Archive-http: /debian/
 Archive-rsync: /debian/
 X-CDImage-ftp: /pub/iso/
 CDImage-http: /pub/iso/
-Mirrors-from: archive.progeny.com
+Mirrors-from: debian.osuosl.org
 Maintainer: Brendon Colby <bren@midco.net>, mirrors@midco.net
 Country: US United States
 Sponsor: Midcontinent Communications http://www.midco.net/
@@ -3535,16 +3280,6 @@ Location: Vienna
 Sponsor: Inode Telekommunikationsdienstleistungs GmbH http://www.inode.at/
 Comment: bandwidth 2 gbit within Austria, ~400 - 500 Mbit international,
  the server itself is on two 100 Mbit NICs
-
-Site: mymirror.asiaosc.org
-Type: leaf
-CDImage-http: /debian-cd/
-Mirrors-from: aurolinux.mit.edu
-Maintainer: Mohd Pazli Sulong <pazli@mimos.my>
-Country: MY Malaysia
-Location: Kuala Lumpur
-Sponsor: MIMOS Berhad http://www.mimos.my/
-Sponsor: Asian Open Source Centre http://www.asiaosc.org/
 
 Site: mirrors.usc.edu
 Type: leaf
@@ -3657,18 +3392,6 @@ Location: Auckland
 Sponsor: Ihug Ltd http://www.ihug.co.nz/
 Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 mips mipsel powerpc s390 sparc
 
-Site: debian.spark.net.gr
-Type: leaf
-Archive-http: /debian/
-CDImage-http: /debian-cd/
-NonUS-http: /debian-non-US/
-Mirrors-from: www.mirror.ac.uk
-Maintainer: Nikos Aslanakis <debianmnt@spark.net.gr>
-Country: GR Greece
-Location: Thessaloniki
-Sponsor: SPARKnet http://www.spark.net.gr/
-Archive-architecture: amd64 i386 sparc
-
 Site: lug.mtu.edu
 Type: leaf
 Archive-ftp: /debian/
@@ -3696,23 +3419,6 @@ Maintainer: Tomohiro Ito <tomohiro@yz.yamagata-u.ac.jp>
 Country: JP Japan
 Location: Yonezawa, Yamagata
 Sponsor: Faculty of Engineering, Yamagata University http://www.yz.yamagata-u.ac.jp/
-
-Site: debian.vicnet.net.au
-Aliases: falls.vicnet.net.au
-Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-Archive-rsync: debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-NonUS-rsync: debian-non-US/
-Mirrors-from: karl.planetmirror.com
-Maintainer: Craig Sanders <cas@vicnet.net.au>
-Country: AU Australia
-Location: Melbourne
-Sponsor: Vicnet http://www.vicnet.net.au/
-Archive-architecture: i386
-Comment: connected to VIX peering exchange
 
 Site: www.ua.debian.org
 Alias: www.debian.org.ua
@@ -3909,15 +3615,15 @@ Comment: See ftp.uni-bayreuth.de
 
 Site: ftp.ds.hj.se
 Type: leaf
-Archive-ftp: /pub/Linux/distributions/debian/
-Archive-http: /pub/Linux/distributions/debian/
+Archive-ftp: /pub/os/linux/debian/
+Archive-http: /pub/os/linux/debian/
 Mirrors-from: ftp.se.debian.org
-Maintainer: Johan Gunnarsson <johan@ds.hj.se>
+Maintainer: Johan Gunnarsson <johan@ds.hj.se>, sysop@ds.hj.se
 Country: SE Sweden
 Location: J&ouml;nk&ouml;ping
 Sponsor: DatorSektionen http://www.ds.hj.se/
 Sponsor: J&ouml;nk&ouml;ping university computer society http://www.hj.se/
-Archive-architecture: i386 powerpc sparc
+Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
 
 Site: debian.logiclinux.com
 Type: leaf
@@ -4083,21 +3789,6 @@ Location: Saitama
 Sponsor: RIKEN Accelerator Research Facility http://www.riken.go.jp/
 Comment: also carries Debian-JP
 
-Site: debian.vinita.lt
-Alias: ftp.vinita.lt
-Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-Mirrors-from: ftp.fi.debian.org
-Maintainer: Andrius Kontrimas <andrius@interneka.lt>
-Country: LT Lithuania
-Location: Vilnius
-Sponsor: Vinita http://www.vinita.lt/
-Archive-architecture: amd64 i386
-Comment: Bandwidth is 100Mbps to Lithuanian providers and academic network.
-
 Site: debian.wow-vision.com.sg
 Type: leaf
 Archive-ftp: /debian/
@@ -4143,20 +3834,6 @@ Mirrors-from: ftp2.fr.debian.org
 Maintainer: Florence LIU <tech@ikoula.com>
 Country: FR France
 Location: Ikoula http://www.ikoula.com/
-
-Site: ring.hosei.ac.jp
-Type: leaf
-Archive-ftp: /pub/linux/debian/debian/
-Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
-Archive-http: /archives/linux/debian/debian/
-NonUS-ftp: /pub/linux/debian/debian-non-US/
-NonUS-http: /archives/linux/debian/debian-non-US/
-Mirrors-from: core.ring.gr.jp
-Maintainer: Yasuhide NAKAMURA <nkmr@k.hosei.ac.jp>
-Country: JP Japan
-Location: Tokyo
-Sponsor: Hosei University http://www.hosei.ac.jp/
-Comment: RingServer Project http://www.ring.gr.jp/
 
 Site: debian.internet.gr
 Type: leaf
@@ -4206,21 +3883,6 @@ Maintainer: ftp@scarlet.be
 Country: BE Belgium
 Location: Vilvoorde
 Sponsor: Scarlet http://www.scarlet.be/
-
-Site: debian.savoirfairelinux.net
-Alias: gpl.savoirfairelinux.net
-Type: leaf
-Archive-ftp: /debian/
-Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
-Archive-http: /debian/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-Mirrors-from: ftp.ie.debian.org
-Maintainer: Philippe Gendreau <hostmaster@savoirfairelinux.net>
-Country: CA Canada
-Location: Montreal
-Sponsor: Savoir-faire Linux, Inc. http://www.savoirfairelinux.com/
-Sponsor: Peer-1 Networks http://www.peer1.net/
 
 Site: ftp.man.szczecin.pl
 Aliases: rubycon.man.szczecin.pl
@@ -4364,7 +4026,7 @@ Maintainer: Rene Joergensen <rgj@dk.telia.net>
 Country: DK Denmark
 Location: Glostrup, Copenhagen
 Sponsor: Telia Networks http://telia.dk
-Comment: Updated twice a day. 100Mbps. ftp.dk.debian.org is still broken, we would like to sponsor ftp.dk.debian.org
+Comment: Updated twice a day. 100Mbps.
 Archive-architecture: amd64 hurd-i386 i386 powerpc sparc
 
 Site: webb.ens-cachan.fr
@@ -4402,8 +4064,7 @@ Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel 
 Site: ftp.mgts.by
 Type: leaf
 Archive-ftp: /debian/
-CDImage-ftp: /debian-cd/
-NonUS-ftp: /debian-non-US/
+Archive-http: /debian/
 Mirrors-from: ftp2.de.debian.org
 Maintainer: Evgeniy Kozhuhovskiy <e.kozhuhovskiy@gmail.com>
 Country: BY Belarus
@@ -4503,17 +4164,6 @@ Location: Caracas
 Sponsor: Universidad Nacional Experimental Simon Rodriguez http://www.unesr.edu.ve
 Comment: The main mirror gets updated once every day at 01:00 UTC. The security updates mirror gets updated four times each day.
 
-Site: debian.funlam.edu.co
-Type: leaf
-Archive-http: /debian/
-NonUS-http: /debian-non-us/
-Mirrors-from: archive.progeny.com
-Maintainer: Departamento de Inform&aacute;tica <informatica@funlam.edu.co>
-Country: CO Colombia
-Location: Medellin
-Sponsor: Fundaci&oacute;n Universitaria Luis Amig&oacute; www.funlam.edu.co
-Archive-architecture: amd64 i386
-
 Site: ftp.ccc.uba.ar
 Type: leaf
 Archive-ftp: /pub/linux/debian/debian/
@@ -4541,15 +4191,6 @@ Location: Valencia
 Sponsor: Generalitat Valenciana http://www.gva.es
 Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
 
-Site: debian.usla.org.ar
-Type: leaf
-Archive-http: /debian/
-Mirrors-from:  mirrors.kernel.org
-Maintainer: Daniel Coletti <dcoletti@cafelug.org.ar>
-Country: AR Argentina
-Sponsor: USLA http://www.usla.org.ar
-Archive-architecture: i386
-
 Site: hp.debian.or.jp
 Type: push-primary
 Comment: used to forward to other mirrors
@@ -4566,6 +4207,7 @@ Country: BG Bulgaria
 Location: Varna, Bulgaria
 
 Site: debian.fastbull.org
+Type: leaf
 Aliases: bull02.fastbull.org
 Archive-http: /debian/
 Archive-ftp: /debian/
@@ -4596,7 +4238,7 @@ Site: debian.mirror.frontiernet.net
 Type: leaf
 Archive-ftp: /debian/
 Archive-http: /debian/
-Mirrors-from: archive.progeny.com
+Mirrors-from: debian.osuosl.org
 Maintainer: ISIS System Services <mirror@frontiernet.net>
 Country: US United States
 Location: Rochester, NY
@@ -4623,3 +4265,96 @@ Country: DE Germany
 Location: Hamburg
 Sponsor: Artfiels New Media GmbH http://www.artfiles.de
 Comment: Updated daily. 100 Mbit/s bandwidth.
+
+Site: debian.intergenia.de
+Alias: debian.server4you.de
+Alias: debian.vserver.de
+Alias: debian.plusserver.de
+Type: leaf
+Archive-http: /debian/
+Archive-rsync: debian-linux/debian/
+NonUS-http: /debian-non-US/
+NonUS-rsync: debian-linux/debian-non-US/
+Mirrors-from: ftp.rfc822.org, debian.inf.tu-dresden.de, ftp.at.debian.org 
+Maintainer: Guido S. Nickels <mirrors@intergenia.de>
+Country: DE Germany
+Location: 2x D?sseldorf/DE, 2x Frankfurt am Main/DE (loadbalanced)
+Sponsor: intergenia Webhosting AG http://www.intergenia.de
+Comment: Updated every four hours. 1gbit/s at both locations.
+
+Site: debian.pop-sc.rnp.br
+Aliases: mirror.pop-sc.rnp.br
+Type: leaf
+Archive-http: /debian/
+Archive-architecture: alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc
+CDImage-http: /mirror/debian-cd/
+Mirrors-from: ftp.br.debian.org
+Maintainer: Guilherme Eliseu Rhoden <rhoden@pop-sc.rnp.br>
+Country: BR Brazil
+Location: Florian&oacute;polis
+Sponsor: PoP-SC http://www.pop-sc.rnp.br
+Comment: Full debian mirror site on PoP-SC/RNP with IPv6/IPv4 dual stack. 2.5Gbps with RNP academic backbone at 2,5Gbps. 136Mps with BrasilTelcom ISP by RCT.
+
+Site: ftp.gul.uc3m.es
+Alias: ftp.gul.es
+Type: leaf
+Archive-ftp: /debian/
+Archive-http: /debian/
+Mirrors-from: ftp.es.debian.org 
+Maintainer: Gul-root Group <gul-root@gul.uc3m.es>
+Country: ES Spain
+Comment: Updated daily. 100Mbit/s connectivity.
+
+Site: ftp.mipt.ru
+Aliases: petrel.telecom.mipt.ru
+Type: leaf
+Archive-ftp: /debian/
+Archive-rsync: mirror/debian/
+X-Archive-architecture: all (alpha amd64 arm hppa hurd-i386 i386 ia64 m68k mips mipsel powerpc s390 sparc)
+Security-ftp: /mirror/debian-security/
+Security-rsync: mirror/debian-security/
+Mirrors-from: ftp.pl.debian.org
+Maintainer: Olleg Samoylov <olleg@mipt.ru>
+Country: RU Russia
+Comment: Updated daily. One stage rsync with --delay-updates and --delete-after options.  100Mbits bandwidth.
+
+Site: debian.savoirfairelinux.net
+Alias: gpl.savoirfairelinux.net
+Type: leaf
+Archive-ftp: /debian/
+Archive-http: /debian/
+Archive-architecture: amd64 i386 powerpc
+Mirrors-from: gulus.usherbrooke.ca
+Maintainer: Support Technique Savoir-faire Linux <support@savoirfairelinux.com>
+Country: CA Canada
+Location: Montreal
+Sponsor: Savoir-faire Linux, Inc. http://www.savoirfairelinux.com/
+
+Site: debian.swordcoast.net
+Type: leaf
+Archive-ftp: /debian/
+Archive-http: /debian/
+NonUS-ftp: /debian-non-US/
+NonUS-http: /debian-non-US/
+Security-ftp: /debian-security/
+Security-http: /debian-security/
+Archive-architecture: !hppa !mips !mipsel !s390 !sparc
+Mirrors-from: ftp2.de.debian.org 
+Maintainer: Bernhard Stoeckner <elven@swordcoast.net>
+Country: DE Germany 
+Location: Nuernberg 
+Comment: 1GBit/s, shared rack, 27GBit IXes. Individual bandwidth limitations may apply. Updated every 4 hours. Rsync available on request.
+
+Site: debian.mirror.iweb.ca
+Type: leaf
+Archive-ftp: /debian/
+Archive-http: /debian/
+NonUS-ftp: /debian-non-US/
+NonUS-http: /debian-non-US/
+Security-ftp: /debian-security/
+Security-http: /debian-security/
+Mirrors-from: mirrors.kernel.org 
+Maintainer: Jean-Francois Chevrette <mirrors@iweb.ca>
+Country: CA Canada 
+Location: Montreal 
+Comment: 100Mbit/s. Updated every 4 hours. Rsync available on request. Connected to various backbones: Teleglobe, Cogent, Videotron and Peer1. Will be soon connected to TORIX (Toronto Internet Exchange).
