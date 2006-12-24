@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer etch\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-19 21:23-0600\n"
-"PO-Revision-Date: 2006-07-26 20:59+0200\n"
+"POT-Creation-Date: 2006-11-04 09:27+0100\n"
+"PO-Revision-Date: 2006-11-03 14:57+0100\n"
 "Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -113,8 +113,8 @@ msgstr ""
 "No heu seleccionat cap partició per a utilitzar com a espai d'intercanvi. "
 "Habilitar espai d'intercanvi és recomanable per a que el sistema puga fer "
 "millor ús de la memòria física disponible, i per a que es comporte millor "
-"quan la memòria física és escasa. Podeu tindre problemes amb la instal·lació "
-"si no teniu suficient memòria física."
+"quan la memòria física és escassa. Podeu tindre problemes amb la "
+"instal·lació si no teniu suficient memòria física."
 
 #. Type: boolean
 #. Description
@@ -199,7 +199,7 @@ msgid ""
 msgstr ""
 "El tipus de sistema de fitxers ${FILESYSTEM} no es pot muntar a "
 "${MOUNTPOINT}, perquè no és un sistema de fitxers UNIX totalment funcional. "
-"Seleccioneu un altre sistema de fitxers, tal com ${EXT2}."
+"Seleccioneu un altre sistema de fitxers, com ara ${EXT2}."
 
 #. Type: select
 #. Choices
@@ -366,6 +366,16 @@ msgstr "Etiqueta:"
 
 #. Type: text
 #. Description
+#. for partman-basicfilesystems: in the following context: "Label: none"
+#: ../partman-basicfilesystems.templates:128
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Label:\" ]"
+msgstr "cap"
+
+#. Type: text
+#. Description
 #. Up to 24 character positions
 #: ../partman-basicfilesystems.templates:133
 msgid "Reserved blocks:"
@@ -415,8 +425,8 @@ msgid ""
 "standard = standard parameters, news = one inode per 4KB block, largefile = "
 "one inode per megabyte, largefile4 = one inode per 4 megabytes."
 msgstr ""
-"estàndard = paràmetres estàndard, news = un inode per bloc de 4KB, largefile "
-"= un inode per megabyte, largefile4 = un inode per 4 megabytes."
+"estàndard = paràmetres estàndard, news = un inode per bloc de 4KiB, "
+"largefile = un inode per megabyte, largefile4 = un inode per 4 megabytes."
 
 #. Type: text
 #. Description
@@ -429,7 +439,10 @@ msgstr "Punt de muntatge:"
 #. Description
 #. In the following context: "Mount point: none"
 #: ../partman-basicfilesystems.templates:172
-msgid "none"
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Mount point:\" ]"
 msgstr "cap"
 
 #. Type: text

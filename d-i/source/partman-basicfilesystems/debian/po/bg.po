@@ -3,23 +3,26 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of bg.po to Bulgarian
 # Bulgarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
-#
+# Damyan Ivanov <dam@modsoftsys.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-04-22 23:50-0600\n"
-"PO-Revision-Date: 2006-04-08 10:14+0300\n"
-"Last-Translator:  Ognyan Kulev <ogi@fmi.uni-sofia.bg>\n"
+"POT-Creation-Date: 2006-11-04 09:27+0100\n"
+"PO-Revision-Date: 2006-11-20 10:50+0200\n"
+"Last-Translator: Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -142,7 +145,7 @@ msgstr ""
 #. Description
 #: ../partman-basicfilesystems.templates:59
 msgid "Failed to create a swap space"
-msgstr "Неуспешно създаване на дял за виртуална памет."
+msgstr "Грешка при създаване на дял за виртуална памет"
 
 #. Type: error
 #. Description
@@ -188,14 +191,13 @@ msgstr "Невалидна файлова система за тази точк�
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:73
-#, fuzzy
 msgid ""
 "The file system type ${FILESYSTEM} cannot be mounted on ${MOUNTPOINT}, "
 "because it is not a fully-functional Unix file system. Please choose a "
 "different file system, such as ${EXT2}."
 msgstr ""
 "Файловата система ${FILESYSTEM} не може да бъде монтирана на ${MOUNTPOINT}, "
-"защото не е пълнофункционална файлова система за Unix. Моля, изберете друга "
+"защото не е пълнофункционална файлова система за Unix. Изберете друга "
 "файлова система, като например ${EXT2}."
 
 #. Type: select
@@ -326,8 +328,7 @@ msgstr "Мястото за монтиране, което сте въвели, 
 #: ../partman-basicfilesystems.templates:97
 msgid "Mount points must start with \"/\". They cannot contain spaces."
 msgstr ""
-"Точката на монтиране трябва да започва с \"/\". Тя не може да съдържа "
-"интервали."
+"Точката на монтиране трябва да започва с „/“ и не може да съдържа интервали."
 
 #. Type: string
 #. Description
@@ -364,17 +365,27 @@ msgstr "Етикет:"
 
 #. Type: text
 #. Description
+#. for partman-basicfilesystems: in the following context: "Label: none"
+#: ../partman-basicfilesystems.templates:128
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Label:\" ]"
+msgstr "няма"
+
+#. Type: text
+#. Description
 #. Up to 24 character positions
 #: ../partman-basicfilesystems.templates:133
 msgid "Reserved blocks:"
-msgstr "Резервирани блокове"
+msgstr "Резервирани блокове:"
 
 #. Type: string
 #. Description
 #: ../partman-basicfilesystems.templates:137
 msgid "Percentage of the file system blocks reserved for the super-user:"
 msgstr ""
-"Процент от блоковете на файловата система, резервирани за администратора"
+"Процент от блоковете на файловата система, резервирани за администратора:"
 
 #. Type: text
 #. Description
@@ -403,8 +414,8 @@ msgid ""
 "Please specify how the file system is going to be used, so that optimal file "
 "system parameters can be chosen for that use."
 msgstr ""
-"Моля, задайте как ще бъде използвана файловата система, така че да бъдат "
-"избрани оптимални параметри на файловата система."
+"Задайте как ще бъде използвана файловата система, така че да бъдат избрани "
+"оптимални параметри на файловата система."
 
 #. Type: select
 #. Description
@@ -427,7 +438,10 @@ msgstr "Място за монтиране:"
 #. Description
 #. In the following context: "Mount point: none"
 #: ../partman-basicfilesystems.templates:172
-msgid "none"
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Mount point:\" ]"
 msgstr "няма"
 
 #. Type: text

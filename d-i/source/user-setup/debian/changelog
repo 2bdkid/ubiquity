@@ -1,3 +1,42 @@
+user-setup (1.8ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust /etc/aliases to send root mail to the initial user.
+    - Add the initial user to the adm, dip, lpadmin, and scanner groups too,
+      and to the admin group if no root password is set.
+    - Allow the admin group to gain root privileges using sudo.
+    - Default passwd/root-login to false.
+    - Refuse to apply an empty root password.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 19 Dec 2006 17:26:07 +0000
+
+user-setup (1.8) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Fix backing up after having chosen to not enable root logins, and changing
+    it to enable root logins. Since the crypted password was set to a locked
+    password in the first pass, the second pass failed to ask for a root
+    password. Closes: #400766, #388003.
+
+  [ Frans Pop ]
+  * Add myself to uploaders.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Rêzan Tovjîn
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by A S Alam
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Frans Pop <fjp@debian.org>  Thu, 30 Nov 2006 15:38:33 +0100
+
 user-setup (1.7ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

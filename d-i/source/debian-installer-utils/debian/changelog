@@ -1,3 +1,27 @@
+debian-installer-utils (1.42ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Work around some weirdness in di_exec that caused log-output sometimes
+      to hang in poll(). We now install a no-op SIGCHLD handler to make sure
+      that poll() returns EINTR when the subsidiary process exits.
+    - user-params: Don't propagate ks=* or vga=* to installed system.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 22 Dec 2006 11:29:21 +0000
+
+debian-installer-utils (1.42) unstable; urgency=low
+
+  [ Joey Hess ]
+  * user-params: Exclude brltty option, since it is already recorded in
+    /etc/brltty.conf. Thanks, Samuel Thibault. Closes: #403820.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Panjabi (pa.po) by A S Alam
+
+ -- Frans Pop <fjp@debian.org>  Thu, 21 Dec 2006 16:26:21 +0100
+
 debian-installer-utils (1.41ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

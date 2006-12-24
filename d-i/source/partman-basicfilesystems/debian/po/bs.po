@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-04-22 23:50-0600\n"
-"PO-Revision-Date: 2006-04-11 11:42+0100\n"
+"POT-Creation-Date: 2006-11-04 09:27+0100\n"
+"PO-Revision-Date: 2006-11-06 18:31+0100\n"
 "Last-Translator: Safir Secerovic <sapphire@linux.org.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.9.1\n"
 "Plural-Forms: 3\n"
-"X-Poedit-Language: Bosnian\n"
 "X-Poedit-Country: BOSNIA AND HERZEGOVINA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -131,7 +130,7 @@ msgstr ""
 #. Description
 #: ../partman-basicfilesystems.templates:53
 msgid "Failed to create a file system"
-msgstr "Nemogu kreirati datotečni sistem"
+msgstr "Ne mogu kreirati datotečni sistem"
 
 #. Type: error
 #. Description
@@ -147,7 +146,7 @@ msgstr ""
 #. Description
 #: ../partman-basicfilesystems.templates:59
 msgid "Failed to create a swap space"
-msgstr "Nemogu kreirati swap datotečni sistem"
+msgstr "Ne mogu kreirati swap datotečni sistem"
 
 #. Type: error
 #. Description
@@ -195,7 +194,6 @@ msgstr "Neispravan datotečni sistem za ovu tačku montiranja"
 #. Type: error
 #. Description
 #: ../partman-basicfilesystems.templates:73
-#, fuzzy
 msgid ""
 "The file system type ${FILESYSTEM} cannot be mounted on ${MOUNTPOINT}, "
 "because it is not a fully-functional Unix file system. Please choose a "
@@ -379,6 +377,16 @@ msgstr "Naziv:"
 
 #. Type: text
 #. Description
+#. for partman-basicfilesystems: in the following context: "Label: none"
+#: ../partman-basicfilesystems.templates:128
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Label:\" ]"
+msgstr "nijedno"
+
+#. Type: text
+#. Description
 #. Up to 24 character positions
 #: ../partman-basicfilesystems.templates:133
 msgid "Reserved blocks:"
@@ -444,7 +452,10 @@ msgstr "Tačka montiranja:"
 #. Description
 #. In the following context: "Mount point: none"
 #: ../partman-basicfilesystems.templates:172
-msgid "none"
+msgid ""
+"none[ Do not translate what's inside the brackets and just put the "
+"translation for the word \"none\" in your language without any brackets. "
+"This \"none\" relates to \"Mount point:\" ]"
 msgstr "nijedno"
 
 #. Type: text

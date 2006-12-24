@@ -37,10 +37,28 @@ get_serial_console() {
 	if echo "${defconsole}" | grep -q console=ttyS; then
 		local PORT="$(echo "${defconsole}" | sed -e 's%^console=ttyS%%' -e 's%,.*%%')"
 		local SPEED="$(echo "${defconsole}" | sed -e 's%^console=ttyS[0-9]\+,%%' -e 's% .*%%')"
-		local SERIAL="${PORT},${SPEED}"
+		local SERIAL="ttyS${PORT},${SPEED}"
 		echo "console=$SERIAL"
 	fi
 }
+
+grub_serial_console() {
+	#$1=output of get_serial_console
+	local unit=$(echo $1 | sed -e 's%^console=ttyS%%' -e 's%,.*%%')
+	local speed=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,%%' -e 's%[^(0-9)].*%%')
+	local parity=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+%%' -e 's%[78].*%%')
+	case "$parity" in 
+		"n") local parity="no" ;;
+		"e") local parity="even" ;;
+		"o") local parity="odd" ;;
+		*)   local parity="" ;;
+	esac
+	local word=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+[oen]%%' -e 's%r%%')
+	local flow=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+[oen][78]%%')
+
+	echo serial --unit=$unit --speed=$speed --word=$word --parity=$parity --stop=1
+	echo terminal serial	
+	}
 
 serial="$(get_serial_console)"
 
@@ -113,37 +131,37 @@ convert () {
 	    	echo "$tmp_drive" | sed "s%)$%,`expr $tmp_part - 1`)%" ;;
 		gnu*)
 	    	if echo $tmp_part | grep "^s" >/dev/null; then
-				tmp_pc_slice=`echo $tmp_part \
+			tmp_pc_slice=`echo $tmp_part \
 		    		| sed "s%s\([0-9]*\)[a-g]*$%\1%"`
-				tmp_drive=`echo "$tmp_drive" \
+			tmp_drive=`echo "$tmp_drive" \
 		    		| sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%"`
 	    	fi
 	    	if echo $tmp_part | grep "[a-g]$" >/dev/null; then
-				tmp_bsd_partition=`echo "$tmp_part" \
+			tmp_bsd_partition=`echo "$tmp_part" \
 		    		| sed "s%[^a-g]*\([a-g]\)$%\1%"`
-				tmp_drive=`echo "$tmp_drive" \
+			tmp_drive=`echo "$tmp_drive" \
 		    		| sed "s%)%,$tmp_bsd_partition)%"`
 	    	fi
 	    	echo "$tmp_drive" ;;
 		freebsd*)
 	    	if echo $tmp_part | grep "^s" >/dev/null; then
-				tmp_pc_slice=`echo $tmp_part \
+			tmp_pc_slice=`echo $tmp_part \
 		    		| sed "s%s\([0-9]*\)[a-h]*$%\1%"`
-				tmp_drive=`echo "$tmp_drive" \
+			tmp_drive=`echo "$tmp_drive" \
 		    		| sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%"`
 	    	fi
 	    	if echo $tmp_part | grep "[a-h]$" >/dev/null; then
-				tmp_bsd_partition=`echo "$tmp_part" \
+			tmp_bsd_partition=`echo "$tmp_part" \
 		    		| sed "s%s\{0,1\}[0-9]*\([a-h]\)$%\1%"`
-				tmp_drive=`echo "$tmp_drive" \
+			tmp_drive=`echo "$tmp_drive" \
 		    		| sed "s%)%,$tmp_bsd_partition)%"`
 	    	fi
 	    	echo "$tmp_drive" ;;
 		netbsd*)
 	    	if echo $tmp_part | grep "^[abe-p]$" >/dev/null; then
-				tmp_bsd_partition=`echo "$tmp_part" \
+			tmp_bsd_partition=`echo "$tmp_part" \
 		    		| sed "s%\([a-p]\)$%\1%"`
-				tmp_drive=`echo "$tmp_drive" \
+			tmp_drive=`echo "$tmp_drive" \
 		    		| sed "s%)%,$tmp_bsd_partition)%"`
 	    	fi
 	    	echo "$tmp_drive" ;;
@@ -472,9 +490,7 @@ if [ "$RET" ]; then
 		> /tmp/menu.lst.password
 	# Add a line to menu.lst to use the given password
 	# The line is appended after the commented example
-	sed '/^# password/r /tmp/menu.lst.password' \
-		< $ROOT/boot/grub/$menu_file > $ROOT/boot/grub/$menu_file.new
-	mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+	sed -i '/^# password/r /tmp/menu.lst.password' $ROOT/boot/grub/$menu_file
 	# By default, menu.lst is world-readable, which is not so good if it
 	# contains a password.
 	chmod o-r $ROOT/boot/grub/$menu_file
@@ -484,19 +500,17 @@ fi
 need_update_grub=
 
 user_params=$(echo $(user-params)) || true
-if [ -n "$user_params" ]; then
+if [ "$user_params" ]; then
 	# Modify menu.lst to include user parameters.
-	sed "s!^\(# defoptions=.*\)!\1 $user_params!" \
-		< $ROOT/boot/grub/$menu_file > $ROOT/boot/grub/$menu_file.new
-	mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+	sed -i "s!^\(# defoptions=.*\)!\1 $user_params!" \
+		$ROOT/boot/grub/$menu_file
 	need_update_grub=1
 fi
 
 if ! db_get debian-installer/framebuffer || [ "$RET" = false ]; then
 	# No framebuffer, so disable the splash screen.
-	sed '/^# defoptions=/ { s/  *splash//g; s/=splash\(  *\|$\)/=/; }' \
-		< $ROOT/boot/grub/$menu_file > $ROOT/boot/grub/$menu_file.new
-	mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+	sed -i '/^# defoptions=/ { s/  *splash//g; s/=splash\(  *\|$\)/=/; }' \
+		$ROOT/boot/grub/$menu_file
 	need_update_grub=1
 fi
 
@@ -507,11 +521,16 @@ fi
 if [ -s /tmp/os-probed ]; then
 	# Other operating systems are installed, so show the menu by default
 	# and raise the timeout.
-	sed 's/^hiddenmenu[[:space:]]*$/#hiddenmenu/;
-	     s/^\(timeout[[:space:]][[:space:]]*\).*/\110/' \
-		< $ROOT/boot/grub/menu.lst > $ROOT/boot/grub/menu.lst.new
-	mv $ROOT/boot/grub/menu.lst.new $ROOT/boot/grub/menu.lst
+	sed -i 's/^hiddenmenu[[:space:]]*$/#hiddenmenu/;
+		s/^\(timeout[[:space:]][[:space:]]*\).*/\110/' \
+		$ROOT/boot/grub/menu.lst
 fi
+
+if [ "$serial" ] ; then
+	# Modify menu.lst so _grub_ uses serial console.
+	(grub_serial_console $serial; cat $ROOT/boot/grub/$menu_file) >$ROOT/boot/grub/$menu_file.new
+	mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+fi 
 
 # Generate menu.lst additions for other OSes
 tmpfile=/tmp/menu.lst.extras
@@ -599,14 +618,13 @@ fi
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_update_etc
 
-sed -e 's/do_bootloader = yes/do_bootloader = no/' < $ROOT/etc/kernel-img.conf > $ROOT/etc/kernel-img.conf.$$
-if [ -z "`grep update-grub $ROOT/etc/kernel-img.conf.$$`" ]; then
+sed -i 's/do_bootloader = yes/do_bootloader = no/' $ROOT/etc/kernel-img.conf
+if [ -z "$(grep update-grub $ROOT/etc/kernel-img.conf)" ]; then
 	(
 		echo "postinst_hook = update-grub"
 		echo "postrm_hook   = update-grub"
-	) >> $ROOT/etc/kernel-img.conf.$$
+	) >> $ROOT/etc/kernel-img.conf
 fi
-mv $ROOT/etc/kernel-img.conf.$$ $ROOT/etc/kernel-img.conf
 
 db_progress STEP 1
 db_progress STOP
