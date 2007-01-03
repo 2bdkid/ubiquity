@@ -23,13 +23,26 @@ _Description:
  Please choose the language used for the installation process. This
  language will be the default language for the final system.
 
+Template: ubiquity/text/release_notes_label
+Type: text
+_Description:
+ If you have Internet access, read the release notes for information on
+ problems that may affect you.
+
+Template: ubiquity/text/release_notes_url
+Type: text
+_Description: Release Notes
+
 Template: ubiquity/text/timezone_heading_label
 Type: text
 _Description: Where are you?
 
 Template: ubiquity/text/timezone_comment_label
 Type: text
-_Description: Select a city in your country and time zone.
+_Description:
+ Select a city in your country and time zone. If the indicated current time
+ is incorrect even after selecting the correct time zone, you can adjust it
+ after rebooting into the installed system.
 
 Template: ubiquity/text/timezone_city_label
 Type: text
@@ -46,10 +59,6 @@ _Description: Selected region:
 Template: ubiquity/text/timezone_time_label
 Type: text
 _Description: Current time:
-
-Template: ubiquity/text/timezone_time_adjust
-Type: text
-_Description: Set Time...
 
 Template: ubiquity/text/keyboard_heading_label
 Type: text

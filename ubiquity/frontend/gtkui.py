@@ -132,7 +132,8 @@ class Wizard:
         self.installing = False
         self.returncode = 0
         self.language_questions = ('live_installer', 'welcome_heading_label',
-                                   'welcome_text_label', 'step_label',
+                                   'welcome_text_label', 'release_notes_label',
+                                   'release_notes_url', 'step_label',
                                    'cancel', 'back', 'next')
         self.allowed_change_step = True
         self.allowed_go_forward = True
@@ -272,6 +273,7 @@ class Wizard:
             old_dbfilter = self.dbfilter
             if current_name == "stepLanguage":
                 self.dbfilter = language.Language(self)
+                gtk.link_button_set_uri_hook(self.link_button_browser)
             elif current_name == "stepLocation":
                 self.dbfilter = timezone.Timezone(self)
             elif current_name == "stepKeyboardConf":
@@ -343,11 +345,18 @@ class Wizard:
         self.live_installer.show()
         self.allow_change_step(False)
 
+        try:
+            release_notes = open('/cdrom/.disk/release_notes_url')
+            self.release_notes_url.set_uri(
+                release_notes.read().rstrip('\n'))
+            release_notes.close()
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            self.release_notes_hbox.hide()
+
         self.tzmap = TimezoneMap(self)
         self.tzmap.tzmap.show()
-
-        if not os.path.exists('/usr/bin/time-admin'):
-            self.timezone_time_adjust.hide()
 
         if 'UBIQUITY_NEW_PARTITIONER' in os.environ:
             self.embedded.hide()
@@ -888,11 +897,11 @@ class Wizard:
         hostname = self.hostname.get_property('text')
         for result in validation.check_hostname(hostname):
             if result == validation.HOSTNAME_LENGTH:
-                error_msg.append("The hostname must be between 3 and 18 characters long.")
-            elif result == validation.HOSTNAME_WHITESPACE:
-                error_msg.append("The hostname may not contain spaces.")
+                error_msg.append("The hostname must be between 2 and 63 characters long.")
             elif result == validation.HOSTNAME_BADCHAR:
-                error_msg.append("The hostname may only contain letters, digits, and hyphens.")
+                error_msg.append("The hostname may only contain letters, digits, hyphens, and dots.")
+            elif result == validation.HOSTNAME_BADHYPHEN:
+                error_msg.append("The hostname may not start or end with a hyphen.")
 
         # showing warning message is error is set
         if len(error_msg) != 0:
@@ -1279,38 +1288,33 @@ class Wizard:
             gtk.main_quit()
 
 
+    def selected_language (self, selection):
+        (model, iterator) = selection.get_selected()
+        if iterator is not None:
+            value = unicode(model.get_value(iterator, 0))
+            return self.language_choice_map[value][1]
+        else:
+            return ''
+
+
+    def link_button_browser (self, button, uri):
+        selection = self.language_treeview.get_selection()
+        lang = self.selected_language(selection)
+        lang = lang.split('.')[0] # strip encoding
+        uri = uri.replace('${LANG}', lang)
+        subprocess.Popen(['sensible-browser', uri], close_fds=True)
+
+
     def on_language_treeview_row_activated (self, treeview, path, view_column):
         self.next.activate()
 
     def on_language_treeview_selection_changed (self, selection):
-        (model, iterator) = selection.get_selected()
-        if iterator is not None:
-            value = unicode(model.get_value(iterator, 0))
-            lang = self.language_choice_map[value][1]
+        lang = self.selected_language(selection)
+        if lang:
             # strip encoding; we use UTF-8 internally no matter what
             lang = lang.split('.')[0].lower()
             for widget in self.language_questions:
                 self.translate_widget(getattr(self, widget), lang)
-
-
-    def on_timezone_time_adjust_clicked (self, button):
-        invisible = gtk.Invisible()
-        invisible.grab_add()
-        time_admin_env = dict(os.environ)
-        tz = self.tzmap.get_selected_tz_name()
-        if tz is not None:
-            time_admin_env['TZ'] = tz
-        if 'DESKTOP_STARTUP_ID' in time_admin_env:
-            del time_admin_env['DESKTOP_STARTUP_ID']
-        time_admin_env['GST_NO_INSTALL_NTP'] = '1'
-        time_admin_subp = subprocess.Popen(["log-output", "-t", "ubiquity",
-                                            "time-admin"], env=time_admin_env)
-        gobject.child_watch_add(time_admin_subp.pid, self.on_time_admin_exit,
-                                invisible)
-
-
-    def on_time_admin_exit (self, pid, condition, invisible):
-        invisible.grab_remove()
 
 
     def on_new_size_scale_format_value (self, widget, value):
@@ -1567,7 +1571,8 @@ class Wizard:
                     self.new_size_scale.set_draw_value(True)
                     self.new_size_scale.set_value_pos(gtk.POS_TOP)
                     self.new_size_scale.set_digits(0)
-                    self.new_size_scale.update_policy(gtk.UPDATE_CONTINUOUS)
+                    self.new_size_scale.set_update_policy(
+                        gtk.UPDATE_CONTINUOUS)
                     self.new_size_scale.connect(
                         'format_value', self.on_new_size_scale_format_value)
                     self.resize_min_size, self.resize_max_size = \
