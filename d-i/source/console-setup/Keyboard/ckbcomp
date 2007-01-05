@@ -1923,10 +1923,12 @@ if ($charmap) {
 }
 
 # A hack to work around a bug in the kernel/loadkeys
-if (! $acm) {
-    $xkbsym_table{'Caps_Lock'} = 'Shift_Lock';
-    $xkbsym_table{'ISO_Lock'} = 'Shift_Lock';
-}
+# Disabled for Ubuntu because the cure is worse than the disease:
+#   https://bugs.launchpad.net/ubuntu/+source/console-setup/+bug/69725
+#if (! $acm) {
+#    $xkbsym_table{'Caps_Lock'} = 'Shift_Lock';
+#    $xkbsym_table{'ISO_Lock'} = 'Shift_Lock';
+#}
 
 ########### PARSING ###############################################
 

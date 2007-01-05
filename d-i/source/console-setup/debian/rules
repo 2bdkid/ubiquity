@@ -6,8 +6,8 @@ xkbdir = /usr/share/X11/xkb
 export xkbdir
 
 main_build:
-	$(MAKE)
-	cd Keyboard && $(MAKE) build-mini
+	$(MAKE) xkbdir=$(xkbdir)
+	cd Keyboard && $(MAKE) build-mini xkbdir=$(xkbdir)
 	touch main_build
 
 debian/console-setup.config debian/console-setup-mini.config: debian/config.proto main_build

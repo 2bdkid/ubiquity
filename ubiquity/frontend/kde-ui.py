@@ -116,6 +116,9 @@ class Wizard:
         #self.app.setMainWidget(self.userinterface)
         self.userinterface.show()
 
+        self.advanceddialog = QDialog(self.userinterface)
+        uic.loadUi("%s/advanceddialog.ui" % UIDIR, self.advanceddialog)
+
         # declare attributes
         self.distro = distro
         self.current_layout = None
@@ -147,8 +150,8 @@ class Wizard:
         self.progress_position = ubiquity.progressposition.ProgressPosition()
         self.progress_cancelled = False
         self.previous_partitioning_page = None
-        # TODO cjwatson 2006-09-04: replace this by a button
-        self.summary_device = ''
+        self.summary_device = None
+        self.popcon = None
         self.installing = False
         self.returncode = 0
         self.language_questions = ('live_installer', 'welcome_heading_label',
@@ -170,12 +173,12 @@ class Wizard:
 
         self.debconf_callbacks = {}    # array to keep callback functions needed by debconf file descriptors
 
-        self.translate_widgets()
-
         self.map_vbox = QVBoxLayout(self.userinterface.map_frame)
         self.map_vbox.setMargin(0)
 
         self.customize_installer()
+
+        self.translate_widgets()
 
         self.autopartition_vbox = QVBoxLayout(self.userinterface.autopartition_frame)
         self.autopartition_buttongroup = QButtonGroup(self.userinterface.autopartition_frame)
@@ -204,13 +207,6 @@ class Wizard:
         self.mountpoint_table = QGridLayout()
         self.mountpoint_vbox.addLayout(self.mountpoint_table)
         self.mountpoint_vbox.addStretch()
-
-        summary_vbox = QVBoxLayout(self.userinterface.summary_frame)
-        summary_vbox.setMargin(0)
-        self.ready_text = UbiquityTextEdit(self, self.userinterface.summary_frame)
-        self.ready_text.setReadOnly(True)
-        self.ready_text.setAcceptRichText(True)
-        summary_vbox.addWidget(self.ready_text)
 
     def excepthook(self, exctype, excvalue, exctb):
         """Crash handler."""
@@ -279,6 +275,8 @@ class Wizard:
         self.app.connect(self.userinterface.language_treeview, SIGNAL("itemSelectionChanged()"), self.on_language_treeview_selection_changed)
 
         self.app.connect(self.userinterface.timezone_city_combo, SIGNAL("activated(int)"), self.tzmap.city_combo_changed)
+
+        self.app.connect(self.userinterface.advanced_button, SIGNAL("clicked()"), self.on_advanced_button_clicked)
 
         # Start the interface
         if got_intro:
@@ -423,12 +421,13 @@ class Wizard:
                 widget.setText("<h2>" + text + "</h2>")
             elif 'extra_label' in name:
                 widget.setText("<em>" + text + "</em>")
-            elif name in ('drives_label', 'partition_method_label',
-                          'mountpoint_label', 'size_label', 'device_label',
-                          'format_label'):
+            elif ('group_label' in name or
+                  name in ('drives_label', 'partition_method_label',
+                           'mountpoint_label', 'size_label', 'device_label',
+                           'format_label')):
                 widget.setText("<strong>" + text + "</strong>")
             elif name == 'release_notes_url':
-                url = self.release_notes_url_pattern.replace(
+                url = self.release_notes_url_template.replace(
                     '${LANG}', lang.split('.')[0])
                 widget.setText('<a href="%s">%s</a>' % (url, text))
             else:
@@ -726,7 +725,7 @@ class Wizard:
         self.allow_go_forward(complete)
 
     def on_hostname_insert_text(self):
-        self.hostname_edited = True
+        self.hostname_edited = (self.userinterface.hostname.text() != '')
 
     def on_next_clicked(self):
         """Callback to control the installation process between steps."""
@@ -1646,21 +1645,52 @@ class Wizard:
         while i != -1:
             text = text[:i] + "<br>" + text[i+1:]
             i = text.find("\n")
-        self.ready_text.setText(text)
-        self.summary_device = "DEVICE"
+        self.userinterface.ready_text.setText(text)
 
     def set_summary_device (self, device):
-        if not device.startswith('(') and not device.startswith('/dev/'):
-            device = '/dev/%s' % device
-        text = self.ready_text.toHtml()
-        device_index = text.indexOf(self.summary_device)
-        if device_index != -1:
-            newstring = text[:device_index] + '<a href="device">' + device + '</a>' + text[device_index+6:]
-            self.ready_text.setText(newstring)
+        if device is not None:
+            if not device.startswith('(') and not device.startswith('/dev/'):
+                device = '/dev/%s' % device
         self.summary_device = device
 
     def get_summary_device (self):
         return self.summary_device
+
+    def set_popcon (self, participate):
+        self.popcon = participate
+
+    def get_popcon (self):
+        return self.popcon
+
+    def on_advanced_button_clicked (self):
+        display = False
+        summary_device = self.get_summary_device()
+        if summary_device is not None:
+            display = True
+            self.advanceddialog.bootloader_group_label.show()
+            self.advanceddialog.grub_device_label.show()
+            self.advanceddialog.grub_device_entry.show()
+            self.advanceddialog.grub_device_entry.setText(summary_device)
+        else:
+            self.advanceddialog.bootloader_group_label.hide()
+            self.advanceddialog.grub_device_label.hide()
+            self.advanceddialog.grub_device_entry.hide()
+        if self.popcon is not None:
+            display = True
+            self.advanceddialog.popcon_group_label.show()
+            self.advanceddialog.popcon_checkbutton.show()
+            self.advanceddialog.popcon_checkbutton.setChecked(self.popcon)
+        else:
+            self.advanceddialog.popcon_group_label.hide()
+            self.advanceddialog.popcon_checkbutton.hide()
+        if not display:
+            return
+
+        response = self.advanceddialog.exec_()
+        if response == QDialog.Accepted:
+            self.set_summary_device(
+                self.advanceddialog.grub_device_entry.text())
+            self.set_popcon(self.advanceddialog.popcon_checkbutton.isChecked())
 
     def return_to_autopartitioning (self):
         """If the install progress bar is up but still at the partitioning
@@ -1764,21 +1794,6 @@ class Wizard:
             text = '%d%%' % value
         self.new_size_value.setText(text)
  
-    def change_device(self):
-        """prompt user to set new Grub device"""
-
-        #FIXME translate text = get_string("Device for boot loader installation:", self.locale)
-
-        answer = QInputDialog.getText(self.userinterface, "Device for boot loader installation:", "Device for boot loader installation:", QLineEdit.Normal, self.summary_device)
-        newdevice = unicode(answer[0])
-
-        if newdevice != "" and newdevice != None:
-            text = unicode(self.ready_text.toHtml())
-            device_index = text.find(self.summary_device)
-            newstring = text[:device_index-75] + '<a href="device">' + newdevice + '</a>' + text[device_index+len(self.summary_device)+11:]
-            self.ready_text.setText(newstring)
-            self.summary_device = newdevice
-
     def quit(self):
         """quit installer cleanly."""
 
@@ -2044,16 +2059,3 @@ class MapWidget(QWidget):
         palette = QPalette()
         palette.setBrush(self.backgroundRole(), QBrush(pixmap))
         self.setPalette(palette)
-
-class UbiquityTextEdit(QTextEdit):
-    """A text edit widget that listens for clicks on the link"""
-    def __init__ (self, mainwin, parent):
-        QTextEdit.__init__(self, parent)
-        self.setMouseTracking(True)
-        self.mainwin = mainwin
-        self.setTextInteractionFlags(Qt.TextBrowserInteraction)
-
-    def mouseReleaseEvent(self, event):
-        if len(self.anchorAt(event.pos())) > 0:
-            self.mainwin.change_device()
-        QTextEdit.mouseReleaseEvent(self, event)
