@@ -1,3 +1,21 @@
+ubiquity (1.3.9) feisty; urgency=low
+
+  [ Colin Watson ]
+  * Document live filesystem manifests and installation from media other
+    than CDs/DVDs in doc/README.
+  * Extend backporting FAQ in doc/README to cover issues with backporting
+    from feisty.
+  * Automatic update of included source packages: silo-installer
+    1.07ubuntu2.
+  * Track silo-installer 1.07ubuntu2 changes (install device2obp, tweak
+    PATH).
+
+  [ Jonathan Riddell ]
+  * KDE frontend: Fix crash if release_notes_url_template is None.
+  * KDE frontend: Fix crash when editing GRUB device name.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue,  9 Jan 2007 17:56:20 +0000
+
 ubiquity (1.3.8) feisty; urgency=low
 
   * Depend on python-gtk2 (>= 2.10) for gtk.LinkButton.

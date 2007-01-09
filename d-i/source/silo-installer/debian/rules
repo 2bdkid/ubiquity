@@ -16,6 +16,9 @@ binary-arch:
 	dh_testdir
 	dh_testroot
 	dh_clean -k
+	mkdir -p debian/silo-installer/sbin
+	cp device2obp debian/silo-installer/sbin/device2obp
+	chmod 755 debian/silo-installer/sbin/device2obp
 	dh_installdebconf
 	dh_installdeb 
 	debian/install-rc finish.d

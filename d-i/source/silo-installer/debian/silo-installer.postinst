@@ -48,26 +48,122 @@ if ! apt-install silo; then
                 exit 1
         fi
 fi
-         
 
-# Write out silo.conf
+# Write out silo.conf for this installation.
 cat > /target/boot/silo.conf << EOF
-root=${rootfs}
-partition=${bootpart}
 default=Linux
 read-only
 timeout=100
-append="quiet splash"
 
 image=${boot}/vmlinuz
 	label=Linux
 	${initrd}
+	root=${rootfs}
+	partition=${bootpart}
+	append="quiet splash"
 
 image=${boot}/vmlinuz.old
 	label=LinuxOLD
 	${initrdold}
+	root=${rootfs}
+	partition=${bootpart}
+	append="quiet splash"
+
+image=${boot}/vmlinuz
+	label=Linux-rescue
+	${initrd}
+	root=${rootfs}
+	partition=${bootpart}
+	append="single"
+
+image=${boot}/vmlinuz.old
+	label=LinuxOLD-rescue
+	${initrdold}
+	root=${rootfs}
+	partition=${bootpart}
+	append="single"
+
 EOF
 
+# detect other OS'es and add them to silo.conf.
+probedos=$(os-prober)
+
+if [ -n "$probedos" ]; then
+	echo "$probedos" | { while read os; do
+		rootpart=$(echo $os | cut -d ":" -f 1)
+		# we need to make sure we have the read device
+		rootpart=$(readlink -f $rootpart)
+		osname=$(echo $os | cut -d ":" -f 3)
+		ostype=$(echo $os | cut -d ":" -f 4)
+		case $ostype in
+		linux)
+			probedsiloconf=$(linux-boot-prober $rootpart)
+			if [ -n "$probedsiloconf" ]; then
+				echo "$probedsiloconf" | { while read siloentry; do
+					bootpart=$(echo $siloentry | cut -d ":" -f 2)
+					# we need to make sure we have the read device
+					bootpart=$(readlink -f $bootpart)
+					label=$(echo $siloentry | cut -d ":" -f 3)
+					kernel=$(echo $siloentry | cut -d ":" -f 4)
+					initrd=$(echo $siloentry | cut -d ":" -f 5)
+					opts=$(echo $siloentry | cut -d ":" -f 6)
+					# strip ro and root=
+					newopts=""
+					for i in $opts; do
+						case $i in
+							root=*|ro) ;;
+							*) newopts="$newopts $i" ;;
+						esac
+					done
+					opts=$(echo $newopts)
+					obpentry=$(device2obp $bootpart)
+					obpalias=$(echo $obpentry | cut -d " " -f 1)
+					obppath=$(echo $obpentry | cut -d " " -f 2)
+					obppart=$(echo $obpentry | cut -d " " -f 3)
+
+					# write stanza
+					echo "image=$obppath$obppart$kernel" >> /target/boot/silo.conf
+					echo -e "\tlabel=$label-$obpalias" >> /target/boot/silo.conf
+					if [ -n "$initrd" ]; then
+						echo -e "\tinitrd=$obppath$obppart$initrd" >> /target/boot/silo.conf
+					fi
+					echo -e "\troot=$rootpart" >> /target/boot/silo.conf
+					echo -e "\tpartition=$(echo $obppart | sed -e 's/;//g')" >> /target/boot/silo.conf
+					echo -e "\tappend=\"$opts\"" >> /target/boot/silo.conf
+					echo "" >> /target/boot/silo.conf
+				done }
+			fi
+		;;
+		chain)
+			obpentry=$(device2obp $rootpart)
+			obpalias=$(echo $obpentry | cut -d " " -f 1)
+			obppath=$(echo $obpentry | cut -d " " -f 2)
+			obppart=$(echo $obpentry | cut -d " " -f 3)
+			echo "other=$obppath$obppart" >> /target/boot/silo.conf
+			echo -e "\tlabel=$osname-$obpalias\n" >> /target/boot/silo.conf
+		;;
+		esac
+	done }
+fi
+
+# setting up OBP to boot from our disk because we CAN.
+obpalias=$(device2obp $bootfs | cut -d " " -f 1)
+bootdev=$(eeprom boot-device)
+newbootdev=""
+if [ -n "$obpalias" ]; then
+	for i in $bootdev; do
+		case $i in
+			$obpalias) ;;
+			*) newbootdev="$newbootdev $i" ;;
+		esac
+	done
+	# set our device as default
+	eeprom boot-device="$obpalias $newbootdev"
+	# make sure to boot into it
+	echo "$obpalias" > /proc/sys/kernel/reboot-cmd
+fi
+
+# do the rest of the job.
 chmod 644 /target/boot/silo.conf
 
 # Compat links
@@ -75,6 +171,8 @@ ln -sf ../boot/silo.conf /target/etc/silo.conf
 ln -sf . /target/boot/boot
 ln -sf . /target/boot/etc
 
+# this part needs some review with Solaris boot support but only when
+# installing on the same disk.
 if chroot /target /sbin/silo -f; then
 	if [ "$raidinstall" = "y" ]; then
 		chroot /target /sbin/silo -f -t >/dev/null 2>&1
