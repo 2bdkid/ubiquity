@@ -2272,6 +2272,8 @@ main(int argc, char *argv[])
                 close(i);
 
         // Set up signal handling
+        memset(&act,0,sizeof(struct sigaction));
+	memset(&oldact,0,sizeof(struct sigaction));
         act.sa_handler = prnt_sig_hdlr;
         sigemptyset(&act.sa_mask);
 
