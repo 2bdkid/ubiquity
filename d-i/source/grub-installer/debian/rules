@@ -9,10 +9,6 @@ ifeq ($(DEB_HOST_ARCH_OS),)
   endif
 endif
 
-ifeq ($(DEB_HOST_ARCH_OS),linux)
-DMIDECODE := dmidecode-udeb (>= 2.7)
-endif
-
 build:
 	dh_testdir
 
@@ -33,11 +29,7 @@ binary-arch: build install
 	dh_install debian/isinstallable DEBIAN
 	dh_installdeb
 	dh_fixperms
-ifdef DMIDECODE
-	dh_gencontrol -- -V'dmidecode=$(DMIDECODE)'
-else
 	dh_gencontrol
-endif
 	dh_builddeb
 
 binary-indep: build install

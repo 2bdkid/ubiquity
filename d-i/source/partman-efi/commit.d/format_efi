@@ -2,6 +2,16 @@
 
 . /lib/partman/definitions.sh
 
+ARCH="$(archdetect)"
+case $ARCH in
+    i386/*|amd64/*)
+	new_efi_fs=fat32
+	;;
+    *)
+	new_efi_fs=fat16
+	;;
+esac
+
 enable_swap
 for dev in $DEVICES/*; do
     [ -d "$dev" ] || continue
@@ -25,7 +35,7 @@ for dev in $DEVICES/*; do
 	    then
 		continue
 	    fi
-	    log "Try to format EFI fat16 fs in $dev/$id"
+	    log "Try to format EFI $new_efi_fs fs in $dev/$id"
 	    template=partman-basicfilesystems/progress_formatting
 	    open_dialog PARTITION_INFO $id
 	    read_line x1 x2 x3 x4 x5 device x6
@@ -38,7 +48,7 @@ for dev in $DEVICES/*; do
 	    db_subst $template PARTITION "$num"
 	    db_subst $template DEVICE $(humandev $(cat device))
 	    name_progress_bar $template
-	    open_dialog CREATE_FILE_SYSTEM $id fat16
+	    open_dialog CREATE_FILE_SYSTEM $id $new_efi_fs
 	    read_line status
 	    close_dialog
 	    sync

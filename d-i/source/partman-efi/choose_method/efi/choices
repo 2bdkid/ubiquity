@@ -10,9 +10,7 @@ id=$2
 #    exit 0
 #fi
 
-if [ ! -d /proc/efi ] && [ ! -d /sys/firmware/efi ]; then
-    exit 0
-fi
+[ -e /var/lib/partman/efi ] || exit 0
 
 db_metaget partman-efi/text/efi description
 

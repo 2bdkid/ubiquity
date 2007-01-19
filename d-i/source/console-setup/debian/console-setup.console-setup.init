@@ -37,20 +37,29 @@ case "$1" in
         # console-setup isn't a daemon
         ;;
     start|force-reload|restart|reload)
-	log_action_begin_msg "Setting up console font and keymap"
-	# Only use --save if we aren't in the boot sequence, to avoid
-	# slowing down the boot too much. Outside the boot sequence, this
-	# means that 'dpkg-reconfigure console-setup' automatically saves
-	# the font and keymap.
-	if run_by_init; then
-	    save=
-	else
-	    save=--save
-	fi
-	if setupcon --force $save; then
-	    log_action_end_msg 0
-	else
-	    log_action_end_msg $?
+	if [ -z "$DISPLAY" ] && ! pidof usplash >/dev/null; then
+	    log_action_begin_msg "Setting up console font and keymap"
+	    # Only use --save if we aren't in the boot sequence, to avoid
+	    # slowing down the boot too much. Outside the boot sequence,
+	    # this means that 'dpkg-reconfigure console-setup' automatically
+	    # saves the font and keymap.
+	    if run_by_init; then
+		save=
+	    else
+		save=--save
+	    fi
+	    if setupcon --force $save; then
+		log_action_end_msg 0
+	    else
+		log_action_end_msg $?
+	    fi
+	elif ! run_by_init; then
+	    log_action_begin_msg "Saving console font and keymap for next boot"
+	    if setupcon --save-only; then
+		log_action_end_msg 0
+	    else
+		log_action_end_msg $?
+	    fi
 	fi
 	;;
     *)

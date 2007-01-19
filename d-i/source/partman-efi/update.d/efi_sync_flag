@@ -3,9 +3,7 @@
 # This script removes the efi flag for partitions whose method is not
 # efi and sets it for partition whose method is efi
 
-if [ ! -d /proc/efi ] && [ ! -d /sys/firmware/efi ]; then
-    exit 0
-fi
+[ -e /var/lib/partman/efi ] || exit 0
 
 . /lib/partman/definitions.sh
 
@@ -16,6 +14,8 @@ size=$4
 type=$5
 fs=$6
 path=$7
+shift; shift; shift; shift; shift; shift; shift
+name=$*
 
 cd $dev
 
@@ -42,6 +42,10 @@ $flag"
 done
 close_dialog
 
+open_dialog USES_NAMES
+read_line uses_names
+close_dialog
+
 if [ "$method" = efi -a ! -f $id/bootable ]; then
     open_dialog SET_FLAGS $id
     write_line "$flags"
@@ -50,6 +54,10 @@ if [ "$method" = efi -a ! -f $id/bootable ]; then
     close_dialog
     >$id/bootable
     >$id/efi_bootable
+    if [ "$uses_names" = yes ] && [ "$fs" = fat32 ]; then
+	open_dialog SET_NAME $id "EFI System Partition"
+	close_dialog
+    fi
     RET=''
 elif [ "$method" != efi -a -f $id/bootable -a -f $id/efi_bootable ]; then
     open_dialog SET_FLAGS $id
@@ -58,4 +66,10 @@ elif [ "$method" != efi -a -f $id/bootable -a -f $id/efi_bootable ]; then
     close_dialog
     rm $id/bootable
     rm $id/efi_bootable
+    if [ "$uses_names" = yes ] && [ "$fs" = fat32 ] && \
+	[ "$name" = "EFI System Partition" ]; then
+	# should be empty, but see http://bugs.debian.org/268495
+	open_dialog SET_NAME "unnamed"
+	close_dialog
+    fi
 fi

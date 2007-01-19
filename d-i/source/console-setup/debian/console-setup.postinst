@@ -156,7 +156,17 @@ fi
 
 # In d-i debhelper doesn't use /etc/init.d scripts :-)
 if [ -f /usr/share/console-setup-mini/console-setup.config ]; then
-    setupcon --force --save
+    if [ -d /lib/debian-installer ]; then
+	setupcon --force --save
+    else
+	# setting the font corrupts X
+	setupcon --save-only
+	setupcon --force -k
+	cat >&2 <<EOF
+Your console font configuration will be updated the next time your system
+boots. If you want to update it now, run 'setupcon' from a virtual console.
+EOF
+    fi
 fi
 
 #DEBHELPER#

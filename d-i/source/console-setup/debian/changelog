@@ -1,3 +1,17 @@
+console-setup (1.13ubuntu5) feisty; urgency=low
+
+  * Add a --save-only option to setupcon, to save the keyboard/font on the
+    root filesystem but not actually tell the kernel to set it up.
+  * Back out part of setup-console-under-usplash changes: attempts to change
+    the font must be guarded against being run while on an X display or
+    while usplash is running, because some kernel console drivers (at least
+    vgacon) are fundamentally unable to change the font only on some virtual
+    consoles, and will corrupt video memory if you try (LP: #73955). We now
+    use setupcon --save-only to make sure the font is available on the root
+    filesystem for the next boot but don't load it immediately.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Jan 2007 20:08:33 +0000
+
 console-setup (1.13ubuntu4) feisty; urgency=low
 
   * Include ro(std) in keymap tree, after talking with Eddy Petrişor.

@@ -2,9 +2,7 @@
 
 . /usr/share/debconf/confmodule
 
-if [ ! -d /proc/efi ] && [ ! -d /sys/firmware/efi ]; then
-    exit 0
-fi
+[ -e /var/lib/partman/efi ] || exit 0
 
 dev=$1
 num=$2

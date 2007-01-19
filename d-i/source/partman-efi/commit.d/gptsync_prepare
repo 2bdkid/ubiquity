@@ -1,0 +1,33 @@
+#! /bin/sh
+
+. /lib/partman/definitions.sh
+
+if ! type gptsync >/dev/null 2>&1; then
+    rm -f /var/lib/partman/gptsync
+    exit 0
+fi
+
+# Only Intel Macs need this.
+ARCH="$(archdetect)"
+case $ARCH in
+    i386/mac|amd64/mac)
+	;;
+    *)
+	rm -f /var/lib/partman/gptsync
+	exit 0
+	;;
+esac
+
+> /var/lib/partman/gptsync
+for dev in $DEVICES/*; do
+    [ -d "$dev" ] || continue
+    cd $dev
+    open_dialog IS_CHANGED
+    read_line changed
+    close_dialog
+    if [ "$changed" = yes ]; then
+	echo "$dev" >> /var/lib/partman/gptsync
+    fi
+done
+
+exit 0

@@ -148,13 +148,13 @@ fi
 
 # setting up OBP to boot from our disk because we CAN.
 obpalias=$(device2obp $bootfs | cut -d " " -f 1)
-bootdev=$(eeprom boot-device)
+bootdev=$(eeprom boot-device | sed -e 's/boot-device=//g')
 newbootdev=""
 if [ -n "$obpalias" ]; then
 	for i in $bootdev; do
 		case $i in
 			$obpalias) ;;
-			*) newbootdev="$newbootdev $i" ;;
+			*) newbootdev="$newbootdev$i " ;;
 		esac
 	done
 	# set our device as default

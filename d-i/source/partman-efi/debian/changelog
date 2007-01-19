@@ -1,3 +1,14 @@
+partman-efi (11ubuntu1) feisty; urgency=low
+
+  * On Intel Macs, depend on gptsync-udeb and run gptsync on changed devices
+    after committing changes.
+  * Automatically use existing EFI system partitions on Intel Macs as EFI
+    boot partitions (LP: #38225).
+  * Create fat32 EFI partitions with the name "EFI System Partition" by
+    default on Intel Macs.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 17 Jan 2007 13:58:59 +0000
+
 partman-efi (11) unstable; urgency=low
 
   * Run debconf-updatepo
