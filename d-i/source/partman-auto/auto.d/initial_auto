@@ -2,6 +2,7 @@
 
 . /usr/share/debconf/confmodule
 . /lib/partman/definitions.sh
+. /lib/partman/auto-shared.sh
 
 dev_to_partman () {
 	local dev_name="$1"
@@ -43,6 +44,14 @@ fi
 disks=""
 if db_get partman-auto/disk && [ "$RET" ]; then
 	disks="$RET"
+fi
+
+# If there's only one disk, then preseeding partman-auto/disk is unnecessary
+if [ "$method" ] && [ -z "$disks" ]; then
+	DEVS="$(get_auto_disks)"
+	if [ "$(echo "$DEVS" | wc -l)" -eq 1 ]; then
+		disks="${DEVS%$TAB*}"
+	fi
 fi
 
 # If both are set, let's try to do a completely automatic partitioning

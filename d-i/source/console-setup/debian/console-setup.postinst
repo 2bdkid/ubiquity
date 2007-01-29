@@ -170,3 +170,9 @@ EOF
 fi
 
 #DEBHELPER#
+
+if type update-initramfs >/dev/null 2>&1; then
+    update-initramfs -u
+fi
+
+exit 0

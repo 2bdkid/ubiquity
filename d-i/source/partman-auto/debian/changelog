@@ -1,3 +1,13 @@
+partman-auto (62ubuntu3) feisty; urgency=low
+
+  * auto.d/initial_auto: If partman-auto/method is preseeded and
+    partman-auto/disk is not but there is only one disk, act as though
+    partman-auto/disk had been preseeded to that disk. This simplifies a
+    number of preseeding scenarios that had been complicated by the removal
+    of devfs path support.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Jan 2007 09:46:39 +0100
+
 partman-auto (62ubuntu2) feisty; urgency=low
 
   * resize_use_free: Return early from scan_disk if GET_MAX_PRIMARY returns

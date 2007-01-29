@@ -1,3 +1,16 @@
+ubiquity (1.3.14) feisty; urgency=low
+
+  * Use partman-efi on i386.
+  * Ship an apport hook instead of calling apport directly from the GTK
+    frontend.
+  * New partitioner: Skip telling partman to edit method or mountpoint if
+    either is left unchanged in the edit dialog.
+  * Copy value of popularity-contest/participate into /target (LP: #78972).
+  * Automatic update of included source packages: console-setup 1.13ubuntu6,
+    partman-auto 62ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 29 Jan 2007 15:05:01 +0000
+
 ubiquity (1.3.13) feisty; urgency=low
 
   * Automatic update of included source packages: base-installer

@@ -52,12 +52,6 @@ try:
 except ImportError:
     from ubiquity.debconfcommunicator import DebconfCommunicator
 
-try:
-    import apport
-    import apport.fileutils
-except ImportError:
-    pass
-
 from ubiquity import filteredcommand, validation
 from ubiquity.misc import *
 from ubiquity.settings import *
@@ -188,33 +182,14 @@ class Wizard:
                              " (invoking crash handler):")
         print >>sys.stderr, tbtext
 
-        if 'apport' in sys.modules:
-            try:
-                pr = apport.Report()
-                pr.add_package_info('ubiquity-frontend-gtk')
-                pr.add_os_info()
-                pr.add_proc_info()
-                pr['BugDisplayMode'] = 'file'
-                pr['ExecutablePath'] = '/usr/bin/ubiquity'
-                pr['PythonTraceback'] = tbtext
-                if os.path.exists('/var/log/syslog'):
-                    pr['UbiquitySyslog'] = ('/var/log/syslog',)
-                if os.path.exists('/var/log/partman'):
-                    pr['UbiquityPartman'] = ('/var/log/partman',)
-                reportfile = open(apport.fileutils.make_report_path(pr), 'w')
-                pr.write(reportfile)
-                reportfile.close()
-            except (KeyboardInterrupt, SystemExit):
-                raise
-            except:
-                # Out of disk space? Fall back to our own crash handler.
-                pass
+        if os.path.exists('/usr/share/apport/apport-gtk'):
+            raise
+        else:
+            self.crash_detail_label.set_text(tbtext)
+            self.crash_dialog.run()
+            self.crash_dialog.hide()
 
-        self.crash_detail_label.set_text(tbtext)
-        self.crash_dialog.run()
-        self.crash_dialog.hide()
-
-        sys.exit(1)
+            sys.exit(1)
 
 
     def run(self):
@@ -1870,12 +1845,12 @@ class Wizard:
         self.partition_edit_mount_combo.set_model(list_store)
         if self.partition_edit_mount_combo.get_text_column() == -1:
             self.partition_edit_mount_combo.set_text_column(0)
-        mountpoint = self.dbfilter.get_current_mountpoint(partition)
-        if mountpoint is not None:
-            self.partition_edit_mount_combo.child.set_text(mountpoint)
+        current_mountpoint = self.dbfilter.get_current_mountpoint(partition)
+        if current_mountpoint is not None:
+            self.partition_edit_mount_combo.child.set_text(current_mountpoint)
             iterator = list_store.get_iter_first()
             while iterator:
-                if list_store[iterator][0] == mountpoint:
+                if list_store[iterator][0] == current_mountpoint:
                     self.partition_edit_mount_combo.set_active_iter(iterator)
                     break
                 iterator = list_store.iter_next(iterator)
@@ -1893,8 +1868,14 @@ class Wizard:
 
             mountpoint = self.partition_edit_mount_combo.child.get_text()
 
-            self.allow_change_step(False)
-            self.dbfilter.edit_partition(devpart, method, mountpoint)
+            if method == current_method:
+                method = None
+            if mountpoint == current_mountpoint:
+                mountpoint = None
+
+            if method is not None or mountpoint is not None:
+                self.allow_change_step(False)
+                self.dbfilter.edit_partition(devpart, method, mountpoint)
 
     def on_partition_list_treeview_button_press_event (self, widget, event):
         if event.type == gtk.gdk.BUTTON_PRESS and event.button == 3:

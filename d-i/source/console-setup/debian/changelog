@@ -1,3 +1,12 @@
+console-setup (1.13ubuntu6) feisty; urgency=low
+
+  * Set keymap and font in the initramfs if possible. Setting these as early
+    as possible is a good thing; we can't set up the font correctly once
+    usplash is running; and setting up the font between usplash and X
+    requires an ugly mode switch.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 22 Jan 2007 14:21:24 +0000
+
 console-setup (1.13ubuntu5) feisty; urgency=low
 
   * Add a --save-only option to setupcon, to save the keyboard/font on the

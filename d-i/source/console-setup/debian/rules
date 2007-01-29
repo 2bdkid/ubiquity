@@ -67,6 +67,12 @@ install-main: build
 		debian/console-setup/usr/share/doc/console-setup/examples/
 	dh_installinit --no-start --name keyboard-setup -- start 06 S .
 	dh_installinit --name console-setup -- start 49 S .
+	install -d debian/console-setup/usr/share/initramfs-tools/hooks \
+		debian/console-setup/usr/share/initramfs-tools/scripts/init-top
+	install -m755 debian/console-setup.initramfs-hook \
+		debian/console-setup/usr/share/initramfs-tools/hooks/console_setup
+	install -m755 debian/console-setup.initramfs-top \
+		debian/console-setup/usr/share/initramfs-tools/scripts/init-top/console_setup
 	rm -rf `find debian/console-setup -name .cvsignore`
 	rm -rf `find debian/console-setup -name .svn`
 
