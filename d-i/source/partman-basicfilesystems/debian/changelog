@@ -1,3 +1,32 @@
+partman-basicfilesystems (51ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Default to mounting partitions with usefully-mountable filesystems on
+      subdirectories of /media.
+    - Add minimal support for NTFS partitions.
+    - Mount FAT and NTFS filesystems at boot (fstab pass 1).
+    - Mount FAT with utf8 and NTFS with nls=utf8.
+    - Mount FAT and NTFS with umask=007,gid=46 (static group plugdev).
+  * When formatting over the top of an existing swap partition, preserve its
+    UUID to avoid leaving systems that use UUIDs in /etc/fstab without swap.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon,  5 Feb 2007 19:40:31 +0000
+
+partman-basicfilesystems (51) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Danish (da.po) by Claus Hindsgaul
+  * French (fr.po) by Christian Perrier
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovak (sk.po) by Peter Mann
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 12:21:15 +0100
+
 partman-basicfilesystems (50ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

@@ -1,0 +1,76 @@
+#!/bin/sh
+
+set -e
+. /usr/share/debconf/confmodule
+. /usr/share/migration-assistant/ma-script-utils
+
+IFS='
+'
+
+if [ -z "$1" ]; then
+    mapath="/usr/bin"
+else
+    mapath="$1"
+fi
+
+error () {
+    logger -t migration-assistant "error: $@"
+}
+
+log () {
+    logger -t migration-assistant "info: $@"
+}
+
+db_get migration-assistant/partitions
+selection=`echo "$RET" | sed -e 's/, /\n/g'`
+for choice in $selection; # Microsoft Windows XP Professional (/dev/hda1)
+do
+    location=`expr "$choice" : '.*(\(.*\))'` # /dev/hda1
+    for line in `os-prober`;
+    do
+	loc=$(expr match "$line" '\(.*\):.*:.*:.*')
+	if [ $location = $loc ]
+	then
+	    set_os_type $line
+	    path=${loc#*/*/}
+	    mount_os "$ostype" "$loc"
+	    db_get migration-assistant/$path/users
+	    user_selection=`echo "$RET" | sed -e 's/, /\n/g'`
+	    for usr in $user_selection;
+	    do
+		db_get migration-assistant/$path/$usr/user
+		new_user=$RET
+
+		if [ $(grep -c ^$new_user: $ROOT/etc/passwd) -eq 0 ]; then
+		    log "creating user $new_user"
+
+		    db_get migration-assistant/new-user/$new_user/password
+		    pass=$RET
+		    db_get migration-assistant/new-user/$new_user/fullname
+		    fn=$RET
+
+		    add_user $new_user $fn $pass
+		fi
+		
+		db_get migration-assistant/$path/$usr/items
+		log "importing: $RET"
+		item_selection=`echo "$RET" | sed -e 's/, /\n/g'`
+		for itm in $item_selection;
+		do
+		    itm=$(echo $itm | sed -e 's/ //g' | tr [A-Z] [a-z])
+		    log-output -t migration-assistant $mapath/ma-import \
+		    --target="$itm" \
+		    --ostype="$ostype" \
+		    --fromuser="$usr" \
+		    --frompath="$mountpoint" \
+		    --touser="$new_user" \
+		    --topath="$ROOT" \
+		    || error "importing $itm failed."
+		done
+	    done
+
+	    unmount_os
+	fi
+    done
+done
+

@@ -78,4 +78,16 @@ ${COMMENT}deb http://$host$directory $codename-security universe
 ${COMMENT}deb-src http://$host$directory $codename-security universe
 EOF
 
+# Security sources for Ubuntu multiverse, with the same caveats as for
+# universe.
+if db_get apt-setup/multiverse && [ "$RET" = true ]; then
+	COMMENT=
+else
+	COMMENT='# '
+fi
+cat >> $file <<EOF
+${COMMENT}deb http://$host$directory $codename-security multiverse
+${COMMENT}deb-src http://$host$directory $codename-security multiverse
+EOF
+
 exit $CODE

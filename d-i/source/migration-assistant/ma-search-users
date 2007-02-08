@@ -1,0 +1,52 @@
+#!/bin/sh
+
+ostype=$1
+mountpoint=$2
+ret=""
+
+if [ -z "$ostype" ] || [ -z "$mountpoint" ]; then
+    echo "usage: $0 OSTYPE MOUNTPOINT"
+    exit 1
+fi
+
+search_windowsxp () {
+    for user in "$mountpoint/Documents and Settings"/*
+    do
+	if [ ! -d "$user" ]; then
+	    continue
+	fi
+
+	user=${user##*/}
+
+	case "$user" in
+	    "All Users" | "Default User" | *Service )
+		    continue
+	    ;;
+	    * )
+		    ret="$ret$user, "
+	    ;;
+	esac
+    done
+    ret=${ret%,*}
+}
+
+search_linux () {
+    for user in "$mountpoint/home"/*
+    do
+	if [ ! -d "$user" ]; then
+	    continue
+	fi
+
+	user=${user##*/}
+	ret="$ret$user, "
+    done
+    ret=${ret%,*}
+}
+
+if [ "$ostype" = "linux" ]; then
+    search_linux
+elif [ "$ostype" = "windowsxp" ]; then
+    search_windowsxp
+fi
+
+echo "$ret"

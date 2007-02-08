@@ -50,7 +50,7 @@ fi
 if [ "$method" ] && [ -z "$disks" ]; then
 	DEVS="$(get_auto_disks)"
 	if [ "$(echo "$DEVS" | wc -l)" -eq 1 ]; then
-		disks="${DEVS%$TAB*}"
+		disks="$(cat "${DEVS%$TAB*}"/device)"
 	fi
 fi
 

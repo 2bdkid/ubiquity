@@ -1,3 +1,13 @@
+apt-setup (1:0.16ubuntu3) feisty; urgency=low
+
+  * generators/90security: Add security sources for multiverse, commented
+    out unless multiverse is enabled (thanks, Timo Aaltonen; LP: #55509).
+  * debian/apt-mirror-setup.templates-ubuntu: Enable universe and multiverse
+    by default
+    (https://blueprints.launchpad.net/ubuntu/+spec/enabling-additional-components).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu,  8 Feb 2007 14:19:38 +0000
+
 apt-setup (1:0.16ubuntu2) feisty; urgency=low
 
   * generators/90security: Disable check for contrib and non-free

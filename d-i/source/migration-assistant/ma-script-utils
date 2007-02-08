@@ -1,0 +1,85 @@
+#!/bin/sh
+
+ostype=""
+set_os_type () {
+# Rather than test for every distro possible in the shortname, we test
+# the bootloader type for 'linux.'  This *should* be fine as we're only
+# working with user's home directories.
+
+    if [ ${1##*:} = "linux" ]; then
+	ostype="linux"
+	return
+    fi
+    
+    case `expr match "$1" '.*:.*:\(.*\):.*'` in
+	"Windows" )
+	ostype="windowsxp"
+	;;
+
+	"Windows9xMe" )
+	ostype="windows9x"
+	;;
+
+	"MacOSX" )
+	ostype="macosx"
+	;;
+    esac
+}
+mountpoint="/mnt/migrationassistant"
+
+mount_os () {
+    ostype="$1"
+    device="$2"
+    mkdir -p $mountpoint
+
+    if [ "$1" = "linux" ]; then
+	mount $device $mountpoint
+    elif [ "$1" = "windowsxp" ]; then
+	mount -t ntfs $device $mountpoint -o umask=0022
+    fi
+
+}
+
+unmount_os() {
+    umount $mountpoint >/dev/null || true
+}
+
+ROOT=/target
+add_user() {
+    local username
+    local fullname
+    local password
+
+    username="$1"
+    fullname="$2"
+    password="$3"
+
+    chroot=chroot
+    log='log-output -t migration-assistant'
+
+# Taken from user-setup/user-setup-apply
+
+	# Add the user
+	if [ -x $ROOT/usr/sbin/adduser ]; then
+		#$log
+		$chroot $ROOT adduser --disabled-password --gecos \
+		"$fullname" "$username" >/dev/null || true
+	else
+		#$log
+		$chroot $ROOT useradd -c "$fullname" -m "$username" >/dev/null || true
+	fi
+
+	# Set the password
+	$chroot $ROOT chpasswd -m <<EOF
+$username:$password
+EOF
+
+	# Add the user to groups
+	if [ -n "$username" ]; then
+		for group in adm audio cdrom dialout floppy video plugdev dip lpadmin scanner; do
+			#$log 
+			$chroot $ROOT adduser "$username" $group >/dev/null 2>&1 || true
+		done
+
+	fi
+}
