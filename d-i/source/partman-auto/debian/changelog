@@ -1,3 +1,15 @@
+partman-auto (62ubuntu5) feisty; urgency=low
+
+  * automatically_partition/biggest_free/do_option,
+    automatically_partition/resize_use_free/do_option,
+    automatically_partition/some_device/do_option: Propagate error codes
+    from autopartition.
+  * auto.d/initial_auto: If an autopartitioning choice fails, remove
+    /var/lib/partman/initial_auto so that we can try again.
+  * Set Maintainer to ubuntu-installer@lists.ubuntu.com.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 15 Feb 2007 12:46:14 +0000
+
 partman-auto (62ubuntu4) feisty; urgency=low
 
   * auto.d/initial_auto: Fix broken partman-auto/disk magic default for

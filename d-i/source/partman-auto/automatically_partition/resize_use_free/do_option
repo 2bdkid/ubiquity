@@ -66,7 +66,7 @@ if (ask_for_size); then
 	exit 1
     fi
 
-    autopartition $dev $bestid
+    autopartition $dev $bestid || exit $?
 
     # accept the autopartitioning
     exit 100

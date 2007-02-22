@@ -5,7 +5,7 @@
 
 disk=$(select_auto_disk) || exit 99
 
-autopartition $disk
+autopartition $disk || exit $?
 
 # accept the autopartitioning
 exit 100

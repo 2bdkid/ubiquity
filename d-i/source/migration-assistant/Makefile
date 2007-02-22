@@ -12,9 +12,12 @@ ma-search-items : registry.o search-items.c
 	$(CC) $(ARGS) -c search-items.c
 	$(CC) $(ARGS) -o ma-search-items search-items.o registry.o
 
-ma-import : gaim-import.o windows-import.o firefox-import.o import.o utils.o
+ma-import : gaim-import.o windows-import.o evolution-import.o firefox-import.o import.o utils.o
 	$(CC) $(ARGS) -c import.c
-	$(CC) $(ARGS) $(LIBXML_LIBS) -o ma-import gaim-import.o windows-import.o firefox-import.o registry.o import.o utils.o
+	$(CC) $(ARGS) $(LIBXML_LIBS) -o ma-import gaim-import.o windows-import.o firefox-import.o evolution-import.o registry.o import.o utils.o
+
+evolution-import.o : registry.o utils.o evolution-import.c
+	$(CC) $(ARGS) $(LIBXML_CFLAGS) -c evolution-import.c
 
 gaim-import.o : registry.o utils.o gaim-import.c
 	$(CC) $(ARGS) $(LIBXML_CFLAGS) -c gaim-import.c

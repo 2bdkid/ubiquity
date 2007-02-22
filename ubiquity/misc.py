@@ -5,6 +5,7 @@ import os
 import re
 import subprocess
 import syslog
+import codecs
 
 
 def part_label(dev):
@@ -266,7 +267,7 @@ def get_translations(languages=None, core_names=[]):
             ['debconf-copydb', 'templatedb', 'pipe',
              '--config=Name:pipe', '--config=Driver:Pipe',
              '--config=InFd:none',
-             '--pattern=^(ubiquity|partman-basicfilesystems/bad_mountpoint|partman-newworld/no_newworld|partman-partitioning|partman-target/no_root|grub-installer/bootdev|popularity-contest/participate)'],
+             '--pattern=^(ubiquity|partman/text/undo_everything|partman-basicfilesystems/bad_mountpoint|partman-newworld/no_newworld|partman-partitioning|partman-target/no_root|grub-installer/bootdev|popularity-contest/participate)'],
             stdout=subprocess.PIPE, stderr=devnull)
         question = None
         descriptions = {}
@@ -381,6 +382,21 @@ def get_string(name, lang):
             text = translations[question]['c']
 
     return unicode(text, 'utf-8', 'replace')
+
+
+# Based on code by Walter Dörwald:
+# http://mail.python.org/pipermail/python-list/2007-January/424460.html
+def ascii_transliterate(exc):
+    if not isinstance(exc, UnicodeEncodeError):
+        raise TypeError("don't know how to handle %r" % exc)
+    import unicodedata
+    s = unicodedata.normalize('NFD', exc.object[exc.start])[:1]
+    if ord(s) in range(128):
+        return s, exc.start + 1
+    else:
+        return u'', exc.start + 1
+
+codecs.register_error('ascii_transliterate', ascii_transliterate)
 
 
 def drop_privileges():

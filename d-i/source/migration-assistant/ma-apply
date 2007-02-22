@@ -13,13 +13,6 @@ else
     mapath="$1"
 fi
 
-error () {
-    logger -t migration-assistant "error: $@"
-}
-
-log () {
-    logger -t migration-assistant "info: $@"
-}
 
 db_get migration-assistant/partitions
 selection=`echo "$RET" | sed -e 's/, /\n/g'`

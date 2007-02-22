@@ -89,6 +89,12 @@ $partinfo"
 	fi
 fi
 
+for s in /lib/partman/check.d/*; do
+	if [ -x $s ]; then
+		$s
+	fi
+done
+
 for s in /lib/partman/commit.d/*; do
 	if [ -x $s ]; then
 		$s

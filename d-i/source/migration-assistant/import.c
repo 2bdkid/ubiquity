@@ -16,6 +16,7 @@
 #include "firefox-import.h"
 #include "windows-import.h"
 #include "firefox-import.h"
+#include "evolution-import.h"
 
 void usage(char** argv) {
     printf("USAGE: %s --ostype=TYPE --fromuser=USER --frompath=PATH"
@@ -87,6 +88,12 @@ int main(int argc, char** argv) {
                     target = firefox_import_firefox;
                 else if(strcmp(optarg, "internetexplorer") == 0)
                     target = firefox_import_internetexplorer;
+                else if(strcmp(optarg, "opera") == 0)
+                    target = firefox_import_opera;
+                else if(strcmp(optarg, "outlookexpress") == 0)
+                    target = evolution_import_outlookexpress;
+                else if(strcmp(optarg, "evolution") == 0)
+                    target = evolution_import_evolution;
 		else
 		    usage(argv);
 		break;

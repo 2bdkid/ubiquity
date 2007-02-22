@@ -1,3 +1,12 @@
+partman-base (100ubuntu4) feisty; urgency=low
+
+  * Add support for /lib/partman/check.d scripts, intended to contain sanity
+    checks run before changes are committed. (These checks were formerly
+    typically in /lib/partman/finish.d.)
+  * Set Maintainer to ubuntu-installer@lists.ubuntu.com.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 Feb 2007 18:21:12 +0000
+
 partman-base (100ubuntu3) feisty; urgency=low
 
   * Use GPT label by default on Intel Macs.

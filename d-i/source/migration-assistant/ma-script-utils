@@ -1,10 +1,23 @@
 #!/bin/sh
 
+. /usr/share/debconf/confmodule
+
+error () {
+    logger -t migration-assistant "error: $@"
+}
+
+log () {
+    logger -t migration-assistant "info: $@"
+}
+
 ostype=""
+mountdevice=""
 set_os_type () {
 # Rather than test for every distro possible in the shortname, we test
 # the bootloader type for 'linux.'  This *should* be fine as we're only
 # working with user's home directories.
+
+    mountdevice="${1%%:*}"
 
     if [ ${1##*:} = "linux" ]; then
 	ostype="linux"
@@ -27,21 +40,27 @@ set_os_type () {
 }
 mountpoint="/mnt/migrationassistant"
 
+unmount_os() {
+	umount $mountpoint >/dev/null || \
+	umount $mountdevice >/dev/null || \
+	log "There was no device to umount."
+}
+
 mount_os () {
     ostype="$1"
     device="$2"
     mkdir -p $mountpoint
+	unmount_os
 
     if [ "$1" = "linux" ]; then
-	mount $device $mountpoint
+		mount $device $mountpoint
     elif [ "$1" = "windowsxp" ]; then
-	mount -t ntfs $device $mountpoint -o umask=0022
+		mount -t ntfs $device $mountpoint -o umask=0022,nls=utf8 || \
+		log "Windows XP drive is not NTFS formatted or error, trying vfat"; \
+		mount -t vfat $device $mountpoint -o umask=0022,utf8 || \
+		log "Mounting with vfat didn't work."
     fi
 
-}
-
-unmount_os() {
-    umount $mountpoint >/dev/null || true
 }
 
 ROOT=/target

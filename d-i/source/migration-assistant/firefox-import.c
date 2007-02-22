@@ -191,6 +191,144 @@ element* append_element(element* parent, item_type t, void* attributes) {
 
     return el;
 }
+char* strip_whitespace(char* line) {
+        char* start = line;
+        char* end = NULL;
+        while(*start == ' ' || *start == '\t') start++;
+        end = start;
+        while(*end != '\r' && *end != '\t') {
+            if(*end == '\n') break;
+            end++;
+        }
+        *end = '\0';
+        if(start == end) return NULL;
+        return start;
+}
+
+void opera_build(FILE* fp, element* parent, element** list) {
+    char* title = NULL;
+    char* line = NULL;
+    char* sline = NULL;
+    char* tmp = NULL;
+    size_t len = 0;
+    ssize_t read;
+    bool reread = false;
+
+    while (true) {
+        if(!reread) {
+            if((read = getline(&line, &len, fp)) == -1) return;
+        } else {
+            reread = false;
+        }
+
+        sline = strip_whitespace(line);
+        if(!sline) continue;
+        if(sline[0] == '-') return;
+        if(sline[0] != '#') continue;
+
+        if(strcmp(sline, "#FOLDER") == 0) {
+            title = NULL;
+
+            while ((read = getline(&line, &len, fp)) != -1) {
+                sline = strip_whitespace(line);
+                if(!sline) continue;
+
+                if(sline[0] == '-') return;
+
+                if(sline[0] == '#') {
+                    reread = true;
+                    break;
+                }
+
+                tmp = sline;
+                while(tmp && *tmp != '=') {
+                    tmp++;
+                }
+                if(!tmp) continue;
+                *tmp = '\0';
+
+                if(strcmp(sline, "NAME") == 0) {
+                    title = malloc(strlen(tmp+1) + 1);
+                    strcpy(title, tmp+1);
+
+                    // For now we don't import the Trash folder.
+                    if(strcmp(title,"Trash") == 0) {
+                        free(title);
+                        while ((read = getline(&line, &len, fp)) != -1) {
+                            sline = strip_whitespace(line);
+                            if(sline)
+                                if(strcmp(sline, "-") == 0) break;
+                        }
+                        break;
+                    }
+                    
+                    folder* f;
+                    f = (folder *)malloc(sizeof(folder));
+                    f->title = title;
+                    f->description = NULL;
+                    f->ptf = NULL;
+
+                    element* p = NULL;
+                    if(parent) {
+                        p = append_element(parent, FOLDER, f);
+                    } else {
+                        p = new_element(list, FOLDER, f);
+                    }
+                    opera_build(fp, p, list);
+                }
+
+            }
+        }
+            
+        else if(strcmp(sline, "#URL") == 0) {
+            char* url = NULL;
+
+            title = NULL;
+            while ((read = getline(&line, &len, fp)) != -1) {
+                sline = strip_whitespace(line);
+                if(!sline) continue;
+                
+                if(*sline == '\r' || *sline == '\n') continue;
+                if(sline[0] == '#' || sline[0] == '-') {
+                    reread = true;
+                    break;
+                }
+
+                tmp = sline;
+                while(tmp && *tmp != '=') {
+                    tmp++;
+                }
+                if(!tmp) continue;
+                *tmp = '\0';
+
+                if(strcmp(sline, "NAME") == 0) {
+                    title = malloc(strlen(tmp+1) + 1);
+                    strcpy(title, tmp+1);
+                } else if(strcmp(sline, "URL") == 0) {
+                    url = malloc(strlen(tmp+1) + 1);
+                    strcpy(url, tmp+1);
+                }
+
+                if(title && url) {
+                    hlink* l;
+                    l = (hlink *)malloc(sizeof(hlink));
+                    l->url = url;
+                    l->title = title;
+                    l->feed = NULL;
+                    l->description = NULL;
+                    l->icon = NULL;
+
+                    if(parent) {
+                        append_element(parent, LINK, l);
+                    } else {
+                        new_element(list, LINK, l);
+                    }
+                    break;
+                }
+            }
+        }
+    }
+}
 void internet_explorer_build(const char* path, element* parent, element** list) {
     struct dirent *dp;
     struct stat statbuf;
@@ -435,7 +573,7 @@ void firefox_format_worker(FILE* fp, const element* ptr) {
                 description = ((folder *)ptr->attributes)->description;
                 ptf = ((folder *)ptr->attributes)->ptf;
                 
-                if(ptf)
+                if(ptf == NULL)
                     fprintf(fp, "<DT><H3>%s</H3>\n", title);
                 else {
                     fprintf(fp, "<DT><H3 PERSONAL_TOOLBAR_FOLDER=\"true\">"
@@ -725,7 +863,7 @@ void firefox_import_firefox(void) {
                 strcat(bookmarksfile,"/bookmarks.html");
                 fp = fopen(bookmarksfile,"r");
                 if(fp == NULL) {
-                    fprintf(stderr, "Could not open file, %s.", bookmarksfile);
+                    fprintf(stderr, "Could not open file, %s.\n", bookmarksfile);
                     continue;
                 }
                 // TODO: get rid of current.
@@ -746,6 +884,38 @@ void firefox_import_firefox(void) {
     free(fullpath);
 }
 
+void firefox_import_opera(void) {
+    FILE* fp;
+    char* bookmarksfile;
+    element* to_bookmarks = NULL;
+    element* from_bookmarks = NULL;
+    char* fullpath = NULL;
+
+    setup_import(&fullpath, &to_bookmarks);
+    asprintf(&bookmarksfile, "%s/Documents and Settings/%s/Application Data/"
+            "Opera/Opera/profile/opera6.adr", from_location, from_user);
+    fp = fopen(bookmarksfile, "r");
+    if(fp == NULL) {
+        fprintf(stderr, "Could not open file, %s.\n", bookmarksfile);
+        return;
+    }
+    free(bookmarksfile);
+
+    current = NULL;
+    opera_build(fp, NULL, &from_bookmarks);
+    fclose(fp);
+    
+    if(to_bookmarks)
+        merge(&to_bookmarks, from_bookmarks);
+    else
+        to_bookmarks = from_bookmarks;
+    
+    firefox_format(to_bookmarks, fullpath);
+    free(fullpath);
+}
+
+
+
 void firefox_import_internetexplorer(void) {
     char* from_iedir = NULL;
     element* to_bookmarks = NULL;
@@ -757,6 +927,7 @@ void firefox_import_internetexplorer(void) {
     asprintf(&from_iedir, "%s/Documents and Settings/%s/Favorites", from_location, from_user);
     current = NULL;
     internet_explorer_build(from_iedir, NULL, &from_bookmarks);
+    free(from_iedir);
     if(to_bookmarks)
         merge(&to_bookmarks, from_bookmarks);
     else

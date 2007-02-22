@@ -18,7 +18,7 @@ char* findkey(const char* location, const char* path)
     REGF myregf;
     char* hbinptr;
 
-    char* ret;
+    char* ret = NULL;
     // FIXME
     char* arr;
     arr = strdup(path);
@@ -84,15 +84,23 @@ char* printk(char* base, NK* thisnk, char* key) {
 					    if (thisvk->valtype == REG_SZ){
 						char* tmp;
 						int j = 0;
+                                                // Emtpy string.
+                                                if((base+4+(thisvk->mydata))[0] == 0)
+                                                    return NULL;
+
 						tmp = malloc(thisvk->datasize-2);
 						for(i=0; i<thisvk->datasize-2; i+=2) {
 						    tmp[j] = (char)(base+4+(thisvk->mydata))[i];
 						    j++;
 						}
 						tmp[j] = '\0';
-
 						return tmp;
-					    }
+					    } else if(thisvk->valtype == REG_DWORD) {
+                                                char* tmp;
+                                                tmp = malloc(8);
+                                                sprintf(tmp, "%d",thisvk->mydata);
+                                                return tmp;
+                                            }
 				    }
 				}
 				free(szname);

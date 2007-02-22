@@ -196,6 +196,20 @@ const char* windowsxp_proxy (void) {
 	return NULL;
 }
 
+const char* windowsxp_outlookexpress (void) {
+    char* registry_location;
+    char* registry_key = NULL;
+
+    registry_location = windows_get_user_registry();
+    registry_key = findkey(registry_location,
+        "\\Software\\Microsoft\\Internet Account Manager\\Accounts\\00000001"
+        "\\Account Name");
+    if(registry_key)
+        return "Outlook Express";
+    else
+        return NULL;
+}
+
 /*		Linux Applications			*/
 
 const char* linux_gaim (void) {
@@ -206,6 +220,41 @@ const char* linux_gaim (void) {
 	fclose(fp);
 	return "Gaim";
     } else {
+	return NULL;
+    }
+}
+
+const char* linux_firefox (void) {
+
+    DIR* dir;
+    struct dirent *entry;
+    char* dirname;
+
+    asprintf(&dirname, "%s/%s/%s/%s", mount_location, "home",
+	    user, ".mozilla/firefox");
+    dir = opendir(dirname);
+    if(!dir) return NULL;
+    free(dirname);
+
+    while((entry = readdir(dir)) != NULL) {
+	if(entry->d_type == DT_DIR) {
+	    return "Mozilla Firefox";
+	}
+    }
+    return NULL;
+}
+
+const char* linux_evolution (void) {
+    FILE* fp = NULL;
+    char* file = NULL;
+    asprintf(&file, "%s/%s/%s/%s", mount_location, "home", user,
+        ".gconf/apps/evolution/mail/\%gconf.xml");
+    if((fp = fopen(file, "r")) != NULL) {
+	fclose(fp);
+        free(file);
+	return "Evolution";
+    } else {
+        free(file);
 	return NULL;
     }
 }
@@ -241,11 +290,14 @@ int main(int argc, char** argv) {
 	windowsxp_mymusic,
 	windowsxp_mypictures,
 	windowsxp_proxy,
+        windowsxp_outlookexpress,
 	NULL,
     };
 
     const char* (*linux_tests[])() = {
 	linux_gaim,
+        linux_firefox,
+        linux_evolution,
 	NULL,
     };
 

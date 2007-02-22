@@ -16,7 +16,35 @@
 #include <unistd.h>
 
 #include "utils.h"
+// Taken from comp.lang.c:
+// http://groups.google.com/group/comp.lang.c/msg/8d7be5a7387de73f?dmode=source
+char *strrep(const char *str, const char *old, const char *new)
+{
+    char *ret, *r;
+    const char *p, *q;
+    size_t len_str = strlen(str);
+    size_t len_old = strlen(old);
+    size_t len_new = strlen(new);
+    size_t count;
 
+    for(count = 0, p = str; (p = strstr(p, old)); p += len_old)
+        count++;
+
+    ret = malloc(count * (len_new - len_old) + len_str + 1);
+    if(!ret)
+        return NULL;
+
+    for(r = ret, p = str; (q = strstr(p, old)); p = q + len_old) {
+        count = q - p;
+        memcpy(r, p, count);
+        r += count;
+        strcpy(r, new);
+        r += len_new;
+    }
+    strcpy(r, p);
+    return ret;
+
+} 
 // Modified from Advanced Programming in the Unix Environment.
 // A generic error(const char*, ...) would be nice.
 void copyfile(const char* from, const char* to) {

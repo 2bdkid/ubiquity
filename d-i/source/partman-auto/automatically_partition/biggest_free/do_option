@@ -3,7 +3,7 @@
 dev=${1%//*}
 id=${1#*//}
 
-autopartition $dev $id
+autopartition $dev $id || exit $?
 
 # accept the autopartitioning
 exit 100

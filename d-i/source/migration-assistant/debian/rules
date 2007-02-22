@@ -31,7 +31,7 @@ binary-arch: build install
 	dh_testroot
 	dh_installdebconf
 	dh_strip
-	# dh_compress # Needed?  Not installing anything in doc.
+	dh_compress
 	dh_fixperms
 	cp debian/isinstallable debian/$(PACKAGE)/DEBIAN/isinstallable
 	dh_installdeb
