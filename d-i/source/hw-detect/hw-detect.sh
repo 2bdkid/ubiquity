@@ -774,6 +774,13 @@ if [ -d /sys/class/misc/pmu/ ]; then
 	apt-install pbbuttonsd || true
 fi
 
+# Install mouseemu on systems likely to have single-button mice
+case $SUBARCH in
+	i386/mac|amd64/mac|powerpc/powermac_*)
+		apt-install mouseemu || true
+	;;
+esac
+
 # Install optimised libc based on CPU type.
 case "$(udpkg --print-architecture)" in
 	i386)

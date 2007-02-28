@@ -11,6 +11,7 @@ arch_get_kernel_flavour () {
 	case "$SUBARCH" in
 		powermac*|prep|chrp*)	echo "$family" ;;
 		amiga)			echo apus ;;
+		ps3)			echo ps3 ;;
 		*)
 			warning "Unknown $ARCH subarchitecture '$SUBARCH'."
 			return 1
