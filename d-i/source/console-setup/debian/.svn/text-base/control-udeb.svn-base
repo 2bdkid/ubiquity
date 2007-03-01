@@ -1,0 +1,66 @@
+Package: console-setup-udeb
+Section: debian-installer
+Priority: extra
+Depends: console-setup-ekmap, archdetect, cdebconf-udeb
+Architecture: all
+Description: Configure the keyboard
+ This is an experimental replacement of kbd-chooser.  It depends on
+ loadkeys which does not exist in the installer currently.
+XC-Package-Type: udeb
+XB-Installer-Menu-Item: 12
+
+Package: console-setup-amiga-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for amiga keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-ataritt-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for ataritt keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-macintoshold-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for macintoshold keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-pc-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for pc keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-sun4-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for sun4 keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-sun5-ekmap
+Provides: console-setup-ekmap
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Encoded keyboard layouts for sun5 keyboards
+XC-Package-Type: udeb
+
+Package: console-setup-fonts-udeb
+Section: debian-installer
+Priority: extra
+Architecture: all
+Description: Console fonts for Debian Installer
+XC-Package-Type: udeb
+
