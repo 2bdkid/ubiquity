@@ -2,6 +2,8 @@
  * this source file was written by Aaron D. Brooks for the BeeHive project
  * (http://sourceforge.net/project/?group_id=1987) and licensed under the GPL
  * v2.
+ *
+ * UTF-16 to UTF-8 conversion taken from VLC.
  */
 
 #include <stdlib.h>
@@ -9,6 +11,108 @@
 #include <fcntl.h>
 #include <string.h>
 #include "registry.h"
+
+/* MSB (big endian)/LSB (little endian) conversions - network order is always
+ * MSB, and should be used for both network communications and files. Note that
+ * byte orders other than little and big endians are not supported, but only
+ * the VAX seems to have such exotic properties. */
+static inline uint16_t U16_AT( void const * _p )
+{
+    uint8_t * p = (uint8_t *)_p;
+    return ( ((uint16_t)p[0] << 8) | p[1] );
+}
+
+/**
+ * UTF16toUTF8: converts UTF-16 (host byte order) to UTF-8
+ *
+ * @param src UTF-16 bytes sequence, aligned on a 16-bits boundary
+ * @param len number of uint16_t to convert
+ */
+static char *
+UTF16toUTF8( const uint16_t *in, size_t len, size_t *newlen )
+{
+    char *res, *out;
+
+    /* allocate memory */
+    out = res = (char *)malloc( 3 * len );
+    if( res == NULL )
+        return NULL;
+
+    while( len > 0 )
+    {
+        uint32_t uv = *in;
+
+        in++;
+        len--;
+
+        if( uv < 0x80 )
+        {
+            *out++ = uv;
+            continue;
+        }
+        if( uv < 0x800 )
+        {
+            *out++ = (( uv >>  6)         | 0xc0);
+            *out++ = (( uv        & 0x3f) | 0x80);
+            continue;
+        }
+        if( (uv >= 0xd800) && (uv < 0xdbff) )
+        {   /* surrogates */
+            uint16_t low = U16_AT( in );
+            in++;
+            len--;
+
+            if( (low < 0xdc00) || (low >= 0xdfff) )
+            {
+                *out++ = '?'; /* Malformed surrogate */
+                continue;
+            }
+            else
+                uv = ((uv - 0xd800) << 10) + (low - 0xdc00) + 0x10000;
+        }
+        if( uv < 0x10000 )
+        {
+            *out++ = (( uv >> 12)         | 0xe0);
+            *out++ = (((uv >>  6) & 0x3f) | 0x80);
+            *out++ = (( uv        & 0x3f) | 0x80);
+            continue;
+        }
+        else
+        {
+            *out++ = (( uv >> 18)         | 0xf0);
+            *out++ = (((uv >> 12) & 0x3f) | 0x80);
+            *out++ = (((uv >>  6) & 0x3f) | 0x80);
+            *out++ = (( uv        & 0x3f) | 0x80);
+            continue;
+        }
+    }
+    len = out - res;
+    res = realloc( res, len );
+    if( newlen != NULL )
+        *newlen = len;
+    return res;
+}
+
+
+/**
+ * FromUTF16(): converts an UTF-16 string to UTF-8.
+ *
+ * @param src UTF-16 bytes sequence, aligned on a 16-bits boundary.
+ *
+ * @return the result of the conversion (must be free()'d),
+ * or NULL in case of error.
+ */
+char *FromUTF16( const uint16_t *src )
+{
+    const uint16_t *in;
+    size_t len;
+
+    /* determine the size of the string */
+    for( len = 1, in = src; *in; len++ )
+        in++;
+
+    return UTF16toUTF8( src, len, NULL );
+}
 
 char* findkey(const char* location, const char* path)
 {
@@ -48,7 +152,7 @@ char* findkey(const char* location, const char* path)
 	    }
 
     } else {
-	puts("Unable to open the registry file.");
+	fprintf(stderr, "Unable to open the registry file.");
 	return NULL;
     }
     fclose(hive);
@@ -78,23 +182,16 @@ char* printk(char* base, NK* thisnk, char* key) {
 				szname[thisvk->namesize]= 0;
 				if(strcmp(szname,key) == 0){
 				    if(thisvk->flag && 0x0000000000000001){
-					// we only deal with strings for now.
-					// FIXME: We need to support other
-					// types, see notes.
 					    if (thisvk->valtype == REG_SZ){
-						char* tmp;
-						int j = 0;
+						char* tmp = NULL;
                                                 // Emtpy string.
                                                 if((base+4+(thisvk->mydata))[0] == 0)
                                                     return NULL;
-
-						tmp = malloc(thisvk->datasize-2);
-						for(i=0; i<thisvk->datasize-2; i+=2) {
-						    tmp[j] = (char)(base+4+(thisvk->mydata))[i];
-						    j++;
-						}
-						tmp[j] = '\0';
+						
+						// Convert to UTF-8.
+						tmp = FromUTF16((uint16_t*)(base+4+(thisvk->mydata)));
 						return tmp;
+
 					    } else if(thisvk->valtype == REG_DWORD) {
                                                 char* tmp;
                                                 tmp = malloc(8);
@@ -120,26 +217,26 @@ NK* getkey(char* base, NK* thisnk, char** path) {
 
     if((element = str_token(path, "\\")) != NULL) {
 
-	if(thisnk->numchildren > 0) {
-	    for(i=0; i<thisnk->numchildren; i++) {
-		tmp = (NK*)&(base[(hasharray+i)->nkrec]);
+            if(thisnk->numchildren > 0) {
+                for(i=0; i<thisnk->numchildren; i++) {
+                        tmp = (NK*)&(base[(hasharray+i)->nkrec]);
 
-		char* szname;
-		szname = (char*) malloc (tmp->namesize+1);
-		strncpy(szname,(char*)(tmp+1),tmp->namesize+1);
-		szname[tmp->namesize]= 0;
+                        char* szname;
+                        szname = (char*) malloc (tmp->namesize+1);
+                        strncpy(szname,(char*)(tmp+1),tmp->namesize+1);
+                        szname[tmp->namesize]= 0;
 
-		if(strcmp(szname,element) == 0){
-		    thisnk = getkey(base, tmp, path);
-		    return thisnk;
-		}
-		free(szname);
-	    }
-	    return NULL;
+                        if(strcmp(szname,element) == 0){
+                            thisnk = getkey(base, tmp, path);
+                            free(szname);
+                            return thisnk;
+                        }
+                        free(szname);
+                }
+                return NULL;
 
-	}
+            }
 
-	free(element);
     }
     return thisnk;
 }

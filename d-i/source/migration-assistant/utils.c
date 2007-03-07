@@ -45,8 +45,27 @@ char *strrep(const char *str, const char *old, const char *new)
     return ret;
 
 } 
+char* reformat_path(const char* from) {
+    /* takes a string of the form:
+     * C:\Windows\Something
+     * and returns the following string that must be free()'d:
+     * Windows/Something
+     */
+    if(strstr(from, "C:\\") == NULL) {
+        puts("Pointed to a location other than C:, exiting.");
+        exit(EXIT_FAILURE);
+    }
+    /* +1 for \0, -3 for C: */
+    char* ret = malloc(strlen(from)-2);
+    strcpy(ret, from+3);
+    char* tmp = ret;
+    while(*tmp != '\0') {
+        if(*tmp == '\\') *tmp = '/';
+        tmp++;
+    }
+    return ret;
+}
 // Modified from Advanced Programming in the Unix Environment.
-// A generic error(const char*, ...) would be nice.
 void copyfile(const char* from, const char* to) {
     int         fdin, fdout;
     void        *src, *dst;
@@ -57,27 +76,32 @@ void copyfile(const char* from, const char* to) {
 
     if ((fdin = open(from, O_RDONLY)) < 0) {
         printf("can't open %s for reading\n", from);
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
+    // if file exists, check to see if the files are the same (byte by byte,
+    // returning on the first inconsistant byte) and if not append a .1 at the
+    // end (followed by .2, .3, etc).
 
     if ((fdout = open(to, O_RDWR | O_CREAT | O_TRUNC, mode)) < 0) {
         printf("can't creat %s for writing\n", to);
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
 
     if (fstat(fdin, &statbuf) < 0) {  /* need size of input file */
         puts("fstat error");
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
+    if(statbuf.st_size == 0)
+        return;
 
     /* set size of output file */
     if (lseek(fdout, statbuf.st_size - 1, SEEK_SET) == -1) {
         puts("lseek error");
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
     if (write(fdout, "", 1) != 1) {
         puts("write error");
-	exit(EXIT_FAILURE);
+	    exit(EXIT_FAILURE);
     }
 
     if ((src = mmap(0, statbuf.st_size, PROT_READ, MAP_SHARED,
@@ -99,6 +123,7 @@ void rcopy(const char* from, const char* to) {
     struct dirent *de;
     DIR *d;
     char* fpn, *tpn;
+    char* extension = NULL;
 
     d = opendir(from);
     if(!d) {
@@ -116,11 +141,21 @@ void rcopy(const char* from, const char* to) {
         asprintf(&tpn, "%s/%s", to, de->d_name);
 
         if(de->d_type == DT_REG) {
-            copyfile(fpn, tpn);
-	} else if(de->d_type == DT_DIR) {
-	    mkdir(tpn, 0755); // I think we can axe this.  See above.
-	    rcopy(fpn, tpn);
-	}
+            extension = de->d_name;
+            while(*extension != '\0') extension++;
+            while(extension != de->d_name && *extension != '.') extension--;
+            if(extension == de->d_name) extension = NULL;
+            else extension++;
+
+            // TODO: Make a array of ignored extensions instead.
+            if(!((strcmp(extension, "ini") == 0)
+                || (strcmp(extension, "lnk") == 0))) {
+                    copyfile(fpn, tpn);
+            }
+	    } else if(de->d_type == DT_DIR) {
+	        mkdir(tpn, 0755); // I think we can axe this.  See above.
+    	    rcopy(fpn, tpn);
+    	}
         free(fpn);
         free(tpn);
     }

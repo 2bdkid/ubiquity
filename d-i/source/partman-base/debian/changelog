@@ -1,3 +1,17 @@
+partman-base (100ubuntu7) feisty; urgency=low
+
+  * Add an IS_BUSY command to check whether a partition is busy (i.e.
+    mounted).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed,  7 Mar 2007 15:13:25 +0000
+
+partman-base (100ubuntu6) feisty; urgency=low
+
+  * Prevent an infinite loop if (for some reason) check.d fails immediately
+    after autopartitioning (LP: #89004).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  2 Mar 2007 13:46:42 +0000
+
 partman-base (100ubuntu5) feisty; urgency=low
 
   * Use MS-DOS label by default on PS3 systems.

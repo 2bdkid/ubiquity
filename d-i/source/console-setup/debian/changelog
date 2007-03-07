@@ -1,3 +1,19 @@
+console-setup (1.13ubuntu7) feisty; urgency=low
+
+  * Add lt to list of non-Latin keymaps (LP: #38931).
+  * Map Caps Lock to Shift Lock for Turkish layouts.
+  * Build keymap tree from MyKeyboardNames.pl rather than KeyboardNames.pl.
+  * Add fr:oss to keymap tree.
+  * Set default variant for French to oss (LP: #89835).
+  * Remove Keyboard/*.tree on clean.
+  * Fix six files in debian/ that were supposed to be symlinks.
+  * Move console-setup-udeb's post-base-installer script to be a
+    base-installer script instead, so that console-setup will be configured
+    properly along with the initramfs during debootstrap.
+  * Set Maintainer to me.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue,  6 Mar 2007 12:09:57 +0000
+
 console-setup (1.13ubuntu6) feisty; urgency=low
 
   * Set keymap and font in the initramfs if possible. Setting these as early

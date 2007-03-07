@@ -6,6 +6,7 @@ typedef enum { WINDOWSXP, LINUX } ostypes;
 ostypes os_type;
 
 char *strrep(const char *str, const char *old, const char *new);
+char* reformat_path(const char* from);
 void copyfile(const char* from, const char* to);
 void rcopy(const char* from, const char* to);
 void makedirs(const char*);

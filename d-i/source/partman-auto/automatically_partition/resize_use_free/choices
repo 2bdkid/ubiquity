@@ -7,6 +7,9 @@ bestfree=0
 bestpart=none
 bestpath=none
 
+tmpfile="$(mktemp /tmp/partman-auto.XXXXXX)"
+trap "rm -f $tmpfile" EXIT HUP INT QUIT TERM
+
 # Count the number of primary and logical partitions.
 count_primary_logical () {
     local primaries=0
@@ -55,6 +58,14 @@ can_be_extended () {
 }
 
 scan_disk () {
+    local partitions uses_extended max_primary
+    local primary_logical primaries logicals
+
+    totalfree=0
+    diskfree=0
+    diskpart=none
+    diskpath=none
+
     open_dialog PARTITIONS
     partitions="$(read_paragraph)"
     close_dialog
@@ -68,7 +79,6 @@ scan_disk () {
     close_dialog
     if [ -z "$max_primary" ]; then
 	log "Unable to get maximum primary partition count on $dev"
-	echo '0 0 none none'
 	return
     fi
 
@@ -86,7 +96,6 @@ scan_disk () {
 	    # demanded by the standard recipes.
 	    if [ "$primaries" -ge "$max_primary" ]; then
 		log "Too many primary partitions already exist on $dev"
-		echo '0 0 none none'
 		return
 	    fi
 
@@ -95,7 +104,6 @@ scan_disk () {
 	    if [ "$logicals" -eq 0 ] && \
 	       [ "$primaries" -ge "$(($max_primary - 1))" ]; then
 		log "Too many primary partitions already exist on $dev without an extended partition"
-		echo '0 0 none none'
 		return
 	    fi
 
@@ -110,11 +118,10 @@ scan_disk () {
 	fi
     fi
 
-    totalfree=0
-    bestfree=0
-    bestpart=none
-    bestpath=none
-    echo "$partitions" | while { read num oldid size type fs path name; [ "$oldid" ]; }; do
+    # Parts of the body of this while loop may use debconf, so we must not
+    # interfere with stdin, hence the temporary file.
+    echo "$partitions" >"$tmpfile"
+    while { read num oldid size type fs path name <&9; [ "$oldid" ]; }; do
 	case $fs in
 	    free)
 		totalfree="$(expr "$totalfree" + "$size")"
@@ -124,10 +131,10 @@ scan_disk () {
 		get_resize_range
 		if [ "$cursize" ] && [ "$minsize" ]; then
 		    thisfree="$(expr "$cursize" - "$minsize")"
-		    if longint_le $bestfree $thisfree; then
-			bestfree=$thisfree
-			bestpart=$dev//$oldid
-			bestpath=$path
+		    if longint_le $diskfree $thisfree; then
+			diskfree=$thisfree
+			diskpart=$dev//$oldid
+			diskpath=$path
 		    fi
 		fi
 		;;
@@ -144,31 +151,26 @@ scan_disk () {
 		fi
 		if [ "$cursize" ] && [ "$minsize" ]; then
 		    thisfree="$(expr "$cursize" - "$minsize")"
-		    if longint_le $bestfree $thisfree; then
-			bestfree=$thisfree
-			bestpart=$dev//$oldid
-			bestpath=$path
+		    if longint_le $diskfree $thisfree; then
+			diskfree=$thisfree
+			diskpart=$dev//$oldid
+			diskpath=$path
 		    fi
 		fi
 		;;
 	esac
-	echo "$totalfree $bestfree $bestpart $bestpath"
-    done | tail -n1
+    done 9<"$tmpfile"
 }
 
 get_resize_use_free_on_dev() {
     cd $dev
 
-    scanned="$(scan_disk)"
-    log "dev: '$dev', scanned: '$scanned'"
-    totalfree="${scanned%% *}"
-    cdr="${scanned#* }"
-    thisfree="${cdr%% *}"
-    if longint_le "$bestfree" "$thisfree"; then
-	bestfree="$thisfree"
-	cdr="${cdr#* }"
-	bestpart="${cdr%% *}"
-	bestpath="${cdr#* }"
+    scan_disk
+    log "dev: '$dev', totalfree: '$totalfree', diskfree: '$diskfree', diskpart: '$diskpart', diskpath: '$diskpath'"
+    if longint_le "$bestfree" "$diskfree"; then
+	bestfree="$diskfree"
+	bestpart="$diskpart"
+	bestpath="$diskpath"
     fi
 
     if longint_le "$(expr \( 2 \* 1024 + 200 \) \* 1024 \* 1024)" $totalfree; then

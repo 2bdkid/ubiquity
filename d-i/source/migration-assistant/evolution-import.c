@@ -426,6 +426,22 @@ void evolution_import_outlookexpress(void) {
         }
 
         free(account_key);
+
+        printf("accountname: %s\n", a->accountname);
+        printf("fullname: %s\n", a->fullname);
+        printf("email: %s\n", a->email);
+        printf("incominguser: %s\n", a->incominguser);
+        printf("incomingserver: %s\n", a->incomingserver);
+        printf("incomingport: %s\n", a->incomingport);
+        printf("incomingssl: %s\n", a->incomingssl);
+        printf("smtpuser: %s\n", a->smtpuser);
+        printf("smtpserver: %s\n", a->smtpserver);
+        printf("smtpport: %s\n", a->smtpport);
+        printf("smtpssl: %s\n", a->smtpssl);
+        printf("uid: %s\n", a->uid);
+        printf("test: %s\n", findkey(filename, "\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\Local AppData"));
+        puts("");
+
         evolution_import_other(a);
         i++;
         if(a->accountname)
@@ -449,3 +465,4 @@ void evolution_import_outlookexpress(void) {
         free(a);
     }
 }
+// vim:ai:et:sts=4:tw=80:sw=4:

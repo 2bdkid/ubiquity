@@ -5,13 +5,7 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-ARCH = $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
 PACKAGE = partman-efi
-
-ifneq (,$(findstring :$(ARCH):,:i386:amd64:))
-GPTSYNC_DEPENDS = gptsync-udeb
-endif
 
 build:
 # Ye olde no-op.
@@ -43,11 +37,7 @@ binary-arch: build install
 	dh_installdebconf
 	dh_fixperms
 	dh_installdeb
-ifdef GPTSYNC_DEPENDS
-	dh_gencontrol -- -Vgptsync:Depends='$(GPTSYNC_DEPENDS)'
-else
 	dh_gencontrol
-endif
 	dh_builddeb
 
 binary: binary-indep binary-arch

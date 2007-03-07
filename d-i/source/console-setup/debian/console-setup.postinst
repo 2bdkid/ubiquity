@@ -157,7 +157,7 @@ fi
 # In d-i debhelper doesn't use /etc/init.d scripts :-)
 if [ -f /usr/share/console-setup-mini/console-setup.config ]; then
     if [ -d /lib/debian-installer ]; then
-	setupcon --force --save
+	setupcon --force
     else
 	# setting the font corrupts X
 	setupcon --save-only

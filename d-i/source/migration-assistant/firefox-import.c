@@ -20,6 +20,7 @@
 #include <unistd.h>
 
 #include "utils.h"
+#include "registry.h"
 
 typedef struct folder {
     char* title;
@@ -831,9 +832,23 @@ void firefox_import_firefox(void) {
             from_location, from_user);
     }
     else if(os_type == WINDOWSXP) {
-        asprintf(&from_firefoxdir, "%s/Documents and Settings/%s/"
-            "Application Data/Mozilla/Firefox/Profiles", from_location,
-            from_user);
+        char* filename = NULL;
+        char* appdata = NULL;
+        char* path;
+        asprintf(&filename, "%s/%s/%s/%s", from_location,
+	        "Documents and Settings", from_user, "NTUSER.DAT");
+        appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+            "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+        free(filename);
+        if(!appdata) {
+            printf("Couldn't find %s\n", appdata);
+            return;
+        }
+        path = reformat_path(appdata);
+        free(appdata);
+        asprintf(&from_firefoxdir, "%s/%s/Mozilla/Firefox/Profiles", from_location,
+            path);
+        free(path);
     }
     if(chdir(from_firefoxdir) == -1) {
         fprintf(stderr, "Could not change directory to %s.\n", from_firefoxdir);
@@ -886,14 +901,27 @@ void firefox_import_firefox(void) {
 
 void firefox_import_opera(void) {
     FILE* fp;
-    char* bookmarksfile;
+    char* bookmarksfile, *filename, *path;
     element* to_bookmarks = NULL;
     element* from_bookmarks = NULL;
     char* fullpath = NULL;
+    char* appdata = NULL;
 
     setup_import(&fullpath, &to_bookmarks);
-    asprintf(&bookmarksfile, "%s/Documents and Settings/%s/Application Data/"
-            "Opera/Opera/profile/opera6.adr", from_location, from_user);
+    asprintf(&filename, "%s/%s/%s/%s", from_location,
+	    "Documents and Settings", from_user, "NTUSER.DAT");
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        printf("Couldn't find %s\n", appdata);
+        return;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&bookmarksfile, "%s/%s/Opera/Opera/profile/opera6.adr",
+        from_location, path);
+    free(path);
     fp = fopen(bookmarksfile, "r");
     if(fp == NULL) {
         fprintf(stderr, "Could not open file, %s.\n", bookmarksfile);
@@ -922,9 +950,25 @@ void firefox_import_internetexplorer(void) {
     element* from_bookmarks = NULL;
     char* fullpath = NULL;
 
+    char* filename, *path;
+    char* favorites = NULL;
+
     setup_import(&fullpath, &to_bookmarks);
 
-    asprintf(&from_iedir, "%s/Documents and Settings/%s/Favorites", from_location, from_user);
+    asprintf(&filename, "%s/%s/%s/%s", from_location,
+	    "Documents and Settings", from_user, "NTUSER.DAT");
+    favorites = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Favorites");
+    free(filename);
+    if(!favorites) {
+        printf("Couldn't find %s\n", favorites);
+        return;
+    }
+    path = reformat_path(favorites);
+    free(favorites);
+    asprintf(&from_iedir, "%s/%s", from_location, path);
+    free(path);
+
     current = NULL;
     internet_explorer_build(from_iedir, NULL, &from_bookmarks);
     free(from_iedir);

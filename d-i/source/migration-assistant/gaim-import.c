@@ -111,14 +111,29 @@ void gaim_import_gaim(void) {
     xmlNode* node, *node_copy = NULL;
     char* accounts_file;
 
+    char* filename, *path;
+    char* appdata = NULL;
+
     if(os_type == LINUX)
 	asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
 		"home", from_user,
 		".gaim/accounts.xml");
-    else if(os_type == WINDOWSXP)
-	asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
-		"Documents and Settings", from_user,
-		"Application Data/.gaim/accounts.xml");
+    else if(os_type == WINDOWSXP) {
+        asprintf(&filename, "%s/%s/%s/%s", from_location,
+	        "Documents and Settings", from_user, "NTUSER.DAT");
+        appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+            "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+        free(filename);
+        if(!appdata) {
+            printf("Couldn't find %s\n", appdata);
+            return;
+        }
+        path = reformat_path(appdata);
+        free(appdata);
+	    asprintf(&accounts_file, "%s/%s/%s", from_location, path,
+    		"/.gaim/accounts.xml");
+        free(path);
+    }
     
     if(!accounts_file) return;
 
@@ -184,57 +199,65 @@ void gaim_import_aimtriton(void) {
     DIR *dir, *dir2;
     struct dirent *entry, *entry2;
     struct stat buf;
-    char* dirname;
+    char* dirname, *uprofile, *filename, *cls, *path;
+    char* appdata = NULL;
 
-    asprintf(&dirname, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user,
-	    "Local Settings/Application Data/AOL/UserProfiles");
+    asprintf(&filename, "%s/%s/%s/%s", from_location,
+	    "Documents and Settings", from_user, "NTUSER.DAT");
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        printf("Couldn't find %s\n", appdata);
+        return;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&dirname, "%s/%s/%s", from_location, path, "AOL/UserProfiles");
+    free(path);
+
     dir = opendir(dirname);
     if(!dir) {
-	printf("Could not open AIM profile root directory: %s\n", dirname);
-	free(dirname);
-	return;
-    }
-    free(dirname);
-
-    while((entry = readdir(dir)) != NULL) {
-	if(entry->d_type != DT_DIR)
-	    continue;
-	    
-	if(strcmp(entry->d_name,"All Users") == 0 ||
-	    (strcmp(entry->d_name,".") == 0 ||
-	     strcmp(entry->d_name,"..") == 0)) {
-	    continue;
-	}
-
-	asprintf(&dirname, "%s/Documents and Settings/%s/"
-		"Local Settings/Application Data/AOL/UserProfiles/%s",
-		from_location, from_user, entry->d_name);
-	dir2 = opendir(dirname);
-	if(!dir2) {
-	    printf("Could not open user's AIM profile directory: %s\n", dirname);
+	    printf("Could not open AIM profile root directory: %s\n", dirname);
 	    free(dirname);
 	    return;
-	}
-	free(dirname);
+    }
 
-	while((entry2 = readdir(dir2)) != NULL) {
-	    if((strcmp(entry2->d_name,from_user) != 0) &&
-		    ((strcmp(entry2->d_name,".") != 0) &&
-		     (strcmp(entry2->d_name,"..") != 0))) {
-		asprintf(&dirname, "%s/Documents and Settings/%s/"
-			"Local Settings/Application Data/AOL/UserProfiles/%s/%s/cls",
-			from_location, from_user, entry->d_name, entry2->d_name);
-		
-		if(stat(dirname, &buf) == 0)
-		    gaim_import_other("prpl-oscar", entry2->d_name, NULL);
+    while((entry = readdir(dir)) != NULL) {
+        if(entry->d_type != DT_DIR)
+            continue;
+            
+        if(strcmp(entry->d_name,"All Users") == 0 ||
+            (strcmp(entry->d_name,".") == 0 ||
+             strcmp(entry->d_name,"..") == 0)) {
+            continue;
+        }
 
-		free(dirname);
-	    }
-	}
-	closedir(dir2);
+        asprintf(&uprofile, "%s/%s", dirname, entry->d_name);
+        dir2 = opendir(uprofile);
+        if(!dir2) {
+            printf("Could not open user's AIM profile directory: %s\n", uprofile);
+            free(uprofile);
+            return;
+        }
+
+        while((entry2 = readdir(dir2)) != NULL) {
+            if((strcmp(entry2->d_name,from_user) != 0) &&
+                ((strcmp(entry2->d_name,".") != 0) &&
+                 (strcmp(entry2->d_name,"..") != 0))) {
+            asprintf(&cls, "%s/%s/cls", uprofile, entry2->d_name);
+            
+            if(stat(cls, &buf) == 0)
+                gaim_import_other("prpl-oscar", entry2->d_name, NULL);
+
+            free(cls);
+            }
+        }
+        closedir(dir2);
+        free(uprofile);
 
     }
+    free(dirname);
     closedir(dir);
     gaim_save_accounts_file();
 }

@@ -63,43 +63,46 @@ do
 	    db_go || exit 10
 
 	    db_get migration-assistant/$path/users
-
+	    
 	    user_selection=`echo "$RET" | sed -e 's/, /\n/g'`
+	    IFS="$NEWLINE"
 	    for usr in $user_selection;
 	    do
+	    	IFS="$OLDIFS"
 		itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr")
-		db_register migration-assistant/items migration-assistant/$path/$usr/items
-		db_subst migration-assistant/$path/$usr/items choices "$itemsret"
-		db_subst migration-assistant/$path/$usr/items user "$usr"
+		formatted_user=`echo "$usr" | sed -e 's/ /:/g'`
+		db_register migration-assistant/items migration-assistant/$path/$formatted_user/items
+		db_subst migration-assistant/$path/$formatted_user/items choices "$itemsret"
+		db_subst migration-assistant/$path/$formatted_user/items user "$usr"
 
 
 		# migration-assistant/discs/disc0/part1/Evan/items
-		db_input high migration-assistant/$path/$usr/items || true
+		db_input high migration-assistant/$path/$formatted_user/items || true
 		db_go || exit 10
 		
 
-		db_register migration-assistant/user migration-assistant/$path/$usr/user
+		db_register migration-assistant/user migration-assistant/$path/$formatted_user/user
 		# This prevents m-a from working right. change to choices
-		#db_set migration-assistant/$path/$usr/user "$(echo "$usr" | tr '[A-Z]' '[a-z]')"
-		db_subst migration-assistant/$path/$usr/user old-user "$usr"
+		#db_set migration-assistant/$path/$formatted_user/user "$(echo "$usr" | tr '[A-Z]' '[a-z]')"
+		db_subst migration-assistant/$path/$formatted_user/user old-user "$usr"
 
 		while [ true ]; do
-			db_get migration-assistant/$path/$usr/user || true
+			db_get migration-assistant/$path/$formatted_user/user || true
 			new_user="$RET"
 
-			db_input high migration-assistant/$path/$usr/user || true
+			db_input high migration-assistant/$path/$formatted_user/user || true
 			db_go || exit 10
 			
-			db_get migration-assistant/$path/$usr/user
+			db_get migration-assistant/$path/$formatted_user/user
 			if [ "$RET" = "skip-question" ]; then
-				db_set migration-assistant/$path/$usr/user "$new_user"
+				db_set migration-assistant/$path/$formatted_user/user "$new_user"
 				break
 			fi
 
 			new_user="$RET"
 			
 			if ! LC_ALL=C expr "$new_user" : '[a-z][-a-z0-9]*$' >/dev/null; then
-				db_fset migration-assistant/$path/$usr/user seen false
+				db_fset migration-assistant/$path/$formatted_user/user seen false
 				db_fset migration-assistant/username-bad seen false
 				db_subst migration-assistant/username-bad user "$new_user"
 				db_input critical migration-assistant/username-bad
@@ -109,7 +112,7 @@ do
 			# TODO: Either copy this or depend on user-setup.
 			if grep -v '^#' /usr/lib/user-setup/reserved-usernames | \
 			   grep -q "^$new_user\$"; then
-				db_fset migration-assistant/$path/$usr/user seen false
+				db_fset migration-assistant/$path/$formatted_user/user seen false
 				db_fset migration-assistant/username-reserved seen false
 				db_subst migration-assistant/username-reserved user "$new_user"
 				db_input critical migration-assistant/username-reserved

@@ -14,8 +14,8 @@ build-mini : $(gziped_ekmaps) pc105.tree
 %.ekmap : 
 	./kbdcompiler $(@:%.ekmap=%) MyKeyboardNames.pl $(xkbdir) >$@
 
-%.tree : %.ekmap.gz keymaptree.use
-	./keymaptree -output $@ -useonly "$$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')" $(@:%.tree=%)
+%.tree : %.ekmap.gz keymaptree.use MyKeyboardNames.pl
+	./keymaptree -output $@ -useonly "$$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')" -names MyKeyboardNames.pl $(@:%.tree=%)
 
 acmfiles = $(wildcard acm/*.acm)
 
@@ -58,6 +58,7 @@ clean:
 	-rm -rf keymaps tree-keymaps
 	-rm -f keymaps.dir names.list
 	-rm -f $(gziped_ekmaps)
+	-rm -f *.tree
 	-rm -f MyKeyboardNames.pl
 
 .PHONY: maintainer-clean

@@ -1,3 +1,10 @@
+partman-auto (62ubuntu6) feisty; urgency=low
+
+  * automatically_partition/resize_use_free/choices: Rearrange scan_disk
+    data flow to avoid hijacking stdin, which confuses debconf (LP: #89004).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri,  2 Mar 2007 13:53:50 +0000
+
 partman-auto (62ubuntu5) feisty; urgency=low
 
   * automatically_partition/biggest_free/do_option,

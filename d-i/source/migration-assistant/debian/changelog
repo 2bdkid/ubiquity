@@ -1,3 +1,14 @@
+migration-assistant (0.4.1) feisty; urgency=low
+
+  * Added proper support for the Windows registry's use of UTF-16 strings.
+  * Grab locations from the registry rather than assuming that everything is
+    a subdirectory of Documents and Settings.
+  * Don't fail when trying to copy empty files.
+  * Fix incorrect detection of Firefox and AIM Triton.
+  * Handle spaces in usernames.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sat,  3 Mar 2007 17:57:46 -0500
+
 migration-assistant (0.4) feisty; urgency=low
 
   * Added Outlook Express and Evolution account support.

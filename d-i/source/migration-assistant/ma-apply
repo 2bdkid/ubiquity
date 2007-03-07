@@ -31,7 +31,8 @@ do
 	    user_selection=`echo "$RET" | sed -e 's/, /\n/g'`
 	    for usr in $user_selection;
 	    do
-		db_get migration-assistant/$path/$usr/user
+		formatted_user=`echo "$usr" | sed -e 's/ /:/g' | sed -e 's/,:/, /g'`
+		db_get migration-assistant/$path/$formatted_user/user
 		new_user=$RET
 
 		if [ $(grep -c ^$new_user: $ROOT/etc/passwd) -eq 0 ]; then
@@ -45,7 +46,7 @@ do
 		    add_user $new_user $fn $pass
 		fi
 		
-		db_get migration-assistant/$path/$usr/items
+		db_get migration-assistant/$path/$formatted_user/items
 		log "importing: $RET"
 		item_selection=`echo "$RET" | sed -e 's/, /\n/g'`
 		for itm in $item_selection;

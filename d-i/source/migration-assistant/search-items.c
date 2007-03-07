@@ -6,16 +6,13 @@
 #include <dirent.h>
 
 #include "registry.h"
+#include "utils.h"
 
 const char* mount_location;
 const char* user;
 
 
 /*		Utility Functions			*/
-/* These really belong in a header file somewhere.	*/
-/* (utils.c and utils.h)				*/
-/* At which point they should take arguments, not	*/
-/* assume that mount_location and user exist.		*/
 
 char* windows_get_user_registry(void) {
     char* ret;
@@ -26,12 +23,23 @@ char* windows_get_user_registry(void) {
 }
 
 char* gaim_get_accounts_file_windows(void) {
-    char* ret;
-    asprintf(&ret, "%s/%s/%s/%s", mount_location,
-	    "Documents and Settings", user,
-	    "Application Data/.gaim/accounts.xml");
+    char* filename, *accounts_file;
+    char* appdata = NULL;
+    char* path = NULL;
+    filename = windows_get_user_registry();
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        return NULL;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&accounts_file, "%s/%s/%s", mount_location, path,
+        "/.gaim/accounts.xml");
+    free(path);
 
-    return ret;
+    return accounts_file;
 }
 
 char* gaim_get_accounts_file_linux(void) {
@@ -93,19 +101,32 @@ const char* windowsxp_aim_triton (void) {
 
     DIR* dir;
     struct dirent *entry;
-    char* dirname;
+    char* dirname, *filename;
+    char* appdata = NULL;
+    char* path = NULL;
 
-    asprintf(&dirname, "%s/%s/%s/%s", mount_location, "Documents and Settings",
-	    user, "Local Settings/Application Data/AOL/UserProfiles");
+    filename = windows_get_user_registry();
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        return NULL;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&dirname, "%s/%s/%s", mount_location, path, "AOL/UserProfiles");
+    free(path);
     dir = opendir(dirname);
     if(!dir) return NULL;
     free(dirname);
 
     while((entry = readdir(dir)) != NULL) {
-	if(entry->d_type == DT_DIR) {
-	    if(strcmp(entry->d_name,"All Users") != 0)
-		return "AIM Triton";
-	}
+        if(entry->d_type == DT_DIR) {
+            if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
+                continue;
+            if(strcmp(entry->d_name,"All Users") != 0)
+                return "AIM Triton";
+        }
     }
     return NULL;
 }
@@ -114,14 +135,28 @@ const char* windowsxp_aim_triton (void) {
 
 const char* windowsxp_opera (void) {
     char* filename;
-    asprintf(&filename, "%s/%s/%s/%s", mount_location, "Documents and Settings",
-	    user, "Application Data/Opera/Opera/profile/opera6.adr");
+    char* appdata = NULL;
+    char* path = NULL;
+
+    filename = windows_get_user_registry();
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        return NULL;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&filename, "%s/%s/%s", mount_location, path,
+        "Opera/Opera/profile/opera6.adr");
+    free(path);
+
     FILE* fp;
     if((fp = fopen(filename, "r")) != NULL) {
 	fclose(fp);
-	return "Opera";
+        return "Opera";
     } else {
-	return NULL;
+        return NULL;
     }
 }
 
@@ -129,16 +164,29 @@ const char* windowsxp_firefox (void) {
 
     DIR* dir;
     struct dirent *entry;
-    char* dirname;
+    char* dirname, *filename;
+    char* appdata = NULL;
+    char* path = NULL;
 
-    asprintf(&dirname, "%s/%s/%s/%s", mount_location, "Documents and Settings",
-	    user, "Application Data/Mozilla/Firefox/Profiles");
+    filename = windows_get_user_registry();
+    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    free(filename);
+    if(!appdata) {
+        return NULL;
+    }
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&dirname, "%s/%s/%s", mount_location, path, "Mozilla/Firefox/Profiles");
+    free(path);
     dir = opendir(dirname);
     if(!dir) return NULL;
     free(dirname);
 
     while((entry = readdir(dir)) != NULL) {
 	if(entry->d_type == DT_DIR) {
+            if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
+                continue;
 	    return "Mozilla Firefox";
 	}
     }
@@ -146,23 +194,61 @@ const char* windowsxp_firefox (void) {
 }
 
 const char* windowsxp_iexplorer (void) {
-    return "Internet Explorer";
+    DIR* dir;
+    struct dirent *entry;
+    char* filename, *path, *iedir;
+    char* favorites = NULL;
+    filename = windows_get_user_registry();
+    favorites = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Favorites");
+    if(!favorites) return NULL;
+    path = reformat_path(favorites);
+    free(favorites);
+    asprintf(&iedir, "%s/%s", mount_location, path);
+    free(path);
+    dir = opendir(iedir);
+    if(!dir) return NULL;
+    free(iedir);
+
+    while((entry = readdir(dir)) != NULL) {
+        if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
+            continue;
+        if(strcmp(entry->d_name, "Desktop.ini") == 0)
+            continue;
+        return "Internet Explorer";
+    }
+    return NULL;
 }
 
 /*		Windows Settings			*/
 
 const char* windowsxp_wallpaper (void) {
-    // Copyright issue?
-    // If so, check to make sure it's not a default.
     return "Wallpaper";
 }
 
 const char* windowsxp_userpicture (void) {
-    // Copyright issue?
-    // If so, check to make sure it's not a default.
-    // What does Microsoft call it?
-    // Doesn't necessarily exist.
-    return "User Picture";
+    char* filename = NULL;
+    char* appdata = NULL;
+    char* path = NULL;
+    char* from = NULL;
+    FILE* fp;
+
+    // FIXME: what about WINNT?
+    asprintf(&filename, "%s/WINDOWS/system32/config/software", from_location);
+    appdata = findkey(filename, "\\Microsoft\\Windows\\CurrentVersion\\"
+        "Explorer\\Shell Folders\\Common AppData");
+    if(!appdata)
+        return NULL;
+    path = reformat_path(appdata);
+    free(appdata);
+    asprintf(&from, "%s/%s/Microsoft/User Account Pictures/%s.bmp",
+        mount_location, path, user);
+    free(path);
+
+    if((fp = fopen(from, "r")) == NULL)
+        return NULL;
+    else
+        return "User Picture";
 }
 
 const char* windowsxp_mydocuments (void) {
@@ -217,10 +303,10 @@ const char* linux_gaim (void) {
     FILE* fp;
     accounts_file = gaim_get_accounts_file_linux();
     if((fp = fopen(accounts_file, "r")) != NULL) {
-	fclose(fp);
-	return "Gaim";
+        fclose(fp);
+        return "Gaim";
     } else {
-	return NULL;
+        return NULL;
     }
 }
 
@@ -238,6 +324,8 @@ const char* linux_firefox (void) {
 
     while((entry = readdir(dir)) != NULL) {
 	if(entry->d_type == DT_DIR) {
+            if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
+                continue;
 	    return "Mozilla Firefox";
 	}
     }
@@ -335,20 +423,26 @@ int main(int argc, char** argv) {
     else if(ostype == WINDOWSXP)
 	tests = windowsxp_tests;
 
+    //fflush(stderr);
+    //if (!freopen("/dev/null", "w", stderr)) {
+    //    fprintf(stderr, "Failed to redirect stderr to /dev/null");
+    //    return EXIT_FAILURE;
+    //}
+
     while(tests[test]) {
 	ret = tests[test]();
-	if(ret) {
-	    
-	    if(passed)
-		printf(", ");
-	    
-	    printf(ret);
-	    passed = 1;
-	}
+        if(ret) {
+            
+            if(passed)
+                printf(", ");
+            
+            printf(ret);
+            passed = 1;
+        }
 	test++;
     }
     if(passed)
-	putchar('\n');
+        putchar('\n');
 
 
     return 0;

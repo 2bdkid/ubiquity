@@ -214,9 +214,9 @@ install-udeb: build
 	dh_installdirs -p console-setup-udeb lib/debian-installer.d
 	install -m0644 debian/console-setup-udeb.startup \
 		debian/console-setup-udeb/lib/debian-installer.d/S55console-setup
-	dh_installdirs -p console-setup-udeb usr/lib/post-base-installer.d
-	install -m0755 debian/console-setup-udeb.post-base-installer \
-		debian/console-setup-udeb/usr/lib/post-base-installer.d/20console-setup
+	dh_installdirs -p console-setup-udeb usr/lib/base-installer.d
+	install -m0755 debian/console-setup-udeb.base-installer \
+		debian/console-setup-udeb/usr/lib/base-installer.d/20console-setup
 	dh_installdirs -p console-setup-udeb etc/default
 	dh_installdirs -p console-setup-udeb etc/console-setup/
 	dh_installdirs -p console-setup-udeb usr/share/doc/console-setup-mini/examples/

@@ -2,7 +2,7 @@
 set -e
 
 #     keymaptree -- build decision trees covering every keymap we can think of
-#     Copyright (C) 2006 Canonical Ltd.; written by Colin Watson.
+#     Copyright (C) 2006, 2007 Canonical Ltd.; written by Colin Watson.
 
 #     This program is free software; you can redistribute it and/or modify
 #     it under the terms of the GNU General Public License as published by
@@ -23,6 +23,7 @@ output=''
 models=''
 useonly="$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')"
 skip=''
+names='KeyboardNames.pl'
 
 while [ "$1" ]; do
     case "$1" in
@@ -38,6 +39,10 @@ while [ "$1" ]; do
 	    shift
 	    skip="$1"
 	    ;;
+	-names)
+	    shift
+	    names="$1"
+	    ;;
 	-\?|-help|--help)
 	    cat >&2 <<EOF
 Usage: keymaptree [options] <model> [...]
@@ -48,6 +53,7 @@ Legal options are:
                     (comma-separated)
 -skip               Exclude these keymaps from the decision tree
                     (comma-separated)
+-names              Use this file instead of KeyboardNames.pl
 EOF
 	    exit 0
 	    ;;
@@ -78,7 +84,7 @@ for model in $models; do
     esac
 done
 
-variantpairs="$(./kbdnames-maker | grep 'variant\*' | sort -t '*' | \
+variantpairs="$(./kbdnames-maker "$names" | grep 'variant\*' | sort -t '*' | \
     cut -d'*' --output-delimiter=: -f2,3 | sed 's/:$//' | \
     egrep -v '^(nec|nec_vndr)/jp')"
 

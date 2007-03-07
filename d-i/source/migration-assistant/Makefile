@@ -5,12 +5,12 @@ BIN=$(DESTDIR)/usr/bin
 
 all: ma-import ma-search-items
 
-registry.o : registry.h registry.c
+registry.o : registry.c registry.h
 	$(CC) $(ARGS) -c registry.c
 
-ma-search-items : registry.o search-items.c
+ma-search-items : registry.o utils.o search-items.c
 	$(CC) $(ARGS) -c search-items.c
-	$(CC) $(ARGS) -o ma-search-items search-items.o registry.o
+	$(CC) $(ARGS) $(LIBXML_LIBS) -o ma-search-items search-items.o registry.o utils.o
 
 ma-import : gaim-import.o windows-import.o evolution-import.o firefox-import.o import.o utils.o
 	$(CC) $(ARGS) -c import.c
@@ -25,10 +25,10 @@ gaim-import.o : registry.o utils.o gaim-import.c
 utils.o: utils.c utils.h
 	$(CC) $(ARGS) $(LIBXML_CFLAGS) -c utils.c
 
-firefox-import.o: firefox-import.c
+firefox-import.o: firefox-import.c registry.o
 	$(CC) $(ARGS) -c firefox-import.c
 
-windows-import.o: windows-import.c utils.o
+windows-import.o: windows-import.c utils.o registry.o
 	$(CC) $(ARGS) -c windows-import.c
 
 strip: ma-import ma-search-items

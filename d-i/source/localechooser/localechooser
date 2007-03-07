@@ -172,18 +172,16 @@ do_preseed() {
 		db_fset ${langname_all} seen $seenflag || true
 		COUNTRY=$(locale2countrycode "$LOCALE")
 		if [ -n "$COUNTRY" ] ; then
+			local SL=""
 			if grep -q "^${LANGUAGE}_${COUNTRY}$" $SHORTLISTS ; then
-				db_set $shortlist-${LANGUAGE}_${COUNTRY} "$COUNTRY"
-				log "Set $shortlist-${LANGUAGE}_${COUNTRY} = '$COUNTRY'"
-				db_unregister $shortlist || true
-				db_register $shortlist-${LANGUAGE}_${COUNTRY} $shortlist
-				db_fset $shortlist seen $seenflag || true
+				SL=${LANGUAGE}_${COUNTRY}
 			elif grep -q "^$LANGUAGE$" $SHORTLISTS ; then
-				db_set $shortlist-$LANGUAGE "$COUNTRY"
-				log "Set $shortlist-$LANGUAGE = '$COUNTRY'"
-				db_unregister $shortlist || true
-				db_register $shortlist-$LANGUAGE $shortlist
-				db_fset $shortlist seen $seenflag || true
+				SL=$LANGUAGE
+			fi
+			if [ "$SL" ] ; then
+				db_set $shortlist-$SL "$COUNTRY"
+				log "Set $shortlist-$SL = '$COUNTRY'"
+				db_fset $shortlist-$SL seen $seenflag || true
 			fi
 			db_fset $fulllist seen $seenflag || true
 			if grep -q "^$LOCALE " $SUPPORTEDLOCALES ; then
@@ -374,6 +372,8 @@ LANGUAGECODE_LANGUAGECHOOSER=$LANGUAGE
 FIRST_LANG="${LANGUAGELIST%%:*}"
 
 # We use /etc/shortlists to check if we should present a shortlist
+# As we may unregister the question for shortlists, the value for the
+# shortlist template is also saved with the language specific question
 use_lang=""
 if [ "$LOCALE" != "C" ] ; then
 	if grep -q "^$FIRST_LANG" $SHORTLISTS; then
@@ -410,6 +410,12 @@ while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
 				shortlist_template="$shortlist-$use_lang"
 				db_unregister $shortlist || true
 				db_register $shortlist_template $shortlist
+				if db_get $shortlist_template && [ "$RET" ]; then
+					db_set $shortlist $RET
+				fi
+				if db_fget $shortlist_template seen; then
+					db_fset $shortlist seen $RET || true
+				fi
 				db_input $shortprio $shortlist || [ $? -eq 30 ]
 				askedshort=1
 			else
@@ -422,6 +428,7 @@ while [ "$STATE" != 0 -a "$STATE" -le "$LASTSTATE" ]; do
 			db_get $shortlist
 			if [ -n "$RET" ] && [ "$RET" != "other" ]; then
 				COUNTRYCODE="$RET"
+				db_set $shortlist_template $COUNTRYCODE
 				break
 			fi
 
@@ -557,9 +564,10 @@ log "Set $localecode = '$LOCALE'"
 # list we got from languagechooser
 # We shouldn't just add this before the former list in case the country 
 # is changed several times.
-if [ "$COUNTRYCODE" != "$COUNTRYCODE_LANGUAGECHOOSER" -a -n "$COUNTRYCODE" -a -n "$LANGUAGE" -a "$LOCALE" != "C" -a "$LANGUAGELIST" != "$LANGUAGE" ]; then
+if [ "$COUNTRYCODE" != "$COUNTRYCODE_LANGUAGECHOOSER" ] && \
+   [ "$COUNTRYCODE" ] && [ "$LANGUAGE" ] && \
+   [ "$LOCALE" != "C" ] && [ "$LANGUAGELIST" != "$LANGUAGE" ]; then
 	LANGUAGELIST=${LANGUAGE}_${COUNTRYCODE}:${LANGUAGELIST}
-	# Languagelist setting
 	db_set "$languagecode" "$LANGUAGELIST"
 	log "Set $languagecode = '$LANGUAGELIST'"
 fi

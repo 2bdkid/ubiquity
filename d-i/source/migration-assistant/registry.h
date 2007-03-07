@@ -2,6 +2,10 @@
 
 // This code is for educational and research purposes only.
 
+typedef unsigned short	uint16_t;
+typedef unsigned int	uint32_t;
+typedef unsigned char	uint8_t;
+
 enum VALTYPE {				// MicroSoft UNICODE = ASCII byte followed by UNICODE byte
 	REG_NONE=0x0000,		
 	REG_SZ=0x0001,			// UNICODE character string 
