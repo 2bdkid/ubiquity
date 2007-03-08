@@ -103,6 +103,12 @@ class Wizard:
     def __init__(self, distro):
         sys.excepthook = self.excepthook
 
+        if 'UBIQUITY_NEW_PARTITIONER' not in os.environ:
+            if find_on_path('qtparted') is None:
+                print "QTParted is required to use the --old-partitioner option."
+                print "Run 'sudo apt-get install qtparted' before trying this again."
+                sys.exit(1)
+
         #about=KAboutData("kubuntu-ubiquity","Installer","0.1","Live CD Installer for Kubuntu",KAboutData.License_GPL,"(c) 2006 Canonical Ltd", "http://wiki.kubuntu.org/KubuntuUbiquity", "jriddell@ubuntu.com")
         #about.addAuthor("Jonathan Riddell", None,"jriddell@ubuntu.com")
         #KCmdLineArgs.init(["./installer"],about)
@@ -387,7 +393,7 @@ class Wizard:
         if 'UBIQUITY_NEW_PARTITIONER' in os.environ:
             self.userinterface.qtparted_frame.hide()
         else:
-            self.part_advanced_vpaned.hide()
+            self.partition_list_treeview.hide()
 
     def translate_widgets(self, parentWidget=None):
         if self.locale is None:
@@ -1591,6 +1597,7 @@ class Wizard:
                             if extra_firstbutton is None:
                                 extra_firstbutton = extra_button
                             disk_vbox.addWidget(extra_button)
+                            extraIdCounter += 1
                     if extra_firstbutton is not None:
                         extra_firstbutton.setChecked(True)
                     self.autopartition_extra_buttongroup[choice] = \
@@ -1598,7 +1605,6 @@ class Wizard:
                     self.autopartition_extra_buttongroup_texts[choice] = \
                         disk_buttongroup_texts
                     disk_frame.show()
-                    extraIdCounter += 1
                     self.autopartition_extras[choice] = disk_frame
 
             # TODO cjwatson 2006-12-09: The lambda never seems to get

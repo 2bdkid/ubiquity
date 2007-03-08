@@ -92,6 +92,12 @@ class Wizard:
         self.previous_excepthook = sys.excepthook
         sys.excepthook = self.excepthook
 
+        if 'UBIQUITY_NEW_PARTITIONER' not in os.environ:
+            if find_on_path('gparted') is None:
+                print "GParted is required to use the --old-partitioner option."
+                print "Run 'sudo apt-get install gparted' before trying this again."
+                sys.exit(1)
+
         # declare attributes
         self.distro = distro
         self.gconf_previous = {}
@@ -397,7 +403,7 @@ class Wizard:
 
         if 'UBIQUITY_NEW_PARTITIONER' in os.environ:
             self.embedded.hide()
-            self.part_advanced_vpaned.show()
+            self.part_advanced_vbox.show()
 
         # set initial bottom bar status
         self.back.hide()
