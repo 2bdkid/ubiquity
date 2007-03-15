@@ -1,3 +1,16 @@
+Template: migration-assistant/failed-unmount
+Type: boolean
+Default: true
+_Description: Failed to unmount partitions
+ migration-assistant needs to mount a partition, but cannot do so because the
+ following mount point could not be unmounted:
+ .
+ ${MOUNTED}
+ .
+ Please close any applications using these mount points.
+ .
+ Would you like migration-assistant to try to unmount these partitions again?
+
 Template: migration-assistant/partitions
 Type: multiselect
 Choices: ${choices}

@@ -704,14 +704,12 @@ class Install:
             # Exclude hooks containing '.', so that *.dpkg-* et al are avoided.
             hooks = filter(lambda entry: '.' not in entry, os.listdir(hookdir))
             self.db.progress('START', 0, len(hooks), 'ubiquity/install/title')
+            self.db.progress('INFO', 'ubiquity/install/target_hooks')
             for hookentry in hooks:
                 hook = os.path.join(hookdir, hookentry)
                 if not os.access(hook, os.X_OK):
                     self.db.progress('STEP', 1)
                     continue
-                self.db.subst('ubiquity/install/target_hook',
-                              'SCRIPT', hookentry)
-                self.db.progress('INFO', 'ubiquity/install/target_hook')
                 # Errors are ignored at present, although this may change.
                 subprocess.call(['log-output', '-t', 'ubiquity',
                                  '--pass-stdout', hook])
@@ -929,10 +927,11 @@ class Install:
         """import documents, settings, and users from previous operating
         systems."""
 
-        dbfilter = migrationassistant_apply.MigrationAssistantApply(None)
-        ret = dbfilter.run_command(auto_process=True)
-        if ret != 0:
-            raise InstallStepError("MigrationAssistantApply failed with code %d" % ret)
+        if 'UBIQUITY_MIGRATION_ASSISTANT' in os.environ:
+            dbfilter = migrationassistant_apply.MigrationAssistantApply(None)
+            ret = dbfilter.run_command(auto_process=True)
+            if ret != 0:
+                raise InstallStepError("MigrationAssistantApply failed with code %d" % ret)
 
 
     def get_resume_partition(self):
@@ -1207,23 +1206,35 @@ class Install:
         misc.ex('mount', '--bind', '/proc', self.target + '/proc')
         misc.ex('mount', '--bind', '/dev', self.target + '/dev')
 
+        archdetect = subprocess.Popen(['archdetect'], stdout=subprocess.PIPE)
+        subarch = archdetect.communicate()[0].strip()
+
         try:
-            from ubiquity.components import grubinstaller
-            dbfilter = grubinstaller.GrubInstaller(None)
-            ret = dbfilter.run_command(auto_process=True)
-            if ret != 0:
-                raise InstallStepError(
-                    "GrubInstaller failed with code %d" % ret)
-        except ImportError:
-            try:
+            if subarch.startswith('amd64/') or subarch.startswith('i386/'):
+                from ubiquity.components import grubinstaller
+                dbfilter = grubinstaller.GrubInstaller(None)
+                ret = dbfilter.run_command(auto_process=True)
+                if ret != 0:
+                    raise InstallStepError(
+                        "GrubInstaller failed with code %d" % ret)
+            elif subarch == 'powerpc/ps3':
+                from ubiquity.components import kbootinstaller
+                dbfilter = kbootinstaller.KbootInstaller(True)
+                ret = dbfilter.run_command(auto_process=True)
+                if ret != 0:
+                    raise InstallStepError(
+                        "KbootInstaller failed with code %d" % ret)
+            elif subarch.startswith('powerpc/'):
                 from ubiquity.components import yabootinstaller
                 dbfilter = yabootinstaller.YabootInstaller(None)
                 ret = dbfilter.run_command(auto_process=True)
                 if ret != 0:
                     raise InstallStepError(
                         "YabootInstaller failed with code %d" % ret)
-            except ImportError:
+            else:
                 raise InstallStepError("No bootloader installer found")
+        except ImportError:
+            raise InstallStepError("No bootloader installer found")
 
         misc.ex('umount', '-f', self.target + '/proc')
         misc.ex('umount', '-f', self.target + '/dev')

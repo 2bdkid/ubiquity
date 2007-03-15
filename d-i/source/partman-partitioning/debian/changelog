@@ -1,3 +1,30 @@
+partman-partitioning (47ubuntu1) feisty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Offer resize option for HFS, HFS+, and HFSX.
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Backing up from the "new partition size" question when resizing a
+      partition now goes back to the menu of options for that partition, not
+      to the partition tree.
+  * Set Maintainer to ubuntu-installer@lists.ubuntu.com.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 14 Mar 2007 12:15:12 +0000
+
+partman-partitioning (47) unstable; urgency=low
+
+  * Enable resizing of Windows Vista NTFS partitions again. Closes: #379835.
+  * Wait for the device file to be created again after resizing an NTFS
+    partition.
+
+ -- Frans Pop <fjp@debian.org>  Wed,  7 Mar 2007 22:48:21 +0100
+
+partman-partitioning (46) unstable; urgency=low
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen A
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 18:24:57 +0100
+
 partman-partitioning (45ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

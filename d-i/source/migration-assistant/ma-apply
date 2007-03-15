@@ -3,9 +3,10 @@
 set -e
 . /usr/share/debconf/confmodule
 . /usr/share/migration-assistant/ma-script-utils
-
-IFS='
+OLDIFS="$IFS"
+NEWLINE='
 '
+IFS="$NEWLINE"
 
 if [ -z "$1" ]; then
     mapath="/usr/bin"
@@ -26,7 +27,9 @@ do
 	then
 	    set_os_type $line
 	    path=${loc#*/*/}
+	    IFS="$OLDIFS"
 	    mount_os "$ostype" "$loc"
+	    IFS="$NEWLINE"
 	    db_get migration-assistant/$path/users
 	    user_selection=`echo "$RET" | sed -e 's/, /\n/g'`
 	    for usr in $user_selection;
@@ -63,7 +66,9 @@ do
 		done
 	    done
 
+	    IFS="$OLDIFS"
 	    unmount_os
+	    IFS="$NEWLINE"
 	fi
     done
 done

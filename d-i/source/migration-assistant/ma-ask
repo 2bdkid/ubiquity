@@ -15,8 +15,9 @@ fi
 
 #FIXME: need a better solution.
 OLDIFS="$IFS"
-IFS='
+NEWLINE='
 '
+IFS="$NEWLINE"
 tmp=""
 for line in `os-prober`;
 do
@@ -33,8 +34,6 @@ db_input high migration-assistant/partitions || true
 db_go || exit 10
 
 db_get migration-assistant/partitions
-NEWLINE='
-'
 IFS="$NEWLINE"
 selection=`echo "$RET" | sed -e 's/, /\n/g'`
 if [ -z "$selection" ]; then
@@ -52,8 +51,8 @@ do
 	    set_os_type $line
 
 	    path="${loc#*/*/}" # hda1 or discs/disc0/part1
-	    mount_os "$ostype" "$loc"
 	    IFS="$OLDIFS"
+	    mount_os "$ostype" "$loc"
 	    db_register migration-assistant/users migration-assistant/$path/users
 	    db_subst migration-assistant/$path/users user-choices "$($mapath/ma-search-users "$ostype" "$mountpoint")"
 	    db_subst migration-assistant/$path/users os-type "$choice"

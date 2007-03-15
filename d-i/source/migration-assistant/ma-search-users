@@ -5,7 +5,7 @@ mountpoint=$2
 ret=""
 
 if [ -z "$ostype" ] || [ -z "$mountpoint" ]; then
-    echo "usage: $0 OSTYPE MOUNTPOINT"
+    echo "usage: $0 OSTYPE MOUNTPOINT" 1>&2
     exit 1
 fi
 

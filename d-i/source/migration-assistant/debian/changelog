@@ -1,3 +1,13 @@
+migration-assistant (0.4.2) feisty; urgency=low
+
+  * Added XS-Vcs-Bzr field to debian/control.
+  * Mount /home if necessary. (LP: 85222)
+  * Display an error on unmount failure and prompt the user to continue.
+    (LP: 89605)
+  * Put usage statements on stderr. (LP: 89821)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 13 Mar 2007 19:57:19 -0400
+
 migration-assistant (0.4.1) feisty; urgency=low
 
   * Added proper support for the Windows registry's use of UTF-16 strings.
