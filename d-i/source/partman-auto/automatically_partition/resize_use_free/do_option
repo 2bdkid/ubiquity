@@ -13,16 +13,24 @@ bestid=
 
 check_virtual
 
-if \
-    [ "$virtual" = no -a -f $oldid/detected_filesystem ] \
-    && [ "$(cat $oldid/detected_filesystem)" = ntfs ]
-then
-    get_ntfs_resize_range
+resize_range_failed=
+if [ "$virtual" = no ] && [ -f $oldid/detected_filesystem ]; then
+    case "$(cat $oldid/detected_filesystem)" in
+	ntfs)
+	    get_ntfs_resize_range || resize_range_failed=1
+	    ;;
+	ext2|ext3)
+	    get_ext2_resize_range || resize_range_failed=1
+	    ;;
+	*)
+	    get_resize_range
+	    ;;
+    esac
 else
     get_resize_range
 fi
 
-if [ -z "$maxsize" ]; then
+if [ "$resize_range_failed" ] || [ -z "$maxsize" ]; then
     db_input critical partman-partitioning/impossible_resize || true
     if db_go; then
 	exit 1

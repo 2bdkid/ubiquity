@@ -1,3 +1,16 @@
+console-setup (1.13ubuntu9) feisty; urgency=low
+
+  * Keyboard/kbdcompiler: Fix keymap reduction not to try to express keymap
+    A in terms of keymap B when B includes keys not mapped by A, fixing a
+    number of incorrectly-reduced keymaps (LP: #74375).
+  * Keyboard/kbdcompiler: Update handling of jp to match
+    debian/config.proto.
+  * Keyboard/keymaptree.use: Remove jp; we cannot detect it correctly
+    without further intelligence, as it's designed for jp106 keyboard
+    models.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 17 Mar 2007 10:06:05 +0000
+
 console-setup (1.13ubuntu8) feisty; urgency=low
 
   * Fix handling of commas in layout and variant names.

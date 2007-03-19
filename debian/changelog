@@ -1,3 +1,22 @@
+ubiquity (1.4.2) feisty; urgency=low
+
+  [ Evan Dandrea ]
+  * Update templates for migration-assistant.
+  * Only seed migration-assistant in usersetup.py if there are partitions
+    selected to import from. (LP: #93270)
+
+  [ Colin Watson ]
+  * KDE frontend:
+    - Fix backup from autopartitioning step (LP: #92533).
+    - Activate create/edit partition dialog when double-clicking a row in
+      the partition list.
+    - Fix backup from user/password page.
+    - Add buttons to the partition list to make it more obvious what to do.
+  * Automatic update of included source packages: console-setup 1.13ubuntu9,
+    partman-auto 62ubuntu7, partman-partitioning 47ubuntu2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 19 Mar 2007 20:39:46 +0000
+
 ubiquity (1.4.1) feisty; urgency=low
 
   * Make the timezone database a singleton, saving about 2MB of memory.

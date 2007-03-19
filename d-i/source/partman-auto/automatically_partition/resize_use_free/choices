@@ -127,8 +127,28 @@ scan_disk () {
 		totalfree="$(expr "$totalfree" + "$size")"
 		;;
 
-	    linux-swap|ext2|ext3|fat32)
+	    linux-swap|fat32)
 		get_resize_range
+		if [ "$cursize" ] && [ "$minsize" ]; then
+		    thisfree="$(expr "$cursize" - "$minsize")"
+		    if longint_le $diskfree $thisfree; then
+			diskfree=$thisfree
+			diskpart=$dev//$oldid
+			diskpath=$path
+		    fi
+		fi
+		;;
+
+	    ext2|ext3)
+		if ! type tune2fs >/dev/null 2>&1 || ! type resize2fs >/dev/null 2>&1; then
+		    continue
+		fi
+		check_virtual
+		if [ "$virtual" = yes ]; then
+		    get_resize_range
+		else
+		    get_ext2_resize_range
+		fi
 		if [ "$cursize" ] && [ "$minsize" ]; then
 		    thisfree="$(expr "$cursize" - "$minsize")"
 		    if longint_le $diskfree $thisfree; then
