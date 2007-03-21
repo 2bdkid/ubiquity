@@ -1,3 +1,10 @@
+partman-partitioning (47ubuntu3) feisty; urgency=low
+
+  * Add another couple of update-dev calls; partition devices can be removed
+    and re-added just after committing partition table changes (LP: #94410).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 21 Mar 2007 13:19:04 +0000
+
 partman-partitioning (47ubuntu2) feisty; urgency=low
 
   * Use tune2fs/resize2fs to handle ext2/ext3 resizing, since libparted

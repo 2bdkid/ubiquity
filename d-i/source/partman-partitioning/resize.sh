@@ -196,6 +196,7 @@ perform_resizing () {
 	    open_dialog PARTITION_INFO $oldid
 	    read_line x1 x2 x3 x4 x5 path x7
 	    close_dialog
+	    update-dev
 	    if echo y | do_ntfsresize -f --size "$newsize" $path; then
 		open_dialog VIRTUAL_RESIZE_PARTITION $oldid $newsize
 		read_line newid
@@ -249,6 +250,7 @@ perform_resizing () {
 	    open_dialog PARTITION_INFO $oldid
 	    read_line x1 x2 x3 x4 x5 path x7
 	    close_dialog
+	    update-dev
 	    if resize2fs $path "$(($newsize / 1024))K"; then
 		open_dialog VIRTUAL_RESIZE_PARTITION $oldid $newsize
 		read_line newid
