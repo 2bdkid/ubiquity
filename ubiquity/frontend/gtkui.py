@@ -134,6 +134,7 @@ class Wizard:
         self.summary_device = None
         self.popcon = None
         self.installing = False
+        self.installing_no_return = False
         self.returncode = 0
         self.language_questions = ('live_installer', 'welcome_heading_label',
                                    'welcome_text_label', 'release_notes_label',
@@ -598,7 +599,8 @@ class Wizard:
         # widget is studied in a different manner depending on object type
         if widget.__class__ == str:
             size = float(self.size[widget.split('/')[2]])
-        elif widget.get_active_text() in self.part_devices:
+        elif (widget.get_active_text() in self.part_devices and
+              self.part_devices[widget.get_active_text()] in self.size):
             size = float(self.size[self.part_devices[widget.get_active_text()].split('/')[2]])
         else:
             # TODO cjwatson 2006-07-31: Why isn't it in part_devices? This
@@ -664,8 +666,14 @@ class Wizard:
 
         dbfilter = partman_commit.PartmanCommit(self, self.manual_partitioning)
         if dbfilter.run_command(auto_process=True) != 0:
-            # TODO cjwatson 2006-09-03: return to partitioning?
+            while self.progress_position.depth() != 0:
+                self.debconf_progress_stop()
+            self.debconf_progress_window.hide()
+            self.return_to_partitioning()
             return
+
+        # No return to partitioning from now on
+        self.installing_no_return = True
 
         self.debconf_progress_region(15, 100)
 
@@ -2047,12 +2055,15 @@ class Wizard:
         if 'id' not in partition:
             # whole disk
             cell.set_property('text', partition['device'])
-        elif partition['parted']['fs'] == 'free':
+        elif partition['parted']['fs'] != 'free':
+            cell.set_property('text', '  %s' % partition['parted']['path'])
+        elif partition['parted']['type'] == 'unusable':
+            unusable = get_string('partman/text/unusable', self.locale)
+            cell.set_property('text', '  %s' % unusable)
+        else:
             # TODO cjwatson 2006-10-30 i18n; partman uses "FREE SPACE" which
             # feels a bit too SHOUTY for this interface.
             cell.set_property('text', '  free space')
-        else:
-            cell.set_property('text', '  %s' % partition['parted']['path'])
 
     def partman_column_type (self, column, cell, model, iterator):
         partition = model[iterator][1]
@@ -2110,6 +2121,19 @@ class Wizard:
             # Yes, I know, 1000000 bytes is annoying. Sorry. This is what
             # partman expects.
             size_mb = int(partition['parted']['size']) / 1000000
+            cell.set_property('text', '%d MB' % size_mb)
+
+    def partman_column_used (self, column, cell, model, iterator):
+        partition = model[iterator][1]
+        if 'id' not in partition or partition['parted']['fs'] == 'free':
+            cell.set_property('text', '')
+        elif 'resize_min_size' not in partition:
+            # TODO cjwatson 2007-03-26: i18n
+            cell.set_property('text', 'unknown')
+        else:
+            # Yes, I know, 1000000 bytes is annoying. Sorry. This is what
+            # partman expects.
+            size_mb = int(partition['resize_min_size']) / 1000000
             cell.set_property('text', '%d MB' % size_mb)
 
     def partman_popup (self, widget, event):
@@ -2554,6 +2578,12 @@ class Wizard:
             column_size.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
             self.partition_list_treeview.append_column(column_size)
 
+            cell_used = gtk.CellRendererText()
+            column_used = gtk.TreeViewColumn("Used", cell_used)
+            column_used.set_cell_data_func(cell_used, self.partman_column_used)
+            column_used.set_sizing(gtk.TREE_VIEW_COLUMN_AUTOSIZE)
+            self.partition_list_treeview.append_column(column_used)
+
             self.partition_list_treeview.set_model(partition_tree_model)
 
             selection = self.partition_list_treeview.get_selection()
@@ -2705,15 +2735,15 @@ class Wizard:
         return True
 
 
-    def return_to_autopartitioning (self):
+    def return_to_partitioning (self):
         """If the install progress bar is up but still at the partitioning
-        stage, then errors can safely return us to autopartitioning.
+        stage, then errors can safely return us to partitioning.
         """
 
-        if self.installing and self.current_page is not None:
-            # Go back to the autopartitioner and try again.
+        if self.installing and not self.installing_no_return:
+            # Go back to the partitioner and try again.
             self.live_installer.show()
-            self.set_current_page(self.steps.page_num(self.stepPartAuto))
+            self.set_current_page(self.previous_partitioning_page)
             self.next.set_label("gtk-go-forward")
             self.translate_widget(self.next, self.locale)
             self.backup = True
@@ -2734,7 +2764,7 @@ class Wizard:
         dialog.run()
         dialog.hide()
         if fatal:
-            self.return_to_autopartitioning()
+            self.return_to_partitioning()
 
     def question_dialog (self, title, msg, options, use_templates=True):
         self.allow_change_step(True)

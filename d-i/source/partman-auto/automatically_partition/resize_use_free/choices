@@ -192,11 +192,6 @@ get_resize_use_free_on_dev() {
 	bestpart="$diskpart"
 	bestpath="$diskpath"
     fi
-
-    if longint_le "$(expr \( 2 \* 1024 + 200 \) \* 1024 \* 1024)" $totalfree; then
-	log "enough free space ($totalfree) on $dev, no need to resize"
-	exit 0
-    fi
 }
 
 dev="$1"

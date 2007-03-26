@@ -4,6 +4,26 @@ set -e
 . /usr/share/debconf/confmodule
 db_capb backup
 
+convert_to_uuid() {
+  root="$1"
+  case "$root" in
+    UUID=*|LABEL=*|/dev/disk/*|/dev/mapper/*|/dev/evms/*|/dev/md[0-9]*)
+    ;;
+    /dev/*)
+      if [ -L "$root" ] && readlink "$root" | grep -q "^/dev/mapper/"
+      then
+        :
+      elif [ -b "$root" ]; then
+        uuid=$(/lib/udev/vol_id -u "$root" || true)
+        if [ -n "$uuid" ]; then
+	  root="/dev/disk/by-uuid/$uuid"
+        fi
+      fi
+    ;;
+  esac
+  echo "$root"
+}
+
 findfs () {
         check=$(mount | grep "on /target${1%/} " | cut -d' ' -f1)
         if [ -n "$check" ]; then
@@ -22,6 +42,8 @@ if [ "$rootfs" = "$bootfs" ]; then
 else
 	boot=""
 fi
+
+rootfs=$(convert_to_uuid $rootfs)
 
 # force -t on raid
 if echo "$bootfs" | grep -q "/dev/md"; then

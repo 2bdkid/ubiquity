@@ -1,3 +1,34 @@
+ubiquity (1.4.4) feisty; urgency=low
+
+  * New partitioner:
+    - Mark unusable free space as such (part of LP: #86202).
+    - Add "Used" column (LP: #96126).
+    - Pressing Enter in the create/edit dialog mount point entry box
+      activates the OK button.
+  * Old partitioner: Work around yet another hard-to-explain crash due to a
+    partition being missing from /proc/partitions (LP: #73058).
+  * KDE frontend:
+    - Disable subsidiary autopartitioning options according to the primary
+      selection (thanks to Thorbjørn Tux for prompting me with suggestions;
+      LP: #85980).
+    - Guard against on_partition_list_*_activate being called with no
+      partition selected (LP: #95429).
+  * Issue a debugging message any time a process exits, not just when it
+    exits non-zero.
+  * Disable migration-assistant if using the old partitioner: it crashes and
+    is probably too much trouble to fix.
+  * Avoid crashing in certain progressposition methods if no progress bar is
+    running (LP: #51077).
+  * Return to partitioning if you back up from partman-commit (LP: #78930).
+  * Adjust ubiquity/text/partition_help, ubiquity/text/finished_label,
+    debian/intro-alpha.txt, and debian/intro-beta.txt to avoid the
+    grammatical error "make sure to" (LP: #86284).
+  * Automatic update of included source packages: base-installer
+    1.70ubuntu6, partman-auto 62ubuntu8, partman-partitioning 47ubuntu5,
+    silo-installer 1.07ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 26 Mar 2007 18:39:53 +0100
+
 ubiquity (1.4.3) feisty; urgency=low
 
   * Install dummy policy-rc.d and start-stop-daemon while doing anything

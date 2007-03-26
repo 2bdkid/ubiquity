@@ -1,3 +1,13 @@
+partman-auto (62ubuntu8) feisty; urgency=low
+
+  * Don't offer some_device automatic partitioning if no disks are present.
+  * resize_use_free: Remove check for whether the disk has < 2.2GB free
+    before offering resizing; the number is debatable at best, and the check
+    can be annoying if you have multiple hard disks or other similar
+    situations.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 24 Mar 2007 18:12:56 +0000
+
 partman-auto (62ubuntu7) feisty; urgency=low
 
   * Make use of changes in partman-partitioning 47ubuntu2 to use

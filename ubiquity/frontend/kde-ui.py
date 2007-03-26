@@ -160,6 +160,7 @@ class Wizard:
         self.summary_device = None
         self.popcon = None
         self.installing = False
+        self.installing_no_return = False
         self.returncode = 0
         self.language_questions = ('live_installer', 'welcome_heading_label',
                                    'welcome_text_label', 'release_notes_label',
@@ -193,6 +194,7 @@ class Wizard:
         self.autopartition_vbox = QVBoxLayout(self.userinterface.autopartition_frame)
         self.autopartition_buttongroup = QButtonGroup(self.userinterface.autopartition_frame)
         self.autopartition_buttongroup_texts = {}
+        self.autopartition_handlers = {}
         self.autopartition_extras = {}
         self.autopartition_extra_buttongroup = {}
         self.autopartition_extra_buttongroup_texts = {}
@@ -551,7 +553,8 @@ class Wizard:
         # widget is studied in a different manner depending on object type
         if widget.__class__ == str:
             size = float(self.size[widget.split('/')[2]])
-        elif unicode(widget.currentText()) in self.part_devices:
+        elif (unicode(widget.currentText()) in self.part_devices and
+              self.part_devices[unicode(widget.currentText())] in self.size):
             size = float(self.size[self.part_devices[unicode(widget.currentText())].split('/')[2]])
         else:
             # TODO cjwatson 2006-07-31: Why isn't it in part_devices? This
@@ -616,10 +619,16 @@ class Wizard:
 
         dbfilter = partman_commit.PartmanCommit(self, self.manual_partitioning)
         if dbfilter.run_command(auto_process=True) != 0:
-            # TODO cjwatson 2006-09-03: return to partitioning?
+            while self.progress_position.depth() != 0:
+                self.debconf_progress_stop()
+            self.progressDialogue.hide()
+            self.return_to_partitioning()
             return
 
         ex('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
+
+        # No return to partitioning from now on
+        self.installing_no_return = True
 
         self.debconf_progress_region(15, 100)
 
@@ -1611,12 +1620,16 @@ class Wizard:
                     disk_frame.show()
                     self.autopartition_extras[choice] = disk_frame
 
-            # TODO cjwatson 2006-12-09: The lambda never seems to get
-            # called? Make sure not to disable things until this is fixed.
-            #self.on_autopartition_toggled(choice, button.isChecked())
-            #self.app.connect(button, SIGNAL('toggled(bool)'),
-            #                 lambda enable:
-            #                     self.on_autopartition_toggled(choice, enable))
+            def make_on_autopartition_toggled_slot(choice):
+                def slot(enable):
+                    return self.on_autopartition_toggled(choice, enable)
+                return slot
+
+            self.on_autopartition_toggled(choice, button.isChecked())
+            self.autopartition_handlers[choice] = \
+                make_on_autopartition_toggled_slot(choice)
+            self.app.connect(button, SIGNAL('toggled(bool)'),
+                             self.autopartition_handlers[choice])
 
             button.show()
             idCounter += 1
@@ -1918,6 +1931,8 @@ class Wizard:
 
     def on_partition_list_new_label_activate(self, ticked):
         selected = self.userinterface.partition_list_treeview.selectedIndexes()
+        if not selected:
+            return
         index = selected[0]
         item = index.internalPointer()
         devpart = item.itemData[0]
@@ -1931,6 +1946,8 @@ class Wizard:
 
     def on_partition_list_new_activate(self, ticked):
         selected = self.userinterface.partition_list_treeview.selectedIndexes()
+        if not selected:
+            return
         index = selected[0]
         item = index.internalPointer()
         devpart = item.itemData[0]
@@ -1939,6 +1956,8 @@ class Wizard:
 
     def on_partition_list_edit_activate(self, ticked):
         selected = self.userinterface.partition_list_treeview.selectedIndexes()
+        if not selected:
+            return
         index = selected[0]
         item = index.internalPointer()
         devpart = item.itemData[0]
@@ -1947,6 +1966,8 @@ class Wizard:
 
     def on_partition_list_delete_activate(self, ticked):
         selected = self.userinterface.partition_list_treeview.selectedIndexes()
+        if not selected:
+            return
         index = selected[0]
         item = index.internalPointer()
         devpart = item.itemData[0]
@@ -2124,14 +2145,14 @@ class Wizard:
                 unicode(self.advanceddialog.grub_device_entry.text()))
             self.set_popcon(self.advanceddialog.popcon_checkbutton.isChecked())
 
-    def return_to_autopartitioning (self):
+    def return_to_partitioning (self):
         """If the install progress bar is up but still at the partitioning
-        stage, then errors can safely return us to autopartitioning.
+        stage, then errors can safely return us to partitioning.
         """
-        if self.installing and self.current_page is not None:
-            # Go back to the autopartitioner and try again.
+        if self.installing and not self.installing_no_return:
+            # Go back to the partitioner and try again.
             #self.live_installer.show()
-            self.set_current_page(WIDGET_STACK_STEPS["stepPartAuto"])
+            self.set_current_page(self.previous_partitioning_page)
             self.userinterface.next.setText("Next >")
             self.translate_widget(self.userinterface.next, self.locale)
             self.backup = True
@@ -2142,7 +2163,7 @@ class Wizard:
         # TODO: cancel button as well if capb backup
         QMessageBox.warning(self.userinterface, title, msg, QMessageBox.Ok)
         if fatal:
-            self.return_to_autopartitioning()
+            self.return_to_partitioning()
 
     def question_dialog (self, title, msg, options, use_templates=True):
         # I doubt we'll ever need more than three buttons.
@@ -2509,6 +2530,7 @@ class PartitionModel(QAbstractItemModel):
         rootData.append(QVariant("Mount point"))
         rootData.append(QVariant("Format?"))
         rootData.append(QVariant("Size"))
+        rootData.append(QVariant("Used"))
         self.rootItem = TreeItem(rootData)
 
     def append(self, data, ubiquity):
@@ -2619,7 +2641,7 @@ class TreeItem:
         if self.parentItem is None:
             return len(self.itemData)
         else:
-            return 4
+            return 5
 
     def data(self, column):
         if self.parentItem is None:
@@ -2634,6 +2656,8 @@ class TreeItem:
             return QVariant(self.partman_column_format())
         elif column == 4:
             return QVariant(self.partman_column_size())
+        elif column == 5:
+            return QVariant(self.partman_column_used())
         else:
             return QVariant("other")
 
@@ -2651,12 +2675,14 @@ class TreeItem:
         if 'id' not in partition:
             # whole disk
             return partition['device']
-        elif partition['parted']['fs'] == 'free':
+        elif partition['parted']['fs'] != 'free':
+            return '  %s' % partition['parted']['path']
+        elif partition['parted']['type'] == 'unusable':
+            return '  %s' % get_string('partman/text/unusable', self.locale)
+        else:
             # TODO cjwatson 2006-10-30 i18n; partman uses "FREE SPACE" which
             # feels a bit too SHOUTY for this interface.
             return '  free space'
-        else:
-            return '  %s' % partition['parted']['path']
 
     def partman_column_type(self):
         partition = self.itemData[1]
@@ -2727,4 +2753,17 @@ class TreeItem:
             # Yes, I know, 1000000 bytes is annoying. Sorry. This is what
             # partman expects.
             size_mb = int(partition['parted']['size']) / 1000000
+            return '%d MB' % size_mb
+
+    def partman_column_used(self):
+        partition = self.itemData[1]
+        if 'id' not in partition or partition['parted']['fs'] == 'free':
+            return ''
+        elif 'resize_min_size' not in partition:
+            # TODO cjwatson 2007-03-26: i18n
+            return 'unknown'
+        else:
+            # Yes, I know, 1000000 bytes is annoying. Sorry. This is what
+            # partman expects.
+            size_mb = int(partition['resize_min_size']) / 1000000
             return '%d MB' % size_mb
