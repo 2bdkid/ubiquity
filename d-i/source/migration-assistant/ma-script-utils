@@ -18,24 +18,28 @@ set_os_type () {
 
     if [ ${1##*:} = "linux" ]; then
 	ostype="linux"
-	return
+	return 0
     fi
     
     case `expr match "$1" '.*:.*:\(.*\):.*'` in
 	"Windows" )
 	ostype="windowsxp"
+        return 0
 	;;
 
 	"Windows9xMe" )
 	ostype="windows9x"
+        return 0
 	;;
 
 	"MacOSX" )
 	ostype="macosx"
+        return 0
 	;;
 
     *)
     echo "Unknown ostype from $1" 1>&2
+    return 1
     ;;
     esac
 }
@@ -91,37 +95,50 @@ mount_os () {
     device="$2"
 
     mkdir -p $mountpoint
-	unmount_os $device
+    unmount_os $device
 
     if [ "$1" = "linux" ]; then
-	    mount $device $mountpoint
-        # All this, just to get /home...
-	# FIXME: we'll probably need to check if /etc is its own part as well.
+	mount $device $mountpoint
 	if [ -f "$mountpoint/etc/fstab" ]; then
             while read uuid mp rest; do
 	    	if [ "$mp" != "/home" ]; then
-			continue
+		    continue
 		fi
 
 		if [ "${uuid%=*}" = "UUID" ]; then
-			uuid=$(readlink -e "/dev/disk/by-uuid/${uuid#*=}")
+                    devname="/dev/disk/by-uuid/${uuid#*=}"
+		    uuid=$(readlink -e "$devname") || \
+                        error "$devname does not exist."
 		elif [ "${uuid%=*}" = "LABEL" ]; then
-			uuid=$(readlink -e "/dev/disk/by-label/${uuid#*=}")
+		    devname="/dev/disk/by-label/${uuid#*=}"
+                    uuid=$(readlink -e "$devname") || \
+                        error "$devname does not exist."
+                elif [ ! -e "$uuid" ]; then
+                    # This happens when the IDE driver in the old OS doesn't
+                    # match the driver in the installer.  The old /home might be
+                    # mounted on /dev/hda3 which could now be /dev/sda3 or
+                    # something entirely different.  Since there's no way to
+                    # determine what the device is without the old kernel
+                    # loaded, we fail gracefully so that we can continue to the
+                    # next OS.
+                    log "$uuid does not exist, continuing."
+                    break
                 fi
                 failed=
 		mount $uuid "$mountpoint/home" || failed="1"
                 if [ "$failed" ]; then
-			unmount_os "$uuid"
-			mount $uuid "$mountpoint/home"
+		    unmount_os "$uuid"
+		    mount $uuid "$mountpoint/home" || \
+                        error "failed to mount $uuid"
 		fi
 		break
             done < "$mountpoint/etc/fstab"
         fi
     elif [ "$1" = "windowsxp" ]; then
-		mount -t ntfs $device $mountpoint -o umask=0022,nls=utf8 || \
-		log "Windows XP drive is not NTFS formatted or error, trying vfat"; \
-		mount -t vfat $device $mountpoint -o umask=0022,utf8 || \
-		log "Mounting with vfat didn't work."
+	mount -t ntfs $device $mountpoint -o umask=0022,nls=utf8 || \
+	( log "Mounting $device to $mountpoint with NTFS failed."
+	mount -t vfat $device $mountpoint -o umask=0022,utf8 || \
+	log "Mounting $device to $mountpoint with VFAT failed." )
     fi
 
 }
@@ -163,3 +180,4 @@ EOF
 
 	fi
 }
+# vim:ai:et:sts=4:tw=80:sw=4:

@@ -1,3 +1,19 @@
+migration-assistant (0.4.3) feisty; urgency=low
+
+  * Possible fix for ostype not getting set in the -ask and -apply
+    scripts.  Also added some temporary debugging information.
+    (LP: #93197)
+  * If the /home partition device doesn't exist under the same name in
+    the running kernel, fail gracefully and continue to the next OS.
+    (LP: #94878)
+  * Added more logging and crash partial recovery.
+  * Gracefully fail and continue on items where a non C: drive letter
+    comes into play. (LP: #95422)
+  * Don't import Windows default bookmarks.  Import, but don't set
+    "Bliss" as the default wallpaper.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 27 Mar 2007 03:44:25 -0400
+
 migration-assistant (0.4.2) feisty; urgency=low
 
   * Added XS-Vcs-Bzr field to debian/control.
@@ -6,7 +22,7 @@ migration-assistant (0.4.2) feisty; urgency=low
     (LP: 89605)
   * Put usage statements on stderr. (LP: 89821)
 
- -- Evan Dandrea <evand@ubuntu.com>  Tue, 13 Mar 2007 19:57:19 -0400
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 21 Mar 2007 22:16:29 -0400
 
 migration-assistant (0.4.1) feisty; urgency=low
 

@@ -46,9 +46,11 @@ do
     do
 	loc="${line%%:*}"
 	# make this not if continue, so we can save an indentation
-	if [ $location = $loc ]
+	if [ "$location" = "$loc" ]
 	then
-	    set_os_type $line
+            log "setting ostype from: '$line'"
+            set_os_type "$line" || continue
+            log "got ostype of: '$ostype', mountpoint is: '$mountpoint'"
 
 	    path="${loc#*/*/}" # hda1 or discs/disc0/part1
 	    IFS="$OLDIFS"
@@ -68,7 +70,8 @@ do
 	    for usr in $user_selection;
 	    do
 	    	IFS="$OLDIFS"
-		itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr")
+		itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr") || \
+                    (itemsret=; error "ma-search-items exited with an error for $usr.")
 		formatted_user=`echo "$usr" | sed -e 's/ /:/g'`
 		db_register migration-assistant/items migration-assistant/$path/$formatted_user/items
 		db_subst migration-assistant/$path/$formatted_user/items choices "$itemsret"
@@ -195,3 +198,4 @@ do
 	fi
     done
 done
+# vim:ai:et:sts=4:tw=80:sw=4:

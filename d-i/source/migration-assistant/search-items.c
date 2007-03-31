@@ -34,6 +34,7 @@ char* gaim_get_accounts_file_windows(void) {
         return NULL;
     }
     path = reformat_path(appdata);
+    if(!path) return NULL;
     free(appdata);
     asprintf(&accounts_file, "%s/%s/%s", mount_location, path,
         "/.gaim/accounts.xml");
@@ -113,6 +114,7 @@ const char* windowsxp_aim_triton (void) {
         return NULL;
     }
     path = reformat_path(appdata);
+    if(!path) return NULL;
     free(appdata);
     asprintf(&dirname, "%s/%s/%s", mount_location, path, "AOL/UserProfiles");
     free(path);
@@ -146,6 +148,7 @@ const char* windowsxp_opera (void) {
         return NULL;
     }
     path = reformat_path(appdata);
+    if(!path) return NULL;
     free(appdata);
     asprintf(&filename, "%s/%s/%s", mount_location, path,
         "Opera/Opera/profile/opera6.adr");
@@ -176,6 +179,7 @@ const char* windowsxp_firefox (void) {
         return NULL;
     }
     path = reformat_path(appdata);
+    if(!path) return NULL;
     free(appdata);
     asprintf(&dirname, "%s/%s/%s", mount_location, path, "Mozilla/Firefox/Profiles");
     free(path);
@@ -203,6 +207,7 @@ const char* windowsxp_iexplorer (void) {
         "CurrentVersion\\Explorer\\Shell Folders\\Favorites");
     if(!favorites) return NULL;
     path = reformat_path(favorites);
+    if(!path) return NULL;
     free(favorites);
     asprintf(&iedir, "%s/%s", mount_location, path);
     free(path);
@@ -234,12 +239,13 @@ const char* windowsxp_userpicture (void) {
     FILE* fp;
 
     // FIXME: what about WINNT?
-    asprintf(&filename, "%s/WINDOWS/system32/config/software", from_location);
+    asprintf(&filename, "%s/WINDOWS/system32/config/software", mount_location);
     appdata = findkey(filename, "\\Microsoft\\Windows\\CurrentVersion\\"
         "Explorer\\Shell Folders\\Common AppData");
     if(!appdata)
         return NULL;
     path = reformat_path(appdata);
+    if(!path) return NULL;
     free(appdata);
     asprintf(&from, "%s/%s/Microsoft/User Account Pictures/%s.bmp",
         mount_location, path, user);

@@ -215,7 +215,6 @@ void windowsxp_import_wallpaper (void) {
         return;
     }
     path = reformat_path(wallpaperloc);
-    free(wallpaperloc);
     image = basename(path);
     asprintf(&from, "%s/%s", from_location, path);
     asprintf(&to, "%s/home/%s/%s", to_location, to_user, image);
@@ -224,10 +223,14 @@ void windowsxp_import_wallpaper (void) {
     free(from);
     free(to);
     
-    asprintf(&to, "/home/%s/%s", to_user, image);
+    if(strcmp(wallpaperloc, "C:\\WINDOWS\\web\\wallpaper\\Bliss.bmp") != 0) {
+        asprintf(&to, "/home/%s/%s", to_user, image);
+        set_gconf_key("/desktop/gnome/background", "picture_filename", GCONF_STRING, to);
+        add_wallpaper(to);
+        free(to);
+    }
+    free(wallpaperloc);
+    free(filename);
     free(path);
-    set_gconf_key("/desktop/gnome/background", "picture_filename", GCONF_STRING, to);
-    add_wallpaper(to);
-    free(to);
 }
-
+// vim:ai:et:sts=4:tw=80:sw=4:

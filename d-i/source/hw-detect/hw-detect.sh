@@ -312,6 +312,12 @@ get_manual_hw_info() {
 		echo "zalon7xx:Zalon SCSI"
 		register-module zalon7xx
 	fi
+
+	case $SUBARCH in
+		powerpc/ps3)
+			register-module snd_ps3
+		;;
+	esac
 }
 
 # Detect discover version

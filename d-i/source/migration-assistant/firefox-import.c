@@ -330,6 +330,20 @@ void opera_build(FILE* fp, element* parent, element** list) {
         }
     }
 }
+const char* blacklisted_urls[] = {
+    "http://www.microsoft.com/isapi/redir.dll",
+    "http://go.microsoft.com",
+    NULL
+};
+bool url_blacklisted(const char* url) {
+    int i = 0;
+    while(blacklisted_urls[i] != NULL) {
+        if(strncmp(url, blacklisted_urls[i], strlen(blacklisted_urls[i])) == 0)
+            return true;
+        i++;
+    }
+    return false;
+}
 void internet_explorer_build(const char* path, element* parent, element** list) {
     struct dirent *dp;
     struct stat statbuf;
@@ -368,7 +382,7 @@ void internet_explorer_build(const char* path, element* parent, element** list) 
                         }
                     }
                     *tmp = '\0';
-                    if(url) {
+                    if(url && !url_blacklisted(url)) {
                         char* title = malloc(strlen(dp->d_name)+1);
                         strcpy(title, dp->d_name);
                         hlink* l;

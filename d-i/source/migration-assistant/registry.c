@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <string.h>
+#include <errno.h>
 #include "registry.h"
 
 /* MSB (big endian)/LSB (little endian) conversions - network order is always
@@ -152,7 +153,8 @@ char* findkey(const char* location, const char* path)
 	    }
 
     } else {
-	fprintf(stderr, "Unable to open the registry file.");
+	fprintf(stderr, "Unable to open the registry file at '%s'\n%d: %s\n",
+	    location, errno, strerror(errno));
 	return NULL;
     }
     fclose(hive);
@@ -288,3 +290,4 @@ char *str_token( char **string, char *delimiters ) {
     return rv;
 
 }
+// vim:ai:et:sts=4:tw=80:sw=4:

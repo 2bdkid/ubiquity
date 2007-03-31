@@ -23,9 +23,9 @@ do
     for line in `os-prober`;
     do
 	loc=$(expr match "$line" '\(.*\):.*:.*:.*')
-	if [ $location = $loc ]
+	if [ "$location" = "$loc" ]
 	then
-	    set_os_type $line
+	    set_os_type "$line" || continue
 	    path=${loc#*/*/}
 	    IFS="$OLDIFS"
 	    mount_os "$ostype" "$loc"

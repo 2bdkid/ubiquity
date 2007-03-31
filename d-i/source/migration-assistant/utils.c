@@ -52,8 +52,8 @@ char* reformat_path(const char* from) {
      * Windows/Something
      */
     if(strstr(from, "C:\\") == NULL) {
-        puts("Pointed to a location other than C:, exiting.");
-        exit(EXIT_FAILURE);
+        fprintf(stderr, "Pointed to a location other than C:");
+        return NULL;
     }
     /* +1 for \0, -3 for C: */
     char* ret = malloc(strlen(from)-2);

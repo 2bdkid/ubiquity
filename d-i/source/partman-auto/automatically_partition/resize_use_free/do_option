@@ -55,6 +55,14 @@ prefsize="$(expr \( "$minsize" + "$maxsize" \) / 2)"
 # ask_for_size will set the default size to $hcursize.
 hcursize=$(longint2human $prefsize)
 
+if [ "$virtual" = no ]; then
+    db_set partman-partitioning/confirm_resize 'false'
+    db_input critical partman-partitioning/confirm_resize || true
+    db_go || exit 99
+    db_get partman-partitioning/confirm_resize
+    [ "$RET" = 'true' ] || exit 99
+fi
+
 # perform_resizing might exit 100, so use a subshell to catch that
 if (ask_for_size); then
     cd $dev
