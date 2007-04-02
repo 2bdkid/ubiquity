@@ -1,3 +1,17 @@
+console-setup (1.13ubuntu10) feisty; urgency=low
+
+  * Source debconf confmodule earlier in postinst (it should always be
+    sourced as early as possible, as it re-executes the calling script).
+  * Fix horrible confusion if the locale has no supported default codeset
+    (LP: #84401).
+  * Fix console-setup/codeset default to be one of the available choices.
+  * Try harder to ensure that we aren't running under X when deciding
+    whether to run setupcon on upgrade (thanks to Kurt J. Bosch for
+    suggestions; LP: #93338).
+  * Don't set an AltGr key by default for US layouts (LP: #76901).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun,  1 Apr 2007 16:49:02 +0100
+
 console-setup (1.13ubuntu9) feisty; urgency=low
 
   * Keyboard/kbdcompiler: Fix keymap reduction not to try to express keymap

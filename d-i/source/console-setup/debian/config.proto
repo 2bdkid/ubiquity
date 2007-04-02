@@ -1504,6 +1504,10 @@ while :; do
 		    db_input high console-setup/toggle || true
 		    db_input medium console-setup/switch || true
 		fi
+		if [ "$layout" = us ]; then
+		    # US keyboards don't use AltGr.
+		    db_default console-setup/altgr 'No AltGr key'
+		fi
 		db_input medium console-setup/altgr || true
 		db_input medium console-setup/compose || true
 		db_endblock
@@ -1746,7 +1750,9 @@ while :; do
 	    fi
 	    ;;
 	8)
-	    db_default console-setup/codeset "$default_codeset"
+	    if [ "$default_codeset" ]; then
+		db_default console-setup/codeset "$default_codeset"
+	    fi
 	    db_input $codeset_priority console-setup/codeset || true
 	    if db_go; then
 		db_get console-setup/codeset

@@ -2,6 +2,9 @@
 
 set -e
 
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
 # The same as /usr/bin/which - in order to make this script work
 # in environments where "which" is not available
 which () {
@@ -30,9 +33,6 @@ fi
 
 CONFIGDIR=/etc/console-setup
 CONFIGFILE=/etc/default/console-setup
-
-# Source debconf library.
-. /usr/share/debconf/confmodule
 
 if [ "$1" = "configure" ]; then
     
