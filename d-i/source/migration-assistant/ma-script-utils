@@ -59,14 +59,14 @@ unmount_os() {
         
 	ISMOUNTED=
 	if [ "$device" ]; then
-		ISMOUNTED=$(grep "$device" $MTAB) || ISMOUNTED=
+		ISMOUNTED=$(grep "^$device " $MTAB) || ISMOUNTED=
 	else
-		ISMOUNTED=$(grep "$mountpoint" $MTAB) || ISMOUNTED=
+		ISMOUNTED=$(grep " $mountpoint " $MTAB) || ISMOUNTED=
 	fi
         if [ -z "$ISMOUNTED" ]; then
 	        break
         fi
-        HOME=$(grep "$mountpoint/home" $MTAB) || HOME=
+        HOME=$(grep " $mountpoint/home " $MTAB) || HOME=
         if [ "$HOME" ]; then
             umount "$mountpoint/home" || failed="$mountpoint/home"
         fi

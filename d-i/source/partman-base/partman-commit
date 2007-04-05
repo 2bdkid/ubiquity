@@ -89,11 +89,13 @@ $partinfo"
 	fi
 fi
 
-for s in /lib/partman/check.d/*; do
-	if [ -x $s ]; then
-		$s
-	fi
-done
+if [ -z "$PARTMAN_ALREADY_CHECKED" ]; then
+	for s in /lib/partman/check.d/*; do
+		if [ -x $s ]; then
+			$s
+		fi
+	done
+fi
 
 for s in /lib/partman/commit.d/*; do
 	if [ -x $s ]; then

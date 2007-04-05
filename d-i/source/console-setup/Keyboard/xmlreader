@@ -263,6 +263,21 @@ while (@{$tree}) {
     }
 }
 
+# Fixups for model names we need
+my %modelvalues = map { $_ => 1 } values %models;
+if (not exists $modelvalues{amiga}) {
+    $models{'Amiga'} = 'amiga';
+}
+if (not exists $modelvalues{ataritt}) {
+    $models{'Atari TT'} = 'ataritt';
+}
+if (not exists $modelvalues{sun4}) {
+    $models{'Sun Type 4'} = 'sun4';
+}
+if (not exists $modelvalues{sun5}) {
+    $models{'Sun Type 5'} = 'sun5';
+}
+
 print <<'EOT';
 #!/usr/bin/perl -w
 

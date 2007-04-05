@@ -164,7 +164,15 @@ char* findkey(const char* location, const char* path)
     else
 	return NULL;
 }
-
+char* expand_string(const char *string) {
+    if(strcmp(string, "%SystemDrive%") == 0) {
+        // FIXME:
+        return strdup("C:");
+    } else {
+        fprintf(stderr, "Unable to expand '%s'.\n", string);
+        exit(EXIT_FAILURE);
+    }
+}
 char* printk(char* base, NK* thisnk, char* key) {
     int i;
     int* valptr;
@@ -184,7 +192,9 @@ char* printk(char* base, NK* thisnk, char* key) {
 				szname[thisvk->namesize]= 0;
 				if(strcmp(szname,key) == 0){
 				    if(thisvk->flag && 0x0000000000000001){
-					    if (thisvk->valtype == REG_SZ){
+					    // FIXME: Handle REG_EXPAND_SZ
+                                            // better
+                                            if (thisvk->valtype == REG_SZ || thisvk->valtype == REG_EXPAND_SZ){
 						char* tmp = NULL;
                                                 // Emtpy string.
                                                 if((base+4+(thisvk->mydata))[0] == 0)
@@ -192,6 +202,53 @@ char* printk(char* base, NK* thisnk, char* key) {
 						
 						// Convert to UTF-8.
 						tmp = FromUTF16((uint16_t*)(base+4+(thisvk->mydata)));
+
+                                                if(thisvk->valtype == REG_EXPAND_SZ) {
+                                                    char *start, *end;
+                                                    int startc = 0;
+                                                    int endc = 0;
+                                                    start = tmp;
+                                                    while(*start != '\0') {
+                                                        if(*start == '%') {
+                                                            end = start+1;
+                                                            endc = startc+1;
+                                                            while(*end != '%') {
+                                                                if(*end == '\0') {
+                                                                    fprintf(stderr, "Unmatched '%%' in %s.\n", tmp);
+                                                                    exit(EXIT_FAILURE);
+                                                                }
+                                                                end++;
+                                                                endc++;
+                                                            }
+                                                            //printf("endc: %d end: %s\n", endc, end);
+                                                            //printf("startc: %d start: %s\n", startc, start);
+                                                            char* toexpand = malloc((endc-startc+1)+1);
+                                                            memcpy(toexpand, start, (endc-startc+1));
+                                                            toexpand[endc-startc+1] = '\0';
+                                                            //printf("toexpand: %s\n", toexpand);
+                                                            char* expanded = expand_string(toexpand);
+                                                            free(toexpand);
+                                                            //printf("expanded: %s\n", expanded);
+                                                            int linelen = strlen(tmp) -
+                                                                (endc-startc+1) + strlen(expanded) + 1;
+                                                            //printf("linelen: %d\n", linelen);
+                                                            char* newtmp = malloc(linelen);
+                                                            strncpy(newtmp, tmp, startc);
+                                                            strcat(newtmp, expanded);
+                                                            strcat(newtmp, end+1);
+                                                            //printf("newtmp: %s\n", newtmp);
+                                                            free(tmp);
+                                                            free(expanded);
+                                                            tmp = newtmp;
+                                                            endc = 0;
+                                                            startc = 0;
+                                                            start=tmp;
+                                                        } else {
+                                                            start++;
+                                                            startc++;
+                                                        }
+                                                    }
+                                                }
 						return tmp;
 
 					    } else if(thisvk->valtype == REG_DWORD) {

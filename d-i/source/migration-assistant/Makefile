@@ -3,10 +3,14 @@ LIBXML_LIBS := $(shell xml2-config --libs)
 LIBXML_CFLAGS := $(shell xml2-config --cflags)
 BIN=$(DESTDIR)/usr/bin
 
-all: ma-import ma-search-items
+all: ma-import ma-search-items ma-search-users
 
 registry.o : registry.c registry.h
 	$(CC) $(ARGS) -c registry.c
+# TODO: Split XML utils out of regular utils.
+ma-search-users : registry.o utils.o ma-search-users.c
+	$(CC) $(ARGS) -c ma-search-users.c
+	$(CC) $(ARGS) $(LIBXML_LIBS) -o ma-search-users ma-search-users.o registry.o utils.o
 
 ma-search-items : registry.o utils.o search-items.c
 	$(CC) $(ARGS) -c search-items.c
@@ -34,7 +38,7 @@ windows-import.o: windows-import.c utils.o registry.o
 strip: ma-import ma-search-items
 	strip --remove-section=.comment --remove-section=.note ma-import ma-search-items
 clean :
-	-rm -f *.o ma-import ma-search-items
+	-rm -f *.o ma-import ma-search-items ma-search-users
 
 install:
 	install -d $(BIN)
