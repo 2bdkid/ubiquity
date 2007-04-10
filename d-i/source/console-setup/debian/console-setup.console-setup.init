@@ -37,7 +37,7 @@ case "$1" in
         # console-setup isn't a daemon
         ;;
     start|force-reload|restart|reload)
-	if expr "$(fgconsole 2>/dev/null)" : '[1-6]$' >/dev/null && \
+	if expr "$(fgconsole 2>/dev/null || true)" : '[1-6]$' >/dev/null && \
 	   ! pidof usplash >/dev/null; then
 	    log_action_begin_msg "Setting up console font and keymap"
 	    # Only use --save if we aren't in the boot sequence, to avoid
