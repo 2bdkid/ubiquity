@@ -315,6 +315,8 @@ get_manual_hw_info() {
 
 	case $SUBARCH in
 		powerpc/ps3)
+			echo "ps3_storage:PS3 internal HDD/CDROM drives"
+			echo "gelic_net:PS3 Gigabit Ethernet"
 			register-module snd_ps3
 		;;
 	esac
