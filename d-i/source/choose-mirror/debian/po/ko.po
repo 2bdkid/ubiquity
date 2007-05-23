@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-05-04 21:53+0900\n"
 "Last-Translator:  Sunjae park <darehanl@gmail.com>\n"
 "Language-Team:  Korean <debian-l10n-korean@lists.debian.org>\n"
@@ -74,7 +74,7 @@ msgstr "우분투 아카이브의 미러를 선택하십시오"
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "수동으로 정보를 입력하십시오"
 
@@ -102,14 +102,14 @@ msgstr "KR"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid "Ubuntu archive mirror country:"
 msgstr "우분투 아카이브 미러 국가:"
 
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
@@ -121,15 +121,15 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Ubuntu archive mirror:"
 msgstr "우분투 아카이브 미러:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
@@ -140,30 +140,30 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "보통, <국가 코드>.archive.ubuntu.com를 선택하는 것이 좋습니다."
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid "Ubuntu archive mirror hostname:"
 msgstr "우분투 아카이브 미러의 호스트명:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr "우분투를 내려받을 미러의 호스트명을 입력하십시오."
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -171,15 +171,15 @@ msgstr "표준 [hostname]:[port] 형식을 사용해 다른 포트를 지정할 
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid "Ubuntu archive mirror directory:"
 msgstr "우분투 아카이브 미러 디렉토리:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
@@ -203,14 +203,30 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "프록시 정보는 \"http://<[[사용자][:암호]@]호스트명[:포트]/\"의 표준 형태로 입"
 "력해야 합니다."
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "FTP 프록시 정보 (없으면 빈 칸):"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"외부와 연결할 때 HTTP 프록시를 사용해야 한다면, 여기에 프록시 정보를 입력하십"
+"시오. 프록시가 필요없다면, 빈 칸으로 남겨 두십시오."
 
 #. Type: select
 #. Default
@@ -229,25 +245,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "KR"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "FTP 프록시 정보 (없으면 빈 칸):"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"외부와 연결할 때 HTTP 프록시를 사용해야 한다면, 여기에 프록시 정보를 입력하십"
-"시오. 프록시가 필요없다면, 빈 칸으로 남겨 두십시오."
 
 #. Type: select
 #. Description

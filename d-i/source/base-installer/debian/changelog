@@ -1,3 +1,155 @@
+base-installer (1.79ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use the Ubuntu keyring.
+    - Enable the restricted component by default.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Write out the resume partition as a UUID if possible.
+  * Remove some old cruft from Ubuntu kernel selection code.
+  * i386 -server* kernels require 686 processors.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 26 Apr 2007 14:31:55 +0100
+
+base-installer (1.79) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove last references to 2.4 kernels.
+  * Remove call to no longer existing function. Closes: #419416.
+
+  [ Martin Michlmayr ]
+  * Remove RiscPC references since this platform is no longer
+    supported.
+
+ -- Frans Pop <fjp@debian.org>  Sun, 15 Apr 2007 18:46:10 +0200
+
+base-installer (1.78) unstable; urgency=low
+
+  * Multiply menu-item-numbers by 100
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:28:45 -0400
+
+base-installer (1.77) unstable; urgency=low
+
+  * Remove compatibility support for old versions of initramfs-tools.
+  * Remove support for initrd-tools.
+  * Also install extra kernel-related packages if no initrd is used. This
+    seems to be a minir error in the original implementation of this option.
+  * Remove distinction between initrd and initramfs: all supported initrds are
+    now initramfs. Keep the more generic name initrd.
+    Three architectures currently don't use an initrd: mips, mipsel and m68k.
+  * Kernel selection: remove support for pre-2.6 kernel images; update
+    testsuite accordingly and bring it in line with kernel images as shipped
+    with Etch.
+  * i386 kernel selection: 686 kernel flavor is usable with AMD k7 processors.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম)
+  * Dzongkha (dz.po) by translator
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Frans Pop <fjp@debian.org>  Tue, 10 Apr 2007 00:34:52 +0200
+
+base-installer (1.76) unstable; urgency=low
+
+  * Improve detection of Centaurhauls VIA processors. Only the later models
+    (Nehemiah and Esther) support the 686 kernel flavor; the older models
+    (Samuel and Ezra) need the 486 flavor. Closes: #414192.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 12 Mar 2007 14:45:30 +0100
+
+base-installer (1.75) unstable; urgency=low
+
+  * Set Aptitude::CmdLine::Ignore-Trust-Violations in allow_unauthenticated
+    mode. Seems that aptitude needs two options for some reason.
+    Closes: #411927
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 22 Feb 2007 15:00:07 -0500
+
+base-installer (1.74) unstable; urgency=low
+
+  * Only pass keyring to debootstrap if using a network protocol.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 17 Feb 2007 14:13:08 -0500
+
+base-installer (1.73) unstable; urgency=low
+
+  [ Aurélien GÉRÔME ]
+  * Add VIA C7 processor definition and test case. Closes: #410819.
+
+  [ Joey Hess ]
+  * Add support for armel.
+  * If debian-installer/allow_unauthenticated exists and is true, write a
+    /etc/apt/apt.conf.d/00AllowUnauthenticated file making apt allow
+    unauthenticated mirrors.
+  * Depend on gpgv-udeb, which has apparently never really been pulled in
+    before.
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 16 Feb 2007 16:04:00 -0500
+
+base-installer (1.72) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Fix processor detection on SMP i386 and amd64 systems when booting with
+    an SMP-capable kernel.
+    See https://bugs.launchpad.net/ubuntu/+source/base-installer/+bug/79109;
+    test case taken from that bug.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Hebrew (he.po) by Lior Kaplan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovak (sk.po) by Peter Mann
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:23:40 +0100
+
+base-installer (1.71) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Strip comments from debian/templates-arch in output templates file.
+
+  [ Frans Pop ]
+  * Also write the default header comments for kernel-img.conf.
+  * For powerpc/prep systems, write the root partition to an initramfs-tools
+    config file. Thanks to Ulrich Teichert for testing. Closes: #405572.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Danish (da.po) by Claus Hindsgaul
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Galician (gl.po) by Jacobo Tarrio
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Sat,  6 Jan 2007 20:15:26 +0100
+
+base-installer (1.70ubuntu7) feisty; urgency=low
+
+  * Use powerpc64 kernels on PS3 systems; the separate ps3 kernels have gone
+    away.
+  * Add PS3 tests.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 11 Apr 2007 15:07:05 +0100
+
 base-installer (1.70ubuntu6) feisty; urgency=low
 
   * Add linux-generic and linux-ps3 to crazy kernel_update_list metapackage

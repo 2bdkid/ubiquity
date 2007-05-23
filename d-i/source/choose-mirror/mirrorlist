@@ -132,6 +132,9 @@ else {
 	foreach my $id (sort { $data[$b]->{rating} <=> $data[$a]->{rating} } 0..$#data) {
 		next unless exists $data[$id]->{"archive-$type"} and
 			    exists $data[$id]->{country};
+		if (! exists $data[$id]->{'archive-architecture'}) {
+			print STDERR "warning: missing archive-architecture for mirror ".$data[$id]->{site}."; assuming it contains all architectures.\n";
+		}
 		print OUT "\t{",
 			  join(", ", $q.$data[$id]->{site}.$q, $q.$data[$id]->{country}.$q,
 				$q.$data[$id]->{"archive-$type"}.$q),

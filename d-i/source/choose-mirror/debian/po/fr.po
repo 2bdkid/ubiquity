@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-28 17:51+0100\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-04-30 20:17+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -84,7 +84,7 @@ msgstr "Choisir un miroir de l'archive Ubuntu"
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "Saisie manuelle"
 
@@ -112,14 +112,14 @@ msgstr "FR"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid "Ubuntu archive mirror country:"
 msgstr "Pays du miroir de l'archive Ubuntu :"
 
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
@@ -131,15 +131,15 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Ubuntu archive mirror:"
 msgstr "Miroir de l'archive Ubuntu :"
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
@@ -151,8 +151,8 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr ""
 "Généralement, <le_code_de_votre pays>.archive.ubuntu.com est un choix "
@@ -160,15 +160,15 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Nom d'hôte du miroir de l'archive Ubuntu :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr ""
@@ -177,8 +177,8 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -188,15 +188,15 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid "Ubuntu archive mirror directory:"
 msgstr "Répertoire du miroir de l'archive Ubuntu :"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
@@ -223,14 +223,31 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "Les paramètres du mandataire doivent être indiqués avec la forme normalisée "
 "« http://[[utilisateur][:mot-de-passe]@]hôte[:port]/ »."
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "Mandataire FTP (laisser vide si aucun) :"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"Si vous avez besoin d'utiliser un mandataire FTP (souvent appelé « proxy ») "
+"pour accéder au monde extérieur, indiquez ses paramètres ici. Sinon, laissez "
+"ce champ vide."
 
 #. Type: select
 #. Default
@@ -249,26 +266,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "FR"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "Mandataire FTP (laisser vide si aucun) :"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"Si vous avez besoin d'utiliser un mandataire FTP (souvent appelé « proxy ») "
-"pour accéder au monde extérieur, indiquez ses paramètres ici. Sinon, laissez "
-"ce champ vide."
 
 #. Type: select
 #. Description

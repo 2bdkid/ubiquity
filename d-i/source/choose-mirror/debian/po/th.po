@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-18 17:01-0600\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-06-23 19:06+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <l10n@opentle.org>\n"
@@ -77,7 +77,7 @@ msgstr "เลือกแหล่งสำเนาแพกเกจของ
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "ป้อนข้อมูลเอง"
 
@@ -105,7 +105,7 @@ msgstr "TH"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid "Ubuntu archive mirror country:"
 msgstr "ใช้แหล่งสำเนาแพกเกจเดเบียนสำหรับประเทศ:"
@@ -113,7 +113,7 @@ msgstr "ใช้แหล่งสำเนาแพกเกจเดเบี
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
@@ -125,16 +125,16 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid "Ubuntu archive mirror:"
 msgstr "แหล่งสำเนาแพกเกจเดเบียน:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
@@ -146,23 +146,23 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "โดยปกติแล้ว <ประเทศของคุณ>.archive.ubuntu.com มักเป็นตัวเลือกที่ดี"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 #, fuzzy
 msgid "Ubuntu archive mirror hostname:"
 msgstr "ชื่อโฮสต์ของแหล่งสำเนาแพกเกจเดเบียน:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 #, fuzzy
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
@@ -170,8 +170,8 @@ msgstr "กรุณาป้อนชื่อโฮสต์ของแหล
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -179,16 +179,16 @@ msgstr "พอร์ตที่ต่างจากค่าปกติสา
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid "Ubuntu archive mirror directory:"
 msgstr "ไดเรกทอรีของแหล่งสำเนาแพกเกจเดเบียน:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
@@ -213,12 +213,28 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr "ข้อมูลพร็อกซีควรอยู่ในรูปมาตรฐาน \"http://[[ผู้ใช้][:รหัสผ่าน]@]โฮสต์[:พอร์ต]/\""
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "ข้อมูลพร็อกซี FTP (ปล่อยว่างไว้ถ้าไม่มี):"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"หากคุณจำเป็นต้องใช้พร็อกซี FTP เพื่อติดต่อกับโลกภายนอก กรุณาป้อนข้อมูลพร็อกซีที่นี่ หากไม่ต้องใช้ "
+"ก็ปล่อยว่างไว้ได้"
 
 #. Type: select
 #. Default
@@ -237,25 +253,9 @@ msgstr "ข้อมูลพร็อกซีควรอยู่ในรู
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "TH"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "ข้อมูลพร็อกซี FTP (ปล่อยว่างไว้ถ้าไม่มี):"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"หากคุณจำเป็นต้องใช้พร็อกซี FTP เพื่อติดต่อกับโลกภายนอก กรุณาป้อนข้อมูลพร็อกซีที่นี่ หากไม่ต้องใช้ "
-"ก็ปล่อยว่างไว้ได้"
 
 #. Type: select
 #. Description

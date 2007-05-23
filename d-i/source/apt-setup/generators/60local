@@ -5,10 +5,9 @@ set -e
 
 file="$1"
 
-if [ -n "$ROOT" ]; then
+chroot=
+if [ "$ROOT" ]; then
 	chroot=chroot
-else
-	chroot=
 fi
 
 i=0
@@ -32,6 +31,12 @@ while db_get "apt-setup/local$i/repository" && [ "$RET" ]; do
 		echo "deb-src $repository" >> $file
 	fi
 	if [ -n "$key" ]; then
+		# make wget use the proxy
+		protocol=${repository%%:*}
+		if db_get mirror/$protocol/proxy && [ "$RET" ]; then
+			proxy="$RET"
+			eval "export ${protocol}_proxy=$proxy"
+		fi
 		# fetch the key
 		wget "$key" -O "$ROOT/tmp/key$i.pub"
 		# add it to the keyring

@@ -1,3 +1,84 @@
+choose-mirror (2.15ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use Ubuntu mirrors.
+    - Check if archive.ubuntu.com is reachable before asking for a proxy.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+  * Move powerpc to ports.ubuntu.com (LP: #107838).
+  * Switch to gutsy by default.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 14 May 2007 11:10:00 +0100
+
+choose-mirror (2.15) unstable; urgency=low
+
+  * Multiply menu-item-numbers by 100
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:37:42 -0400
+
+choose-mirror (2.14) unstable; urgency=low
+
+  [ Colin Watson ]
+  * sort-countries: Add a small corner-case sanity check.
+
+  [ Joey Hess ]
+  * Switch PREFERRED_DISTRIBUTION to lenny.
+
+  [ Updated translations ]
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 09 Apr 2007 16:01:41 -0400
+
+choose-mirror (2.13) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Add a warning message about missing archive-architecture fields in
+    Mirrors.masterlist.
+  * Generate valid templates that won't crash cdebconf when there are no
+    mirrors for a given arch.
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Malayalam (ml.po) by Praveen A
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 17:38:13 +0100
+
+choose-mirror (2.12) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Danish (da.po) by Claus Hindsgaul
+  * Esperanto (eo.po) by Serge Leblanc
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:29:29 +0100
+
+choose-mirror (2.11) unstable; urgency=low
+
+  * Enable ftp support again, but without the option to select country/mirror
+    to limit the size increase of the udeb. Closes: #377032.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Panjabi (pa.po) by A S Alam
+  * Slovenian (sl.po) by Matej Kovačič
+
+ -- Frans Pop <fjp@debian.org>  Fri, 29 Dec 2006 04:24:19 +0100
+
 choose-mirror (2.10ubuntu2) feisty; urgency=low
 
   * Set Maintainer to ubuntu-installer@lists.ubuntu.com.
@@ -35,8 +116,11 @@ choose-mirror (2.10) unstable; urgency=low
 
 choose-mirror (2.09) unstable; urgency=low
 
+  [ Colin Watson ]
   * sort-countries: Defend against stale list.* and sortedlist.* files from
     previous aborted sort-countries runs.
+
+  [ Christian Perrier ]
   * Rebuilt after cleanups in Mirrors.masterlist
 
   [ Updated translations ]

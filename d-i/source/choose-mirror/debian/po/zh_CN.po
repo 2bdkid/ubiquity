@@ -5,7 +5,7 @@
 # 
 # Simplified Chinese translation for Debian Installer.
 #
-# Copyright (C) 2003, 2004, 2005 Software in the Public Interest, Inc.
+# Copyright (C) 2003-2006 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 # Translated by bbbush (2004), Carlos Z.F. Liu (2004,2005,2006) and
@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-06-28 17:51+0100\n"
-"PO-Revision-Date: 2006-03-31 17:38+1200\n"
-"Last-Translator: Carlos Z.F. Liu <carlosliu@users.sourceforge.net>\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
+"PO-Revision-Date: 2006-10-20 20:53-0500\n"
+"Last-Translator: Ming Hua <minghua@rice.edu>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,7 @@ msgstr "选择 Ubuntu 归档镜像"
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "手动输入信息"
 
@@ -102,14 +102,14 @@ msgstr "CN"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid "Ubuntu archive mirror country:"
 msgstr "Ubuntu 归档镜像所在的国家："
 
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
@@ -120,15 +120,15 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Ubuntu archive mirror:"
 msgstr "Ubuntu 归档镜像："
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
@@ -139,32 +139,32 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr ""
-"通常，<您的国家代码>.archive.ubuntu.com 会是一个较好的选择(本软件发布时，中国"
-"的相应站点尚在筹建当中，如果您无法正常连接该服务器，请使用其它镜像)。"
+"通常，<您的国家代码>.archive.ubuntu.com 会是一个较好的选择 (本软件发布时，中"
+"国的相应站点尚在筹建当中，如果您无法正常连接该服务器，请使用其它镜像)。"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid "Ubuntu archive mirror hostname:"
 msgstr "请输入 Ubuntu 归档镜像的主机名："
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr "请输入将要使用的 Ubuntu 镜像的主机名。"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -172,15 +172,15 @@ msgstr "您可以通过使用标准的 [主机名]:[端口] 格式来指定替�
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid "Ubuntu archive mirror directory:"
 msgstr "Ubuntu 归档镜像目录："
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
@@ -190,7 +190,7 @@ msgstr "请输入 Ubuntu 归档镜像所在的目录。"
 #. Description
 #: ../choose-mirror-bin.templates.http-in:58
 msgid "HTTP proxy information (blank for none):"
-msgstr "HTTP 代理信息(如果没有请置空)："
+msgstr "HTTP 代理信息 (如果没有请置空)："
 
 #. Type: string
 #. Description
@@ -203,13 +203,28 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "代理信息应按照“http://[[用户名][:密码]@]主机名[:端口]/”的标准格式给出。"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "FTP 代理信息 (如果没有请置空)："
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"如果您需要用 FTP 代理来连接外部网络，请在这里输入代理的信息。否则，请置空。"
 
 #. Type: select
 #. Default
@@ -228,24 +243,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "CN"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "FTP 代理信息(如果没有请置空)："
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"如果您需要用 FTP 代理来连接外部网络，请在这里输入代理的信息。否则，请置空。"
 
 #. Type: select
 #. Description

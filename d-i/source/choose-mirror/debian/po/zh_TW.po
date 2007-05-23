@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-18 17:01-0600\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-10-01 22:24+0800\n"
 "Last-Translator: Tetralet <tetralet@gmail.com>\n"
 "Language-Team: Debian-user in Chinese [Big5] <debian-chinese-big5@lists."
@@ -74,7 +74,7 @@ msgstr "請選擇一個 Ubuntu 檔案鏡像站"
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "手動輸入資訊"
 
@@ -102,14 +102,14 @@ msgstr "TW"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid "Ubuntu archive mirror country:"
 msgstr "Ubuntu 檔案鏡像站所在的國家："
 
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
 "the network -- be aware that nearby countries, or even your own, may not be "
@@ -120,15 +120,15 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Ubuntu archive mirror:"
 msgstr "Ubuntu 檔案鏡像站："
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
 "country or region if you do not know which mirror has the best Internet "
@@ -140,29 +140,29 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:30
-#: ../choose-mirror-bin.templates.ftp-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "通常，<您的國家代碼>.archive.ubuntu.com 會是一個較好的選擇。"
 
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid "Ubuntu archive mirror hostname:"
 msgstr "請輸入 Ubuntu 檔案鏡像站的主機名稱："
 
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr "請輸入在下載 Ubuntu 時所使用的鏡像站的主機名稱。"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -170,15 +170,15 @@ msgstr "可以使用標準的 [主機名稱]:[連接埠] 格式來指定另一�
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid "Ubuntu archive mirror directory:"
 msgstr "Ubuntu 檔案鏡像站目錄："
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
 "located."
@@ -202,14 +202,30 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "請以  http://[[使用者][:密碼]@]主機名稱[:連接埠]/ 這種標準格式來鍵入 Proxy 資"
 "訊。"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "FTP Proxy 資訊 (如果沒有請留白) ："
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"如果您需要透過 FTP Proxy 來連接外部網路，請在這裡輸入 Proxy 的資訊。否則，直"
+"接留白即可。"
 
 #. Type: select
 #. Default
@@ -228,25 +244,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "TW"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "FTP Proxy 資訊 (如果沒有請留白) ："
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"如果您需要透過 FTP Proxy 來連接外部網路，請在這裡輸入 Proxy 的資訊。否則，直"
-"接留白即可。"
 
 #. Type: select
 #. Description

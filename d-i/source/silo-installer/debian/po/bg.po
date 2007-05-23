@@ -3,23 +3,26 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of bg.po to Bulgarian
 # Bulgarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
-#
+# Damyan Ivanov <dam@modsoftsys.com>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-19 21:24-0600\n"
-"PO-Revision-Date: 2006-04-08 10:14+0300\n"
-"Last-Translator:  Ognyan Kulev <ogi@fmi.uni-sofia.bg>\n"
+"POT-Creation-Date: 2007-01-06 22:48+0100\n"
+"PO-Revision-Date: 2006-11-20 10:50+0200\n"
+"Last-Translator: Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: boolean
 #. Description
@@ -50,8 +53,7 @@ msgstr "Грешка при инсталирането на SILO"
 #. Description
 #: ../silo-installer.templates:11
 msgid "Running \"/sbin/silo\" failed with error code \"${ERRCODE}\"."
-msgstr ""
-"Грешка при изпълнението на \"/sbin/silo\" с код на грешка \"${ERRCODE}\"."
+msgstr "Грешка при изпълнението на „/sbin/silo“ с код на грешка „${ERRCODE}“."
 
 #. Type: note
 #. Description
@@ -74,14 +76,13 @@ msgstr ""
 #. Main menu text
 #: ../silo-installer.templates:23
 msgid "Install the SILO boot loader on a hard disk"
-msgstr "Инсталиране на SILO върху твърд диск."
+msgstr "Инсталиране на SILO върху твърд диск"
 
 #. Type: note
 #. Description
 #: ../silo-installer.templates:27
-#, fuzzy
 msgid "Unsupported boot file system type"
-msgstr "Неподдържан вид на файлова система"
+msgstr "Неподдържан вид на файловата система за първоначално зареждане"
 
 #. Type: note
 #. Description
@@ -148,9 +149,9 @@ msgid ""
 "partition table of type \"${SILO_DISK}\"."
 msgstr ""
 "SILO (Sparc Linux Loader) може да зареди ядро само от диск с таблица на "
-"дялове \"sun\". В текущото разпределение на дялове ядрото ще бъде "
-"инсталирано в дяла ${SILO_PART}, разположени на диск с таблицата на дялове "
-"от тип \"${SILO_DISK}\"."
+"дялове „sun“. В текущото разпределение на дялове ядрото ще бъде инсталирано "
+"в дяла ${SILO_PART}, разположени на диск с таблицата на дялове от тип "
+"„${SILO_DISK}“."
 
 #. Type: note
 #. Description
@@ -163,9 +164,3 @@ msgstr ""
 "Силно препоръчително е да се върнете към манипулирането на дялове и да "
 "поправите този проблем. Задържането на текущите настройки може да доведе до "
 "незареждаема система."
-
-#. Type: note
-#. Description
-#: ../silo-installer.templates:27
-msgid "Unsupported boot filesystem type"
-msgstr "Неподдържан вид на файлова система"

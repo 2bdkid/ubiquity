@@ -30,10 +30,6 @@ export number_width
 # discover where the comma has to be escaped..
 deci='.'
 
-# If porting this to Debian, be careful! Debian's partman starts automatic
-# partitioning from an init.d script (rather than auto.d as in Ubuntu),
-# which will probably have undesirable consequences unless care is taken to
-# suppress it.
 initcount=`ls /lib/partman/init.d/* | wc -l`
 db_progress START 0 $initcount partman/progress/init/title
 for s in /lib/partman/init.d/*; do
@@ -53,41 +49,7 @@ for s in /lib/partman/init.d/*; do
 done
 db_progress STOP
 
-# Hack to handle information fed into partman by an external agent (i.e.
-# Ubiquity).
-if [ "$PARTMAN_UPDATE_BEFORE_COMMIT" ]; then
-	for dev in /var/lib/partman/devices/*; do
-		[ -d "$dev" ] || continue
-		cd $dev
-		partitions=
-		open_dialog PARTITIONS
-		while { read_line partinfo; [ "$partinfo" ]; }; do
-			if [ "$partitions" ]; then
-				partitions="$partitions
-$partinfo"
-			else
-				partitions="$partinfo"
-			fi
-		done
-		close_dialog
-
-		IFS="$NL"
-		for partinfo in $partitions; do
-			restore_ifs
-			for u in /lib/partman/update.d/*; do
-				[ -x "$u" ] || continue
-				$u $dev $partinfo
-			done
-			IFS="$NL"
-		done
-		restore_ifs
-	done
-
-	if ! confirm_changes "partman"; then
-		trap - EXIT
-		exit 10
-	fi
-fi
+# auto.d intentionally omitted.
 
 if [ -z "$PARTMAN_ALREADY_CHECKED" ]; then
 	for s in /lib/partman/check.d/*; do

@@ -33,32 +33,43 @@ info() {
 }
 
 get_serial_console() {
-	local defconsole="$(sed -e 's/.*console=/console=/' /proc/cmdline)"
-	if echo "${defconsole}" | grep -q console=ttyS; then
-		local PORT="$(echo "${defconsole}" | sed -e 's%^console=ttyS%%' -e 's%,.*%%')"
-		local SPEED="$(echo "${defconsole}" | sed -e 's%^console=ttyS[0-9]\+,%%' -e 's% .*%%')"
-		local SERIAL="ttyS${PORT},${SPEED}"
-		echo "console=$SERIAL"
+	# Get the last 'console=' entry (if none, the whole string is returned)
+	local defconsole="$(sed -e 's/.*\(console=[^ ]*\).*/\1/' /proc/cmdline)"
+	if echo "$defconsole" | grep -q console=ttyS; then
+		echo "$defconsole"
 	fi
 }
 
 grub_serial_console() {
 	#$1=output of get_serial_console
-	local unit=$(echo $1 | sed -e 's%^console=ttyS%%' -e 's%,.*%%')
-	local speed=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,%%' -e 's%[^(0-9)].*%%')
-	local parity=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+%%' -e 's%[78].*%%')
+	local serconsole=${1##console=}
+	local device=${serconsole%%,*}
+	local unit=${device##ttyS}
+	local options=""
+	if echo $serconsole | grep -q ","; then
+		options=${serconsole##*,}
+	fi
+	local speed=$(echo "$options" | sed -e 's/^\([0-9]*\).*$/\1/')
+	# Take optional 1st (parity) and 3rd (word) characters after speed
+	options=${options##${speed}}
+	local parity=$(echo $options | sed 's/^\(.\?\).*$/\1/')
+	local word=$(echo $options | sed 's/^.\?.\?\(.\?\).*$/\1/')
+	if [ -z "$speed" ]; then
+		speed="9600"
+	fi
 	case "$parity" in 
-		"n") local parity="no" ;;
-		"e") local parity="even" ;;
-		"o") local parity="odd" ;;
-		*)   local parity="" ;;
+		n) parity="--parity=no" ;;
+		e) parity="--parity=even" ;;
+		o) parity="--parity=odd" ;;
+		*) parity="" ;;
 	esac
-	local word=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+[oen]%%' -e 's%r%%')
-	local flow=$(echo $1 | sed -e 's%^console=ttyS[0-9]\+,[0-9]\+[oen][78]%%')
+	if [ "$word" ]; then
+		word="--word=$word"
+	fi
 
-	echo serial --unit=$unit --speed=$speed --word=$word --parity=$parity --stop=1
+	echo serial --unit=$unit --speed=$speed $word $parity --stop=1
 	echo terminal serial	
-	}
+}
 
 serial="$(get_serial_console)"
 
@@ -250,15 +261,15 @@ grub_version="grub"
 menu_file="menu.lst"
 
 # reiserfs is the only filesystem that d-i supports and grub2 doesn't yet
-##if [ "$bootfstype" != "reiserfs" ]; then
-##  db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
-##  db_go || true
-##  db_get grub-installer/grub2_instead_of_grub_legacy
-##  if [ "$RET" = true ]; then
-##    grub_version="grub2"
-##    menu_file="grub.cfg"
-##  fi
-##fi
+if [ "$bootfstype" != "reiserfs" ]; then
+	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
+	db_go || true
+	db_get grub-installer/grub2_instead_of_grub_legacy
+	if [ "$RET" = true ]; then
+		grub_version="grub2"
+		menu_file="grub.cfg"
+	fi
+fi
 
 if [ "$bootfstype" = "xfs" ]; then
 	# Warn user that grub on xfs is not safe and let them back out to
@@ -286,7 +297,11 @@ db_progress INFO grub-installer/progress/step_install
 # apt-install passes --no-remove to apt, but grub{,2} conflict each other, so
 # we need to purge them first to support users who try grub2 and then switch
 # to grub legacy, or vice-versa
-##log-output -t grub-installer $chroot $ROOT dpkg -P grub grub2
+if [ "$grub_version" = grub ]; then
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub2
+else
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub
+fi
 
 if ! apt-install $grub_version ; then
 	info "Calling 'apt-install $grub_version' failed"

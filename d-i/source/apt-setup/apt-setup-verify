@@ -2,6 +2,9 @@
 # verify and optionally save out the file
 set -e
 
+NL="
+"
+
 NOTEST=""
 if [ "$1" = "--invalid" ]; then
 	NOTEST=1
@@ -11,10 +14,14 @@ fi
 file="$1"
 saveto="$2"
 
-if [ -n "$ROOT" ]; then
+logoutput=""
+if [ "$CATCHLOG" ]; then
+	logoutput="log-output -t apt-setup"
+fi
+
+chroot=
+if [ "$ROOT" ]; then
 	chroot=chroot
-else
-	chroot=
 fi
 
 saveline () {
@@ -42,8 +49,8 @@ valid () {
 		esac
 	fi
 
-	if $chroot $ROOT apt-get -o APT::Get::List-Cleanup=false \
-		-o Dir::Etc::sourcelist=$tmp update
+	if $logoutput $chroot $ROOT apt-get -o APT::Get::List-Cleanup=false \
+		-o Dir::Etc::sourcelist=$tmp $ASV_TIMEOUT update
 	then
 		rm -f $ROOT$tmp
 	else
@@ -55,11 +62,12 @@ valid () {
 items=0
 gooditems=0
 
-IFS="
-"
+OLDIFS="$IFS"
+IFS="$NL"
 # Can't just iterate over $(cat $file) because that kills newlines, so
 # introduce a dummy colon.
 for line in $(sed 's/^/:/' $file); do
+	IFS="$OLDIFS"
 	line="${line#:}"
 	if expr "$line" : '.*[^ ].*' >/dev/null && [ "$(expr "$line" : "#")" != 1 ]; then
 		items=$(expr "$items" + 1)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-18 17:01-0600\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-10-03 23:32+0300\n"
 "Last-Translator: Siim Põder <windo@p6drad-teel.net>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
@@ -73,7 +73,7 @@ msgstr "Vali Debiani arhiivi peegeldus"
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "sisesta info käsitsi"
 
@@ -101,7 +101,7 @@ msgstr "EE"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid "Ubuntu archive mirror country:"
 msgstr "Debiani arhiivi peegelduse riik:"
@@ -109,7 +109,7 @@ msgstr "Debiani arhiivi peegelduse riik:"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
@@ -122,16 +122,16 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid "Ubuntu archive mirror:"
 msgstr "Debiani arhiivi peegeldus:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
@@ -145,7 +145,7 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:30
-#: ../choose-mirror-bin.templates.ftp-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr ""
 "Ülidiselt on <sinu riigi kood>.archive.ubuntu.com hea valik. Näiteks: ee."
@@ -154,7 +154,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 #, fuzzy
 msgid "Ubuntu archive mirror hostname:"
 msgstr "Debiani arhiivi peegelduse võrgunimi:"
@@ -162,7 +162,7 @@ msgstr "Debiani arhiivi peegelduse võrgunimi:"
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
 msgstr ""
@@ -171,7 +171,7 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -180,16 +180,16 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid "Ubuntu archive mirror directory:"
 msgstr "Debiani arhiivi peegelduse kataloog:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
@@ -215,13 +215,29 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:54
-#: ../choose-mirror-bin.templates.ftp-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "Vahendaja info tuleks anda standartsel kujul \"http://[[user][:pass]@]host[:"
 "port]/\""
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "FTP vahendaja informatsioon (jäta tühjaks, kui pole):"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"Kui pead välismaailmaga suhtlemiseks kasutama FTP vahendajat, sisesta siia "
+"vahendaja info. Vastasel juhul jäta tühjaks."
 
 #. Type: select
 #. Default
@@ -240,25 +256,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "EE"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "FTP vahendaja informatsioon (jäta tühjaks, kui pole):"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:54
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"Kui pead välismaailmaga suhtlemiseks kasutama FTP vahendajat, sisesta siia "
-"vahendaja info. Vastasel juhul jäta tühjaks."
 
 #. Type: select
 #. Description

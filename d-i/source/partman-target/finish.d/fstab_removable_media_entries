@@ -99,26 +99,8 @@ if [ -d /sys/block ] && type udevinfo >/dev/null 2>&1; then
 		continue 2
 	    fi
 	done
-	founddevs="${founddevs:+$founddevs }$dev"
-    done
-else
-    for dir in /proc/scsi/usb-storage-* /proc/scsi/usb-storage; do
-	if [ -d "$dir" ]; then
-	    for ent in $dir/*; do
-		if [ -f "$ent" ]; then
-		    host=$(grep "Host scsi" $ent | sed 's/.*scsi\([0-9]\).*/\1/')
-		    for dev in $(find /dev/scsi/host$host/ -type b); do
-			if [ -b "$dev" ]; then
-			    if grep -q "^$(mapdevfs $dev) " /target/etc/fstab; then
-				continue 2
-			    fi
-			fi
-		    done
-		    dev=$(mapdevfs $(find /dev/scsi/host$host/ -type b | grep /disc))
-		    founddevs="${founddevs:+$founddevs }$dev"
-		fi
-	    done
-	fi
+	mapdev="$(mapdevfs $dev)"
+	founddevs="${founddevs:+$founddevs }$mapdev"
     done
 fi
 USBDEVICES=

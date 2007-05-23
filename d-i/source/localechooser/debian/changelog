@@ -1,3 +1,32 @@
+localechooser (1.38ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add a localechooser-data package containing lists useful for packages
+      that create automatic installation scripts.
+    - Always support English, unless preseeded otherwise.
+    - Check whether the language has changed after asking the country
+      question, and recalculate a number of things if so.
+    - Drop fallbacks for Norwegian Bokmål and Nynorsk.
+    - Simplify use of locale-gen using the new command-line argument
+      facility in Ubuntu's locales package.
+    - Move Portuguese above Portuguese (Brazil) in languagelist.l10n.
+    - Add encoding field to languagelist file and use the full SUPPORTED
+      file rather than SUPPORTED-short.
+    - If the language question was already marked as seen and the answer
+      didn't change, then don't recalculate the locale.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 15 May 2007 14:11:57 +0100
+
+localechooser (1.38) unstable; urgency=low
+
+  * Multiply menu-item-numbers by 100
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:41:33 -0400
+
 localechooser (1.37ubuntu1) feisty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

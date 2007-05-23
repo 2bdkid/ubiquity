@@ -1,3 +1,117 @@
+hw-detect (1.52ubuntu2) gutsy; urgency=low
+
+  * Install ps3pf-utils on powerpc/ps3 systems.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 17 May 2007 14:58:59 +0100
+
+hw-detect (1.52ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Depend on pciutils-udeb for lspci.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3_storage and gelic_net and add snd_ps3
+      to /etc/modules.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 26 Apr 2007 15:30:32 +0100
+
+hw-detect (1.52) unstable; urgency=low
+
+  * Code cleanup:
+    - remove support for 2.4 series kernels
+    - remove support for discover
+    - remove support for old versions of hotplug/udev
+
+ -- Frans Pop <fjp@debian.org>  Sat, 21 Apr 2007 00:59:06 +0200
+
+hw-detect (1.51) unstable; urgency=low
+
+  * Multiply menu-item-numbers by 100
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:44:32 -0400
+
+hw-detect (1.50) unstable; urgency=low
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Malayalam (ml.po) by Praveen A
+  * Swedish (sv.po) by Daniel Nylander
+  * Ukrainian (uk.po) by Eugeniy Meshcheryakov
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 16:49:26 +0100
+
+hw-detect (1.49) unstable; urgency=low
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:35:05 +0100
+
+hw-detect (1.48) unstable; urgency=low
+
+  * hw-detect.sh: [hppa] make sure initramfs-tools will load scsi modules for
+    controlers on a native HP bus. Closes: #406735.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+
+ -- Frans Pop <fjp@debian.org>  Wed, 24 Jan 2007 02:14:10 +0100
+
+hw-detect (1.47) unstable; urgency=low
+
+  * sysfs-update-devnames.sh
+    FireWire Ethernet devices are often a subdevice of the actual (PCI)
+    controller and thus do not have vendor/device info under /sys/class/net.
+    However, we can recognize FireWire devices by their bus type. Having this
+    recognition should make it easier for users to identify their "regular"
+    Ethernet NIC.
+
+  [ Updated translations ]
+  * Danish (da.po) by Claus Hindsgaul
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Galician (gl.po) by Jacobo Tarrio
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+
+ -- Frans Pop <fjp@debian.org>  Thu, 11 Jan 2007 15:17:33 +0100
+
+hw-detect (1.46) unstable; urgency=low
+
+  * Change menu item for ethdetect from 18 to 17 so that ppp-udeb does not
+    get skipped.
+
+  [ Updated translations ]
+  * Panjabi (pa.po) by A S Alam
+
+ -- Frans Pop <fjp@debian.org>  Thu, 21 Dec 2006 16:24:44 +0100
+
+hw-detect (1.45ubuntu5) feisty; urgency=low
+
+  * Don't install mouseemu on powerpc64 for now; it causes a kernel oops
+    somewhere in the input layer (thanks, Benjamin Herrenschmidt).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 15 Apr 2007 10:06:28 +0100
+
 hw-detect (1.45ubuntu4) feisty; urgency=low
 
   * Load ps3_storage and gelic_net on powerpc/ps3 systems. (The initramfs

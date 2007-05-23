@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
 #include <getopt.h>
 #include <syslog.h>
 #include <debian-installer.h>

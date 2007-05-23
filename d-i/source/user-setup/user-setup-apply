@@ -153,7 +153,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 		if [ ! -e $ROOT/etc/sudoers ]; then
 			# try to work in d-i and out; it's better to
 			# use apt-install in d-i
-			apt-install sudo 2>/dev/null || $log $chroot apt-get -q -y install sudo || true
+			apt-install sudo 2>/dev/null || $log $chroot $ROOT apt-get -q -y install sudo || true
 		fi
 		if [ -e $ROOT/etc/sudoers ]; then
 			$log $chroot $ROOT addgroup --system admin >/dev/null 2>&1 || true
@@ -169,9 +169,9 @@ EOF
 		fi
 		# Configure gksu to use sudo, via an alternative, if it's
 		# installed and the alternative is registered.
-		if $chroot update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
-			$log $chroot update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-sudo
-			$log $chroot update-gconf-defaults
+		if $chroot $ROOT update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
+			$log $chroot $ROOT update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-sudo
+			$log $chroot $ROOT update-gconf-defaults
 		fi
 	fi
 else

@@ -10,7 +10,7 @@ if [ -f /cdrom/.disk/base_installable ]; then
 	cp -a /target/etc/apt/sources.list /target/etc/apt/sources.list.base
 fi
 
-apt-setup /target
+apt-setup --log-output /target
 
 if [ -f /target/etc/apt/sources.list.base ]; then
 	logger -t apt-setup 'Using only basic sources for CD installation'

@@ -1,3 +1,102 @@
+apt-setup (1:0.21ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when deciding whether to run
+      choose-mirror.
+    - Don't bother validating network mirrors if the base system can be
+      installed from CD; apt's failure mode is sufficiently graceful
+      nowadays that we can let the user sort out problems after
+      installation.
+    - Enable universe and multiverse by default.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 29 Apr 2007 16:25:30 +0100
+
+apt-setup (1:0.21) unstable; urgency=low
+
+  * Multiply menu-item-numbers by 100.
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+
+ -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:26:40 -0400
+
+apt-setup (1:0.20) unstable; urgency=low
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen A
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 16:37:56 +0100
+
+apt-setup (1:0.19) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Improve regexp in 90security to not misfire if the mirror's name or path
+    contains "contrib" or "non-free".
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+
+ -- Frans Pop <fjp@debian.org>  Tue, 13 Feb 2007 23:23:00 +0100
+
+apt-setup (1:0.18) unstable; urgency=low
+
+  [ Updated translations ]
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:18:40 +0100
+
+apt-setup (1:0.17) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Fix error in French translation. Closes: #400715.
+
+  [ Frans Pop ]
+  * Make wget respect proxy servers defined for local sources. Based on a
+    patch suggested by John Morrissey, for which thanks. Closes: #408297.
+  * Use log-output for commands that produce output if run in the installer.
+  * Consistently use http protocol when setting up security archive (ftp
+    reguires a different mirror directory and is thus not easy to support).
+  * Reduce timeout for testing security mirrors to 30 seconds. As security.d.o
+    currently has 3 IP addresses listed, and these are tried consecutively, the
+    total timeout will be 1.5 minutes (was 6 minutes). Closes: #393033.
+  * apt-setup-verify: reset IFS to avoid problems with option processing.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Safir Secerovic
+  * Danish (da.po) by Claus Hindsgaul
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Hebrew (he.po) by Lior Kaplan
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+
+ -- Frans Pop <fjp@debian.org>  Mon, 29 Jan 2007 21:43:32 +0100
+
 apt-setup (1:0.16ubuntu4) feisty; urgency=low
 
   * Set Maintainer to ubuntu-installer@lists.ubuntu.com.
@@ -49,7 +148,6 @@ apt-setup (1:0.16ubuntu1) feisty; urgency=low
 
 apt-setup (1:0.16) unstable; urgency=low
 
-  [ Updated translations ]
   * Arabic (ar.po) by Ossama M. Khayat
   * Belarusian (be.po) by Andrei Darashenka
   * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)

@@ -1,3 +1,83 @@
+partman-target (50ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use UUID= fstab syntax for all partitions if a UUID is available, and
+      add a comment above each UUID to indicate the corresponding device at
+      install time.
+    - Disable automatic mounting of USB removable devices.
+    - Don't use UUIDs in fstab for those device types that volumeid.postinst
+      refuses to convert.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 30 Apr 2007 11:42:14 +0100
+
+partman-target (50) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Create /var/lock and /var/run on the root filesystem before /var is
+    mounted, so that they can be mounted as tmpfses as in Ubuntu
+    (https://launchpad.net/bugs/44142).
+  * We don't need to call update_partition if the user backs up from
+    selecting a method.
+  * Move sanity-checking scripts from finish.d to check.d. Requires
+    partman-base 106.
+
+  [ Frans Pop ]
+  * Code cleanup: remove no longer used code in fstab_removable_media_entries.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 27 Apr 2007 09:18:23 +0100
+
+partman-target (49) unstable; urgency=low
+
+  * Add missing devfs translation for USB devices. Closes: #414733.
+
+ -- Frans Pop <fjp@debian.org>  Tue, 13 Mar 2007 18:40:32 +0100
+
+partman-target (48) unstable; urgency=low
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Lior Kaplan
+  * Malayalam (ml.po) by Praveen A
+
+ -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 18:26:31 +0100
+
+partman-target (47) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Bosnian (bs.po) by Safir Secerovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Siim Põder
+  * Galician (gl.po) by Jacobo Tarrio
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen A
+  * Norwegian Bokmål (nb.po) by Bjørn Steensrud
+  * Panjabi (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Matej Kovačič
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+
+ -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 12:27:42 +0100
+
 partman-target (46ubuntu2) feisty; urgency=low
 
   * Move sanity-checking scripts from finish.d to check.d.

@@ -1,3 +1,88 @@
+console-setup (1.15ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian (LP: #94177). Remaining changes:
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+    - If the detect-keyboard debconf plugin is available
+      (cdebconf-newt-detect-keys in the installer), then offer to use it to
+      detect the keyboard layout.
+    - Ship MyKeyboardNames.pl (as KeyboardNames.pl) and kbdnames-maker in
+      /usr/share/console-setup.
+    - Only default to Canadian layout for fr_CA; use U.S. English for other
+      *_CA locales.
+    - Fix default layout for Bosnian and default variant for Hindi.
+    - Set default charmap for d-i to UTF-8.
+    - Remove unhelpful defaults for several questions.
+    - Adjust the default keyboard model for Brazilian and Japanese layouts.
+    - Allow preseeding of console-setup/modelcode, console-setup/layoutcode,
+      console-setup/variantcode, console-setup/optionscode, and
+      console-setup/fontsize.
+    - Use jp(latin),jp rather than us,jp by default for Japanese.
+    - Reset console-setup/toggle to the default if it's set to "No toggling"
+      and you select a non-Latin layout.
+    - Change the default font from Terminus to VGA where supported.
+    - Add a few bits of installer integration to console-setup-udeb borrowed
+      from kbd-chooser.
+    - console-setup Depends: perl; something in ckbcomp is causing perl to
+      'use utf8' implicitly, and some of the necessary modules aren't in
+      perl-base.
+    - Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+      tty, since the current tty might belong to X and changing X's tty out
+      of raw mode is a very bad idea.
+    - Map fr_CH to ch(fr) (Swiss French).
+    - Fix codeset question priority for Esperanto.
+    - Automatically save the font and keymap to /etc in
+      /etc/init.d/console-setup if it isn't being run from init. Similarly,
+      ensure that the font and keymap are saved to /etc during initial
+      installation.
+    - Disable workaround in ckbcomp for the kernel not applying Caps Lock to
+      non-ASCII letters, except for Turkish layouts; the cure is worse than
+      the disease because it makes Caps Lock equivalent to Shift Lock.
+    - Add a --save-only option to setupcon, to save the keyboard/font on the
+      root filesystem but not actually tell the kernel to set it up. Use it
+      to make sure the font is available on the root filesystem for the next
+      boot but not to load it immediately, avoiding console manipulation
+      when X or usplash is running.
+    - Set keymap and font in the initramfs if possible.
+    - Add lt to list of non-Latin keymaps.
+    - Set default variant for French to oss.
+    - Fix handling of commas in layout and variant names.
+    - Fix keymap reduction not to try to express keymap A in terms of keymap
+      B when B includes keys not mapped by A.
+    - Source debconf confmodule earlier in postinst.
+    - Fix horrible confusion if the locale has no supported default codeset.
+    - Fix console-setup/codeset default to be one of the available choices.
+    - Don't set an AltGr key by default for US layouts.
+    - Add amiga, ataritt, sun4, and sun5 models, since they are used as
+      defaults on certain architectures.
+    - Map keycode 133 to AT scancode 124 for Japanese.
+  * debian/config.proto: Set sparc default model to pc105 (LP: #105595).
+  * debian/control: Multiply Installer-Menu-Item number by 100.
+  * debian/control: Remove outdated note about loadkeys in
+    console-setup-udeb's description.
+  * debian/console-setup.postinst: Drop font fixups for upgrades from
+    development versions of Edgy.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 25 Apr 2007 11:52:52 +0100
+
+console-setup (1.15) unstable; urgency=low
+
+  * Updated Georgian letters for Fixed16 and Fixed14.  Thanks to Vladimer
+    Sichinava.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Wed, 14 Mar 2007 21:50:54 +0200
+
+console-setup (1.14) unstable; urgency=low
+
+  * Non-maintainer upload to fix pending l10n issues.
+  * Debconf translations:
+    - Czech. Closes: #408602
+    - Spanish. Closes: #412128
+    - Galician. Closes: #413356
+    - Convert French to UTF-8
+
+ -- Christian Perrier <bubulle@debian.org>  Sun,  4 Mar 2007 19:54:11 +0100
+
 console-setup (1.13ubuntu13) feisty; urgency=low
 
   * debian/console-setup.console-setup.init: Don't break if fgconsole fails.

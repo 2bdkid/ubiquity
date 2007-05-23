@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ne\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2006-05-18 17:01-0600\n"
+"POT-Creation-Date: 2007-01-06 22:47+0100\n"
 "PO-Revision-Date: 2006-10-18 11:05+0545\n"
 "Last-Translator: Shiva Prasad Pokharel <pokharelshiva@hotmail.com>\n"
 "Language-Team: Nepali <info@mpp.org.np>\n"
@@ -80,7 +80,7 @@ msgstr "डेबियन सङ्ग्रहको एउटा मिरर
 #. Type: select
 #. Choices
 #: ../choose-mirror-bin.templates.http-in:5
-#: ../choose-mirror-bin.templates.ftp-in:5
+#: ../choose-mirror-bin.templates.ftp.sel-in:6
 msgid "enter information manually"
 msgstr "सूचना म्यानुअल तरिकाले प्रविष्ट गर्नुहोस्"
 
@@ -108,7 +108,7 @@ msgstr "GB"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid "Ubuntu archive mirror country:"
 msgstr "डेबियन सङ्ग्रह मिरर देश:"
@@ -116,7 +116,7 @@ msgstr "डेबियन सङ्ग्रह मिरर देश:"
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:22
-#: ../choose-mirror-bin.templates.ftp-in:22
+#: ../choose-mirror-bin.templates.ftp.sel-in:23
 #, fuzzy
 msgid ""
 "The goal is to find a mirror of the Ubuntu archive that is close to you on "
@@ -129,15 +129,15 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../choose-mirror-bin.templates.http-in:30
-#: ../choose-mirror-bin.templates.ftp-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid "Ubuntu archive mirror:"
 msgstr "डेवियन सङ्ग्रह मिरर:"
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 #, fuzzy
 msgid ""
 "Please select an Ubuntu archive mirror. You should use a mirror in your "
@@ -149,23 +149,23 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../choose-mirror-bin.templates.http-in:32
-#: ../choose-mirror-bin.templates.ftp-in:32
+#: ../choose-mirror-bin.templates.http-in:30
+#: ../choose-mirror-bin.templates.ftp.sel-in:31
 msgid "Usually, <your country code>.archive.ubuntu.com is a good choice."
 msgstr "सामान्यतया, <your country code>.archive.ubuntu.com राम्रो रोजाई हुनसक्छ ।"
 
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:39
-#: ../choose-mirror-bin.templates.ftp-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 #, fuzzy
 msgid "Ubuntu archive mirror hostname:"
 msgstr "डेबियन सङ्ग्रह मिरर होस्टनाम:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 #, fuzzy
 msgid ""
 "Please enter the hostname of the mirror from which Ubuntu will be downloaded."
@@ -173,8 +173,8 @@ msgstr "कृपया मिररको होस्टनाम प्रव
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:41
-#: ../choose-mirror-bin.templates.ftp-in:41
+#: ../choose-mirror-bin.templates.http-in:39
+#: ../choose-mirror-bin.templates.ftp.base-in:5
 msgid ""
 "An alternate port can be specified using the standard [hostname]:[port] "
 "format."
@@ -184,15 +184,15 @@ msgstr ""
 #. Type: string
 #. Description
 #: ../choose-mirror-bin.templates.http-in:48
-#: ../choose-mirror-bin.templates.ftp-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid "Ubuntu archive mirror directory:"
 msgstr "डेबियन सङ्ग्रह मिरर डाइरेक्ट्री:"
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:52
-#: ../choose-mirror-bin.templates.ftp-in:52
+#: ../choose-mirror-bin.templates.http-in:48
+#: ../choose-mirror-bin.templates.ftp.base-in:14
 #, fuzzy
 msgid ""
 "Please enter the directory in which the mirror of the Ubuntu archive is "
@@ -217,14 +217,30 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../choose-mirror-bin.templates.http-in:58
-#: ../choose-mirror-bin.templates.ftp-in:58
+#: ../choose-mirror-bin.templates.http-in:54
+#: ../choose-mirror-bin.templates.ftp.base-in:20
 msgid ""
 "The proxy information should be given in the standard form of \"http://"
 "[[user][:pass]@]host[:port]/\"."
 msgstr ""
 "प्रोक्सी सूचना \"http://[[user][:pass]@]host[:port]/\" को मानक रुपमा दिएको "
 "हुनुपर्दछ ।"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid "FTP proxy information (blank for none):"
+msgstr "FTP प्रोक्सी सूचना (कुनैका लागि पनि खाली छैन):"
+
+#. Type: string
+#. Description
+#: ../choose-mirror-bin.templates.ftp.base-in:20
+msgid ""
+"If you need to use a FTP proxy to access the outside world, enter the proxy "
+"information here. Otherwise, leave this blank."
+msgstr ""
+"यदि तपाईँ बाहिरी संसारलाई HTTP प्रोक्सी प्रयोग गरेर पहुँच गर्न चाहानुहुन्छ भने यहाँ प्रोक्सी "
+"सूचना प्रविष्ट गर्नुहोस् । अन्यथा यो खाली छोड्नुहोस् ।"
 
 #. Type: select
 #. Default
@@ -243,25 +259,9 @@ msgstr ""
 #. You should even NOT put square brackets in translations:
 #. msgid "GB[ Default value for ftp]"
 #. msgstr "FR"
-#: ../choose-mirror-bin.templates.ftp-in:21
+#: ../choose-mirror-bin.templates.ftp.sel-in:22
 msgid "GB[ Default value for ftp]"
 msgstr "GB"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid "FTP proxy information (blank for none):"
-msgstr "FTP प्रोक्सी सूचना (कुनैका लागि पनि खाली छैन):"
-
-#. Type: string
-#. Description
-#: ../choose-mirror-bin.templates.ftp-in:58
-msgid ""
-"If you need to use a FTP proxy to access the outside world, enter the proxy "
-"information here. Otherwise, leave this blank."
-msgstr ""
-"यदि तपाईँ बाहिरी संसारलाई HTTP प्रोक्सी प्रयोग गरेर पहुँच गर्न चाहानुहुन्छ भने यहाँ प्रोक्सी "
-"सूचना प्रविष्ट गर्नुहोस् । अन्यथा यो खाली छोड्नुहोस् ।"
 
 #. Type: select
 #. Description
