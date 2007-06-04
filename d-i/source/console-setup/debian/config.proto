@@ -371,7 +371,7 @@ case "$locale" in
 	default_codeset=Lat15
 	codeset_priority=low
 	;;
-    eo|eo_*)
+    eo|eo.*|eo_*|eo\@*)
 	default_codeset=Lat38
 	codeset_priority=low
 	;;
@@ -692,6 +692,9 @@ case "$locale" in
 	codeset_priority=high
 	;;
 esac
+if [ "$default_codeset" = unsupported ]; then
+    default_codeset=Uni1
+fi
 
 default_codeset="`decode_codeset $default_codeset`"
 
@@ -869,6 +872,9 @@ case "$locale" in
     el_*)
 	default_layout=gr  # Greece
 	;;
+    eo|eo.*|eo_*|eo\@*)
+	default_layout=epo  # Esperanto
+	;;
     fr_*)
 	default_layout=fr  # France
 	default_variant=oss # Alternative
@@ -880,7 +886,7 @@ case "$locale" in
 	;;
     hi_*)
 	default_layout=in  # India
-	default_variant=deva # Devangari
+	default_variant=deva # Devanagari
 	;;
     hr_*)
 	default_layout=hr  # Croatia
@@ -1065,7 +1071,7 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 	'fi') XKBLAYOUT="fi";;
 	fr-latin9) XKBLAYOUT="fr"; XKBVARIANT="latin9";;
 	fr_CH) XKBLAYOUT="ch"; XKBVARIANT="fr";;
-	fr) XKBLAYOUT="fr"; XKBVARIANT="oss";;
+	fr) XKBLAYOUT="fr";;
 	hebrew) XKBLAYOUT="il";;
 	hu) XKBLAYOUT="hu";;
 	gb) XKBLAYOUT="gb";;
@@ -1166,6 +1172,11 @@ if [ -e $CONFIGFILE ]; then
     default_codeset="`decode_codeset $CODESET`"
 
     case "$XKBLAYOUT" in
+	lt,lt)
+	    default_layout=${XKBLAYOUT%,*}
+	    default_variant="${XKBVARIANT%,*}"
+	    unsupported_layout=no
+	    ;;	    
 	# TODO: make s.t. to not forget to update this list
 	cs,cs|us,am|us,ara|us,ben|us,bd|us,bg|us,bt|us,by|us,deva|us,ge|us,gh|us,gr|us,guj|us,guru|us,il|us,in|us,ir|us,iku|jp,jp|us,jp|us,kan|us,kh|us,la|us,lao|us,lk|us,lt|us,mk|us,mm|us,mn|us,mv|us,mal|us,ori|us,pk|us,ru|us,scc|us,sy|us,syr|us,tel|us,th|us,tj|us,tam|us,ua|us,uz)
 	    default_layout=${XKBLAYOUT#*,}
@@ -1374,25 +1385,6 @@ while :; do
 	    else
 		STATE=$(($STATE - 1))
 	    fi
-	    # Adjust the keyboard model for some layouts requiring extra keys.
-	    case $model in
-		pc105|abnt2|jp106)
-		    case $layout in
-			br)
-			    model=abnt2
-			    db_set console-setup/modelcode "$model"
-			    ;;
-			jp)
-			    model=jp106
-			    db_set console-setup/modelcode "$model"
-			    ;;
-			*)
-			    model=pc105
-			    db_set console-setup/modelcode "$model"
-			    ;;
-		    esac
-		    ;;
-	    esac
 	    ;;
 	5)
 	    adjust_layout=false
@@ -1449,9 +1441,13 @@ while :; do
 				;;
 			esac
 			;;
-		    # TODO: make s.t. to not forget to update this list
-		    # Don't forget to update also the list in kbdcompiler
-		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|kan|kh|la|lao|lk|lt|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
+		    lt)
+			latin=no
+			real_layout=lt,lt
+			;;
+		    # TODO: make s.t. to not forget to update this list.  Don't
+		    # forget to update also the nonlatin list in kbdcompiler
+		    am|ara|ben|bd|bg|bt|by|deva|ge|gh|gr|guj|guru|il|in|ir|iku|kan|kh|la|lao|lk|mk|mm|mn|mv|mal|ori|pk|ru|scc|sy|syr|tel|th|tj|tam|ua|uz)
 			latin=no
 			real_layout=us,$layout
 			;;
@@ -1478,8 +1474,17 @@ while :; do
 				"latin,$variant"
 			    ;;
 		    esac
+		elif [ "$real_layout" = lt,lt ]; then
+		    case "$variant" in
+			us)
+			    db_set console-setup/variantcode "us,"
+			    ;;
+			*)
+			    db_set console-setup/variantcode "$variant,us"
+			    ;;
+		    esac
 		elif [ "$real_layout" = jp,jp ]; then
-		    db_set console-setup/variantcode "latin,$variant"
+			    db_set console-setup/variantcode "latin,$variant"
 		else
 		    db_set console-setup/variantcode ",$variant"
 		fi
@@ -1504,9 +1509,13 @@ while :; do
 		    db_input high console-setup/toggle || true
 		    db_input medium console-setup/switch || true
 		fi
-		if [ "$layout" = us ]; then
-		    # US keyboards don't use AltGr.
-		    db_default console-setup/altgr 'No AltGr key'
+		if [ ! -f $CONFIGFILE -a "$layout" = us ]; then
+		    if [ "$variant" = '' ]; then
+			# basic US keyboard doesn't use AltGr.
+			db_default console-setup/altgr 'No AltGr key'
+		    else
+			db_default console-setup/altgr 'Right Alt'
+		    fi
 		fi
 		db_input medium console-setup/altgr || true
 		db_input medium console-setup/compose || true
@@ -1750,6 +1759,8 @@ while :; do
 	    fi
 	    ;;
 	8)
+	    # It shouldn't be possible for $default_codeset to be
+	    # empty, but just a precaution.
 	    if [ "$default_codeset" ]; then
 		db_default console-setup/codeset "$default_codeset"
 	    fi
@@ -1885,4 +1896,21 @@ done
 
 if [ $STATE -eq 0 ]; then
     exit 10
+else
+    # we don't do the following corrections during the state 2 or 3 of
+    # the loop because if the user backs up and selects another layout
+    # the keyboard model will be wrong.  We also want the combinations
+    # Brasilian layout on Japanese keyboard and Japanese layout on
+    # Brasilian keyboard to be possible.
+    db_get console-setup/modelcode
+    if [ "$RET" = "$default_model" ]; then
+	if [ "$layout" = br ]; then 
+	    model=abnt2
+	elif [ "$layout" = jp ]; then 
+	    model=jp106
+	fi
+	db_set console-setup/modelcode "$model"
+    fi
 fi
+
+exit 0

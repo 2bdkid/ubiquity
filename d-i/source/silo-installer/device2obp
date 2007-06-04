@@ -79,6 +79,10 @@ dev_to_obp() {
 		slotnum="$(printf '%d' "'$slotalpha")"
 		slotnum="$(($slotnum - 97))"
 		path="$path/$media@$slotnum"
+	elif echo $path | grep -q qlc; then
+		target=$(echo $last | cut -d ":" -f 3)
+		lun=$(echo $last | cut -d ":" -f 4)
+		path="$path/fp@0,0/disk@$(($target + 1)),$lun"
 	fi
 	echo $media $path \;$partnum $partalpha
 }

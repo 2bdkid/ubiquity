@@ -1,3 +1,26 @@
+partman-partitioning (50ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 24 May 2007 10:20:20 +0100
+
+partman-partitioning (50) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Use expr in resize logic rather than assuming that shell arithmetic is
+    64-bit clean (busybox is at the moment, but in general partman tries not
+    to assume this).
+
+  [ Frans Pop ]
+  * Move deletion of SVN directories to install-rc script.
+  * Improve the way install-rc is called.
+
+  [ Updated translations ]
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 21 May 2007 16:59:33 +0200
+
 partman-partitioning (49ubuntu1) gutsy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

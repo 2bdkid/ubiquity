@@ -1,3 +1,110 @@
+console-setup (1.16ubuntu2) gutsy; urgency=low
+
+  * Make Keyboard/keymaptree executable again.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 03 Jun 2007 21:30:57 +0100
+
+console-setup (1.16ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+    - If the detect-keyboard debconf plugin is available
+      (cdebconf-newt-detect-keys in the installer), then offer to use it to
+      detect the keyboard layout.
+    - Only default to Canadian layout for fr_CA; use U.S. English for other
+      *_CA locales.
+    - Set default charmap for d-i to UTF-8.
+    - Remove unhelpful defaults for several questions.
+    - Allow preseeding of console-setup/modelcode, console-setup/layoutcode,
+      console-setup/variantcode, console-setup/optionscode, and
+      console-setup/fontsize.
+    - Reset console-setup/toggle to the default if it's set to "No toggling"
+      and you select a non-Latin layout.
+    - Change the default font from Terminus to VGA where supported.
+    - Add a few bits of installer integration to console-setup-udeb borrowed
+      from kbd-chooser.
+    - console-setup Depends: perl; something in ckbcomp is causing perl to
+      'use utf8' implicitly, and some of the necessary modules aren't in
+      perl-base.
+    - Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+      tty, since the current tty might belong to X and changing X's tty out
+      of raw mode is a very bad idea.
+    - Automatically save the font and keymap to /etc in
+      /etc/init.d/console-setup if it isn't being run from init. Similarly,
+      ensure that the font and keymap are saved to /etc during initial
+      installation.
+    - Disable workaround in ckbcomp for the kernel not applying Caps Lock to
+      non-ASCII letters, except for Turkish layouts; the cure is worse than
+      the disease because it makes Caps Lock equivalent to Shift Lock.
+    - Use 'setupcon --save-only' to make sure the font is available on the
+      root filesystem for the next boot but not to load it immediately,
+      avoiding console manipulation when X or usplash is running.
+    - Set keymap and font in the initramfs if possible.
+    - Set default variant for French to oss.
+    - Fix handling of commas in layout and variant names.
+    - Fix keymap reduction not to try to express keymap A in terms of keymap
+      B when B includes keys not mapped by A.
+    - debian/config.proto: Set sparc default model to pc105.
+    - debian/control: Remove outdated note about loadkeys in
+      console-setup-udeb's description.
+  * Allow kbd's initramfs hook as an alternative to that provided by
+    console-tools.
+  * Don't run 'setupcon -k' from rcS if usplash is running, as that means
+    the console will be in raw mode and loadkeys will do confusing things to
+    the keymap (LP: #84156).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 03 Jun 2007 14:53:42 +0100
+
+console-setup (1.16) unstable; urgency=low
+
+  * Update ckbconf with the most recent list of xkeysyms.
+  * Thanks to Colin Watson and Ubuntu team for the many bugs and
+    improvements fixed in this release.  Patches were provided by Colin
+    Watson:
+    - Do not sorce the debconf library in the middle of the postinst,
+      closes: #420831.
+    - Remove from the source package several directories
+      debian/UDEB-PACKAGE-NAME.  (The udebs were removed from
+      debian/control before running the clean target.)  Closes: #420912.
+    - Map fr_CH locale to Swiss French default keyboard
+      layout in config.proto.  Closes: #420828.
+    - Pass xkbdir variable on the make-command line, because else its
+      value is overriden and the keymap definitions in Keyboard/ckb are
+      used.  Closes: #420827.
+    - A new option --save-only for setupcon.
+    - Ship KeyboardNames.pl and kbdnames-maker.  Closes: #420914.
+    - Fix Esperanto locale check in config.proto, closes: #420785.  Make
+      'epo' the default layout for Esperanto.
+    - The Bosnian layout is 'ba', not 'bs'.  Closes: #420787.
+    - The layout variant is 'deva', not 'dev'.  Closes: #420797.
+    - Do not leave empty default codeset for unsupported locales.
+      Closes: #420802.  
+    - Use 'jp(latin)' instead of 'us' in the Latin mode of Japanese
+      keyboards.  Override the keyboard model if it was chosen by default
+      and the layout is Japanese or Brasilian.  Closes: #420824.
+    - Add --save-only option to setupcon.  Closes: #420832.
+    - Multiply the Installer-Menu-Item field of the udebs by 100.
+      Closes: #421260.
+    - By default do not use AltGr with basic US keyboard.  Closes: #421263.
+    - Make sure amiga, ataritt, sun4 and sun5 are in KeyboardNames.pl even
+      if they are not in the xml database.  Closes: #420821.
+    - Talk about 'national' instead of 'non-Latin' mode in the templates.
+      Treat the Lithuanian keyboard as a two-mode keyboard similarly to
+      the Serbian keyboard.  Closes: #421261.
+  * Do not ignore the Control+ and Alt+non_symbol_key combinations.
+    Thanks to Karsten Hilbert, closes: #421796.
+  * Two additions to the FAQ:
+    - Add a suggestion for the VBERestore option.  Thanks to Dmitry
+      Semyonov, closes: #402143.
+    - Document CapsLock working as ShiftLock in Unicode mode.
+  * Added manual page for setupcon.  Thanks to Vassilis Pandis,
+    closes: #405005. 
+  * Added Dutch translation.  Thanks to Bart Cornelis, closes: #415518.
+  * Updated Bulgarian translation.
+  
+ -- Anton Zinoviev <zinoviev@debian.org>  Tue,  1 May 2007 23:48:12 +0300
+
 console-setup (1.15ubuntu1) gutsy; urgency=low
 
   * Resynchronise with Debian (LP: #94177). Remaining changes:

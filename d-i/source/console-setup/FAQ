@@ -8,8 +8,9 @@ The following topics are addressed:
    1.5) The symbols on the screen of my LCD are ugly
 
      2) THE INPUT ON THE CONSOLE
-   2.1) I cannot type any non-ASCII character.  How to fix the keymap?
+   2.1) I cannot type any non-ASCII character.  How do I fix the keymap?
    2.2) Where is the Dvorak keyboard?
+   2.3) Why does CapsLock work as ShiftLock?
 
 
 1) THE OUTPUT ON THE CONSOLE
@@ -49,7 +50,19 @@ The following topics are addressed:
    in some future version of X Window.  You may want to send a bug
    report to the X developers.
 
+   Some chipsets might require specific video driver options in order
+   to restore all console settings correctly. For example, if you
+   selected any font size other than 16 for console, it is necessary
+   to add the following line into "Device" section of xorg.conf when
+   using i810 driver with some integrated graphics controllers:
 
+      Option "VBERestore" "true"
+
+   Please, read 'man i810' (or 'man <your driver name>') for
+   additional information and, more importantly, for warnings on using
+   the options.
+
+ 
 1.2) The screen size is wrong.  The buttom 2-3 lines are cut off
 
    The reason and the fix of the problem are the same as in the
@@ -128,7 +141,7 @@ The following topics are addressed:
 
 2) THE INPUT ON THE CONSOLE
 
-2.1) I cannot type any non-ASCII character.  How to fix the keymap?
+2.1) I cannot type any non-ASCII character.  How do I fix the keymap?
 
    In most cases the keymap does not need a fix.
 
@@ -157,3 +170,17 @@ The following topics are addressed:
       XKBVARIANT="dvorak"
 
    in /etc/default/console-setup.
+
+
+2.3) Why does CapsLock work as ShiftLock?
+
+   Yes, this happens if your working encoding is UTF-8.  Unfortunately
+   due to bugs in the kernel and possibly in loadkeys also, when the
+   console is in Unicode mode, CapsLock doesn't work for the non-ASCII
+   letters.  That is why we decided to use ShiftLock instead of
+   CapsLock.  This solution works for all letters but unfortunately it
+   works also for non-letters, i.e. it swaps also 2 and @, 3 and #,
+   etc.  We hope the kernel developers will find a better solution of
+   this problem.
+
+   When the console is not in UTF-8 mode CapsLock works as it should.

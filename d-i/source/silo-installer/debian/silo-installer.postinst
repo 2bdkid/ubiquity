@@ -169,20 +169,26 @@ if [ -n "$probedos" ]; then
 fi
 
 # setting up OBP to boot from our disk because we CAN.
-obpalias=$(device2obp $bootfs | cut -d " " -f 1)
-bootdev=$(eeprom boot-device | sed -e 's/boot-device=//g')
-newbootdev=""
-if [ -n "$obpalias" ]; then
-	for i in $bootdev; do
-		case $i in
-			$obpalias) ;;
-			*) newbootdev="$newbootdev$i " ;;
-		esac
-	done
-	# set our device as default
-	eeprom boot-device="$obpalias $newbootdev"
-	# make sure to boot into it
-	echo "$obpalias" > /proc/sys/kernel/reboot-cmd
+# but only if boot/root is not on raid. Expanding the RAID to single
+# devices requires tons of extra code for a very small beneficial feature
+# that a RAID user should be able to mangle manually anyway if it needs
+# to recover.
+if [ "$raidinstall" = "n" ]; then
+	obpalias=$(device2obp $bootfs | cut -d " " -f 1)
+	bootdev=$(eeprom boot-device | sed -e 's/boot-device=//g')
+	newbootdev=""
+	if [ -n "$obpalias" ]; then
+		for i in $bootdev; do
+			case $i in
+				$obpalias) ;;
+				*) newbootdev="$newbootdev$i " ;;
+			esac
+		done
+		# set our device as default
+		eeprom boot-device="$obpalias $newbootdev"
+		# make sure to boot into it
+		echo "$obpalias" > /proc/sys/kernel/reboot-cmd
+	fi
 fi
 
 # do the rest of the job.

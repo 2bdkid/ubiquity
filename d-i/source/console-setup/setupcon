@@ -17,6 +17,9 @@
 #     along with this program, write to the Free Software Foundation, Inc.,
 #     59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+###########################################################################
+
+
 # The same as /usr/bin/which - in order to make "which" available before
 # /usr is mounted
 which () {
@@ -205,7 +208,7 @@ if [ "$keyboard_only" != yes ] && [ "$ACTIVE_CONSOLES" ]; then
 	if [ "$save_only" != yes ]; then
 	    if which consolechars >/dev/null; then
 		if [ "$bigfont" = yes ]; then
-		    echo "setupcon: The console-chars utility from the console-setup font can load only fonts witn 8 pixel width matrix.  Please install the setfont utility from the kbd package." >&2
+		    echo "setupcon: The consolechars utility from the console-setup font can load only fonts witn 8 pixel width matrix.  Please install the setfont utility from the kbd package." >&2
 		fi
 		eval consolechars -v --tty=$console -f "$FONT" $verbose
 	    elif which setfont >/dev/null; then

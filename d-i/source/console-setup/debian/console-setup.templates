@@ -100,9 +100,9 @@ Template: console-setup/toggle
 Type: select
 __Choices: Caps Lock, Right Alt, Right Control, Right Shift, Right Logo key, Menu key, Alt+Shift, Control+Shift, Shift+Caps Lock, Control+Alt, Both Shift keys together, Both Control keys together, Both Alt keys together, Left Alt, Left Control, Left Shift, Left Logo key, No toggling
 Default: Alt+Shift
-_Description: Method for toggling between Latin and non-Latin mode:
- Since your keyboard is a non-Latin one, you will need a way to toggle
- between the Latin and the non-Latin mode.  Several options are available.
+_Description: Method for toggling between national and Latin mode:
+ You will need a way to toggle the keyboard between the national
+ layout and the standard Latin layout.  Several options are available.
  .
  The most ergonomic choices seem to be the right Alt and the Caps Lock keys
  (in the later case use the combination Shift+Caps Lock for normal Caps
@@ -117,13 +117,13 @@ Template: console-setup/switch
 Type: select
 __Choices: No temporary switch, Right Alt, Left Alt, Right Logo key, Left Logo key, Both Logo keys
 Default: No temporary switch
-_Description: Method for temporarily toggle between Latin and non-Latin input:
- Sometimes the keyboard is in non-Latin mode and you want to type only few
+_Description: Method for temporarily toggle between national and Latin input:
+ Sometimes the keyboard is in national mode and you want to type only few
  Latin letters. In this case it may be desirable to have a key for
- temporary switching between non-Latin and Latin letters.  While this key
- is pressed in non-Latin mode the keyboard types Latin letters and in
+ temporary switching between national and Latin symbols.  While this key
+ is pressed in national mode the keyboard types Latin letters and in
  reverse, when the keyboard is in Latin mode and you are pressing this key
- the keyboard will type non-Latin letters.
+ the keyboard will type national letters.
  .
  If you don't like this feature, choose the option "No temporary switch".
 

@@ -240,6 +240,7 @@ binary-indep: build install
 		 usr/share/doc/console-setup-mini
 	dh_installdocs -pbdf2psf debian/README.fontsets
 #	dh_installexamples
+	dh_installman -pconsole-setup setupcon.1
 	dh_installman -pbdf2psf Fonts/bdf2psf.1
 #	dh_installinfo
 #	dh_undocumented
