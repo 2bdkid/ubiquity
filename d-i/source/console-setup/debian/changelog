@@ -1,3 +1,12 @@
+console-setup (1.16ubuntu3) gutsy; urgency=low
+
+  * Remove 'exit 0' from the end of debian/config.proto; this will be
+    sourced from the postinst in the installer, and exiting in the
+    successful case means that /etc/default/console-setup never gets
+    generated (thanks, Evan Dandrea).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 04 Jun 2007 22:53:23 +0100
+
 console-setup (1.16ubuntu2) gutsy; urgency=low
 
   * Make Keyboard/keymaptree executable again.
