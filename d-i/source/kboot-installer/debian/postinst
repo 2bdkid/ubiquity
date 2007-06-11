@@ -35,8 +35,23 @@ rootfs_devfs="$(findfs /)"
 bootfs_devfs="$(findfs /boot)"
 [ "$bootfs_devfs" ] || bootfs_devfs="$rootfs_devfs"
 
-rootfs="$(mapdevfs "$rootfs_devfs")"
-bootfs="$(mapdevfs "$bootfs_devfs")"
+if [ -b "$rootfs_devfs" ]; then
+    rootfs="$(PATH="/lib/udev:$PATH" vol_id -u "$rootfs_devfs" || true)"
+fi
+if [ -b "$bootfs_devfs" ]; then
+    bootfs="$(PATH="/lib/udev:$PATH" vol_id -u "$bootfs_devfs" || true)"
+fi
+
+if [ "$rootfs" ]; then
+    rootfs="UUID=$rootfs"
+else
+    rootfs="$(mapdevfs "$rootfs_devfs")"
+fi
+if [ "$bootfs" ]; then
+    bootfs="UUID=$bootfs"
+else
+    bootfs="$(mapdevfs "$bootfs_devfs")"
+fi
 
 # Work out user parameters.
 user_params=quiet
