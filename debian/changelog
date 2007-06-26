@@ -1,3 +1,39 @@
+ubiquity (1.5.4) gutsy; urgency=low
+
+  [ Colin Watson ]
+  * Make sure that the bounds of the spin button in the partition edit
+    dialog always include the current size of the partition, even if for
+    some reason it is outside the minimum/maximum resize ranges reported by
+    partman, which can happen due to rounding errors in ubiquity/partman
+    communication (part of #95619).
+  * Save /var/log/casper.log to installed system (LP: #119993).
+  * KDE frontend:
+    - Say "Skip" (or translation thereof) rather than "Cancel" in progress
+      dialog (LP: #116631).
+    - Fix crash if one of the placeholder continent entries is selected as
+      the timezone (LP: #112813).
+  * From the department of pickiness: PEP-8 import ordering.
+  * Move .glade and .ui files to a new top-level gui directory in the source
+    package. Install .ui files in /usr/share/ubiquity/qt rather than in
+    /usr/lib/ubiquity/ubiquity/frontend now that they are loaded on the fly
+    rather than being compiled into .py files statically.
+  * If /etc/udev/rules.d/70-persistent-net.rules exists, copy it rather than
+    generating /etc/iftab.
+
+  [ Mario Limonciello ]
+  * Break up the glade file into multiple pieces to make updates
+    to single pages a lot easier.
+
+  [ Nathan Collins ]
+  * Fix typo in unionfs dirs= option generation (LP: #118742).
+
+  [ Evan Dandrea ]
+  * Work around 122141 by keeping a reference to the button image.
+  * Automatic update of included source packages: silo-installer
+    1.10ubuntu3.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 26 Jun 2007 10:26:53 -0400
+
 ubiquity (1.5.3) gutsy; urgency=low
 
   [ Colin Watson ]

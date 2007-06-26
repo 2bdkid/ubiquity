@@ -22,6 +22,15 @@
 # Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 import sys
+import os
+import datetime
+import subprocess
+import math
+import traceback
+import syslog
+import signal
+import gettext
+
 #from qt import *
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
@@ -30,16 +39,6 @@ from PyQt4 import uic
 #from kdecore import *
 #from kio import KRun
 #import kdedesigner
-
-import os
-import datetime
-import subprocess
-import math
-import traceback
-import syslog
-import signal
-
-import gettext
 
 try:
     from debconf import DebconfCommunicator
@@ -62,7 +61,7 @@ PATH = '/usr/share/ubiquity'
 # Define locale path
 LOCALEDIR = "/usr/share/locale"
 
-UIDIR = '/usr/lib/ubiquity/ubiquity/frontend'
+UIDIR = os.path.join(PATH, 'qt')
 
 BREADCRUMB_STEPS = {
     "stepLanguage": 1,
@@ -902,9 +901,10 @@ class Wizard(BaseFrontend):
             progress_title = ""
         total_steps = progress_max - progress_min
         if self.progressDialogue is None:
-            self.progressDialogue = QProgressDialog('', "Cancel", 0, total_steps, self.userinterface)
+            skipText = self.get_string("progress_cancel_button")
+            self.progressDialogue = QProgressDialog('', skipText, 0, total_steps, self.userinterface)
             self.progressDialogue.setWindowModality(Qt.WindowModal);
-            self.cancelButton = QPushButton("Cancel", self.progressDialogue)
+            self.cancelButton = QPushButton(skipText, self.progressDialogue)
             self.cancelButton.hide()
             self.progressDialogue.setCancelButton(self.cancelButton)
         elif self.progress_position.depth() == 0:
@@ -1358,6 +1358,9 @@ class Wizard(BaseFrontend):
             min_size_mb = int(partition['resize_min_size']) / 1000000
             cur_size_mb = int(partition['parted']['size']) / 1000000
             max_size_mb = int(partition['resize_max_size']) / 1000000
+            # Bad things happen if the current size is out of bounds.
+            min_size_mb = min(min_size_mb, cur_size_mb)
+            max_size_mb = max(cur_size_mb, max_size_mb)
             self.edit_dialog.partition_edit_size_spinbutton.setMinimum(min_size_mb)
             self.edit_dialog.partition_edit_size_spinbutton.setMaximum(max_size_mb)
             self.edit_dialog.partition_edit_size_spinbutton.setSingleStep(1)
@@ -1906,7 +1909,7 @@ class TimezoneMap(object):
             return
 
     def get_tz_from_name(self, name):
-        if len(name) != 0:
+        if len(name) != 0 and name in self.timezone_city_index:
             return self.timezone_city_index[name]
         else:
             return None

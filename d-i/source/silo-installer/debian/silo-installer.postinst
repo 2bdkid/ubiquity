@@ -5,23 +5,23 @@ set -e
 db_capb backup
 
 convert_to_uuid() {
-  root="$1"
-  case "$root" in
-    UUID=*|LABEL=*|/dev/disk/*|/dev/mapper/*|/dev/evms/*|/dev/md[0-9]*)
-    ;;
-    /dev/*)
-      if [ -L "$root" ] && readlink "$root" | grep -q "^/dev/mapper/"
-      then
-        :
-      elif [ -b "$root" ]; then
-        uuid=$(/lib/udev/vol_id -u "$root" || true)
-        if [ -n "$uuid" ]; then
-	  root="/dev/disk/by-uuid/$uuid"
-        fi
-      fi
-    ;;
-  esac
-  echo "$root"
+	root="$1"
+	case "$root" in
+		UUID=*|LABEL=*|/dev/disk/*|/dev/mapper/*|/dev/evms/*|/dev/md[0-9]*)
+		;;
+		/dev/*)
+			if [ -L "$root" ] && readlink "$root" | grep -q "^/dev/mapper/"
+			then
+				:
+			elif [ -b "$root" ]; then
+				uuid=$(/lib/udev/vol_id -u "$root" || true)
+				if [ -n "$uuid" ]; then
+					root="/dev/disk/by-uuid/$uuid"
+				fi
+			fi
+		;;
+	esac
+	echo "$root"
 }
 
 findfs () {
@@ -29,6 +29,18 @@ findfs () {
         if [ -n "$check" ]; then
 		mapdevfs $check
 	fi
+}
+
+create_dev () {
+	device=$(echo $1 | sed -e 's#/dev/##g' -e 's/[0-9]*//g')
+	maj=$(cat /sys/block/$device/dev | cut -d ":" -f 1)
+	min=$(cat /sys/block/$device/dev | cut -d ":" -f 2)
+	mknod /target/dev/$device b $maj $min
+	cd /sys/block/$device
+	for i in ${device}*; do
+		min=$(cat $i/dev | cut -d ":" -f 2)
+		mknod /target/dev/$i b $maj $min
+	done
 }
 
 # detect the partitions /target and /target/boot
@@ -41,6 +53,14 @@ if [ "$rootfs" = "$bootfs" ]; then
 	boot="/boot"
 else
 	boot=""
+fi
+
+# create devices in target if they don't exists
+if [ ! -e "/target$rootfs" ]; then
+	create_dev $rootfs
+fi
+if [ ! -e "/target$bootfs" ]; then
+	create_dev $bootfs
 fi
 
 rootfs=$(convert_to_uuid $rootfs)
