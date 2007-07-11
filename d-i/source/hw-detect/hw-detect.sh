@@ -505,6 +505,11 @@ case $SUBARCH in
 	;;
 esac
 
+# Install eject?
+if [ -n "$(list-devices cd; list-devices maybe-usb-floppy)" ]; then
+	apt-install eject || true
+fi
+
 # Install optimised libc based on CPU type
 case "$(udpkg --print-architecture)" in
 	i386)

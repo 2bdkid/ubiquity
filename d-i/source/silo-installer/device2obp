@@ -83,6 +83,9 @@ dev_to_obp() {
 		target=$(echo $last | cut -d ":" -f 3)
 		lun=$(echo $last | cut -d ":" -f 4)
 		path="$path/fp@0,0/disk@$(($target + 1)),$lun"
+	elif echo $path | grep -q virtual-devices; then
+		media=disk
+		path="/virtual-devices/$(basename $path | sed -e 's/,.*//g')"
 	fi
 	echo $media $path \;$partnum $partalpha
 }

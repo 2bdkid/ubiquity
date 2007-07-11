@@ -28,6 +28,7 @@ import subprocess
 import math
 import traceback
 import syslog
+import atexit
 import signal
 import gettext
 
@@ -40,10 +41,7 @@ from PyQt4 import uic
 #from kio import KRun
 #import kdedesigner
 
-try:
-    from debconf import DebconfCommunicator
-except ImportError:
-    from ubiquity.debconfcommunicator import DebconfCommunicator
+import debconf
 
 from ubiquity import filteredcommand, i18n, validation
 from ubiquity.misc import *
@@ -123,9 +121,11 @@ class Wizard(BaseFrontend):
 
         # declare attributes
         self.release_notes_url_template = None
-        self.language_questions = ('live_installer', 'welcome_heading_label',
-                                   'welcome_text_label', 'release_notes_label',
-                                   'release_notes_url', 'step_label',
+        self.language_questions = ('live_installer',
+                                   'welcome_heading_label', 'welcome_text_label',
+                                   'oem_id_label',
+                                   'release_notes_label', 'release_notes_url',
+                                   'step_label',
                                    'cancel', 'back', 'next')
         self.current_page = None
         self.allowed_change_step = True
@@ -151,8 +151,7 @@ class Wizard(BaseFrontend):
         self.app.connect(self.userinterface.partition_list_treeview, SIGNAL("activated(const QModelIndex&)"), self.on_partition_list_treeview_activated)
 
         # set default language
-        dbfilter = language.Language(self, DebconfCommunicator('ubiquity',
-                                                               cloexec=True))
+        dbfilter = language.Language(self, self.debconf_communicator())
         dbfilter.cleanup()
         dbfilter.db.shutdown()
 
@@ -212,6 +211,14 @@ class Wizard(BaseFrontend):
             dialog.exec_()
             sys.exit(1)
 
+    # Disable the KDE media notifier to avoid problems during partitioning.
+    def disable_volume_manager(self):
+        execute('dcop', 'kded', 'kded', 'unloadModule', 'medianotifier')
+        atexit.register(self.enable_volume_manager)
+
+    def enable_volume_manager(self):
+        execute('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
+
     def openURL(self, url):
         #need to run this else kdesu can't run Konqueror
         execute('su', 'ubuntu', 'xhost', '+localhost')
@@ -226,6 +233,8 @@ class Wizard(BaseFrontend):
             result = QMessageBox.critical(self.userinterface, "Must be root",
                                           title)
             sys.exit(1)
+
+        self.disable_volume_manager()
 
         # show interface
         # TODO cjwatson 2005-12-20: Disabled for now because this segfaults in
@@ -345,6 +354,28 @@ class Wizard(BaseFrontend):
         self.photo.set_from_file(photo)
         """
 
+        if self.oem_config:
+            self.userinterface.setWindowTitle(
+                self.get_string('oem_config_title'))
+            try:
+                self.userinterface.oem_id_entry.setText(
+                    self.debconf_operation('get', 'oem-config/id'))
+            except debconf.DebconfError:
+                pass
+            self.userinterface.fullname.setText(
+                'OEM Configuration (temporary user)')
+            self.userinterface.fullname.setReadOnly(True)
+            self.userinterface.fullname.setEnabled(False)
+            self.userinterface.username.setText('oem')
+            self.userinterface.username.setReadOnly(True)
+            self.userinterface.username.setEnabled(False)
+            self.username_edited = True
+            # The UserSetup component takes care of preseeding passwd/user-uid.
+            execute('apt-install', 'oem-config-kde')
+        else:
+            self.userinterface.oem_id_label.hide()
+            self.userinterface.oem_id_entry.hide()
+
         try:
             release_notes = open('/cdrom/.disk/release_notes_url')
             self.release_notes_url_template = release_notes.read().rstrip('\n')
@@ -367,6 +398,7 @@ class Wizard(BaseFrontend):
         else:
             languages = [self.locale]
         core_names = ['ubiquity/text/%s' % q for q in self.language_questions]
+        core_names.append('ubiquity/text/oem_config_title')
         for stock_item in ('cancel', 'close', 'go-back', 'go-forward',
                            'ok', 'quit'):
             core_names.append('ubiquity/imported/%s' % stock_item)
@@ -434,6 +466,8 @@ class Wizard(BaseFrontend):
             widget.setText(text.replace('_', '&', 1))
 
         elif isinstance(widget, QWidget) and str(widget.objectName()) == "UbiquityUIBase":
+            if self.oem_config:
+                text = self.get_string('oem_config_title', lang)
             widget.setWindowTitle(text)
         else:
             print "WARNING: unknown widget: " + widget.objectName()
@@ -528,8 +562,6 @@ class Wizard(BaseFrontend):
             0, 100, self.get_string('ubiquity/install/title'))
         self.debconf_progress_region(0, 15)
 
-        execute('dcop', 'kded', 'kded', 'unloadModule', 'medianotifier')
-
         dbfilter = partman_commit.PartmanCommit(self)
         if dbfilter.run_command(auto_process=True) != 0:
             while self.progress_position.depth() != 0:
@@ -537,8 +569,6 @@ class Wizard(BaseFrontend):
             self.progressDialogue.hide()
             self.return_to_partitioning()
             return
-
-        execute('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
 
         # No return to partitioning from now on
         self.installing_no_return = True
@@ -1013,6 +1043,9 @@ class Wizard(BaseFrontend):
             return self.language_choice_map[value][0]
         else:
             return 'C'
+
+    def get_oem_id (self):
+        return unicode(self.userinterface.oem_id_entry.text())
 
     def set_timezone (self, timezone):
         self.tzmap.set_tz_from_name(timezone)

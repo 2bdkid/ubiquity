@@ -1,3 +1,30 @@
+hw-detect (1.53ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3_storage and gelic_net and add snd_ps3
+      to /etc/modules.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 11 Jun 2007 10:31:27 -0400
+
+hw-detect (1.53) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Install eject on systems that seem to have a CD drive. Previously, it
+    was installed by cdrom-detect, only when installing from CD.
+
+  [ Updated translations ]
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 21 May 2007 16:38:31 +0200
+
 hw-detect (1.52ubuntu2) gutsy; urgency=low
 
   * Install ps3pf-utils on powerpc/ps3 systems.
@@ -3216,3 +3243,4 @@ ddetect (0.03) unstable; urgency=low
   * Initial Release.
 
  -- David Whedon <dwhedon@gordian.com>  Mon, 13 Nov 2000 23:46:39 -0800
+

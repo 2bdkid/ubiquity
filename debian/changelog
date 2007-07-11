@@ -1,3 +1,53 @@
+ubiquity (1.5.5) gutsy; urgency=low
+
+  [ Colin Watson ]
+  * KDE frontend: Disable the KDE media notifier for the entire duration of
+    installation (LP: #122500).
+  * Rename gtk-ui to gtk_ui and kde-ui to kde_ui, to make it easier to
+    subclass them.
+  * If oem-config/enable is true, then:
+    - Adjust title bar to indicate that Ubiquity is running in OEM mode.
+    - Hardcode the user's full name to "OEM Configuration (temporary user)",
+      the username to "oem", and the UID to 29999.
+    - Install the appropriate oem-config-FRONTEND package on the target
+      system.
+    - Install a desktop file for oem-config-prepare on the oem user's
+      desktop.
+    - Ask for a unique identifier for this batch of installations, and save
+      that in /var/log/installer/oem-id on the installed system.
+  * Add a warning in d-i/source/README about modifying files in this
+    directory.
+  * GTK frontend:
+    - Fix full-name error reason widget, and make the error reasons
+      selectable.
+    - Suppress some spurious uncaught exceptions on startup.
+    - Don't reconfigure the username entry box as a combo box if
+      migration-assistant didn't find any users.
+  * Replicate the apt configuration done by base-installer (trust CD-ROMs,
+    allow unauthenticated packages if debian-installer/allow_unauthenticated
+    is true, bind-mount /cdrom into /target, and configure apt-cdrom/apt not
+    to mount CD-ROMs).
+  * Install packages passed to apt-install even if they aren't on the live
+    filesystem, as long as they're available from the apt archive on the CD
+    (LP: #114296).
+
+  [ Evan Dandrea ]
+  * Initial commit of ubiquity-automation work:
+    - Added a new frontend, noninteractive.
+    - debconffilter now respects the "seen" flag when running in automatic
+      mode.
+
+  [ Mario Limonciello ]
+  * Merge in mythbuntu alpha 2 changes.
+  * Set all mythbuntu labels to word wrap.
+  * Add mythbuntu to translatable files.
+
+  [ Evan Dandrea ]
+  * Automatic update of included source packages: base-installer
+    1.80ubuntu2, hw-detect 1.53ubuntu1, silo-installer 1.10ubuntu4.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 11 Jul 2007 10:34:53 +0100
+
 ubiquity (1.5.4) gutsy; urgency=low
 
   [ Colin Watson ]

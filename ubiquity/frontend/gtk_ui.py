@@ -1,6 +1,6 @@
-# 2007# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #
-# «gtk-ui» - GTK user interface
+# «gtk_ui» - GTK user interface
 #
 # Copyright (C) 2005 Junta de Andalucía
 # Copyright (C) 2005, 2006, 2007 Canonical Ltd.
@@ -49,10 +49,7 @@ import pango
 import gobject
 import gtk.glade
 
-try:
-    from debconf import DebconfCommunicator
-except ImportError:
-    from ubiquity.debconfcommunicator import DebconfCommunicator
+import debconf
 
 from ubiquity import filteredcommand, i18n, validation
 from ubiquity.misc import *
@@ -133,9 +130,11 @@ class Wizard(BaseFrontend):
         # declare attributes
         self.gconf_previous = {}
         self.thunar_previous = {}
-        self.language_questions = ('live_installer', 'welcome_heading_label',
-                                   'welcome_text_label', 'release_notes_label',
-                                   'release_notes_url', 'step_label',
+        self.language_questions = ('live_installer',
+                                   'welcome_heading_label', 'welcome_text_label',
+                                   'oem_id_label',
+                                   'release_notes_label', 'release_notes_url',
+                                   'step_label',
                                    'cancel', 'back', 'next',
                                    'warning_dialog', 'warning_dialog_label',
                                    'cancelbutton', 'exitbutton')
@@ -149,6 +148,8 @@ class Wizard(BaseFrontend):
         self.resize_max_size = None
         self.new_size_scale = None
         self.username_combo = None
+        self.username_changed_id = None
+        self.hostname_changed_id = None
         self.username_edited = False
         self.hostname_edited = False
         self.previous_partitioning_page = None
@@ -159,8 +160,7 @@ class Wizard(BaseFrontend):
         self.laptop = execute("laptop-detect")
 
         # set default language
-        dbfilter = language.Language(self, DebconfCommunicator('ubiquity',
-                                                               cloexec=True))
+        dbfilter = language.Language(self, self.debconf_communicator())
         dbfilter.cleanup()
         dbfilter.db.shutdown()
 
@@ -174,7 +174,7 @@ class Wizard(BaseFrontend):
 
         # load the main interface
         self.glade = gtk.glade.XML('%s/ubiquity.glade' % GLADEDIR)
-        add_widgets(self,self.glade)
+        add_widgets(self, self.glade)
 
         steps = self.glade.get_widget("steps")
         for page in SUBPAGES:
@@ -428,6 +428,24 @@ class Wizard(BaseFrontend):
         self.logo_image.set_from_file(logo)
         self.photo.set_from_file(photo)
 
+        if self.oem_config:
+            self.live_installer.set_title(self.get_string('oem_config_title'))
+            self.oem_id_vbox.show()
+            try:
+                self.oem_id_entry.set_text(
+                    self.debconf_operation('get', 'oem-config/id'))
+            except debconf.DebconfError:
+                pass
+            self.fullname.set_text('OEM Configuration (temporary user)')
+            self.fullname.set_editable(False)
+            self.fullname.set_sensitive(False)
+            self.username.set_text('oem')
+            self.username.set_editable(False)
+            self.username.set_sensitive(False)
+            self.username_edited = True
+            # The UserSetup component takes care of preseeding passwd/user-uid.
+            execute('apt-install', 'oem-config-gtk')
+
         self.live_installer.show()
         self.allow_change_step(False)
 
@@ -489,6 +507,7 @@ class Wizard(BaseFrontend):
         else:
             languages = [self.locale]
         core_names = ['ubiquity/text/%s' % q for q in self.language_questions]
+        core_names.append('ubiquity/text/oem_config_title')
         for stock_item in ('cancel', 'close', 'go-back', 'go-forward',
                            'ok', 'quit'):
             core_names.append('ubiquity/imported/%s' % stock_item)
@@ -554,6 +573,8 @@ class Wizard(BaseFrontend):
                 widget.set_label(text)
 
         elif isinstance(widget, gtk.Window):
+            if name == 'live_installer' and self.oem_config:
+                text = self.get_string('oem_config_title', lang)
             widget.set_title(text)
 
 
@@ -752,6 +773,10 @@ class Wizard(BaseFrontend):
     def info_loop(self, widget):
         """check if all entries from Identification screen are filled. Callback
         defined in glade file."""
+
+        if (self.username_changed_id is None or
+            self.hostname_changed_id is None):
+            return
 
         if (widget is not None and widget.get_name() == 'fullname' and
             not self.username_edited):
@@ -1189,6 +1214,10 @@ class Wizard(BaseFrontend):
         else:
             value = unicode(model.get_value(iterator, 0))
             return self.language_choice_map[value][0]
+
+
+    def get_oem_id (self):
+        return self.oem_id_entry.get_text()
 
 
     def set_timezone (self, timezone):
@@ -1972,6 +2001,10 @@ class Wizard(BaseFrontend):
 
         # If the user pressed back.
         if self.username_combo:
+            return
+
+        # Were any users found?
+        if not self.ma_new_users:
             return
 
         # Reconfigure username as a combobox without having to modify

@@ -1,3 +1,43 @@
+base-installer (1.80ubuntu2) gutsy; urgency=low
+  
+  * Install smp kernel by default on sun4v (Niagara based sparc).
+    With the new LDOM support on the way, adding/removing CPU's
+    from control/service/guest nodes is easy as drinking a glass
+    of water. With this change we will guarantee that the user
+    will always get the best setup.
+
+ -- Fabio M. Di Nitto <fabbione@ubuntu.com>  Tue, 03 Jul 2007 09:58:53 +0200
+
+base-installer (1.80ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Write out the resume partition as a UUID if possible.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 15 Jun 2007 15:52:38 -0400
+
+base-installer (1.80) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove obsolete code to mount CDs in /target for 2.2 kernels.
+
+  [ Joey Hess ]
+  * Depend on debian-archive-keyring-udeb. (This is not a hard dependency,
+    since the keyring is not always used, but it's simpler than using
+    anna-install.)
+
+  [ Updated translations ]
+  * Panjabi (pa.po) by A S Alam
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 21 May 2007 16:33:20 +0200
+
 base-installer (1.79ubuntu1) gutsy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

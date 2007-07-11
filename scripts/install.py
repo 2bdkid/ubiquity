@@ -391,7 +391,12 @@ class Install:
             self.configure_bootloader()
 
             self.db.progress('SET', 94)
-            self.db.progress('REGION', 94, 99)
+            self.db.progress('REGION', 94, 95)
+            self.db.progress('INFO', 'ubiquity/install/installing')
+            self.install_extras()
+
+            self.db.progress('SET', 95)
+            self.db.progress('REGION', 95, 99)
             self.db.progress('INFO', 'ubiquity/install/removing')
             self.remove_extras()
 
@@ -574,6 +579,15 @@ class Install:
             status_gz.close()
             status.close()
         except IOError:
+            pass
+        try:
+            if self.db.get('oem-config/enable') == 'true':
+                oem_id = self.db.get('oem-config/id')
+                oem_id_file = open(
+                    os.path.join(self.target, 'var/log/installer/oem-id'))
+                print >>oem_id_file, oem_id
+                oem_id_file.close()
+        except (debconf.DebconfError, IOError):
             pass
 
 
@@ -783,13 +797,59 @@ exit 0"""
     def configure_apt(self):
         """Configure /etc/apt/sources.list."""
 
+        # TODO cjwatson 2007-07-06: Much of the following is
+        # cloned-and-hacked from base-installer/debian/postinst. Perhaps we
+        # should come up with a way to avoid this.
+
+        # Make apt trust CDs. This is not on by default (we think).
+        # This will be left in place on the installed system.
+        apt_conf_tc = open(os.path.join(
+            self.target, 'etc/apt/apt.conf.d/00trustcdrom'), 'w')
+        print >>apt_conf_tc, 'APT::Authentication::TrustCDROM "true";'
+        apt_conf_tc.close()
+
         # Avoid clock skew causing gpg verification issues.
         # This file will be left in place until the end of the install.
         apt_conf_itc = open(os.path.join(
             self.target, 'etc/apt/apt.conf.d/00IgnoreTimeConflict'), 'w')
-        print >>apt_conf_itc, ('Acquire::gpgv::Options {'
-                               ' "--ignore-time-conflict"; };')
+        print >>apt_conf_itc, \
+            'Acquire::gpgv::Options { "--ignore-time-conflict"; };'
         apt_conf_itc.close()
+
+        try:
+            if self.db.get('debian-installer/allow_unauthenticated') == 'true':
+                apt_conf_au = open(
+                    os.path.join(self.target,
+                                 'etc/apt/apt.conf.d/00AllowUnauthenticated'),
+                    'w')
+                print >>apt_conf_au, 'APT::Get::AllowUnauthenticated "true";'
+                print >>apt_conf_au, \
+                    'Aptitude::CmdLine::Ignore-Trust-Violations "true";'
+                apt_conf_au.close()
+        except debconf.DebconfError:
+            pass
+
+        # let apt inside the chroot see the cdrom
+        target_cdrom = os.path.join(self.target, 'cdrom')
+        misc.execute('umount', target_cdrom)
+        if not os.path.exists(target_cdrom):
+            os.mkdir(target_cdrom)
+        misc.execute('mount', '--bind', '/cdrom', target_cdrom)
+
+        # Make apt-cdrom and apt not unmount/mount CD-ROMs.
+        # This file will be left in place until the end of the install.
+        apt_conf_nmc = open(os.path.join(
+            self.target, 'etc/apt/apt.conf.d/00NoMountCDROM'), 'w')
+        print >>apt_conf_nmc, textwrap.dedent("""\
+            APT::CDROM::NoMount "true";
+            Acquire::cdrom {
+              mount "/cdrom";
+              "/cdrom/" {
+                Mount  "true";
+                UMount "true";
+              };
+            }""")
+        apt_conf_nmc.close()
 
         dbfilter = apt_setup.AptSetup(None)
         ret = dbfilter.run_command(auto_process=True)
@@ -818,6 +878,16 @@ exit 0"""
             print >>record, pkg
 
         record.close()
+
+
+    def query_recorded_installed(self):
+        apt_installed = set()
+        if os.path.exists("/var/lib/ubiquity/apt-installed"):
+            record_file = open("/var/lib/ubiquity/apt-installed")
+            for line in record_file:
+                apt_installed.add(line.strip())
+            record_file.close()
+        return apt_installed
 
 
     def mark_install(self, cache, pkg):
@@ -878,86 +948,8 @@ exit 0"""
                 to_install.append(pattern.replace('$LL', lp))
             # More extensive language support packages.
             to_install.append('language-support-%s' % lp)
-        self.record_installed(to_install)
 
-        self.db.progress('START', 0, 100, 'ubiquity/langpacks/title')
-
-        self.db.progress('REGION', 0, 10)
-        fetchprogress = DebconfFetchProgress(
-            self.db, 'ubiquity/langpacks/title',
-            'ubiquity/install/apt_indices_starting',
-            'ubiquity/install/apt_indices')
-        cache = Cache()
-
-        if cache._depcache.BrokenCount > 0:
-            syslog.syslog(
-                'not installing language packs, since there are broken '
-                'packages: %s' % ', '.join(self.broken_packages(cache)))
-            self.db.progress('STOP')
-            return
-
-        try:
-            # update() returns False on failure and 0 on success. Madness!
-            if cache.update(fetchprogress) not in (0, True):
-                fetchprogress.stop()
-                self.db.progress('STOP')
-                return
-        except IOError, e:
-            for line in str(e).split('\n'):
-                syslog.syslog(syslog.LOG_WARNING, line)
-            self.db.progress('STOP')
-            raise
-        cache.open(None)
-        self.db.progress('SET', 10)
-
-        self.db.progress('REGION', 10, 100)
-        fetchprogress = DebconfFetchProgress(
-            self.db, 'ubiquity/langpacks/title', None,
-            'ubiquity/langpacks/packages')
-        installprogress = DebconfInstallProgress(
-            self.db, 'ubiquity/langpacks/title', 'ubiquity/install/apt_info')
-
-        for lp in to_install:
-            self.mark_install(cache, lp)
-        installed_pkgs = []
-        for pkg in cache.keys():
-            if (cache[pkg].markedInstall or cache[pkg].markedUpgrade or
-                cache[pkg].markedReinstall or cache[pkg].markedDowngrade):
-                installed_pkgs.append(pkg)
-        self.record_installed(installed_pkgs)
-
-        commit_error = None
-        try:
-            if not cache.commit(fetchprogress, installprogress):
-                fetchprogress.stop()
-                installprogress.finishUpdate()
-                self.db.progress('STOP')
-                return
-        except IOError, e:
-            for line in str(e).split('\n'):
-                syslog.syslog(syslog.LOG_WARNING, line)
-            commit_error = str(e)
-        except SystemError, e:
-            for line in str(e).split('\n'):
-                syslog.syslog(syslog.LOG_WARNING, line)
-            commit_error = str(e)
-        self.db.progress('SET', 100)
-
-        cache.open(None)
-        if commit_error or cache._depcache.BrokenCount > 0:
-            if commit_error is None:
-                commit_error = ''
-            brokenpkgs = self.broken_packages(cache)
-            syslog.syslog('broken packages after language pack installation: '
-                          '%s' % ', '.join(brokenpkgs))
-            self.db.subst('ubiquity/install/broken_install', 'ERROR',
-                          commit_error)
-            self.db.subst('ubiquity/install/broken_install', 'PACKAGES',
-                          ', '.join(brokenpkgs))
-            self.db.input('critical', 'ubiquity/install/broken_install')
-            self.db.go()
-
-        self.db.progress('STOP')
+        self.do_install(to_install, langpacks=True)
 
 
     def configure_timezone(self):
@@ -993,7 +985,24 @@ exit 0"""
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
             raise InstallStepError("UserSetupApply failed with code %d" % ret)
-    
+
+        try:
+            if self.db.get('oem-config/enable') == 'true':
+                if os.path.isdir(os.path.join(self.target, 'home/oem')):
+                    for desktop_file in (
+                        'usr/share/applications/oem-config-prepare-gtk.desktop',
+                        'usr/share/applications/kde/oem-config-prepare-kde.desktop'):
+                        if os.path.exists(os.path.join(self.target,
+                                                       desktop_file)):
+                            desktop_base = os.path.basename(desktop_file)
+                            self.chrex('install', '-D',
+                                       '-o', 'oem', '-g', 'oem',
+                                       '/%s' % desktop_file,
+                                       '/home/oem/Desktop/%s' % desktop_base)
+                            break
+        except debconf.DebconfError:
+            pass
+
     def configure_ma(self):
         """import documents, settings, and users from previous operating
         systems."""
@@ -1181,11 +1190,11 @@ exit 0"""
 
     def configure_network(self):
         """Automatically configure the network.
-        
+
         At present, the only thing the user gets to tweak in the UI is the
         hostname. Some other things will be copied from the live filesystem,
         so changes made there will be reflected in the installed system.
-        
+
         Unfortunately, at present we have to duplicate a fair bit of netcfg
         here, because it's hard to drive netcfg in a way that won't try to
         bring interfaces up and down."""
@@ -1339,6 +1348,90 @@ exit 0"""
                 continue
         return brokenpkgs
 
+    def do_install(self, to_install, langpacks=False):
+        if langpacks:
+            self.db.progress('START', 0, 10, 'ubiquity/langpacks/title')
+        else:
+            self.db.progress('START', 0, 10, 'ubiquity/install/title')
+        self.db.progress('INFO', 'ubiquity/install/find_installables')
+
+        if langpacks:
+            # ... otherwise we're installing packages that have already been
+            # recorded
+            self.record_installed(to_install)
+
+        self.db.progress('REGION', 0, 1)
+        fetchprogress = DebconfFetchProgress(
+            self.db, 'ubiquity/install/title',
+            'ubiquity/install/apt_indices_starting',
+            'ubiquity/install/apt_indices')
+        cache = Cache()
+
+        if cache._depcache.BrokenCount > 0:
+            syslog.syslog(
+                'not installing additional packages, since there are broken '
+                'packages: %s' % ', '.join(self.broken_packages(cache)))
+            self.db.progress('STOP')
+            return
+
+        for pkg in to_install:
+            self.mark_install(cache, pkg)
+
+        self.db.progress('SET', 1)
+        self.db.progress('REGION', 1, 10)
+        if langpacks:
+            fetchprogress = DebconfFetchProgress(
+                self.db, 'ubiquity/langpacks/title', None,
+                'ubiquity/langpacks/packages')
+            installprogress = DebconfInstallProgress(
+                self.db, 'ubiquity/langpacks/title',
+                'ubiquity/install/apt_info')
+        else:
+            fetchprogress = DebconfFetchProgress(
+                self.db, 'ubiquity/install/title', None,
+                'ubiquity/install/fetch_remove')
+            installprogress = DebconfInstallProgress(
+                self.db, 'ubiquity/install/title',
+                'ubiquity/install/apt_info',
+                'ubiquity/install/apt_error_install')
+        self.chroot_setup()
+        commit_error = None
+        try:
+            try:
+                if not cache.commit(fetchprogress, installprogress):
+                    fetchprogress.stop()
+                    installprogress.finishUpdate()
+                    self.db.progress('STOP')
+                    return
+            except IOError, e:
+                for line in str(e).split('\n'):
+                    syslog.syslog(syslog.LOG_ERR, line)
+                commit_error = str(e)
+            except SystemError, e:
+                for line in str(e).split('\n'):
+                    syslog.syslog(syslog.LOG_ERR, line)
+                commit_error = str(e)
+        finally:
+            self.chroot_cleanup()
+        self.db.progress('SET', 10)
+
+        cache.open(None)
+        if commit_error or cache._depcache.BrokenCount > 0:
+            if commit_error is None:
+                commit_error = ''
+            brokenpkgs = self.broken_packages(cache)
+            syslog.syslog('broken packages after installation: '
+                          '%s' % ', '.join(brokenpkgs))
+            self.db.subst('ubiquity/install/broken_install', 'ERROR',
+                          commit_error)
+            self.db.subst('ubiquity/install/broken_install', 'PACKAGES',
+                          ', '.join(brokenpkgs))
+            self.db.input('critical', 'ubiquity/install/broken_install')
+            self.db.go()
+
+        self.db.progress('STOP')
+
+
     def do_remove(self, to_remove, recursive=False):
         self.db.progress('START', 0, 5, 'ubiquity/install/title')
         self.db.progress('INFO', 'ubiquity/install/find_removables')
@@ -1484,6 +1577,31 @@ exit 0"""
         self.db.progress('STOP')
 
 
+    def install_extras(self):
+        """Try to install additional packages requested by installer
+        components."""
+
+        # We only ever install these packages from the CD.
+        sources_list = os.path.join(self.target, 'etc/apt/sources.list')
+        os.rename(sources_list, "%s.apt-setup" % sources_list)
+        old_sources = open("%s.apt-setup" % sources_list)
+        new_sources = open(sources_list, 'w')
+        found_cdrom = False
+        for line in old_sources:
+            if 'cdrom:' in line:
+                print >>new_sources, line,
+                found_cdrom = True
+        new_sources.close()
+        old_sources.close()
+        if not found_cdrom:
+            os.rename("%s.apt-setup" % sources_list, sources_list)
+
+        self.do_install(self.query_recorded_installed())
+
+        if found_cdrom:
+            os.rename("%s.apt-setup" % sources_list, sources_list)
+
+
     def remove_extras(self):
         """Try to remove packages that are needed on the live CD but not on
         the installed system."""
@@ -1511,13 +1629,7 @@ exit 0"""
             difference = set()
 
         # Keep packages we explicitly installed.
-        apt_installed = set()
-        if os.path.exists("/var/lib/ubiquity/apt-installed"):
-            apt_installed_file = open("/var/lib/ubiquity/apt-installed")
-            for line in apt_installed_file:
-                apt_installed.add(line.strip())
-            apt_installed_file.close()
-        difference -= apt_installed
+        difference -= self.query_recorded_installed()
 
         if len(difference) == 0:
             return
@@ -1531,11 +1643,17 @@ exit 0"""
 
     def cleanup(self):
         """Miscellaneous cleanup tasks."""
-        try:
-            os.unlink(os.path.join(
-                self.target, 'etc/apt/apt.conf.d/00IgnoreTimeConflict'))
-        except:
-            pass
+
+        misc.execute('umount', os.path.join(self.target, 'cdrom'))
+
+        for apt_conf in ('00NoMountCDROM', '00IgnoreTimeConflict',
+                         '00AllowUnauthenticated'):
+            try:
+                os.unlink(os.path.join(
+                    self.target, 'etc/apt/apt.conf.d', apt_conf))
+            except:
+                pass
+
         if self.source == '/var/lib/ubiquity/source':
             self.umount_source()
 
