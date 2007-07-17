@@ -13,7 +13,7 @@ fstab=$(
     sort |
     while read mp fs type options dump pass; do
 	case "$fs" in
-	    (/dev/disk/*|/dev/fd[0-9]*|/dev/mapper/*|/dev/evms/*|/dev/md[0-9]*)
+	    (/dev/disk/*|/dev/fd[0-9]*)
 		printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
 		;;
 	    (/*)

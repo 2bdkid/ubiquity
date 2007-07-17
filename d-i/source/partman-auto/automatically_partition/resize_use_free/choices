@@ -2,6 +2,7 @@
 
 . /lib/partman/definitions.sh
 . /lib/partman/resize.sh
+. /lib/partman/auto-shared.sh
 
 bestfree=0
 bestpart=none
@@ -197,10 +198,15 @@ get_resize_use_free_on_dev() {
 dev="$1"
 
 if [ -z "$dev" ]; then
-    for dev in $DEVICES/*; do
-	[ -d $dev ] || continue
+    DEVS="$(get_auto_disks)"
+    IFS="$NL"
+    for dev in $DEVS; do
+	restore_ifs
+	dev="${dev%$TAB*}"
 	get_resize_use_free_on_dev
+	IFS="$NL"
     done
+    restore_ifs
 else
     get_resize_use_free_on_dev
 fi
