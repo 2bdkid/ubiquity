@@ -1,3 +1,18 @@
+partman-auto (69ubuntu5) gutsy; urgency=low
+
+  * Add support for partman-auto/method=loop via partman-auto-loop.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 30 Jul 2007 13:26:40 +0100
+
+partman-auto (69ubuntu4) gutsy; urgency=low
+
+  * Backport from trunk:
+    - Fix divide-by-zero error if the sum of the factors in the scheme is
+      equal to the sum of the minimum sizes, or if we run off the maximum
+      size of the recipe before we run out of disk to allocate.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 30 Jul 2007 12:30:35 +0100
+
 partman-auto (69ubuntu3) gutsy; urgency=low
 
   * Don't offer /dev/mapper/* devices for automatic resizing.

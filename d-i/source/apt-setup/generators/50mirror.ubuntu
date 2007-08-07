@@ -123,6 +123,8 @@ cat >> $file <<EOF
 ## team.
 ${COMMENT}deb $protocol://$hostname$directory $codename universe
 ${COMMENT}deb-src $protocol://$hostname$directory $codename universe
+${COMMENT}deb $protocol://$hostname$directory $codename-updates universe
+${COMMENT}deb-src $protocol://$hostname$directory $codename-updates universe
 EOF
 
 # Multiverse is different, don't write anything unless enabled.
@@ -136,6 +138,8 @@ if db_get apt-setup/multiverse && [ "$RET" = true ]; then
 ## security team.
 deb $protocol://$hostname$directory $codename multiverse
 deb-src $protocol://$hostname$directory $codename multiverse
+deb $protocol://$hostname$directory $codename-updates multiverse
+deb-src $protocol://$hostname$directory $codename-updates multiverse
 EOF
 fi
 
@@ -160,3 +164,16 @@ cat >> $file <<EOF
 ${COMMENT}deb $protocol://$hostname$directory $codename-backports main restricted universe multiverse
 ${COMMENT}deb-src $protocol://$hostname$directory $codename-backports main restricted universe multiverse
 EOF
+
+if (db_get apt-setup/restricted && [ "$RET" = true ]) || \
+   (db_get apt-setup/multiverse && [ "$RET" = true ]); then
+	cat >> $file <<EOF
+
+## Uncomment the following two lines to add software from Canonical's
+## 'commercial' repository. This software is not part of Ubuntu, but is
+## offered by Canonical and the respective vendors as a service to Ubuntu
+## users.
+# deb http://archive.canonical.com/ubuntu $codename commercial
+# deb-src http://archive.canonical.com/ubuntu $codename commercial
+EOF
+fi

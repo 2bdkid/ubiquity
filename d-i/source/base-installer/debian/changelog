@@ -1,3 +1,26 @@
+base-installer (1.81ubuntu1) gutsy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Write out the resume partition as a UUID if possible.
+    - Install smp kernel by default on sun4v (Niagara based sparc).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 01 Aug 2007 19:06:43 +0100
+
+base-installer (1.81) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Provides installed-base. This is need to be able to use alternative
+    ways of installing Debian.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 18 Jun 2007 22:16:24 +0100
+
 base-installer (1.80ubuntu2) gutsy; urgency=low
   
   * Install smp kernel by default on sun4v (Niagara based sparc).
