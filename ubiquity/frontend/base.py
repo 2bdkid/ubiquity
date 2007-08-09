@@ -57,6 +57,12 @@ class BaseFrontend:
         try:
             if self.debconf_operation('get', 'oem-config/enable') == 'true':
                 self.oem_config = True
+                # It seems unlikely that anyone will need
+                # migration-assistant in the OEM installation process. If it
+                # turns out that they do, just delete the following two
+                # lines.
+                if 'UBIQUITY_MIGRATION_ASSISTANT' in os.environ:
+                    del os.environ['UBIQUITY_MIGRATION_ASSISTANT']
         except debconf.DebconfError:
             pass
 
@@ -347,6 +353,15 @@ class BaseFrontend:
             if not device.startswith('(') and not device.startswith('/dev/'):
                 device = '/dev/%s' % device
         self.summary_device = device
+
+    def set_grub(self, enable):
+        """Sets whether we will be installing GRUB."""
+        self.grub_en = enable
+
+    # called from ubiquity.components.install
+    def get_grub(self):
+        """Returns whether we will be installing GRUB."""
+        return self.grub_en
 
     # called from ubiquity.components.install
     def get_summary_device(self):

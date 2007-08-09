@@ -1,3 +1,35 @@
+ubiquity (1.5.8) gutsy; urgency=low
+
+  [ Mario Limonciello ]
+  * Fix mythbuntu lircd.conf generation.
+  * Update lircd gui to fit better.
+  * Clean up mythbuntu summary text.  Remove all passwords that are
+    shown.
+  * Activate mythweb security.
+  * Add lirc to mythbuntu depends.
+  * In postinstall mythbuntu-setup, change xhost behavior.
+  * Add lirc.hwdb population to mythbuntu lirc steps
+  * Make all "yes"/"no"'s True/False
+  * Add support to enable/disable boot loader installation in GTK,
+    KDE, and Mythbuntu frontends (LP: #130445)
+
+  [ Evan Dandrea ]
+  * Don't dump debug information to the console when using --automatic.
+  * Get the user password straight from debconf in noninteractive mode.
+
+  [ Colin Watson ]
+  * Add partman-auto-loop.
+  * Move oem-config post-user-creation hacks to the end of install_extras,
+    when oem-config-gtk/kde will have been installed in /target
+    (LP: #131250).
+  * Reimplement more of oem-config-udeb (ugh): disable the hwdb-client
+    notification for the created user; set up autologin for the oem user via
+    gdm/kdm.
+  * Disable migration-assistant if oem-config/enable=true.
+  * Adjust apport hook to attach /var/log/installer/debug too if available.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 09 Aug 2007 19:57:31 +0100
+
 ubiquity (1.5.7) gutsy; urgency=low
 
   * Run apt's DoInstall() method with stdin redirected from /dev/null, to

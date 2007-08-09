@@ -3,6 +3,7 @@
 
 # Copyright (C) 2005 Javier Carranza and others for Guadalinex
 # Copyright (C) 2005, 2006 Canonical Ltd.
+# Copyright (C) 2007 Mario Limonciello
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -42,6 +43,7 @@ from apt.progress import FetchProgress, InstallProgress
 sys.path.insert(0, '/usr/lib/ubiquity')
 
 from ubiquity import misc
+from ubiquity import osextras
 from ubiquity.components import language_apply, apt_setup, timezone_apply, \
                                 clock_setup, console_setup_apply, \
                                 usersetup_apply, hw_detect, check_kernels, \
@@ -995,23 +997,6 @@ exit 0"""
         if ret != 0:
             raise InstallStepError("UserSetupApply failed with code %d" % ret)
 
-        try:
-            if self.db.get('oem-config/enable') == 'true':
-                if os.path.isdir(os.path.join(self.target, 'home/oem')):
-                    for desktop_file in (
-                        'usr/share/applications/oem-config-prepare-gtk.desktop',
-                        'usr/share/applications/kde/oem-config-prepare-kde.desktop'):
-                        if os.path.exists(os.path.join(self.target,
-                                                       desktop_file)):
-                            desktop_base = os.path.basename(desktop_file)
-                            self.chrex('install', '-D',
-                                       '-o', 'oem', '-g', 'oem',
-                                       '/%s' % desktop_file,
-                                       '/home/oem/Desktop/%s' % desktop_base)
-                            break
-        except debconf.DebconfError:
-            pass
-
     def configure_ma(self):
         """import documents, settings, and users from previous operating
         systems."""
@@ -1308,42 +1293,43 @@ exit 0"""
     def configure_bootloader(self):
         """configuring and installing boot loader into installed
         hardware system."""
+        install_bootloader = self.db.get('ubiquity/install_bootloader')
+        if install_bootloader == "true":
+            misc.execute('mount', '--bind', '/proc', self.target + '/proc')
+            misc.execute('mount', '--bind', '/dev', self.target + '/dev')
 
-        misc.execute('mount', '--bind', '/proc', self.target + '/proc')
-        misc.execute('mount', '--bind', '/dev', self.target + '/dev')
+            archdetect = subprocess.Popen(['archdetect'], stdout=subprocess.PIPE)
+            subarch = archdetect.communicate()[0].strip()
 
-        archdetect = subprocess.Popen(['archdetect'], stdout=subprocess.PIPE)
-        subarch = archdetect.communicate()[0].strip()
-
-        try:
-            if subarch.startswith('amd64/') or subarch.startswith('i386/'):
-                from ubiquity.components import grubinstaller
-                dbfilter = grubinstaller.GrubInstaller(None)
-                ret = dbfilter.run_command(auto_process=True)
-                if ret != 0:
-                    raise InstallStepError(
-                        "GrubInstaller failed with code %d" % ret)
-            elif subarch == 'powerpc/ps3':
-                from ubiquity.components import kbootinstaller
-                dbfilter = kbootinstaller.KbootInstaller(None)
-                ret = dbfilter.run_command(auto_process=True)
-                if ret != 0:
-                    raise InstallStepError(
-                        "KbootInstaller failed with code %d" % ret)
-            elif subarch.startswith('powerpc/'):
-                from ubiquity.components import yabootinstaller
-                dbfilter = yabootinstaller.YabootInstaller(None)
-                ret = dbfilter.run_command(auto_process=True)
-                if ret != 0:
-                    raise InstallStepError(
-                        "YabootInstaller failed with code %d" % ret)
-            else:
+            try:
+                if subarch.startswith('amd64/') or subarch.startswith('i386/'):
+                    from ubiquity.components import grubinstaller
+                    dbfilter = grubinstaller.GrubInstaller(None)
+                    ret = dbfilter.run_command(auto_process=True)
+                    if ret != 0:
+                        raise InstallStepError(
+                            "GrubInstaller failed with code %d" % ret)
+                elif subarch == 'powerpc/ps3':
+                    from ubiquity.components import kbootinstaller
+                    dbfilter = kbootinstaller.KbootInstaller(None)
+                    ret = dbfilter.run_command(auto_process=True)
+                    if ret != 0:
+                        raise InstallStepError(
+                            "KbootInstaller failed with code %d" % ret)
+                elif subarch.startswith('powerpc/'):
+                    from ubiquity.components import yabootinstaller
+                    dbfilter = yabootinstaller.YabootInstaller(None)
+                    ret = dbfilter.run_command(auto_process=True)
+                    if ret != 0:
+                        raise InstallStepError(
+                            "YabootInstaller failed with code %d" % ret)
+                else:
+                    raise InstallStepError("No bootloader installer found")
+            except ImportError:
                 raise InstallStepError("No bootloader installer found")
-        except ImportError:
-            raise InstallStepError("No bootloader installer found")
 
-        misc.execute('umount', '-f', self.target + '/proc')
-        misc.execute('umount', '-f', self.target + '/dev')
+            misc.execute('umount', '-f', self.target + '/proc')
+            misc.execute('umount', '-f', self.target + '/dev')
 
 
     def broken_packages(self, cache):
@@ -1609,6 +1595,81 @@ exit 0"""
 
         if found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
+
+        # TODO cjwatson 2007-08-09: python reimplementation of
+        # oem-config/finish-install.d/07oem-config-user. This really needs
+        # to die in a great big chemical fire and call the same shell script
+        # instead.
+        try:
+            if self.db.get('oem-config/enable') == 'true':
+                if os.path.isdir(os.path.join(self.target, 'home/oem')):
+                    open(os.path.join(self.target, 'home/oem/.hwdb'),
+                         'w').close()
+
+                    for desktop_file in (
+                        'usr/share/applications/oem-config-prepare-gtk.desktop',
+                        'usr/share/applications/kde/oem-config-prepare-kde.desktop'):
+                        if os.path.exists(os.path.join(self.target,
+                                                       desktop_file)):
+                            desktop_base = os.path.basename(desktop_file)
+                            self.chrex('install', '-D',
+                                       '-o', 'oem', '-g', 'oem',
+                                       '/%s' % desktop_file,
+                                       '/home/oem/Desktop/%s' % desktop_base)
+                            break
+
+                # Some serious horribleness is needed here to handle absolute
+                # symlinks.
+                for name in ('gdm-cdd.conf', 'gdm.conf'):
+                    gdm_conf_name = os.path.join(self.target, 'etc/gdm', name)
+                    gdm_conf = osextras.realpath_root(
+                        self.target, os.path.join('/etc/gdm', name))
+                    if os.path.isfile(gdm_conf):
+                        gdm_conf_file = open(gdm_conf)
+                        gdm_conf_file_new = open('%s.oem' % gdm_conf_name, 'w')
+                        for line in gdm_conf_file:
+                            if line.startswith('AutomaticLoginEnable='):
+                                line = 'AutomaticLoginEnable=true'
+                            elif line.startswith('AutomaticLogin='):
+                                line = 'AutomaticLogin=oem'
+                            elif line.startswith('TimedLoginEnable='):
+                                line = 'TimedLoginEnable=true'
+                            elif line.startswith('TimedLogin='):
+                                line = 'TimedLogin=oem'
+                            elif line.startswith('TimedLoginDelay='):
+                                line = 'TimedLoginDelay=10'
+                            print >>gdm_conf_file_new, line
+                        gdm_conf_file_new.close()
+                        gdm_conf_file.close()
+                        break
+
+                kdmrc = os.path.join(self.target, 'etc/kde3/kdm/kdmrc')
+                if os.path.isfile(kdmrc):
+                    kdmrc_file = open(kdmrc)
+                    kdmrc_file_new = open('%s.oem' % kdmrc, 'w')
+                    for line in kdmrc_file:
+                        line_nocomment = line.lstrip('#')
+                        if line_nocomment.startswith('AutoLoginEnable='):
+                            line = 'AutoLoginEnable=true'
+                        elif line_nocomment.startswith('AutoLoginUser='):
+                            line = 'AutoLoginUser=oem'
+                        elif line_nocomment.startswith('AutoReLogin='):
+                            line = 'AutoReLogin=true'
+                        print >>kdmrc_file_new, line
+                    kdmrc_file_new.close()
+                    kdmrc_file.close()
+
+                if osextras.find_on_path_root(self.target, 'kpersonalizer'):
+                    kpersonalizerrc = os.path.join(self.target,
+                                                   'etc/kde3/kpersonalizerrc')
+                    if not os.path.isfile(kpersonalizerrc):
+                        kpersonalizerrc_file = open(kpersonalizerrc, 'w')
+                        print >>kpersonalizerrc_file, '[General]'
+                        print >>kpersonalizerrc_file, 'FirstLogin=false'
+                        kpersonalizerrc_file.close()
+                        open('%s.created-by-oem', 'w').close()
+        except debconf.DebconfError:
+            pass
 
 
     def remove_extras(self):
