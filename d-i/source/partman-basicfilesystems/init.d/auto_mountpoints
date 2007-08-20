@@ -56,9 +56,7 @@ for part in $partitions; do
     fi
 
     echo keep >"$dev/$id/method"
-    if [ -f "$dev/$id/format" ]; then
-	rm "$dev/$id/format"
-    fi
+    rm -f "$dev/$id/format"
     >"$dev/$id/use_filesystem"
     echo "$fs" >"$dev/$id/filesystem"
     mkdir -p "$dev/$id/options"

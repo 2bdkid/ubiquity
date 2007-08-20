@@ -60,7 +60,7 @@ for dev in $DEVICES/*; do
 		    [ -f "$id/mountpoint" ] || continue
 		    mountpoint=$(cat $id/mountpoint)
 		    options=$(get_mountoptions $dev $id)
-		    if [ "$utf8" ]; then
+		    if [ "$utf8" ] && [ ! -f /var/lib/partman/ntfs-3g ]; then
 			options="$options,nls=utf8"
 		    fi
 		    # base-passwd defines gid 46 as group plugdev

@@ -1,3 +1,15 @@
+partman-basicfilesystems (54ubuntu3) gutsy; urgency=low
+
+  * init.d/auto_mountpoints: Use 'rm -f' rather than a more awkward
+    test-then-remove construction.
+  * Adjust Description to note that we provide NTFS support too.
+  * If ntfs-3g is available, try to load the fuse module; if we can do that
+    and the fuseblk filesystem is available, accept that as sufficient NTFS
+    support.
+  * Don't set the nls=utf8 mount option if using ntfs-3g.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 20 Aug 2007 19:44:25 +0100
+
 partman-basicfilesystems (54ubuntu2) gutsy; urgency=low
 
   * Backport from trunk (LP: #126328):
