@@ -58,7 +58,7 @@ if [ -n "$MAPCDDEV" ]; then
     CDDEVICES="$MAPCDDEV $CDDEVICES" # first the mounted cdrom
 fi
 
-populate_media cdrom udf,iso9660 user,noauto $CDDEVICES
+populate_media cdrom udf,iso9660 user,noauto,exec $CDDEVICES
 # Compatability link to keep things working; etch is not migrated away
 # entirely from /cdrom.
 if [ -n "$CDDEVICES" ]; then
@@ -74,7 +74,7 @@ for dev in $(list-devices floppy); do
     fi
 done
 
-populate_media floppy auto rw,user,noauto $FDDEVICES
+populate_media floppy auto rw,user,noauto,exec $FDDEVICES
 
 # See if a usb storage device is plugged in right now. If so, assume it is
 # removable media unless the disk is already listed in the fstab. 
