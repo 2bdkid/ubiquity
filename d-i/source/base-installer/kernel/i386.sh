@@ -22,7 +22,7 @@ arch_get_kernel_flavour () {
 				" 6")
 					case "$MODEL" in
 						" 9"|" 10")		echo 686 ;;
-						*)		echo 486 ;;
+						*)		echo 586 ;;
 					esac
 					;;
 				*)		echo 486 ;;

@@ -443,6 +443,10 @@ while : ; do
 	fi
 done
 
+if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
+	bootdev=
+fi
+
 db_progress STEP 1
 db_subst grub-installer/progress/step_install_loader BOOTDEV "$bootdev"
 db_progress INFO grub-installer/progress/step_install_loader
@@ -450,6 +454,8 @@ db_progress INFO grub-installer/progress/step_install_loader
 info "Installing grub on '$bootdev'"
 
 update_mtab
+
+mkdir -p $ROOT/boot/grub
 
 # Install grub on each space separated disk in the list
 bootdevs="$bootdev"
@@ -614,6 +620,11 @@ if ! db_get debian-installer/framebuffer || [ "$RET" = false ]; then
 	# No framebuffer, so disable the splash screen.
 	sed -i '/^# defoptions=/ { s/  *splash//g; s/=splash\(  *\|$\)/=/; }' \
 		$ROOT/boot/grub/$menu_file
+	need_update_grub=1
+fi
+
+if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
+	sed -i "/^# groot=/s:).*:)$RET:" $ROOT/boot/grub/$menu_file
 	need_update_grub=1
 fi
 

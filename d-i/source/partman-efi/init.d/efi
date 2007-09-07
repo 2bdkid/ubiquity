@@ -6,7 +6,7 @@
 # Give the kernel a chance to create /proc/efi if appropriate.
 modprobe efivars >/dev/null 2>&1 || true
 
-if [ ! -d /proc/efi ] && [ ! -d /sys/firmware/efi ]; then
+if [ -d /proc/efi ] || [ -d /sys/firmware/efi ]; then
     > /var/lib/partman/efi
 else
     ARCH="$(archdetect)"

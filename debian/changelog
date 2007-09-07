@@ -1,3 +1,33 @@
+ubiquity (1.5.13) gutsy; urgency=low
+
+  [ Mario Limonciello ]
+  * Correct typo in HDHomerun application.
+  * Make sure that backend_configured happens for right user.
+  * Re-order installer so Mythbuntu steps appear at a different time.
+  * Make sure errno errors can be reported properly in mythbuntu_install.py
+    (LP: #130771)
+
+  [ Evan Dandrea ]
+  * The migration-assistant page will now be skipped if there are no
+    partitions able to be imported from.
+  * Initialize self.errors in migration-assistant (LP: #134254).
+  * Add a progress bar for automatic mode.
+  * Update noninteractive frontend to work with recent changes.
+  * Temporary fix for the language packs no longer installing bug (LP:
+    #131294)
+
+  [ Colin Watson ]
+  * If 'automatic-ubiquity' is on the kernel command line, start Ubiquity in
+    its own X session. Thanks to Agostino Russo for the prototype of this.
+  * Just call 'reboot' rather than gdm/kdm-specific reboot methods if
+    DESKTOP_SESSION isn't set in the environment.
+  * Automatic update of included source packages: apt-setup 1:0.21ubuntu3,
+    base-installer 1.81ubuntu2, grub-installer 1.24ubuntu3,
+    partman-auto-loop 0ubuntu5, partman-efi 13ubuntu2, partman-target
+    50ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 07 Sep 2007 18:24:17 +0100
+
 ubiquity (1.5.12) gutsy; urgency=low
 
   [ Mario Limonciello ]

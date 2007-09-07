@@ -126,6 +126,7 @@ free_size="$(expr 0000000"$free_size" : '0*\(..*\)......$')"
 
 recipe_new=
 firstword=
+imagepaths=
 for word in $(cat "$recipe_dir/loop_recipe"); do
 	case $word in
 		.)
@@ -137,6 +138,7 @@ for word in $(cat "$recipe_dir/loop_recipe"); do
 				recipe_new="${recipe_new:+$recipe_new }$word"
 			else
 				firstword="$word"
+				imagepaths="${imagepaths:+$imagepaths }$word"
 			fi
 			;;
 	esac
@@ -185,9 +187,29 @@ done
 mkdir -p /host
 mount -o move /target /host # TODO error handling
 
-# TODO wipe_disk equivalent? Remove old loop images? Note that we work out
-# the available size before mounting the host filesystem at the moment,
-# which makes this rather difficult.
+# Ensure that no old loop images are present.
+found_images=
+for path in $imagepaths; do
+	case $path in
+		/*)	;;
+		*)	path="/$path" ;;
+	esac
+	if [ -e "/host$path" ]; then
+		found_images="${found_images:+$found_images }$path"
+	fi
+done
+if [ "$found_images" ]; then
+	db_progress STOP
+	db_subst partman-auto-loop/unclean_host PARTITION "$partition"
+	db_subst partman-auto-loop/unclean_host DISK "$disk"
+	db_subst partman-auto-loop/unclean_host IMAGES "$found_images"
+	db_input critical partman-auto-loop/unclean_host || true
+	db_capb
+	db_go || true
+	db_capb backup
+	umount /host || true
+	exit 1
+fi
 
 db_progress STEP 1
 
@@ -214,12 +236,25 @@ setup_loop () {
 		shift
 		continue
 	fi
-	for loop in /dev/loop* /dev/loop/*; do
+	if [ "$4" = linux-swap ]; then
+		loops="/host$path"
+	else
+		loops="$(echo /dev/loop* /dev/loop/*)"
+	fi
+	for loop in $loops; do
 		[ -e "$loop" ] || continue
-		loopfile="$(losetup "$loop")" || continue
-		# The following works with both busybox's losetup and
-		# util-linux's losetup. Yes, this is ugly.
-		loopfile="$(echo "$loopfile" | sed 's,.*\(/host/[^)]*\).*,\1,')"
+		case $loop in
+			/dev/loop*)
+				loopfile="$(losetup "$loop")" || continue
+				# The following works with both busybox's
+				# losetup and util-linux's losetup. Yes,
+				# this is ugly.
+				loopfile="$(echo "$loopfile" | sed 's,.*\(/host/[^)]*\).*,\1,')"
+				;;
+			*)
+				loopfile="$loop"
+				;;
+		esac
 		[ "$loopfile" = "/host$path" ] || continue
 
 		dirname="$(echo "$loop" | sed 's:/:=:g')"
@@ -273,6 +308,8 @@ foreach_partition 'setup_loop $*'
 db_progress STEP 1
 
 update_all
+
+apt-install lupin-support
 
 db_progress STOP
 
