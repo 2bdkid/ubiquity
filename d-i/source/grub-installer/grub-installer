@@ -266,8 +266,8 @@ menu_file="menu.lst"
 
 # reiserfs is the only filesystem that d-i supports and grub2 doesn't yet
 if [ "$bootfstype" != "reiserfs" ]; then
-	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
-	db_go || true
+	#db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
+	#db_go || true
 	db_get grub-installer/grub2_instead_of_grub_legacy
 	if [ "$RET" = true ]; then
 		grub_version="grub2"

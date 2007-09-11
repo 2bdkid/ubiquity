@@ -1,3 +1,11 @@
+grub-installer (1.24ubuntu4) gutsy; urgency=low
+
+  * Only support grub-installer/grub2_instead_of_grub_legacy by preseeding
+    for now, to avoid a prompt (albeit only in expert mode) that won't work
+    on our CDs (LP: #138035).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 07 Sep 2007 19:27:20 +0100
+
 grub-installer (1.24ubuntu3) gutsy; urgency=low
 
   * Support grub-installer/bootdev_directory preseeding to make use of the
