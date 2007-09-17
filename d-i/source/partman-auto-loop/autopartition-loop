@@ -222,6 +222,7 @@ clean_method
 db_progress STEP 1
 
 setup_loop () {
+	[ "$1" != 0 ] || return
 	path="$(echo "$*" | sed 's/.*\$imagepath{  *\([^ }]*\) *}.*/\1/')"
 	[ "$path" != "$*" ] || return
 

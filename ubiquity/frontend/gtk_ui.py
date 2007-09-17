@@ -139,8 +139,11 @@ class Wizard(BaseFrontend):
                                    'warning_dialog', 'warning_dialog_label',
                                    'cancelbutton', 'exitbutton')
         self.current_page = None
+        self.first_seen_page = None
+        self.backup = None
         self.allowed_change_step = True
         self.allowed_go_forward = True
+        self.stay_on_page = False
         self.progress_position = ubiquity.progressposition.ProgressPosition()
         self.progress_cancelled = False
         self.autopartition_extras = {}
@@ -367,7 +370,9 @@ class Wizard(BaseFrontend):
             gtk.main()
         
         while(self.pagesindex < pageslen):
-            self.backup = False
+            if self.current_page == None:
+                break
+
             old_dbfilter = self.dbfilter
             self.dbfilter = self.pages[self.pagesindex](self)
 
@@ -383,7 +388,8 @@ class Wizard(BaseFrontend):
                     self.progress_loop()
                 elif self.current_page is not None and not self.backup:
                     self.process_step()
-                    self.pagesindex = self.pagesindex + 1
+                    if not self.stay_on_page:
+                        self.pagesindex = self.pagesindex + 1
                     if 'UBIQUITY_AUTOMATIC' in os.environ:
                         # if no debconf_progress, create another one, set start to pageindex
                         self.debconf_progress_step(1)
@@ -391,13 +397,6 @@ class Wizard(BaseFrontend):
                 if self.backup:
                     if self.pagesindex > 0:
                         self.pagesindex = self.pagesindex - 1
-            
-            self.back.show()
-
-            # TODO: Move this to after we're done processing GTK events, or is
-            # that not worth the CPU time?
-            if self.current_page == None:
-                break
 
             while gtk.events_pending():
                 gtk.main_iteration()
@@ -476,7 +475,6 @@ class Wizard(BaseFrontend):
 
         # set initial bottom bar status
         self.back.hide()
-
 
     def poke_screensaver(self):
         """Attempt to make sure that the screensaver doesn't kick in."""
@@ -664,27 +662,40 @@ class Wizard(BaseFrontend):
 
 
     def set_page(self, n):
+        # We only stop the backup process when we're on a page where questions
+        # need to be asked, otherwise you wont be able to back up past
+        # migration-assistant.
+        self.backup = False
         self.live_installer.show()
         if n == 'Language':
-            self.set_current_page(self.steps.page_num(self.stepLanguage))
+            cur = self.stepLanguage
         elif n == 'ConsoleSetup':
-            self.set_current_page(self.steps.page_num(self.stepKeyboardConf))
+            cur = self.stepKeyboardConf
         elif n == 'Timezone':
-            self.set_current_page(self.steps.page_num(self.stepLocation))
+            cur = self.stepLocation
         elif n == 'Partman':
             # Rather than try to guess which partman page we should be on,
             # we leave that decision to set_autopartitioning_choices and
             # update_partman.
-            pass
+            return
         elif n == 'UserSetup':
-            self.set_current_page(self.steps.page_num(self.stepUserInfo))
+            cur = self.stepUserInfo
         elif n == 'Summary':
-            self.set_current_page(self.steps.page_num(self.stepReady))
+            cur = self.stepReady
             self.next.set_label("Install")
         elif n == 'MigrationAssistant':
-            self.set_current_page(self.steps.page_num(self.stepMigrationAssistant))
+            cur = self.stepMigrationAssistant
         else:
             print >>sys.stderr, 'No page found for %s' % n
+            return
+        
+        self.set_current_page(self.steps.page_num(cur))
+        if not self.first_seen_page:
+            self.first_seen_page = n
+        if self.first_seen_page == self.pages[self.pagesindex].__name__:
+            self.back.hide()
+        elif 'UBIQUITY_AUTOMATIC' not in os.environ:
+            self.back.show()
 
     def set_current_page(self, current):
         if self.steps.get_current_page() == current:
@@ -909,7 +920,6 @@ class Wizard(BaseFrontend):
         
         elif step == "stepLanguage":
             self.translate_widgets()
-            self.back.show()
             # FIXME: needed anymore now that we're doing dbfilter first?
             #self.allow_go_forward(self.get_timezone() is not None)
         # Automatic partitioning
@@ -953,6 +963,9 @@ class Wizard(BaseFrontend):
         if len(error_msg) != 0:
             self.hostname_error_reason.set_text("\n".join(error_msg))
             self.hostname_error_box.show()
+            self.stay_on_page = True
+        else:
+            self.stay_on_page = False
 
 
     def process_autopartitioning(self):
