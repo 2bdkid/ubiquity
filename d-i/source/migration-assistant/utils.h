@@ -1,7 +1,10 @@
+// Move into globals.h for readability.
 char* from_location;
 char* from_user;
 char* to_location;
 char* to_user;
+char* software_key_file;
+char* user_key_file;
 typedef enum { WINDOWSXP, LINUX } ostypes;
 ostypes os_type;
 
@@ -15,6 +18,7 @@ typedef enum { GCONF_BOOLEAN, GCONF_STRING, GCONF_LIST_STRING } gconf_type;
 void set_gconf_key (const char*, const char*, gconf_type, const char*);
 void add_wallpaper (const char*);
 void makegconfdirs(const char *dir);
+void initialize_registry_paths();
 // struct target_t {
 //  const char* option;
 //  const char* name;

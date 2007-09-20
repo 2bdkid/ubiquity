@@ -3,40 +3,35 @@
 #include <stdlib.h>
 #include <getopt.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <dirent.h>
 
 #include "registry.h"
 #include "utils.h"
 
-const char* mount_location;
-const char* user;
-
-
 /*		Utility Functions			*/
 
 char* windows_get_user_registry(void) {
     char* ret;
-    asprintf(&ret, "%s/%s/%s/%s", mount_location,
-	    "Documents and Settings", user, "NTUSER.DAT");
+    asprintf(&ret, "%s/%s/%s/%s", from_location,
+	    "Documents and Settings", from_user, "NTUSER.DAT");
 
     return ret;
 }
 
 char* gaim_get_accounts_file_windows(void) {
-    char* filename, *accounts_file;
+    char* accounts_file;
     char* appdata = NULL;
     char* path = NULL;
-    filename = windows_get_user_registry();
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         return NULL;
     }
     path = reformat_path(appdata);
     if(!path) return NULL;
     free(appdata);
-    asprintf(&accounts_file, "%s/%s/%s", mount_location, path,
+    asprintf(&accounts_file, "%s/%s/%s", from_location, path,
         "/.gaim/accounts.xml");
     free(path);
 
@@ -45,8 +40,8 @@ char* gaim_get_accounts_file_windows(void) {
 
 char* gaim_get_accounts_file_linux(void) {
     char* ret;
-    asprintf(&ret, "%s/%s/%s/%s", mount_location,
-	    "home", user,
+    asprintf(&ret, "%s/%s/%s/%s", from_location,
+	    "home", from_user,
 	    ".gaim/accounts.xml");
 
     return ret;
@@ -102,34 +97,39 @@ const char* windowsxp_aim_triton (void) {
 
     DIR* dir;
     struct dirent *entry;
-    char* dirname, *filename;
+    struct stat st;
+    char* dirname;
     char* appdata = NULL;
     char* path = NULL;
+    char* profile = NULL;
 
-    filename = windows_get_user_registry();
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         return NULL;
     }
     path = reformat_path(appdata);
     if(!path) return NULL;
     free(appdata);
-    asprintf(&dirname, "%s/%s/%s", mount_location, path, "AOL/UserProfiles");
+    asprintf(&dirname, "%s/%s/%s", from_location, path, "AOL/UserProfiles");
     free(path);
     dir = opendir(dirname);
     if(!dir) return NULL;
-    free(dirname);
 
     while((entry = readdir(dir)) != NULL) {
-        if(entry->d_type == DT_DIR) {
+        asprintf(&profile, "%s/%s", dirname, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(S_ISDIR(st.st_mode)) {
+            free(profile);
             if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
                 continue;
             if(strcmp(entry->d_name,"All Users") != 0)
                 return "AIM Triton";
         }
     }
+    free(dirname);
     return NULL;
 }
 
@@ -140,25 +140,25 @@ const char* windowsxp_opera (void) {
     char* appdata = NULL;
     char* path = NULL;
 
-    filename = windows_get_user_registry();
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         return NULL;
     }
     path = reformat_path(appdata);
     if(!path) return NULL;
     free(appdata);
-    asprintf(&filename, "%s/%s/%s", mount_location, path,
+    asprintf(&filename, "%s/%s/%s", from_location, path,
         "Opera/Opera/profile/opera6.adr");
     free(path);
 
     FILE* fp;
     if((fp = fopen(filename, "r")) != NULL) {
-	fclose(fp);
+        fclose(fp);
+        free(filename);
         return "Opera";
     } else {
+        free(filename);
         return NULL;
     }
 }
@@ -167,49 +167,54 @@ const char* windowsxp_firefox (void) {
 
     DIR* dir;
     struct dirent *entry;
-    char* dirname, *filename;
+    struct stat st;
+    char* dirname;
     char* appdata = NULL;
     char* path = NULL;
+    char* profile = NULL;
 
-    filename = windows_get_user_registry();
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         return NULL;
     }
     path = reformat_path(appdata);
     if(!path) return NULL;
     free(appdata);
-    asprintf(&dirname, "%s/%s/%s", mount_location, path, "Mozilla/Firefox/Profiles");
+    asprintf(&dirname, "%s/%s/%s", from_location, path, "Mozilla/Firefox/Profiles");
     free(path);
     dir = opendir(dirname);
     if(!dir) return NULL;
-    free(dirname);
 
     while((entry = readdir(dir)) != NULL) {
-	if(entry->d_type == DT_DIR) {
+        asprintf(&profile, "%s/%s", dirname, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(S_ISDIR(st.st_mode)) {
+            free(profile);
             if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
                 continue;
-	    return "Mozilla Firefox";
-	}
+            free(dirname);
+            return "Mozilla Firefox";
+        }
     }
+    free(dirname);
     return NULL;
 }
 
 const char* windowsxp_iexplorer (void) {
     DIR* dir;
     struct dirent *entry;
-    char* filename, *path, *iedir;
+    char* path, *iedir;
     char* favorites = NULL;
-    filename = windows_get_user_registry();
-    favorites = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    favorites = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Favorites");
     if(!favorites) return NULL;
     path = reformat_path(favorites);
     if(!path) return NULL;
     free(favorites);
-    asprintf(&iedir, "%s/%s", mount_location, path);
+    asprintf(&iedir, "%s/%s", from_location, path);
     free(path);
     dir = opendir(iedir);
     if(!dir) return NULL;
@@ -232,15 +237,12 @@ const char* windowsxp_wallpaper (void) {
 }
 
 const char* windowsxp_userpicture (void) {
-    char* filename = NULL;
     char* appdata = NULL;
     char* path = NULL;
     char* from = NULL;
     FILE* fp;
 
-    // FIXME: what about WINNT?
-    asprintf(&filename, "%s/WINDOWS/system32/config/software", mount_location);
-    appdata = findkey(filename, "\\Microsoft\\Windows\\CurrentVersion\\"
+    appdata = findkey(software_key_file, "\\Microsoft\\Windows\\CurrentVersion\\"
         "Explorer\\Shell Folders\\Common AppData");
     if(!appdata)
         return NULL;
@@ -248,7 +250,7 @@ const char* windowsxp_userpicture (void) {
     if(!path) return NULL;
     free(appdata);
     asprintf(&from, "%s/%s/Microsoft/User Account Pictures/%s.bmp",
-        mount_location, path, user);
+        from_location, path, from_user);
     free(path);
 
     if((fp = fopen(from, "r")) == NULL)
@@ -320,28 +322,36 @@ const char* linux_firefox (void) {
 
     DIR* dir;
     struct dirent *entry;
+    struct stat st;
     char* dirname;
+    char* profile = NULL;
 
-    asprintf(&dirname, "%s/%s/%s/%s", mount_location, "home",
-	    user, ".mozilla/firefox");
+    asprintf(&dirname, "%s/%s/%s/%s", from_location, "home",
+	    from_user, ".mozilla/firefox");
     dir = opendir(dirname);
     if(!dir) return NULL;
-    free(dirname);
 
     while((entry = readdir(dir)) != NULL) {
-	if(entry->d_type == DT_DIR) {
+        asprintf(&profile, "%s/%s", dirname, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(S_ISDIR(st.st_mode)) {
+            free(profile);
             if(strcmp(entry->d_name,".") == 0 || strcmp(entry->d_name,"..") == 0)
                 continue;
-	    return "Mozilla Firefox";
-	}
+            free(dirname);
+            return "Mozilla Firefox";
+        }
     }
+    free(dirname);
     return NULL;
 }
 
 const char* linux_evolution (void) {
     FILE* fp = NULL;
     char* file = NULL;
-    asprintf(&file, "%s/%s/%s/%s", mount_location, "home", user,
+    asprintf(&file, "%s/%s/%s/%s", from_location, "home", from_user,
         ".gconf/apps/evolution/mail/\%gconf.xml");
     if((fp = fopen(file, "r")) != NULL) {
 	fclose(fp);
@@ -414,10 +424,10 @@ int main(int argc, char** argv) {
 		else usage();
 		break;
 	    case 'p' :
-		mount_location = strdup(optarg);
+		from_location = strdup(optarg);
 		break;
 	    case 'u' :
-		user = strdup(optarg);
+		from_user = strdup(optarg);
 		break;
 	    default:
 		usage();
@@ -426,14 +436,10 @@ int main(int argc, char** argv) {
 
     if(ostype == LINUX)
 	tests = linux_tests;
-    else if(ostype == WINDOWSXP)
-	tests = windowsxp_tests;
-
-    //fflush(stderr);
-    //if (!freopen("/dev/null", "w", stderr)) {
-    //    fprintf(stderr, "Failed to redirect stderr to /dev/null");
-    //    return EXIT_FAILURE;
-    //}
+    else if(ostype == WINDOWSXP) {
+        tests = windowsxp_tests;
+        initialize_registry_paths();
+    }
 
     while(tests[test]) {
 	ret = tests[test]();

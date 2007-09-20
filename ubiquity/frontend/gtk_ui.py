@@ -112,6 +112,7 @@ class Wizard(BaseFrontend):
         def add_widgets(self, glade):
             """Makes all widgets callable by the toplevel."""
             for widget in glade.get_widget_prefix(""):
+                self.all_widgets.add(widget)
                 setattr(self, widget.get_name(), widget)
                 # We generally want labels to be selectable so that people can
                 # easily report problems in them
@@ -128,6 +129,7 @@ class Wizard(BaseFrontend):
         sys.excepthook = self.excepthook
 
         # declare attributes
+        self.all_widgets = set()
         self.gconf_previous = {}
         self.thunar_previous = {}
         self.language_questions = ('live_installer',
@@ -520,7 +522,7 @@ class Wizard(BaseFrontend):
             core_names.append('ubiquity/imported/%s' % stock_item)
         i18n.get_translations(languages=languages, core_names=core_names)
 
-        for widget in self.glade.get_widget_prefix(""):
+        for widget in self.all_widgets:
             self.translate_widget(widget, self.locale)
 
     def translate_widget(self, widget, lang):
@@ -2377,7 +2379,7 @@ class Wizard(BaseFrontend):
             # Go back to the partitioner and try again.
             self.live_installer.show()
             # FIXME: ugh, can't hardcode this.
-            self.pagesindex = 1
+            self.pagesindex = 3
             self.dbfilter = partman.Partman(self)
             self.set_current_page(self.previous_partitioning_page)
             self.next.set_label("gtk-go-forward")

@@ -46,7 +46,7 @@ do
 		    db_get migration-assistant/new-user/$new_user/fullname
 		    fn=$RET
 
-		    add_user $new_user $fn $pass
+		    add_user "$new_user" "$fn" "$pass"
 		fi
 		
 		db_get migration-assistant/$path/$formatted_user/items

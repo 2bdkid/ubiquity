@@ -1,3 +1,21 @@
+ubiquity (1.5.16) gutsy; urgency=low
+
+  [ Evan Dandrea ]
+  * Updated kde_ui.py to reflect recent fixes to gtk_ui.py.
+  * Small fix to return to the right page on return_to_partitioning.
+
+  [ Colin Watson ]
+  * Translate widgets from all glade files, not just the main one.
+  * Purge ucf's state for /etc/papersize so that it will be recreated
+    properly (LP: #128258).
+  * Fix automatic-ubiquity option handling in init script.
+  * Automatic update of included source packages: hw-detect 1.53ubuntu2,
+    kboot-installer 0.0.1ubuntu4, localechooser 1.38ubuntu2,
+    migration-assistant 0.5.0, partman-auto-loop 0ubuntu7, partman-base
+    107ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Sep 2007 22:59:23 +0100
+
 ubiquity (1.5.15) gutsy; urgency=low
 
   [ Evan Dandrea ]

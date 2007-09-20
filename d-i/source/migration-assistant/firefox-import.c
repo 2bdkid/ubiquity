@@ -846,14 +846,10 @@ void firefox_import_firefox(void) {
             from_location, from_user);
     }
     else if(os_type == WINDOWSXP) {
-        char* filename = NULL;
         char* appdata = NULL;
         char* path;
-        asprintf(&filename, "%s/%s/%s/%s", from_location,
-	        "Documents and Settings", from_user, "NTUSER.DAT");
-        appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
             "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-        free(filename);
         if(!appdata) {
             printf("Couldn't find %s\n", appdata);
             return;
@@ -915,18 +911,15 @@ void firefox_import_firefox(void) {
 
 void firefox_import_opera(void) {
     FILE* fp;
-    char* bookmarksfile, *filename, *path;
+    char* bookmarksfile, *path;
     element* to_bookmarks = NULL;
     element* from_bookmarks = NULL;
     char* fullpath = NULL;
     char* appdata = NULL;
 
     setup_import(&fullpath, &to_bookmarks);
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         printf("Couldn't find %s\n", appdata);
         return;
@@ -964,16 +957,13 @@ void firefox_import_internetexplorer(void) {
     element* from_bookmarks = NULL;
     char* fullpath = NULL;
 
-    char* filename, *path;
+    char* path;
     char* favorites = NULL;
 
     setup_import(&fullpath, &to_bookmarks);
 
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    favorites = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    favorites = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Favorites");
-    free(filename);
     if(!favorites) {
         printf("Couldn't find %s\n", favorites);
         return;

@@ -111,7 +111,7 @@ void gaim_import_gaim(void) {
     xmlNode* node, *node_copy = NULL;
     char* accounts_file;
 
-    char* filename, *path;
+    char* path;
     char* appdata = NULL;
 
     if(os_type == LINUX)
@@ -119,11 +119,8 @@ void gaim_import_gaim(void) {
 		"home", from_user,
 		".gaim/accounts.xml");
     else if(os_type == WINDOWSXP) {
-        asprintf(&filename, "%s/%s/%s/%s", from_location,
-	        "Documents and Settings", from_user, "NTUSER.DAT");
-        appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+        appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
             "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-        free(filename);
         if(!appdata) {
             printf("Couldn't find %s\n", appdata);
             return;
@@ -175,13 +172,9 @@ void gaim_import_other(const char* proto, const char* username,
 
 void gaim_import_yahoo(void) {
     char* username;
-    char* filename;
 
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    username = findkey(filename,
+    username = findkey(user_key_file,
 	    "\\Software\\Yahoo\\pager\\Yahoo! User ID");
-    free(filename);
 
     if(username) {
 	gaim_import_other("prpl-yahoo", username, NULL);
@@ -199,14 +192,13 @@ void gaim_import_aimtriton(void) {
     DIR *dir, *dir2;
     struct dirent *entry, *entry2;
     struct stat buf;
-    char* dirname, *uprofile, *filename, *cls, *path;
+    struct stat st;
+    char* dirname, *uprofile, *cls, *path;
     char* appdata = NULL;
+    char* profile = NULL;
 
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    appdata = findkey(filename, "\\Software\\Microsoft\\Windows\\"
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
         "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    free(filename);
     if(!appdata) {
         printf("Couldn't find %s\n", appdata);
         return;
@@ -224,14 +216,20 @@ void gaim_import_aimtriton(void) {
     }
 
     while((entry = readdir(dir)) != NULL) {
-        if(entry->d_type != DT_DIR)
+        asprintf(&profile, "%s/%s", dirname, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(!(S_ISDIR(st.st_mode))) {
+            free(profile);
             continue;
-            
-        if(strcmp(entry->d_name,"All Users") == 0 ||
+        } else if(strcmp(entry->d_name,"All Users") == 0 ||
             (strcmp(entry->d_name,".") == 0 ||
              strcmp(entry->d_name,"..") == 0)) {
+            free(profile);
             continue;
         }
+        free(profile);
 
         asprintf(&uprofile, "%s/%s", dirname, entry->d_name);
         dir2 = opendir(uprofile);

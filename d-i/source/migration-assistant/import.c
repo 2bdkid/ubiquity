@@ -8,6 +8,10 @@
 #include <pwd.h>
 #include <unistd.h>
 
+// For directory manipulation
+#include <dirent.h>
+#include <fcntl.h>
+
 // For umask
 #include <sys/stat.h>
 
@@ -24,7 +28,6 @@ void usage(char** argv) {
 	    argv[0]);
     exit(EXIT_FAILURE);
 }
-
 int main(int argc, char** argv) {
 
     void (*target)();
@@ -45,8 +48,10 @@ int main(int argc, char** argv) {
 	switch(c) {
 	    case 'o' :
 		if(strcmp(optarg, "linux") == 0) os_type = LINUX;
-		else if(strcmp(optarg, "windowsxp") == 0)
+		else if(strcmp(optarg, "windowsxp") == 0) {
 		    os_type = WINDOWSXP;
+            initialize_registry_paths();
+        }
 		else
 		    usage(argv);
 		break;
@@ -84,16 +89,16 @@ int main(int argc, char** argv) {
 		    target = windowsxp_import_userpicture;
 		else if(strcmp(optarg, "wallpaper") == 0)
 		    target = windowsxp_import_wallpaper;
-                else if(strcmp(optarg, "mozillafirefox") == 0)
-                    target = firefox_import_firefox;
-                else if(strcmp(optarg, "internetexplorer") == 0)
-                    target = firefox_import_internetexplorer;
-                else if(strcmp(optarg, "opera") == 0)
-                    target = firefox_import_opera;
-                else if(strcmp(optarg, "outlookexpress") == 0)
-                    target = evolution_import_outlookexpress;
-                else if(strcmp(optarg, "evolution") == 0)
-                    target = evolution_import_evolution;
+        else if(strcmp(optarg, "mozillafirefox") == 0)
+            target = firefox_import_firefox;
+        else if(strcmp(optarg, "internetexplorer") == 0)
+            target = firefox_import_internetexplorer;
+        else if(strcmp(optarg, "opera") == 0)
+            target = firefox_import_opera;
+        else if(strcmp(optarg, "outlookexpress") == 0)
+            target = evolution_import_outlookexpress;
+        else if(strcmp(optarg, "evolution") == 0)
+            target = evolution_import_evolution;
 		else
 		    usage(argv);
 		break;
@@ -104,31 +109,35 @@ int main(int argc, char** argv) {
     }
     
     if((from_user && to_user) && (from_location && to_location)) {
-    
-	// Instead of chowning everything we create, we just drop to the user
-	// we're working with.  Not entirely sure if this is a good/bad idea.
-	
-	struct passwd *p;
-	char* passwd_file;
-	FILE* fp = NULL;
-	
-	asprintf(&passwd_file, "%s/etc/passwd", to_location);
-	fp = fopen(passwd_file, "r");
-	free(passwd_file);
-	
-	while((p = fgetpwent(fp)) != NULL) {
-	    if(strcmp(p->pw_name, to_user) == 0) {
-		setgid(p->pw_gid);
-		setuid(p->pw_uid);
-	    }
-	}
-	endpwent();
-	fclose(fp);
-	
-	target();
+        struct passwd *p;
+        char* passwd_file;
+        FILE* fp = NULL;
+        
+        
+        // Instead of chowning everything we create, we just drop to the user
+        // we're working with.  Not entirely sure if this is a good/bad idea.
+        asprintf(&passwd_file, "%s/etc/passwd", to_location);
+        fp = fopen(passwd_file, "r");
+        
+        if(fp) {
+            while((p = fgetpwent(fp)) != NULL) {
+                if(strcmp(p->pw_name, to_user) == 0) {
+                    setgid(p->pw_gid);
+                    setuid(p->pw_uid);
+                }
+            }
+            endpwent();
+            fclose(fp);
+        } else {
+            fprintf(stderr, "Unable to open %s\n", passwd_file);
+            exit(EXIT_FAILURE);
+        }
+        free(passwd_file);
+        
+        target();
     } else
 	usage(argv);
     
     return 0;
 }
-// vim:ai:et:sts=4:tw=80:sw=4:
+/* vim:ai:et:sts=4:tw=80:sw=4: */

@@ -539,6 +539,13 @@ case $SUBARCH in
 		;;
 esac
 
+# Install Cell utilities
+case $SUBARCH in
+	powerpc/ps3|powerpc/cell)
+		apt-install elfspe2 || true
+		;;
+esac
+
 db_progress SET $MAX_STEPS
 db_progress STOP
 

@@ -56,7 +56,7 @@ do
 	    IFS="$OLDIFS"
 	    mount_os "$ostype" "$loc"
 	    db_register migration-assistant/users migration-assistant/$path/users
-	    db_subst migration-assistant/$path/users user-choices "$($mapath/ma-search-users "$ostype" "$mountpoint")"
+	    db_subst migration-assistant/$path/users user-choices "$($mapath/ma-search-users "$ostype" "$mountpoint" 2>/var/log/migrationassistant)"
 	    db_subst migration-assistant/$path/users os-type "$choice"
 	    
 
@@ -70,7 +70,8 @@ do
 	    for usr in $user_selection;
 	    do
 	    	IFS="$OLDIFS"
-		itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr") || \
+		# FIXME: redirect stderr to /dev/null or a file.
+		itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr" 2>/var/log/migrationassistant) || \
                     (itemsret=; error "ma-search-items exited with an error for $usr.")
 		formatted_user=`echo "$usr" | sed -e 's/ /:/g'`
 		db_register migration-assistant/items migration-assistant/$path/$formatted_user/items

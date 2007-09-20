@@ -298,10 +298,6 @@ void evolution_import_evolution(void) {
     free(file);
 }
 void evolution_import_outlookexpress(void) {
-    char* filename = NULL;
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-
     char* account_key = NULL;
     char* temp_key = NULL;
 
@@ -328,7 +324,7 @@ void evolution_import_outlookexpress(void) {
         asprintf(&account_key, "\\Software\\Microsoft\\"
         "Internet Account Manager\\Accounts\\%.8d\\", i);
         asprintf(&temp_key, "%s%s", account_key, "Account Name");
-        a->accountname = findkey(filename, temp_key);
+        a->accountname = findkey(user_key_file, temp_key);
         free(temp_key);
         if(!a->accountname) {
             if(a) free(a);
@@ -351,46 +347,46 @@ void evolution_import_outlookexpress(void) {
                                 hostname);
 
         asprintf(&temp_key, "%s%s", account_key, "SMTP Display Name");
-        a->fullname = findkey(filename, temp_key);
+        a->fullname = findkey(user_key_file, temp_key);
         free(temp_key);
 
         asprintf(&temp_key, "%s%s", account_key, "SMTP Email Address");
-        a->email = findkey(filename, temp_key);
+        a->email = findkey(user_key_file, temp_key);
         free(temp_key);
 
         asprintf(&temp_key, "%s%s", account_key, "IMAP User Name");
-        a->incominguser = findkey(filename, temp_key);
+        a->incominguser = findkey(user_key_file, temp_key);
         free(temp_key);
 
         if(a->incominguser) {
             a->type = IMAP;
             asprintf(&temp_key, "%s%s", account_key, "IMAP Server");
-            a->incomingserver = findkey(filename, temp_key);
+            a->incomingserver = findkey(user_key_file, temp_key);
             free(temp_key);
             
             asprintf(&temp_key, "%s%s", account_key, "IMAP Port");
-            a->incomingport = findkey(filename, temp_key);
+            a->incomingport = findkey(user_key_file, temp_key);
             free(temp_key);
             
             asprintf(&temp_key, "%s%s", account_key, "IMAP Secure Connection");
-            a->incomingssl = findkey(filename, temp_key);
+            a->incomingssl = findkey(user_key_file, temp_key);
             free(temp_key);
         } else {
             a->type = POP3;
             asprintf(&temp_key, "%s%s", account_key, "POP3 User Name");
-            a->incominguser = findkey(filename, temp_key);
+            a->incominguser = findkey(user_key_file, temp_key);
             free(temp_key);
 
             asprintf(&temp_key, "%s%s", account_key, "POP3 Server");
-            a->incomingserver = findkey(filename, temp_key);
+            a->incomingserver = findkey(user_key_file, temp_key);
             free(temp_key);
             
             asprintf(&temp_key, "%s%s", account_key, "POP3 Port");
-            a->incomingport = findkey(filename, temp_key);
+            a->incomingport = findkey(user_key_file, temp_key);
             free(temp_key);
             
             asprintf(&temp_key, "%s%s", account_key, "POP3 Secure Connection");
-            a->incomingssl = findkey(filename, temp_key);
+            a->incomingssl = findkey(user_key_file, temp_key);
             free(temp_key);
         }
         if(a->incomingssl && strcmp(a->incomingssl, "1") == 0) {
@@ -403,19 +399,19 @@ void evolution_import_outlookexpress(void) {
 
 
         asprintf(&temp_key, "%s%s", account_key, "SMTP User Name");
-        a->smtpuser = findkey(filename, temp_key);
+        a->smtpuser = findkey(user_key_file, temp_key);
         free(temp_key);
 
         asprintf(&temp_key, "%s%s", account_key, "SMTP Server");
-        a->smtpserver = findkey(filename, temp_key);
+        a->smtpserver = findkey(user_key_file, temp_key);
         free(temp_key);
         
         asprintf(&temp_key, "%s%s", account_key, "SMTP Port");
-        a->smtpport = findkey(filename, temp_key);
+        a->smtpport = findkey(user_key_file, temp_key);
         free(temp_key);
             
         asprintf(&temp_key, "%s%s", account_key, "SMTP Secure Connection");
-        a->smtpssl = findkey(filename, temp_key);
+        a->smtpssl = findkey(user_key_file, temp_key);
         free(temp_key);
         if(a->smtpssl && strcmp(a->smtpssl, "1") == 0) {
             free(a->smtpssl);
@@ -439,7 +435,7 @@ void evolution_import_outlookexpress(void) {
         printf("smtpport: %s\n", a->smtpport);
         printf("smtpssl: %s\n", a->smtpssl);
         printf("uid: %s\n", a->uid);
-        printf("test: %s\n", findkey(filename, "\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\Local AppData"));
+        printf("test: %s\n", findkey(user_key_file, "\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\\Local AppData"));
         puts("");
 
         evolution_import_other(a);

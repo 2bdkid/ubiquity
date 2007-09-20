@@ -1,3 +1,10 @@
+partman-base (107ubuntu3) gutsy; urgency=low
+
+  * Use expr rather than shell arithmetic in human2longint, since dash
+    doesn't support 64-bit arithmetic (LP: #137878).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 17 Sep 2007 17:23:45 +0100
+
 partman-base (107ubuntu2) gutsy; urgency=low
 
   * Backport from trunk (LP: #126328):

@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include <dirent.h>
+#include <sys/stat.h>
 
 #include "registry.h"
 #include "utils.h"
@@ -10,8 +11,10 @@
 void search_linux(const char* mountpoint) {
     DIR* dir;
     struct dirent *entry;
+    struct stat st;
     char* fullpath = NULL;
     char* cwd;
+    char* profile = NULL;
     int mult = 0;
 
     asprintf(&fullpath, "%s/home", mountpoint);
@@ -21,9 +24,13 @@ void search_linux(const char* mountpoint) {
             fullpath);
         exit(EXIT_FAILURE);
     }
-    free(fullpath);
     while((entry = readdir(dir)) != NULL) {
-        if(entry->d_type == DT_DIR) {
+        asprintf(&profile, "%s/%s", fullpath, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(S_ISDIR(st.st_mode)) {
+            free(profile);
             cwd = entry->d_name;
             if(strcmp(cwd,".") == 0 || strcmp(cwd,"..") == 0)
                 continue;
@@ -37,17 +44,21 @@ void search_linux(const char* mountpoint) {
             }
         }
     }
+    free(fullpath);
+    closedir(dir);
     puts("");
 }
 
 void search_windowsxp(const char* mountpoint) {
     DIR* dir;
     struct dirent *entry;
+    struct stat st;
     char* cwd;
     char* profilesdir = NULL;
     char* systemreg = NULL;
     char* allusers = NULL;
     char* defaultuser = NULL;
+    char* profile = NULL;
     int mult = 0;
 
     asprintf(&systemreg, "%s/WINDOWS/system32/config/software", mountpoint);
@@ -67,16 +78,20 @@ void search_windowsxp(const char* mountpoint) {
     free(profilesdir);
     asprintf(&profilesdir, "%s/%s", mountpoint, pdir);
     free(pdir);
-    //printf("profilesdir: %s\n", profilesdir);
+    fprintf(stderr, "profilesdir: %s\n", profilesdir);
     dir = opendir(profilesdir);
     if(!dir) {
         fprintf(stderr, "ma-search-users: Error.  Unable to open %s\n", 
             profilesdir);
         exit(EXIT_FAILURE);
     }
-    free(profilesdir);
     while((entry = readdir(dir)) != NULL) {
-        if(entry->d_type == DT_DIR) {
+        asprintf(&profile, "%s/%s", profilesdir, entry->d_name);
+        if( -1 == stat(profile, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", profile);
+            free(profile);
+        } else if(S_ISDIR(st.st_mode)) {
+            free(profile);
             cwd = entry->d_name;
             if(strcmp(cwd,".") == 0 || strcmp(cwd,"..") == 0)
                 continue;
@@ -92,6 +107,8 @@ void search_windowsxp(const char* mountpoint) {
             }
         }
     }
+    free(profilesdir);
+    closedir(dir);
     puts("");
 }
 

@@ -7,7 +7,7 @@
 
 ARCH="$(archdetect)"
 case $ARCH in
-    powerpc/ps3)
+    powerpc/ps3|powerpc/cell)
 	;;
     *)
 	exit 0

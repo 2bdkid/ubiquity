@@ -16,6 +16,119 @@
 #include <unistd.h>
 
 #include "utils.h"
+/* This function discovers the correct case-sensitive file or directory path
+ * from a case-insensitive file or directory path.
+ *
+ * It assumes that only one case-insensitive file or directory matches the
+ * case-sensitive path.
+ *
+ * FIXME: It will accept somefile.ext/
+ * FIXME: chdir is not thread-safe, however this currently does not get called
+ * in areas that might be optimized into concurrent processes or threads.
+ */
+char* get_insensitive_path(const char* path) {
+    DIR *d;
+    char* head = NULL;
+    char* start;
+    char* end;
+    int done = 0;
+    int found;
+    char* ret = "";
+    struct dirent *de;
+    int cwd;
+    
+    if(!path || *path == '\0') {
+        fprintf(stderr, \
+            "Error: get_insensitive_path was passed a NULL string.\n");
+        return NULL;
+    }
+
+    head = strdup(path);
+    if(head == NULL) {
+        fprintf(stderr, "Fatal: Out of memory.\n");
+        exit(EXIT_FAILURE);
+    }
+    end = head;
+
+    if ((cwd = open(".", O_RDONLY)) == -1) {
+        fprintf(stderr, "Fatal: Could not get a file descriptor for the" \
+            " current working directory.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    if(*end == '/') {
+        ret = "/";
+        chdir("/");
+        end++;
+    }
+    
+    while(!done) {
+        start = end;
+        if(*start == '\0') break;
+        while(*end != '/' && *end != '\0') end++;
+        if(*end == '\0') done = 1;
+        else *end = '\0';
+        end++;
+        
+        d = opendir(".");
+        found = 0;
+        while((de = readdir(d)) != NULL) {
+            if(strcasecmp(de->d_name, start) == 0) {
+                found = 1;
+                break;
+            }
+        }
+        closedir(d);
+        if(!found) {
+            fprintf(stderr, "Error: Could not find the path %s\n", path);
+            return NULL;
+        }
+        else {
+            if(done)
+                asprintf(&ret, "%s%s", ret, de->d_name);
+            else
+                asprintf(&ret, "%s%s/", ret, de->d_name);
+            chdir(ret);
+        }
+    }
+    if(head) free(head);
+    if (fchdir(cwd) == -1) {
+        fprintf(stderr, "Fatal: Could not change back to the original " \
+            "directory.\n");
+        exit(EXIT_FAILURE);
+    }
+    //printf("ret: %s\n", ret);
+    return ret;
+}
+void initialize_registry_paths() {
+    char* tmp;
+    software_key_file = NULL;
+    user_key_file = NULL;
+
+    asprintf(&tmp, "%s/WINDOWS/system32/config/software", from_location);
+    software_key_file = get_insensitive_path(tmp);
+    if(tmp) free(tmp);
+    if(software_key_file == NULL) {
+        asprintf(&tmp, "%s/WINNT/system32/config/software", from_location);
+        software_key_file = get_insensitive_path(tmp);
+        if(software_key_file == NULL) {
+            fprintf(stderr, "Fatal: Could not find the SOFTWARE registry " \
+                "hive at %s.\n", tmp);
+            exit(EXIT_FAILURE);
+        }
+        if(tmp) free(tmp);
+    }
+
+    asprintf(&tmp, "%s/%s/%s/%s", from_location,
+    "Documents and Settings", from_user, "NTUSER.DAT");
+    user_key_file = get_insensitive_path(tmp);
+    if(user_key_file == NULL) {
+        fprintf(stderr, "Fatal: Could not find the USER registry hive at " \
+            "%s\n.", tmp);
+        exit(EXIT_FAILURE);
+    }
+    if(tmp) free(tmp);
+}
 // Taken from comp.lang.c:
 // http://groups.google.com/group/comp.lang.c/msg/8d7be5a7387de73f?dmode=source
 char *strrep(const char *str, const char *old, const char *new)
@@ -121,6 +234,7 @@ void copyfile(const char* from, const char* to) {
 
 void rcopy(const char* from, const char* to) {
     struct dirent *de;
+    struct stat st;
     DIR *d;
     char* fpn, *tpn;
     char* extension = NULL;
@@ -140,7 +254,9 @@ void rcopy(const char* from, const char* to) {
         asprintf(&fpn, "%s/%s", from, de->d_name);
         asprintf(&tpn, "%s/%s", to, de->d_name);
 
-        if(de->d_type == DT_REG) {
+        if( -1 == stat(fpn, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", fpn);
+        } else if(S_ISREG(st.st_mode)) {
             extension = de->d_name;
             while(*extension != '\0') extension++;
             while(extension != de->d_name && *extension != '.') extension--;
@@ -152,7 +268,7 @@ void rcopy(const char* from, const char* to) {
                 || (strcmp(extension, "lnk") == 0))) {
                     copyfile(fpn, tpn);
             }
-	    } else if(de->d_type == DT_DIR) {
+        } else if(S_ISDIR(st.st_mode)) {
 	        mkdir(tpn, 0755); // I think we can axe this.  See above.
     	    rcopy(fpn, tpn);
     	}

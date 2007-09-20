@@ -1,3 +1,17 @@
+migration-assistant (0.5.0) gutsy; urgency=low
+
+  * Handle more than one installed copy of Windows (LP: #97081).
+  * Error if unable to mount Linux partitions.
+  * Bump installer-menu-item to 6400.
+  * Close directories in ma-search-users.
+  * Don't unmount devices when we can avoid having to.
+  * Look for registry files case-insensitively.
+  * Quote arguments to add_user (LP: #123425).
+  * Use stat instead of the DT_ macros to avoid issues with fuse.
+  * Add a debug log.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 31 Jul 2007 20:21:35 -0400
+
 migration-assistant (0.4.5) feisty; urgency=low
 
   * Proper grep for mounted devices. (LP: #99004)

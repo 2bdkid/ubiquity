@@ -21,13 +21,10 @@ const char* mypictureskey = "\\Software\\Microsoft\\Windows\\CurrentVersion"
 // FIXME: gnome-about-me also adds this to EDS.
 void windowsxp_import_userpicture (void) {
     char *from, *to;
-    char* filename = NULL;
     char* appdata = NULL;
     char* path = NULL;
 
-    // FIXME: what about WINNT?
-    asprintf(&filename, "%s/WINDOWS/system32/config/software", from_location);
-    appdata = findkey(filename, "\\Microsoft\\Windows\\CurrentVersion\\"
+    appdata = findkey(software_key_file, "\\Microsoft\\Windows\\CurrentVersion\\"
         "Explorer\\Shell Folders\\Common AppData");
     if(!appdata) {
         puts("Couldn't find Common AppData");
@@ -52,12 +49,9 @@ void windowsxp_import_proxy (void) { return; }
 void windowsxp_import_mymusic (void) {
     char* to, *from;
     char* mymusic = NULL;
-    char* filename = NULL;
     char* path = NULL;
     
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    mymusic = findkey(filename, mymusickey);
+    mymusic = findkey(user_key_file, mymusickey);
     if(!mymusic) {
         printf("Couldn't find %s\n", mymusickey);
         return;
@@ -80,13 +74,10 @@ void windowsxp_import_mymusic (void) {
 
 void windowsxp_import_mypictures (void) {
     char *to, *from;
-    char* filename = NULL;
     char* mypictures = NULL;
     char* path = NULL;
 
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    mypictures = findkey(filename, mypictureskey);
+    mypictures = findkey(user_key_file, mypictureskey);
     if(!mypictures) {
         printf("Couldn't find %s\n", mypictureskey);
         return;
@@ -109,13 +100,11 @@ void windowsxp_import_mydocuments (void) {
     struct dirent *rep;
     char* mydocuments = NULL;
     char* path = NULL;
-    char* filename = NULL;
     char* extension = NULL;
+    struct stat st;
 
 
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    mydocuments = findkey(filename, mydocumentskey);
+    mydocuments = findkey(user_key_file, mydocumentskey);
     if(!mydocuments) {
         printf("Couldn't find %s\n", mydocumentskey);
         return;
@@ -125,12 +114,12 @@ void windowsxp_import_mydocuments (void) {
 
     char* mypictures = NULL;
     char* mymusic = NULL;
-    mypictures = findkey(filename, mypictureskey);
+    mypictures = findkey(user_key_file, mypictureskey);
     if(!mypictures) {
         printf("Couldn't find %s\n", mypictureskey);
         return;
     }
-    mymusic = findkey(filename, mymusickey);
+    mymusic = findkey(user_key_file, mymusickey);
     if(!mymusic) {
         printf("Couldn't find %s\n", mymusickey);
         return;
@@ -169,7 +158,9 @@ void windowsxp_import_mydocuments (void) {
 	    //mkdir(to, 0755);
 	    mkdir(t, 0755); // Test to see if this is needed.
 	    asprintf(&t, "%s/%s", to, rep->d_name);
-	    if(rep->d_type == DT_REG) {
+        if( -1 == stat(f, &st)) {
+            fprintf(stderr, "Unable to stat %s.\n", f);
+        } else if(S_ISREG(st.st_mode)) {
             extension = rep->d_name;
             while(*extension != '\0') extension++;
             while(extension != rep->d_name && *extension != '.') extension--;
@@ -181,7 +172,7 @@ void windowsxp_import_mydocuments (void) {
                 || (strcmp(extension, "lnk") == 0))) {
 		            copyfile(f,t);
             }
-	    } else if(rep->d_type == DT_DIR) {
+        } else if(S_ISDIR(st.st_mode)) {
 		rcopy(f,t);
 	    }
 	    free(t);
@@ -199,15 +190,12 @@ void windowsxp_import_mydocuments (void) {
 
 void windowsxp_import_wallpaper (void) {
     char *to, *from, *image, *path;
-    char* filename = NULL;
     char* wallpaperloc = NULL;
     
-    asprintf(&filename, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-    wallpaperloc = findkey(filename,
+    wallpaperloc = findkey(user_key_file,
         "\\Control Panel\\Desktop\\ConvertedWallpaper");
     if(!wallpaperloc) {
-        wallpaperloc = findkey(filename,
+        wallpaperloc = findkey(user_key_file,
             "\\Control Panel\\Desktop\\Wallpaper");
     }
     if(!wallpaperloc) {
@@ -230,7 +218,6 @@ void windowsxp_import_wallpaper (void) {
         free(to);
     }
     free(wallpaperloc);
-    free(filename);
     free(path);
 }
 // vim:ai:et:sts=4:tw=80:sw=4:

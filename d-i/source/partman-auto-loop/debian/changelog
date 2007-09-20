@@ -1,3 +1,11 @@
+partman-auto-loop (0ubuntu7) gutsy; urgency=low
+
+  * Read all output from fstab.d scripts; exiting early causes very strange
+    errors due to fstab.d scripts not making it to close_dialog before the
+    next one starts.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Sep 2007 11:40:27 +0100
+
 partman-auto-loop (0ubuntu6) gutsy; urgency=low
 
   * Skip any zero-sized partitions resulting from recipe expansion.
