@@ -4,6 +4,13 @@
 . /lib/partman/resize.sh
 . /lib/partman/recipes.sh
 
+# busybox wants mount -o move; util-linux wants mount --move. Sigh.
+if [ -d /lib/debian-installer ]; then
+	mount_move='-o move'
+else
+	mount_move='--move'
+fi
+
 modprobe loop >/dev/null 2>&1 || true
 
 # Set up working directory.
@@ -184,7 +191,10 @@ done
 # TODO: handle errors if no mount succeeded
 
 mkdir -p /host
-mount -o move /target /host # TODO error handling
+mount $mount_move /target /host # TODO error handling
+
+# Don't try to mount this again later.
+rm -f $partition_id/mountpoint
 
 # Ensure that no old loop images are present.
 found_images=
@@ -231,7 +241,7 @@ setup_loop () {
 	esac
 	mkdir -p "/host${path%/*}"
 	rm -f "/host$path"
-	dd if=/dev/zero of="/host$path" bs="1000000" count="$1"
+	dd if=/dev/zero of="/host$path" bs="1000000" seek="$1" count=0
 	if ! losetup -f "/host$path"; then
 		shift
 		continue
@@ -263,7 +273,7 @@ setup_loop () {
 		rm -rf "$dev"
 		mkdir "$dev" || autopartitioning_failed
 		printf "%s" "$loop" >"$dev/device"
-		printf "%s" "$4" >"$dev/size"
+		printf "%s" "$1" >"$dev/size"
 		echo "Loopback on $loopfile" >"$dev/model"
 		echo "$loopfile" >"$dev/loop"
 

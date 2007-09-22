@@ -1,3 +1,14 @@
+migration-assistant (0.5.1) gutsy; urgency=low
+
+  [ Colin Watson ]
+  * In the Windows case in mount_os:
+    - Look in /proc/mounts, not /proc/partitions.
+    - Look in /proc/mounts before /etc/mtab.
+    - Make sure to select only the first mountpoint for a given device (in
+      case of bind mounts).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 21 Sep 2007 21:48:48 -0400
+
 migration-assistant (0.5.0) gutsy; urgency=low
 
   * Handle more than one installed copy of Windows (LP: #97081).

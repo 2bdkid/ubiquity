@@ -146,8 +146,8 @@ mount_os () {
         # whole system in Windows (yet), we can allow already mounted
         # partitions.  This may fix some corner cases.  At any rate, it's
         # required for Wubi to function properly.
-        [ -f /etc/mtab ] && mnt=$(grep "$device" /etc/mtab|cut -d " " -f 2) \
-        [ -z "$mnt" ] && mnt=$(grep "$device" /proc/partitions|cut -d " " -f 2) \
+        mnt=$(grep "$device" /proc/mounts | head -n1 | cut -d " " -f 2)
+        [ -z "$mnt" ] && [ -f /etc/mtab ] && mnt=$(grep "$device" /etc/mtab | head -n1 | cut -d " " -f 2)
         [ -n "$mnt" ] && mountpoint=$mnt && return 0
 
         mkdir -p $mountpoint

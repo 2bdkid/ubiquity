@@ -1,3 +1,23 @@
+partman-auto-loop (0ubuntu9) gutsy; urgency=low
+
+  * Remove the 'mountpoint' file for the partition mounted on /host so that
+    we don't try to mount it again later and get confused.
+  * Create sparse files for now. This is probably not ideal as they will
+    tend to fragment and this won't preallocate space, but the installer
+    experience is intolerable at the moment as it takes so long to dd
+    /dev/zero over the whole file.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 22 Sep 2007 03:20:40 +0100
+
+partman-auto-loop (0ubuntu8) gutsy; urgency=low
+
+  * Use 'mount --move' outside d-i rather than 'mount -o move';
+    inconveniently, util-linux doesn't like the latter, and busybox doesn't
+    like the former.
+  * Actually write the size to the partition's 'size' file, not the type!
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 22 Sep 2007 01:30:01 +0100
+
 partman-auto-loop (0ubuntu7) gutsy; urgency=low
 
   * Read all output from fstab.d scripts; exiting early causes very strange
