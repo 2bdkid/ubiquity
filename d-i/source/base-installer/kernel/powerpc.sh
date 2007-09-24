@@ -1,7 +1,7 @@
 arch_get_kernel_flavour () {
 	CPU=`grep '^cpu[[:space:]]*:' "$CPUINFO" | head -n1 | cut -d: -f2 | sed 's/^ *//; s/[, ].*//' | tr A-Z a-z`
 	case "$CPU" in
-		power3|i-star|s-star|power4|power4+|ppc970*|power5|power5+|cell)
+		power3|i-star|s-star|power4|power4+|ppc970*|power5|power5+)
 			family=powerpc64
 			;;
 		*)
@@ -9,7 +9,8 @@ arch_get_kernel_flavour () {
 			;;
 	esac
 	case "$SUBARCH" in
-		powermac*|prep|chrp*|ps3)	echo "$family" ;;
+		powermac*|prep|chrp*)		echo "$family" ;;
+		ps3|cell)			echo cell ;;
 		amiga)				echo apus ;;
 		*)
 			warning "Unknown $ARCH subarchitecture '$SUBARCH'."
