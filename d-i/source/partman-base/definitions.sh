@@ -965,7 +965,7 @@ default_disk_label () {
 		    echo mac;;
 		powermac_oldworld)
 		    echo mac;;
-		ps3)
+		ps3|cell)
 		    echo msdos;;
 		*)
 		    echo UNKNOWN;;

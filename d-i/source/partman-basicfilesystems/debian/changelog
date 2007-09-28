@@ -1,3 +1,10 @@
+partman-basicfilesystems (54ubuntu4) gutsy; urgency=low
+
+  * mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+    file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Sep 2007 11:03:53 +0100
+
 partman-basicfilesystems (54ubuntu3) gutsy; urgency=low
 
   * init.d/auto_mountpoints: Use 'rm -f' rather than a more awkward
