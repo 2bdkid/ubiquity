@@ -51,7 +51,7 @@ import gtk.glade
 
 import debconf
 
-from ubiquity import filteredcommand, i18n, validation
+from ubiquity import filteredcommand, i18n, osextras, validation
 from ubiquity.misc import *
 from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 partman, partman_commit, \
@@ -254,28 +254,31 @@ class Wizard(BaseFrontend):
     # Disable gnome-volume-manager automounting to avoid problems during
     # partitioning.
     def disable_volume_manager(self):
-        gvm_automount_drives = '/desktop/gnome/volume_manager/automount_drives'
-        gvm_automount_media = '/desktop/gnome/volume_manager/automount_media'
-        volumes_visible = '/apps/nautilus/desktop/volumes_visible'
-        if 'SUDO_USER' in os.environ:
-            gconf_dir = ('xml:readwrite:%s' %
-                         os.path.expanduser('~%s/.gconf' %
-                                            os.environ['SUDO_USER']))
-        else:
-            gconf_dir = 'xml:readwrite:%s' % os.path.expanduser('~/.gconf')
-        self.gconf_previous = {}
-        for gconf_key in (gvm_automount_drives, gvm_automount_media,
-            volumes_visible):
-            subp = subprocess.Popen(['gconftool-2', '--config-source',
-                                     gconf_dir, '--get', gconf_key],
-                                    stdout=subprocess.PIPE,
-                                    stderr=subprocess.PIPE,
+        if osextras.find_on_path_root('/', 'gconftool-2'):
+            gvm_root = '/desktop/gnome/volume_manager'
+            gvm_automount_drives = '%s/automount_drives' % gvm_root
+            gvm_automount_media = '%s/automount_media' % gvm_root
+            volumes_visible = '/apps/nautilus/desktop/volumes_visible'
+            if 'SUDO_USER' in os.environ:
+                gconf_dir = ('xml:readwrite:%s' %
+                             os.path.expanduser('~%s/.gconf' %
+                                                os.environ['SUDO_USER']))
+            else:
+                gconf_dir = 'xml:readwrite:%s' % os.path.expanduser('~/.gconf')
+            self.gconf_previous = {}
+            for gconf_key in (gvm_automount_drives, gvm_automount_media,
+                volumes_visible):
+                subp = subprocess.Popen(['gconftool-2', '--config-source',
+                                         gconf_dir, '--get', gconf_key],
+                                        stdout=subprocess.PIPE,
+                                        stderr=subprocess.PIPE,
+                                        preexec_fn=drop_privileges)
+                self.gconf_previous[gconf_key] = \
+                    subp.communicate()[0].rstrip('\n')
+                if self.gconf_previous[gconf_key] != 'false':
+                    subprocess.call(['gconftool-2', '--set', gconf_key,
+                                     '--type', 'bool', 'false'],
                                     preexec_fn=drop_privileges)
-            self.gconf_previous[gconf_key] = subp.communicate()[0].rstrip('\n')
-            if self.gconf_previous[gconf_key] != 'false':
-                subprocess.call(['gconftool-2', '--set', gconf_key,
-                                 '--type', 'bool', 'false'],
-                                preexec_fn=drop_privileges)
 
         self.thunar_previous = self.thunar_set_volmanrc(
             {'AutomountDrives': 'FALSE', 'AutomountMedia': 'FALSE'})
@@ -283,19 +286,21 @@ class Wizard(BaseFrontend):
         atexit.register(self.enable_volume_manager)
 
     def enable_volume_manager(self):
-        gvm_automount_drives = '/desktop/gnome/volume_manager/automount_drives'
-        gvm_automount_media = '/desktop/gnome/volume_manager/automount_media'
-        volumes_visible = '/apps/nautilus/desktop/volumes_visible'
-        for gconf_key in (gvm_automount_drives, gvm_automount_media,
-            volumes_visible):
-            if self.gconf_previous[gconf_key] == '':
-                subprocess.call(['gconftool-2', '--unset', gconf_key],
-                                preexec_fn=drop_privileges)
-            elif self.gconf_previous[gconf_key] != 'false':
-                subprocess.call(['gconftool-2', '--set', gconf_key,
-                                 '--type', 'bool',
-                                 self.gconf_previous[gconf_key]],
-                                preexec_fn=drop_privileges)
+        if osextras.find_on_path_root('/', 'gconftool-2'):
+            gvm_root = '/desktop/gnome/volume_manager'
+            gvm_automount_drives = '%s/automount_drives' % gvm_root
+            gvm_automount_media = '%s/automount_media' % gvm_root
+            volumes_visible = '/apps/nautilus/desktop/volumes_visible'
+            for gconf_key in (gvm_automount_drives, gvm_automount_media,
+                volumes_visible):
+                if self.gconf_previous[gconf_key] == '':
+                    subprocess.call(['gconftool-2', '--unset', gconf_key],
+                                    preexec_fn=drop_privileges)
+                elif self.gconf_previous[gconf_key] != 'false':
+                    subprocess.call(['gconftool-2', '--set', gconf_key,
+                                     '--type', 'bool',
+                                     self.gconf_previous[gconf_key]],
+                                    preexec_fn=drop_privileges)
 
         if self.thunar_previous:
             self.thunar_set_volmanrc(self.thunar_previous)
@@ -570,17 +575,12 @@ class Wizard(BaseFrontend):
             tempref = widget.get_image()
 
             question = i18n.map_widget_name(widget.get_name())
+            widget.set_label(text)
             if question.startswith('ubiquity/imported/'):
-                if '|' in text:
-                    widget.set_label(text.split('|', 1)[1])
-                else:
-                    widget.set_label(text)
                 stock_id = question[18:]
                 widget.set_use_stock(False)
                 widget.set_image(gtk.image_new_from_stock(
                     'gtk-%s' % stock_id, gtk.ICON_SIZE_BUTTON))
-            else:
-                widget.set_label(text)
 
         elif isinstance(widget, gtk.Window):
             if name == 'live_installer' and self.oem_config:
@@ -597,10 +597,23 @@ class Wizard(BaseFrontend):
             self.live_installer.window.set_cursor(cursor)
         self.back.set_sensitive(allowed)
         self.next.set_sensitive(allowed and self.allowed_go_forward)
+        # Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070
+        if self.back.get_property('visible') and allowed:
+            self.back.hide()
+            self.back.show()
+        if (self.next.get_property('visible') and
+            allowed and self.allowed_go_forward):
+            self.next.hide()
+            self.next.show()
         self.allowed_change_step = allowed
 
     def allow_go_forward(self, allowed):
         self.next.set_sensitive(allowed and self.allowed_change_step)
+        # Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070
+        if (self.next.get_property('visible') and
+            allowed and self.allowed_change_step):
+            self.next.hide()
+            self.next.show()
         self.allowed_go_forward = allowed
 
 
@@ -686,7 +699,7 @@ class Wizard(BaseFrontend):
             cur = self.stepUserInfo
         elif n == 'Summary':
             cur = self.stepReady
-            self.next.set_label("Install")
+            self.next.set_label(self.get_string('install_button'))
         elif n == 'MigrationAssistant':
             cur = self.stepMigrationAssistant
         else:
@@ -966,6 +979,8 @@ class Wizard(BaseFrontend):
                 error_msg.append("The hostname may only contain letters, digits, hyphens, and dots.")
             elif result == validation.HOSTNAME_BADHYPHEN:
                 error_msg.append("The hostname may not start or end with a hyphen.")
+            elif result == validation.HOSTNAME_BADDOTS:
+                error_msg.append('The hostname may not start or end with a dot, or contain the sequence "..".')
 
         # showing warning message is error is set
         if len(error_msg) != 0:

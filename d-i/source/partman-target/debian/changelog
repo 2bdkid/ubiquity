@@ -1,3 +1,16 @@
+partman-target (50ubuntu5) gutsy; urgency=low
+
+  [ Colin Watson ]
+  * Always set the loop option for loop devices.
+  * Fix loop device detection.
+
+  [ Reinhard Tartler ]
+  * don't do UUID conversion for /dev/mapper/*_crypt devices. Those are
+    created by partman-crypto, and are used by cryptsetup's cryptroot-hook.
+    LP: #144390
+
+ -- Reinhard Tartler <siretart@tauware.de>  Fri, 28 Sep 2007 18:26:30 +0200
+
 partman-target (50ubuntu4) gutsy; urgency=low
 
   * Use the path of the file associated with a loop device in /etc/fstab,

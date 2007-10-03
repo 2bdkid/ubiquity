@@ -1,3 +1,52 @@
+ubiquity (1.6.1) gutsy; urgency=low
+
+  [ Evan Dandrea ]
+  * Modified the install component to allow grub preseeding in automatic mode.
+  * Add missing subprocess import to base.py.
+  * Respect preseeded values for grub-installer/with_other_os and
+    grub-installer/only_debian.
+
+  [ Colin Watson ]
+  * Strip translation context for imported strings (e.g. "Navigation|_Back")
+    at a lower level so that it applies to the KDE frontend too.
+  * KDE frontend:
+    - Remove some duplicate code during widget translation.
+    - Retranslate oem_id_label when the language is changed.
+  * Update imported translations from gtk+2.0 2.12.0-0ubuntu1.
+  * Forbid consecutive, initial, or final dots in hostnames (LP: #105890).
+  * Check whether gconftool-2 exists before calling it.
+  * Add missing Provides to ubiquity-frontend-mythbuntu.
+  * Switch XS-Vcs-Bzr to the ~ubuntu-installer branch we're using at the
+    moment.
+  * Stop installing doc/Changelog.Guadalinex as the upstream changelog, as
+    it's no longer current.
+  * Upgrade to gettext 0.16.1.
+  * Start dcopserver when running the KDE frontend in automatic-ubiquity
+    mode (LP: #145226).
+  * GTK frontend:
+    - Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070 by hiding
+      and re-showing the button widgets, following a suggestion by Scott
+      Horowitz.
+    - Make the OK button the default widget in the create and edit partition
+      dialogs.
+  * Remove d-i/source/console-setup/Keyboard/MyKeyboardNames.pl on clean.
+  * Only run gnome-settings-daemon if it exists, removing dependency on
+    gnome-control-center (LP: #147852).
+  * Add advanced button text to translation template (LP: #147612).
+  * Add install button text to translation template, distinguished from the
+    window title (LP: #103925).
+  * Load strings for "Use as:" and "Mount point:".
+  * Update translations from Rosetta.
+  * Automatic update of included source packages: base-installer
+    1.81ubuntu4, partman-auto-loop 0ubuntu11, partman-target 50ubuntu5.
+
+  [ Mario Limonciello ]
+  * Actually install xmltv from on-cd repo if checked.
+  * Correct minor typo for nvidia xorg generation.
+  * Explicitly remove via drivers before trying to install openchrome.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 03 Oct 2007 10:36:27 +0100
+
 ubiquity (1.6.0) gutsy; urgency=low
 
   [ Mario Limonciello ]

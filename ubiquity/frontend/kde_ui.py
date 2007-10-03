@@ -422,7 +422,6 @@ class Wizard(BaseFrontend):
         self.translate_widget(parentWidget, self.locale)
         if parentWidget.children() != None:
             for widget in parentWidget.children():
-                self.translate_widget(widget, self.locale)
                 self.translate_widget_children(widget)
 
     def translate_widget(self, widget, lang):
@@ -432,14 +431,13 @@ class Wizard(BaseFrontend):
 
         name = widget.objectName()
 
-        text = self.get_string(widget.objectName(), lang)
+        text = self.get_string(name, lang)
 
-        if str(widget.objectName()) == "UbiquityUIBase":
+        if str(name) == "UbiquityUIBase":
             text = self.get_string("live_installer", lang)
 
         if text is None:
             return
-        name = widget.objectName()
 
         if isinstance(widget, QLabel):
             if name == 'step_label':
@@ -474,12 +472,13 @@ class Wizard(BaseFrontend):
                 text = "< " + text
             widget.setText(text.replace('_', '&', 1))
 
-        elif isinstance(widget, QWidget) and str(widget.objectName()) == "UbiquityUIBase":
+        elif isinstance(widget, QWidget) and str(name) == "UbiquityUIBase":
             if self.oem_config:
                 text = self.get_string('oem_config_title', lang)
             widget.setWindowTitle(text)
+
         else:
-            print "WARNING: unknown widget: " + widget.objectName()
+            print "WARNING: unknown widget: " + name
 
     def allow_change_step(self, allowed):
         if allowed:
@@ -568,8 +567,7 @@ class Wizard(BaseFrontend):
             self.set_current_page(WIDGET_STACK_STEPS["stepUserInfo"])
         elif n == 'Summary':
             self.set_current_page(WIDGET_STACK_STEPS["stepReady"])
-            installText = self.get_string("live_installer")
-            self.userinterface.next.setText(installText)
+            self.userinterface.next.setText(self.get_string('install_button'))
         else:
             print >>sys.stderr, 'No page found for %s' % n
             return
@@ -814,6 +812,8 @@ class Wizard(BaseFrontend):
                 error_msg.append("The hostname may only contain letters, digits, hyphens, and dots.")
             elif result == validation.HOSTNAME_BADHYPHEN:
                 error_msg.append("The hostname may not start or end with a hyphen.")
+            elif result == validation.HOSTNAME_BADDOTS:
+                error_msg.append('The hostname may not start or end with a dot, or contain the sequence "..".')
 
         # showing warning message is error is set
         if len(error_msg) != 0:
@@ -879,7 +879,7 @@ class Wizard(BaseFrontend):
         if lang:
             # strip encoding; we use UTF-8 internally no matter what
             lang = lang.split('.')[0].lower()
-            for widget in (self.userinterface, self.userinterface.welcome_heading_label, self.userinterface.welcome_text_label, self.userinterface.release_notes_label, self.userinterface.release_notes_url, self.userinterface.next, self.userinterface.back, self.userinterface.cancel, self.userinterface.step_label):
+            for widget in (self.userinterface, self.userinterface.welcome_heading_label, self.userinterface.welcome_text_label, self.userinterface.oem_id_label, self.userinterface.release_notes_label, self.userinterface.release_notes_url, self.userinterface.next, self.userinterface.back, self.userinterface.cancel, self.userinterface.step_label):
                 self.translate_widget(widget, lang)
 
     def on_steps_switch_page(self, newPageID):

@@ -12,6 +12,8 @@ arch_check_usable_kernel () {
 	# Generic and server kernels can be run on any machine.
 	if expr "$1" : '.*-server.*' >/dev/null; then return 0; fi
 	if expr "$1" : '.*-generic.*' >/dev/null; then return 0; fi
+	if expr "$1" : '.*-xen.*' >/dev/null; then return 0; fi
+	if expr "$1" : '.*-rt.*' >/dev/null; then return 0; fi
 
 	return 1
 }
@@ -22,4 +24,10 @@ arch_get_kernel () {
 
 	echo "linux-server"
 	echo "linux-image-server"
+
+	echo "linux-xen"
+	echo "linux-image-xen"
+
+	echo "linux-rt"
+	echo "linux-image-rt"
 }

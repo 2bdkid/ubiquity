@@ -13,13 +13,18 @@ fstab=$(
     sort |
     while read mp fs type options dump pass; do
 	case "$fs" in
-	    (/dev/disk/*|/dev/fd[0-9]*)
+	    (/dev/disk/*|/dev/fd[0-9]*|/dev/mapper/*_crypt)
 		printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
 		;;
 	    (/*)
-		dev="/var/lib/partman/devices/$(echo "$1" | sed 's:/:=:g')"
+		dev="/var/lib/partman/devices/$(echo "$fs" | sed 's:/:=:g')"
 		if [ -f "$dev/loop" ]; then
 		    loop="$(cat "$dev/loop")"
+		    if [ "$options" = defaults ]; then
+			options=loop
+		    else
+			options="loop,$options"
+		    fi
 		    printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$loop" "${mp}" "$type" "$options" "$dump" "$pass"
 		else
 		    uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)"

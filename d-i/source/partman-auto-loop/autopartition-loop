@@ -180,14 +180,30 @@ fi
 
 mkdir -p /target
 
-for m in /lib/partman/mount.d/*; do
-	[ -x "$m" ] || continue
-
-	unmount_cmd="$($m "$fstab")"
-	if [ "$?" = 0 ]; then
-		break
+mountpoint="$(grep "^${fstab%% *} [^ ]* [^ ]* [^ ]*rw" /proc/mounts | cut -d ' ' -f2)" || mountpoint=
+if [ "$mountpoint" = /target ]; then
+	# nothing to do
+	:
+elif [ "$mountpoint" ]; then
+	if ! mount $mount_move "$mountpoint" /target; then
+		logger -t partman-auto-loop "Error: Failed to move $mountpoint to /target"
+		exit 1
 	fi
-done
+	unmount_cmd='umount /target'
+else
+	for m in /lib/partman/mount.d/*; do
+		[ -x "$m" ] || continue
+
+		unmount_cmd="$($m "$fstab")"
+		if [ "$?" = 0 ]; then
+			break
+		fi
+	done
+fi
+if [ -d /var/run ]; then
+	pidof /sbin/mount.ntfs-3g >> /var/run/sendsigs.omit
+fi
+
 # TODO: handle errors if no mount succeeded
 
 mkdir -p /host

@@ -77,7 +77,9 @@ clean:
 	$(MAKE) -C d-i clean
 	[ ! -f Makefile ] || $(MAKE) distclean
 
-	dh_clean debian/ubiquity.install ubiquity/keyboard_names.py
+	dh_clean debian/ubiquity.install \
+		 d-i/source/console-setup/Keyboard/MyKeyboardNames.pl \
+		 ubiquity/keyboard_names.py
 
 	$(MAKE) -C d-i check
 
@@ -203,7 +205,7 @@ endif
 binary-indep: install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs doc/Changelog.Guadalinex
+	dh_installchangelogs
 	dh_installdocs
 	dh_installdebconf
 	dh_link
@@ -227,7 +229,7 @@ endif
 binary-arch: install
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs doc/Changelog.Guadalinex
+	dh_installchangelogs
 	dh_installdocs
 	dh_installdebconf
 	echo >> debian/ubiquity/DEBIAN/templates
