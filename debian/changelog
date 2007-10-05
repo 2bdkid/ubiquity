@@ -1,3 +1,22 @@
+ubiquity (1.6.2) gutsy; urgency=low
+
+  [ Evan Dandrea ]
+  * Add 'only-ubiquity' option to kernel cmdline to run ubiquity in a
+    minimal session.  Thanks Tormod Volden (LP: #148341).
+  * Filter out partition selections that do not have any users.
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+   - Change ext3 to a less dangerous looking colour than red
+
+  [ Colin Watson ]
+  * Disable the intro message, as Ubuntu 7.10 is approaching.
+  * Update translations from Rosetta.
+  * Automatic update of included source packages: choose-mirror 2.15ubuntu2,
+    debian-installer-utils 1.48ubuntu2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 05 Oct 2007 13:23:00 +0100
+
 ubiquity (1.6.1) gutsy; urgency=low
 
   [ Evan Dandrea ]
