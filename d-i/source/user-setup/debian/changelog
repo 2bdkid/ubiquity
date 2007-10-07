@@ -1,3 +1,10 @@
+user-setup (1.14ubuntu4) gutsy; urgency=low
+
+  * Only call archdetect if we have it, in order not to break use of the
+    .deb outside ubiquity.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 05 Oct 2007 23:01:34 +0100
+
 user-setup (1.14ubuntu3) gutsy; urgency=low
 
   * Create the spu group on powerpc/ps3 and powerpc/cell (LP: #145460).

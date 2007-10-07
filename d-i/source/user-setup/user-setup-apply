@@ -140,12 +140,14 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for group in lpadmin scanner; do
 			$log $chroot $ROOT addgroup --system $group >/dev/null 2>&1 || true
 		done
-		SUBARCH="$(archdetect)"
-		case $SUBARCH in
-			powerpc/ps3|powerpc/cell)
-				$log $chroot $ROOT addgroup --system spu >/dev/null 2>&1 || true
-				;;
-		esac
+		if type archdetect >/dev/null 2>&1; then
+			SUBARCH="$(archdetect)"
+			case $SUBARCH in
+				powerpc/ps3|powerpc/cell)
+					$log $chroot $ROOT addgroup --system spu >/dev/null 2>&1 || true
+					;;
+			esac
+		fi
 		for group in adm audio cdrom dialout floppy video plugdev dip netdev powerdev lpadmin scanner; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done

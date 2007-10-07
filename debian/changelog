@@ -1,3 +1,25 @@
+ubiquity (1.6.3) gutsy; urgency=low
+
+  [ Evan Dandrea ]
+  * Remember to not use the migration-assistant dbfilter when using
+    --no-migration-assistant, again (LP: #148766).
+  * Update noninteractive frontend to use recent changes to FilteredCommand
+    (LP: #149473).
+
+  [ Colin Watson ]
+  * Remove excessive blank lines in GDM and KDM configuration files in OEM
+    mode.
+  * GTK frontend:
+    - Make sure the next button remains the default widget despite being
+      hidden and re-shown.
+  * Shell out to sed for now rather than using flaky, complicated, and above
+    all incorrect code to edit gdm.conf and kdmrc for autologin in OEM mode
+    (LP: #149985).
+  * Update translations from Rosetta.
+  * Automatic update of included source packages: user-setup 1.14ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 07 Oct 2007 21:00:19 +0100
+
 ubiquity (1.6.2) gutsy; urgency=low
 
   [ Evan Dandrea ]
