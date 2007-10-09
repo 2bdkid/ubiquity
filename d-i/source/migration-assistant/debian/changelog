@@ -1,3 +1,18 @@
+migration-assistant (0.5.3) gutsy; urgency=low
+
+  * Move initialize_registry_paths call later to avoid situations where
+    other needed variables may not be set yet, causing m-a to fail.
+  * Fix logging.
+  * Fix IFS handling around call to expr.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 09 Oct 2007 10:58:09 -0400
+
+migration-assistant (0.5.2) gutsy; urgency=low
+
+  * Fix IFS handling (LP: #145712, #135149)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 03 Oct 2007 22:27:20 -0400
+
 migration-assistant (0.5.1) gutsy; urgency=low
 
   [ Colin Watson ]

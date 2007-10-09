@@ -48,10 +48,8 @@ int main(int argc, char** argv) {
 	switch(c) {
 	    case 'o' :
 		if(strcmp(optarg, "linux") == 0) os_type = LINUX;
-		else if(strcmp(optarg, "windowsxp") == 0) {
+		else if(strcmp(optarg, "windowsxp") == 0)
 		    os_type = WINDOWSXP;
-            initialize_registry_paths();
-        }
 		else
 		    usage(argv);
 		break;
@@ -134,10 +132,11 @@ int main(int argc, char** argv) {
         }
         free(passwd_file);
         
+        if(os_type == WINDOWSXP) initialize_registry_paths();
         target();
     } else
 	usage(argv);
     
     return 0;
 }
-/* vim:ai:et:sts=4:tw=80:sw=4: */
+// vim:ai:et:sts=4:tw=80:sw=4:
