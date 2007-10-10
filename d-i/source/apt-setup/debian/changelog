@@ -1,3 +1,12 @@
+apt-setup (1:0.21ubuntu4) gutsy; urgency=low
+
+  * Always verify the mirror, though with a shorter timeout than before (10
+    seconds). If we don't, then 'apt-get update' isn't called to download
+    indices, which means we are never able to download language packs from
+    the network.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 10 Oct 2007 18:16:15 +0100
+
 apt-setup (1:0.21ubuntu3) gutsy; urgency=low
 
   * Rename the 'commercial' component to 'partner'.
