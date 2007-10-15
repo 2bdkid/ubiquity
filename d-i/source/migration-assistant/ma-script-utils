@@ -53,6 +53,7 @@ mountpoint="/mnt/migrationassistant"
 unmount_os() {
     # If we didn't mount the device ourselves, don't unmount it.
     [ "$mountpoint" = "/mnt/migrationassistant" ] || return 0
+    unmount_previously_run=
     device="$1"
 
     if [ -f /etc/mtab ]; then
@@ -88,6 +89,14 @@ unmount_os() {
         if [ -z "$failed" ]; then
             break
         fi
+        # lets try waiting briefly once before we completely give up on
+        # unmounting the partition and dump the problem on the user.
+        if [ -z "$unmount_previously_run" ]; then
+            unmount_previously_run=1
+            sleep 15
+            continue
+        fi
+
         db_reset migration-assistant/failed-unmount
         db_subst migration-assistant/failed-unmount MOUNTED "$failed"
         db_input critical migration-assistant/failed-unmount || true
