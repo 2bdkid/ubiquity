@@ -31,7 +31,7 @@ Type: error
 _Description: Copy operation failure
  An error occurred while writing the changes to the storage devices.
  .
- The copy operation is aborted.
+ The copy operation has been aborted.
 
 Template: partman-partitioning/impossible_resize
 Type: error
@@ -78,7 +78,7 @@ Type: error
 _Description: Resize operation failure
  An error occurred while writing the changes to the storage devices.
  .
- The resize operation is aborted.
+ The resize operation has been aborted.
 
 Template: partman-partitioning/new_partition_size
 Type: string
@@ -125,6 +125,19 @@ Type: select
 Choices: ${CHOICES}
 _Description: Partition table type:
  Select the type of partition table to use.
+
+Template: partman-partitioning/bootable_logical
+Type: boolean
+Default: false
+_Description: Are you sure you want a bootable logical partition?
+ You are trying to set the bootable flag on a logical partition. The
+ bootable flag is generally only useful on primary partitions, so setting it
+ on logical partitions is normally discouraged. Some BIOS versions are known
+ to fail to boot if there is no bootable primary partition.
+ .
+ However, if you are sure that your BIOS does not have this problem, or if
+ you are using a custom boot manager that pays attention to bootable logical
+ partitions, then setting this flag may make sense.
 
 Template: partman-partitioning/text/set_flags
 Type: text

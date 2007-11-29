@@ -11,13 +11,13 @@
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
+# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-15 12:14+0400\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-08-27 21:37+0400\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -82,7 +82,7 @@ msgstr "Копирование не удалось"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+msgid "The copy operation has been aborted."
 msgstr "Копирование было прервано."
 
 #. Type: error
@@ -169,7 +169,7 @@ msgstr "Ошибка при записи изменений на устройс�
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+msgid "The resize operation has been aborted."
 msgstr "Изменение размера разделов было прервано."
 
 #. Type: string
@@ -279,62 +279,95 @@ msgstr "Тип таблицы разделов:"
 msgid "Select the type of partition table to use."
 msgstr "Выберите нужный типа таблицы разделов."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Вы уверены, что хотите сделать загрузочным логический раздел?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"Вы пытаетесь установить загрузочный флаг на логический раздел. Обычно, "
+"загрузочный флаг полезен только на первичных разделах, поэтому его установка "
+"на логические разделы не поощряется. Известно, что некоторые версии BIOS не "
+"выполняют загрузку с диска, если флаг установлен не на первичном разделе."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"Однако, если вы уверены, что ваш BIOS сможет выполнить загрузку, или если вы "
+"пользуетесь специальным менеджером загрузки, который понимает, когда "
+"загрузочный флаг стоит на логическом разделе, то такая установка может иметь "
+"смысл."
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Задать флаги раздела"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Имя:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Метка 'загрузочный':"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "вкл"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "выкл"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Изменить размер раздела (текущий размер ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Копировать данные из другого раздела"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Удалить раздел"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Создать новый раздел"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Создать новую пустую таблицу разделов на этом устройстве"

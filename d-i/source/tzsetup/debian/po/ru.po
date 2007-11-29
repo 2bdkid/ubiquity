@@ -7,17 +7,17 @@
 # Russian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
-#
+# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-04-08 13:35+0300\n"
+"POT-Creation-Date: 2007-10-11 22:48+0000\n"
+"PO-Revision-Date: 2007-09-10 21:16+0400\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,415 +25,783 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: select
 #. Choices
-#. Timezones for AQ.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. McMurdo, south pole, Rothera, Palmer, Mawson, Davis, Casey, Vostok, Dumont-d'Urville, Syowa
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "McMurdo"
+msgstr "Мак-Мердо"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "south pole"
+msgstr "Южный полюс"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Rothera"
+msgstr "Ротера"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Palmer"
+msgstr "Палмер"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Mawson"
+msgstr "Моусон"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Davis"
+msgstr "Дейвис"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Casey"
+msgstr "Кейси"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Vostok"
+msgstr "Восток"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Dumont-d'Urville"
+msgstr "Дюмон-д'Юрвиль"
+
+#. Type: select
+#. Choices
+#. Time zone for Antarctica
+#: ../common.templates:11
+msgid "Syowa"
+msgstr "Сёва"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
 #: ../common.templates:19
-msgid ""
-"Antarctica/McMurdo, Antarctica/South_Pole, Antarctica/Rothera, Antarctica/"
-"Palmer, Antarctica/Mawson, Antarctica/Davis, Antarctica/Casey, Antarctica/"
-"Vostok, Antarctica/DumontDUrville, Antarctica/Syowa"
-msgstr ""
-"Марк-Мердо, Южный полюс, Ротера, Палмер, Мейсон, Дэвис, Кейси, Восток, "
-"Дюмонд-Дюрвиль, Сева"
+msgid "Lord Howe Island"
+msgstr "Лорд-Хау"
 
 #. Type: select
 #. Choices
-#. Timezones for AU.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Lord Howe Island, Hobart, Melbourne, Sydney, Broken Hill, Brisbane, Lindeman, Adelaide, Darwin, Perth
-#: ../common.templates:36
-msgid ""
-"Australia/Lord_Howe, Australia/Hobart, Australia/Melbourne, Australia/"
-"Sydney, Australia/Broken_Hill, Australia/Brisbane, Australia/Lindeman, "
-"Australia/Adelaide, Australia/Darwin, Australia/Perth"
-msgstr ""
-"Лорд-Хау, Хобарт, Мельбурн, Сидней, Брокен-Хилл, Брисбен, Линдеман, "
-"Аделаида, Дарвин, Перт"
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Hobart"
+msgstr "Хобарт"
 
 #. Type: select
 #. Choices
-#. Timezones for BR.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Noronha, Belem, Fortaleza, Recife, Araguaina, Maceio, Bahia, Sao Paulo, Campo Grande, Cuiaba, Porto Velho, Boa Vista, Manaus, Eirunepe, Rio Branco
-#: ../common.templates:53
-msgid ""
-"America/Noronha, America/Belem, America/Fortaleza, America/Recife, America/"
-"Araguaina, America/Maceio, America/Bahia, America/Sao_Paulo, America/"
-"Campo_Grande, America/Cuiaba, America/Porto_Velho, America/Boa_Vista, "
-"America/Manaus, America/Eirunepe, America/Rio_Branco"
-msgstr ""
-"Норона, Белем, Форталеза, Ресифи, Арагуайна, Масейо, Бахиа, Сан-Пауло, Кампо-"
-"Грандэ, Куяба, Порто-Вело, Боа-Виста, Манаус, Эйрунепе, Рио-Бранко"
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Melbourne"
+msgstr "Мельбурн"
 
 #. Type: select
 #. Choices
-#. Timezones for CA.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Newfoundland, Atlantic, Eastern, Central, East Saskatchewan, Saskatchewan, Mountain, Pacific, Yukon
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Sydney"
+msgstr "Сидней"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Broken Hill"
+msgstr "Брокен-Хилл"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Brisbane"
+msgstr "Брисбен"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Lindeman"
+msgstr "Линдеман"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Adelaide"
+msgstr "Аделаида"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Darwin"
+msgstr "Дарвин"
+
+#. Type: select
+#. Choices
+#. Time zone for Australia
+#: ../common.templates:19
+msgid "Perth"
+msgstr "Перт"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Noronha"
+msgstr "Норона"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Belem"
+msgstr "Белен"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Fortaleza"
+msgstr "Форталеза"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Recife"
+msgstr "Ресифи"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Araguaina"
+msgstr "Арагуаина"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Maceio"
+msgstr "Масейо"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Bahia"
+msgstr "Баия"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Sao Paulo"
+msgstr "Сан-Паулу"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Campo Grande"
+msgstr "Кампу-Гранди"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Cuiaba"
+msgstr "Куяба"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Porto Velho"
+msgstr "Порто-Велью"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Boa Vista"
+msgstr "Боа-Виста"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Manaus"
+msgstr "Манаус"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Eirunepe"
+msgstr "Эйрунепе"
+
+#. Type: select
+#. Choices
+#. Time zone for Brazil
+#: ../common.templates:27
+msgid "Rio Branco"
+msgstr "Риу-Бранку"
+
+#. Type: select
+#. Choices
+#. Time zone for Canada
+#: ../common.templates:35
+msgid "Newfoundland"
+msgstr "Ньюфаундленд"
+
+#. Type: select
+#. Choices
+#. Time zone for Canada
+#: ../common.templates:35
+msgid "Atlantic"
+msgstr "Атлантическое время"
+
+#. Type: select
+#. Choices
+#. Time zone for Canada
+#: ../common.templates:35
+msgid "East Saskatchewan"
+msgstr "Восточный Саскачеван"
+
+#. Type: select
+#. Choices
+#. Time zone for Canada
+#: ../common.templates:35
+msgid "Saskatchewan"
+msgstr "Саскачеван"
+
+#. Type: select
+#. Choices
+#. Time zone for Canada
+#: ../common.templates:35
+msgid "Yukon"
+msgstr "Юкон"
+
+#. Type: select
+#. Choices
+#. Time zone for Congo, The Democratic Republic of the
+#: ../common.templates:42
+msgid "Kinshasa"
+msgstr "Киншаса"
+
+#. Type: select
+#. Choices
+#. Time zone for Congo, The Democratic Republic of the
+#: ../common.templates:42
+msgid "Lubumbashi"
+msgstr "Лубумбаши"
+
+#. Type: select
+#. Choices
+#. Time zone for Chile
+#: ../common.templates:49
+msgid "Santiago"
+msgstr "Сантьяго"
+
+#. Type: select
+#. Choices
+#. Time zone for Chile
+#: ../common.templates:49
+msgid "Easter Island"
+msgstr "Остров Пасхи"
+
+#. Type: select
+#. Choices
+#. Time zone for Ecuador
+#: ../common.templates:56
+msgid "Guayaquil"
+msgstr "Гуаякиль"
+
+#. Type: select
+#. Choices
+#. Time zone for Ecuador
+#: ../common.templates:56
+msgid "Galapagos"
+msgstr "Галапагосские острова"
+
+#. Type: select
+#. Choices
+#. Time zone for Spain
+#: ../common.templates:63
+msgid "Madrid"
+msgstr "Мадрид"
+
+#. Type: select
+#. Choices
+#. Time zone for Spain
+#: ../common.templates:63
+msgid "Ceuta"
+msgstr "Сеута"
+
+#. Type: select
+#. Choices
+#. Time zone for Spain
+#: ../common.templates:63
+msgid "Canary Islands"
+msgstr "Канары"
+
+#. Type: select
+#. Choices
+#. Time zone for Micronesia, Federated States of
 #: ../common.templates:70
-msgid ""
-"Canada/Newfoundland, Canada/Atlantic, Canada/Eastern, Canada/Central, Canada/"
-"East-Saskatchewan, Canada/Saskatchewan, Canada/Mountain, Canada/Pacific, "
-"Canada/Yukon"
-msgstr ""
-"Ньюфаундленд, Атлантический, Восточный, Центральный, Восточный Саскатчеван, "
-"Саскатчеван, Горный, Тихоокеанский, Юкон"
+msgid "Yap"
+msgstr "Яп"
 
 #. Type: select
 #. Choices
-#. Timezones for CD.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Kinshasa, Lubumbashi
-#: ../common.templates:86
-msgid "Africa/Kinshasa, Africa/Lubumbashi"
-msgstr "Киншаса, Лубумбаши"
+#. Time zone for Micronesia, Federated States of
+#: ../common.templates:70
+msgid "Truk"
+msgstr "Трук"
 
 #. Type: select
 #. Choices
-#. Timezones for CL.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Santiago, Easter Island
-#: ../common.templates:102
-msgid "America/Santiago, Pacific/Easter"
-msgstr "Сантьяго, Остров Пасхи"
+#. Time zone for Micronesia, Federated States of
+#: ../common.templates:70
+msgid "Ponape"
+msgstr "Понпей"
 
 #. Type: select
 #. Choices
-#. Timezones for EC.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Guayaquil, Galapagos
-#: ../common.templates:118
-msgid "America/Guayaquil, Pacific/Galapagos"
-msgstr "Гуаякиль, Галапагосы"
+#. Time zone for Micronesia, Federated States of
+#: ../common.templates:70
+msgid "Kosrae"
+msgstr "Кусаие"
 
 #. Type: select
 #. Choices
-#. Timezones for ES.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Madrid, Ceuta, Canary Islands
-#: ../common.templates:134
-msgid "Europe/Madrid, Africa/Ceuta, Atlantic/Canary"
-msgstr "Мадрид, Сеута, Канары"
+#. Time zone for Greenland
+#: ../common.templates:77
+msgid "Godthab"
+msgstr "Готхоб"
 
 #. Type: select
 #. Choices
-#. Timezones for FM.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Yap, Truk, Ponape, Kosrae
-#: ../common.templates:150
-msgid "Pacific/Yap, Pacific/Truk, Pacific/Ponape, Pacific/Kosrae"
-msgstr "Яп, Трук, Понапе, Косрэй"
+#. Time zone for Greenland
+#: ../common.templates:77
+msgid "Danmarkshavn"
+msgstr "Данмарксхавн"
 
 #. Type: select
 #. Choices
-#. Timezones for GL.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Godthab, Danmarkshavn, Scoresbysund, Thule
-#: ../common.templates:166
-msgid ""
-"America/Godthab, America/Danmarkshavn, America/Scoresbysund, America/Thule"
-msgstr "Готхоб, Денмаркшавн, Скоресбисунд, Туле"
+#. Time zone for Greenland
+#: ../common.templates:77
+msgid "Scoresbysund"
+msgstr "Скорсбисунн"
 
 #. Type: select
 #. Choices
-#. Timezones for ID.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Jakarta, Pontianak, Makassar, Jayapura
-#: ../common.templates:182
-msgid "Asia/Jakarta, Asia/Pontianak, Asia/Makassar, Asia/Jayapura"
-msgstr "Джакарта, Понтианак, Макасар, Джаяпура"
+#. Time zone for Greenland
+#: ../common.templates:77
+msgid "Thule"
+msgstr "Туле"
 
 #. Type: select
 #. Choices
-#. Timezones for KI.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Tarawa (Gilbert Islands), Enderbury (Phoenix Islands), Kiritimati (Line Islands)
-#: ../common.templates:198
-msgid "Pacific/Tarawa, Pacific/Enderbury, Pacific/Kiritimati"
-msgstr "Тарава, Эндирбури, Киритимати"
+#. Time zone for Indonesia
+#: ../common.templates:84
+msgid "Jakarta"
+msgstr "Джакарта"
 
 #. Type: select
 #. Choices
-#. Timezones for KZ.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Almaty, Qyzylorda, Aqtobe, Atyrau, Oral
-#: ../common.templates:214
-msgid "Asia/Almaty, Asia/Qyzylorda, Asia/Aqtobe, Asia/Aqtau, Asia/Oral"
-msgstr "Алма-Ата, Кызылорда, Актобе, Актау, Уральск"
+#. Time zone for Indonesia
+#: ../common.templates:84
+msgid "Pontianak"
+msgstr "Понтианак"
 
 #. Type: select
 #. Choices
-#. Timezones for MN.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Ulaanbaatar, Hovd, Choibalsan
-#: ../common.templates:230
-msgid "Asia/Ulaanbaatar, Asia/Hovd, Asia/Choibalsan"
-msgstr "Уланбатор, Ховд, Чойбалсан"
+#. Time zone for Indonesia
+#: ../common.templates:84
+msgid "Makassar"
+msgstr "Макассар"
+
+#. Type: select
+#. Choices
+#. Time zone for Indonesia
+#: ../common.templates:84
+msgid "Jayapura"
+msgstr "Джаяпура"
+
+#. Type: select
+#. Choices
+#. Time zone for Kiribati
+#: ../common.templates:91
+msgid "Tarawa (Gilbert Islands)"
+msgstr "Тарава"
+
+#. Type: select
+#. Choices
+#. Time zone for Kiribati
+#: ../common.templates:91
+msgid "Enderbury (Phoenix Islands)"
+msgstr "Эндербери"
+
+#. Type: select
+#. Choices
+#. Time zone for Kiribati
+#: ../common.templates:91
+msgid "Kiritimati (Line Islands)"
+msgstr "Киритимати"
+
+#. Type: select
+#. Choices
+#. Time zone for Kazakhstan
+#: ../common.templates:98
+msgid "Almaty"
+msgstr "Алма-Ата"
+
+#. Type: select
+#. Choices
+#. Time zone for Kazakhstan
+#: ../common.templates:98
+msgid "Qyzylorda"
+msgstr "Кзыл-Орда"
+
+#. Type: select
+#. Choices
+#. Time zone for Kazakhstan
+#: ../common.templates:98
+msgid "Aqtobe"
+msgstr "Актюбинск"
+
+#. Type: select
+#. Choices
+#. Time zone for Kazakhstan
+#: ../common.templates:98
+msgid "Atyrau"
+msgstr "Актау"
+
+#. Type: select
+#. Choices
+#. Time zone for Kazakhstan
+#: ../common.templates:98
+msgid "Oral"
+msgstr "Уральск"
+
+#. Type: select
+#. Choices
+#. Time zone for Mongolia
+#: ../common.templates:105
+msgid "Ulaanbaatar"
+msgstr "Улан-Батор"
+
+#. Type: select
+#. Choices
+#. Time zone for Mongolia
+#: ../common.templates:105
+msgid "Hovd"
+msgstr "Ховд"
+
+#. Type: select
+#. Choices
+#. Time zone for Mongolia
+#: ../common.templates:105
+msgid "Choibalsan"
+msgstr "Чойбалсан"
 
 #. Type: select
 #. Description
-#: ../common.templates:232
+#: ../common.templates:106
 msgid "Select a city in your time zone:"
 msgstr "Выберите город в вашем часовом поясе:"
 
 #. Type: select
 #. Choices
-#. Timezones for MX.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Central, Mountain, Pacific
-#: ../common.templates:246
-msgid "Mexico/General, Mexico/BajaSur, Mexico/BajaNorte"
-msgstr "Общий, БьяджаСур, БьяджаНорте"
+#. Time zone for New Zealand
+#: ../common.templates:119
+msgid "Auckland"
+msgstr "Окленд"
 
 #. Type: select
 #. Choices
-#. Timezones for NZ.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Auckland, Chatham Islands
-#: ../common.templates:262
-msgid "Pacific/Auckland, Pacific/Chatham"
-msgstr "Окленд, Четхэм"
+#. Time zone for New Zealand
+#: ../common.templates:119
+msgid "Chatham Islands"
+msgstr "Чатем"
 
 #. Type: select
 #. Choices
-#. Timezones for PF.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Tahiti (Society Islands), Marquesas Islands, Gambier Islands
-#: ../common.templates:278
-msgid "Pacific/Tahiti, Pacific/Marquesas, Pacific/Gambier"
-msgstr "Таити, Маркизские острова, Гамбиэ"
+#. Time zone for French Polynesia
+#: ../common.templates:126
+msgid "Tahiti (Society Islands)"
+msgstr "Таити"
 
 #. Type: select
 #. Choices
-#. Timezones for PT.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Lisbon, Madeira Islands, Azores
-#: ../common.templates:294
-msgid "Europe/Lisbon, Atlantic/Madeira, Atlantic/Azores"
-msgstr "Лиссабон, Мадейра, Азорские острова"
+#. Time zone for French Polynesia
+#: ../common.templates:126
+msgid "Marquesas Islands"
+msgstr "Маркизские острова"
 
 #. Type: select
 #. Choices
-#. Timezones for RU.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Moscow-01 - Kaliningrad, Moscow+00 - west Russia, Moscow+01 - Samara, Moscow+02 - Urals, Moscow+03 - west Siberia, Moscow+03 - Novosibirsk, Moscow+04 - Yenisei River, Moscow+05 - Lake Baikal, Moscow+06 - Lena River, Moscow+07 - Amur River, Moscow+07 - Sakhalin Island, Moscow+08 - Magadan, Moscow+09 - Kamchatka, Moscow+10 - Bering Sea
-#: ../common.templates:311
-msgid ""
-"Europe/Kaliningrad, Europe/Moscow, Europe/Samara, Asia/Yekaterinburg, Asia/"
-"Omsk, Asia/Novosibirsk, Asia/Krasnoyarsk, Asia/Irkutsk, Asia/Yakutsk, Asia/"
-"Vladivostok, Asia/Sakhalin, Asia/Magadan, Asia/Kamchatka, Asia/Anadyr"
-msgstr ""
-"Калининград, Москва, Самара, Екатеринбург, Омск, Новосибирск, Красноярск, "
-"Иркутск, Якутск, Владивосток, Сахалин, Магадан, Камчатка, Анадырь"
+#. Time zone for French Polynesia
+#: ../common.templates:126
+msgid "Gambier Islands"
+msgstr "Остров Гамбье"
 
 #. Type: select
 #. Choices
-#. Timezones for UM.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Johnston Atoll, Midway Islands, Wake Island
-#: ../common.templates:327
-msgid "Pacific/Johnston, Pacific/Midway, Pacific/Wake"
-msgstr "Джонстон, Мидуэй, Уэйк"
+#. Time zone for Portugal
+#: ../common.templates:133
+msgid "Lisbon"
+msgstr "Лиссабон"
+
+#. Type: select
+#. Choices
+#. Time zone for Portugal
+#: ../common.templates:133
+msgid "Madeira Islands"
+msgstr "Мадейра"
+
+#. Type: select
+#. Choices
+#. Time zone for Portugal
+#: ../common.templates:133
+msgid "Azores"
+msgstr "Азорские острова"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow-01 - Kaliningrad"
+msgstr "Калининград"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+00 - west Russia"
+msgstr "Москва"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+01 - Samara"
+msgstr "Самара"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+02 - Urals"
+msgstr "Екатеринбург"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+03 - west Siberia"
+msgstr "Омск"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+03 - Novosibirsk"
+msgstr "Новосибирск"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+04 - Yenisei River"
+msgstr "Красноярск"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+05 - Lake Baikal"
+msgstr "Иркутск"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+06 - Lena River"
+msgstr "Якутск"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+07 - Amur River"
+msgstr "Владивосток"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+07 - Sakhalin Island"
+msgstr "Сахалин"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+08 - Magadan"
+msgstr "Магадан"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+09 - Kamchatka"
+msgstr "Камчатка"
+
+#. Type: select
+#. Choices
+#. Time zone for Russian Federation
+#: ../common.templates:141
+msgid "Moscow+10 - Bering Sea"
+msgstr "Анадырь"
+
+#. Type: select
+#. Choices
+#. Time zone for United States Minor Outlying Islands
+#: ../common.templates:148
+msgid "Johnston Atoll"
+msgstr "Джонстон"
+
+#. Type: select
+#. Choices
+#. Time zone for United States Minor Outlying Islands
+#: ../common.templates:148
+msgid "Midway Islands"
+msgstr "Мидуэй"
+
+#. Type: select
+#. Choices
+#. Time zone for United States Minor Outlying Islands
+#: ../common.templates:148
+msgid "Wake Island"
+msgstr "Уэйк"
 
 #. Type: select
 #. Description
-#: ../common.templates:329
+#: ../common.templates:149
 msgid "Select a location in your time zone:"
 msgstr "Выберите расположение в вашем часовом поясе:"
 
 #. Type: select
 #. Choices
-#. Timezones for US.
-#.
-#. TRANSLATORS PLEASE NOTE: The msgid below looks strange because it is
-#. a list of filenames (in /usr/share/zoneinfo). Do not translate the filenames.
-#. Instead translate the English text which is displayed to the user instead
-#. of these filenames. Also, many place names will not need translation
-#. from the English text, but some parts may be translatable.
-#.
-#. The English text to translate for this list of timezones is:
-#. Eastern, Central, Mountain, Pacific, Alaska, Hawaii, Arizona, East Indiana, Samoa
-#: ../common.templates:344
-msgid ""
-"US/Eastern, US/Central, US/Mountain, US/Pacific, US/Alaska, US/Hawaii, US/"
-"Arizona, US/East-Indiana, US/Samoa"
-msgstr ""
-"Восточный, Центральный, Горный, Тихоокеанский, Аляска, Гавайи, Аризона, "
-"Восточная Индиана, Самоа"
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Eastern"
+msgstr "Восточное время"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Central"
+msgstr "Центральное время"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Mountain"
+msgstr "Горное время"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Pacific"
+msgstr "Тихоокеанское время"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Alaska"
+msgstr "Аляска"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Hawaii"
+msgstr "Гавайи"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Arizona"
+msgstr "Аризона"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "East Indiana"
+msgstr "Восточная Индиана"
+
+#. Type: select
+#. Choices
+#. Time zone for United States
+#: ../common.templates:156
+msgid "Samoa"
+msgstr "Самоа"
 
 #. Type: select
 #. Description
-#: ../common.templates:346
+#: ../common.templates:157
 msgid "Select your time zone:"
 msgstr "Выберите часовой пояс:"
 
 #. Type: text
 #. Description
-#. Main menu item
-#: ../tzsetup-udeb.templates:4
-msgid "Configure time zone"
-msgstr "Настройка часового пояса"
-
-#. Type: text
-#. Description
 #. finish-install progress bar item
-#: ../tzsetup-udeb.templates:9
-msgid "Saving time zone..."
+#: ../tzsetup-udeb.templates:4
+msgid "Saving the time zone..."
 msgstr "Запись данных о часовом поясе..."
 
 #. Type: note
 #. Description
-#: ../tzsetup-udeb.templates:13
-msgid "Selected timezone"
+#: ../tzsetup-udeb.templates:8
+msgid "Selected time zone"
 msgstr "Выбранный часовой пояс"
 
 #. Type: note
 #. Description
-#: ../tzsetup-udeb.templates:13
+#: ../tzsetup-udeb.templates:8
 msgid "Based on your country, your time zone is ${ZONE}."
 msgstr "Судя по стране, вы находитесь в часовом поясе ${ZONE}."

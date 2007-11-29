@@ -4,8 +4,7 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of fr.po to French
-# French messages for debian-installer.
-# Copyright (C) 2004 Software in the Public Interest, Inc.
+# Copyright (C) 2004-2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 # Christian Perrier <bubulle@debian.org>, 2002-2004.
@@ -13,13 +12,13 @@
 # Denis Barbier <barbier@debian.org>, 2002-2004.
 # Philippe Batailler <philippe.batailler@free.fr>, 2002-2004.
 # Michel Grentzinger <mic.grentz@online.fr>, 2003-2004.
-# Christian Perrier <bubulle@debian.org>, 2005, 2006.
+# Christian Perrier <bubulle@debian.org>, 2005, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-09-01 07:02+0200\n"
+"POT-Creation-Date: 2007-06-30 12:27+0000\n"
+"PO-Revision-Date: 2007-06-30 20:44+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -504,41 +503,57 @@ msgstr "Volume chiffré (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:290
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume0 (mirror)
+#: ../partman-base.templates:291
+#, no-c-format
+msgid "Serial ATA RAID %s (%s)"
+msgstr "SATA RAID %s (%s)"
+
+#. Type: text
+#. Description
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume01 (partition #1)
+#: ../partman-base.templates:296
+#, no-c-format
+msgid "Serial ATA RAID %s (partition #%s)"
+msgstr "SATA RAID %s (partition n° %s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:300
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "Groupe de volumes LVM %s, volume logique %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:294
+#: ../partman-base.templates:304
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "Bouclage (« loopback », loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:298
+#: ../partman-base.templates:308
 #, no-c-format
 msgid "DASD %s (%s)"
 msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:302
+#: ../partman-base.templates:312
 #, no-c-format
 msgid "DASD %s (%s), partition #%s"
 msgstr "DASD %s (%s), partition n° %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:306
+#: ../partman-base.templates:316
 msgid "Cancel this menu"
 msgstr "Annuler ce menu"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:311
+#: ../partman-base.templates:321
 msgid "Partition disks"
 msgstr "Partitionner les disques"

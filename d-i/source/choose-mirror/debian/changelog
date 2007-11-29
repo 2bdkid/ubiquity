@@ -1,8 +1,89 @@
-choose-mirror (2.15ubuntu2) gutsy; urgency=low
+choose-mirror (2.19ubuntu1) hardy; urgency=low
 
-  * Trigger rebuild for hppa
+  * Resynchronise with Debian. Remaining changes:
+    - Use Ubuntu mirrors.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+  * Stop checking if archive.ubuntu.com is reachable before asking for a
+    proxy. This caused a number of very long delays on systems behind
+    firewalls that dropped packets they didn't like rather than rejecting
+    them. Furthermore, now that we have Ubiquity it is less important for
+    Ubuntu's d-i to ask as few questions as possible, and more important for
+    it to work correctly in corner cases.
+  * Switch to gutsy by default.
+  * Drop unsupported releases from mirror/suite Choices.
 
- -- LaMont Jones <lamont@ubuntu.com>  Thu, 04 Oct 2007 12:02:54 -0600
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 22 Oct 2007 13:12:49 +0100
+
+choose-mirror (2.19) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Rebuild with latest Mirrors.masterlist.
+  * Fix lintian warning malformed-prompt-in-templates for mirror/country and
+    mirror/codename.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Italian (it.po) by Stefano Canepa
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Swedish (sv.po) by Daniel Nylander
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sat, 06 Oct 2007 13:21:52 +0200
+
+choose-mirror (2.18) unstable; urgency=low
+
+  * Fix buggy handling of "enter information manually" introduced in
+    choose-mirror 2.17.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 27 Jul 2007 14:58:03 +0100
+
+choose-mirror (2.17) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Remove old unused NO_MIRROR define from mirrors.h.
+  * Permit preseeding the country to "manual" as a more convenient spelling
+    of "enter information manually".
+  * If the proxy string does not already contain a colon, prepend http://
+    (closes: #257877).
+
+  [ Updated translations ]
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:11:50 +0200
+
+choose-mirror (2.16) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Use codename from /etc/default-release as the default release for the
+    target system, which is set when D-I images are built. This replaces
+    the current hardcoded value in mirrors.h which will be removed after a
+    transition period. Closes: #426303.
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Japanese (ja.po) by Kenshi Muto
+  * Romanian (ro.po) by Eddy Petrișor
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Mon, 28 May 2007 22:32:17 +0200
 
 choose-mirror (2.15ubuntu1) gutsy; urgency=low
 
@@ -28,7 +109,7 @@ choose-mirror (2.15ubuntu1) gutsy; urgency=low
 
 choose-mirror (2.15) unstable; urgency=low
 
-  * Multiply menu-item-numbers by 100
+  * Multiply menu-item-numbers by 100.
 
  -- Joey Hess <joeyh@debian.org>  Tue, 10 Apr 2007 14:37:42 -0400
 

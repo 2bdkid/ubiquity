@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:48+0100\n"
-"PO-Revision-Date: 2007-01-30 16:22+0200\n"
+"POT-Creation-Date: 2007-09-01 22:48+0000\n"
+"PO-Revision-Date: 2007-10-26 02:25+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,10 +53,10 @@ msgid ""
 "When your computer boots, you will be able to choose to load one of these "
 "operating systems or your new system."
 msgstr ""
-"Dacă toate sistemele dumneavoastră de operare sunt afişate mai sus, atunci "
+"Dacă toate sistemele dumneavoastră de operare sunt afișate mai sus, atunci "
 "ar trebui să nu fie nici o problemă la instalarea încărcătorului de sistem "
 "în înregistrarea master boot a primului disc fix. Când calculatorul "
-"dumneavoastră va porni, veţi putea să alegeţi să încărcaţi unul din aceste "
+"dumneavoastră va porni, veți putea să alegeți să încărcați unul din aceste "
 "sisteme de operare sau noul dumneavoastră sistem."
 
 #. Type: boolean
@@ -87,7 +87,7 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
-"Atenţie: Dacă programul de instalare nu s-a reuşit detectarea unui alt "
+"Atenție: Dacă programul de instalare nu s-a reușit detectarea unui alt "
 "sistem de operare care este prezent pe calculatorul dumneavoastră, "
 "modificarea înregistrării master boot poate duce, temporar, la "
 "imposibilitatea de a mai porni acel sistem, dar ulterior GRUB poate fi "
@@ -96,29 +96,76 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
-msgid "Install the GRUB boot loader to XFS file system?"
-msgstr "Se instalează încărcătorul de sistem GRUB pe sistem de fişiere XFS?"
+msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
+msgstr "Se instalează încărcătorului de sistem GRUB pe discul RAID ATA Serial?"
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "Installation of GRUB on Serial ATA RAID is experimental."
+msgstr ""
+"Instalarea lui GRUB pe discuri RAID ATA Serial este o facililtate "
+"experimentală."
 
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
 msgid ""
+"GRUB is always installed to the master boot record (MBR) of the Serial ATA "
+"RAID disk. It is also assumed that that disk is listed as the first hard "
+"disk in the boot order defined in the system's BIOS setup."
+msgstr ""
+"GRUB este întotdeauna instalat în înregistrarea master boot (MBR) a "
+"discurilor RAID ATA Serial. De asemenea, se presupune că acest disc este "
+"enumerat ca primul disc în ordinea de pornire a sistemului, așa cum este "
+"definită de configurația BIOS a sistemului."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "The GRUB root device is: ${GRUBROOT}."
+msgstr "Dispozitivul rădăcină al lui GRUB este: ${GRUBROOT}."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
+msgstr ""
+"A apărut o eroare în timpul configurării lui GRUB pentru discul "
+"dumneavoastră RAID ATA Serial."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "The GRUB installation has been aborted."
+msgstr "Procesul de instalare al lui GRUB a fost abandonat."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:49
+msgid "Install the GRUB boot loader to XFS file system?"
+msgstr "Se instalează încărcătorul de sistem GRUB pe sistem de fișiere XFS?"
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:49
+msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
 msgstr ""
-"Instalarea încărcătorului de sistem GRUB adesea eşuează sau se blochează "
-"atunci când /boot este situat pe un sistem de fişiere XFS. Folosirea LILO în "
-"această situaţie este recomandată."
+"Instalarea încărcătorului de sistem GRUB adesea eșuează sau se blochează "
+"atunci când /boot este situat pe un sistem de fișiere XFS. Folosirea LILO în "
+"această situație este recomandată."
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid "Device for boot loader installation:"
 msgstr "Dispozitivul folosit pentru instalarea încărcătorului de sistem:"
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -126,15 +173,15 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
-"Este necesar să permiteţi sistemului proaspăt instalat să poată porni prin "
+"Este necesar să permiteți sistemului proaspăt instalat să poată porni prin "
 "instalarea încărcătorului de sistem GRUB. Modul uzual este de a face acest "
-"lucru este să instalaţi GRUB în zona înregistrării master boot a primului "
-"disc fix. Dacă preferaţi, puteţi instala GRUB în altă parte pe disc, pe un "
+"lucru este să instalați GRUB în zona înregistrării master boot a primului "
+"disc fix. Dacă preferați, puteți instala GRUB în altă parte pe disc, pe un "
 "alt dispozitiv, sau chiar pe o dischetă."
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -146,26 +193,25 @@ msgid ""
 "   your third drive (SCSI here);\n"
 " - \"(fd0)\" or \"/dev/fd0\" will install GRUB to a floppy."
 msgstr ""
-"Dispozitivul poate fi indicat folosind notaţia GRUB \"(hdn,m)\", sau ca un "
+"Dispozitivul poate fi indicat folosind notația GRUB „(hdn,m)”, sau ca un "
 "dispozitiv în /dev. În continuare sunt câteva exemple: \n"
-" - \"(hd0)\" sau \"/dev/hda\" va instala GRUB în înregistrarea master boot \n"
+" - „(hd0)” sau „/dev/hda” va instala GRUB în înregistrarea master boot \n"
 "   a primului disc fix(IDE);\n"
-" - \"(hd0,1)\" sau \"/dev/hda2\" va utiliza a doua partiţie a primului\n"
+" - „(hd0,1)” sau „/dev/hda2” va utiliza a doua partiție a primului\n"
 "   disc fix(IDE);\n"
-" - \"(hd2,4)\" sau \"/dev/sdc5\" va utiliza a prima partiţie extinsă a "
-"celui \n"
+" - „(hd2,4)” sau „/dev/sdc5” va utiliza a prima partiție extinsă a celui \n"
 "   de-al treilea disc fix (aici, de tip SCSI);\n"
-" - \"(fd0)\" sau \"/dev/fd0\" va instala GRUB pe o dischetă."
+" - „(fd0)” sau „/dev/fd0” va instala GRUB pe o dischetă."
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "GRUB password:"
 msgstr "Parola GRUB:"
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid ""
 "The GRUB boot loader offers many powerful interactive features, which could "
 "be used to compromise your system if unauthorized users have access to the "
@@ -174,122 +220,119 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
-"Încărcătorul de sistem GRUB oferă multe facilităţi interactive puternice, "
+"Încărcătorul de sistem GRUB oferă multe facilități interactive puternice, "
 "care ar putea fi folosite să vă compromită sistemul, dacă utilizatori "
-"neautorizaţi au acces la maşină la pornire. Pentru a vă apăra împotriva "
-"acestui lucru, puteţi alege o parolă care va fi cerută înainte de editarea "
-"intrărilor din meniu sau la intrarea în interfaţa în linie de comandă a lui "
+"neautorizați au acces la mașină la pornire. Pentru a vă apăra împotriva "
+"acestui lucru, puteți alege o parolă care va fi cerută înainte de editarea "
+"intrărilor din meniu sau la intrarea în interfața în linie de comandă a lui "
 "GRUB. Implicit, orice utilizator va putea încă să pornească orice intrare în "
 "meniu fără introducerea parolei."
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "If you do not wish to set a GRUB password, leave this field blank."
 msgstr ""
-"Dacă nu doriţi să activaţi o parolă pentru GRUB, lăsaţi liber acest câmp."
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid "GRUB installation failed.  Continue anyway?"
-msgstr "Instalarea GRUB a eşuat. Mai continuaţi?"
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid ""
-"The grub package failed to install into /target/.  Installing GRUB as a boot "
-"loader is a required step.  The install problem might however be unrelated "
-"to GRUB, so continuing the installation may be possible."
-msgstr ""
-"Instalarea pachetului grub pe /target/ s-a soldat cu eşec. Instalarea GRUB "
-"ca şi încărcător de sistem este un pas necesar. Problema instalării ar "
-"putea, totuşi, să nu aibă legătură cu GRUB, deci continuarea instalării ar "
-"putea fi posibilă."
+"Dacă nu doriți să activați o parolă pentru GRUB, lăsați liber acest câmp."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:92
+msgid "GRUB installation failed"
+msgstr "Instalarea lui GRUB a eșuat"
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:92
+msgid ""
+"The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
+"loader, the installed system will not boot."
+msgstr ""
+"Instalarea pachetului „${GRUB}” în /target/ a eșuat. Fară încărcătorul de "
+"sistem GRUB sistemul instalat nu va putea fi pornit."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:98
 msgid "Unable to install GRUB in ${BOOTDEV}"
 msgstr "Nu s-a putut instala GRUB în ${BOOTDEV}"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:98
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
-msgstr "Execuţia 'grub-install ${BOOTDEV}' a eşuat."
+msgstr "Execuția 'grub-install ${BOOTDEV}' a eșuat."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Unable to configure GRUB"
 msgstr "Nu s-a putut configura GRUB"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Executing 'update-grub' failed."
-msgstr "Execuţia 'update-grub' a eşuat."
+msgstr "Execuția 'update-grub' a eșuat."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "This is a fatal error."
 msgstr "Aceasta este o eroare fatală."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:105
+#: ../grub-installer.templates:136
 msgid "Installing GRUB boot loader"
 msgstr "Se instalează încărcătorul de sistem GRUB"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:109
+#: ../grub-installer.templates:140
 msgid "Looking for other operating systems..."
 msgstr "Se caută alte sisteme de operare..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:113
-msgid "Installing the 'grub' package..."
-msgstr "Se instalează pachetul 'grub'..."
+#: ../grub-installer.templates:144
+msgid "Installing the '${GRUB}' package..."
+msgstr "Se instalează pachetul „${GRUB}”..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:117
+#: ../grub-installer.templates:148
 msgid "Determining GRUB boot device..."
 msgstr "Se determină dispozitivul GRUB de pornire..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:121
+#: ../grub-installer.templates:152
 msgid "Running \"grub-install ${BOOTDEV}\"..."
-msgstr "Se rulează \"grub-install ${BOOTDEV}\"..."
+msgstr "Se rulează „grub-install ${BOOTDEV}”..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:125
+#: ../grub-installer.templates:156
 msgid "Running \"update-grub\"..."
-msgstr "Se rulează \"update-grub\"..."
+msgstr "Se rulează „update-grub”..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:129
+#: ../grub-installer.templates:160
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "Se actualizează /etc/kernel-img.conf..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:134
+#: ../grub-installer.templates:165
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "Instalare a încărcătorului de sistem GRUB pe un disc fix"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:139
+#: ../grub-installer.templates:170
 msgid "Reinstall GRUB boot loader"
 msgstr "Reinstalează încărcătorul de sistem GRUB"

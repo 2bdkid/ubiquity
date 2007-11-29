@@ -1,3 +1,97 @@
+console-setup (1.19ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+    - If the detect-keyboard debconf plugin is available
+      (cdebconf-newt-detect-keys in the installer), then offer to use it to
+      detect the keyboard layout.
+    - Only default to Canadian layout for fr_CA; use U.S. English for other
+      *_CA locales.
+    - Reset console-setup/toggle to the default if it's set to "No toggling"
+      and you select a non-Latin layout.
+    - Change the default font from Terminus to VGA where supported.
+    - Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+      tty, since the current tty might belong to X and changing X's tty out
+      of raw mode is a very bad idea.
+    - Automatically save the font and keymap to /etc in
+      /etc/init.d/console-setup if it isn't being run from init. Similarly,
+      ensure that the font and keymap are saved to /etc during initial
+      installation.
+    - Disable workaround in ckbcomp for the kernel not applying Caps Lock to
+      non-ASCII letters, except for Turkish layouts; the cure is worse than
+      the disease because it makes Caps Lock equivalent to Shift Lock.
+    - Set keymap and font in the initramfs if possible.
+    - Set default variant for French to oss.
+    - Fix handling of commas in layout and variant names.
+    - Fix keymap reduction not to try to express keymap A in terms of keymap
+      B when B includes keys not mapped by A.
+    - debian/config.proto: Set sparc default model to pc105.
+    - Remove 'exit 0' from the end of debian/config.proto; this will be
+      sourced from the postinst in the installer, and exiting in the
+      successful case means that /etc/default/console-setup never gets
+      generated.
+    - Set default model to pc105 on powerpc/ps3 systems.
+  * Switch back to console-tools-udeb for now; we'd like to use kbd for
+    Hardy, but Alpha 1 is looming ...
+  * Stop running debconf-updatepo on clean; this is not standard in d-i and
+    should be done manually where necessary in Ubuntu.
+  * Backport from trunk:
+    - Run setupcon with --save in the postinst to ensure that required data
+      is copied to /etc.
+    - Load the saved keymap in /etc/console-setup/boottime.kmap.gz if
+      available rather than running ckbcomp (which is slow), unless we're
+      being called with --save or --save-only.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 27 Nov 2007 15:05:15 +0000
+
+console-setup (1.19) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Fix additional ellipsis in keyboard-setup initscript. (Closes: #435285)
+
+  [ Otavio Salvador ]
+  * Provides keyboard-setup virtual package.
+  
+  [ Anton Zinoviev ]
+  * ckbcomp: '#' is also a comment character.  Thanks to Matt Kraai,
+    closes: #443709.
+
+  [ Debconf templates translations ]
+  * German. Closes: #438395
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Sun, 23 Sep 2007 20:10:44 +0300
+
+console-setup (1.18) unstable; urgency=low
+
+  * In d-i environment read the encoding from debian-installer/charset
+    variable.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Sun, 15 Jul 2007 23:50:29 +0300
+
+console-setup (1.17) unstable; urgency=low
+
+  * Add a manual page for ckbcomp.  Thanks to Vassilis Pandis,
+    closes: #405005. 
+  * Apply a patch by Colin Watson:
+    - enable udebs;
+    - remove unhelpful defaults for several questions;
+    - allow preseeding of console-setup/modelcode,
+      console-setup/layoutcode, console-setup/variantcode,
+      console-setup/optionscode, and console-setup/fontsize;
+    - remove outdated note about loadkeys in console-setup-udeb's
+      description;
+    - Add a few bits of installer integration to console-setup-udeb
+      borrowed from kbd-chooser. 
+    I disabled the code for making UTF-8 default charmap in d-i because
+    there are locales which use other charmap.  However I made setupcon to
+    always use UTF-8 in d-i environment.
+  * Updated French and Dutch translations, new Portuguese.  Thanks to
+    Pedro Ribeiro, Jean-Luc Coulon and Bart Cornelis.
+    Closes: #424665, #425773, #426082.
+
+ -- Anton Zinoviev <zinoviev@debian.org>  Sun, 15 Jul 2007 16:35:55 +0300
+
 console-setup (1.16ubuntu5) gutsy; urgency=low
 
   * Rebuild against xkb-data 0.9-4ubuntu2.

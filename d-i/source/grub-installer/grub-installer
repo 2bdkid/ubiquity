@@ -32,6 +32,9 @@ info() {
 	log "info: $@"
 }
 
+ARCH="$(archdetect)"
+info "architecture: $ARCH"
+
 get_serial_console() {
 	# Get the last 'console=' entry (if none, the whole string is returned)
 	local defconsole="$(sed -e 's/.*\(console=[^ ]*\).*/\1/' /proc/cmdline)"
@@ -68,119 +71,125 @@ grub_serial_console() {
 	fi
 
 	echo serial --unit=$unit --speed=$speed $word $parity --stop=1
-	echo terminal serial	
 }
 
 serial="$(get_serial_console)"
 
-# This is copied from update-grub; we've requested that it be moved
-# to a utility or shell library
+## This is copied from update-grub; we've requested that it be moved
+## to a utility or shell library
 device_map=$ROOT/boot/grub/device.map
+
 # Usage: convert os_device
 # Convert an OS device to the corresponding GRUB drive
 # This part is OS-specific
 convert () {
 ## First, check if the device file exists
-#    if test -e "$1"; then
+#	if test -e "$1"; then
 #		:
-#    else
+#	else
 #		echo "$1: Not found or not a block device." 1>&2
 #		exit 1
-#    fi
+#	fi
 
-    host_os=`uname -s | tr 'A-Z' 'a-z'`
+	host_os=$(uname -s | tr 'A-Z' 'a-z')
 
-    # Break the device name into the disk part and the partition part
-    case "$host_os" in
-    linux*)
-		tmp_disk=`echo "$1" | sed -e 's%\([sh]d[a-z]\)[0-9]*$%\1%' \
+	# Break the device name into the disk part and the partition part
+	case "$host_os" in
+	    linux*)
+		tmp_disk=$(echo "$1" | sed -e 's%\([sh]d[a-z]\)[0-9]*$%\1%' \
 				  -e 's%\(fd[0-9]*\)$%\1%' \
 				  -e 's%/part[0-9]*$%/disc%' \
-				  -e 's%\(c[0-7]d[0-9]*\).*$%\1%'`
-		tmp_part=`echo "$1" | sed -e 's%.*/[sh]d[a-z]\([0-9]*\)$%\1%' \
+				  -e 's%\(c[0-7]d[0-9]*\).*$%\1%')
+		tmp_part=$(echo "$1" | sed -e 's%.*/[sh]d[a-z]\([0-9]*\)$%\1%' \
 				  -e 's%.*/fd[0-9]*$%%' \
 				  -e 's%.*/floppy/[0-9]*$%%' \
 				  -e 's%.*/\(disc\|part\([0-9]*\)\)$%\2%' \
-				  -e 's%.*c[0-7]d[0-9]*p*%%'`
-	;;
-    gnu*)
-		tmp_disk=`echo "$1" | sed 's%\([sh]d[0-9]*\).*%\1%'`
-		tmp_part=`echo "$1" | sed "s%$tmp_disk%%"` ;;
-    freebsd*)
-		tmp_disk=`echo "$1" | sed 's%r\{0,1\}\([saw]d[0-9]*\).*$%r\1%' \
-			    | sed 's%r\{0,1\}\(da[0-9]*\).*$%r\1%'`
-		tmp_part=`echo "$1" \
-	    		| sed "s%.*/r\{0,1\}[saw]d[0-9]\(s[0-9]*[a-h]\)%\1%" \
-       	    	| sed "s%.*/r\{0,1\}da[0-9]\(s[0-9]*[a-h]\)%\1%"`
-	;;
-    netbsd*)
-		tmp_disk=`echo "$1" | sed 's%r\{0,1\}\([sw]d[0-9]*\).*$%r\1d%' \
-	    		| sed 's%r\{0,1\}\(fd[0-9]*\).*$%r\1a%'`
-		tmp_part=`echo "$1" \
-	    		| sed "s%.*/r\{0,1\}[sw]d[0-9]\([abe-p]\)%\1%"`
-	;;
-    *)
+				  -e 's%.*c[0-7]d[0-9]*p*%%')
+		;;
+	    gnu*)
+		tmp_disk=$(echo "$1" | sed 's%\([sh]d[0-9]*\).*%\1%')
+		tmp_part=$(echo "$1" | sed "s%$tmp_disk%%")
+		;;
+	    freebsd*)
+		tmp_disk=$(echo "$1" | sed 's%r\{0,1\}\([saw]d[0-9]*\).*$%r\1%' | \
+			sed 's%r\{0,1\}\(da[0-9]*\).*$%r\1%')
+		tmp_part=$(echo "$1" | \
+	    		sed "s%.*/r\{0,1\}[saw]d[0-9]\(s[0-9]*[a-h]\)%\1%" | \
+       	    		sed "s%.*/r\{0,1\}da[0-9]\(s[0-9]*[a-h]\)%\1%")
+		;;
+	    netbsd*)
+		tmp_disk=$(echo "$1" | sed 's%r\{0,1\}\([sw]d[0-9]*\).*$%r\1d%' | \
+	    		sed 's%r\{0,1\}\(fd[0-9]*\).*$%r\1a%')
+		tmp_part=$(echo "$1" | \
+	    		sed "s%.*/r\{0,1\}[sw]d[0-9]\([abe-p]\)%\1%")
+		;;
+	    *)
 		echo "update-grub does not support your OS yet." 1>&2
-		exit 1 ;;
-    esac
+		exit 1
+		;;
+	esac
 
-    # Get the drive name
-    tmp_drive=`grep -v '^#' $device_map | grep "$tmp_disk *$" \
-			| sed 's%.*\(([hf]d[0-9][a-g0-9,]*)\).*%\1%'`
+	# Get the drive name
+	tmp_drive=$(grep -v '^#' $device_map | grep "$tmp_disk *$" | \
+		sed 's%.*\(([hf]d[0-9][a-g0-9,]*)\).*%\1%')
 
-    # If not found, print an error message and exit
-    if test "x$tmp_drive" = x; then
+	# If not found, print an error message and exit
+	if [ -z "$tmp_drive" ]; then
 		echo "$1 does not have any corresponding BIOS drive." 1>&2
 		exit 1
-    fi
+	fi
 
-    if test "x$tmp_part" != x; then
+	if [ -n "$tmp_part" ]; then
 		# If a partition is specified, we need to translate it into the
 		# GRUB's syntax
 		case "$host_os" in
-		linux*)
-	    	echo "$tmp_drive" | sed "s%)$%,`expr $tmp_part - 1`)%" ;;
-		gnu*)
-	    	if echo $tmp_part | grep "^s" >/dev/null; then
-			tmp_pc_slice=`echo $tmp_part \
-		    		| sed "s%s\([0-9]*\)[a-g]*$%\1%"`
-			tmp_drive=`echo "$tmp_drive" \
-		    		| sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%"`
-	    	fi
-	    	if echo $tmp_part | grep "[a-g]$" >/dev/null; then
-			tmp_bsd_partition=`echo "$tmp_part" \
-		    		| sed "s%[^a-g]*\([a-g]\)$%\1%"`
-			tmp_drive=`echo "$tmp_drive" \
-		    		| sed "s%)%,$tmp_bsd_partition)%"`
-	    	fi
-	    	echo "$tmp_drive" ;;
-		freebsd*)
-	    	if echo $tmp_part | grep "^s" >/dev/null; then
-			tmp_pc_slice=`echo $tmp_part \
-		    		| sed "s%s\([0-9]*\)[a-h]*$%\1%"`
-			tmp_drive=`echo "$tmp_drive" \
-		    		| sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%"`
-	    	fi
-	    	if echo $tmp_part | grep "[a-h]$" >/dev/null; then
-			tmp_bsd_partition=`echo "$tmp_part" \
-		    		| sed "s%s\{0,1\}[0-9]*\([a-h]\)$%\1%"`
-			tmp_drive=`echo "$tmp_drive" \
-		    		| sed "s%)%,$tmp_bsd_partition)%"`
-	    	fi
-	    	echo "$tmp_drive" ;;
-		netbsd*)
-	    	if echo $tmp_part | grep "^[abe-p]$" >/dev/null; then
-			tmp_bsd_partition=`echo "$tmp_part" \
-		    		| sed "s%\([a-p]\)$%\1%"`
-			tmp_drive=`echo "$tmp_drive" \
-		    		| sed "s%)%,$tmp_bsd_partition)%"`
-	    	fi
-	    	echo "$tmp_drive" ;;
+		    linux*)
+		    	echo "$tmp_drive" | sed "s%)$%,`expr $tmp_part - 1`)%"
+			;;
+		    gnu*)
+		    	if echo $tmp_part | grep "^s" >/dev/null; then
+				tmp_pc_slice=$(echo $tmp_part | \
+			    		sed "s%s\([0-9]*\)[a-g]*$%\1%")
+				tmp_drive=$(echo "$tmp_drive" | \
+			    		sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%")
+			    	fi
+		    	if echo $tmp_part | grep "[a-g]$" >/dev/null; then
+				tmp_bsd_partition=$(echo "$tmp_part" | \
+				    	sed "s%[^a-g]*\([a-g]\)$%\1%")
+				tmp_drive=$(echo "$tmp_drive" | \
+			    		sed "s%)%,$tmp_bsd_partition)%")
+		    	fi
+		    	echo "$tmp_drive"
+			;;
+		    freebsd*)
+		    	if echo $tmp_part | grep "^s" >/dev/null; then
+				tmp_pc_slice=$(echo $tmp_part | \
+			    		sed "s%s\([0-9]*\)[a-h]*$%\1%")
+				tmp_drive=$(echo "$tmp_drive" | \
+			    		sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%")
+		    	fi
+		    	if echo $tmp_part | grep "[a-h]$" >/dev/null; then
+				tmp_bsd_partition=$(echo "$tmp_part" | \
+				    	sed "s%s\{0,1\}[0-9]*\([a-h]\)$%\1%")
+				tmp_drive=$(echo "$tmp_drive" | \
+			    		sed "s%)%,$tmp_bsd_partition)%")
+		    	fi
+		    	echo "$tmp_drive"
+			;;
+		    netbsd*)
+		    	if echo $tmp_part | grep "^[abe-p]$" >/dev/null; then
+				tmp_bsd_partition=$(echo "$tmp_part" | \
+			    		sed "s%\([a-p]\)$%\1%")
+				tmp_drive=$(echo "$tmp_drive" | \
+			    		sed "s%)%,$tmp_bsd_partition)%")
+    			fi
+		    	echo "$tmp_drive"
+			;;
 		esac
-    else
+	else
 		# If no partition is specified, just print the drive name
 		echo "$tmp_drive"
-    fi
+	fi
 }
 
 # Convert a linux non-devfs disk device name into the hurd's syntax
@@ -257,25 +266,88 @@ is_removable () {
 	esac
 }
 
+rootfs=$(findfs /)
+bootfs=$(findfs /boot)
+[ -n "$bootfs" ] || bootfs="$rootfs"
+
 bootfstype=$(findfstype /boot)
 [ -n "$bootfstype" ] || bootfstype="$(findfstype /)"
 
-# GRUB Legacy defaults
-grub_version="grub"
-menu_file="menu.lst"
+case $ARCH in
+    powerpc/*)
+      offs=$(findfs /boot/grub)
+      [ -n "$offs" ] || error "GRUB requires that the OF partition is mounted in /boot/grub" 1>&2
+    ;;
+esac
 
-# reiserfs is the only filesystem that d-i supports and grub2 doesn't yet
-if [ "$bootfstype" != "reiserfs" ]; then
-	#db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
-	#db_go || true
-	db_get grub-installer/grub2_instead_of_grub_legacy
-	if [ "$RET" = true ]; then
-		grub_version="grub2"
-		menu_file="grub.cfg"
-	fi
+# This code to set disc_offered was taken from lilo-installer
+rootfs_nodevfs=$(mapdevfs $rootfs)
+bootfs_nodevfs=$(mapdevfs $bootfs)
+prefix=$(echo "$bootfs" | \
+  sed 's:\(/dev/\(cciss\|ida\)/c[0-9]d[0-9]\|/dev/[a-z]\+\).*:\1:')
+
+case $prefix in
+    /dev/md)
+	disc_offered_devfs="$bootfs"
+	;;
+    /dev/mapper)
+	disc_offered_devfs="$bootfs"
+	;;
+    /dev/[hs]d[a-z]|/dev/cciss/c[0-9]d[0-9]|/dev/ida/c[0-9]d[0-9])
+	disc_offered_devfs="$prefix"
+	;;
+    *)
+	disc_offered_devfs=$(echo "$bootfs_devfs" | sed "s:\(.*\)/.*:\1/disc:")
+	;;
+esac
+disc_offered=$(mapdevfs "$disc_offered_devfs")
+
+# Identify partition table of the disk containing our boot partition
+bootfslabel=$(partmap $disc_offered || echo unknown)
+
+# Check if the boot file system is on Serial ATA RAID
+frdev=""
+if type dmraid >/dev/null 2>&1; then
+	for frdisk in $(dmraid -s -c | grep -v "No RAID disks"); do
+		if echo "$disc_offered" | grep -q "/$frdisk[0-9]\+"; then
+			frdev=/dev/mapper/$frdisk
+			frbootpart=${disc_offered#$frdev}
+			frgrubroot=$(($frbootpart - 1))
+			break
+		fi
+	done
 fi
 
-if [ "$bootfstype" = "xfs" ]; then
+info "Identified partition label for $bootfs: $bootfslabel"
+
+case $ARCH in
+    i386/mac|amd64/mac)
+	# Note: depends on partman-efi to load the efivars module!
+	if [ -d /sys/firmware/efi ]; then
+		# This point can't be reached (yet).  See debian/isinstallable.
+		grub_package="grub-efi"
+	else
+		# On PC/BIOS, default to GRUB Legacy
+		grub_package="grub"
+	fi
+	;;
+    i386/*|amd64/*)
+	# On PC/BIOS, default to GRUB Legacy
+	grub_package="grub"
+	;;
+    powerpc/*)
+	grub_package="grub-of"
+	;;
+esac
+
+case "$bootfstype:$bootfslabel:$grub_package" in
+    *:loop:*)
+	# Serial ATA RAID partition, currently only grub is supported
+	: ;;
+    *:gpt:*)
+	# Ubuntu's grub package supports GPT, although Debian's doesn't.
+	: ;;
+    xfs:*:*)
 	# Warn user that grub on xfs is not safe and let them back out to
 	# main menu
 	db_input critical grub-installer/install_to_xfs || [ $? -eq 30 ]
@@ -284,7 +356,36 @@ if [ "$bootfstype" = "xfs" ]; then
 	if [ "$RET" != true ]; then
 		exit 10
 	fi
-fi
+	;;
+    *:*:grub)
+	#db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
+	#db_go || true
+	db_get grub-installer/grub2_instead_of_grub_legacy
+	if [ "$RET" = true ]; then
+		grub_package="grub-pc"
+	fi
+	;;
+    *:*:*)
+	db_subst grub-installer/grub_not_mature_on_this_platform ARCH $ARCH
+	db_input low grub-installer/grub_not_mature_on_this_platform || [ $? -eq 30 ]
+	db_go || true
+	db_get grub-installer/grub_not_mature_on_this_platform
+	if [ "$RET" != true ]; then
+		exit 10
+	fi
+	;;
+esac
+
+case $grub_package in
+    grub)
+	grub_version="grub"
+	menu_file="menu.lst"
+	;;
+    *)
+	grub_version="grub2"
+	menu_file="grub.cfg"
+	;;
+esac
 
 # determine if /boot or / are on a removable disk. We will do it for Linux only
 # and see how bad it goes.
@@ -296,30 +397,30 @@ fi
 
 db_progress START 0 6 grub-installer/progress/title
 
+db_subst grub-installer/progress/step_install GRUB "$grub_version"
 db_progress INFO grub-installer/progress/step_install
 
 # apt-install passes --no-remove to apt, but grub{,2} conflict each other, so
 # we need to purge them first to support users who try grub2 and then switch
 # to grub legacy, or vice-versa
-if [ "$grub_version" = grub ]; then
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub2
-else
+case "$grub_package" in
+    grub)
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub-pc
+	;;
+    grub-pc)
 	log-output -t grub-installer $chroot $ROOT dpkg -P grub
-fi
+	;;
+esac
 
-if ! apt-install $grub_version ; then
-	info "Calling 'apt-install $grub_version' failed"
-	# Hm, unable to install grub into $ROOT/, what should we do?
-	db_input critical grub-installer/apt-install-failed || [ $? -eq 30 ]
+if ! apt-install $grub_package ; then
+	db_progress STOP
+	info "Calling 'apt-install $grub_package' failed"
+	db_subst grub-installer/apt-install-failed GRUB "$grub_package"
+	db_input critical grub-installer/apt-install-failed || true
 	if ! db_go; then
-		db_progress STOP
 		exit 10 # back up to menu
 	fi
-	db_get grub-installer/apt-install-failed
-	if [ true != "$RET" ] ; then
-		db_progress STOP
-		exit 1
-	fi
+	exit 1
 fi
 
 db_progress STEP 1
@@ -339,32 +440,30 @@ if [ -s /tmp/os-probed ]; then
 		title=$(echo "$os" | cut -d: -f2)
 		type=$(echo "$os" | cut -d: -f4)
 		case "$type" in
-			chain)
-				:
-			;;
-			linux)
-				# Check for linux systems that we don't
-				# know how to boot
-				partition=$(echo "$os" | cut -d: -f1)
-				if [ -z "$(linux-boot-prober $partition)" ]; then
-					if [ -n "$unsupported_os_list" ]; then
-						unsupported_os_list="$unsupported_os_list, $title"
-					else
-						unsupported_os_list="$title"
-					fi
-					continue
-				fi
-			;;
-			hurd)
-				:
-			;;
-			*)
+		    chain)
+			: ;;
+		    linux)
+			# Check for linux systems that we don't
+			# know how to boot
+			partition=$(echo "$os" | cut -d: -f1)
+			if [ -z "$(linux-boot-prober $partition)" ]; then
 				if [ -n "$unsupported_os_list" ]; then
 					unsupported_os_list="$unsupported_os_list, $title"
 				else
 					unsupported_os_list="$title"
 				fi
 				continue
+			fi
+			;;
+		    hurd)
+			: ;;
+		    *)
+			if [ -n "$unsupported_os_list" ]; then
+				unsupported_os_list="$unsupported_os_list, $title"
+			else
+				unsupported_os_list="$title"
+			fi
+			continue
 			;;
 		esac
 
@@ -393,6 +492,18 @@ else
 	state=1
 fi
 
+if [ "$frdev" ]; then
+	if [ -e $ROOT$frdev ] && \
+	   [ $frgrubroot -gt 0 ] && [ -e $ROOT$frdev$frbootpart ]; then
+	   	db_subst grub-installer/sataraid GRUBROOT $ROOT$frdev$frbootpart
+		q=grub-installer/sataraid
+	else
+		db_input grub-installer/sataraid-error
+		db_go || true
+		exit 1
+	fi
+fi
+
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_bootdev
 
@@ -417,6 +528,12 @@ while : ; do
 			fi
 			break
 		else
+			# Exit to menu if /boot is on SATA RAID; we don't
+			# support device selection in that case
+			if [ "$frdev" ]; then
+				db_progress STOP
+				exit 10
+			fi
 			state=2
 		fi
 	else
@@ -457,37 +574,83 @@ update_mtab
 
 mkdir -p $ROOT/boot/grub
 
-# Install grub on each space separated disk in the list
-bootdevs="$bootdev"
-for bootdev in $bootdevs; do
-	if ! is_floppy "$bootdev"; then
-		if $chroot $ROOT grub-install -h 2>&1 | grep -q no-floppy; then
-			info "grub-install supports --no-floppy"
-			floppyparam="--no-floppy"
-		else
-			info "grub-install does not support --no-floppy"
-		fi
-		if [ -e $ROOT/boot/grub/device.map ] && grep '^(fd' $ROOT/boot/grub/device.map; then
-			recheck="--recheck"
-		fi
-	else
-		if [ -e $ROOT/boot/grub/device.map ] && ! grep '^(fd' $ROOT/boot/grub/device.map; then
-			recheck="--recheck"
-		fi
-	fi
+if [ -z "$frdisk" ]; then
 
-	info "Running $chroot $ROOT grub-install $recheck $floppyparam \"$bootdev\""
-	if log-output -t grub-installer $chroot $ROOT grub-install $recheck $floppyparam "$bootdev"; then
-		info "grub-install ran successfully"
-	else
-		error "Running 'grub-install $recheck $floppyparam \"$bootdev\"' failed."
-		db_subst grub-installer/grub-install-failed BOOTDEV "$bootdev"
-		db_input critical grub-installer/grub-install-failed || [ $? -eq 30 ]
-		db_go || true
-		db_progress STOP
+	# Install grub on each space separated disk in the list
+	bootdevs="$bootdev"
+	for bootdev in $bootdevs; do
+		grub_install_params=
+		if ! is_floppy "$bootdev"; then
+			if $chroot $ROOT grub-install -h 2>&1 | grep -q no-floppy; then
+				info "grub-install supports --no-floppy"
+				grub_install_params="$grub_install_params --no-floppy"
+			else
+				info "grub-install does not support --no-floppy"
+			fi
+			if [ -e $ROOT/boot/grub/device.map ] && grep '^(fd' $ROOT/boot/grub/device.map; then
+				recheck="--recheck"
+			fi
+		else
+			if [ -e $ROOT/boot/grub/device.map ] && ! grep '^(fd' $ROOT/boot/grub/device.map; then
+				recheck="--recheck"
+			fi
+		fi
+
+		if [ "$ARCH" = "powerpc/chrp_pegasos" ] ; then
+			# nvram is broken here
+			grub_install_params="$grub_install_params --no-nvram"
+		fi
+
+		if [ "$grub_version" = "grub" ] ; then
+			grub_install_params="$grub_install_params $recheck"
+		fi
+
+		info "Running $chroot $ROOT grub-install $grub_install_params \"$bootdev\""
+		if log-output -t grub-installer $chroot $ROOT grub-install $grub_install_params "$bootdev"; then
+			info "grub-install ran successfully"
+		else
+			error "Running 'grub-install $grub_install_params \"$bootdev\"' failed."
+			db_subst grub-installer/grub-install-failed BOOTDEV "$bootdev"
+			db_input critical grub-installer/grub-install-failed || [ $? -eq 30 ]
+			db_go || true
+			db_progress STOP
+			exit 1
+		fi
+	done
+
+else
+
+	# Semi-manual grub setup for Serial ATA RAID
+	info "Boot partition is on a Serial ATA RAID disk"
+	info "Installing GRUB to $frdev; grub root is $disc_offered"
+	case $(archdetect) in
+	    i386/*)
+		stagedir=i386-pc ;;
+	    amd64/*)
+		stagedir=x86_64-pc ;;
+	    *)
+	    	error "Unsupported architecture for SATA RAID installation"
+		exit 1
+		;;
+	esac
+	if [ ! -d $ROOT/usr/lib/grub/$stagedir/ ]; then
+		error "Grub stage files not available"
 		exit 1
 	fi
-done
+	mkdir -p /target/boot/grub
+	cp $ROOT/usr/lib/grub/$stagedir/* $ROOT/boot/grub
+
+	# TODO: Check for errors during this process!
+	TERM=linux $chroot $ROOT \
+        grub --device-map=/dev/null >/var/log/grub-dmraid.log 2>&1 </dev/null <<EOF
+device (hd0,$frgrubroot) $disc_offered
+device (hd0) $frdev
+root (hd0,$frgrubroot)
+setup (hd0)
+quit
+EOF
+
+fi
 
 # Split a device name into a disk device name and a partition number, if
 # possible.
@@ -580,31 +743,41 @@ db_progress INFO grub-installer/progress/step_config_loader
 rm -f $ROOT/boot/grub/$menu_file
 update_grub
 
-# Set up a password if asked
-db_input low grub-installer/password || true
-if ! db_go; then
-	# back up to menu
-	db_progress STOP
-	exit 10
+# For SATA RAID we may need to update the grub root
+# TODO: This should really be supported in update-grub
+if [ "$frdev" ] && [ $frgrubroot -gt 0 ]; then
+	sed -i "/^root/s/(hd0,0)/(hd0,$frgrubroot)/
+		/^# groot/s/(hd0,0)/(hd0,$frgrubroot)/" $ROOT/boot/grub/$menu_file
 fi
-db_get grub-installer/password
-if [ "$RET" ]; then
-	password="$RET"
-	# check if the password is crypted
-	db_get grub-installer/password-crypted
-	if [ "$RET" = true ]; then
-		password_opts=--md5
+
+# Set up a password if asked
+if [ "$grub_version" = "grub" ] ; then
+	db_input low grub-installer/password || true
+	if ! db_go; then
+		# back up to menu
+		db_progress STOP
+		exit 10
 	fi
-	echo "password ${password_opts:+$password_opts }$password" \
-		> /tmp/menu.lst.password
-	# Add a line to menu.lst to use the given password
-	# The line is appended after the commented example
-	sed -i '/^# password/r /tmp/menu.lst.password' $ROOT/boot/grub/$menu_file
-	# By default, menu.lst is world-readable, which is not so good if it
-	# contains a password.
-	chmod o-r $ROOT/boot/grub/$menu_file
-	rm -f /tmp/menu.lst.password
-fi 
+	db_get grub-installer/password
+	if [ "$RET" ]; then
+		password="$RET"
+		# check if the password is crypted
+		db_get grub-installer/password-crypted
+		if [ "$RET" = false ]; then
+			password=$(echo -e "md5crypt\n$password" | \
+				   grub --batch --device-map=/dev/null 2>&1 | \
+				   grep "^Encrypted:" | cut -d' ' -f2)
+		fi
+		echo "password --md5 $password" >/tmp/menu.lst.password
+		# Add a line to menu.lst to use the given password
+		# The line is appended after the commented example
+		sed -i '/^# password/r /tmp/menu.lst.password' $ROOT/boot/grub/$menu_file
+		# By default, menu.lst is world-readable, which is not so good if it
+		# contains a password.
+		chmod o-r $ROOT/boot/grub/$menu_file
+		rm -f /tmp/menu.lst.password
+	fi 
+fi
 
 need_update_grub=
 
@@ -642,8 +815,29 @@ fi
 
 if [ "$serial" ] ; then
 	# Modify menu.lst so _grub_ uses serial console.
-	(grub_serial_console $serial; cat $ROOT/boot/grub/$menu_file) >$ROOT/boot/grub/$menu_file.new
-	mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+	case $grub_package in
+	    grub)
+		(
+			grub_serial_console $serial
+			echo "terminal serial"
+			cat $ROOT/boot/grub/$menu_file
+		) >$ROOT/boot/grub/$menu_file.new
+		mv $ROOT/boot/grub/$menu_file.new $ROOT/boot/grub/$menu_file
+		;;
+	    grub-pc)
+		if grep -q "^GRUB_TERMINAL=" $ROOT/etc/default/grub; then
+			sed -i $ROOT/etc/default/grub -e "s/^\(GRUB_TERMINAL\)=.*/\1=serial/g"
+		else
+			echo "GRUB_TERMINAL=serial" >> $ROOT/etc/default/grub
+		fi
+		if grep -q "^GRUB_SERIAL_COMMAND=" $ROOT/etc/default/grub ; then
+			sed -i $ROOT/etc/default/grub -e "s/^\(GRUB_SERIAL_COMMAND\)=.*/\1=\"`grub_serial_console`\"/g"
+		else
+			echo "GRUB_SERIAL_COMMAND=\"`grub_serial_console`\"" >> $ROOT/etc/default/grub
+		fi
+		update-grub # propagate to grub.cfg
+		;;
+	esac
 fi 
 
 # Generate menu.lst additions for other OSes
@@ -656,63 +850,64 @@ for os in $(cat /tmp/os-probed); do
 	shortname=$(echo "$os" | cut -d: -f3)
 	type=$(echo "$os" | cut -d: -f4)
 	case "$type" in
-		chain)
-			partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
-			grubdrive=$(convert "$partition") || true
-			if [ -n "$grubdrive" ]; then
-				case $grub_version in
-				    grub)	grub_write_chain ;;
-				    grub2)	grub2_write_chain ;;
-				esac
-			fi
-		;;
-		linux)
-			partition=$(echo "$os" | cut -d: -f1)
-			mappedpartition=$(mapdevfs "$partition")
-			IFS="$newline"
-			for entry in $(linux-boot-prober "$partition"); do
-				IFS="$OLDIFS"
-				bootpart=$(echo "$entry" | cut -d: -f2)
-				mappedbootpart=$(mapdevfs "$bootpart") || true
-				if [ -z "$mappedbootpart" ]; then
-					mappedbootpart="$bootpart"
-				fi
-				label=$(echo "$entry" | cut -d : -f3)
-				if [ -z "$label" ]; then
-					label="$title"
-				fi
-				kernel=$(echo "$entry" | cut -d : -f4)
-				initrd=$(echo "$entry" | cut -d : -f5)
-				if echo "$kernel" | grep -q '^/boot/' && \
-				   [ "$mappedbootpart" != "$mappedpartition" ]; then
-				   	# separate /boot partition
-					kernel=$(echo "$kernel" | sed 's!^/boot!!')
-					initrd=$(echo "$initrd" | sed 's!^/boot!!')
-					grubdrive=$(convert "$mappedbootpart") || true
-				else
-					grubdrive=$(convert "$mappedpartition") || true
-				fi
-				params="$(echo "$entry" | cut -d : -f6-) $serial"
-				case $grub_version in
-				    grub)	grub_write_linux ;;
-				    grub2)	grub2_write_linux ;;
-				esac
-				IFS="$newline"
-			done
-			IFS="$OLDIFS"
-		;;
-		hurd)
-			partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
-			grubdrive=$(convert "$partition") || true
-			hurddrive=$(hurd_convert "$partition") || true
-			# Use the standard hurd boilerplate to boot it.
-			case $grub_version in
-			    grub)	grub_write_hurd ;;
-			    grub2)	grub2_write_hurd ;;
+	    chain)
+		partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
+		grubdrive=$(convert "$partition") || true
+		if [ -n "$grubdrive" ]; then
+			case $grub_package in
+			    grub)	grub_write_chain ;;
+			    grub-pc | grub-efi)
+					grub2_write_chain ;;
 			esac
+		fi
 		;;
-		*)
-			info "unhandled: $os"
+	    linux)
+		partition=$(echo "$os" | cut -d: -f1)
+		mappedpartition=$(mapdevfs "$partition")
+		IFS="$newline"
+		for entry in $(linux-boot-prober "$partition"); do
+			IFS="$OLDIFS"
+			bootpart=$(echo "$entry" | cut -d: -f2)
+			mappedbootpart=$(mapdevfs "$bootpart") || true
+			if [ -z "$mappedbootpart" ]; then
+				mappedbootpart="$bootpart"
+			fi
+			label=$(echo "$entry" | cut -d : -f3)
+			if [ -z "$label" ]; then
+				label="$title"
+			fi
+			kernel=$(echo "$entry" | cut -d : -f4)
+			initrd=$(echo "$entry" | cut -d : -f5)
+			if echo "$kernel" | grep -q '^/boot/' && \
+			   [ "$mappedbootpart" != "$mappedpartition" ]; then
+			   	# separate /boot partition
+				kernel=$(echo "$kernel" | sed 's!^/boot!!')
+				initrd=$(echo "$initrd" | sed 's!^/boot!!')
+				grubdrive=$(convert "$mappedbootpart") || true
+			else
+				grubdrive=$(convert "$mappedpartition") || true
+			fi
+			params="$(echo "$entry" | cut -d : -f6-) $serial"
+			case $grub_version in
+			    grub)	grub_write_linux ;;
+			    grub2)	grub2_write_linux ;;
+			esac
+			IFS="$newline"
+		done
+		IFS="$OLDIFS"
+		;;
+	    hurd)
+		partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
+		grubdrive=$(convert "$partition") || true
+		hurddrive=$(hurd_convert "$partition") || true
+		# Use the standard hurd boilerplate to boot it.
+		case $grub_version in
+		    grub)	grub_write_hurd ;;
+		    grub2)	grub2_write_hurd ;;
+		esac
+		;;
+	    *)
+		info "unhandled: $os"
 		;;
 	esac
 	IFS="$newline"
@@ -721,11 +916,21 @@ IFS="$OLDIFS"
 rm -f /tmp/os-probed
 
 if [ -s $tmpfile ] ; then
+	grub_write_divider
 	case $grub_version in
-	    grub)	grub_write_divider ;;
-	    grub2)	: ;;
+	    grub)
+		cat $tmpfile >> $ROOT/boot/grub/$menu_file
+		;;
+	    grub2)
+		cat > $ROOT/etc/grub.d/30_otheros << EOF
+#!/bin/sh
+exec tail -n +3 \$0
+EOF
+		cat $tmpfile >> $ROOT/etc/grub.d/30_otheros
+		chmod +x $ROOT/etc/grub.d/30_otheros
+		update-grub # propagate 30_otheros to grub.cfg
+		;;
 	esac
-	cat $tmpfile >> $ROOT/boot/grub/$menu_file
 	rm -f $tmpfile
 fi
 

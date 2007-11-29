@@ -1,3 +1,166 @@
+grub-installer (1.27ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed.
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Add user parameters to defoptions rather than kopt, so that they
+      aren't used in the recovery mode option.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Mark the partition to which GRUB is being installed as bootable, or
+      failing that the first available primary partition on the disk to
+      which GRUB is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for installation-from-windows. Setting this disables
+      normal grub installation.
+    - Only support grub-installer/grub2_instead_of_grub_legacy by preseeding
+      for now.
+  * Adjust Vcs-* headers for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 26 Nov 2007 14:45:05 +0000
+
+grub-installer (1.27) unstable; urgency=low
+
+  [ Romain Perier ]
+  * Password was sent in clear-text into menu.lst; use 'grub --batch'
+    with md5crypt alternative to correct it. Closes: #442443.
+
+  [ Otavio Salvador ]
+  * Add maintainer-script-lacks-debhelper-token to
+    source.lintian-overrides.
+  * Change grub-installer.install to avoid .svn files on rescue.d dir.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Korean (ko.po) by Sunjae Park
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrișor
+  * Albanian (sq.po) by Elian Myftiu
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Otavio Salvador <otavio@debian.org>  Sat, 27 Oct 2007 11:58:04 -0200
+
+grub-installer (1.26) unstable; urgency=low
+
+  [ Joey Hess ]
+  * If grub fails to install, display an error message, rather than letting
+    the user choose to continue running grub-install, which will then fail
+    strangely later.
+  * Substitute the name of grub/grub2 into the error message and progress bar
+    message.
+
+  [ Frans Pop ]
+  * Support multiple disks when devfs device names are used (see #432314).
+
+  [ Christian Perrier ]
+  * Fix the consistency of "Serial ATA RAID" vs. "SATA RAID"
+
+  [ Robert Millan ]
+  * Misc cleanup improvements that will make it easier for grub-installer to
+    be used on non-PC architectures.
+  * Add myself to Uploaders.
+  * Add initial support for powerpc.  Only pegasos/efika are expected to
+    work at this point.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Nabin Gautam
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Robert Millan <rmh@aybabtu.com>  Sun,  9 Sep 2007 16:28:41 +0200
+
+grub-installer (1.25) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Only purge the package from grub and grub2 that we aren't using, not both.
+
+  [ Robert Millan ]
+  * Switch to grub2 when using GPT.  (Closes: #422370)
+  * When installing with GRUB 2, adjust otheros entry writing to the interface
+    provided by new update-grub.  (Closes: #423393)
+  * When setting up a serial port with GRUB 2, adjust output to the interface
+    provided by new update-grub.
+
+  [ Frans Pop ]
+  * Fix incorrect detection of SATA RAID devices (dmraid) as LVM volumes.
+  * Add support for installing GRUB to a Serial ATA RAID disk. Currently this
+    is only possible by using a semi-manual procedure that executes commands
+    in the grub command environment (grub-install cannot be used).
+    The current implementation assumes that teh SATA RAID disk will be listed
+    as the first boot device in the BIOS.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Tshewang Norbu
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Norwegian Bokmal (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Frans Pop
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+  * Ukrainian (uk.po)
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:08:48 +0200
+
 grub-installer (1.24ubuntu4) gutsy; urgency=low
 
   * Only support grub-installer/grub2_instead_of_grub_legacy by preseeding

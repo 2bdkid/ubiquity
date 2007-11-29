@@ -1,3 +1,113 @@
+hw-detect (1.58ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3rom, ps3disk, and ps3_gelic, and add
+      snd_ps3 to /etc/modules.
+    - Install elfspe2 on Cell (powerpc/ps3 and powerpc/cell) platforms.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 27 Nov 2007 14:13:59 +0000
+
+hw-detect (1.58) unstable; urgency=low
+
+  * Install acpi-support-base, needed now to get power button shutdowns to
+    work in non-gui environments since acpid dropped that support.
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 17 Nov 2007 21:34:08 -0500
+
+hw-detect (1.57) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Discard errors from grepping /sys/bus/pci/devices/*/class, in case
+    /sys/bus/pci/devices exists but not the class files.
+
+  [ Frans Pop ]
+  * Various code and whitespace cleanups.
+  * No longer load isofs by default as it's loaded automatically when mount is
+    called with '-t iso9660' which we do both in cdrom-detect and iso-scan.
+  * No longer explicitly load ide-core.
+  * Stop loading all IDE driver modules by default as they should be loaded
+    correctly automatically by the kernel/udev. For now, the old behavior can
+    still be forced by booting with hw-detect/load-ide=true.
+    The ide-floppy driver module may not be loaded automatically, but
+    mountfloppy (0.14) will try to load it when needed.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Esperanto (eo.po) by Serge Leblanc
+  * Korean (ko.po) by Sunjae Park
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Tue, 13 Nov 2007 14:06:56 +0100
+
+hw-detect (1.56) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Add missing "fi" in hw-detect.sh.
+  * Fix debian-rules-ignores-make-clean-error lintian warning.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 30 Sep 2007 04:20:41 +0200
+
+hw-detect (1.55) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Only ask PCMCIA resource question at low priority as we've not seen any
+    installation reports mentioning that issue in a long time.
+
+  [ Joey Hess ]
+  * Linux 2.6.22 renames the firewire bus and modules from "1394" to
+    "firewire". Support the new module names.
+  * While eth1394 is not currently being built for 2.6.22, go ahead and modify
+    sysfs-update-devnames to recognise ethernet devices that point to
+    /sys/bus/firewire as firewire ethernet.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Italian (it.po) by Stefano Canepa
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 28 Sep 2007 19:18:04 -0400
+
+hw-detect (1.54) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Remove cruft left over from the days of pcmcia-cs.
+    - pcmciautils doesn't create a cardmgr.pid, so stop looking for it to
+      determine if pcmcia is started. Look for the pcmcia_core module being
+      loaded  instead.
+    - No need for funky redirections when running the init script as it no
+      longer starts a daemon.
+    - /var/run/stab was only produced by pcmcia-cs, so the whole
+      gen_pcmcia_devnames section can no longer run; remove.
+    - Only modify config.opts in /target if pcmcia_resources is preseeded.
+  * Remove workaround for long fixed cdebconf bug.
+
+  [ Frans Pop ]
+  * disk-detect: detect Serial ATA RAID disks if requested by setting
+    disk-detect/dmraid/enable at the boot prompt. Closes: #405484.
+    Thanks to Criss Carr for all the information he has provided, much of
+    which has been used in implementing the experimental dmraid support
+    available with this release of hw-detect and other components. Also
+    thanks to Jérémy Bobbio for his patches and Mark Brown for providing
+    a test system.
+
+  [ Updated translations ]
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Russian (ru.po) by Yuri Kozlov
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:17:19 +0200
+
 hw-detect (1.53ubuntu3) gutsy; urgency=low
 
   * We now need to use ps3rom and ps3disk rather than ps3_storage.

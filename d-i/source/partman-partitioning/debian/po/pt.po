@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-14 10:35+0000\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-08-11 11:48+0100\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "Falha na operação de cópia"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+msgid "The copy operation has been aborted."
 msgstr "A operação de cópia foi abortada."
 
 #. Type: error
@@ -132,8 +132,8 @@ msgid ""
 "The minimum size you can use is ${MINSIZE} or ${PERCENT} and the maximum "
 "size is ${MAXSIZE}."
 msgstr ""
-"O tamanho mínimo que pode usar é ${MINSIZE} ou ${PERCENT} e o tamanho máximo "
-"é ${MAXSIZE}."
+"O tamanho mínimo que pode utilizar é ${MINSIZE} ou ${PERCENT} e o tamanho "
+"máximo é ${MAXSIZE}."
 
 #. Type: error
 #. Description
@@ -164,7 +164,7 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+msgid "The resize operation has been aborted."
 msgstr "A operação de redimensionamento foi abortada."
 
 #. Type: string
@@ -272,64 +272,97 @@ msgstr "Tipo da tabela da partição:"
 #. Description
 #: ../partman-partitioning.templates:126
 msgid "Select the type of partition table to use."
-msgstr "Definir o tipo da tabela da partição a usar."
+msgstr "Definir o tipo da tabela da partição a utilizar."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Tem a certeza que quer uma partição lógica de arranque?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"Você está a tentar definir a 'flag' de arranque numa partição lógica. A "
+"'flag' de arranque é normalemente útil em partições primárias, por isso "
+"defini-la em partições lógicas é normalmente desencorajado. Algumas versões "
+"de BIOS são conhecidas por falharem o arranque se não existir uma partição "
+"primária de arranque."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"No entanto, se tem a certeza que a sua BIOS não tem este problema, ou se "
+"está a utilizar um gestor de arranque personalizado que tem em atenção "
+"partições lógicas de arranque, então faz sentido definir esta 'flag'."
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Definir flags da partição"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Nome:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Flag de arranque:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "activa"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "inactiva"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Redimensionar a partição (actualmente ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Copiar os dados de outra partição"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Remover a partição"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Criar uma nova partição"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Criar uma nova tabela de partições vazia neste dispositivo"

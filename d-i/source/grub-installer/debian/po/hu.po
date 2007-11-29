@@ -6,21 +6,21 @@
 # Hungarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Maintains: VI fsfhu
-# comm2: sas 321hu
+# coor: SZERVÁC Attila - sas 321hu -- 2006-2007
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:48+0100\n"
-"PO-Revision-Date: 2006-08-19 14:42+0100\n"
+"POT-Creation-Date: 2007-09-01 22:48+0000\n"
+"PO-Revision-Date: 2007-09-02 07:42+0100\n"
 "Last-Translator: SZERVÁC Attila <sas@321.hu>\n"
 "Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Country: HUNGARY\n"
 
 #. Type: boolean
 #. Description
@@ -78,12 +78,51 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
+msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
+msgstr "A GRUB boot betöltőt a SATA RAID lemezre telepíted?"
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "Installation of GRUB on Serial ATA RAID is experimental."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid ""
+"GRUB is always installed to the master boot record (MBR) of the Serial ATA "
+"RAID disk. It is also assumed that that disk is listed as the first hard "
+"disk in the boot order defined in the system's BIOS setup."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "The GRUB root device is: ${GRUBROOT}."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
+msgstr "Hiba történt a GRUB beállításakor a SATA RAID lemezen."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "The GRUB installation has been aborted."
+msgstr "GRUB telepítése megszakítva."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:49
 msgid "Install the GRUB boot loader to XFS file system?"
 msgstr "A GRUB rendszerbetöltőt XFS fájlrendszerre telepíted?"
 
 #. Type: boolean
 #. Description
-#: ../grub-installer.templates:29
+#: ../grub-installer.templates:49
 msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
@@ -93,13 +132,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid "Device for boot loader installation:"
 msgstr "A rendszerbetöltő erre az eszközre kerül:"
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -114,7 +153,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -136,13 +175,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "GRUB password:"
 msgstr "GRUB jelszó:"
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid ""
 "The GRUB boot loader offers many powerful interactive features, which could "
 "be used to compromise your system if unauthorized users have access to the "
@@ -158,110 +197,106 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "If you do not wish to set a GRUB password, leave this field blank."
 msgstr "Ha nem akarunk GRUB jelszót adni, hagyjuk üresen e mezőt."
 
-#. Type: boolean
+#. Type: error
 #. Description
-#: ../grub-installer.templates:73
-msgid "GRUB installation failed.  Continue anyway?"
-msgstr "A GRUB telepítése sikertelen. Mégis továbblépsz?"
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid ""
-"The grub package failed to install into /target/.  Installing GRUB as a boot "
-"loader is a required step.  The install problem might however be unrelated "
-"to GRUB, so continuing the installation may be possible."
-msgstr ""
-"A grub csomag /target/-be telepítése meghiúsult. A GRUB telepítése pedig "
-"szükséges. Lehet, hogy e gond nem a GRUB-hoz kötődik és a telepítés "
-"folytatása mégis lehetséges."
+#: ../grub-installer.templates:92
+msgid "GRUB installation failed"
+msgstr "A GRUB telepítése meghiúsult"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:92
+msgid ""
+"The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
+"loader, the installed system will not boot."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:98
 msgid "Unable to install GRUB in ${BOOTDEV}"
 msgstr "A GRUB ${BOOTDEV} eszközre telepítése sikertelenül zárult"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:98
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
 msgstr "A 'grub-install ${BOOTDEV}' hibát adott."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Unable to configure GRUB"
 msgstr "A GRUB konfigurálása meghiúsult"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Executing 'update-grub' failed."
 msgstr "Az 'update-grub' futtatása meghiúsult"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "This is a fatal error."
 msgstr "Ez egy végzetes hiba."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:105
+#: ../grub-installer.templates:136
 msgid "Installing GRUB boot loader"
 msgstr "A GRUB rendszerbetöltő telepítése"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:109
+#: ../grub-installer.templates:140
 msgid "Looking for other operating systems..."
 msgstr "Más operációs rendszerek keresése..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:113
-msgid "Installing the 'grub' package..."
-msgstr "A 'grub' csomag telepítése..."
+#: ../grub-installer.templates:144
+msgid "Installing the '${GRUB}' package..."
+msgstr "'${GRUB}' csomag telepítése..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:117
+#: ../grub-installer.templates:148
 msgid "Determining GRUB boot device..."
 msgstr "A GRUB eszköz meghatározása..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:121
+#: ../grub-installer.templates:152
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "A \"grub-install ${BOOTDEV}\" futtatása..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:125
+#: ../grub-installer.templates:156
 msgid "Running \"update-grub\"..."
 msgstr "Az \"update-grub\" futtatása..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:129
+#: ../grub-installer.templates:160
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "A /etc/kernel-img.conf frissítése..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:134
+#: ../grub-installer.templates:165
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "A GRUB rendszerbetöltő merevlemezre telepítése"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:139
+#: ../grub-installer.templates:170
 msgid "Reinstall GRUB boot loader"
 msgstr "A GRUB boot betöltő újratelepítése"

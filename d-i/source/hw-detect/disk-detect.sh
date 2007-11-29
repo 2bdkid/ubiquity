@@ -15,7 +15,7 @@ is_not_loaded() {
 
 list_modules_dir() {
 	if [ -d "$1" ]; then
-		find $1 -type f | sed -e 's/\.k\?o$//' -e 's/.*\///'
+		find $1 -type f | sed 's/\.ko$//; s/.*\///'
 	fi
 }
 
@@ -96,11 +96,7 @@ hw-detect disk-detect/detect_progress_title || true
 while ! disk_found; do
 	CHOICES=""
 	for mod in $(list_disk_modules | sort); do
-		if [ -z "$CHOICES" ]; then
-			CHOICES="$mod"
-		else
-			CHOICES="$CHOICES, $mod"
-		fi
+		CHOICES="${CHOICES:+$CHOICES, }$mod"
 	done
 
 	if [ -n "$CHOICES" ]; then
@@ -114,7 +110,7 @@ while ! disk_found; do
 
 		db_get disk-detect/module_select
 		if [ "$RET" = "continue with no disk drive" ]; then
-			break
+			exit 0
 		elif [ "$RET" != "none of the above" ]; then
 			module="$RET"
 			if [ -n "$module" ] && is_not_loaded "$module" ; then
@@ -147,3 +143,26 @@ while ! disk_found; do
 	fi
 	db_capb
 done
+
+# Activate support for Serial ATA RAID
+db_get disk-detect/dmraid/enable
+if [ "$RET" = true ]; then
+	if anna-install dmraid-udeb; then
+		# Device mapper support is required to run dmraid
+		if is_not_loaded dm-mod; then
+			module_probe dm-mod
+		fi
+
+		if [ "$(dmraid -c -s)" != "No RAID disks" ]; then
+			logger -t disk-detect "Serial ATA RAID disk(s) detected; enabling dmraid support"
+			if anna-install partman-dmraid; then
+				# Activate devices
+				log-output -t disk-detect dmraid -ay
+			else
+				logger -t disk-detect "Error loading partman-dmraid; dmraid devices not activated"
+			fi
+		else
+			logger -t disk-detect "No Serial ATA RAID disks detected"
+		fi
+	fi
+fi

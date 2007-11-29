@@ -23,6 +23,26 @@ _Description: Install the GRUB boot loader to the master boot record?
  that operating system temporarily unbootable, though GRUB can be manually
  configured later to boot it.
 
+Template: grub-installer/sataraid
+Type: boolean
+Default: true
+_Description: Install the GRUB boot loader to the Serial ATA RAID disk?
+ Installation of GRUB on Serial ATA RAID is experimental.
+ .
+ GRUB is always installed to the master boot record (MBR) of the
+ Serial ATA RAID disk. It is also assumed that that disk is listed as
+ the first hard disk in the boot order defined in the system's BIOS
+ setup.
+ .
+ The GRUB root device is: ${GRUBROOT}.
+
+Template: grub-installer/sataraid-error
+Type: error
+_Description: Unable to configure GRUB
+ An error occurred while setting up GRUB for your Serial ATA RAID disk.
+ .
+ The GRUB installation has been aborted.
+
 Template: grub-installer/install_to_xfs
 Type: boolean
 Default: false
@@ -68,12 +88,10 @@ Description: for internal use; can be preseeded
  Has the value of grub-installer/password already been encrypted?
 
 Template: grub-installer/apt-install-failed
-Type: boolean
-Default: true
-_Description: GRUB installation failed.  Continue anyway?
- The grub package failed to install into /target/.  Installing GRUB
- as a boot loader is a required step.  The install problem might however be
- unrelated to GRUB, so continuing the installation may be possible.
+Type: error
+_Description: GRUB installation failed
+ The '${GRUB}' package failed to install into /target/. Without the GRUB
+ boot loader, the installed system will not boot.
 
 Template: grub-installer/grub-install-failed
 Type: error
@@ -100,6 +118,19 @@ Description: Install GRUB 2 instead of GRUB Legacy?
  becomes unbootable. You're advised not to try this in production
  environments.
 
+Template: grub-installer/grub_not_mature_on_this_platform
+Type: boolean
+Default: false
+# This is suitable for testing grub2 only. Do not translate it!
+Description: Install GRUB?
+ GRUB 2 is the next generation of GNU GRUB, the bootloader that is commonly
+ used on i386/amd64 PCs.  It is now also available for ${ARCH}.
+ .
+ It has interesting new features but is still experimental software. If you
+ choose to install it, you should be prepared for breakage, and have an idea
+ on how to recover your system if it becomes unbootable. You're advised not to
+ try this in production environments.
+
 Template: grub-installer/progress/title
 Type: text
 _Description: Installing GRUB boot loader
@@ -110,7 +141,7 @@ _Description: Looking for other operating systems...
 
 Template: grub-installer/progress/step_install
 Type: text
-_Description: Installing the 'grub' package...
+_Description: Installing the '${GRUB}' package...
 
 Template: grub-installer/progress/step_bootdev
 Type: text

@@ -1,3 +1,115 @@
+base-installer (1.85ubuntu2) hardy; urgency=low
+
+  * Install busybox-initramfs rather than busybox.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Nov 2007 14:34:33 +0000
+
+base-installer (1.85ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Write out the resume partition as a UUID if possible.
+  * Set the Vcs-Bzr field to the Ubuntu branch.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 27 Nov 2007 15:50:44 -0500
+
+base-installer (1.85) unstable; urgency=low
+
+  * Bind mount /dev to /target/dev instead of creating device nodes for
+    devicemapper etc.
+  * Ensure static devices created during installation are preserved by first
+    bind mounting /target/dev on /dev/.static/dev/. MAKEDEV will then detect
+    udev is used (provided proc is mounted in /target).
+    Note: any devices created in /target/dev/ itself will get lost.
+  * Utility pkgdetails moved from debootstrap-udeb to bootstrap-base so that
+    debootstrap-udeb can become 'Architecture: all'.
+  * Requires debootstrap-udeb (1.0.7).
+
+ -- Frans Pop <fjp@debian.org>  Wed, 14 Nov 2007 12:16:37 +0100
+
+base-installer (1.84) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Drop isinstallable test for sarge, we don't support sarge installs
+    anymore.
+  * Remove support for sparc32.
+
+  [ Colin Watson ]
+  * Clean up /tmp/available_kernels.txt.unfiltered too.
+
+  [ Joey Hess ]
+  * Install busybox before installing initramfs-tools, to support version 0.91
+    which will only recommend busybox.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Italian (it.po) by Stefano Canepa
+  * Dutch (nl.po) by Frans Pop
+  * Swedish (sv.po) by Daniel Nylander
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Otavio Salvador <otavio@debian.org>  Tue, 11 Sep 2007 09:12:17 -0300
+
+base-installer (1.83) unstable; urgency=low
+
+  [ Fabio M. Di Nitto ]
+  * Install smp kernel by default on sun4v (Niagara based sparc).
+    With the new LDOM support on the way, adding/removing CPU's
+    from control/service/guest nodes is easy as drinking a glass
+    of water. With this change we will guarantee that the user
+    will always get the best setup.
+
+  [ Frans Pop ]
+  * Drop preprogrammed kernel defaults as that mechanism is no longer used.
+  * Restructure kernel selection to allow for preseeding. Preseeding "none"
+    to skip installing a kernel is supported.
+  * If we could not determine any reasonable default kernel, ask the question
+    at critical priority.
+  * Sort the kernel list in ascending order. With the improved method of
+    selecting a default and the fact that we no longer have different kernel
+    major versions, reverse sorting is no longer as important, especially as
+    using a descending order has its own disadvantages.
+
+  [ Joey Hess ]
+  * Move dependencies on mounted-partitions and created-fstab from
+    base-installer to bootstrap-base.
+
+  [ Updated translations ]
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 22 Jul 2007 13:39:36 -0400
+
+base-installer (1.82) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Add support for Serial ATA RAID (dmraid):
+    - install dmraid (if needed)
+    - create device nodes in /target for SATA RAID devmapper devices
+
+  [ Joey Hess ]
+  * Split off a bootstrap-base package that contains the bits needed to
+    [c]debootstrap a base installation.
+  * base-installer now provides the framework for installing base, including a
+    shell library in /usr/lib/base-installer/library.sh.
+  * bootstrap-base templates are not renamed, to avoid preseeding
+    issues and other complications.
+  * Dropped pcmcia modules package installation support (2.4 kernel stuff).
+  * Remove old support for using prebaseconfig templates for progress.
+
+  [ Otavio Salvador ]
+  * Add support to run_waypoints to accept different templates for the
+    progress bar title.
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Fri, 29 Jun 2007 15:10:49 -0300
+
 base-installer (1.81ubuntu4) gutsy; urgency=low
 
   * Add support for virtual, rt, and xen kernel flavours (LP: #144111).

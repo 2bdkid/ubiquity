@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-12 15:29+0300\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-02-19 16:44+0200\n"
 "Last-Translator: Tapio Lehtonen <tale@debian.org>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,8 @@ msgstr "Kopiointi ei onnistunut"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+#, fuzzy
+msgid "The copy operation has been aborted."
 msgstr "Kopiointi keskeytetään."
 
 #. Type: error
@@ -166,7 +167,8 @@ msgstr "Tallennettaessa muutoksia massamuistilaitteille tapahtui virhe."
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+#, fuzzy
+msgid "The resize operation has been aborted."
 msgstr "Koon muuttaminen keskeytetään."
 
 #. Type: string
@@ -275,62 +277,88 @@ msgstr "Osiotaulun tyyppi:"
 msgid "Select the type of partition table to use."
 msgstr "Valitse käytettävän osiotaulun tyyppi."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+#, fuzzy
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Haluatko varmasti lopettaa nyt?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Aseta osion ilmaisimet"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Nimi:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Käynnistyskelpoisuuden ilmaisin:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "päälle"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "pois"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Muuta osion kokoa (koko nyt ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Kopioi tiedot toisesta osiosta"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Poista osio"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Luo uusi osio"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Luo uusi tyhjä osiotaulu tälle laitteelle"

@@ -112,6 +112,10 @@ fi
 
 . "$CONFIG"
 
+if [ -d /lib/debian-installer ]; then
+    CHARMAP=UTF-8
+fi
+
 if [ "$verbose_option" = yes ]; then
     VERBOSE_OUTPUT=yes
 fi
@@ -278,13 +282,16 @@ if [ "$font_only" != yes ] && [ "$ACTIVE_CONSOLES" ]; then
 		    kbd_mode -u <$console
 		else
 		    kbd_mode -a <$console
-		fi	
+		fi
 	    fi
 	done
     fi
     
     if which loadkeys >/dev/null; then
-	if which ckbcomp >/dev/null; then
+	if [ "$save" != yes ] && \
+	   [ -f /etc/console-setup/boottime.kmap.gz ]; then
+	    eval loadkeys /etc/console-setup/boottime.kmap.gz $verbose
+	elif which ckbcomp >/dev/null; then
 	    if [ "$CHARMAP" != UTF-8 ]; then
 		acm_option="-charmap $CHARMAP"
 	    else
@@ -300,9 +307,6 @@ if [ "$font_only" != yes ] && [ "$ACTIVE_CONSOLES" ]; then
 		    "$XKBLAYOUT" "$XKBVARIANT" "$XKBOPTIONS" \
 		    | gzip -9 >/etc/console-setup/boottime.kmap.gz
 	    fi
-	elif [ "$save_only" != yes ] && \
-	     [ -f /etc/console-setup/boottime.kmap.gz ]; then
-	    eval loadkeys /etc/console-setup/boottime.kmap.gz $verbose
 	fi
     fi
 fi

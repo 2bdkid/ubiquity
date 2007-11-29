@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+msgid "The copy operation has been aborted."
 msgstr ""
 
 #. Type: error
@@ -151,7 +151,7 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+msgid "The resize operation has been aborted."
 msgstr ""
 
 #. Type: string
@@ -256,62 +256,87 @@ msgstr ""
 msgid "Select the type of partition table to use."
 msgstr ""
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr ""

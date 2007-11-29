@@ -1,7 +1,12 @@
 #!/bin/sh
 
-. /usr/share/debconf/confmodule
 . /lib/partman/definitions.sh
+
+# Only run the first time
+if [ -f /var/lib/partman/initial_auto ]; then
+	exit 0
+fi
+
 . /lib/partman/auto-shared.sh
 
 dev_to_partman () {
@@ -30,11 +35,7 @@ if [ -z "$(get_auto_disks)" ] || \
 	exit 0
 fi
 
-# Only run the first time
-if [ -f /var/lib/partman/initial_auto ]; then
-	exit 0
-fi
-[ -d /var/lib/partman ] || mkdir /var/lib/partman
+mkdir -p /var/lib/partman
 touch /var/lib/partman/initial_auto
 
 # See if any autopartition method has been set
@@ -130,7 +131,10 @@ while [ $code = 99 ]; do
 	ask_user /lib/partman/automatically_partition 
 	code=$?
 done
-if [ $code -lt 100 ]; then
+if [ $code -eq 255 ]; then
+	code=99 # do not back up to main menu, restart partman instead
+fi
+if [ $code -gt 0 ] && [ $code -lt 100 ]; then
 	rm -f /var/lib/partman/initial_auto # try again
 fi
 echo "partman-auto/automatically_partition" > /lib/partman/automatically_partition/question

@@ -9,13 +9,15 @@
 # This file is distributed under the same license as debian-installer.
 #
 #
-# Lior Kaplan <kaplan@debian.org>, 2004-2006.
+# Lior Kaplan <kaplan@debian.org>, 2004-2007.
+# Amit Dovev <debian.translator@gmail.com>, 2007.
+# Meital Bourvine <meitalbourvine@gmail.com>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: he\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-14 11:31+0200\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-09-13 03:03+0300\n"
 "Last-Translator: Lior Kaplan <kaplan@debian.org>\n"
 "Language-Team: Hebrew <debian-hebrew-common@lists.alioth.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,8 +78,8 @@ msgstr "פעולת העתקה נכשלה"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
-msgstr "פעולת העתקה בוטלה"
+msgid "The copy operation has been aborted."
+msgstr "פעולת העתקה בוטלה."
 
 #. Type: error
 #. Description
@@ -161,8 +163,8 @@ msgstr "התרחשה שגיאה בזמן כתיבת השינויים להתקנ�
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
-msgstr "פועלת שינוי הגודל בוטלה"
+msgid "The resize operation has been aborted."
+msgstr "פועלת שינוי הגודל בוטלה."
 
 #. Type: string
 #. Description
@@ -268,62 +270,93 @@ msgstr "סוג טבלת המחיצות:"
 msgid "Select the type of partition table to use."
 msgstr "בחירת סוג טבלת המחיצות לשימוש"
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "האם אתה בטוח שברצונך מחיצה לוגית שניתן לאתחל ממנה?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"אתה מנסה לשים את דגל האתחול על מחיצה לוגית. בעקרון דגל האתחול שימושי רק על "
+"מחיצות ראשיות, כך שלא מומלץ לשים אותו על מחיצה לוגית. חלק מגירסאות ה-BIOS "
+"ידועות בכשלון לאתחל אם אין מחיצה ראשית הניתנת לאתחול."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"למרות זאת, אם אתה בטוח של-BIOS שלך אין את הבעיה הזאת, או אם אתה משתמש במנהל "
+"אתחול מותאם אישית ששם לב למחיצות לוגיות הניתנות לאתחול, אז השמת דגל זה הינה "
+"הגיונית."
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "קביעת דגלי המחיצה"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "שם:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "דגל בר-אתחול:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "פעיל"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "לא פעיל"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "שינוי גודל המחיצה (כרגע ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "העתקת מידע ממחיצה אחרת"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "מחיקת המחיצה"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "יצירת מחיצה חדשה"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "יצירת טבלת מחיצות חדשה על התקן זה"

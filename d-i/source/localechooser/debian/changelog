@@ -1,3 +1,123 @@
+localechooser (1.42ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add a localechooser-data package containing lists useful for packages
+      that create automatic installation scripts.
+    - Always support English, unless preseeded otherwise.
+    - Check whether the language has changed after asking the country
+      question, and recalculate a number of things if so.
+    - Drop fallbacks for Norwegian Bokmål and Nynorsk.
+    - Simplify use of locale-gen using the new command-line argument
+      facility in Ubuntu's locales package.
+    - Move Portuguese above Portuguese (Brazil) in languagelist.l10n.
+    - Add encoding field to languagelist file and use the full SUPPORTED
+      file rather than SUPPORTED-short.
+    - If the language question was already marked as seen and the answer
+      didn't change, then don't recalculate the locale.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 27 Nov 2007 12:24:59 +0000
+
+localechooser (1.42) unstable; urgency=low
+
+  * Since /etc/default/locale is now a conffile provided by locales,
+    sed changes into it rather than overwriting. (Fall back to writing to the
+    file if necessary.)
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Korean (ko.po) by Sunjae Park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Nabin Gautam
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Albanian (sq.po) by Elian Myftiu
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 01 Nov 2007 08:54:49 +0100
+
+localechooser (1.41) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Change continents prefix to correct characters in Vietnamese translation.
+    Closes: #432339.
+
+  [ Christian Perrier ]
+  * Set the Bulgarian, Esperanto, Georgian and (commented) Kazakh
+    to use UTF-8
+  * Unconditionnally set debian-installer/charmap to UTF-8 for
+    console-setup purposes.
+  * TF region moved to Indian Ocean. Remaining of #426890
+  * Create a region named "Atlantic Ocean". Put Bouvet Island, Falkland
+    Islands, South Georgia and South Sandwich and Saint-Helena in there.
+    Iceland remains in Europe and Greenland as well.
+  * Change the default kbd encoding for Bulgarian to "utf8"
+  * Change the console settings for (commented) Kazakh to
+    "CyrAsia-Terminus16(utf8)"
+
+  [ Jérémy Bobbio ]
+  * Prevent grep to exit with an error when country2code is called with a
+    region as argument in localechooser.
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 21 Jul 2007 08:38:53 +0200
+
+localechooser (1.40) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Add the new Serbia and Montenegro entries to Europe.
+    Remove the former entry for "Serbia and Montenegro".
+    Thanks to Piotr Engelking for the patch. Closes: #426821
+  * Correct misplaced countries.
+    Thanks to Piotr Engelking for the patch. Closes: #426890
+
+  [ Colin Watson ]
+  * Rewrite some inefficient if blocks that can be done in a single
+    assignment instead.
+
+  [ Frans Pop ]
+  * Set better defaults when localechooser is run again after it has been
+    run preseeded the first time.
+  * Select language selection template before checking preseeding. This
+    allows us to preseed the correct template for the environment we're
+    working in. It also improves behavior when preseeding without setting
+    the 'seen' flag.
+  * Fix bug in code2country function.
+  * If for country selection the current (preseeded) value is not in the
+    shortlist, show the full list instead.
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:19:06 +0200
+
+localechooser (1.39) unstable; urgency=low
+
+  * Add localized name for Armenian.
+  * Add (commented) entry for Armenian in the language list.
+  * No longer write locale settings to /etc/environment after #389466 was
+    fixed.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Basque (eu.po) by Piarres Beobide
+  * Romanian (ro.po) by Eddy Petri?or
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 21 May 2007 20:55:03 +0200
+
 localechooser (1.38ubuntu2) gutsy; urgency=low
 
   * Backport from trunk (Christian Perrier, LP: #140931):
@@ -84,7 +204,7 @@ localechooser (1.35) unstable; urgency=low
 
   [ Updated translations ]
   * Italian (it.po) by Stefano Canepa
-  * Romanian (ro.po) by Eddy Petrișor
+  * Romanian (ro.po) by Eddy Petri?or
 
  -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:44:21 +0100
 

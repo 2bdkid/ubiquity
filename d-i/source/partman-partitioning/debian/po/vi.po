@@ -4,26 +4,26 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Vietnamese translation for Debian Installer Level 1.
-# Copyright © 2006 Software in the Public Interest, Inc.
+# Copyright © 2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Jean Christophe André <progfou@gmail.com>
 # Vũ Quang Trung <vu.quang.trung@auf.org>
 # Trịnh Minh Thành <tmthanh@yahoo.com>
-# Clytie Siddall <clytie@riverland.net.au>, 2005-2006.
+# Clytie Siddall <clytie@riverland.net.au>, 2005-2007
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer Level 1\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-16 15:34+0930\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-08-28 16:33+0930\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: LocFactoryEditor 1.6fc1\n"
+"X-Generator: LocFactoryEditor 1.7b1\n"
 
 #. Type: text
 #. Description
@@ -80,8 +80,8 @@ msgstr "Việc sao chép bị lỗi"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
-msgstr "Việc sao chép bị hủy bỏ."
+msgid "The copy operation has been aborted."
+msgstr "Thao tác sao chép bị hủy bỏ."
 
 #. Type: error
 #. Description
@@ -168,8 +168,8 @@ msgstr "Gặp lỗi khi ghi các thay đổi vào những thiết bị lưu tr�
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
-msgstr "Việc thay đổi kích cỡ bị hủy bỏ."
+msgid "The resize operation has been aborted."
+msgstr "Thao tác thay đổi kích cỡ bị hủy bỏ."
 
 #. Type: string
 #. Description
@@ -277,62 +277,94 @@ msgstr "Kiểu bảng phân vùng:"
 msgid "Select the type of partition table to use."
 msgstr "Hãy chọn kiểu bảng phân vùng cần dùng."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Bạn có chắc muốn tạo một phân vùng hợp lý có khả năng khởi động không?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"Bạn đang thử đặt cờ « có khả năng khởi động » vào một phân vùng hợp lý. Nói "
+"chúng, cờ khởi động được chỉ có ích trên phân vùng chính, vì vậy khuyên bạn "
+"không đặt nó trên phân vùng hợp lý. Không có phân vùng chính khởi động được "
+"thì một số phiên bản BIOS sẽ không khởi động thành công."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"Tuy nhiên, nếu bạn chắc chắn rằng BIOS riêng của bạn không gặp khó khăn này, "
+"hoặc nếu bạn chạy một trình quản lý khởi động riêng sẽ đáp ứng phân vùng hợp "
+"lý có khả năng khởi động, có lẽ có ích khi đặt cờ này."
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Đặt các cờ phân vùng"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Tên:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Cờ khởi động được:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "bật"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "tắt"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Thay đổi kích cỡ của phân vùng (hiện thời ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Sao chép dữ liệu từ phân vùng khác"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Xóa phân vùng"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Tạo phân vùng mới"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Tạo bảng phân vùng trống mới trên thiết bị này"

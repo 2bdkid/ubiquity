@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006, 2007.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-15 17:32+0200\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-09-15 16:41+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -86,7 +86,7 @@ msgstr "Kopiervorgang fehlgeschlagen"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+msgid "The copy operation has been aborted."
 msgstr "Der Kopiervorgang wurde abgebrochen."
 
 #. Type: error
@@ -180,7 +180,7 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+msgid "The resize operation has been aborted."
 msgstr "Der Vorgang für die Änderung der Größe wurde abgebrochen."
 
 #. Type: string
@@ -290,62 +290,96 @@ msgstr "Typ der Partitionstabelle:"
 msgid "Select the type of partition table to use."
 msgstr "Wählen Sie den Typ der Partitionstabelle, der benutzt werden soll."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr ""
+"Sind Sie sicher, dass Sie eine bootbare logische Partition haben möchten?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"Sie versuchen, das Boot-Flag für eine logische Partition zu setzen. Dieses "
+"Flag ist im Allgemeinen nur bei primären Partitionen sinnvoll, so dass das "
+"Setzen für logische Partitionen normalerweise nicht empfohlen wird. Es sind "
+"einige BIOS-Versionen bekannt, die nicht starten, falls es keine primäre "
+"Partition gibt."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"Falls Sie jedoch sicher sind, dass Ihr BIOS dieses Problem nicht hat oder "
+"einen angepassten Boot-Manager verwenden, der bootbar-markierte logische "
+"Partitionen berücksichtigt, dann macht das Setzen dieses Flags Sinn."
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Partitions-Flags setzen"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Name:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Boot-Flag:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "Ein"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "Aus"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Partitionsgröße ändern (zurzeit ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Daten von einer anderen Partition kopieren"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Die Partition löschen"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Eine neue Partition erstellen"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Eine neue, leere Partitionstabelle auf diesem Gerät erstellen"

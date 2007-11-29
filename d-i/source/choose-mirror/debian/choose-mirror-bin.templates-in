@@ -6,19 +6,19 @@
 
 Template: mirror/country
 Type: string
-Description: country code or "enter information manually" (internal use)
+Description: country code or "manual" (for internal use)
 
 Template: mirror/suite
 Type: select
-Choices: warty, hoary, breezy, dapper, edgy, feisty, gutsy
-Default: gutsy
+Choices: dapper, edgy, feisty, gutsy, hardy
+Default: hardy
 Description: Ubuntu version to install:
  In Ubuntu, this question is never asked, and is only for preseeding.
  Caveat emptor.
 
 Template: mirror/codename
 Type: string
-Description: codename for the selected suite (internal use)
+Description: codename for the selected suite (for internal use)
 
 Template: mirror/checking_title
 Type: text

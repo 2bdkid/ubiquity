@@ -12,16 +12,16 @@
 # Quazi Ashfaq-ur Rahman <quazi.ashfaq@gmail.com>, 2005.
 # Khandakar Mujahidul Islam <suzan@bengalinux.org>, 2005, 2006.
 # Progga <progga@BengaLinux.Org>, 2005, 2006.
-# Jamil Ahmed <jamil@bengalinux.org>, 2006.
+# Jamil Ahmed <jamil@bengalinux.org>, 2006-2007.
 # Mahay Alam Khan (মাহে আলম খান) <makl10n@yahoo.com>, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-03-22 22:49+0000\n"
-"PO-Revision-Date: 2007-03-14 00:50+0600\n"
-"Last-Translator: Mahay Alam Khan (মাহে আলম) <mahayalamkhan@gmail.com>\n"
+"POT-Creation-Date: 2007-06-21 22:47+0000\n"
+"PO-Revision-Date: 2007-07-22 23:44+0600\n"
+"Last-Translator: Jamil Ahmed <jamil@bengalinux.org>\n"
 "Language-Team: Bangla <core@BengaLinux.Org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,15 +41,103 @@ msgid ""
 "could cause problems with the installation process, and if you proceed, some "
 "of the existing files may be overwritten."
 msgstr ""
-"গন্তব্য ফাইল সিস্টেমে পুরমো ইনস্টলেশনের ফাইল রয়েছে।  এই ফাইলগুলো ইনস্টলেশন প্রক্রিয়ায় "
+"গন্তব্য ফাইল সিস্টেমে পুরমো ইনস্টলেশনের ফাইল রয়েছে। এই ফাইলগুলো ইনস্টলেশন প্রক্রিয়ায় "
 "সমস্যা ঘটাতে পারে, এবং যদি আপনি এ অবস্থায়ই এগিয়ে যান, তবে বিদ্যমান কিছু ফাইলের "
 "ওপর দিয়েই লিখে ফেলতে পারে।"
 
 #. Type: error
 #. Description
+#: ../base-installer.templates:11
+msgid "No file system mounted on /target"
+msgstr "/target-এ কোন ফাইল সিস্টেম মাউন্ট করা নেই"
+
+#. Type: error
+#. Description
+#: ../base-installer.templates:11
+msgid ""
+"Before the installation can proceed, a root file system must be mounted on /"
+"target. The partitioner and formatter should have done this for you."
+msgstr ""
+"ইনস্টলেশন প্রক্রিয়া এগিয়ে যাওয়ার পূর্বে /target-এ একটি রুট ফাইল সিস্টেমকে অবশ্যই "
+"মাউন্ট করতে হবে। পার্টিশনকারী ও ফরম্যাটকারী প্রোগ্রামের আপনার জন্য এ কাজটি করার "
+"কথা।"
+
+# FIXME
+#. Type: error
+#. Description
+#: ../base-installer.templates:17
+msgid "Not installing to unclean target"
+msgstr "সমস্যাপূর্ণ ফাইল সিস্টেমে (target) ইনস্টল করা হচ্ছে না"
+
+#. Type: error
+#. Description
+#: ../base-installer.templates:17
+msgid ""
+"The installation to the target file system has been canceled. You should go "
+"back and erase or format the target file system before proceeding with the "
+"install."
+msgstr ""
+"গন্তব্য ফাইল সিস্টেমে ইনস্টল করার উদ্যোগ বাতিল করা হয়েছে। ইনস্টলেশন প্রক্রিয়াকে আরো "
+"এগিয়ে নেওয়ার পূর্বে আপনার উচিত্‍ পেছনে ফিরে গিয়ে গন্তব্য ফাইল সিস্টেমকে মুছে ফেলা বা "
+"ফরম্যাট করা।"
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:24
+msgid "Preparing to install the base system..."
+msgstr "মূল সিস্টেম ইনস্টল করার জন্য প্রস্তুত হচ্ছি..."
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:28 ../bootstrap-base.templates:185
+msgid "Installing the base system"
+msgstr "মূল সিস্টেম ইনস্টল করা হচ্ছে"
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:32
+msgid "Running ${SCRIPT}..."
+msgstr "${SCRIPT} চলছে..."
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:36
+msgid "Updating the list of available packages..."
+msgstr "উপস্থিত প্যাকেজগুলোর তালিকা আপডেট করা হচ্ছে..."
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:40
+msgid "Installing extra packages..."
+msgstr "অতিরিক্ত প্যাকেজ ইনস্টল করা হচ্ছে..."
+
+#. Type: text
+#. Description
+#. SUBST0 is a package name
+#: ../base-installer.templates:45
+msgid "Installing extra packages - retrieving and installing ${SUBST0}..."
+msgstr ""
+"অতিরিক্ত প্যাকেজ ইনস্টল করা হচ্ছে - ${SUBST0}-কে আনা হচ্ছে ও ইনস্টল করা হচ্ছে..."
+
+#. Type: text
+#. Description
+#: ../base-installer.templates:49
+msgid "Creating device files..."
+msgstr "ডিভাইস ফাইল তৈরি করা হচ্ছে..."
+
+#. Type: text
+#. Description
+#. Item in the main menu to select this package
+#. TRANSLATORS: <65 columns
+#: ../bootstrap-base.templates:5
+msgid "Install the base system"
+msgstr "মূল সিস্টেমকে ইনস্টল করুন"
+
+#. Type: error
+#. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:13
+#: ../bootstrap-base.templates:11
 msgid "Cannot install base system"
 msgstr "মূল সিস্টেম ইনস্টল করা যাচ্ছে না"
 
@@ -57,71 +145,35 @@ msgstr "মূল সিস্টেম ইনস্টল করা যাচ�
 #. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:13
+#: ../bootstrap-base.templates:11
 msgid ""
 "The installer cannot figure out how to install the base system. No "
 "installable CD-ROM was found and no valid mirror was configured."
 msgstr ""
-"মূল সিস্টেমকে কীভাবে ইনস্টল করতে হবে ইনস্টলার তা বুঝতে পারছে না।  কারণ কোন "
+"মূল সিস্টেমকে কীভাবে ইনস্টল করতে হবে ইনস্টলার তা বুঝতে পারছে না। কারণ কোন "
 "ইনস্টলযোগ্য সিডি-রম পাওয়া যায় নি এবং কোন বৈধ মিররকেও কনফিগার করা হয় নি।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:19
+#: ../bootstrap-base.templates:17
 msgid "Failed to determine the codename for the release."
 msgstr "প্রকাশনার (release) সাংকেতিক নাম নির্ণয় করতে ব্যর্থ হয়েছি।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:24
-msgid "No file system mounted on /target"
-msgstr "/target-এ কোন ফাইল সিস্টেম মাউন্ট করা নেই"
-
-#. Type: error
-#. Description
-#: ../base-installer.templates:24
-msgid ""
-"Before the installation can proceed, a root file system must be mounted on /"
-"target. The partitioner and formatter should have done this for you."
-msgstr ""
-"ইনস্টলেশন প্রক্রিয়া এগিয়ে যাওয়ার পূর্বে /target-এ একটি রুট ফাইল সিস্টেমকে অবশ্যই "
-"মাউন্ট করতে হবে।  পার্টিশনকারী ও ফরম্যাটকারী প্রোগ্রামের আপনার জন্য এ কাজটি করার "
-"কথা।"
-
-# FIXME
-#. Type: error
-#. Description
-#: ../base-installer.templates:30
-msgid "Not installing to unclean target"
-msgstr "সমস্যাপূর্ণ ফাইল সিস্টেমে (target) ইনস্টল করা হচ্ছে না"
-
-#. Type: error
-#. Description
-#: ../base-installer.templates:30
-msgid ""
-"The installation to the target file system has been canceled. You should go "
-"back and erase or format the target file system before proceeding with the "
-"install."
-msgstr ""
-"গন্তব্য ফাইল সিস্টেমে ইনস্টল করার উদ্যোগ বাতিল করা হয়েছে।  ইনস্টলেশন প্রক্রিয়াকে আরো "
-"এগিয়ে নেওয়ার পূর্বে আপনার উচিত্‍ পেছনে ফিরে গিয়ে গন্তব্য ফাইল সিস্টেমকে মুছে ফেলা বা "
-"ফরম্যাট করা।"
-
-#. Type: error
-#. Description
-#: ../base-installer.templates:37
+#: ../bootstrap-base.templates:22
 msgid "Failed to install the base system"
 msgstr "মূল সিস্টেম ইনস্টল করার চেষ্টা ব্যর্থ হয়েছে"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:37
+#: ../bootstrap-base.templates:22
 msgid "The base system installation into /target/ failed."
 msgstr "/target/-এ মূল সিস্টেম ইনস্টলেশনের চেষ্টা ব্যর্থ হয়েছে।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:44
+#: ../bootstrap-base.templates:29
 msgid ""
 "The debootstrap program exited with an error (return value ${EXITCODE})."
 msgstr ""
@@ -130,50 +182,50 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:51
+#: ../bootstrap-base.templates:36
 msgid "Base system installation error"
 msgstr "মূল সিস্টেম ইনস্টলেশনে সমস্যা হয়েছে"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:51
+#: ../bootstrap-base.templates:36
 msgid "The debootstrap program exited abnormally."
 msgstr "debootstrap প্রোগ্রামটি অস্বাভাবিকভাবে প্রস্থান করল।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:59
+#: ../bootstrap-base.templates:44
 msgid "The following error occurred:"
 msgstr "যেসব সমস্যা হয়েছে সেগুলো হল:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:69
+#: ../bootstrap-base.templates:54
 msgid "Tool to use to generate boot initrd:"
 msgstr "বুট initrd তৈরিতে ব্যবহৃত সফটওয়্যার:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:69
+#: ../bootstrap-base.templates:54
 msgid ""
 "The list shows the available tools. If you are unsure which to select, you "
 "should select the default. If your system fails to boot, you can retry the "
 "installation using the other options."
 msgstr ""
-"তালিকাটি উপস্থিত সফটওয়্যারগুলোকে দেখায়।  এদের মধ্যে কোনটিকে নির্বাচন করবেন সে "
-"ব্যাপারে আপনার কোন দ্বিধা থাকলে, যেটি ডিফল্ট সেটিকে বেছে নিন।  এরপর যদি আপনার "
+"তালিকাটি উপস্থিত সফটওয়্যারগুলোকে দেখায়। এদের মধ্যে কোনটিকে নির্বাচন করবেন সে "
+"ব্যাপারে আপনার কোন দ্বিধা থাকলে, যেটি ডিফল্ট সেটিকে বেছে নিন। এরপর যদি আপনার "
 "সিস্টেম বুট না করে, তবে আপনি অন্য কোন অপশন বেছে নিয়ে পুনরায় ইনস্টল করার চেষ্টা "
 "করতে পারবেন।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:76
+#: ../bootstrap-base.templates:61
 msgid "Unsupported initrd generator"
 msgstr "অসমর্থিত initrd তৈরিকারী"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:76
+#: ../bootstrap-base.templates:61
 msgid ""
 "The package ${GENERATOR} that was selected to generate the initrd is not "
 "supported."
@@ -183,13 +235,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:82
+#: ../bootstrap-base.templates:67
 msgid "Unable to install the selected kernel"
 msgstr "বাছাইকৃত কার্নেলটি ইনস্টল করা যায় নি"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:82
+#: ../bootstrap-base.templates:67
 msgid ""
 "An error was returned while trying to install the kernel into the target "
 "system."
@@ -197,7 +249,7 @@ msgstr "গন্তব্য ফাইল সিস্টেমে কার্
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:82
+#: ../bootstrap-base.templates:67
 msgid "Kernel package: '${KERNEL}'."
 msgstr "কার্নেল প্যাকেজ: '${KERNEL}' ।"
 
@@ -205,7 +257,7 @@ msgstr "কার্নেল প্যাকেজ: '${KERNEL}' ।"
 #. Choices
 #. For base-installer, "none" is an additional choice to a list of kernels.
 #. It means "no kernel"
-#: ../base-installer.templates:95
+#: ../bootstrap-base.templates:80
 msgid ""
 "none[ Do not translate what's inside the brackets and just put the "
 "translation for the word \"none\" in your language without any brackets. "
@@ -214,65 +266,65 @@ msgstr "একটিও নয়"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:96
+#: ../bootstrap-base.templates:81
 msgid "Kernel to install:"
 msgstr "যে কার্নেলটি ইনস্টল করা হবে:"
 
 #. Type: select
 #. Description
-#: ../base-installer.templates:96
+#: ../bootstrap-base.templates:81
 msgid ""
 "The list shows the available kernels. Please choose one of them in order to "
 "make the system bootable from the hard drive."
 msgstr ""
-"ব্যবহারযোগ্য কার্নেলগুলো তালিকায় দেখা যাচ্ছে।  সিস্টেমকে হার্ড ড্রাইভ থেকে বুটযোগ্য "
+"ব্যবহারযোগ্য কার্নেলগুলো তালিকায় দেখা যাচ্ছে। সিস্টেমকে হার্ড ড্রাইভ থেকে বুটযোগ্য "
 "করার জন্য এসব কার্নেলের যেকোন একটিকে বেছে নিন।"
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:103
+#: ../bootstrap-base.templates:88
 msgid "Continue without installing a kernel?"
 msgstr "কোন কার্নেল ইনস্টল না করেই এগিয়ে যাব কি?"
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:103
+#: ../bootstrap-base.templates:88
 msgid "No installable kernel was found in the defined APT sources."
 msgstr "উল্লেখকৃত APT উত্‍সে কোন ইনস্টলযোগ্য কার্নেল পাওয়া যায় নি।"
 
 #. Type: boolean
 #. Description
-#: ../base-installer.templates:103
+#: ../bootstrap-base.templates:88
 msgid ""
 "You may try to continue without a kernel, and manually install your own "
 "kernel later. This is only recommended for experts, otherwise you will "
 "likely end up with a machine that doesn't boot."
 msgstr ""
 "আপনি এখন কোন কার্নেল ইনস্টল না করেই এগিয়ে যেতে পারেন, এবং পরে নিজ হাতে কার্নেল "
-"ইনস্টল করতে পারেন।  এই পরামর্শ শুধু অভিজ্ঞ ব্যবহারকারীদের জন্যই, অন্যথায় ইনস্টলেশন "
-"শেষ হওয়ার পর আপনি এমন একটি কম্পিউটার আবিষ্কার করবেন যা বুট হয় না।"
+"ইনস্টল করতে পারেন। এই পরামর্শ শুধু অভিজ্ঞ ব্যবহারকারীদের জন্যই, অন্যথায় ইনস্টলেশন শেষ "
+"হওয়ার পর আপনি এমন একটি কম্পিউটার আবিষ্কার করবেন যা বুট হয় না।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:112
+#: ../bootstrap-base.templates:97
 msgid "Cannot install kernel"
 msgstr "কার্নেল ইনস্টল করা যায় নি"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:112
+#: ../bootstrap-base.templates:97
 msgid "The installer cannot find a suitable kernel package to install."
 msgstr "ইনস্টলারটি ইনস্টল করার উপযোগী কোন কার্নেল প্যাকেজ খুঁজে পাচ্ছে না।"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:117
+#: ../bootstrap-base.templates:102
 msgid "Unable to install ${PACKAGE}"
 msgstr "${PACKAGE} ইনস্টল করা যাচ্ছে না"
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:117
+#: ../bootstrap-base.templates:102
 msgid ""
 "An error was returned while trying to install the ${PACKAGE} package onto "
 "the target system."
@@ -280,28 +332,28 @@ msgstr "গন্তব্য সিস্টেমে প্যাকেজ ${P
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:117
+#: ../bootstrap-base.templates:102
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr "বিস্তারিত জানার জন্য /var/log/syslog পড়ুন অথবা চতুর্থ ভার্চুয়াল কনসোল দেখুন।"
 
 #. Type: error
 #. Description
 #. SUBST0 is a Release file name.
-#: ../base-installer.templates:126
+#: ../bootstrap-base.templates:111
 msgid "Failed getting Release file ${SUBST0}."
 msgstr "রিলিজ ফাইল ${SUBST0} পাওয়ার চেষ্টা ব্যর্থ হয়েছে।"
 
 #. Type: error
 #. Description
 #. SUBST0 is a Release.gpg file name
-#: ../base-installer.templates:132
+#: ../bootstrap-base.templates:117
 msgid "Failed getting Release signature file ${SUBST0}."
 msgstr "রিলিজ-এর স্বাক্ষর ফাইল ${SUBST0} পাওয়ার চেষ্টা ব্যর্থ হয়েছে।"
 
 #. Type: error
 #. Description
 #. SUBST0 is a gpg key ID
-#: ../base-installer.templates:138
+#: ../bootstrap-base.templates:123
 msgid "Release file signed by unknown key (key id ${SUBST0})"
 msgstr ""
 "রিলিজ ফাইল যে কী (key) দ্বারা স্বাক্ষর করা হয়েছে, তা অজ্ঞাত (কী আই.ডি. "
@@ -309,14 +361,14 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../base-installer.templates:143
+#: ../bootstrap-base.templates:128
 msgid "Invalid Release file: no valid components."
 msgstr "অবৈধ রিলিজ ফাইল: কোন বৈধ উপাদান নেই।"
 
 #. Type: error
 #. Description
 #. SUBST0 is a filename
-#: ../base-installer.templates:149
+#: ../bootstrap-base.templates:134
 msgid "Invalid Release file: no entry for ${SUBST0}."
 msgstr "অবৈধ রিলিজ ফাইল: ${SUBST0}-এর জন্য কোন এন্ট্রি নেই।"
 
@@ -324,7 +376,7 @@ msgstr "অবৈধ রিলিজ ফাইল: ${SUBST0}-এর জন্য
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:156
+#: ../bootstrap-base.templates:141
 msgid "Debootstrap Error"
 msgstr "Debootstrap সংক্রান্ত সমস্যা"
 
@@ -332,19 +384,19 @@ msgstr "Debootstrap সংক্রান্ত সমস্যা"
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:156
+#: ../bootstrap-base.templates:141
 msgid ""
 "Couldn't retrieve ${SUBST0}. This may be due to a network problem or a bad "
 "CD, depending on your installation method."
 msgstr ""
-"${SUBST0}-কে আনা যায় নি।  আপনার ইনস্টলেশন প্রক্রিয়ার ওপর নির্ভর করে এটি "
+"${SUBST0}-কে আনা যায় নি। আপনার ইনস্টলেশন প্রক্রিয়ার ওপর নির্ভর করে এটি "
 "নেটওয়ার্কের সমস্যার কারণে কিংবা ত্রুটিপূর্ণ সিডি'র কারণে ঘটতে পারে।"
 
 #. Type: error
 #. Description
 #. SUBST0 is a filename or package name
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:156
+#: ../bootstrap-base.templates:141
 msgid ""
 "If you are installing from CD-R or CD-RW, burning the CD at a lower speed "
 "may help."
@@ -354,70 +406,52 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:169
-msgid "Preparing to install the base system..."
-msgstr "মূল সিস্টেম ইনস্টল করার জন্য প্রস্তুত হচ্ছি..."
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:173
-msgid "Running ${SCRIPT}..."
-msgstr "${SCRIPT} চলছে..."
-
-#. Type: text
-#. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:178
+#: ../bootstrap-base.templates:151
 msgid "Retrieving Release file"
 msgstr "রিলিজ ফাইল আনা হচ্ছে"
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:183
+#: ../bootstrap-base.templates:156
 msgid "Retrieving Release file signature"
 msgstr "রিলিজ ফাইলের স্বাক্ষর আনা হচ্ছে"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:188
+#: ../bootstrap-base.templates:161
 msgid "Finding package sizes"
 msgstr "প্যাকেজের আকার খোঁজা হচ্ছে"
 
 #. Type: text
 #. Description
 #. Packages is a filename which should not be translated
-#: ../base-installer.templates:193
+#: ../bootstrap-base.templates:166
 msgid "Retrieving Packages files"
 msgstr "প্যাকেজ ফাইল আনা হচ্ছে"
 
 #. Type: text
 #. Description
 #. Packages is a filename which should not be translated
-#: ../base-installer.templates:198
+#: ../bootstrap-base.templates:171
 msgid "Retrieving Packages file"
 msgstr "প্যাকেজ ফাইল আনা হচ্ছে"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:203
+#: ../bootstrap-base.templates:176
 msgid "Retrieving packages"
 msgstr "প্যাকেজ আনা হচ্ছে"
 
 #. Type: text
 #. Description
 #. "packages" here can be translated
-#: ../base-installer.templates:208
+#: ../bootstrap-base.templates:181
 msgid "Extracting packages"
 msgstr "প্যাকেজ খোলা হচ্ছে"
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:212
-msgid "Installing the base system"
-msgstr "মূল সিস্টেম ইনস্টল করা হচ্ছে"
 
 #. Type: text
 #. Description
@@ -425,7 +459,7 @@ msgstr "মূল সিস্টেম ইনস্টল করা হচ্�
 #. The "core" packages are indeed packages that are specifically
 #. recorded as part of the base system. Other packages may
 #. be installed on the base system because of dependency resolution
-#: ../base-installer.templates:220
+#: ../bootstrap-base.templates:193
 msgid "Installing core packages"
 msgstr "মূল প্যাকেজগুলো ইনস্টল করা হচ্ছে"
 
@@ -435,13 +469,13 @@ msgstr "মূল প্যাকেজগুলো ইনস্টল করা
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:228
+#: ../bootstrap-base.templates:201
 msgid "Unpacking required packages"
 msgstr "প্রয়োজনীয় প্যাকেজগুলো খোলা হচ্ছে"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:232
+#: ../bootstrap-base.templates:205
 msgid "Configuring required packages"
 msgstr "প্রয়োজনীয় প্যাকেজগুলো কনফিগার করা হচ্ছে"
 
@@ -449,7 +483,7 @@ msgstr "প্রয়োজনীয় প্যাকেজগুলো কনফ�
 #. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:238
+#: ../bootstrap-base.templates:211
 msgid "Unpacking the base system"
 msgstr "মূল সিস্টেমকে খোলা হচ্ছে"
 
@@ -457,34 +491,34 @@ msgstr "মূল সিস্টেমকে খোলা হচ্ছে"
 #. Description
 #. The base system is the minimal Debian system
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
-#: ../base-installer.templates:244
+#: ../bootstrap-base.templates:217
 msgid "Configuring the base system"
 msgstr "মূল সিস্টেমকে কনফিগার করা হচ্ছে"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:248
+#: ../bootstrap-base.templates:221
 msgid "${SECTION}: ${INFO}..."
 msgstr "${SECTION}: ${INFO}..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:253
+#: ../bootstrap-base.templates:226
 msgid "Validating ${SUBST0}..."
 msgstr "${SUBST0}-এর বৈধতা পরীক্ষা করা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:258
+#: ../bootstrap-base.templates:231
 msgid "Retrieving ${SUBST0}..."
 msgstr "${SUBST0}-কে আনা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:263
+#: ../bootstrap-base.templates:236
 msgid "Extracting ${SUBST0}..."
 msgstr "${SUBST0}-কে খোলা হচ্ছে..."
 
@@ -492,21 +526,21 @@ msgstr "${SUBST0}-কে খোলা হচ্ছে..."
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:268
+#: ../bootstrap-base.templates:241
 msgid "Unpacking ${SUBST0}..."
 msgstr "${SUBST0}-কে খোলা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:273
+#: ../bootstrap-base.templates:246
 msgid "Configuring ${SUBST0}..."
 msgstr "${SUBST0}-কে কনফিগার করা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:278
+#: ../bootstrap-base.templates:251
 msgid "Checking Release signature"
 msgstr "রিলিজ-এর স্বাক্ষর পরীক্ষা করা হচ্ছে"
 
@@ -514,20 +548,20 @@ msgstr "রিলিজ-এর স্বাক্ষর পরীক্ষা �
 #. Description
 #. SUBST0 is a gpg key id
 #. Release is a filename which should not be translated
-#: ../base-installer.templates:284
+#: ../bootstrap-base.templates:257
 msgid "Valid Release signature (key id ${SUBST0})"
 msgstr "রিলিজ-এর স্বাক্ষর বৈধ (কী আই.ডি. ${SUBST0})"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:288
+#: ../bootstrap-base.templates:261
 msgid "Resolving dependencies of base packages..."
 msgstr "মূল প্যাকেজসমূহের নির্ভরতা দূর করা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:293
+#: ../bootstrap-base.templates:266
 msgid "Found additional base dependencies: ${SUBST0}"
 msgstr "মূল প্যাকেজের নির্ভরতা পূরণের জন্য এই প্যাকেজগুলো প্রয়োজন: ${SUBST0}"
 
@@ -535,20 +569,20 @@ msgstr "মূল প্যাকেজের নির্ভরতা পূর
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:298
+#: ../bootstrap-base.templates:271
 msgid "Found additional required dependencies: ${SUBST0}"
 msgstr "নির্ভরতা পূরণের জন্য এই প্যাকেজগুলো প্রয়োজন: ${SUBST0}"
 
 #. Type: text
 #. Description
 #. SUBST0 is a list of packages
-#: ../base-installer.templates:303
+#: ../bootstrap-base.templates:276
 msgid "Found packages in base already in required: ${SUBST0}"
 msgstr "base এ প্যাকেজ পাওয়া গেছে যা ${SUBST0} 'র জন্য প্রয়োেজন"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:307
+#: ../bootstrap-base.templates:280
 msgid "Resolving dependencies of required packages..."
 msgstr "প্রয়োজনীয় প্যাকেজের নির্ভরতা দূর করা হচ্ছে..."
 
@@ -557,7 +591,7 @@ msgstr "প্রয়োজনীয় প্যাকেজের নির্ভ�
 #. Description
 #. SUBST0 is an archive component (main, etc)
 #. SUBST1 is a mirror
-#: ../base-installer.templates:313
+#: ../bootstrap-base.templates:286
 msgid "Checking component ${SUBST0} on ${SUBST1}..."
 msgstr "উপাদান ${SUBST0}-কে ${SUBST1}-এ পরীক্ষা করা হচ্ছে..."
 
@@ -567,7 +601,7 @@ msgstr "উপাদান ${SUBST0}-কে ${SUBST1}-এ পরীক্ষা 
 #. The "core" packages are indeed packages that are specifically
 #. recorded as part of the base system. Other packages may
 #. be installed on the base system because of dependency resolution
-#: ../base-installer.templates:321
+#: ../bootstrap-base.templates:294
 msgid "Installing core packages..."
 msgstr "মূল প্যাকেজগুলোকে ইনস্টল করা হচ্ছে..."
 
@@ -577,7 +611,7 @@ msgstr "মূল প্যাকেজগুলোকে ইনস্টল ক
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:329
+#: ../bootstrap-base.templates:302
 msgid "Unpacking required packages..."
 msgstr "প্রয়োজনীয় প্যাকেজগুলোকে খোলা হচ্ছে..."
 
@@ -587,116 +621,76 @@ msgstr "প্রয়োজনীয় প্যাকেজগুলোকে খ�
 #. by the dependency chain of core packages
 #. In short, they are "required" because at least one of the
 #. packages from the core packages depends on them
-#: ../base-installer.templates:337
+#: ../bootstrap-base.templates:310
 msgid "Configuring required packages..."
 msgstr "প্রয়োজনীয় প্যাকেজগুলোকে কনফিগার করা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:341
+#: ../bootstrap-base.templates:314
 msgid "Installing base packages..."
 msgstr "মূল প্যাকেজগুলোকে ইনস্টল করা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:345
+#: ../bootstrap-base.templates:318
 msgid "Unpacking the base system..."
 msgstr "মূল সিস্টেমকে খোলা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:349
+#: ../bootstrap-base.templates:322
 msgid "Configuring the base system..."
 msgstr "মূল সিস্টেমকে কনফিগার করা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:353
+#: ../bootstrap-base.templates:326
 msgid "Base system installed successfully."
 msgstr "মূল সিস্টেমকে সফলভাবে ইনস্টল করা হয়েছে।"
 
 #. Type: error
 #. Description
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:358
+#: ../bootstrap-base.templates:331
 msgid "Debootstrap warning"
 msgstr "Debootstrap সংক্রান্ত সতর্কবার্তা"
 
 #. Type: error
 #. Description
 #. Debootstrap is a program name: should not be translated
-#: ../base-installer.templates:358
+#: ../bootstrap-base.templates:331
 msgid "Warning: ${INFO}"
 msgstr "সতর্কবার্তা: ${INFO}"
 
 #. Type: text
 #. Description
 #. SUBST0 is an url
-#: ../base-installer.templates:364
+#: ../bootstrap-base.templates:337
 msgid "Retrying failed download of ${SUBST0}"
 msgstr "${SUBST0}-কে পুনরায় ডাউনলোডের চেষ্টা করা হচ্ছে"
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:368
+#: ../bootstrap-base.templates:341
 msgid "Configuring APT sources..."
 msgstr "APT-এর উৎ‍স কনফিগার করা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:372
-msgid "Updating the list of available packages..."
-msgstr "উপস্থিত প্যাকেজগুলোর তালিকা আপডেট করা হচ্ছে..."
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:376
-msgid "Installing extra packages..."
-msgstr "অতিরিক্ত প্যাকেজ ইনস্টল করা হচ্ছে..."
-
-#. Type: text
-#. Description
-#. SUBST0 is a package name
-#: ../base-installer.templates:381
-msgid "Installing extra packages - retrieving and installing ${SUBST0}..."
-msgstr ""
-"অতিরিক্ত প্যাকেজ ইনস্টল করা হচ্ছে - ${SUBST0}-কে আনা হচ্ছে ও ইনস্টল করা হচ্ছে..."
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:385
-msgid "Creating device files..."
-msgstr "ডিভাইস ফাইল তৈরি করা হচ্ছে..."
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:389
+#: ../bootstrap-base.templates:345
 msgid "Selecting the kernel to install..."
 msgstr "যে কার্নেলটি ইনস্টল করা হবে, তাকে বাছাই করা হচ্ছে..."
 
 #. Type: text
 #. Description
-#: ../base-installer.templates:393
+#: ../bootstrap-base.templates:349
 msgid "Installing the kernel..."
 msgstr "কার্নেল ইনস্টল করা হচ্ছে..."
 
 #. Type: text
 #. Description
 #. SUBST0 is a package name
-#: ../base-installer.templates:398
+#: ../bootstrap-base.templates:354
 msgid "Installing the kernel - retrieving and installing ${SUBST0}..."
 msgstr "কার্নেল ইনস্টল করা হচ্ছে - ${SUBST0}-কে আনা হচ্ছে ও ইনস্টল করা হচ্ছে..."
-
-#. Type: text
-#. Description
-#: ../base-installer.templates:402
-msgid "Installing the PCMCIA modules"
-msgstr "পি.সি.এম.সি.আই.এ. মডিউল ইনস্টল করা হচ্ছে"
-
-#. Type: text
-#. Description
-#. Item in the main menu to select this package
-#. TRANSLATORS: <65 columns
-#: ../base-installer.templates:408
-msgid "Install the base system"
-msgstr "মূল সিস্টেমকে ইনস্টল করুন"

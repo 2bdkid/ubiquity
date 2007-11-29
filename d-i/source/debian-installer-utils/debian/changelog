@@ -1,3 +1,23 @@
+debian-installer-utils (1.49ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate ks=*, vga=*, or break=* to installed
+      system.
+  * Add XS-Vcs-Bzr for Ubuntu branch.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 19 Nov 2007 13:29:25 -0500
+
+debian-installer-utils (1.49) unstable; urgency=low
+
+  [ Frans Pop ]
+  * user-params: also filter out new D-I boot parameter "lowmem".
+
+  [ Joey Hess ]
+  * Pass APT::Install-Recommends=false to apt to avoid new versions pulling in
+    recommends.
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:14:53 +0200
+
 debian-installer-utils (1.48ubuntu2) gutsy; urgency=low
 
   * user-params: Don't propagate break=* to installed system.

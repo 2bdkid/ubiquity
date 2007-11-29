@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2007-01-03 20:28+0000\n"
+"POT-Creation-Date: 2007-06-30 12:27+0000\n"
+"PO-Revision-Date: 2007-07-23 21:32+0100\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. Description
 #: ../partman-base.templates:3
 msgid "Starting up the partitioner"
-msgstr "A iniciar o particionador:"
+msgstr "A iniciar o particionador"
 
 #. Type: text
 #. Description
@@ -131,10 +131,10 @@ msgid ""
 "etc.), a free space to create partitions, or a device to initialise its "
 "partition table."
 msgstr ""
-"Isto é uma visão geral das partições actualmente configuradas e os seus "
-"pontos de montagem. Seleccione a partição para alterar as suas definições "
-"(sistema de ficheiros, ponto de montagem, etc.), um espaço livre para criar "
-"partições, ou um dispositivo para inicializar a sua tabela de partições."
+"Isto é uma visão geral das partições actualmente configuradas e pontos de "
+"montagem. Escolha uma partição para modificar as suas definições (sistema de "
+"ficheiros, ponto de montagem, etc.), um espaço livre para criar partições, "
+"ou um dispositivo para inicializar a sua tabela de partições."
 
 #. Type: boolean
 #. Description
@@ -150,7 +150,7 @@ msgid ""
 "creating a new partition table on the device, then all current partitions "
 "will be removed."
 msgstr ""
-"Você seleccionou um dispositivo inteiro para particionar. Se proceder com a "
+"Você escolheu um dispositivo inteiro para particionar. Se proceder com a "
 "criação de uma nova tabela de partições no dispositivo, então todas as "
 "partições actuais serão removidas."
 
@@ -494,41 +494,57 @@ msgstr "Volume encriptado (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:290
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume0 (mirror)
+#: ../partman-base.templates:291
+#, no-c-format
+msgid "Serial ATA RAID %s (%s)"
+msgstr "Serial ATA RAID %s (%s)"
+
+#. Type: text
+#. Description
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume01 (partition #1)
+#: ../partman-base.templates:296
+#, no-c-format
+msgid "Serial ATA RAID %s (partition #%s)"
+msgstr "Serial ATA RAID %s (partição #%s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:300
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:294
+#: ../partman-base.templates:304
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "Loopback (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:298
+#: ../partman-base.templates:308
 #, no-c-format
 msgid "DASD %s (%s)"
 msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:302
+#: ../partman-base.templates:312
 #, no-c-format
 msgid "DASD %s (%s), partition #%s"
 msgstr "DASD%s (%s), partição #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:306
+#: ../partman-base.templates:316
 msgid "Cancel this menu"
 msgstr "Cancelar este menu"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:311
+#: ../partman-base.templates:321
 msgid "Partition disks"
 msgstr "Particionar discos"

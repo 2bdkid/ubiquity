@@ -103,7 +103,8 @@ static char **mirrors_in(char *country) {
 /* returns true if there is a mirror in the specified country */
 static inline int has_mirror(char *country) {
 	char **mirrors;
-	if (strcmp(country, MANUAL_ENTRY) == 0)
+	if (strcmp(country, MANUAL_ENTRY) == 0 ||
+	    strcmp(country, MANUAL_ENTRY_OLD) == 0)
 		return 1;
 	mirrors = mirrors_in(country);
 	return (mirrors[0] == NULL) ? 0 : 1;
@@ -139,6 +140,7 @@ int find_suite (void) {
 	int nbr_suites = sizeof(suites)/SUITE_LENGTH;
 	int i;
 	int ret = 0;
+	char buf[SUITE_LENGTH];
 
 	if (show_progress) {
 		debconf_progress_start(debconf, 0, 1,
@@ -167,8 +169,26 @@ int find_suite (void) {
 				suite = strdup(debconf->value);
 			}
 			else {
-				continue;
+				/* Read this file to find the default suite
+				 * to use. */
+				f = fopen("/etc/default-release", "r");
+				if (f != NULL) {
+					if (fgets(buf, SUITE_LENGTH - 1, f)) {
+						if (buf[strlen(buf) - 1] == '\n')
+							buf[strlen(buf) - 1] = '\0';
+						suite = strdup(buf);
+						fclose(f);
+					}
+					else {
+						fclose(f);
+						continue;
+					}
+				}
+				else {
+					continue;
+				}
 			}
+			
 		}
 		else {
 			suite = strdup(suites[i - 1]);
@@ -181,7 +201,6 @@ int find_suite (void) {
 		free(command);
 
 		if (f != NULL) {
-			char buf[SUITE_LENGTH];
 			if (fgets(buf, SUITE_LENGTH - 1, f)) {
 				if (buf[strlen(buf) - 1] == '\n')
 					buf[strlen(buf) - 1] = '\0';
@@ -214,8 +233,6 @@ static int check_base_on_cd(void) {
 	}
 	else if (getenv("OVERRIDE_BASE_INSTALLABLE") != NULL)
 		base_on_cd = 1;
-	else
-		base_on_cd = 0;
 	return 0;
 }
 
@@ -314,10 +331,12 @@ static int choose_mirror(void) {
 
 	debconf_get(debconf, DEBCONF_BASE "country");
 #ifndef WITH_FTP_MANUAL
-	manual_entry = ! strcmp(debconf->value, MANUAL_ENTRY);
+	manual_entry = ! strcmp(debconf->value, MANUAL_ENTRY) ||
+		       ! strcmp(debconf->value, MANUAL_ENTRY_OLD);
 #else
 	if (! strcasecmp(protocol,"ftp") == 0)
-		manual_entry = ! strcmp(debconf->value, MANUAL_ENTRY);
+		manual_entry = ! strcmp(debconf->value, MANUAL_ENTRY) ||
+			       ! strcmp(debconf->value, MANUAL_ENTRY_OLD);
 	else
 		manual_entry = 1;
 #endif
@@ -361,86 +380,18 @@ static int choose_mirror(void) {
 
 static int choose_proxy(void) {
 	char *px = add_protocol("proxy");
-	char *command;
-	FILE *f = NULL;
-	char syn[32];
-	int  syns=0;
 
-	/* Ubuntu change: try to check if we can reach archive.ubuntu.com
-	 * before asking for a proxy. There might be several reasons why it
-	 * can fail but it is still wise to test. 
-	 * NOTE: this portion of code is not meant to track user installations
-	 *       and it temporarily hardcodes values. It also sets the
-	 *       /proc/sys/net/ipv4/tcp_syn_retries to 2 to reduce the delay
-	 *       time in case of connection failure and restore the original
-	 *       setting immediately after.
+	/* This is a nasty way to check whether we ought to have a network
+	 * connection; if we don't, it isn't worthwhile to ask for a proxy.
+	 * We should really change netcfg to write out a flag somewhere.
 	 */
-
-	/* be sure the string is all 0's */
-	memset(syn, '0', sizeof(syn));
-
-	/* get current setting */
-	asprintf(&command, "cat /proc/sys/net/ipv4/tcp_syn_retries");
-	f = popen(command, "r");
-	if (f != NULL) {
-		if (fgets(syn, 31, f)) {
-			syns=1;
-		}
-		pclose(f);
-	}
-	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
-	free(command);
-
-	/* set ours */
-	if (syns > 0) {
-		asprintf(&command, "echo 1 > /proc/sys/net/ipv4/tcp_syn_retries");
-		f = popen(command, "r");
-		if (f != NULL) {
-			pclose(f);
-		}
-		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
-		free(command);
-	}
-
-	asprintf(&command, "wget -q http://archive.ubuntu.com/ubuntu/dists/%s/Release -O - | grep ^Suite: | cut -d' ' -f 2", PREFERRED_DISTRIBUTION);
-
-	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
-
-	f = popen(command, "r");
-	if (f != NULL) {
-		char suite[32];
-		if (fgets(suite, 31, f)) {
-			debconf_input(debconf, "low", px);
-		} else {
-			debconf_input(debconf, "critical", px);
-		}
-		pclose(f);
+	if (debconf_get(debconf, "netcfg/dhcp_options") == 0 && debconf->value != NULL && strncmp(debconf->value, "Do not configure", strlen("Do not configure")) == 0) {
+		debconf_input(debconf, "low", px);
 	} else {
-		/* This is a nasty way to check whether we ought to have a
-		 * network connection; if we don't, it isn't worthwhile to
-		 * ask for a proxy. We should really change netcfg to write
-		 * out a flag somewhere.
-		 */
-		if (debconf_get(debconf, "netcfg/dhcp_options") == 0 && debconf->value != NULL && strncmp(debconf->value, "Do not configure", strlen("Do not configure")) == 0) {
-			debconf_input(debconf, "low", px);
-		} else {
-			debconf_input(debconf, "critical", px);
-		}
+		debconf_input(debconf, "high", px);
 	}
-	free(command);
+
 	free(px);
-
-	/* set default back */
-	if (syns > 0) {
-		asprintf(&command, "echo %s > /proc/sys/net/ipv4/tcp_syn_retries", syn);
-		f = popen(command, "r");
-		if (f != NULL) {
-			pclose(f);
-		}
-		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
-		free(command);
-	}
-
 	return 0;
 }
 
@@ -452,7 +403,14 @@ static int set_proxy(void) {
 
 	debconf_get(debconf, px);
 	if (debconf->value != NULL && strlen(debconf->value)) {
-		setenv(proxy_var, debconf->value, 1);
+		if (strchr(debconf->value, ':'))
+			setenv(proxy_var, debconf->value, 1);
+		else {
+			char *proxy_value;
+			asprintf(&proxy_value, "http://%s", debconf->value);
+			setenv(proxy_var, proxy_value, 1);
+			free(proxy_value);
+		}
 	}
 	else {
 		unsetenv(proxy_var);

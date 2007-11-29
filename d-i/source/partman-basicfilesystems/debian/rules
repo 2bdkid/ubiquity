@@ -5,7 +5,7 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-PACKAGE = partman-basicfilesystems
+export PACKAGE = partman-basicfilesystems
 
 build:
 # Ye olde no-op.
@@ -35,8 +35,6 @@ install: build
 	dh_install select_mountpoint bin
 	dh_install select_mountoptions bin
 	dh_install get_mountoptions bin
-	rm -rf `find debian/$(PACKAGE) -name CVS`
-	rm -rf `find debian/$(PACKAGE) -name .svn`
 
 binary-indep: build install
 	dh_testdir

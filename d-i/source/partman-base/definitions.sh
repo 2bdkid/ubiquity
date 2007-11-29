@@ -24,22 +24,11 @@ basename () {
 	echo "${x##*/}"
 }
 
-can_escape () {
-	type debconf-escape >/dev/null 2>&1 || return 1
-	db_capb backup
-	for cap in $RET; do
-		case $cap in
-			escape)	return 0 ;;
-		esac
-	done
-	return 1
-}
-
 maybe_escape () {
 	local code saveret
 	text="$1"
 	shift
-	if can_escape; then
+	if [ "$can_escape" ]; then
 		db_capb backup escape
 		code=0
 		"$@" "$(printf '%s' "$text" | debconf-escape -e)" || code=$?
@@ -71,16 +60,10 @@ debconf_select () {
 		local key option
 		restore_ifs
 		key=$(echo ${x%$TAB*})
-		# work around bug #243373
-		if [ "$TERM" = xterm -o "$TERM" = bterm ]; then
-			debconf_select_lead="$NBSP"
-		else
-			debconf_select_lead="> "
-		fi
 		option=$(echo "${x#*$TAB}" | sed "s/ *\$//g; s/^ /$debconf_select_lead/g")
 		newchoices="${newchoices:+${newchoices}${NL}}${key}${TAB}${option}"
 		if [ "$key" = "$default_choice" ]; then
-		    default="$option"
+			default="$option"
 		fi
 		case $PARTMAN_SNOOP in
 			?*)
@@ -93,19 +76,19 @@ debconf_select () {
 	IFS="$NL"
 	# escape the commas and leading whitespace but keep them unescaped
 	# in $choices
-        for x in $choices; do
-                u="$u, `echo ${x#*$TAB} | sed 's/,/\\\\,/g; s/^ /\\\\ /'`"
-        done
-        u=${u#, }
+	for x in $choices; do
+		u="$u, `echo ${x#*$TAB} | sed 's/,/\\\\,/g; s/^ /\\\\ /'`"
+	done
+	u=${u#, }
 	restore_ifs
 	# TODO: This can be preseeded without having to use translated
 	# values (which are often inappropriate for preseeding across many
 	# machines due to including e.g. disk capacities) but it's nasty;
 	# you have to use runes like
-	# "20some_device__________/var/lib/partman/devices/=dev=sda". We
-	# could do with an abbreviated syntax.
+	# "20some_device__________/var/lib/partman/devices/=dev=sda".
+	# We could do with an abbreviated syntax.
 	if [ -n "$default" ]; then
-	        db_set $template "$default"
+		db_set $template "$default"
 	fi
 	db_subst $template CHOICES "$u"
 	code=0
@@ -124,65 +107,65 @@ debconf_select () {
 }
 
 menudir_default_choice () {
-    printf "%s__________%s\n" "$(basename $1/??$2)" "$3" > $1/default_choice
+	printf "%s__________%s\n" "$(basename $1/??$2)" "$3" > $1/default_choice
 }
 
 ask_user () {
-    local IFS dir template priority default choices plugin name option
-    dir="$1"; shift
-    template=$(cat $dir/question)
-    priority=$(cat $dir/priority)
-    if [ -f $dir/default_choice ]; then
-	default=$(cat $dir/default_choice)
-    else
-	default=""
-    fi
-    choices=$(
-	for plugin in $dir/*; do
-	    [ -d $plugin ] || continue
-	    name=$(basename $plugin)
-	    IFS="$NL"
-	    for option in $($plugin/choices "$@"); do
-		printf "%s__________%s\n" $name "$option"
-	    done
-	    restore_ifs
-	done
-    )
-    code=0
-    debconf_select $priority $template "$choices" "$default" || code=$?
-    if [ $code -ge 100 ]; then return 255; fi
-    echo "$RET" >$dir/default_choice
-    $dir/${RET%__________*}/do_option ${RET#*__________} "$@" || return $?
-    return 0
+	local IFS dir template priority default choices plugin name option
+	dir="$1"; shift
+	template=$(cat $dir/question)
+	priority=$(cat $dir/priority)
+	if [ -f $dir/default_choice ]; then
+		default=$(cat $dir/default_choice)
+	else
+		default=""
+	fi
+	choices=$(
+		for plugin in $dir/*; do
+			[ -d $plugin ] || continue
+			name=$(basename $plugin)
+			IFS="$NL"
+			for option in $($plugin/choices "$@"); do
+				printf "%s__________%s\n" $name "$option"
+			done
+			restore_ifs
+		done
+	)
+	code=0
+	debconf_select $priority $template "$choices" "$default" || code=$?
+	if [ $code -ge 100 ]; then return 255; fi
+	echo "$RET" >$dir/default_choice
+	$dir/${RET%__________*}/do_option ${RET#*__________} "$@" || return $?
+	return 0
 }
 
 partition_tree_choices () {
-    local IFS
-    local whitespace_hack=""
-    for dev in $DEVICES/*; do
-	[ -d $dev ] || continue
-	printf "%s//\t%s\n" $dev "$(device_name $dev)" # GETTEXT?
-	cd $dev
+	local IFS
+	local whitespace_hack=""
+	for dev in $DEVICES/*; do
+		[ -d $dev ] || continue
+		printf "%s//\t%s\n" $dev "$(device_name $dev)" # GETTEXT?
+		cd $dev
 
-	open_dialog PARTITIONS
-	partitions="$(read_paragraph)"
-	close_dialog
-	
-	IFS="$TAB"
-	echo "$partitions" |
-	while { read num id size type fs path name; [ "$id" ]; }; do
-	    part=${dev}/$id
-	    [ -f $part/view ] || continue
-	    printf "%s//%s\t     %s\n" "$dev" "$id" $(cat $part/view)
+		open_dialog PARTITIONS
+		partitions="$(read_paragraph)"
+		close_dialog
+
+		IFS="$TAB"
+		echo "$partitions" |
+		while { read num id size type fs path name; [ "$id" ]; }; do
+			part=${dev}/$id
+			[ -f $part/view ] || continue
+			printf "%s//%s\t     %s\n" "$dev" "$id" $(cat $part/view)
+		done
+		restore_ifs
+	done | while read line; do
+		# A hack to make sure each line in the table is unique and
+		# selectable by debconf -- pad lines with varying amounts of
+		# whitespace.
+    		whitespace_hack="$NBSP$whitespace_hack"
+		echo "$line$whitespace_hack"
 	done
-	restore_ifs
-    done | while read line; do
-        # A hack to make sure each line in the table is unique and
-	# selectable by debconf -- pad lines with varying amounts of
-	# whitespace.
-    	whitespace_hack="$NBSP$whitespace_hack"
-	echo "$line$whitespace_hack"
-    done
 }
 
 longint_le () {
@@ -191,15 +174,15 @@ longint_le () {
 	x=$(expr "$1" : '0*\(.*\)')
 	y=$(expr "$2" : '0*\(.*\)')
 	if [ ${#x} -lt ${#y} ]; then
-	    return 0
+		return 0
 	elif [ ${#x} -gt ${#y} ]; then
-	    return 1
+		return 1
 	elif [ "$x" = "$y" ]; then
-	    return 0
+		return 0
 	elif [ "$x" '<' "$y" ]; then
-	    return 0
+		return 0
 	else
-	    return 1
+		return 1
 	fi
 }
 
@@ -298,42 +281,42 @@ valid_human () {
 }
 
 stop_parted_server () {
-    open_infifo
-    write_line "QUIT"
-    close_infifo
+	open_infifo
+	write_line "QUIT"
+	close_infifo
 }
 
 # Must call stop_parted_server before calling this.
 restart_partman () {
-    initcount=`ls /lib/partman/init.d/* | wc -l`
-    db_progress START 0 $initcount partman/progress/init/title
-    for s in /lib/partman/init.d/*; do
-	if [ -x $s ]; then
-	    base=$(basename $s | sed 's/[0-9]*//')
-	    if ! db_progress INFO partman/progress/init/$base; then
-		db_progress INFO partman/progress/init/fallback
-	    fi
-	    if ! $s; then
-		db_progress STOP
-		exit 255
-	    fi
-	fi
-	db_progress STEP 1
-    done
-    db_progress STOP
+	initcount=`ls /lib/partman/init.d/* | wc -l`
+	db_progress START 0 $initcount partman/progress/init/title
+	for s in /lib/partman/init.d/*; do
+		if [ -x $s ]; then
+			base=$(basename $s | sed 's/[0-9]*//')
+			if ! db_progress INFO partman/progress/init/$base; then
+				db_progress INFO partman/progress/init/fallback
+			fi
+			if ! $s; then
+				db_progress STOP
+				exit 255
+			fi
+		fi
+		db_progress STEP 1
+	done
+	db_progress STOP
 }
 
 update_partition () {
-    local u
-    cd $1
-    open_dialog PARTITION_INFO $2
-    read_line part
-    close_dialog
-    [ "$part" ] || return 0
-    for u in /lib/partman/update.d/*; do
-	[ -x "$u" ] || continue
-	$u $1 $part
-    done
+	local u
+	cd $1
+	open_dialog PARTITION_INFO $2
+	read_line part
+	close_dialog
+	[ "$part" ] || return 0
+	for u in /lib/partman/update.d/*; do
+		[ -x "$u" ] || continue
+		$u $1 $part
+	done
 }
         
 DEVICES=/var/lib/partman/devices
@@ -344,33 +327,33 @@ DEVICES=/var/lib/partman/devices
 # 7=outfifo
 
 open_infifo() {
-    exec 6>/var/lib/partman/infifo
+	exec 6>/var/lib/partman/infifo
 }
 
 close_infifo() {
-    exec 6>&-
+	exec 6>&-
 }
 
 open_outfifo () {
-    exec 7</var/lib/partman/outfifo
+	exec 7</var/lib/partman/outfifo
 }
 
 close_outfifo () {
-    exec 7<&-
+	exec 7<&-
 }
 
 write_line () {
-    log IN: "$@"
-    echo "$@" >&6
+	log IN: "$@"
+	echo "$@" >&6
 }
 
 read_line () {
-    read "$@" <&7
+	read "$@" <&7
 }
 
 synchronise_with_server () {
-    exec 6>/var/lib/partman/stopfifo
-    exec 6>&-
+	exec 6>/var/lib/partman/stopfifo
+	exec 6>&-
 }
 
 read_paragraph () {
@@ -382,21 +365,17 @@ read_paragraph () {
 }
 
 read_list () {
-    local item list
-    list=''
-    while { read_line item; [ "$item" ]; }; do
-	log "option: $item"
-	if [ "$list" ]; then
-	    list="$list, $item"
-	else
-	    list="$item"
-	fi
-    done
-    echo "$list"
+	local item list
+	list=''
+	while { read_line item; [ "$item" ]; }; do
+		log "option: $item"
+		list="${list:+$list, }$item"
+	done
+	echo "$list"
 }
 
 name_progress_bar () {
-    echo $1 >/var/lib/partman/progress_info
+	echo $1 >/var/lib/partman/progress_info
 }
 
 error_handler () {
@@ -480,33 +459,33 @@ error_handler () {
 }
 
 open_dialog () {
-    command="$1"
-    shift
-    open_infifo
-    write_line "$command" "${PWD##*/}" "$@"
-    open_outfifo
-    error_handler
+	command="$1"
+	shift
+	open_infifo
+	write_line "$command" "${PWD##*/}" "$@"
+	open_outfifo
+	error_handler
 }
 
 close_dialog () {
-    close_outfifo
-    close_infifo
-    exec 6>/var/lib/partman/stopfifo
-    exec 6>&-
-    exec 7>/var/lib/partman/outfifo
-    exec 7>&-
-    exec 6>/var/lib/partman/stopfifo
-    exec 6>&-
-    exec 6</var/lib/partman/infifo
-    cat <&6 >/dev/null
-    exec 6<&-
-    exec 6>/var/lib/partman/stopfifo
-    exec 6>&-
+	close_outfifo
+	close_infifo
+	exec 6>/var/lib/partman/stopfifo
+	exec 6>&-
+	exec 7>/var/lib/partman/outfifo
+	exec 7>&-
+	exec 6>/var/lib/partman/stopfifo
+	exec 6>&-
+	exec 6</var/lib/partman/infifo
+	cat <&6 >/dev/null
+	exec 6<&-
+	exec 6>/var/lib/partman/stopfifo
+	exec 6>&-
 }
 
 log () {
-    local program
-    echo $0: "$@" >>/var/log/partman
+	local program
+	echo $0: "$@" >>/var/log/partman
 }
 
 ####################################################################
@@ -667,12 +646,8 @@ humandev () {
 	    else
 	       line=`echo "$line" | sed 's,disc\([0-9]*\)/\([a-z]*\)\(.*\),\1 \2 \3,'`
 	       lun=`echo  "$line" | cut -d" " -f1`
-	       if [ "$lun" > 15 ] ; then
-	          controller=$(($lun / 16))
-		  lun=$(($lun % 16))
-	       else
-		  controller=0
-	       fi
+	       controller=$(($lun / 16))
+	       lun=$(($lun % 16))
 	       disc=`echo "$line" | cut -d" " -f2`
 	       part=`echo "$line" | cut -d" " -f3`
 	    fi
@@ -719,13 +694,37 @@ humandev () {
 	    printf "$RET" ${type} ${device}
 	    ;;
 	/dev/mapper/*)
-	    # First of all, check if this is a dm-crypt device
 	    type=""
 	    if [ -x /sbin/dmsetup ]; then
 	        type=$(/sbin/dmsetup table "$1" | head -n 1 | cut -d " " -f3)
 	    fi
 
-	    if [ "$type" = crypt ]; then
+	    # First check for Serial ATA RAID devices
+	    if type dmraid >/dev/null 2>&1; then
+		for frdisk in $(dmraid -s -c | grep -v "No RAID disks"); do
+			device=${1#/dev/mapper/}
+			case "$1" in
+			    /dev/mapper/$frdisk)
+				type=sataraid
+				superset=${device%_*}
+				desc=$(dmraid -s -c -c "$superset")
+				rtype=$(echo "$desc" | cut -d: -f4)
+				db_metaget partman/text/dmraid_volume description
+				printf "$RET" $device $rtype
+				;;
+			    /dev/mapper/$frdisk*)
+				type=sataraid
+				part=${device#$frdisk}
+				db_metaget partman/text/dmraid_part description
+				printf "$RET" $device $part
+				;;
+			esac
+		done
+	    fi
+
+	    if [ "$type" = sataraid ]; then
+		:
+	    elif [ "$type" = crypt ]; then
 	        mapping=${1#/dev/mapper/}
 	        db_metaget partman/text/dmcrypt_volume description
 	        printf "$RET" $mapping
@@ -776,22 +775,22 @@ humandev () {
 }
 
 humandev_dasd_disk () {
-    dev=${1##*/}
-    discipline=$(cat $1/discipline)
-    db_metaget partman/text/dasd_disk description
-    printf "$RET" "$dev" "$discipline"
+	dev=${1##*/}
+	discipline=$(cat $1/discipline)
+	db_metaget partman/text/dasd_disk description
+	printf "$RET" "$dev" "$discipline"
 }
 
 humandev_dasd_partition () {
-    dev=${1##*/}
-    discipline=$(cat $1/discipline)
-    db_metaget partman/text/dasd_partition description
-    printf "$RET" "$dev" "$discipline" "$part"
+	dev=${1##*/}
+	discipline=$(cat $1/discipline)
+	db_metaget partman/text/dasd_partition description
+	printf "$RET" "$dev" "$discipline" "$part"
 }
 
 device_name () {
-    cd $1
-    printf "%s - %s %s" "$(humandev $(cat device))" "$(longint2human $(cat size))" "$(cat model)"
+	cd $1
+	printf "%s - %s %s" "$(humandev $(cat device))" "$(longint2human $(cat size))" "$(cat model)"
 }
 
 enable_swap () {
@@ -965,7 +964,9 @@ default_disk_label () {
 		    echo mac;;
 		powermac_oldworld)
 		    echo mac;;
-		ps3|cell)
+		ps3)
+		    echo msdos;;
+		cell)
 		    echo msdos;;
 		*)
 		    echo UNKNOWN;;
@@ -1098,7 +1099,7 @@ confirm_changes () {
 			db_subst $partdesc TYPE "$filesystem"
 			db_subst $partdesc DEVICE $(humandev $(cat device))
 			db_metaget $partdesc description
-		    
+
 			items="${items}   ${RET}
 "
 		done
@@ -1109,7 +1110,7 @@ confirm_changes () {
 		items="$RET
 $items"
 	fi
-    
+
 	if [ "$partitems" ]; then
 		db_metaget partman/text/confirm_partitem_header description
 		partitems="$RET
@@ -1140,6 +1141,10 @@ $items"
 		if [ "$formatted_previously" = no ]; then
 			db_input critical $template/confirm_nochanges
 			db_go || true
+			if [ $template = partman-dmraid ]; then
+				# for dmraid, only a note is displayed
+				return 1
+			fi
 			db_get $template/confirm_nochanges
 			if [ "$RET" = false ]; then
 				db_reset $template/confirm_nochanges

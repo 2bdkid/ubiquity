@@ -44,7 +44,7 @@ add_to_aliases () {
 root:	$1
 EOF
 		if [ -x $ROOT/usr/bin/newaliases ]; then
-			$log $chroot $ROOT /usr/bin/newaliases
+			$log $chroot $ROOT /usr/bin/newaliases || true
 		fi
 	fi
 }
@@ -148,7 +148,8 @@ if [ "$RET" = true ] && ! is_system_user; then
 					;;
 			esac
 		fi
-		for group in adm audio cdrom dialout floppy video plugdev dip netdev powerdev lpadmin scanner; do
+		db_get passwd/user-default-groups
+		for group in $RET; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
 		add_to_aliases "$USER"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: console-setup\n"
 "Report-Msgid-Bugs-To: pkg-kbd-devel@lists.alioth.debian.org\n"
 "POT-Creation-Date: 2007-05-01 14:01+0300\n"
-"PO-Revision-Date: 2006-11-13 21:24+0200\n"
+"PO-Revision-Date: 2007-05-21 15:46+0200\n"
 "Last-Translator: Jean-Luc Coulon (f5ibh) <jean-luc.coulon@wanadoo.fr>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr ""
 #. Choices
 #: ../console-setup.templates:1001
 msgid "# Latin7 - Lithuanian; Latvian; Maori and Marshallese"
-msgstr "# latin7 : lituanien, letton, maori et marshallais"
+msgstr "# latin7 : lituanien, letton, maori et marshall"
 
 #. Type: select
 #. Choices
@@ -111,7 +111,7 @@ msgstr ". latin : vietnamien"
 #. Choices
 #: ../console-setup.templates:1001
 msgid "# Thai"
-msgstr "# thai"
+msgstr "# thaï"
 
 #. Type: select
 #. Choices
@@ -174,8 +174,8 @@ msgid ""
 "There are more than one keyboard layouts with the origin you selected. "
 "Please select the layout matching your keyboard."
 msgstr ""
-"Il y a plusieurs dispositions de clavier correspondant à l'origine que vous "
-"avez choisie. Veuillez choisir celle qui correspond à votre clavier."
+"Plusieurs dispositions de clavier correspondant à l'origine choisie. Veuillez "
+"choisir celle qui correspond à votre clavier."
 
 #. Type: note
 #. Description
@@ -292,7 +292,7 @@ msgstr ""
 "hauteur des symboles (en nombre de lignes de balayage). Sinon, la taille est "
 "dans le format HAUTEURxLARGEUR et les polices correspondantes ne peuvent "
 "être utilisées que si vous utilisez le tampon vidéo (« framebuffer ») et le "
-"paquet « kbd-console » (« console-tools » ne fonctionne pas avec ce type de "
+"paquet « kbd » (« console-tools » ne fonctionne pas avec ce type de "
 "police). Actuellement, ces polices ne peuvent pas être utilisées si votre "
 "tampon vidéo est basé sur le module du noyau RadeonFB."
 
@@ -328,7 +328,7 @@ msgid ""
 "Unix filename wildcards are allowed (*, ? and [...])."
 msgstr ""
 "Veuillez entrer une liste, délimitée par des espaces, des consoles "
-"virtuelles que vous utilisez. Les jockers habituels pour les noms de fichier "
+"virtuelles que vous utilisez. Les jokers habituels pour les noms de fichier "
 "Unix sont autorisés (*, ? et [...])."
 
 #. Type: string
@@ -488,20 +488,18 @@ msgstr "Pas de basculement"
 #. Type: select
 #. Description
 #: ../console-setup.templates:11002
-#, fuzzy
 msgid "Method for toggling between national and Latin mode:"
-msgstr "Méthode de basculement entre les modes latin et non latin :"
+msgstr "Méthode de basculement entre le mode national et le mode latin :"
 
 #. Type: select
 #. Description
 #: ../console-setup.templates:11002
-#, fuzzy
 msgid ""
 "You will need a way to toggle the keyboard between the national layout and "
 "the standard Latin layout.  Several options are available."
 msgstr ""
-"Puisque votre clavier est non latin, il vous faudra un moyen pour basculer "
-"entre les modes latin et non latin. Plusieurs options sont disponibles."
+"Il vous faudra un moyen pour basculer entre la disposition nationale et la "
+"disposition latine normale. Plusieurs options sont disponibles."
 
 #. Type: select
 #. Description
@@ -546,16 +544,14 @@ msgstr "Les deux touches « logo »"
 #. Type: select
 #. Description
 #: ../console-setup.templates:12002
-#, fuzzy
 msgid "Method for temporarily toggle between national and Latin input:"
 msgstr ""
-"Méthode de basculement temporaire entre les entrées de caractères latins et "
-"non latins :"
+"Méthode de basculement temporaire entre les entrées de caractères nationaux "
+"et latins :"
 
 #. Type: select
 #. Description
 #: ../console-setup.templates:12002
-#, fuzzy
 msgid ""
 "Sometimes the keyboard is in national mode and you want to type only few "
 "Latin letters. In this case it may be desirable to have a key for temporary "
@@ -564,12 +560,12 @@ msgid ""
 "keyboard is in Latin mode and you are pressing this key the keyboard will "
 "type national letters."
 msgstr ""
-"Parfois, le clavier est dans un mode non latin et vous désirez entrer "
+"Parfois, le clavier est dans un mode national et vous désirez entrer "
 "quelques caractères latins. Dans ce cas, il peut être souhaitable d'avoir "
-"une touche pour basculer temporairement entre les lettres latines et non "
-"latines. Lorsque cette touche est pressée en mode non latin, les lettres "
+"une touche pour basculer temporairement entre les symboles nationaux et "
+"latins. Lorsque cette touche est pressée en mode national, les lettres "
 "entrées le sont en latin et, à l'inverse, lorsque le clavier est en mode "
-"latin et que vous pressez cette touche, les lettres seront de type non latin."
+"latin et que vous pressez cette touche, les lettres seront de type national."
 
 #. Type: select
 #. Description
@@ -649,42 +645,3 @@ msgstr ""
 "mode Unicode. Si l'on n'est pas en mode Unicode, indépendemment de ce que "
 "vous avez choisi ici, vous pouvez toujours utiliser la combinaison Alt + "
 "point comme touche « compose »."
-
-#. Type: boolean
-#. Description
-#: ../console-setup.templates:15001
-#, fuzzy
-msgid "Detect keyboard layout?"
-msgstr "Disposition du clavier :"
-
-#. Type: boolean
-#. Description
-#: ../console-setup.templates:15001
-msgid ""
-"You can try to have your keyboard layout detected by pressing a series of "
-"keys. If you do not want to do this, you will be able to select your "
-"keyboard layout from a list."
-msgstr ""
-
-#. Type: detect-keyboard
-#. Description
-#: ../console-setup.templates:16001
-#, fuzzy
-msgid "Detecting your keyboard layout"
-msgstr "Disposition du clavier :"
-
-#. Type: note
-#. Description
-#: ../console-setup.templates:17001
-#, fuzzy
-msgid "Keyboard layout detection complete"
-msgstr "Disposition du clavier :"
-
-#. Type: note
-#. Description
-#: ../console-setup.templates:17001
-msgid ""
-"Based on the keys you pressed, your keyboard layout appears to be \"${LAYOUT}"
-"\". If this is not correct, you can go back and select your layout from the "
-"full list instead."
-msgstr ""

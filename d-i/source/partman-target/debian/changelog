@@ -1,3 +1,51 @@
+partman-target (52ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use UUID= fstab syntax for all partitions if a UUID is available, and
+      add a comment above each UUID to indicate the corresponding device at
+      install time.
+    - Disable automatic mounting of USB removable devices.
+    - Don't use UUIDs in fstab for those device types that volumeid.postinst
+      refuses to convert.
+    - Mount CD-ROMs and floppies with 'exec'.
+    - Use the path of the file associated with a loop device in /etc/fstab,
+      rather than the filesystem's UUID or the loop device path.
+    - Always set the loop option for loop devices.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Oct 2007 17:53:53 +0100
+
+partman-target (52) unstable; urgency=low
+
+  * Use 'mkdir -p' rather than more awkward test-then-create constructions
+    (or the labyrinthine reimplementation in finish.d/mount_partitions).
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Italian (it.po) by Stefano Canepa
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 02 Oct 2007 17:25:50 +0100
+
+partman-target (51) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Move deletion of SVN directories to install-rc script.
+  * Improve the way install-rc is called.
+  * Do not offer to set method for a Serial ATA RAID disk.
+
+  [ Colin Watson ]
+  * Filter ro out of options passed to mount.d scripts.
+
+  [ Updated translations ]
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Ukrainian (uk.po)
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 04 Jul 2007 16:30:01 +0100
+
 partman-target (50ubuntu5) gutsy; urgency=low
 
   [ Colin Watson ]

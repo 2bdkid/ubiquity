@@ -1,3 +1,62 @@
+partman-auto (70ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust default partition sizes for Ubuntu.
+    - Accept autopartitioning automatically rather than showing
+      choose_partition.
+    - Drop priority of partman-auto/choose_recipe question to medium.
+    - Offer resize_use_free autopartitioning method.
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on dmsetup-udeb.
+    - Add support for partman-auto/method=loop via partman-auto-loop.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Oct 2007 15:43:40 +0100
+
+partman-auto (70) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Move deletion of SVN directories to install-rc script.
+  * Improve the way install-rc is called.
+
+  [ Colin Watson ]
+  * Fix divide-by-zero error if the sum of the factors in the scheme is
+    equal to the sum of the minimum sizes, or if we run off the maximum size
+    of the recipe before we run out of disk to allocate.
+  * Minor optimisations using ${parameter:-word} and ${parameter:+word}
+    expansions.
+  * Use 'mkdir -p' rather than more awkward test-then-create constructions.
+
+  [ Anton Zinoviev ]
+  * Rename auto.d to display.d.  Be more careful with the exit code of the
+    script in display.d and when to remove /var/lib/partman/initial_auto.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Nabin Gautam
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Ukrainian (uk.po)
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 02 Oct 2007 16:45:42 +0100
+
 partman-auto (69ubuntu5) gutsy; urgency=low
 
   * Add support for partman-auto/method=loop via partman-auto-loop.

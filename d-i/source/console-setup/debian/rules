@@ -43,7 +43,6 @@ build: main_build debian/console-setup.config debian/console-setup-mini.config
 .PHONY : clean
 clean:
 	dh_testdir
-	debconf-updatepo
 	-$(MAKE) maintainer-clean
 	-rm -f build main_build
 	-rm -f debian/*.config
@@ -240,6 +239,7 @@ binary-indep: build install
 		 usr/share/doc/console-setup-mini
 	dh_installdocs -pbdf2psf debian/README.fontsets
 #	dh_installexamples
+	dh_installman -pconsole-setup Keyboard/ckbcomp.1
 	dh_installman -pconsole-setup setupcon.1
 	dh_installman -pbdf2psf Fonts/bdf2psf.1
 #	dh_installinfo

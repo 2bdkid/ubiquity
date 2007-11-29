@@ -7,7 +7,7 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006, 2007.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-21 22:01+0200\n"
+"POT-Creation-Date: 2007-06-30 12:27+0000\n"
+"PO-Revision-Date: 2007-11-10 00:23+0100\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -320,7 +320,7 @@ msgstr ""
 #. Description
 #: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
-msgstr "Die Partition ist mit dem ${FILESYSTEM} formatiert."
+msgstr "Die Partition ist mit ${FILESYSTEM} formatiert."
 
 #. Type: text
 #. Description
@@ -504,35 +504,51 @@ msgstr "Verschlüsseltes Volume (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:290
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume0 (mirror)
+#: ../partman-base.templates:291
+#, no-c-format
+msgid "Serial ATA RAID %s (%s)"
+msgstr "Serial ATA RAID %s (%s)"
+
+#. Type: text
+#. Description
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume01 (partition #1)
+#: ../partman-base.templates:296
+#, no-c-format
+msgid "Serial ATA RAID %s (partition #%s)"
+msgstr "Serial ATA RAID %s (Partition %s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:300
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:294
+#: ../partman-base.templates:304
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "Loopback (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:298
+#: ../partman-base.templates:308
 #, no-c-format
 msgid "DASD %s (%s)"
 msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:302
+#: ../partman-base.templates:312
 #, no-c-format
 msgid "DASD %s (%s), partition #%s"
 msgstr "DASD %s (%s), Partition #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:306
+#: ../partman-base.templates:316
 msgid "Cancel this menu"
 msgstr "Dieses Menü verlassen"
 
@@ -541,6 +557,6 @@ msgstr "Dieses Menü verlassen"
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:311
+#: ../partman-base.templates:321
 msgid "Partition disks"
 msgstr "Festplatten partitionieren"

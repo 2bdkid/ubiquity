@@ -10,13 +10,16 @@ struct mirror_t {
 };
 
 /* This is the codename of the preferred distribution; the one that the
- * current version of d-i is targeted at installing. */
-#define PREFERRED_DISTRIBUTION "gutsy"
+ * current version of d-i is targeted at installing. This can be removed
+ * once /etc/default_release is fully deployed. */
+#define PREFERRED_DISTRIBUTION "hardy"
 
-/* The two strings defined below must match the strings used in the
- * templates (http and ftp) for these options. */
-#define NO_MIRROR    "don't use a network mirror"
-#define MANUAL_ENTRY "enter information manually"
+/* The string defined below must match the string used in the templates
+ * (http and ftp) for this option. */
+#define MANUAL_ENTRY "manual"
+
+/* backward compatibility with old preseed files */
+#define MANUAL_ENTRY_OLD "enter information manually"
 
 #define SUITE_LENGTH 32
 

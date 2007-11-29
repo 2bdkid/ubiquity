@@ -3,10 +3,6 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of hi.po to Hindi
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
-# translation of debian-installer_packages_po.po to
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
 # Debian Installer translators, please read the D-I i18n documentation
@@ -18,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-15 03:10+0530\n"
-"Last-Translator: Nishant Sharma <me at nishants.net>\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-01-24 12:56+0530\n"
+"Last-Translator: Nishant Sharma <me at nishants dot net>\n"
 "Language-Team: Hindi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -82,7 +78,8 @@ msgstr "नक़ल की प्रक्रिया असफल रही"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+#, fuzzy
+msgid "The copy operation has been aborted."
 msgstr "नक़ल की प्रक्रिया छोड़ी गई."
 
 #. Type: error
@@ -167,7 +164,8 @@ msgstr "भंडारण उपकरण पर परिवर्तनों
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+#, fuzzy
+msgid "The resize operation has been aborted."
 msgstr "नया आकार देने की प्रक्रिया छोड़ी गई."
 
 #. Type: string
@@ -275,62 +273,88 @@ msgstr "पार्टीशन टेबल प्रकारः"
 msgid "Select the type of partition table to use."
 msgstr "इस्तेमाल के लिए पार्टीशन टेबल प्रकार चुनें."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+#, fuzzy
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "क्या आप सुनिश्चित हैं कि आप अब बाहर होना चाहते हैं?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "पार्टीशन फ्लैग नियत करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "नाम:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "बूटेबल फ्लैगः"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "चालू"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "बन्द"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "पार्टिशन का आकार बदलें (वर्तमान ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "अन्य पार्टीशन से डाटा नक़ल करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "पार्टीशन मिटाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "नया पार्टीशन बनाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ"

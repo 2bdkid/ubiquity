@@ -1,3 +1,37 @@
+user-setup (1.16ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust /etc/aliases to send root mail to the initial user.
+    - Add the initial user to the adm, dip, lpadmin, and scanner groups too,
+      and to the admin group if no root password is set.
+    - Allow the admin group to gain root privileges using sudo.
+    - Default passwd/root-login to false.
+    - Don't reserve the 'hal' username in Ubuntu; we call it haldaemon.
+    - Create the spu group on powerpc/ps3 and powerpc/cell.
+  * Ignore failures from newaliases, which might be due to the user having
+    declined to configure postfix (LP: #158952).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 21 Nov 2007 00:05:52 +0000
+
+user-setup (1.16) unstable; urgency=low
+
+  * Move menu item to come after base-installer, and just before apt-setup.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 25 Jul 2007 13:39:40 -0400
+
+user-setup (1.15) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Add support to control which default groups the initial user will be
+    added. Preseed it at passwd/user-default-groups. Closes: #426452
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 29 Jun 2007 06:33:38 +0200
+
 user-setup (1.14ubuntu4) gutsy; urgency=low
 
   * Only call archdetect if we have it, in order not to break use of the

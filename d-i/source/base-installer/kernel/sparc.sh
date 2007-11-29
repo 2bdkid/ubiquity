@@ -11,37 +11,16 @@ arch_get_kernel_flavour () {
 }
 
 arch_check_usable_kernel () {
-	case "$2" in
-	    sparc32)
-		if expr "$1" : '.*-2\.6.*-sparc32-smp' >/dev/null; then
-			# No working SMP yet
-			return 1
-		fi
-		if expr "$1" : '.*-sparc32.*' >/dev/null; then return 0; fi
-		return 1
-		;;
-	    sparc64)
-		if expr "$1" : '.*-sparc64.*' >/dev/null; then return 0; fi
-		return 1
-		;;
-	esac
-
-	# default to usable in case of strangeness
-	warning "Unknown kernel usability: $1 / $2"
-	return 0
+	if expr "$1" : '.*-sparc64.*' >/dev/null; then return 0; fi
+	return 1
 }
 
 arch_get_kernel () {
 	CPUS=`grep 'ncpus probed' "$CPUINFO" | cut -d: -f2`
 	TYPE=`grep '^type' "$CPUINFO" | head -n1 | cut -d: -f2 | sed -e 's/^[[:space:]]//'`
 	if [ "$CPUS" -ne 1 ] || [ "$TYPE" = "sun4v" ]; then
-		if [ "$1" = sparc32 ] && [ "$KERNEL_MAJOR" = 2.6 ]; then
-			# No working SMP yet
-			:
-		else
-			echo "linux-$1-smp"
-			echo "linux-image-$1-smp"
-		fi
+		echo "linux-$1-smp"
+		echo "linux-image-$1-smp"
 	fi
 	echo "linux-$1"
 	echo "linux-image-$1"

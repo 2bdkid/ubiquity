@@ -1,3 +1,146 @@
+partman-base (111ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 21 Nov 2007 17:10:39 +0000
+
+partman-base (111) unstable; urgency=low
+
+  * init.d/umount-target: also unmount /dev/.static/dev/ which may have
+    /target/dev/ mounted on it by base-installer (>= 1.85).
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Korean (ko.po) by Sunjae Park
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 19 Nov 2007 11:44:31 +0100
+
+partman-base (110ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Oct 2007 15:38:01 +0100
+
+partman-base (110) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Resolve symlinks before looking up devices in /proc/swaps.
+  * Minor read_list optimisation using a ${parameter:+word} expansion.
+  * Optimise humandev cciss handling a little, fixing a shell syntax error
+    along the way that created a file called "15" rather than checking
+    whether $lun was greater than 15.
+  * Use 'mkdir -p' rather than more awkward test-then-create constructions.
+  * If devices are passed as command-line arguments to parted_devices,
+    iterate over them rather than over the list of devices probed by
+    libparted. This can be useful to support devices that libparted would
+    not normally probe automatically, such as loop devices. (Read-only
+    devices, CDs, and floppies are still skipped.)
+  * Use expr rather than shell arithmetic in human2longint, to avoid relying
+    on 64-bit shell arithmetic.
+  * Use MS-DOS label by default on Cell platforms.
+
+  [ Anton Zinoviev ]
+  * Simplify the logic of the main partman script.  Rename auto.d to
+    display.d.
+  * Compute some variables only once to make things faster:
+    - can_escape: whether debconf can escape only once.
+    - debconf_select_lead: can we use NBSP on the terminal
+  * Rename GET_DISK_TYPE to GET_LABEL_TYPE.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Nabin Gautam
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Slovak (sk.po) by Peter Mann
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 02 Oct 2007 16:44:48 +0100
+
+partman-base (109) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Remove partmap on clean.
+  * Fix a compilation warning on partmap.c.
+
+  [ Colin Watson ]
+  * Use MS-DOS label by default on PS3 systems.
+
+  [ Frans Pop ]
+  * Add support for Serial ATA RAID (closes: #389570):
+    - recognize and display dmraid devices
+    - skip physical disks that are part of a SATA RAID disk
+    Thanks to Jérémy Bobbio whose patch was used in the changes.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Japanese (ja.po) by Kenshi Muto
+  * Dutch (nl.po) by Frans Pop
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Ukrainian (uk.po)
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Fri, 06 Jul 2007 00:22:23 +0200
+
+partman-base (108) unstable; urgency=low
+
+  [ Martin Michlmayr ]
+  * Remove references to RiscPC since this platform is no longer
+    supported.
+
+  [ Colin Watson ]
+  * If an auto.d script exits >= 100, skip all remaining auto.d scripts
+    since the semantics are supposed to be that we go straight to the
+    confirmation prompt.
+  * Use GPT label by default on Intel Macs.
+
+  [ Frans Pop ]
+  * Move deletion of SVN directories to install-rc script.
+  * Improve the way install-rc is called.
+  * Add new udeb partman-utils containing the utilities parted_devices and
+    partmap. Thanks to Robert Millan for contributing partmap.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Panjabi (pa.po) by A S Alam
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 21 May 2007 16:48:21 +0200
+
 partman-base (107ubuntu4) gutsy; urgency=low
 
   * Use MS-DOS label by default on Cell systems.

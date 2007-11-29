@@ -8,14 +8,15 @@
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files#
 # Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt#
-# Kartik Mistry <kartik.mistry@gmail.com>, 2006.
+# in doc/i18n/i18n.txt
+# Contributor:
+# Kartik Mistry <kartik.mistry@gmail.com>, 2006-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: d-i\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
+"POT-Creation-Date: 2007-06-30 12:27+0000\n"
 "PO-Revision-Date: 2006-07-10 15:53+0530\n"
 "Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
 "Language-Team: Gujarati <team@utkarsh.org>\n"
@@ -100,7 +101,7 @@ msgstr ""
 #. Description
 #: ../partman-base.templates:64
 msgid "Continue with partitioning?"
-msgstr "પાર્ટિિશન ક્રિયા ચાલુ રાખશો?"
+msgstr "પાર્ટિશન ક્રિયા ચાલુ રાખશો?"
 
 #. Type: boolean
 #. Description
@@ -217,7 +218,7 @@ msgid ""
 "If you plan on using already created file systems, be aware that existing "
 "files may prevent the successful installation of the base system."
 msgstr ""
-"જો તમે પહેલાથી બનાવવામાં આવેલી ફાઇલ સિસ્ટમો વાપરવાની યોજના બનાવી રહ્યા હોવ તો, "
+"જો તમે પહેલાથી બનાવવામાં આવેલી ફાઇલ સિસ્ટમ્સ વાપરવાની યોજના બનાવી રહ્યા હોવ તો, "
 "ધ્યાનમાં રાખો કે હાજર રહેલી ફાઇલો પાયાનાં સિસ્ટમનાં સફળ સ્થાપનમાં મુશ્કેલી કરી શકે છે."
 
 #. Type: boolean
@@ -243,14 +244,14 @@ msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
 msgstr ""
-"ચોતવણી: આ ક્રિયા તમે દૂર કરેલા પાર્ટિશનો તેમજ જે પાર્ટિશનો ફોર્મેટ થવા જઇ રહ્યા છે તેમાંથી "
+"ચેતવણી: આ ક્રિયા તમે દૂર કરેલા પાર્ટિશનો તેમજ જે પાર્ટિશનો ફોર્મેટ થવા જઇ રહ્યા છે તેમાંથી "
 "બધી માહિતી કાઢી નાખશે."
 
 #. Type: text
 #. Description
 #: ../partman-base.templates:125
 msgid "The following partitions are going to be formatted:"
-msgstr "નીચેનાં પાર્ટિશનો ફોરમેટ થવા જઇ રહ્યા છે:"
+msgstr "નીચેનાં પાર્ટિશનો ફોર્મેટ થવા જઇ રહ્યા છે:"
 
 #. Type: text
 #. Description
@@ -305,7 +306,7 @@ msgstr ""
 #. Description
 #: ../partman-base.templates:160
 msgid "This partition is formatted with the ${FILESYSTEM}."
-msgstr "આ પાર્ટિશન ${FILESYSTEM} સાથે ફોરમેટ થયેલ છે."
+msgstr "આ પાર્ટિશન ${FILESYSTEM} સાથે ફોર્મેટ થયેલ છે."
 
 #. Type: text
 #. Description
@@ -341,7 +342,7 @@ msgstr "મહેરબાની કરીને રાહ જુઓ..."
 #. Description
 #: ../partman-base.templates:184
 msgid "Partitions formatting"
-msgstr "પાર્ટિશનોને ફોરમેટ થાય છે"
+msgstr "પાર્ટિશનોને ફોર્મેટ થાય છે"
 
 #. Type: text
 #. Description
@@ -489,41 +490,57 @@ msgstr "એન્ક્રિપ્ટ કરેલ કદ (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:290
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume0 (mirror)
+#: ../partman-base.templates:291
+#, no-c-format
+msgid "Serial ATA RAID %s (%s)"
+msgstr "સીરીયલ ATA રેઇડ %s (%s)"
+
+#. Type: text
+#. Description
+#. For example: Serial ATA RAID isw_dhiiedgihc_Volume01 (partition #1)
+#: ../partman-base.templates:296
+#, no-c-format
+msgid "Serial ATA RAID %s (partition #%s)"
+msgstr "સીરીયલ ATA રેઇડ %s (પાર્ટિશન #%s)"
+
+#. Type: text
+#. Description
+#: ../partman-base.templates:300
 #, no-c-format
 msgid "LVM VG %s, LV %s"
 msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:294
+#: ../partman-base.templates:304
 #, no-c-format
 msgid "Loopback (loop%s)"
 msgstr "લુપબેક (loop%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:298
+#: ../partman-base.templates:308
 #, no-c-format
 msgid "DASD %s (%s)"
 msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:302
+#: ../partman-base.templates:312
 #, no-c-format
 msgid "DASD %s (%s), partition #%s"
 msgstr "DASD %s (%s), પાર્ટિશન #%s"
 
 #. Type: text
 #. Description
-#: ../partman-base.templates:306
+#: ../partman-base.templates:316
 msgid "Cancel this menu"
 msgstr "આ મેનુ રદ કરો"
 
 #. Type: text
 #. Description
 #. Main menu entry
-#: ../partman-base.templates:311
+#: ../partman-base.templates:321
 msgid "Partition disks"
 msgstr "પાર્ટિશન ડિસ્ક"

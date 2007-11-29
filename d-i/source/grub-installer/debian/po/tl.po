@@ -4,23 +4,24 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # Tagalog messages for debian-installer.
-# Copyright (C) 2004, 2005, 2006 Software in the Public Interest, Inc.
+# Copyright (C) 2004-2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Ipinamamahagi ang talaksang ito alinsunod sa lisensiya ng debian-installer.
-# Eric Pareja <xenos@upm.edu.ph>, 2004, 2005, 2006
+# Eric Pareja <xenos@upm.edu.ph>, 2004-2007
 # Rick Bahague, Jr. <rbahaguejr@gmail.com>, 2004
 # Reviewed by Roel Cantada on Feb-Mar 2005.
 # Sinuri ni Roel Cantada noong Peb-Mar 2005.
 # This file is maintained by Eric Pareja <xenos@upm.edu.ph>
 # Inaalagaan ang talaksang ito ni Eric Pareja <xenos@upm.edu.ph>
 #
+# ituloy angsulong mga kapatid http://www.upm.edu.ph/~xenos
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:48+0100\n"
-"PO-Revision-Date: 2006-08-22 08:14+0800\n"
+"POT-Creation-Date: 2007-09-01 22:48+0000\n"
+"PO-Revision-Date: 2007-04-18 16:39+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -86,12 +87,54 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
+#, fuzzy
+msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
+msgstr "Mag-install ng GRUB boot loader sa hard disk"
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "Installation of GRUB on Serial ATA RAID is experimental."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid ""
+"GRUB is always installed to the master boot record (MBR) of the Serial ATA "
+"RAID disk. It is also assumed that that disk is listed as the first hard "
+"disk in the boot order defined in the system's BIOS setup."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "The GRUB root device is: ${GRUBROOT}."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+#, fuzzy
+msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
+msgstr "May naganap na error habang isinasaayos ang encrypted na volume."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+#, fuzzy
+msgid "The GRUB installation has been aborted."
+msgstr "Hininto ang pagsasaayos."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:49
 msgid "Install the GRUB boot loader to XFS file system?"
 msgstr "Mag-install ng GRUB boot loader sa file system na XFS?"
 
 #. Type: boolean
 #. Description
-#: ../grub-installer.templates:29
+#: ../grub-installer.templates:49
 msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
@@ -102,13 +145,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid "Device for boot loader installation:"
 msgstr "Device sa pagluklok ng boot loader:"
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -125,7 +168,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -149,13 +192,13 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "GRUB password:"
 msgstr "Kontrasenyas ng GRUB:"
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid ""
 "The GRUB boot loader offers many powerful interactive features, which could "
 "be used to compromise your system if unauthorized users have access to the "
@@ -177,112 +220,110 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "If you do not wish to set a GRUB password, leave this field blank."
 msgstr ""
 "Kung nais niyong hindi magbigay ng GRUB kontrasenyas, iwanan ang puwang na "
 "blanko."
 
-#. Type: boolean
+#. Type: error
 #. Description
-#: ../grub-installer.templates:73
-msgid "GRUB installation failed.  Continue anyway?"
-msgstr "Bigo ang pagluklok ng GRUB.  Magpatuloy pa rin?"
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid ""
-"The grub package failed to install into /target/.  Installing GRUB as a boot "
-"loader is a required step.  The install problem might however be unrelated "
-"to GRUB, so continuing the installation may be possible."
-msgstr ""
-"Bigo ang pagluklok ng grub pakete sa /target/.  Kinakailangan na mag-install "
-"ng GRUB bilang boot loader.  Ang problema sa pagluklok ay maaaring walang "
-"kinalaman sa GRUB, kaya maaaring magpatuloy ng pagluklok."
+#: ../grub-installer.templates:92
+#, fuzzy
+msgid "GRUB installation failed"
+msgstr "Bigo ang pagluklok ng LILO"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:92
+msgid ""
+"The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
+"loader, the installed system will not boot."
+msgstr ""
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:98
 msgid "Unable to install GRUB in ${BOOTDEV}"
 msgstr "Hindi na-install ang GRUB sa ${BOOTDEV}"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:98
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
 msgstr "Bigo ang pagpapatakbo ng 'grub-install ${BOOTDEV}'."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Unable to configure GRUB"
 msgstr "Hindi maisaayos ang GRUB"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Executing 'update-grub' failed."
 msgstr "Bigo ang pagpapatakbo ng 'update-grub'."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "This is a fatal error."
 msgstr "Ito ay error na walang ligtas."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:105
+#: ../grub-installer.templates:136
 msgid "Installing GRUB boot loader"
 msgstr "Nagluluklok ng GRUB boot loader"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:109
+#: ../grub-installer.templates:140
 msgid "Looking for other operating systems..."
 msgstr "Naghahanap ng ibang mga operating system..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:113
-msgid "Installing the 'grub' package..."
+#: ../grub-installer.templates:144
+#, fuzzy
+msgid "Installing the '${GRUB}' package..."
 msgstr "Nagluluklok ng pakete na 'grub'..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:117
+#: ../grub-installer.templates:148
 msgid "Determining GRUB boot device..."
 msgstr "Hinahanap ang GRUB boot device..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:121
+#: ../grub-installer.templates:152
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "Pinapatakbo ang \"grub-install ${BOOTDEV}\"..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:125
+#: ../grub-installer.templates:156
 msgid "Running \"update-grub\"..."
 msgstr "Pinapatakbo ang \"update-grub\"..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:129
+#: ../grub-installer.templates:160
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "Sinasariwa ang /etc/kernel-img.conf..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:134
+#: ../grub-installer.templates:165
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "Mag-install ng GRUB boot loader sa hard disk"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:139
+#: ../grub-installer.templates:170
 msgid "Reinstall GRUB boot loader"
 msgstr "Iluklok muli ang GRUB boot loader"

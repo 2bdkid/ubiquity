@@ -17,6 +17,11 @@ SUBARCH="$(archdetect)"
 
 finish_install=/usr/lib/finish-install.d/30hw-detect
 
+LOAD_IDE=""
+if db_get hw-detect/load-ide && [ "$RET" = true ]; then
+	LOAD_IDE=1
+fi
+
 if [ -x /sbin/depmod ]; then
 	depmod -a > /dev/null 2>&1 || true
 fi
@@ -88,7 +93,8 @@ load_module() {
 		IFS="$IFS_SAVE"
 	else   
 		log "Error loading '$module'"
-		if [ "$module" != floppy ] && [ "$module" != ide-floppy ] && [ "$module" != ide-cd ]; then
+		if [ "$module" != floppy ] && [ "$module" != ide-floppy ] && \
+		   [ "$module" != ide-cd ]; then
 			db_subst hw-detect/modprobe_error CMD_LINE_PARAM "modprobe -v $module"
 			db_input medium hw-detect/modprobe_error || [ $? -eq 30 ]
 			db_go
@@ -102,7 +108,7 @@ load_module() {
 get_ide_chipset_info() {
 	for ide_module in $(find /lib/modules/*/kernel/drivers/ide/pci/ -type f 2>/dev/null); do
 		if [ -e $ide_module ]; then
-			baseidemod=$(echo $ide_module | sed 's/\.o$//' | sed 's/\.ko$//' | sed 's/.*\///')
+			baseidemod=$(echo $ide_module | sed 's/\.ko$//; s/.*\///')
 			echo "$baseidemod:IDE chipset support"
 		fi
 	done
@@ -112,7 +118,8 @@ get_ide_chipset_info() {
 get_detected_hw_info() {
 	if [ "${SUBARCH%%/*}" = powerpc ]; then
 		discover-mac-io
-		if [ "$SUBARCH" = powerpc/chrp_rs6k ] || [ "$SUBARCH" = powerpc/chrp_ibm ]; then
+		if [ "$SUBARCH" = powerpc/chrp_rs6k ] || \
+		   [ "$SUBARCH" = powerpc/chrp_ibm ]; then
 			discover-ibm
 		fi
 	fi
@@ -148,24 +155,18 @@ get_rtc_info() {
 	esac
 }
 
-# Modules that should load before autodetection.
-get_early_manual_hw_info() {
-	# Load explicitly rather than implicitly to allow the user to
-	# specify parameters when the module is loaded.
-	echo "ide-core:Linux IDE support"
-}
-	
 # Manually load modules to enable things we can't detect.
 # XXX: This isn't the best way to do this; we should autodetect.
 # The order of these modules are important.
 get_manual_hw_info() {
-	get_floppy_info
-	get_ide_chipset_info
-	echo "ide-generic:Linux IDE support"
-	get_ide_floppy_info
-	echo "ide-disk:Linux ATA DISK"
-	echo "ide-cd:Linux ATAPI CD-ROM"
-	echo "isofs:Linux ISO 9660 filesystem"
+	if [ "$LOAD_IDE" ]; then
+		get_floppy_info
+		get_ide_chipset_info
+		echo "ide-generic:Linux IDE support"
+		get_ide_floppy_info
+		echo "ide-disk:Linux ATA DISK"
+		echo "ide-cd:Linux ATAPI CD-ROM"
+	fi
 	get_rtc_info
 
 	# on some hppa systems, nic and scsi won't be found because they're
@@ -200,17 +201,16 @@ db_progress START 0 $MAX_STEPS $PROGRESSBAR
 db_progress INFO hw-detect/detect_progress_step
 
 # TODO: Can possibly be removed if udev will load yenta_socket automatically
-# Load yenta_socket, if hardware is available, so that
-# discover will see Cardbus cards.
+# Load yenta_socket, if hardware is available, for Cardbus cards.
 if [ -d /sys/bus/pci/devices ] && \
-	grep -q 0x060700 /sys/bus/pci/devices/*/class && \
+	grep -q 0x060700 /sys/bus/pci/devices/*/class 2>/dev/null && \
 	! grep -q ^yenta_socket /proc/modules; then
 	db_subst hw-detect/load_progress_step CARDNAME "Cardbus bridge"
 	db_subst hw-detect/load_progress_step MODULE "yenta_socket"
 	db_progress INFO hw-detect/load_progress_step
 	
 	log "Detected Cardbus bridge, loading yenta_socket"
-	modprobe -v yenta_socket | logger -t hw-detect
+	load_module yenta_socket
 	# Ugly hack, but what's the alternative?
 	sleep 3 || true
 fi
@@ -219,7 +219,7 @@ fi
 # TODO: this just loads modules itself, rather than handing back a list
 update-dev
 
-ALL_HW_INFO=$(get_early_manual_hw_info; get_detected_hw_info; get_manual_hw_info)
+ALL_HW_INFO=$(get_detected_hw_info; get_manual_hw_info)
 db_progress STEP $OTHER_STEPSIZE
 
 # Remove modules that are already loaded or not available, and construct
@@ -242,10 +242,7 @@ for device in $ALL_HW_INFO; do
 		fi
 		
 		if in_list "$module" "$AVAIL_MODULES"; then
-			if [ -n "$LIST" ]; then
-				LIST="$LIST, "
-			fi
-			LIST="$LIST$module ($(echo "$cardname" | sed 's/,/ /g'))"
+			LIST="${LIST:+$LIST, }$module ($(echo "$cardname" | sed 's/,/ /g'))"
 			PROCESSED="$PROCESSED $module"
 		else
 			missing_module "$module" "$cardname"
@@ -309,19 +306,26 @@ if [ -z "$LIST" ]; then
 	db_progress STEP $MODULE_STEPS
 fi
 
-if ! is_not_loaded ohci1394; then
+if ! is_not_loaded ohci1394 || ! is_not_loaded firewire-ohci; then
 	# if firewire was found, try to enable firewire cd support
-	if is_not_loaded sbp2 && is_available scsi_mod; then
-		if is_available sbp2; then
+	if is_not_loaded sbp2 && is_not_loaded firewire-sbp2 && \
+	    is_available scsi_mod; then
+	    	sbp2module=
+		if is_available firewire-sbp2; then
+			sbp2module=firewire-sbp2
+		elif is_available sbp2; then
+			sbp2module=sbp2
+		fi
+		if [ -n "$sbp2module" ]; then
 			db_subst hw-detect/load_progress_step CARDNAME "FireWire CDROM support"
-			db_subst hw-detect/load_progress_step MODULE "sbp2"
+			db_subst hw-detect/load_progress_step MODULE "$sbp2module"
 			db_progress INFO hw-detect/load_progress_step
-			load_module sbp2
+			load_module "$sbp2module"
+			register-module "$sbp2module"
 		else
-			missing_module sbp2 "FireWire CDROM"
+			missing_module firewire-sbp2 "FireWire CDROM"
 		fi
 	fi
-	register-module sbp2
 	db_progress STEP $OTHER_STEPSIZE
 fi
 
@@ -376,62 +380,28 @@ if [ -x /etc/init.d/pcmciautils ]; then
 	PCMCIA_INIT=/etc/init.d/pcmciautils
 fi
 if [ "$PCMCIA_INIT" ]; then
-	if ! [ -e /var/run/cardmgr.pid ]; then
+	if is_not_loaded pcmcia_core; then
 		db_input medium hw-detect/start_pcmcia || true
-	fi
-	if db_go && db_get hw-detect/start_pcmcia && [ "$RET" = true ]; then
-		if ! [ -e /var/run/cardmgr.pid ]; then
-			db_input medium hw-detect/pcmcia_resources || true
-			db_go || true
-			db_get hw-detect/pcmcia_resources || true
+		db_input low hw-detect/pcmcia_resources || true
+		db_go || true
+		if db_get hw-detect/pcmcia_resources && [ "$RET" ]; then
 			apply_pcmcia_resource_opts $RET
 		fi
-		
+	fi
+	if db_go && db_get hw-detect/start_pcmcia && [ "$RET" = true ]; then
 		db_progress INFO hw-detect/pcmcia_step
-		
-		if [ -e /var/run/cardmgr.pid ]; then
-			# Not using $PCMCIA_INIT stop as it
-			# uses sleep which is not available and is racey.
-			kill -9 $(cat /var/run/cardmgr.pid) 2>/dev/null || true
-			rm -f /var/run/cardmgr.pid
-		fi
-
-		CARDMGR_OPTS="-f" $PCMCIA_INIT start </dev/null 3<&0 2>&1 \
-			| logger -t hw-detect
-	    
+		$PCMCIA_INIT start 2>&1 | log
 		db_progress STEP $OTHER_STEPSIZE
 	fi
-	db_fset hw-detect/start_pcmcia seen true || true
 fi
-
-gen_pcmcia_devnames() {
-	while read line; do
-		log "Reading line: $line"
-		line="$(echo $line | tr '\t' ' ')"
-
-		case "$line" in
-			Socket*)
-			devname="$(echo $line | cut -d' ' -f3-)"
-		;;
-		[0-9]*)
-			class="$(echo $line | cut -d' ' -f2)"
-			dev="$(echo $line | cut -d' ' -f5)"
-
-			if [ "$class" != "network" ]; then
-				devname=""
-				return
-			else
-				echo "$dev:$devname" >> /etc/network/devnames
-				echo "$dev" >> /etc/network/devhotplug
-			fi
-		;;
-		esac
-	done
-}
 
 have_pcmcia=0
 if ls /sys/class/pcmcia_socket/* >/dev/null 2>&1; then
-	have_pcmcia=1
+	if db_get hw-detect/start_pcmcia && [ "$RET" = false ]; then
+		have_pcmcia=0
+	else
+		have_pcmcia=1
+	fi
 fi
 
 # find Cardbus network cards
@@ -452,24 +422,17 @@ if ls /sys/class/pcmcia_socket/* >/dev/null 2>&1; then
 	done
 fi
 
-if db_get hw-detect/start_pcmcia && [ "$RET" = false ]; then
-	have_pcmcia=0
-fi
-
 # Try to do this only once..
-if [ "$have_pcmcia" -eq 1 ] && ! grep -q pcmciautils /var/lib/apt-install/queue 2>/dev/null; then
+if [ "$have_pcmcia" -eq 1 ] && \
+   ! grep -q pcmciautils /var/lib/apt-install/queue 2>/dev/null; then
 	log "Detected PCMCIA, installing pcmciautils."
 	apt-install pcmciautils || true
 
-	echo "mkdir /target/etc/pcmcia 2>/dev/null || true" \
-		>>$finish_install
-	echo "cp /etc/pcmcia/config.opts /target/etc/pcmcia/config.opts" \
-		>>$finish_install
-
-	# Determine devnames.
-	if [ -f /var/run/stab ]; then
-		mkdir -p /etc/network
-		gen_pcmcia_devnames < /var/run/stab
+	if db_get hw-detect/pcmcia_resources && [ -n "$RET" ]; then
+		echo "mkdir /target/etc/pcmcia 2>/dev/null || true" \
+			>>$finish_install
+		echo "cp /etc/pcmcia/config.opts /target/etc/pcmcia/config.opts" \
+			>>$finish_install
 	fi
 fi
 
@@ -485,6 +448,7 @@ fi
 if [ -d /proc/acpi ]; then
 	apt-install acpi || true
 	apt-install acpid || true
+	apt-install acpi-support-base || true
 fi
 
 # If hardware has support for pmu, install pbbuttonsd
@@ -513,23 +477,23 @@ fi
 
 # Install optimised libc based on CPU type
 case "$(udpkg --print-architecture)" in
-	i386)
-		case "$(grep '^cpu family' /proc/cpuinfo | cut -d: -f2)" in
-			" 6"|" 15")
-				# intel 686 or Amd k6.
-				apt-install libc6-i686 || true
-	                ;;
-		esac
+    i386)
+	case "$(grep '^cpu family' /proc/cpuinfo | cut -d: -f2)" in
+	    " 6"|" 15")
+		# intel 686 or Amd k6.
+		apt-install libc6-i686 || true
+                ;;
+	esac
 	;;
-	sparc)
-		if grep -q '^type.*: sun4u' /proc/cpuinfo ; then
-			# sparc v9 or v9b
-			if grep -q '^cpu.*: .*UltraSparc III' /proc/cpuinfo; then
-				apt-install libc6-sparcv9b || true
-			else
-				apt-install libc6-sparcv9 || true
-			fi
+    sparc)
+	if grep -q '^type.*: sun4u' /proc/cpuinfo ; then
+		# sparc v9 or v9b
+		if grep -q '^cpu.*: .*UltraSparc III' /proc/cpuinfo; then
+			apt-install libc6-sparcv9b || true
+		else
+			apt-install libc6-sparcv9 || true
 		fi
+	fi
 	;;
 esac
 

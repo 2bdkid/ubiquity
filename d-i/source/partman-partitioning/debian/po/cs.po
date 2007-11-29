@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-13 21:39+0200\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-09-29 09:57+0200\n"
 "Last-Translator:  Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team:  Czech <provoz@debian.cz>\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr "Chyba při kopírování"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+msgid "The copy operation has been aborted."
 msgstr "Kopírování bylo přerušeno."
 
 #. Type: error
@@ -160,8 +160,8 @@ msgstr "Během zápisu změn na úložná zařízení nastala chyba."
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
-msgstr "Operace změny velikosti je přerušena."
+msgid "The resize operation has been aborted."
+msgstr "Operace změny velikosti byla přerušena."
 
 #. Type: string
 #. Description
@@ -270,62 +270,95 @@ msgstr "Typ tabulky oblastí:"
 msgid "Select the type of partition table to use."
 msgstr "Vyberte typ tabulky oblastí, který se má použít."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Jste si jisti, že chcete zaváděcí logickou oblast?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+"Pokoušíte se nastavit zaváděcí příznak na logické oblasti. Zaváděcí příznak "
+"je obvykle užitečný pouze na primárních oblastech a proto se jeho použití na "
+"logických oblastech nedoporučuje. Například jsou známy některé verze BIOSů, "
+"které odmítnou zavést systém v případě, že nenaleznou zaváděcí příznak na "
+"primární oblasti."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+"Pokud jste si jisti, že váš BIOS s tím nemá problémy, nebo pokud používáte "
+"zavaděč, který si všímá logických oblastí se zaváděcím příznakem, je to "
+"nejspíš v pořádku."
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Nastavit příznaky oblasti"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Jméno:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Příznak zavádění:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "zapnut"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "vypnut"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Změnit velikost oblasti (nyní ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Zkopírovat data z jiné oblasti"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Smazat oblast"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Vytvořit novou oblast"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Vytvořit novou tabulku oblastí na tomto zařízení"

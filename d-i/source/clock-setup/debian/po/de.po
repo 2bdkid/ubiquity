@@ -7,21 +7,21 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006.
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006, 2007.
 # Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
 # Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
 # Bastian Blank <waldi@debian.org>, 2003.
 # Jan Luebbe <jluebbe@lasnet.de>, 2003.
 # Thorsten Sauter <tsauter@gmx.net>, 2003.
 #
-# This file is maintained by Dennis Stampfer <seppy@debian.org>
+# This file is maintained by Jens Seidel <jensseidel@users.sf.net>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2005-11-21 22:08+0100\n"
+"POT-Creation-Date: 2007-07-25 16:45+0000\n"
+"PO-Revision-Date: 2007-09-15 16:41+0200\n"
 "Last-Translator: Jens Seidel <jensseidel@users.sf.net>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -59,20 +59,97 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../clock-setup.templates:17
+#. progress bar item
+#: ../clock-setup.templates:18
+msgid "Configuring clock settings..."
+msgstr "Konfiguriere Uhreinstellungen ..."
+
+#. Type: text
+#. Description
+#: ../clock-setup.templates:22
 msgid "Setting up the clock"
 msgstr "Uhr einstellen"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:27
+msgid "Set the clock using NTP?"
+msgstr "Die Uhr mittels NTP einstellen?"
+
+# FIXME: "works BEST"????
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:27
+msgid ""
+"The Network Time Protocol (NTP) can be used to set the system's clock. The "
+"installation process works best with a correctly set clock."
+msgstr ""
+"Das Netzwerk-Zeit-Protokoll (NTP) kann verwendet werden, um die Systemuhr "
+"einzustellen. Der Installationsprozess arbeitet mit einer korrekt "
+"eingestellten Uhr am besten."
+
+#. Type: string
+#. Description
+#: ../clock-setup.templates:34
+msgid "NTP server to use:"
+msgstr "Zu verwendender NTP-Server:"
+
+#. Type: string
+#. Description
+#: ../clock-setup.templates:34
+msgid ""
+"The default NTP server is almost always a good choice, but if you prefer to "
+"use another NTP server, you can enter it here."
+msgstr ""
+"Der Standard-NTP-Server ist nahezu immer eine gute Wahl. Falls Sie aber "
+"einen anderen NTP-Server bevorzugen, können Sie ihn hier eingeben."
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:22
-msgid "Please wait..."
-msgstr "Bitte warten ..."
+#: ../clock-setup.templates:41
+msgid "Getting the time from a network time server..."
+msgstr "Bestimme die Zeit von einem Netzwerk-Zeit-Server ..."
 
 #. Type: text
 #. Description
-#. finish-install progress bar item
-#: ../clock-setup.templates:27
-msgid "Saving UTC setting..."
-msgstr "Speichere UTC-Einstellungen ..."
+#. progress bar item
+#: ../clock-setup.templates:46
+msgid "Setting the hardware clock..."
+msgstr "Stelle die Hardware-Uhr ein ..."
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid "Wait another 30 seconds for hwclock to set the clock?"
+msgstr "Weitere 30 Sekunden auf hwclock zur Einstellung der Uhr warten?"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid ""
+"Setting the hardware clock is taking longer than expected. The 'hwclock' "
+"program used to set the clock may have problems talking to the hardware "
+"clock."
+msgstr ""
+"Das Setzen der Hardware-Uhr dauert länger als erwartet. Das Programm "
+"»hwclock«, das zum Einstellen der Uhr verwendet wird, könnte Probleme bei "
+"der Verbindung mit der Hardware-Uhr haben."
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""
+"Prüfen Sie /var/log/syslog oder die virtuelle Konsole 4 für genauere "
+"Informationen."
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid ""
+"If you choose to not wait for hwclock to finish setting the clock, this "
+"system's clock may not be set correctly."
+msgstr ""
+"Falls Sie wählen, nicht auf hwclock zur Einstellung der Uhr zu warten, "
+"könnte die Uhr dieses Systems nicht korrekt eingestellt sein."

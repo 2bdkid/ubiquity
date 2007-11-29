@@ -4,22 +4,21 @@
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
 # translation of wo.po to Wolof
-# translation of Debian Installer to Wolof
-# Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>, 2005, 2006.
 #
 #
+# Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>, 2005, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: wo\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-09-05 19:50+0000\n"
+"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"PO-Revision-Date: 2007-06-04 14:35+0000\n"
 "Last-Translator: Mouhamadou Mamoune Mbacke <mouhamadoumamoune@gmail.com>\n"
-"Language-Team: Wolof <debian-boot@lists.debian.org>\n"
+"Language-Team: Wolof\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.9.1\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -76,7 +75,8 @@ msgstr "Kopiye bi antuwul"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-msgid "The copy operation is aborted."
+#, fuzzy
+msgid "The copy operation has been aborted."
 msgstr "Bayyi nañu kopiye bi."
 
 #. Type: error
@@ -164,7 +164,8 @@ msgstr "Ab njuumte amna bi nuy bind coppat yi ca periferik u deñcukaay yi."
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-msgid "The resize operation is aborted."
+#, fuzzy
+msgid "The resize operation has been aborted."
 msgstr "Bayyi nañu soppi rëyaay u partisoŋ bi."
 
 #. Type: string
@@ -274,62 +275,88 @@ msgstr "Fasoŋ u taabal u partisoŋ bi:"
 msgid "Select the type of partition table to use."
 msgstr "Tannal fasoŋ u taabal u partisoŋ bi nuy jëfandikoo."
 
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+#, fuzzy
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Ndax wóorna la ne bëgg ngaa génn leegi?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"You are trying to set the bootable flag on a logical partition. The bootable "
+"flag is generally only useful on primary partitions, so setting it on "
+"logical partitions is normally discouraged. Some BIOS versions are known to "
+"fail to boot if there is no bootable primary partition."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:132
+msgid ""
+"However, if you are sure that your BIOS does not have this problem, or if "
+"you are using a custom boot manager that pays attention to bootable logical "
+"partitions, then setting this flag may make sense."
+msgstr ""
+
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:131
+#: ../partman-partitioning.templates:144
 msgid "Set the partition flags"
 msgstr "Sampu falaag yu partisoŋ bi"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:135
+#: ../partman-partitioning.templates:148
 msgid "Name:"
 msgstr "Tur:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:139
+#: ../partman-partitioning.templates:152
 msgid "Bootable flag:"
 msgstr "Falaag bootable:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:143
+#: ../partman-partitioning.templates:156
 msgid "on"
 msgstr "on"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:147
+#: ../partman-partitioning.templates:160
 msgid "off"
 msgstr "off"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:151
+#: ../partman-partitioning.templates:164
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Soppi rëyaay u partisoŋ bi (fimune nii ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:155
+#: ../partman-partitioning.templates:168
 msgid "Copy data from another partition"
 msgstr "Kopiyee done ci baneen partisoŋ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:159
+#: ../partman-partitioning.templates:172
 msgid "Delete the partition"
 msgstr "Far partisoŋ bi"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:163
+#: ../partman-partitioning.templates:176
 msgid "Create a new partition"
 msgstr "Sos partisoŋ bu bee"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:167
+#: ../partman-partitioning.templates:180
 msgid "Create a new empty partition table on this device"
 msgstr "Sos ci periferik bii ab taabal u partisoŋ bu bees bu féex"

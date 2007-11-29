@@ -8,14 +8,15 @@
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files#
 # Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt#
-# Kartik Mistry <kartik.mistry@gmail.com>, 2006.
+# in doc/i18n/i18n.txt
+# Contributor:
+# Kartik Mistry <kartik.mistry@gmail.com>, 2006-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: d-i\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:48+0100\n"
+"POT-Creation-Date: 2007-09-01 22:48+0000\n"
 "PO-Revision-Date: 2006-07-10 15:53+0530\n"
 "Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
 "Language-Team: Gujarati <team@utkarsh.org>\n"
@@ -30,7 +31,7 @@ msgstr ""
 msgid ""
 "The following other operating systems have been detected on this computer: "
 "${OS_LIST}"
-msgstr "નીચેની બીજી ઓપરેટિંગ સિસ્ટમો આ કમ્પ્યુટરમાં મળી છે: ${OS_LIST}"
+msgstr "નીચેની બીજી ઓપરેટિંગ સિસ્ટમ્સ આ કમ્પ્યુટરમાં મળી છે: ${OS_LIST}"
 
 #. Type: boolean
 #. Description
@@ -41,7 +42,7 @@ msgid ""
 "When your computer boots, you will be able to choose to load one of these "
 "operating systems or your new system."
 msgstr ""
-"જો તમારી બધી ઓપરેટિંગ સિસ્ટમો ઉપર લખેલી હોય તો, તમારી પ્રથમ હાર્ડ ડ્રાઇવનાં માસ્ટર બૂટ "
+"જો તમારી બધી ઓપરેટિંગ સિસ્ટમ્સ ઉપર લખેલી હોય તો, તમારી પ્રથમ હાર્ડ ડ્રાઇવનાં માસ્ટર બૂટ "
 "રેકોર્ડમાં બુટ લોડર સ્થાપિત કરવું એ સલામત છે. જ્યારે તમારી કમ્પ્યુટર શરુ થશે, તમે આ ઓપરેટિંગ "
 "સિસ્ટમ માંથી અથવા તમારી નવી ઓપરેટિંગ સિસ્ટમમ તમે શરુ કરી શકશો."
 
@@ -78,12 +79,54 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../grub-installer.templates:29
+msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
+msgstr "GRUB બૂટ લોડરને સીરીઅલ એટીએ હાર્ડ ડિસ્ક પર સ્થાપિત કરશો?"
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "Installation of GRUB on Serial ATA RAID is experimental."
+msgstr "GRUB નું સીરીયલ ATA રેઇડ પર સ્થાપન પ્રાયોગિક છે."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid ""
+"GRUB is always installed to the master boot record (MBR) of the Serial ATA "
+"RAID disk. It is also assumed that that disk is listed as the first hard "
+"disk in the boot order defined in the system's BIOS setup."
+msgstr ""
+"GRUB હંંમેશા સીરીઅલ એટીએ રેઇડ ડિસ્કનાં માસ્ટર બૂટ રેકોર્ડ (એમબીઆર) માં સ્થાપિત થશે. હંમેશા "
+"એ પણ ધારી લેવામાં આવશે કે ડિસ્કએ સિસ્ટમની BIOS ગોઠવણીમાં વ્યાખ્યાયિત કર્યા મુજબની પ્રથમ "
+"ડિસ્ક છે."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:29
+msgid "The GRUB root device is: ${GRUBROOT}."
+msgstr "GRUB રુટ ઉપકરણ છે: ${GRUBROOT}."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
+msgstr "તમારી સીરીઅલ એટીએ રેઇડ ડિસ્ક માટે GRUB ગોઠવતી વખતે ક્ષતિ આવી."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:41
+msgid "The GRUB installation has been aborted."
+msgstr "GRUB સ્થાપન બંધ કરેલ છે."
+
+#. Type: boolean
+#. Description
+#: ../grub-installer.templates:49
 msgid "Install the GRUB boot loader to XFS file system?"
 msgstr "GRUB બૂટ લોડરને XFS ફાઇલ સિસ્ટમમાં સ્થાપિત કરશો?"
 
 #. Type: boolean
 #. Description
-#: ../grub-installer.templates:29
+#: ../grub-installer.templates:49
 msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
@@ -93,13 +136,13 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid "Device for boot loader installation:"
 msgstr "બૂટ લોડર સ્થાપન માટેનું ઉપકરણ:"
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "You need to make the newly installed system bootable, by installing the GRUB "
 "boot loader on a bootable device. The usual way to do this is to install "
@@ -114,7 +157,7 @@ msgstr ""
 
 #. Type: string
 #. Description
-#: ../grub-installer.templates:35
+#: ../grub-installer.templates:55
 msgid ""
 "The device can be specified using GRUB's \"(hdn,m)\" notation, or as a "
 "device in /dev. Below are some examples:\n"
@@ -127,26 +170,26 @@ msgid ""
 " - \"(fd0)\" or \"/dev/fd0\" will install GRUB to a floppy."
 msgstr ""
 "ઉપકરણ GRUBની \"(hdn,m)\" પધ્ધતિનો ઉપયોગ કરી, /dev માંનાં ઉપકરણ વડે અથવા સ્પષ્ટ કરી "
-"શકાય છે.નીચે કેટલાંક ઉદાહરણો આપેલાં છે:\n"
+"શકાય છે. નીચે કેટલાંક ઉદાહરણો આપેલાં છે:\n"
 " - \"(hd0)\" અથવા \"/dev/hda\" મુખ્ય બૂટ રેકોર્ડમાં GRUB તમારી પ્રથમ હાર્ડડિસ્ક (IDE) "
 "માં\n"
 "    સ્થાપિત કરશે;\n"
 " - \"(hd0,1)\" અથવા \"/dev/hda2\" તમારી પ્રથમ હાર્ડડિસ્ક IDE નાં બીજા પાર્ટિશનનો\n"
 "   ઉપયોગ કરશે;\n"
-" - \"(hd2,4)\" અથવા \"/dev/sdc5\" તમારી ત્રીજી હાર્ડડિસ્ક (અહીં SCSI)નું પ્રથમ "
+" - \"(hd2,4)\" અથવા \"/dev/sdc5\" તમારી ત્રીજી હાર્ડડિસ્ક (અહીં SCSI) નું પ્રથમ "
 "વિસ્તૃત \n"
 "   પાર્ટિશનનો ઉપયોગ કરશે;\n"
 " - \"(fd0)\" અથવા \"/dev/fd0\" GRUB ને ફ્લોપીમાં સંગ્રહ કરશે."
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "GRUB password:"
 msgstr "GRUB પાસવર્ડ:"
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid ""
 "The GRUB boot loader offers many powerful interactive features, which could "
 "be used to compromise your system if unauthorized users have access to the "
@@ -155,7 +198,7 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
-"GRUB બુટ લોડર ઘણી શક્તિશાળી લાક્ષણિકતાઓ આપે છે, જે તમારી સિસ્ટમનો ગેરફાયદો ઉઠાવવાં "
+"GRUB બુટ લોડર ઘણી શક્તિશાળી લાક્ષણિકતાઓ આપે છે, જે તમારી સિસ્ટમનો ગેરફાયદો ઉઠાવવા "
 "માટે ઉપયોગ થઇ શકે છે, જો તમારા મશીનની શરુઆત વખતે અયોગ્ય વપરાશકર્તાને તેને વાપરવાનો હક "
 "મળી જાય. આની સામે રક્ષણ મેળવવા માટે તમે મેનુ વિકલ્પોને બદલવા માટેનો પાસવર્ડ પસંદ કરી શકો "
 "છો. જે કોઇપણ વિક્લ્પ બદલતાં પહેલાં અથવા GRUB આદેશ ઇન્ટરફેસ મેળવતાં પહેલાં આપવો પડશે. મૂળભુત "
@@ -163,110 +206,108 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../grub-installer.templates:54
+#: ../grub-installer.templates:74
 msgid "If you do not wish to set a GRUB password, leave this field blank."
-msgstr "જો તમે GRUB પાસવર્ડ ગોઠવવા માંગતા ન હોવ તો, આ જગ્યાને ખાલી છોડો."
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid "GRUB installation failed.  Continue anyway?"
-msgstr "GRUB સ્થાપન નિષ્ફળ.  આગળ વધશો?"
-
-#. Type: boolean
-#. Description
-#: ../grub-installer.templates:73
-msgid ""
-"The grub package failed to install into /target/.  Installing GRUB as a boot "
-"loader is a required step.  The install problem might however be unrelated "
-"to GRUB, so continuing the installation may be possible."
-msgstr ""
-"grub પેકેજ /target/ પર સ્થાપિત થવામાં નિષ્ફળ.  GRUB ને બુટ લોડર તરીકે સ્થાપિત કરવું એ "
-"જરુરી પગથિયું છે.  સ્થાપન મુશ્કેલી કદાચ GRUB ને સંબંધિત ન પણ હોઇ શકે, એટલે સ્થાપનમાં આગળ "
-"વધવું એ કદાચ શક્ય બની શકે છે."
+msgstr "જો તમે GRUB પાસવર્ડ ગોઠવવા માંગતા ન હોવ તો, આ જગ્યાને ખાલી છોડી દો."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:92
+msgid "GRUB installation failed"
+msgstr "GRUB સ્થાપન નિષ્ફળ ગયું"
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:92
+msgid ""
+"The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
+"loader, the installed system will not boot."
+msgstr ""
+"${GRUB} પેકેજ /target/ પર સ્થાપિત થવામાં નિષ્ફળ ગયું છે. GRUB બૂટ લોડર  વગર, સિસ્ટમ શરુ "
+"થશે નહી."
+
+#. Type: error
+#. Description
+#: ../grub-installer.templates:98
 msgid "Unable to install GRUB in ${BOOTDEV}"
 msgstr "${BOOTDEV} માં GRUB સ્થાપિત કરવામાં નિષ્ફળ"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:80
+#: ../grub-installer.templates:98
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
 msgstr "'grub-install ${BOOTDEV}' ચલાવવાનું નિષ્ફળ."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Unable to configure GRUB"
 msgstr "GRUB રૂપરેખાંકિત કરવામાં અસક્ષમ"
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "Executing 'update-grub' failed."
 msgstr "'update-grub' ચલાવવાનું નિષ્ફળ."
 
 #. Type: error
 #. Description
-#: ../grub-installer.templates:87
+#: ../grub-installer.templates:105
 msgid "This is a fatal error."
 msgstr "આ ઘાતક ક્ષતિ છે."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:105
+#: ../grub-installer.templates:136
 msgid "Installing GRUB boot loader"
 msgstr "GRUB બૂટ લોડર સ્થાપિત કરે છે"
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:109
+#: ../grub-installer.templates:140
 msgid "Looking for other operating systems..."
-msgstr "બીજી ઓપરેટિંગ સિસ્ટમો માટે ચકાસે છે..."
+msgstr "બીજી ઓપરેટિંગ સિસ્ટમ્સ માટે ચકાસે છે..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:113
-msgid "Installing the 'grub' package..."
-msgstr "'grub' પેકેજ સ્થાપિત કરે છે..."
+#: ../grub-installer.templates:144
+msgid "Installing the '${GRUB}' package..."
+msgstr "'${GRUB}' પેકેજ સ્થાપિત કરે છે..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:117
+#: ../grub-installer.templates:148
 msgid "Determining GRUB boot device..."
 msgstr "GRUB બૂટ ઉપકરણ નક્કી કરે છે..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:121
+#: ../grub-installer.templates:152
 msgid "Running \"grub-install ${BOOTDEV}\"..."
 msgstr "\"grub-install ${BOOTDEV}\" ચલાવે છે..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:125
+#: ../grub-installer.templates:156
 msgid "Running \"update-grub\"..."
 msgstr "\"update-grub\" ચલાવે છે..."
 
 #. Type: text
 #. Description
-#: ../grub-installer.templates:129
+#: ../grub-installer.templates:160
 msgid "Updating /etc/kernel-img.conf..."
 msgstr "/etc/kernel-img.conf સુધારે છે..."
 
 #. Type: text
 #. Description
 #. Main menu item
-#: ../grub-installer.templates:134
+#: ../grub-installer.templates:165
 msgid "Install the GRUB boot loader on a hard disk"
 msgstr "GRUB બૂટ લોડરને હાર્ડ ડિસ્ક પર સ્થાપિત કરો"
 
 #. Type: text
 #. Description
 #. Rescue menu item
-#: ../grub-installer.templates:139
+#: ../grub-installer.templates:170
 msgid "Reinstall GRUB boot loader"
 msgstr "GRUB બૂટ લોડર ફરી સ્થાપિત કરો"

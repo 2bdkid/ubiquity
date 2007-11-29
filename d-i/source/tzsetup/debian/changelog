@@ -1,3 +1,98 @@
+tzsetup (1:0.19) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Convert time zone selection templates to use Choices-C. This makes the
+    huge note for translators largely redundant and should lead to less
+    translation errors.
+  * Print country name instead of code in translator comment for time zones.
+
+  [ Christian Perrier ]
+  * Split out _Choices in __Choices. This will even more minimize the
+    translation errors.
+
+  [ Otavio Salvador ]
+  * Change tzsetup-udeb.install to avoid .svn dirs on post-base-installer.d.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Sunjae Park
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Nabin Gautam
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  
+ -- Otavio Salvador <otavio@debian.org>  Sat, 27 Oct 2007 12:25:39 -0200
+
+tzsetup (1:0.18) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Consistent spelling of "time zone" in debconf templates.
+    Translations unfuzzied
+  * Menu entry and progress bar corrected for proper English
+    (missing article)
+
+  [ Joey Hess ]
+  * Add build-dep on tzdata as it's used explicitly.
+  * No longer provide a d-i menu item. Needs clock-setup 0.90, which calls it
+    from its menu item.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Claus Hindsgaul
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Tshewang Norbu
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Norwegian Bokmal (nb.po) by Bjørn Steensrud
+  * Dutch (nl.po) by Frans Pop
+  * Punjabi (Gurmukhi) (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Albanian (sq.po) by Elian Myftiu
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+  * Ukrainian (uk.po)
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Joey Hess <joeyh@debian.org>  Wed, 25 Jul 2007 13:38:53 -0400
+
 tzsetup (1:0.17) unstable; urgency=low
 
   * Multiply menu-item-numbers by 100
@@ -24,7 +119,7 @@ tzsetup (1:0.15) unstable; urgency=low
   * Basque (eu.po) by Piarres Beobide
   * Latvian (lv.po) by Aigars Mahinovs
   * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
-  * Romanian (ro.po) by Eddy Petrișor
+  * Romanian (ro.po) by Eddy Petri?or
   * Slovenian (sl.po) by Matej Kovačič
 
  -- Frans Pop <fjp@debian.org>  Wed, 31 Jan 2007 11:56:25 +0100
@@ -65,7 +160,7 @@ tzsetup (1:0.12) unstable; urgency=low
   [ Updated translations ]
   * Belarusian (be.po) by Andrei Darashenka
   * Kurdish (ku.po) by Erdal Ronahi
-  * Romanian (ro.po) by Eddy Petrișor
+  * Romanian (ro.po) by Eddy Petri?or
   * Tamil (ta.po) by Damodharan Rajalingam
   * Vietnamese (vi.po) by Clytie Siddall
 

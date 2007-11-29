@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2005-11-20 11:43+0900\n"
+"POT-Creation-Date: 2007-07-25 16:45+0000\n"
+"PO-Revision-Date: 2007-07-27 15:03+0900\n"
 "Last-Translator:  Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Debian L10n Japanese <debian-l10n-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,20 +48,95 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../clock-setup.templates:17
+#. progress bar item
+#: ../clock-setup.templates:18
+msgid "Configuring clock settings..."
+msgstr "時刻を設定しています ..."
+
+#. Type: text
+#. Description
+#: ../clock-setup.templates:22
 msgid "Setting up the clock"
 msgstr "時刻を設定しています"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:27
+msgid "Set the clock using NTP?"
+msgstr "NTP を使って時刻を設定しますか?"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:27
+msgid ""
+"The Network Time Protocol (NTP) can be used to set the system's clock. The "
+"installation process works best with a correctly set clock."
+msgstr ""
+"Network Time Protocol (NTP) を、システムの時刻を設定するのに使えます。時刻を"
+"正しく設定することで、インストールプロセスは安全に動作します。"
+
+#. Type: string
+#. Description
+#: ../clock-setup.templates:34
+msgid "NTP server to use:"
+msgstr "利用する NTP サーバ:"
+
+#. Type: string
+#. Description
+#: ../clock-setup.templates:34
+msgid ""
+"The default NTP server is almost always a good choice, but if you prefer to "
+"use another NTP server, you can enter it here."
+msgstr ""
+"デフォルトの NTP サーバはほとんどの場合、最適な選択肢ですが、別の NTP サーバ"
+"を使いたいのであればそれをここで入力できます。"
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:22
-msgid "Please wait..."
-msgstr "しばらくお待ちください..."
+#: ../clock-setup.templates:41
+msgid "Getting the time from a network time server..."
+msgstr "ネットワーク時刻サーバから時刻を取得しています..."
 
 #. Type: text
 #. Description
-#. finish-install progress bar item
-#: ../clock-setup.templates:27
-msgid "Saving UTC setting..."
-msgstr "UTC の設定を保存しています..."
+#. progress bar item
+#: ../clock-setup.templates:46
+msgid "Setting the hardware clock..."
+msgstr "ハードウェア時刻を設定しています..."
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid "Wait another 30 seconds for hwclock to set the clock?"
+msgstr "hwclock の時刻を設定するのにさらに 30 秒待ちますか?"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid ""
+"Setting the hardware clock is taking longer than expected. The 'hwclock' "
+"program used to set the clock may have problems talking to the hardware "
+"clock."
+msgstr ""
+"ハードウェア時刻の設定に、予想よりも長くかかっています。時刻を設定するのに使"
+"われる 'hwclock' プログラムがハードウェア時刻とやり取りする際に、問題が発生し"
+"ている可能性があります。"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""
+"詳細については、/var/log/syslog を確認するか、仮想コンソール 4 を見てくださ"
+"い。"
+
+#. Type: boolean
+#. Description
+#: ../clock-setup.templates:51
+msgid ""
+"If you choose to not wait for hwclock to finish setting the clock, this "
+"system's clock may not be set correctly."
+msgstr ""
+"時刻の設定が完了するまで hwclock を待たないように選択すると、このシステムの時"
+"刻はおそらく正しく設定されません。"

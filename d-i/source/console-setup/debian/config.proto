@@ -941,17 +941,21 @@ case "$locale" in
 	;;
 esac
 
-if which locale >/dev/null; then
-    default_charmap=`locale charmap`
-elif [ -d /lib/debian-installer ]; then
+if \
+    [ -d /lib/debian-installer ] \
+    && db_get debian-installer/charmap \
+    && [ "$RET" ]
+then
+    default_charmap="$RET"
+elif [ "$locale" = C ]; then
     default_charmap=UTF-8
+    charmap_priority=high
+elif which locale >/dev/null; then
+    default_charmap=`locale charmap`
 else
     default_charmap=unknown
 fi
-if [ "$locale" = C ]; then
-    default_charmap=UTF-8
-    charmap_priority=high
-elif echo "$charmaps" | grep "$default_charmap" >/dev/null; then
+if echo "$charmaps" | grep "$default_charmap" >/dev/null; then
     charmap_priority=low
 else
     default_charmap=UTF-8
@@ -1144,25 +1148,27 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 fi
     
 # Get defaults from debconf, to allow preseeding.
-if db_get console-setup/modelcode && [ "$RET" ]; then
-    default_model="$RET"
-fi
-if db_get console-setup/layoutcode && [ "$RET" ]; then
-    default_layout="$RET"
-    layout_priority=medium
-    db_set console-setup/ask_detect false
-    db_fset console-setup/ask_detect seen true
-fi
-if db_get console-setup/variantcode && [ "$RET" ]; then
-    default_variant="$RET"
-fi
-if db_get console-setup/optionscode && [ "$RET" ]; then
-    XKBOPTIONS="$RET"
-    got_xkboptions=yes
-fi
-if db_get console-setup/fontsize && [ "$RET" ]; then
-    db_set console-setup/fontsize-text "$RET"
-    db_set console-setup/fontsize-fb "$RET"
+if [ -d /lib/debian-installer ]; then
+    if db_get console-setup/modelcode && [ "$RET" ]; then
+	default_model="$RET"
+    fi
+    if db_get console-setup/layoutcode && [ "$RET" ]; then
+	default_layout="$RET"
+	layout_priority=medium
+	db_set console-setup/ask_detect false
+	db_fset console-setup/ask_detect seen true
+    fi
+    if db_get console-setup/variantcode && [ "$RET" ]; then
+	default_variant="$RET"
+    fi
+    if db_get console-setup/optionscode && [ "$RET" ]; then
+	XKBOPTIONS="$RET"
+	got_xkboptions=yes
+    fi
+    if db_get console-setup/fontsize && [ "$RET" ]; then
+	db_set console-setup/fontsize-text "$RET"
+	db_set console-setup/fontsize-fb "$RET"
+    fi
 fi
 
 # Load the config file, if it exists.

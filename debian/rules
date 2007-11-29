@@ -10,6 +10,7 @@ BUILDDIR=$(CURDIR)/debian/build
 VERSION := $(shell dpkg-parsechangelog | awk '/^Version:/ { print $$2 }')
 AC_VERSION := $(shell grep -w '^AC_INIT' configure.ac | cut -d' ' -f2 | \
 			sed 's/[][,]//g')
+MANGLED_VERSION := $(subst ~,-,$(VERSION))
 
 ifneq ($(VERSION),$(AC_VERSION))
 $(warning Version $(VERSION) in debian/changelog does not match $(AC_VERSION) in configure.ac!)
@@ -125,6 +126,8 @@ endif
 	# Bits of manual installation that can't be done by dh_install
 	
 	# Get rid of duplicate mythbuntu scripts
+	mv debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity-mythbuntu.desktop debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity.desktop
+	mv debian/ubiquity-frontend-mythbuntu/usr/share/pixmaps/ubiquity-mythbuntu.png debian/ubiquity-frontend-mythbuntu/usr/share/pixmaps/ubiquity.png
 	rm -rf debian/ubiquity/usr/share/ubiquity/mythbuntu
 	install bin/ubiquity-wrapper debian/ubiquity/usr/bin/ubiquity
 	sed 's/@VERSION@/$(VERSION)/g' bin/ubiquity \
@@ -188,6 +191,8 @@ ifeq ($(DEB_HOST_ARCH),sparc)
 	install d-i/source/silo-installer/debian/silo-installer.postinst \
 		debian/ubiquity/usr/lib/ubiquity/silo-installer/silo-installer
 endif
+	install -m644 debian/intro-alpha.txt \
+		debian/ubiquity/usr/share/ubiquity/intro.txt
 
 	set -e; for size in 16 22 32 48 64 128; do \
 		mkdir -p debian/ubiquity-frontend-kde/usr/share/icons/crystalsvg/$${size}x$${size}/apps; \
@@ -214,7 +219,7 @@ binary-indep: install
 				 -pubiquity-frontend-mythbuntu
 	dh_installdeb
 	dh_shlibdeps
-	dh_gencontrol
+	dh_gencontrol -- -Vmangled-version='$(MANGLED_VERSION)'
 	dh_md5sums
 	dh_builddeb
 
@@ -253,9 +258,9 @@ binary-arch: install
 	dh_installdeb
 	dh_shlibdeps
 ifdef bootloader-depends
-	dh_gencontrol -- -V'bootloader-depends=$(bootloader-depends)' -V'console-setup-depends=$(console-setup-depends)'
+	dh_gencontrol -- -V'bootloader-depends=$(bootloader-depends)' -V'console-setup-depends=$(console-setup-depends)' -Vmangled-version='$(MANGLED_VERSION)'
 else
-	dh_gencontrol -- -V'console-setup-depends=$(console-setup-depends)'
+	dh_gencontrol -- -V'console-setup-depends=$(console-setup-depends)' -Vmangled-version='$(MANGLED_VERSION)'
 endif
 	dh_md5sums
 	dh_builddeb
