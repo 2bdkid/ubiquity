@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-08-27 10:58+0000\n"
+"POT-Creation-Date: 2007-12-05 22:48+0000\n"
 "PO-Revision-Date: 2007-01-24 12:56+0530\n"
 "Last-Translator: Nishant Sharma <me at nishants dot net>\n"
 "Language-Team: Hindi\n"
@@ -261,28 +261,135 @@ msgstr "नए पार्टीशन के लिए फ्लैग्स�
 msgid "Partition name:"
 msgstr "पार्टीशन नामः"
 
-#. Type: select
+#. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:126
+msgid ""
+"This partitioner doesn't have information about the default type of the "
+"partition tables on your architecture.  Please send an e-mail message to "
+"debian-boot@lists.debian.org with information."
+msgstr ""
+"आपके संघटन के अनुरूप विभाजन तालिका इस विभाजक के संज्ञान में नहीं है। कृपया सूचना के साथ इस "
+"पते पर ई-मेल करें debian-boot@lists.debian.org"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:126
+msgid ""
+"Please note that if the type of the partition table is unsupported by "
+"libparted, then this partitioner will not work properly."
+msgstr ""
+"यदि विभाजन तालिका का प्रकार libparted द्वारा समर्थित नहीं है, तो यह विभाजकिशनर "
+"भली प्रकार काम नहीं करेगा।"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid "Continue with partitioning?"
+msgstr "पार्टीशनिंग जारी रखें?libparted "
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"This partitioner is based on the library libparted which doesn't have "
+"support for the partition tables used on your architecture.  It is strongly "
+"recommended that you exit this partitioner."
+msgstr ""
+"यह विभाजक libparted पर आधारित है जोकि आपके संघटन के अनुरूप विभाजन तालिका के लिए "
+"समर्थित नहीं है। आपको इस विभाजक को प्रयोग नहीं करना चाहिए।"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"If you can, please help to add support for your partition table type to "
+"libparted."
+msgstr ""
+"यदि संभव है तो, कृपया आपके पार्टीशन टेबल प्रकार को लिबपार्टेड में शामिल करने हेतु मदद करें."
+
+#. Type: select
+#. Description
+#: ../partman-partitioning.templates:148
 msgid "Partition table type:"
 msgstr "पार्टीशन टेबल प्रकारः"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:126
+#: ../partman-partitioning.templates:148
 msgid "Select the type of partition table to use."
 msgstr "इस्तेमाल के लिए पार्टीशन टेबल प्रकार चुनें."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:154
+msgid "Create new empty partition table on this device?"
+msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:154
+msgid ""
+"You have selected an entire device to partition. If you proceed with "
+"creating a new partition table on the device, then all current partitions "
+"will be removed."
+msgstr ""
+"आपने एक पूरे उपकरण को विभाजन के लिए चुना है। यदि आप इस पर नया पार्टिशन टेबल बनाते हैंतो "
+"सभी वर्तमान पार्टिशन मिटा दिये जाएँगे।"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:154
+msgid "Note that you will be able to undo this operation later if you wish."
+msgstr "ज्ञात रहे कि  कि इस प्रक्रिया को बाद में यदि आप चाहें तो वापस ले सकते हैं."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid "Write a new empty partition table?"
+msgstr "एक नया खाली पार्टीशन टेबल लिखें?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Because of limitations in the current implementation of the Sun partition "
+"tables in libparted, the newly created partition table has to be written to "
+"the disk immediately."
+msgstr ""
+"लिबपार्टेड वर्तमान में सन पार्टिशन टेबल को पूर्णतया समर्थित नहीं करती है इसलिए नये बनाए "
+"गये पार्टिशनोंको तुरंत ही डिस्क पर लिखना होगा।"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"You will NOT be able to undo this operation later and all existing data on "
+"the disk will be irreversibly removed."
+msgstr ""
+"इस प्रक्रिया को बाद में आप वापस नहीं ले सकेंगे तथा इस डिस्क के सभी वर्तमान डाटा मिट जाएँगे "
+"जिन्हें वापस पाया नहीं जा सकेगा."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Confirm whether you actually want to create a new partition table and write "
+"it to disk."
+msgstr ""
+"सुनिश्चित करें कि क्या आप वास्तव में नया पार्टीशन टेबल बनाना चाहते हैं तथा इसे डिस्क पर "
+"लिखना चाहते हैं."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
 #, fuzzy
 msgid "Are you sure you want a bootable logical partition?"
 msgstr "क्या आप सुनिश्चित हैं कि आप अब बाहर होना चाहते हैं?"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:178
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
@@ -292,7 +399,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:178
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
@@ -301,60 +408,60 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:144
+#: ../partman-partitioning.templates:190
 msgid "Set the partition flags"
 msgstr "पार्टीशन फ्लैग नियत करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:148
+#: ../partman-partitioning.templates:194
 msgid "Name:"
 msgstr "नाम:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:152
+#: ../partman-partitioning.templates:198
 msgid "Bootable flag:"
 msgstr "बूटेबल फ्लैगः"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:156
+#: ../partman-partitioning.templates:202
 msgid "on"
 msgstr "चालू"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:160
+#: ../partman-partitioning.templates:206
 msgid "off"
 msgstr "बन्द"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:164
+#: ../partman-partitioning.templates:210
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "पार्टिशन का आकार बदलें (वर्तमान ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:168
+#: ../partman-partitioning.templates:214
 msgid "Copy data from another partition"
 msgstr "अन्य पार्टीशन से डाटा नक़ल करें"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:172
+#: ../partman-partitioning.templates:218
 msgid "Delete the partition"
 msgstr "पार्टीशन मिटाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:176
+#: ../partman-partitioning.templates:222
 msgid "Create a new partition"
 msgstr "नया पार्टीशन बनाएँ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:180
+#: ../partman-partitioning.templates:226
 msgid "Create a new empty partition table on this device"
 msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ"

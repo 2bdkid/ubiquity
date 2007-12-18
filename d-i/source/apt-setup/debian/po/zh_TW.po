@@ -11,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-07-28 00:11+0800\n"
-"Last-Translator: Tetralet <tetralet@pchome.com.tw>\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-03-10 13:18+0800\n"
+"Last-Translator: Tetralet <tetralet@gmail.com>\n"
 "Language-Team: Debian-user in Chinese [Big5] <debian-chinese-big5@lists."
 "debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -54,31 +54,92 @@ msgstr "正在掃瞄本機的檔案資料庫..."
 msgid "Scanning the security updates repository..."
 msgstr "正在掃瞄安全更新資料庫..."
 
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:27
+#, fuzzy
+msgid "Scanning the volatile updates repository..."
+msgstr "正在掃瞄安全更新資料庫..."
+
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
+msgid "Cannot access repository"
 msgstr "無法存取安全更新"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
 msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
 "無法存取 ${SECURITY_HOST} 上的安全更新，所以您目前暫時無法進行更新。您應該在"
 "稍後進行檢查。"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
 msgstr ""
 "${SECURITY_HOST} 的項目已被加上註解並附加到 /etc/apt/sources.list 檔裡。"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr ""
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+#, fuzzy
+msgid "Services to use:"
+msgstr "名稱伺服器位址："
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -99,6 +160,13 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr "試圖設定 apt 可由 CD 來安裝其它套件，但失敗了。"
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -208,13 +276,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "是否使用網路鏡像站？"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -223,13 +291,68 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+#, fuzzy
+msgid "Continue without a network mirror?"
+msgstr "是否不使用 Default Route 並繼續進行？"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+#, fuzzy
+msgid "No network mirror was selected."
+msgstr "探測不到任何網路介面"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
 "如果您正從 netinst CD 進行安裝，且您選擇不要使用鏡像站，您最終得到的將只有極"
 "為精簡的 Base System。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
 
 #. Type: boolean
 #. Description

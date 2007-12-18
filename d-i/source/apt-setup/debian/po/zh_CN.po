@@ -5,19 +5,19 @@
 # 
 # Simplified Chinese translation for Debian Installer.
 #
-# Copyright (C) 2003-2006 Software in the Public Interest, Inc.
+# Copyright (C) 2003-2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Translated by bbbush (2004), Carlos Z.F. Liu (2004,2005,2006) and
-# Ming Hua (2005,2006).
+# Translated by Yijun Yuan (2004), Carlos Z.F. Liu (2004,2005,2006) and
+# Ming Hua (2005,2006,2007).
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-20 20:53-0500\n"
-"Last-Translator: Ming Hua <minghua@rice.edu>\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-09-27 02:03-0500\n"
+"Last-Translator: Ming Hua <minghua-guest@users.alioth.debian.org>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +37,7 @@ msgstr "配置软件包管理器"
 #. so please do NOT translate it
 #: ../apt-setup-udeb.templates:11
 msgid "Configuring apt"
-msgstr "正在设置 apt"
+msgstr "正在配置 apt"
 
 #. Type: text
 #. Description
@@ -57,32 +57,89 @@ msgstr "正在扫描本地软件源..."
 msgid "Scanning the security updates repository..."
 msgstr "正在扫描安全更新软件源..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "无法读取安全更新"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "正在扫描 volatile 更新软件源..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"无法访问位于 ${SECURITY_HOST} 的安全更新，因此那里的更新现在还无法供您使用。"
-"您应随后调查这一问题。"
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "无法访问软件源"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"被注释掉的有关 ${SECURITY_HOST} 的条目已被加入到 /etc/apt/sources.list文件"
-"中。"
+"无法访问位于 ${HOST} 的软件源，因此您现在还无法使用那里的软件更新。您应随后调"
+"查这一问题。"
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr "被注释掉的有关 ${HOST} 的条目已被加入到 /etc/apt/sources.list 文件中。"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "安全更新 (来自 ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "volatile 更新 (来自 ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "要使用的服务："
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr "Debian 有两个为已发布版本提供更新的服务：security (安全) 和 volatile。"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr "安全更新能够帮助您的系统抵御外来的攻击。强烈建议您启用这项更新服务。"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Volatile 更新为那些变动相对频繁，而且没有最新版本就会降低可用性的软件提供新的"
+"版本，例如病毒扫描软件的病毒特征数据。这一服务只针对稳定版 (stable) 和旧稳定"
+"版 (oldstable)。"
 
 #. Type: text
 #. Description
@@ -103,6 +160,13 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr "尝试配置 apt 从光盘安装额外的软件包失败。"
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "正在 sources.list 里禁用 netinst CD..."
 
 #. Type: text
 #. Description
@@ -212,13 +276,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "使用网络镜像吗？"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -226,13 +290,75 @@ msgstr "网络镜像可以用来补充光盘所带的软件，也可以用来提
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "没有网络镜像，继续安装吗？"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "没有选择网络镜像。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"如果您正在从网络安装光盘 (netinst CD) 进行安装并且选择不使用镜像，您将只能装"
-"上一个非常小的基本系统。"
+"如果您正在用网络安装 (netinst) 光盘进行安装并且选择不使用镜像，您将只能装上一"
+"个非常小的基本系统。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"您正在从网络安装 (netinst) 光盘进行安装，而网络安装光盘只能安装一个非常小的基"
+"本系统。您可以使用镜像来安装一个更完备的系统。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"您正在从光盘进行安装，而光盘里只有一部分有限的软件包。如果您有一个良好的 "
+"Internet 连接，特别是如果您打算安装一个图形界面的桌面环境，那么推荐您使用镜"
+"像。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"值得提醒的是，使用镜像会导致在安装过程的下一步骤中下载大量的数据。您也可以选"
+"择不使用镜像继续安装，并在安装过程结束后从其它光盘中安装任何所缺的软件包。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"您正在从 DVD 进行安装。虽然 DVD 里包含了很大一部分软件包，但是仍然可能缺少一"
+"些，特别是那些用于支持英语以外的语言的软件包。如果您有一个足够好的 Internet "
+"连接，而且打算安装一个图形界面的桌面环境，那么建议您使用镜像。"
 
 #. Type: boolean
 #. Description

@@ -1,3 +1,79 @@
+partman-auto (73ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust default partition sizes for Ubuntu.
+    - Accept autopartitioning automatically rather than showing
+      choose_partition.
+    - Drop priority of partman-auto/choose_recipe question to medium.
+    - Offer resize_use_free autopartitioning method.
+    - Add support for partman-auto/method=loop via partman-auto-loop.
+  * Remove dmsetup-udeb dependency, as the corresponding code was removed in
+    partman-auto 72.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Dec 2007 10:56:24 +0000
+
+partman-auto (73) unstable; urgency=low
+
+  * Moved definitions.sh to ./lib/base.sh.
+  * Move recipes.sh and auto-shared.sh to ./lib/.
+  * auto-shared.sh: rename wipe_disk() to auto_init_disk().
+  * Use functions provided by partman-partitioning in auto_init_disk():
+    - use the create_new_label function; don't prompt for disk label to use
+      unless the default is invalid
+    - create_new_label will now take care of removing existing LVM data from
+      the selected device; the actual code to erase existing LVM data has been
+      moved to partman-lvm
+    Changes inspired by and partially based on a patch proposed in #396023 by
+    Jérémy Bobbio.
+  * Major whitespace cleanup and some coding style improvements.
+  * Requires: partman-base (>= 114); partman-partitioning (>= 54).
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Japanese (ja.po) by Kenshi Muto
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+
+ -- Frans Pop <fjp@debian.org>  Tue, 11 Dec 2007 14:03:38 +0100
+
+partman-auto (72ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust default partition sizes for Ubuntu.
+    - Accept autopartitioning automatically rather than showing
+      choose_partition.
+    - Drop priority of partman-auto/choose_recipe question to medium.
+    - Offer resize_use_free autopartitioning method.
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on dmsetup-udeb.
+    - Add support for partman-auto/method=loop via partman-auto-loop.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Dec 2007 17:26:51 +0000
+
+partman-auto (72) unstable; urgency=low
+
+  * Revert support for erasing encrypted LVM volumes introduced in (69).
+    There are too many problems with it and starting fresh seems better than
+    stacking change on change to fix it. Closes: #425829.
+  * lvm-wipe-disk(): needs device-mapper support while removing devices.
+  * lvm-wipe-disk(): fix restart logic.
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * French (fr.po) by Christian Perrier
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Frans Pop <fjp@debian.org>  Wed, 05 Dec 2007 13:17:01 +0100
+
+partman-auto (71) unstable; urgency=low
+
+  * Fix regression preventing to exit to main menu when using go back from
+    initial guided partitioning screen. Closes: #446994.
+
+ -- Frans Pop <fjp@debian.org>  Thu, 15 Nov 2007 12:28:20 +0100
+
 partman-auto (70ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

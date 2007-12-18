@@ -1,3 +1,71 @@
+partman-partitioning (54ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Dec 2007 10:53:41 +0000
+
+partman-partitioning (54) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Moved definitions.sh to ./lib/base.sh.
+  * Move resize.sh to ./lib/resize.sh.
+  * Reorganization of partition label related code:
+    - add new function library ./lib/disk-label.sh to include the function
+      default_disk_label (previously in definitions.sh) and a new function
+      create_new_label (factored out from storage_device/label/do_option)
+    - add init.d/unsupported previously in partman-base
+    - add partman/*_label templates previously in partman-base
+    Part of this change was originally suggested by Jérémy Bobbio.
+  * disk-label.sh: allow not to prompt for new disk label if default is valid
+    (for use during guided partitioning).
+  * disk-label.sh: remove existing LVM data from the device before creating a
+    new disk label; this is now also done if a new disk label is created
+    during manual partitioning.
+  * Requires partman-base (>= 114); partman-lvm (>= 57).
+
+  [ Colin Watson ]
+  * Quote $(FS_DEPENDS) in dh_gencontrol arguments to avoid gotcha when
+    adding extra items to it.
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Tue, 11 Dec 2007 14:02:38 +0100
+
+partman-partitioning (53ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Dec 2007 13:37:35 +0000
+
+partman-partitioning (53) unstable; urgency=low
+
+  [ Max Vozeler ]
+  * Replace code to commit partman changes to disk with call to commit_changes
+    from partman-base (>= 113). We can't add the versioned dependency because
+    -base depends on -partitioning, which would be circular.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Korean (ko.po) by Sunjae Park
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovak (sk.po) by Ivan Masár
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Frans Pop <fjp@debian.org>  Wed, 05 Dec 2007 13:23:10 +0100
+
 partman-partitioning (52ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

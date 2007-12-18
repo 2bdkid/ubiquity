@@ -11,22 +11,22 @@
 # in doc/i18n/i18n.txt#
 #
 # Andrei Darashenka <adorosh2@it.org.by>, 2005, 2006.
-# Pavel Piatruk <berserker@neolocation.com>, 2006.
+# Pavel Piatruk <berserker@neolocation.com>, 2006, 2007.
 # Nasciona Piatrouskaja <naska.pet@gmail.com>, 2006.
-# Hleb Rubanau <g.rubanau@gmail.com>, 2006.
+# Hleb Rubanau <g.rubanau@gmail.com>, 2006, 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: be\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-08-27 10:58+0000\n"
-"PO-Revision-Date: 2007-01-15 11:16+0100\n"
+"POT-Creation-Date: 2007-12-05 22:48+0000\n"
+"PO-Revision-Date: 2007-10-15 11:16+0100\n"
 "Last-Translator: Hleb Rubanau <g.rubanau@gmail.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Pootle 0.10.1\n"
+"X-Generator: vim\n"
 
 #. Type: text
 #. Description
@@ -72,7 +72,7 @@ msgstr "Падзел-крыніца:"
 #. Description
 #: ../partman-partitioning.templates:26
 msgid "Please choose the partition which contains the data you want to copy."
-msgstr "Выберыце падзел, што змяшчае дадзеныя для капіявання."
+msgstr "Выберыце падзел, што ўтрымлівае інфармацыю для капіявання."
 
 #. Type: error
 #. Description
@@ -83,9 +83,8 @@ msgstr "Памылка падчас капіявання"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-#, fuzzy
 msgid "The copy operation has been aborted."
-msgstr "Аперацыя капіявання перарваная."
+msgstr "Аперацыя капіявання прымусова спыненая."
 
 #. Type: error
 #. Description
@@ -170,9 +169,8 @@ msgstr "Падчас запісу зменаў на фізічную прыла�
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-#, fuzzy
 msgid "The resize operation has been aborted."
-msgstr "Аперацыя змянення памеру перарваная."
+msgstr "Аперацыя змянення памеру прымусова спыненая."
 
 #. Type: string
 #. Description
@@ -269,100 +267,218 @@ msgstr "Знакі для новага падзела:"
 msgid "Partition name:"
 msgstr "Назва падзела:"
 
-#. Type: select
+#. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:126
+msgid ""
+"This partitioner doesn't have information about the default type of the "
+"partition tables on your architecture.  Please send an e-mail message to "
+"debian-boot@lists.debian.org with information."
+msgstr ""
+"Гэты майстар падзелу не мае інфармацыі пра асноўны тып табліц падзелаў для "
+"Вашай архітэктуры. Калі ласка, дашліце e-mail допіс з інфармацыяй на адрас "
+"<debian-boot@lists.debian.org>."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:126
+msgid ""
+"Please note that if the type of the partition table is unsupported by "
+"libparted, then this partitioner will not work properly."
+msgstr ""
+"Калі ласка, майце на ўвазе, што калі табліца падзелаў не падтрымліваецца "
+"бібліятэкай libparted, гэтая праграма падзелу дыскаў не будзе правільна "
+"працаваць."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid "Continue with partitioning?"
+msgstr "Працягваць перадзел дыскаў?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"This partitioner is based on the library libparted which doesn't have "
+"support for the partition tables used on your architecture.  It is strongly "
+"recommended that you exit this partitioner."
+msgstr ""
+"Гэтая праграма перадзелу дыскаў грунтуецца на бібліятэцы libparted, якая не "
+"падтрымлівае табліцы падзелаў, выкарыстаныя ў Вашай архітэктуры. Настойліва "
+"рэкамендуем выйсці з гэтай праграмы перадзелу."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"If you can, please help to add support for your partition table type to "
+"libparted."
+msgstr ""
+"Калі ласка, пры магчымасці дапамажыце дадаць падтрымку тыпу Вашай табліцы "
+"падзелаў дыска да бібліятэкі libparted."
+
+#. Type: select
+#. Description
+#: ../partman-partitioning.templates:148
 msgid "Partition table type:"
 msgstr "Тып табліцы падзела:"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:126
+#: ../partman-partitioning.templates:148
 msgid "Select the type of partition table to use."
 msgstr "Пазначце тып табліцы падзела, які трэба ўжыць."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
-#, fuzzy
-msgid "Are you sure you want a bootable logical partition?"
-msgstr "Ці вы ўпэўненыя, што хочаце выйсці зараз?"
+#: ../partman-partitioning.templates:154
+msgid "Create new empty partition table on this device?"
+msgstr "Стварыць новую пустую табліцу падзелаў на гэтай прыладзе?"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:154
+msgid ""
+"You have selected an entire device to partition. If you proceed with "
+"creating a new partition table on the device, then all current partitions "
+"will be removed."
+msgstr ""
+"Вы пазначылі для падзелу суцэльную прыладу. Калі працягнуць стварэнне новай "
+"табліцы падзелаў на гэтай прыладзе, усе існуючыя падзелы будуць знішчаныя."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:154
+msgid "Note that you will be able to undo this operation later if you wish."
+msgstr "Майце на ўвазе, што Вы можаце скасаваць вынікі гэтай аперацыі пазней."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid "Write a new empty partition table?"
+msgstr "Запісаць новую табліцу падзелаў?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Because of limitations in the current implementation of the Sun partition "
+"tables in libparted, the newly created partition table has to be written to "
+"the disk immediately."
+msgstr ""
+"З-за абмежаванняў у сучаснай рэалізацыі табліц падзелаў Sun бібліятэкай "
+"libparted, створаная новая табліца падзелаў будзе запісаная на дыск адразу."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"You will NOT be able to undo this operation later and all existing data on "
+"the disk will be irreversibly removed."
+msgstr ""
+"У Вас НЕ атрымаецца скасаваць гэтую аперацыю пазней, і ўся існуючая "
+"інфармацыя на дыску будзе незваротна знішчана. "
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Confirm whether you actually want to create a new partition table and write "
+"it to disk."
+msgstr ""
+"Пацвердзіце сваё жаданне стварыць новую табліцу падзелаў і запісаць яе на "
+"дыск."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Ці вы ўпэўненыя, што Вам патрэбны загрузачны лагічны падзел?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
 "logical partitions is normally discouraged. Some BIOS versions are known to "
 "fail to boot if there is no bootable primary partition."
 msgstr ""
+"Вы спрабуеце адзначыць лагічны падзел як \"загрузачны\". Звычайна, "
+"адпаведная адзнака мае сэнс толькі для першасных падзелаў. Яе выкарыстанне "
+"для лагічных падзелаў можа быць не вельмі добрай ідэяй. Вядома, што пэўныя "
+"версіі BIOS не могуць загрузіцца, калі ў сістэме няма першаснага "
+"загрузачнага падзелу."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:178
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
 "partitions, then setting this flag may make sense."
 msgstr ""
+"Але, калі Вы ўпэўненыя, што Ваш BIOS не мае такой праблемы, альбо калі "
+"выкарыстоўваеце адмысловы мэнэджэр загрузкі, які бярэ да ўвагі загрузачныя "
+"лагічныя падзелы, тады такая адзнака можа мець сэнс."
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:144
+#: ../partman-partitioning.templates:190
 msgid "Set the partition flags"
 msgstr "Выставіць знакі для падзела"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:148
+#: ../partman-partitioning.templates:194
 msgid "Name:"
 msgstr "Назва:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:152
+#: ../partman-partitioning.templates:198
 msgid "Bootable flag:"
 msgstr "Знак \"Загрузачны\":"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:156
+#: ../partman-partitioning.templates:202
 msgid "on"
 msgstr "on"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:160
+#: ../partman-partitioning.templates:206
 msgid "off"
 msgstr "off"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:164
+#: ../partman-partitioning.templates:210
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Змяніць памер падзела (зараз ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:168
+#: ../partman-partitioning.templates:214
 msgid "Copy data from another partition"
-msgstr "Капіяваць дадзеныя з іншага падзела"
+msgstr "Капіяваць інфармацыю з іншага падзела"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:172
+#: ../partman-partitioning.templates:218
 msgid "Delete the partition"
 msgstr "Выдаліць падзел:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:176
+#: ../partman-partitioning.templates:222
 msgid "Create a new partition"
 msgstr "Стварыць новы падзел"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:180
+#: ../partman-partitioning.templates:226
 msgid "Create a new empty partition table on this device"
 msgstr "Стварыць новую пустую табліцу падзелаў на прыладзе"

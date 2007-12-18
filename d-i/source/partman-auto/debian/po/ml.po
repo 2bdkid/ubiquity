@@ -16,14 +16,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Debian Installer Level 1\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-04-02 22:49+0000\n"
-"PO-Revision-Date: 2007-02-21 23:22+0530\n"
-"Last-Translator: Praveen A <pravi.a@gmail.com>\n"
-"Language-Team: Swathanthra Malayalam Computing <smc-discuss@googlegroups."
-"com>\n"
+"POT-Creation-Date: 2007-12-08 22:48+0000\n"
+"PO-Revision-Date: 2007-12-09 14:26-0800\n"
+"Last-Translator: Praveen|പ്രവീണ്‍ A|എ <pravi.a@gmail.com>\n"
+"Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
+"discuss@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Malayalam\n"
+"X-Poedit-Country: INDIA\n"
 
 #. Type: text
 #. Description
@@ -35,7 +37,7 @@ msgstr "ദയവായി കാത്തിരിക്കുക..."
 #. Description
 #: ../partman-auto.templates:7
 msgid "Computing the new partitions..."
-msgstr "പുതിയ ഭാഗങ്ങള്‍ കണക്കുകൂട്ടിക്കൊണ്ടിരിക്കുന്നു..."
+msgstr "പുതിയ ഭാഗങ്ങള്‍ കണക്കുകൂട്ടിക്കൊണ്ടിരിയ്ക്കുന്നു..."
 
 #. Type: error
 #. Description
@@ -44,7 +46,7 @@ msgid ""
 "This probably happened because the selected disk or free space is too small "
 "to be automatically partitioned."
 msgstr ""
-"ഒരു പക്ഷേ തിരഞ്ഞെടുത്ത ഡിസ്കോ അല്ലെങ്കില്‍ ഫ്രീ സ്പേയ്സോ ഇടപെടലില്ലാതെ വിഭജിക്കാന്‍ "
+"ഒരു പക്ഷേ തെരഞ്ഞെടുത്ത ഡിസ്കോ അല്ലെങ്കില്‍ ഫ്രീ സ്പേയ്സോ ഇടപെടലില്ലാതെ വിഭജിക്കാന്‍ "
 "പറ്റുന്നതിനേക്കാള്‍ ചെറുതായത് കൊണ്ടാകാം ഇത് സംഭവിച്ചത്."
 
 #. Type: error
@@ -76,122 +78,25 @@ msgstr ""
 "വിഭജനത്തില്‍, പിന്നീട് ഓടിച്ച് നോക്കിയതിന് ശേഷം അന്തിമഫലത്തില്‍ ആവശ്യമായ മാറ്റങ്ങള്‍ വരുത്താന്‍ "
 "നിങ്ങള്‍ക്ക് ഒരവസരമുണ്ട്."
 
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-msgid "Remove existing logical volume data?"
-msgstr "നേരത്തെയുള്ള ലോജിക്കല്‍ വാള്യ ഡാറ്റ എടുത്ത് കളയണോ?"
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-#, fuzzy
-msgid ""
-"The selected device already contains the following LVM logical volumes, "
-"volume groups and physical volumes which are about to be removed:"
-msgstr ""
-"തിരഞ്ഞെടുത്ത ഉപകരണം നേരത്തെ തന്നെ ഒരു മുന്‍ LVM ഇന്‍സ്റ്റലേഷനില്‍ നിന്നുമുള്ള ലോജിക്കല്‍ വാള്യങ്ങളും "
-"വാള്യം ഗ്രൂപ്പുകളും അല്ലെങ്കില്‍ രണ്ടും ഉള്ളതാണെങ്കില്‍ എതെങ്കിലും ഭാഗങ്ങള്‍ സൃഷ്ടിക്കുന്നതിന് മുന്‍പായി "
-"അവ ഡിസ്കില്‍ നിന്നും എടുത്ത് കളയേണ്ടതുണ്ട്."
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-msgid "Logical volume(s) to be removed: ${LVTARGETS}"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-#, fuzzy
-msgid "Volume group(s) to be removed: ${VGTARGETS}"
-msgstr "നീക്കം ചെയ്യേണ്ട വാള്യം ഗ്രൂപ്പ്:"
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-msgid "Physical volume(s) to be removed: ${PVTARGETS}"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:36
-#, fuzzy
-msgid ""
-"Note that this will permanently erase any data currently on the logical "
-"volumes."
-msgstr ""
-"ഇത് ലോജിക്കല്‍ വാള്യങ്ങളിലെ ഇപ്പോഴുള്ള ഏത് ഡാറ്റയും എന്നെന്നേക്കുമായി മായ്ച് കളയുമെന്നും പ്രത്യേകം "
-"ഓര്‍ക്കുക."
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:52
-#, fuzzy
-msgid "Remove existing crypto volume data?"
-msgstr "നേരത്തെയുള്ള ലോജിക്കല്‍ വാള്യ ഡാറ്റ എടുത്ത് കളയണോ?"
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:52
-msgid ""
-"The selected device already contains a crypto volume which is about to be "
-"removed."
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:52
-msgid "The following crypto volume will be removed: ${TARGET}"
-msgstr ""
-
-#. Type: boolean
-#. Description
-#: ../partman-auto.templates:52
-#, fuzzy
-msgid ""
-"Note that this will also permanently erase any data currently on the crypto "
-"volume."
-msgstr ""
-"ഇത് ലോജിക്കല്‍ വാള്യങ്ങളിലെ ഇപ്പോഴുള്ള ഏത് ഡാറ്റയും എന്നെന്നേക്കുമായി മായ്ച് കളയുമെന്നും പ്രത്യേകം "
-"ഓര്‍ക്കുക."
-
-#. Type: error
-#. Description
-#: ../partman-auto.templates:64
-msgid "LVM physical volume already exists on the selected device"
-msgstr "തിരഞ്ഞെടുത്ത ഉപകരണത്തില്‍ LVM ഭൌതിക വാള്യം നേരത്തെ തന്നെ നിലവിലുണ്ട്"
-
-#. Type: error
-#. Description
-#: ../partman-auto.templates:64
-msgid ""
-"The selected device already contains one or more LVM physical volumes which "
-"cannot be removed. It is therefore not possible to automatically partition "
-"this device."
-msgstr ""
-"തിരഞ്ഞെടുത്ത ഉപകരണം കളയാന്‍ പറ്റാത്ത ഒന്നോ അതിലതികമോ LVM ഭൌതിക വാള്യങ്ങള്‍ നേരത്തെ തന്നെ "
-"ഉള്‍ക്കൊള്ളുന്നതാണ്.  അതുകൊണ്ടുതന്നെ ഈ ഉപകരണത്തെ ഇടപെടലില്ലാതെ വിഭജിക്കാന്‍ സാധ്യമല്ല."
-
 #. Type: select
 #. Description
-#: ../partman-auto.templates:82
+#: ../partman-auto.templates:46
 msgid "Partitioning method:"
 msgstr "വിഭജന രീതി:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:82
+#: ../partman-auto.templates:46
 msgid ""
 "If you choose guided partitioning for an entire disk, you will next be asked "
 "which disk should be used."
 msgstr ""
-"നിങ്ങള്‍ മുഴുവന്‍ ഡിസ്കിനും സഹായത്തോടെയുള്ള വിഭജനം തിരഞ്ഞെടുത്തെങ്കില്‍, ഏത് ഡിസ്കാണ് "
+"നിങ്ങള്‍ മുഴുവന്‍ ഡിസ്കിനും സഹായത്തോടെയുള്ള വിഭജനം തെരഞ്ഞെടുത്തെങ്കില്‍, ഏത് ഡിസ്കാണ് "
 "ഉപയോഗിക്കേണ്ടത് എന്ന് അടുത്തതായി നിങ്ങളോട് ചോദിക്കും."
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:97
+#: ../partman-auto.templates:61
 msgid "Partitioning scheme:"
 msgstr "വിഭജന പദ്ധതി:"
 
@@ -203,129 +108,129 @@ msgstr "വിഭജന പദ്ധതി:"
 #.
 #. It is followed by a variable giving the chosen disk, hence the colon
 #. at the end of the sentence. Please keep it.
-#: ../partman-auto.templates:97
+#: ../partman-auto.templates:61
 msgid "Selected for partitioning:"
-msgstr "വിഭജനത്തിന് തിരഞ്ഞെടുത്തിരിക്കുന്നു:"
+msgstr "വിഭജനത്തിന് തെരഞ്ഞെടുത്തിരിക്കുന്നു:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:97
+#: ../partman-auto.templates:61
 msgid ""
 "The disk can be partitioned using one of several different schemes. If you "
 "are unsure, choose the first one."
 msgstr ""
 "പല വ്യത്യസ്ത പദ്ധതികളിലേതെങ്കിലും ഉപയോഗിച്ച് ഡിസ്ക് വിഭജിക്കാവുന്നതാണ്. നിങ്ങള്‍ക്കുറപ്പില്ലെങ്കില്‍ "
-"ആദ്യത്തേത് തിരഞ്ഞെടുക്കുക."
+"ആദ്യത്തേത് തെരഞ്ഞെടുക്കുക."
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:107
+#: ../partman-auto.templates:71
 msgid "Unusable free space"
 msgstr "ഉപയോഗിക്കാനാകാത്ത ഫ്രീ സ്പേയ്സ്"
 
 #. Type: error
 #. Description
-#: ../partman-auto.templates:107
+#: ../partman-auto.templates:71
 msgid ""
 "Partitioning failed because the chosen free space may not be used. There are "
 "probably too many (primary) partitions in the partition table."
 msgstr ""
-"തിരഞ്ഞെടുത്ത ഫ്രീ സ്പേയ്സ് ഉപയോഗിക്കാന്‍ പറ്റാത്തതിനാല്‍ വിഭജനം പരാജയപ്പെട്ടു. ഒരു പക്ഷേ വിഭജന "
+"തെരഞ്ഞെടുത്ത ഫ്രീ സ്പേയ്സ് ഉപയോഗിക്കാന്‍ പറ്റാത്തതിനാല്‍ വിഭജനം പരാജയപ്പെട്ടു. ഒരു പക്ഷേ വിഭജന "
 "പട്ടികയില്‍ കൂടുതല്‍ ഭാഗങ്ങള്‍ (പ്രാഥമികം) ഉണ്ടായിരിക്കാം."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:126
+#: ../partman-auto.templates:90
 msgid "Guided partitioning"
 msgstr "സഹായത്തോടെയുള്ള വിഭജനം"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:131
+#: ../partman-auto.templates:95
 msgid "Guided - use the largest continuous free space"
-msgstr "സഹായത്തോടെയുള്ള - ഏറ്റവും വലിയ തുടര്‍ചയായ ഫ്രീ സ്പേയ്സ് ഉപയോഗിക്കുക"
+msgstr "സഹായത്തോടെയുള്ള - ഏറ്റവും വലിയ തുടര്‍ചയായ ഫ്രീ സ്പേയ്സ് ഉപയോഗിയ്ക്കുക"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:136
+#: ../partman-auto.templates:100
 msgid "Guided - use entire disk"
-msgstr "സഹായത്തോടെയുള്ള - ഡിസ്ക് മുഴുവനും ഉപയോഗിക്കുക"
+msgstr "സഹായത്തോടെയുള്ള - ഡിസ്ക് മുഴുവനും ഉപയോഗിയ്ക്കുക"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:141
+#: ../partman-auto.templates:105
 msgid "Select disk to partition:"
-msgstr "വിഭജിക്കേണ്ട ഡിസ്ക് തിരഞ്ഞെടുക്കുക:"
+msgstr "വിഭജിക്കേണ്ട ഡിസ്ക് തെരഞ്ഞെടുക്കുക:"
 
 #. Type: select
 #. Description
-#: ../partman-auto.templates:141
+#: ../partman-auto.templates:105
 msgid ""
 "Note that all data on the disk you select will be erased, but not before you "
 "have confirmed that you really want to make the changes."
 msgstr ""
-"നിങ്ങള്‍ തിരഞ്ഞെടുക്കുന്ന ഡിസ്കിലെ മുഴുവന്‍ ഡാറ്റയും മായ്ച് കളയുന്നതായിരിക്കും എന്ന് മനസ്സിലാക്കുക, "
+"നിങ്ങള്‍ തെരഞ്ഞെടുക്കുന്ന ഡിസ്കിലെ മുഴുവന്‍ ഡാറ്റയും മായ്ച് കളയുന്നതായിരിയ്ക്കും എന്ന് മനസ്സിലാക്കുക, "
 "പക്ഷേ മാറ്റം വരുത്തണം എന്ന് നിങ്ങള്‍ ശരിക്കും ഉറപ്പാക്കിന്നതിന് മുന്‍പല്ല."
 
 #. Type: multiselect
 #. Description
-#: ../partman-auto.templates:148
+#: ../partman-auto.templates:112
 msgid "Select disk(s) to partition:"
-msgstr "വിഭജിക്കേണ്ട ഡിസ്കുകള്‍ തിരഞ്ഞെടുക്കുക:"
+msgstr "വിഭജിക്കേണ്ട ഡിസ്കുകള്‍ തെരഞ്ഞെടുക്കുക:"
 
 #. Type: multiselect
 #. Description
-#: ../partman-auto.templates:148
+#: ../partman-auto.templates:112
 msgid ""
 "Note that all data on the disk(s) you select will be erased, but not before "
 "you have confirmed that you really want to make the changes."
 msgstr ""
-"നിങ്ങള്‍ തിരഞ്ഞെടുക്കുന്ന ഡിസ്കുകളിലെ മുഴുവന്‍ ഡാറ്റയും മായ്ച് കളയുന്നതായിരിക്കും എന്ന് മനസ്സിലാക്കുക, "
+"നിങ്ങള്‍ തെരഞ്ഞെടുക്കുന്ന ഡിസ്കുകളിലെ മുഴുവന്‍ ഡാറ്റയും മായ്ച് കളയുന്നതായിരിയ്ക്കും എന്ന് മനസ്സിലാക്കുക, "
 "പക്ഷേ മാറ്റം വരുത്തണം എന്ന് നിങ്ങള്‍ ശരിക്കും ഉറപ്പാക്കുന്നതിന് മുന്‍പല്ല."
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
 #. This is a method for partioning - as in guided (automatic) versus manual
-#: ../partman-auto.templates:156
+#: ../partman-auto.templates:120
 msgid "Manual"
 msgstr "തന്നത്താന്‍"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:161
+#: ../partman-auto.templates:125
 msgid "Automatically partition the free space"
 msgstr "ഇടപെടലില്ലാതെ ഫ്രീ സ്പേയ്സിനെ വിഭജിക്കുക"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:166
+#: ../partman-auto.templates:130
 msgid "All files in one partition (recommended for new users)"
 msgstr "എല്ലാ ഫയലുകളും ഒറ്റ ഭാഗത്ത്(പുതിയ ഉപയോക്താക്കള്‍ക്ക് ശുപാര്‍ശ ചെയ്തിരിക്കുന്നു)"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:171
+#: ../partman-auto.templates:135
 msgid "Separate /home partition"
 msgstr "വേറിട്ട /home ഭാഗം"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:176
+#: ../partman-auto.templates:140
 msgid "Separate /home, /usr, /var, and /tmp partitions"
 msgstr "വേറിട്ട /home, /usr, /var, /tmp എന്നീ ഭാഗങ്ങള്‍"
 
 #. Type: text
 #. Description
 #. TRANSLATORS: This is a menu entry. Keep in under 55 columns/characters
-#: ../partman-auto.templates:181
+#: ../partman-auto.templates:145
 msgid "Small-disk (< 1GB) partitioning scheme"
 msgstr "ചെറിയ-ഡിസ്ക് (< 1GB) വിഭജന പദ്ധതി"
 

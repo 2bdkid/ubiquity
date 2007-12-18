@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /lib/partman/definitions.sh
+. /lib/partman/lib/base.sh
 
 dev=$1
 id=$2
@@ -19,4 +19,3 @@ case "$type" in
 	printf "auto\t${RET}\n"
 	;;
 esac
-

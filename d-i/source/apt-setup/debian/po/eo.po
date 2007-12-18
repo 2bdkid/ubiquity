@@ -3,9 +3,8 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of eo.po to Esperanto 
-# Esperanto messages for debian-installer.
-# Copyright (C) 2005,2006 Software in the Public Interest, Inc.
+# translation of Debian Installer templates to Esperanto.
+# Copyright (C) 2005-2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 # Samuel Gimeno <sgimeno@gmail.com>, 2005.
@@ -14,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2007-03-15 11:26+0100\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-10-13 13:48+0200\n"
 "Last-Translator: Serge Leblanc <serge.leblanc@wanadoo.fr>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +27,7 @@ msgstr ""
 #. MUST be kept below 55 characters/columns
 #: ../apt-setup-udeb.templates:5
 msgid "Configure the package manager"
-msgstr "Akomodu la pakan administrilon"
+msgstr "Akomodi la pakan administrilon"
 
 #. Type: text
 #. Description
@@ -56,32 +55,96 @@ msgstr "Skani lokajn deponejojn..."
 msgid "Scanning the security updates repository..."
 msgstr "Skani la deponejon de la sekura ĝisdatigo..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Neeblas atingi sekurajn ĝisdatigojn"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "Skani la deponejon de la volatila ĝisdatigo..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"La sekurajn ĝisdatigojn sur ${SECURITY_HOST} ne eblas atingi, do tiuj "
-"ĝisdatigoj ne estos nun disponeblaj. Vi pli malfrue devu esplori tion."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Neeblas atingi ĝisdatigojn"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Malaktivaj enirejoj por la servilo ${SECURITY_HOST} estis aldonitaj en '/etc/"
-"apt/sources.list' dosiero."
+"La '${HOST}'-deponejo ne estas atingebla, tiel la ĝisdatigoj ne estos "
+"disponeblaj al vi ĉi foje. Vi devu poste esplori tion."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"Malaktivaj enirejoj por ${HOST} estis aldonitaj al la '/etc/apt/sources."
+"list'-dosiero."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "sekuraj ĝisdatigoj (el ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "volatilaj ĝisdatigoj (el ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Uzotaj servoj:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debiano posedas du servojn provizantajn freŝdatajn eldonojn: sekura kaj "
+"volatila."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"Sekura ĝisdatigo permesas gardi vian sistemon sekuritan kontraŭ atakoj. Oni "
+"nepre konsilas aktivigi ĉi tiun servon."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Volatila ĝisdatigo provizas freŝdatajn eldonojn de ofte ŝanĝitaj programoj, "
+"kiuj perdus iliajn interesojn se oni ne uzas la lastajn versiojn. Ekzemple, "
+"la signumoj por la kantraŭvirusaj programoj. Tiu servo ne estas disponebla "
+"en la 'stable' kaj 'oldstable'-distribuo."
 
 #. Type: text
 #. Description
@@ -103,6 +166,13 @@ msgid ""
 "failed."
 msgstr ""
 "'apt'-akomoda klopodo por instali pluajn pakojn el lumdisko malsukcesis."
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "Malaktivado de la 'netinst'-lumdisko en la dosiero 'sources.list'..."
 
 #. Type: text
 #. Description
@@ -214,13 +284,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "Uzu reta spegularkivon?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -230,13 +300,80 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Daŭrigu sen retan spegularkivon?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Neniu elektita reta spegularkivo."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"Se vi instalas per 'netinst'-lumdisko la sistemon kaj vi ne uzas la retan "
-"spegularkivon, la instalota sistemo estos baza."
+"Se vi instalas la sistemon per 'netinst'-lumdisko kaj vi ne uzas la retan "
+"spegularkivon, tiam la instalota sistemo estos baza kaj mininuma."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Vi plenumas instaladon per 'netinst'-lumdisko permesanta nur instaladon de "
+"mininuma baza sistemo. Uzu spegularkivon por instali plian kompletan "
+"sistemon."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Vi plenumas instaladon per lumdisko entenanta limitan elekton de pakoj. Se "
+"vi havas rapidan kaj alkvalitan interretan konekton, kaj volas instali "
+"grafikan labortablon, bonvolu uzi retan spegularkivon."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"Notu ke la uzado de spegularkivo povas kaŭzi la elŝutadon de granda kvanto "
+"da datumoj dum la sekvonta instaletapo. Alternative, vi povas daŭri sen "
+"spegularkivo kaj instali la mankajn pakojn lokitajn en aliaj lumdiskoj, post "
+"la instalado."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"Vi plenumas instaladon per lumdiskego entenanta larĝan elekton de pakoj. "
+"Kelkaj povas manki (note, kelkaj pakoj permesas administradon de aliaj "
+"lingvoj ol la angla). Se vi havas rapidan kaj alkvalitan interretan "
+"konekton, kaj volas instali grafikan labortablon, bonvolu uzi retan "
+"spegularkivon."
 
 #. Type: boolean
 #. Description

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-05-22 18:36+0200\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-09-29 09:57+0200\n"
 "Last-Translator:  Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team:  Czech <provoz@debian.cz>\n"
 "MIME-Version: 1.0\n"
@@ -53,33 +53,97 @@ msgstr "Prohledávají se lokální archivy..."
 msgid "Scanning the security updates repository..."
 msgstr "Prohledává se archiv s bezpečnostními aktualizacemi..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Nelze získat bezpečnostní aktualizace"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "Prohledává se archiv s rychlými aktualizacemi..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Nelze se připojit k archivu"
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Nelze se připojit k bezpečnostním aktualizacím na ${SECURITY_HOST}, což "
-"znamená, že bezpečnostní aktualizace nyní nebudou dostupné. Situaci byste "
-"měli později prověřit."
+"Nelze se připojit k archivu na ${HOST}, což znamená, že aktualizace balíků "
+"nyní nebudou dostupné. Situaci byste měli později prověřit."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
 msgstr ""
 "Do souboru /etc/apt/sources.list byly přidány zakomentované záznamy pro "
-"${SECURITY_HOST}."
+"${HOST}."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "bezpečnostní opravy (z ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "rychlé aktualizace (z ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Používat služby:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debian má dvě služby, které poskytují aktualizované balíky: bezpečnostní "
+"opravy a rychlé aktualizace."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"Bezpečnostní opravy udržují váš systém chráněný proti útokům. Povolení této "
+"služby je důrazně doporučováno."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Rychlé aktualizace poskytují novější verze balíků, které se mění relativně "
+"často a u nichž by nedostupnost poslední verze znamenala sníženou "
+"použitelnost. Příkladem jsou databáze virových signatur pro antivirové "
+"programy. Tato služba je dostupná pouze pro stabilní a předchozí stabilní "
+"vydání."
 
 #. Type: text
 #. Description
@@ -103,6 +167,13 @@ msgstr "Pokus o nastavení aptu, aby instaloval další balíky z CD, selhal."
 
 #. Type: text
 #. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "Blokuje se netinst CD v sources.list..."
+
+#. Type: text
+#. Description
 #: ../apt-mirror-setup.templates:3
 msgid "Scanning the mirror..."
 msgstr "Prohledává se zrcadlo..."
@@ -123,7 +194,7 @@ msgid ""
 "using, modifying, or sharing it."
 msgstr ""
 "Některý nesvobodný software byl upraven, aby s Debianem pracoval. Přestože "
-"tento software není součástí Debianu, můžete ho naistalovat standardními "
+"tento software není součástí Debianu, můžete ho nainstalovat standardními "
 "příkazy Debianu. Tento software má různé licence, které omezují jeho "
 "použití, modifikaci nebo šíření."
 
@@ -211,13 +282,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "Používat síťové zrcadlo?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -227,13 +298,78 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Pokračovat bez síťového zrcadla?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Nebylo vybráno žádné síťové zrcadlo."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"Jestliže instalujete z malého CD (varianta netinst) a zamítnete použití "
-"síťového zrcadla, skončíte po instalaci jen s minimálním základním systémem."
+"Jestliže instalujete z malého CD (varianta netinst) a nepoužijete síťové "
+"zrcadlo, skončíte po instalaci jen s minimálním základním systémem."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Instalujete z malého CD (varianta netinst), které samo o sobě umožňuje "
+"instalaci pouze minimálního systému. Pro instalaci úplnějšího systému "
+"použijte síťové zrcadlo."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Instalujete z CD, na které se vejde jen omezený počet balíků. Kromě případů, "
+"kdy nemáte rozumné internetové připojení, se doporučuje použít síťové "
+"zrcadlo (obzvláště pokud plánujete instalovat desktopové prostředí)."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"Použití zrcadla může v příštím kroku instalace způsobit stahování větších "
+"objemů dat. Alternativně můžete pokračovat bez zrcadla a nainstalovat "
+"chybějící balíky z ostatních CD kdykoliv po skončení instalace."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"Instalujete z DVD. Přestože DVD obsahuje velké množství balíků, některé "
+"mohou chybět (například balíky pro podporu jazyků jiných než je angličtina). "
+"Máte-li rozumně rychlé připojení do Internetu a plánujete-li instalovat "
+"desktopové prostředí, bývá použití síťového zrcadla vhodnou volbou."
 
 #. Type: boolean
 #. Description

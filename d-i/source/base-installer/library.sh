@@ -754,7 +754,7 @@ EOT
 		fi
 	else
 		echo "deb $APTSOURCE $DISTRIBUTION $COMPONENTS" > /target/etc/apt/sources.list
-		echo "deb $APTSOURCE $DISTRIBUTION-updates $COMPONENTS" > /target/etc/apt/sources.list
+		echo "deb $APTSOURCE $DISTRIBUTION-updates $COMPONENTS" >> /target/etc/apt/sources.list
 		if db_get apt-setup/security_host; then
 			SECMIRROR="$RET"
 		else

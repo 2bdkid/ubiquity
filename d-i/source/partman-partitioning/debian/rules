@@ -38,7 +38,8 @@ install: build
 	debian/install-rc storage_device
 	debian/install-rc active_partition
 	debian/install-rc free_space
-	dh_install resize.sh lib/partman
+	debian/install-rc init.d
+	dh_install lib lib/partman
 
 binary-arch: build install
 	dh_testdir

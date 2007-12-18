@@ -492,6 +492,20 @@ log () {
 # The functions below are not yet documented
 ####################################################################
 
+# Returns free memory in kB
+memfree () {
+	local free buff
+	if [ -e /proc/meminfo ]; then
+		free=$(grep MemFree /proc/meminfo | head -n1 | \
+			sed 's/.*:[[:space:]]*\([0-9]*\).*/\1/')
+		buff=$(grep Buffers /proc/meminfo | head -n1 | \
+			sed 's/.*:[[:space:]]*\([0-9]*\).*/\1/')
+		echo $(($free + $buff))
+	else
+		echo 0
+	fi
+}
+
 # TODO: this should not be global
 humandev () {
     local host bus target part lun idenum targtype scsinum linux
@@ -829,157 +843,6 @@ disable_swap () {
           done
 }
 
-default_disk_label () {
-    if [ -x /bin/archdetect ]; then
-	archdetect=$(archdetect)
-    else
-	archdetect=unknown/generic
-    fi
-    arch=${archdetect%/*}
-    sub=${archdetect#*/}
-    case "$arch" in
-	alpha)
-	    # Load srm_env.o if we can; this should fail on ARC-based systems.
-	    (modprobe srm_env || true) 2> /dev/null
-	    if [ -f /proc/srm_environment/named_variables/booted_dev ]; then
-                # Have SRM, so need BSD disklabels
-		echo bsd
-	    else
-		echo msdos
-	    fi;;	    
-	arm|armel)
-	    case "$sub" in
-		iop32x)
-		    echo msdos;;
-		iop33x)
-		    echo msdos;;
-		ixp4xx)
-		    echo msdos;;
-		riscstation)
-		    echo msdos;;
-		netwinder)
-		    echo msdos;;
-		ads)
-		    echo msdos;;
-		versatile)
-		    echo msdos;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	armeb)
-	    case "$sub" in
-		ixp4xx)
-		    echo msdos;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	amd64)
-	    case "$sub" in
-		mac)
-		    echo gpt;;
-		*)
-		    echo msdos;;
-	    esac;;
-	hppa)
-	    echo msdos;;
-	ia64)
-	    echo gpt;;
-	i386)
-	    case "$sub" in
-		mac)
-		    echo gpt;;
-		*)
-		    echo msdos;;
-	    esac;;
-	m68k)
-	    case "$sub" in
-		amiga)
-		    echo amiga;;
-		atari)
-		    echo UNSUPPORTED;; # atari is unsupported by parted
-		mac)
-		    echo mac;;
-		*vme*)
-		    echo msdos;;
-		q40)
-		    echo UNSUPPORTED;; # (same as atari)
-		sun*)
-	    	    echo sun;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	mips)
-	    case "$sub" in
-		# Indy
-		r4k-ip22 | r5k-ip22 | r8k-ip26 | r10k-ip28)
-		    echo dvh;;
-		# Origin
-		r10k-ip27 | r12k-ip27)
-		    echo dvh;;
-		# O2
-		r5k-ip32 | r10k-ip32 | r12k-ip32)
-		    echo dvh;;
-		# Broadcom SB1 evaluation boards
-		sb1-bcm91250a | sb1a-bcm91480b)
-		    echo msdos;;
-		qemu-mips32)
-		    echo msdos;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	mipsel)
-	    case "$sub" in
-		# DECstation
-		r3k-kn02)
-		    echo msdos;;
-		r4k-kn04)
-		    echo msdos;;
-		# Broadcom SB1 evaluation boards
-		sb1-bcm91250a | sb1a-bcm91480b)
-		    echo msdos;;
-		cobalt)
-		    echo msdos;;
-		bcm947xx)
-		    echo msdos;;
-		qemu-mips32)
-		    echo msdos;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	powerpc)
-	    case "$sub" in
-		apus)
-		    echo amiga;;
-		amiga)
-		    echo amiga;;
-		chrp)
-		    echo msdos;;
-		chrp_rs6k|chrp_ibm)
-		    echo msdos;;
-		chrp_pegasos)
-		    echo amiga;;
-		prep)
-		    echo msdos;;
-		powermac_newworld)
-		    echo mac;;
-		powermac_oldworld)
-		    echo mac;;
-		ps3)
-		    echo msdos;;
-		cell)
-		    echo msdos;;
-		*)
-		    echo UNKNOWN;;
-	    esac;;
-	s390)
-	    echo msdos;;
-	sparc)
-	    echo sun;;
-	*)
-	    echo UNKNOWN;;
-    esac
-}
-
 # Lock a device or partition against further modifications
 partman_lock_unit() {
 	local device message dev testdev
@@ -1157,6 +1020,28 @@ $items"
 			return 0
 		fi
 	fi
+}
+
+commit_changes () {
+	local template
+	template=$1
+
+	for s in /lib/partman/commit.d/*; do
+		if [ -x $s ]; then
+			$s || {
+				db_input critical $template || true
+				db_go || true
+				for s in /lib/partman/init.d/*; do
+					if [ -x $s ]; then
+						$s || return 255
+					fi
+				done
+				return 1
+			}
+		fi
+	done
+
+	return 0
 }
 
 log '*******************************************************'

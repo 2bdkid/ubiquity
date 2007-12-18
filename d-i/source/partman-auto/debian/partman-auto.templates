@@ -30,42 +30,6 @@ _Description: Partitioning method:
  If you choose guided partitioning for an entire disk, you will next be
  asked which disk should be used.
 
-Template: partman-auto/purge_lvm_from_device
-Type: boolean
-Default: false
-_Description: Remove existing logical volume data?
- The selected device already contains the following LVM logical volumes,
- volume groups and physical volumes which are about to be removed:
- .
- Logical volume(s) to be removed: ${LVTARGETS}
- .
- Volume group(s) to be removed: ${VGTARGETS}
- .
- Physical volume(s) to be removed: ${PVTARGETS}
- .
- Note that this will permanently erase any data currently on the
- logical volumes.
-
-Template: partman-auto/purge_crypto_from_device
-Type: boolean
-Default: false
-_Description: Remove existing crypto volume data?
- The selected device already contains a crypto volume which is about
- to be removed.
- .
- The following crypto volume will be removed:
- ${TARGET}
- .
- Note that this will also permanently erase any data currently on the
- crypto volume.
-
-Template: partman-auto/cannot_purge_lvm_from_device
-Type: error
-_Description: LVM physical volume already exists on the selected device
- The selected device already contains one or more LVM physical
- volumes which cannot be removed. It is therefore not possible to
- automatically partition this device.
-
 Template: partman-auto/disk
 Type: string
 Description: for internal use; can be preseeded

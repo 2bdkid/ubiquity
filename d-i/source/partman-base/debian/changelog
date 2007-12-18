@@ -1,3 +1,71 @@
+partman-base (114ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Dec 2007 10:51:32 +0000
+
+partman-base (114) unstable; urgency=low
+
+  * Move definitions.sh to ./lib/base.sh. Temporarily provide a symlink to the
+    old location to ease the transition.
+  * base.sh: add memfree function which returns free memory in kB.
+  * Reorganization of partition label related code to partman-partitioning:
+    - move function default_disk_label from base.sh to disk-label.sh
+    - move init.d/unsupported
+    - move partman/*_label templates
+    - depend on partman-partitioning (>= 54) so other components can just
+      depend on this version of partman-base
+    Part of this change was originally suggested by Jérémy Bobbio.
+  * Only load components for LVM and crypto support when there is sufficient
+    free memory. For crypto this only loads base support components;
+    additional crypto components will only be loaded on demand. Support for
+    guided (encrypted) LVM partitioning is only loaded if partman-auto was
+    already loaded (which it may not be for lowmem installs).
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+
+ -- Frans Pop <fjp@debian.org>  Tue, 11 Dec 2007 13:45:43 +0100
+
+partman-base (113ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Dec 2007 13:29:43 +0000
+
+partman-base (113) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Revert support for erasing encrypted LVM volumes introduced in (106).
+    There are too many problems with it and starting fresh seems better
+    than stacking change on change to fix it.
+  * Don't link against libdl.so.2; according to dpkg-shlibdeps it's not used.
+
+  [ Max Vozeler ]
+  * definitions.sh: Provide commit_changes for other partman packages to use
+    when they need to commit pending changes to disk.
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+
+ -- Frans Pop <fjp@debian.org>  Wed, 05 Dec 2007 13:14:53 +0100
+
+partman-base (112) unstable; urgency=low
+
+  * Add support for the Orion (ARM) platform.
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Thu, 29 Nov 2007 09:19:46 +0100
+
 partman-base (111ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

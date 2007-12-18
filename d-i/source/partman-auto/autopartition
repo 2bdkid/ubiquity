@@ -1,8 +1,8 @@
 #!/bin/sh
 
-. /lib/partman/definitions.sh
-. /lib/partman/recipes.sh
-. /lib/partman/auto-shared.sh
+. /lib/partman/lib/base.sh
+. /lib/partman/lib/recipes.sh
+. /lib/partman/lib/auto-shared.sh
 
 dev=$1
 cd $dev
@@ -13,13 +13,12 @@ target="$(humandev $(cat device)) - $(cat model)"
 
 if [ -z "$2" ]; then
 	# Only one parameter. Being run for initial autopartitioning.
-
 	target="$target: $(longint2human $size)"
 	free_size=$(expr 0000000"$size" : '0*\(..*\)......$') # convert to megabytes
 
 	choose_recipe default "$target" "$free_size" || exit $?
 
-	wipe_disk "$dev" || exit $?
+	auto_init_disk "$dev" || exit $?
 else
 	# Two parameters, being run on selected free space.
 	free_space=$2

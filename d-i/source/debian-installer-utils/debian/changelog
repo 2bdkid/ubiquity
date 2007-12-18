@@ -1,3 +1,36 @@
+debian-installer-utils (1.50ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate ks=*, vga=*, or break=* to installed
+      system.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 03 Dec 2007 12:41:36 +0000
+
+debian-installer-utils (1.50) unstable; urgency=low
+
+  [ Frans Pop ]
+  * register-module: remove support for obsolete modutils and for no longer
+    used type chandev.
+  * apt-install: support CD/DVD changing by using debconf-apt-progress.
+    To make media changing possible, the installation CD is unmounted in the
+    D-I environment and reloaded after the package installation is finished.
+    This change also makes apt-install use the passthrough instead of the
+    noninteractive frontend.
+    Requires debconf (1.5.16).
+  * chroot-setup.sh: unconditionally check for and mount /target/sys.
+
+  [ Otavio Salvador ]
+  * list-devices: use pendrive as floppy workaround while probing
+    partitions. Closes: #440301.
+
+  [ Colin Watson ]
+  * Just test whether /etc/apt/sources.list exists, not whether it's a file.
+    I got a bug report involving a package that made /etc/apt/sources.list
+    be a symlink to an absolute path which of course doesn't exist in the
+    installer environment...
+
+ -- Frans Pop <fjp@debian.org>  Wed, 21 Nov 2007 15:51:29 +0100
+
 debian-installer-utils (1.49ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

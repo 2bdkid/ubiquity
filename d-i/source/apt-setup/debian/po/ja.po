@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-05-29 10:54+0900\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-09-27 21:17+0900\n"
 "Last-Translator:  Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Debian L10n Japanese <debian-l10n-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,33 +53,96 @@ msgstr "ローカルリポジトリを検査しています..."
 msgid "Scanning the security updates repository..."
 msgstr "セキュリティアップデートリポジトリを検査しています..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "セキュリティアップデートにアクセスできません"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "volatile アップデートリポジトリを検査しています..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"${SECURITY_HOST} のセキュリティアップデートにアクセスできませんでした。そのた"
-"め、これらのアップデートは現時点では利用できるようになっていません。あとで調"
-"査してください。"
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "リポジトリにアクセスできません"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"コメントアウトされた ${SECURITY_HOST} のエントリが /etc/apt/sources.list ファ"
-"イルに追加されました。"
+"${HOST} のリポジトリにアクセスできませんでした。そのため、これらのアップデー"
+"トは現時点では利用できるようになっていません。あとで調査してください。"
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"コメントアウトされた ${HOST} のエントリが /etc/apt/sources.list ファイルに追"
+"加されました。"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "セキュリティアップデート (${SEC_HOST} から)"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "volatile アップデート (${VOL_HOST} から)"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "利用するサービス:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debian には、リリース版の更新を提供する 2 つのサービスがあります: セキュリ"
+"ティと volatile です。"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"セキュリティアップデートは、あなたのシステムを攻撃から安全に保つのに役立ちま"
+"す。このサービスを有効にすることを強くお勧めします。"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"volatile アップデートは、比較的頻繁に変化し、また新しいバージョンがソフトウェ"
+"アの利便性を低下させることはないソフトウェアの、最新のバージョンを提供しま"
+"す。たとえば、ウイルススキャナのウイルスシグネチャなどです。このサービスは、"
+"安定版および旧安定版のリリースのみで利用できます。"
 
 #. Type: text
 #. Description
@@ -101,6 +164,13 @@ msgid ""
 "failed."
 msgstr ""
 "CD から追加パッケージをインストールするための apt 設定の試行に失敗しました。"
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "sources.list 内の netinst CD 行を無効にしています..."
 
 #. Type: text
 #. Description
@@ -213,13 +283,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "ネットワークミラーを使いますか?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -230,13 +300,80 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "ネットワークミラーなしに続けますか?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "ネットワークミラーが選択されませんでした。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
 "netinst CD からインストールしており、ミラーを使うことを選ばない場合には、非常"
 "に小さな基本システムのみという形で終わることになります。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"あなたは、単体では非常に小さな基本システムのインストールだけしかできない "
+"netinst CD からインストールしています。より完全なシステムをインストールするた"
+"めに、ミラーを利用してください。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"あなたは、限定されたパッケージセレクションを収録した CD からインストールして"
+"います。良好なインターネット接続がないというわけでなければ、(特にグラフィカル"
+"デスクトップ環境をインストールすることを計画しているなら) ミラーを利用するこ"
+"とをお勧めします。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"ミラーの利用は、インストールの次のステップで大量のデータがダウンロードされる"
+"ことになることに注意してください。あるいは、ミラーなしに継続して、インストー"
+"ル後にほかの CD から足りないパッケージをインストールすることもできます。"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"あなたは DVD からインストールしています。DVD には多くのパッケージセレクション"
+"が収録されていますが、いくつかは入っていません (特に英語以外の言語をサポート"
+"するのに必要ないくつかのパッケージ)。適度に良好なインターネット接続があるな"
+"ら、ないというわけでなければ、(特にグラフィカルデスクトップ環境をインストール"
+"することを計画しているなら) ミラーを利用することをお勧めします。"
 
 #. Type: boolean
 #. Description

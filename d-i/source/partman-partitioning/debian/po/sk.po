@@ -7,14 +7,17 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
+# Peter Mann
+# Ivan Masár <helix84@centrum.sk>, 2007.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-08-27 10:58+0000\n"
-"PO-Revision-Date: 2007-08-25 21:48+0200\n"
-"Last-Translator: Peter Mann <Peter.Mann@tuke.sk>\n"
-"Language-Team:  Slovak <sk-i18n@lists.linux.sk>\n"
+"POT-Creation-Date: 2007-12-05 22:48+0000\n"
+"PO-Revision-Date: 2007-11-28 00:52+0100\n"
+"Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -186,15 +189,15 @@ msgid ""
 "available free space for this partition.  Use \"max\" as a shortcut for the "
 "maximum allowed size."
 msgstr ""
-"Pomôcka: Skúste použiť \"20%\" (alebo \"30%\", atď.) pre 20% (resp. 30%, "
-"atď.) z minimálnej dostupnej veľkosti pre túto oblasť. Skúste použiť \"max\" "
+"Pomôcka: Skúste použiť „20 %“ (alebo „30 %“, atď.) pre 20 % (resp. 30 %, "
+"atď.) z minimálnej dostupnej veľkosti pre túto oblasť. Skúste použiť „max“ "
 "ako skratku pre maximálnu povolenú veľkosť."
 
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:95
 msgid "Invalid size"
-msgstr "Chybná veľkosť"
+msgstr "Neplatná veľkosť"
 
 #. Type: select
 #. Choices
@@ -260,100 +263,217 @@ msgstr "Príznaky novej oblasti:"
 msgid "Partition name:"
 msgstr "Názov oblasti:"
 
-#. Type: select
+#. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:126
+msgid ""
+"This partitioner doesn't have information about the default type of the "
+"partition tables on your architecture.  Please send an e-mail message to "
+"debian-boot@lists.debian.org with information."
+msgstr ""
+"Nástroj na rozdelenie disku nemá informácie o predvolenom type tabuliek "
+"oblastí na vašej architektúre. Pošlite, prosím, e-mail s takýmito "
+"informáciami na adresu debian-boot@lists.debian.org."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:126
+msgid ""
+"Please note that if the type of the partition table is unsupported by "
+"libparted, then this partitioner will not work properly."
+msgstr ""
+"Uvedomte si, že nástroj na rozdelenie disku nebude pracovať správne, ak nie "
+"je daný typ tabuľky oblastí podporovaný pomocou libparted."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid "Continue with partitioning?"
+msgstr "Pokračovať v rozdeľovaní disku?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"This partitioner is based on the library libparted which doesn't have "
+"support for the partition tables used on your architecture.  It is strongly "
+"recommended that you exit this partitioner."
+msgstr ""
+"Tento nástroj na rozdelenie disku je založený na knižnici libparted, ktorá "
+"nemá podporu pre tabuľky oblastí používané na vašej architektúre. Odporúča "
+"sa nepokračovať ďalej v práci s týmto nástrojom."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"If you can, please help to add support for your partition table type to "
+"libparted."
+msgstr ""
+"Môžete pomôcť pri pridávaní podpory pre vašu tabuľku oblastí do libparted."
+
+#. Type: select
+#. Description
+#: ../partman-partitioning.templates:148
 msgid "Partition table type:"
 msgstr "Typ tabuľky oblastí:"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:126
+#: ../partman-partitioning.templates:148
 msgid "Select the type of partition table to use."
 msgstr "Zvoľte typ tabuľky oblastí, ktorý sa má použiť."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
-#, fuzzy
-msgid "Are you sure you want a bootable logical partition?"
-msgstr "Ste si istí, že to chcete ukončiť?"
+#: ../partman-partitioning.templates:154
+msgid "Create new empty partition table on this device?"
+msgstr "Vytvoriť na tomto zariadení novú prázdnu tabuľku oblastí?"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:154
+msgid ""
+"You have selected an entire device to partition. If you proceed with "
+"creating a new partition table on the device, then all current partitions "
+"will be removed."
+msgstr ""
+"Na rozdelenie ste si vybrali celé zariadenie. Ak budete pokračovať vo "
+"vytváraní novej tabuľky oblastí na tomto zariadení, všetky doterajšie "
+"oblasti na zariadení budú odstránené."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:154
+msgid "Note that you will be able to undo this operation later if you wish."
+msgstr "Neskôr môžete túto operáciu zrušiť."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid "Write a new empty partition table?"
+msgstr "Vytvoriť novú prázdnu tabuľku oblastí?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Because of limitations in the current implementation of the Sun partition "
+"tables in libparted, the newly created partition table has to be written to "
+"the disk immediately."
+msgstr ""
+"Kvôli obmedzeniam v súčasnej implementácii tabuliek oblastí pre Sun v "
+"libparted, bude novovytvorená tabuľka oblastí ihneď zapísaná na disk."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"You will NOT be able to undo this operation later and all existing data on "
+"the disk will be irreversibly removed."
+msgstr ""
+"Neskôr už NEBUDE možné zrušiť túto operáciu a všetky jestvujúce údaje na "
+"disku budú nenávratne vymazané."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Confirm whether you actually want to create a new partition table and write "
+"it to disk."
+msgstr ""
+"Potvrďte, či naozaj chcete vytvoriť novú tabuľku oblastí a zapísať ju na "
+"disk."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
+msgid "Are you sure you want a bootable logical partition?"
+msgstr "Ste si istí, že chcete nastaviť možnosť zavádzania z logickéj oblati?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
 "logical partitions is normally discouraged. Some BIOS versions are known to "
 "fail to boot if there is no bootable primary partition."
 msgstr ""
+"Pokúšate sa nastaviť logickej oblasti príznak, že sa z neho dá zavádzať "
+"systém. Príznak zavádzania má vo všeobecnosti význam iba pre primárne "
+"oblasti, takže sa bežne jeho nastavenie na logické oblasti neodporúča. O "
+"niektorých verziách BIOSu je známe, že neumožnia zavedenie systému, ak "
+"neexistuje primárna oblasť, z ktorej je možné systém zaviesť."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:178
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
 "partitions, then setting this flag may make sense."
 msgstr ""
+"Avšak ak ste so istí, že váš BIOS netrpí týmto problémom alebo používate "
+"vlastného správcu zavádzania systému, ktorý umožňuje zavádzanie z logických "
+"oblastí, nastavenie tohto príznaku môže byť zmysluplné."
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:144
+#: ../partman-partitioning.templates:190
 msgid "Set the partition flags"
 msgstr "Nastavenie príznakov oblasti"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:148
+#: ../partman-partitioning.templates:194
 msgid "Name:"
 msgstr "Názov:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:152
+#: ../partman-partitioning.templates:198
 msgid "Bootable flag:"
 msgstr "Štartovací (boot) príznak:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:156
+#: ../partman-partitioning.templates:202
 msgid "on"
 msgstr "zapnutý"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:160
+#: ../partman-partitioning.templates:206
 msgid "off"
 msgstr "vypnutý"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:164
+#: ../partman-partitioning.templates:210
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Zmeniť veľkosť oblasti (teraz ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:168
+#: ../partman-partitioning.templates:214
 msgid "Copy data from another partition"
 msgstr "Skopírovať údaje z inej oblasti"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:172
+#: ../partman-partitioning.templates:218
 msgid "Delete the partition"
 msgstr "Zmazať oblasť"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:176
+#: ../partman-partitioning.templates:222
 msgid "Create a new partition"
 msgstr "Vytvoriť novú oblasť"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:180
+#: ../partman-partitioning.templates:226
 msgid "Create a new empty partition table on this device"
 msgstr "Vytvoriť novú prázdnu tabuľku oblastí na tomto zariadení"

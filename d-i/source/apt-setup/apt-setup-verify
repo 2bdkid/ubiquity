@@ -35,9 +35,11 @@ saveline () {
 valid () {
 	line="$1"
 
+	[ "${line%%:*}" != "deb cdrom" ] || return 0
+
 	tmp=$($chroot $ROOT tempfile)
 	echo "$line" > $ROOT$tmp
-
+	
 	if $logoutput $chroot $ROOT apt-get -o APT::Get::List-Cleanup=false \
 		-o Dir::Etc::sourcelist=$tmp $ASV_TIMEOUT update
 	then

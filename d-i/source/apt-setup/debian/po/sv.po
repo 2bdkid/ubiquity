@@ -20,10 +20,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-11-19 10:06+0100\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-10-01 08:09+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
-"Language-Team: Swedish <debian-boot@lists.debian.org>\n"
+"Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,33 +62,98 @@ msgstr "Söker igenom lokala förråd..."
 msgid "Scanning the security updates repository..."
 msgstr "Söker igenom förrådet för säkerhetsuppdateringar..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Kan inte nå säkerhetsuppdateringar."
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "Söker igenom det flyktiga uppdateringsförrådet..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"Säkerhetsuppdateringar på ${SECURITY_HOST} kunde inte nås därför kommer de "
-"här uppdateringarna inte vara tillgängliga för dig för tillfället. Du bör "
-"undersöka det här senare."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Kan inte komma åt förrådet"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Bortkommenterade poster för ${SECURITY_HOST} har lagts till i filen /etc/apt/"
-"sources.list."
+"Förrådet på ${HOST} kunde inte nås, därför kommer de här uppdateringarna "
+"inte vara tillgängliga för dig för tillfället. Du bör undersöka det här "
+"senare."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"Bortkommenterade poster för ${HOST} har lagts till i filen /etc/apt/sources."
+"list."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "säkerhetsuppdateringar (från ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "flyktiga uppdateringar (från ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Tjänster att använda:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debian har två tjänster som tillhandahåller uppdateringar till utgåvor: "
+"security (säkerhet) och volatile (flyktiga)."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"Säkerhetsuppdateringar hjälper dig att hålla ditt system säkert mot "
+"attacker. Aktivering av den här tjänsten rekommenderas starkt."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Flyktiga uppdateringar tillhandahåller mer aktuella versioner för "
+"programvara som ändras relativt frekvent och innebörden att inte ha den "
+"senaste versionen kan minska användbarheten för programvaran. Ett exempel är "
+"virussignaturer för ett antivirusprogram. Den här tjänsten är endast "
+"tillgänglig för stabila och \"oldstable\" utgåvor."
 
 #. Type: text
 #. Description
@@ -111,6 +176,13 @@ msgid ""
 msgstr ""
 "Ett försök att konfigurera apt att installera ytterligare paket från cd-"
 "skivan misslyckades."
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "Inaktiverar cd-skiva för nätverkinstallation i sources.list..."
 
 #. Type: text
 #. Description
@@ -218,20 +290,20 @@ msgid ""
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"Installeraren kunde inte hämta en fil från spegeln. Det kan bero på problem "
-"med ditt nätverk eller med spegeln. Du kan välja att försöka hämtningen "
-"igen, välja en annan spegel eller ignorera problemet och fortsätta utan "
-"paket från den här spegeln."
+"Installationsprogrammet kunde inte hämta en fil från spegeln. Det kan bero "
+"på problem med ditt nätverk eller med spegeln. Du kan välja att försöka "
+"hämtningen igen, välja en annan spegelserver eller ignorera problemet och "
+"fortsätta utan paket från den här spegeln."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "Använd en nätverksspegel?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -242,13 +314,82 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Fortsätt utan en nätverksspegel?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Ingen nätverksspegel valdes."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"Om du installerar från en netinst-cd och du väljer att inte använda en "
-"spegel kommer du att få ett mycket minimalt grundsystem som resultat."
+"Om du installerar från en cd-skiva för nätverksinstallation och du väljer "
+"att inte använda en spegelserver kommer det att resultera i att du får ett "
+"mycket minimalt grundsystem."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Du installerar från en cd-skiva för nätverksinstallation, som i sig endast "
+"tillåter installation av ett mycket minimalt grundsystem. Använd en "
+"spegelserver för att installera ett mer komplett system."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Du installerar från en cd-skiva som innehåller ett begränsat paketurval. "
+"Såvida du inte har en snabb internetanslutning så rekommenderas det att du "
+"använder en spegelserver, speciellt om du planerar att installera en grafisk "
+"skrivbordsmiljö."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"Observera att användningen av en spegelserver kan resultera i att en stor "
+"datamängd hämtas ner under nästa steg i installationen. Alternativt kan du "
+"fortsätta utan en spegelserver och installera de saknade paketen från andra "
+"cd-skivor efter installationen."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"Du installerar från en dvd-skiva. Även om dvd-skivan innehåller ett stort "
+"paketurval kan vissa paket saknas (speciellt några paket som behövs för att "
+"ge annat språkstöd än engelska). Om du har en normalsnabb internetanslutning "
+"föreslås det att du använder en spegelserver om du planerar att installera "
+"en grafisk skrivbordsmiljö."
 
 #. Type: boolean
 #. Description

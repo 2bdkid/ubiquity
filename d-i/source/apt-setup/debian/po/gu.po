@@ -8,14 +8,15 @@
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files#
 # Debian Installer translators, please read the D-I i18n documentation
-# in doc/i18n/i18n.txt#
-# Kartik Mistry <kartik.mistry@gmail.com>, 2006.
+# in doc/i18n/i18n.txt
+# Contributor:
+# Kartik Mistry <kartik.mistry@gmail.com>, 2006-2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: d-i\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
 "PO-Revision-Date: 2006-07-10 15:53+0530\n"
 "Last-Translator: Kartik Mistry <kartik.mistry@gmail.com>\n"
 "Language-Team: Gujarati <team@utkarsh.org>\n"
@@ -58,32 +59,93 @@ msgstr "સ્થાનિક રેપોઝીટોરીઓ ચકાસે 
 msgid "Scanning the security updates repository..."
 msgstr "સલામતી સુધારાઓની રેપોઝીટોરીઓ ચકાસે છે..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "સલામતી સુધારાઓ મેળવી શકાતા નથી."
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "વોલેટાઇલ સુધારાઓની રેપોઝીટોરીઓ ચકાસે છે..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"${SECURITY_HOST} પરથી સલામતી સુધારાઓ મેળવી શકાતા નથી, એટલે તે સુધારાઓ આ સમયે તમને "
-"પ્રાપ્ત થઇ શકશે નહી. તમારે આની પાછળથી તપાસ કરવી પડશે."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "રેપોઝીટોરીને મેળવી શકતા નથી"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"${SECURITY_HOST} માટે કોમેન્ટ કરેલી લીટીઓ /etc/apt/sources.list ફાઇલમાં ઉમેરવામાં "
-"આવી છે."
+"${HOST} મેળવી શકાતું નથી, એટલે તે સુધારાઓ આ સમયે તમને પ્રાપ્ત થઇ શકશે નહી.આની તમારે થોડા "
+"સમય પછી તપાસ કરવી પડશે."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"${HOST} માટે કોમેન્ટ કરેલી લીટીઓ /etc/apt/sources.list ફાઇલમાં ઉમેરવામાં આવી છે."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "સલામતી સુધારાઓ (${SEC_HOST} માંથી)"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "વોલેટાઇલ સુધારાઓ (${VOL_HOST} માંથી)"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "ઉપયોગ કરવા માટેની સેવાઓ:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr "ડેબિયન પાસે બે સેવાઓ છે જે રીલીઝ માટે સુધારા પુરા પાડે છે: સલામતી અને વોલેટાઇલ."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"સલામતી સુધારાઓ તમારી સિસ્ટમને આક્રમણો સામે સુરક્ષિત રાખવામાં મદદ કરે છે. આ સેવાને સક્રિય "
+"કરવાનું ખૂબ જ આગ્રહપૂર્વક સૂચવવામાં આવે છે."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"વોલેટાઇલ સુધારાઓ એવા સોફ્ટવેર માટે સુધારાઓ પુરા પાડે છે કે જેઓ વારંવાર ફેરફારો ધરાવે છે અને "
+"તેઓ જો તેમનાં છેલ્લી આવૃતિમાં ન હોય તો તે સોફ્ટવેરની ઉપયોગિતા ઘટાડી શકે છે. દાખલા તરીકે "
+"વાયરસ શોધવા માટેનું વાયરસ સિગ્નેચર. આ સેવા માત્ર સ્ટેબલ અને ઓલ્ડ સ્ટેબલ રીલીઝ માટે જ પ્રાપ્ત "
+"છે."
 
 #. Type: text
 #. Description
@@ -108,6 +170,13 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "નેટઇન્સ્ટ સીડીને sources.list માં અસક્રિય કરે છે..."
+
+#. Type: text
+#. Description
 #: ../apt-mirror-setup.templates:3
 msgid "Scanning the mirror..."
 msgstr "મિરર શોધે છે..."
@@ -116,7 +185,7 @@ msgstr "મિરર શોધે છે..."
 #. Description
 #: ../apt-mirror-setup.templates:8
 msgid "Use non-free software?"
-msgstr "પરતંત્ર સોફ્ટવેર વાપરશો?"
+msgstr "અસ્વતંત્ર સોફ્ટવેર વાપરશો?"
 
 #. Type: boolean
 #. Description
@@ -128,8 +197,9 @@ msgid ""
 "using, modifying, or sharing it."
 msgstr ""
 "કેટલાક મુક્ત ન હોય તેવા સોફ્ટવેર ડેબિયન સાથે કામ કરવા માટે બનાવવામાં આવ્યા છે. આ સોફ્ટવેર "
-"ડેબિયનનો ભાગ ન હોવા છતાં, ડેબિયનનાં પ્રમાણભૂત સાધનો તેને સ્થાપિત કરવા માટે વાપરી શકાય "
-"છે. આ સોફ્ટવેરને અલગ લાયસન્સ છે જે તમને તેનો ઉપયોગ કરતાં, બદલતાં, અથવા વહેંચતા રોકી શકે છે."
+"ડેબિયનનાં ભાગરૂપ ન હોવા છતાં, ડેબિયનનાં પ્રમાણભૂત સાધનો તેને સ્થાપિત કરવા માટે વાપરી "
+"શકાય છે. આ સોફ્ટવેરને અલગ લાયસન્સ છે જે તમને તેનો ઉપયોગ કરતાં, બદલતાં, અથવા વહેંચતા રોકી "
+"શકે છે."
 
 #. Type: boolean
 #. Description
@@ -138,7 +208,7 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
-msgstr "મહેરબાની કરી પસંદ કરો કે તમને આ પ્રાપ્ત થાય તેમ તમે ઇચ્છો છો."
+msgstr "મહેરબાની કરી પસંદ કરો કે તમારે આ પ્રાપ્ત કરવાં છે."
 
 #. Type: boolean
 #. Description
@@ -214,29 +284,93 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "નેટવર્ક મિરર વાપરશો?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
 msgstr ""
-"સીડી-રોમ પર સમાવેશ કરેલ સોફ્ટવેરની અવેજીમાં નેટવર્ક મિરર ઉપયોગ થઇ શકે છે. આ સોફ્ટવેરની "
-"નવી આવૃતિઓ પ્રાપ્ત કરાવી શકે છે."
+"સીડી-રોમ પર સમાવેશ કરેલ સોફ્ટવેરની અવેજીમાં નેટવર્ક મિરર ઉપયોગ થઇ શકે છે. આ તમને "
+"સોફ્ટવેરની નવી આવૃતિઓ પ્રાપ્ત કરાવી શકે છે."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "નેટવર્ક મિરર વગર આગળ વધશો?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "કોઇ નેટવર્ક મિરર મળ્યો નહી."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"જો તમે નેટઇન્સ્ટોલ સીડીમાંથી સ્થાપિત કરી રહ્યા છો અને તમે મિરર પસંદ કર્યો નથી, તો તમને "
-"માત્ર નાની પાયાની સિસ્ટમ અંતમાં મળશે."
+"જો તમે નેટ ઇન્સ્ટોલ સીડીમાંથી સ્થાપિત કરી રહ્યા છો અને તમે મિરર ઉપયોગ કરવાનું પસંદ કર્યુ "
+"નથી, તો તમને અંતમાં માત્ર નાની પાયાની સિસ્ટમ મળશે."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"તમે નેટઇન્સ્ટોલ સીડીમાંથી સ્થાપન કરી રહ્યા છો, જે તમને ફક્ત ઘણી નાની પાયાની સિસ્ટમનું "
+"સ્થાપન કરવા દેશે. સંપૂર્ણ સિસ્ટમનું સ્થાપન કરવા માટે મિરરનો ઉપયોગ કરો."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"જો તમે સીડીમાંથી સ્થાપન કરી રહ્યા છો, જે મર્યાદિત માત્રામાં પસંદગીનાં પેકેજીસ ધરાવે છે. "
+"જ્યાં સુધી તમારી પાસે સારું ઇન્ટરનેટ જોડાણ ન હોય તો, મિરરનો ઉપયોગ સલાહભર્યું છે, ખાસ "
+"કરીને જો તમે ગ્રાફિકલ ડેસ્કટોપ સ્થાપન કરવા માંગતા હોવ."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"ધ્યાનમાં રાખો કે મિરરનો ઉપયોગ કરવાથી મોટી માત્રામાં માહિતી ઇન્ટરનેટ પરથી આગળનાં "
+"પગથિયાંમાં ડાઉનલોડ થશે. વૈકલ્પિક રીતે, તમે મિરર વગર આગળ વધી શકો છો અને કોઇપણ ન મળેલ "
+"પેકેજ બીજી સીડીથી સ્થાપન પછી સ્થાપિત કરી શકો છો."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"જો તમે ડીવીડીમાંથી સ્થાપન કરી રહ્યા છો. ડીવીડી મોટી માત્રામાં પેકેજીસની પસંદગી ધરાવતી "
+"હોવા છતાં, કદાચ કેટલાક (ખાસ કરીને અંગ્રેજી સિવાયની ભાષાઓના આધાર માટેનાં પેકેજ) મળી "
+"શકતાં નથી.જો તમારી પાસે સારું ઇન્ટરનેટ જોડાણ હોય તો, મિરરનો ઉપયોગ સલાહભર્યો છો, જો "
+"તમે ગ્રાફિકલ ડેસ્કટોપનું સ્થાપન કરવાનું વિચારતા હોવ."
 
 #. Type: boolean
 #. Description

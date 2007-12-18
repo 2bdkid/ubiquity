@@ -333,6 +333,12 @@ class Install:
                     # Exit code 3 signals to the frontend that we have
                     # handled this error.
                     sys.exit(3)
+                elif e.errno == errno.ENOSPC:
+                    error_template = 'ubiquity/install/copying_error/no_space'
+                    self.db.subst(error_template, 'ERROR', str(e))
+                    self.db.input('critical', error_template)
+                    self.db.go()
+                    sys.exit(3)
                 else:
                     raise
 
@@ -1071,6 +1077,11 @@ exit 0"""
         try:
             os.unlink('/target/etc/usplash.conf')
         except OSError:
+            pass
+        try:
+            modes = self.db.get('xserver-xorg/config/display/modes')
+            self.set_debconf('xserver-xorg/config/display/modes', modes)
+        except debconf.DebconfError:
             pass
 
         try:

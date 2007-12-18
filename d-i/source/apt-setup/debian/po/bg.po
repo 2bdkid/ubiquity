@@ -3,24 +3,26 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
+# translation of bg.po to Bulgarian
 # Bulgarian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+#
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
-# Damyan Ivanov <dam@modsoftsys.com>, 2006.
-#
+# Damyan Ivanov <dam@modsoftsys.com>, 2006, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-10-31 12:37+0200\n"
-"Last-Translator:  Damyan Ivanov <dam@modsoftsys.com>\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-10-02 13:05+0300\n"
+"Last-Translator: Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: text
 #. Description
@@ -56,33 +58,97 @@ msgstr "Сканиране за локално хранилище..."
 msgid "Scanning the security updates repository..."
 msgstr "Сканиране за хранилище с обновявания по сигурността..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Няма достъп до обновените пакети, засягащи сигурността"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "Сканиране за хранилище с бързи обновявания..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"Обновени пакети, засягащи сигурността, не могат да бъдат достигнати в "
-"${SECURITY_HOST}, така че тези обновявания няма да бъдат налични в настоящия "
-"момент от време. Трябва да проучите този въпрос по-късно."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Грешка при достъп до хранилището"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Коментирани редове за ${SECURITY_HOST} са добавени към файла /etc/apt/"
-"sources.list."
+"Хранилището на ${HOST} не може да бъде достигнато. Поради тази причина "
+"обновявания от него няма да бъдат налични в настоящия момент. Трябва да "
+"проучите този въпрос по-късно."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"Коментирани редове за ${HOST} са добавени към файла /etc/apt/sources.list."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "обновявания по сигурността (от ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "бързи обновявания (от ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Източници на обновявания:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Дебиан поддържа два източника на обновявания: обновявания по сигурността и "
+"„бързи“ обновявания."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"Обновяванията по сигурността помагат за по-сигурната работа на системата. "
+"Разрешаването им е силно препоръчително."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Бързите обновявания предлагат осъвременени версии на програми, които се "
+"променят относително често и при които често е необходимо използването на "
+"най-новата версия за да не се губи функционалност. Примерни такива програми "
+"са програмите за откриване на вируси. Това хранилище е на разположение само "
+"за дистрибуциите stable и oldstable."
 
 #. Type: text
 #. Description
@@ -105,6 +171,13 @@ msgid ""
 msgstr ""
 "Провален е опитът за настройване на apt, така че да инсталира допълнителни "
 "пакети от компактдиск."
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "Забраняване на netinst CD в sources.list..."
 
 #. Type: text
 #. Description
@@ -220,13 +293,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "Използване на огледален сървър?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -236,14 +309,80 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Продължаване без използване на огледален сървър?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Не е избран огледален сървър."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
 "Ако инсталирате от CD за мрежова инсталация и решите да не използвате "
-"огледален сървър, новоинсталираната Ви система ще съдържа само ограничен "
-"брой базови пакети."
+"огледален сървър, система ще съдържа само ограничен брой базови пакети."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Компактдискът, който използвате за инсталиране (netinst) съдържа само "
+"минимална базова система. Използвайте огледало за инсталирането на "
+"останалата част от системата."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Инсталирате от компактдиск, съдържащ ограничен брой пакети. Освен в случай "
+"на ограничена мрежова свързаност, за инсталиране на останалата част от "
+"системата се препоръчва използването на огледало, особено ако планирате да "
+"инсталирате графична работна среда."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"Използването на огледало може да доведе то изтеглянето на голям обем "
+"информация по време на следващата стъпка на инсталацията. Можете да "
+"продължите и без огледало, като инсталирате допълнителните пакети след "
+"приключване на инсталацията от други компактдискове."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"DVD-то, от което инсталирате съдържа голям набор от пакети, но някои, "
+"особено тези за поддръжка на езици, различни от английски може да липсват. "
+"Ако имате добра връзка с Интернет се препоръчва използването на огледало, "
+"особено ако планирате да инсталирате графична работна среда."
 
 #. Type: boolean
 #. Description

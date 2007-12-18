@@ -1,3 +1,40 @@
+partman-efi (14ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Automatically use existing EFI system partitions on Intel Macs as EFI
+      boot partitions.
+    - Create fat32 EFI partitions with the name "EFI System Partition" by
+      default on Intel Macs.
+    - choose_method/efi/do_option: Make sure no mountpoint is set.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Dec 2007 11:28:33 +0000
+
+partman-efi (14) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Move sanity-checking scripts from finish.d to check.d. Requires
+    partman-base 106.
+  * Use 'mkdir -p' rather than more awkward test-then-create constructions.
+
+  [ Frans Pop ]
+  * Move deletion of SVN directories to install-rc script.
+  * Improve the way install-rc is called.
+  * Add amd64 to supported architectures. Closes: #439660.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Bengali (bn.po) by Jamil Ahmed
+  * Danish (da.po) by Claus Hindsgaul
+  * Basque (eu.po) by Piarres Beobide
+  * Italian (it.po) by Stefano Canepa
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Frans Pop <fjp@debian.org>  Wed, 05 Dec 2007 13:20:33 +0100
+
 partman-efi (13ubuntu2) gutsy; urgency=low
 
   * init.d/efi: Fix reversed logic affecting ia64 systems (LP: #137501).

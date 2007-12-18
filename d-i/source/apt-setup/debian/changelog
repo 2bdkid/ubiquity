@@ -1,3 +1,216 @@
+apt-setup (1:0.31ubuntu2) hardy; urgency=low
+
+  * Fix Debian-style sources.list line that crept back into the security
+    generator (thanks, Timo Aaltonen).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Dec 2007 15:49:34 +0000
+
+apt-setup (1:0.31ubuntu1) hardy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when checking
+      /cdrom/.disk/base_installable.
+    - Enable universe and multiverse by default.
+    - If either restricted or multiverse is enabled, add commented-out lines
+      for the partner archive.
+    - Reduce the mirror verification timeout to 10 seconds.
+  * Use archive.ubuntu.com as the default source mirror for ports
+    architectures.
+  * Disable the volatile service for Ubuntu, and don't ask the
+    apt-setup/services-select question.
+  * Always disable the CD at the end of installation if no mirrors are
+    present, even if it's a complete CD. These days it's more irritating
+    than not, and inserting the CD on a desktop system will produce a prompt
+    anyway.
+  * Default to not using a mirror if the user selected to not configure the
+    network in netcfg (copied from Debian mirror generator).
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Dec 2007 16:32:52 +0000
+
+apt-setup (1:0.31) unstable; urgency=low
+
+  * Correct inverted test for CD sources, which caused it to skip verification
+    of mirrors.
+
+  [ Updated translations ]
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 02 Nov 2007 13:19:03 -0400
+
+apt-setup (1:0.30) unstable; urgency=low
+
+  [ Frans Pop ]
+  * apt-setup-verify: 'apt-get update' does not actually verify CD/DVD
+    sources, so skip those.
+  * 50cdrom: rewrite error handling as 'apt-get update' does not verify CDs
+    but 'apt-cdrom add' will return an error if it fails to identify a CD.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Hleb Rubanau
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Korean (ko.po) by Sunjae Park
+  * Dutch (nl.po) by Bart Cornelis
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Otavio Salvador <otavio@debian.org>  Sat, 27 Oct 2007 11:45:54 -0200
+
+apt-setup (1:0.29) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Add back detection if user selected to not configure the network. That
+    check is unrelated to the loop discussed in #442891. Closes: #402645.
+  * Allow to continue without selecting a mirror when choose-mirror exits
+    non-zero. This allows a user to back out of mirror selection in the case
+    of a netinst install without a network being available while still
+    avoiding the "use a mirror" question for all netinst based installs.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Jérémy Bobbio <lunar@debian.org>  Thu, 27 Sep 2007 18:18:15 +0200
+
+apt-setup (1:0.28) unstable; urgency=low
+
+  * Revert detection of unconfigured network in netcfg as it cannot be done
+    reliably. Closes: #443831, reopens #402645.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 24 Sep 2007 14:44:01 -0400
+
+apt-setup (1:0.27) unstable; urgency=low
+
+  * Notice if netcfg was skipped entirely (possibly due to there being no
+    network card), or never asked netcfg/dhcp_options, and behave same
+    as if the user selected to not configure the network in netcfg.
+    Closes: #442891
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 17 Sep 2007 17:34:55 -0400
+
+apt-setup (1:0.26) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Default to not using a mirror if the user selected to not configure the
+    network in netcfg. Mirrors for update services are added commented out
+    without testing for them. Closes: #402645.
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Mon, 20 Aug 2007 13:53:50 -0300
+
+apt-setup (1:0.25) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Fix inconsistency in template names that causes an error during install.
+
+  [ Updated translations ]
+  * Dutch (nl.po) by Bart Cornelis
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 12 Aug 2007 00:06:07 +0200
+
+apt-setup (1:0.24) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove old isinstallable file that was for sarge, we don't support sarge
+    installs anymore.
+  * Add support for updates from volatile.debian.org.
+  * Allow the user to select whether to add security and/or volatile updates.
+    The question is only asked at medium or low priority. Closes: #401432.
+  * For CD installs, ask more selectively whether to use a mirror or not. The
+    question is still mostly asked as even on DVDs some packages belonging to
+    tasks may be missing on the first image.
+    - businesscard: mirror will always be used
+    - netinst: default to true, ask only at medium priority
+    - full CD: default to true, ask at high priority
+    - DVD: default to false, ask at high priority
+    An explanation is displayed that is tailored to the type of CD image.
+  * Disable netinst CD image in sources.list in target before reboot if other
+    sources are present. Closes: #379067.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Jamil Ahmed
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Japanese (ja.po) by Kenshi Muto
+  * Nepali (ne.po) by Nabin Gautam
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 10 Aug 2007 17:32:29 -0300
+
+apt-setup (1:0.23) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Replace 'base-installer' dependency by 'installed-base' virtual
+    package. Needs base-installer 1.81.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 18 Jun 2007 22:15:29 +0100
+
+apt-setup (1:0.22) unstable; urgency=low
+
+  * 50mirror: default suite to codename, similar to what we already do for
+    network-based installs; choose-mirror will determine the actual suite
+    from the codename. Closes: #422442.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Mon, 21 May 2007 16:15:02 +0200
+
 apt-setup (1:0.21ubuntu4) gutsy; urgency=low
 
   * Always verify the mirror, though with a shorter timeout than before (10

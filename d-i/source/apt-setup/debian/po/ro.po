@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2007-01-30 16:22+0200\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-10-26 02:25+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -68,33 +68,99 @@ msgstr "Se examinează arhivele locale..."
 msgid "Scanning the security updates repository..."
 msgstr "Se examinează arhiva cu actualizările de securitate..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Nu se pot accesa actualizările de securitate"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "Se examinează arhiva cu actualizările volatile..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"Actualizările de securitate de pe ${SECURITY_HOST} nu au putut fi accesate, "
-"drept urmare acele actualizări nu vă vor fi făcute disponibile la acest "
-"moment. Ar trebui să investigaţi acestă problemă mai târziu."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Nu se pot accesa arhiva"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Intrări comentate pentru ${SECURITY_HOST} au fost adăugate la fişierul /etc/"
-"apt/sources.list."
+"Arhiva de la ${HOST} nu au putut fi accesată, drept actualizările sale nu vă "
+"vor fi disponibile la acest moment. Ar trebui să investigați acestă problemă "
+"mai târziu."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"Au fost adăugate intrări comentate pentru ${HOST} în fișierul /etc/apt/"
+"sources.list."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "actualizări de securitate (de la ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "actualizări volatile (de la ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Servicii folosite:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debian are două servicii care furnizează actualizări pentru versiunile "
+"lansate: serviciul de securitate și cel volatil."
+
+# puternic recomandat/recomandat cu tărie
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"Actualizările de securitate vă ajută să mențineți securitatea sistemului "
+"împotriva atacurilor. O bună recomandare este să activați acest serviciu."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"Actualiazările volatile oferă versiuni mai noi ale aplicațiilor care se "
+"schimbă relativ frecvent și pentru care absența celei mai noi versiuni ar "
+"putea reduce utilitatea aplicației. Un exemplu îl reprezintă colecțiile de "
+"semnături de viruși pentru un antivirus. Acest serviciu este disponibil doar "
+"pentru versiunea stabilă și pentru versiunea stabilă anterioară."
 
 #. Type: text
 #. Description
@@ -115,8 +181,15 @@ msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
 msgstr ""
-"O încercare de configurare a apt-ului să instaleze pachete adiţionale de pe "
-"CD a eşuat."
+"O încercare de configurare a apt-ului să instaleze pachete adiționale de pe "
+"CD a eșuat."
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "Se dezactivează CD-ul netinst din sources.list..."
 
 #. Type: text
 #. Description
@@ -128,7 +201,7 @@ msgstr "Se examinează situl alternativ..."
 #. Description
 #: ../apt-mirror-setup.templates:8
 msgid "Use non-free software?"
-msgstr "Folosiţi software non-liber?"
+msgstr "Folosiți software non-liber?"
 
 #. Type: boolean
 #. Description
@@ -139,10 +212,10 @@ msgid ""
 "to install it. This software has varying licenses which may prevent you from "
 "using, modifying, or sharing it."
 msgstr ""
-"Unele programe non-libere au fost făcute să funcţioneze cu Debian. Deşi "
+"Unele programe non-libere au fost făcute să funcționeze cu Debian. Deși "
 "aceste programe nu sunt deloc parte din Debian, se pot folosi unelte "
-"standard pentru a le instala. Aceste programe au diverse licenţe care vă pot "
-"împiedica să le folosiţi, să le modificaţi sau să le oferiţi şi la alţii."
+"standard pentru a le instala. Aceste programe au diverse licențe care vă pot "
+"împiedica să le folosiți, să le modificați sau să le oferiți și la alții."
 
 #. Type: boolean
 #. Description
@@ -151,13 +224,13 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
-msgstr "Vă rugăm să alegeţi dacă doriţi să le aveţi totuşi disponibile."
+msgstr "Vă rugăm să alegeți dacă doriți să le aveți totuși disponibile."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:19
 msgid "Use contrib software?"
-msgstr "Folosiţi software contrib?"
+msgstr "Folosiți software contrib?"
 
 #. Type: boolean
 #. Description
@@ -168,7 +241,7 @@ msgid ""
 "software is not a part of Debian, but standard Debian tools can be used to "
 "install it."
 msgstr ""
-"Unele programe adiţionale au fost făcute să funcţioneze cu Debian. Deşi "
+"Unele programe adiționale au fost făcute să funcționeze cu Debian. Deși "
 "aceste programe sunt libere, ele depind de programe non-libere pentru a "
 "opera. Aceste programe nu sunt parte din Debian, dar uneltele standard "
 "Debian se pot folosi pentru a le instala."
@@ -182,7 +255,7 @@ msgstr ""
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
-"Vă rugăm să alegeţi dacă doriţi ca aceste programe să vă fie disponibile."
+"Vă rugăm să alegeți dacă doriți ca aceste programe să vă fie disponibile."
 
 #. Type: select
 #. Choices
@@ -212,7 +285,7 @@ msgstr "Ignorare"
 #. Description
 #: ../apt-mirror-setup.templates:33
 msgid "Downloading a file failed:"
-msgstr "Descărcarea unui fişier a eşuat:"
+msgstr "Descărcarea unui fișier a eșuat:"
 
 #. Type: select
 #. Description
@@ -223,21 +296,21 @@ msgid ""
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"Programul de instalare a eşuat la accesarea sitului alternativ. Aceasta ar "
-"putea fi o problemă cu reţeaua dumneavoastră, sau cu situl alternativ. "
-"Puteţi alege să reîncercaţi descărcarea, să selectaţi un alt sit alternativ, "
-"sau să ignoraţi problema şi să continuaţi fără toate pachetele de pe acest "
+"Programul de instalare a eșuat la accesarea sitului alternativ. Aceasta ar "
+"putea fi o problemă cu rețeaua dumneavoastră, sau cu situl alternativ. "
+"Puteți alege să reîncercați descărcarea, să selectați un alt sit alternativ, "
+"sau să ignorați problema și să continuați fără toate pachetele de pe acest "
 "sit."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
-msgstr "Se foloseşte un sit alternativ?"
+msgstr "Se folosește un sit alternativ?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -248,20 +321,87 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Se continuă fără un sit alternativ?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Nu s-a selectat nici un sit alternativ"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"Dacă instalaţi de pe un CD netinst şi optaţi să nu folosiţi un sit "
-"alternativ instalarea va rezulta într-un sistem de bază minimal."
+"Dacă instalați de pe un CD netinst și optați să nu folosiți un sit "
+"alternativ instalarea va rezulta doar într-un sistem de bază minimal."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Instalați de pe un CD netinst, care în sine permite doar instalarea unui "
+"sistem de bază strict minimal. Folosiți un sit alternativ pentru a instala "
+"un sistem mai complex."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Instalați de pe un CD, care în sine conține o colecție limitată de pachete. "
+"Dacă aveți o conexiune bună internet este recomandat să folosiți un sit "
+"alternativ, mai ales dacă plănuiți să instalați un mediu grafic."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"A se reține că folosirea unui sit alternativ poate face ca o cantitate mare "
+"de date să fie descărcată în timpul următorului pas în procesul de "
+"instalare. Există și posibilitatea să continuați fără un sit alternativ și "
+"să instalați pachetele care lipsesc de pe celelalte CD-uri, după instalare."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"Instalați de pe DVD. Deși DVD-ul conține o colecție mare de pachete, unele "
+"dintre ele ar putea lipsi (cele mai cunoscute fiind câteva pachete necesare "
+"pentru a suporta alte limbi decât limba engleză). Dacă aveți o conexiune la "
+"internet rezonabil de bună, se sugerează folosirea unui sit alternativ dacă "
+"plănuiți să instalați un mediu grafic."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr "Se folosesc programe din componenta \"restricted\"?"
+msgstr "Se folosesc programe din componenta „restricted”?"
 
 #. Type: boolean
 #. Description
@@ -273,18 +413,18 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
-"Unele programe non-libere sunt disponibile sub formă de pachete. Deşi aceste "
-"programe nu sunt parte din distribuţia principală, uneltele standard de "
+"Unele programe non-libere sunt disponibile sub formă de pachete. Deși aceste "
+"programe nu sunt parte din distribuția principală, uneltele standard de "
 "management al pachetelor pot fi folosite pentru a le instala. Aceste "
-"programe au diverse licenţe care ar putea să vă împiedice a le utiliza, a le "
-"modifica sau a le distribuiţi şi la alţii."
+"programe au diverse licențe care ar putea să vă împiedice a le utiliza, a le "
+"modifica sau a le distribuiți și la alții."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr "Se folosesc programe din componenta \"universe\"?"
+msgstr "Se folosesc programe din componenta „universe”?"
 
 #. Type: boolean
 #. Description
@@ -295,8 +435,8 @@ msgid ""
 "free and, though it is not a part of the main distribution, standard package "
 "management tools can be used to install it."
 msgstr ""
-"Unele programe adiţionale sunt disponibile sub formă de pachete. Aceste "
-"programe sunt libere şi, deşi nu sunt parte din distribuţia principală, "
+"Unele programe adiționale sunt disponibile sub formă de pachete. Aceste "
+"programe sunt libere și, deși nu sunt parte din distribuția principală, "
 "uneltele standard de management al pachetelor pot fi folosite pentru a le "
 "instala."
 
@@ -305,7 +445,7 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:28
 msgid "Use software from the \"multiverse\" component?"
-msgstr "Se folosesc programe din componenta \"multiverse\"?"
+msgstr "Se folosesc programe din componenta „multiverse”?"
 
 #. Type: boolean
 #. Description
@@ -318,11 +458,11 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
-"Unele programe non-libere sunt disponibile sub formă de pachete. Deşi aceste "
-"programe nu sunt parte din distribuţia principală, uneltele standard de "
+"Unele programe non-libere sunt disponibile sub formă de pachete. Deși aceste "
+"programe nu sunt parte din distribuția principală, uneltele standard de "
 "management al pachetelor pot fi folosite pentru a le instala. Aceste "
-"programe au diverse licenţe şi (în unele cazuri) sunt acoperite de patente "
-"care ar putea să vă prevină a le utiliza, modifica sau a le împărţi cu alţii."
+"programe au diverse licențe și (în unele cazuri) sunt acoperite de patente "
+"care ar putea să vă prevină a le utiliza, modifica sau a le împărți cu alții."
 
 #. Type: boolean
 #. Description
@@ -341,7 +481,7 @@ msgid ""
 "testing as that contained in the release, it includes newer versions of some "
 "applications which may provide useful features."
 msgstr ""
-"Unele programe au fost portate din ramura de dezvoltare pentru a funcţiona "
-"cu această lansare. Deşi aceste programe nu au trecut prin teste aşa de "
-"complete ca cele din versiunea lansată, ele conţin versiuni mai noi ale unor "
-"aplicaţii care ar putea oferi capabilităţi utile."
+"Unele programe au fost portate din ramura de dezvoltare pentru a funcționa "
+"cu această lansare. Deși aceste programe nu au trecut prin teste așa de "
+"complete ca cele din versiunea lansată, ele conțin versiuni mai noi ale unor "
+"aplicații care ar putea oferi capabilități utile."

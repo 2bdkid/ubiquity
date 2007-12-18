@@ -5,7 +5,7 @@
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
 
-PACKAGE = partman-efi
+export PACKAGE = partman-efi
 
 build:
 # Ye olde no-op.
@@ -26,8 +26,6 @@ install: build
 	debian/install-rc init.d
 	debian/install-rc update.d
 	dh_install parted_names lib/partman
-	rm -rf `find debian/$(PACKAGE) -name CVS`
-	rm -rf `find debian/$(PACKAGE) -name .svn`
 
 binary-indep: build install
 

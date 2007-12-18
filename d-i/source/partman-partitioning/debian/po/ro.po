@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-08-27 10:58+0000\n"
-"PO-Revision-Date: 2007-04-29 17:20+0300\n"
+"POT-Creation-Date: 2007-12-05 22:48+0000\n"
+"PO-Revision-Date: 2007-10-26 02:25+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -92,9 +92,8 @@ msgstr "Eșec la operația de copiere"
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:31
-#, fuzzy
 msgid "The copy operation has been aborted."
-msgstr "Operația de copiere este abandonată."
+msgstr "Operația de copiere a fost abandonată."
 
 #. Type: error
 #. Description
@@ -186,9 +185,8 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../partman-partitioning.templates:78
-#, fuzzy
 msgid "The resize operation has been aborted."
-msgstr "Operația de redimensionare este abandonată."
+msgstr "Operația de redimensionare a fost abandonată."
 
 #. Type: string
 #. Description
@@ -211,8 +209,8 @@ msgid ""
 "available free space for this partition.  Use \"max\" as a shortcut for the "
 "maximum allowed size."
 msgstr ""
-"Pont: Folosiți \"20%\" (sau \"30%\", etc.) pentru 20% (resp. 30%, etc.) din "
-"spațiul liber disponibil pentru acestă partiție. Utilizați \"max\" pentru a "
+"Pont: Folosiți „20%” (sau „30%”, etc.) pentru 20% (resp. 30%, etc.) din "
+"spațiul liber disponibil pentru acestă partiție. Utilizați „max” pentru a "
 "specifică dimensiunea maximă admisă."
 
 #. Type: error
@@ -285,100 +283,220 @@ msgstr "Fanioane pentru noua partiție:"
 msgid "Partition name:"
 msgstr "Numele partiției:"
 
-#. Type: select
+#. Type: boolean
 #. Description
 #: ../partman-partitioning.templates:126
+msgid ""
+"This partitioner doesn't have information about the default type of the "
+"partition tables on your architecture.  Please send an e-mail message to "
+"debian-boot@lists.debian.org with information."
+msgstr ""
+"Acest program de partiționare nu deține informații despre tipul implicit al "
+"tabelelor de partiții pe arhitectura dumneavoastră. Vă rugăm să trimiteți un "
+"mesaj la debian-boot@lists.debian.org cu informații."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:126
+msgid ""
+"Please note that if the type of the partition table is unsupported by "
+"libparted, then this partitioner will not work properly."
+msgstr ""
+"Dacă tipul tabelei de partiții este nesuportat de libparted, atunci acest "
+"program de partiționare nu va funcționa cum trebuie."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid "Continue with partitioning?"
+msgstr "Se continuă partiționarea?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"This partitioner is based on the library libparted which doesn't have "
+"support for the partition tables used on your architecture.  It is strongly "
+"recommended that you exit this partitioner."
+msgstr ""
+"Acest program de partiționare este bazat pe biblioteca libparted care nu are "
+"suport pentru tabelele de partiții utilizate pe arhitectura calculatorului "
+"dumneavoastră. Chiar vi se recomandă să ieșiți din acest program de "
+"partiționare."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:137
+msgid ""
+"If you can, please help to add support for your partition table type to "
+"libparted."
+msgstr ""
+"Dacă puteți, vă rugăm să ajutați la adăugarea suportului pentru tipul "
+"dumneavoastră de tabelă de partiții la biblioteca libparted."
+
+#. Type: select
+#. Description
+#: ../partman-partitioning.templates:148
 msgid "Partition table type:"
 msgstr "Tipul tabelei de partiții:"
 
 #. Type: select
 #. Description
-#: ../partman-partitioning.templates:126
+#: ../partman-partitioning.templates:148
 msgid "Select the type of partition table to use."
 msgstr "Selectați tipul de tabelă de partiții care va fi folosit."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
-#, fuzzy
-msgid "Are you sure you want a bootable logical partition?"
-msgstr "Sunteți sigur(ă) că doriți să ieșiți acum?"
+#: ../partman-partitioning.templates:154
+msgid "Create new empty partition table on this device?"
+msgstr "Creați o nouă partiție goală pe acest dispozitiv?"
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:154
+msgid ""
+"You have selected an entire device to partition. If you proceed with "
+"creating a new partition table on the device, then all current partitions "
+"will be removed."
+msgstr ""
+"Ați selectat un întreg dispozitiv pentru partiționare. Dacă continuați "
+"crearea unei noi tabele de partiții pe dispozitiv, atunci toate partițiile "
+"curente vor fi șterse."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:154
+msgid "Note that you will be able to undo this operation later if you wish."
+msgstr "Veți putea sa anula acestă operație mai târziu, dacă doriți."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid "Write a new empty partition table?"
+msgstr "Se scrie o nouă tabelă de partiții goală?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Because of limitations in the current implementation of the Sun partition "
+"tables in libparted, the newly created partition table has to be written to "
+"the disk immediately."
+msgstr ""
+"Datorită limitărilor din actuala implementare a tabelelor de partiții Sun "
+"din libparted, partiția nou creată trebuie să fie scrisă imediat pe disc."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"You will NOT be able to undo this operation later and all existing data on "
+"the disk will be irreversibly removed."
+msgstr ""
+"NU veți putea să anulați această operație mai târziu și toate datele "
+"existente pe disc vor fi șterse în mod ireversibil."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:164
+msgid ""
+"Confirm whether you actually want to create a new partition table and write "
+"it to disk."
+msgstr ""
+"Confirmați dacă doriți într-adevăr să creați o nouă tabelă de partiții și să "
+"o scrieți pe disc."
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
+msgid "Are you sure you want a bootable logical partition?"
+msgstr ""
+"Sunteți sigur(ă) că doriți o partiție logică cu fanionul de pornire activat?"
+
+#. Type: boolean
+#. Description
+#: ../partman-partitioning.templates:178
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
 "logical partitions is normally discouraged. Some BIOS versions are known to "
 "fail to boot if there is no bootable primary partition."
 msgstr ""
+"Ați încercat să activați fanionul de pornire a unei partiții logice. Acest "
+"fanion este, în genere, util doar pentru partițiile primare, deci activarea "
+"lui pentru partiție logică este, desigur, descurajată. Se cunosc unele "
+"versiuni de BIOS care nu mai pot porni sistemul dacă nu există nici o "
+"partiție primară cu acest fanion activat."
 
 #. Type: boolean
 #. Description
-#: ../partman-partitioning.templates:132
+#: ../partman-partitioning.templates:178
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
 "partitions, then setting this flag may make sense."
 msgstr ""
+"Totuși, dacă BIOS-ul dumneavoastră nu are asemenea probleme sau dacă "
+"folosiți un manager de pornire special care ia în considerare partițiile "
+"logice cu fanionul de pornire activ, atunci acest fanion ar putea fi valid."
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:144
+#: ../partman-partitioning.templates:190
 msgid "Set the partition flags"
 msgstr "Ajustează fanioanele partiției"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:148
+#: ../partman-partitioning.templates:194
 msgid "Name:"
 msgstr "Numele:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:152
+#: ../partman-partitioning.templates:198
 msgid "Bootable flag:"
 msgstr "Fanion de pornire:"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:156
+#: ../partman-partitioning.templates:202
 msgid "on"
 msgstr "activ"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:160
+#: ../partman-partitioning.templates:206
 msgid "off"
 msgstr "inactiv"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:164
+#: ../partman-partitioning.templates:210
 msgid "Resize the partition (currently ${SIZE})"
 msgstr "Redimensionarea partiției (acum ${SIZE})"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:168
+#: ../partman-partitioning.templates:214
 msgid "Copy data from another partition"
 msgstr "Copiază datele de pe altă partiție"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:172
+#: ../partman-partitioning.templates:218
 msgid "Delete the partition"
 msgstr "Șterge partiția"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:176
+#: ../partman-partitioning.templates:222
 msgid "Create a new partition"
 msgstr "Creează o nouă partiție"
 
 #. Type: text
 #. Description
-#: ../partman-partitioning.templates:180
+#: ../partman-partitioning.templates:226
 msgid "Create a new empty partition table on this device"
 msgstr "Creează o nouă tabelă de partiții goală pe acest dispozitiv"

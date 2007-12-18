@@ -14,14 +14,15 @@
 # Jaswinder Singh Phulewala <jaswinderphulewala@yahoo.com>, 2005, 2006.
 # Amanpreet Singh Alam <apbrar@gmail.com>, 2006.
 # A S Alam <apbrar@gmail.com>, 2006.
+# A S Alam <aalam@users.sf.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-12-26 07:47+0530\n"
-"Last-Translator: A S Alam <apbrar@gmail.com>\n"
-"Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-07-18 09:27+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi <punjabi-l10n@lists.sf.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -62,37 +63,98 @@ msgstr "ਲੋਕਲ ਰਿਪੋਜ਼ਟਰੀਆਂ ਦੀ ਜਾਂਚ ਜ�
 msgid "Scanning the security updates repository..."
 msgstr "ਸੁਰੱਖਿਆ ਨਵੀਨੀਕਰਨ ਭੰਡਾਰ ਦੀ ਜਾਂਚ ਹੋ ਰਹੀ ਹੈ..."
 
+#. Type: text
+#. Description
+#: ../apt-setup-udeb.templates:27
+#, fuzzy
+msgid "Scanning the volatile updates repository..."
+msgstr "ਸੁਰੱਖਿਆ ਨਵੀਨੀਕਰਨ ਭੰਡਾਰ ਦੀ ਜਾਂਚ ਹੋ ਰਹੀ ਹੈ..."
+
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
+msgid "Cannot access repository"
 msgstr "ਸੁਰੱਖਿਆ ਨਵੀਨੀਕਰਨ ਨੂੰ ਵੇਖ ਨਹੀਂ ਸਕਦਾ"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
 msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"${SECURITY_HOST} ਉੱਪਰ ਸੁਰੱਖਿਆ ਨਵੀਨੀਕਰਨ ਤੱਕ ਪਹੁੰਚਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ, ਤਾਂ ਕਿ ਉਹ ਨਵੀਨੀਕਰਨ "
+"${SECURITY_HOST} ਉੱਤੇ ਸੁਰੱਖਿਆ ਨਵੀਨੀਕਰਨ ਤੱਕ ਪਹੁੰਚਿਆ ਨਹੀਂ ਜਾ ਸਕਦਾ, ਤਾਂ ਕਿ ਉਹ ਨਵੀਨੀਕਰਨ "
 "ਤੁਹਾਡੇ ਲਈ ਇਸ ਸਮੇਂ ਉਪਲੱਬਧ ਨਹੀਂ ਹੋਣਗੇ। ਤੁਹਾਨੂੰ ਇਸ ਦੀ ਬਾਅਦ ਵਿੱਚ ਜਾਂਚ ਕਰਨੀ ਚਾਹੀਦੀ ਹੈ।"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
+#, fuzzy
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
 msgstr ""
 "${SECURITY_HOST} ਲਈ ਚੁਣੀਆਂ ਇੰਦਰਾਜਾਂ /etc/apt/sources.list ਫਾਇਲ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋ ਗਈਆਂ।"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr ""
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+#, fuzzy
+msgid "Services to use:"
+msgstr "ਨਾਂ-ਸਰਵਰ ਸਿਰਨਾਵਾਂ:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../apt-cdrom-setup.templates:3
 msgid "Scanning the CD-ROM..."
-msgstr "CD-ROM ਦੀ ਜਾਂਚ ਕਰ ਰਿਹਾ ਹੈ..."
+msgstr "CD-ROM ਦੀ ਜਾਂਚ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ..."
 
 #. Type: error
 #. Description
@@ -106,19 +168,26 @@ msgstr "apt ਸੰਰਚਨਾ ਸਮੱਸਿਆਾ"
 msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
-msgstr "CD ਤੋਂ ਵਾਧੂ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਨ ਲਈ apt ਦੀ ਸੰਰਚਨਾ ਅਸਫਲ ਹੋਈ।"
+msgstr "CD ਤੋਂ ਵਾਧੂ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਨ ਲਈ apt ਦੀ ਸੰਰਚਨਾ ਫੇਲ੍ਹ ਹੋਈ।"
+
+#. Type: text
+#. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../apt-mirror-setup.templates:3
 msgid "Scanning the mirror..."
-msgstr "ਪ੍ਰਤੀਬਿੰਬ ਜਾਂਚ ਜਾਰੀ ਹੈ..."
+msgstr "ਈਮੇਜ਼ ਜਾਂਚ ਜਾਰੀ ਹੈ..."
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:8
 msgid "Use non-free software?"
-msgstr "ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਵਰਤੋ?"
+msgstr "ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਵਰਤੋਂ?"
 
 #. Type: boolean
 #. Description
@@ -130,7 +199,7 @@ msgid ""
 "using, modifying, or sharing it."
 msgstr ""
 "ਕੁਝ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਨਾਲ ਵਰਤਣ ਲਈ ਬਣਾਏ ਹਨ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਦਾ ਭਾਗ "
-"ਨਹੀਂ, ਮਿਆਰੀ ਡੇਬੀਅਨ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਇਸ ਸਾਫਟਵੇਅਰ ਦਾ ਵੱਖਰਾ "
+"ਨਹੀਂ, ਸਟੈਂਡਰਡ ਡੇਬੀਅਨ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਇਸ ਸਾਫਟਵੇਅਰ ਦਾ ਵੱਖਰਾ "
 "ਲਾਈਸੈਂਸ ਹੈ ਜੋ ਤੁਹਾਨੂੰ ਵਰਤਣ, ਤਬਦੀਲ ਕਰਨ, ਜਾਂ ਸਾਂਝਾ ਕਰਨ ਤੋਂ ਹਟਾ ਸਕਦਾ ਹੈ।"
 
 #. Type: boolean
@@ -140,13 +209,13 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
 msgid "Please choose whether you want to have it available anyway."
-msgstr "ਕਿਰਪਾ ਕਰਕੇ ਚੁਣੋ ਕਿ ਤੁਸੀਂ ਕਿਸੇ ਵੀ ਹਾਲਤ ਵਿੱਚ ਉਪਲੱਬਧ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
+msgstr "ਚੁਣੋ ਕਿ ਤੁਸੀਂ ਕਿਸੇ ਵੀ ਹਾਲਤ ਵਿੱਚ ਉਪਲੱਬਧ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
 
 #. Type: boolean
 #. Description
 #: ../apt-mirror-setup.templates:19
 msgid "Use contrib software?"
-msgstr "contrib ਸਾਫਟਵੇਅਰ ਵਰਤੋ?"
+msgstr "contrib ਸਾਫਟਵੇਅਰ ਵਰਤੋਂ?"
 
 #. Type: boolean
 #. Description
@@ -157,8 +226,8 @@ msgid ""
 "software is not a part of Debian, but standard Debian tools can be used to "
 "install it."
 msgstr ""
-"ਕੁਝ ਵਾਧੂ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਨਾਲ ਵਰਤਣ ਲਈ ਬਣਾਏ ਹਨ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਕਤ ਹੈਨਹਇਸ ਦੀ ਕਿਰਿਆ "
-"ਲਈ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ। ਇਹ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਦਾ ਭਾਗ ਨਹੀਂ ਹੈ, ਪਰ ੀਂ, ਮਿਆਰੀ "
+"ਕੁਝ ਵਾਧੂ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਨਾਲ ਵਰਤਣ ਲਈ ਬਣਾਏ ਹਨ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਕਤ ਹੈਨਹਇਸ ਦੀ ਕਾਰਵਾਈ "
+"ਲਈ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਤੇ ਨਿਰਭਰ ਕਰਦਾ ਹੈ। ਇਹ ਸਾਫਟਵੇਅਰ ਡੇਬੀਅਨ ਦਾ ਭਾਗ ਨਹੀਂ ਹੈ, ਪਰ, ਸਟੈਂਡਰਡ "
 "ਡੇਬੀਅਨ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹੈ।"
 
 #. Type: boolean
@@ -169,8 +238,7 @@ msgstr ""
 #: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
 msgid ""
 "Please choose whether you want this software to be made available to you."
-msgstr ""
-"ਕਿਰਪਾ ਕਰਕੇ ਚੁਣੋ ਕਿ  ਤੁਸੀਂਇਹ ਸਾਫਟਵੇਅਰ ਆਪਣੇ ਲਈ ਗ ਉਪਲੱ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ। ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ।"
+msgstr "ਚੁਣੋ ਕਿ ਤੁਸੀਂ ਇਹ ਸਾਫਟਵੇਅਰ ਆਪਣੇ ਲਈ ਉਪਲੱਬਧ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ।"
 
 #. Type: select
 #. Choices
@@ -178,7 +246,7 @@ msgstr ""
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Retry"
-msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
+msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼"
 
 #. Type: select
 #. Choices
@@ -186,7 +254,7 @@ msgstr "ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ"
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Change mirror"
-msgstr "ਪ੍ਰਤੀਬਿੰਬ ਤਬਦੀਲ ਕਰੋ"
+msgstr "ਮਿਰਰ ਬਦਲੋ"
 
 #. Type: select
 #. Choices
@@ -194,7 +262,7 @@ msgstr "ਪ੍ਰਤੀਬਿੰਬ ਤਬਦੀਲ ਕਰੋ"
 #. an infinitive form
 #: ../apt-mirror-setup.templates:32
 msgid "Ignore"
-msgstr "ਰੱਦ ਕਰੋ"
+msgstr "ਅਣਡਿੱਠਾ"
 
 #. Type: select
 #. Description
@@ -211,42 +279,97 @@ msgid ""
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"ਇੰਸਟਾਲਰ ਪ੍ਰਤੀਬਿੰਬ ਵਰਤਣ ਕਰਨ ਵਿੱਚ ਅਸਫਲ ਹੈ। ਇਹ ਤੁਹਾਡੇ ਨੈੱਟਵਰਕ ਜਾਂ ਪ੍ਰਤੀਬਿੰਬਦੀ ਮੁਸ਼ਕਿਲ ਹੋ ਸਕਦੀ "
-"ਹੈ। ਤੁਸੀਂ ਮੁੜ ਡਾਊਨਲੋ ਮੁੜਡ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਲਈ, ਵੱਖਰਾ ਪ੍ਰਤੀਬਿੰਬ ਚੁਣਨ ਲਈ, ਮੁਸ਼ਕਿਲ ਜਾਂ ਰੱਦ ਕਰਨ ਇਸ "
-"ਪ੍ਰਤੀਬਿੰਬ ਤੋਂ ਸਭ ਪੈਕੇਜਾਂ ਬਿਨਾਂਂ ਜਾਰੀ ਕਰਨਨ ਵਿਧੀ ਚੁਣਨ ਲਈ ਚੁਣ ਸਕਦੇ ਹੋ।"
+"ਇੰਸਟਾਲਰ ਈਮੇਜ਼ ਵਰਤਣ ਕਰਨ ਵਿੱਚ ਅਸਫਲ ਹੈ। ਇਹ ਤੁਹਾਡੇ ਨੈੱਟਵਰਕ ਜਾਂ ਈਮੇਜ਼ ਦੀ ਮੁਸ਼ਕਿਲ ਹੋ ਸਕਦੀ ਹੈ। ਤੁਸੀਂ "
+"ਮੁੜ ਡਾਊਨਲੋਡ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰਨ ਲਈ, ਵੱਖਰਾ ਈਮੇਜ਼ ਚੁਣਨ ਲਈ, ਮੁਸ਼ਕਿਲ ਜਾਂ ਰੱਦ ਕਰਨ ਇਸ ਈਮੇਜ਼ ਤੋਂ ਸਭ ਪੈਕੇਜਾਂ "
+"ਬਿਨਾਂ ਜਾਰੀ ਕਰਨ ਦਾ ਢੰਗ ਚੁਣਨ ਲਈ ਚੁਣ ਸਕਦੇ ਹੋ।"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
-msgstr "ਇੱਕ ਨੈੱਟਵਰਕ ਪ੍ਰਤੀਬਿੰਬ ਵਰਤਣਾ ਹੈ?"
+msgstr "ਇੱਕ ਨੈੱਟਵਰਕ ਮਿਰੱਰ ਵਰਤਣਾ ਹੈ?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
 msgstr ""
-"ਇੱਕ ਨੈੱਟਵਰਕ ਪ੍ਰਤੀਬਿੰਬ ਨੂੰ CD-ROM ਉੱਤੇ ਉਪਲੱਬਧ ਸਾਫਟਵੇਅਰ ਦੇ ਅਨੁਪੂਰਕ ਦੇ ਤੌਰ ਉੱਤੇ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਇਸ "
-"ਨੂੰ ਸਾਫਟਵੇਅਰ ਦੇ ਨਵੇਂ ਉਪਲੱਬਧ ਵਰਜਨ ਦੇ ਲਈ ਵੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
+"ਇੱਕ ਨੈੱਟਵਰਕ ਈਮੇਜ਼ ਨੂੰ CD-ROM ਉੱਤੇ ਉਪਲੱਬਧ ਸਾਫਟਵੇਅਰ ਦੇ ਅਨੁਪੂਰਕ ਦੇ ਤੌਰ ਉੱਤੇ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ। ਇਸ ਨੂੰ "
+"ਸਾਫਟਵੇਅਰ ਦੇ ਨਵੇਂ ਉਪਲੱਬਧ ਵਰਜਨ ਦੇ ਲਈ ਵੀ ਵਰਤਿਆ ਜਾ ਸਕਦਾ ਹੈ।"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+#, fuzzy
+msgid "Continue without a network mirror?"
+msgstr "ਮੂਲ ਮਾਰਗ (root) ਤੋਂ ਬਿਨਾਂ ਜਾਰੀ ਰੱਖੋ?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+#, fuzzy
+msgid "No network mirror was selected."
+msgstr "ਕੋਈ ਨੈੱਟਵਰਕ ਇੰਟਰਫੇਸ ਨਹੀਂ ਲੱਭਿਆ ਹੈ"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"ਜੇ ਤੁਸੀਂ netinst CD ਤੋਂ ਇੰਸਟਾਲ ਕਰ ਰਹੇ ਹੋ ਅਤੇ ਤੁਸੀਂ ਇੱਕ ਪ੍ਰਤੀਬਿੰਬ ਦੀ ਚੋਣ ਨਹੀਂ ਕੀਤੀ ਤਾਂ ਤੁਹਾਡੇ ਕੋਲ "
+"ਜੇ ਤੁਸੀਂ netinst CD ਤੋਂ ਇੰਸਟਾਲ ਕਰ ਰਹੇ ਹੋ ਅਤੇ ਤੁਸੀਂ ਇੱਕ ਮਿਰੱਰ ਦੀ ਚੋਣ ਨਹੀਂ ਕੀਤੀ ਤਾਂ ਤੁਹਾਡੇ ਕੋਲ "
 "ਸਿਰਫ਼ ਇੱਕਲਾ ਅਧਾਰ ਸਿਸਟਮ ਹੀ ਇੰਸਟਾਲ ਹੋਵੇਗਾ।"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:5
 msgid "Use restricted software?"
-msgstr "ਪਾਬੰਦੀਸ਼ੁਦਾ ਸਾਫਟਵੇਅਰ ਵਰਤੋ?"
+msgstr "ਪਾਬੰਦੀਸ਼ੁਦਾ ਸਾਫਟਵੇਅਰ ਵਰਤਣੇ ਹਨ?"
 
 #. Type: boolean
 #. Description
@@ -258,7 +381,7 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
-"ਪੈਕੇਜ ਵਿੱਚ ਕੁਝ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਉਪਲੱਬਧ ਹੈ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਢਲੀ ਵੰਡ ਦਾ ਹਿੱਸਾ ਨਹੀਂ, ਮਿਆਰੀ "
+"ਪੈਕੇਜ ਵਿੱਚ ਕੁਝ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਉਪਲੱਬਧ ਹੈ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਢਲੀ ਵੰਡ ਦਾ ਹਿੱਸਾ ਨਹੀਂ, ਸਟੈਂਡਰਡ "
 "ਪੈਕੇਜ ਪ੍ਰਬੰਧਕ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਇਸ ਸਾਫਟਵੇਅਰ ਦਾ ਲਾਈਸੈਂਸ ਵੱਖਰਾ ਹੈ ਜੋ "
 "ਤੁਹਾਨੂੰ ਵਰਤਣ, ਤਬਦੀਲ ਕਰਨ, ਜਾਂ ਸਾਂਝਾ ਕਰਨ ਤੋਂ ਹਟਾ ਸਕਦਾ ਹੈ।"
 
@@ -267,7 +390,7 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:17
 msgid "Use software from the \"universe\" component?"
-msgstr "\"universe\" ਹਿੱਸੇ ਤੋਂ ਸਾਫਟਵੇਅਰ ਵਰਤੋ?"
+msgstr "\"universe\" ਹਿੱਸੇ ਤੋਂ ਸਾਫਟਵੇਅਰ ਵਰਤੋਂ?"
 
 #. Type: boolean
 #. Description
@@ -279,7 +402,7 @@ msgid ""
 "management tools can be used to install it."
 msgstr ""
 "ਪੈਕੇਜ ਵਿੱਚ ਵਾਧੂ ਸਾਫਟਵੇਅਰ ਉਪਲੱਬਧ ਹੈ। ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਕਤ ਹੈ ਅਤੇ, ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਢਲੀ ਵੰਡ ਦਾ "
-"ਹਿੱਸਾ ਨਹੀਂ, ਮਿਆਰੀ ਪੈਕੇਜ ਪ੍ਰਬੰਧਕ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ।"
+"ਹਿੱਸਾ ਨਹੀਂ, ਸਟੈਂਡਰਡ ਪੈਕੇਜ ਮੈਨੇਜ਼ਮਿੰਟ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ।"
 
 #. Type: boolean
 #. Description
@@ -299,7 +422,7 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
-"ਪੈਕੇਜ ਵਿੱਚ ਕੁਝ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਉਪਲੱਬਧ ਹੈ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਢਲੀ ਵੰਡ ਦਾ ਹਿੱਸਾ ਨਹੀਂ, ਮਿਆਰੀ "
+"ਪੈਕੇਜ ਵਿੱਚ ਕੁਝ ਨਾ-ਮੁਕਤ ਸਾਫਟਵੇਅਰ ਉਪਲੱਬਧ ਹੈ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਮੁਢਲੀ ਵੰਡ ਦਾ ਹਿੱਸਾ ਨਹੀਂ, ਸਟੈਂਡਰਡ "
 "ਪੈਕੇਜ ਪ੍ਰਬੰਧਕ ਸੰਦ ਇਸ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਵਰਤੇ ਜਾ ਸਕਦੇ ਹਨ। ਇਸ ਸਾਫਟਵੇਅਰ ਦਾ ਲਾਈਸੈਂਸ ਵੱਖਰਾ ਹੈ ਜੋ "
 "ਤੁਹਾਨੂੰ ਵਰਤਣ, ਤਬਦੀਲ ਕਰਨ, ਜਾਂ ਸਾਂਝਾ ਕਰਨ ਤੋਂ ਹਟਾ ਸਕਦਾ ਹੈ।"
 
@@ -308,7 +431,7 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #: ../apt-mirror-setup.templates-ubuntu:41
 msgid "Use backported software?"
-msgstr "ਬੈਕਪੋਰਟਡ ਸਾਫਟਵੇਅਰ ਵਰਤੋ?"
+msgstr "ਬੈਕਪੋਰਟਡ ਸਾਫਟਵੇਅਰ ਵਰਤੋਂ?"
 
 #. Type: boolean
 #. Description
@@ -321,5 +444,5 @@ msgid ""
 "applications which may provide useful features."
 msgstr ""
 "ਕੁਝ ਪੈਕੇਜ ਵਿਕਾਸ ਟਰੀ ਤੋਂ ਸ਼ਾਮਲ ਕੀਤੇ ਹਨ ਤਾਂ ਕਿ ਇਸ ਵੰਡ ਨਾਲ ਕੰਮ ਕਰ ਸਕਣ। ਭਾਵੇਂ ਇਹ ਸਾਫਟਵੇਅਰ ਇਸੇ "
-"ਵੰਡ ਵਿੱਚ ਸ਼ਾਮਲ ਮੁਕੰਮਲ ਜਾਂਚ ਦੁਆਰਾ ਲੰਘੇ ਹਨ, ਇਸ ਵਿੱਚ ਕੁਝ ਕਾਰਜਾਂ ਦੇ ਨਵੇਂ ਵਰਜਨ ਸ਼ਾਮਲ ਹਨ ਜੋ ਵਰਤੋਂ ਯੋਗ "
+"ਵੰਡ ਵਿੱਚ ਸ਼ਾਮਲ ਮੁਕੰਮਲ ਜਾਂਚ ਰਾਹੀਂ ਲੰਘੇ ਹਨ, ਇਸ ਵਿੱਚ ਕੁਝ ਕਾਰਜਾਂ ਦੇ ਨਵੇਂ ਵਰਜਨ ਸ਼ਾਮਲ ਹਨ ਜੋ ਵਰਤੋਂ ਯੋਗ "
 "ਵਿਸ਼ਾਸ਼ਤਾਵਾਂ ਦੇ ਸਕਦੇ ਹਨ।"

@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-01-06 22:47+0100\n"
-"PO-Revision-Date: 2006-05-25 18:41+0000\n"
+"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"PO-Revision-Date: 2007-09-27 21:41+0100\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
 "MIME-Version: 1.0\n"
@@ -53,33 +53,97 @@ msgstr "A pesquisar os repositórios locais..."
 msgid "Scanning the security updates repository..."
 msgstr "A pesquisar o repositório de actualizações de segurança..."
 
-#. Type: error
+#. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid "Cannot access security updates"
-msgstr "Não pode aceder a actualizações de segurança"
+#: ../apt-setup-udeb.templates:27
+msgid "Scanning the volatile updates repository..."
+msgstr "A pesquisar o repositório de actualizações 'volatile'..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
-msgid ""
-"The security updates on ${SECURITY_HOST} couldn't be accessed, so those "
-"updates will not be made available to you at this time. You should "
-"investigate this later."
-msgstr ""
-"Não podem ser acedidas as actualizações de segurança em ${SECURITY_HOST}, "
-"por isso essas actualizações não estarão disponíveis desta vez. Depois deve "
-"investigar isto."
+#: ../apt-setup-udeb.templates:43
+msgid "Cannot access repository"
+msgstr "Não pode aceder ao repositório"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:33
+#: ../apt-setup-udeb.templates:43
 msgid ""
-"Commented out entries for ${SECURITY_HOST} have been added to the /etc/apt/"
-"sources.list file."
+"The repository on ${HOST} couldn't be accessed, so its updates will not be "
+"made available to you at this time. You should investigate this later."
 msgstr ""
-"Foram adicionas as entradas comentadas para ${SECURITY_HOST} ao ficheiro /"
-"etc/apt/sources.list."
+"Não pode ser acedido o repositório em ${HOST}, por isso as actualizações não "
+"estarão disponíveis desta vez. Posteriormente deve investigar isto."
+
+#. Type: error
+#. Description
+#: ../apt-setup-udeb.templates:43
+msgid ""
+"Commented out entries for ${HOST} have been added to the /etc/apt/sources."
+"list file."
+msgstr ""
+"Foram acrecentadas entradas comentadas para ${HOST} ao ficheiro /etc/apt/"
+"sources.list."
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "security updates (from ${SEC_HOST})"
+msgstr "actualizações de segurança (de ${SEC_HOST})"
+
+#. Type: multiselect
+#. Choices
+#. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#: ../apt-setup-udeb.templates:58
+msgid "volatile updates (from ${VOL_HOST})"
+msgstr "actualizações de 'volatile' (de ${VOL_HOST})"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid "Services to use:"
+msgstr "Serviços a utilizar:"
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Debian has two services that provide updates to releases: security and "
+"volatile."
+msgstr ""
+"Debian tem dois serviços que disponibilizam actualizações aos lançamentos: "
+"'security' e 'volatile'."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Security updates help to keep your system secured against attacks. Enabling "
+"this service is strongly recommended."
+msgstr ""
+"As actualizações de segurança ajudam a manter o seu sistema seguro contra "
+"ataques. É fortemente recomendado habilitar este serviço."
+
+#. Type: multiselect
+#. Description
+#: ../apt-setup-udeb.templates:60
+msgid ""
+"Volatile updates provide more current versions for software that changes "
+"relatively frequently and where not having the lastest version could reduce "
+"the usability of the software. An example is the virus signatures for a "
+"virus scanner. This service is only available for stable and oldstable "
+"releases."
+msgstr ""
+"As actualizações do 'volatile' disponibilizam versões mais actuais para "
+"software que muda frequentemente e do qual não ter a versão mais recente "
+"pode reduzir a usabilidade do software. Um exemplo são as assinaturas dos "
+"anti-virus. Este serviço apenas está disponível para os lançamentos 'stable' "
+"e 'oldstable'."
 
 #. Type: text
 #. Description
@@ -105,6 +169,13 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. finish-install progress bar item
+#: ../apt-cdrom-setup.templates:14
+msgid "Disabling netinst CD in sources.list..."
+msgstr "A desabilitar o CD 'netinst' no sources.list..."
+
+#. Type: text
+#. Description
 #: ../apt-mirror-setup.templates:3
 msgid "Scanning the mirror..."
 msgstr "A pesquisar o mirror..."
@@ -113,7 +184,7 @@ msgstr "A pesquisar o mirror..."
 #. Description
 #: ../apt-mirror-setup.templates:8
 msgid "Use non-free software?"
-msgstr "Usar software non-free?"
+msgstr "Utilizar software 'non-free'?"
 
 #. Type: boolean
 #. Description
@@ -124,10 +195,10 @@ msgid ""
 "to install it. This software has varying licenses which may prevent you from "
 "using, modifying, or sharing it."
 msgstr ""
-"Algum software non-free foi preparado para funcionar com Debian. Embora este "
-"software não faça parte de Debian, as ferramentas standard de Debian podem "
-"ser usadas para instala-lo. Este software tem variadas licenças que podem "
-"prevenir que você possa usa-lo, modifica-lo ou partilha-lo."
+"Algum software não-livre foi preparado para funcionar com Debian. Embora "
+"este software não faça parte de Debian, as ferramentas standard de Debian "
+"podem ser utilizadas para o instalar. Este software tem variadas licenças "
+"que podem prevenir que você o possa utilizar, modificar ou o partilhar."
 
 #. Type: boolean
 #. Description
@@ -142,7 +213,7 @@ msgstr "Por favor escolha se o quer ter disponível de qualquer maneira."
 #. Description
 #: ../apt-mirror-setup.templates:19
 msgid "Use contrib software?"
-msgstr "Usar software contrib?"
+msgstr "Utilizar software contrib?"
 
 #. Type: boolean
 #. Description
@@ -156,7 +227,7 @@ msgstr ""
 "Algum software adicional foi feito para funcionar com Debian. Embora este "
 "software seja livre, depende de software não-livre para funcionar. Este "
 "software não faz parte de Debian, mas as ferramentas standard de Debian "
-"podem ser usadas para instala-lo."
+"podem ser utilizadas para instalá-lo."
 
 #. Type: boolean
 #. Description
@@ -214,30 +285,98 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid "Use a network mirror?"
 msgstr "Utilizar um mirror de rede"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:43
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
 msgstr ""
-"Um mirror de rede pode ser utilizado para acrescentar software suplementar "
-"ao que é incluído no CD-ROM. Pode também trazer versões mais recentes do "
-"software disponível."
+"Pode ser utilizado um mirror de rede para acrescentar software ao que é "
+"incluído no CD-ROM. Pode também trazer versões mais recentes do software "
+"disponível."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:42
+#: ../apt-mirror-setup.templates:52
+msgid "Continue without a network mirror?"
+msgstr "Continuar sem um 'mirror' de rede?"
+
+#. Type: boolean
+#. Description
+#: ../apt-mirror-setup.templates:52
+msgid "No network mirror was selected."
+msgstr "Não foram detectados interfaces de rede"
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:60
 msgid ""
-"If you are installing from a netinst CD and you choose not to use a mirror, "
-"you will end up with only a very minimal base system."
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
 msgstr ""
-"Você está a instalar a partir de um CD netinst e escolheu não utilizar um "
-"mirror, irá ficar apenas com um sistema base muito mínimo."
+"Você está a instalar a partir de um CD netinst e escolher não utilizar um "
+"'mirror', irá ficar apenas com um sistema base muito mínimo."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:64
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Está a instalar a partir de um CD 'netinst', que por si só apenas permite a "
+"instalação de um sistema base muito mínimo. Utilize um 'mirror' para "
+"instalar um sistema mais completo."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:68
+msgid ""
+"You are installing from a CD, which contains a limited selection of "
+"packages. Unless you don't have a good Internet connection, use of a mirror "
+"is recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Está a instalar a partir de um CD, que contém uma escolha limitada de "
+"pacotes. É recomendada a utilização de um mirror a menos que não tenha uma "
+"boa ligação à Internet, especialmente se planeia instalar um ambiente de "
+"desktop gráfico."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:72
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation. Alternatively, you can "
+"continue without a mirror and install any missing packages from other CDs "
+"after the installation."
+msgstr ""
+"Note que utilizar um 'mirror' pode resultar em download de uma grande "
+"quantidade de dados durante a próxima etapa da instalação. Em alternativa, "
+"após a instalação, pode continuar sem um 'mirror' e instalar quaisquer "
+"pacotes em falta a partir de outros CDs."
+
+#. Type: text
+#. Description
+#: ../apt-mirror-setup.templates:76
+msgid ""
+"You are installing from a DVD. Though the DVD contains a large selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English). If you have a reasonably good Internet "
+"connection, use of a mirror is suggested if you plan to install a graphical "
+"desktop environment."
+msgstr ""
+"Você está a instalar a partir de um DVD. Embora o DVD contenha uma grande "
+"seleccão de pacotes, alguns podem faltar (notavelmente alguns pacotes para "
+"suportar outros idiomas além do Inglês). Se tiver uma ligação à internet "
+"relativamente boa, é sugerida a utilização de um 'mirror' se planeia "
+"instalar um ambiente de desktop gráfico."
 
 #. Type: boolean
 #. Description
@@ -259,7 +398,7 @@ msgstr ""
 "Algum software não-livre está disponível na forma de pacotes. Embora este "
 "software não faça parte da distribuição principal, as ferramentas de gestão "
 "de pacotes podem ser utilizadas para o instalar. Este software tem variadas "
-"licenças que podem evitar que seja usado, alterado, ou partilhado."
+"licenças que podem evitar que seja utilizado, alterado, ou partilhado."
 
 #. Type: boolean
 #. Description
