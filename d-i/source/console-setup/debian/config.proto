@@ -273,14 +273,16 @@ available_fontsizes () {
 }
 
 decode_codeset () {
+    pattern="^$(echo "$*" | sed 's/[^ #0-9;A-Za-z-]/\\&/g')\\*"
     echo "$codesets" | \
-	grep -F "$**" | \
+	grep "$pattern" | \
 	sed 's/.*[*]//'
 }
 
 encode_codeset () {
+    pattern="\\*$(echo "$*" | sed 's/[^ #0-9;A-Za-z-]/\\&/g')\$"
     echo "$codesets" | \
-	grep -F "*$*" | \
+	grep "$pattern" | \
 	sed 's/[*].*//'
 }
 
@@ -703,6 +705,10 @@ if [ "$default_codeset" = unsupported ]; then
 fi
 
 default_codeset="`decode_codeset $default_codeset`"
+if [ -z "$default_codeset" ]; then
+    default_codeset=Uni1
+    codeset_priority=high
+fi
 
 default_layout=''
 default_variant=''
@@ -1186,6 +1192,10 @@ if [ -e $CONFIGFILE ]; then
     default_model="$XKBMODEL"
 
     default_codeset="`decode_codeset $CODESET`"
+    if [ -z "$default_codeset" ]; then
+	default_codeset=Uni1
+	codeset_priority=high
+    fi
 
     case "$XKBLAYOUT" in
 	lt,lt)

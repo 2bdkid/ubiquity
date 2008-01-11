@@ -1,8 +1,8 @@
 #! /bin/sh
 
-. /lib/partman/definitions.sh
-. /lib/partman/resize.sh
-. /lib/partman/recipes.sh
+. /lib/partman/lib/base.sh
+. /lib/partman/lib/resize.sh
+. /lib/partman/lib/recipes.sh
 
 # busybox wants mount -o move; util-linux wants mount --move. Sigh.
 if [ -d /lib/debian-installer ]; then
@@ -201,7 +201,8 @@ else
 	done
 fi
 if [ -d /var/run ]; then
-	pidof /sbin/mount.ntfs-3g >> /var/run/sendsigs.omit
+	pidof mount.ntfs >> /var/run/sendsigs.omit
+	pidof mount.ntfs-3g >> /var/run/sendsigs.omit
 fi
 
 # TODO: handle errors if no mount succeeded

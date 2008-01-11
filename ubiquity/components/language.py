@@ -40,16 +40,13 @@ class Language(FilteredCommand):
 
             # Get index of untranslated value; we'll map this to the
             # translated value later.
-            current_language_index = self.value_index(
-                'languagechooser/language-name')
+            current_language_index = self.value_index(question)
             current_language = "English"
 
             language_choices = self.split_choices(
-                unicode(self.db.metaget('languagechooser/language-name',
-                                        'choices-en.utf-8'),
+                unicode(self.db.metaget(question, 'choices-en.utf-8'),
                         'utf-8', 'replace'))
-            language_choices_c = self.choices_untranslated(
-                'languagechooser/language-name')
+            language_choices_c = self.choices_untranslated(question)
 
             language_codes = {}
             languagelist = open('/usr/lib/ubiquity/localechooser/languagelist')
@@ -99,7 +96,18 @@ class Language(FilteredCommand):
                 # Normally this default is handled by Default-$LL, but since
                 # we can't change debconf's language on the fly (unlike
                 # cdebconf), we have to fake it.
-                self.db.set(question, self.db.get('debian-installer/country'))
+                country = self.db.get('debian-installer/country')
+                if question.endswith('shortlist'):
+                    self.db.set(question, country)
+                elif question.endswith('country-name') and country:
+                    fp = open('/usr/share/iso-codes/iso_3166.tab')
+                    try:
+                        for line in fp:
+                            if line.startswith(country):
+                                self.db.set(question, line.split()[1])
+                                break
+                    finally:
+                        fp.close()
             return True
 
         return FilteredCommand.run(self, priority, question)

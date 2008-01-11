@@ -1,3 +1,12 @@
+partman-auto-loop (0ubuntu12) hardy; urgency=low
+
+  * Grab pids of mount.ntfs as well as mount.ntfs-3g (LP: #150822).
+  * Pass basenames rather than full paths to pidof.
+  * Vcs-Bzr is now an official field.
+  * Account for partman library code having moved to /lib/partman/lib/.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 10 Jan 2008 08:42:52 +0000
+
 partman-auto-loop (0ubuntu11) gutsy; urgency=low
 
   * Use $mount_move for existing mountpoints too (thanks, Agostino Russo).
