@@ -48,6 +48,9 @@ for dev in $DEVICES/*; do
 		db_progress START 0 3 partman/text/formatting
 		db_progress INFO $template
 		db_progress SET 1
+		# According to Szabolcs Szakacsits, the NTFS-3g author, it is
+		# safer to format the loop file, rather than the device.
+		[ ! -s loop ] || device="$(cat loop)"
 		if
 		    log-output -t partman --pass-stdout mkswap $device >/dev/null
 		then

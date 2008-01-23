@@ -1,3 +1,27 @@
+partman-ext3 (49ubuntu1) hardy; urgency=low
+
+  * Special case loopmounted filesystems as it's safer to format the
+    underlying file, not the device.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 11 Jan 2008 17:07:46 -0500
+
+partman-ext3 (49) unstable; urgency=low
+
+  * Moved definitions.sh to ./lib/base.sh. Requires partman-base (>= 114).
+  * Major whitespace cleanup and some coding style improvements.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Panjabi (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Frans Pop <fjp@debian.org>  Sat, 29 Dec 2007 22:13:58 +0100
+
 partman-ext3 (48) unstable; urgency=low
 
   [ Frans Pop ]
@@ -65,6 +89,18 @@ partman-ext3 (46) unstable; urgency=low
   * Malayalam (ml.po) by Praveen A
 
  -- Frans Pop <fjp@debian.org>  Tue, 27 Feb 2007 18:22:43 +0100
+
+partman-ext3 (45ubuntu2) feisty; urgency=low
+
+  * Fix script executability.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 Feb 2007 23:53:44 +0000
+
+partman-ext3 (45ubuntu1) feisty; urgency=low
+
+  * Move sanity-checking scripts from finish.d to check.d.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 Feb 2007 21:00:59 +0000
 
 partman-ext3 (45) unstable; urgency=low
 

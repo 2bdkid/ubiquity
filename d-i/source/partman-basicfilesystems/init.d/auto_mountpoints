@@ -9,6 +9,12 @@ touch /var/lib/partman/auto_mountpoints
 
 . /lib/partman/definitions.sh
 
+if type udevadm >/dev/null 2>&1; then
+    udevinfo () {
+	udevadm info "$@"
+    }
+fi
+
 partitions=
 for dev in $DEVICES/*; do
     [ -d "$dev" ] || continue

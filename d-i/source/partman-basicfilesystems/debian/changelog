@@ -1,3 +1,15 @@
+partman-basicfilesystems (56ubuntu2) hardy; urgency=low
+
+  [ Colin Watson ]
+  * udev 117 merged all udev tools into a single binary called udevadm.
+    Check for this and use it instead of udevinfo if available.
+
+  [ Evan Dandrea ]
+  * Special case loopmounted filesystems as it's safer to format the
+    underlying file, not the device (LP: #177868).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 14 Jan 2008 10:17:23 -0500
+
 partman-basicfilesystems (56ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

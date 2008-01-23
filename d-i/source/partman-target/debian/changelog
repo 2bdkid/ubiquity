@@ -1,3 +1,18 @@
+partman-target (52ubuntu2) hardy; urgency=low
+
+  [ Colin Watson ]
+  * Set Vcs-Bzr for Ubuntu.
+
+  [ Evan Dandrea ]
+  * Added support for installing without reformatting existing partitions for
+    the ubiquity-preserve-home specification (LP: #174619):
+    - Remove critical system files from the existing filesystem before
+      installing.
+    - Preserve the UID and GID of the initial user, if possible.  Requires a
+      patch to user-setup.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 22 Jan 2008 16:06:55 +0000
+
 partman-target (52ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

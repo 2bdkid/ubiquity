@@ -22,6 +22,8 @@ install: build
 	dh_clean -k
 	dh_install autopartition-loop bin
 	debian/install-rc finish.d
+	debian/install-rc mount.d
+	dh_install fstab.d lib/partman
 
 binary-indep: build install
 	dh_testdir

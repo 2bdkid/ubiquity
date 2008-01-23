@@ -1,0 +1,74 @@
+#! /bin/sh
+# Remove critical files to ensure we don't end up with a mixed system.
+
+. /lib/partman/lib/base.sh
+
+failed () {
+    db_progress STOP
+    db_input critical partman-target/clear_partitions_failed || true
+    db_go || true
+    exit 1
+}
+
+partitions=$(
+for dev in $DEVICES/*; do
+    [ -d "$dev" ] || continue
+    cd $dev
+    open_dialog PARTITIONS
+    while { read_line num id size type fs path name; [ "$id" ]; }; do
+	[ "$fs" != free ] || continue
+	[ -f "$id/mountpoint" ] || continue
+	[ -f "$id/format" ] && continue
+	mp="$(cat "$id/mountpoint")"
+	echo "$mp,$path"
+    done
+    close_dialog
+done | sort
+)
+
+[ -n "$partitions" ] || exit 0
+
+tmp="/mnt/tmpmount"
+mkdir -p $tmp
+for part in $partitions; do
+    mp="${part%,*}"
+    path="${part#*,}"
+    mount $path $tmp$mp || failed
+done
+
+template=partman-target/clear_partitions_progress
+db_progress START 0 12 ubiquity/install/title
+db_progress INFO $template
+for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
+    db_progress STEP 1
+    [ -e $tmp/$x ] && (rm -rf $tmp/$x || failed)
+done
+for x in $tmp/initrd* $tmp/vmlinuz*; do
+    [ -e $x ] && (rm -rf $x || failed)
+done
+
+# /home could be a symlink.
+[ -f $tmp/home ] && (rm $tmp/home || failed)
+db_progress STOP
+
+# Preserve the UID, if possible.
+db_get passwd/username || true
+username=$RET
+if [ -n $username ] && [ -d $tmp/home/$username ]; then
+    db_set passwd/user-uid "$(stat -c %u $tmp/home/$username)" || true
+    db_set passwd/user-gid "$(stat -c %g $tmp/home/$username)" || true
+fi
+
+partitions=$(
+for part in $partitions; do
+    echo "$part"
+done | sort -r
+)
+
+for part in $partitions; do
+    mp="${part%,*}"
+    path="${part#*,}"
+    umount $path || failed
+done
+
+rmdir $tmp || failed

@@ -258,7 +258,12 @@ is_removable () {
 			return
 		fi
 	fi
-	bus="$(udevinfo -q env -n $removabledevice | grep ^ID_BUS= | sed 's/^ID_BUS=//')"
+	if type udevadm >/dev/null 2>&1; then
+		bus="$(udevadm info -q env -n $removabledevice)"
+	else
+		bus="$(udevinfo -q env -n $removabledevice)"
+	fi
+	bus="$(echo "$bus" | grep ^ID_BUS= | sed 's/^ID_BUS=//')"
 	case $bus in
 		usb|ieee1394)
 			echo "/dev/$removabledevice"
@@ -268,10 +273,13 @@ is_removable () {
 
 rootfs=$(findfs /)
 bootfs=$(findfs /boot)
-[ -n "$bootfs" ] || bootfs="$rootfs"
-
 bootfstype=$(findfstype /boot)
+if [ -d "$bootfs" ] && [ "$bootfstype" = "none" ]; then
+    bootfs=$rootfs
+    bootfstype=$(findfstype /)
+fi
 [ -n "$bootfstype" ] || bootfstype="$(findfstype /)"
+[ -n "$bootfs" ] || bootfs="$rootfs"
 
 case $ARCH in
     powerpc/*)
@@ -287,10 +295,7 @@ prefix=$(echo "$bootfs" | \
   sed 's:\(/dev/\(cciss\|ida\)/c[0-9]d[0-9]\|/dev/[a-z]\+\).*:\1:')
 
 case $prefix in
-    /dev/md)
-	disc_offered_devfs="$bootfs"
-	;;
-    /dev/mapper)
+    /dev/md|/dev/mapper|/dev/loop)
 	disc_offered_devfs="$bootfs"
 	;;
     /dev/[hs]d[a-z]|/dev/cciss/c[0-9]d[0-9]|/dev/ida/c[0-9]d[0-9])

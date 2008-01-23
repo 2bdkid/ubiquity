@@ -74,3 +74,14 @@ Template: partman-target/text/get_help
 Type: text
 _Description: Help on partitioning
 
+Template: partman-target/clear_partitions_failed
+Type: error
+#flag:translate!:3
+_Description: Failed to remove conflicting files
+ The installer needs to remove operating system files from the install target,
+ but was unable to do so.  The install cannot continue.
+
+Template: partman-target/clear_partitions_progress
+Type: text
+_Description: Removing conflicting operating system files...
+

@@ -94,43 +94,6 @@ update_partition $disk $partition_id
 dev="$disk"
 oldid="$partition_id"
 
-case $partition_fs in
-	linux-swap|fat16|fat32|hfs|hfs+|hfsx)
-		get_resize_range
-		;;
-	ext2|ext3)
-		if ! search-path tune2fs; then
-			logger -t partman-auto-loop "Error: tune2fs not found"
-			exit 1
-		fi
-		if ! search-path resize2fs; then
-			logger -t partman-auto-loop "Error: resize2fs not found"
-			exit 1
-		fi
-		if ! get_ext2_resize_range; then
-			logger -t partman-auto-loop "Error: Failed to get ext2 resize range for $disk/$partition_id"
-			exit 1
-		fi
-		;;
-	ntfs)
-		if ! search-path ntfsresize; then
-			logger -t partman-auto-loop "Error: ntfsresize not found"
-			exit 1
-		fi
-		if ! get_ntfs_resize_range; then
-			logger -t partman-auto-loop "Error: Failed to get NTFS resize range for $disk/$partition_id"
-			exit 1
-		fi
-		;;
-	*)
-		logger -t partman-auto-loop "Cannot calculate free space on filesystems of type $partition_fs"
-		exit 1
-		;;
-esac
-free_size="$(expr \( "$cursize" - "$minsize" \) \* 9 / 10)"
-# convert to megabytes
-free_size="$(expr 0000000"$free_size" : '0*\(..*\)......$')"
-
 recipe_new=
 firstword=
 imagepaths=
@@ -152,10 +115,6 @@ for word in $(cat "$recipe_dir/loop_recipe"); do
 done
 echo "$recipe_new" >"$recipe_dir/loop_recipe_new"
 decode_recipe "$recipe_dir/loop_recipe_new" loop
-if [ $(min_size) -gt $free_size ]; then
-	logger -t partman-auto-loop "Error: partman-auto-loop/recipe too large ($(min_size) > $free_size)"
-	exit 1
-fi
 
 db_progress STEP 1
 
@@ -206,22 +165,88 @@ if [ -d /var/run ]; then
 fi
 
 # TODO: handle errors if no mount succeeded
-
 mkdir -p /host
 mount $mount_move /target /host # TODO error handling
 
 # Don't try to mount this again later.
 rm -f $partition_id/mountpoint
 
-# Ensure that no old loop images are present.
+# Ensure there is enough free space.
+check_free_space=false
+requires_disk_space(){
+    [ "$1" != 0 ] || return
+    path="$(echo "$*" | sed 's/.*\$imagepath{  *\([^ }]*\) *}.*/\1/')"
+    [ "$path" != "$*" ] || return
+    case $path in
+		/*)	;;
+		*)	path="/$path" ;;
+    esac
+    [ -f "/host$path" ] && return 
+    check_free_space=true
+}
+foreach_partition 'requires_disk_space $*' 
+
+# Skip resize_range check if images are already created.
+if [ $check_free_space = true ]; then
+    case $partition_fs in
+	linux-swap|fat16|fat32|hfs|hfs+|hfsx)
+		get_resize_range
+		;;
+	ext2|ext3)
+		if ! search-path tune2fs; then
+			logger -t partman-auto-loop "Error: tune2fs not found"
+			exit 1
+		fi
+		if ! search-path resize2fs; then
+			logger -t partman-auto-loop "Error: resize2fs not found"
+			exit 1
+		fi
+		if ! get_ext2_resize_range; then
+			logger -t partman-auto-loop "Error: Failed to get ext2 resize range for $disk/$partition_id"
+			exit 1
+		fi
+		;;
+	ntfs)
+		if ! search-path ntfsresize; then
+			logger -t partman-auto-loop "Error: ntfsresize not found"
+			exit 1
+		fi
+		if ! get_ntfs_resize_range; then
+			db_input critical partman-auto-loop/unclean_ntfs || true
+			db_go || true
+			logger -t partman-auto-loop "Error: Failed to get NTFS resize range for $disk/$partition_id"
+			reboot
+			exit 1
+		fi
+		;;
+	*)
+		logger -t partman-auto-loop "Cannot calculate free space on filesystems of type $partition_fs"
+		exit 1
+		;;
+    esac
+    free_size="$(expr \( "$cursize" - "$minsize" \) \* 9 / 10)"
+    # convert to megabytes
+    free_size="$(expr 0000000"$free_size" : '0*\(..*\)......$')"
+    if [ $(min_size) -gt $free_size ]; then
+        logger -t partman-auto-loop "Error: partman-auto-loop/recipe too large ($(min_size) > $free_size)"
+        exit 1
+    fi
+fi
+
+# Ensure that no old loop images are present and mountable.
 found_images=
+mkdir -p /tmpmountpoint
 for path in $imagepaths; do
 	case $path in
 		/*)	;;
 		*)	path="/$path" ;;
 	esac
 	if [ -e "/host$path" ]; then
-		found_images="${found_images:+$found_images }$path"
+		if mount -t auto -o loop,ro /host$path /tmpmountpoint 2>/dev/null; then
+			found_images="${found_images:+$found_images }$path"
+			umount /tmpmountpoint || true
+			rmdir /tmpmountpoint || true
+		fi
 	fi
 done
 if [ "$found_images" ]; then
@@ -256,9 +281,15 @@ setup_loop () {
 		/*)	;;
 		*)	path="/$path" ;;
 	esac
-	mkdir -p "/host${path%/*}"
-	rm -f "/host$path"
-	dd if=/dev/zero of="/host$path" bs="1000000" seek="$1" count=0
+	if [ ! -f "/host$path" ]; then
+		mkdir -p "/host${path%/*}"
+		if [ "$4" = "linux-swap" ]; then
+			# swap requires a file with no holes
+			dd if=/dev/zero of="/host$path" bs="1000000" count="$1"
+		else
+			dd if=/dev/zero of="/host$path" bs="1000000" seek="$1" count=0
+		fi
+	fi
 	if ! losetup -f "/host$path"; then
 		shift
 		continue
