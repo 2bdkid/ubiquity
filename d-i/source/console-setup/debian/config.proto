@@ -189,6 +189,7 @@ ask_debconf () {
 # ppc/pmac	mac		"machine: PowerMac|[Pp]ower[Bb]ook*|Power|iMac*|PowerMac1*"
 # ppc/prep	pc		"machine: PReP"
 # ppc/ps3	pc		"platform: PS3"
+# ppc/cell	pc		"platform: Cell"
 # ppc/{bbox,mbx,ppc64,82xx,8xx} Not yet supported by Debian
 
 # arm/*		pc		(refered to as 'arm' only)
@@ -206,7 +207,7 @@ guess_arch () {
     if [ "$arch" = 'powerpc' -o "$arch" = 'm68k' ]; then
 	if [ "$arch" = powerpc ]; then
 	    line=`sed -n 's/^platform.*: *//p' /proc/cpuinfo`
-	    if [ "$line" = PS3 ]; then
+	    if [ "$line" = PS3 ] || [ "$line" = Cell ]; then
 		subarch=`echo $line|tr A-Z a-z`
 	    else
 		line=`sed -n 's/^machine.*: *//p' /proc/cpuinfo`
@@ -804,11 +805,17 @@ case "$locale" in
     *_LV*)
 	default_layout=lv  # Latvia
 	;;
+    *_MA*)
+	default_layout=ma  # Morocco
+	;;
     *_MK*)
 	default_layout=mk  # Macedonia
 	;;
+# According to https://launchpad.net/bugs/129982, Dutch users prefer the US
+# keymap.
     *_NL*)
-	default_layout=nl  # Netherlands
+	default_layout=us  # Netherlands
+	default_variant=intl # International (with dead keys)
 	;;
     *_MN*)
 	default_layout=mn  # Mongolia
@@ -925,8 +932,12 @@ case "$locale" in
 	default_layout=in  # India
 	default_variant=guru # Gurmukhi
 	;;
+    sr_ME*)
+	default_layout=me  # Montenegro
+	layout_priority=critical
+	;;
     sr_*)
-	default_layout=cs  # Serbia and Montenegro
+	default_layout=rs  # Serbia
 	layout_priority=critical
 	;;
     sv_*)
@@ -940,6 +951,9 @@ case "$locale" in
     te_*)
 	default_layout=in  # India
 	default_variant=tel # Telugu
+	;;
+    zh_CN)
+	default_layout=cn  # China
 	;;
     # Fallback
     *)
@@ -1039,7 +1053,7 @@ case "$arch" in
 	default_model=pc105
 	model_priority=medium
 	;;
-    powerpc/ps3)
+    powerpc/ps3|powerpc/cell)
 	default_model=pc105
 	model_priority=medium
 	;;
@@ -1097,7 +1111,7 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 	gb) XKBLAYOUT="gb";;
 	is) XKBLAYOUT="is";;
 	it) XKBLAYOUT="it";;
-	jp106) XKBLAYOUT="jp"; XKBVARIANT="jp106"; XKBMODEL="jp106";;
+	jp106) XKBLAYOUT="jp"; XKBVARIANT="kana"; XKBMODEL="jp106";;
 	la) XKBLAYOUT="latam";;
 	lt) XKBLAYOUT="lt";; 
 	lv-latin4) XKBLAYOUT="lv";;
@@ -1117,7 +1131,7 @@ if db_get debian-installer/keymap && [ "$RET" ]; then
 	sg) XKBLAYOUT="ch"; XKBVARIANT="de";;
 	sk-qwerty) XKBLAYOUT="sk"; XKBVARIANT="qwerty";;
 	slovene) XKBLAYOUT="si";;
-	sr-cy) XKBLAYOUT="cs";;
+	sr-cy) XKBLAYOUT="rs";;
 	trf|trfu) XKBLAYOUT="tr"; XKBVARIANT="f";;
 	trq|trqu) XKBLAYOUT="tr";;
 	ua) XKBLAYOUT="ua";;
@@ -1197,6 +1211,54 @@ if [ -e $CONFIGFILE ]; then
 	codeset_priority=high
     fi
 
+    migrate_layout () {
+	case "$1" in
+	    cs)
+		echo rs
+		;;
+	    *)
+		echo "$1"
+		;;
+	esac
+    }
+
+    migrate_variant () {
+	case "$1" in
+	    jp)
+		case "$2" in
+		    latin)
+			echo 106
+			;;
+		    jp106)
+			echo kana
+			;;
+		    *)
+			echo "$2"
+			;;
+		esac
+		;;
+	    *)
+		echo "$2"
+		;;
+	esac
+    }
+
+    # Migration
+    case "$XKBLAYOUT" in
+	*,*)
+	    layout1="${XKBLAYOUT%%,*}"
+	    layout2="${XKBLAYOUT#*,}"
+	    variant1="${XKBVARIANT%%,*}"
+	    variant2="${XKBVARIANT#*,}"
+	    XKBLAYOUT="$(migrate_layout "$layout1"),$(migrate_layout "$layout2")"
+	    XKBVARIANT="$(migrate_variant "$layout1" "$variant1"),$(migrate_variant "$layout2" "$variant2")"
+	    ;;
+	*)
+	    XKBLAYOUT="$(migrate_layout "$XKBLAYOUT")"
+	    XKBVARIANT="$(migrate_variant "$XKBLAYOUT" "$XKBVARIANT")"
+	    ;;
+    esac
+
     case "$XKBLAYOUT" in
 	lt,lt)
 	    default_layout=${XKBLAYOUT%,*}
@@ -1204,7 +1266,7 @@ if [ -e $CONFIGFILE ]; then
 	    unsupported_layout=no
 	    ;;	    
 	# TODO: make s.t. to not forget to update this list
-	cs,cs|us,am|us,ara|us,ben|us,bd|us,bg|us,bt|us,by|us,deva|us,ge|us,gh|us,gr|us,guj|us,guru|us,il|us,in|us,ir|us,iku|jp,jp|us,jp|us,kan|us,kh|us,la|us,lao|us,lk|us,lt|us,mk|us,mm|us,mn|us,mv|us,mal|us,ori|us,pk|us,ru|us,scc|us,sy|us,syr|us,tel|us,th|us,tj|us,tam|us,ua|us,uz)
+	me,me|rs,rs|us,am|us,ara|us,ben|us,bd|us,bg|us,bt|us,by|us,deva|us,ge|us,gh|us,gr|us,guj|us,guru|us,il|us,in|us,ir|us,iku|jp,jp|us,jp|us,kan|us,kh|us,la|us,lao|us,lk|us,lt|us,mk|us,mm|us,mn|us,mv|us,mal|us,ori|us,pk|us,ru|us,scc|us,sy|us,syr|us,tel|us,th|us,tj|us,tam|us,ua|us,uz)
 	    default_layout=${XKBLAYOUT#*,}
 	    default_variant="${XKBVARIANT#*,}"
 	    unsupported_layout=no
@@ -1443,21 +1505,9 @@ while :; do
 	    fi
 	    if $adjust_layout; then
 		case "$layout" in
-		    cs)
-			case "$variant" in
-			    latin*)
-				latin=yes
-				real_layout=$layout
-				;;
-			    *)
-				latin=no
-				real_layout=cs,cs
-				;;
-			esac
-			;;
 		    jp)
 			case "$variant" in
-			    latin)
+			    106|common|OADG109A|nicola_f_bs)
 				latin=yes
 				real_layout=$layout
 				;;
@@ -1470,6 +1520,30 @@ while :; do
 		    lt)
 			latin=no
 			real_layout=lt,lt
+			;;
+		    me)
+			case "$variant" in
+			    basic|latin*)
+				latin=yes
+				real_layout=$layout
+				;;
+			    *)
+				latin=no
+				real_layout=me,me
+				;;
+			esac
+			;;
+		    rs)
+			case "$variant" in
+			    basic|latin*)
+				latin=yes
+				real_layout=$layout
+				;;
+			    *)
+				latin=no
+				real_layout=rs,rs
+				;;
+			esac
 			;;
 		    # TODO: make s.t. to not forget to update this list.  Don't
 		    # forget to update also the nonlatin list in kbdcompiler
@@ -1485,7 +1559,33 @@ while :; do
 		db_set console-setup/layoutcode "$real_layout"
 		if [ "$latin" = yes ]; then
 		    db_set console-setup/variantcode "$variant"
-		elif [ "$real_layout" = cs,cs ]; then
+		elif [ "$real_layout" = lt,lt ]; then
+		    case "$variant" in
+			us)
+			    db_set console-setup/variantcode "us,"
+			    ;;
+			*)
+			    db_set console-setup/variantcode "$variant,us"
+			    ;;
+		    esac
+		elif [ "$real_layout" = jp,jp ]; then
+			    db_set console-setup/variantcode "106,$variant"
+		elif [ "$real_layout" = me,me ]; then
+		    case "$variant" in
+			cyrillicyz)
+			    db_set console-setup/variantcode \
+				"latinyz,$variant"
+			    ;;
+			cyrillicalternatequotes)
+			    db_set console-setup/variantcode \
+				"latinalternatequotes,$variant"
+			    ;;
+			*)
+			    db_set console-setup/variantcode \
+				"basic,$variant"
+			    ;;
+		    esac
+		elif [ "$real_layout" = rs,rs ]; then
 		    case "$variant" in
 			yz)
 			    db_set console-setup/variantcode \
@@ -1500,17 +1600,6 @@ while :; do
 				"latin,$variant"
 			    ;;
 		    esac
-		elif [ "$real_layout" = lt,lt ]; then
-		    case "$variant" in
-			us)
-			    db_set console-setup/variantcode "us,"
-			    ;;
-			*)
-			    db_set console-setup/variantcode "$variant,us"
-			    ;;
-		    esac
-		elif [ "$real_layout" = jp,jp ]; then
-			    db_set console-setup/variantcode "latin,$variant"
 		else
 		    db_set console-setup/variantcode ",$variant"
 		fi

@@ -137,7 +137,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 	fi
 
 	if [ -n "$USER" ]; then
-		for group in lpadmin scanner; do
+		for group in lpadmin; do
 			$log $chroot $ROOT addgroup --system $group >/dev/null 2>&1 || true
 		done
 		if type archdetect >/dev/null 2>&1; then

@@ -1,3 +1,14 @@
+migration-assistant (0.6.0) hardy; urgency=low
+
+  * Copy NTFS mount fix.
+  * Removed dead ubiquity-specific code in ma-ask.
+  * Cleaned up ma-ask and ma-apply.
+  * Fix potential bugs where RET could get set to an error description and
+    then be used as the answer to other questions.
+  * Add the user to the groups specified by user-setup-udeb.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 24 Jan 2008 09:25:41 +0000
+
 migration-assistant (0.5.4) gutsy; urgency=low
 
   * Added a short timeout and retry to unmounting to accomodate slow umounts

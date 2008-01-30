@@ -161,7 +161,7 @@ mount_os () {
 
         mkdir -p $mountpoint
         unmount_os $device
-        mount -t ntfs $device $mountpoint -o umask=0022,nls=utf8 || \
+        mount -t ntfs $device $mountpoint -o umask=0022,nls=utf8 3>&- || \
         ( log "Mounting $device to $mountpoint with NTFS failed."
         mount -t vfat $device $mountpoint -o umask=0022,utf8 || \
         log "Mounting $device to $mountpoint with VFAT failed." )
@@ -180,7 +180,6 @@ add_user() {
     password="$3"
 
     chroot=chroot
-    log='log-output -t migration-assistant'
 
 # Taken from user-setup/user-setup-apply
 
@@ -199,11 +198,10 @@ EOF
 
 	# Add the user to groups
 	if [ -n "$username" ]; then
-		for group in adm audio cdrom dialout floppy video plugdev dip lpadmin scanner; do
-			#$log 
-			$chroot $ROOT adduser "$username" $group >/dev/null 2>&1 || true
+		db_get passwd/user-default-groups
+		for group in $RET; do
+			log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
-
 	fi
 }
 # vim:ai:et:sts=4:tw=80:sw=4:

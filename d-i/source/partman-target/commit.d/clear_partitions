@@ -9,16 +9,17 @@ failed () {
     db_go || true
     exit 1
 }
-
+count=0
 partitions=$(
 for dev in $DEVICES/*; do
     [ -d "$dev" ] || continue
     cd $dev
     open_dialog PARTITIONS
     while { read_line num id size type fs path name; [ "$id" ]; }; do
-	[ "$fs" != free ] || continue
 	[ -f "$id/mountpoint" ] || continue
+	[ "$fs" != free ] || continue
 	[ -f "$id/format" ] && continue
+	count=$(($count + 1))
 	mp="$(cat "$id/mountpoint")"
 	echo "$mp,$path"
     done
@@ -28,47 +29,58 @@ done | sort
 
 [ -n "$partitions" ] || exit 0
 
+echo "clear_partitions: considering $partitions" >>/var/log/syslog
+
 tmp="/mnt/tmpmount"
 mkdir -p $tmp
-for part in $partitions; do
-    mp="${part%,*}"
-    path="${part#*,}"
-    mount $path $tmp$mp || failed
-done
-
 template=partman-target/clear_partitions_progress
-db_progress START 0 12 ubiquity/install/title
+db_progress START 0 $count ubiquity/install/title
 db_progress INFO $template
-for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
-    db_progress STEP 1
-    [ -e $tmp/$x ] && (rm -rf $tmp/$x || failed)
-done
-for x in $tmp/initrd* $tmp/vmlinuz*; do
-    [ -e $x ] && (rm -rf $x || failed)
-done
-
-# /home could be a symlink.
-[ -f $tmp/home ] && (rm $tmp/home || failed)
-db_progress STOP
-
-# Preserve the UID, if possible.
-db_get passwd/username || true
-username=$RET
-if [ -n $username ] && [ -d $tmp/home/$username ]; then
-    db_set passwd/user-uid "$(stat -c %u $tmp/home/$username)" || true
-    db_set passwd/user-gid "$(stat -c %g $tmp/home/$username)" || true
-fi
-
-partitions=$(
-for part in $partitions; do
-    echo "$part"
-done | sort -r
-)
-
+to_delete=""
 for part in $partitions; do
     mp="${part%,*}"
     path="${part#*,}"
-    umount $path || failed
+    if [ $mp = "/" ]; then
+	mount $path $tmp || failed
+	for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
+	    [ -e $tmp/$x ] && (rm -rf $tmp/$x || failed)
+	done
+	for x in $tmp/initrd* $tmp/vmlinuz*; do
+	    [ -e $x ] && (rm -rf $x || failed)
+	done
+	
+	# /home could be a symlink.
+	[ -f $tmp/home ] && (rm $tmp/home || failed)
+	
+	# Preserve the UID, if possible.
+	db_get passwd/username || true
+	username=$RET
+	if [ -n $username ] && [ -d $tmp/home/$username ]; then
+	    db_set passwd/user-uid "$(stat -c %u $tmp/home/$username)" || true
+	    db_set passwd/user-gid "$(stat -c %g $tmp/home/$username)" || true
+	fi
+	umount $tmp
+    elif [ $mp = "/home" ]; then
+	mount $path $tmp || failed
+	# Preserve the UID, if possible.
+	db_get passwd/username || true
+	username=$RET
+	if [ -n $username ] && [ -d $tmp/$username ]; then
+	    db_set passwd/user-uid "$(stat -c %u $tmp/$username)" || true
+	    db_set passwd/user-gid "$(stat -c %g $tmp/$username)" || true
+	fi
+	umount $tmp
+    else
+	for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
+	    if $(echo $path | grep -wqs ^/$x); then
+		mount $path $tmp || failed
+		rm -rf $tmp/* || failed
+		umount $tmp
+		break
+	    fi
+	done
+    fi
+    db_progress STEP 1
 done
-
+db_progress STOP
 rmdir $tmp || failed

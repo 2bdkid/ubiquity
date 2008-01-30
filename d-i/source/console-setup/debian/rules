@@ -43,7 +43,7 @@ build: main_build debian/console-setup.config debian/console-setup-mini.config
 .PHONY : clean
 clean:
 	dh_testdir
-	-$(MAKE) maintainer-clean
+	$(MAKE) maintainer-clean
 	-rm -f build main_build
 	-rm -f debian/*.config
 	-rm -f debian/*~
@@ -64,6 +64,9 @@ install-main: build
 	install -d debian/console-setup/usr/share/doc/console-setup/examples/
 	mv debian/console-setup/etc/default/console-setup \
 		debian/console-setup/usr/share/doc/console-setup/examples/
+	install -d debian/console-setup/usr/share/lintian/overrides
+	install -m 644 debian/lintian.overrides \
+		debian/console-setup/usr/share/lintian/overrides/console-setup
 	dh_installinit --no-start --name keyboard-setup -- start 06 S .
 	dh_installinit --name console-setup -- start 49 S .
 	install -d debian/console-setup/usr/share/initramfs-tools/hooks \
@@ -218,8 +221,6 @@ install-udeb: build
 		debian/console-setup-udeb/usr/lib/base-installer.d/20console-setup
 	dh_installdirs -p console-setup-udeb etc/default
 	dh_installdirs -p console-setup-udeb etc/console-setup/
-	dh_installdirs -p console-setup-udeb usr/share/doc/console-setup-mini/examples/
-	cp config debian/console-setup-udeb/usr/share/doc/console-setup-mini/examples/console-setup
 	rm -rf `find debian/console-setup-udeb -name .cvsignore`
 	rm -rf `find debian/console-setup-udeb -name .svn`
 
