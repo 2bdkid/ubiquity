@@ -3,6 +3,8 @@
 
 . /lib/partman/lib/base.sh
 
+exit 0
+
 failed () {
     db_progress STOP
     db_input critical partman-target/clear_partitions_failed || true
