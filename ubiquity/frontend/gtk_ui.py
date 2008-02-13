@@ -51,7 +51,7 @@ import gtk.glade
 
 import debconf
 
-from ubiquity import filteredcommand, i18n, osextras, validation
+from ubiquity import filteredcommand, gconftool, i18n, osextras, validation
 from ubiquity.misc import *
 from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 partman, partman_commit, \
@@ -151,6 +151,8 @@ class Wizard(BaseFrontend):
         self.autopartition_extras = {}
         self.resize_min_size = None
         self.resize_max_size = None
+        self.resize_orig_size = None
+        self.resize_path = ''
         self.new_size_scale = None
         self.ma_choices = []
         self.username_combo = None
@@ -255,33 +257,19 @@ class Wizard(BaseFrontend):
     # Disable gnome-volume-manager automounting to avoid problems during
     # partitioning.
     def disable_volume_manager(self):
-        if osextras.find_on_path('gconftool-2'):
-            gvm_root = '/desktop/gnome/volume_manager'
-            gvm_automount_drives = '%s/automount_drives' % gvm_root
-            gvm_automount_media = '%s/automount_media' % gvm_root
-            volumes_visible = '/apps/nautilus/desktop/volumes_visible'
-            media_automount = '/apps/nautilus/preferences/media_automount'
-            media_automount_open = '/apps/nautilus/preferences/media_automount_open'
-            if 'SUDO_USER' in os.environ:
-                gconf_dir = ('xml:readwrite:%s' %
-                             os.path.expanduser('~%s/.gconf' %
-                                                os.environ['SUDO_USER']))
-            else:
-                gconf_dir = 'xml:readwrite:%s' % os.path.expanduser('~/.gconf')
-            self.gconf_previous = {}
-            for gconf_key in (gvm_automount_drives, gvm_automount_media,
-                volumes_visible, media_automount, media_automount_open):
-                subp = subprocess.Popen(['gconftool-2', '--config-source',
-                                         gconf_dir, '--get', gconf_key],
-                                        stdout=subprocess.PIPE,
-                                        stderr=subprocess.PIPE,
-                                        preexec_fn=drop_privileges)
-                self.gconf_previous[gconf_key] = \
-                    subp.communicate()[0].rstrip('\n')
-                if self.gconf_previous[gconf_key] != 'false':
-                    subprocess.call(['gconftool-2', '--set', gconf_key,
-                                     '--type', 'bool', 'false'],
-                                    preexec_fn=drop_privileges)
+        gvm_root = '/desktop/gnome/volume_manager'
+        gvm_automount_drives = '%s/automount_drives' % gvm_root
+        gvm_automount_media = '%s/automount_media' % gvm_root
+        volumes_visible = '/apps/nautilus/desktop/volumes_visible'
+        media_automount = '/apps/nautilus/preferences/media_automount'
+        media_automount_open = '/apps/nautilus/preferences/media_automount_open'
+        self.gconf_previous = {}
+        for gconf_key in (gvm_automount_drives, gvm_automount_media,
+                          volumes_visible,
+                          media_automount, media_automount_open):
+            self.gconf_previous[gconf_key] = gconftool.get(gconf_key)
+            if self.gconf_previous[gconf_key] != 'false':
+                gconftool.set(gconf_key, 'bool', 'false')
 
         self.thunar_previous = self.thunar_set_volmanrc(
             {'AutomountDrives': 'FALSE', 'AutomountMedia': 'FALSE'})
@@ -289,23 +277,20 @@ class Wizard(BaseFrontend):
         atexit.register(self.enable_volume_manager)
 
     def enable_volume_manager(self):
-        if osextras.find_on_path('gconftool-2'):
-            gvm_root = '/desktop/gnome/volume_manager'
-            gvm_automount_drives = '%s/automount_drives' % gvm_root
-            gvm_automount_media = '%s/automount_media' % gvm_root
-            volumes_visible = '/apps/nautilus/desktop/volumes_visible'
-            media_automount = '/apps/nautilus/preferences/media_automount'
-            media_automount_open = '/apps/nautilus/preferences/media_automount_open'
-            for gconf_key in (gvm_automount_drives, gvm_automount_media,
-                volumes_visible, media_automount, media_automount_open):
-                if self.gconf_previous[gconf_key] == '':
-                    subprocess.call(['gconftool-2', '--unset', gconf_key],
-                                    preexec_fn=drop_privileges)
-                elif self.gconf_previous[gconf_key] != 'false':
-                    subprocess.call(['gconftool-2', '--set', gconf_key,
-                                     '--type', 'bool',
-                                     self.gconf_previous[gconf_key]],
-                                    preexec_fn=drop_privileges)
+        gvm_root = '/desktop/gnome/volume_manager'
+        gvm_automount_drives = '%s/automount_drives' % gvm_root
+        gvm_automount_media = '%s/automount_media' % gvm_root
+        volumes_visible = '/apps/nautilus/desktop/volumes_visible'
+        media_automount = '/apps/nautilus/preferences/media_automount'
+        media_automount_open = '/apps/nautilus/preferences/media_automount_open'
+        for gconf_key in (gvm_automount_drives, gvm_automount_media,
+                          volumes_visible,
+                          media_automount, media_automount_open):
+            if self.gconf_previous[gconf_key] == '':
+                gconftool.unset(gconf_key)
+            elif self.gconf_previous[gconf_key] != 'false':
+                gconftool.set(gconf_key, 'bool',
+                              self.gconf_previous[gconf_key])
 
         if self.thunar_previous:
             self.thunar_set_volmanrc(self.thunar_previous)
@@ -354,7 +339,6 @@ class Wizard(BaseFrontend):
         
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             got_intro = False
-            self.live_installer.hide()
             self.debconf_progress_start(0, pageslen,
                 self.get_string('ubiquity/install/checking'))
             self.refresh()
@@ -472,7 +456,8 @@ class Wizard(BaseFrontend):
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute('apt-install', 'oem-config-gtk')
 
-        self.live_installer.show()
+        if not 'UBIQUITY_AUTOMATIC' in os.environ:
+            self.live_installer.show()
         self.allow_change_step(False)
 
         try:
@@ -541,6 +526,9 @@ class Wizard(BaseFrontend):
 
         for widget in self.all_widgets:
             self.translate_widget(widget, self.locale)
+        
+        self.partition_button_undo.set_label(
+            self.get_string('partman/text/undo_everything'))
 
     def translate_widget(self, widget, lang):
         if isinstance(widget, gtk.Button) and widget.get_use_stock():
@@ -1347,24 +1335,14 @@ class Wizard(BaseFrontend):
                     new_size_label.set_selectable(True)
                     new_size_label.set_property('can-focus', False)
                     hbox.pack_start(new_size_label, expand=False, fill=False)
-                    self.new_size_scale = gtk.HScale(
-                        gtk.Adjustment(0, 0, 100, 1, 10, 0))
-                    self.new_size_scale.set_draw_value(True)
-                    self.new_size_scale.set_value_pos(gtk.POS_TOP)
-                    self.new_size_scale.set_digits(0)
-                    self.new_size_scale.set_update_policy(
-                        gtk.UPDATE_CONTINUOUS)
-                    self.new_size_scale.connect(
-                        'format_value', self.on_new_size_scale_format_value)
-                    self.resize_min_size, self.resize_max_size = \
-                        extra_options[choice]
-                    if (self.resize_min_size is not None and
-                        self.resize_max_size is not None):
-                        min_percent = int(math.ceil(
-                            100 * self.resize_min_size / self.resize_max_size))
-                        self.new_size_scale.set_range(min_percent, 100)
-                        self.new_size_scale.set_value(
-                            int((min_percent + 100) / 2))
+                    self.new_size_scale = ResizeWidget()
+                    self.resize_min_size, self.resize_max_size, \
+                        self.resize_orig_size, self.resize_path = \
+                            extra_options[choice]
+                    self.new_size_scale.set_part_size(self.resize_orig_size)
+                    self.new_size_scale.set_min(self.resize_min_size)
+                    self.new_size_scale.set_max(self.resize_max_size)
+                    self.new_size_scale.set_device(self.resize_path)
                     hbox.pack_start(self.new_size_scale, expand=True, fill=True)
                 elif choice != manual_choice:
                     vbox = gtk.VBox(spacing=6)
@@ -1790,11 +1768,12 @@ class Wizard(BaseFrontend):
         return True
 
     def on_partition_list_treeview_selection_changed (self, selection):
+        self.partition_button_new_label.set_sensitive(False)
+        self.partition_button_new.set_sensitive(False)
+        self.partition_button_edit.set_sensitive(False)
+        self.partition_button_delete.set_sensitive(False)
         if not isinstance(self.dbfilter, partman.Partman):
             return
-
-        for child in self.partition_list_buttonbox.get_children():
-            self.partition_list_buttonbox.remove(child)
 
         model, iterator = selection.get_selected()
         if iterator is None:
@@ -1803,47 +1782,16 @@ class Wizard(BaseFrontend):
         else:
             devpart = model[iterator][0]
             partition = model[iterator][1]
-
         for action in self.dbfilter.get_actions(devpart, partition):
             if action == 'new_label':
-                # TODO cjwatson 2007-02-19: i18n;
-                # partman-partitioning/text/label is too long unless we can
-                # figure out how to make the row of buttons auto-wrap
-                new_label_button = gtk.Button('New partition table')
-                new_label_button.connect(
-                    'clicked', self.on_partition_list_new_label_activate,
-                    devpart, partition)
-                self.partition_list_buttonbox.pack_start(new_label_button,
-                                                         False, False)
+                self.partition_button_new_label.set_sensitive(True)
             elif action == 'new':
-                # TODO cjwatson 2007-02-19: i18n
-                new_button = gtk.Button('New partition')
-                new_button.connect(
-                    'clicked', self.on_partition_list_new_activate,
-                    devpart, partition)
-                self.partition_list_buttonbox.pack_start(new_button,
-                                                         False, False)
+                self.partition_button_new.set_sensitive(True)
             elif action == 'edit':
-                # TODO cjwatson 2007-02-19: i18n
-                edit_button = gtk.Button('Edit partition')
-                edit_button.connect(
-                    'clicked', self.on_partition_list_edit_activate,
-                    devpart, partition)
-                self.partition_list_buttonbox.pack_start(edit_button,
-                                                         False, False)
+                self.partition_button_edit.set_sensitive(True)
             elif action == 'delete':
-                # TODO cjwatson 2007-02-19: i18n
-                delete_button = gtk.Button('Delete partition')
-                delete_button.connect(
-                    'clicked', self.on_partition_list_delete_activate,
-                    devpart, partition)
-                self.partition_list_buttonbox.pack_start(delete_button,
-                                                         False, False)
-        undo_button = gtk.Button(
-            self.get_string('partman/text/undo_everything'))
-        undo_button.connect('clicked', self.on_partition_list_undo_activate)
-        self.partition_list_buttonbox.pack_start(undo_button, False, False)
-        self.partition_list_buttonbox.show_all()
+                self.partition_button_delete.set_sensitive(True)
+        self.partition_button_undo.set_sensitive(True)
 
     def on_partition_list_treeview_row_activated (self, treeview,
                                                   path, view_column):
@@ -1874,27 +1822,40 @@ class Wizard(BaseFrontend):
         else:
             self.partman_edit_dialog(devpart, partition)
 
-    def on_partition_list_new_label_activate (self, widget,
-                                              devpart, partition):
+    def partition_list_get_selection (self):
+        model, iterator = self.partition_list_treeview.get_selection().get_selected()
+        if iterator is None:
+            devpart = None
+            partition = None
+        else:
+            devpart = model[iterator][0]
+            partition = model[iterator][1]
+        return (devpart, partition)
+
+    def on_partition_list_new_label_activate (self, widget):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Partman):
             return
         self.allow_change_step(False)
+        devpart, partition = self.partition_list_get_selection()
         self.dbfilter.create_label(devpart)
 
-    def on_partition_list_new_activate (self, widget, devpart, partition):
+    def on_partition_list_new_activate (self, widget):
+        devpart, partition = self.partition_list_get_selection()
         self.partman_create_dialog(devpart, partition)
 
-    def on_partition_list_edit_activate (self, widget, devpart, partition):
+    def on_partition_list_edit_activate (self, widget):
+        devpart, partition = self.partition_list_get_selection()
         self.partman_edit_dialog(devpart, partition)
 
-    def on_partition_list_delete_activate (self, widget, devpart, partition):
+    def on_partition_list_delete_activate (self, widget):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Partman):
             return
         self.allow_change_step(False)
+        devpart, partition = self.partition_list_get_selection()
         self.dbfilter.delete_partition(devpart)
 
     def on_partition_list_undo_activate (self, widget):
@@ -2136,33 +2097,69 @@ class Wizard(BaseFrontend):
         ready_buffer.set_text(text)
         self.ready_text.set_buffer(ready_buffer)
 
+    def set_grub_combo (self, options):
+        self.grub_device_entry.clear()
+        l = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        renderer = gtk.CellRendererText()
+        self.grub_device_entry.pack_start(renderer, True)
+        self.grub_device_entry.add_attribute(renderer, 'text', 0)
+        renderer = gtk.CellRendererText()
+        self.grub_device_entry.pack_start(renderer, True)
+        self.grub_device_entry.add_attribute(renderer, 'text', 1)
+        for opt in options:
+            l.append(opt)
+        self.grub_device_entry.set_model(l)
+        self.grub_device_entry.set_text_column(0)
+
+    def grub_verify_loop(self, widget):
+        if widget is not None:
+            if validation.check_grub_device(widget.child.get_text()):
+                self.advanced_okbutton.set_sensitive(True)
+            else:
+                self.advanced_okbutton.set_sensitive(False)
+
     def on_advanced_button_clicked (self, button):
         display = False
         summary_device = self.get_summary_device()
         grub_en = self.get_grub()
+
         if summary_device is not None:
             display = True
             self.bootloader_vbox.show()
-            self.grub_device_entry.set_text(summary_device)
+            self.grub_device_entry.child.set_text(summary_device)
             self.grub_device_entry.set_sensitive(grub_en)
             self.grub_device_label.set_sensitive(grub_en)
         else:
             self.bootloader_vbox.hide()
+
         if self.popcon is not None:
             display = True
             self.popcon_vbox.show()
             self.popcon_checkbutton.set_active(self.popcon)
         else:
             self.popcon_vbox.hide()
+
+        display = True
+        if self.http_proxy_host:
+            self.proxy_host_entry.set_text(self.http_proxy_host)
+            self.proxy_port_spinbutton.set_sensitive(True)
+        else:
+            self.proxy_port_spinbutton.set_sensitive(False)
+        self.proxy_port_spinbutton.set_value(self.http_proxy_port)
+
+        # never happens at the moment because the HTTP proxy question is
+        # always valid
         if not display:
             return
 
         response = self.advanced_dialog.run()
         self.advanced_dialog.hide()
         if response == gtk.RESPONSE_OK:
-            self.set_summary_device(self.grub_device_entry.get_text())
+            self.set_summary_device(self.grub_device_entry.child.get_text())
             self.set_popcon(self.popcon_checkbutton.get_active())
             self.set_grub(self.grub_enable.get_active())
+            self.set_proxy_host(self.proxy_host_entry.get_text())
+            self.set_proxy_port(self.proxy_port_spinbutton.get_value_as_int())
         return True
 
     def toggle_grub(self, widget):
@@ -2170,6 +2167,10 @@ class Wizard(BaseFrontend):
             self.grub_device_entry.set_sensitive(widget.get_active())
             self.grub_device_label.set_sensitive(widget.get_active())
 
+    def on_proxy_host_changed(self, widget):
+        if widget is not None and widget.get_name() == 'proxy_host_entry':
+            text = self.proxy_host_entry.get_text()
+            self.proxy_port_spinbutton.set_sensitive(text != '')
 
     def return_to_partitioning (self):
         """If the install progress bar is up but still at the partitioning
@@ -2509,5 +2510,115 @@ class TimezoneMap(object):
             self.frontend.allow_go_forward(self.location_selected is not None)
 
         return True
+
+class ResizeWidget(gtk.HPaned):
+    def __init__(self):
+        gtk.HPaned.__init__(self)
+        self.old_os = gtk.Label()
+        self.new_os = gtk.Label()
+        self.old_os.set_justify(gtk.JUSTIFY_CENTER)
+        self.new_os.set_justify(gtk.JUSTIFY_CENTER)
+        self.old_os.set_ellipsize(pango.ELLIPSIZE_END)
+        self.new_os.set_ellipsize(pango.ELLIPSIZE_END)
+        
+        color = gtk.gdk.color_parse('orange')
+        frame = gtk.Frame()
+        eb = gtk.EventBox()
+        eb.modify_bg(gtk.STATE_NORMAL, color)
+        eb.add(self.old_os)
+        frame.add(eb)
+        self.pack1(frame, shrink=False)
+        frame = gtk.Frame()
+        eb = gtk.EventBox()
+        eb.add(self.new_os)
+        frame.add(eb)
+        self.pack2(frame, shrink=False)
+        
+        self.part_size = 0
+        self.old_os_title = ''
+        self._set_new_os_title()
+        self.max_size = 0
+        self.min_size = 0
+
+        self.connect('expose_event', self.do_expose_event)
+
+    def do_expose_event(self, widget, event):
+        self._update_min()
+        self._update_max()
+
+        s1 = self.old_os.get_allocation().width
+        s2 = self.new_os.get_allocation().width
+        total = s1 + s2
+
+        percent = (float(s1) / float(total))
+        txt = '%s\n%.0f%% (%s)' % (self.old_os_title,
+            (percent * 100.0),
+            format_size(percent * self.part_size))
+        self.old_os.set_text(txt)
+        self.old_os.set_tooltip_text(txt)
+
+        percent = (float(s2) / float(total))
+        txt = '%s\n%.0f%% (%s)' % (self.new_os_title,
+            (percent * 100.0),
+            format_size(percent * self.part_size))
+        self.new_os.set_text(txt)
+        self.new_os.set_tooltip_text(txt)
+        
+    def set_min(self, size):
+        self.min_size = size
+
+    def set_max(self, size):
+        self.max_size = size
+
+    def set_part_size(self, size):
+        self.part_size = size
+
+    def _update_min(self):
+        total = self.new_os.get_allocation().width + self.old_os.get_allocation().width
+        # The minimum percent needs to be 1% greater than the value debconf
+        # feeds us, otherwise the resize will fail.
+        tmp = (self.min_size / self.part_size) + 0.01
+        pixels = int(tmp * total)
+        self.old_os.set_size_request(pixels, -1)
+
+    def _update_max(self):
+        total = self.new_os.get_allocation().width + self.old_os.get_allocation().width
+        tmp = ((self.part_size - self.max_size) / self.part_size)
+        pixels = int(tmp * total)
+        self.new_os.set_size_request(pixels, -1)
+
+    def _set_new_os_title(self):
+        self.new_os_title = ''
+        try:
+            fp = open('/cdrom/.disk/info')
+            line = fp.readline()
+            if line:
+                self.new_os_title = ' '.join(line.split()[:2])
+        except:
+            syslog.syslog(syslog.LOG_ERR,
+                "Unable to determine the distribution name from /cdrom/.disk/info")
+        finally:
+            fp.close()
+        if not self.new_os_title:
+            self.new_os_title = 'Ubuntu'
+
+    def set_device(self, dev):
+        '''Sets the title of the old partition to the name found in os_prober.
+           On failure, sets the title to the device name or the empty string.'''
+        if dev:
+            self.old_os_title = find_in_os_prober(dev)
+        if dev and not self.old_os_title:
+            self.old_os_title = dev
+        elif not self.old_os_title:
+            self.old_os_title = ''
+            
+    def get_value(self):
+        '''Returns the percent the old partition is of the maximum size it can be.'''
+        s1 = self.old_os.get_allocation().width
+        s2 = self.new_os.get_allocation().width
+        totalwidth = s1 + s2
+        percentwidth = float(s1) / float(totalwidth)
+        percentpart = percentwidth * self.part_size
+        return int((percentpart / self.max_size) * 100)
 
 # vim:ai:et:sts=4:tw=80:sw=4:

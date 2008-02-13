@@ -101,8 +101,8 @@ class DM:
         extras = []
         if self.frontend == 'gtk_ui':
             wm = subprocess.Popen(['/usr/bin/metacity', '--sm-disable'], stdin=null, stdout=logfile, stderr=logfile)
-            if os.path.exists('/usr/lib/gnome-control-center/gnome-settings-daemon'):
-                extras.append(subprocess.Popen(['/usr/lib/gnome-control-center/gnome-settings-daemon'], stdin=null, stdout=logfile, stderr=logfile))
+            if os.path.exists('/usr/lib/gnome-settings-daemon/gnome-settings-daemon'):
+                extras.append(subprocess.Popen(['/usr/lib/gnome-settings-daemon/gnome-settings-daemon'], stdin=null, stdout=logfile, stderr=logfile))
             
             # Accessibility
             os.environ['GTK_MODULES'] = 'gail:atk-bridge'
@@ -168,4 +168,12 @@ if len(sys.argv) < 3:
 
 vt, display = sys.argv[1:3]
 dm = DM(vt, display)
-sys.exit(dm.run(*sys.argv[3:]))
+proc = None
+if dm.frontend == 'gtk_ui':
+    proc = ['/etc/init.d/gdm', 'start']
+elif dm.frontend == 'kde_ui':
+    proc = ['/etc/init.d/kdm', 'start']
+ret = dm.run(*sys.argv[3:])
+if proc:
+    subprocess.Popen(proc)
+sys.exit(ret)

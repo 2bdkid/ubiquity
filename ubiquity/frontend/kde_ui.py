@@ -115,7 +115,6 @@ class Wizard(BaseFrontend):
         self.userinterface = UbiquityUI()
         self.userinterface.setWizard(self)
         #self.app.setMainWidget(self.userinterface)
-        self.userinterface.show()
 
         self.advanceddialog = QDialog(self.userinterface)
         uic.loadUi("%s/advanceddialog.ui" % UIDIR, self.advanceddialog)
@@ -274,6 +273,19 @@ class Wizard(BaseFrontend):
 
         self.app.connect(self.userinterface.advanced_button, SIGNAL("clicked()"), self.on_advanced_button_clicked)
 
+        self.pages = [language.Language, timezone.Timezone,
+            console_setup.ConsoleSetup, partman.Partman,
+            usersetup.UserSetup, summary.Summary]
+
+        self.pagesindex = 0
+        pageslen = len(self.pages)
+
+        if 'UBIQUITY_AUTOMATIC' in os.environ:
+            got_intro = False
+            self.debconf_progress_start(0, pageslen,
+                self.get_string('ubiquity/install/checking'))
+            self.refresh()
+
         # Start the interface
         if got_intro:
             global BREADCRUMB_STEPS, BREADCRUMB_MAX_STEP
@@ -285,13 +297,6 @@ class Wizard(BaseFrontend):
         else:
             first_step = "stepLanguage"
         self.set_current_page(WIDGET_STACK_STEPS[first_step])
-
-        self.pages = [language.Language, timezone.Timezone,
-            console_setup.ConsoleSetup, partman.Partman,
-            usersetup.UserSetup, summary.Summary]
-
-        self.pagesindex = 0
-        pageslen = len(self.pages)
         
         if got_intro:
             self.app.exec_()
@@ -299,11 +304,6 @@ class Wizard(BaseFrontend):
         while(self.pagesindex < pageslen):
             if self.current_page == None:
                 break
-
-            if not self.installing:
-                # Make sure any started progress bars are stopped.
-                while self.progress_position.depth() != 0:
-                    self.debconf_progress_stop()
 
             self.backup = False
             old_dbfilter = self.dbfilter
@@ -323,6 +323,10 @@ class Wizard(BaseFrontend):
                     self.process_step()
                     if not self.stay_on_page:
                         self.pagesindex = self.pagesindex + 1
+                    if 'UBIQUITY_AUTOMATIC' in os.environ:
+                        # if no debconf_progress, create another one, set start to pageindex
+                        self.debconf_progress_step(1)
+                        self.refresh()
                 if self.backup:
                     if self.pagesindex > 0:
                         self.pagesindex = self.pagesindex - 1
@@ -385,6 +389,9 @@ class Wizard(BaseFrontend):
         else:
             self.userinterface.oem_id_label.hide()
             self.userinterface.oem_id_entry.hide()
+        
+        if not 'UBIQUITY_AUTOMATIC' in os.environ:
+            self.userinterface.show()
 
         try:
             release_notes = open('/cdrom/.disk/release_notes_url')
@@ -1155,8 +1162,12 @@ class Wizard(BaseFrontend):
                                      self.update_new_size_label)
                     new_size_scale_vbox.addWidget(self.new_size_scale)
                     self.new_size_scale.show()
-                    self.resize_min_size, self.resize_max_size = \
-                        extra_options[choice]
+                    # TODO evand 2008-02-12: Until the new resize widget is
+                    # ported to Qt, resize_orig_size and resize_path are not
+                    # needed.
+                    self.resize_min_size, self.resize_max_size, \
+                        dis, dis = extra_options[choice]
+                    del dis
                     if (self.resize_min_size is not None and
                         self.resize_max_size is not None):
                         min_percent = int(math.ceil(
@@ -1692,6 +1703,10 @@ class Wizard(BaseFrontend):
             text = text[:i] + "<br>" + text[i+1:]
             i = text.find("\n")
         self.userinterface.ready_text.setText(text)
+
+    def set_grub_combo(self, options):
+        # TODO evand 2008-02-13: Port grub combobox.
+        pass
 
     def on_advanced_button_clicked (self):
         self.app.connect(self.advanceddialog.grub_enable, SIGNAL("stateChanged(int)"), self.toggle_grub)

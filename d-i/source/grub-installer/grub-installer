@@ -96,11 +96,11 @@ convert () {
 	# Break the device name into the disk part and the partition part
 	case "$host_os" in
 	    linux*)
-		tmp_disk=$(echo "$1" | sed -e 's%\([sh]d[a-z]\)[0-9]*$%\1%' \
+		tmp_disk=$(echo "$1" | sed -e 's%\([vsh]d[a-z]\)[0-9]*$%\1%' \
 				  -e 's%\(fd[0-9]*\)$%\1%' \
 				  -e 's%/part[0-9]*$%/disc%' \
 				  -e 's%\(c[0-7]d[0-9]*\).*$%\1%')
-		tmp_part=$(echo "$1" | sed -e 's%.*/[sh]d[a-z]\([0-9]*\)$%\1%' \
+		tmp_part=$(echo "$1" | sed -e 's%.*/[vsh]d[a-z]\([0-9]*\)$%\1%' \
 				  -e 's%.*/fd[0-9]*$%%' \
 				  -e 's%.*/floppy/[0-9]*$%%' \
 				  -e 's%.*/\(disc\|part\([0-9]*\)\)$%\2%' \
@@ -251,7 +251,7 @@ is_removable () {
 		removabledevice="$(readlink -f $removabledevice)"
 	fi
 	# copy from convert(). We can't use the entire stuff yet. We can clean it later on.
-	removabledevice="$(echo "$removabledevice" | sed -e 's%\([sh]d[a-z]\)[0-9]*$%\1%' -e 's%\(fd[0-9]*\)$%\1%' -e 's%/part[0-9]*$%/disc%' -e 's%\(c[0-7]d[0-9]*\).*$%\1%' -e 's%^/dev/%%g')"
+	removabledevice="$(echo "$removabledevice" | sed -e 's%\([vsh]d[a-z]\)[0-9]*$%\1%' -e 's%\(fd[0-9]*\)$%\1%' -e 's%/part[0-9]*$%/disc%' -e 's%\(c[0-7]d[0-9]*\).*$%\1%' -e 's%^/dev/%%g')"
 	if [ -e "/sys/block/$removabledevice/removable" ]; then
 		if [ "$(cat /sys/block/$removabledevice/removable)" != "0" ]; then
 			echo "/dev/$removabledevice"
@@ -298,7 +298,7 @@ case $prefix in
     /dev/md|/dev/mapper|/dev/loop)
 	disc_offered_devfs="$bootfs"
 	;;
-    /dev/[hs]d[a-z]|/dev/cciss/c[0-9]d[0-9]|/dev/ida/c[0-9]d[0-9])
+    /dev/[vhs]d[a-z]|/dev/cciss/c[0-9]d[0-9]|/dev/ida/c[0-9]d[0-9])
 	disc_offered_devfs="$prefix"
 	;;
     *)
@@ -503,7 +503,7 @@ if [ "$frdev" ]; then
 	   	db_subst grub-installer/sataraid GRUBROOT $ROOT$frdev$frbootpart
 		q=grub-installer/sataraid
 	else
-		db_input grub-installer/sataraid-error
+		db_input critical grub-installer/sataraid-error
 		db_go || true
 		exit 1
 	fi
@@ -567,6 +567,9 @@ done
 
 if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev=
+	if ! [ -f "$device_map" ]; then
+		echo quit | grub --batch --device-map="$device_map" >/dev/null 2>&1
+	fi
 fi
 
 db_progress STEP 1
@@ -663,7 +666,7 @@ split_device () {
 	disk=
 	part=
 	case $1 in
-		/dev/[hs]d[a-z]*)
+		/dev/[vhs]d[a-z]*)
 			disk="$(echo "$1" | sed 's,\(/dev/[a-z]\+\).*,\1,')"
 			part="$(echo "$1" | sed 's,/dev/[a-z]\+\(.*\),\1,')"
 			;;

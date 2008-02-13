@@ -166,3 +166,10 @@ if [ "$RET" = true ]; then
 		fi
 	fi
 fi
+
+
+# Activate support for Serial ATA RAID
+db_get disk-detect/iscsi/enable
+if [ "$RET" = true ]; then
+	anna-install open-iscsi-udeb
+fi

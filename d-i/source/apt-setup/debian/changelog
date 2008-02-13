@@ -1,3 +1,28 @@
+apt-setup (1:0.31ubuntu5) hardy; urgency=low
+
+  * Run 'apt-get update' for all sources.list lines produced by a single
+    generator in one go, and don't comment out sources.list lines if it
+    fails (LP: #154095).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 11 Feb 2008 15:15:22 +0000
+
+apt-setup (1:0.31ubuntu4) hardy; urgency=low
+
+  * Use different pre-populated Release files for -proposed, -updates, and
+    -backports.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 11 Feb 2008 13:08:23 +0000
+
+apt-setup (1:0.31ubuntu3) hardy; urgency=low
+
+  * Add apt-setup/proposed question (never asked); if preseeded to true,
+    -proposed entries will be added to sources.list (LP: #181776).
+  * Pre-populate apt's lists directory with signed Release files for
+    archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
+    against downgrade attacks right from initial installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 08 Feb 2008 13:01:59 +0000
+
 apt-setup (1:0.31ubuntu2) hardy; urgency=low
 
   * Fix Debian-style sources.list line that crept back into the security

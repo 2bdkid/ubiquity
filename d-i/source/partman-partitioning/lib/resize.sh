@@ -100,6 +100,13 @@ human_resize_range () {
 
 ask_for_size () {
     local noninteractive digits minmb
+
+    # Get the original size of the partition being resized.
+    open_dialog PARTITION_INFO $oldid
+    read_line x1 x2 origsize x4 x5 path x7
+    close_dialog
+    origsize=$(longint2human $origsize)
+
     noninteractive=true
     while true; do
 	newsize=''
@@ -108,6 +115,9 @@ ask_for_size () {
 	    db_subst partman-partitioning/new_size MINSIZE "$hminsize"
 	    db_subst partman-partitioning/new_size MAXSIZE "$hmaxsize"
 	    db_subst partman-partitioning/new_size PERCENT "$minpercent%"
+	    # Used by ubiquity to determine the size of the resize bar.
+	    db_subst partman-partitioning/new_size ORISIZE "$origsize"
+	    db_subst partman-partitioning/new_size PATH "$path"
 	    db_input critical partman-partitioning/new_size || $noninteractive
 	    noninteractive="return 1"
 	    db_go || return 1

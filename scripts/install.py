@@ -872,7 +872,7 @@ exit 0"""
             }""")
         apt_conf_nmc.close()
 
-        dbfilter = apt_setup.AptSetup(None)
+        dbfilter = apt_setup.AptSetup(None, self.db)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
             raise InstallStepError("AptSetup failed with code %d" % ret)
@@ -1682,6 +1682,10 @@ exit 0"""
         except debconf.DebconfError:
             pass
 
+        # Tell apt-install to install packages directly from now on.
+        apt_install_direct = open('/var/lib/ubiquity/apt-install-direct', 'w')
+        apt_install_direct.close()
+
 
     def remove_extras(self):
         """Try to remove packages that are needed on the live CD but not on
@@ -1726,6 +1730,11 @@ exit 0"""
         """Miscellaneous cleanup tasks."""
 
         misc.execute('umount', os.path.join(self.target, 'cdrom'))
+
+        env = dict(os.environ)
+        env['OVERRIDE_BASE_INSTALLABLE'] = '1'
+        subprocess.call(['/usr/lib/ubiquity/apt-setup/finish-install'],
+                        env=env)
 
         for apt_conf in ('00NoMountCDROM', '00IgnoreTimeConflict',
                          '00AllowUnauthenticated'):

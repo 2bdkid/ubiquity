@@ -1,3 +1,49 @@
+ubiquity (1.7.7) hardy; urgency=low
+
+  [ Mario Limonciello ]
+  * Add ubiquity-frontend-mythbuntu.links to source exterior glade files.
+  * Add temporary workaround to allow Mythbuntu installs on low res
+    displays.
+  * Fix case when no themes are removed.
+
+  [ Colin Watson ]
+  * Prevent apt-install from installing packages directly unless
+    install_extras has been run (previously, it would do so once apt was
+    configured, which produced some confusing error messages).
+  * Call apt-setup finish-install script during cleanup, not while
+    configuring apt; removing cdrom entries from sources.list at this point
+    broke OEM installs and probably other things (LP: #188240).
+  * Fetch http_proxy and no_proxy from gconf (if possible) immediately
+    before configuring apt.
+  * Update installed file list for apt-setup 1:0.31ubuntu3.
+  * GTK frontend:
+    - Add proxy configuration to the advanced dialog (LP: #131421).
+  * Import DebconfError correctly in summary component (thanks, Jesus L.
+    Alvaro; LP: #177442).
+  * Build-depend on dctrl-tools rather than grep-dctrl.
+
+  [ Evan Dandrea ]
+  * Validate the boot device string that the user provides on the
+    advanced page.
+  * Change the boot device Entry to a ComboBox that displays suitable targets.
+  * Updated the location of gnome-settings-daemon in ubiquity-dm.
+  * Fix the installer window appearing briefly when starting automatic mode.
+  * Explicitly call GDM/KDM at the end of ubiquity-dm as we now remove the rc
+    files in casper for only-ubiquity and automatic-ubiquity.
+  * Always show the advanced partitioner buttons, greying them out
+    conditionally instead of hiding them.
+  * Add the progress bar for automatic mode that was already present in
+    gtk_ui to kde_ui.
+  * Replace the resize slider with a custom widget in gtk_ui.
+  * Automatic update of included source packages: apt-setup
+    1:0.31ubuntu5, grub-installer 1.27ubuntu5, hw-detect 1.58ubuntu2,
+    partman-partitioning 54ubuntu2.
+
+  [ Agostino Russo ]
+  * Added debug mode boot parameter
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 13 Feb 2008 15:03:15 -0500
+
 ubiquity (1.7.6) hardy; urgency=low
 
   [ Mario Limonciello ]

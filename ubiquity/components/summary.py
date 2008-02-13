@@ -19,8 +19,58 @@
 
 import os
 import textwrap
+import subprocess
+
+import debconf
+
+from ubiquity.parted_server import PartedServer
+from ubiquity.misc import *
 
 from ubiquity.filteredcommand import FilteredCommand
+
+def grub_options():
+    """ Generates a list of suitable targets for grub-installer
+        @return empty list or a list of ['/dev/sda1','Ubuntu Hardy 8.04'] """
+    l = []
+    oslist = {}
+    subp = subprocess.Popen(['os-prober'], stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE)
+    result = subp.communicate()[0].splitlines()
+    for res in result:
+        res = res.split(':')
+        oslist[res[0]] = res[1]
+    p = PartedServer()
+    for disk in p.disks():
+        p.select_disk(disk)
+        dev = ''
+        mod = ''
+        size = ''
+        try:
+            fp = open(p.device_entry('model'))
+            mod = fp.readline()
+            fp.close()
+            fp = open(p.device_entry('device'))
+            dev = fp.readline()
+            fp = open(p.device_entry('size'))
+            size = fp.readline()
+        finally:
+            fp.close()
+        if dev and mod:
+            if size.isdigit():
+                size = format_size(int(size))
+                l.append([dev, '%s (%s)' % (mod, size)])
+            else:
+                l.append([dev, mod])
+        for part in p.partitions():
+            ostype = ''
+            if part[4] == 'xfs' or part[4] == 'linux-swap':
+                continue
+            if os.path.exists(p.part_entry(part[1], 'format')):
+                pass
+            elif part[5] in oslist.keys():
+                ostype = oslist[part[5]]
+            l.append([part[5], ostype])
+    return l
 
 def will_be_installed(pkg):
     try:
@@ -59,11 +109,13 @@ class Summary(FilteredCommand):
             else:
                 self.frontend.set_summary_device(None)
 
+            self.frontend.set_grub_combo(grub_options())
+
             if will_be_installed('popularity-contest'):
                 try:
                     participate = self.db.get('popularity-contest/participate')
                     self.frontend.set_popcon(participate == 'true')
-                except DebconfError:
+                except debconf.DebconfError:
                     self.frontend.set_popcon(None)
             else:
                 self.frontend.set_popcon(None)
