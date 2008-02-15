@@ -1,3 +1,11 @@
+partman-target (52ubuntu5) hardy; urgency=low
+
+  * fstab_removable_media_entries: Mount CD-ROMs and Floppies with the "utf8"
+    option by default, since this is our only supported encoding since Hoary.
+    (LP: #22623)
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Wed, 13 Feb 2008 15:56:29 +0100
+
 partman-target (52ubuntu4) hardy; urgency=low
 
   * Temporarily disable clear_partitions.  It's removing directories on

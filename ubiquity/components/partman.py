@@ -24,6 +24,7 @@ import signal
 
 from ubiquity.filteredcommand import FilteredCommand
 from ubiquity import parted_server
+from ubiquity.misc import drop_privileges
 
 PARTITION_TYPE_PRIMARY = 0
 PARTITION_TYPE_LOGICAL = 1
@@ -43,6 +44,7 @@ class Partman(FilteredCommand):
 
     def prepare(self):
         # If an old parted_server is still running, clean it up.
+        os.seteuid(0)
         if os.path.exists('/var/run/parted_server.pid'):
             try:
                 pidline = open('/var/run/parted_server.pid').readline().strip()
@@ -57,6 +59,7 @@ class Partman(FilteredCommand):
 
         # Force autopartitioning to be re-run.
         shutil.rmtree('/var/lib/partman', ignore_errors=True)
+        drop_privileges()
 
         self.autopartition_question = None
         self.auto_state = None
@@ -418,6 +421,7 @@ class Partman(FilteredCommand):
                             self.cache_order)
                 else:
                     self.debug('Partman: Building cache')
+                    os.seteuid(0)
                     parted = parted_server.PartedServer()
                     matches = self.find_script(menu_options, 'partition_tree')
 
@@ -496,6 +500,7 @@ class Partman(FilteredCommand):
                             'name': info[6]
                         }
 
+                    drop_privileges()
                     self.frontend.debconf_progress_start(
                         0, len(self.update_partitions),
                         self.description('partman/progress/init/parted'))
@@ -708,6 +713,7 @@ class Partman(FilteredCommand):
                         return False
 
                 assert state[0] == 'partman/choose_partition'
+                os.seteuid(0)
                 parted = parted_server.PartedServer()
 
                 parted.select_disk(partition['dev'])
@@ -720,6 +726,7 @@ class Partman(FilteredCommand):
                         partition[entry] = \
                             parted.readline_part_entry(partition['id'], entry)
 
+                drop_privileges()
                 visit = []
                 for (script, arg, option) in menu_options:
                     if arg in ('method', 'mountpoint'):

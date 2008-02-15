@@ -27,10 +27,7 @@ import re
 import syslog
 
 import debconf
-try:
-    from debconf import DebconfCommunicator
-except ImportError:
-    from ubiquity.debconfcommunicator import DebconfCommunicator
+from ubiquity.debconfcommunicator import DebconfCommunicator
 
 from ubiquity.debconffilter import DebconfFilter
 
@@ -109,7 +106,11 @@ class FilteredCommand(object):
             self.dbfilter.start(self.command, blocking=True, extra_env=env)
 
     def process_line(self):
-        return self.dbfilter.process_line()
+        try:
+            return self.dbfilter.process_line()
+        except Exception, e:
+            self.debug('Exception caught: %s' % e)
+            return False
 
     def wait(self):
         ret = self.dbfilter.wait()
