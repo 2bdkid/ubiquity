@@ -3,8 +3,6 @@
 
 . /lib/partman/lib/base.sh
 
-exit 0
-
 failed () {
     db_progress STOP
     db_input critical partman-target/clear_partitions_failed || true
@@ -31,10 +29,10 @@ done | sort
 
 [ -n "$partitions" ] || exit 0
 
-echo "clear_partitions: considering $partitions" >>/var/log/syslog
+echo "Considering $partitions." | tr '\n' ' ' | logger -t clear_partitions
 
 tmp="/mnt/tmpmount"
-mkdir -p $tmp
+mkdir -p "$tmp"
 template=partman-target/clear_partitions_progress
 db_progress START 0 $count ubiquity/install/title
 db_progress INFO $template
@@ -42,40 +40,43 @@ to_delete=""
 for part in $partitions; do
     mp="${part%,*}"
     path="${part#*,}"
-    if [ $mp = "/" ]; then
+    if [ "$mp" = "/" ]; then
 	mount $path $tmp || failed
 	for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
-	    [ -e $tmp/$x ] && (rm -rf $tmp/$x || failed)
+	    [ -e "$tmp/$x" ] && (rm -rf "$tmp/$x" &&
+	    logger -t clear_partitions "Removing $x from / ($path)." ||
+	    failed)
 	done
 	for x in $tmp/initrd* $tmp/vmlinuz*; do
-	    [ -e $x ] && (rm -rf $x || failed)
+	    [ -e "$x" ] && (rm -rf "$x" || failed)
 	done
 	
 	# /home could be a symlink.
-	[ -f $tmp/home ] && (rm $tmp/home || failed)
+	[ -f "$tmp/home" ] && (rm "$tmp/home" || failed)
 	
 	# Preserve the UID, if possible.
 	db_get passwd/username || true
-	username=$RET
-	if [ -n $username ] && [ -d $tmp/home/$username ]; then
-	    db_set passwd/user-uid "$(stat -c %u $tmp/home/$username)" || true
-	    db_set passwd/user-gid "$(stat -c %g $tmp/home/$username)" || true
+	username="$RET"
+	if [ -n "$username" ] && [ -d "$tmp/home/$username" ]; then
+	    db_set passwd/user-uid "$(stat -c %u "$tmp/home/$username")" || true
+	    db_set passwd/user-gid "$(stat -c %g "$tmp/home/$username")" || true
 	fi
 	umount $tmp
-    elif [ $mp = "/home" ]; then
+    elif [ "$mp" = "/home" ]; then
 	mount $path $tmp || failed
 	# Preserve the UID, if possible.
 	db_get passwd/username || true
-	username=$RET
-	if [ -n $username ] && [ -d $tmp/$username ]; then
-	    db_set passwd/user-uid "$(stat -c %u $tmp/$username)" || true
-	    db_set passwd/user-gid "$(stat -c %g $tmp/$username)" || true
+	username="$RET"
+	if [ -n "$username" ] && [ -d "$tmp/$username" ]; then
+	    db_set passwd/user-uid "$(stat -c %u "$tmp/$username")" || true
+	    db_set passwd/user-gid "$(stat -c %g "$tmp/$username")" || true
 	fi
 	umount $tmp
     else
 	for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
-	    if $(echo $path | grep -wqs ^/$x); then
+	    if $(echo "$mp" | grep -wqs "^/$x$") || $(echo "$mp" | grep -qws "^/$x/*"); then
 		mount $path $tmp || failed
+		logger -t clear_partitions "Removing everything from $mp ($path)."
 		rm -rf $tmp/* || failed
 		umount $tmp
 		break
@@ -85,4 +86,4 @@ for part in $partitions; do
     db_progress STEP 1
 done
 db_progress STOP
-rmdir $tmp || failed
+rmdir $tmp

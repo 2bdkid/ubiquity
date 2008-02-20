@@ -1,3 +1,16 @@
+base-installer (1.86ubuntu2) hardy; urgency=low
+
+  [ Colin Watson ]
+  * If apt-setup/proposed is true, set up the default sources.list to look
+    in -proposed as well (LP: #181776).
+  * If base-installer/use_unclean_target is asked, emit a warning to the
+    logs so that we know about it when diagnosing problems.
+
+  [ Soren Hansen ]
+  * Add support for AMD CPU family 16 on i386 (LP: #187869).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 19 Feb 2008 10:25:10 +0000
+
 base-installer (1.86ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
