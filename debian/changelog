@@ -1,3 +1,24 @@
+ubiquity (1.7.11) hardy; urgency=low
+
+  [ Jonathan Riddell ]
+  * Add web proxy field to qt frontend.  
+    Patch by Richard A. Johnson <nixternal@kubuntu.org>
+  * Force kde_ui style to plastique, works around QtDbus/pydbus
+    clash when using oxygen style
+	
+  [ Mario Limonciello ]
+  * Drop fullscreen workaround in Mythbuntu interface.
+  * Adjust user permissions before/after launching MythTV setup.
+  * If mythbuntu frontend is present, use that.  This allows
+    only-ubiquity to launch directly into this frontend.
+  * Check for jockey-gtk instead of restricted-manager on a PS3 install.
+
+  [ Evan Dandrea ]
+  * Properly drop privileges in ubiquity-dm.  Previous attempts were
+    relying on SUDO_UID and SUDO_GID being set.
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 25 Feb 2008 00:47:39 -0500
+
 ubiquity (1.7.10) hardy; urgency=low
 
   [ Evan Dandrea ]
