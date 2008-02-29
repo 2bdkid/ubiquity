@@ -1,3 +1,10 @@
+apt-setup (1:0.31ubuntu6) hardy; urgency=low
+
+  * Don't bother running 'apt-get update' after disabling cdrom entries in
+    sources.list; it can be slow and is unnecessary.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 27 Feb 2008 14:11:28 +0000
+
 apt-setup (1:0.31ubuntu5) hardy; urgency=low
 
   * Run 'apt-get update' for all sources.list lines produced by a single

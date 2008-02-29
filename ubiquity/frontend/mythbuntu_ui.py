@@ -348,6 +348,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         self.installing = False
 
     def set_page(self, n):
+        self.run_automation_error_cmd()
         gtk_ui_pages  = ['Language', 'ConsoleSetup', 'Timezone', 'Partman', 'UserSetup', 'Summary', 'MigrationAssistant']
         found = False
         for item in gtk_ui_pages:
@@ -394,27 +395,36 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
     def populate_video(self):
         """Finds the currently active video driver"""
-        vid = open('/etc/X11/xorg.conf')
-        start_filter = re.compile("Section \"Device\"")
-        driver_filter = re.compile("Driver")
-        section=False
-        for line in vid:
-            if not section and start_filter.search(line):
-                section=True
-            elif section and driver_filter.search(line):
-                list = string.split(line, '"')
-                if len(list) > 1:
-                    self.video_driver.append_text("Open Source Driver: " + list[1])
-                    self.video_driver.set_active(6)
-                    self.tvoutstandard.set_active(0)
-                    self.tvouttype.set_active(0)
-                    break
-        if not section:
-            self.video_driver.append_text("Open Source Driver")
-            self.video_driver.set_active(6)
-            self.tvoutstandard.set_active(0)
-            self.tvouttype.set_active(0)
-        vid.close()
+        #disable reading xorg.conf.  not really a good idea anymore
+        #with how empty it is as of Hardy
+        self.video_driver.append_text("Open Source Driver")
+        self.video_driver.set_active(5)
+        self.tvoutstandard.set_active(0)
+        self.tvouttype.set_active(0)
+
+        #vid = open('/etc/X11/xorg.conf')
+        #start_filter = re.compile("Section \"Device\"")
+        #driver_filter = re.compile("Driver")
+        #section=False
+        #for line in vid:
+        #   if not section and start_filter.search(line):
+        #        section=True
+        #    elif section and driver_filter.search(line):
+        #        list = string.split(line, '"')
+        #        if len(list) > 1:
+        #            self.video_driver.append_text("Open Source Driver: " + list[1])
+        #            self.video_driver.set_active(5)
+        #            self.tvoutstandard.set_active(0)
+        #            self.tvouttype.set_active(0)
+        #            break
+        #        else:
+        #            section = False
+        #if not section:
+        #    self.video_driver.append_text("Open Source Driver")
+        #    self.video_driver.set_active(5)
+        #    self.tvoutstandard.set_active(0)
+        #    self.tvouttype.set_active(0)
+        #vid.close()
 
     def allow_go_backward(self, allowed):
         self.back.set_sensitive(allowed and self.allowed_change_step)
@@ -562,7 +572,6 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
         def set_all_fe_plugins(self,enable):
             """ Enables all frontend plugins for defaults"""
-            self.mythappearance.set_active(enable)
             self.mytharchive.set_active(enable)
             self.mythbrowser.set_active(enable)
             self.mythcontrols.set_active(enable)
@@ -901,13 +910,17 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
             else:
                 self.tvout_vbox.set_sensitive(False)
                 self.videodrivers_hbox.set_sensitive(False)
-                self.video_driver.set_active(6)
+                self.video_driver.set_active(5)
                 self.tvoutstandard.set_active(0)
                 self.tvouttype.set_active(0)
         elif (widget is not None and widget.get_name() == 'video_driver'):
             type = widget.get_active()
             if (type == 0 or type == 1 or type == 2 or type == 3 or type == 4):
                 self.tvout_vbox.set_sensitive(True)
+            else:
+                self.tvout_vbox.set_sensitive(False)
+                self.tvoutstandard.set_active(0)
+                self.tvouttype.set_active(0)
 
     def toggle_tv_out (self,widget):
         """Called when the tv-out type is toggled"""
@@ -963,13 +976,6 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
     def get_mythcontrols(self):
         """Returns the status of the mythcontrols plugin"""
         if self.mythcontrols.get_active():
-            return True
-        else:
-            return False
-
-    def get_mythappearance(self):
-        """Returns the status of the mythappearance plugin"""
-        if self.mythappearance.get_active():
             return True
         else:
             return False
@@ -1082,14 +1088,14 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         if (self.modifyvideodriver.get_active()):
             return self.tvouttype.get_active_text()
         else:
-            return "TV Out Disabled"
+            return "Disable TV-Out"
 
     def get_tvstandard(self):
         """Returns the status of the TV Standard type"""
         if (self.modifyvideodriver.get_active()):
             return self.tvoutstandard.get_active_text()
         else:
-            return "TV Out Disabled"
+            return "Disable TV-Out"
 
     def get_uselivemysqlinfo(self):
         if (self.uselivemysqlinfo.get_active()):

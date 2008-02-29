@@ -82,6 +82,7 @@ class Partman(FilteredCommand):
         questions = ['^partman-auto/.*automatically_partition$',
                      '^partman-auto/select_disk$',
                      '^partman-partitioning/confirm_resize$',
+                     '^partman-partitioning/confirm_new_label$',
                      '^partman-partitioning/new_size$',
                      '^partman/choose_partition$',
                      '^partman/confirm.*',
@@ -405,8 +406,7 @@ class Partman(FilteredCommand):
                         partition = self.partition_cache[state[1]]
                         self.debug('Partman: Building cache (%s)',
                                    partition['parted']['path'])
-                        self.preseed(question, partition['display'],
-                                     escape=True)
+                        self.preseed(question, partition['display'])
                         return True
                     else:
                         # Finished building the cache.
@@ -529,8 +529,7 @@ class Partman(FilteredCommand):
                         self.debug('Partman: Building cache (%s)',
                                    partition['parted']['path'])
                         self.__state.append([question, devpart, None])
-                        self.preseed(question, partition['display'],
-                                     escape=True)
+                        self.preseed(question, partition['display'])
                         return True
                     else:
                         self.debug('Partman: Finished building cache '
@@ -590,7 +589,7 @@ class Partman(FilteredCommand):
                 if devpart in self.disk_cache:
                     disk = self.disk_cache[devpart]
                     # No need to use self.__state to keep track of this.
-                    self.preseed(question, disk['display'], escape=True)
+                    self.preseed(question, disk['display'])
                 return True
 
             elif self.creating_partition:
@@ -598,7 +597,7 @@ class Partman(FilteredCommand):
                 if devpart in self.partition_cache:
                     partition = self.partition_cache[devpart]
                     self.__state.append([question, devpart, None])
-                    self.preseed(question, partition['display'], escape=True)
+                    self.preseed(question, partition['display'])
                 return True
 
             elif self.editing_partition:
@@ -606,7 +605,7 @@ class Partman(FilteredCommand):
                 if devpart in self.partition_cache:
                     partition = self.partition_cache[devpart]
                     self.__state.append([question, devpart, None])
-                    self.preseed(question, partition['display'], escape=True)
+                    self.preseed(question, partition['display'])
                 return True
 
             elif self.deleting_partition:
@@ -614,7 +613,7 @@ class Partman(FilteredCommand):
                 if devpart in self.partition_cache:
                     partition = self.partition_cache[devpart]
                     # No need to use self.__state to keep track of this.
-                    self.preseed(question, partition['display'], escape=True)
+                    self.preseed(question, partition['display'])
                 return True
 
             elif self.undoing:
@@ -625,7 +624,7 @@ class Partman(FilteredCommand):
                 raise AssertionError, ("Returned to %s with nothing to do" %
                                        question)
 
-        elif question == 'partman/confirm_new_label':
+        elif question == 'partman-partitioning/confirm_new_label':
             if self.creating_label:
                 response = self.frontend.question_dialog(
                     self.description(question),
@@ -700,7 +699,7 @@ class Partman(FilteredCommand):
                     if state[2] < len(partition['active_partition_build']):
                         # Move on to the next item.
                         visit = partition['active_partition_build']
-                        self.preseed(question, visit[state[2]][2], escape=True)
+                        self.preseed(question, visit[state[2]][2])
                         return True
                     else:
                         # Finished building the cache for this submenu; go
@@ -739,7 +738,7 @@ class Partman(FilteredCommand):
                 if visit:
                     partition['active_partition_build'] = visit
                     self.__state.append([question, state[1], 0])
-                    self.preseed(question, visit[0][2], escape=True)
+                    self.preseed(question, visit[0][2])
                     return True
                 else:
                     # Back up to the previous menu.
@@ -774,7 +773,7 @@ class Partman(FilteredCommand):
                     item = visit[state[2]]
                     scripts = self.find_script(menu_options, None, item)
                     if scripts:
-                        self.preseed(question, scripts[0][2], escape=True)
+                        self.preseed(question, scripts[0][2])
                         return True
                     state[2] += 1
 
@@ -970,8 +969,8 @@ class Partman(FilteredCommand):
                 ('ubiquity/text/go_back', 'ubiquity/text/continue'))
 
             answer_reversed = False
-            if (question == 'partman-jfs/jfs_boot' or
-                question == 'partman-jfs/jfs_root'):
+            if question in ('partman-jfs/jfs_boot', 'partman-jfs/jfs_root',
+                            'grub-installer/install_to_xfs'):
                 answer_reversed = True
             if response is None or response == 'ubiquity/text/continue':
                 answer = answer_reversed

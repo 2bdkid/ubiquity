@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: Source: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2008-02-20 09:18-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2008-02-29 10:49-0500\n"
+"PO-Revision-Date: 2008-02-20 12:41+0000\n"
 "Last-Translator: Clytie Siddall <clytie@riverland.net.au>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2007-10-07 16:59+0000\n"
+"X-Launchpad-Export-Date: 2008-02-28 18:11+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. Type: text
@@ -27,7 +27,7 @@ msgstr "Cài đặt"
 #. Description
 #: ../ubiquity.templates:3001
 msgid "Install (OEM mode, for manufacturers only)"
-msgstr ""
+msgstr "Cài đặt (OEM mode, chỉ dành cho nhan viên kĩ thuật)"
 
 #. Type: text
 #. Description
@@ -222,18 +222,10 @@ msgstr "Di chuyển tài liệu và thiết lập"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:28001
-#, fuzzy
-#| msgid ""
-#| "Select any accounts you would like to import and fill in the form below "
-#| "for each one.  The documents and settings for these accounts will be "
-#| "available after the install completes."
 msgid ""
 "Select any accounts you would like to import.  The documents and settings "
 "for these accounts will be available after the install completes."
 msgstr ""
-"Chọn bất kỳ tài khoản nào bạn muốn nhập và điền vào mẫu dưới cho mỗi cái. "
-"Những tài liệu và thiết lập cho các tài khoản này sẽ hiện diện sau khi quá "
-"trình cài đặt hoàn tất."
 
 #. Type: text
 #. Description
@@ -284,7 +276,7 @@ msgstr "Hệ điều hành mới của bạn sẽ được cài đặt với nh�
 #. Description
 #: ../ubiquity.templates:34001
 msgid "Advanced..."
-msgstr ""
+msgstr "Chi tiết"
 
 #. Type: text
 #. Description
@@ -292,7 +284,7 @@ msgstr ""
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:35001
 msgid "Install[ action ]"
-msgstr ""
+msgstr "Cài đặt"
 
 #. Type: text
 #. Description
@@ -368,7 +360,7 @@ msgstr "Tạo phân vùng"
 #. Description
 #: ../ubiquity.templates:47001 ../ubiquity.templates:54001
 msgid "New partition size in megabytes (1000000 bytes):"
-msgstr ""
+msgstr "Dung lượng phân vùng mới bằng megabytes"
 
 #. Type: text
 #. Description
@@ -504,7 +496,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:67001
 msgid "Checking the installation..."
-msgstr ""
+msgstr "Đang kiểm tra cài đặt..."
 
 #. Type: title
 #. Description
@@ -539,10 +531,8 @@ msgstr "Đang sao chép các tệp (chỉ còn chưa đến một phút)..."
 #. Type: error
 #. Description
 #: ../ubiquity.templates:74001
-#, fuzzy
-#| msgid "Failed to copy files; faulty hard disk?"
 msgid "Failed to copy files; out of disk space."
-msgstr "Lỗi không chép được tập tin; do đĩa cứng bị hư?"
+msgstr ""
 
 #. Type: error
 #. Description
@@ -630,10 +620,8 @@ msgstr ""
 #. Type: select
 #. Description
 #: ../ubiquity.templates:78001
-#, fuzzy
-#| msgid "Failed to copy files; faulty CD/DVD or hard disk?"
 msgid "Failed to copy file; faulty CD/DVD or hard disk?"
-msgstr "Lỗi chép tập tin; do đĩa CD/DVD hoặc ổ cứng hư?"
+msgstr ""
 
 #. Type: select
 #. Description
@@ -725,13 +713,13 @@ msgstr "Đang cấu hình trình khởi động..."
 #. Description
 #: ../ubiquity.templates:91001
 msgid "Installing additional packages..."
-msgstr ""
+msgstr "Đang cài đặt các gói phụ thêm..."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:92001
 msgid "Checking for packages to install..."
-msgstr ""
+msgstr "Đang kiểm tra các gói để cài đặt..."
 
 #. Type: text
 #. Description
@@ -779,7 +767,7 @@ msgstr "Không thể loại bỏ gói ${PACKAGE}..."
 #. Description
 #: ../ubiquity.templates:101001
 msgid "Error while installing packages"
-msgstr ""
+msgstr "Lỗi khi cài đặt các gói"
 
 #. Type: error
 #. Description
@@ -838,7 +826,13 @@ msgstr "Đang tải về các gói ngôn ngữ (thời gian còn lại: ${TIME})
 #. Description
 #: ../ubiquity.templates:110001
 msgid "Failed to unmount partitions"
-msgstr "Không tháo lắp phân vùng nào được."
+msgstr ""
+"#-#-#-#-#  vi.po (debian-installer Level 1)  #-#-#-#-#\n"
+"Lỗi tháo lắp phân vùng\n"
+"#-#-#-#-#  vi.po (debian-installer)  #-#-#-#-#\n"
+"Không tháo lắp phân vùng nào được.\n"
+"#-#-#-#-#  vi.po (debian-installer Level 1)  #-#-#-#-#\n"
+"Lỗi tháo lắp phân vùng"
 
 #. Type: boolean
 #. Description
@@ -869,36 +863,23 @@ msgstr "Bạn có muốn chương trình cài đặt cố gỡ bỏ các phân v
 #. Description
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001 ../ubiquity.templates:116001
-#, fuzzy
-#| msgid "How do you want to partition the disk?"
+#: ../ubiquity.templates:111001 ../ubiquity.templates:117001
 msgid "Do you want to return to the partitioner?"
-msgstr "Bạn muốn phân vùng ổ đĩa cứng như thế nào?"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:111001
-#, fuzzy
-#| msgid ""
-#| "The file system on ${PARTITION} assigned to ${MOUNTPOINT} has not been "
-#| "marked for formatting. File systems used by the system (/, /boot, /usr, /"
-#| "var) must be reformatted for use by this installer. Other file systems (/"
-#| "home, /media/*, /usr/local, etc.) may be used without reformatting."
 msgid ""
 "The file system on ${PARTITION} assigned to ${MOUNTPOINT} has not been "
 "marked for formatting.  Directories containing system files (/boot, /etc, /"
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
-"Phân vùng hệ thống trên ${PARTITION} được gắn vào ${MOUNTPOINT} chưa được "
-"đánh dấu để định dạng. Các hệ thống tập tin đang được sử dụng bởi hệ thống "
-"(/, /boot, /usr, /var) phải được định dạng lại thì chương trình cài đặt mới "
-"có thể dùng được. Những hệ thống tập tin khác (/home, /media/*, /usr/local, "
-"etc.) có thể được dùng mà không cần phải định dạng lại."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:116001
+#: ../ubiquity.templates:117001
 msgid ""
 "Some of the partitions you created are too small.  Please make the following "
 "partitions at least this large (in bytes):"
@@ -906,7 +887,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:116001
+#: ../ubiquity.templates:117001
 msgid ""
 "If you do not go back to the partitioner and increase the size of these "
 "partitions, the installation may fail."
@@ -982,7 +963,7 @@ msgstr ""
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:6001
 msgid "Advanced Installation"
-msgstr ""
+msgstr "Cài đặt nâng cao"
 
 #. Type: text
 #. Description
@@ -1143,72 +1124,66 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:30001
-msgid "Myth Appearance"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:31001
 msgid "Myth Movies"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:32001
+#: ../ubiquity-frontend-mythbuntu.templates:31001
 msgid "Myth Flix"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:33001
+#: ../ubiquity-frontend-mythbuntu.templates:32001
 msgid "Myth Gallery"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:34001
+#: ../ubiquity-frontend-mythbuntu.templates:33001
 msgid "Myth Game"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:35001
+#: ../ubiquity-frontend-mythbuntu.templates:34001
 msgid "Myth Music"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:36001
+#: ../ubiquity-frontend-mythbuntu.templates:35001
 msgid "Myth News"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:37001
+#: ../ubiquity-frontend-mythbuntu.templates:36001
 msgid "Myth Phone"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:38001
+#: ../ubiquity-frontend-mythbuntu.templates:37001
 msgid "Myth Stream"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:39001
+#: ../ubiquity-frontend-mythbuntu.templates:38001
 msgid "Myth Video"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:40001
+#: ../ubiquity-frontend-mythbuntu.templates:39001
 msgid "Myth Weather"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:41001
+#: ../ubiquity-frontend-mythbuntu.templates:40001
 msgid ""
 "A plugin for MythTV that lets you create DVDs from content on your MythTV "
 "Network."
@@ -1216,13 +1191,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:42001
+#: ../ubiquity-frontend-mythbuntu.templates:41001
 msgid "An integrated web browser plugin for your MythTV system."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:43001
+#: ../ubiquity-frontend-mythbuntu.templates:42001
 msgid ""
 "External controls for MythTV. This will allow you to modify button mappings "
 "and key bindings."
@@ -1230,43 +1205,37 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:44001
-msgid "Controls the size of the Mythfrontend GUI"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:45001
+#: ../ubiquity-frontend-mythbuntu.templates:43001
 msgid "Find movies playing in nearby local cinemas"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:46001
+#: ../ubiquity-frontend-mythbuntu.templates:44001
 msgid "Allows you to monitor your Netflix dvd rental queue."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:47001
+#: ../ubiquity-frontend-mythbuntu.templates:45001
 msgid "Allows you to visually browse a directory tree containing image files."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:48001
+#: ../ubiquity-frontend-mythbuntu.templates:46001
 msgid "A frontend to start any emulator or binary that Linux runs."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:49001
+#: ../ubiquity-frontend-mythbuntu.templates:47001
 msgid "Provides a digital audio jukebox integrated with MythTV."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:50001
+#: ../ubiquity-frontend-mythbuntu.templates:48001
 msgid ""
 "An RSS feed news reader plugin for MythTV that keeps you up-to-date on your "
 "favorite news topics."
@@ -1274,40 +1243,42 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:51001
+#: ../ubiquity-frontend-mythbuntu.templates:49001
 msgid ""
 "A phone and videophone capability on MythTV using the standard SIP protocol."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:52001
+#: ../ubiquity-frontend-mythbuntu.templates:50001
 msgid "Provides a method to listen to streaming internet radio stations."
-msgstr ""
+msgstr "Cung cấp phương thức thể nghe radio từ internet"
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:53001
+#: ../ubiquity-frontend-mythbuntu.templates:51001
 msgid ""
 "Allows you to browse and play video streams, using an external player, from "
 "within the MythTV interface."
 msgstr ""
+"Cho phép bạn duyệt và xem video, sử dụng trình chơi ở ngoài ngay tại giao "
+"diện của MythTV"
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:54001
+#: ../ubiquity-frontend-mythbuntu.templates:52001
 msgid "Displays current and forecast weather information within MythTV."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:55001
+#: ../ubiquity-frontend-mythbuntu.templates:53001
 msgid "Choose Extra Themes"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:56001
+#: ../ubiquity-frontend-mythbuntu.templates:54001
 msgid ""
 "Themes can greatly improve the aesthetic appeal of a MythTV setup, and "
 "display it to match your tastes much better."
@@ -1317,20 +1288,20 @@ msgstr ""
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:57001
-#: ../ubiquity-frontend-mythbuntu.templates:58001
+#: ../ubiquity-frontend-mythbuntu.templates:55001
+#: ../ubiquity-frontend-mythbuntu.templates:56001
 msgid "Enable/Disable All"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:59001
+#: ../ubiquity-frontend-mythbuntu.templates:57001
 msgid "Additional Drivers/Firmware"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:60001
+#: ../ubiquity-frontend-mythbuntu.templates:58001
 msgid ""
 "An open source graphics driver is already enabled and configured for your "
 "installation.  If you would like to use a different graphics driver, you can "
@@ -1340,25 +1311,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:61001
+#: ../ubiquity-frontend-mythbuntu.templates:59001
 msgid "Modify Video Driver & Settings"
-msgstr ""
+msgstr "Hiệu chỉnhVideo Driver & Các thiết lập"
+
+#. Type: text
+#. Description
+#: ../ubiquity-frontend-mythbuntu.templates:60001
+msgid "If you would like to configure TV-out, choose an option here:"
+msgstr "Nếu bạn muốn cấu hình TV-out, xin chọn ở đây:"
+
+#. Type: text
+#. Description
+#: ../ubiquity-frontend-mythbuntu.templates:61001
+msgid "If enabling TV Out, you will also need to choose a TV Standard:"
+msgstr "Nếu muốn hiệu lực TV Out, bạn cần chọn thêm một chuẩn TV:"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:62001
-msgid "If you would like to configure TV-out, choose an option here:"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:63001
-msgid "If enabling TV Out, you will also need to choose a TV Standard:"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:64001
 msgid ""
 "Warning: Do not set the TV standard to something higher than what your TV "
 "supports. PERMANENT damage may occur."
@@ -1366,49 +1337,49 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:65001
+#: ../ubiquity-frontend-mythbuntu.templates:63001
 msgid "Master Backend Info"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:66001
+#: ../ubiquity-frontend-mythbuntu.templates:64001
 msgid "Please enter the information necessary to contact your master backend:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:67001
+#: ../ubiquity-frontend-mythbuntu.templates:65001
 msgid "MySQL Password"
-msgstr ""
+msgstr "Mật khẩu MySQL"
+
+#. Type: text
+#. Description
+#: ../ubiquity-frontend-mythbuntu.templates:66001
+msgid "MySQL User Name"
+msgstr "Tài khoản MySQL"
+
+#. Type: text
+#. Description
+#: ../ubiquity-frontend-mythbuntu.templates:67001
+msgid "MySQL Database"
+msgstr "Cơ sở dữ liệu MySQL"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:68001
-msgid "MySQL User Name"
-msgstr ""
+msgid "MySQL Server"
+msgstr "Máy chủ MySQL"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:69001
-msgid "MySQL Database"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:70001
-msgid "MySQL Server"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity-frontend-mythbuntu.templates:71001
 msgid "Configure Guide Data / Backend"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:72001
+#: ../ubiquity-frontend-mythbuntu.templates:70001
 msgid ""
 "The final steps of the installation require setting up your guide data and "
 "configuring the backend for the first time."
@@ -1416,13 +1387,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:73001
+#: ../ubiquity-frontend-mythbuntu.templates:71001
 msgid "Click to open the Schedules Direct website"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:74001
+#: ../ubiquity-frontend-mythbuntu.templates:72001
 msgid ""
 "Users in North America will need to setup an account with Schedules Direct "
 "(SD).  SD provides guide data for a nominal fee.  Without SD, North American "
@@ -1431,13 +1402,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:75001
+#: ../ubiquity-frontend-mythbuntu.templates:73001
 msgid "Launch MythTV Setup"
-msgstr ""
+msgstr "Chạy cài đặt MythTV"
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:76001
+#: ../ubiquity-frontend-mythbuntu.templates:74001
 msgid ""
 "After setting up your guide data source, you will need to launch MythTV-"
 "Setup to run the backend configuration for the first time.  You will need to "
@@ -1447,68 +1418,27 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:77001
+#: ../ubiquity-frontend-mythbuntu.templates:75001
 #, fuzzy
 msgid "Configuring mythtv..."
 msgstr "Đang cấu hình apt..."
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:78001
+#: ../ubiquity-frontend-mythbuntu.templates:76001
 #, fuzzy
 msgid "Configuring additional drivers..."
 msgstr "Đang cấu hình phần cứng..."
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:79001
+#: ../ubiquity-frontend-mythbuntu.templates:77001
 #, fuzzy
 msgid "Configuring additional services..."
 msgstr "Đang cấu hình phần cứng..."
 
 #. Type: text
 #. Description
-#: ../ubiquity-frontend-mythbuntu.templates:80001
-#, fuzzy
+#: ../ubiquity-frontend-mythbuntu.templates:78001
 msgid "Configuring infrared devices..."
-msgstr "Đang cấu hình phần cứng..."
-
-#~ msgid "System partition not formatted"
-#~ msgstr "Phân vùng hệ thống chưa được định dạng."
-
-#, fuzzy
-#~ msgid "Configuring remote control..."
-#~ msgstr "Đang chỉnh đồ điều khiển từ xa..."
-
-#~ msgid "Create a user to import the selected account into:"
-#~ msgstr ""
-#~ "Tạo một tài khoản người dùng để nhập thông tin các tài khoản được chọn:"
-
-#~ msgid "Full Name:"
-#~ msgstr "Tên đầy đủ :"
-
-#~ msgid "Login Name:"
-#~ msgstr "Tên đăng nhập:"
-
-#~ msgid "Password:"
-#~ msgstr "Mật khẩu:"
-
-#~ msgid "Confirm:"
-#~ msgstr "Xác nhận lại mật khẩu:"
-
-#, fuzzy
-#~ msgid ""
-#~ "You need to specify a partition for the root file system (mount point \"/"
-#~ "\") with a minimum size of 2 GB, and a swap partition of at least 256 MB. "
-#~ "You may also set up other partitions if you wish."
-#~ msgstr ""
-#~ "Bạn cần xác định một phân vùng cho hệ thống tập tin gốc (mount point \"/"
-#~ "\") có ít nhất 2 GB trống, và một phân vùng swap ít nhất 256 MB. Bạn có "
-#~ "thể dùng phân vùng khác nếu muốn."
-
-#~ msgid ""
-#~ "Be sure to remove the CD when restarting the computer, otherwise it will "
-#~ "start back up using this live CD rather than the newly-installed system."
-#~ msgstr ""
-#~ "Hãy chắc chắn là bạn đã lấy đĩa CD ra khi khởi động lại máy, nếu không nó "
-#~ "sẽ khởi động lại đĩa live CD thay vì hệ thống vừa được cài đặt."
+msgstr ""

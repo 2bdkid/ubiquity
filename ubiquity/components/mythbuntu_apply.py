@@ -49,9 +49,6 @@ class MythbuntuApply(FilteredCommand):
             patternline += "|^mythtv-backend-master|^mythtv-database|^mysql-server-5.0|^mythtv-frontend|^mythtv\ "
         elif installtype == "Frontend":
             patternline += "|^mythtv-backend-master|^mythtv-database|^mythtv-backend|^mysql-server-5.0|^mysql-server|^mythtv\ "
-        mythappearance = self.db.get('mythbuntu/mythappearance')
-        if mythappearance == "false":
-            patternline += "|^mythappearance"
         mytharchive = self.db.get('mythbuntu/mytharchive')
         if mytharchive == "false":
             patternline += "|^mytharchive|^ffmpeg|^genisoimage|^dvdauthor|^mjpegtools|^dvd+rw-tools|^python-imaging|^python-mysqldb"
@@ -97,17 +94,19 @@ class MythbuntuApply(FilteredCommand):
         official = self.db.get('mythbuntu/officialthemes')
         if official != "":
             for theme in string.split(official," "):
-                patternline += "|^" + theme
+                if theme != "":
+                    patternline += "|^" + theme
         community = self.db.get('mythbuntu/communitythemes')
         if community != "":
             for theme in string.split(community," "):
-                patternline += "|^" + theme
+                if theme != "":
+                    patternline += "|^" + theme
         samba = self.db.get('mythbuntu/sambaservice')
         if samba == "false":
             patternline += "|^samba|^samba-common|^smbfs"
         vnc = self.db.get('mythbuntu/vncservice')
         if vnc == "false":
-            patternline += "|^vnc4-common"
+            patternline += "|^vnc4-common|^x11vnc"
         ssh = self.db.get('mythbuntu/sshservice')
         if ssh == "false":
             patternline += "|^openssh-server"
@@ -135,7 +134,7 @@ class AdditionalDrivers(FilteredCommand):
 class VNCHandler:
     """Used to properly enable VNC in a target configuration"""
 
-    # rather ugly workaround for lp: #1364282)
+    # rather ugly workaround for lp: #136482)
     locale.setlocale(locale.LC_ALL, 'C')
 
     def __init__(self,root):

@@ -479,10 +479,13 @@ class Wizard(BaseFrontend):
             pixmap = '/usr/share/ubiquity/pixmaps/earth.jpg'
             full_zoom = True
             font_selected = "white"
-            font_unselected = "maroon"
+            font_unselected = "orange"
             args = (self, pixmap, full_zoom, font_selected, font_unselected)
             self.tzmap = zoommap.ZoomMapWidget(*args)
             self.tzmap.show()
+
+        if 'UBIQUITY_NO_CONTINUE' in os.environ:
+            del self.quit_button
 
         if 'UBIQUITY_DEBUG' in os.environ:
             self.password_debug_warning_label.show()
@@ -688,7 +691,7 @@ class Wizard(BaseFrontend):
 
 
     def set_page(self, n):
-        self.run_error_cmd()
+        self.run_automation_error_cmd()
         # We only stop the backup process when we're on a page where questions
         # need to be asked, otherwise you wont be able to back up past
         # migration-assistant.
@@ -1043,7 +1046,8 @@ class Wizard(BaseFrontend):
         lang = self.selected_language(selection)
         lang = lang.split('.')[0] # strip encoding
         uri = uri.replace('${LANG}', lang)
-        subprocess.Popen(['sensible-browser', uri], close_fds=True)
+        subprocess.Popen(['sensible-browser', uri],
+                         close_fds=True, preexec_fn=drop_all_privileges)
 
 
     def on_language_treeview_row_activated (self, treeview, path, view_column):
@@ -2196,7 +2200,7 @@ class Wizard(BaseFrontend):
     
     def error_dialog (self, title, msg, fatal=True):
         # TODO: cancel button as well if capb backup
-        self.run_error_cmd()
+        self.run_automation_error_cmd()
         self.allow_change_step(True)
         if self.current_page is not None:
             transient = self.live_installer
@@ -2213,7 +2217,7 @@ class Wizard(BaseFrontend):
             self.return_to_partitioning()
 
     def question_dialog (self, title, msg, options, use_templates=True):
-        self.run_error_cmd()
+        self.run_automation_error_cmd()
         self.allow_change_step(True)
         if self.current_page is not None:
             transient = self.live_installer

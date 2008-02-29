@@ -1,3 +1,21 @@
+partman-auto (73ubuntu3) hardy; urgency=low
+
+  * Backport from trunk (LP: #181296):
+    - Support preseeding partman-auto/choose_recipe using the name of the
+      recipe you want (e.g. "home"), as an alternative to the localised
+      description.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 29 Feb 2008 12:11:39 +0000
+
+partman-auto (73ubuntu2) hardy; urgency=low
+
+  * Drop the bootable flag from i386/amd64 recipes; it can break existing
+    Windows installations when autopartitioning only free space rather than
+    a whole disk (LP: #14244). This reinstates the change from 40ubuntu3 now
+    that grub-installer ensures that there is one bootable partition.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 28 Feb 2008 14:59:36 +0000
+
 partman-auto (73ubuntu1) hardy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

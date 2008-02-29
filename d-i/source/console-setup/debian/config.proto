@@ -871,8 +871,10 @@ case "$locale" in
     en_US*)
 	default_layout=us  # U.S. English
 	;;
+# According to https://launchpad.net/bugs/191451, most keyboards in Vietnam
+# are in fact US keyboards.
     *_VN*)
-	default_layout=vn  # Vietnam
+	default_layout=us  # Vietnam
 	;;
     # Keyboards for specific languages and international keyboards:
     # TODO: Is the following list correct?

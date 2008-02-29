@@ -1,3 +1,49 @@
+ubiquity (1.7.14) hardy; urgency=low
+
+  [ Mario Limonciello ]
+  * Drop all references to mythappearance.
+  * Use x11vnc instead of vnc4server which is broke in Hardy.
+  * Add support for PVR-350 TV-Out.
+  * Only remove themes when selected for removal.
+  * Update included mythweb postinst for trunk behavior.
+
+  [ Colin Watson ]
+  * Split iso_3166.tab lines by tabs, fixing an infinite loop on countries
+    whose names contain more than one word (LP: #193329).
+  * Drop all privileges and set HOME before launching a browser to read
+    release notes (LP: #194727).
+  * Explicitly depend on ntfsprogs for NTFS resizing.
+  * Print a traceback as well as the exception message if
+    DebconfFilter.process_line raises an exception.
+  * Enable debconf's escape capability for communications between the filter
+    and the underlying frontend by default. Split arguments to filtered
+    commands into only as many arguments as are required by the command.
+    This should fix autopartitioning in certain locales (LP: #177623).
+  * In ubiquity-dm, fall back to xfwm4 if metacity fails (unifying gtk_ui
+    and mythbuntu_ui handling in the process). Avoid hardcoding full paths
+    where possible.
+  * Fix reversed handling of answer to grub-installer/install_to_xfs
+    (LP: #138422).
+  * Update translations from Launchpad.
+
+  [ Evan Dandrea ]
+  * partman/confirm_new_label is now partman-
+    partitioning/confirm_new_label (LP: #190036).
+  * Add ubiquity/automation_failure_command debconf question which is called
+    whenever user interaction is required.  This includes non-fatal error
+    dialogs.  ubiquity/failure_command is now only called when the installer
+    crashes.
+  * Make the zoomed in tzmap bigger and the points smaller.  Only select one
+    timezone at a time.
+  * Add a --no-continue option to disable the continue using the Live CD
+    button when running in only-ubiquity mode (LP: #195935).
+  * Automatic update of included source packages: apt-setup
+    1:0.31ubuntu6, console-setup 1.21ubuntu3, debian-installer-utils
+    1.50ubuntu2, partman-auto 73ubuntu3, partman-base 114ubuntu2, user-
+    setup 1.16ubuntu4.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 29 Feb 2008 11:59:45 -0500
+
 ubiquity (1.7.13) hardy; urgency=low
 
   * Drop build dependency on python-xml.
@@ -25,7 +71,7 @@ ubiquity (1.7.12) hardy; urgency=low
 
   [ Jonathan Riddell ]
   * Fix QApplication args in ubiquity/frontend/kde_ui.py 
-	
+
  -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 25 Feb 2008 10:13:27 -0500
 
 ubiquity (1.7.11) hardy; urgency=low
@@ -35,7 +81,7 @@ ubiquity (1.7.11) hardy; urgency=low
     Patch by Richard A. Johnson <nixternal@kubuntu.org>
   * Force kde_ui style to plastique, works around QtDbus/pydbus
     clash when using oxygen style
-	
+
   [ Mario Limonciello ]
   * Drop fullscreen workaround in Mythbuntu interface.
   * Adjust user permissions before/after launching MythTV setup.
