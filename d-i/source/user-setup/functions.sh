@@ -1,5 +1,11 @@
 # Returns a true value if there seems to be a system user account.
+# OVERRIDE_SYSTEM_USER overrides this to assume that no system user account
+# exists.
 is_system_user () {
+	if [ "$OVERRIDE_SYSTEM_USER" ]; then
+		return 1
+	fi
+
 	if ! [ -e $ROOT/etc/passwd ]; then
 		return 1
 	fi

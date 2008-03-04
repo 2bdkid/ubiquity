@@ -23,8 +23,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-08-10 20:43+0000\n"
-"PO-Revision-Date: 2007-10-15 00:42+0300\n"
+"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"PO-Revision-Date: 2007-10-26 02:25+0300\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -36,7 +36,8 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-jfs.templates:3
+#. :sl2:
+#: ../partman-jfs.templates:1001
 msgid "Checking the jfs file system in partition #${PARTITION} of ${DEVICE}..."
 msgstr ""
 "Se verifică sistemul de fișiere jfs de pe partiția nr.${PARTITION} a "
@@ -44,13 +45,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:7
+#. :sl2:
+#: ../partman-jfs.templates:2001
 msgid "Go back to the menu and correct errors?"
 msgstr "Vă întoarceți la meniu și corectați erorile?"
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:7
+#. :sl2:
+#: ../partman-jfs.templates:2001
 msgid ""
 "The test of the file system with type jfs in partition #${PARTITION} of "
 "${DEVICE} found uncorrected errors."
@@ -60,7 +63,8 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:7
+#. :sl2:
+#: ../partman-jfs.templates:2001
 msgid ""
 "If you do not go back to the partitioning menu and correct these errors, the "
 "partition will not be used at all."
@@ -70,13 +74,15 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-jfs.templates:16
+#. :sl2:
+#: ../partman-jfs.templates:3001
 msgid "Failed to create a file system"
 msgstr "Eșec la crearea unui sistem de fișiere"
 
 #. Type: error
 #. Description
-#: ../partman-jfs.templates:16
+#. :sl2:
+#: ../partman-jfs.templates:3001
 msgid ""
 "The jfs file system creation in partition #${PARTITION} of ${DEVICE} failed."
 msgstr ""
@@ -85,13 +91,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:22
+#. :sl2:
+#: ../partman-jfs.templates:4001
 msgid "Do you want to return to the partitioning menu?"
 msgstr "Doriți să vă întoarceți la meniul de partiționare?"
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:22
+#. :sl2:
+#: ../partman-jfs.templates:4001
 msgid ""
 "No mount point is assigned for the jfs file system in partition #"
 "${PARTITION} of ${DEVICE}."
@@ -101,7 +109,8 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:22
+#. :sl2:
+#: ../partman-jfs.templates:4001
 msgid ""
 "If you do not go back to the partitioning menu and assign a mount point from "
 "there, this partition will not be used at all."
@@ -111,17 +120,31 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl2:
 #. This is an item in the menu "Partition settings"
-#: ../partman-jfs.templates:32
+#: ../partman-jfs.templates:5001
 msgid "Mount point:"
 msgstr "Punct de montare:"
+
+#. Type: text
+#. Description
+#. :sl1:
+#. File system name (untranslatable in many languages)
+#. Type: text
+#. Description
+#. Short file system name (untranslatable in many languages)
+#. :sl1:
+#: ../partman-jfs.templates:6001 ../partman-jfs.templates:9001
+msgid "jfs"
+msgstr "jfs"
 
 #. Type: multiselect
 #. Choices
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "noatime - do not update inode access times at each access"
 msgstr "noatime - nu actualiza timpii de acces (în inod) la fiecare acces"
 
@@ -130,7 +153,8 @@ msgstr "noatime - nu actualiza timpii de acces (în inod) la fiecare acces"
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "relatime - update inode access times relative to modify time"
 msgstr "relatime - reține timpii de acces relativ la timpul de modificare"
 
@@ -139,7 +163,8 @@ msgstr "relatime - reține timpii de acces relativ la timpul de modificare"
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "nodev - do not support character or block special devices"
 msgstr "nodev - nu suporta dispozitive caracter sau bloc speciale"
 
@@ -148,16 +173,18 @@ msgstr "nodev - nu suporta dispozitive caracter sau bloc speciale"
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "nosuid - ignore set-user-identifier or set-group-identifier bits"
-msgstr "nosuid - ignoră biții \"set user ID\" sau \"set group ID\""
+msgstr "nosuid - ignoră biții „set user ID” sau „set group ID”"
 
 #. Type: multiselect
 #. Choices
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "noexec - do not allow execution of any binaries"
 msgstr "noexec - nu permite execuția nici unui fișier binar"
 
@@ -166,54 +193,54 @@ msgstr "noexec - nu permite execuția nici unui fișier binar"
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "ro - mount the file system read-only"
-msgstr "ro - montează sistemul de fișiere în mod \"doar citire\""
+msgstr "ro - montează sistemul de fișiere în mod „doar citire”"
 
 #. Type: multiselect
 #. Choices
 #. Note to translators : Please keep your translations of the choices
 #. below a 65 columns limit (which means 65 characters
 #. in single-byte languages)
-#: ../partman-jfs.templates:44
+#. :sl2:
+#: ../partman-jfs.templates:7001
 msgid "sync - all input/output activities occur synchronously"
 msgstr "sync - toate activitățile de intrare/ieșire de desfășoară sincron"
 
 #. Type: multiselect
 #. Description
-#: ../partman-jfs.templates:45
+#. :sl2:
+#: ../partman-jfs.templates:7002
 msgid "Mount options:"
 msgstr "Opțiuni de montare:"
 
 #. Type: multiselect
 #. Description
-#: ../partman-jfs.templates:45
+#. :sl2:
+#: ../partman-jfs.templates:7002
 msgid "Mount options can tune the behavior of the file system."
 msgstr "Opțiunile de montare pot regla comportamentul sistemului de fișiere."
 
 #. Type: text
 #. Description
 #. File system name
-#: ../partman-jfs.templates:51
+#. :sl2:
+#: ../partman-jfs.templates:8001
 msgid "JFS journaling file system"
 msgstr "sistem de fișiere jfs cu jurnalizare"
 
-#. Type: text
-#. Description
-#. Short file system name (untranslatable in many languages)
-#: ../partman-jfs.templates:56
-msgid "jfs"
-msgstr "jfs"
-
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:61
+#. :sl2:
+#: ../partman-jfs.templates:10001
 msgid "Use unrecommended JFS root file system?"
 msgstr "Utilizați ca sistem de fișiere rădăcină sistemul nerecomandat JFS?"
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:61
+#. :sl2:
+#: ../partman-jfs.templates:10001
 msgid ""
 "Your root file system is a JFS file system. This can cause problems with the "
 "boot loader used by default by this installer."
@@ -224,7 +251,8 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:61
+#. :sl2:
+#: ../partman-jfs.templates:10001
 msgid ""
 "You should use a small /boot partition with another file system, such as "
 "ext3."
@@ -234,13 +262,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:70
+#. :sl2:
+#: ../partman-jfs.templates:11001
 msgid "Use unrecommended JFS /boot file system?"
 msgstr "Utilizați sistemul de fișiere JFS nerecomandat pentru /boot?"
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:70
+#. :sl2:
+#: ../partman-jfs.templates:11001
 msgid ""
 "You have mounted a JFS file system as /boot. This is likely to cause "
 "problems with the boot loader used by default by this installer."
@@ -251,7 +281,8 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-jfs.templates:70
+#. :sl2:
+#: ../partman-jfs.templates:11001
 msgid ""
 "You should use another file system, such as ext3, for the /boot partition."
 msgstr ""

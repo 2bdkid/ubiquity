@@ -5,19 +5,19 @@
 #
 # Simplified Chinese translation for Debian Installer.
 #
-# Copyright (C) 2003-2006 Software in the Public Interest, Inc.
+# Copyright (C) 2003-2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Translated by bbbush (2004), Carlos Z.F. Liu (2004,2005,2006) and
-# Ming Hua (2005,2006).
+# Translated by Yijun Yuan (2004), Carlos Z.F. Liu (2004,2005,2006) and
+# Ming Hua (2005,2006,2007,2008).
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: Source: partman-target@packages.debian.org\n"
-"POT-Creation-Date: 2008-01-22 16:17+0000\n"
-"PO-Revision-Date: 2006-10-20 20:53-0500\n"
-"Last-Translator: Ming Hua <minghua@rice.edu>\n"
+"Report-Msgid-Bugs-To: partman-target@packages.debian.org\n"
+"POT-Creation-Date: 2008-03-03 21:30+0000\n"
+"PO-Revision-Date: 2008-01-18 01:46-0600\n"
+"Last-Translator: Ming Hua <minghua-guest@users.alioth.debian.org>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,14 +25,17 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #. Type: text
 #. Description
-#: ../partman-target.templates:1001 ../partman-target.templates:9001
+#. :sl1:
+#: ../partman-target.templates:1001 ../partman-target.templates:10001
 msgid "Help on partitioning"
 msgstr "有关分区的帮助信息"
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Partitioning a hard drive consists of dividing it to create the space needed "
@@ -44,12 +47,14 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid "Select a free space to create partitions in it."
 msgstr "请选择一块空闲空间以在其中创建分区。"
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a device to remove all partitions in it and create a new empty "
@@ -58,6 +63,7 @@ msgstr "请选择一个设备以删除其中所有的分区并创建一个新的
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a partition to remove it or to specify how it should be used. At a "
@@ -72,6 +78,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
@@ -83,6 +90,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "In general you will want to format the partition with a newly created file "
@@ -97,6 +105,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl1:
 #: ../partman-target.templates:2001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It can "
@@ -112,6 +121,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl4:
 #: ../partman-target.templates:3001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It is "
@@ -125,12 +135,14 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Identical mount points for two file systems"
 msgstr "两个文件系统指向同一挂载点"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
@@ -140,37 +152,64 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Please correct this by changing mount points."
 msgstr "请通过改变挂载点来修正此错误。"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system"
 msgstr "没有根文件系统"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system is defined."
 msgstr "没有定义根文件系统。"
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:5001
+#. :sl2:
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001 ../partman-target.templates:6001
 msgid "Please correct this from the partitioning menu."
 msgstr "请回到分区菜单以修正此错误。"
 
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid "Separate file system not allowed here"
+msgstr "这里不允许使用单独的文件系统"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid ""
+"You assigned a separate file system to ${MOUNTPOINT}, but in order for the "
+"system to start correctly this directory must be on the root file system."
+msgstr ""
+"您为 ${MOUNTPOINT} 指定了一个单独的文件系统，但是该目录必须位于根文件系统上才"
+"能保证系统正常启动。"
+
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "Do you want to resume partitioning?"
 msgstr "您是否希望重新分区？"
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
@@ -179,31 +218,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "You may resume partitioning from the partitioning menu."
 msgstr "您可以返回分区菜单重新进行分区。"
 
 #. Type: select
 #. Description
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "How to use this partition:"
 msgstr "如何使用此分区："
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:8001
+#. :sl2:
+#: ../partman-target.templates:9001
 msgid "Use as:"
 msgstr "用于："
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid "Failed to remove conflicting files"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
@@ -211,6 +252,6 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid "Removing conflicting operating system files..."
 msgstr ""

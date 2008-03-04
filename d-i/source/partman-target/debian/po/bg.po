@@ -10,29 +10,33 @@
 #
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
-# Damyan Ivanov <dam@modsoftsys.com>, 2006.
+# Damyan Ivanov <dam@modsoftsys.com>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: Source: partman-target@packages.debian.org\n"
-"POT-Creation-Date: 2008-01-22 16:17+0000\n"
-"PO-Revision-Date: 2006-11-24 11:03+0200\n"
+"Project-Id-Version: bg\n"
+"Report-Msgid-Bugs-To: partman-target@packages.debian.org\n"
+"POT-Creation-Date: 2008-03-03 21:30+0000\n"
+"PO-Revision-Date: 2008-01-16 09:49+0200\n"
 "Last-Translator: Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: note
 #. Description
+#. :sl1:
 #. Type: text
 #. Description
-#: ../partman-target.templates:1001 ../partman-target.templates:9001
+#. :sl1:
+#: ../partman-target.templates:1001 ../partman-target.templates:10001
 msgid "Help on partitioning"
 msgstr "Помощ в разделянето"
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Partitioning a hard drive consists of dividing it to create the space needed "
@@ -45,12 +49,14 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid "Select a free space to create partitions in it."
 msgstr "Изберете свободно пространство, в което да създадете дялове."
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a device to remove all partitions in it and create a new empty "
@@ -61,6 +67,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a partition to remove it or to specify how it should be used. At a "
@@ -77,6 +84,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
@@ -89,6 +97,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "In general you will want to format the partition with a newly created file "
@@ -104,6 +113,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl1:
 #: ../partman-target.templates:2001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It can "
@@ -121,6 +131,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl4:
 #: ../partman-target.templates:3001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It is "
@@ -135,12 +146,14 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Identical mount points for two file systems"
 msgstr "Едно и също място на монтиране за две файлови системи"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
@@ -151,37 +164,65 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Please correct this by changing mount points."
 msgstr "Моля, поправете това чрез смяна на местата на монтиране."
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system"
 msgstr "Няма главна файлова система"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system is defined."
 msgstr "Не е зададена главна (root) файлова система."
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:5001
+#. :sl2:
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001 ../partman-target.templates:6001
 msgid "Please correct this from the partitioning menu."
 msgstr "Моля, поправете това от менюто за редактиране на дяловете."
 
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid "Separate file system not allowed here"
+msgstr "Не може да се използва отделна файлова система"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid ""
+"You assigned a separate file system to ${MOUNTPOINT}, but in order for the "
+"system to start correctly this directory must be on the root file system."
+msgstr ""
+"Избрали сте отделна файлова система за ${MOUNTPOINT}, но за нормалното "
+"стартиране на системата тази директория трябва да е на основната файлова "
+"система (/)."
+
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "Do you want to resume partitioning?"
 msgstr "Желаете ли да се върнете към редактиране на дяловете?"
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
@@ -191,31 +232,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "You may resume partitioning from the partitioning menu."
 msgstr "Можете да продължите с редактиране на дяловете."
 
 #. Type: select
 #. Description
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "How to use this partition:"
 msgstr "Метод за използване на този дял:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:8001
+#. :sl2:
+#: ../partman-target.templates:9001
 msgid "Use as:"
 msgstr "Използване като:"
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid "Failed to remove conflicting files"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
@@ -223,6 +266,6 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid "Removing conflicting operating system files..."
 msgstr ""

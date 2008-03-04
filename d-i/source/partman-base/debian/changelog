@@ -1,3 +1,12 @@
+partman-base (114ubuntu3) hardy; urgency=low
+
+  * Backport from trunk:
+    - Fix parted_devices check for floppy devices, broken by me in
+      partman-base 100 (sorry!).
+  * Skip /dev/ccache* devices (LP: #193267).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 03 Mar 2008 15:16:07 +0000
+
 partman-base (114ubuntu2) hardy; urgency=low
 
   * Backport from trunk (LP: #181296):

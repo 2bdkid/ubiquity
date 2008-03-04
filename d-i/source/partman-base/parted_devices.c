@@ -36,7 +36,7 @@ is_cdrom(const char *path)
 static int
 is_floppy(const char *path)
 {
-	return (strstr(path, "/dev/floppy") != NULL &&
+	return (strstr(path, "/dev/floppy") != NULL ||
 		strstr(path, "/dev/fd") != NULL);
 }
 #else /* !__linux__ */
@@ -49,6 +49,9 @@ process_device(PedDevice *dev)
 	if (dev->read_only)
 		return;
 	if (is_cdrom(dev->path) || is_floppy(dev->path))
+		return;
+	/* Exclude compcache (http://code.google.com/p/compcache/) */
+	if (strstr(dev->path, "/dev/ccache") != NULL)
 		return;
 	printf("%s\t%lli\t%s\n",
 	       dev->path,

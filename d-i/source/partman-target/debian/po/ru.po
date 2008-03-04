@@ -11,13 +11,13 @@
 # Russian L10N Team <debian-l10n-russian@lists.debian.org>, 2004.
 # Yuri Kozlov <yuray@id.ru>, 2004, 2005.
 # Dmitry Beloglazov <dm-guest@alioth.debian.org>, 2005.
-# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006.
+# Yuri Kozlov <kozlov.y@gmail.com>, 2005, 2006, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
-"Report-Msgid-Bugs-To: Source: partman-target@packages.debian.org\n"
-"POT-Creation-Date: 2008-01-22 16:17+0000\n"
-"PO-Revision-Date: 2006-11-11 12:08+0300\n"
+"Report-Msgid-Bugs-To: partman-target@packages.debian.org\n"
+"POT-Creation-Date: 2008-03-03 21:30+0000\n"
+"PO-Revision-Date: 2008-01-17 21:32+0300\n"
 "Last-Translator: Yuri Kozlov <kozlov.y@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,18 +25,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #. Type: note
 #. Description
+#. :sl1:
 #. Type: text
 #. Description
-#: ../partman-target.templates:1001 ../partman-target.templates:9001
+#. :sl1:
+#: ../partman-target.templates:1001 ../partman-target.templates:10001
 msgid "Help on partitioning"
 msgstr "Справка по разметке"
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Partitioning a hard drive consists of dividing it to create the space needed "
@@ -48,12 +51,14 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid "Select a free space to create partitions in it."
 msgstr "Выберите свободное пространство, в котором будут созданы разделы."
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a device to remove all partitions in it and create a new empty "
@@ -64,6 +69,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a partition to remove it or to specify how it should be used. At a "
@@ -80,6 +86,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
@@ -92,6 +99,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "In general you will want to format the partition with a newly created file "
@@ -108,6 +116,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl1:
 #: ../partman-target.templates:2001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It can "
@@ -124,6 +133,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl4:
 #: ../partman-target.templates:3001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It is "
@@ -137,12 +147,14 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Identical mount points for two file systems"
 msgstr "Одинаковые точки монтирования для двух файловых систем"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
@@ -153,37 +165,65 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Please correct this by changing mount points."
 msgstr "Пожалуйста, поправьте точки монтирования."
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system"
 msgstr "Нет корневой файловой системы (root file system)"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system is defined."
 msgstr "Корневая файловая система не определена."
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:5001
+#. :sl2:
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001 ../partman-target.templates:6001
 msgid "Please correct this from the partitioning menu."
 msgstr "Исправьте это из меню разметки."
 
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid "Separate file system not allowed here"
+msgstr "Здесь нельзя указывать отдельную файловую систему"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid ""
+"You assigned a separate file system to ${MOUNTPOINT}, but in order for the "
+"system to start correctly this directory must be on the root file system."
+msgstr ""
+"Вы назначили отдельную файловую систему для точки монтирования "
+"${MOUNTPOINT}, но для корректного запуска компьютера этот каталог должен "
+"находиться в корневой файловой системе."
+
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "Do you want to resume partitioning?"
 msgstr "Хотите ли вы продолжить разметку?"
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
@@ -193,31 +233,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "You may resume partitioning from the partitioning menu."
 msgstr "Продолжить разметку можно из главного меню разметки."
 
 #. Type: select
 #. Description
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "How to use this partition:"
 msgstr "Принцип применения этого раздела:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:8001
+#. :sl2:
+#: ../partman-target.templates:9001
 msgid "Use as:"
 msgstr "Использовать как:"
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid "Failed to remove conflicting files"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
@@ -225,6 +267,6 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid "Removing conflicting operating system files..."
 msgstr ""

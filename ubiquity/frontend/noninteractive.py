@@ -39,6 +39,7 @@ from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 summary, install, migrationassistant
 import ubiquity.progressposition
 from ubiquity.frontend.base import BaseFrontend
+import debconf
 
 class Wizard(BaseFrontend):
 
@@ -58,6 +59,9 @@ class Wizard(BaseFrontend):
         dbfilter = language.Language(self, self.debconf_communicator())
         dbfilter.cleanup()
         dbfilter.db.shutdown()
+
+        if self.oem_config:
+            execute_root('apt-install', 'oem-config-gtk')
 
     def run(self):
         """Main entry point."""
@@ -226,7 +230,7 @@ class Wizard(BaseFrontend):
     def get_language(self):
         """Get the current selected language."""
         return self.language
-
+    
     # ubiquity.components.timezone
 
     def set_timezone(self, timezone):

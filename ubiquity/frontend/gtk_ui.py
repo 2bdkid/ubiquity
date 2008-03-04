@@ -455,7 +455,7 @@ class Wizard(BaseFrontend):
             self.username.set_sensitive(False)
             self.username_edited = True
             # The UserSetup component takes care of preseeding passwd/user-uid.
-            execute('apt-install', 'oem-config-gtk')
+            execute_root('apt-install', 'oem-config-gtk')
 
         if not 'UBIQUITY_AUTOMATIC' in os.environ:
             self.live_installer.show()

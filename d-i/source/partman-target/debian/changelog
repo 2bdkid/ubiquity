@@ -1,3 +1,109 @@
+partman-target (54ubuntu1) hardy; urgency=low
+
+  [ Colin Watson ]
+  * Resynchronise with Debian, largely to pick up checks for directories
+    that must be on the root file system (LP: #148331). Remaining changes:
+    - Use UUID= fstab syntax for all partitions if a UUID is available, and
+      add a comment above each UUID to indicate the corresponding device at
+      install time.
+    - Disable automatic mounting of USB removable devices.
+    - Don't use UUIDs in fstab for those device types that volumeid.postinst
+      refuses to convert.
+    - Mount CD-ROMs and floppies with 'exec'.
+    - Use the path of the file associated with a loop device in /etc/fstab,
+      rather than the filesystem's UUID or the loop device path.
+    - Always set the loop option for loop devices.
+    - Remove critical system files from the existing filesystem before
+      installing.
+    - Preserve the UID and GID of the initial user, if possible.  Requires a
+      patch to user-setup.
+    - Mount CD-ROMs and floppies with the "utf8" option by default.
+  * Don't clear partitions marked "do not use" (LP: #198106).
+
+  [ Evan Dandrea ]
+  * Clean up mountpoint check for bug fixing and readability.  Thanks
+    Colin Watson.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 03 Mar 2008 22:49:56 +0000
+
+partman-target (54) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Ensure that /bin, /etc, /lib*, and /sbin are on the root file system.
+
+  [ Frans Pop ]
+  * Add default value for mount_failed template (see #457901).
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Kumar Appaiah
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Viesturs Zarins
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Nepali (ne.po) by Shyam Krishna Bal
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Peter Mann
+  * Slovenian (sl.po) by Matej Kovacic
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po)
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 15:43:39 -0200
+
+partman-target (53) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Moved definitions.sh to ./lib/base.sh. Requires partman-base (>= 114).
+  * Major whitespace cleanup and a few minor coding style fixes.
+
+  [ Colin Watson ]
+  * udev 117 merged all udev tools into a single binary called udevadm.
+    Check for this and use it instead of udevinfo if available.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Belarusian (be.po) by Hleb Rubanau
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Frans Pop <fjp@debian.org>  Sat, 29 Dec 2007 22:16:34 +0100
+
 partman-target (52ubuntu6) hardy; urgency=low
 
   * Fixed major bug in 60clear_partitions and re-enabled it.

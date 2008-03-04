@@ -24,9 +24,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: Source: partman-target@packages.debian.org\n"
-"POT-Creation-Date: 2008-01-22 16:17+0000\n"
-"PO-Revision-Date: 2007-08-31 00:42+0200\n"
+"Report-Msgid-Bugs-To: partman-target@packages.debian.org\n"
+"POT-Creation-Date: 2008-03-03 21:30+0000\n"
+"PO-Revision-Date: 2008-01-19 16:56+0100\n"
 "Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -35,14 +35,17 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #. Type: text
 #. Description
-#: ../partman-target.templates:1001 ../partman-target.templates:9001
+#. :sl1:
+#: ../partman-target.templates:1001 ../partman-target.templates:10001
 msgid "Help on partitioning"
 msgstr "Aiuto sul partizionamento"
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Partitioning a hard drive consists of dividing it to create the space needed "
@@ -55,12 +58,14 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid "Select a free space to create partitions in it."
 msgstr "Selezionare uno spazio libero in cui creare le partizioni."
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a device to remove all partitions in it and create a new empty "
@@ -71,6 +76,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "Select a partition to remove it or to specify how it should be used. At a "
@@ -87,6 +93,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "When the partition is already formatted you may choose to keep and use the "
@@ -99,6 +106,7 @@ msgstr ""
 
 #. Type: note
 #. Description
+#. :sl1:
 #: ../partman-target.templates:1001
 msgid ""
 "In general you will want to format the partition with a newly created file "
@@ -115,6 +123,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl1:
 #: ../partman-target.templates:2001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It can "
@@ -131,6 +140,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. :sl4:
 #: ../partman-target.templates:3001
 msgid ""
 "In order to start your new system, a so called boot loader is used.  It is "
@@ -145,12 +155,14 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Identical mount points for two file systems"
 msgstr "punto di mount identico per due file system"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
@@ -161,37 +173,65 @@ msgstr ""
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:4001
 msgid "Please correct this by changing mount points."
 msgstr "Correggere cambiando i punto di mount."
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system"
 msgstr "Nessun file system di root"
 
 #. Type: error
 #. Description
+#. :sl2:
 #: ../partman-target.templates:5001
 msgid "No root file system is defined."
 msgstr "Non è stato definito alcun file system di root."
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:5001
+#. :sl2:
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001 ../partman-target.templates:6001
 msgid "Please correct this from the partitioning menu."
 msgstr "Correggere l'errore dal menu partizionamento."
 
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid "Separate file system not allowed here"
+msgstr "File system separati non permessi"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:6001
+msgid ""
+"You assigned a separate file system to ${MOUNTPOINT}, but in order for the "
+"system to start correctly this directory must be on the root file system."
+msgstr ""
+"È stato assegnato un file system separato per ${MOUNTPOINT} ma affinché il "
+"sistema si avvii correttamente questa directory deve essere nel file system "
+"root."
+
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "Do you want to resume partitioning?"
 msgstr "Riprendere il partizionamento?"
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
@@ -201,31 +241,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:6001
+#. :sl2:
+#: ../partman-target.templates:7001
 msgid "You may resume partitioning from the partitioning menu."
 msgstr "È possibile riprendere il partizionamento dal menu di partizionamento."
 
 #. Type: select
 #. Description
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "How to use this partition:"
 msgstr "Come usare questa partizione:"
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:8001
+#. :sl2:
+#: ../partman-target.templates:9001
 msgid "Use as:"
 msgstr "Usato come:"
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid "Failed to remove conflicting files"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:10001
+#: ../partman-target.templates:11001
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
@@ -233,6 +275,6 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid "Removing conflicting operating system files..."
 msgstr ""
