@@ -17,6 +17,7 @@ for dev in $DEVICES/*; do
 	open_dialog PARTITIONS
 	while { read_line num id size type fs path name; [ "$id" ]; }; do
 		[ -f "$id/method" ] || continue
+		[ -f "$id/use_filesystem" ] || continue
 		[ -f "$id/mountpoint" ] || continue
 		[ "$fs" != free ] || continue
 		[ -f "$id/format" ] && continue

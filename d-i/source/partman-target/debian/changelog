@@ -1,3 +1,12 @@
+partman-target (54ubuntu2) hardy; urgency=low
+
+  * Don't clear partitions that aren't marked as using a filesystem.
+  * Run clear_partitions from finish.d, not commit.d; commit.d is run in all
+    sorts of places, such as while configuring RAID, where we don't want to
+    clear partitions yet (LP: #198106).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Mar 2008 13:24:59 +0000
+
 partman-target (54ubuntu1) hardy; urgency=low
 
   [ Colin Watson ]
