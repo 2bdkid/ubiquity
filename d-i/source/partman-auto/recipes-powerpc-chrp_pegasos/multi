@@ -6,7 +6,8 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /boot } .
+	mountpoint{ /boot }
+	options/relatime{ relatime } .
 
 70 800 280 ext3
 	$lvmok{ }
@@ -14,7 +15,8 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ / } .
+	mountpoint{ / }
+	options/relatime{ relatime } .
 
 500 3000 5000 ext3
 	$lvmok{ }
@@ -22,7 +24,8 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /usr } .
+	mountpoint{ /usr }
+	options/relatime{ relatime } .
 
 70 1500 3000 ext3
 	$lvmok{ }
@@ -30,7 +33,8 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /var } .
+	mountpoint{ /var }
+	options/relatime{ relatime } .
 
 96 512 300% linux-swap
 	$lvmok{ }
@@ -43,7 +47,8 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /tmp } .
+	mountpoint{ /tmp }
+	options/relatime{ relatime } .
 
 300 3000 1000000000 ext3
 	$lvmok{ }
@@ -51,5 +56,6 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /home } .
+	mountpoint{ /home }
+	options/relatime{ relatime } .
 

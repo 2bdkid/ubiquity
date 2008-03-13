@@ -15,21 +15,24 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ / } .
+	mountpoint{ / }
+	options/relatime{ relatime } .
 
 500 3000 6000 ext3
 	method{ format }
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /usr } .
+	mountpoint{ /usr }
+	options/relatime{ relatime } .
 
 70 1500 3000 ext3
 	method{ format }
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /var } .
+	mountpoint{ /var }
+	options/relatime{ relatime } .
 
 96 512 300% linux-swap
 	method{ swap }
@@ -40,12 +43,14 @@ partman-auto/text/multi_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /tmp } .
+	mountpoint{ /tmp }
+	options/relatime{ relatime } .
 
 300 3000 1000000000 ext3
 	method{ format }
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /home } .
+	mountpoint{ /home }
+	options/relatime{ relatime } .
 

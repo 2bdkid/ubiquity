@@ -1,3 +1,11 @@
+grub-installer (1.27ubuntu6) hardy; urgency=low
+
+  * Added the grub-installer/make_active debconf question.  When
+    preseeded false, this will skip the code that marks a partition as
+    bootable.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 13 Mar 2008 09:56:02 -0400
+
 grub-installer (1.27ubuntu5) hardy; urgency=low
 
   * grub-installer: Pass the correct number of arguments to db_input for

@@ -74,6 +74,9 @@ for part in $partitions; do
 			db_set passwd/user-gid "$(stat -c %g "$tmp/$username")" || true
 		fi
 		umount $tmp
+	elif echo "$mp" | egrep -q "^/usr/local" || echo "$mp" | egrep -q "^/var/local"; then
+		logger -t clear_partitions "Skipping $mp ($path)."
+		continue
 	else
 		for x in bin boot dev etc lib lib32 lib64 proc sbin usr var sys; do
 			if echo "$mp" | egrep -q "^/$x(\$|/)"; then

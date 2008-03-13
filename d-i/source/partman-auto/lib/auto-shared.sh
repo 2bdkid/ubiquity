@@ -22,6 +22,44 @@ auto_init_disk() {
 	close_dialog
 }
 
+# Each disk must have at least one primary partition after autopartitioning.
+ensure_primary() {
+	if echo "$scheme" | grep -q '\$primary{'; then
+		# Recipe provides one primary partition
+		return
+	fi
+
+	cd $dev
+
+	open_dialog PARTITIONS
+	local have_primary=
+	local id type
+	while { read_line x1 id x2 type x3 x4 x5; [ "$id" ]; }; do
+		if [ "$type" = primary ]; then
+			have_primary=1
+		fi
+	done
+	close_dialog
+
+	if [ "$have_primary" ]; then
+		# Existing disk provides one primary partition
+		return
+	fi
+
+	# Neither disk nor recipe provides a primary partition. Force the
+	# first partition in the recipe (arbitrarily chosen) to be primary.
+	scheme="$(
+		local first=1
+		foreach_partition '
+			if [ "$first" ]; then
+				echo "$* \$primary{ }"
+				first=
+			else
+				echo "$*"
+			fi'
+	)"
+}
+
 ### XXXX: I am not 100% sure if this is exactly what this code is doing.
 ### XXXX: Rename is of course an option. Just remember to do it here, in
 ### XXXX: perform_recipe and in partman-auto-lvm.

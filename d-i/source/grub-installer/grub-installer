@@ -679,69 +679,77 @@ split_device () {
 	echo "$disk $part"
 }
 
-bootdisk=
-bootpart=
-case $bootdev in
-	/dev/*)
-		bootdev_split="$(split_device "$bootdev")"
-		bootdisk="${bootdev_split%% *}"
-		bootpart="${bootdev_split#* }"
-		;;
-	\([hf]d[0-9]*\))
-		bootdev_nopart="$(echo "$bootdev" | sed 's/,[^)]*//')"
-		bootdisk="$(grep -v '^#' $device_map | grep "^ *$bootdev_nopart" \
-			| sed 's/^ *(.*)[[:space:]]*\(.*\)/\1/')"
-		bootpart="$(echo "$bootdev" | sed 's/.*,\([^)]*\).*/\1/')"
-		[ "$bootpart" != "$bootdev" ] || bootpart=
-		;;
-	[hf]d[0-9]*)
-		# The GRUB format with no parenthesis.
-		bootdisk="$(grep -v '^#' $device_map | grep "^ *(${bootdev%%,*})" \
-			| sed 's/^ *(.*)[[:space:]]*\(.*\)/\1/')"
-		bootpart="${bootdev#*,}"
-		[ "$bootpart" != "$bootdev" ] || bootpart=
-		;;
-esac
+make_active_partition () {
+	bootdisk=
+	bootpart=
+	case $bootdev in
+		/dev/*)
+			bootdev_split="$(split_device "$bootdev")"
+			bootdisk="${bootdev_split%% *}"
+			bootpart="${bootdev_split#* }"
+			;;
+		\([hf]d[0-9]*\))
+			bootdev_nopart="$(echo "$bootdev" | sed 's/,[^)]*//')"
+			bootdisk="$(grep -v '^#' $device_map | grep "^ *$bootdev_nopart" \
+				| sed 's/^ *(.*)[[:space:]]*\(.*\)/\1/')"
+			bootpart="$(echo "$bootdev" | sed 's/.*,\([^)]*\).*/\1/')"
+			[ "$bootpart" != "$bootdev" ] || bootpart=
+			;;
+		[hf]d[0-9]*)
+			# The GRUB format with no parenthesis.
+			bootdisk="$(grep -v '^#' $device_map | grep "^ *(${bootdev%%,*})" \
+				| sed 's/^ *(.*)[[:space:]]*\(.*\)/\1/')"
+			bootpart="${bootdev#*,}"
+			[ "$bootpart" != "$bootdev" ] || bootpart=
+			;;
+	esac
 
-# Make sure that there's *some* active partition; some BIOSes reportedly
-# don't like it otherwise. Leave well alone on GPT since libparted does this
-# for us.
-# TODO: this is gross and wrong; doing it with libparted would probably be
-# slightly less unpleasant.
-if [ "$bootdisk" ] && ! fdisk -l "$bootdisk" | grep '^/dev/' | grep -q '\*' && \
-   ! fdisk -l "$bootdisk" | grep -q 'EFI GPT$'; then
-	if [ -z "$bootpart" ]; then
-		# bootdev must be set to a disk rather than a partition, or
-		# we'd already have an active partition due to the previous
-		# check. Try /boot, if it's on the same disk and is primary.
-		bootfs="$(findfs /boot)"
-		[ "$bootfs" ] || bootfs="$(findfs /)"
-		bootfs="$(mapdevfs "$bootfs")"
-		bootfs_split="$(split_device "$bootfs")"
-		bootfs_disk="${bootfs_split%% *}"
-		bootfs_part="${bootfs_split#* }"
-		if [ "$bootfs_disk" = "$bootdisk" ] && \
-		   ([ "$bootfs_part" -ge 1 ] && [ "$bootfs_part" -le 4 ]); then
-			bootpart="$bootfs_part"
+	# Make sure that there's *some* active partition; some BIOSes
+	# reportedly don't like it otherwise. Leave well alone on GPT since
+	# libparted does this for us.
+	# TODO: this is gross and wrong; doing it with libparted would probably
+	# be slightly less unpleasant.
+	if [ "$bootdisk" ] && ! fdisk -l "$bootdisk" | grep '^/dev/' | grep -q '\*' && \
+	   ! fdisk -l "$bootdisk" | grep -q 'EFI GPT$'; then
+		if [ -z "$bootpart" ]; then
+			# bootdev must be set to a disk rather than a
+			# partition, or we'd already have an active partition
+			# due to the previous check. Try /boot, if it's on the
+			# same disk and is primary.
+			bootfs="$(findfs /boot)"
+			[ "$bootfs" ] || bootfs="$(findfs /)"
+			bootfs="$(mapdevfs "$bootfs")"
+			bootfs_split="$(split_device "$bootfs")"
+			bootfs_disk="${bootfs_split%% *}"
+			bootfs_part="${bootfs_split#* }"
+			if [ "$bootfs_disk" = "$bootdisk" ] && \
+			   ([ "$bootfs_part" -ge 1 ] && [ "$bootfs_part" -le 4 ]); then
+				bootpart="$bootfs_part"
+			fi
+		fi
+
+		if [ -z "$bootpart" ]; then
+			# We don't care at this point; just pick the first
+			# primary partition that exists.
+			for pnum in 1 2 3 4; do
+				if fdisk -l "$bootdisk" | grep -q "^$bootdisk$pnum "; then
+					bootpart="$pnum"
+					break
+				fi
+			done
+		fi
+
+		if [ "$bootpart" ]; then
+			echo -n "I: Setting partition $bootpart of $bootdisk to active..." >&2
+			sfdisk -A"$bootpart" "$bootdisk"
+			echo "done." >&2
 		fi
 	fi
+}
 
-	if [ -z "$bootpart" ]; then
-		# We don't care at this point; just pick the first primary
-		# partition that exists.
-		for pnum in 1 2 3 4; do
-			if fdisk -l "$bootdisk" | grep -q "^$bootdisk$pnum "; then
-				bootpart="$pnum"
-				break
-			fi
-		done
-	fi
-
-	if [ "$bootpart" ]; then
-		echo -n "I: Setting partition $bootpart of $bootdisk to active..." >&2
-		sfdisk -A"$bootpart" "$bootdisk"
-		echo "done." >&2
-	fi
+db_get grub-installer/make_active
+if [ "$RET" = true ]; then
+	make_active_partition
 fi
 
 db_progress STEP 1

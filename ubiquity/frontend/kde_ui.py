@@ -179,12 +179,32 @@ class Wizard(BaseFrontend):
         self.partition_bar_vbox.setSpacing(0)
         self.partition_bar_vbox.setMargin(0)
 
-        self.partition_list_buttonbox = QHBoxLayout(self.userinterface.partition_list_buttons)
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/32x32/status/dialog-warning.png"):
+            warningIcon = QPixmap("/usr/lib/kde4/share/icons/oxygen/32x32/status/dialog-warning.png")
+        else:
+            warningIcon = QPixmap("/usr/share/icons/crystalsvg/32x32/actions/messagebox_warning.png")
+        self.userinterface.fullname_error_image.setPixmap(warningIcon)
+        self.userinterface.username_error_image.setPixmap(warningIcon)
+        self.userinterface.password_error_image.setPixmap(warningIcon)
+        self.userinterface.hostname_error_image.setPixmap(warningIcon)
 
-        self.userinterface.fullname_error_image.setPixmap(QPixmap("/usr/share/icons/crystalsvg/32x32/actions/messagebox_warning.png"))
-        self.userinterface.username_error_image.setPixmap(QPixmap("/usr/share/icons/crystalsvg/32x32/actions/messagebox_warning.png"))
-        self.userinterface.password_error_image.setPixmap(QPixmap("/usr/share/icons/crystalsvg/32x32/actions/messagebox_warning.png"))
-        self.userinterface.hostname_error_image.setPixmap(QPixmap("/usr/share/icons/crystalsvg/32x32/actions/messagebox_warning.png"))
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-next.png"):
+            forwardIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-next.png")
+        else:
+            forwardIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/forward.png")
+        self.userinterface.next.setIcon(forwardIcon)
+
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-previous.png"):
+            backIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-previous.png")
+        else:
+            backIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/back.png")
+        self.userinterface.back.setIcon(backIcon)
+
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/dialog-cancel.png"):
+            cancelIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/dialog-cancel.png")
+        else:
+            cancelIcon = QIcon("/usr/share/icons/crystalsvg/22x22/actions/button_cancel.png")
+        self.userinterface.cancel.setIcon(cancelIcon)
 
     def excepthook(self, exctype, excvalue, exctb):
         """Crash handler."""
@@ -273,6 +293,12 @@ class Wizard(BaseFrontend):
 
         self.app.connect(self.userinterface.advanced_button, SIGNAL("clicked()"), self.on_advanced_button_clicked)
 
+        self.app.connect(self.userinterface.partition_button_new_label, SIGNAL("clicked(bool)"), self.on_partition_list_new_label_activate)
+        self.app.connect(self.userinterface.partition_button_new, SIGNAL("clicked(bool)"), self.on_partition_list_new_activate)
+        self.app.connect(self.userinterface.partition_button_edit, SIGNAL("clicked(bool)"),self.on_partition_list_edit_activate)
+        self.app.connect(self.userinterface.partition_button_delete, SIGNAL("clicked(bool)"),self.on_partition_list_delete_activate)
+        self.app.connect(self.userinterface.partition_button_undo, SIGNAL("clicked(bool)"),self.on_partition_list_undo_activate)
+
         self.pages = [language.Language, timezone.Timezone,
             console_setup.ConsoleSetup, partman.Partman,
             usersetup.UserSetup, summary.Summary]
@@ -329,8 +355,10 @@ class Wizard(BaseFrontend):
                         self.refresh()
                 if self.backup:
                     if self.pagesindex > 0:
-                        self.pagesindex = self.pagesindex - 1
-            
+                        step = self.step_name(self.get_current_page())
+                        if not step == "stepPartAdvanced": #Advanced will already have pagesindex pointing at first Paritioning page
+                            self.pagesindex = self.pagesindex - 1
+
             self.app.processEvents()
 
             # needed to be here for --automatic as there might not be any
@@ -346,7 +374,7 @@ class Wizard(BaseFrontend):
     def customize_installer(self):
         """Initial UI setup."""
 
-        self.userinterface.setWindowIcon(QIcon("/usr/share/icons/crystalsvg/64x64/apps/ubiquity.png"))
+        self.userinterface.setWindowIcon(QIcon("/usr/share/icons/hicolor/64x64/apps/ubiquity.png"))
         self.userinterface.back.hide()
 
         """
@@ -658,7 +686,10 @@ class Wizard(BaseFrontend):
         #quitAnswer = QMessageBox.question(self.userinterface, titleText, quitText, rebootButtonText, quitButtonText)
         self.run_success_cmd()
         if not self.get_reboot_seen():
-            quitAnswer = QMessageBox.question(self.userinterface, titleText, quitText)
+            messageBox = QMessageBox(QMessageBox.Question, titleText, quitText, QMessageBox.NoButton, self.userinterface)
+            messageBox.addButton(rebootButtonText, QMessageBox.AcceptRole)
+            messageBox.addButton(quitButtonText, QMessageBox.RejectRole)
+            quitAnswer = messageBox.exec_()
 
             if quitAnswer == 0:
                 self.reboot()
@@ -864,7 +895,7 @@ class Wizard(BaseFrontend):
         changed_page = False
 
         if str(step) == "stepReady":
-            self.userinterface.next.setText("Next >")
+            self.userinterface.next.setText("Next")
             self.translate_widget(self.userinterface.next, self.locale)
 
         if self.dbfilter is not None:
@@ -944,8 +975,10 @@ class Wizard(BaseFrontend):
             self.progressDialogue = QProgressDialog('', skipText, 0, total_steps, self.userinterface)
             self.progressDialogue.setWindowModality(Qt.WindowModal);
             self.cancelButton = QPushButton(skipText, self.progressDialogue)
-            self.cancelButton.hide()
             self.progressDialogue.setCancelButton(self.cancelButton)
+            # This needs to be called after setCancelButton, otherwise that
+            # function will cause the button to be shown again.
+            self.cancelButton.hide()
         elif self.progress_position.depth() == 0:
             self.progressDialogue.setMaximum(total_steps)
 
@@ -1476,15 +1509,12 @@ class Wizard(BaseFrontend):
             self.edit_dialog.partition_edit_mount_combo.setEnabled(True)
 
     def on_partition_list_treeview_selection_changed(self, selected, deselected):
+        self.userinterface.partition_button_new_label.setEnabled(False)
+        self.userinterface.partition_button_new.setEnabled(False)
+        self.userinterface.partition_button_edit.setEnabled(False)
+        self.userinterface.partition_button_delete.setEnabled(False)
         if not isinstance(self.dbfilter, partman.Partman):
             return
-
-        for child in self.userinterface.partition_list_buttons.children():
-            if isinstance(child, QHBoxLayout):
-                pass
-            else:
-                self.partition_list_buttonbox.removeWidget(child)
-                child.hide()
 
         indexes = self.userinterface.partition_list_treeview.selectedIndexes()
         if indexes:
@@ -1501,36 +1531,14 @@ class Wizard(BaseFrontend):
 
         for action in self.dbfilter.get_actions(devpart, partition):
             if action == 'new_label':
-                # TODO cjwatson 2007-02-19: i18n;
-                # partman-partitioning/text/label is too long unless we can
-                # figure out how to make the row of buttons auto-wrap
-                new_label_button = QPushButton('New partition table', self.userinterface.partition_list_buttons)
-                self.app.connect(new_label_button, SIGNAL("clicked(bool)"),
-                                 self.on_partition_list_new_label_activate)
-                self.partition_list_buttonbox.addWidget(new_label_button)
+                self.userinterface.partition_button_new_label.setEnabled(True)
             elif action == 'new':
-                # TODO cjwatson 2007-02-19: i18n
-                new_button = QPushButton('New partition', self.userinterface.partition_list_buttons)
-                self.app.connect(new_button, SIGNAL("clicked(bool)"),
-                                 self.on_partition_list_new_activate)
-                self.partition_list_buttonbox.addWidget(new_button)
+                self.userinterface.partition_button_new.setEnabled(True)
             elif action == 'edit':
-                # TODO cjwatson 2007-02-19: i18n
-                edit_button = QPushButton('Edit partition', self.userinterface.partition_list_buttons)
-                self.app.connect(edit_button, SIGNAL("clicked(bool)"),
-                                 self.on_partition_list_edit_activate)
-                self.partition_list_buttonbox.addWidget(edit_button)
+                self.userinterface.partition_button_edit.setEnabled(True)
             elif action == 'delete':
-                # TODO cjwatson 2007-02-19: i18n
-                delete_button = QPushButton('Delete partition', self.userinterface.partition_list_buttons)
-                self.app.connect(delete_button, SIGNAL("clicked(bool)"),
-                                 self.on_partition_list_delete_activate)
-                self.partition_list_buttonbox.addWidget(delete_button)
-        undo_button = QPushButton(
-            self.get_string('partman/text/undo_everything'))
-        self.app.connect(undo_button, SIGNAL("clicked(bool)"),
-                         self.on_partition_list_undo_activate)
-        self.partition_list_buttonbox.addWidget(undo_button)
+                self.userinterface.partition_button_delete.setEnabled(True)
+        self.userinterface.partition_button_undo.setEnabled(True)
 
     def on_partition_list_treeview_activated(self, index):
         if not self.allowed_change_step:

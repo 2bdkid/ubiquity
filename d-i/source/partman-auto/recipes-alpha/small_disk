@@ -8,7 +8,8 @@ partman-auto/text/small_disk ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext2 }
-	mountpoint{ / } .
+	mountpoint{ / }
+	options/relatime{ relatime } .
 
 96 512 512 linux-swap
 	method{ swap }

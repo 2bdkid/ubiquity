@@ -92,18 +92,10 @@ scan_disk () {
 	    logicals="${primary_logical#* }"
 	    log "$primaries primary partitions, $logicals logical partitions"
 
-	    # If we already have four primary partitions (counting extended
-	    # partitions), then we won't have room to create the extra one
-	    # demanded by the standard recipes.
-	    if [ "$primaries" -ge "$max_primary" ]; then
-		log "Too many primary partitions already exist on $dev"
-		return
-	    fi
-
-	    # If there are no logical partitions, then we will need an extra
+	    # If there are no logical partitions, then we will need a
 	    # primary partition slot to create an extended partition.
 	    if [ "$logicals" -eq 0 ] && \
-	       [ "$primaries" -ge "$(($max_primary - 1))" ]; then
+	       [ "$primaries" -ge "$max_primary" ]; then
 		log "Too many primary partitions already exist on $dev without an extended partition"
 		return
 	    fi

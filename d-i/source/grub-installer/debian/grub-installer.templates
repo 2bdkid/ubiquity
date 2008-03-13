@@ -180,3 +180,9 @@ Type: string
 Description: for internal use; relative boot directory for grub4dos
  Note that setting this disables installing grub. You are expected to
  install grub4dos some other way.
+
+Template: grub-installer/make_active
+Type: boolean
+Default: true
+Description: for internal use; can be preseeded
+ Mark a partition as bootable.

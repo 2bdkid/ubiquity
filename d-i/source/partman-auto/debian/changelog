@@ -1,3 +1,24 @@
+partman-auto (73ubuntu5) hardy; urgency=low
+
+  * Add relatime to all autopartitioning recipes.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 07 Mar 2008 10:20:39 +0000
+
+partman-auto (73ubuntu4) hardy; urgency=low
+
+  * Ensure that there is always at least one primary partition after
+    autopartitioning. An existing primary partition on the disk satisfies
+    this, as does a recipe partition explicitly marked $primary{ }; if
+    neither of those exists, then arbitrarily promote the first recipe
+    partition to be a primary partition.
+  * Remove explicit $primary{ } specifiers from standard recipes. We only
+    need them to be primary if no other primary partitions exist already.
+  * Relax auto-resize constraints now that a primary partition is not
+    unconditionally required; this will allow auto-resize partitioning on
+    systems that already have three primary partitions (LP: #134950).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 07 Mar 2008 00:26:42 +0000
+
 partman-auto (73ubuntu3) hardy; urgency=low
 
   * Backport from trunk (LP: #181296):

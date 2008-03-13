@@ -7,7 +7,8 @@ partman-auto/text/home_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /boot } .
+	mountpoint{ /boot }
+	options/relatime{ relatime } .
 
 500 4000 7000 ext3
 	$primary{ }
@@ -15,7 +16,8 @@ partman-auto/text/home_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ / } .
+	mountpoint{ / }
+	options/relatime{ relatime } .
 
 96 512 300% linux-swap
 	method{ swap }
@@ -26,5 +28,6 @@ partman-auto/text/home_scheme ::
 	format{ }
 	use_filesystem{ }
 	filesystem{ ext3 }
-	mountpoint{ /home } .
+	mountpoint{ /home }
+	options/relatime{ relatime } .
 
