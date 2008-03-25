@@ -271,6 +271,9 @@ case $DEBIAN_FRONTEND in
 	fi
 	;;
 esac
+if [ "$OVERRIDE_SHOW_ALL_LANGUAGES" ]; then
+	langname_template=$langname_all
+fi
 #log "Language input template is $langname_template"
 
 # Support preseeding of the locale all in one variable for convenience.

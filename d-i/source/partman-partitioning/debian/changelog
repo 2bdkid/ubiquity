@@ -1,3 +1,14 @@
+partman-partitioning (54ubuntu5) hardy; urgency=low
+
+  * Backport from trunk:
+    - Only disable swap on devices that are being changed (LP: #199048).
+      Requires partman-base (>= 114ubuntu4).
+  * Move 'local' down a line in create_new_partition in order to work
+    properly with bash, which initialises local variables without an
+    accompanying assignment to empty rather than to any previous value.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Mar 2008 00:27:06 +0000
+
 partman-partitioning (54ubuntu4) hardy; urgency=low
 
   * Silence warning in case $id/options already exists.

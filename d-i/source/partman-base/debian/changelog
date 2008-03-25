@@ -1,3 +1,14 @@
+partman-base (114ubuntu4) hardy; urgency=low
+
+  * Backport from trunk:
+    - Don't emit confusing log messages if partman-lvm or partman-crypto are
+      already loaded.
+    - Allow disable_swap to take a device argument, in which case it only
+      disables swap on that device rather than on all devices.
+    - Only disable swap on devices that are being changed (LP: #199048).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Mar 2008 00:24:24 +0000
+
 partman-base (114ubuntu3) hardy; urgency=low
 
   * Backport from trunk:

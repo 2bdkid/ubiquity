@@ -399,7 +399,9 @@ class Wizard(BaseFrontend):
                         self.refresh()
                 if self.backup:
                     if self.pagesindex > 0:
-                        self.pagesindex = self.pagesindex - 1
+                        step = self.step_name(self.steps.get_current_page())
+                        if not step == 'stepPartAdvanced':
+                            self.pagesindex = self.pagesindex - 1
 
             while gtk.events_pending():
                 gtk.main_iteration()
@@ -439,6 +441,9 @@ class Wizard(BaseFrontend):
         self.logo_image.set_from_file(logo)
         self.photo.set_from_file(photo)
 
+        if 'UBIQUITY_ONLY' in os.environ:
+            self.live_installer.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
+        
         if self.oem_config:
             self.live_installer.set_title(self.get_string('oem_config_title'))
             self.oem_id_vbox.show()
@@ -790,7 +795,7 @@ class Wizard(BaseFrontend):
 
         self.run_success_cmd()
         if not self.get_reboot_seen():
-            if 'UBIQUITY_NO_CONTINUE' in os.environ:
+            if 'UBIQUITY_ONLY' in os.environ:
                 txt = self.get_string('ubiquity/finished_restart_only')
                 self.finished_label.set_label(txt)
                 self.quit_button.hide()
@@ -1061,16 +1066,6 @@ class Wizard(BaseFrontend):
             lang = lang.split('.')[0].lower()
             for widget in self.language_questions:
                 self.translate_widget(getattr(self, widget), lang)
-
-
-    def on_new_size_scale_format_value (self, widget, value):
-        # TODO cjwatson 2006-01-09: get minsize/maxsize through to here
-        if self.resize_max_size is not None:
-            size = value * self.resize_max_size / 100
-            return '%d%% (%s)' % (value, format_size(size))
-        else:
-            return '%d%%' % value
-
 
     def on_steps_switch_page (self, foo, bar, current):
         self.current_page = current

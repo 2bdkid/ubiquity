@@ -33,7 +33,8 @@ class Language(FilteredCommand):
         questions = ['^languagechooser/language-name',
                      '^countrychooser/(shortlist|country-name)$']
         return (['/usr/lib/ubiquity/localechooser/localechooser'], questions,
-                {'PATH': '/usr/lib/ubiquity/localechooser:' + os.environ['PATH']})
+                {'PATH': '/usr/lib/ubiquity/localechooser:' + os.environ['PATH'],
+                 'OVERRIDE_SHOW_ALL_LANGUAGES': '1'})
 
     def run(self, priority, question):
         if question.startswith('languagechooser/language-name'):
@@ -132,4 +133,5 @@ class Language(FilteredCommand):
             except locale.Error, e:
                 self.debug('locale.setlocale failed: %s (LANG=%s)',
                            e, di_locale)
-            misc.execute('fontconfig-voodoo', '--auto', '--force', '--quiet')
+            misc.execute_root('fontconfig-voodoo',
+                              '--auto', '--force', '--quiet')

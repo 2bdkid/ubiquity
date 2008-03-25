@@ -86,8 +86,8 @@ WIDGET_STACK_STEPS = {
 
 class UbiquityUI(QWidget):
 
-    def __init__(self):
-        QWidget.__init__(self)
+    def __init__(self, parent):
+        QWidget.__init__(self, parent)
         uic.loadUi("%s/liveinstaller.ui" % UIDIR, self)
 
     def setWizard(self, wizardRef):
@@ -112,8 +112,15 @@ class Wizard(BaseFrontend):
 
         self.app = QApplication(['ubiquity', '-style=plastique'])
 
-        self.userinterface = UbiquityUI()
+        # We want to hide the minimise button if running in the ubiquity-only mode (no desktop)
+        # To achieve this we need to set window flags to Dialog but we also need a parent widget which is showing
+        # else Qt tried to be clever and puts the minimise button back
+        self.parentWidget = QWidget()
+        if 'UBIQUITY_ONLY' in os.environ:
+            self.parentWidget.show()
+        self.userinterface = UbiquityUI(self.parentWidget)
         self.userinterface.setWizard(self)
+        self.userinterface.setWindowFlags(Qt.Dialog)
         #self.app.setMainWidget(self.userinterface)
 
         self.advanceddialog = QDialog(self.userinterface)
@@ -188,20 +195,26 @@ class Wizard(BaseFrontend):
         self.userinterface.password_error_image.setPixmap(warningIcon)
         self.userinterface.hostname_error_image.setPixmap(warningIcon)
 
-        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-next.png"):
-            forwardIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-next.png")
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/16x16/actions/go-next.png"):
+            self.forwardIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/16x16/actions/go-next.png")
         else:
-            forwardIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/forward.png")
-        self.userinterface.next.setIcon(forwardIcon)
+            self.forwardIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/forward.png")
+        self.userinterface.next.setIcon(self.forwardIcon)
 
-        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-previous.png"):
-            backIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/go-previous.png")
+        #Used for the last step
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/16x16/actions/dialog-ok-apply.png"):
+            self.applyIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/16x16/actions/dialog-ok-apply.png")
+        else:
+            self.applyIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/ok.png")
+
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/16x16/actions/go-previous.png"):
+            backIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/16x16/actions/go-previous.png")
         else:
             backIcon = QIcon("/usr/share/icons/crystalsvg/16x16/actions/back.png")
         self.userinterface.back.setIcon(backIcon)
 
-        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/22x22/actions/dialog-cancel.png"):
-            cancelIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/22x22/actions/dialog-cancel.png")
+        if os.path.exists("/usr/lib/kde4/share/icons/oxygen/16x16/actions/dialog-cancel.png"):
+            cancelIcon = QIcon("/usr/lib/kde4/share/icons/oxygen/16x16/actions/dialog-cancel.png")
         else:
             cancelIcon = QIcon("/usr/share/icons/crystalsvg/22x22/actions/button_cancel.png")
         self.userinterface.cancel.setIcon(cancelIcon)
@@ -420,6 +433,7 @@ class Wizard(BaseFrontend):
         
         if not 'UBIQUITY_AUTOMATIC' in os.environ:
             self.userinterface.show()
+            self.parentWidget.hide()
 
         try:
             release_notes = open('/cdrom/.disk/release_notes_url')
@@ -604,6 +618,7 @@ class Wizard(BaseFrontend):
         elif n == 'Summary':
             self.set_current_page(WIDGET_STACK_STEPS["stepReady"])
             self.userinterface.next.setText(self.get_string('install_button'))
+            self.userinterface.next.setIcon(self.applyIcon)
         else:
             print >>sys.stderr, 'No page found for %s' % n
             return
@@ -686,9 +701,12 @@ class Wizard(BaseFrontend):
         #quitAnswer = QMessageBox.question(self.userinterface, titleText, quitText, rebootButtonText, quitButtonText)
         self.run_success_cmd()
         if not self.get_reboot_seen():
+            if 'UBIQUITY_ONLY' in os.environ:
+                quitText = self.get_string('ubiquity/finished_restart_only')
             messageBox = QMessageBox(QMessageBox.Question, titleText, quitText, QMessageBox.NoButton, self.userinterface)
             messageBox.addButton(rebootButtonText, QMessageBox.AcceptRole)
-            messageBox.addButton(quitButtonText, QMessageBox.RejectRole)
+            if not 'UBIQUITY_ONLY' in os.environ:
+                messageBox.addButton(quitButtonText, QMessageBox.RejectRole)
             quitAnswer = messageBox.exec_()
 
             if quitAnswer == 0:
@@ -896,6 +914,7 @@ class Wizard(BaseFrontend):
 
         if str(step) == "stepReady":
             self.userinterface.next.setText("Next")
+            self.userinterface.next.setIcon(self.forwardIcon)
             self.translate_widget(self.userinterface.next, self.locale)
 
         if self.dbfilter is not None:
@@ -1781,7 +1800,8 @@ class Wizard(BaseFrontend):
             self.pagesindex = 1
             self.dbfilter = partman.Partman(self)
             self.set_current_page(self.previous_partitioning_page)
-            self.userinterface.next.setText("Next >")
+            self.userinterface.next.setText(_("Next"))
+            self.userinterface.next.setIcon(self.forwardIcon)
             self.translate_widget(self.userinterface.next, self.locale)
             self.backup = True
             self.installing = False

@@ -1,3 +1,49 @@
+ubiquity (1.8.1) hardy; urgency=low
+
+  [ Evan Dandrea ]
+  * Change --no-continue option to a more general --only option for use
+    in only-ubiquity and automatic-ubiquity modes.
+  * Disable the minimize button when using --only (LP: #200034).
+  * Properly return in debconf progress functions in the noninteractive
+    frontend.  Thanks Colin Watson.
+  * Print progress updates on a new line again in the noninteractive
+    frontend.
+  * When clicking back from the advanced partitioner, go back to the first
+    partitioning page rather than the keyboard page.  Thanks Jonathan
+    Riddell.
+  * Remove dead code for the old resize widget.
+  * Fix printing of non-latin text in the noninteractive frontend.
+  * bin/ubiquity-dm: Set groups in drop_privileges.
+  * Use the proper username and full name in oem_config mode for the
+    noninteractive frontend.
+  * Exit on failure to commit to the partition table in the noninteractive
+    frontend.
+  * Move the spawning of the noninteractive frontend when the noninteractive
+    kernel cmdline option is present out of casper and into debian/init.
+  * Automatic update of included source packages: choose-mirror
+    2.19ubuntu3, localechooser 1.42ubuntu3, partman-auto 73ubuntu6,
+    partman-base 114ubuntu4, partman-partitioning 54ubuntu5.
+
+  [ Colin Watson ]
+  * Set OVERRIDE_SHOW_ALL_LANGUAGES while calling localechooser, so that
+    even languages with complex scripts are displayed (LP: #202291).
+  * Run fontconfig-voodoo as root (LP: #203086).
+
+  [ Luke Yelavich ]
+  * bin/ubiquity-dm: Set the GTK_MODULES environment variable only when
+    at-spi-registryd is loaded.
+
+  [ Mario Limonciello ]
+  * Set proper path to change permissions of vnc files.  (LP: #204985)
+  * Use newer nvidia syntax in xorg.conf.
+
+  [ Jonathan Riddell ]
+  * kde_ui: changes for UBIQUITY_ONLY mode, don't offer a no-reboot method at
+    end of install, and hide minimise button on window frame.
+  * kde_ui: Fixes to the button icons
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 25 Mar 2008 16:16:09 -0400
+
 ubiquity (1.8.0) hardy; urgency=low
 
   * Disable the intro message in preparation for Ubuntu 8.04 beta.
