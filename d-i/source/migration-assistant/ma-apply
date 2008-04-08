@@ -35,7 +35,7 @@ for choice in $selection; do # Microsoft Windows XP Professional (/dev/hda1)
         user_selection=`echo "$RET" | sed -e 's/, /\n/g'`
         for usr in $user_selection; do
             IFS="$OLDIFS"
-            formatted_user=`echo "$usr" | sed -e 's/ /:/g' | sed -e 's/,:/, /g'`
+            formatted_user=`echo "$usr" | sed -e 's/ /+/g' | sed -e 's/,+/, /g'`
             db_get migration-assistant/$path/$formatted_user/user || continue
             new_user=$RET
 

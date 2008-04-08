@@ -1,3 +1,26 @@
+console-setup (1.21ubuntu6) hardy; urgency=low
+
+  * Handle some special cases for the KPDL key (LP: #189529).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 02 Apr 2008 00:06:25 +0100
+
+console-setup (1.21ubuntu5) hardy; urgency=low
+
+  * Silence error messages for keycodes 214, 215, 216, and 217, which are
+    various special keys in the default X.org PC keyboard map that we don't
+    need to handle.
+  * Map dead_stroke to U+002D HYPHEN-MINUS.
+  * Add a "Do not configure keyboard; keep kernel keymap" model option,
+    preseedable by console-setup/modelcode=SKIP (LP: #59889).
+  * Drop the layout/variant priority to high on fresh installs
+    (LP: #205959).
+  * Support rules with multiple consequents (thanks, Adam Simpkins;
+    LP: #139710).
+  * Allow specifying alternate rules using XKBRULES (thanks, Adam Simpkins;
+    LP: #139712).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 31 Mar 2008 14:33:25 +0100
+
 console-setup (1.21ubuntu4) hardy; urgency=low
 
   * Set default layout for Kurdish to tr(ku) (LP: #28683).

@@ -87,6 +87,8 @@ class Wizard(BaseFrontend):
             self.dbfilter = x(self)
             self.dbfilter.start(auto_process=True)
             self.mainloop.run()
+            if self.dbfilter_status:
+                sys.exit(1)
 
         self.installing = True
         self.progress_loop()
@@ -117,9 +119,9 @@ class Wizard(BaseFrontend):
                                      (ret, realtb))
         else:
             self.run_success_cmd()
-            if not self.get_reboot():
-                raw_input('Installation complete.  Press enter or return to reboot...')
-            execute("reboot")
+            print 'Installation complete.'
+            if self.get_reboot():
+                execute("reboot")
 
     def watch_debconf_fd(self, from_debconf, process_input):
         """Event loop interface to debconffilter.
@@ -354,8 +356,9 @@ class Wizard(BaseFrontend):
     # ubiquity.components.install
     def get_hostname(self):
         """Get the selected hostname."""
-        # FIXME
-        return 'ubuntu-desktop'
+        #We set a default in install.py in case it isn't preseeded
+        #but when we preseed, we are looking for None anyhow.
+        return None
 
     # ubiquity.components.summary
 

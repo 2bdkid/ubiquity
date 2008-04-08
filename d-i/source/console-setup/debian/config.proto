@@ -146,7 +146,7 @@ ask_debconf () {
     prefix=$3       # The prefix for $kbdnames
     default_code=$4 # The default choice (optional)
     choices=`echo "$kbdnames" | grep "^$prefix\*" | 
-        sed -e "s/^$prefix\*[^\*]*\*//" -e 's/,/\\\\,/g' -e 's/$/,/' | sort `
+        sed -e "s/^$prefix\*[^\*]*\*//" -e 's/,/\\\\,/g' -e 's/$/,/' | LC_ALL=C sort `
     choices=`echo $choices | sed 's/, *$//'`
 
     db_subst $template CHOICES "$choices"
@@ -258,7 +258,7 @@ guess_arch () {
 }
 
 available_fontfaces () {
-    echo "$fontsets" | sort | \
+    echo "$fontsets" | LC_ALL=C sort | \
 	grep "^$codeset-" | \
 	sed -e "s/^$codeset-//" \
 	    -e 's/[0-9][0-9]*x[0-9][0-9]*$//' \
@@ -267,7 +267,7 @@ available_fontfaces () {
 }
 
 available_fontsizes () {
-    echo "$fontsets" | sort | \
+    echo "$fontsets" | LC_ALL=C sort | \
 	grep "^$codeset-$fontface[0-9]" | \
 	sed -e "s/^$codeset-$fontface//" | \
 	uniq
@@ -713,7 +713,15 @@ fi
 
 default_layout=''
 default_variant=''
-layout_priority=critical
+if [ -e /etc/console/boottime.kmap.gz ]; then
+    # Upgrade from pre-console-setup; we need to ask if autodetection fails.
+    layout_priority=critical
+else
+    # Probably a fresh installation. If the installation is being automated,
+    # then in the worst case selecting a "us" layout won't break the system,
+    # so drop the priority a little bit.
+    layout_priority=high
+fi
 case "$locale" in
     # Keyboards for countries
     *_AL*)
@@ -1410,6 +1418,7 @@ while :; do
 	    db_get console-setup/modelcode
 	    if \
 		$detect_keyboard \
+		&& [ "$RET" != SKIP ] \
 		&& [ -e "/usr/share/console-setup-mini/$RET.tree" ]
 	    then
 		db_input high console-setup/ask_detect || true
@@ -1428,6 +1437,7 @@ while :; do
 	    if \
 		[ "$STATE" -ge "$old_state" ] \
 		&& $detect_keyboard \
+		&& [ "$model" != SKIP ] \
 		&& [ -e "/usr/share/console-setup-mini/$model.tree" ] \
 		&& db_get console-setup/ask_detect \
 		&& [ "$RET" = true ]
@@ -1460,6 +1470,8 @@ while :; do
 		layout="${detected_keyboard%%:*}"
 		db_set console-setup/layoutcode "$layout"
 		# skip the question without making Debconf loop
+		STATE=$(( $STATE + $STATE - $old_state ))
+	    elif [ "$model" = SKIP ]; then
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    elif [ "$unsupported_layout" = yes ]; then
 		if [ "$STATE" -ge "$old_state" ]; then
@@ -1494,6 +1506,8 @@ while :; do
 		db_set console-setup/variantcode "$variant"
 		adjust_layout=:
 		# skip the question without making Debconf loop
+		STATE=$(( $STATE + $STATE - $old_state ))
+	    elif [ "$model" = SKIP ]; then
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    elif [ "$unsupported_layout" = yes ]; then
 		db_set console-setup/variantcode "$XKBVARIANT"
@@ -1615,6 +1629,8 @@ while :; do
 	    if [ "$unsupported_layout" = yes ]; then
 		db_set console-setup/optionscode "$XKBOPTIONS"
 		# skip the questions without making Debconf loop
+		STATE=$(( $STATE + $STATE - $old_state ))
+	    elif [ "$model" = SKIP ]; then
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    else
 		if [ "$latin" = yes ]; then
@@ -1864,7 +1880,7 @@ while :; do
 		charmap=UTF-8
 	    else
 		# add commas
-		choices=`echo "$charmaps" | sed -e 's/$/,/g' | sort `
+		choices=`echo "$charmaps" | sed -e 's/$/,/g' | LC_ALL=C sort `
 		# remove newlines
 		choices=`echo $choices | sed -e 's/,$//' `
 		db_subst console-setup/charmap CHOICES "$choices"

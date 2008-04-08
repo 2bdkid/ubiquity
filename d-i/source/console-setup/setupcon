@@ -291,19 +291,26 @@ if [ "$font_only" != yes ] && [ "$ACTIVE_CONSOLES" ]; then
 	if [ "$save" != yes ] && \
 	   [ -f /etc/console-setup/boottime.kmap.gz ]; then
 	    eval loadkeys /etc/console-setup/boottime.kmap.gz $verbose
-	elif which ckbcomp >/dev/null; then
+	elif [ "$XKBMODEL" != SKIP ] && which ckbcomp >/dev/null; then
 	    if [ "$CHARMAP" != UTF-8 ]; then
 		acm_option="-charmap $CHARMAP"
 	    else
 		acm_option=''
 	    fi
+
+	    if [ "$XKBRULES" ]; then
+		rules_option="-rules $XKBRULES"
+	    else
+		rules_option=''
+	    fi
+
 	    if [ "$save_only" != yes ]; then
-		ckbcomp $acm_option -model "$XKBMODEL" \
+		ckbcomp $acm_option $rules_option -model "$XKBMODEL" \
 		    "$XKBLAYOUT" "$XKBVARIANT" "$XKBOPTIONS" \
 		    | eval loadkeys $verbose
 	    fi
 	    if which gzip >/dev/null && [ "$save" = yes ]; then
-		ckbcomp $acm_option -model "$XKBMODEL" \
+		ckbcomp $acm_option $rules_option -model "$XKBMODEL" \
 		    "$XKBLAYOUT" "$XKBVARIANT" "$XKBOPTIONS" \
 		    | gzip -9 >/etc/console-setup/boottime.kmap.gz
 	    fi

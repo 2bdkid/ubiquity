@@ -22,6 +22,8 @@ import re
 import shutil
 import signal
 
+import debconf
+
 from ubiquity.filteredcommand import FilteredCommand
 from ubiquity import parted_server
 from ubiquity.misc import drop_privileges
@@ -78,6 +80,7 @@ class Partman(FilteredCommand):
         self.deleting_partition = None
         self.undoing = False
         self.finish_partitioning = False
+        self.bad_auto_size = False
 
         questions = ['^partman-auto/.*automatically_partition$',
                      '^partman-auto/select_disk$',
@@ -156,7 +159,6 @@ class Partman(FilteredCommand):
             question, menu_options, want_script, want_arg)
         self.preseed(question, option)
 
-    @classmethod
     def split_devpart(self, devpart):
         dev, part_id = devpart.split('//', 1)
         if dev.startswith(parted_server.devices + '/'):
@@ -165,26 +167,43 @@ class Partman(FilteredCommand):
         else:
             return None, None
 
-    @classmethod
     def subdirectories(self, directory):
         for name in sorted(os.listdir(directory)):
             if os.path.isdir(os.path.join(directory, name)):
                 yield name[2:]
 
-    @classmethod
     def scripts(self, directory):
         for name in sorted(os.listdir(directory)):
             if os.access(os.path.join(directory, name), os.X_OK):
                 yield name[2:]
 
-    @classmethod
+    def method_description(self, method):
+        try:
+            question = None
+            if method == 'swap':
+                question = 'partman/method_long/swap'
+            elif method == 'efi':
+                question = 'partman-efi/text/efi'
+            elif method == 'newworld':
+                question = 'partman/method_long/newworld'
+            if question is not None:
+                return self.description(question)
+        except debconf.DebconfError:
+            pass
+        return method
+
+    def filesystem_description(self, filesystem):
+        try:
+            return self.description('partman/filesystem_long/%s' % filesystem)
+        except debconf.DebconfError:
+            return filesystem
+
     def create_use_as(self):
         """Yields the possible methods that a new partition may use."""
 
         # TODO cjwatson 2006-11-01: This is a particular pain; we can't find
         # out the real list of possible uses from partman until after the
         # partition has been created, so we have to partially hardcode this.
-        # TODO cjwatson 2006-11-01: Get human-readable names.
 
         for method in self.subdirectories('/lib/partman/choose_method'):
             if method == 'filesystem':
@@ -192,12 +211,17 @@ class Partman(FilteredCommand):
                     if fs == 'ntfs':
                         pass
                     elif fs == 'fat':
-                        yield (method, 'fat16')
-                        yield (method, 'fat32')
+                        yield (method, 'fat16',
+                               self.filesystem_description('fat16'))
+                        yield (method, 'fat32',
+                               self.filesystem_description('fat32'))
                     else:
-                        yield (method, fs)
+                        yield (method, fs, self.filesystem_description(fs))
+            elif method == 'dont_use':
+                question = 'partman-basicmethods/text/dont_use'
+                yield (method, 'dontuse', self.description(question))
             else:
-                yield (method, method)
+                yield (method, method, self.method_description(method))
 
     def get_current_method(self, partition):
         if 'method' in partition:
@@ -209,7 +233,7 @@ class Partman(FilteredCommand):
             else:
                 return partition['method']
         else:
-            return 'dont_use'
+            return 'dontuse'
 
     def get_current_mountpoint(self, partition):
         if ('method' in partition and 'acting_filesystem' in partition and
@@ -295,6 +319,11 @@ class Partman(FilteredCommand):
             if self.editing_partition:
                 # Break out of resizing the partition.
                 self.editing_partition['bad_size'] = True
+            else:
+                # Break out of resizing the partition in cases where partman
+                # fed us bad boundary values.  These are bugs in partman, but
+                # we should handle the result as gracefully as possible.
+                self.bad_auto_size = True
         elif question == 'partman-basicfilesystems/bad_mountpoint':
             # Break out of creating or editing the partition.
             if self.creating_partition:
@@ -844,6 +873,9 @@ class Partman(FilteredCommand):
                     return False
                 else:
                     assert self.extra_choice is not None
+                    if self.bad_auto_size:
+                        self.bad_auto_size = False
+                        return False
                     self.preseed(question, '%d%%' % self.extra_choice)
                     self.succeeded = True
                     return True

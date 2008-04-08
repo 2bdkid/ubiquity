@@ -32,6 +32,12 @@ Default: security.ubuntu.com
 Description: for internal use; can be preseeded
  Host to use for security updates
 
+Template: apt-setup/security_path
+Type: string
+Default: /ubuntu
+Description: for internal use; can be preseeded
+ Path to use for security updates
+
 Template: apt-setup/volatile_host
 Type: string
 Default: volatile.debian.org

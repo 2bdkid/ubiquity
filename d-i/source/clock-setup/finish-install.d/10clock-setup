@@ -42,6 +42,10 @@ else
 	if [ -z "$probed" ]; then
 		# installing the only OS, so use UTC
 		db_set clock-setup/utc true
+		db_get clock-setup/utc-auto
+		if [ "$RET" = true ]; then
+			pri=low
+		fi
 	fi
 fi
 

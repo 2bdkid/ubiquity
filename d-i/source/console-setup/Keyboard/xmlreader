@@ -277,6 +277,9 @@ if (not exists $modelvalues{sun4}) {
 if (not exists $modelvalues{sun5}) {
     $models{'Sun Type 5'} = 'sun5';
 }
+if (not exists $modelvalues{SKIP}) {
+    $models{'Do not configure keyboard; keep kernel keymap'} = 'SKIP';
+}
 
 print <<'EOT';
 #!/usr/bin/perl -w

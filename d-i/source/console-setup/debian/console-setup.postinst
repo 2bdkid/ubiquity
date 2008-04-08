@@ -94,7 +94,9 @@ EOF
 
     . $CONFIGFILE || true
 
-    if \
+    if [ "$model" = SKIP ]; then
+	BOOTTIME_KMAP_MD5=
+    elif \
 	[ -z "$BOOTTIME_KMAP_MD5" ] \
 	|| [ ! -f "$CONFIGDIR/boottime.kmap.gz" ] \
 	|| echo "$BOOTTIME_KMAP_MD5  $CONFIGDIR/boottime.kmap.gz" \

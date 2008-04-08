@@ -1,3 +1,46 @@
+ubiquity (1.8.2) hardy; urgency=low
+
+  [ Evan Dandrea ]
+  * Treat the dbfilter returning nonzero as a fatal error in the
+    noninteractive frontend.
+  * Clean up the reboot message in the noninteractive frontend.
+  * Optimize the md5 check on file copy (LP: #198019).
+  * Copy the locale over to the target system when using oem-config.
+    This was previously fixed for the alternate CD in LP 181291.
+  * Use + instead of : for a replacement character for m-a as it is
+    explicitly allowed by debconf policy.
+  * Break out of resizing the partition in cases where partman fed us bad
+    boundary values (LP: #197838).
+  * Don't miscalculate with nested partitions in 03partition_too_small (LP:
+    #198039).
+  * Automatic update of included source packages: apt-setup
+    1:0.31ubuntu7, choose-mirror 2.19ubuntu5, clock-setup 0.92ubuntu3,
+    console-setup 1.21ubuntu6, localechooser 1.42ubuntu4, migration-
+    assistant 0.6.1, partman-auto 73ubuntu7, tzsetup 1:0.20.
+
+  [ Mario Limonciello ]
+  * Don't unnecessarily hardcode the return of get_hostname()
+    in the noninteractive frontend.
+  * Turn off console blanking in Ubiquity init script to prevent
+    confusion on the noninteractive frontend.
+  * Update mythbuntu ubiquity icon.
+
+  [ Colin Watson ]
+  * Fix crash if partitioning failed when partitioning was automated (see LP
+    #206113).
+  * Remove packages in the restricted section from the installed system if
+    apt-setup/restricted is false.
+  * Fix crash with the "don't use" partitioning option (LP: #132611).
+  * Use localised, human-readable names for partitioning methods.
+  * Reorganise the wrapper script to cope with kdesu's broken argument
+    handling.
+  * Add a "Format the partition?" checkbox to the partition edit dialog
+    (LP: #184838).
+  * Give reconfigured packages access to our X display, so that
+    usplash.postinst can check its dimensions (LP: #188764).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 08 Apr 2008 02:02:23 -0400
+
 ubiquity (1.8.1) hardy; urgency=low
 
   [ Evan Dandrea ]

@@ -19,34 +19,6 @@ char* windows_get_user_registry(void) {
     return ret;
 }
 
-char* gaim_get_accounts_file_windows(void) {
-    char* accounts_file;
-    char* appdata = NULL;
-    char* path = NULL;
-    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
-        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
-    if(!appdata) {
-        return NULL;
-    }
-    path = reformat_path(appdata);
-    if(!path) return NULL;
-    free(appdata);
-    asprintf(&accounts_file, "%s/%s/%s", from_location, path,
-        "/.gaim/accounts.xml");
-    free(path);
-
-    return accounts_file;
-}
-
-char* gaim_get_accounts_file_linux(void) {
-    char* ret;
-    asprintf(&ret, "%s/%s/%s/%s", from_location,
-	    "home", from_user,
-	    ".gaim/accounts.xml");
-
-    return ret;
-}
-
 /*		Windows Applications			*/
 
 /*		Instant Messaging			*/
@@ -74,15 +46,37 @@ const char* windowsxp_yahoo (void) {
 }
 
 const char* windowsxp_gaim (void) {
-    char* accounts_file;
     FILE* fp;
-    accounts_file = gaim_get_accounts_file_windows();
-    if((fp = fopen(accounts_file, "r")) != NULL) {
-	fclose(fp);
-	return "Gaim";
-    } else {
-	return NULL;
+    char* accounts_file;
+    char* accounts_file_new;
+    char* appdata = NULL;
+    char* path = NULL;
+    appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
+        "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
+    if(!appdata) {
+        return NULL;
     }
+    path = reformat_path(appdata);
+    if(!path) return NULL;
+    free(appdata);
+    asprintf(&accounts_file, "%s/%s/%s", from_location, path,
+        "/.gaim/accounts.xml");
+    asprintf(&accounts_file_new, "%s/%s/%s", from_location, path,
+        "/.purple/accounts.xml");
+    free(path);
+    fp = fopen(accounts_file, "r");
+    free(accounts_file);
+    if(fp != NULL) {
+        fclose(fp);
+        return "Gaim";
+    }
+    fp = fopen(accounts_file_new, "r");
+    free(accounts_file_new);
+    if(fp != NULL) {
+        fclose(fp);
+        return "Gaim";
+    }
+    return NULL;
 }
 
 const char* windowsxp_msn (void) {
@@ -308,14 +302,25 @@ const char* windowsxp_outlookexpress (void) {
 
 const char* linux_gaim (void) {
     char* accounts_file;
+    char* accounts_file_new;
     FILE* fp;
-    accounts_file = gaim_get_accounts_file_linux();
-    if((fp = fopen(accounts_file, "r")) != NULL) {
+    asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
+	    "home", from_user,
+	    ".gaim/accounts.xml");
+    asprintf(&accounts_file_new, "%s/%s/%s/%s", from_location,
+	    "home", from_user,
+	    ".purple/accounts.xml");
+    fp = fopen(accounts_file, "r");
+    if(fp != NULL) {
         fclose(fp);
         return "Gaim";
-    } else {
-        return NULL;
     }
+    fp = fopen(accounts_file_new, "r");
+    if(fp != NULL) {
+        fclose(fp);
+        return "Gaim";
+    }
+    return NULL;
 }
 
 const char* linux_firefox (void) {

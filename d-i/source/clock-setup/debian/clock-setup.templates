@@ -12,6 +12,12 @@ _Description: Is the system clock set to UTC?
  local time. This is recommended unless you also use another operating
  system that expects the clock to be set to local time.
 
+Template: clock-setup/utc-auto
+Type: boolean
+Default: false
+Description: for internal use; can be preseeded
+ If true and we are the only OS on the disk, don't ask clock-setup/utc.
+
 Template: finish-install/progress/clock-setup
 Type: text
 # progress bar item

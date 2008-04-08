@@ -93,7 +93,7 @@ locale2langname() {
 				# country as well.
 				countrypart="${1#*_}"
 				countrypart="${countrypart%%[@.]*}"
-				countryline="$(echo "$line" | grep ";$countrypart\$" ||true)"
+				countryline="$(echo "$line" | grep ";$countrypart\$" | head -n1 ||true)"
 				if [ "$countryline" ]; then
 					echo "${countryline%%;*}"
 					return
@@ -282,6 +282,16 @@ db_get localechooser/alreadyrun
 if [ "$RET" != true ]; then
 	if db_get $localecode && [ "$RET" ]; then
 		do_preseed $RET
+	elif db_get $languagecode && [ "$RET" ]; then
+		LANGUAGE="$RET"
+		db_fget $languagecode seen
+		seenflag=$RET
+		LANGNAME=$(locale2langname "$LANGUAGE")
+		if [ -n "$LANGNAME" ]; then
+			db_set $langname_template $LANGNAME
+			log "Set $langname_template = '$LANGNAME'"
+			db_fset $langname_template seen $seenflag || true
+		fi
 	fi
 
 	# Prevent preseeding from being checked a second time

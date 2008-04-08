@@ -13,14 +13,22 @@ fi
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	if [ "$disks" ]; then
-		disk="$(cat "$dev/device")"
-		case " $disks " in
-		    *" $disk "*)
-			;;
-		    *)
+		partman_disk="$(cat "$dev/device")"
+		local found=0
+		for preseed_disk in $disks; do
+			preseed_id=$(mapdevfs $preseed_disk)
+			case " $preseed_id " in
+			    *" $partman_disk "*)
+				found=1
+				;;
+			    *)
+				continue
+				;;
+			esac
+		done
+		if [ "$found" = "0" ]; then
 			continue
-			;;
-		esac
+		fi
 	fi
 	cd $dev
 	open_dialog PARTITIONS

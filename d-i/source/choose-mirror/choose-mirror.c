@@ -92,7 +92,8 @@ static char **mirrors_in(char *country) {
 			num *= 2;
 			ret = realloc(ret,num * sizeof(char*));
 		}
-		if (strcmp(mirrors[i].country, country) == 0) {
+		if (strcmp(mirrors[i].country, country) == 0 ||
+		    strcmp(mirrors[i].country, "*") == 0) {
 			ret[j++]=mirrors[i].site;
 		}
 	}

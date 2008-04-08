@@ -45,6 +45,7 @@ package KeyboardNames;
     'Dell USB Multimedia Keybard' => 'dellusbmm',
     'Dexxa Wireless Desktop Keyboard' => 'dexxa',
     'Diamond 9801 / 9802 series' => 'diamond',
+    'Do not configure keyboard; keep kernel keymap' => 'SKIP',
     'Ennyah DKB-1008' => 'ennyah_dkb1008',
     'Evdev-managed keyboard' => 'evdev',
     'Everex STEPnote' => 'everex',

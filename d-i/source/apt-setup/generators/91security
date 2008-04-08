@@ -13,7 +13,10 @@ fi
 db_get apt-setup/security_host
 host="$RET"
 [ "$host" ] || exit
-directory=/ubuntu
+
+db_get apt-setup/security_path
+directory="$RET"
+[ "$directory" ] || exit
 
 if ! db_get mirror/codename || [ -z "$RET" ]; then
 	db_get cdrom/codename

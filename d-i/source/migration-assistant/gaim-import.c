@@ -20,7 +20,7 @@ xmlDoc* gaim_new_accounts_file(void) {
     if(!doc) {
 	asprintf(&accounts_file, "%s/%s/%s/%s", to_location,
 	    "home", to_user,
-	    ".gaim/accounts.xml");
+	    ".purple/accounts.xml");
 
 	create_file(accounts_file);
 	doc = xmlReadFile(accounts_file, NULL, opts);
@@ -41,7 +41,7 @@ void gaim_save_accounts_file(void) {
     char* accounts_file;
     asprintf(&accounts_file, "%s/%s/%s/%s", to_location,
 	    "home", to_user,
-	    ".gaim/accounts.xml");
+	    ".purple/accounts.xml");
     xmlSaveFormatFile(accounts_file, doc, 1);
 }
 
@@ -113,11 +113,21 @@ void gaim_import_gaim(void) {
 
     char* path;
     char* appdata = NULL;
+	FILE* fp;
 
-    if(os_type == LINUX)
-	asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
-		"home", from_user,
-		".gaim/accounts.xml");
+    if(os_type == LINUX) {
+		asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
+			"home", from_user,
+			".gaim/accounts.xml");
+		fp = fopen(accounts_file, "r");
+		if(fp == NULL) {
+			free(accounts_file);
+			asprintf(&accounts_file, "%s/%s/%s/%s", from_location,
+				"home", from_user,
+				".purple/accounts.xml");
+		} else
+			fclose(fp);
+	}
     else if(os_type == WINDOWSXP) {
         appdata = findkey(user_key_file, "\\Software\\Microsoft\\Windows\\"
             "CurrentVersion\\Explorer\\Shell Folders\\Local AppData");
@@ -129,6 +139,13 @@ void gaim_import_gaim(void) {
         free(appdata);
 	    asprintf(&accounts_file, "%s/%s/%s", from_location, path,
     		"/.gaim/accounts.xml");
+		fp = fopen(accounts_file, "r");
+		if(fp == NULL) {
+			free(accounts_file);
+			asprintf(&accounts_file, "%s/%s/%s", from_location, path,
+				"/.purple/accounts.xml");
+		} else
+			fclose(fp);
         free(path);
     }
     
