@@ -6,15 +6,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2008-03-06 15:51+0000\n"
-"PO-Revision-Date: 2008-01-29 01:33+0000\n"
-"Last-Translator: Zoran Olujic <olujicz@gmail.com>\n"
+"Report-Msgid-Bugs-To: Source: ubiquity@packages.debian.org\n"
+"POT-Creation-Date: 2008-04-10 04:12-0400\n"
+"PO-Revision-Date: 2008-03-18 16:54+0000\n"
+"Last-Translator: Љубиша Радовановић <prevod@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-02-28 18:10+0000\n"
+"X-Launchpad-Export-Date: 2008-04-08 07:57+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. Type: text
@@ -72,6 +72,9 @@ msgid ""
 "for this batch of systems. This name will be saved on the installed system "
 "and can be used to help with bug reports."
 msgstr ""
+"Инсталирате у моду произвођача система. Молим, унесите јединствено име за "
+"овај скуп система. Ово име ће бити сачувано на инсталираном систему и моћи "
+"ће се користити као помоћ при пријављивању грешака."
 
 #. Type: text
 #. Description
@@ -256,7 +259,7 @@ msgstr "Припреми партиције"
 #. Description
 #. Type: note
 #. Description
-#: ../ubiquity.templates:32001 ../ubiquity.templates:67001
+#: ../ubiquity.templates:32001 ../ubiquity.templates:79001
 #: ../ubiquity-frontend-mythbuntu.templates:1001
 msgid "Ready to install"
 msgstr "Спреман за инсталацију"
@@ -322,7 +325,7 @@ msgstr "Наставите користити live CD"
 #. Description
 #: ../ubiquity.templates:42001
 msgid "Restart now"
-msgstr "Изнова покрени рачунар"
+msgstr "Изнова покрените рачунар"
 
 #. Type: text
 #. Description
@@ -343,10 +346,112 @@ msgid ""
 "following detail in your bug report, and attach the files /var/log/syslog "
 "and /var/log/partman:"
 msgstr ""
+"Жао нам јеч Инсталација вам се срушила. Молим вас поднесит извештај о грешки "
+"на https://launchpad.net/ubuntu/+source/ubiquity/+filebug (не прилажите ваше "
+"детаље са постојећим грешкама) и програмер ће се позабавити са проблемом чим "
+"је то могуће. Да би помогли програмерима да боље разумеју шта није радило "
+"додајте следеће детаље у ваш извештај и приложите фајлове /var/log/syslog и /"
+"var/log/partman:"
 
 #. Type: text
 #. Description
+#. An action, displayed on a button or as a menu item.
 #: ../ubiquity.templates:46001
+#, fuzzy
+#| msgid "Create partition"
+msgid "New partition table"
+msgstr "Направи партицију"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#: ../ubiquity.templates:47001
+#, fuzzy
+#| msgid "Create partition"
+msgid "New partition"
+msgstr "Направи партицију"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#. Type: text
+#. Description
+#: ../ubiquity.templates:48001 ../ubiquity.templates:64001
+msgid "Edit partition"
+msgstr "Измени партицију"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#: ../ubiquity.templates:49001
+#, fuzzy
+#| msgid "Create partition"
+msgid "Delete partition"
+msgstr "Направи партицију"
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:50001
+msgid "Device"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner. Indicates how the partition is to be
+#. used (ext2, swap, etc.).
+#: ../ubiquity.templates:51001
+msgid "Type"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:52001
+msgid "Mount point"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:53001
+msgid "Format?"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:54001
+msgid "Size"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner. Indicates how much of the space on
+#. this partition is used by data.
+#: ../ubiquity.templates:55001
+msgid "Used"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Indicates unpartitioned free space on a disk.
+#: ../ubiquity.templates:56001
+#, fuzzy
+#| msgid "Prepare disk space"
+msgid "free space"
+msgstr "Припреми простор на диску"
+
+#. Type: text
+#. Description
+#. Indicates that we do not know how much space is used on this partition.
+#: ../ubiquity.templates:57001
+msgid "unknown"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:58001
 msgid "Create partition"
 msgstr "Направи партицију"
 
@@ -354,139 +459,125 @@ msgstr "Направи партицију"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:47001 ../ubiquity.templates:54001
+#: ../ubiquity.templates:59001 ../ubiquity.templates:66001
 msgid "New partition size in megabytes (1000000 bytes):"
 msgstr "Величина нове партиције у мегабајтима (1000000 бајта):"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:48001
+#: ../ubiquity.templates:60001
 msgid "Beginning"
 msgstr "Почетак"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:49001
+#: ../ubiquity.templates:61001
 msgid "End"
 msgstr "Крај"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:50001
+#: ../ubiquity.templates:62001
 msgid "Primary"
 msgstr "Примарна"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:51001
+#: ../ubiquity.templates:63001
 msgid "Logical"
 msgstr "Логичка"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:52001
-msgid "Edit partition"
-msgstr "Измени партицију"
-
-#. Type: text
-#. Description
-#: ../ubiquity.templates:53001
+#: ../ubiquity.templates:65001
 msgid "Edit a partition"
 msgstr "Измена партиције"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:55001
+#: ../ubiquity.templates:67001
 msgid "Advanced Options"
 msgstr "Напредне опције"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:56001
+#: ../ubiquity.templates:68001
 msgid "Boot loader"
 msgstr "Покретач система"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:57001
+#: ../ubiquity.templates:69001
 msgid "Install boot loader"
 msgstr "Инсталиран покретач система"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:58001
+#: ../ubiquity.templates:70001
 msgid "Popularity contest"
 msgstr "Такмичење у популарности"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:59001
+#: ../ubiquity.templates:71001
 msgid "Participate in the package usage survey"
 msgstr "Учествујте у анкети коришћења пакета"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:60001
+#: ../ubiquity.templates:72001
 msgid "Network proxy"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:61001
+#: ../ubiquity.templates:73001
 msgid "HTTP proxy:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:62001
+#: ../ubiquity.templates:74001
 msgid "Port:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:63001
+#: ../ubiquity.templates:75001
 msgid ""
 "Installation is complete. You need to restart the computer in order to use "
 "the new installation. You can continue to use this live CD, although any "
 "changes you make or documents you save will not be preserved."
 msgstr ""
 "Инсталација је завршена. Морате изнова покренути рачунар како бисте "
-"подигнули нови систем. Можете наставити користити овај Live CD, али промјене "
+"подигнули нови систем. Можете наставити користити овај Live CD, али промене "
 "које направите на документима, неће бити сачуване."
 
 #. Type: text
 #. Description
 #. Translators, this text will appear on a button, so KEEP IT SHORT
-#: ../ubiquity.templates:64001
+#: ../ubiquity.templates:76001
 msgid "Go Back"
 msgstr "Натраг"
 
 #. Type: text
 #. Description
 #. Translators, this text will appear on a button, so KEEP IT SHORT
-#: ../ubiquity.templates:65001
+#: ../ubiquity.templates:77001
 msgid "Continue"
 msgstr "Настави"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:66001
-#, fuzzy
-#| msgid ""
-#| "Installation is complete. You need to restart the computer in order to "
-#| "use the new installation. You can continue to use this live CD, although "
-#| "any changes you make or documents you save will not be preserved."
+#: ../ubiquity.templates:78001
 msgid ""
 "Installation is complete. You need to restart the computer in order to use "
 "the new installation."
 msgstr ""
-"Инсталација је завршена. Морате изнова покренути рачунар како бисте "
-"подигнули нови систем. Можете наставити користити овај Live CD, али промјене "
-"које направите на документима, неће бити сачуване."
 
 #. Type: note
 #. Description
-#: ../ubiquity.templates:67001
+#: ../ubiquity.templates:79001
 msgid ""
 " Language: ${LANGUAGE}\n"
 " Keyboard layout: ${KEYMAP}\n"
@@ -506,43 +597,43 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:68001
+#: ../ubiquity.templates:80001
 msgid "Checking the installation..."
 msgstr "Провера инсталације..."
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:69001
+#: ../ubiquity.templates:81001
 msgid "Installing system"
 msgstr "Инсталирам систем"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:70001
+#: ../ubiquity.templates:82001
 msgid "Finding the distribution to copy..."
-msgstr "Pronalazim distribuciju za kopiranje..."
+msgstr "Тражим дистрибуцију за пресликавање..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:72001
+#: ../ubiquity.templates:84001
 msgid "Scanning files..."
 msgstr "Претраживање датотека..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:73001
+#: ../ubiquity.templates:85001
 msgid "Copying files..."
-msgstr "Kopiram datoteke..."
+msgstr "Копирам датотеке..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:74001
+#: ../ubiquity.templates:86001
 msgid "Copying files (less than a minute remaining)..."
 msgstr "Копирање датотека (преостало је мање од једне минуте)..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001
+#: ../ubiquity.templates:87001
 msgid "Failed to copy files; out of disk space."
 msgstr ""
 
@@ -554,14 +645,14 @@ msgstr ""
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001 ../ubiquity.templates:76001
-#: ../ubiquity.templates:77001 ../ubiquity.templates:78001
+#: ../ubiquity.templates:87001 ../ubiquity.templates:88001
+#: ../ubiquity.templates:89001 ../ubiquity.templates:90001
 msgid "The installer encountered an error copying files to the hard disk:"
 msgstr "Инсталер је наишао на грешку током копирања датотека на хард диск."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001
+#: ../ubiquity.templates:87001
 msgid ""
 "This particular error is due to there being insufficient disk space for the "
 "install to complete on the target partition.  Please run the installer again "
@@ -570,13 +661,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:76001
+#: ../ubiquity.templates:88001
 msgid "Failed to copy files; faulty CD/DVD?"
 msgstr "Неуспех при копирању датотека; неисправан CD/DVD?"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:76001
+#: ../ubiquity.templates:88001
 msgid ""
 "This particular error is often due to a faulty CD/DVD disk or drive. It may "
 "help to clean the CD/DVD, to burn the CD/DVD at a lower speed, or to clean "
@@ -590,27 +681,27 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:77001
+#: ../ubiquity.templates:89001
 msgid "Failed to copy files; faulty hard disk?"
-msgstr "Неуспешно копирање датотека; оштећен хард диск?"
+msgstr "Неуспешно копирање датотека; да ли оштећен хард диск?"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:77001
+#: ../ubiquity.templates:89001
 msgid ""
 "This particular error is often due to a faulty hard disk. It may help to "
 "check whether the hard disk is old and in need of replacement, or to move "
 "the system to a cooler environment."
 msgstr ""
 "Ова грешка често настаје због неисправног хард диска. Може помоћи провера да "
-"ли је хард диск стар и треба замену, или премештање система у хладније "
+"ли је хард диск стар и треба замену или можда, премештање система у хладније "
 "окружење."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:78001
+#: ../ubiquity.templates:90001
 msgid "Failed to copy files; faulty CD/DVD or hard disk?"
-msgstr "Неуспешно копирање датотека; оштећен CD/DVD или хард диск?"
+msgstr "Неуспешно копирање датотека; Можда је оштећен CD/DVD или хард диск?"
 
 #. Type: error
 #. Description
@@ -618,7 +709,9 @@ msgstr "Неуспешно копирање датотека; оштећен CD/
 #. fault.
 #. Type: select
 #. Description
-#: ../ubiquity.templates:78001 ../ubiquity.templates:79001
+#. This is used when there was an md5 mismatch during copying, meaning that
+#. the source file and destination file are not equal.
+#: ../ubiquity.templates:90001 ../ubiquity.templates:91001
 msgid ""
 "This particular error is often due to a faulty CD/DVD disk or drive, or a "
 "faulty hard disk. It may help to clean the CD/DVD, to burn the CD/DVD at a "
@@ -634,157 +727,151 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../ubiquity.templates:79001
+#: ../ubiquity.templates:91001
 msgid "Failed to copy file; faulty CD/DVD or hard disk?"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../ubiquity.templates:79001
+#: ../ubiquity.templates:91001
 msgid "The following file did not match its source copy on the CD/DVD:"
 msgstr ""
 
-#. Type: select
-#. Description
-#: ../ubiquity.templates:79001
-msgid "${FILE}"
-msgstr ""
-
 #. Type: text
 #. Description
-#: ../ubiquity.templates:80001
+#: ../ubiquity.templates:92001
 msgid "Copying installation logs..."
-msgstr "Kopiram instalacione beleške..."
+msgstr "Копирам инсталационе белешке..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:81001
+#: ../ubiquity.templates:93001
 msgid "Configuring target system..."
 msgstr "Подешавање циљног система..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:82001
+#: ../ubiquity.templates:94001
 msgid "Configuring system locales..."
-msgstr "Конфигуришем локализације система"
+msgstr "Постављам локализирано сучеље..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001
+#: ../ubiquity.templates:95001
 msgid "Configuring apt..."
 msgstr "Подешавам apt..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:84001
+#: ../ubiquity.templates:96001
 msgid "Configuring time zone..."
 msgstr "Подешавам временску зону..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:85001
+#: ../ubiquity.templates:97001
 msgid "Configuring keyboard..."
 msgstr "Подешавам тастатуру..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:86001
+#: ../ubiquity.templates:98001
 msgid "Creating user..."
 msgstr "Стварам корисника..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:87001
+#: ../ubiquity.templates:99001
 msgid "Importing documents and settings..."
 msgstr "Уносим документа и подешавања..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:88001
+#: ../ubiquity.templates:100001
 msgid "Configuring hardware..."
 msgstr "Подешавам физичке компоненте..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:89001
+#: ../ubiquity.templates:101001
 msgid "Configuring network..."
 msgstr "Подешавам мрежу..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:90001
+#: ../ubiquity.templates:102001
 msgid "Setting computer name..."
 msgstr "Постављам име рачунара..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:91001
+#: ../ubiquity.templates:103001
 msgid "Configuring boot loader..."
-msgstr "Конфигуришем програм за подизање система..."
+msgstr "Подешавање boot управитеља..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:92001
+#: ../ubiquity.templates:104001
 msgid "Installing additional packages..."
 msgstr "Инсталирање додатних пакета..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:93001
+#: ../ubiquity.templates:105001
 msgid "Checking for packages to install..."
 msgstr "Провера пакета за инсталацију"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:94001
+#: ../ubiquity.templates:106001
 msgid "Removing extra packages..."
 msgstr "Уклањам додатне пакете..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:95001
+#: ../ubiquity.templates:107001
 msgid "Checking for packages to remove..."
 msgstr "Проверавам пакете за уклањање..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:96001
+#: ../ubiquity.templates:108001
 msgid "Downloading packages (${TIME} remaining)..."
 msgstr "Преузимам пакете (преостало време: ${TIME})..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:97001
+#: ../ubiquity.templates:109001
 msgid "Downloading package lists..."
 msgstr "Преузимам списак пакета..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:98001
+#: ../ubiquity.templates:110001
 msgid "Downloading package lists (${TIME} remaining)..."
 msgstr "Преузимам списак пакета (преостало време: ${TIME})..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:100001
+#: ../ubiquity.templates:112001
 msgid "Error installing ${PACKAGE}"
 msgstr "Грешка приликом инсталирања пакета ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:101001
+#: ../ubiquity.templates:113001
 msgid "Error removing ${PACKAGE}"
 msgstr "Грешка приликом уклањања пакета ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001
+#: ../ubiquity.templates:114001
 msgid "Error while installing packages"
 msgstr "Грешка у току инсталирања пакета"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001
+#: ../ubiquity.templates:114001
 msgid "An error occurred while installing packages:"
 msgstr "Грешка се догодила док су инсталирани пакети:"
 
@@ -792,7 +879,7 @@ msgstr "Грешка се догодила док су инсталирани п
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001 ../ubiquity.templates:103001
+#: ../ubiquity.templates:114001 ../ubiquity.templates:115001
 msgid "The following packages are in a broken state:"
 msgstr "Следећи пакети су у неповезаном стању:"
 
@@ -800,7 +887,7 @@ msgstr "Следећи пакети су у неповезаном стању:"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001 ../ubiquity.templates:103001
+#: ../ubiquity.templates:114001 ../ubiquity.templates:115001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
 "in some of the packages listed above. More details may be found in /var/log/"
@@ -810,40 +897,47 @@ msgid ""
 "versions of your installer image, or failing that report the problem to your "
 "distributor."
 msgstr ""
+"Ово може бити због коришћења старе инсталационе слике или може бити због "
+"грешке у неком од пакета наведених горе. Више детаља је доступно у /var/log/"
+"syslog. Инсталер ће покушати да настави упркос овоме, али може пасти касније "
+"и неће моћи да инсталира или уклони друге пакете (можда не и самога себе) са "
+"инсталираног система. Требало би да прво потражите новију верзију ваше "
+"инсталационе слике или, ако не успете у томе, да пријавите проблем вашем "
+"дистрибутору."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:103001
+#: ../ubiquity.templates:115001
 msgid "Error while removing packages"
 msgstr "Грешка при уклањању пакета"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:103001
+#: ../ubiquity.templates:115001
 msgid "An error occurred while removing packages:"
 msgstr "Дошло је до грешке приликом уклањања пакета:"
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:105001
+#: ../ubiquity.templates:117001
 msgid "Installing language packs"
 msgstr "Инсталирам језичке пакете"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:106001
+#: ../ubiquity.templates:118001
 msgid "Downloading language packs (${TIME} remaining)..."
 msgstr "Преузимам језичке пакете (преостало време: ${TIME})..."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Failed to unmount partitions"
 msgstr "Грешка у качењу партиција"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid ""
 "The installer needs to commit changes to partition tables, but cannot do so "
 "because partitions on the following mount points could not be unmounted:"
@@ -853,13 +947,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Please close any applications using these mount points."
 msgstr "Молимо вас да искључите програме који користе ове прикључне тачке."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Да ли желите да програм за инсталацију још једном проба да искључи ове "
@@ -869,13 +963,13 @@ msgstr ""
 #. Description
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:112001 ../ubiquity.templates:118001
+#: ../ubiquity.templates:124001 ../ubiquity.templates:130001
 msgid "Do you want to return to the partitioner?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:112001
+#: ../ubiquity.templates:124001
 msgid ""
 "The file system on ${PARTITION} assigned to ${MOUNTPOINT} has not been "
 "marked for formatting.  Directories containing system files (/boot, /etc, /"
@@ -885,7 +979,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:118001
+#: ../ubiquity.templates:130001
 msgid ""
 "Some of the partitions you created are too small.  Please make the following "
 "partitions at least this large (in bytes):"
@@ -893,7 +987,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:118001
+#: ../ubiquity.templates:130001
 msgid ""
 "If you do not go back to the partitioner and increase the size of these "
 "partitions, the installation may fail."
@@ -1014,6 +1108,9 @@ msgid ""
 "MythTV for HTPC applications. This type of installation is intended for use "
 "as a component in your home theatre."
 msgstr ""
+"Комбиновани бекенд/фронтенд је најуобичајенији сетап за оне који желе MythTV "
+"за HTPC апликације. Овај тип инсталације је намењен за употребу као "
+"компонента у вашем систему куђног театра."
 
 #. Type: text
 #. Description
@@ -1035,7 +1132,7 @@ msgstr ""
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:15001
 msgid "Primary Backend"
-msgstr ""
+msgstr "Примарни бекенд"
 
 #. Type: text
 #. Description
@@ -1045,12 +1142,15 @@ msgid ""
 "requiring very little maintenance.  This is intended to be installed as the "
 "first backend on a network."
 msgstr ""
+"Машина која садржи само бекенд компоненту система је типично дизајнирана да "
+"функционише као специјализован уређај; захтева врло мало одржавања. Намењена "
+"је да буде инсталирана као први бекенд на мрежи."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:17001
 msgid "Secondary Backend"
-msgstr ""
+msgstr "Секундарни бекенд"
 
 #. Type: text
 #. Description
@@ -1059,6 +1159,8 @@ msgid ""
 "This will set up a system similar to a Primary Backend, however it will be "
 "configured to connect to an existing backend on the network."
 msgstr ""
+"Ово ће поставити систем сличан примарном бекенду, али ће бити конфигурисана "
+"тако да се качи на постојећи бекенд на мрежи."
 
 #. Type: text
 #. Description
@@ -1074,12 +1176,15 @@ msgid ""
 "backend and distribute it.  This configuration requires an existing backend "
 "on the network."
 msgstr ""
+"Главна функција машине која ради само као фронтенд је да прима медијски "
+"садржај од бекенда и дистрибуира га. Ова конфигурација захтева постојећи "
+"бекенд на мрежи."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:21001
 msgid "Choose Frontend / Backend Plugins"
-msgstr ""
+msgstr "Одаберите фронтенд / бекенд додатке"
 
 #. Type: text
 #. Description
@@ -1088,6 +1193,8 @@ msgid ""
 "Plugins can be used to extend MythTV functionality beyond a time shifting TV "
 "solution."
 msgstr ""
+"Додаци се могу користити да би проширили функционалност MythTV у односу на "
+"стандардно решење ТВ временског померања."
 
 #. Type: text
 #. Description
@@ -1181,7 +1288,7 @@ msgstr "Myth телефон"
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:37001
 msgid "Myth Stream"
-msgstr ""
+msgstr "Миф Стрим"
 
 #. Type: text
 #. Description
@@ -1209,7 +1316,7 @@ msgstr ""
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:41001
 msgid "An integrated web browser plugin for your MythTV system."
-msgstr ""
+msgstr "Интегрисани додатак за Ваш веб прегледник за Миф стрим систем."
 
 #. Type: text
 #. Description
@@ -1218,6 +1325,8 @@ msgid ""
 "External controls for MythTV. This will allow you to modify button mappings "
 "and key bindings."
 msgstr ""
+"Спољне контроле за MythTV.  Оне вам дају могућност мењања функционалности "
+"типки и пречица на тастатури."
 
 #. Type: text
 #. Description
@@ -1248,7 +1357,7 @@ msgstr "Сучеље за покретање емулатора или бина�
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:47001
 msgid "Provides a digital audio jukebox integrated with MythTV."
-msgstr ""
+msgstr "Омогућава дигитални аудио џубокс интегрисан са MythTV."
 
 #. Type: text
 #. Description
@@ -1257,6 +1366,8 @@ msgid ""
 "An RSS feed news reader plugin for MythTV that keeps you up-to-date on your "
 "favorite news topics."
 msgstr ""
+"Додатак за RSS читач вести за MythTV који вам омогућава да будете у току са "
+"вашим омиљеним вестима."
 
 #. Type: text
 #. Description
@@ -1264,12 +1375,14 @@ msgstr ""
 msgid ""
 "A phone and videophone capability on MythTV using the standard SIP protocol."
 msgstr ""
+"Могућност телефонирања и видео-телефонирања у MythTV користећи стандардан "
+"SIP протокол."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:50001
 msgid "Provides a method to listen to streaming internet radio stations."
-msgstr ""
+msgstr "Омогућава слушање интернет радио станица."
 
 #. Type: text
 #. Description
@@ -1278,6 +1391,8 @@ msgid ""
 "Allows you to browse and play video streams, using an external player, from "
 "within the MythTV interface."
 msgstr ""
+"Омогућава вам да прегледате и пуштате видео записе користећи екстерни плејер "
+"унутар MythTV корисничког интерфејса."
 
 #. Type: text
 #. Description

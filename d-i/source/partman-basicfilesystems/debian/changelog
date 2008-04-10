@@ -1,3 +1,11 @@
+partman-basicfilesystems (56ubuntu4) hardy; urgency=low
+
+  * Disable automounting unless partman/automount is preseeded to true. This
+    makes LP #106209 much less likely to occur, since future installations
+    are less likely to format a partition whose UUID we have in /etc/fstab.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 09 Apr 2008 08:18:47 +0100
+
 partman-basicfilesystems (56ubuntu3) hardy; urgency=low
 
   * Add Choices-C entries for mount options.

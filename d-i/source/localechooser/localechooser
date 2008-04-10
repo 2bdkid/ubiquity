@@ -340,7 +340,14 @@ else
 	:
 fi
 
-[ -f /etc/lsb-release ] && . /etc/lsb-release
+X_INSTALLATION_MEDIUM=
+if [ -f /etc/lsb-release ]; then
+	lsb_extract () {
+		grep "^$1=" /etc/lsb-release | \
+			sed 's/^[^=]*=//; s/^"//; s/"$//'
+	}
+	X_INSTALLATION_MEDIUM="$(lsb_extract X_INSTALLATION_MEDIUM)"
+fi
 if [ "$X_INSTALLATION_MEDIUM" = "floppy" ] && [ $LANGUAGE != en ]; then
 	db_input high localechooser/no-translations-yet || true
 	db_go || true

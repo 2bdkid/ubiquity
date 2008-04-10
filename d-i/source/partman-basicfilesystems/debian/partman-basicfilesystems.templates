@@ -240,3 +240,9 @@ Choices-C: ro, sync, quiet
 __Choices: ro - mount the file system read-only, sync - all input/output activities occur synchronously, quiet - changing owner and permissions does not return errors
 _Description: Mount options:
  Mount options can tune the behavior of the file system.
+
+Template: partman/automount
+Type: boolean
+Default: false
+Description: for internal use; can be preseeded
+ Set to true to automount interesting-looking partitions under /media.

@@ -8,15 +8,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2008-03-06 15:51+0000\n"
+"Report-Msgid-Bugs-To: Source: ubiquity@packages.debian.org\n"
+"POT-Creation-Date: 2008-04-10 04:12-0400\n"
 "PO-Revision-Date: 2007-11-05 17:23+0000\n"
 "Last-Translator: Yannig MARCHEGAY (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (post 1500) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2008-02-28 18:10+0000\n"
+"X-Launchpad-Export-Date: 2008-04-08 07:59+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. Type: text
@@ -74,6 +74,9 @@ msgid ""
 "for this batch of systems. This name will be saved on the installed system "
 "and can be used to help with bug reports."
 msgstr ""
+"Efectuatz l'installacion en mòde revendeire informatic. Picatz un nom unic "
+"per aqueste lòt de sistèmas. Aqueste nom serà salvagardat sul sistèma "
+"installat e poirà èsser utilizat pels rapòrts d'anomalias."
 
 #. Type: text
 #. Description
@@ -265,7 +268,7 @@ msgstr "Preparar las particions"
 #. Description
 #. Type: note
 #. Description
-#: ../ubiquity.templates:32001 ../ubiquity.templates:67001
+#: ../ubiquity.templates:32001 ../ubiquity.templates:79001
 #: ../ubiquity-frontend-mythbuntu.templates:1001
 msgid "Ready to install"
 msgstr "Prèst a installar"
@@ -340,7 +343,7 @@ msgstr "Tornar aviar ara"
 #. Description
 #: ../ubiquity.templates:43001 ../ubiquity.templates:44001
 msgid "Installer crashed"
-msgstr ""
+msgstr "L'installaire a rencontrat una error"
 
 #. Type: text
 #. Description
@@ -353,10 +356,112 @@ msgid ""
 "following detail in your bug report, and attach the files /var/log/syslog "
 "and /var/log/partman:"
 msgstr ""
+"O planhèm, l'installaire a rencontrat una error. Senhalatz aqueste bòg sus "
+"https://launchpad.net/ubuntu/+source/ubiquity/+filebug (ajustetz pas vòstras "
+"entresenhas a un bòg existent) e un desvolopaire s'ocuparà del problèma lo "
+"mai lèu possible. Per ajudar lo desvolopaire a compréner lo problèma, "
+"incluissetz las entresenhas seguentas dins vòstre rapòrt e ligatz los "
+"fichièrs /var/log/syslog e /var/log/partma :"
 
 #. Type: text
 #. Description
+#. An action, displayed on a button or as a menu item.
 #: ../ubiquity.templates:46001
+#, fuzzy
+#| msgid "Create partition"
+msgid "New partition table"
+msgstr "Crear una particion"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#: ../ubiquity.templates:47001
+#, fuzzy
+#| msgid "Create partition"
+msgid "New partition"
+msgstr "Crear una particion"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#. Type: text
+#. Description
+#: ../ubiquity.templates:48001 ../ubiquity.templates:64001
+msgid "Edit partition"
+msgstr "Modificar la particion"
+
+#. Type: text
+#. Description
+#. An action, displayed on a button or as a menu item.
+#: ../ubiquity.templates:49001
+#, fuzzy
+#| msgid "Create partition"
+msgid "Delete partition"
+msgstr "Crear una particion"
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:50001
+msgid "Device"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner. Indicates how the partition is to be
+#. used (ext2, swap, etc.).
+#: ../ubiquity.templates:51001
+msgid "Type"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:52001
+msgid "Mount point"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:53001
+msgid "Format?"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner.
+#: ../ubiquity.templates:54001
+msgid "Size"
+msgstr ""
+
+#. Type: text
+#. Description
+#. A column heading in the partitioner. Indicates how much of the space on
+#. this partition is used by data.
+#: ../ubiquity.templates:55001
+msgid "Used"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Indicates unpartitioned free space on a disk.
+#: ../ubiquity.templates:56001
+#, fuzzy
+#| msgid "Prepare disk space"
+msgid "free space"
+msgstr "Preparar l'espaci del disc"
+
+#. Type: text
+#. Description
+#. Indicates that we do not know how much space is used on this partition.
+#: ../ubiquity.templates:57001
+msgid "unknown"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:58001
 msgid "Create partition"
 msgstr "Crear una particion"
 
@@ -364,97 +469,91 @@ msgstr "Crear una particion"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:47001 ../ubiquity.templates:54001
+#: ../ubiquity.templates:59001 ../ubiquity.templates:66001
 msgid "New partition size in megabytes (1000000 bytes):"
 msgstr "Talha de la particion novèla en Mo (1 000 000 octets)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:48001
+#: ../ubiquity.templates:60001
 msgid "Beginning"
 msgstr "Debuta"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:49001
+#: ../ubiquity.templates:61001
 msgid "End"
 msgstr "Fin"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:50001
+#: ../ubiquity.templates:62001
 msgid "Primary"
 msgstr "Primari"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:51001
+#: ../ubiquity.templates:63001
 msgid "Logical"
 msgstr "Logic"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:52001
-msgid "Edit partition"
-msgstr "Modificar la particion"
-
-#. Type: text
-#. Description
-#: ../ubiquity.templates:53001
+#: ../ubiquity.templates:65001
 msgid "Edit a partition"
 msgstr "Modificar una particion"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:55001
+#: ../ubiquity.templates:67001
 msgid "Advanced Options"
 msgstr "Opcions avançadas"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:56001
+#: ../ubiquity.templates:68001
 msgid "Boot loader"
 msgstr "Gestionari d'aviada"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:57001
+#: ../ubiquity.templates:69001
 msgid "Install boot loader"
 msgstr "Installar lo gestionari d'aviada"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:58001
+#: ../ubiquity.templates:70001
 msgid "Popularity contest"
 msgstr "Concors de popularitat"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:59001
+#: ../ubiquity.templates:71001
 msgid "Participate in the package usage survey"
-msgstr ""
+msgstr "Concors de popularitat"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:60001
+#: ../ubiquity.templates:72001
 msgid "Network proxy"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:61001
+#: ../ubiquity.templates:73001
 msgid "HTTP proxy:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:62001
+#: ../ubiquity.templates:74001
 msgid "Port:"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:63001
+#: ../ubiquity.templates:75001
 msgid ""
 "Installation is complete. You need to restart the computer in order to use "
 "the new installation. You can continue to use this live CD, although any "
@@ -467,36 +566,28 @@ msgstr ""
 #. Type: text
 #. Description
 #. Translators, this text will appear on a button, so KEEP IT SHORT
-#: ../ubiquity.templates:64001
+#: ../ubiquity.templates:76001
 msgid "Go Back"
 msgstr "Tornar"
 
 #. Type: text
 #. Description
 #. Translators, this text will appear on a button, so KEEP IT SHORT
-#: ../ubiquity.templates:65001
+#: ../ubiquity.templates:77001
 msgid "Continue"
 msgstr "Contunhar"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:66001
-#, fuzzy
-#| msgid ""
-#| "Installation is complete. You need to restart the computer in order to "
-#| "use the new installation. You can continue to use this live CD, although "
-#| "any changes you make or documents you save will not be preserved."
+#: ../ubiquity.templates:78001
 msgid ""
 "Installation is complete. You need to restart the computer in order to use "
 "the new installation."
 msgstr ""
-"L'installacion es terminada. Debètz tornar aviar l'ordenador per utilisar lo "
-"sistèma nòu. Podètz contunhar a utilisar lo live CD mas los cambis que "
-"farètz o los fichièrs qu'enregistrarètz seràn pas conservats."
 
 #. Type: note
 #. Description
-#: ../ubiquity.templates:67001
+#: ../ubiquity.templates:79001
 msgid ""
 " Language: ${LANGUAGE}\n"
 " Keyboard layout: ${KEYMAP}\n"
@@ -516,43 +607,43 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:68001
+#: ../ubiquity.templates:80001
 msgid "Checking the installation..."
 msgstr "Verificacion de l'installacion..."
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:69001
+#: ../ubiquity.templates:81001
 msgid "Installing system"
 msgstr "Installacion del sistèma"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:70001
+#: ../ubiquity.templates:82001
 msgid "Finding the distribution to copy..."
 msgstr "Recèrca de la distribucion de copiar..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:72001
+#: ../ubiquity.templates:84001
 msgid "Scanning files..."
 msgstr "Examèn dels fichièrs..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:73001
+#: ../ubiquity.templates:85001
 msgid "Copying files..."
 msgstr "Còpia dels fichièrs..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:74001
+#: ../ubiquity.templates:86001
 msgid "Copying files (less than a minute remaining)..."
 msgstr "Còpia de fichièrs (mens d'una minuta restanta)..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001
+#: ../ubiquity.templates:87001
 msgid "Failed to copy files; out of disk space."
 msgstr ""
 
@@ -564,8 +655,8 @@ msgstr ""
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001 ../ubiquity.templates:76001
-#: ../ubiquity.templates:77001 ../ubiquity.templates:78001
+#: ../ubiquity.templates:87001 ../ubiquity.templates:88001
+#: ../ubiquity.templates:89001 ../ubiquity.templates:90001
 msgid "The installer encountered an error copying files to the hard disk:"
 msgstr ""
 "Lo programa d'installacion a encontrat una error al moment de copiar de "
@@ -573,7 +664,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:75001
+#: ../ubiquity.templates:87001
 msgid ""
 "This particular error is due to there being insufficient disk space for the "
 "install to complete on the target partition.  Please run the installer again "
@@ -582,13 +673,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:76001
+#: ../ubiquity.templates:88001
 msgid "Failed to copy files; faulty CD/DVD?"
 msgstr "Impossible de copiar los fichièrs ; CD/DVD defectuós ?"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:76001
+#: ../ubiquity.templates:88001
 msgid ""
 "This particular error is often due to a faulty CD/DVD disk or drive. It may "
 "help to clean the CD/DVD, to burn the CD/DVD at a lower speed, or to clean "
@@ -602,13 +693,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:77001
+#: ../ubiquity.templates:89001
 msgid "Failed to copy files; faulty hard disk?"
 msgstr "Impossible de copiar los fichièrs ; disc dur defectuós ?"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:77001
+#: ../ubiquity.templates:89001
 msgid ""
 "This particular error is often due to a faulty hard disk. It may help to "
 "check whether the hard disk is old and in need of replacement, or to move "
@@ -620,7 +711,7 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:78001
+#: ../ubiquity.templates:90001
 msgid "Failed to copy files; faulty CD/DVD or hard disk?"
 msgstr "Impossible de copiar los fichièrs ; CD/DVD o disc dur defectuós ?"
 
@@ -630,7 +721,9 @@ msgstr "Impossible de copiar los fichièrs ; CD/DVD o disc dur defectuós ?"
 #. fault.
 #. Type: select
 #. Description
-#: ../ubiquity.templates:78001 ../ubiquity.templates:79001
+#. This is used when there was an md5 mismatch during copying, meaning that
+#. the source file and destination file are not equal.
+#: ../ubiquity.templates:90001 ../ubiquity.templates:91001
 msgid ""
 "This particular error is often due to a faulty CD/DVD disk or drive, or a "
 "faulty hard disk. It may help to clean the CD/DVD, to burn the CD/DVD at a "
@@ -646,157 +739,151 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../ubiquity.templates:79001
+#: ../ubiquity.templates:91001
 msgid "Failed to copy file; faulty CD/DVD or hard disk?"
 msgstr ""
 
 #. Type: select
 #. Description
-#: ../ubiquity.templates:79001
+#: ../ubiquity.templates:91001
 msgid "The following file did not match its source copy on the CD/DVD:"
-msgstr ""
-
-#. Type: select
-#. Description
-#: ../ubiquity.templates:79001
-msgid "${FILE}"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:80001
+#: ../ubiquity.templates:92001
 msgid "Copying installation logs..."
 msgstr "Còpia dels fichièrs jornal de l'installacion..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:81001
+#: ../ubiquity.templates:93001
 msgid "Configuring target system..."
 msgstr "Configuracion del sistèma de destinacion..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:82001
+#: ../ubiquity.templates:94001
 msgid "Configuring system locales..."
 msgstr "Configuracion dels paramètres regionales del sistèma"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001
+#: ../ubiquity.templates:95001
 msgid "Configuring apt..."
 msgstr "Configuracion d'apt..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:84001
+#: ../ubiquity.templates:96001
 msgid "Configuring time zone..."
 msgstr "Configuracion del fus orari..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:85001
+#: ../ubiquity.templates:97001
 msgid "Configuring keyboard..."
 msgstr "Configuracion del clavièr..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:86001
+#: ../ubiquity.templates:98001
 msgid "Creating user..."
 msgstr "Creacion d'un utilizaire..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:87001
+#: ../ubiquity.templates:99001
 msgid "Importing documents and settings..."
 msgstr "Importacion de documents e de paramètres..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:88001
+#: ../ubiquity.templates:100001
 msgid "Configuring hardware..."
 msgstr "Configuracion del material..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:89001
+#: ../ubiquity.templates:101001
 msgid "Configuring network..."
 msgstr "Configuracion de la ret..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:90001
+#: ../ubiquity.templates:102001
 msgid "Setting computer name..."
 msgstr "Definicion del nom de l'ordenador..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:91001
+#: ../ubiquity.templates:103001
 msgid "Configuring boot loader..."
 msgstr "Configuracion del gestionari d'aviada..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:92001
+#: ../ubiquity.templates:104001
 msgid "Installing additional packages..."
 msgstr "Installacion de paquetatges suplementaris..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:93001
+#: ../ubiquity.templates:105001
 msgid "Checking for packages to install..."
 msgstr "Verificacion dels paquetatges d'installar..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:94001
+#: ../ubiquity.templates:106001
 msgid "Removing extra packages..."
 msgstr "Supression dels paquetatges suplementaris..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:95001
+#: ../ubiquity.templates:107001
 msgid "Checking for packages to remove..."
 msgstr "Verificacion dels paquetatges de suprimir..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:96001
+#: ../ubiquity.templates:108001
 msgid "Downloading packages (${TIME} remaining)..."
 msgstr "Telecarga dels paquetatges (resta ${TIME})..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:97001
+#: ../ubiquity.templates:109001
 msgid "Downloading package lists..."
 msgstr "Telecarga de las tièras de paquetatges"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:98001
+#: ../ubiquity.templates:110001
 msgid "Downloading package lists (${TIME} remaining)..."
 msgstr "Telecarga de las tièras de paquetatges (resta ${TIME})..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:100001
+#: ../ubiquity.templates:112001
 msgid "Error installing ${PACKAGE}"
 msgstr "Error al moment d'installar ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:101001
+#: ../ubiquity.templates:113001
 msgid "Error removing ${PACKAGE}"
 msgstr "Error al moment de suprimir ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001
+#: ../ubiquity.templates:114001
 msgid "Error while installing packages"
 msgstr "Error al moment d'installar de paquetatges"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001
+#: ../ubiquity.templates:114001
 msgid "An error occurred while installing packages:"
 msgstr "I a agut una error al moment d'installar de paquetatges :"
 
@@ -804,7 +891,7 @@ msgstr "I a agut una error al moment d'installar de paquetatges :"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001 ../ubiquity.templates:103001
+#: ../ubiquity.templates:114001 ../ubiquity.templates:115001
 msgid "The following packages are in a broken state:"
 msgstr "Los paquetatges seguents son corromputs :"
 
@@ -812,7 +899,7 @@ msgstr "Los paquetatges seguents son corromputs :"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:102001 ../ubiquity.templates:103001
+#: ../ubiquity.templates:114001 ../ubiquity.templates:115001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
 "in some of the packages listed above. More details may be found in /var/log/"
@@ -822,40 +909,47 @@ msgid ""
 "versions of your installer image, or failing that report the problem to your "
 "distributor."
 msgstr ""
+"Aquò pòt èsser degut a l'utilizacion d'un imatge ancian de l'installaire, o "
+"alara a un bòg dins d'unes paquets listats çaijós. De detalhs mai amples se "
+"pòdon trobar dins /var/log/syslog. L'installaire va ensajar de perseguir "
+"malgrat tot, mas pòt fracassar a una etapa ulteriora, e poirà pas installar "
+"o suprimir d'autres paquets (i compres ele-meteis probablament) del sistèma "
+"installat. Deuriatz, d'en primièr, cercar de versions novèlas de l'imatge de "
+"l'installaire, o se s'escai, senhalar aqueste problèma a vòstre revendeire."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:103001
+#: ../ubiquity.templates:115001
 msgid "Error while removing packages"
 msgstr "Error al moment de desinstallar de paquetatges"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:103001
+#: ../ubiquity.templates:115001
 msgid "An error occurred while removing packages:"
 msgstr "I a agut una error al moment de suprimir de paquetatges :"
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:105001
+#: ../ubiquity.templates:117001
 msgid "Installing language packs"
 msgstr "Installacion dels paquetatges de lenga"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:106001
+#: ../ubiquity.templates:118001
 msgid "Downloading language packs (${TIME} remaining)..."
 msgstr "Telecarga dels paquetatges de lenga (demòran ${TIME})..."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Failed to unmount partitions"
 msgstr "Impossible de desmontar particions"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid ""
 "The installer needs to commit changes to partition tables, but cannot do so "
 "because partitions on the following mount points could not be unmounted:"
@@ -866,7 +960,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Please close any applications using these mount points."
 msgstr ""
 "Se vos plai, tampatz las aplicacions qu'utilisan aquestes punches de "
@@ -874,7 +968,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:111001
+#: ../ubiquity.templates:123001
 msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Volgatz que lo programa d'installacion ensage un còp de mai lo desmontatge "
@@ -884,13 +978,13 @@ msgstr ""
 #. Description
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:112001 ../ubiquity.templates:118001
+#: ../ubiquity.templates:124001 ../ubiquity.templates:130001
 msgid "Do you want to return to the partitioner?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:112001
+#: ../ubiquity.templates:124001
 msgid ""
 "The file system on ${PARTITION} assigned to ${MOUNTPOINT} has not been "
 "marked for formatting.  Directories containing system files (/boot, /etc, /"
@@ -900,7 +994,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:118001
+#: ../ubiquity.templates:130001
 msgid ""
 "Some of the partitions you created are too small.  Please make the following "
 "partitions at least this large (in bytes):"
@@ -908,7 +1002,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:118001
+#: ../ubiquity.templates:130001
 msgid ""
 "If you do not go back to the partitioner and increase the size of these "
 "partitions, the installation may fail."
@@ -935,6 +1029,22 @@ msgid ""
 "     Regular Login name: ${USERNAME}\n"
 "     Location:           ${LOCATION}"
 msgstr ""
+" Tipe d'installacion[nbsp ]: ${INSTALLTYPE}\n"
+" Pilòts :\n"
+"     Pilòt vidèo suplementar : ${VIDEO_DRIVER}\n"
+"         Sortida TV : ${TVOUT}, ${TVSTANDARD}\n"
+" Servicis suplementaris :\n"
+"     VNC : ${EN_VNC}\n"
+"     SSH : ${EN_OPENSSH}\n"
+"     Samba : ${EN_SAMBA}\n"
+"     NFS : ${EN_NFS}\n"
+"     Servici MythTV : ${EN_MYSQL}\n"
+" Questions per l'installacion Ubuntu estandarda :\n"
+"     Lenga : ${LANGUAGE}\n"
+"     Disposicion del clavièr : ${KEYMAP}\n"
+"     Nom : ${FULLNAME}\n"
+"     Identificant de connexion : ${USERNAME}\n"
+"     Emplaçament : ${LOCATION}"
 
 #. Type: text
 #. Description
@@ -962,6 +1072,9 @@ msgid ""
 "user interaction. This will install a backend, frontend, all plugins, and "
 "all themes."
 msgstr ""
+"Una installacion estandarda installarà e configurarà totas las opcions amb "
+"un minimom d'intervencion de l'utilizaire. Aquò installarà lo motor de "
+"tractament, l'interfàcia, totes los ensèrts e totes los tèmas."
 
 #. Type: text
 #. Description
@@ -977,6 +1090,9 @@ msgid ""
 "Mythbuntu install. NOTE: An advanced install is necessary to add a Mythbuntu "
 "machine to an existing MythTV based network."
 msgstr ""
+"Una installacion avançada pòt èsser utilizada per personalizar çò qu'es "
+"necessari a aquesta installacion de Mythbuntu. Una installacion avançada es "
+"necessària per ajustar una maquina MythBuntu a una ret basada sus MythTV."
 
 #. Type: text
 #. Description
@@ -997,7 +1113,7 @@ msgstr "Quina mena de sistèma serà ?"
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:11001
 msgid "Primary Backend w/ Frontend"
-msgstr ""
+msgstr "Maquina primària combinant motor de tractament e interfàcia"
 
 #. Type: text
 #. Description
@@ -1007,12 +1123,16 @@ msgid ""
 "MythTV for HTPC applications. This type of installation is intended for use "
 "as a component in your home theatre."
 msgstr ""
+"Una maquina combinant motor de tractament e interfàcia es la configuracion "
+"mai correnta per las personas desirant utilizar MythTV per las aplicacions "
+"HTPC. Aqueste tipe d'installacion es previst per utilizar en tant que "
+"compausant de vòstre « home cinèma »."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:13001
 msgid "Secondary Backend w/ Frontend"
-msgstr ""
+msgstr "Maquina segondària combinant motor de tractament e interfàcia"
 
 #. Type: text
 #. Description
@@ -1021,12 +1141,15 @@ msgid ""
 "This will set up a system similar to a Primary Backend w/ Frontend, however "
 "will be configured to connect to an existing backend on the network."
 msgstr ""
+"Lo sistèma serà configurat d'un biais similar a una maquina primària "
+"combinant motor de tractament e interfàcia, çaquelà serà configurat per se "
+"connectar a un motor de tractament existent sus la ret."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:15001
 msgid "Primary Backend"
-msgstr ""
+msgstr "Maquina primària de tractament"
 
 #. Type: text
 #. Description
@@ -1036,12 +1159,16 @@ msgid ""
 "requiring very little maintenance.  This is intended to be installed as the "
 "first backend on a network."
 msgstr ""
+"Una maquina contenent unicament lo motor de tractament es concebuda per se "
+"comportar coma un serveire aplicatiu ; necessitant fòrt pauc de mantenença. "
+"Es prevista per èsser installada en tant que motor de tractament primari sus "
+"la ret"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:17001
 msgid "Secondary Backend"
-msgstr ""
+msgstr "Maquina segondària de tractament"
 
 #. Type: text
 #. Description
@@ -1050,12 +1177,15 @@ msgid ""
 "This will set up a system similar to a Primary Backend, however it will be "
 "configured to connect to an existing backend on the network."
 msgstr ""
+"Lo sistèma serà configurat d'un biais similar a un motor de tractament "
+"primari, çaquelà serà configurat per se connectar a un motor de tractament "
+"existent sus la ret."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:19001
 msgid "Frontend"
-msgstr ""
+msgstr "Maquina servent unicament d'interfàcia"
 
 #. Type: text
 #. Description
@@ -1065,12 +1195,16 @@ msgid ""
 "backend and distribute it.  This configuration requires an existing backend "
 "on the network."
 msgstr ""
+"La foncion principala d'una maquina servent unicament d'interfàcia, es de "
+"recebre los contenguts multimèdia del motor de tractament e de los "
+"distribuir. Aquesta configuracion necessita un motor de tractament existent "
+"sus la ret."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:21001
 msgid "Choose Frontend / Backend Plugins"
-msgstr ""
+msgstr "Causir los ensèrts per l'interfàcia/motor de tractament"
 
 #. Type: text
 #. Description
@@ -1079,18 +1213,20 @@ msgid ""
 "Plugins can be used to extend MythTV functionality beyond a time shifting TV "
 "solution."
 msgstr ""
+"D'ensèrtss pòdon èsser utilizats per espandir las foncionalitats de MythTV "
+"al delà de la foncion de « dirècte en diferit » (Time Shifting)."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:23001
 msgid "Backend Plugins"
-msgstr ""
+msgstr "Ensèrts pel motor de tractament"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:24001
 msgid "Frontend Plugins"
-msgstr ""
+msgstr "Ensèrts per l'interfàcia"
 
 #. Type: text
 #. Description
@@ -1105,24 +1241,27 @@ msgid ""
 "MythWeb provides a web interface which can be used to view listings, "
 "schedule recordings, delete recordings, and search for programs."
 msgstr ""
+"MythWeb prepausa una interfàcia Web que permet de veire de listas, de "
+"programar d'enregistraments, suprimir d'enregistraments, e de cercar de "
+"programas."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:27001
 msgid "Myth Archive"
-msgstr ""
+msgstr "Archiu Myth"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:28001
 msgid "Myth Browser"
-msgstr ""
+msgstr "Navegaire Myth"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:29001
 msgid "Myth Controls"
-msgstr ""
+msgstr "Contraròtles Myth"
 
 #. Type: text
 #. Description
@@ -1164,7 +1303,7 @@ msgstr "Novèlas Myth"
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:36001
 msgid "Myth Phone"
-msgstr ""
+msgstr "Telèfon Myth"
 
 #. Type: text
 #. Description
@@ -1176,13 +1315,13 @@ msgstr "Flus Myth"
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:38001
 msgid "Myth Video"
-msgstr ""
+msgstr "Vidèo Myth"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:39001
 msgid "Myth Weather"
-msgstr ""
+msgstr "Meteo Myth"
 
 #. Type: text
 #. Description
@@ -1191,12 +1330,14 @@ msgid ""
 "A plugin for MythTV that lets you create DVDs from content on your MythTV "
 "Network."
 msgstr ""
+"Un ensèrt per MythTV que vos permet de crear de DVD à partir du contenu "
+"présent sur votre réseau MythTV."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:41001
 msgid "An integrated web browser plugin for your MythTV system."
-msgstr ""
+msgstr "Un navegaire Web integrat per vòstre sistèma MythTV."
 
 #. Type: text
 #. Description
@@ -1205,6 +1346,8 @@ msgid ""
 "External controls for MythTV. This will allow you to modify button mappings "
 "and key bindings."
 msgstr ""
+"Contraròtles extèrnes per MythTV. Aquò vos permetrà de modificar los botons "
+"e acorchis de clavièr."
 
 #. Type: text
 #. Description
@@ -1216,25 +1359,28 @@ msgstr ""
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:44001
 msgid "Allows you to monitor your Netflix dvd rental queue."
-msgstr ""
+msgstr "Vos permet de susvelhar vòstra lista de locacion de DVD Netfix"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:45001
 msgid "Allows you to visually browse a directory tree containing image files."
 msgstr ""
+"Vos permet de navegar visualament dins un repertòri contenent d'imatges."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:46001
 msgid "A frontend to start any emulator or binary that Linux runs."
 msgstr ""
+"Una interfàcia permetent d'aviar tot emulator o executable que Linux pòt "
+"amodar."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:47001
 msgid "Provides a digital audio jukebox integrated with MythTV."
-msgstr ""
+msgstr "Provesís un lector audio numeric integrat a MythTV."
 
 #. Type: text
 #. Description
@@ -1243,6 +1389,8 @@ msgid ""
 "An RSS feed news reader plugin for MythTV that keeps you up-to-date on your "
 "favorite news topics."
 msgstr ""
+"Un lector de flus RSS per MythTV que permet de demorar a jorn sus vòstres "
+"subjèctes preferits."
 
 #. Type: text
 #. Description
@@ -1250,12 +1398,16 @@ msgstr ""
 msgid ""
 "A phone and videophone capability on MythTV using the standard SIP protocol."
 msgstr ""
+"Una foncion de telefonia e visiofonia, utilizant lo protocòl estandard SIP, "
+"integrada a MythTV."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:50001
 msgid "Provides a method to listen to streaming internet radio stations."
 msgstr ""
+"Provesîs un mejan d'escotar d'estacions de ràdio difusent lor flus sus "
+"Internet"
 
 #. Type: text
 #. Description
@@ -1264,12 +1416,14 @@ msgid ""
 "Allows you to browse and play video streams, using an external player, from "
 "within the MythTV interface."
 msgstr ""
+"Vos permet de legir e de navegar demest las vidèos, en utilizant un lector "
+"extèrn, al sen de l'interfàcia MythTV."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:52001
 msgid "Displays current and forecast weather information within MythTV."
-msgstr ""
+msgstr "Aficha la meteo actuala e las previsions dins MythTV."
 
 #. Type: text
 #. Description
@@ -1298,7 +1452,7 @@ msgstr ""
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:57001
 msgid "Additional Drivers/Firmware"
-msgstr ""
+msgstr "Pilòts/micrologicials (firmwares) adicionals"
 
 #. Type: text
 #. Description
@@ -1309,24 +1463,28 @@ msgid ""
 "do so here.  Note that proprietary graphics drivers may be necessary for TV "
 "Output or OpenGL effects."
 msgstr ""
+"Un pilòt grafic open source ja es activat e configurat per vòstra "
+"installacion. Se desiratz utilizar un pilòt grafic diferent, o podètz far "
+"aicí. Notatz qu'un pilòt grafic proprietari pòt èsser necessari per la "
+"sortida TV o los efièches OpenGL."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:59001
 msgid "Modify Video Driver & Settings"
-msgstr ""
+msgstr "Cambiar lo pilòt e los paramètres vidèo"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:60001
 msgid "If you would like to configure TV-out, choose an option here:"
-msgstr ""
+msgstr "Se desiratz configurar la sortida TV, causissètz una opcion aicí :"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:61001
 msgid "If enabling TV Out, you will also need to choose a TV Standard:"
-msgstr ""
+msgstr "Se activatz la sortida TV, tanben devètz causir un estandard TV :"
 
 #. Type: text
 #. Description
@@ -1335,18 +1493,22 @@ msgid ""
 "Warning: Do not set the TV standard to something higher than what your TV "
 "supports. PERMANENT damage may occur."
 msgstr ""
+"Atencion : Definissetz pas un estandard TV qu'es pas pres en carga per "
+"vòstre televisor. Lo riscatz de damatjar definitivament."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:63001
 msgid "Master Backend Info"
-msgstr ""
+msgstr "Entresenha sus la maquina de tractament primari"
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:64001
 msgid "Please enter the information necessary to contact your master backend:"
 msgstr ""
+"Picatz l'entresenha necessària per contactar vòstra maquina de tractament "
+"primari :"
 
 #. Type: text
 #. Description
@@ -1376,7 +1538,7 @@ msgstr "Servidor MySQL"
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:69001
 msgid "Configure Guide Data / Backend"
-msgstr ""
+msgstr "Configurar las donadas pels programas TV/ motor de tractament"
 
 #. Type: text
 #. Description
@@ -1385,12 +1547,14 @@ msgid ""
 "The final steps of the installation require setting up your guide data and "
 "configuring the backend for the first time."
 msgstr ""
+"Las etapas finalas de l'installacion necessitan de definir las donadas pels "
+"programas TV e d'efectuar una primièra configuracion del motor de tractament."
 
 #. Type: text
 #. Description
 #: ../ubiquity-frontend-mythbuntu.templates:71001
 msgid "Click to open the Schedules Direct website"
-msgstr ""
+msgstr "Clicatz per dobrir lo sit web « Schedules Direct »"
 
 #. Type: text
 #. Description
@@ -1400,6 +1564,10 @@ msgid ""
 "(SD).  SD provides guide data for a nominal fee.  Without SD, North American "
 "users may lose many of the scheduling features in MythTV."
 msgstr ""
+"Los utilizaires en America del Nòrd deuràn crear un compte çò « Schedules "
+"Direct » (SD). SD provesís los programas TV per un prètz nominal. Sens SD, "
+"los utilizaires d'America del Nòrd poirián perdre fòrça foncionalitats de "
+"programacion dins MythTV."
 
 #. Type: text
 #. Description
@@ -1416,6 +1584,10 @@ msgid ""
 "configure the first four sections, being sure to provide your guide data "
 "during the third."
 msgstr ""
+"Aprèp aver configurat vòstra font de donada pels programas TV, anatz dever "
+"amodar MythTV-Setup per una primièra execucion de la configuracion del motor "
+"de tractament. Deuretz configurar las quatre primièras seccions, asseguratz-"
+"vos de provesir las donadas pels programas dins la tresena."
 
 #. Type: text
 #. Description

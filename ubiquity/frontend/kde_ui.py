@@ -913,7 +913,7 @@ class Wizard(BaseFrontend):
         changed_page = False
 
         if str(step) == "stepReady":
-            self.userinterface.next.setText("Next")
+            self.userinterface.next.setText(_("Next"))
             self.userinterface.next.setIcon(self.forwardIcon)
             self.translate_widget(self.userinterface.next, self.locale)
 
@@ -1380,6 +1380,8 @@ class Wizard(BaseFrontend):
         self.create_dialog.partition_create_size_spinbutton.setMaximum(max_size_mb)
         self.create_dialog.partition_create_size_spinbutton.setValue(max_size_mb)
 
+        self.create_dialog.partition_create_place_beginning.setChecked(True)
+
         self.create_use_method_names = {}
         for method, name, description in self.dbfilter.create_use_as():
             self.create_use_method_names[description] = name
@@ -1387,8 +1389,12 @@ class Wizard(BaseFrontend):
         if self.create_dialog.partition_create_use_combo.count() == 0:
             self.create_dialog.partition_create_use_combo.setEnabled(False)
 
-        # TODO cjwatson 2006-11-01: set up mount point combo
-        #self.create_dialog.partition_create_mount_combo.setText('')
+        self.create_dialog.partition_create_mount_combo.clear()
+        for mp, choice_c, choice in self.dbfilter.default_mountpoint_choices():
+            ##FIXME gtk frontend has a nifty way of showing the user readable
+            ##'choice' text in the drop down, but only selecting the 'mp' text
+            self.create_dialog.partition_create_mount_combo.addItem(mp)
+        self.create_dialog.partition_create_mount_combo.clearEditText()
 
         response = self.create_dialog.exec_()
 
@@ -1430,10 +1436,15 @@ class Wizard(BaseFrontend):
             return
         method = self.create_use_method_names[text]
         if method not in known_filesystems:
-            #self.create_dialog.partition_create_mount_combo.child.setText('')
+            self.create_dialog.partition_create_mount_combo.clearEditText()
             self.create_dialog.partition_create_mount_combo.setEnabled(False)
         else:
             self.create_dialog.partition_create_mount_combo.setEnabled(True)
+            if isinstance(self.dbfilter, partman.Partman):
+                self.create_dialog.partition_create_mount_combo.clear()
+                for mp, choice_c, choice in \
+                    self.dbfilter.default_mountpoint_choices(method):
+                    self.create_dialog.partition_create_mount_combo.addItem(mp)
 
     def partman_edit_dialog(self, devpart, partition):
         if not self.allowed_change_step:
@@ -1498,10 +1509,6 @@ class Wizard(BaseFrontend):
         self.edit_dialog.partition_edit_format_checkbutton.setChecked(
             current_format)
 
-        # TODO cjwatson 2006-11-02: mountpoint_choices won't be available
-        # unless the method is already one that can be mounted, so we may
-        # need to calculate this dynamically based on the method instead of
-        # relying on cached information from partman
         self.edit_dialog.partition_edit_mount_combo.clear()
         if 'mountpoint_choices' in partition:
             for mp, choice_c, choice in partition['mountpoint_choices']:
@@ -1528,7 +1535,7 @@ class Wizard(BaseFrontend):
             method_description = unicode(self.edit_dialog.partition_edit_use_combo.currentText())
             method = self.edit_use_method_names[method_description]
 
-            format = self.partition_edit_format_checkbutton.isChecked()
+            format = self.edit_dialog.partition_edit_format_checkbutton.isChecked()
 
             mountpoint = str(self.edit_dialog.partition_edit_mount_combo.currentText())
 
@@ -1564,10 +1571,15 @@ class Wizard(BaseFrontend):
             return
         method = self.edit_use_method_names[text]
         if method not in known_filesystems:
-            #self.edit_dialog.partition_edit_mount_combo.child.setText('')
+            self.edit_dialog.partition_edit_mount_combo.clearEditText()
             self.edit_dialog.partition_edit_mount_combo.setEnabled(False)
         else:
             self.edit_dialog.partition_edit_mount_combo.setEnabled(True)
+            if isinstance(self.dbfilter, partman.Partman):
+                self.edit_dialog.partition_edit_mount_combo.clear()
+                for mp, choice_c, choice in \
+                    self.dbfilter.default_mountpoint_choices(method):
+                    self.edit_dialog.partition_edit_mount_combo.addItem(mp)
 
     def on_partition_list_treeview_selection_changed(self, selected, deselected):
         self.userinterface.partition_button_new_label.setEnabled(False)
@@ -1706,24 +1718,23 @@ class Wizard(BaseFrontend):
         partition_list_menu = QMenu(self.userinterface)
         for action in self.dbfilter.get_actions(devpart, partition):
             if action == 'new_label':
-                # TODO cjwatson 2006-12-21: i18n;
-                # partman-partitioning/text/label text is quite long?
-                new_label_item = partition_list_menu.addAction('New partition table')
+                new_label_item = partition_list_menu.addAction(
+                    self.get_string('partition_button_new_label'))
                 self.app.connect(new_label_item, SIGNAL("triggered(bool)"),
                                  self.on_partition_list_new_label_activate)
             elif action == 'new':
-                # TODO cjwatson 2006-10-31: i18n
-                new_item = partition_list_menu.addAction('New partition')
+                new_item = partition_list_menu.addAction(
+                    self.get_string('partition_button_new'))
                 self.app.connect(new_item, SIGNAL("triggered(bool)"),
                                  self.on_partition_list_new_activate)
             elif action == 'edit':
-                # TODO cjwatson 2006-10-31: i18n
-                edit_item = partition_list_menu.addAction('Edit partition')
+                edit_item = partition_list_menu.addAction(
+                    self.get_string('partition_button_edit'))
                 self.app.connect(edit_item, SIGNAL("triggered(bool)"),
                                  self.on_partition_list_edit_activate)
             elif action == 'delete':
-                # TODO cjwatson 2006-10-31: i18n
-                delete_item = partition_list_menu.addAction('Delete partition')
+                delete_item = partition_list_menu.addAction(
+                    self.get_string('partition_button_delete'))
                 self.app.connect(delete_item, SIGNAL("triggered(bool)"),
                                  self.on_partition_list_delete_activate)
         if partition_list_menu.children():
@@ -1862,7 +1873,8 @@ class Wizard(BaseFrontend):
         assert len(options) <= 3, options
 
         self.allow_change_step(True)
-        buttons = []
+        buttons = {}
+        messageBox = QMessageBox(QMessageBox.Question, title, msg, QMessageBox.NoButton, self.userinterface)
         for option in options:
             if use_templates:
                 text = self.get_string(option)
@@ -1870,31 +1882,20 @@ class Wizard(BaseFrontend):
                 text = option
             if text is None:
                 text = option
-            buttons.append(text)
-        # Convention for options is to have the affirmative action last; KDE
-        # convention is to have it first.
-        affirmative = buttons.pop()
-        buttons.insert(0, affirmative)
+            # Convention for options is to have the affirmative action last; KDE
+            # convention is to have it first.
+            if option == options[-1]:
+                button = messageBox.addButton(text, QMessageBox.AcceptRole)
+            else:
+                button = messageBox.addButton(text, QMessageBox.RejectRole)
+            buttons[button] = option
 
-        #FIXME qt 4 seems to have lost the ability to set a custom message on the buttons for stock dialogs
-        #response = QMessageBox.question(self.userinterface, title, msg,
-        #                                *buttons)
-        response = QMessageBox.question(self.userinterface, title, msg, QMessageBox.Ok, QMessageBox.Cancel)
+        response = messageBox.exec_()
 
-        """
         if response < 0:
             return None
-        elif response == 0:
-            return options[len(buttons) - 1]
         else:
-            return options[response - 1]
-        """
-        if response < 0:
-            return None
-        elif response == QMessageBox.Ok:
-            return options[1]
-        elif response == QMessageBox.Cancel:
-            return options[0]
+            return buttons[messageBox.clickedButton()]
 
     def refresh (self):
         self.app.processEvents()
@@ -2217,12 +2218,13 @@ class PartitionModel(QAbstractItemModel):
         QAbstractItemModel.__init__(self, parent)
 
         rootData = []
-        rootData.append(QVariant("Device")) ##FIXME i18n
-        rootData.append(QVariant("Type"))
-        rootData.append(QVariant("Mount point"))
-        rootData.append(QVariant("Format?"))
-        rootData.append(QVariant("Size"))
-        rootData.append(QVariant("Used"))
+        rootData.append(QVariant(self.get_string('partition_column_device')))
+        rootData.append(QVariant(self.get_string('partition_column_type')))
+        rootData.append(QVariant(
+            self.get_string('partition_column_mountpoint')))
+        rootData.append(QVariant(self.get_string('partition_column_format')))
+        rootData.append(QVariant(self.get_string('partition_column_size')))
+        rootData.append(QVariant(self.get_string('partition_column_used')))
         self.rootItem = TreeItem(rootData)
 
     def append(self, data, ubiquity):
@@ -2372,9 +2374,9 @@ class TreeItem:
         elif partition['parted']['type'] == 'unusable':
             return '  %s' % self.ubiquity.get_string('partman/text/unusable')
         else:
-            # TODO cjwatson 2006-10-30 i18n; partman uses "FREE SPACE" which
-            # feels a bit too SHOUTY for this interface.
-            return '  free space'
+            # partman uses "FREE SPACE" which feels a bit too SHOUTY for
+            # this interface.
+            return '  %s' % self.ubiquity.get_string('partition_free_space')
 
     def partman_column_type(self):
         partition = self.itemData[1]
@@ -2452,8 +2454,7 @@ class TreeItem:
         if 'id' not in partition or partition['parted']['fs'] == 'free':
             return ''
         elif 'resize_min_size' not in partition:
-            # TODO cjwatson 2007-03-26: i18n
-            return 'unknown'
+            return self.ubiquity.get_string('partition_used_unknown')
         else:
             # Yes, I know, 1000000 bytes is annoying. Sorry. This is what
             # partman expects.

@@ -1,3 +1,35 @@
+ubiquity (1.8.3) hardy; urgency=low
+
+  [ Colin Watson ]
+  * Make all text in the partitioner translatable (LP: #144741).
+    Unfortunately we don't have time to get translations in place for 8.04,
+    but there ought to be time to do this for 8.04.1. This also involved
+    moving the "Undo changes to partitions" button to a second line in order
+    to avoid excessive horizontal growth.
+  * Adjust po-debconf flags in ubiquity/install/copying_error/md5, so that
+    ${FILE} doesn't get translated.
+  * Offer a list of mount points when creating a partition (LP: #85713).
+    Adjust this list (and also that offered when editing a partition) if the
+    file system is changed to FAT or NTFS.
+  * Guard against division by zero while copying files (LP: #211503).
+  * Ensure that "Location for the new partition" always defaults to
+    "Beginning" (LP: #207810).
+  * Stop X forwarding code from breaking if we aren't running within X
+    (LP: #214211).
+
+  [ Evan Dandrea ]
+  * Update the translations from Rosetta.
+  * Automatic update of included source packages: debian-installer-utils
+    1.50ubuntu3, localechooser 1.42ubuntu5, partman-basicfilesystems
+    56ubuntu4.
+
+  [ Jonathan Riddell ]
+  * Fix exception in edit partitions dialogue use in kde_ui
+  * Add minimum size to partition_edit_dialog.ui, closes LP: #203626
+  * Fix buttons on question dialogue to use supplied text, closes LP: #203660
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 10 Apr 2008 04:22:15 -0400
+
 ubiquity (1.8.2) hardy; urgency=low
 
   [ Evan Dandrea ]
