@@ -263,6 +263,7 @@ class Wizard(BaseFrontend):
         volumes_visible = '/apps/nautilus/desktop/volumes_visible'
         media_automount = '/apps/nautilus/preferences/media_automount'
         media_automount_open = '/apps/nautilus/preferences/media_automount_open'
+        media_autorun_never = '/apps/nautilus/preferences/media_autorun_never'
         self.gconf_previous = {}
         for gconf_key in (gvm_automount_drives, gvm_automount_media,
                           volumes_visible,
@@ -270,6 +271,10 @@ class Wizard(BaseFrontend):
             self.gconf_previous[gconf_key] = gconftool.get(gconf_key)
             if self.gconf_previous[gconf_key] != 'false':
                 gconftool.set(gconf_key, 'bool', 'false')
+        for gconf_key in (media_autorun_never,):
+            self.gconf_previous[gconf_key] = gconftool.get(gconf_key)
+            if self.gconf_previous[gconf_key] != 'true':
+                gconftool.set(gconf_key, 'bool', 'true')
 
         self.thunar_previous = self.thunar_set_volmanrc(
             {'AutomountDrives': 'FALSE', 'AutomountMedia': 'FALSE'})
@@ -283,12 +288,19 @@ class Wizard(BaseFrontend):
         volumes_visible = '/apps/nautilus/desktop/volumes_visible'
         media_automount = '/apps/nautilus/preferences/media_automount'
         media_automount_open = '/apps/nautilus/preferences/media_automount_open'
+        media_autorun_never = '/apps/nautilus/preferences/media_autorun_never'
         for gconf_key in (gvm_automount_drives, gvm_automount_media,
                           volumes_visible,
                           media_automount, media_automount_open):
             if self.gconf_previous[gconf_key] == '':
                 gconftool.unset(gconf_key)
             elif self.gconf_previous[gconf_key] != 'false':
+                gconftool.set(gconf_key, 'bool',
+                              self.gconf_previous[gconf_key])
+        for gconf_key in (media_autorun_never,):
+            if self.gconf_previous[gconf_key] == '':
+                gconftool.unset(gconf_key)
+            elif self.gconf_previous[gconf_key] != 'true':
                 gconftool.set(gconf_key, 'bool',
                               self.gconf_previous[gconf_key])
 
@@ -1426,7 +1438,12 @@ class Wizard(BaseFrontend):
     def partman_column_type (self, column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition or 'method' not in partition:
-            cell.set_property('text', '')
+            if ('parted' in partition and
+                partition['parted']['fs'] != 'free' and
+                'detected_filesystem' in partition):
+                cell.set_property('text', partition['detected_filesystem'])
+            else:
+                cell.set_property('text', '')
         elif ('filesystem' in partition and
               partition['method'] in ('format', 'keep')):
             cell.set_property('text', partition['acting_filesystem'])
@@ -1793,8 +1810,10 @@ class Wizard(BaseFrontend):
         if iterator is None or model[iterator][0] not in known_filesystems:
             self.partition_edit_mount_combo.child.set_text('')
             self.partition_edit_mount_combo.set_sensitive(False)
+            self.partition_edit_format_checkbutton.set_sensitive(False)
         else:
             self.partition_edit_mount_combo.set_sensitive(True)
+            self.partition_edit_format_checkbutton.set_sensitive(True)
             if isinstance(self.dbfilter, partman.Partman):
                 mount_model = self.partition_edit_mount_combo.get_model()
                 if mount_model is not None:
@@ -2647,6 +2666,7 @@ class ResizeWidget(gtk.HPaned):
 
     def _set_new_os_title(self):
         self.new_os_title = ''
+        fp = None
         try:
             fp = open('/cdrom/.disk/info')
             line = fp.readline()
@@ -2656,7 +2676,8 @@ class ResizeWidget(gtk.HPaned):
             syslog.syslog(syslog.LOG_ERR,
                 "Unable to determine the distribution name from /cdrom/.disk/info")
         finally:
-            fp.close()
+            if fp is not None:
+                fp.close()
         if not self.new_os_title:
             self.new_os_title = 'Ubuntu'
 

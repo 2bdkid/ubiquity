@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 #
 # Copyright (C) 2006, 2007 Canonical Ltd.
 #
@@ -94,7 +94,21 @@ class UbiquityUI(QWidget):
         self.wizard = wizardRef
 
     def closeEvent(self, event):
-        self.wizard.on_cancel_clicked()
+        if self.wizard.on_cancel_clicked() == False:
+            event.ignore()
+
+class linkLabel(QLabel):
+
+    def __init__(self, wizard, parent):
+        QLabel.__init__(self, parent)
+        self.wizard = wizard
+
+    def mouseReleaseEvent(self, event):
+        self.wizard.openReleaseNotes()
+
+    def setText(self, text):
+        QLabel.setText(self, text)
+        self.resize(self.sizeHint())
 
 class Wizard(BaseFrontend):
 
@@ -171,6 +185,11 @@ class Wizard(BaseFrontend):
         self.map_vbox.setMargin(0)
 
         self.customize_installer()
+
+        release_notes_layout = QHBoxLayout(self.userinterface.release_notes_frame)
+        self.release_notes_url = linkLabel(self, self.userinterface.release_notes_frame)
+        self.release_notes_url.setObjectName("release_notes_url")
+        self.release_notes_url.show()
 
         self.translate_widgets()
 
@@ -255,10 +274,13 @@ class Wizard(BaseFrontend):
     def enable_volume_manager(self):
         execute('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
 
+    def openReleaseNotes(self):
+        self.openURL(self.release_notes_url_template)
+
     def openURL(self, url):
         #need to run this else kdesu can't run Konqueror
         execute('su', 'ubuntu', 'xhost', '+localhost')
-        KRun.runURL(KURL(url), "text/html")
+        execute('su', 'ubuntu', 'xdg-open', url)
 
     def run(self):
         """run the interface."""
@@ -443,7 +465,7 @@ class Wizard(BaseFrontend):
             raise
         except:
             self.userinterface.release_notes_label.hide()
-            self.userinterface.release_notes_url.hide()
+            self.userinterface.release_notes_frame.hide()
 
         self.tzmap = TimezoneMap(self)
         self.tzmap.tzmap.show()
@@ -465,6 +487,13 @@ class Wizard(BaseFrontend):
 
         self.translate_widget_children(parentWidget)
 
+        self.userinterface.partition_button_undo.setText(
+            self.get_string('partman/text/undo_everything').replace('_', '&', 1))
+        if self.release_notes_url_template is not None:
+            url = self.release_notes_url_template.replace('${LANG}', self.locale.split('.')[0])
+            text = self.get_string('release_notes_url')
+            self.release_notes_url.setText('<a href="%s">%s</a>' % (url, text))
+
     def translate_widget_children(self, parentWidget=None):
         if parentWidget == None:
             parentWidget = self.userinterface
@@ -479,7 +508,7 @@ class Wizard(BaseFrontend):
         if not isinstance(widget, QWidget):
             return
 
-        name = widget.objectName()
+        name = str(widget.objectName())
 
         text = self.get_string(name, lang)
 
@@ -515,11 +544,7 @@ class Wizard(BaseFrontend):
             else:
                 widget.setText(text)
 
-        elif isinstance(widget, QPushButton):
-            if name == 'next':
-                text = text + " >"
-            elif name == 'back':
-                text = "< " + text
+        elif isinstance(widget, QPushButton) or isinstance(widget, QCheckBox):
             widget.setText(text.replace('_', '&', 1))
 
         elif isinstance(widget, QWidget) and str(name) == "UbiquityUIBase":
@@ -617,7 +642,7 @@ class Wizard(BaseFrontend):
             self.set_current_page(WIDGET_STACK_STEPS["stepUserInfo"])
         elif n == 'Summary':
             self.set_current_page(WIDGET_STACK_STEPS["stepReady"])
-            self.userinterface.next.setText(self.get_string('install_button'))
+            self.userinterface.next.setText(self.get_string('install_button').replace('_', '&', 1))
             self.userinterface.next.setIcon(self.applyIcon)
         else:
             print >>sys.stderr, 'No page found for %s' % n
@@ -913,7 +938,7 @@ class Wizard(BaseFrontend):
         changed_page = False
 
         if str(step) == "stepReady":
-            self.userinterface.next.setText(_("Next"))
+            self.userinterface.next.setText(self.get_string("next").replace('_', '&', 1))
             self.userinterface.next.setIcon(self.forwardIcon)
             self.translate_widget(self.userinterface.next, self.locale)
 
@@ -937,7 +962,7 @@ class Wizard(BaseFrontend):
         if lang:
             # strip encoding; we use UTF-8 internally no matter what
             lang = lang.split('.')[0].lower()
-            for widget in (self.userinterface, self.userinterface.welcome_heading_label, self.userinterface.welcome_text_label, self.userinterface.oem_id_label, self.userinterface.release_notes_label, self.userinterface.release_notes_url, self.userinterface.next, self.userinterface.back, self.userinterface.cancel, self.userinterface.step_label):
+            for widget in (self.userinterface, self.userinterface.welcome_heading_label, self.userinterface.welcome_text_label, self.userinterface.oem_id_label, self.userinterface.release_notes_label, self.userinterface.release_notes_frame, self.userinterface.next, self.userinterface.back, self.userinterface.cancel, self.userinterface.step_label):
                 self.translate_widget(widget, lang)
 
     def on_steps_switch_page(self, newPageID):
@@ -1202,32 +1227,35 @@ class Wizard(BaseFrontend):
                     new_size_label.show()
                     new_size_scale_vbox = QVBoxLayout()
                     new_size_hbox.addLayout(new_size_scale_vbox)
-                    self.new_size_value = QLabel(self.userinterface.autopartition_frame)
-                    new_size_scale_vbox.addWidget(self.new_size_value)
-                    self.new_size_value.show()
-                    self.new_size_scale = QSlider(Qt.Horizontal, self.userinterface.autopartition_frame)
-                    self.new_size_scale.setMaximum(100)
-                    self.new_size_scale.setSizePolicy(QSizePolicy.Expanding,
-                                                      QSizePolicy.Minimum)
-                    self.app.connect(self.new_size_scale,
-                                     SIGNAL("valueChanged(int)"),
-                                     self.update_new_size_label)
+                    #self.new_size_scale = QSlider(Qt.Horizontal, self.userinterface.autopartition_frame)
+                    self.new_size_scale = ResizeWidget(self.userinterface.autopartition_frame)
+                    #self.new_size_scale.setMaximum(100)
+                    #self.new_size_scale.setSizePolicy(QSizePolicy.Expanding,
+                    #                                  QSizePolicy.Minimum)
+                    #self.app.connect(self.new_size_scale,
+                    #                 SIGNAL("valueChanged(int)"),
+                    #                 self.update_new_size_label)
                     new_size_scale_vbox.addWidget(self.new_size_scale)
                     self.new_size_scale.show()
+
                     # TODO evand 2008-02-12: Until the new resize widget is
                     # ported to Qt, resize_orig_size and resize_path are not
                     # needed.
                     self.resize_min_size, self.resize_max_size, \
-                        dis, dis = extra_options[choice]
-                    del dis
+                        self.resize_orig_size, self.resize_path = \
+                            extra_options[choice]
                     if (self.resize_min_size is not None and
                         self.resize_max_size is not None):
                         min_percent = int(math.ceil(
                             100 * self.resize_min_size / self.resize_max_size))
-                        self.new_size_scale.setMinimum(min_percent)
-                        self.new_size_scale.setMaximum(100)
-                        self.new_size_scale.setValue(
-                            int((min_percent + 100) / 2))
+                        #self.new_size_scale.setMinimum(min_percent)
+                        #self.new_size_scale.setMaximum(100)
+                        #self.new_size_scale.setValue(
+                        #    int((min_percent + 100) / 2))
+                        self.new_size_scale.set_part_size(self.resize_orig_size)
+                        self.new_size_scale.set_min(self.resize_min_size)
+                        self.new_size_scale.set_max(self.resize_max_size)
+                        self.new_size_scale.set_device(self.resize_path)
                     self.autopartition_extras[choice] = containerWidget
                 elif choice != manual_choice:
                     disk_frame = QFrame(self.userinterface.autopartition_frame)
@@ -1288,7 +1316,7 @@ class Wizard(BaseFrontend):
         if choice == self.resize_choice:
             # resize choice should have been hidden otherwise
             assert self.new_size_scale is not None
-            return choice, self.new_size_scale.value()
+            return choice, self.new_size_scale.get_value()
         elif (choice != self.manual_choice and
               choice in self.autopartition_extra_buttongroup):
             disk_id = self.autopartition_extra_buttongroup[choice].checkedId()
@@ -1299,7 +1327,7 @@ class Wizard(BaseFrontend):
 
     def update_partman (self, disk_cache, partition_cache, cache_order):
         #throwing away the old model if there is one
-        self.partition_tree_model = PartitionModel(self.userinterface.partition_list_treeview)
+        self.partition_tree_model = PartitionModel(self, self.userinterface.partition_list_treeview)
 
         children = self.userinterface.partition_bar_frame.children()
         for child in children:
@@ -1354,6 +1382,7 @@ class Wizard(BaseFrontend):
         self.create_dialog = QDialog(self.userinterface)
         uic.loadUi("%s/partition_create_dialog.ui" % UIDIR, self.create_dialog)
         self.app.connect(self.create_dialog.partition_create_use_combo, SIGNAL("currentIndexChanged(int)"), self.on_partition_create_use_combo_changed)
+        self.translate_widget_children(self.create_dialog)
 
         # TODO cjwatson 2006-11-01: Because partman doesn't use a question
         # group for these, we have to figure out in advance whether each
@@ -1455,6 +1484,7 @@ class Wizard(BaseFrontend):
         self.edit_dialog = QDialog(self.userinterface)
         uic.loadUi("%s/partition_edit_dialog.ui" % UIDIR, self.edit_dialog)
         self.app.connect(self.edit_dialog.partition_edit_use_combo, SIGNAL("currentIndexChanged(int)"), self.on_partition_edit_use_combo_changed)
+        self.translate_widget_children(self.edit_dialog)
 
         current_size = None
         if ('can_resize' not in partition or not partition['can_resize'] or
@@ -1566,15 +1596,17 @@ class Wizard(BaseFrontend):
         # have to hardcode the list of known filesystems here.
         known_filesystems = ('ext3', 'ext2', 'reiserfs', 'jfs', 'xfs',
                              'fat16', 'fat32', 'ntfs')
-        text = str(self.edit_dialog.partition_edit_use_combo.currentText())
+        text = unicode(self.edit_dialog.partition_edit_use_combo.currentText())
         if text not in self.edit_use_method_names:
             return
         method = self.edit_use_method_names[text]
         if method not in known_filesystems:
             self.edit_dialog.partition_edit_mount_combo.clearEditText()
             self.edit_dialog.partition_edit_mount_combo.setEnabled(False)
+            self.edit_dialog.partition_edit_format_checkbutton.setEnabled(False)
         else:
             self.edit_dialog.partition_edit_mount_combo.setEnabled(True)
+            self.edit_dialog.partition_edit_format_checkbutton.setEnabled(True)
             if isinstance(self.dbfilter, partman.Partman):
                 self.edit_dialog.partition_edit_mount_combo.clear()
                 for mp, choice_c, choice in \
@@ -1789,6 +1821,7 @@ class Wizard(BaseFrontend):
         pass
 
     def on_advanced_button_clicked (self):
+        self.translate_widget_children(self.advanceddialog)
         self.app.connect(self.advanceddialog.grub_enable, SIGNAL("stateChanged(int)"), self.toggle_grub)
         self.app.connect(self.advanceddialog.proxy_host_entry, SIGNAL("textChanged(const QString &)"), self.enable_proxy_spinbutton)
         display = False
@@ -1853,7 +1886,7 @@ class Wizard(BaseFrontend):
             self.pagesindex = 1
             self.dbfilter = partman.Partman(self)
             self.set_current_page(self.previous_partitioning_page)
-            self.userinterface.next.setText(_("Next"))
+            self.userinterface.next.setText(self.get_string("next").replace('_', '&', 1))
             self.userinterface.next.setIcon(self.forwardIcon)
             self.translate_widget(self.userinterface.next, self.locale)
             self.backup = True
@@ -2214,17 +2247,16 @@ class MapWidget(QWidget):
         self.setPalette(palette)
 
 class PartitionModel(QAbstractItemModel):
-    def __init__(self, parent=None):
+    def __init__(self, ubiquity, parent=None):
         QAbstractItemModel.__init__(self, parent)
 
         rootData = []
-        rootData.append(QVariant(self.get_string('partition_column_device')))
-        rootData.append(QVariant(self.get_string('partition_column_type')))
-        rootData.append(QVariant(
-            self.get_string('partition_column_mountpoint')))
-        rootData.append(QVariant(self.get_string('partition_column_format')))
-        rootData.append(QVariant(self.get_string('partition_column_size')))
-        rootData.append(QVariant(self.get_string('partition_column_used')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_device')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_type')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_mountpoint')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_format')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_size')))
+        rootData.append(QVariant(ubiquity.get_string('partition_column_used')))
         self.rootItem = TreeItem(rootData)
 
     def append(self, data, ubiquity):
@@ -2381,7 +2413,12 @@ class TreeItem:
     def partman_column_type(self):
         partition = self.itemData[1]
         if 'id' not in partition or 'method' not in partition:
-            return ''
+            if ('parted' in partition and
+                partition['parted']['fs'] != 'free' and
+                'detected_filesystem' in partition):
+                return partition['detected_filesystem']
+            else:
+                return ''
         elif ('filesystem' in partition and
               partition['method'] in ('format', 'keep')):
             return partition['acting_filesystem']
@@ -2460,3 +2497,138 @@ class TreeItem:
             # partman expects.
             size_mb = int(partition['resize_min_size']) / 1000000
             return '%d MB' % size_mb
+
+#TODO much of this is duplicated from gtk_ui, abstract it
+class ResizeWidget(QWidget):
+    def __init__(self, parent=None):
+        QWidget.__init__(self, parent)
+
+        frame = QFrame(self)
+        layout = QHBoxLayout(self)
+        layout.addWidget(frame)
+
+        frame.setLineWidth(1)
+        frame.setFrameShadow(QFrame.Plain)
+        frame.setFrameShape(QFrame.StyledPanel)
+
+        layout = QHBoxLayout(frame)
+        layout.setMargin(2)
+        splitter = QSplitter(frame)
+        splitter.setChildrenCollapsible(False)
+        layout.addWidget(splitter)
+
+        self.old_os = QFrame(splitter)
+        self.old_os.setLineWidth(1)
+        self.old_os.setFrameShadow(QFrame.Raised)
+        self.old_os.setFrameShape(QFrame.Box)
+        layout = QHBoxLayout(self.old_os)
+        self.old_os_label = QLabel(self.old_os)
+        layout.addWidget(self.old_os_label)
+
+        self.new_os = QFrame(splitter)
+        self.new_os.setLineWidth(1)
+        self.new_os.setFrameShadow(QFrame.Raised)
+        self.new_os.setFrameShape(QFrame.Box)
+        layout = QHBoxLayout(self.new_os)
+        self.new_os_label = QLabel(self.new_os)
+        layout.addWidget(self.new_os_label)
+
+        self.old_os_label.setAlignment(Qt.AlignHCenter)
+        self.new_os_label.setAlignment(Qt.AlignHCenter)
+
+        self.old_os.setAutoFillBackground(True)
+        palette = self.old_os.palette()
+        palette.setColor(QPalette.Active, QPalette.Background, QColor("#FFA500"))
+        palette.setColor(QPalette.Inactive, QPalette.Background, QColor("#FFA500"))
+
+        self.new_os.setAutoFillBackground(True)
+        palette = self.new_os.palette()
+        palette.setColor(QPalette.Active, QPalette.Background, Qt.white)
+        palette.setColor(QPalette.Inactive, QPalette.Background, Qt.white)
+
+        self.part_size = 0
+        self.old_os_title = ''
+        self._set_new_os_title()
+        self.max_size = 0
+        self.min_size = 0
+
+    def paintEvent(self, event):
+        self._update_min()
+        self._update_max()
+
+        s1 = self.old_os.width()
+        s2 = self.new_os.width()
+        total = s1 + s2
+
+        percent = (float(s1) / float(total))
+        txt = '%s\n%.0f%% (%s)' % (self.old_os_title,
+            (percent * 100.0),
+            format_size(percent * self.part_size))
+        self.old_os_label.setText(txt)
+        self.old_os.setToolTip(txt)
+
+        percent = (float(s2) / float(total))
+        txt = '%s\n%.0f%% (%s)' % (self.new_os_title,
+            (percent * 100.0),
+            format_size(percent * self.part_size))
+        self.new_os_label.setText(txt)
+        self.new_os.setToolTip(txt)
+
+    def set_min(self, size):
+        self.min_size = size
+
+    def set_max(self, size):
+        self.max_size = size
+
+    def set_part_size(self, size):
+        self.part_size = size
+
+    def _update_min(self):
+        total = self.new_os.width() + self.old_os.width()
+        # The minimum percent needs to be 1% greater than the value debconf
+        # feeds us, otherwise the resize will fail.
+        tmp = (self.min_size / self.part_size) + 0.01
+        pixels = int(tmp * total)
+        self.old_os.setMinimumWidth(pixels)
+
+    def _update_max(self):
+        total = self.new_os.width() + self.old_os.width()
+        tmp = ((self.part_size - self.max_size) / self.part_size)
+        pixels = int(tmp * total)
+        self.new_os.setMinimumWidth(pixels)
+
+    def _set_new_os_title(self):
+        self.new_os_title = ''
+        fp = None
+        try:
+            fp = open('/cdrom/.disk/info')
+            line = fp.readline()
+            if line:
+                self.new_os_title = ' '.join(line.split()[:2])
+        except:
+            syslog.syslog(syslog.LOG_ERR,
+                "Unable to determine the distribution name from /cdrom/.disk/info")
+        finally:
+            if fp is not None:
+                fp.close()
+        if not self.new_os_title:
+            self.new_os_title = 'Kubuntu'
+
+    def set_device(self, dev):
+        '''Sets the title of the old partition to the name found in os_prober.
+           On failure, sets the title to the device name or the empty string.'''
+        if dev:
+            self.old_os_title = find_in_os_prober(dev)
+        if dev and not self.old_os_title:
+            self.old_os_title = dev
+        elif not self.old_os_title:
+            self.old_os_title = ''
+     
+    def get_value(self):
+        '''Returns the percent the old partition is of the maximum size it can be.'''
+        s1 = self.old_os.width()
+        s2 = self.new_os.width()
+        totalwidth = s1 + s2
+        percentwidth = float(s1) / float(totalwidth)
+        percentpart = percentwidth * self.part_size
+        return int((percentpart / self.max_size) * 100)

@@ -1,3 +1,33 @@
+ubiquity (1.8.4) hardy; urgency=low
+
+  [ Jonathan Riddell ]
+  * kde_ui:
+   - Fix crash in PartitionModel localisation (LP: #216031).
+   - Fix translations on buttons
+   - Replace the resize slider with the custom widget
+   - Fix occasional bug where the app would still quit after the confirm
+     exit dialogue had been dismissed
+   - Fix exception in on_partition_edit_use_combo_changed when non-ASCII
+     characters are used
+   - Translate dialogues
+   - Fix launching browser from release notes label
+  * kde_ui, gtk_ui
+   - In partition edit dialogue, enable format tickbox when a format type is
+     selected
+
+  [ Colin Watson ]
+  * KDE frontend: Translate the partition create dialog too.
+  * Fix crash if opening /cdrom/.disk/info fails (with Jonathan and Evan).
+  * Show current filesystem type if it isn't currently being used for
+    anything; now that partman no longer sets up automatic mount points for
+    everything, the lack of filesystem types made it difficult to get any
+    context on which partition was which.
+  * Set /apps/nautilus/preferences/media_autorun_never to true during
+    installation (thanks, John S. Gruber; LP: #210620).
+  * Update translations from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 12 Apr 2008 13:23:13 +0100
+
 ubiquity (1.8.3) hardy; urgency=low
 
   [ Colin Watson ]
