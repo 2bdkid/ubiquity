@@ -1,3 +1,17 @@
+grub-installer (1.27ubuntu7) hardy; urgency=low
+
+  [ Colin Watson ]
+  * Backport from trunk:
+    - Run grub in the chroot for password encryption.
+
+  [ James Westby ]
+  * Confirm the GRUB password after entry (LP: #42019). Note that
+    grub-installer/password-again must now be preseeded in addition to
+    grub-installer/password, and that grub-installer/password-crypted now
+    takes an MD5-crypted password rather than a boolean.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 15 Apr 2008 01:55:07 +0100
+
 grub-installer (1.27ubuntu6) hardy; urgency=low
 
   * Added the grub-installer/make_active debconf question.  When

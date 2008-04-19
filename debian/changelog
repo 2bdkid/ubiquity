@@ -1,3 +1,34 @@
+ubiquity (1.8.6) hardy; urgency=low
+
+  [ Luke Yelavich ]
+  * bin/ubiquity-dm:
+    - Move code relating to at-spi-registryd to ensure that a11y is loaded
+      before the background and window manager. (LP: #197887)
+    - Ensure that orca/onboard are only run if the a11y gconf key is set.
+    - Don't show any background image if the v1 profile is selected, similar to
+      what happens in the GNOME desktop with this profile enabled.
+    - Do not drop privileges when running the window manager,
+      gnome-settings-daemon, or any of the a11y tools. Privileges are still
+      dropped when accessibility is not enabled.
+    - Wait for 15 seconds before loading orca, to let the a11y framework settle,
+      and prevent orca from zombifying. This is a workaround until a cleaner
+      solution is found.
+
+  [ Colin Watson ]
+  * Fix console-setup seen flag handling; console-setup/layout and
+    console-setup/variant need to be marked unseen even in automatic mode so
+    that they get their defaults set correctly, so use a different method to
+    avoid displaying the question in preseeded installations (LP: #188492).
+  * Fix partition_too_small check only to warn about partitions that are not
+    free space, are not marked as "do not use", and are marked for use with
+    a filesystem.
+
+  [ Evan Dandrea ]
+  * Automatic update of included source packages: grub-installer
+    1.27ubuntu7, partman-base 114ubuntu5.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sat, 19 Apr 2008 12:13:35 -0400
+
 ubiquity (1.8.5) hardy; urgency=low
 
   [ Evan Dandrea ]
