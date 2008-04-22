@@ -7,6 +7,7 @@ struct mirror_t {
 	char *site;
 	char *country;
 	char *root;
+	int wildcard;
 };
 
 /* This is the codename of the preferred distribution; the one that the

@@ -135,12 +135,16 @@ else {
 		if (! exists $data[$id]->{'archive-architecture'}) {
 			print STDERR "warning: missing archive-architecture for mirror ".$data[$id]->{site}."; assuming it contains all architectures.\n";
 		}
+		my $wildcard = 0;
+		if (exists $data[$id]->{wildcard} and $data[$id]->{wildcard} eq 'yes') {
+			$wildcard = 1;
+		}
 		print OUT "\t{",
 			  join(", ", $q.$data[$id]->{site}.$q, $q.$data[$id]->{country}.$q,
-				$q.$data[$id]->{"archive-$type"}.$q),
+				$q.$data[$id]->{"archive-$type"}.$q, $wildcard),
 			  "},\n";
 	}
-	print OUT "\t{NULL, NULL, NULL}\n";
+	print OUT "\t{NULL, NULL, NULL, 0}\n";
 	print OUT "};\n";
 
 	close OUT;

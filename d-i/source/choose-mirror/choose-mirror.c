@@ -93,7 +93,7 @@ static char **mirrors_in(char *country) {
 			ret = realloc(ret,num * sizeof(char*));
 		}
 		if (strcmp(mirrors[i].country, country) == 0 ||
-		    strcmp(mirrors[i].country, "*") == 0) {
+		    mirrors[i].wildcard) {
 			ret[j++]=mirrors[i].site;
 		}
 	}
@@ -269,7 +269,23 @@ static int choose_country(void) {
 	char *countries;
 	countries = add_protocol("countries");
 	if (has_mirror(country)) {
-		debconf_set(debconf, countries, country);
+		const char *default_country = MANUAL_ENTRY;
+		/* TODO: duplicates much of mirrors_in and has_mirror, since
+		 * those don't let us get the country at the moment
+		 */
+		if (strcmp(country, MANUAL_ENTRY) != 0 &&
+		    strcmp(country, MANUAL_ENTRY_OLD) != 0) {
+			int i = 0;
+			struct mirror_t *mirrors = mirror_list();
+			for (i = 0; mirrors[i].country != NULL; i++) {
+				if (strcmp(mirrors[i].country, country) == 0 ||
+				    mirrors[i].wildcard) {
+					default_country = mirrors[i].country;
+					break;
+				}
+			}
+		}
+		debconf_set(debconf, countries, default_country);
 		debconf_fget(debconf, DEBCONF_BASE "country", "seen");
 		debconf_fset(debconf, countries, "seen", debconf->value);
 	}
