@@ -1,3 +1,31 @@
+ubiquity (1.9.0) intrepid; urgency=low
+
+  [ Colin Watson ]
+  * Fix ownership of /home/oem/Desktop in OEM installations (LP: #209683).
+  * Silence deprecation warning in zoommap.
+  * Add ubiquity-dm implementation for matchbox-window-manager (thanks,
+    Patrick Hétu; see LP #159363).
+  * Make use of RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE variables from
+    partman-partitioning 59ubuntu2 to set accurate bounds on the resize
+    widget.
+
+  [ Evan Dandrea ]
+  * Usability fixes for the timezone widget:
+    - Make the hover-to-zoom areas relative to the widget size.
+    - Zoom in on the location of the cursor, not the edge relative to its
+      position.
+    - Add a delay for zooming out.
+  * Handle the migration-assistant UI being fed non-UTF data gracefully.
+  * Make capitalization of migration-assistant consistent (LP: #225555).
+  * Remember hostname between runs of ubiquity (LP: #40590).
+  * Disable the close button for progress windows (LP: #107686).
+  * Reset stay_on_page when the back button is pressed (LP: #235374).
+
+  [ Mario Limonciello ]
+  * Enable --automatic and preseeding support on the Mythbuntu frontend.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 02 Jun 2008 14:26:30 -0400
+
 ubiquity (1.8.7) hardy; urgency=low
 
   * Update translations from Launchpad.

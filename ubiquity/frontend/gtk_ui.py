@@ -1034,6 +1034,7 @@ class Wizard(BaseFrontend):
         self.allow_change_step(False)
 
         self.backup = True
+        self.stay_on_page = False
 
         # Enabling next button
         self.allow_go_forward(True)
@@ -2062,7 +2063,11 @@ class Wizard(BaseFrontend):
                 # Gaim, Yahoo, etc
                 text = model.get_value(iterator, 1)
 
-            cell.set_property("markup", text)
+            try:
+                cell.set_property("markup", unicode(text))
+            except:
+                cell.set_property("text", '%s  %s (%s)' % \
+                    (val['user'], val['os'], val['part']))
         # Showing the interface for the second time.
         if self.matreeview.get_model():
             for col in self.matreeview.get_columns():
@@ -2165,6 +2170,8 @@ class Wizard(BaseFrontend):
     def get_hostname (self):
         return self.hostname.get_text()
 
+    def set_hostname(self, value):
+        self.hostname.set_text(value)
 
     def set_summary_text (self, text):
         for child in self.ready_text.get_children():
@@ -2652,9 +2659,7 @@ class ResizeWidget(gtk.HPaned):
 
     def _update_min(self):
         total = self.new_os.get_allocation().width + self.old_os.get_allocation().width
-        # The minimum percent needs to be 1% greater than the value debconf
-        # feeds us, otherwise the resize will fail.
-        tmp = (self.min_size / self.part_size) + 0.01
+        tmp = self.min_size / self.part_size
         pixels = int(tmp * total)
         self.old_os.set_size_request(pixels, -1)
 
