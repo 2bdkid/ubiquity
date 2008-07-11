@@ -1,3 +1,250 @@
+partman-base (121ubuntu3) intrepid; urgency=low
+
+  * Add support for explicit 'b' or 'B' suffixes on partition sizes to force
+    interpretation as bytes.
+  * Add a small test suite for longint2human and human2longint.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 10 Jul 2008 21:00:12 +0100
+
+partman-base (121ubuntu2) intrepid; urgency=low
+
+  * Don't disable /dev/ramzswap* swap devices (thanks, John McCabe-Dansted;
+    LP: #193552).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 01 Jul 2008 12:49:48 +0100
+
+partman-base (121ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Skip /dev/ccache* and /dev/ramzswap* devices.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 24 Jun 2008 23:32:32 +0100
+
+partman-base (121) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Add divider below "Use as" in ithe partition options dialog. If the
+    partition is used for encryption, "Encryption method" will also be
+    above the divider. As changing these option changes defaults and what
+    other options are available, this provides a useful visual separation.
+
+  [ Otavio Salvador ]
+  * Update to GNU Parted 1.8: Change build-depends to libparted1.8-dev
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Slovenian (sl.po) by Matej Kovacic
+  * Turkish (tr.po) by Mert Dirik
+  
+ -- Otavio Salvador <otavio@debian.org>  Sat, 21 Jun 2008 17:02:06 -0300
+
+partman-base (120ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Skip /dev/ccache* and /dev/ramzswap* devices.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 27 May 2008 10:06:48 +0100
+
+partman-base (120) unstable; urgency=high
+
+  [ Jérémy Bobbio ]
+  * Fix partition numbering when confirming changes.  Closes: #481433
+
+  [ Frans Pop ]
+  * Urgency high for inclusion in Beta 2 release.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Marathi (mr.po) by Sampada
+  * Romanian (ro.po) by Eddy Petrișor
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Frans Pop <fjp@debian.org>  Mon, 26 May 2008 12:54:24 +0200
+
+partman-base (119) unstable; urgency=low
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay(Bongop) (DIT,BHUTAN)
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hebrew (he.po) by Lior Kaplan
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Marathi (mr.po) by Sampada
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:56:43 -0300
+
+partman-base (118) unstable; urgency=low
+
+  [ Frans Pop ]
+  * init.d/parted: minor code improvements.
+  * Apply patch by Ian Campbell and Ferenc Wagner to improve display of Xen
+    virtual disks in partman. With thanks to both. Closes: #474556.
+  * In lowmem mode it is possible that newly loaded support for a file system
+    is not "seen" because depmod has not been run after loading the kernel
+    udeb. Therefore, run depmod when partman is started.
+    Also fixes missing file system support (including ext2/3) for s390.
+
+  [ Evan Dandrea ]
+  * Disable swap on all the swap partitions for the device being changed,
+    rather than just the ones that will exist after partitioning
+    (LP: #218394).
+
+  [ Colin Watson ]
+  * Fix error message in NEW_PARTITION (partition type, not label type).
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po)
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Mon, 05 May 2008 13:09:21 +0200
+
+partman-base (117ubuntu2) intrepid; urgency=low
+
+  * Skip /dev/ramzswap* as well as /dev/ccache*.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 21 May 2008 14:27:09 +0200
+
+partman-base (117ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Skip /dev/ccache* devices.
+    - Disable swap on all the swap partitions for the device being changed,
+      rather than just the ones that will exist after partitioning.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 03 May 2008 13:09:52 +0100
+
+partman-base (117) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Don't emit confusing log messages if partman-lvm or partman-crypto are
+    already loaded.
+  * Support preseeding questions asked through ask_user using the name of
+    the plugin responsible for the answer you want (e.g.
+    partman-auto/init_automatically_partition=biggest_free).
+  * Fix parted_devices check for floppy devices, broken by me in
+    partman-base 100 (sorry!).
+  * Allow disable_swap to take a device argument, in which case it only
+    disables swap on that device rather than on all devices.
+  * Only disable swap on devices that are being changed.
+
+  [ Guido Guenther ]
+  * Add multipath support (closes: #442236):
+    - recognize and display multipath devices
+    - skip physical disks that are part of a multipath device
+
+  [ Frans Pop ]
+  * Drop the compatibility symlink for definitions.sh; all other partman
+    components have now been uploaded.
+  * Change "initialise" to American English spelling (-ize).
+
+  [ Updated translations ]
+  * Amharic (am.po) by Tegegne Tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 20:58:08 +0100
+
+partman-base (116) unstable; urgency=low
+
+  [ Stephen R. Marenka ]
+  * m68k: don't make partman uninstallable for atari
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Hindi (hi.po) by Kumar Appaiah
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Viesturs Zarins
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Slovenian (sl.po) by Matej Kovacic
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po)
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 15:34:54 -0200
+
+partman-base (115) unstable; urgency=low
+
+  * Major whitespace cleanup and a few minor coding style fixes.
+  * Move functions confirm_changes and commit_changes from base.sh to new
+    function library commit.sh.
+  * Clean up the old_devices directory when it's no longer needed.
+  * commit.d/parted: ensure that we clean up obsolete partition directories
+    in the partition's device directory when we commit changes to a device by
+    calling the new function device_cleanup_partitions() in commit.sh.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+
+ -- Frans Pop <fjp@debian.org>  Sat, 29 Dec 2007 22:11:36 +0100
+
 partman-base (114ubuntu5) hardy; urgency=low
 
   * Disable swap on all the swap partitions for the device being

@@ -52,7 +52,7 @@ db_get apt-setup/volatile_host
 db_subst apt-setup/services-select VOL_HOST "$RET"
 
 # Don't ask this for Ubuntu.
-#db_input medium apt-setup/services-select
+#db_input medium apt-setup/services-select || true
 #if ! db_go; then
 #	exit 10 # back up
 #fi

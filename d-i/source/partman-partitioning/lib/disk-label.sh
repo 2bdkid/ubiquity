@@ -17,7 +17,7 @@ default_disk_label () {
 			echo bsd
 		else
 			echo msdos
-		fi;;	    
+		fi;;
 	    arm|armel)
 		case "$sub" in
 		    iop32x)
@@ -26,7 +26,7 @@ default_disk_label () {
 			echo msdos;;
 		    ixp4xx)
 			echo msdos;;
-		    orion)
+		    orion5x)
 			echo msdos;;
 		    riscstation)
 			echo msdos;;
@@ -69,19 +69,21 @@ default_disk_label () {
 		    amiga)
 			echo amiga;;
 		    atari|q40)
-			# unsupported by parted
-			echo UNSUPPORTED;;
+			echo atari;;
 		    mac)
 			echo mac;;
 		    *vme*)
 			echo msdos;;
 		    sun*)
-	    		echo sun;;
+			echo sun;;
 		    *)
 			echo UNKNOWN;;
 		esac;;
 	    mips)
 		case "$sub" in
+		    4kc-malta | 5kc-malta)
+			# MIPS Malta
+			echo msdos;;
 		    r4k-ip22 | r5k-ip22 | r8k-ip26 | r10k-ip28)
 			# Indy
 			echo dvh;;
@@ -101,6 +103,9 @@ default_disk_label () {
 		esac;;
 	    mipsel)
 		case "$sub" in
+		    4kc-malta | 5kc-malta)
+			# MIPS Malta
+			echo msdos;;
 		    # DECstation
 		    r3k-kn02)
 			echo msdos;;
@@ -130,6 +135,8 @@ default_disk_label () {
 			echo msdos;;
 		    chrp_pegasos)
 			echo amiga;;
+		    pasemi)
+			echo msdos;;
 		    prep)
 			echo msdos;;
 		    powermac_newworld)

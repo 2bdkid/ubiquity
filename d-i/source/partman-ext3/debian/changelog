@@ -1,3 +1,54 @@
+partman-ext3 (52ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Default to mounting ext3 with relatime.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 24 Jun 2008 16:00:17 +0100
+
+partman-ext3 (52) unstable; urgency=low
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po) by Sampada
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 01:07:46 -0300
+
+partman-ext3 (51ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Default to mounting ext3 with relatime.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 07 May 2008 13:21:30 +0100
+
+partman-ext3 (51) unstable; urgency=low
+
+  * Use common mount options template; requires partman-basicfilesystems (59).
+  * Drop dependency on ancient version of di-utils.
+
+ -- Frans Pop <fjp@debian.org>  Wed, 26 Mar 2008 15:40:54 +0100
+
+partman-ext3 (50) unstable; urgency=low
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Viesturs Zarins
+  * Nepali (ne.po) by Shyam Krishna Bal
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovenian (sl.po) by Matej Kovacic
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po)
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Fri, 15 Feb 2008 09:34:22 -0200
+
 partman-ext3 (49ubuntu2) hardy; urgency=low
 
   * Add Choices-C entries for mount options.

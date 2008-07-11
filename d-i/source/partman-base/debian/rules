@@ -17,6 +17,7 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 	$(MAKE)
+	cd test && ./conversions
 	touch build-stamp
 
 clean:
@@ -48,9 +49,6 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_install
-	# Temporary link to provide backwards compatibility
-	dh_link -p partman-base \
-		/lib/partman/lib/base.sh /lib/partman/definitions.sh
 	dh_installdebconf
 	cp debian/isinstallable debian/${PACKAGE}/DEBIAN/
 	dh_strip

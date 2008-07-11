@@ -1,3 +1,30 @@
+partman-reiserfs (41ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Default to mounting reiserfs with relatime.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 07 May 2008 14:38:19 +0100
+
+partman-reiserfs (41) unstable; urgency=low
+
+  * Use common mount options template; requires partman-basicfilesystems (59).
+  * Drop dependency on ancient version of di-utils.
+
+ -- Frans Pop <fjp@debian.org>  Wed, 26 Mar 2008 15:41:50 +0100
+
+partman-reiserfs (40) unstable; urgency=low
+
+  * Properly quote file system label in case it contains spaces.
+    Thanks to Teodor for his help in hunting this down. Closes: #335947.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Basque (eu.po) by Piarres Beobide
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Frans Pop <fjp@debian.org>  Thu, 20 Mar 2008 11:21:41 +0100
+
 partman-reiserfs (39ubuntu1) hardy; urgency=low
 
   * Add Choices-C entries for mount options.

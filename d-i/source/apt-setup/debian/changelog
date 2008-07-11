@@ -1,3 +1,217 @@
+apt-setup (1:0.37ubuntu2) intrepid; urgency=low
+
+  * Initialise local variable 'file' so that apt-setup-verify doesn't get
+    excruciatingly confused when you pass file=/path on the kernel command
+    line.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 26 Jun 2008 18:45:38 +0100
+
+apt-setup (1:0.37ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when checking
+      /cdrom/.disk/base_installable.
+    - Enable universe and multiverse by default.
+    - If either restricted or multiverse is enabled, add commented-out lines
+      for the partner archive.
+    - Reduce the mirror verification timeout to 10 seconds.
+    - Disable the volatile service for Ubuntu, and don't ask the
+      apt-setup/services-select question.
+    - Always disable the CD at the end of installation if no mirrors are
+      present, even if it's a complete CD.
+    - Pre-populate apt's lists directory with signed Release files for
+      archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
+      against downgrade attacks right from initial installation.
+    - Run 'apt-get update' for all sources.list lines produced by a single
+      generator in one go, and don't comment out sources.list lines if it
+      fails.
+    - Make the path to security updates configurable, as well as the host.
+    - Remove restricted from cdrom entry if apt-setup/restricted is false.
+  * Add Release files for intrepid.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 17 Jun 2008 12:29:09 +0100
+
+apt-setup (1:0.37) unstable; urgency=low
+
+  [ Updated translations ]
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Marathi (mr.po) by Sampada
+  * Dutch (nl.po) by Frans Pop
+  * Punjabi (Gurmukhi) (pa.po) by Amanpreet Singh Alam
+
+ -- Otavio Salvador <otavio@debian.org>  Wed, 07 May 2008 23:58:11 -0300
+
+apt-setup (1:0.36) unstable; urgency=low
+
+  * Don't scan the installation CD if it does not include base packages.
+  * Because of reported issues with accessing the CD in the /target environment
+    if it is already mounted in the D-I environment, base-installer has been
+    reverted to loop-mounting the installation CD. In order to still allow
+    CD-changing while avoiding these issues and keeping installs idempotent, we
+    now need to allow apt-cdrom to manage mounting/unmounting for all types of
+    CD images (except for hd-media installs). See: #474346, #475639.
+    Requires: base-installer (>= 1.90), pkgsel (>= 0.19), di-utils (>= 1.57).
+
+  [ Updated translations ]
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Marathi (mr.po)
+
+ -- Frans Pop <fjp@debian.org>  Mon, 28 Apr 2008 07:20:55 +0200
+
+apt-setup (1:0.35) unstable; urgency=low
+
+  * Remove code to work around the fact that base-installer loop-mounted the
+    installation CD on /target/cdrom.
+    Requires: base-installer (>= 1.89).
+  * 90services-select: don't fail if question is skipped. Closes: #466066.
+
+  [ Updated translations ]
+  * Amharic (am.po) by Tegegne Tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Basque (eu.po) by Piarres Beobide
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+
+ -- Frans Pop <fjp@debian.org>  Mon, 24 Mar 2008 23:18:36 +0100
+
+apt-setup (1:0.34) unstable; urgency=low
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Nepali (ne.po) by Shyam Krishna Bal
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovenian (sl.po) by Matej Kovacic
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po)
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 07:40:58 -0200
+
+apt-setup (1:0.33) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Put apt downloading info in the progress bar.
+  * Allocate 100 steps on the progress bar for each generator,
+    and 100 steps for verifying each generated block.
+  * Export PROGRESS_FROM and PROGRESS_TO to generators, giving the
+    starting and ending progress bar position for that generator. This can
+    be used by generators that need an absolute progress bar position for
+    calling debconf-apt-progress.
+  * apt-setup-verify: Use debconf-apt-progress and add a way for generators
+    to specify how it should advance the progress bar.
+  * Allow the progress bar to be canceled.
+  * 50mirror: Call choose-mirror -n to avoid trashing the progress bar.
+  * Needs debconf 1.5.17.
+
+  [ Frans Pop ]
+  * debian/rules: move packaging rules from binary-arch to binary-indep.
+  * Adjust templates for mirror use to also cover installation from CD sets.
+  * Only ask to use a mirror at low priority if more that 8 CDs or 2 DVDs were
+    scanned.
+  * Language tasks fit on CD3/DVD1; don't warn about missing packages from
+    them unless necessary.
+  * Move templates for mirror use linked to installation from CD to apt-cdrom
+    as they can only be used when that is installed.
+  * Disable option to cancel progress bar as there are issues with it.
+
+  [ Updated translations ]
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Serge Leblanc
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Stefano Canepa
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Viesturs Zarins
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+
+ -- Frans Pop <fjp@debian.org>  Tue, 05 Feb 2008 00:17:21 +0100
+
+apt-setup (1:0.32) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Add support for CD/DVD sets during installation:
+    - rename generator 50cdrom to 40cdrom to make room for new generator
+    - add new generator 41cdset to support scanning additional CD/DVDs
+    - add script load-install-cd
+    To support CD/DVD changing, the installation CD/DVD needs to be unmounted
+    in the D-I environment during package installation, which means that e.g.
+    running anna-install to install udebs is no longer possible. Because of
+    this components/scripts also need make sure that the installation CD is
+    loaded and mounted again after package installation.
+    Components/scripts that can install packages in /target after apt-setup
+    has been run should either use apt-install, or create the correct
+    conditions themselves (as pkgsel does).
+    Requires apt (0.7.9) in testing for #448187 and #448521, and requires
+    pkgsel (1.16) and di-utils (1.50).
+  * Add myself as uploader.
+
+  [ Colin Watson ]
+  * Strip 'deb ' from the start of apt-setup/local*/repository, just in case
+    somebody copies and pastes from an existing sources.list; see also
+    #420894.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Panjabi (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Frans Pop <fjp@debian.org>  Sun, 06 Jan 2008 20:35:19 +0100
+
+apt-setup (1:0.31ubuntu8) hardy-proposed; urgency=low
+
+  * Remove restricted from cdrom entry if apt-setup/restricted is false
+    (LP: #220805).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 May 2008 22:24:39 +0200
+
 apt-setup (1:0.31ubuntu7) hardy; urgency=low
 
   * Make the path to security updates configurable, as well as the host

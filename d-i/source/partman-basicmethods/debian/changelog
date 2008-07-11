@@ -1,3 +1,23 @@
+partman-basicmethods (39ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - When changing filesystem, set the default mount options to the
+      contents of /lib/partman/mountoptions/${fs}_defaults if it exists.
+  * Set Vcs-Bzr for Ubuntu.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 17 May 2008 18:17:03 +0200
+
+partman-basicmethods (39) unstable; urgency=low
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Marathi (mr.po) by Sampada
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:59:12 -0300
+
 partman-basicmethods (38ubuntu2) hardy; urgency=low
 
   * Make choose_method/dont_use/choices executable again.

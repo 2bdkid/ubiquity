@@ -106,24 +106,19 @@ decode_recipe () {
 }
 
 foreach_partition () {
-	local - doing IFS partition former last
+	local - doing IFS pcount last partition
 	doing=$1
+	pcount=$(echo "$scheme" | wc -l)
+	last=no
+
 	IFS="$NL"
-	former=''
 	for partition in $scheme; do
 		restore_ifs
-		if [ "$former" ]; then
-			set -- $former
-			last=no
-			eval "$doing"
-		fi
-		former="$partition"
-	done
-	if [ "$former" ]; then
-		set -- $former
-		last=yes
+		[ $pcount -gt 1 ] || last=yes
+		set -- $partition
 		eval "$doing"
-	fi
+		pcount=$(($pcount - 1))
+	done
 }
 
 min_size () {
@@ -178,13 +173,13 @@ partition_after () {
 
 pull_primary () {
 	primary=''
-	logical=''
+	scheme_rest=''
 	foreach_partition '
 		if [ -z "$primary" ] && \
 		   echo $* | grep '\''\$primary{'\'' >/dev/null; then
 			primary="$*"
 		else
-			logical="${logical:+$logical$NL}$*"
+			scheme_rest="${scheme_rest:+$scheme_rest$NL}$*"
 		fi'
 }
 
@@ -265,7 +260,7 @@ choose_recipe () {
 	type=$1
 	target="$2"
 	free_size=$3
-	
+
 	# Preseeding of recipes
 	db_get partman-auto/expert_recipe
 	if [ -n "$RET" ]; then
@@ -285,7 +280,7 @@ choose_recipe () {
 	fi
 
 	recipedir=$(get_recipedir)
-	
+
 	choices=''
 	default_recipe=no
 	db_get partman-auto/choose_recipe
@@ -309,13 +304,13 @@ choose_recipe () {
 			fi
 		fi
 	done
-	
+
 	if [ -z "$choices" ]; then
 		db_input critical partman-auto/no_recipe || true
 		db_go || true # TODO handle backup right
 		return 1
 	fi
- 
+
 	db_subst partman-auto/choose_recipe TARGET "$target"
 	debconf_select medium partman-auto/choose_recipe "$choices" "$default_recipe"
 	if [ $? = 255 ]; then

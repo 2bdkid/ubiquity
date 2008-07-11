@@ -30,7 +30,7 @@ if [ -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; the
 	[ "$RET" ] || db_set apt-setup/use_mirror true 
 
 	# Text is variable for Debian
-	db_metaget apt-mirror/use/netinst_old description
+	db_metaget apt-setup/use/netinst_old description
 	db_subst apt-setup/use_mirror EXPLANATION "$RET"
 
 	db_input medium apt-setup/use_mirror || [ $? -eq 30 ]
@@ -84,6 +84,14 @@ dists="main"
 db_get apt-setup/restricted
 if [ "$RET" = true ]; then
 	dists="$dists restricted"
+else
+	# Remove restricted from any previous cdrom entry if necessary.
+	for file in $ROOT/etc/apt/sources.list.base \
+		    $ROOT/etc/apt/sources.list.new; do
+		if [ -e "$file" ]; then
+			sed -i '/deb cdrom:/s/ restricted//g' "$file"
+		fi
+	done
 fi
 
 db_get mirror/protocol

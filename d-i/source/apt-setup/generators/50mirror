@@ -16,8 +16,8 @@ warning() {
 }
 
 # Ask if a mirror should be used if the base system can be installed from CD
-# Default to false for full CD/DVD images; ask only at medium prio for
-# netinst images and DVDs
+# Default value and priority vary with the CD type used and number of CDs
+# that has been scanned in 41cdset
 if [ -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; then
 	if ! search-path choose-mirror; then
 		warning "choose-mirror is not available; cannot offer network mirror"
@@ -28,29 +28,62 @@ if [ -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; the
 	if [ -e /cdrom/.disk/cd_type ]; then
 		cd_type=$(cat /cdrom/.disk/cd_type)
 	fi
+	cd_count=$(grep "^deb cdrom:" $ROOT/etc/apt/sources.list.new | wc -l)
 
 	case "$cd_type" in
 	    not_complete)
-		db_metaget apt-mirror/use/netinst description
-		db_subst apt-setup/use_mirror EXPLANATION "$RET"
 		use_mirror=true
-		use_prio=medium ;;
-	    full_cd)
-		db_metaget apt-mirror/use/full_cd1 description
-		explanation="$RET"
-		db_metaget apt-mirror/use/full_cd2 description
-		explanation="$explanation$NL$NL$RET"
-		db_subst apt-setup/use_mirror EXPLANATION "$explanation"
-		use_mirror=true
-		use_prio=high ;;
-	    dvd)
-		db_metaget apt-mirror/use/dvd description
+		use_prio=medium
+		db_metaget apt-setup/use/netinst description
 		db_subst apt-setup/use_mirror EXPLANATION "$RET"
+		;;
+	    full_cd*)
+		use_mirror=true
+		use_prio=high
+		if [ $cd_count -le 8 ]; then
+			if [ $cd_count -eq 1 ]; then
+				db_metaget apt-setup/use/cd description
+			elif [ $cd_count -le 3 ]; then
+				db_metaget apt-setup/use/cd-set1 description
+				RET="$(printf "$RET" "$cd_count")"
+			else
+				use_mirror=false
+				db_metaget apt-setup/use/cd-set2 description
+				RET="$(printf "$RET" "$cd_count")"
+			fi
+			explanation="$RET"
+			if [ $cd_count -le 3 ]; then
+				db_metaget apt-setup/use/inet1 description
+				explanation="$explanation $RET"
+				db_metaget apt-setup/use/cd-note description
+				explanation="$explanation$NL$NL$RET"
+			else
+				db_metaget apt-setup/use/inet2 description
+				explanation="$explanation $RET"
+			fi
+			db_subst apt-setup/use_mirror EXPLANATION "$explanation"
+		else
+			use_mirror=false
+			use_prio=low
+		fi
+		;;
+	    dvd*)
 		use_mirror=false
-		use_prio=high ;;
+		use_prio=high
+		if [ $cd_count -eq 1 ]; then
+			db_metaget apt-setup/use/dvd description
+			explanation="$RET"
+			db_metaget apt-setup/use/inet2 description
+			explanation="$explanation $RET"
+			db_subst apt-setup/use_mirror EXPLANATION "$explanation"
+		else
+			use_prio=low
+		fi
+		;;
 	    *)
 		use_mirror=true
-		use_prio=high ;;
+		use_prio=high
+		;;
 	esac
 
 	# Default to false if no network selected in netcfg
@@ -184,7 +217,7 @@ while [ ! "$done" ]; do
 
 	echo "deb $protocol://$hostname$directory $codename $dists" > $file
 	
-	if apt-setup-verify $file; then
+	if apt-setup-verify --from $PROGRESS_FROM --to $PROGRESS_TO $file; then
 		done=1
 	else
 		db_set apt-setup/mirror/error Retry
@@ -192,7 +225,7 @@ while [ ! "$done" ]; do
 		db_go || exit 10
 		db_get apt-setup/mirror/error
 		if [ "$RET" = "Change mirror" ]; then
-			choose-mirror || true
+			choose-mirror -n || true
 		elif [ "$RET" = Ignore ]; then
 			exit 1
 		fi

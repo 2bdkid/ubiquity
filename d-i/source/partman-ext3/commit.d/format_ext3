@@ -80,8 +80,8 @@ for dev in $DEVICES/*; do
 				# author, it is safer to format the loop file,
 				# rather than the device.
 				if [ -s loop ]; then
-				    device="$(cat loop)"
-				    force=-F
+					device="$(cat loop)"
+					force=-F
 				fi
 				if log-output -t partman --pass-stdout \
 				   mkfs.ext3 $force "$device" $usage >/dev/null; then

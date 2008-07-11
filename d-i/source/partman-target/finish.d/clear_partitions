@@ -55,6 +55,9 @@ for part in $partitions; do
 		
 		# /home could be a symlink.
 		[ -f "$tmp/home" ] && (rm "$tmp/home" || failed)
+
+		# / could have the wrong owner.
+		chown root:root $tmp
 		
 		# Preserve the UID, if possible.
 		db_get passwd/username || true

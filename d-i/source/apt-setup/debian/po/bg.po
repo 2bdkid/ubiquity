@@ -10,13 +10,13 @@
 #
 # Ognyan Kulev <ogi@fmi.uni-sofia.bg>, 2004, 2005, 2006.
 # Nikola Antonov <nikola@linux-bg.org>, 2004.
-# Damyan Ivanov <dam@modsoftsys.com>, 2006, 2007.
+# Damyan Ivanov <dam@modsoftsys.com>, 2006, 2007, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: bg\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-09-27 06:30+0000\n"
-"PO-Revision-Date: 2007-10-02 13:05+0300\n"
+"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"PO-Revision-Date: 2008-01-17 09:57+0200\n"
 "Last-Translator: Damyan Ivanov <dam@modsoftsys.com>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,8 @@ msgstr ""
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
-#: ../apt-setup-udeb.templates:5
+#. :sl1:
+#: ../apt-setup-udeb.templates:1001
 msgid "Configure the package manager"
 msgstr "Настройване на управлението на пакети"
 
@@ -36,43 +37,50 @@ msgstr "Настройване на управлението на пакети"
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
-#: ../apt-setup-udeb.templates:11
+#. :sl1:
+#: ../apt-setup-udeb.templates:2001
 msgid "Configuring apt"
 msgstr "Настройване на apt"
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:15
+#. :sl1:
+#: ../apt-setup-udeb.templates:3001
 msgid "Running ${SCRIPT}..."
 msgstr "Изпълнение на ${SCRIPT}..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:19
+#. :sl1:
+#: ../apt-setup-udeb.templates:4001
 msgid "Scanning local repositories..."
 msgstr "Сканиране за локално хранилище..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:23
+#. :sl1:
+#: ../apt-setup-udeb.templates:5001
 msgid "Scanning the security updates repository..."
 msgstr "Сканиране за хранилище с обновявания по сигурността..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:27
+#. :sl1:
+#: ../apt-setup-udeb.templates:6001
 msgid "Scanning the volatile updates repository..."
 msgstr "Сканиране за хранилище с бързи обновявания..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 msgid "Cannot access repository"
 msgstr "Грешка при достъп до хранилището"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
 "made available to you at this time. You should investigate this later."
@@ -83,7 +91,8 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
 "list file."
@@ -95,7 +104,8 @@ msgstr ""
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#: ../apt-setup-udeb.templates:58
+#. :sl2:
+#: ../apt-setup-udeb.templates:10001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "обновявания по сигурността (от ${SEC_HOST})"
 
@@ -104,19 +114,22 @@ msgstr "обновявания по сигурността (от ${SEC_HOST})"
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#: ../apt-setup-udeb.templates:58
+#. :sl2:
+#: ../apt-setup-udeb.templates:10001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr "бързи обновявания (от ${VOL_HOST})"
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid "Services to use:"
 msgstr "Източници на обновявания:"
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -126,7 +139,8 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -136,10 +150,11 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
-"relatively frequently and where not having the lastest version could reduce "
+"relatively frequently and where not having the latest version could reduce "
 "the usability of the software. An example is the virus signatures for a "
 "virus scanner. This service is only available for stable and oldstable "
 "releases."
@@ -152,19 +167,22 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../apt-cdrom-setup.templates:3
+#. :sl1:
+#: ../apt-cdrom-setup.templates:1001
 msgid "Scanning the CD-ROM..."
 msgstr "Сканиране на компактдиск..."
 
 #. Type: error
 #. Description
-#: ../apt-cdrom-setup.templates:7
+#. :sl2:
+#: ../apt-cdrom-setup.templates:2001
 msgid "apt configuration problem"
 msgstr "Проблем с настройване на apt"
 
 #. Type: error
 #. Description
-#: ../apt-cdrom-setup.templates:7
+#. :sl2:
+#: ../apt-cdrom-setup.templates:2001
 msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
@@ -172,28 +190,251 @@ msgstr ""
 "Провален е опитът за настройване на apt, така че да инсталира допълнителни "
 "пакети от компактдиск."
 
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
+#: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
+msgid "Scan another CD or DVD?"
+msgstr "Сканиране на друго CD или DVD?"
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001
+msgid "Your installation CD or DVD has been scanned; its label is:"
+msgstr "Преглеждането на инсталационното CD или DVD приключи. Етикетът му е:"
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001
+msgid ""
+"You now have the option to scan additional CDs or DVDs for use by the "
+"package manager (apt). Normally these should be from the same set as the "
+"installation CD/DVD. If you do not have any additional CDs or DVDs "
+"available, this step can just be skipped."
+msgstr ""
+"Сега имате възможност да сканирате допълнителни CD или DVD, които да се "
+"използват от пакетния мениджър (apt). Обикновено допълнителните носители "
+"трябва да са от комплекта на инсталационния диск. Ако нямате допълнителни "
+"дискове просто прескочете тази стъпка."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
+msgid "If you wish to scan another CD or DVD, please insert it now."
+msgstr ""
+"Ако желаете да бъде сканиран допълнителен диск, поставете го в устройството."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:4001
+msgid "The CD or DVD with the following label has been scanned:"
+msgstr "Следният носител беше сканиран:"
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:5001
+msgid "The CD or DVD with the following label has already been scanned:"
+msgstr "Носителят с този етикет вече е сканиран:"
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:5001
+msgid "Please replace it now if you wish to scan another CD or DVD."
+msgstr "Ако желаете да бъде сканиран друг диск, поставете го в устройството."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:6001
+msgid ""
+"An attempt to configure apt to install additional packages from the CD/DVD "
+"failed."
+msgstr ""
+"Провален е опитът за настройване на apt, така че да инсталира допълнителни "
+"пакети от CD/DVD."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:6001
+msgid "Please check that the CD/DVD has been inserted correctly."
+msgstr "Уверете се, че дискът е поставен правилно."
+
 #. Type: text
 #. Description
+#. :sl1:
+#. This template uses the same text as used in the package apt for apt-cdrom
+#. Do not translate "/cdrom/" (the mount point)
+#: ../apt-cdrom-setup.templates:7001
+msgid "Media change"
+msgstr "Смяна на носителя"
+
+#. Type: text
+#. Description
+#. :sl1:
+#. This template uses the same text as used in the package apt for apt-cdrom
+#. Do not translate "/cdrom/" (the mount point)
+#: ../apt-cdrom-setup.templates:7001
+msgid ""
+"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
+"and press enter."
+msgstr ""
+"/cdrom/:Поставете диска с етикет „${LABEL}“ в устройството „/cdrom/“ и "
+"натиснете клавиша „Enter“."
+
+#. Type: text
+#. Description
+#. :sl1:
 #. finish-install progress bar item
-#: ../apt-cdrom-setup.templates:14
+#: ../apt-cdrom-setup.templates:8001
 msgid "Disabling netinst CD in sources.list..."
 msgstr "Забраняване на netinst CD в sources.list..."
 
 #. Type: text
 #. Description
-#: ../apt-mirror-setup.templates:3
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+msgid ""
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
+msgstr ""
+"Ако инсталирате от CD за мрежова инсталация и решите да не използвате "
+"огледален сървър, система ще съдържа само ограничен брой базови пакети."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:10001
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+"Компактдискът, който използвате за инсталиране (netinst) съдържа само "
+"минимална базова система. Използвайте огледало за инсталирането на "
+"останалата част от системата."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:11001
+msgid ""
+"You are installing from a CD, which contains a limited selection of packages."
+msgstr "Инсталирате от компактдиск, който съдържа ограничен набор от пакети."
+
+#. Type: text
+#. Description
+#. :sl1:
+#. The value of %i can be 2 or 3
+#: ../apt-cdrom-setup.templates:12001
+#, no-c-format
+msgid ""
+"You have scanned %i CDs. Even though these contain a fair selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English)."
+msgstr ""
+"Сканирани са %i носителя. Въпреки, че те съдържат голям набор от пакети, "
+"някои пакети може да не са налични (например тези за поддръжка на езици, "
+"различни от английски)."
+
+#. Type: text
+#. Description
+#. :sl1:
+#. The value of %i can be from 4 to 8
+#: ../apt-cdrom-setup.templates:13001
+#, no-c-format
+msgid ""
+"You have scanned %i CDs. Even though these contain a large selection of "
+"packages, some may be missing."
+msgstr ""
+"Сканирани са %i носителя. Въпреки, че те съдържат голям набор от пакети, "
+"някои пакети може да не са налични."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:14001
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation."
+msgstr ""
+"Използването на огледало може да доведе то изтеглянето на голям обем "
+"информация по време на следващата стъпка на инсталацията."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:15001
+msgid ""
+"You are installing from a DVD. Even though the DVD contains a large "
+"selection of packages, some may be missing."
+msgstr ""
+"Инсталирате от DVD. Въпреки, че то съдържа голям набор от пакети, има "
+"пакети, които не са включени."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:16001
+msgid ""
+"Unless you don't have a good Internet connection, use of a mirror is "
+"recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+"Ако имате добра връзка с Интернет се препоръчва използването на огледало, "
+"особено ако планирате да инсталирате графична работна среда."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:17001
+msgid ""
+"If you have a reasonably good Internet connection, use of a mirror is "
+"suggested if you plan to install a graphical desktop environment."
+msgstr ""
+"Ако имате добра връзка с Интернет се препоръчва използването на огледало, "
+"особено ако планирате да инсталирате графична работна среда."
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-mirror-setup.templates:1001
 msgid "Scanning the mirror..."
 msgstr "Сканиране на огледалото..."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:8
+#. :sl1:
+#: ../apt-mirror-setup.templates:2001
 msgid "Use non-free software?"
 msgstr "Използване на non-free софтуер?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:8
+#. :sl1:
+#: ../apt-mirror-setup.templates:2001
 msgid ""
 "Some non-free software has been made to work with Debian. Though this "
 "software is not at all a part of Debian, standard Debian tools can be used "
@@ -208,23 +449,28 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. :sl1:
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates:2001
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr ""
 "Моля, изберете дали искате все пак да го направите достъпен за инсталиране."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19
+#. :sl1:
+#: ../apt-mirror-setup.templates:3001
 msgid "Use contrib software?"
 msgstr "Използване на contrib софтуер?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19
+#. :sl1:
+#: ../apt-mirror-setup.templates:3001
 msgid ""
 "Some additional software has been made to work with Debian. Though this "
 "software is free, it depends on non-free software for its operation. This "
@@ -238,10 +484,23 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. :sl1:
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates:3001
+#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates-ubuntu:3001
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -249,37 +508,40 @@ msgstr ""
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Retry"
 msgstr "Опит отново"
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Change mirror"
 msgstr "Смяна на огледало"
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Ignore"
 msgstr "Игнориране"
 
 #. Type: select
 #. Description
-#: ../apt-mirror-setup.templates:33
+#: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Грешка при изтеглянето на файл:"
 
 #. Type: select
 #. Description
-#: ../apt-mirror-setup.templates:33
+#: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
@@ -293,13 +555,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:43
+#. :sl1:
+#: ../apt-mirror-setup.templates:5001
 msgid "Use a network mirror?"
 msgstr "Използване на огледален сървър?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:43
+#. :sl1:
+#: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -309,92 +573,31 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:52
+#. :sl2:
+#: ../apt-mirror-setup.templates:6001
 msgid "Continue without a network mirror?"
 msgstr "Продължаване без използване на огледален сървър?"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:52
+#. :sl2:
+#: ../apt-mirror-setup.templates:6001
 msgid "No network mirror was selected."
 msgstr "Не е избран огледален сървър."
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:60
-msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
-msgstr ""
-"Ако инсталирате от CD за мрежова инсталация и решите да не използвате "
-"огледален сървър, система ще съдържа само ограничен брой базови пакети."
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:64
-msgid ""
-"You are installing from a netinst CD, which by itself only allows "
-"installation of a very minimal base system. Use a mirror to install a more "
-"complete system."
-msgstr ""
-"Компактдискът, който използвате за инсталиране (netinst) съдържа само "
-"минимална базова система. Използвайте огледало за инсталирането на "
-"останалата част от системата."
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:68
-msgid ""
-"You are installing from a CD, which contains a limited selection of "
-"packages. Unless you don't have a good Internet connection, use of a mirror "
-"is recommended, especially if you plan to install a graphical desktop "
-"environment."
-msgstr ""
-"Инсталирате от компактдиск, съдържащ ограничен брой пакети. Освен в случай "
-"на ограничена мрежова свързаност, за инсталиране на останалата част от "
-"системата се препоръчва използването на огледало, особено ако планирате да "
-"инсталирате графична работна среда."
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:72
-msgid ""
-"Note that using a mirror can result in a large amount of data being "
-"downloaded during the next step of the installation. Alternatively, you can "
-"continue without a mirror and install any missing packages from other CDs "
-"after the installation."
-msgstr ""
-"Използването на огледало може да доведе то изтеглянето на голям обем "
-"информация по време на следващата стъпка на инсталацията. Можете да "
-"продължите и без огледало, като инсталирате допълнителните пакети след "
-"приключване на инсталацията от други компактдискове."
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:76
-msgid ""
-"You are installing from a DVD. Though the DVD contains a large selection of "
-"packages, some may be missing (notably some packages needed to support "
-"languages other than English). If you have a reasonably good Internet "
-"connection, use of a mirror is suggested if you plan to install a graphical "
-"desktop environment."
-msgstr ""
-"DVD-то, от което инсталирате съдържа голям набор от пакети, но някои, "
-"особено тези за поддръжка на езици, различни от английски може да липсват. "
-"Ако имате добра връзка с Интернет се препоръчва използването на огледало, "
-"особено ако планирате да инсталирате графична работна среда."
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Use restricted software?"
 msgstr "Използване на ограничен софтуер?"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -410,14 +613,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:17
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:2001
 msgid "Use software from the \"universe\" component?"
 msgstr "Използване на софтуер от компонентата „universe“?"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:17
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:2001
 msgid ""
 "Some additional software is available in packaged form. This software is "
 "free and, though it is not a part of the main distribution, standard package "
@@ -430,14 +635,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:28
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:3001
 msgid "Use software from the \"multiverse\" component?"
 msgstr "Използване на софтуер от компонентата „multiverse“?"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:28
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:3001
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -454,14 +661,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid "Use backported software?"
 msgstr "Използване на софтуер backport?"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

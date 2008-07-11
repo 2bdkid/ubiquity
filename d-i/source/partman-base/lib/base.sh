@@ -171,7 +171,7 @@ partition_tree_choices () {
 		# A hack to make sure each line in the table is unique and
 		# selectable by debconf -- pad lines with varying amounts of
 		# whitespace.
-    		whitespace_hack="$NBSP$whitespace_hack"
+		whitespace_hack="$NBSP$whitespace_hack"
 		echo "$line$whitespace_hack"
 	done
 }
@@ -228,17 +228,26 @@ longint2human () {
 }
 
 human2longint () {
-	local human suffix int frac longint
+	local human orighuman gotb suffix int frac longint
 	set -- $*; human="$1$2$3$4$5" # without the spaces
+	orighuman="$human"
 	human=${human%b} #remove last b
 	human=${human%B} #remove last B
+	gotb=''
+	if [ "$human" != "$orighuman" ]; then
+		gotb=1
+	fi
 	suffix=${human#${human%?}} # the last symbol of $human
 	case $suffix in
 	k|K|m|M|g|G|t|T)
 		human=${human%$suffix}
 		;;
 	*)
-		suffix=''
+		if [ "$gotb" ]; then
+			suffix=B
+		else
+			suffix=''
+		fi
 		;;
 	esac
 	int="${human%[.,]*}"
@@ -248,6 +257,10 @@ human2longint () {
 	frac=${frac%${frac#????}} # only the first 4 digits of $frac
 	longint=$(expr "$int" \* 10000 + "$frac")
 	case $suffix in
+	b|B)
+		longint=${longint%????}
+		[ "$longint" ] || longint=0
+		;;
 	k|K)
 		longint=${longint%?}
 		;;
@@ -326,7 +339,7 @@ update_partition () {
 		$u $1 $part
 	done
 }
-        
+
 DEVICES=/var/lib/partman/devices
 
 # 0, 1 and 2 are standard input, output and error.
@@ -401,7 +414,7 @@ error_handler () {
 		db_progress INFO $info
 		while { read_line frac state; [ "$frac" != ready ]; }; do
 		    if [ "$state" ]; then
-			db_subst $info STATE "$state" 
+			db_subst $info STATE "$state"
 			db_progress INFO $info
 		    fi
 		    db_progress SET $frac
@@ -514,9 +527,36 @@ memfree () {
 	fi
 }
 
+# return the device mapper table type
+dm_table () {
+	local type=""
+	if [ -x /sbin/dmsetup ]; then
+		type=$(/sbin/dmsetup table "$1" 2>/dev/null | head -n 1 | cut -d " " -f3)
+	fi
+	echo $type
+}
+
+# Check if a device is a partition on a multipath'ed device by checking if
+# the corresponding multipath map exists
+is_multipath_part () {
+	local type mp name
+
+	type multipath >/dev/null 2>&1 || return 1
+
+	type=$(dm_table $1)
+	[ "$type" = linear ] || return 1
+	name=$(dmsetup info --noheadings -c -oname "$1")
+
+	mp=${name%-part*}
+	if [ $(multipath -l $mp | wc -l) -gt  0 ]; then
+		return 0
+	fi
+	return 1
+}
+
 # TODO: this should not be global
 humandev () {
-    local host bus target part lun idenum targtype scsinum linux
+    local host bus target part lun idenum targtype scsinum linux wwid
     case "$1" in
 	/dev/ide/host*/bus[01]/target[01]/lun0/disc)
 	    host=`echo $1 | sed 's,/dev/ide/host\(.*\)/bus.*/target[01]/lun0/disc,\1,'`
@@ -716,10 +756,7 @@ humandev () {
 	    printf "$RET" ${type} ${device}
 	    ;;
 	/dev/mapper/*)
-	    type=""
-	    if [ -x /sbin/dmsetup ]; then
-	        type=$(/sbin/dmsetup table "$1" | head -n 1 | cut -d " " -f3)
-	    fi
+	    type=$(dm_table "$1")
 
 	    # First check for Serial ATA RAID devices
 	    if type dmraid >/dev/null 2>&1; then
@@ -750,6 +787,16 @@ humandev () {
 	        mapping=${1#/dev/mapper/}
 	        db_metaget partman/text/dmcrypt_volume description
 	        printf "$RET" $mapping
+	    elif [ "$type" = multipath ]; then
+		device=${1#/dev/mapper/}
+		wwid=$(multipath -l ${device} | head -n 1 | sed "s/^${device} \+(\([a-f0-9]\+\)).*/\1/")
+		db_metaget partman/text/multipath description
+		printf "$RET" ${device} ${wwid}
+	    elif is_multipath_part $1; then
+		part=$(echo "$1" | sed 's%.*-part\([0-9]\+\)$%\1%')
+		device=$(echo "$1" | sed 's%/dev/mapper/\(.*\)-part[0-9]\+$%\1%')
+		db_metaget partman/text/multipath_partition description
+		printf "$RET" ${device} ${part}
 	    else
 	        # LVM2 devices are found as /dev/mapper/<vg>-<lv>.  If the vg
 	        # or lv contains a dash, the dash is replaced by two dashes.
@@ -781,6 +828,21 @@ humandev () {
 	/dev/dasd*)
 	    disk="${1#/dev/}"
 	    humandev_dasd_disk /sys/block/$disk/$(readlink /sys/block/$disk/device)
+	    ;;
+	/dev/xvd[a-z])
+	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/xvd\([a-z]\).*,\1,')")
+	    drive=$(($drive - 96))
+	    linux=${1#/dev/}
+	    db_metaget partman/text/virtual_disk description
+	    printf "$RET" "$drive" "$linux"
+	    ;;
+	/dev/xvd[a-z][0-9]*)
+	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/xvd\([a-z]\).*,\1,')")
+	    drive=$(($drive - 96))
+	    part=$(echo $1 | sed 's,^/dev/xvd[a-z]\([0-9][0-9]*\).*,\1,')
+	    linux=${1#/dev/}
+	    db_metaget partman/text/virtual_partition description
+	    printf "$RET" "$drive" "$part" "$linux"
 	    ;;
 	*)
 	    # Check if it's an LVM1 device
@@ -855,7 +917,7 @@ disable_swap () {
 		  swapoff $path
 	      done
     else
-	grep '^/dev' /proc/swaps \
+	grep '^/dev' /proc/swaps | grep -v '^/dev/ramzswap' \
 	    | while read path x; do
 		  swapoff $path
 	      done
@@ -873,7 +935,7 @@ partman_lock_unit() {
 		cd $dev
 
 		# First check if we should lock a device
-		if [ -e "device" ]; then
+		if [ -e device ]; then
 			testdev=$(mapdevfs $(cat device))
 			if [ "$device" = "$testdev" ]; then
 				echo "$message" > locked
@@ -903,7 +965,7 @@ partman_unlock_unit() {
 		cd $dev
 
 		# First check if we should unlock a device
-		if [ -e "device" ]; then
+		if [ -e device ]; then
 			testdev=$(mapdevfs $(cat device))
 			if [ "$device" = "$testdev" ]; then
 				rm -f locked
@@ -923,147 +985,7 @@ partman_unlock_unit() {
 	done
 }
 
-# List the changes that are about to be committed and let the user confirm first
-confirm_changes () {
-	local template dev x part partitions num id size type fs path name filesystem partdesc partitems items formatted_previously
-	template="$1"
-
-	# Compute the changes we are going to do
-	partitems=''
-	items=''
-	formatted_previously=no
-	for dev in $DEVICES/*; do
-		[ -d "$dev" ] || continue
-		cd $dev
-
-		open_dialog IS_CHANGED
-		read_line x
-		close_dialog
-		if [ "$x" = yes ]; then
-			partitems="${partitems}   $(humandev $(cat device))
-"
-		fi
-
-		partitions=
-		open_dialog PARTITIONS
-		while { read_line num id size type fs path name; [ "$id" ]; }; do
-			[ "$fs" != free ] || continue
-			partitions="$partitions $id,$num"
-		done
-		close_dialog
-	
-		for part in $partitions; do
-			id=${part%,*}
-			num=${part#*,}
-			[ -f $id/method -a -f $id/format \
-			  -a -f $id/visual_filesystem ] || continue
-			# if no filesystem (e.g. swap) should either be not
-			# formatted or formatted before the method is specified
-			[ -f $id/filesystem -o ! -f $id/formatted \
-			  -o $id/formatted -ot $id/method ] || continue
-			# if it is already formatted filesystem it must be formatted 
-			# before the method or filesystem is specified
-			[ ! -f $id/filesystem -o ! -f $id/formatted \
-			  -o $id/formatted -ot $id/method \
-			  -o $id/formatted -ot $id/filesystem ] ||
-			{
-				formatted_previously=yes
-				continue
-			}
-			filesystem=$(cat $id/visual_filesystem)
-			# Special case d-m devices to use a different description
-			if cat device | grep -q "/dev/mapper" ; then
-				partdesc="partman/text/confirm_unpartitioned_item"
-			else
-				partdesc="partman/text/confirm_item"
-				db_subst $partdesc PARTITION "$num"
-			fi
-			db_subst $partdesc TYPE "$filesystem"
-			db_subst $partdesc DEVICE $(humandev $(cat device))
-			db_metaget $partdesc description
-
-			items="${items}   ${RET}
-"
-		done
-	done
-
-	if [ "$items" ]; then
-		db_metaget partman/text/confirm_item_header description
-		items="$RET
-$items"
-	fi
-
-	if [ "$partitems" ]; then
-		db_metaget partman/text/confirm_partitem_header description
-		partitems="$RET
-$partitems"
-	fi
-
-	if [ "$partitems$items" ]; then
-		if [ -z "$items" ]; then
-			x="$partitems"
-		elif [ -z "$partitems" ]; then
-			x="$items"
-		else
-			x="$partitems
-$items"
-		fi
-		maybe_escape "$x" db_subst $template/confirm ITEMS
-		db_input critical $template/confirm
-		db_go || true
-		db_get $template/confirm
-		if [ "$RET" = false ]; then
-			db_reset $template/confirm
-			return 1
-		else
-			db_reset $template/confirm
-			return 0
-		fi
-	else
-		if [ "$formatted_previously" = no ]; then
-			db_input critical $template/confirm_nochanges
-			db_go || true
-			if [ $template = partman-dmraid ]; then
-				# for dmraid, only a note is displayed
-				return 1
-			fi
-			db_get $template/confirm_nochanges
-			if [ "$RET" = false ]; then
-				db_reset $template/confirm_nochanges
-				return 1
-			else
-				db_reset $template/confirm_nochanges
-				return 0
-			fi
-		else
-			return 0
-		fi
-	fi
-}
-
-commit_changes () {
-	local template
-	template=$1
-
-	for s in /lib/partman/commit.d/*; do
-		if [ -x $s ]; then
-			$s || {
-				db_input critical $template || true
-				db_go || true
-				for s in /lib/partman/init.d/*; do
-					if [ -x $s ]; then
-						$s || return 255
-					fi
-				done
-				return 1
-			}
-		fi
-	done
-
-	return 0
-}
-
-log '*******************************************************'
+[ "$PARTMAN_TEST" ] || log '*******************************************************'
 
 # Local Variables:
 # coding: utf-8

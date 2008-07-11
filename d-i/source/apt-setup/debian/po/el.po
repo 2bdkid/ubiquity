@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-09-27 06:30+0000\n"
+"POT-Creation-Date: 2008-01-26 07:32+0000\n"
 "PO-Revision-Date: 2007-02-20 12:26+0200\n"
 "Last-Translator: galaxico\n"
 "Language-Team:  <en@li.org>\n"
@@ -33,7 +33,8 @@ msgstr ""
 #. Description
 #. Main menu item
 #. MUST be kept below 55 characters/columns
-#: ../apt-setup-udeb.templates:5
+#. :sl1:
+#: ../apt-setup-udeb.templates:1001
 msgid "Configure the package manager"
 msgstr "Ρύθμιση του Διαχειριστή πακέτων"
 
@@ -41,45 +42,52 @@ msgstr "Ρύθμιση του Διαχειριστή πακέτων"
 #. Description
 #. Translators, "apt" is the program name
 #. so please do NOT translate it
-#: ../apt-setup-udeb.templates:11
+#. :sl1:
+#: ../apt-setup-udeb.templates:2001
 msgid "Configuring apt"
 msgstr "Ρύθμιση του apt"
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:15
+#. :sl1:
+#: ../apt-setup-udeb.templates:3001
 msgid "Running ${SCRIPT}..."
 msgstr "Εκτελείται το ${SCRIPT}..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:19
+#. :sl1:
+#: ../apt-setup-udeb.templates:4001
 msgid "Scanning local repositories..."
 msgstr "Ανίχνευση τοπικών αρχειοθηκών..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:23
+#. :sl1:
+#: ../apt-setup-udeb.templates:5001
 msgid "Scanning the security updates repository..."
 msgstr "Ανίχνευση της αρχειοθήκης των αναβαθμίσεων ασφαλείας..."
 
 #. Type: text
 #. Description
-#: ../apt-setup-udeb.templates:27
+#. :sl1:
+#: ../apt-setup-udeb.templates:6001
 #, fuzzy
 msgid "Scanning the volatile updates repository..."
 msgstr "Ανίχνευση της αρχειοθήκης των αναβαθμίσεων ασφαλείας..."
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 #, fuzzy
 msgid "Cannot access repository"
 msgstr "Δεν είναι δυνατή η πρόσβαση στις αναβαθμίσεις ασφαλείας"
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 #, fuzzy
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
@@ -91,7 +99,8 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../apt-setup-udeb.templates:43
+#. :sl2:
+#: ../apt-setup-udeb.templates:9001
 #, fuzzy
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
@@ -105,7 +114,8 @@ msgstr ""
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#: ../apt-setup-udeb.templates:58
+#. :sl2:
+#: ../apt-setup-udeb.templates:10001
 msgid "security updates (from ${SEC_HOST})"
 msgstr ""
 
@@ -114,20 +124,23 @@ msgstr ""
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#: ../apt-setup-udeb.templates:58
+#. :sl2:
+#: ../apt-setup-udeb.templates:10001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 #, fuzzy
 msgid "Services to use:"
 msgstr "Διευθύνσεις διακομιστών ονομάτων:"
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -135,7 +148,8 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -143,10 +157,11 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#: ../apt-setup-udeb.templates:60
+#. :sl2:
+#: ../apt-setup-udeb.templates:10002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
-"relatively frequently and where not having the lastest version could reduce "
+"relatively frequently and where not having the latest version could reduce "
 "the usability of the software. An example is the virus signatures for a "
 "virus scanner. This service is only available for stable and oldstable "
 "releases."
@@ -154,19 +169,22 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../apt-cdrom-setup.templates:3
+#. :sl1:
+#: ../apt-cdrom-setup.templates:1001
 msgid "Scanning the CD-ROM..."
 msgstr "Ανίχνευση CD-ROM..."
 
 #. Type: error
 #. Description
-#: ../apt-cdrom-setup.templates:7
+#. :sl2:
+#: ../apt-cdrom-setup.templates:2001
 msgid "apt configuration problem"
 msgstr "Πρόβλημα ρύθμισης του apt"
 
 #. Type: error
 #. Description
-#: ../apt-cdrom-setup.templates:7
+#. :sl2:
+#: ../apt-cdrom-setup.templates:2001
 msgid ""
 "An attempt to configure apt to install additional packages from the CD "
 "failed."
@@ -174,28 +192,234 @@ msgstr ""
 "Μια προσπάθεια ρύθμισης του apt για εγκατάσταση επιπλέον πακέτων από το CD "
 "απέτυχε."
 
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
+#: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
+msgid "Scan another CD or DVD?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001
+msgid "Your installation CD or DVD has been scanned; its label is:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001
+msgid ""
+"You now have the option to scan additional CDs or DVDs for use by the "
+"package manager (apt). Normally these should be from the same set as the "
+"installation CD/DVD. If you do not have any additional CDs or DVDs "
+"available, this step can just be skipped."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
+msgid "If you wish to scan another CD or DVD, please insert it now."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:4001
+msgid "The CD or DVD with the following label has been scanned:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:5001
+msgid "The CD or DVD with the following label has already been scanned:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:5001
+#, fuzzy
+msgid "Please replace it now if you wish to scan another CD or DVD."
+msgstr ""
+"Παρακαλώ, επιλέξτε τις μονάδες που θέλετε να προσθέσετε στην Ομάδα Τόμων."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:6001
+#, fuzzy
+msgid ""
+"An attempt to configure apt to install additional packages from the CD/DVD "
+"failed."
+msgstr ""
+"Μια προσπάθεια ρύθμισης του apt για εγκατάσταση επιπλέον πακέτων από το CD "
+"απέτυχε."
+
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:6001
+#, fuzzy
+msgid "Please check that the CD/DVD has been inserted correctly."
+msgstr "Παρακαλώ βεβαιωθείτε ότι έχετε κάνει σωστές ρυθμίσεις."
+
 #. Type: text
 #. Description
+#. :sl1:
+#. This template uses the same text as used in the package apt for apt-cdrom
+#. Do not translate "/cdrom/" (the mount point)
+#: ../apt-cdrom-setup.templates:7001
+msgid "Media change"
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#. This template uses the same text as used in the package apt for apt-cdrom
+#. Do not translate "/cdrom/" (the mount point)
+#: ../apt-cdrom-setup.templates:7001
+msgid ""
+"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
+"and press enter."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
 #. finish-install progress bar item
-#: ../apt-cdrom-setup.templates:14
+#: ../apt-cdrom-setup.templates:8001
 msgid "Disabling netinst CD in sources.list..."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../apt-mirror-setup.templates:3
+#. :sl1:
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
+msgid ""
+"If you are installing from a netinst CD and choose not to use a mirror, you "
+"will end up with only a very minimal base system."
+msgstr ""
+"Αν κάνετε την εγκατάσταση από ένα CD netinst και επιλέξετε να μην "
+"χρησιμοποιήσετε έναν καθρέφτη, θα καταλήξετε μόνο με ένα ελάχιστο βασικό "
+"σύστημα. "
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:10001
+msgid ""
+"You are installing from a netinst CD, which by itself only allows "
+"installation of a very minimal base system. Use a mirror to install a more "
+"complete system."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:11001
+msgid ""
+"You are installing from a CD, which contains a limited selection of packages."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#. The value of %i can be 2 or 3
+#: ../apt-cdrom-setup.templates:12001
+#, no-c-format
+msgid ""
+"You have scanned %i CDs. Even though these contain a fair selection of "
+"packages, some may be missing (notably some packages needed to support "
+"languages other than English)."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#. The value of %i can be from 4 to 8
+#: ../apt-cdrom-setup.templates:13001
+#, no-c-format
+msgid ""
+"You have scanned %i CDs. Even though these contain a large selection of "
+"packages, some may be missing."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:14001
+msgid ""
+"Note that using a mirror can result in a large amount of data being "
+"downloaded during the next step of the installation."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:15001
+msgid ""
+"You are installing from a DVD. Even though the DVD contains a large "
+"selection of packages, some may be missing."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:16001
+msgid ""
+"Unless you don't have a good Internet connection, use of a mirror is "
+"recommended, especially if you plan to install a graphical desktop "
+"environment."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:17001
+msgid ""
+"If you have a reasonably good Internet connection, use of a mirror is "
+"suggested if you plan to install a graphical desktop environment."
+msgstr ""
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../apt-mirror-setup.templates:1001
 msgid "Scanning the mirror..."
 msgstr "Αναζήτηση στην αρχειοθήκη..."
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:8
+#. :sl1:
+#: ../apt-mirror-setup.templates:2001
 msgid "Use non-free software?"
 msgstr "Θέλετε να χρησιμοποιήσετε μη ελεύθερο λογισμικό;"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:8
+#. :sl1:
+#: ../apt-mirror-setup.templates:2001
 msgid ""
 "Some non-free software has been made to work with Debian. Though this "
 "software is not at all a part of Debian, standard Debian tools can be used "
@@ -210,10 +434,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. :sl1:
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates:8 ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates:2001
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr ""
 "Παρακαλώ, επιλέξτε αν επιθυμείτε να είναι διαθέσιμο αυτό το λογισμικό ούτως "
@@ -221,13 +448,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19
+#. :sl1:
+#: ../apt-mirror-setup.templates:3001
 msgid "Use contrib software?"
 msgstr "Θέλετε να χρησιμοποιήσετε συνεισφερόμενο λογισμικό;"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:19
+#. :sl1:
+#: ../apt-mirror-setup.templates:3001
 msgid ""
 "Some additional software has been made to work with Debian. Though this "
 "software is free, it depends on non-free software for its operation. This "
@@ -242,47 +471,63 @@ msgstr ""
 
 #. Type: boolean
 #. Description
+#. :sl1:
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates:19 ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates:3001
+#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates-ubuntu:3001
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Παρακαλώ, επιλέξτε αν επιθυμείτε να είναι διαθέσιμο αυτό το λογισμικό."
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Retry"
 msgstr "Ξαναπροσπαθήστε"
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Change mirror"
 msgstr "Αλλαγή καθρέφτη της αρχειοθήκης"
 
 #. Type: select
 #. Choices
+#. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-mirror-setup.templates:32
+#: ../apt-mirror-setup.templates:4001
 msgid "Ignore"
 msgstr "Αγνοήστε"
 
 #. Type: select
 #. Description
-#: ../apt-mirror-setup.templates:33
+#: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Απέτυχε η μεταφόρτωση ενός αρχείου:"
 
 #. Type: select
 #. Description
-#: ../apt-mirror-setup.templates:33
+#: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
 "network, or with the mirror. You can choose to retry the download, select a "
@@ -298,13 +543,15 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:43
+#. :sl1:
+#: ../apt-mirror-setup.templates:5001
 msgid "Use a network mirror?"
 msgstr "Να χρησιμοποιηθεί κάποιος δικτυακός καθρέφτης;"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:43
+#. :sl1:
+#: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
 "the CD-ROM. This may also make newer versions of software available."
@@ -315,81 +562,33 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:52
+#. :sl2:
+#: ../apt-mirror-setup.templates:6001
 #, fuzzy
 msgid "Continue without a network mirror?"
 msgstr "Συνέχεια χωρίς προκαθορισμένη δρομολόγηση;"
 
 #. Type: boolean
 #. Description
-#: ../apt-mirror-setup.templates:52
+#. :sl2:
+#: ../apt-mirror-setup.templates:6001
 #, fuzzy
 msgid "No network mirror was selected."
 msgstr "Δεν ανιχνεύθηκαν διασυνδέσεις δικτύου"
 
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:60
-#, fuzzy
-msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
-msgstr ""
-"Αν κάνετε την εγκατάσταση από ένα CD netinst και επιλέξετε να μην "
-"χρησιμοποιήσετε έναν καθρέφτη, θα καταλήξετε μόνο με ένα ελάχιστο βασικό "
-"σύστημα. "
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:64
-msgid ""
-"You are installing from a netinst CD, which by itself only allows "
-"installation of a very minimal base system. Use a mirror to install a more "
-"complete system."
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:68
-msgid ""
-"You are installing from a CD, which contains a limited selection of "
-"packages. Unless you don't have a good Internet connection, use of a mirror "
-"is recommended, especially if you plan to install a graphical desktop "
-"environment."
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:72
-msgid ""
-"Note that using a mirror can result in a large amount of data being "
-"downloaded during the next step of the installation. Alternatively, you can "
-"continue without a mirror and install any missing packages from other CDs "
-"after the installation."
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../apt-mirror-setup.templates:76
-msgid ""
-"You are installing from a DVD. Though the DVD contains a large selection of "
-"packages, some may be missing (notably some packages needed to support "
-"languages other than English). If you have a reasonably good Internet "
-"connection, use of a mirror is suggested if you plan to install a graphical "
-"desktop environment."
-msgstr ""
-
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Use restricted software?"
 msgstr "Χρήση\"υπό περιορισμούς\" λογισιμικού;"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:5
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:1001
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -405,14 +604,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:17
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:2001
 msgid "Use software from the \"universe\" component?"
 msgstr "Χρήση λογισμικού από την ενότητα \"universe\";"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:17
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:2001
 msgid ""
 "Some additional software is available in packaged form. This software is "
 "free and, though it is not a part of the main distribution, standard package "
@@ -426,14 +627,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:28
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:3001
 msgid "Use software from the \"multiverse\" component?"
 msgstr "Χρήση λογισμικού από την ενότητα \"multiverse\";"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:28
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:3001
 msgid ""
 "Some non-free software is available in packaged form. Though this software "
 "is not a part of the main distribution, standard package management tools "
@@ -451,14 +654,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid "Use backported software?"
 msgstr "Χρήση backported λογισμικού;"
 
 #. Type: boolean
 #. Description
 #. This template is used by the Ubuntu version of d-i.
-#: ../apt-mirror-setup.templates-ubuntu:41
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

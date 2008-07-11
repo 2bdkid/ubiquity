@@ -52,7 +52,7 @@ if db_get netcfg/dhcp_options && \
 	CODE=9
 else
 	CODE=0
-	if ! apt-setup-verify $file; then
+	if ! apt-setup-verify --from $PROGRESS_FROM --to $PROGRESS_TO $file; then
 		db_subst apt-setup/service-failed HOST "$host"
 		db_input critical apt-setup/service-failed || true
 		if ! db_go; then
