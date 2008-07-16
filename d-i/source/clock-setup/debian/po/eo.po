@@ -3,9 +3,8 @@
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
 # 
-# translation of eo.po to Esperanto 
-# Esperanto messages for debian-installer.
-# Copyright (C) 2005,2006 Software in the Public Interest, Inc.
+# translation of Debian Installer templates to Esperanto.
+# Copyright (C) 2005-2007 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
 # Samuel Gimeno <sgimeno@gmail.com>, 2005.
@@ -14,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eo\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-07-25 16:45+0000\n"
-"PO-Revision-Date: 2007-05-01 14:01+0200\n"
+"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"PO-Revision-Date: 2007-10-13 13:48+0200\n"
 "Last-Translator: Serge Leblanc <serge.leblanc@wanadoo.fr>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,19 +24,22 @@ msgstr ""
 #. Type: text
 #. Description
 #. Main menu item
-#: ../clock-setup.templates:4
+#. :sl1:
+#: ../clock-setup.templates:1001
 msgid "Configure the clock"
 msgstr "Akomodi la horloĝon"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:9
+#. :sl1:
+#: ../clock-setup.templates:2001
 msgid "Is the system clock set to UTC?"
 msgstr "Ĉu la sistema horloĝo indikas la universalan horon ('UTC')?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:9
+#. :sl1:
+#: ../clock-setup.templates:2001
 msgid ""
 "System clocks are generally set to Coordinated Universal Time (UTC). The "
 "operating system uses your time zone to convert system time into local time. "
@@ -52,87 +54,105 @@ msgstr ""
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:18
-#, fuzzy
+#. :sl1:
+#: ../clock-setup.templates:3001
 msgid "Configuring clock settings..."
-msgstr "Memorigado de retaj akomodoj..."
+msgstr "Akomodado de la horloĝaj agordoj..."
 
 #. Type: text
 #. Description
-#: ../clock-setup.templates:22
+#. :sl1:
+#: ../clock-setup.templates:4001
 msgid "Setting up the clock"
 msgstr "Agordu la horloĝon"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:27
+#. :sl2:
+#: ../clock-setup.templates:5001
 msgid "Set the clock using NTP?"
-msgstr ""
+msgstr "Agordu la holoĝon uzante la 'NTP'?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:27
+#. :sl2:
+#: ../clock-setup.templates:5001
 msgid ""
 "The Network Time Protocol (NTP) can be used to set the system's clock. The "
 "installation process works best with a correctly set clock."
 msgstr ""
+"La 'NTP'-protokolo ('Network Time Protocol') povas esti uzita por agordi la "
+"sisteman horloĝon. La instalado pli bone funkcias kun ĝusta horloĝo."
 
 #. Type: string
 #. Description
-#: ../clock-setup.templates:34
-#, fuzzy
+#. :sl2:
+#: ../clock-setup.templates:6001
 msgid "NTP server to use:"
-msgstr "Nomserviladresoj:"
+msgstr "Uzota 'NTP'-servilo:"
 
 #. Type: string
 #. Description
-#: ../clock-setup.templates:34
+#. :sl2:
+#: ../clock-setup.templates:6001
 msgid ""
 "The default NTP server is almost always a good choice, but if you prefer to "
 "use another NTP server, you can enter it here."
 msgstr ""
+"La implicita 'NTP'-servilo kutime taŭgas. Tamen, vi povas nun indiki alian "
+"servilon, se vi preferas."
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:41
+#. :sl1:
+#: ../clock-setup.templates:7001
 msgid "Getting the time from a network time server..."
-msgstr ""
+msgstr "Kolektado de la horo per hora retservilo..."
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:46
-#, fuzzy
+#. :sl1:
+#: ../clock-setup.templates:8001
 msgid "Setting the hardware clock..."
-msgstr "Agordu la horloĝon"
+msgstr "Agordado de la horloĝo..."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid "Wait another 30 seconds for hwclock to set the clock?"
-msgstr ""
+msgstr "Ĉu oni atendas 30 sekondojn pli por agordi la horloĝon?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid ""
 "Setting the hardware clock is taking longer than expected. The 'hwclock' "
 "program used to set the clock may have problems talking to the hardware "
 "clock."
 msgstr ""
+"La agordado de la aparata horloĝo daŭras pli longe ol kutime. La uzita "
+"'hwclock'-programo por agordi la horloĝon eble havas dialogan problemon kun "
+"la aparata horloĝo."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
 "Vidu '/var/log/syslog' aŭ la kvara virtuala konzolo por akiri detalojn."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid ""
 "If you choose to not wait for hwclock to finish setting the clock, this "
 "system's clock may not be set correctly."
 msgstr ""
+"Se vi elektas neatendi la finon de la horloĝa agordo, tiu sistema horloĝo "
+"eblus malbone agordita."

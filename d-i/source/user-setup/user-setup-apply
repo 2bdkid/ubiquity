@@ -24,29 +24,17 @@ fi
 # Pass in three arguments: the user, the password, and 'true' if the
 # password has been pre-crypted (by preseeding).
 setpassword () {
-	local USER
-	local PASSWD
-	local PRECRYPTED
+	local USER PASSWD OPTS
 	USER="$1"
 	PASSWD="$2"
 	if [ "$3" = true ]; then
-		PRECRYPTED=-e
+		OPTS=-e
+	else
+		OPTS=-m
 	fi
-	$chroot $ROOT chpasswd $PRECRYPTED -m <<EOF
+	$chroot $ROOT chpasswd $OPTS <<EOF
 $USER:$PASSWD
 EOF
-}
-
-add_to_aliases () {
-	if ! grep -qi ^root: $ROOT/etc/aliases 2>/dev/null; then
-		cat <<EOF >>$ROOT/etc/aliases
-# Added by installer for initial user
-root:	$1
-EOF
-		if [ -x $ROOT/usr/bin/newaliases ]; then
-			$log $chroot $ROOT /usr/bin/newaliases || true
-		fi
-	fi
 }
 
 # Enable/disable shadow passwords.
@@ -137,7 +125,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 	fi
 
 	if [ -n "$USER" ]; then
-		for group in lpadmin; do
+		for group in lpadmin sambashare; do
 			$log $chroot $ROOT addgroup --system $group >/dev/null 2>&1 || true
 		done
 		if type archdetect >/dev/null 2>&1; then
@@ -152,7 +140,6 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for group in $RET; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
-		add_to_aliases "$USER"
 	fi
 
 	db_get passwd/root-login

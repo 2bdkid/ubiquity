@@ -111,7 +111,6 @@ ask_for_size () {
 	open_dialog PARTITION_INFO $oldid
 	read_line x1 x2 origsize x4 x5 path x7
 	close_dialog
-	origsize=$(longint2human $origsize)
 
 	noninteractive=true
 	while true; do

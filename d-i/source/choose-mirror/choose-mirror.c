@@ -470,7 +470,6 @@ static int validate_mirror(void) {
 			 * some time to time out if there's no network
 			 * connection), let's just assume that the CD will
 			 * be sufficient to get a basic system up, setting
-			 * suite to PREFERRED_DISTRIBUTION if unset and
 			 * codename = suite. Note that this is an
 			 * Ubuntu-specific change since (a) Debian netinst
 			 * CDs etc. may not be able to install a complete
@@ -484,14 +483,11 @@ static int validate_mirror(void) {
 			 */
 			di_log(DI_LOG_LEVEL_INFO, "base system installable from CD; skipping mirror check");
 			debconf_get(debconf, DEBCONF_BASE "suite");
-			if (!*debconf->value) {
-				di_log(DI_LOG_LEVEL_INFO, "falling back to suite %s", PREFERRED_DISTRIBUTION);
-				debconf_set(debconf, DEBCONF_BASE "suite", PREFERRED_DISTRIBUTION);
+			if (*debconf->value) {
+				di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
+				debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
+				exit(0);
 			}
-			debconf_get(debconf, DEBCONF_BASE "suite");
-			di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
-			debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
-			exit(0);
 		}
 
 		valid = find_suite();

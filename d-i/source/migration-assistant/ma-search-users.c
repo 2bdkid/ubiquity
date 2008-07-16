@@ -55,30 +55,47 @@ void search_windowsxp(const char* mountpoint) {
     struct stat st;
     char* cwd;
     char* profilesdir = NULL;
-    char* systemreg = NULL;
     char* allusers = NULL;
     char* defaultuser = NULL;
+    char* defaultuser_junction = NULL;
+    char* publicuser = NULL;
     char* profile = NULL;
     int mult = 0;
 
-    asprintf(&systemreg, "%s/WINDOWS/system32/config/software", mountpoint);
-    profilesdir = findkey(systemreg, "\\Microsoft\\Windows NT\\CurrentVersion"
-        "\\ProfileList\\ProfilesDirectory");
-    allusers = findkey(systemreg, "\\Microsoft\\Windows NT\\CurrentVersion"
+    from_location = mountpoint;
+    initialize_software_registry_path();
+
+    profilesdir = get_profiles_dir(mountpoint);
+    allusers = findkey(software_key_file, "\\Microsoft\\Windows NT\\CurrentVersion"
         "\\ProfileList\\AllUsersProfile");
-    defaultuser = findkey(systemreg, "\\Microsoft\\Windows NT\\CurrentVersion"
+    if (!allusers)
+        allusers = "All Users";
+
+    defaultuser = findkey(software_key_file, "\\Microsoft\\Windows NT\\CurrentVersion"
         "\\ProfileList\\DefaultUserProfile");
-    free(systemreg);
-    if(!profilesdir) {
-        fprintf(stderr, "ma-search-users: Error.  Could not find "
-            "ProfilesDirectory.\n");
-        exit(EXIT_FAILURE);
+    if (!defaultuser) {
+        defaultuser = findkey(software_key_file, "\\Microsoft\\Windows NT\\CurrentVersion"
+            "\\ProfileList\\Default");
+        if (defaultuser) {
+            // Windows Vista
+            char *path = reformat_path(defaultuser);
+            free(defaultuser);
+            defaultuser = strdup(basename(path));
+            free(path);
+            defaultuser_junction = "Default User";
+        }
     }
-    char* pdir = reformat_path(profilesdir);
-    free(profilesdir);
-    asprintf(&profilesdir, "%s/%s", mountpoint, pdir);
-    free(pdir);
-    fprintf(stderr, "profilesdir: %s\n", profilesdir);
+
+    publicuser = findkey(software_key_file, "\\Microsoft\\Windows NT\\CurrentVersion"
+        "\\ProfileList\\Public");
+    if (publicuser) {
+        // Windows Vista
+        char *path = reformat_path(publicuser);
+        free(publicuser);
+        publicuser = strdup(basename(path));
+        free(path);
+    }
+
     dir = opendir(profilesdir);
     if(!dir) {
         fprintf(stderr, "ma-search-users: Error.  Unable to open %s\n", 
@@ -95,7 +112,9 @@ void search_windowsxp(const char* mountpoint) {
             cwd = entry->d_name;
             if(strcmp(cwd,".") == 0 || strcmp(cwd,"..") == 0)
                 continue;
-            if(strcmp(cwd,allusers) == 0 || strcmp(cwd,defaultuser) == 0)
+            if(strcmp(cwd,allusers) == 0 || (defaultuser && strcmp(cwd,defaultuser) == 0) ||
+	       (defaultuser_junction && strcmp(cwd,defaultuser_junction) == 0) ||
+	       (publicuser && strcmp(cwd,publicuser) == 0))
                 continue;
             if(strcmp(cwd,"NetworkService") == 0 || strcmp(cwd,"LocalService") == 0)
                 continue;

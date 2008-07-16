@@ -1,3 +1,107 @@
+choose-mirror (2.24ubuntu2) intrepid; urgency=low
+
+  * Fix extraneous Ubuntu-specific reference to PREFERRED_DISTRIBUTION; in
+    practice this should never be needed anymore, but in any case it's
+    currently not defined.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 12 Jun 2008 02:07:54 -0700
+
+choose-mirror (2.24ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use Ubuntu mirrors.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+    - Don't check if archive.ubuntu.com is reachable before asking for a
+      proxy.
+    - Switch to hardy by default.
+    - Drop unsupported releases from mirror/suite Choices.
+    - Set Vcs-Bzr for Ubuntu.
+    - Use ports.ubuntu.com for all countries.
+    - Move sparc to ports.ubuntu.com, and fix default hostname and directory
+      for sparc.
+    - Fix country selection for ports architectures.
+  * Change the default target from hardy to intrepid; drop edgy from the list
+    of suite choices since it's no longer supported
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 11 Jun 2008 23:50:20 -0700
+
+choose-mirror (2.24) unstable; urgency=low
+
+  * Patch by Matthias Klose stolen from Ubuntu (closes: #468623):
+    - iso3166tab.py: Include ErrorPrinter and DefaultHandler from obsolete
+      saxutils.py
+    - drop build dependency on python-xml
+  * Remove PREFERRED_DISTRIBUTION; has been replaced by /etc/default_release.
+  * Improved version of the script used to sort the mirror country list.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * Marathi (mr.po)
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Frans Pop <fjp@debian.org>  Sun, 06 Apr 2008 11:48:18 +0200
+
+choose-mirror (2.23) unstable; urgency=low
+
+  * Rebuilt using updated Mirrors.masterlist which now includes official
+    armel mirrors.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 15 Feb 2008 16:59:49 -0500
+
+choose-mirror (2.22) unstable; urgency=low
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Korean (ko.po) by Changwoo Ryu
+  * Latvian (lv.po) by Viesturs Zarins
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Turkish (tr.po) by Recai Oktaş
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 07:49:33 -0200
+
+choose-mirror (2.21) unstable; urgency=low
+
+  * If built from a clean VCS checkout, Mirrors.masterlist was not present
+    when the source package was built, and so was not included in the source
+    package, and so has to be individually downloaded by each build daemon.
+    Avoid this by updating Mirrors.masterlist in the clean rule.
+    Closes: #460389
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 12 Jan 2008 13:56:15 -0500
+
+choose-mirror (2.20) unstable; urgency=low
+
+  * Rebuild with latest Mirrors.masterlist. (Particularly for armel.)
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by Praveen
+  * Panjabi (pa.po) by A S Alam
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Joey Hess <joeyh@debian.org>  Thu, 10 Jan 2008 13:41:21 -0500
+
 choose-mirror (2.19ubuntu6) hardy; urgency=low
 
   * Fix default hostname and directory for sparc.

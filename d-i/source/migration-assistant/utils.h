@@ -19,6 +19,9 @@ void set_gconf_key (const char*, const char*, gconf_type, const char*);
 void add_wallpaper (const char*);
 void makegconfdirs(const char *dir);
 void initialize_registry_paths();
+void initialize_software_registry_path();
+void initialize_user_registry_path();
+char* get_profiles_dir(const char *mountpoint);
 // struct target_t {
 //  const char* option;
 //  const char* name;

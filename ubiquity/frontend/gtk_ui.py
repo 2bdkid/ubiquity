@@ -1240,7 +1240,7 @@ class Wizard(BaseFrontend):
             return 'C'
         else:
             value = unicode(model.get_value(iterator, 0))
-            return self.language_choice_map[value][0]
+            return self.language_choice_map[value][1]
 
 
     def get_oem_id (self):
@@ -2659,13 +2659,13 @@ class ResizeWidget(gtk.HPaned):
 
     def _update_min(self):
         total = self.new_os.get_allocation().width + self.old_os.get_allocation().width
-        tmp = self.min_size / self.part_size
+        tmp = float(self.min_size) / self.part_size
         pixels = int(tmp * total)
         self.old_os.set_size_request(pixels, -1)
 
     def _update_max(self):
         total = self.new_os.get_allocation().width + self.old_os.get_allocation().width
-        tmp = ((self.part_size - self.max_size) / self.part_size)
+        tmp = ((float(self.part_size) - self.max_size) / self.part_size)
         pixels = int(tmp * total)
         self.new_os.set_size_request(pixels, -1)
 

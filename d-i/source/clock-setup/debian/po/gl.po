@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2007-07-25 16:45+0000\n"
-"PO-Revision-Date: 2007-07-04 20:16+0200\n"
+"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"PO-Revision-Date: 2007-09-29 16:04+0100\n"
 "Last-Translator: Jacobo Tarrio <jtarrio@debian.org>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -22,19 +22,22 @@ msgstr ""
 #. Type: text
 #. Description
 #. Main menu item
-#: ../clock-setup.templates:4
+#. :sl1:
+#: ../clock-setup.templates:1001
 msgid "Configure the clock"
 msgstr "Configurar o reloxo"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:9
+#. :sl1:
+#: ../clock-setup.templates:2001
 msgid "Is the system clock set to UTC?"
 msgstr "¿Ten o reloxo do sistema a funcionar en UTC?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:9
+#. :sl1:
+#: ../clock-setup.templates:2001
 msgid ""
 "System clocks are generally set to Coordinated Universal Time (UTC). The "
 "operating system uses your time zone to convert system time into local time. "
@@ -49,86 +52,104 @@ msgstr ""
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:18
-#, fuzzy
+#. :sl1:
+#: ../clock-setup.templates:3001
 msgid "Configuring clock settings..."
-msgstr "A gravar a configuración da rede..."
+msgstr "A configurar o reloxo..."
 
 #. Type: text
 #. Description
-#: ../clock-setup.templates:22
+#. :sl1:
+#: ../clock-setup.templates:4001
 msgid "Setting up the clock"
 msgstr "A configurar o reloxo"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:27
+#. :sl2:
+#: ../clock-setup.templates:5001
 msgid "Set the clock using NTP?"
-msgstr ""
+msgstr "¿Pór o reloxo en hora empregando NTP?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:27
+#. :sl2:
+#: ../clock-setup.templates:5001
 msgid ""
 "The Network Time Protocol (NTP) can be used to set the system's clock. The "
 "installation process works best with a correctly set clock."
 msgstr ""
+"Pódese empregar o protocolo de hora da rede (NTP) para pór o reloxo do "
+"sistema en hora. O proceso de instalación funciona mellor cun reloxo en hora."
 
 #. Type: string
 #. Description
-#: ../clock-setup.templates:34
-#, fuzzy
+#. :sl2:
+#: ../clock-setup.templates:6001
 msgid "NTP server to use:"
-msgstr "Enderezos de servidores de nomes"
+msgstr "Servidor NTP a empregar:"
 
 #. Type: string
 #. Description
-#: ../clock-setup.templates:34
+#. :sl2:
+#: ../clock-setup.templates:6001
 msgid ""
 "The default NTP server is almost always a good choice, but if you prefer to "
 "use another NTP server, you can enter it here."
 msgstr ""
+"O servidor NTP por defecto adoita ser unha boa opción, pero se prefire "
+"empregar outro servidor NTP, pode introducilo aquí."
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:41
+#. :sl1:
+#: ../clock-setup.templates:7001
 msgid "Getting the time from a network time server..."
-msgstr ""
+msgstr "A obter a hora dun servidor NTP..."
 
 #. Type: text
 #. Description
 #. progress bar item
-#: ../clock-setup.templates:46
-#, fuzzy
+#. :sl1:
+#: ../clock-setup.templates:8001
 msgid "Setting the hardware clock..."
-msgstr "A configurar o reloxo"
+msgstr "A configurar o reloxo hardware..."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid "Wait another 30 seconds for hwclock to set the clock?"
-msgstr ""
+msgstr "¿Agardar outros 30 segundos para que hwclock poña o reloxo en hora?"
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid ""
 "Setting the hardware clock is taking longer than expected. The 'hwclock' "
 "program used to set the clock may have problems talking to the hardware "
 "clock."
 msgstr ""
+"Pór en hora o reloxo hardware está a levar máis tempo do esperado. O "
+"programa \"hwclock\" que se emprega para pór o reloxo en hora pode ter "
+"problemas de comunicación co reloxo hardware."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr "Consulte os detalles en /var/log/syslog ou na consola virtual 4."
 
 #. Type: boolean
 #. Description
-#: ../clock-setup.templates:51
+#. :sl2:
+#: ../clock-setup.templates:9001
 msgid ""
 "If you choose to not wait for hwclock to finish setting the clock, this "
 "system's clock may not be set correctly."
 msgstr ""
+"Se non quere agardar a que hwclock remate de pór o reloxo en hora, o reloxo "
+"do sistema pode non ser puntual."

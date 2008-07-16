@@ -9,16 +9,6 @@
 #include "registry.h"
 #include "utils.h"
 
-/*		Utility Functions			*/
-
-char* windows_get_user_registry(void) {
-    char* ret;
-    asprintf(&ret, "%s/%s/%s/%s", from_location,
-	    "Documents and Settings", from_user, "NTUSER.DAT");
-
-    return ret;
-}
-
 /*		Windows Applications			*/
 
 /*		Instant Messaging			*/
@@ -26,15 +16,10 @@ char* windows_get_user_registry(void) {
 const char* windowsxp_yahoo (void) {
     // Doesn't account for more than one account.
     // Doesn't matter here, but just don't do this at the import stage.
-    char* registry_location;
     char* registry_key;
 
-    registry_location = windows_get_user_registry();
-    registry_key = findkey(registry_location,
+    registry_key = findkey(user_key_file,
 	    "\\Software\\Yahoo\\pager\\Yahoo! User ID");
-
-    if(registry_location)
-	free(registry_location);
 
     if(registry_key) {
 	free(registry_key);
@@ -270,11 +255,9 @@ const char* windowsxp_mypictures (void) {
 
 const char* windowsxp_proxy (void) {
     // Need to add REG_DWORD support to the registry utils.
-    char* registry_location;
     char* registry_key;
 
-    registry_location = windows_get_user_registry();
-    registry_key = findkey(registry_location,
+    registry_key = findkey(user_key_file,
 	    "\\Software\\Microsoft\\Windows\\CurrentVersion\\"
 	    "Internet Settings\\ProxyEnable");
 
@@ -285,11 +268,9 @@ const char* windowsxp_proxy (void) {
 }
 
 const char* windowsxp_outlookexpress (void) {
-    char* registry_location;
     char* registry_key = NULL;
 
-    registry_location = windows_get_user_registry();
-    registry_key = findkey(registry_location,
+    registry_key = findkey(user_key_file,
         "\\Software\\Microsoft\\Internet Account Manager\\Accounts\\00000001"
         "\\Account Name");
     if(registry_key)

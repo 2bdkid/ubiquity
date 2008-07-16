@@ -29,6 +29,7 @@ binary-indep: build
 	  /usr/share/terminfo/v/vt102; do \
 		mkdir -p debian/di-utils-terminfo/`dirname $$file`; \
 		cp -pL $$file debian/di-utils-terminfo/$$file; \
+		chmod 644 debian/di-utils-terminfo/$$file; \
 	done
 	cp debian/di-utils-shell.isinstallable debian/di-utils-shell/DEBIAN/isinstallable
 	dh_installdeb -i
@@ -40,13 +41,14 @@ binary-arch: install
 	dh_testroot
 	dh_clean -k
 	dh_install -pdi-utils anna-install apt-install debconf-disconnect \
-			      debconf-get debconf-set log-output \
+			      debconf-get debconf-set fetch-url log-output \
 			      register-module search-path update-dev \
 			      user-params in-target list-devices bin
 	dh_install -pdi-utils chroot-setup.sh lib
 	dh_installdirs -pdi-utils usr/lib/post-base-installer.d
 	install register-module.post-base-installer debian/di-utils/usr/lib/post-base-installer.d/10register-module
 	dh_install -pdi-utils-mapdevfs mapdevfs bin
+	dh_link -p di-utils usr/lib/fetch-url/http usr/lib/fetch-url/ftp
 	dh_installdebconf -a
 	dh_compress -a
 	dh_fixperms -a

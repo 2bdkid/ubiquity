@@ -10,11 +10,6 @@ struct mirror_t {
 	int wildcard;
 };
 
-/* This is the codename of the preferred distribution; the one that the
- * current version of d-i is targeted at installing. This can be removed
- * once /etc/default_release is fully deployed. */
-#define PREFERRED_DISTRIBUTION "hardy"
-
 /* The string defined below must match the string used in the templates
  * (http and ftp) for this option. */
 #define MANUAL_ENTRY "manual"
@@ -27,7 +22,9 @@ struct mirror_t {
 /* Stack of suites */
 static const char suites[][SUITE_LENGTH] = {
 	/* higher preference */
-	PREFERRED_DISTRIBUTION
+	"stable",
+	"testing",
+	"unstable"
 	/* lower preference */
 };
 

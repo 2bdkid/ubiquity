@@ -1,3 +1,117 @@
+hw-detect (1.63ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3rom, ps3disk, and ps3_gelic, and add
+      snd_ps3 to /etc/modules.
+    - Install elfspe2 on Cell (powerpc/ps3 and powerpc/cell) platforms.
+    - Add hooks for iSCSI support.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 26 Jun 2008 13:00:09 +0100
+
+hw-detect (1.63) unstable; urgency=low
+
+  [ Colin Watson, Frans Pop ]
+  * The esp module is now called esp_scsi. linux-kernel-di-sparc-2.6 was
+    updated last October, but sbus.list wasn't updated to match.
+    Turns out the corrent module to load is sun_esp, not esp_scsi which is
+    only a mid-level module. See #485961.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Korean (ko.po) by Changwoo Ryu
+  * Russian (ru.po) by Yuri Kozlov
+
+ -- Frans Pop <fjp@debian.org>  Tue, 17 Jun 2008 14:08:02 +0200
+
+hw-detect (1.62ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3rom, ps3disk, and ps3_gelic, and add
+      snd_ps3 to /etc/modules.
+    - Install elfspe2 on Cell (powerpc/ps3 and powerpc/cell) platforms.
+    - Add hooks for iSCSI support.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 15 Jun 2008 22:37:38 +0100
+
+hw-detect (1.62) unstable; urgency=low
+
+  [ Updated translations ]
+  * Marathi (mr.po) by Sampada
+  * Punjabi (Gurmukhi) (pa.po) by Amanpreet Singh Alam
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:14:58 -0300
+
+hw-detect (1.61) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove Bdale Garbee, Christian Perrier and Matt Kraai as Uploaders with
+    many thanks for their past contributions.
+
+  [ Guido Guenther ]
+  * Run depmod after pulling in the multipath kernel modules.
+    Closes: #476836
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po)
+
+ -- Frans Pop <fjp@debian.org>  Thu, 01 May 2008 10:47:19 +0200
+
+hw-detect (1.60) unstable; urgency=low
+
+  [ Guido Guenther ]
+  * Add optional multipath detection to disk-detect.sh (triggered by
+    disk-detect/multipath/enable). Closes: #440439.
+
+  [ Frans Pop ]
+  * Some older systems have a disk controller that is not listed by lspci,
+    but that is supported by ide-generic. Load ide-generic if an ISA bus is
+    detected and, if new block devices become available, register the module
+    for inclusion in the initrd. Closes: #472487.
+  * hw-detect: simplify is_available() function.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+
+ -- Frans Pop <fjp@debian.org>  Thu, 03 Apr 2008 13:31:39 +0200
+
+hw-detect (1.59) unstable; urgency=low
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Viesturs Zarins
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Turkish (tr.po) by Recai Oktaş
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 08:14:58 -0200
+
 hw-detect (1.58ubuntu2) hardy; urgency=low
 
   * Add hooks for iSCSI support.
@@ -3372,4 +3486,3 @@ ddetect (0.03) unstable; urgency=low
   * Initial Release.
 
  -- David Whedon <dwhedon@gordian.com>  Mon, 13 Nov 2000 23:46:39 -0800
-

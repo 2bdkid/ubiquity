@@ -56,15 +56,36 @@ The mechanism is the following:
 1) propose a language choice
 2) propose a "short" list of countries with all countries for which
    this language has a supported locale
-3) optionally propose the whole list of world countries
+3) optionally propose the whole list of world countries, split into
+   separate questions for first continent/area and the country
 4) (for medium priority installs) prompt for a locale if several locales
    (with different modifiers or charsets) exist for that language/country
    combination
 
 This package should behave as follows:
 
+
 Language choice
 ---------------
+
+Which languages are supported depends on the installation method and on
+the cdebconf frontend that is being used.
+Currently 5 levels are distinguished:
+- no framebuffer and text interface      -->level 0 (only ASCII)
+- no framebuffer and other interface     -->level 1 (only Latin1)
+- framebuffer and non-graphical interface-->level 2 and 3 (no combining langs)
+- framebuffer and graphical interface    -->level 4 (all langs)
+
+Depending on these values, we use different templates with a different
+list of languages. These lists are created at package build-time from
+the contents of the second field of languagelist entries.
+
+Stricto-sensu, the text interface could use all languages but it will most
+often be used in situation where the display is "poor", so it is assumed
+that only ASCII languages may be displayed. When the gtk frontend is used,
+it is assumed that all languages are supported.
+
+The steps during language selection are:
 
   0. Ask the user to pick one of the available languages.
 
@@ -80,7 +101,7 @@ Language choice
       code for country. The list is to be read from left to right
       with the preferred combination at the left
       This is meant to be used as the LANGUAGE variable later
-     -debian-installer/country: 
+     -debian-installer/country:
       This value may be pre-feeded with an ISO-3166 name for a country
       This should be done when only one country has a valid locale
       for the given language. For other languages, with several
@@ -88,19 +109,19 @@ Language choice
       the country must NOT be set by languagechooser
      -debian-installer/locale
       This should be a single entry such as fr_CA
-      Each language MUST provide one, which will be the default for this 
+      Each language MUST provide one, which will be the default for this
       language
 
-      This entry may be modified by the country choice running after 
+      This entry may be modified by the country choice running after
       the language choice
      -debian-installer/fallbacklocale This should be similar to the
       "locale" value. This value will *never* change. The country
       choice section will set debian-installer/locale to it when the
       chosen country builds an unsupported locale
 
-  3. pass the locale information on to the modules that needs it. 
+  3. pass the locale information on to the modules that needs it.
 
-The language code is passed into cdebconf.  The locale, country code 
+The language code is passed into cdebconf.  The locale, country code
 and priority list of languages are passed to the installed system
 via the cdebconf database.
 
@@ -152,7 +173,7 @@ defined as follows:
  even if the language code became nb)
 
 -if at least one xx_YY locale exists in Debian:
- 
+
  -the fallback locale set in the language selection part (3rd field of
   the languagelist file) is examined and any modifier or charset is
   added to xx_YY, leading to xx_YY@modifier.charset:
@@ -256,7 +277,7 @@ Language;supported_environments;langcode;countrycode;fallbacklocale;langlist;con
                        possible to display in the regular Linux console
                      4=OK only with the graphical installer
    -langcode        =iso-639 TWO characters language code
-                     
+
                      DO NOT GUESS IT. Please check in the iso-codes
                      and locales packages
 
@@ -264,7 +285,7 @@ Language;supported_environments;langcode;countrycode;fallbacklocale;langlist;con
 		     this documentation is written, trigger hidden
 		     problems. If a new language has no two-letter ISO
                      code, then this problem should be sorted out.
-		     
+
 		     If we're lucky, everything is OK and 3-letter codes
                      will work..:-)
 
@@ -285,9 +306,9 @@ Language;supported_environments;langcode;countrycode;fallbacklocale;langlist;con
 
 		     Any modifier (@euro for instance) or charset mentioned
                      here will be ADDED to the final locale if such combination
-		     is supported. 
+		     is supported.
 
-                     Example: Assume English uses "en_US@euro". 
+                     Example: Assume English uses "en_US@euro".
                               If the user chooses
                               USA as country, the @euro will be dropped as
                               these is no en_US@euro locale. However, if
@@ -296,7 +317,7 @@ Language;supported_environments;langcode;countrycode;fallbacklocale;langlist;con
    -langlist        =colon-separated list of possible fallback languages
 		     It will usually be empty except for languages
 		     where fallback to something else than English is wished
-		     
+
 		     Setting this field will enforce setting LANGUAGE in
 		     /etc/environment or /etc/default/locale
 
@@ -305,5 +326,3 @@ Language;supported_environments;langcode;countrycode;fallbacklocale;langlist;con
 
    -console-data    =special options for the console-data package
                      (mostly keyboard or terminal settings)
-
-

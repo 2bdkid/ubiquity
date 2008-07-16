@@ -20,8 +20,9 @@
 use warnings 'all';
 use strict;
 
+my $debug_flag = 1;
 sub debug {
-    if (1) {
+    if ($debug_flag) {
 	print STDERR "@_";
     }
 }
@@ -164,8 +165,8 @@ my %keycodes_table; # x keysym -> x key code
 my %aliases;        # x keysym -> x keysym
 
 my %symbols_table;   # x key code -> [[symbols for group0,...],
-                     #               [symbols for group1,...], ...]
-my %types_table;     # x key code -> key type (i.e. "PC_BREAK" or "TWO_LEVEL")
+                     #                [symbols for group1,...], ...]
+my %types_table;     # x key code -> key type (i.e. "TWO_LEVEL")
 
 my $augment_method = 1;   # Constants for different XKB include methods
 my $override_method = 2;
@@ -337,7 +338,9 @@ my %xkbsym_table = (
     'Z' => '005a',
     'bracketleft' => '005b',
     'backslash' => '005c',
+    'backlash' => '005c',   # Is this recognised by X ? (speling error)
     'bracketright' => '005d',
+    'circumflex' => '005e',
     'asciicircum' => '005e',
     'underscore' => '005f',
     'grave' => '0060',
@@ -369,6 +372,7 @@ my %xkbsym_table = (
     'y' => '0079',
     'z' => '007a',
     'braceleft' => '007b',
+    'pipe' => '007c', # Is this recognised by X ?
     'bar' => '007c',
     'braceright' => '007d',
     'asciitilde' => '007e',
@@ -1308,6 +1312,8 @@ my %xkbsym_table = (
     'minutes' => '2032',
     'seconds' => '2033',
     'caret' => '2038',
+    'guilsinglleft' => '2039',
+    'guilsinglright' => '203a',
     'overline' => '203e',
     'zerosuperior' => '2070',
     'foursuperior' => '2074',
@@ -1869,19 +1875,6 @@ my %xkbsym_table = (
     'Hangul_AraeA' => '318d',
     'Hangul_AraeAE' => '318e',
 # Keypad keys
-    'KP_Home' => 'VoidSymbol',
-    'KP_Left' => 'VoidSymbol',
-    'KP_Up' => 'VoidSymbol',
-    'KP_Right' => 'VoidSymbol',
-    'KP_Down' => 'VoidSymbol',
-    'KP_Prior' => 'VoidSymbol',
-    'KP_Page_Up' => 'VoidSymbol',
-    'KP_Next' => 'VoidSymbol',
-    'KP_Page_Down' => 'VoidSymbol',
-    'KP_End' => 'VoidSymbol',
-    'KP_Begin' => 'VoidSymbol',
-    'KP_Insert' => 'VoidSymbol',
-    'KP_Delete' => 'VoidSymbol',
     'KP_Multiply' => 'KP_Multiply',
     'KP_Add' => 'KP_Add',
     'KP_Seprator' => 'KP_Comma', # Is this recognised by X ?
@@ -1900,6 +1893,20 @@ my %xkbsym_table = (
     'KP_8' => 'KP_8',
     'KP_9' => 'KP_9',
     'KP_Enter' => 'KP_Enter',
+# Keypad keys (alternate level)
+    'KP_Home' => 'KP_7',
+    'KP_Left' => 'KP_4',
+    'KP_Up' => 'KP_8',
+    'KP_Right' => 'KP_6',
+    'KP_Down' => 'KP_2',
+    'KP_Prior' => 'KP_9',
+    'KP_Page_Up' => 'KP_9',
+    'KP_Next' => 'KP_3',
+    'KP_Page_Down' => 'KP_3',
+    'KP_End' => 'KP_1',
+    'KP_Begin' => 'VoidSymbol', # What does correspond to this?
+    'KP_Insert' => 'KP_0',
+    'KP_Delete' => 'VoidSymbol', # has to be 'KP_Period' or 'KP_Decimal'
 # Keypad keys with missing support in the kernel
     'KP_Space' => 'space',
     'KP_Equal' => 'equal',
@@ -1929,11 +1936,13 @@ my %xkbsym_table = (
     'dead_macron' => '005f',         # underscore
     'dead_abovedot' => '002e',       # period
     'dead_abovering' => '002a',      # asterisk
+    'dead_stroke' => '002d',         # hyphen
     'dead_belowdot' => '0323',       # ???? Vietnamese
     'dead_hook' => '0309',           # ???? Vietnamese
     'dead_iota' => '03b9',           # ???? Greek
     'dead_horn' => '031b',           # ???? Greek
-    'dead_stroke' => '002d',         # hyphen
+    'dead_psili' => 'VoidSymbol',    # ???? Greek
+    'dead_dasia' => 'VoidSymbol',    # ???? Greek
 # Modifiers
     'Multi_key' => 'Compose',
     'Mode_switch' => 'ShiftL',
@@ -1969,7 +1978,10 @@ my %xkbsym_table = (
     'ISO_Last_Group' => 'ShiftL_Lock',
     'ISO_Last_Group_Lock' => 'ShiftL_Lock',
 # Other symbols
+    'NoAction' => 'NoSymbol', # Is this recognised by X ?
+    'nosymbol' => 'NoSymbol', # Is this recognised by X ?
     'Nosymbol' => 'NoSymbol', # Is this recognised by X ?
+    'noSymbol' => 'NoSymbol', # Is this recognised by X ?
     'NoSymbol' => 'NoSymbol',
     'any' => 'NoSymbol', # Is this recognised by X ?
     'VoidSymbol' => 'VoidSymbol',
@@ -2085,9 +2097,18 @@ my %xkbsym_table = (
     'XF86_Ungrab' => 'VoidSymbol',
     'XF86_Next_VMode' => 'VoidSymbol',
     'XF86_Prev_VMode' => 'VoidSymbol',
+    'XF86Copy' => 'VoidSymbol',
+    'XF86Cut' => 'VoidSymbol',
+    'XF86Paste' => 'VoidSymbol',
+    'XF86AudioLowerVolume' => 'VoidSymbol',
+    'XF86AudioRaiseVolume' => 'VoidSymbol',
+    'XF86AudioMute' => 'VoidSymbol',
+    'XF86PowerOff' => 'VoidSymbol',
 # I do not know the Unicodes of these
+    '0x1000' => 'VoidSymbol', # Special symbol for X or syntax error?
+    '0x13a4' => 'VoidSymbol', # Special symbol for X or syntax error?
+    '0xfe11' => 'VoidSymbol', # Special symbol for X or syntax error?
     'leftcaret' => 'VoidSymbol', # Is this recognised by X ?
-    '0x13a4' => 'VoidSymbol', # Spelling error ?
     'guj_rra' => 'VoidSymbol', # Is this recognised by X ?
     'guj_nnna' => 'VoidSymbol', # Is this recognised by X ?
     'guj_llla' => 'VoidSymbol', # Is this recognised by X ?
@@ -2097,12 +2118,25 @@ my %xkbsym_table = (
     'Eisu_toggle' => 'VoidSymbol', # Is this recognised by X ?
     'Zenkaku_Hankaku' => 'VoidSymbol', # Is this recognised by X ?
     'Kanji' => 'VoidSymbol', # Is this recognised by X ?
+    'Hangul' => 'VoidSymbol', # Is this recognised by X ?
+    'Hangul_Hanja' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_1' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_2' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_3' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_4' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_5' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_6' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_7' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_8' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_9' => 'VoidSymbol', # Is this recognised by X ?
+    'braille_dot_10' => 'VoidSymbol', # Is this recognised by X ?
 # XFree86 does not recognise these
     'SunAudioLowerVolume' => 'VoidSymbol',
-    'SunAudioMute' => 'VoidSymbol',
     'SunAudioRaiseVolume' => 'VoidSymbol',
+    'SunAudioMute' => 'VoidSymbol',
     'SunCopy' => 'VoidSymbol',
     'SunCut' => 'VoidSymbol',
+    'SunPaste' => 'VoidSymbol',
     'SunAgain' => 'VoidSymbol',
     'SunUndo' => 'VoidSymbol',
     'SunFind' => 'VoidSymbol',
@@ -2111,7 +2145,6 @@ my %xkbsym_table = (
     'SunF37' => 'VoidSymbol',
     'SunFront' => 'VoidSymbol',
     'SunOpen' => 'VoidSymbol',
-    'SunPaste' => 'VoidSymbol',
     'SunPowerSwitch' => 'VoidSymbol',
     'SunPowerSwitchShift' => 'VoidSymbol',
     'SunProps' => 'VoidSymbol',
@@ -2712,7 +2745,8 @@ sub symbols_for_group {
 	my $level = 0;
 	for my $symbol (@_) {
 	    if ($symbol !~ /\(/ && $symbol =~ /./
-		&& ($symbol !~ /^(?:nosymbol|any)$/i
+		&& (! defined $xkbsym_table{$symbol}
+		    || $xkbsym_table{$symbol} ne 'NoSymbol'
 		    || ! defined $symbols_table{$code}[$group][$level])) {
 		$symbols_table{$code}[$group][$level] = $symbol;
 	    }
@@ -2742,6 +2776,7 @@ sub adjust_symbols {
 }
 
 sub xkb_key {
+    my $default_key_type = $_[0];
     if ($stream =~ /^key</i) {
 	$stream =~ s/^key<([^>]+)>\{([^\}]*?)\};(.*)/$3/i
 	    or syntax_error "key definition";
@@ -2776,12 +2811,13 @@ sub xkb_key {
 		    next;
 		}
 		# type = "...."
-		if ($list =~ (s/^type=\"([^\"]+)\",(.*)/$2/)) {
+		if ($list =~ (s/^type(?:\[Group1\])?
+                              =\"([^\"]+)\",(.*)/$2/x)) {
 		    if ($method == $replace_method
 			|| $method == $override_method
 			|| ($method == $augment_method
 			    && ! defined $types_table{$code})) {
-			$types_table{$code} = $1;	
+			$types_table{$code} = $1;
 		    }
 		    next;
 		}
@@ -2797,6 +2833,10 @@ sub xkb_key {
 		die "$0: garbage in a key definition: \"$list\""
 		    ." in $filename.\n";
 	    }
+	    if (! defined $types_table{$code}
+		|| $types_table{$code} eq 'DEFAULT') {
+		$types_table{$code} = $default_key_type;
+	    }
 	}
 	return 1;
     } else {
@@ -2806,6 +2846,7 @@ sub xkb_key {
 
 sub xkb_symbols_definitions {
     my $oldmethod = $method;
+    my $default_key_type = 'DEFAULT';
     while ($stream) {
 	$method = $oldmethod;
 
@@ -2821,6 +2862,11 @@ sub xkb_symbols_definitions {
 	    next;
 	}
 
+	if ($stream =~ (s/^key\.type(?:\[Group1\])?=\"([^\"]+)\";(.*)/$2/)) {
+	    $default_key_type = $1;
+	    next;
+	}
+	
 	if ($stream =~ s/^[a-zA-Z0-9]+\.[a-zA-Z0-9]+=.*?;(.*)/$1/i) {
 	    next;
 	}
@@ -2830,7 +2876,7 @@ sub xkb_symbols_definitions {
 	    next;
 	}
 
-	if (xkb_key) {
+	if (xkb_key $default_key_type) {
 	    next;
 	}
 
@@ -2842,7 +2888,7 @@ sub xkb_symbols_definitions {
 	}
 
 	if ($stream =~ /^virtual_modifiers/i) {
-	    $stream =~ (s/^virtual_modifiers\s?[a-zA-Z0-9_]+;(.*)/$1/ix)
+	    $stream =~ (s/^virtual_modifiers\s?[a-zA-Z0-9_,]+;(.*)/$1/ix)
 		or syntax_error "virtual_modifiers";
 	    next;
 	}
@@ -3009,7 +3055,7 @@ foreach my $key (keys %symbols_table) {
     }
 }
 
-# later in the code we use that the distance is always less than 1000000
+# later we use that the distance is an even number less than 1000000
 sub distance {
     my $x = $_[0];
     my $y = $_[1];
@@ -3018,7 +3064,7 @@ sub distance {
     if (($x | 0x0f) != ($y | 0x0f)) {
 	$bottom = $bottom & 0x0f;
     }
-    return  (($y - $bottom) << 6) | ($x - $bottom);
+    return  ((($y - $bottom) << 6) | ($x - $bottom)) << 1;
 }
 
 sub uni_to_legacy {
@@ -3137,6 +3183,16 @@ sub approximate {
 
 # Fill @vector with data for key number $_[0]
 sub flatten {
+    #    Kernel         X
+    # -----------------------------------------
+    # 1  Shift          level 2 (Shift)
+    # 2  AltGr          levels 3 and 4 (AltGr)
+    # 4  Control        Control
+    # 8  Alt            Alt
+    # 0                 Group1
+    # 16 ShiftL         Group2
+    # 32 ShiftR         Group4
+    # 48 ShiftL+ShiftR  Group3
     my $key = $_[0];
     @vector = ();
     @quality = ();
@@ -3156,12 +3212,7 @@ sub flatten {
 	}
 	next if ($real_group < 0);
 	for my $level (0..3) {
-	    my $coord = $level + ($group << 4);
 	    my $real_level = $level;
-	    if ($types_table{$key} =~ /PC_BREAK|PC_SYSRQ
-                                       |CTRL\+ALT|SHIFT\+ALT/x) {
-		$real_level = 0;
-	    }
 	    while ($real_level > $#{$symbols_table{$key}[$real_group]}) {
 		if ($real_level == 2) {
 		    $real_level = $real_level - 2;
@@ -3170,89 +3221,95 @@ sub flatten {
 		}
 	    }
 	    next if ($real_level < 0);
+	    my $coord;
+	    for ($types_table{$key}) {
+		if (/^(DEFAULT|ONE_LEVEL|TWO_LEVEL
+                      |THREE_LEVEL|ALPHABETIC
+                      |EIGHT_LEVEL|EIGHT_LEVEL_ALPHABETIC
+                      |FOUR_LEVEL|FOUR_LEVEL_ALPHABETIC
+                      |FOUR_LEVEL_SEMIALPHABETIC
+                      |SEPARATE_CAPS_AND_SHIFT_ALPHABETIC
+		      |KEYPAD|FOUR_LEVEL_X|FOUR_LEVEL_MIXED_KEYPAD
+		      |FOUR_LEVEL_KEYPAD|LOCAL_EIGHT_LEVEL
+                      |FOUR_LEVEL_PLUS_LOCK
+                      )$/x) {
+		    # Level1: plain
+		    # Level2: shift
+		    # Level3: altgr
+		    # Level4: shift+altgr
+		    $coord = ($group << 4) + $level;
+		} elsif (/^(PC_BREAK|PC_CONTROL_LEVEL2
+                           |PC_LCONTROL_LEVEL2|PC_RCONTROL_LEVEL2)$/x) {
+		    # Level1: plain
+		    # Level2: control
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 3;
+		    }
+		} elsif (/^(PC_SYSRQ|PC_ALT_LEVEL2
+                           |PC_LALT_LEVEL2|PC_RALT_LEVEL2)$/x) {
+		    # Level1: plain
+		    # Level2: alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			# notice that $level is 1 or 3
+			$coord = ($group << 4) + $level + 7;
+		    }
+		} elsif (/^SHIFT\+ALT$/) {
+		    # Level1: plain
+		    # Level2: shift+alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 8;
+		    }
+		} elsif (/^CTRL\+ALT$/) {
+		    # Level1: plain
+		    # Level2: control+alt
+		    if ($level == 0 || $level == 2) {
+			$coord = ($group << 4) + $level;
+		    } else {
+			$coord = ($group << 4) + $level + 11;
+		    }
+		} else {
+		    warning "Unknown key type $types_table{$key}\n";
+		    $coord = ($group << 4) + $level;
+		}
+	    }
 	    my $xkeysym = $symbols_table{$key}[$real_group][$real_level];
 	    my $is_special = ($xkeysym !~ /^U[0-9a-fA-F]+$/
 			      && defined $xkbsym_table{$xkeysym}
 			      && ($xkbsym_table{$xkeysym}
 				  !~ /^[0-9a-fA-F]{4}$/));
 	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
-	    $vector[$coord] = $kernelkeysym;
 	    my $ascii = x_to_ascii ($xkeysym);
-	    next unless (defined $ascii or $is_special);
+	    approximate ($coord, $kernelkeysym, 0);
 	    for my $approximated_group (0 .. 3) {
 		for my $approximated_level (0 .. 3) {
 		    my $approximated_coord = ($approximated_level
 					      + ($approximated_group << 4));
 		    my $distance = distance ($approximated_coord, $coord);
+		    approximate ($approximated_coord,
+				 $kernelkeysym, $distance);
 		    if (defined $ascii) {
 			approximate (($approximated_coord | 0x08), 
-				     $metasyms[$ascii + 1], $distance);
+				     $metasyms[$ascii + 1], $distance + 1);
 			approximate (($approximated_coord | 0x04), 
-				     $controlsyms[$ascii + 1], $distance);
+				     $controlsyms[$ascii + 1], $distance + 1);
 			approximate (($approximated_coord | 0x0c), 
-				     $metacontrolsyms[$ascii + 1], $distance);
+				     $metacontrolsyms[$ascii + 1], 
+				     $distance + 1);
 		    } elsif ($is_special) {
 			approximate (($approximated_coord | 0x08), 
-				     $kernelkeysym, $distance);
+				     $kernelkeysym, $distance + 1);
 			approximate (($approximated_coord | 0x04), 
-				     $kernelkeysym, $distance);
+				     $kernelkeysym, $distance + 1);
 			approximate (($approximated_coord | 0x0c), 
-				     $kernelkeysym, $distance);
+				     $kernelkeysym, $distance + 1);
 		    }
 		}
-	    }
-	}
-	if ($types_table{$key} eq 'PC_BREAK' 
-	    && $#{$symbols_table{$key}[$real_group]} >= 1) {
-	    my $xkeysym = $symbols_table{$key}[$real_group][1];
-	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
-	    if ($kernelkeysym ne 'VoidSymbol') {
-		my $coord = ($group << 4);
-		$vector[$coord + 4] = $kernelkeysym;
-		$vector[$coord + 5] = $kernelkeysym;
-		$vector[$coord + 6] = $kernelkeysym;
-		$vector[$coord + 7] = $kernelkeysym;
-		$vector[$coord + 12] = $kernelkeysym;
-		$vector[$coord + 13] = $kernelkeysym;
-		$vector[$coord + 14] = $kernelkeysym;
-		$vector[$coord + 15] = $kernelkeysym;
-	    }
-	} elsif ($types_table{$key} eq 'PC_SYSRQ' 
-	    && $#{$symbols_table{$key}[$real_group]} >= 1) {
-	    my $xkeysym = $symbols_table{$key}[$real_group][1];
-	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
-	    if ($kernelkeysym ne 'VoidSymbol') {
-		my $coord = ($group << 4);
-		$vector[$coord + 8] = $kernelkeysym;
-		$vector[$coord + 9] = $kernelkeysym;
-		$vector[$coord + 10] = $kernelkeysym;
-		$vector[$coord + 11] = $kernelkeysym;
-		$vector[$coord + 12] = $kernelkeysym;
-		$vector[$coord + 13] = $kernelkeysym;
-		$vector[$coord + 14] = $kernelkeysym;
-		$vector[$coord + 15] = $kernelkeysym;
-	    }
-	} elsif ($types_table{$key} eq 'CTRL+ALT' 
-	    && $#{$symbols_table{$key}[$real_group]} >= 1) {
-	    my $xkeysym = $symbols_table{$key}[$real_group][1];
-	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
-	    if ($kernelkeysym ne 'VoidSymbol') {
-		my $coord = ($group << 4);
-		$vector[$coord + 12] = $kernelkeysym;
-		$vector[$coord + 13] = $kernelkeysym;
-		$vector[$coord + 14] = $kernelkeysym;
-		$vector[$coord + 15] = $kernelkeysym;
-	    }
-	} elsif ($types_table{$key} eq 'SHIFT+ALT' 
-	    && $#{$symbols_table{$key}[$real_group]} >= 1) {
-	    my $xkeysym = $symbols_table{$key}[$real_group][1];
-	    my $kernelkeysym = x_to_kernelsym ($xkeysym);
-	    if ($kernelkeysym ne 'VoidSymbol') {
-		my $coord = ($group << 4);
-		$vector[$coord + 9] = $kernelkeysym;
-		$vector[$coord + 11] = $kernelkeysym;
-		$vector[$coord + 13] = $kernelkeysym;
-		$vector[$coord + 15] = $kernelkeysym;
 	    }
 	}
     }
@@ -3268,36 +3325,67 @@ sub flatten {
 	next unless (defined $mask);
 	for my $mod (4, 8, 12) {
 	    if ($vector[$coord + $mod] eq 'VoidSymbol'
-		&& ($vector[($coord + $mod) | $mask] eq 'VoidSymbol')) {
+		&& ($vector[($coord + $mod) ^ $mask] eq 'VoidSymbol')) {
 		$vector[$coord + $mod] = $vector[$coord];
 	    }
 	}
     }
     
+    # Without this it would be possible to lock permanently
+    # the modifier key such as Control or Alt
     for my $coord (0 .. 63) {
 	my $mask = $kernel_modifiers{$vector[$coord]};
 	if (defined $mask) {
-	    $vector[$coord | $mask] = $vector[$coord];
+	    $vector[$coord ^ $mask] = $vector[$coord];
+	    if ($compact) {
+		# AltGr = 0x02,  ShiftL = 0x10
+		if (($mask & 0x02) && ($mask & 0x10)) {
+		    $vector[$coord ^ $mask ^ 0x02] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x10] = $vector[$coord];
+		} elsif ($mask & 0x02) {
+		    $vector[$coord ^ $mask ^ 0x10] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x10 ^ 0x02] = $vector[$coord];
+		} elsif ($mask & 0x10) {
+		    $vector[$coord ^ $mask ^ 0x02] = $vector[$coord];
+		    $vector[$coord ^ $mask ^ 0x02 ^ 0x10] = $vector[$coord];
+		}
+	    }
 	}
     }
     
-    for my $coord (16 .. 63) {
-	if ($vector[$coord] eq 'ShiftL') {
-	    $vector[$coord] = 'VoidSymbol';
-	} elsif ($vector[$coord] eq 'ShiftL_Lock') {
-	    $vector[$coord] = 'VoidSymbol';
+    if (! $compact) {
+	for my $coord (16 .. 63) {
+	    if ($vector[$coord] =~ /^(ShiftL|ShiftL_Lock)$/) {
+		$vector[$coord] = 'VoidSymbol';
+	    }
 	}
-    }
-
-    for my $coord (0 .. 15) {
-	if ($vector[$coord] eq 'ShiftL') {
-	    $vector[$coord + 16] = 'ShiftR';
-	    $vector[$coord + 32] = 'ShiftR';
-	    $vector[$coord + 48] = 'ShiftL';
-	} elsif ($vector[$coord] eq 'ShiftL_Lock') {
-	    $vector[$coord + 16] = 'ShiftR_Lock';
-	    $vector[$coord + 32] = 'ShiftR_Lock';
-	    $vector[$coord + 48] = 'ShiftL_Lock';
+	for my $coord (0 .. 15) {
+	    if ($vector[$coord] eq 'ShiftL_Lock') {   #  0 => 16
+		$vector[$coord + 16] = 'ShiftR_Lock'; # 16 => 48
+		$vector[$coord + 32] = 'ShiftR_Lock'; # 32 => 0
+		$vector[$coord + 48] = 'ShiftL_Lock'; # 48 => 32
+	    } elsif ($vector[$coord] eq 'ShiftL') {
+		$vector[$coord + 16] = 'ShiftL';
+		$vector[$coord + 32] = 'ShiftL';
+		$vector[$coord + 48] = 'ShiftL';
+	    }
+	}
+    } else {
+	for my $coord (16 .. 63) {
+	    if ($vector[$coord] =~ /^(AltGr|AltGr_Lock)$/) {
+		$vector[$coord] = 'VoidSymbol';
+	    }
+	}
+	for my $coord (0 .. 15) {
+	    if ($vector[$coord] eq 'AltGr_Lock') {
+		$vector[$coord + 16] = 'AltGr_Lock';
+		$vector[$coord + 32] = 'AltGr_Lock';
+		$vector[$coord + 48] = 'AltGr_Lock';
+	    } elsif ($vector[$coord] eq 'AltGr') {
+		$vector[$coord + 16] = 'AltGr';
+		$vector[$coord + 32] = 'AltGr';
+		$vector[$coord + 48] = 'AltGr';
+	    }
 	}
     }
 
@@ -3305,15 +3393,77 @@ sub flatten {
 	my $kp = undef;
 	for my $x (0 .. 15) {
 	    my $coord = 16 * $group + $x;
-	    if ($vector[$coord] =~ /^KP_/ && ! defined $kp) {
+	    if ($vector[$coord] =~ /^KP_/) {
 		$kp = $vector[$coord];
+		last;
 	    }
+	}
+	if ($types_table{$key} =~ /^(KEYPAD|FOUR_LEVEL_X
+                                    |FOUR_LEVEL_MIXED_KEYPAD
+		                    |FOUR_LEVEL_KEYPAD)$/x
+	    && ! defined $kp) {
+	    $kp = 'VoidSymbol';
 	}
 	if ($kp) {
 	    for my $x (0 .. 15) {
 		my $coord = 16 * $group + $x;
-		if ($vector[$coord] eq 'VoidSymbol') {
-		    $vector[$coord] = $kp;
+		for ($vector[$coord]) {
+		    if (/^VoidSymbol$/) {
+			# KP_Begin and KP_Delete are mapped to VoidSymbol
+			$vector[$coord] = $kp;
+		    } elsif (/$xkbsym_table{'plus'}/) {# not anchored match!
+			$vector[$coord] = 'KP_Add';
+		    } elsif (/$xkbsym_table{'minus'}/) {
+			$vector[$coord] = 'KP_Subtract';
+		    } elsif (/$xkbsym_table{'asterisk'}/) {
+			$vector[$coord] = 'KP_Multiply';
+		    } elsif (/$xkbsym_table{'slash'}/) {
+			$vector[$coord] = 'KP_Divide';
+		    } elsif (/$xkbsym_table{'comma'}/) {
+			$vector[$coord] = 'KP_Comma';
+		    } elsif (/$xkbsym_table{'period'}/) {
+			$vector[$coord] = 'KP_Period';
+		    } elsif (/$xkbsym_table{'0'}/) {
+			$vector[$coord] = 'KP_0';
+		    } elsif (/$xkbsym_table{'1'}/) {
+			$vector[$coord] = 'KP_1';
+		    } elsif (/$xkbsym_table{'2'}/) {
+			$vector[$coord] = 'KP_2';
+		    } elsif (/$xkbsym_table{'3'}/) {
+			$vector[$coord] = 'KP_3';
+		    } elsif (/$xkbsym_table{'4'}/) {
+			$vector[$coord] = 'KP_4';
+		    } elsif (/$xkbsym_table{'5'}/) {
+			$vector[$coord] = 'KP_5';
+		    } elsif (/$xkbsym_table{'6'}/) {
+			$vector[$coord] = 'KP_6';
+		    } elsif (/$xkbsym_table{'7'}/) {
+			$vector[$coord] = 'KP_7';
+		    } elsif (/$xkbsym_table{'8'}/) {
+			$vector[$coord] = 'KP_8';
+		    } elsif (/$xkbsym_table{'9'}/) {
+			$vector[$coord] = 'KP_9';
+		    } elsif (/^(Return|Enter)$/) {
+			$vector[$coord] = 'KP_Enter';
+		    } elsif (/^Home$/) {
+			$vector[$coord] = 'KP_7';
+		    } elsif (/^Left$/) {
+			$vector[$coord] = 'KP_4';
+		    } elsif (/^Up$/) {
+			$vector[$coord] = 'KP_8';
+		    } elsif (/^Right$/) {
+			$vector[$coord] = 'KP_6';
+		    } elsif (/^Down$/) {
+			$vector[$coord] = 'KP_2';
+		    } elsif (/^Prior$/) {
+			$vector[$coord] = 'KP_9';
+		    } elsif (/^Next$/) {
+			$vector[$coord] = 'KP_3';
+		    } elsif (/^End$/) {
+			$vector[$coord] = 'KP_1';
+		    } elsif (/^Insert$/) {
+			$vector[$coord] = 'KP_0';
+		    }
 		}
 	    }
 	}
@@ -3531,10 +3681,10 @@ my %at_scancodes = (
     209 => -1,  # Korean
     210 => -1,  # Korean
     211 => 89,  # Brasilian ABNT2
-    214 => -1,  # XF86Display
-    215 => -1,  # XF86KbdLightOnOff
-    216 => -1,  # XF86KbdBrightnessDown
-    217 => -1,  # XF86KbdBrightnessUp
+    214 => -1,  # alternate between internal and multimedia display
+    215 => -1,  # turn light on/of
+    216 => -1,  # brightness down
+    217 => -1,  # brightness up
 );
 
 if ($compact) {

@@ -24,6 +24,17 @@ is_sataraid () {
 	return 1
 }
 
+is_multipath () {
+	if type multipath >/dev/null 2>&1; then
+		for frdisk in $(multipath -l 2>/dev/null | grep '^mpath[0-9]\+ ' | cut -d ' ' -f 1); do
+			if echo "$1" | grep -q "^/dev/mapper/${frdisk}-part[0-9]\+"; then
+				return 0
+			fi
+		done
+	fi
+	return 1
+}
+
 ARCH="$(archdetect)"
 
 case $ARCH in
@@ -33,7 +44,13 @@ case $ARCH in
 		log "GRUB not yet usable on Intel-based Macs booted using EFI"
 		exit 1
 	fi
-    ;;
+	;;
+    powerpc/chrp_pegasos)
+	;;
+    powerpc/*)
+	log "GRUB not yet usable on PowerPC systems other than Pegasos/Efika"
+	exit 1
+	;;
 esac
 
 bootfs=$(findfs /boot)
@@ -47,7 +64,7 @@ fi
 # Check for the control file to work around lvdisplay refusal to work with
 # certian lvm device names.
 if lvdisplay "$bootfs" | grep -q 'LV Name' 2>/dev/null || [ -e "$(dirname $bootfs)/control" ]; then
-	if ! is_sataraid $bootfs; then
+	if ! is_sataraid $bootfs && ! is_multipath $bootfs; then
 		log "/boot is a lvm volume ($bootfs), cannot install grub"
 		exit 1
 	fi

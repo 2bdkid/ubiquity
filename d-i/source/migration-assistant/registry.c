@@ -232,7 +232,7 @@ char* printk(char* base, NK* thisnk, char* key) {
                                                             int linelen = strlen(tmp) -
                                                                 (endc-startc+1) + strlen(expanded) + 1;
                                                             //printf("linelen: %d\n", linelen);
-                                                            char* newtmp = malloc(linelen);
+                                                            char* newtmp = calloc(linelen, 1);
                                                             strncpy(newtmp, tmp, startc);
                                                             strcat(newtmp, expanded);
                                                             strcat(newtmp, end+1);

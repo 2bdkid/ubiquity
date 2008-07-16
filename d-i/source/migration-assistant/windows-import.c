@@ -122,7 +122,7 @@ void windowsxp_import_mydocuments (void) {
     mymusic = findkey(user_key_file, mymusickey);
     if(!mymusic) {
         printf("Couldn't find %s\n", mymusickey);
-        return;
+        mymusic = strdup("");
     }
     const char* pic = mypictures;
     const char* mus = mymusic;
@@ -156,7 +156,6 @@ void windowsxp_import_mydocuments (void) {
 	} else {
 	    asprintf(&f, "%s/%s", from, rep->d_name);
 	    //mkdir(to, 0755);
-	    mkdir(t, 0755); // Test to see if this is needed.
 	    asprintf(&t, "%s/%s", to, rep->d_name);
         if( -1 == stat(f, &st)) {
             fprintf(stderr, "Unable to stat %s.\n", f);
@@ -164,7 +163,7 @@ void windowsxp_import_mydocuments (void) {
             extension = rep->d_name;
             while(*extension != '\0') extension++;
             while(extension != rep->d_name && *extension != '.') extension--;
-            if(extension == rep->d_name) extension = NULL;
+            if(extension == rep->d_name) extension = "";
             else extension++;
 
             // TODO: Make a array of ignored extensions instead.

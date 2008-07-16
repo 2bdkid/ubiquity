@@ -299,7 +299,11 @@ get_mirror_info () {
 		db_get mirror/$PROTOCOL/directory || mirror_error=1
 		DIRECTORY="$RET"
 
-		COMPONENTS="main,restricted"
+		if db_get apt-setup/restricted && [ "$RET" = false ]; then
+			COMPONENTS="main"
+		else
+			COMPONENTS="main,restricted"
+		fi
 
 		if [ "$mirror_error" = 1 ] || [ -z "$PROTOCOL" ] || [ -z "$MIRROR" ]; then
 			exit_error base-installer/cannot_install

@@ -1,3 +1,199 @@
+grub-installer (1.32ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed.
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for installation-from-windows. Setting this disables
+      normal grub installation, but still generates a device.map.
+    - Only support grub-installer/grub2_instead_of_grub_legacy by preseeding
+      for now.
+    - Handle cases where /boot is bind-mounted.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 16 Jun 2008 16:45:11 +0100
+
+grub-installer (1.32) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Jurmey Rabgay(Bongop) (DIT,BHUTAN)
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hebrew (he.po) by Lior Kaplan
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Marathi (mr.po) by Sampada
+  * Norwegian Bokmal (nb.po) by Hans Fredrik Nordhaug
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Punjabi (Gurmukhi) (pa.po) by Amanpreet Singh Alam
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:00:05 -0300
+
+grub-installer (1.31) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Run grub in the chroot for password encryption.
+  * Make grub-installer executable again.
+
+  [ Frans Pop ]
+  * Apply patch from Ian Campbell to add support for Xen virtual disks.
+    Closes: #456784.
+
+  [ James Westby ]
+  * Confirm the GRUB password after entry (LP: #42019, closes: #321109).
+    Based on earlier patches by Julian Graham and Frans Pop.
+    Note that grub-installer/password-again must now be preseeded in addition
+    to grub-installer/password, and that grub-installer/password-crypted now
+    takes an MD5-crypted password rather than a boolean.
+
+  [ Soren Hansen ]
+  * Teach grub-installer about virtio devices (/dev/vd*).
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po)
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Brar
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Thu, 01 May 2008 10:34:23 +0200
+
+grub-installer (1.30) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Correct off-by-one error in SATA RAID sanity checks. Thanks Guido Günther.
+  * Add the "quiet" boot parameter only to 'defoptions' and not to 'kopt' so
+    that it is not included for "single user" mode. The same could be done for
+    other parameters.
+
+  [ Guido Guenther ]
+  * Add multipath support modelled after dmraid. Closes: #468832.
+
+  [ Max Vozeler ]
+  * Fix serial console setup for console= options that include either a
+    word size != 8 or a flow control parameter. Closes: #470951
+
+  [ Updated translations ]
+  * Amharic (am.po) by Tegegne Tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 20:59:41 +0100
+
+grub-installer (1.29) unstable; urgency=low
+
+  [ Luke Yelavich ]
+  * Pass the correct number of arguments to db_input for
+    grub-installer/sataraid-error.
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Nepali (ne.po) by Shyam Krishna Bal
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovenian (sl.po) by Matej Kovacic
+  * Turkish (tr.po) by Recai Oktaş
+  * Ukrainian (uk.po)
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 10:18:11 -0200
+
+grub-installer (1.28) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Fix some hardcoding of /target.
+
+  [ Robert Millan ]
+  * Replace update-grub with update_grub in a pair of places.
+  * Stop aborting on reiserfs/gpt (supported now).
+  * Change menu item from 7300 to 7400 so that for PowerPC grub is offered
+    after the yaboot bootloader; for x86 it will still be the default as
+    lilo and elilo already have higher numbers. Closes: #463765.
+  * Set grub-installer as uninstallable for PowerPC subarchitectures other
+    than chrp_pegasos.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Viesturs Zarins
+  * Malayalam (ml.po) by Praveen|പ്രവീണണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Panjabi (pa.po) by A S Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Robert Millan <rmh@aybabtu.com>  Mon,  4 Feb 2008 15:31:06 +0100
+
 grub-installer (1.27ubuntu7) hardy; urgency=low
 
   [ Colin Watson ]

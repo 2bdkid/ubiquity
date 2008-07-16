@@ -1,3 +1,141 @@
+debian-installer-utils (1.59ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 23 Jun 2008 18:07:32 +0100
+
+debian-installer-utils (1.59) unstable; urgency=low
+
+  * Ensure that terminfo files do not have strange modes, as in the last
+    upload.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 20 Jun 2008 13:04:48 -0400
+
+debian-installer-utils (1.58) unstable; urgency=low
+
+  [ Evan Dandrea ]
+  * Avoid triggering sound events, which can cause audio to be played every
+    time update-dev runs; only relevant in live CD environments such as
+    Ubuntu's (LP: #178057).
+
+  [ Philip Hands ]
+  * Move fetch-url here from preseed.
+  * Take inspiration from cdebconf about wget -c.
+  * Add wrapper to wget that allows it to differentiate 404s as originally
+    suggested by Alex Owen (closes: #422088).
+  * Modify all fetch methods to return 4 for missing files.
+  * Incorporate loads of suggestions from Frans Pop.
+
+  [ Frans Pop ]
+  * in-target: accept --pass-stdout option and pass it on to log-output.
+    Allows more flexible use of in-target, especially for single commands
+    that need a correct target environment.
+  * chroot-setup.sh: allow to override the normal LANG setting.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Marathi (mr.po) by Sampada
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+
+ -- Frans Pop <fjp@debian.org>  Tue, 17 Jun 2008 14:20:06 +0200
+
+debian-installer-utils (1.57ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - update-dev: Avoid triggering sound events, which can cause audio to be
+      played every time update-dev runs.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 08 May 2008 01:28:48 +0100
+
+debian-installer-utils (1.57) unstable; urgency=low
+
+  * Remove David Kimdon, Matt Kraai and Tollef Fog Heen as Uploaders with many
+    thanks for their past contributions.
+  * Unmount /cdrom during package installation even if the user did not scan
+    additional CDs as otherwise accessing the CD may fail. See: #474346.
+
+  [ Updated translations ]
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po)
+
+ -- Frans Pop <fjp@debian.org>  Mon, 28 Apr 2008 07:11:36 +0200
+
+debian-installer-utils (1.56) unstable; urgency=low
+
+  * Make apt-install safe to be used during pkgsel when the installation CD
+    may already be unmounted in the D-I environment.
+  * user-params: also exclude debconf variables with '?=' (unset seen flag).
+    Update testset to catch that. Closes: #470892.
+
+  [ Updated translations ]
+  * Basque (eu.po) by Piarres Beobide
+  * Dutch (nl.po) by Frans Pop
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 20:52:10 +0100
+
+debian-installer-utils (1.55) unstable; urgency=low
+
+  * chroot-setup.sh: also mount /dev/pts to avoid errors like:
+    Can not write log, openpty() failed (/dev/pts not mounted?)
+    Thanks to Petter Reinholdtsen for the patch. Closes: #463866.
+
+ -- Frans Pop <fjp@debian.org>  Sat, 16 Feb 2008 13:48:36 +0100
+
+debian-installer-utils (1.54) unstable; urgency=low
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Turkish (tr.po) by Recai Oktaş
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 08:08:48 -0200
+
+debian-installer-utils (1.53) unstable; urgency=low
+
+  * apt-install: add -q option for apt-get which fixes the restarting of the
+    progress bar every time apt-install was called from base-installer.
+
+  [ Updated translations ]
+  * Latvian (lv.po) by Viesturs Zarins
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+
+ -- Frans Pop <fjp@debian.org>  Thu, 07 Feb 2008 08:12:51 +0100
+
+debian-installer-utils (1.52) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Spell "Debian" correctly in packages' descriptions
+  * Do not ignore errors from 'make clean' in the clean target
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by Praveen|പരവീണ A|എ
+  * Panjabi (pa.po) by A S Alam
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 10 Jan 2008 07:38:00 +0100
+
+debian-installer-utils (1.51) unstable; urgency=low
+
+  [ Colin Watson ]
+  * user-params: Exclude ks=, used by kickseed.
+  * list-devices: udev 117 merged all udev tools into a single binary called
+    udevadm. Check for this and use it instead of udevinfo if available.
+  * update-dev: Likewise for udevtrigger and udevsettle.
+
+  [ Joey Hess ]
+  * chroot-setup.sh: Prepare for apt-listchanges being priority standard
+    by avoiding it trying to display changes in the d-i environment. (Could
+    happen if a package installation involves upgrading something else.)
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 03 Dec 2007 12:43:29 +0000
+
 debian-installer-utils (1.50ubuntu3) hardy; urgency=low
 
   * Backport from trunk:

@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 #include "utils.h"
+#include "registry.h"
 /* This function discovers the correct case-sensitive file or directory path
  * from a case-insensitive file or directory path.
  *
@@ -78,8 +79,8 @@ char* get_insensitive_path(const char* path) {
                 break;
             }
         }
-        closedir(d);
         if(!found) {
+            closedir(d);
             fprintf(stderr, "Error: Could not find the path %s\n", path);
             return NULL;
         }
@@ -90,6 +91,7 @@ char* get_insensitive_path(const char* path) {
                 asprintf(&ret, "%s%s/", ret, de->d_name);
             chdir(ret);
         }
+        closedir(d);
     }
     if(head) free(head);
     if (fchdir(cwd) == -1) {
@@ -101,9 +103,12 @@ char* get_insensitive_path(const char* path) {
     return ret;
 }
 void initialize_registry_paths() {
+    initialize_software_registry_path();
+    initialize_user_registry_path();
+}
+void initialize_software_registry_path() {
     char* tmp;
     software_key_file = NULL;
-    user_key_file = NULL;
 
     asprintf(&tmp, "%s/WINDOWS/system32/config/software", from_location);
     software_key_file = get_insensitive_path(tmp);
@@ -118,9 +123,28 @@ void initialize_registry_paths() {
         }
         if(tmp) free(tmp);
     }
+}
+char* get_profiles_dir(const char *mountpoint) {
+    char *profilesdir = findkey(software_key_file, "\\Microsoft\\Windows NT\\CurrentVersion"
+        "\\ProfileList\\ProfilesDirectory");
+    if(!profilesdir) {
+        fprintf(stderr, "ma-search-users: Error.  Could not find "
+            "ProfilesDirectory.\n");
+        exit(EXIT_FAILURE);
+    }
+    char* pdir = reformat_path(profilesdir);
+    free(profilesdir);
+    asprintf(&profilesdir, "%s/%s", mountpoint, pdir);
+    free(pdir);
+    fprintf(stderr, "profilesdir: %s\n", profilesdir);
+    return profilesdir;
+}
+void initialize_user_registry_path() {
+    char* tmp;
+    user_key_file = NULL;
 
-    asprintf(&tmp, "%s/%s/%s/%s", from_location,
-    "Documents and Settings", from_user, "NTUSER.DAT");
+    char* profilesdir = get_profiles_dir(from_location);
+    asprintf(&tmp, "%s/%s/%s", profilesdir, from_user, "NTUSER.DAT");
     user_key_file = get_insensitive_path(tmp);
     if(user_key_file == NULL) {
         fprintf(stderr, "Fatal: Could not find the USER registry hive at " \
@@ -181,7 +205,6 @@ char* reformat_path(const char* from) {
 // Modified from Advanced Programming in the Unix Environment.
 void copyfile(const char* from, const char* to) {
     int         fdin, fdout;
-    void        *src, *dst;
     struct stat statbuf;
     const int mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 
@@ -204,32 +227,32 @@ void copyfile(const char* from, const char* to) {
         puts("fstat error");
 	    exit(EXIT_FAILURE);
     }
-    if(statbuf.st_size == 0)
+    if(statbuf.st_size == 0) {
+        close(fdin);
+        close(fdout);
         return;
-
-    /* set size of output file */
-    if (lseek(fdout, statbuf.st_size - 1, SEEK_SET) == -1) {
-        puts("lseek error");
-	    exit(EXIT_FAILURE);
-    }
-    if (write(fdout, "", 1) != 1) {
-        puts("write error");
-	    exit(EXIT_FAILURE);
     }
 
-    if ((src = mmap(0, statbuf.st_size, PROT_READ, MAP_SHARED,
-      fdin, 0)) == MAP_FAILED) {
-        puts("mmap error for input");
-	exit(EXIT_FAILURE);
+    /* does the file copy */
+    /* simplified version of coreutils/src/copy.c */
+    blksize_t blocksize = statbuf.st_blksize;
+    char *buf = alloca(blocksize);
+    for (;;) {
+        ssize_t n_read = read(fdin, buf, blocksize);
+        if (n_read < 0) {
+            printf("can't read in %s\n", from);
+            exit(EXIT_FAILURE);
+        }
+        if (n_read == 0)
+            break;
+        if (write(fdout, buf, n_read) != n_read) {
+            printf("can't write in %s\n", to);
+            exit(EXIT_FAILURE);
+        }
     }
 
-    if ((dst = mmap(0, statbuf.st_size, PROT_READ | PROT_WRITE,
-      MAP_SHARED, fdout, 0)) == MAP_FAILED) {
-        puts("mmap error for output");
-	exit(EXIT_FAILURE);
-    }
-
-    memcpy(dst, src, statbuf.st_size); /* does the file copy */
+    close(fdin);
+    close(fdout);
 }
 
 void rcopy(const char* from, const char* to) {
@@ -260,7 +283,7 @@ void rcopy(const char* from, const char* to) {
             extension = de->d_name;
             while(*extension != '\0') extension++;
             while(extension != de->d_name && *extension != '.') extension--;
-            if(extension == de->d_name) extension = NULL;
+            if(extension == de->d_name) extension = "";
             else extension++;
 
             // TODO: Make a array of ignored extensions instead.
@@ -301,6 +324,7 @@ void create_file(const char* file) {
     FILE* fp;
     char* tmp;
     char* filename;
+    int fd;
 
     if((fp = fopen(file, "r")) != NULL) {
 	fclose(fp);
@@ -312,7 +336,8 @@ void create_file(const char* file) {
     makedirs(filename);
     free(tmp);
 
-    creat(file, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    fd = creat(file, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    close(fd);
 }
 void add_wallpaper (const char* path) {
     xmlDoc* doc = NULL;

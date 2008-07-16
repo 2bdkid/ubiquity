@@ -2,6 +2,7 @@
 
 Template: mirror/ftp/hostname
 Type: string
+# :sl2:
 _Description: Ubuntu archive mirror hostname:
  Please enter the hostname of the mirror from which Ubuntu will be downloaded.
  .
@@ -15,12 +16,14 @@ Default[hppa]: /ubuntu-ports/
 Default[ia64]: /ubuntu-ports/
 Default[powerpc]: /ubuntu-ports/
 Default[sparc]: /ubuntu-ports/
+# :sl2:
 _Description: Ubuntu archive mirror directory:
  Please enter the directory in which the mirror of the Ubuntu archive is
  located.
 
 Template: mirror/ftp/proxy
 Type: string
+# :sl2:
 _Description: FTP proxy information (blank for none):
  If you need to use a FTP proxy to access the outside world, enter the
  proxy information here. Otherwise, leave this blank.

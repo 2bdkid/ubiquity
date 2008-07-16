@@ -1,3 +1,31 @@
+migration-assistant (0.6.2) intrepid; urgency=low
+
+  * Several fixes from Olivier Blin of Mandriva:
+    - Close file descriptors when they're no longer needed.
+    - Move a closedir() call, it can free data returned by readdir() too
+      early.  It leads to path corruption in some cases.
+    - Fix a segfault with files with no extension.
+    - Remove a spurious directory creation, with uninitialized name.
+    - Fix Windows 2000 migration, by not trying to import music if not
+      present.
+    - Fix detection of Windows-NT-like registry path in ma-search-users, by
+      splitting and reusing WINNT code from utils.c
+    - Reimplement copy using read/write (like cp) to handle large files,
+      since we can't mmap() (twice) large files in memory.
+    - fix segfault by zeroing buffers for strcat.
+    - Improve WINNT patch to factorize user registry location as well.
+    - Vista profile directories support.  Get profiles directory from
+      registry for ma-search-items and ma-import as well ("Documents and
+      Settings" is not correct in Vista), this also allows us to read the
+      user registries.
+    - Vista users support.  Filter Public and Default users for Vista (from
+      registry keys).  Filter "Default User" key in Vista (it is a junction
+      to Default).  Do not segfault if keys are missing.
+  * More efficient and less error-prone device substring extraction.
+  * Set the locale to C when using expr.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 27 May 2008 14:07:31 -0400
+
 migration-assistant (0.6.1) hardy; urgency=low
 
   * Use + instead of : for a replacement character as it is explicitly
