@@ -1,3 +1,17 @@
+user-setup (1.20ubuntu3) intrepid; urgency=low
+
+  * debian/user-setup-udeb.templates: Drop the initial user from some groups
+    which have better dynamic replacements, in an effort to reduce the misuse
+    of groups for assigning privileges:
+    - audio, video, floppy: Hal assigns ACLs for local foreground console
+      users; remote users should not have these. 'cdrom' has to stay for
+      apt-cdrom (Debian #464899), 'plugdev' has to stay for static mountpoints
+      created by the installer.
+    - dip: Not used anywhere in Ubuntu.
+    See intrepid-device-permissions spec.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Mon, 21 Jul 2008 16:10:17 +0200
+
 user-setup (1.20ubuntu2) intrepid; urgency=low
 
   * Create sambashare group and add the initial user to it (thanks, Mantas

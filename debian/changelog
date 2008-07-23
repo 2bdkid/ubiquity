@@ -1,3 +1,33 @@
+ubiquity (1.9.5) intrepid; urgency=low
+
+  [ Colin Watson ]
+  * Update README to document --automatic option.
+  * Direct questions to the ubuntu-installer list rather than to me
+    personally.
+  * Depend on kdesudo | kdesudo-kde4 (the latter is transitional now).
+  * KDE frontend:
+    - Fix crash on selecting non-ASCII options in the "Use as:" menu while
+      creating a partition (LP: #247993).
+    - Fix crash when entering a non-ASCII mount point (LP: #128554).
+  * Preseed netcfg/dhcp_ntp_servers from install component rather than
+    clock-setup, since the latter doesn't have debconf database access at
+    the right time (LP: #251089).
+
+  [ Jonathan Riddell ]
+  * language.py: Change string to unicode, fixes crash when using KDE 
+    frontend, closes LP: #251097
+  * KDE frontend
+   - comment out dcop code
+   - add set_hostname method
+   - temporarily force sudo until we work out why kdesudo stops it passing 
+     partitioning stage, bug 251203
+
+  [ Evan Dandrea ]
+  * Automatic update of included source packages: user-setup
+    1.20ubuntu3.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 23 Jul 2008 12:48:57 -0400
+
 ubiquity (1.9.4) intrepid; urgency=low
 
   [ Colin Watson ]

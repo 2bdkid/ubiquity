@@ -268,11 +268,13 @@ class Wizard(BaseFrontend):
 
     # Disable the KDE media notifier to avoid problems during partitioning.
     def disable_volume_manager(self):
-        execute('dcop', 'kded', 'kded', 'unloadModule', 'medianotifier')
+        print "FIXME, medianotifier unload port to KDE 4"
+        #execute('dcop', 'kded', 'kded', 'unloadModule', 'medianotifier')
         atexit.register(self.enable_volume_manager)
 
     def enable_volume_manager(self):
-        execute('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
+        print "FIXME, medianotifier unload port to KDE 4"
+        #execute('dcop', 'kded', 'kded', 'loadModule', 'medianotifier')
 
     def openReleaseNotes(self):
         self.openURL(self.release_notes_url_template)
@@ -749,10 +751,11 @@ class Wizard(BaseFrontend):
         """Callback for main program to actually reboot the machine."""
 
         if 'DESKTOP_SESSION' in os.environ:
-            execute('dcop', 'ksmserver', 'ksmserver', 'logout',
-                    # ShutdownConfirmNo, ShutdownTypeReboot,
-                    # ShutdownModeForceNow
-                    '0', '1', '2')
+            print "FIXME, port logout to KDE 4"
+            #execute('dcop', 'ksmserver', 'ksmserver', 'logout',
+            #        # ShutdownConfirmNo, ShutdownTypeReboot,
+            #        # ShutdownModeForceNow
+            #        '0', '1', '2')
         else:
             execute('reboot')
 
@@ -1448,7 +1451,7 @@ class Wizard(BaseFrontend):
             method_description = unicode(self.create_dialog.partition_create_use_combo.currentText())
             method = self.create_use_method_names[method_description]
 
-            mountpoint = str(self.create_dialog.partition_create_mount_combo.currentText())
+            mountpoint = unicode(self.create_dialog.partition_create_mount_combo.currentText())
 
             self.allow_change_step(False)
             self.dbfilter.create_partition(
@@ -1461,7 +1464,7 @@ class Wizard(BaseFrontend):
             return
         known_filesystems = ('ext3', 'ext2', 'reiserfs', 'jfs', 'xfs',
                              'fat16', 'fat32', 'ntfs')
-        text = str(self.create_dialog.partition_create_use_combo.currentText())
+        text = unicode(self.create_dialog.partition_create_use_combo.currentText())
         if text not in self.create_use_method_names:
             return
         method = self.create_use_method_names[text]
@@ -1568,7 +1571,7 @@ class Wizard(BaseFrontend):
 
             format = self.edit_dialog.partition_edit_format_checkbutton.isChecked()
 
-            mountpoint = str(self.edit_dialog.partition_edit_mount_combo.currentText())
+            mountpoint = unicode(self.edit_dialog.partition_edit_mount_combo.currentText())
 
             if (current_size is not None and size is not None and
                 current_size == size):
@@ -1809,6 +1812,9 @@ class Wizard(BaseFrontend):
 
     def get_hostname (self):
         return unicode(self.userinterface.hostname.text())
+
+    def set_hostname (self, value):
+        self.userinterface.hostname.setText(value)
 
     def set_summary_text (self, text):
         i = text.find("\n")
