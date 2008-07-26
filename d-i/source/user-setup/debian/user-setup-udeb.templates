@@ -22,6 +22,12 @@ Type: string
 Default: adm cdrom dialout lpadmin plugdev fuse sambashare
 Description: for internal use only
 
+# Allow preseeding whether to automatically log in the first created user
+Template: passwd/auto-login
+Type: boolean
+Default: false
+Description: for internal use only
+
 Template: passwd/root-login
 Type: boolean
 Default: false

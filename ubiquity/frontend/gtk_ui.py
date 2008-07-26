@@ -930,6 +930,9 @@ class Wizard(BaseFrontend):
         elif gtk.main_level() > 0:
             gtk.main_quit()
 
+        if not self.live_installer.get_focus():
+            self.live_installer.child_focus(gtk.DIR_TAB_FORWARD)
+
     def on_keyboardlayoutview_row_activated(self, treeview, path, view_column):
         self.next.activate()
 
@@ -1052,6 +1055,9 @@ class Wizard(BaseFrontend):
         elif gtk.main_level() > 0:
             gtk.main_quit()
 
+        if not self.live_installer.get_focus():
+            self.live_installer.child_focus(gtk.DIR_TAB_FORWARD)
+
 
     def selected_language (self, selection):
         (model, iterator) = selection.get_selected()
@@ -1084,7 +1090,12 @@ class Wizard(BaseFrontend):
 
     def on_steps_switch_page (self, foo, bar, current):
         self.current_page = current
-        self.translate_widget(self.step_label, self.locale)
+        # If we're on the language page, then
+        # on_language_treeview_selection_changed will take care of
+        # translating this, and we may not know the correct language at this
+        # point.
+        if self.step_name(current) != 'stepLanguage':
+            self.translate_widget(self.step_label, self.locale)
         syslog.syslog('switched to page %s' % self.step_name(current))
 
 
@@ -1835,6 +1846,21 @@ class Wizard(BaseFrontend):
             self.partman_popup(widget, event)
             return True
 
+    def on_partition_list_treeview_key_press_event (self, widget, event):
+        if event.type != gtk.gdk.KEY_PRESS:
+            return False
+
+        if event.keyval == gtk.keysyms.Delete:
+            if not isinstance(self.dbfilter, partman.Partman):
+                return False
+            devpart, partition = self.partition_list_get_selection()
+            for action in self.dbfilter.get_actions(devpart, partition):
+                if action == 'delete':
+                    self.on_partition_list_delete_activate(widget)
+                    return True
+
+        return False
+
     def on_partition_list_treeview_popup_menu (self, widget):
         self.partman_popup(widget, None)
         return True
@@ -2158,6 +2184,9 @@ class Wizard(BaseFrontend):
 
     def get_verified_password(self):
         return self.verified_password.get_text()
+
+    def get_auto_login(self):
+        return self.auto_login.get_active()
 
     def username_error(self, msg):
         self.username_error_reason.set_text(msg)

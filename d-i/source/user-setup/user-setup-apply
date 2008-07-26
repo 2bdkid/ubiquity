@@ -140,6 +140,38 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for group in $RET; do
 			$log $chroot $ROOT adduser "$USER" $group >/dev/null 2>&1 || true
 		done
+ 
+ 		# Configure desktop auto-login if instructed by preseeding
+ 		db_get passwd/auto-login
+ 		if [ "$RET" = true ]; then
+			# chroot needed to handle symlinks correctly
+			if $chroot $ROOT [ -f /etc/gdm/gdm-cdd.conf ]; then
+				GDMCONF=/etc/gdm/gdm-cdd.conf
+			else
+				GDMCONF=/etc/gdm/gdm.conf
+			fi
+	 
+			# chroot needed to handle symlinks correctly
+			if $chroot $ROOT [ -f "$GDMCONF" ]; then
+				# Configure GDM autologin
+				$log $chroot $ROOT sed -i \
+					-e "s/^AutomaticLoginEnable=.*\$/AutomaticLoginEnable=true/" \
+					-e "s/^AutomaticLogin=.*\$/AutomaticLogin=$USER/" \
+					-e "s/^TimedLoginEnable=.*\$/TimedLoginEnable=true/" \
+					-e "s/^TimedLogin=.*\$/TimedLogin=$USER/" \
+					-e "s/^TimedLoginDelay=.*\$/TimedLoginDelay=10/" \
+					"$GDMCONF"
+			fi
+	 
+			if $chroot $ROOT [ -f /etc/kde3/kdm/kdmrc ]; then
+				# Configure KDM autologin
+				$log $chroot $ROOT sed -i -r \
+					-e "s/^#?AutoLoginEnable=.*\$/AutoLoginEnable=true/" \
+					-e "s/^#?AutoLoginUser=.*\$/AutoLoginUser=$USER/" \
+					-e "s/^#?AutoReLogin=.*\$/AutoReLogin=true/" \
+					/etc/kde3/kdm/kdmrc
+			fi
+		fi
 	fi
 
 	db_get passwd/root-login

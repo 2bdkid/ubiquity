@@ -1,3 +1,46 @@
+ubiquity (1.9.7) intrepid; urgency=low
+
+  [ Evan Dandrea ]
+  * Properly fix intltool dependency.  Remove old copies of intltool
+    scripts.
+  * Add an auto-login option to the "Who are you?" page.
+
+  [ Michael Terry ]
+  * Ensure that some widget is focused after changing page (LP: #241367).
+
+  [ Colin Watson ]
+  * Add a no-op compatibility shim for depmod. Some d-i code calls it after
+    calling anna-install in order to make sure that new kernel modules are
+    installed properly; this is unnecessary and slow in the live CD
+    environment (LP: #251117).
+  * Brown-paper-bag bug: open /target/var/log/installer/oem-id for writing
+    (LP: #251751).
+  * Update summary page to fetch the language name correctly from the new
+    localechooser.
+  * Set SCIM_USER and SCIM_HOME to force scim to use configuration and
+    sockets from the live CD user rather than root (LP: #234208).
+  * Use a single private debconf-communicate instance for five queries in
+    base frontend initialisation rather than using the debconf_operation
+    wrapper. This is less convenient, but significantly speeds up startup
+    (in a kvm instance here, 19 seconds -> 4 seconds).
+  * Remove hardcoded invisible_char properties in order to use GTK's
+    defaults (LP: #225882).
+  * GTK frontend:
+    - Don't translate step_label when switching to the language page;
+      on_language_treeview_selection_changed will take care of it if
+      necessary, and the page-switch handler may not know the correct
+      language (LP: #225876).
+    - Bind the Delete key on the partition list to "Delete partition"
+      (LP: #218936).
+  * KDE frontend:
+    - Make "Details" string on summary page translatable (LP: #190491).
+  * Depend on rdate for clock-setup.
+  * Automatic update of included source packages: apt-setup 1:0.37ubuntu3,
+    clock-setup 0.96ubuntu1, localechooser 2.03ubuntu2, user-setup
+    1.20ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 27 Jul 2008 00:13:38 +0100
+
 ubiquity (1.9.6) intrepid; urgency=low
 
   * Add a dependency on intltool to fix a build failure.

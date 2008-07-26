@@ -1,3 +1,43 @@
+clock-setup (0.96ubuntu1) intrepid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Add lpia to architecture list.
+  * Fix rdate-udeb dependency to include the epoch.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 26 Jul 2008 23:34:38 +0100
+
+clock-setup (0.96) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove Petter Reinholdtsen and Christian Perrier as Uploaders with many
+    thanks for their past contributions.
+
+  [ Jérémy Bobbio ]
+  * As #436497 has been fixed in newt 0.52.2-11.3, step the progress bar again
+    after setting the time.
+  * Step the progress bar while attempting to contact the NTP servers.
+    This also adds the ability to cancel NTP synchronisation. (Closes: #448871)
+    Depends: rdate-udeb (>= 1.1.3-2)
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Milo Casagrande
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po) by Sampada
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Mert Dirik
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Jérémy Bobbio <lunar@debian.org>  Tue, 22 Jul 2008 15:15:22 +0000
+
 clock-setup (0.95ubuntu1) intrepid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

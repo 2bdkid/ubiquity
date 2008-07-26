@@ -8,6 +8,9 @@ file="$1"
 if [ ! -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; then
 	exit 0
 fi
+if [ ! -s /cdrom/.disk/info ]; then
+	exit 0
+fi
 
 remount_cd() {
 	if [ "$ROOT" ] && [ ! -d /hd-media ]; then

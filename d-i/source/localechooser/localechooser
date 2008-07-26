@@ -135,7 +135,13 @@ do_preseed() {
 	# Only populate debconf if this is a supported locale
 	# and if the language is supported in D-I
 	LANGUAGE=${LOCALE%%.*}
-	LANGUAGE=${LANGUAGE%%_*}
+	if ! grep -q "^$LANGUAGE;" $LANGUAGELISTFILE; then
+		LANGUAGE=${LANGUAGE%%_*}
+		if ! grep -q "^$LANGUAGE;" $LANGUAGELISTFILE; then
+			LANGUAGE="$(grep "^${LANGUAGE}_" $LANGUAGELISTFILE | \
+				head -n1 | cut -d';' -f1)"
+		fi
+	fi
 	if [ -n "$LANGUAGE" ]; then
 		db_set $tpl_languagelist $LANGUAGE
 		log "Set $tpl_languagelist = '$LANGUAGE'"
@@ -363,7 +369,13 @@ if [ ! -f /var/lib/localechooser/preseeded ]; then
 		db_fget $tpl_di_language seen
 		seenflag=$RET
 		LANGUAGE="${LANGUAGE%%.*}"
-		LANGUAGE="${LANGUAGE%%_*}"
+		if ! grep -q "^$LANGUAGE;" $LANGUAGELISTFILE; then
+			LANGUAGE="${LANGUAGE%%_*}"
+			if ! grep -q "^$LANGUAGE;" $LANGUAGELISTFILE; then
+				LANGUAGE="$(grep "^${LANGUAGE}_" $LANGUAGELISTFILE | \
+					head -n1 | cut -d';' -f1)"
+			fi
+		fi
 		if [ -n "$LANGUAGE" ]; then
 			db_set $tpl_languagelist $LANGUAGE
 			log "Set $tpl_languagelist = '$LANGUAGE'"
