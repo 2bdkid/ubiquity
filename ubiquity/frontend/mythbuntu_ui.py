@@ -278,7 +278,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
                 self.installing = False
                 self.steps.next_page()
                 self.back.hide()
-                self.cancel.hide()
+                self.quit.hide()
                 self.next.set_label("Finish")
                 gtk.main()
                 self.live_installer.hide()
@@ -410,10 +410,6 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         self.tvoutstandard.set_active(0)
         self.tvouttype.set_active(0)
 
-    def allow_go_backward(self, allowed):
-        self.back.set_sensitive(allowed and self.allowed_change_step)
-        self.allowed_go_backward = allowed
-
     def mythbuntu_password(self,widget):
         """Checks that certain passwords meet requirements"""
         #For the services page, the only password we have is the VNC
@@ -529,9 +525,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         lists = [{'video_driver': self.video_driver,
                   'tvout': self.tvouttype,
                   'tvstandard': self.tvoutstandard,
-                  'hdhomerun': self.hdhomerun,
-                  'xmltv': self.xmltv,
-                  'dvbutils': self.dvbutils}]
+                  'hdhomerun': self.hdhomerun}]
         self._preseed_list(lists,name,value)
 
     def set_password(self,name,value):
@@ -659,9 +653,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         return self._build_static_list([{'video_driver': self.video_driver,
                                          'tvout': self.tvouttype,
                                          'tvstandard': self.tvoutstandard,
-                                         'hdhomerun': self.hdhomerun,
-                                         'xmltv': self.xmltv,
-                                         'dvbutils': self.dvbutils}])
+                                         'hdhomerun': self.hdhomerun}])
 
     def get_mythtv_passwords(self):
         return self._build_static_list([{'mysql_admin_password':self.mysql_root_password,

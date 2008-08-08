@@ -21,7 +21,7 @@ might as well see the one that's being documented as well ;-)
                         echo 1
                         wget "$@" 2>&1 >&3 && echo %OK%
                         echo %EOF%
-                        } | ( sed -ne '1{h;d};/server returned error 404/{p;s/.*/4/;h;d};/^%OK%$/{s/.*/0/;h;d};$!p;$x;$w /dev/fd/4' >&2 ) 4>&1
+                        } | ( sed -ne '1{h;d};/server returned error 404/{p;s/.*/4/;h;d};/^%OK%$/{s/.*/0/;h;d};$!p;$x;$w /proc/self/fd/4' >&2 ) 4>&1
                 ) 3>&1
                 return $RETVAL
         }
@@ -49,7 +49,7 @@ It manages this by doing the following:
   $x     -- when we get to the last line (provided by the echo %EOF%) swap the pattern
             with the hold space -- so now we have our return code in the pattern space
 
-  $w /dev/fd/4 -- write the result to file handle 4
+  $w /proc/self/fd/4 -- write the result to file handle 4
 
 The rest of this is just making sure that the standard error, and standard
 out pops out of the function as if it were just wget, while allowing us

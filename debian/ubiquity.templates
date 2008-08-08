@@ -182,11 +182,11 @@ _Description: Step ${INDEX} of ${TOTAL}
 
 Template: ubiquity/text/warning_dialog
 Type: title
-_Description: Abort the installation?
+_Description: Quit the installation?
 
 Template: ubiquity/text/warning_dialog_label
 Type: text
-_Description: Do you really want to abort the installation now?
+_Description: Do you really want to quit the installation now?
 
 Template: ubiquity/text/progress_cancel_button
 Type: text
@@ -667,6 +667,11 @@ Template: ubiquity/install_bootloader
 Type: boolean
 Default: true
 Description: for internal use; determines whether a bootloader will be installed
+
+Template: ubiquity/partman-skip-unmount
+Type: boolean
+Default: false
+Description: for internal use; prevent ubiquity from unmounting partitions before committing partition table changes (may cause problems)
 
 Template: ubiquity/partman-failed-unmount
 Type: boolean

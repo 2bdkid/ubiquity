@@ -260,6 +260,9 @@ is_removable () {
 			return
 		fi
 	fi
+	if [ -z "$removabledevice" ]; then
+		return
+	fi
 	if type udevadm >/dev/null 2>&1; then
 		bus="$(udevadm info -q env -n $removabledevice)"
 	else
@@ -349,6 +352,19 @@ elif type multipath >/dev/null 2>&1; then
 		$chroot $ROOT mount /proc
 		$chroot $ROOT dmsetup mknodes
 	fi
+# Check of the boot file system is on an mdadm device
+elif type mdadm >/dev/null 2>&1; then
+	frdisk_list=
+	md=$(findfs "/boot")
+	for frdisk in $(mdadm --detail "$md" 2>/dev/null | \
+			grep " active sync " 2>/dev/null | \
+			sed "s/^.* active sync\s*//" 2>/dev/null \
+	); do
+		# Build a list of devices in the mirror
+		frdisk_list="$frdisk_list $frdisk"
+		frdev=
+		frtype="mdadm"
+	done
 fi
 
 info "Identified partition label for $bootfs: $bootfslabel"
@@ -614,6 +630,19 @@ update_mtab
 
 mkdir -p $ROOT/boot/grub
 
+write_grub() {
+	info "Installing GRUB to $frdev; grub root is $disc_offered"
+	# TODO: Check for errors during this process!
+	TERM=linux $chroot $ROOT \
+        grub --device-map=/dev/null >/var/log/grub-${frtype}.log 2>&1 </dev/null <<EOF
+device (hd0,$frgrubroot) $disc_offered
+device (hd0) $frdev
+root (hd0,$frgrubroot)
+setup (hd0)
+quit
+EOF
+}
+
 if [ -z "$frdisk" ]; then
 
 	# Install grub on each space separated disk in the list
@@ -661,15 +690,14 @@ if [ -z "$frdisk" ]; then
 else
 
 	# Semi-manual grub setup for Serial ATA RAID/multipath
-	info "Boot partition is on a Serial ATA RAID disk or multipath device"
-	info "Installing GRUB to $frdev; grub root is $disc_offered"
+	info "Boot partition is on a Serial ATA RAID disk, multipath, or mdadm device"
 	case $(archdetect) in
 	    i386/*)
 		stagedir=i386-pc ;;
 	    amd64/*)
 		stagedir=x86_64-pc ;;
 	    *)
-		error "Unsupported architecture for SATA RAID/multipath installation"
+		error "Unsupported architecture for SATA RAID/multipath/mdadm installation"
 		exit 1
 		;;
 	esac
@@ -680,15 +708,17 @@ else
 	mkdir -p $ROOT/boot/grub
 	cp $ROOT/usr/lib/grub/$stagedir/* $ROOT/boot/grub
 
-	# TODO: Check for errors during this process!
-	TERM=linux $chroot $ROOT \
-        grub --device-map=/dev/null >/var/log/grub-${frtype}.log 2>&1 </dev/null <<EOF
-device (hd0,$frgrubroot) $disc_offered
-device (hd0) $frdev
-root (hd0,$frgrubroot)
-setup (hd0)
-quit
-EOF
+	if [ "$frtype" = "mdadm" ]; then
+		for frdisk in $frdisk_list; do
+			frdev=$(echo "$frdisk" | sed "s/[0-9]\+$//")
+			disc_offered=$frdev
+			frbootpart=${frdisk#$frdev}
+			frgrubroot=$(($frbootpart-1))
+			write_grub
+		done
+	else
+		write_grub
+	fi
 
 fi
 

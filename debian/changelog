@@ -1,3 +1,35 @@
+ubiquity (1.9.8) intrepid; urgency=low
+
+  [ Mario Limonciello ]
+  * Remove xmltv and dvbutils options, as they will be installed across
+    all boxen now.
+  * debian/control:
+    - Drop depends for guidance on mythbuntu package.
+  * Install custom mythbuntu recipe - only applicable for Mythbuntu
+    frontend.
+  * Add support for additional mythbuntu plugin, apple trailers.
+
+  [ Colin Watson ]
+  * When copying files, remove regular files and symlinks if they exist
+    already on the target; this can happen legitimately if installing over
+    an existing system and /boot wasn't erased.
+  * Make the Back button insensitive on the first page rather than hiding it
+    (LP: #186953).
+  * Rename main Cancel button to Quit, and adjust the quit dialog text
+    slightly so that we consistently use "quit" as the action verb and
+    "cancel" clearly means to cancel the dialog (LP: #45690).
+  * Fix format string substitution error in _abstract method.
+  * Allow skipping the unmounting of busy partitions by preseeding
+    ubiquity/partman-skip-unmount to true (LP: #252667).
+  * Automatic update of included source packages: debian-installer-utils
+    1.59ubuntu2, grub-installer 1.32ubuntu2, partman-target 55ubuntu2.
+
+  [ Evan Dandrea ]
+  * Also remove the langlevel file if it exists before we start
+    localechooser.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 08 Aug 2008 16:10:49 +0100
+
 ubiquity (1.9.7) intrepid; urgency=low
 
   [ Evan Dandrea ]
