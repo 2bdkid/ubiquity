@@ -264,7 +264,11 @@ get_mirror_info () {
 		MIRROR=""
 		DIRECTORY="/cdrom/"
 		if [ -s /cdrom/.disk/base_components ]; then
-			COMPONENTS=`grep -v '^#' /cdrom/.disk/base_components | tr '\n' , | sed 's/,$//'`
+			if db_get apt-setup/restricted && [ "$RET" = false ]; then
+				COMPONENTS=`grep -v '^#' /cdrom/.disk/base_components | egrep -v '^(restricted|multiverse)$' | tr '\n' , | sed 's/,$//'`
+			else
+				COMPONENTS=`grep -v '^#' /cdrom/.disk/base_components | tr '\n' , | sed 's/,$//'`
+			fi
 		else
 			COMPONENTS="*"
 		fi
@@ -756,6 +760,9 @@ EOT
 		: > /target/etc/apt/sources.list
 		if ! log-output -t base-installer chroot /target apt-cdrom add ; then
 			error "error while running apt-cdrom"
+		fi
+		if db_get apt-setup/restricted && [ "$RET" = false ]; then
+			sed -i 's/ \(restricted\|multiverse\)//g' /target/etc/apt/sources.list
 		fi
 	else
 		echo "deb $APTSOURCE $DISTRIBUTION $COMPONENTS" > /target/etc/apt/sources.list

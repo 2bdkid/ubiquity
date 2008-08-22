@@ -202,12 +202,33 @@ EOF
 			$log $chroot $ROOT update-gconf-defaults
 		fi
 	fi
+
+	db_get user-setup/encrypted-private
+	if [ "$RET" = true ]; then
+		if ! $chroot $ROOT which ecryptfs-setup-private >/dev/null 2>&1; then
+			# try to work in d-i and out; it's better to
+			# use apt-install in d-i
+			apt-install ecryptfs-utils 2>/dev/null || $log $chroot $ROOT apt-get -q -y install ecryptfs-utils || true
+		fi
+		db_get user-setup/encrypted-private-passphrase
+		ENCRYPTED_PW="$RET"
+		USER="$USER" LOGINPASS="$USER_PW" MOUNTPASS="$ENCRYPTED_PW" \
+			$log $chroot $ROOT \
+			su -p "$USER" -c ecryptfs-setup-private
+		# Clear the mount passphrase from the database.
+		db_set user-setup/encrypted-private-passphrase ''
+		db_set user-setup/encrypted-private-passphrase-again ''
+	fi
 else
 	# Just in case, clear any preseeded user password from the database
 	# anyway.
 	db_set passwd/user-password-crypted ''
 	db_set passwd/user-password ''
 	db_set passwd/user-password-again ''
+	# Do the same for the mount passphrase, if any.
+	db_set user-setup/encrypted-private-passphrase ''
+	db_set user-setup/encrypted-private-passphrase-again ''
+	db_subst user-setup/encrypted-private-passphrase-display PASSPHRASE ''
 fi
 
 exit 0

@@ -163,6 +163,11 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
         self.disable_volume_manager()
 
+        #disable the mainline ubiquity autologin
+        #we have mythbuntu specific offerings that behave
+        #a little bit differently
+        self.auto_login.hide()
+
         # show interface
         got_intro = self.show_intro()
         self.allow_change_step(True)
@@ -455,9 +460,11 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
     def do_mythtv_setup(self,widget):
         """Spawn MythTV-Setup binary."""
-        os.seteuid(0)
-        execute("/usr/share/ubiquity/mythbuntu-setup")
-        drop_privileges()
+        self.live_installer.hide()
+        while gtk.events_pending():
+            gtk.main_iteration()
+        execute_root("/usr/share/ubiquity/mythbuntu-setup")
+        self.live_installer.show()
 
     def do_connection_test(self,widget):
         """Tests to make sure that the backend is accessible"""
