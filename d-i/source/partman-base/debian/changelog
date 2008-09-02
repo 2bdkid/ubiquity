@@ -1,3 +1,17 @@
+partman-base (121ubuntu5) intrepid; urgency=low
+
+  * init.d/parted: Set the sataraid flag for dmraid arrays. This code was
+    originally in partman-dmraid, which is being retired.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Wed, 27 Aug 2008 21:44:21 +1000
+
+partman-base (121ubuntu4) UNRELEASED; urgency=low
+
+  * Add partman/early_command hook to run arbitrary commands immediately
+    before partitioning (LP: #239348).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 11 Jul 2008 17:47:55 +0100
+
 partman-base (121ubuntu3) intrepid; urgency=low
 
   * Add support for explicit 'b' or 'B' suffixes on partition sizes to force

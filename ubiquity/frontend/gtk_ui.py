@@ -52,7 +52,7 @@ import gtk.glade
 import debconf
 
 from ubiquity import filteredcommand, gconftool, i18n, osextras, validation, \
-                     zoommap
+                     zoommap, segmented_bar
 from ubiquity.misc import *
 from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 partman, partman_commit, \
@@ -160,12 +160,15 @@ class Wizard(BaseFrontend):
         self.username_combo = None
         self.username_changed_id = None
         self.hostname_changed_id = None
+        self.scale_changed_id = None
         self.username_edited = False
         self.hostname_edited = False
         self.grub_en = True
         self.installing = False
         self.installing_no_return = False
         self.returncode = 0
+        self.partition_bars = {}
+        self.auto_colors = ['3465a4', '73d216', 'f57900']
 
         self.laptop = execute("laptop-detect")
 
@@ -1110,6 +1113,62 @@ class Wizard(BaseFrontend):
             self.translate_widget(self.step_label, self.locale)
         syslog.syslog('switched to page %s' % self.step_name(current))
 
+    def on_extra_button_toggled (self, widget):
+        if widget.get_active():
+            choice = unicode(widget.get_label(), 'utf-8', 'replace')
+            for k in self.disk_layout.iterkeys():
+                if '(%s)' % k.strip('=dev=') in choice:
+                    self.before_bar.remove_all()
+                    self.create_bar(k)
+
+    def scale_changed(self, widget, allocation):
+        s1 = self.new_size_scale.old_os.get_allocation().width
+        s2 = self.new_size_scale.new_os.get_allocation().width
+        totalwidth = s1 + s2
+        percentwidth = float(s1) / float(totalwidth)
+        # FIXME: ugly.  Move into segmented_bar.
+        p = self.action_bar.segments[-2].percent
+        newp = self.action_bar.segments[-1].percent + (p - percentwidth)
+        self.action_bar.segments[-2].percent = percentwidth
+        self.action_bar.segments[-1].percent = newp
+        self.action_bar.queue_draw()
+
+    def on_choice_toggled (self, widget, extra_buttons):
+        if widget.get_active():
+            choice = unicode(widget.get_label(), 'utf-8', 'replace')
+            self.action_bar.remove_all()
+            if choice != self.resize_choice and self.scale_changed_id:
+                self.new_size_scale.new_os.disconnect( \
+                    self.scale_changed_id)
+            if choice == self.manual_choice:
+                self.action_bar.add_segment_rgb(self.manual_choice, 1, \
+                    self.auto_colors[0])
+            elif choice == self.resize_choice:
+                for k in self.disk_layout:
+                    for p in self.disk_layout[k]:
+                        if self.resize_path in p:
+                            self.before_bar.remove_all()
+                            self.create_bar(k)
+                            self.create_bar(k, resize_bar=True)
+                            break
+                self.scale_changed_id = \
+                    self.new_size_scale.new_os.connect('size-allocate', \
+                    self.scale_changed)
+            else:
+                # Use entire disk.
+                # FIXME: Get the release name from a variable as generated
+                # once at the start of the installer.
+                # FIXME: Ugly.
+                self.action_bar.add_segment_rgb('Ubuntu 8.10', 1, \
+                    self.action_bar.remainder_color)
+                for b in extra_buttons:
+                    if b.get_active():
+                        t = unicode(b.get_label(), 'utf-8', 'replace')
+                        for k in self.disk_layout.iterkeys():
+                            if '(%s)' % k.strip('=dev=') in t:
+                                self.before_bar.remove_all()
+                                self.create_bar(k)
+                                break
 
     def on_autopartition_toggled (self, widget):
         """Update autopartitioning screen when a button is selected."""
@@ -1354,6 +1413,28 @@ class Wizard(BaseFrontend):
         else:
             return unicode(model.get_value(iterator, 0))
 
+    def set_disk_layout(self, layout):
+        self.disk_layout = layout
+        return
+
+    def create_bar(self, disk, resize_bar=False):
+        if resize_bar:
+            b = self.action_bar
+        else:
+            b = self.before_bar
+        i = 0
+        for part in self.disk_layout[disk]:
+            dev = part[0]
+            size = part[1]
+            if dev == 'free':
+                b.add_segment_rgb("Free Space", size, b.remainder_color)
+            else:
+                b.add_segment_rgb(dev, size, self.auto_colors[i])
+                i = (i + 1) % len(self.auto_colors)
+        if resize_bar:
+                # FIXME:
+                self.action_bar.add_segment_rgb('Ubuntu 8.10', 0, \
+                    self.auto_colors[i])
 
     def set_autopartition_choices (self, choices, extra_options,
                                    resize_choice, manual_choice):
@@ -1363,7 +1444,26 @@ class Wizard(BaseFrontend):
         for child in self.autopartition_vbox.get_children():
             self.autopartition_vbox.remove(child)
 
+        hb = gtk.HBox()
+        # TODO: i18n
+        hb.pack_start(gtk.Label('After:'), expand=False)
+        self.action_bar = segmented_bar.SegmentedBar()
+        self.action_bar.h_padding = self.action_bar.bar_height / 2
+        hb.pack_start(self.action_bar)
+        self.autopartition_vbox.add(hb)
+        self.autopartition_vbox.reorder_child(hb, 0)
+
+        hb = gtk.HBox()
+        # TODO: i18n
+        hb.pack_start(gtk.Label('Before:'), expand=False)
+        self.before_bar = segmented_bar.SegmentedBar()
+        self.before_bar.h_padding = self.before_bar.bar_height / 2
+        hb.pack_start(self.before_bar)
+        self.autopartition_vbox.add(hb)
+        self.autopartition_vbox.reorder_child(hb, 0)
+
         firstbutton = None
+        extra_buttons = []
         for choice in choices:
             button = gtk.RadioButton(firstbutton, choice, False)
             if firstbutton is None:
@@ -1401,12 +1501,16 @@ class Wizard(BaseFrontend):
                         if extra_firstbutton is None:
                             extra_firstbutton = extra_button
                         vbox.add(extra_button)
+                        extra_buttons.append(extra_button)
+                        extra_button.connect('toggled', self.on_extra_button_toggled)
                 self.autopartition_vbox.pack_start(alignment,
                                                    expand=False, fill=False)
                 self.autopartition_extras[choice] = alignment
 
                 self.on_autopartition_toggled(button)
                 button.connect('toggled', self.on_autopartition_toggled)
+            self.on_choice_toggled(button, extra_buttons)
+            button.connect('toggled', self.on_choice_toggled, extra_buttons)
         if firstbutton is not None:
             firstbutton.set_active(True)
 
@@ -1892,6 +1996,13 @@ class Wizard(BaseFrontend):
         else:
             devpart = model[iterator][0]
             partition = model[iterator][1]
+            if 'id' not in partition:
+                dev = partition['device']
+            else:
+                dev = partition['parent']
+            for p in self.partition_bars.itervalues():
+                p.hide()
+            self.partition_bars[dev].show()
         for action in self.dbfilter.get_actions(devpart, partition):
             if action == 'new_label':
                 self.partition_button_new_label.set_sensitive(True)
@@ -1977,15 +2088,15 @@ class Wizard(BaseFrontend):
         self.dbfilter.undo()
 
     def update_partman (self, disk_cache, partition_cache, cache_order):
+        if self.partition_bars:
+            for p in self.partition_bars.itervalues():
+                self.part_advanced_vbox.remove(p)
+                del p
+
         partition_tree_model = self.partition_list_treeview.get_model()
         if partition_tree_model is None:
             partition_tree_model = gtk.ListStore(gobject.TYPE_STRING,
                                                  gobject.TYPE_PYOBJECT)
-            for item in cache_order:
-                if item in disk_cache:
-                    partition_tree_model.append([item, disk_cache[item]])
-                else:
-                    partition_tree_model.append([item, partition_cache[item]])
 
             cell_name = gtk.CellRendererText()
             column_name = gtk.TreeViewColumn(
@@ -2042,12 +2153,43 @@ class Wizard(BaseFrontend):
         else:
             # TODO cjwatson 2006-08-31: inefficient, but will do for now
             partition_tree_model.clear()
-            for item in cache_order:
-                if item in disk_cache:
-                    partition_tree_model.append([item, disk_cache[item]])
-                else:
-                    partition_tree_model.append([item, partition_cache[item]])
 
+        partition_bar = None
+        dev = ''
+        total_size = {}
+        i = 0
+        for item in cache_order:
+            if item in disk_cache:
+                partition_tree_model.append([item, disk_cache[item]])
+                dev = disk_cache[item]['device']
+                self.partition_bars[dev] = segmented_bar.SegmentedBar()
+                partition_bar = self.partition_bars[dev]
+                self.part_advanced_vbox.pack_start(partition_bar)
+                self.part_advanced_vbox.reorder_child(partition_bar, 0)
+                total_size[dev] = 0.0
+            else:
+                partition_tree_model.append([item, partition_cache[item]])
+                size = int(partition_cache[item]['parted']['size'])
+                total_size[dev] = total_size[dev] + size
+                fs = partition_cache[item]['parted']['fs']
+                path = partition_cache[item]['parted']['path'].replace('/dev/','')
+                if fs == 'free':
+                    c = partition_bar.remainder_color
+                    # TODO evand 2008-07-27: i18n
+                    txt = 'Free space'
+                else:
+                    i = (i + 1) % len(self.auto_colors)
+                    c = self.auto_colors[i]
+                    txt = '%s (%s)' % (path, fs)
+                partition_bar.add_segment_rgb(txt, size, c)
+        for item in cache_order:
+            if item in disk_cache:
+                dev = disk_cache[item]['device']
+                for seg in self.partition_bars[dev].segments:
+                    seg.percent = seg.percent / total_size[dev]
+        sel = self.partition_list_treeview.get_selection()
+        if sel.count_selected_rows() == 0:
+            sel.select_path(0)
         # make sure we're on the advanced partitioning page
         self.set_current_page(self.steps.page_num(self.stepPartAdvanced))
 

@@ -193,7 +193,7 @@ get_auto_disks() {
 		# RAID (/dev/md/X and /dev/mdX) devices
 		device=$(cat $dev/device)
 		$(echo "$device" | grep -Eq "/dev/md/?[0-9]*$") && continue
-		if echo $device | grep -q "^/dev/mapper/"; then
+		if echo $device | grep -q "^/dev/mapper/" && [ ! -f "$dev/sataraid" ]; then
 			dmtype=$(dm_table $device)
 			[ "$dmtype" = multipath ] || continue
 		fi
