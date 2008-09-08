@@ -355,8 +355,7 @@ elif type multipath >/dev/null 2>&1; then
 # Check of the boot file system is on an mdadm device
 elif type mdadm >/dev/null 2>&1; then
 	frdisk_list=
-	md=$(findfs "/boot")
-	for frdisk in $(mdadm --detail "$md" 2>/dev/null | \
+	for frdisk in $(mdadm --detail "$bootfs_nodevfs" 2>/dev/null | \
 			grep " active sync " 2>/dev/null | \
 			sed "s/^.* active sync\s*//" 2>/dev/null \
 	); do

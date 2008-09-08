@@ -5,7 +5,7 @@ set -e
 
 file="$1"
 
-if [ ! -e /cdrom/.disk/base_installable ] || [ "$OVERRIDE_BASE_INSTALLABLE" ]; then
+if [ ! -e /cdrom/.disk/base_installable ] && [ -z "$OVERRIDE_BASE_INSTALLABLE" ]; then
 	exit 0
 fi
 if [ ! -s /cdrom/.disk/info ]; then
@@ -13,7 +13,7 @@ if [ ! -s /cdrom/.disk/info ]; then
 fi
 
 remount_cd() {
-	if [ "$ROOT" ] && [ ! -d /hd-media ]; then
+	if [ "$ROOT" ] && [ ! -d /hd-media ] && [ -z "$OVERRIDE_LEAVE_CD_MOUNTED" ]; then
 		db_get cdrom-detect/cdrom_device
 		$logoutput mount -t iso9660 -o ro,exec $RET /cdrom || true
 	fi
@@ -53,7 +53,7 @@ if [ "$ROOT" ]; then
 
 	# Allow apt-cdrom to manage mounting/unmounting CDs in /target
 	# (except for hd-media installs)
-	if [ ! -d /hd-media ]; then
+	if [ ! -d /hd-media ] && [ -z "$OVERRIDE_LEAVE_CD_MOUNTED" ]; then
 		rm -f $ROOT/etc/apt/apt.conf.d/00NoMountCDROM
 
 		# Also removes the bind-mount in /target

@@ -1,3 +1,12 @@
+apt-setup (1:0.37ubuntu4) intrepid; urgency=low
+
+  * Fix sense of OVERRIDE_BASE_INSTALLABLE test in cdrom generator
+    (LP: #264337).
+  * If OVERRIDE_LEAVE_CD_MOUNTED is set, don't unmount /cdrom; this is a bad
+    idea in a live CD environment!
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 06 Sep 2008 10:47:32 +0100
+
 apt-setup (1:0.37ubuntu3) intrepid; urgency=low
 
   * Bail out cleanly from cdrom generator if /cdrom/.disk/info doesn't exist

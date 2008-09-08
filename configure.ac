@@ -1,5 +1,5 @@
 AC_PREREQ(2.52)
-AC_INIT(ubiquity, 1.9.11, https://launchpad.net/ubuntu/+source/ubiquity/+filebug)
+AC_INIT(ubiquity, 1.9.12, https://launchpad.net/ubuntu/+source/ubiquity/+filebug)
 AC_CONFIG_SRCDIR(src/cut-and-paste/e-map/e-map.c)
 AC_CONFIG_AUX_DIR([build])
 AC_CONFIG_MACRO_DIR([m4])
@@ -31,15 +31,15 @@ if test "x$UBIQUITY_NO_GTK" = x; then
   PKG_CHECK_MODULES(PYGTK, [gtk+-2.0 >= $GTK_REQUIRED pygtk-2.0])
   AC_SUBST(PYGTK_CFLAGS)
   AC_SUBST(PYGTK_LIBS)
-  AC_PATH_PROG(PYGTK_CODEGEN, [pygtk-codegen-2.0], [no])
+  AC_PATH_PROG(PYGOBJECT_CODEGEN, [pygobject-codegen-2.0], [no])
 else
   AC_SUBST(PYGTK_CFLAGS, [])
   AC_SUBST(PYGTK_LIBS, [])
-  AC_SUBST(PYGTK_CODEGEN, [no])
+  AC_SUBST(PYGOBJECT_CODEGEN, [no])
 fi
 
-AM_CONDITIONAL([PYGTK_CODEGEN], [test "x$PYGTK_CODEGEN" != xno])
-if test "x$PYGTK_CODEGEN" != xno; then
+AM_CONDITIONAL([PYGOBJECT_CODEGEN], [test "x$PYGOBJECT_CODEGEN" != xno])
+if test "x$PYGOBJECT_CODEGEN" != xno; then
   AC_MSG_CHECKING([for pygtk defs])
   PYGTK_DEFSDIR=`$PKG_CONFIG --variable=defsdir pygtk-2.0`
   AC_SUBST(PYGTK_DEFSDIR)
