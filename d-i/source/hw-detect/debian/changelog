@@ -1,3 +1,12 @@
+hw-detect (1.63ubuntu2) intrepid; urgency=low
+
+  * disk-detect.sh: Do not check the kernel command line for any option
+    to enable dmraid support. If functional dmraid arrays are found, they
+    will be activated.
+  * debian/disk-detect.templates: Remove disk-detect/dmraid/enable template.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Thu, 28 Aug 2008 00:13:21 +1000
+
 hw-detect (1.63ubuntu1) intrepid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

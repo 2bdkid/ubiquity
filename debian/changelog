@@ -1,3 +1,21 @@
+ubiquity (1.9.13) intrepid; urgency=low
+
+  * Change "Automatically sign in" to "Log in automatically", to match
+    wording elsewhere (LP: #266995).
+  * Never select /dev/ramzswap* as a hibernation target.
+  * Fix fully-qualified path generation while walking the source filesystem;
+    dirpath is already prefixed with self.source. (This made no difference
+    in practice because os.path.join throws away previous components upon
+    encountering an absolute path, but was inelegant.)
+  * Make the exclusion of /etc/fstab from bulk copying more precise.
+  * Fix window title of bulk copy failure alerts, and remove a bit of
+    unnecessary verbosity from the primary text (LP: #254652).
+  * Initialise self.blacklist even if it's going to be empty.
+  * Automatic update of included source packages: base-installer
+    1.86ubuntu5, hw-detect 1.63ubuntu2, partman-partitioning 59ubuntu5.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 13 Sep 2008 15:19:19 +0100
+
 ubiquity (1.9.12) intrepid; urgency=low
 
   [ Mario Limonciello ]

@@ -561,6 +561,7 @@ class Install:
             difference -= set(['yaboot', 'hfsutils'])
  
         if len(difference) == 0:
+            self.blacklist = {}
             return
  
         use_restricted = True
@@ -620,8 +621,10 @@ class Install:
 
             for name in dirnames + filenames:
                 relpath = os.path.join(sourcepath, name)
-                fqpath = os.path.join(self.source, dirpath, name)
-                if "etc/fstab" not in relpath:
+                fqpath = os.path.join(dirpath, name)
+                # /etc/fstab was legitimately created by partman, and
+                # shouldn't be copied again.
+                if relpath != "etc/fstab":
                     total_size += os.lstat(fqpath).st_size
                     files.append(relpath)
 
@@ -1249,6 +1252,8 @@ exit 0"""
         for line in swaps:
             words = line.split()
             if words[1] != 'partition':
+                continue
+            if words[0].startswith('/dev/ramzswap'):
                 continue
             size = int(words[2])
             if size > biggest_size:

@@ -164,25 +164,20 @@ while ! disk_found; do
 done
 
 # Activate support for Serial ATA RAID
-db_get disk-detect/dmraid/enable
-if [ "$RET" = true ]; then
-	if anna-install dmraid-udeb; then
-		# Device mapper support is required to run dmraid
-		if is_not_loaded dm-mod; then
-			module_probe dm-mod
-		fi
+if anna-install dmraid-udeb; then
+	# Device mapper support is required to run dmraid
+	if is_not_loaded dm-mod; then
+		module_probe dm-mod
+	fi
 
-		if [ "$(dmraid -c -s)" != "No RAID disks" ]; then
-			logger -t disk-detect "Serial ATA RAID disk(s) detected; enabling dmraid support"
-			if anna-install partman-dmraid; then
-				# Activate devices
-				log-output -t disk-detect dmraid -ay
-			else
-				logger -t disk-detect "Error loading partman-dmraid; dmraid devices not activated"
-			fi
-		else
-			logger -t disk-detect "No Serial ATA RAID disks detected"
-		fi
+	if [ "$(dmraid -c -s)" != "No RAID disks" ]; then
+		logger -t disk-detect "Serial ATA RAID disk(s) detected; enabling dmraid support"
+		# Activate only those arrays which have all disks present.
+		for dev in $(dmraid -r -c); do
+			log-output -t disk-detect dmraid-activate $dev
+		done
+	else
+		logger -t disk-detect "No Serial ATA RAID disks detected"
 	fi
 fi
 
