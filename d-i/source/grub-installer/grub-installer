@@ -321,20 +321,23 @@ disc_offered=$(mapdevfs "$disc_offered_devfs")
 # Identify partition table of the disk containing our boot partition
 bootfslabel=$(partmap $disc_offered || echo unknown)
 
+found=0
 # Check if the boot file system is on Serial ATA RAID
 frdev=""
-if type dmraid >/dev/null 2>&1; then
+if [ "$found" = "0" ] && type dmraid >/dev/null 2>&1; then
 	for frdisk in $(dmraid -s -c | grep -v "No RAID disks"); do
 		if echo "$disc_offered" | grep -q "/$frdisk[0-9]\+"; then
 			frdev=/dev/mapper/$frdisk
 			frbootpart=${disc_offered#$frdev}
 			frgrubroot=$(($frbootpart - 1))
 			frtype=sataraid
+			found=1
 			break
 		fi
 	done
+fi
 # Check if the boot file system is on multipath
-elif type multipath >/dev/null 2>&1; then
+if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
 	for frdisk in $(multipath -l 2>/dev/null | \
 			grep '^mpath[0-9]\+ ' | cut -d ' ' -f 1); do
 		if echo "$disc_offered" | 	   \
@@ -343,6 +346,7 @@ elif type multipath >/dev/null 2>&1; then
 			frbootpart=${disc_offered#$frdev}
 			frgrubroot=$((${frbootpart#-part} - 1))
 			frtype=multipath
+			found=1
 			break
 		fi
 	done
@@ -352,8 +356,9 @@ elif type multipath >/dev/null 2>&1; then
 		$chroot $ROOT mount /proc
 		$chroot $ROOT dmsetup mknodes
 	fi
-# Check of the boot file system is on an mdadm device
-elif type mdadm >/dev/null 2>&1; then
+fi
+# Check if the boot file system is on an mdadm device
+if [ "$found" = "0" ] && type mdadm >/dev/null 2>&1; then
 	frdisk_list=
 	for frdisk in $(mdadm --detail "$bootfs_nodevfs" 2>/dev/null | \
 			grep " active sync " 2>/dev/null | \
@@ -363,6 +368,7 @@ elif type mdadm >/dev/null 2>&1; then
 		frdisk_list="$frdisk_list $frdisk"
 		frdev=
 		frtype="mdadm"
+		found=1
 	done
 fi
 

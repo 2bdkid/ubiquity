@@ -1,3 +1,12 @@
+clock-setup (0.96ubuntu2) intrepid; urgency=low
+
+  * Fix handling of progress bar cancellation (LP: #262500):
+    - db_progress INFO might be cancelled if the user is quick; cope with
+      that.
+    - Reset the progresscancel capability when we're finished.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 14 Sep 2008 13:13:36 +0100
+
 clock-setup (0.96ubuntu1) intrepid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

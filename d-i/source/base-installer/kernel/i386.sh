@@ -5,7 +5,7 @@ arch_get_kernel_flavour () {
 	case "$VENDOR" in
 		" AuthenticAMD"*)
 			case "$FAMILY" in
-				" 6"|" 15"|" 16")	echo k7 ;;
+				" 6"|" 15"|" 16"|" 17")	echo k7 ;;
 				" 5")			echo k6 ;;
 				*)			echo 486 ;;
 			esac

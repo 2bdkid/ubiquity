@@ -1,3 +1,12 @@
+localechooser (2.03ubuntu3) intrepid; urgency=low
+
+  * Install kbd rather than console-tools. Remove configuration file changes
+    that: (a) modify a dpkg-handled conffile and so are policy violations;
+    (b) are partly composed of workarounds for console-tools bugs not
+    present in kbd; (c) are superseded by console-setup anyway.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 16 Sep 2008 10:39:42 +0100
+
 localechooser (2.03ubuntu2) intrepid; urgency=low
 
   * Fix preseeding of languages that only have country variants (e.g. zh_CN)
