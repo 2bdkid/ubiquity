@@ -1448,23 +1448,23 @@ class Wizard(BaseFrontend):
         for child in self.autopartition_vbox.get_children():
             self.autopartition_vbox.remove(child)
 
-        hb = gtk.HBox()
-        # TODO: i18n
-        hb.pack_start(gtk.Label('After:'), expand=False)
-        self.action_bar = segmented_bar.SegmentedBar()
-        self.action_bar.h_padding = self.action_bar.bar_height / 2
-        hb.pack_start(self.action_bar)
-        self.autopartition_vbox.add(hb)
-        self.autopartition_vbox.reorder_child(hb, 0)
+        table = gtk.Table(2, 2)
 
-        hb = gtk.HBox()
         # TODO: i18n
-        hb.pack_start(gtk.Label('Before:'), expand=False)
+        table.attach(gtk.Label('Before:'), 0, 1, 0, 1,
+                     xoptions=gtk.FILL, yoptions=0)
         self.before_bar = segmented_bar.SegmentedBar()
         self.before_bar.h_padding = self.before_bar.bar_height / 2
-        hb.pack_start(self.before_bar)
-        self.autopartition_vbox.add(hb)
-        self.autopartition_vbox.reorder_child(hb, 0)
+        table.attach(self.before_bar, 1, 2, 0, 1, yoptions=0)
+
+        # TODO: i18n
+        table.attach(gtk.Label('After:'), 0, 1, 1, 2,
+                     xoptions=gtk.FILL, yoptions=0)
+        self.action_bar = segmented_bar.SegmentedBar()
+        self.action_bar.h_padding = self.action_bar.bar_height / 2
+        table.attach(self.action_bar, 1, 2, 1, 2, yoptions=0)
+
+        self.autopartition_vbox.add(table)
 
         firstbutton = None
         extra_buttons = []
@@ -2168,7 +2168,8 @@ class Wizard(BaseFrontend):
                 dev = disk_cache[item]['device']
                 self.partition_bars[dev] = segmented_bar.SegmentedBar()
                 partition_bar = self.partition_bars[dev]
-                self.part_advanced_vbox.pack_start(partition_bar)
+                self.part_advanced_vbox.pack_start(partition_bar,
+                    expand=False, padding=6)
                 self.part_advanced_vbox.reorder_child(partition_bar, 0)
                 total_size[dev] = 0.0
             else:

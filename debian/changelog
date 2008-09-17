@@ -1,3 +1,21 @@
+ubiquity (1.9.16) intrepid; urgency=low
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Put the "before" and "after" partition bars in a table so that they
+      line up.
+    - Mark the partition bar on the advanced partitioning page as
+      non-expanding so that it doesn't take up nearly half the available
+      space.
+
+  [ Evan Dandrea ]
+  * Add missing set_disk_layout stub function to the other frontends
+    (LP: #271467).
+  * Automatic update of included source packages: partman-partitioning
+    59ubuntu6.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 17 Sep 2008 16:47:46 -0400
+
 ubiquity (1.9.15) intrepid; urgency=low
 
   * GTK frontend:
