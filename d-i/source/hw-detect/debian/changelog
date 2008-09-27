@@ -1,3 +1,10 @@
+hw-detect (1.63ubuntu3) intrepid; urgency=low
+
+  * disk-detect.sh: Do not pass the complete device node path to
+    dmraid-activate, since it no longer uses basename.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Thu, 25 Sep 2008 11:09:36 +1000
+
 hw-detect (1.63ubuntu2) intrepid; urgency=low
 
   * disk-detect.sh: Do not check the kernel command line for any option

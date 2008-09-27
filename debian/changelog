@@ -1,3 +1,22 @@
+ubiquity (1.10.0) intrepid; urgency=low
+
+  [ Evan Dandrea ]
+  * Use a normal color for the partition bar when use entire disk is
+    selected (LP: #273271).
+  * Automatic update of included source packages: debian-installer-utils
+    1.59ubuntu3, grub-installer 1.32ubuntu6, hw-detect 1.63ubuntu3,
+    user-setup 1.20ubuntu7.
+
+  [ Colin Watson ]
+  * Don't mark partman questions as seen when we expect them to be asked
+    again (LP: #182004).
+  * Set GtkAdjustment page_size to zero in Glade files too.
+
+  [ Emmet Hikory ]
+  * install.py: use grub-installer as the boot loader for lpia (LP: #274785)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sat, 27 Sep 2008 00:43:05 -0400
+
 ubiquity (1.9.19) intrepid; urgency=low
 
   [ Colin Watson ]

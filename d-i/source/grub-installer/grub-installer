@@ -96,17 +96,22 @@ convert () {
 	# Break the device name into the disk part and the partition part
 	case "$host_os" in
 	    linux*)
-		tmp_disk=$(echo "$1" | sed -e 's%\(\(s\|h\|v\|xv\)d[a-z]\)[0-9]*$%\1%' \
-				  -e 's%\(fd[0-9]*\)$%\1%' \
-				  -e 's%/part[0-9]*$%/disc%' \
-				  -e 's%\(c[0-7]d[0-9]*\).*$%\1%' \
-				  -e 's%\(/mapper/mpath[0-9]\+\)-part[0-9]\+$%\1%')
-		tmp_part=$(echo "$1" | sed -e 's%.*/\(s\|h\|v\|xv\)d[a-z]\([0-9]*\)$%\2%' \
-				  -e 's%.*/fd[0-9]*$%%' \
-				  -e 's%.*/floppy/[0-9]*$%%' \
-				  -e 's%.*/\(disc\|part\([0-9]*\)\)$%\2%' \
-				  -e 's%.*c[0-7]d[0-9]*p*%%' \
-				  -e 's%.*/mapper/mpath[0-9]\+-part\([0-9]\+\)%\1%')
+		if [ "$frtype" = "sataraid" ] && type dmraid >/dev/null 2>&1; then
+			tmp_disk="$frdev"
+			tmp_part=$(echo "$1" | sed -e "s@$frdev@@")
+		else
+			tmp_disk=$(echo "$1" | sed -e 's%\(\(s\|h\|v\|xv\)d[a-z]\)[0-9]*$%\1%' \
+					  -e 's%\(fd[0-9]*\)$%\1%' \
+					  -e 's%/part[0-9]*$%/disc%' \
+					  -e 's%\(c[0-7]d[0-9]*\).*$%\1%' \
+					  -e 's%\(/mapper/mpath[0-9]\+\)-part[0-9]\+$%\1%')
+			tmp_part=$(echo "$1" | sed -e 's%.*/\(s\|h\|v\|xv\)d[a-z]\([0-9]*\)$%\2%' \
+					  -e 's%.*/fd[0-9]*$%%' \
+					  -e 's%.*/floppy/[0-9]*$%%' \
+					  -e 's%.*/\(disc\|part\([0-9]*\)\)$%\2%' \
+					  -e 's%.*c[0-7]d[0-9]*p*%%' \
+					  -e 's%.*/mapper/mpath[0-9]\+-part\([0-9]\+\)%\1%')
+		fi
 		;;
 	    gnu*)
 		tmp_disk=$(echo "$1" | sed 's%\([sh]d[0-9]*\).*%\1%')
@@ -130,6 +135,24 @@ convert () {
 		exit 1
 		;;
 	esac
+
+	# Adjust the device map to add a SATA RAID array.
+	if [ "$frtype" = "sataraid" ] && type dmraid >/dev/null 2>&1; then
+		temp_map=/target/tmp/sataraid.map
+		echo quit | chroot /target /usr/sbin/grub --batch --device-map=/tmp/sataraid.map >/dev/null 2>&1
+
+		# Dmraid -r seems to list disks in reverse order to how they
+		# are detected by the kernel.
+		satadisk=$(dmraid -r | grep $(basename "$tmp_disk") | cut -f 1 -d : | tail -1)
+		sed -i "s@$satadisk@$tmp_disk@" $temp_map
+
+		# Remove member disks of the SATA RAID array from the device map.
+		for sdisk in $(dmraid -r | grep $(basename "$tmp_disk") | cut -f 1 -d : | grep -v "$satadisk"); do
+			cat $temp_map | grep -v "$sdisk" > $temp_map.new
+			mv $temp_map.new $temp_map
+		done
+		mv $temp_map $device_map
+	fi
 
 	# Get the drive name
 	tmp_drive=$(grep -v '^#' $device_map | grep "$tmp_disk *$" | \
@@ -385,7 +408,7 @@ case $ARCH in
 		grub_package="grub"
 	fi
 	;;
-    i386/*|amd64/*)
+    i386/*|amd64/*|lpia/*)
 	# On PC/BIOS, default to GRUB Legacy
 	grub_package="grub"
 	;;
@@ -550,7 +573,7 @@ else
 	state=1
 fi
 
-if [ "$frdev" ]; then
+if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
 	if [ -e $ROOT$frdev ] && [ -e $ROOT$frdev$frbootpart ] && \
 	   [ $frgrubroot -ge 0 ]; then
 		db_subst grub-installer/$frtype GRUBROOT $ROOT$frdev$frbootpart

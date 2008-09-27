@@ -174,7 +174,7 @@ if anna-install dmraid-udeb; then
 		logger -t disk-detect "Serial ATA RAID disk(s) detected; enabling dmraid support"
 		# Activate only those arrays which have all disks present.
 		for dev in $(dmraid -r -c); do
-			log-output -t disk-detect dmraid-activate $dev
+			log-output -t disk-detect dmraid-activate $(basename $dev)
 		done
 	else
 		logger -t disk-detect "No Serial ATA RAID disks detected"

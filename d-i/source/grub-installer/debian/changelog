@@ -1,3 +1,19 @@
+grub-installer (1.32ubuntu6) intrepid; urgency=low
+
+  * Add support for lpia (LP: #274781)
+
+ -- Emmet Hikory <persia@ubuntu.com>  Fri, 26 Sep 2008 22:38:21 +0900
+
+grub-installer (1.32ubuntu5) intrepid; urgency=low
+
+  * grub-installer: Properly make use of output from os-prober to configure
+    the booting of other operating systems on dmraid arrays. Attempt to
+    guess where in the device map the array belongs, by substituting
+    the first drive in the dmraid array for the dmraid array device node
+    itself, and removing any reference to other member disks of the array.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Thu, 25 Sep 2008 23:14:10 +1000
+
 grub-installer (1.32ubuntu4) intrepid; urgency=low
 
   [ Dustin Kirkland ]

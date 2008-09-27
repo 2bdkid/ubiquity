@@ -1,3 +1,12 @@
+user-setup (1.20ubuntu7) intrepid; urgency=low
+
+  * debian/user-setup-udeb.templates: Do not put the initial user into the fuse
+    group, too. We now assign a dynamic ACL to /dev/fuse, in an effort to
+    reduce the misuse of groups for assigning privileges. See
+    intrepid-device-permissions spec.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Thu, 25 Sep 2008 17:55:53 +0200
+
 user-setup (1.20ubuntu6) intrepid; urgency=low
 
   [ Dustin Kirkland ]
