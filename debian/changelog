@@ -1,3 +1,22 @@
+ubiquity (1.10.3) intrepid; urgency=low
+
+  * Back out DVD performance fixes for beta; they cause files from some
+    packages that actually are installed (language packs) to be missing from
+    the installed system. Works around LP #276657, but this needs a better
+    fix for Ubuntu 8.10.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 01 Oct 2008 17:56:59 +0100
+
+ubiquity (1.10.2) intrepid; urgency=low
+
+  * Initialise auto-login checkbox from debconf database (LP: #276247).
+  * Add some more grub pieces on lpia.
+  * Add ntfsprogs dependency on lpia.
+  * Automatic update of included source packages: partman-partitioning
+    59ubuntu7.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 30 Sep 2008 18:47:01 +0100
+
 ubiquity (1.10.1) intrepid; urgency=low
 
   * Revert part of intltool 0.40.4 change (described in bug 275795) that
