@@ -283,6 +283,7 @@ class Install:
         self.kernel_version = platform.release()
         self.db = debconf.Debconf()
 
+        self.generate_blacklist()
         apt_pkg.InitConfig()
         apt_pkg.Config.Set("Dir", "/target")
         apt_pkg.Config.Set("Dir::State::status", "/target/var/lib/dpkg/status")
@@ -577,10 +578,22 @@ class Install:
                     cache[pkg].section.startswith('restricted/')):
                     difference.add(pkg)
             del cache
-
-        for x in difference:
-            syslog.syslog(x)
         difference = filter(lambda x: not os.path.exists('/var/lib/dpkg/info/%s.prerm' % x), difference)
+        cache = Cache()
+        for pkg in difference:
+            cachedpkg = self.get_cache_pkg(cache, pkg)
+            if cachedpkg is not None and cachedpkg.isInstalled:
+                apt_error = False
+                try:
+                    cachedpkg.markDelete(autoFix=False, purge=True)
+                    if cache._depcache.BrokenCount > 0:
+                        p = self.broken_packages(cache)
+                        if p - set(difference):
+                            difference.remove(pkg)
+                except SystemError:
+                    pass
+                finally:
+                    cachedpkg.markKeep()
         cmd = ['dpkg', '-L']
         cmd.extend(difference)
         subp = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -601,10 +614,6 @@ class Install:
         self.db.progress('START', 0, 100, 'ubiquity/install/title')
         self.db.progress('INFO', 'ubiquity/install/scanning')
 
-        # This causes problems with language packs. We'll fix this for
-        # Ubuntu 8.10, but let's just back this part out for the beta.
-        #self.generate_blacklist()
-        self.blacklist = {}
         # Obviously doing os.walk() twice is inefficient, but I'd rather not
         # suck the list into ubiquity's memory, and I'm guessing that the
         # kernel's dentry cache will avoid most of the slowness anyway.
@@ -762,10 +771,11 @@ class Install:
                          '/var/log/installer/version', '/var/log/casper.log'):
             target_log_file = os.path.join(target_dir,
                                            os.path.basename(log_file))
-            if not misc.execute('cp', '-a', log_file, target_log_file):
-                syslog.syslog(syslog.LOG_ERR,
-                              'Failed to copy installation log file')
-            os.chmod(target_log_file, stat.S_IRUSR | stat.S_IWUSR)
+            if os.path.isfile(log_file):
+                if not misc.execute('cp', '-a', log_file, target_log_file):
+                    syslog.syslog(syslog.LOG_ERR,
+                                  'Failed to copy installation log file')
+                os.chmod(target_log_file, stat.S_IRUSR | stat.S_IWUSR)
         try:
             status = open(os.path.join(self.target, 'var/lib/dpkg/status'))
             status_gz = gzip.open(os.path.join(target_dir,
@@ -835,7 +845,10 @@ class Install:
             mountpoint = '/var/lib/ubiquity/%s' % sysloop
         if not os.path.isdir(mountpoint):
             os.mkdir(mountpoint)
-        misc.execute('mount', dev, mountpoint)
+        if not misc.execute('mount', dev, mountpoint):
+            misc.execute('losetup', '-d', dev)
+            misc.execute('mount', '-o', 'loop', fsfile, mountpoint)
+            dev = 'unused'
 
         return (dev, mountpoint)
 
@@ -866,7 +879,8 @@ class Install:
             # Manual detection on non-unionfs systems
             fsfiles = ['/cdrom/casper/filesystem.cloop',
                        '/cdrom/casper/filesystem.squashfs',
-                       '/cdrom/META/META.squashfs']
+                       '/cdrom/META/META.squashfs',
+                       '/live/image/live/filesystem.squashfs']
 
             for fsfile in fsfiles:
                 if fsfile != '' and os.path.isfile(fsfile):
@@ -916,7 +930,8 @@ class Install:
             if not misc.execute('umount', mountpoint):
                 raise InstallStepError("Failed to unmount %s" % mountpoint)
         for dev in devs:
-            if dev != '' and not misc.execute('losetup', '-d', dev):
+            if (dev != '' and dev != 'unused' and
+                not misc.execute('losetup', '-d', dev)):
                 raise InstallStepError(
                     "Failed to detach loopback device %s" % dev)
 
@@ -1362,6 +1377,7 @@ exit 0"""
         packages = ['linux-image-' + self.kernel_version,
                     'linux-restricted-modules-' + self.kernel_version,
                     'usplash',
+                    'splashy',
                     'popularity-contest',
                     'libpaper1',
                     'ssl-cert']

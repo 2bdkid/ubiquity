@@ -169,7 +169,7 @@ while :; do
 			db_get passwd/user-password-crypted || true
 			if ! test "$RET" ; then
 				# Compare the two passwords, loop with message if not
-				# identical, or if empty.
+				# identical
 				db_get passwd/user-password
 				USER_PW="$RET"
 				db_get passwd/user-password-again
@@ -183,7 +183,10 @@ while :; do
 					STATE=6
 					continue
 				fi
-				if [ -z "$USER_PW" ]; then
+				# Loop if the password is empty, and it's not
+				# specifically allowed by preseeding
+				db_get passwd/allow-password-empty
+				if [ "$RET" = false ] && [ -z "$USER_PW" ]; then
 					db_set passwd/user-password ""
 					db_set passwd/user-password-again ""
 					db_fset user-setup/password-empty seen false

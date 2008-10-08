@@ -55,6 +55,7 @@ class Wizard(BaseFrontend):
         self.verifiedpassword = ''
         self.progress_val = 0
         self.progress_info = ''
+        self.auto_login = False
         self.mainloop = gobject.MainLoop()
 
         dbfilter = language.Language(self, self.debconf_communicator())
@@ -343,6 +344,12 @@ class Wizard(BaseFrontend):
     def get_verified_password(self):
         """Get the user's password confirmation."""
         return self.dbfilter.db.get('passwd/user-password-again') #self.verifiedpassword
+
+    def set_auto_login(self, value):
+        self.auto_login = value
+
+    def get_auto_login(self):
+        return self.auto_login
 
     def username_error(self, msg):
         """The selected username was bad."""

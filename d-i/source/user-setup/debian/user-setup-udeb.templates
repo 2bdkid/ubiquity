@@ -28,6 +28,12 @@ Type: boolean
 Default: false
 Description: for internal use only
 
+# Allow preseeding whether to permit a blank password for created non-root user
+Template: passwd/allow-password-empty
+Type: boolean
+Default: false
+Description: for internal use only
+
 Template: passwd/root-login
 Type: boolean
 Default: false

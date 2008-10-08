@@ -1,3 +1,41 @@
+ubiquity (1.10.4) intrepid; urgency=low
+
+  [ Colin Watson ]
+  * Only show the "EFI boot partition" option while creating a partition if
+    the current hardware supports it usefully.
+  * When creating a new partition, default to logical if a primary partition
+    already exists, since there are stricter constraints on primary
+    partitions and the only real reasons for them are Microsoft operating
+    systems or boot partitions (LP: #218938).
+  * Fix intltool handling; po/Makefile.in.in was still coming from gettext.
+    Pass no-xml to IT_PROG_INTLTOOL so that we don't need to build-depend on
+    libxml-parser-perl.
+  * Check whether log files exist before copying them (thanks, Vitaly
+    Petrov; see LP #279003).
+  * Adjust live filesystem mounting for Debian (thanks, Vitaly Petrov; see
+    LP #279003).
+  * Reconfigure splashy (thanks, Vitaly Petrov; see LP #279003).
+
+  [ Evan Dandrea ]
+  * Accurately place and calculate the total size of the new partitions
+    (LP: #271512).
+  * Calculate the allocation for the labels after adding a new segment in
+    segmented_bar (LP: #271554).
+  * Do not remove the files for packages that will break other packages when
+    removed (LP: #276657).
+  * Fix a crash in the noninteractive frontend due to missing auto_login
+    functions.
+  * Automatic update of included source packages: partman-ext3
+    52ubuntu3, partman-jfs 26ubuntu2, partman-reiserfs 41ubuntu3,
+    partman-xfs 41ubuntu2, user-setup 1.20ubuntu8.
+  * Automatic update of included source packages: partman-efi 18ubuntu1.
+
+  [ Emmet Hikory ]
+  * Build partman-efi udebs for amd64 and lpia
+  * Build grub-installer udeb for lpia (LP: #277225)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 08 Oct 2008 14:01:39 -0400
+
 ubiquity (1.10.3) intrepid; urgency=low
 
   * Back out DVD performance fixes for beta; they cause files from some
