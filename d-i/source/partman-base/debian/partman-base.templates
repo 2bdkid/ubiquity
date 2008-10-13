@@ -363,3 +363,9 @@ Template: partman/early_command
 Type: string
 Description: for internal use; can be preseeded
  Shell command or commands to run immediately before partitioning
+
+Template: partman/filter_mounted
+Type: boolean
+Default: true
+Description: for internal use; can be preseeded
+ Filter out disks with mounted partitions.

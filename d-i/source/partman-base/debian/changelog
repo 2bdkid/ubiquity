@@ -1,3 +1,20 @@
+partman-base (121ubuntu7) intrepid; urgency=low
+
+  [ Colin Watson ]
+  * Exit straight away if a called script is killed by a signal.
+  * Disable backup while displaying device/partition locked errors; it makes
+    no sense and it can cause us to exit without closing the FIFO to
+    parted_server (LP: #274219).
+  * Record that CHANGE_FILE_SYSTEM changes the partition table
+    (LP: #149832).
+
+  [ Evan Dandrea ]
+  * Exclude devices that have mounted partitions.  Useful for when installing
+    from a disk (LP: #276656).  This can be disabled by preseeding
+    partman/filter_mounted to false.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sun, 12 Oct 2008 02:32:41 -0400
+
 partman-base (121ubuntu6) intrepid; urgency=low
 
   * Merge some updated dmraid partitioning changes, thanks to Frans Pop

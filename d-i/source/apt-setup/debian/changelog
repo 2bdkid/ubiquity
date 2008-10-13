@@ -1,3 +1,13 @@
+apt-setup (1:0.37ubuntu5) intrepid; urgency=low
+
+  * Fix description of universe in generated sources.list: packages there
+    are expected to be under a free licence.
+  * Run 'apt-get update', without downloading package lists or cleaning up
+    old files, after moving the sources.list generated during base system
+    installation back into place (LP: #267884).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 09 Oct 2008 14:53:36 +0100
+
 apt-setup (1:0.37ubuntu4) intrepid; urgency=low
 
   * Fix sense of OVERRIDE_BASE_INSTALLABLE test in cdrom generator

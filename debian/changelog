@@ -1,3 +1,28 @@
+ubiquity (1.10.5) intrepid; urgency=low
+
+  [ Evan Dandrea ]
+  * Filter out the net subsystem when calling update-dev to prevent the
+    network connection from resetting (LP: #276383).
+  * If ubiquity is installing from a disk, such as a USB drive, then default
+    to writing grub to the disk that /boot or / is to be written to, as (hd0)
+    will most likely be the installation medium (LP: #282037).
+  * Automatic update of included source packages: apt-setup
+    1:0.37ubuntu5, partman-auto 78ubuntu3, partman-base 121ubuntu7,
+    partman-target 55ubuntu4, user-setup 1.20ubuntu9.
+
+  [ Colin Watson ]
+  * Fix typo in architecture detection for ntfsprogs dependency.
+  * Work around lpia having DEB_HOST_ARCH_CPU=i686 (!).
+  * Disable window minimise buttons if the installer is running in
+    standalone mode (LP: #249045).
+  * Update imported translations from gtk+2.0 2.14.3-0ubuntu3.
+  * Update translations from Launchpad (LP: #144741, #218636, #277451).
+
+  [ Emmet Hikory ]
+  * Honor preseeded passwd/allow-password-empty (LP: #280014)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 13 Oct 2008 01:34:45 -0400
+
 ubiquity (1.10.4) intrepid; urgency=low
 
   [ Colin Watson ]

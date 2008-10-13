@@ -349,7 +349,7 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 msgid "Set up an encrypted private directory?"
-msgstr ""
+msgstr "¿Configurar un directorio privado y cifrado?"
 
 #. Type: boolean
 #. Description
@@ -360,6 +360,10 @@ msgid ""
 "the system, to make it easier to share files among users. You can change "
 "this for individual files or directories by changing their permissions."
 msgstr ""
+"Los contenidos de su directorio home normalmente serán visibles para todos "
+"los usuarios en el sistema, para hacer más fácil compartir archivos entre "
+"usuarios. Usted puede cambiar esto para archivos individuales o directorios "
+"cambiando sus permisos."
 
 #. Type: boolean
 #. Description
@@ -371,13 +375,17 @@ msgid ""
 "your computer is stolen. If you choose to do this, the directory will be "
 "called \"Private\"."
 msgstr ""
+"Además de los permisos estándar del sistema, puede ser útil establecer un "
+"directorio privado cifrado para que esos archivos permanezcan privados "
+"incluso si le roban su equipo. Si selecciona hacer esto, el directorio se "
+"llamará «Private»."
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 msgid "Encryption passphrase:"
-msgstr ""
+msgstr "Frase de contraseña de cifrado:"
 
 #. Type: password
 #. Description
@@ -389,18 +397,16 @@ msgid ""
 "normally need to use this passphrase, but it may be useful in case something "
 "goes wrong and you need to recover your encrypted data."
 msgstr ""
+"Puede seleccionar una contraseña para cifrar su directorio privado. Si lo "
+"deja en blanco, se generará una contraseña aleatoria. Normalmente no "
+"necesitará usar esta contraseña, pero puede ser útil en caso de que algo "
+"vaya mal y necesite recuperar sus datos cifrados."
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 #, fuzzy
-#| msgid ""
-#| "You need to set a password for 'root', the system administrative account. "
-#| "A malicious or unqualified user with root access can have disastrous "
-#| "results, so you should take care to choose a root password that is not "
-#| "easy to guess. It should not be a word found in dictionaries, or a word "
-#| "that could be easily associated with you."
 msgid ""
 "The overall strength of the encryption depends strongly on this passphrase, "
 "so you should take care to choose a passphrase that is not easy to guess. It "
@@ -419,9 +425,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 #, fuzzy
-#| msgid ""
-#| "A good password will contain a mixture of letters, numbers and "
-#| "punctuation and should be changed at regular intervals."
 msgid ""
 "A good passphrase will contain a mixture of letters, numbers and "
 "punctuation. Passphrases are recommended to have a length of 20 or more "
@@ -439,13 +442,15 @@ msgid ""
 "data, you should normally write down the passphrase and keep it in a safe "
 "place separate from this computer."
 msgstr ""
+"No hay manera de recuperar esta frase de paso si la pierde. Para evitar "
+"pérdidas de datos, debería escribir la frase de paso y guardarla en un lugar "
+"seguro y alejado de este equipo."
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Re-enter password to verify:"
 msgid "Re-enter passphrase to verify:"
 msgstr "Vuelva a introducir la contraseña para su verificación:"
 
@@ -454,9 +459,6 @@ msgstr "Vuelva a introducir la contraseña para su verificación:"
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid ""
-#| "Please enter the same root password again to verify that you have typed "
-#| "it correctly."
 msgid ""
 "Please enter the same passphrase again to verify that you have typed it "
 "correctly."
@@ -469,21 +471,21 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:22001
 msgid "Keep this passphrase in a safe place!"
-msgstr ""
+msgstr "Guarde esta frase de contraseña en un sitio seguro."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:22001
 msgid "Your new encryption passphrase is as follows:"
-msgstr ""
+msgstr "Su nueva frase de cifrado es como sigue:"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:22001
 msgid "Please write this down and store it separately from this computer."
-msgstr ""
+msgstr "Por favor, anote esto y guárdelo separado de este equipo."
 
 #. Type: title
 #. Description

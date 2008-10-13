@@ -3,6 +3,7 @@
 set -e
 
 . /lib/partman/lib/base.sh
+. /usr/share/debconf/confmodule
 
 ORIG_IFS="$IFS"
 
@@ -50,9 +51,39 @@ if [ ! -f /var/run/parted_server.pid ]; then
 	fi
 	mkdir $DEVICES || true
 
+	# Exclude devices that have mounted partitions.
+	disks=
+	db_get partman/filter_mounted
+	if [ "$RET" != false ]; then
+		while read dev rest; do
+			# Taken from split_device() in grub-installer.
+			disk=
+			case $dev in
+				/dev/[vhs]d[a-z]*)
+					disk="$(echo "$dev" | sed 's,\(/dev/[a-z]\+\).*,\1,')"
+				;;
+				/dev/*/c*d*)
+					disk="$(echo "$dev" | sed 's,\(/dev/.*/c[0-9]\+d[0-9]\+\).*,\1,')"
+				;;
+			esac
+            		if [ -z "$disk" ]; then
+				continue
+			fi
+			if [ -n "$disks" ]; then
+				disks="$disks\|$disk"
+			else
+				disks="$disk"
+			fi
+		done < /proc/mounts
+    	fi
+	if [ "$disks" ]; then
+		disks="^\($disks\)"
+	else
+		disks="^$"
+	fi
 	IFS="$NL"
 	for partdev in $(parted_devices |
-		grep -v '^/dev/md' |
+		grep -v '^/dev/md' | grep -v "$disks" |
 		sed 's,^/dev/\(ide\|scsi\|[hs]d\),!/dev/\1,' |
 		sort |
 		sed 's,^!,,' ); do

@@ -538,6 +538,14 @@ class Wizard(BaseFrontend):
         return True
 
 
+    def set_window_hints(self, widget):
+        if 'UBIQUITY_ONLY' in os.environ:
+            # Disable minimise button.
+            widget.window.set_functions(
+                gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MOVE |
+                gtk.gdk.FUNC_MAXIMIZE)
+
+
     def set_locales(self):
         """internationalization config. Use only once."""
 
@@ -916,9 +924,13 @@ class Wizard(BaseFrontend):
             self.hostname.handler_unblock(self.hostname_changed_id)
 
         complete = True
-        for name in ('username', 'password', 'verified_password', 'hostname'):
+        for name in ('username', 'hostname'):
             if getattr(self, name).get_text() == '':
                 complete = False
+        if not self.allow_password_empty:
+            for name in ('password', 'verified_password'):
+                if getattr(self, name).get_text() == '':
+                    complete = False
         self.allow_go_forward(complete)
 
     def on_username_changed(self, widget):
