@@ -394,6 +394,11 @@ if [ "$found" = "0" ] && type mdadm >/dev/null 2>&1; then
 		found=1
 	done
 fi
+# Check if the boot file system is on a virtio device, /dev/vd*
+if [ "$found" = "0" ] && echo "$bootfs" | grep -qs "^\/dev\/vd[a-z]"; then
+	frdisk=
+	found=1
+fi
 
 info "Identified partition label for $bootfs: $bootfslabel"
 
@@ -955,7 +960,9 @@ if [ "$kopt_params" ]; then
 fi
 if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev_directory="$RET"
-	sed -i "/^# groot=/s:).*:)$bootdev_directory:" $ROOT/boot/grub/$menu_file
+	# Be careful to deal with either UUID-style or non-UUID-style groot.
+	# grub4dos doesn't recognise UUIDs yet.
+	sed -i "s:^\(# groot=\)[^(].*:\1():; s:^\(# groot=([^)]*)\).*:\1$bootdev_directory:" $ROOT/boot/grub/$menu_file
 fi
 # In either case, update the Debian kernel entries
 if [ "$user_params" ] || [ "$bootdev_directory" ]; then

@@ -98,7 +98,8 @@ if [ ! -f /var/run/parted_server.pid ]; then
 
 		# Skip devices that are part of a dmraid device
 		if type dmraid >/dev/null 2>&1; then
-			if part_of_sataraid $device; then
+			if part_of_sataraid $device && \
+			   [ -f /var/lib/disk-detect/activate_dmraid ]; then
 				continue
 			fi
 		fi

@@ -1,3 +1,24 @@
+grub-installer (1.32ubuntu9) intrepid; urgency=low
+
+  * grub4dos can't handle UUIDs, so tweak previous change to continue using
+    groot=()/ubuntu/disks in that case (LP: #283520).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Oct 2008 11:17:06 +0100
+
+grub-installer (1.32ubuntu8) intrepid; urgency=low
+
+  * Cope with new UUID-style groot when handling
+    grub-installer/bootdev_directory (LP: #283520).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Oct 2008 09:20:51 +0100
+
+grub-installer (1.32ubuntu7) intrepid; urgency=low
+
+  * grub-installer: if the boot filesystem is on a virtio device, we need to
+    null out the $frdisk variable (LP: #281492)
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 14 Oct 2008 17:31:47 -0500
+
 grub-installer (1.32ubuntu6) intrepid; urgency=low
 
   * Add support for lpia (LP: #274781)

@@ -42,3 +42,9 @@ Default: false
 Description: for internal use; can be preseeded
  Check for the presence of multipath devices?
 
+Template: disk-detect/activate_dmraid
+Type: boolean
+Default: true
+_Description: Activate Serial ATA RAID devices?
+ One or more drives containing Serial ATA RAID configurations have been found.
+ Do you wish to activate these RAID devices?

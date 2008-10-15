@@ -171,11 +171,22 @@ if anna-install dmraid-udeb; then
 	fi
 
 	if [ "$(dmraid -c -s)" != "No RAID disks" ]; then
-		logger -t disk-detect "Serial ATA RAID disk(s) detected; enabling dmraid support"
-		# Activate only those arrays which have all disks present.
-		for dev in $(dmraid -r -c); do
-			log-output -t disk-detect dmraid-activate $(basename $dev)
-		done
+		logger -t disk-detect "Serial ATA RAID disk(s) detected.
+		# Ask the user whether they want to activate dmraid devices."
+		db_input high disk-detect/activate_dmraid || true
+		db_go
+		db_get disk-detect/activate_dmraid
+		activate_dmraid=$RET
+
+		if [ "$activate_dmraid" = true ]; then
+			mkdir -p /var/lib/disk-detect
+			touch /var/lib/disk-detect/activate_dmraid
+			logger -t disk-detect "Enabling dmraid support."
+			# Activate only those arrays which have all disks present.
+			for dev in $(dmraid -r -c); do
+				log-output -t disk-detect dmraid-activate $(basename $dev)
+			done
+		fi
 	else
 		logger -t disk-detect "No Serial ATA RAID disks detected"
 	fi
