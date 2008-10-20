@@ -1,3 +1,11 @@
+apt-setup (1:0.37ubuntu6) intrepid; urgency=low
+
+  * Check to make sure the CD filesystem is iso9660 before remounting it
+    as such.  Do not write a CD identifier if we're not working with
+    iso9660 so pkgsel does not try to unmount such disks.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 20 Oct 2008 01:58:26 -0400
+
 apt-setup (1:0.37ubuntu5) intrepid; urgency=low
 
   * Fix description of universe in generated sources.list: packages there

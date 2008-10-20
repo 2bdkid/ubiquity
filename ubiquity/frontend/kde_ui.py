@@ -124,7 +124,7 @@ class Wizard(BaseFrontend):
 
         #self.app = KApplication()
 
-        self.app = QApplication(['ubiquity', '-style=plastique'])
+        self.app = QApplication(['ubiquity', '-style=oxygen'])
 
         # We want to hide the minimise button if running in the ubiquity-only mode (no desktop)
         # To achieve this we need to set window flags to Dialog but we also need a parent widget which is showing
@@ -267,8 +267,8 @@ class Wizard(BaseFrontend):
 
     def openURL(self, url):
         #need to run this else kdesu can't run Konqueror
-        execute('su', 'ubuntu', 'xhost', '+localhost')
-        execute('su', 'ubuntu', 'xdg-open', url)
+        execute('su', '-c', 'xhost +localhost', 'ubuntu')
+        execute('su', '-c', 'kfmclient openURL '+url, 'ubuntu')
 
     def run(self):
         """run the interface."""

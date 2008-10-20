@@ -1,3 +1,46 @@
+ubiquity (1.10.7) intrepid; urgency=low
+
+  [ Jonathan Riddell ]
+  * Use Oxygen style in KDE UI
+
+  [ Andreas Wenning ]
+  * Edit ubiquity/frontend/kde_ui.py to correctly open the url for
+    release notes.
+
+  [ Evan Dandrea ]
+  * Pack the table containing the partition bars in a scrolled window
+    (LP: #272318).
+  * Remove broken CD-ROM entries from fstab after install (LP: #150872).
+  * Automatic update of included source packages: apt-setup
+    1:0.37ubuntu6, base-installer 1.86ubuntu7, kboot-installer
+    0.0.1ubuntu7, user-setup 1.20ubuntu10.
+
+  [ Mario Limonciello ]
+  * Add above broken CD-ROM entries to mythbuntu frontend too.
+  * Properly pre-setup database on mythbuntu frontend. (LP: #276904)
+  * Simplify the xorg.conf that is written out in apply-drivers. (LP: #181564)
+    The ideal situation is to enable these via Jockey, but Jockey doesn't
+    have a good interface for turning on during installation and turning
+    on and off tv-out.
+
+  [ Colin Watson ]
+  * Fix excessive file-copy blacklisting, which had several problems
+    (LP: #285238):
+    - wasn't deciding which language packs to use before generating the
+      blacklist;
+    - was filtering out packages with prerms before doing ok-to-remove
+      calculations;
+    - needed to try recursively removing broken packages in order to get a
+      fully-expanded list of reverse-dependencies out of apt;
+    - was removing packages from the difference list too early so they
+      stopped being considered as packages that were allowed to be removed.
+    In an attempt to make this rather large change a little more reviewable,
+    note that the code used to analyse removals while generating the
+    blacklist is now the same as that used to remove unused packages later
+    in the installation process.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 20 Oct 2008 04:19:30 -0400
+
 ubiquity (1.10.6) intrepid; urgency=low
 
   [ Evan Dandrea ]

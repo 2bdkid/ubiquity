@@ -3,7 +3,7 @@
 # This script forces the root partition to have the label "/", since kboot
 # relies on that.
 
-. /lib/partman/definitions.sh
+. /lib/partman/lib/base.sh
 
 ARCH="$(archdetect)"
 case $ARCH in
