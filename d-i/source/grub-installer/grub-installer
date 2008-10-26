@@ -590,6 +590,21 @@ if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
 	fi
 fi
 
+# Set a sensible default boot device as hd0 does not make sense when
+# installing from a removable disk.
+cdfs=$(mount | grep "on /cdrom " | cut -d' ' -f5)
+if [ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]; then
+	db_fget grub-installer/bootdev seen
+	if [ "$RET" != true ]; then
+		bootfs=$(findfs /boot)
+		[ "$bootfs" ] || bootfs="$(findfs /)"
+		disk=$(echo "$bootfs" | \
+		sed 's:\(/dev/\(cciss\|ida\)/c[0-9]d[0-9]\|/dev/[a-z]\+\).*:\1:')
+		db_set grub-installer/bootdev "$disk"
+		state=2
+	fi
+fi
+
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_bootdev
 

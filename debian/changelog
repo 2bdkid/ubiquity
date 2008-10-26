@@ -1,3 +1,25 @@
+ubiquity (1.10.8) intrepid; urgency=low
+
+  [ Jonathan Riddell ]
+  * KDE Frontend, in liveinstaller.ui change size policy to
+    stop release notes widget being half hidden
+  * ubiquity-dm: turn off compositing for kwin (also don't run dcopserver)
+    Closes LP: #285626
+
+  [ Evan Dandrea ]
+  * Optimize the blacklist generation.  Thanks Colin Watson.
+  * Add ubiquity/install/generate-blacklist preseed key for file
+    blacklist generation.
+
+  [ Colin Watson ]
+  * Clip the resize widget's value to the allowed minimum and maximum size,
+    and pass it to the backend as an exact size rather than as a percentage
+    to avoid rounding errors (LP: #287547).
+  * Automatic update of included source packages: grub-installer
+    1.32ubuntu10, kboot-installer 0.0.1ubuntu8, partman-target 55ubuntu5.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 26 Oct 2008 04:19:31 +0000
+
 ubiquity (1.10.7) intrepid; urgency=low
 
   [ Jonathan Riddell ]

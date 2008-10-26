@@ -55,9 +55,10 @@ fi
 
 # Work out user parameters.
 user_params=quiet
-if db_get debian-installer/framebuffer && [ "$RET" = true ]; then
-    user_params="$user_params splash"
-fi
+# usplash disabled for 8.10 due to https://launchpad.net/bugs/285218.
+#if db_get debian-installer/framebuffer && [ "$RET" = true ]; then
+#    user_params="$user_params splash"
+#fi
 user_params="$(echo $user_params $(user-params))" || true
 
 if [ -e /target/boot/vmlinux ]; then
