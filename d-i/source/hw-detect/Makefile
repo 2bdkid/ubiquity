@@ -16,9 +16,11 @@ CFLAGS_ARCH = -DCPU_TEXT='"$(DEB_HOST_ARCH)"'
 bindir=$(DESTDIR)/bin/
 hpdir=$(DESTDIR)/etc/hotplug.d
 udevdir=$(DESTDIR)/etc/udev/rules.d
+udevlibdir=$(DESTDIR)/lib/udev
 didir=$(DESTDIR)/lib/debian-installer.d
 fidir=$(DESTDIR)/usr/lib/finish-install.d
 sharedir=$(DESTDIR)/usr/share/hw-detect/
+postbaseinstallerdir=$(DESTDIR)/usr/lib/post-base-installer.d/
 
 INSTALL=install
 INSTALL_DATA = ${INSTALL} -m 644
@@ -40,6 +42,11 @@ ifeq ($(DEB_HOST_ARCH_OS),linux)
 	$(INSTALL) sysfs-update-devnames.sh $(bindir)/sysfs-update-devnames
 	$(INSTALL) -d $(udevdir)
 	$(INSTALL_DATA) net-hotplug.rules $(udevdir)/010_net-hotplug.rules
+	$(INSTALL) -d $(udevlibdir)
+	$(INSTALL) firmware.agent $(udevlibdir)
+	$(INSTALL) check-missing-firmware.sh $(bindir)/check-missing-firmware
+	$(INSTALL) -d $(postbaseinstallerdir)
+	$(INSTALL) post-base-installer $(postbaseinstallerdir)/50hw-detect
 	$(INSTALL) -d $(hpdir)/net
 	$(INSTALL) net-hotplug.sh $(hpdir)/net/hw-detect.hotplug
 	$(INSTALL) -d $(fidir)

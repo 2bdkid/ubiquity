@@ -1,3 +1,84 @@
+choose-mirror (2.27ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use Ubuntu mirrors.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+    - Don't check if archive.ubuntu.com is reachable before asking for a
+      proxy.
+    - Switch to jaunty by default.
+    - Drop unsupported releases from mirror/suite Choices.
+    - Set Vcs-Bzr for Ubuntu.
+    - Use ports.ubuntu.com for all countries.
+    - Move sparc to ports.ubuntu.com, and fix default hostname and directory
+      for sparc.
+    - Fix country selection for ports architectures.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 13 Nov 2008 14:00:22 -0800
+
+choose-mirror (2.27) unstable; urgency=low
+
+  * Use isoquery instead of a python script to generate iso_3166.tab and
+    generate the file only once instead of every time its needed.
+  * Remove obsolete versions in build dependencies.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 22 Sep 2008 12:16:32 +0200
+
+choose-mirror (2.26) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bosnian (bs.po) by Armin Besirovic
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * French (fr.po) by Christian Perrier
+  * Croatian (hr.po) by Josip Rodin
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Peteris Krisjanis
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Serbian (sr.po) by Veselin Mijušković
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 18:56:44 -0300
+
+choose-mirror (2.25) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Remove Martin Sjogren and Matt Kraai as Uploaders with many thanks for
+    their past contributions.
+
+  [ Joey Hess ]
+  * mirror_root can return null. If it does, flag the mirror as invalid.
+  * ftp.debian.org has been disabled in Mirrors.masterlist. So remove it as
+    the default. Do not set a default at all, we'll rely on the first mirror
+    in the list being a good default choice. Closes: #486558
+
+  [ Updated translations ]
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Milo Casagrande
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po) by Sampada
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Slovak (sk.po) by Ivan Masár
+  * Turkish (tr.po) by Mert Dirik
+  * Simplified Chinese (zh_CN.po) by Kov Chai
+
+ -- Frans Pop <fjp@debian.org>  Wed, 16 Jul 2008 13:36:46 +0200
+
 choose-mirror (2.24ubuntu2) intrepid; urgency=low
 
   * Fix extraneous Ubuntu-specific reference to PREFERRED_DISTRIBUTION; in
@@ -42,7 +123,7 @@ choose-mirror (2.24) unstable; urgency=low
     - iso3166tab.py: Include ErrorPrinter and DefaultHandler from obsolete
       saxutils.py
     - drop build dependency on python-xml
-  * Remove PREFERRED_DISTRIBUTION; has been replaced by /etc/default_release.
+  * Remove PREFERRED_DISTRIBUTION; has been replaced by /etc/default-release.
   * Improved version of the script used to sort the mirror country list.
 
   [ Updated translations ]

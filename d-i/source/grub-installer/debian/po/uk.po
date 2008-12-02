@@ -10,14 +10,15 @@
 # This file is distributed under the same license as debian-installer.
 #
 # Eugeniy Meshcheryakov <eugen@debian.org>, 2005, 2006, 2007.
+# Євгеній Мещеряков <eugen@debian.org>, 2008.
 msgid ""
 msgstr ""
 "Project-Id-Version: uk\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
 "POT-Creation-Date: 2008-04-28 22:53+0000\n"
-"PO-Revision-Date: 2008-02-12 22:40+0100\n"
-"Last-Translator: \n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2008-09-18 13:53+0200\n"
+"Last-Translator: Євгеній Мещеряков <eugen@debian.org>\n"
+"Language-Team: uk <>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -92,16 +93,15 @@ msgstr ""
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
-#, fuzzy
 msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
-msgstr "Встановити завантажувач GRUB на жорсткий диск"
+msgstr "Встановити завантажувач GRUB на Serial ATA RAID-диск?"
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
 msgid "Installation of GRUB on Serial ATA RAID is experimental."
-msgstr ""
+msgstr "Встановлення GRUB на Serial ATA RAID є експериментальним."
 
 #. Type: boolean
 #. Description
@@ -112,6 +112,9 @@ msgid ""
 "RAID disk. It is also assumed that disk is listed as the first hard disk in "
 "the boot order defined in the system's BIOS setup."
 msgstr ""
+"GRUB завжди встановлюється в головний завантажувальний запис (MBR) Serial "
+"ATA RAID диску. Також очікується що диск знаходиться першим в порядку "
+"завантаження визначеному в налаштуваннях системної BIOS."
 
 #. Type: boolean
 #. Description
@@ -121,7 +124,7 @@ msgstr ""
 #. :sl3:
 #: ../grub-installer.templates:3001 ../grub-installer.templates:5001
 msgid "The GRUB root device is: ${GRUBROOT}."
-msgstr ""
+msgstr "Кореневий пристрій GRUB: ${GRUBROOT}."
 
 #. Type: error
 #. Description
@@ -141,9 +144,8 @@ msgstr "Не вдалося налаштувати GRUB"
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:4001
-#, fuzzy
 msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
-msgstr "Виникла помилка під час активації зашифрованих томів."
+msgstr "Виникла помилка під час встановлення GRUB на Serial ATA RAID диск."
 
 #. Type: error
 #. Description
@@ -152,9 +154,8 @@ msgstr "Виникла помилка під час активації заши�
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:4001 ../grub-installer.templates:6001
-#, fuzzy
 msgid "The GRUB installation has been aborted."
-msgstr "Налаштування було перервано"
+msgstr "Встановлення GRUB було перервано."
 
 #. Type: boolean
 #. Description
@@ -302,11 +303,10 @@ msgstr "Повторіть ввід паролю для перевірки:"
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:10001
-#, fuzzy
 msgid ""
 "Please enter the same GRUB password again to verify that you have typed it "
 "correctly."
-msgstr "Введіть той самий пароль root для перевірки його коректності."
+msgstr "Введіть той самий пароль GRUB для перевірки коректності його вводу."
 
 #. Type: error
 #. Description
@@ -326,9 +326,8 @@ msgstr "Два введені вами пароля неоднакові. Спр
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:13001
-#, fuzzy
 msgid "GRUB installation failed"
-msgstr "Не вдалося встановити LILO"
+msgstr "Не вдалося встановити GRUB"
 
 #. Type: error
 #. Description
@@ -338,6 +337,8 @@ msgid ""
 "The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
 "loader, the installed system will not boot."
 msgstr ""
+"Пакунок '${GRUB}' не вдалося встановити в /target/. Без завантажувача GRUB "
+"встановлена система завантажуватися не буде."
 
 #. Type: error
 #. Description

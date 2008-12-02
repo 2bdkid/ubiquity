@@ -1,3 +1,40 @@
+clock-setup (0.97ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Add lpia to architecture list.
+    - Fix rdate-udeb dependency to include the epoch.
+    - Fix handling of progress bar cancellation.
+  * Apparently OpenSolaris keeps the hardware clock in local time
+    (surprisingly). Assume UTC=no if Solaris is detected (LP: #279065).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 05 Nov 2008 12:33:19 +0000
+
+clock-setup (0.97) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bosnian (bs.po) by Armin Besirovic
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Greek, Modern (1453-) (el.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * French (fr.po) by Christian Perrier
+  * Croatian (hr.po) by Josip Rodin
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Peteris Krisjanis
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Serbian (sr.po) by Veselin Mijušković
+  * Ukrainian (uk.po) by Євгеній Мещеряков
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 19:03:32 -0300
+
 clock-setup (0.96ubuntu2) intrepid; urgency=low
 
   * Fix handling of progress bar cancellation (LP: #262500):

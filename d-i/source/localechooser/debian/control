@@ -5,14 +5,14 @@ Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Christian Perrier <bubulle@debian.org>, Frans Pop <fjp@debian.org>, Joey Hess <joeyh@debian.org>
 Build-Depends: debhelper (>= 4.2)
-Build-Depends-Indep: dash | ash, dpkg-dev (>= 1.9), locales, iso-codes (>= 0.21-1), intltool-debian (>= 0.30+20040212), po-debconf, python (>= 2.4)
-XS-Original-Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/localechooser
+Build-Depends-Indep: dash | ash, dpkg-dev (>= 1.9), locales, intltool-debian (>= 0.30+20040212), po-debconf, iso-codes, isoquery
+XS-Debian-Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/localechooser
 Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/localechooser/ubuntu
 
 Package: localechooser
 XC-Package-Type: udeb
 Architecture: all
-Depends: cdebconf-udeb (>= 0.129), iso-3166-udeb
+Depends: cdebconf-udeb (>= 0.129)
 XB-Installer-Menu-Item: 1000
 Description: choose language/country/locale
 

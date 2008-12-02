@@ -1,3 +1,166 @@
+debian-installer-utils (1.65ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "usb-partition" type for detecting partitions on USB
+      drives.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 03 Nov 2008 14:08:16 +0000
+
+debian-installer-utils (1.65) unstable; urgency=low
+
+  * When looking for partitions, only consider device subdirectories that end
+    with a number to avoid matching directories such as power, slaves, etc.
+  * Add support for MMC/SD card devices (mmcblkX). The devices are matched on
+    name as udev does not return an ID_TYPE environment variable.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 29 Sep 2008 20:25:52 +0200
+
+debian-installer-utils (1.64) unstable; urgency=low
+
+  [ Joey Hess ]
+  * update-dev: Add back support for userdevfs, which was removed mistakenly
+    as part of code cleanup in version 1.47.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * German (de.po) by Jens Seidel
+  * Greek, Modern (1453-) (el.po)
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Hebrew (he.po) by Omer Zak
+  * Hindi (hi.po) by Kumar Appaiah
+  * Croatian (hr.po) by Josip Rodin
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Central Khmer (km.po) by KHOEM Sokhem
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Arangel Angov
+  * Malayalam (ml.po) by Praveen|പ്രവീണണ്‍ A|എ
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Dutch (nl.po) by Frans Pop
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Albanian (sq.po) by Elian Myftiu
+  * Serbian (sr.po) by Veselin Mijušković
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Mert Dirik
+  * Ukrainian (uk.po) by Євгеній Мещеряков
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Deng Xiyue
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 21:54:41 -0300
+
+debian-installer-utils (1.63) unstable; urgency=low
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Dzongkha (dz.po) by Jurmey Rabgay(Bongop) (DIT,BHUTAN)
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Marathi (mr.po) by Sampada
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Turkish (tr.po) by Mert Dirik
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 09 Aug 2008 16:32:56 -0300
+
+debian-installer-utils (1.62) unstable; urgency=low
+
+  [ Frans Pop ]
+  * fetch-url: fix initialization of TRY_REPEAT and TRY_CONTINUE variables.
+  * fetch-url-methods/http: don't attempt continuation retries if the file
+    does not already exist (i.e. not at least partially downloaded).
+
+  [ Philip Hands ]
+  * remove some code duplication introduced in Alex Owen's #491098 patch.
+
+  [ Jérémy Bobbio ]
+  * Ship start-shell in di-utils.  It allows a shell to be started either with
+    debconf-disconnect or with the terminal plugin for the GTK+ frontend.
+  * Use start-shell in di-utils-shell.postinst.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Marathi (mr.po) by Sampada
+  * Dutch (nl.po) by Frans Pop
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 01 Aug 2008 14:45:27 -0300
+
+debian-installer-utils (1.61) unstable; urgency=low
+
+  * update-dev: remove obsolete fallbacks to udevtrigger and udevsettle.
+  * Apply patch from Alex Owen to update wget error checks to current busybox
+    wget output and similar checking for FTP. Closes: #491098.
+
+  [ Updated translations ]
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+
+ -- Frans Pop <fjp@debian.org>  Wed, 16 Jul 2008 20:06:49 +0200
+
+debian-installer-utils (1.60) unstable; urgency=low
+
+  * Use new "mountmedia floppy" command instead of mountfloppy.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 07 Jul 2008 14:09:33 -0400
+
 debian-installer-utils (1.59ubuntu3) intrepid; urgency=low
 
   * list-devices: new "usb-partition" type for detecting partitions on

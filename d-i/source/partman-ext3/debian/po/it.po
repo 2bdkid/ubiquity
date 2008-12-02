@@ -19,15 +19,15 @@
 # Samuele Giovanni Tonon <samu@linuxasylum.net>
 # Stefano Canepa <sc@linux.it>
 # Stefano Melchior <stefano.melchior@openlabs.it>
-#
+# Milo Casagrande <milo@ubuntu.com>, 2008
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-03-26 13:16+0000\n"
-"PO-Revision-Date: 2008-01-19 16:56+0100\n"
-"Last-Translator: Stefano Canepa <sc@linux.it>\n"
+"POT-Creation-Date: 2008-08-26 17:53+0000\n"
+"PO-Revision-Date: 2008-09-03 22:13+0200\n"
+"Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,15 +40,15 @@ msgstr ""
 msgid ""
 "Checking the ext3 file system in partition #${PARTITION} of ${DEVICE}..."
 msgstr ""
-"Verifica del file system ext3 nella partizione n° ${PARTITION} di ${DEVICE} "
-"in corso."
+"Verifica del file system ext3 nella partizione n° ${PARTITION} di "
+"${DEVICE}..."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-ext3.templates:2001
 msgid "Go back to the menu and correct errors?"
-msgstr "Tornare al menu di partizionamento e correggere gli errori?"
+msgstr "Tornare al menù di partizionamento e correggere gli errori?"
 
 #. Type: boolean
 #. Description
@@ -69,7 +69,7 @@ msgid ""
 "If you do not go back to the partitioning menu and correct these errors, the "
 "partition will not be used at all."
 msgstr ""
-"Se non si torna al menu di partizionamento per correggere questi errori la "
+"Se non si torna al menù di partizionamento per correggere questi errori la "
 "partizione non verrà utilizzata."
 
 #. Type: error
@@ -77,7 +77,7 @@ msgstr ""
 #. :sl2:
 #: ../partman-ext3.templates:3001
 msgid "Failed to create a file system"
-msgstr "Creazione del file system fallita"
+msgstr "Creazione del file system non riuscita"
 
 #. Type: error
 #. Description
@@ -87,14 +87,14 @@ msgid ""
 "The ext3 file system creation in partition #${PARTITION} of ${DEVICE} failed."
 msgstr ""
 "Creazione del file system ext3 nella partizione n° ${PARTITION} di ${DEVICE} "
-"fallita."
+"non riuscita."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-ext3.templates:4001
 msgid "Do you want to return to the partitioning menu?"
-msgstr "Tornare al menu di partizionamento?"
+msgstr "Tornare al menù di partizionamento?"
 
 #. Type: boolean
 #. Description
@@ -115,8 +115,8 @@ msgid ""
 "If you do not go back to the partitioning menu and assign a mount point from "
 "there, this partition will not be used at all."
 msgstr ""
-"Se non si torna al menu di partizionamento per assegnare un mount point da "
-"lì la partizione non verrà utilizzata."
+"Se non si torna al menù di partizionamento per assegnare un punto di mount, "
+"la partizione non verrà utilizzata."
 
 #. Type: text
 #. Description
@@ -145,3 +145,55 @@ msgstr "ext3"
 #: ../partman-ext3.templates:7001
 msgid "Ext3 journaling file system"
 msgstr "Ext3 journaling file system"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../partman-ext3.templates:9001 ../partman-ext3.templates:10001
+msgid "Go back to the menu and correct this problem?"
+msgstr "Tornare al menù e correggere questo problema?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../partman-ext3.templates:9001
+msgid ""
+"Your boot partition has not been configured with the ext2 or ext3 file "
+"system. This is needed by your machine in order to boot. Please go back and "
+"use either the ext2 or ext3 file system."
+msgstr ""
+"La partizione di avvio non è stata configurata con il file system ext2 o "
+"ext3. Questo è necessario affinché il computer si avvii. Tornare indietro e "
+"usare il file system ext2 o ext3."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../partman-ext3.templates:9001 ../partman-ext3.templates:10001
+msgid ""
+"If you do not go back to the partitioning menu and correct this error, the "
+"partition will be used as is.  This means that you may not be able to boot "
+"from your hard disk."
+msgstr ""
+"Se non si torna al menù di partizionamento per correggere questo errore, la "
+"partizione verrà utilizzata così come è. Questo vuol dire che potrebbe "
+"essere impossibile avviare da questo disco fisso."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../partman-ext3.templates:10001
+msgid ""
+"Your boot partition is not located on the first primary partition of your "
+"hard disk.  This is needed by your machine in order to boot.  Please go back "
+"and use your first primary partition as a boot partition."
+msgstr ""
+"La partizione di avvio non è nella prima partizione primaria del disco "
+"fisso. Questo è necessario affinché il computer si avvii. Tornare indietro e "
+"usare la prima partizione primaria come partizione di avvio."

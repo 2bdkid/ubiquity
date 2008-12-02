@@ -1,3 +1,117 @@
+grub-installer (1.35ubuntu4) jaunty; urgency=low
+
+  * Fix syntax error in otheros.sh.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Nov 2008 23:52:52 +0000
+
+grub-installer (1.35ubuntu3) jaunty; urgency=low
+
+  * Nail another instance of dmraid output-checking.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Nov 2008 21:08:56 +0000
+
+grub-installer (1.35ubuntu2) jaunty; urgency=low
+
+  * Hide GRUB menu if grub-installer/bootdev_directory is preseeded; this is
+    used in the Wubi case where GRUB is used as a secondary boot loader, and
+    so the user already had a chance to boot from another operating system
+    (thanks, Agostino Russo; LP: #289791).
+  * Use rootnoverify rather than root when chain-loading Microsoft operating
+    systems (LP: #10661).
+  * 'dmraid -c -s' changed its output format; cope with both old and new.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 21 Nov 2008 21:00:39 +0000
+
+grub-installer (1.35ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed.
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for installation-from-windows. Setting this disables
+      normal grub installation, but still generates a device.map.
+    - Only support grub-installer/grub2_instead_of_grub_legacy by preseeding
+      for now.
+    - Handle cases where /boot is bind-mounted.
+    - Add another guard against calling 'udevadm info' with an empty device
+      name.
+    - Add support for writing an MBR on each disk in an mdadm-managed RAID
+      providing /boot.
+    - Properly make use of output from os-prober to configure the booting of
+      other operating systems on dmraid arrays. Attempt to guess where in
+      the device map the array belongs, by substituting the first drive in
+      the dmraid array for the dmraid array device node itself, and removing
+      any reference to other member disks of the array.
+    - Add support for lpia.
+    - Handle /boot being on a virtio device.
+    - Set a sensible default boot device when /cdrom is not iso9660, as this
+      is probably a USB install and (hd0) does not make sense when
+      installing from a removable disk.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Nov 2008 00:39:33 +0000
+
+grub-installer (1.35) unstable; urgency=low
+
+  * Add support for MMC/SD card devices (mmcblkX).
+
+ -- Frans Pop <fjp@debian.org>  Mon, 29 Sep 2008 20:31:10 +0200
+
+grub-installer (1.34) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Fix up the grub root (groot) in menu.lst for dmraid if it is incorrect.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Greek, Modern (1453-) (el.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Omer Zak
+  * Hindi (hi.po) by Kumar Appaiah
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Milo Casagrande
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Central Khmer (km.po) by KHOEM Sokhem
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Amed Çeko Jiyan
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Arangel Angov
+  * Marathi (mr.po) by Sampada
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Serbian (sr.po) by Veselin Mijušković
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Mert Dirik
+  * Ukrainian (uk.po) by Євгеній Мещеряков
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Deng Xiyue
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 21:47:51 -0300
+
 grub-installer (1.32ubuntu10) intrepid; urgency=low
 
   [ Evan Dandrea ]

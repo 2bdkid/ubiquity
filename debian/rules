@@ -8,11 +8,12 @@ export DH_OPTIONS
 BUILDDIR=$(CURDIR)/debian/build
 
 VERSION := $(shell dpkg-parsechangelog | awk '/^Version:/ { print $$2 }')
+EXPECTED_AC_VERSION := $(shell echo "$(VERSION)" | cut -d. -f1,2)
 AC_VERSION := $(shell grep -w '^AC_INIT' configure.ac | cut -d' ' -f2 | \
 			sed 's/[][,]//g')
 MANGLED_VERSION := $(subst ~,-,$(VERSION))
 
-ifneq ($(VERSION),$(AC_VERSION))
+ifneq ($(EXPECTED_AC_VERSION),$(AC_VERSION))
 $(warning Version $(VERSION) in debian/changelog does not match $(AC_VERSION) in configure.ac!)
 endif
 
@@ -135,7 +136,7 @@ endif
 	# Bits of manual installation that can't be done by dh_install
 	
 	# Get rid of duplicate mythbuntu scripts and move some mythbuntu stuff around
-	mv debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity-mythbuntu.desktop debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity.desktop
+	mv debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity-mythbuntu.desktop debian/ubiquity-frontend-mythbuntu/usr/share/applications/ubiquity-gtkui.desktop
 	mv debian/ubiquity-frontend-mythbuntu/usr/share/pixmaps/ubiquity-mythbuntu.png debian/ubiquity-frontend-mythbuntu/usr/share/pixmaps/ubiquity.png
 	mv debian/ubiquity-frontend-mythbuntu/lib/partman/recipes/mythbuntu.recipe debian/ubiquity-frontend-mythbuntu/lib/partman/recipes/30atomic
 	rm -rf debian/ubiquity/usr/share/ubiquity/mythbuntu
@@ -211,6 +212,8 @@ ifeq ($(DEB_HOST_ARCH),sparc)
 	install d-i/source/silo-installer/debian/silo-installer.postinst \
 		debian/ubiquity/usr/lib/ubiquity/silo-installer/silo-installer
 endif
+	install -m644 debian/intro-alpha.txt \
+		debian/ubiquity/usr/share/ubiquity/intro.txt
 
 	set -e; for size in 16 22 32 48 64 128; do \
 		mkdir -p debian/ubiquity-frontend-kde/usr/share/icons/hicolor/$${size}x$${size}/apps; \

@@ -4,10 +4,10 @@
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
 # Tagalog messages for debian-installer.
-# Copyright (C) 2004-2007 Software in the Public Interest, Inc.
+# Copyright (C) 2004-2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Ipinamamahagi ang talaksang ito alinsunod sa lisensiya ng debian-installer.
-# Eric Pareja <xenos@upm.edu.ph>, 2004-2007
+# Eric Pareja <xenos@upm.edu.ph>, 2004-2008
 # Rick Bahague, Jr. <rbahaguejr@gmail.com>, 2004
 # Reviewed by Roel Cantada on Feb-Mar 2005.
 # Sinuri ni Roel Cantada noong Peb-Mar 2005.
@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-04-01 22:50+0000\n"
-"PO-Revision-Date: 2007-04-18 16:39+0800\n"
+"POT-Creation-Date: 2008-07-30 22:50+0000\n"
+"PO-Revision-Date: 2008-06-18 07:02+0800\n"
 "Last-Translator: Eric Pareja <xenos@upm.edu.ph>\n"
 "Language-Team: Tagalog <debian-tl@banwa.upm.edu.ph>\n"
 "MIME-Version: 1.0\n"
@@ -128,9 +128,8 @@ msgstr ""
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:6001
-#, fuzzy
 msgid "The copy operation has been aborted."
-msgstr "Hininto ang pangongopya."
+msgstr "Hininto ang pagkokopya."
 
 #. Type: error
 #. Description
@@ -192,13 +191,12 @@ msgstr "Bagong laki ng partisyon:"
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:9001
-#, fuzzy
 msgid ""
 "The minimum size for this partition is ${MINSIZE} (or ${PERCENT}) and its "
 "maximum size is ${MAXSIZE}."
 msgstr ""
-"Ang pinakamaliit na laking maaari niyong gamitin ay ${MINSIZE} o ${PERCENT} "
-"at ang pinakamalaki ay ${MAXSIZE}."
+"Ang pinakamaliit na laking maaari niyong gamitin ay ${MINSIZE} (o "
+"${PERCENT}) at ang pinakamalaki ay ${MAXSIZE}."
 
 #. Type: string
 #. Description
@@ -213,6 +211,9 @@ msgid ""
 "Hint: \"max\" can be used as a shortcut to specify the maximum size, or "
 "enter a percentage (e.g. \"20%\") to use that percentage of the maximum size."
 msgstr ""
+"Payo: Maaring gamitin ang \"max\" bilang shortcut para sa pinakamalaking "
+"laki, o magbigay ng bahagdan (tulad ng \"20%\")upang gamitin ang bahagdang "
+"ito ng pinakamalaking laki."
 
 #. Type: error
 #. Description
@@ -250,7 +251,6 @@ msgstr "Bigo ang pagbabago ng laki"
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:13001
-#, fuzzy
 msgid "The resize operation has been aborted."
 msgstr "Hininto ang pagbago ng laki ng partisyon."
 
@@ -258,9 +258,8 @@ msgstr "Hininto ang pagbago ng laki ng partisyon."
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:14001
-#, fuzzy
 msgid "The maximum size for this partition is ${MAXSIZE}."
-msgstr "Ang pinakamalaking magagamit niyo ay ${MAXSIZE}."
+msgstr "Ang pinakamalaking laki nitong partisyon ay ${MAXSIZE}."
 
 #. Type: select
 #. Choices
@@ -295,44 +294,37 @@ msgstr ""
 "magagamit na puwang."
 
 #. Type: select
-#. Description
-#. :sl1:
-#: ../partman-partitioning.templates:17001
-msgid "File system for the new partition:"
-msgstr "File system ng bagong partisyon:"
-
-#. Type: select
 #. Choices
 #. :sl1:
-#: ../partman-partitioning.templates:18001
+#: ../partman-partitioning.templates:17001
 msgid "Primary"
 msgstr "Pangunahin"
 
 #. Type: select
 #. Choices
 #. :sl1:
-#: ../partman-partitioning.templates:18001
+#: ../partman-partitioning.templates:17001
 msgid "Logical"
 msgstr "Lohikal"
 
 #. Type: select
 #. Description
 #. :sl1:
-#: ../partman-partitioning.templates:18002
+#: ../partman-partitioning.templates:17002
 msgid "Type for the new partition:"
 msgstr "Uri ng bagong partisyon:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:19001
+#: ../partman-partitioning.templates:18001
 msgid "Flags for the new partition:"
 msgstr "Mga flag para sa bagong partisyon:"
 
 #. Type: string
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:20001
+#: ../partman-partitioning.templates:19001
 msgid "Partition name:"
 msgstr "Pangalan ng partisyon:"
 
@@ -342,15 +334,15 @@ msgstr "Pangalan ng partisyon:"
 #. Type: boolean
 #. Description
 #. :sl2:
+#: ../partman-partitioning.templates:20001
 #: ../partman-partitioning.templates:21001
-#: ../partman-partitioning.templates:22001
 msgid "Continue with partitioning?"
 msgstr "Ituloy ang pag-partisyon?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:21001
+#: ../partman-partitioning.templates:20001
 msgid ""
 "This partitioner doesn't have information about the default type of the "
 "partition tables on your architecture.  Please send an e-mail message to "
@@ -363,7 +355,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:21001
+#: ../partman-partitioning.templates:20001
 msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
@@ -374,7 +366,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:22001
+#: ../partman-partitioning.templates:21001
 msgid ""
 "This partitioner is based on the library libparted which doesn't have "
 "support for the partition tables used on your architecture.  It is strongly "
@@ -387,7 +379,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:22001
+#: ../partman-partitioning.templates:21001
 msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
@@ -398,28 +390,28 @@ msgstr ""
 #. Type: select
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:23001
+#: ../partman-partitioning.templates:22001
 msgid "Partition table type:"
 msgstr "Uri ng partisyon teybol:"
 
 #. Type: select
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:23001
+#: ../partman-partitioning.templates:22001
 msgid "Select the type of partition table to use."
 msgstr "Piliin ang uri ng partisyon teybol na gagamitin."
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid "Create new empty partition table on this device?"
 msgstr "Bumuo ng bagong partisyon teybol na walang laman sa device na ito?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid ""
 "You have selected an entire device to partition. If you proceed with "
 "creating a new partition table on the device, then all current partitions "
@@ -432,7 +424,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid "Note that you will be able to undo this operation later if you wish."
 msgstr ""
 "Dapat niyong mabatid na mababawi niyo ang hakbang na ito mamaya kung inyong "
@@ -441,14 +433,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid "Write a new empty partition table?"
 msgstr "Isulat ang bagong partisyon teybol?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "Because of limitations in the current implementation of the Sun partition "
 "tables in libparted, the newly created partition table has to be written to "
@@ -461,7 +453,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "You will NOT be able to undo this operation later and all existing data on "
 "the disk will be irreversibly removed."
@@ -472,7 +464,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "Confirm whether you actually want to create a new partition table and write "
 "it to disk."
@@ -483,45 +475,61 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
-#, fuzzy
+#: ../partman-partitioning.templates:25001
 msgid "Are you sure you want a bootable logical partition?"
-msgstr "Talaga bang gusto niyo nang lumabas ngayon?"
+msgstr "Tiyak ba kayong gusto niyo ng bootable logical partition?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
+#: ../partman-partitioning.templates:25001
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
 "logical partitions is normally discouraged. Some BIOS versions are known to "
 "fail to boot if there is no bootable primary partition."
 msgstr ""
+"Sinusubukang ninyong itakda ang bootable flag sa isang logical partition. "
+"Ang bootable flag ay karaniwang kapakipakinabang lamang sa mga primary "
+"partition, kaya hindi ito ipinapayo na itakda ito sa mga logical partitions. "
+"Kilala ang mga ilang bersyon ng BIOS na bigo na makapag-boot kung walang "
+"makitang bootable primary partition."
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
+#: ../partman-partitioning.templates:25001
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
 "partitions, then setting this flag may make sense."
 msgstr ""
+"Subalit, kung tiyak kayo na ang inyong BIOS ay wala nitong problema, o kung "
+"gumagamit kayo ng isang custom boot manager na nagbibigay-pansin sa mga "
+"bootable logical partitions, maaari ninyong itakda ang bootable flag."
 
 #. Type: text
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:27001
+#: ../partman-partitioning.templates:26001
 msgid "Set the partition flags"
 msgstr "Itakda ang mga flag ng partisyon"
 
 #. Type: text
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:28001
+#: ../partman-partitioning.templates:27001
 msgid "Name:"
 msgstr "Pangalan:"
+
+#. Type: text
+#. Description
+#. :sl3:
+#. Setting to reserve a small part of the disk for use by BIOS-based bootloaders
+#. such as GRUB.
+#: ../partman-partitioning.templates:28001
+msgid "Reserve BIOS boot area:"
+msgstr ""
 
 #. Type: text
 #. Description

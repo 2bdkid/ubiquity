@@ -3,7 +3,8 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# translation of hi.po to Tamil
+# translation of debian-installer_packages_po_sublevel1_hi.po to Hindi
+# translation of debian-installer_packages_po_sublevel1_hi.po to
 # Debian Installer master translation file template
 # Don't forget to properly fill-in the header of PO files
 # Debian Installer translators, please read the D-I i18n documentation
@@ -12,14 +13,15 @@
 #
 # Nishant Sharma <me@nishants.net>, 2005, 2006.
 # Kumar Appaiah <akumar@ee.iitm.ac.in>, 2008.
+# Kumar Appaiah <a.kumar@alumni.iitm.ac.in>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: hi\n"
+"Project-Id-Version: debian-installer_packages_po_sublevel1_hi\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-04-01 22:50+0000\n"
-"PO-Revision-Date: 2008-02-10 11:44+0530\n"
-"Last-Translator: Kumar Appaiah <akumar@ee.iitm.ac.in>\n"
-"Language-Team: Tamil\n"
+"POT-Creation-Date: 2008-07-30 22:50+0000\n"
+"PO-Revision-Date: 2008-08-30 16:34-0500\n"
+"Last-Translator: Kumar Appaiah <a.kumar@alumni.iitm.ac.in>\n"
+"Language-Team: Hindi <debian-in-workers@lists.alioth.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -177,13 +179,12 @@ msgstr "नया पार्टीशन आकार:"
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:9001
-#, fuzzy
 msgid ""
 "The minimum size for this partition is ${MINSIZE} (or ${PERCENT}) and its "
 "maximum size is ${MAXSIZE}."
 msgstr ""
-"प्रयोग करने योग्य निम्नतम आकार  ${MINSIZE} या ${PERCENT}है  और अधिकतम आकार "
-"${MAXSIZE} है."
+"इस पार्टिशन के उपयोग के लिए निम्नतम आकार ${MINSIZE} (या ${PERCENT}) है और अधिकतम "
+"आकार ${MAXSIZE} है."
 
 #. Type: string
 #. Description
@@ -198,6 +199,8 @@ msgid ""
 "Hint: \"max\" can be used as a shortcut to specify the maximum size, or "
 "enter a percentage (e.g. \"20%\") to use that percentage of the maximum size."
 msgstr ""
+"संकेत: \"max\" द्वारा अधिकतम संभव आकार चुना जा सकता है, अथवा प्रतिशत संख्या (उदाहरण: "
+"\"20%\") द्वारा अधिकतम आकार का एक प्रतिशत चुना जा सकता है."
 
 #. Type: error
 #. Description
@@ -242,9 +245,8 @@ msgstr "नया आकार देने की प्रक्रिया �
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:14001
-#, fuzzy
 msgid "The maximum size for this partition is ${MAXSIZE}."
-msgstr "अधिकतम आकार जो आप इस्तेमाल कर सकते हैं वह हैः ${MAXSIZE}."
+msgstr "इस पार्टिशन का अधिकतम आकार ${MAXSIZE} है."
 
 #. Type: select
 #. Choices
@@ -277,44 +279,37 @@ msgid ""
 msgstr "आप नया पार्टिशन उपलब्ध स्थान के प्रारंभ में बनाना चाहते हैं या अंत में?"
 
 #. Type: select
-#. Description
-#. :sl1:
-#: ../partman-partitioning.templates:17001
-msgid "File system for the new partition:"
-msgstr "नए पार्टीशन हेतु फ़ाइल सिस्टम:"
-
-#. Type: select
 #. Choices
 #. :sl1:
-#: ../partman-partitioning.templates:18001
+#: ../partman-partitioning.templates:17001
 msgid "Primary"
 msgstr "प्रायमरी"
 
 #. Type: select
 #. Choices
 #. :sl1:
-#: ../partman-partitioning.templates:18001
+#: ../partman-partitioning.templates:17001
 msgid "Logical"
 msgstr "लॉज़िकल"
 
 #. Type: select
 #. Description
 #. :sl1:
-#: ../partman-partitioning.templates:18002
+#: ../partman-partitioning.templates:17002
 msgid "Type for the new partition:"
 msgstr "नए पार्टीशन के लिए प्रकार:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:19001
+#: ../partman-partitioning.templates:18001
 msgid "Flags for the new partition:"
 msgstr "नए पार्टीशन के लिए फ्लैग्स:"
 
 #. Type: string
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:20001
+#: ../partman-partitioning.templates:19001
 msgid "Partition name:"
 msgstr "पार्टीशन नाम:"
 
@@ -324,15 +319,15 @@ msgstr "पार्टीशन नाम:"
 #. Type: boolean
 #. Description
 #. :sl2:
+#: ../partman-partitioning.templates:20001
 #: ../partman-partitioning.templates:21001
-#: ../partman-partitioning.templates:22001
 msgid "Continue with partitioning?"
 msgstr "पार्टीशनिंग जारी रखें? "
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:21001
+#: ../partman-partitioning.templates:20001
 msgid ""
 "This partitioner doesn't have information about the default type of the "
 "partition tables on your architecture.  Please send an e-mail message to "
@@ -344,7 +339,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:21001
+#: ../partman-partitioning.templates:20001
 msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
@@ -355,7 +350,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:22001
+#: ../partman-partitioning.templates:21001
 msgid ""
 "This partitioner is based on the library libparted which doesn't have "
 "support for the partition tables used on your architecture.  It is strongly "
@@ -367,7 +362,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:22001
+#: ../partman-partitioning.templates:21001
 msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
@@ -377,28 +372,28 @@ msgstr ""
 #. Type: select
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:23001
+#: ../partman-partitioning.templates:22001
 msgid "Partition table type:"
 msgstr "पार्टीशन टेबल प्रकार:"
 
 #. Type: select
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:23001
+#: ../partman-partitioning.templates:22001
 msgid "Select the type of partition table to use."
 msgstr "इस्तेमाल के लिए पार्टीशन टेबल प्रकार चुनें."
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid "Create new empty partition table on this device?"
 msgstr "इस उपकरण पर एक नया खाली पार्टीशन टेबल बनाएँ?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid ""
 "You have selected an entire device to partition. If you proceed with "
 "creating a new partition table on the device, then all current partitions "
@@ -410,21 +405,21 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:24001
+#: ../partman-partitioning.templates:23001
 msgid "Note that you will be able to undo this operation later if you wish."
 msgstr "ज्ञात रहे कि  कि इस प्रक्रिया को बाद में यदि आप चाहें तो वापस ले सकते हैं."
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid "Write a new empty partition table?"
 msgstr "एक नया खाली पार्टीशन टेबल लिखें?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "Because of limitations in the current implementation of the Sun partition "
 "tables in libparted, the newly created partition table has to be written to "
@@ -436,7 +431,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "You will NOT be able to undo this operation later and all existing data on "
 "the disk will be irreversibly removed."
@@ -447,7 +442,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:25001
+#: ../partman-partitioning.templates:24001
 msgid ""
 "Confirm whether you actually want to create a new partition table and write "
 "it to disk."
@@ -458,14 +453,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
+#: ../partman-partitioning.templates:25001
 msgid "Are you sure you want a bootable logical partition?"
 msgstr "क्या आप सुनिश्चित हैं कि आप एक बूटेबल लॉजिकल पार्टिशन चाहते हैं?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
+#: ../partman-partitioning.templates:25001
 msgid ""
 "You are trying to set the bootable flag on a logical partition. The bootable "
 "flag is generally only useful on primary partitions, so setting it on "
@@ -480,7 +475,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:26001
+#: ../partman-partitioning.templates:25001
 msgid ""
 "However, if you are sure that your BIOS does not have this problem, or if "
 "you are using a custom boot manager that pays attention to bootable logical "
@@ -493,16 +488,25 @@ msgstr ""
 #. Type: text
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:27001
+#: ../partman-partitioning.templates:26001
 msgid "Set the partition flags"
 msgstr "पार्टीशन फ्लैग नियत करें"
 
 #. Type: text
 #. Description
 #. :sl2:
-#: ../partman-partitioning.templates:28001
+#: ../partman-partitioning.templates:27001
 msgid "Name:"
 msgstr "नाम:"
+
+#. Type: text
+#. Description
+#. :sl3:
+#. Setting to reserve a small part of the disk for use by BIOS-based bootloaders
+#. such as GRUB.
+#: ../partman-partitioning.templates:28001
+msgid "Reserve BIOS boot area:"
+msgstr "बूट एरिया सुरक्षित करें:"
 
 #. Type: text
 #. Description

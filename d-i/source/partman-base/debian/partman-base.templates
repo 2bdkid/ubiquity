@@ -55,7 +55,8 @@ Description: ${TYPE}
 
 Template: partman/choose_partition
 Type: select
-Choices: ${CHOICES}
+Choices-C: ${CHOICES}
+Choices: ${DESCRIPTIONS}
 # :sl1:
 _Description: This is an overview of your currently configured partitions and mount points. Select a partition to modify its settings (file system, mount point, etc.), a free space to create partitions, or a device to initialize its partition table.
 
@@ -108,19 +109,22 @@ _Description: The partition tables of the following devices are changed:
 
 Template: partman/storage_device
 Type: select
-Choices: ${CHOICES}
+Choices-C: ${CHOICES}
+Choices: ${DESCRIPTIONS}
 # :sl2:
 _Description: What to do with this device:
 
 Template: partman/free_space
 Type: select
-Choices: ${CHOICES}
+Choices-C: ${CHOICES}
+Choices: ${DESCRIPTIONS}
 # :sl2:
 _Description: How to use this free space:
 
 Template: partman/active_partition
 Type: select
-Choices: ${CHOICES}
+Choices-C: ${CHOICES}
+Choices: ${DESCRIPTIONS}
 # :sl2:
 _Description: Partition settings:
  You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} ${DESTROYED}
@@ -272,6 +276,18 @@ Template: partman/text/scsi_partition
 Type: text
 # :sl1:
 _Description: SCSI%s (%s,%s,%s), partition #%s (%s)
+
+Template: partman/text/mmc_disk
+Type: text
+# For example MMC/SD card #1 (mmcblk0)
+# :sl3:
+Description: MMC/SD card #%s (%s)
+
+Template: partman/text/mmc_partition
+Type: text
+# For example MMC/SD card #1, partition #2 (mmcblk0p2)
+# :sl3:
+Description: MMC/SD card #%s, partition #%s (%s)
 
 Template: partman/text/raid_device
 Type: text

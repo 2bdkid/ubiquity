@@ -1,3 +1,55 @@
+ubiquity (1.11.0) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Check to make sure a gdk window is mapped before calling
+    cairo_create (LP: #208800).
+  * Reset next_go_backup after encountering a question marked as seen
+    (LP: #290760).
+  * Save an apt.cache.Cache() so we retain the package information on
+    restricted packages even after removing restricted from the
+    sources.list (LP: #290925).
+  * Provide operating system titles in segmented_bar.
+  * Notify the user of what operating systems will be deleted if they choose
+    to use the entire disk.
+  * Move finding the release name into its own function now that multiple
+    locations need to know it.
+  * Correct debian/ubiquity.install-any to refer to the new location of tzmap
+    in tzsetup.
+  * Use preseed_as_c in the partman component for automatically_partition and
+    select_disk as those questions now require it.
+  * Install check-missing-firmware as part of hw-detect.
+  * Automatic update of included source packages: base-installer
+    1.86ubuntu8, choose-mirror 2.27ubuntu1, clock-setup 0.97ubuntu1,
+    console-setup 1.28ubuntu3, debian-installer-utils 1.65ubuntu1, grub-
+    installer 1.35ubuntu4, hw-detect 1.70ubuntu3, localechooser
+    2.08ubuntu1, partconf 1.30, partman-auto 83ubuntu1, partman-base
+    128ubuntu2, partman-basicfilesystems 62ubuntu1, partman-basicmethods
+    42, partman-ext3 55ubuntu1, partman-jfs 29ubuntu1, partman-newworld
+    20ubuntu1, partman-partitioning 64ubuntu1, partman-reiserfs
+    44ubuntu1, partman-target 58ubuntu1, partman-xfs 43ubuntu1, preseed
+    1.41ubuntu1, silo-installer 1.15ubuntu1, tzsetup 1:0.24, user-setup
+    1.23ubuntu1, yaboot-installer 1.1.14ubuntu1.
+
+  [ Colin Watson ]
+  * Add an intro message noting that we're alpha again.
+  * Autoconf likes to have a version in AC_INIT, but start omitting our
+    sub-minor version from it so that we don't have to regenerate configure
+    with every single upload.
+  * Remove obsolete Encoding: lines from .desktop files, since
+    desktop-file-validate complains about them.
+  * Remove seen flag from console-setup/model and console-setup/codeset to
+    make sure that they don't get misinterpreted as preseeding (LP: #94177).
+
+  [ Mario Limonciello ]
+  * Install Mythbuntu's ubiquity desktop file as the right file
+    name to get snagged by casper.
+  * Drop old update-rc.d hacks in apply-type since they are available
+    now in casper.
+  * Correct a small typo on a mythbuntu specific glade file
+    (LP: #276900)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 02 Dec 2008 15:36:52 -0500
+
 ubiquity (1.10.10) intrepid; urgency=low
 
   [ Evan Dandrea ]

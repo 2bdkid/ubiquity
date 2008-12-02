@@ -1,11 +1,43 @@
-partman-basicmethods (39ubuntu1) intrepid; urgency=low
+partman-basicmethods (42) unstable; urgency=low
 
-  * Resynchronise with Debian. Remaining changes:
-    - When changing filesystem, set the default mount options to the
-      contents of /lib/partman/mountoptions/${fs}_defaults if it exists.
-  * Set Vcs-Bzr for Ubuntu.
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bosnian (bs.po) by Armin Besirovic
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Croatian (hr.po) by Josip Rodin
+  * Latvian (lv.po) by Peteris Krisjanis
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Serbian (sr.po) by Veselin Mijušković
 
- -- Colin Watson <cjwatson@ubuntu.com>  Sat, 17 May 2008 18:17:03 +0200
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 21:06:02 -0300
+
+partman-basicmethods (41) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Remove lvm, raid and swap flags when selecting dont_use.  Otherwise
+    switching from raid or lvm methods to dont_use would not be effectful
+    (as $id/method is written again in update.d/{md,lvm}_sync_flags scripts).
+  * Use cdebconf's new column alignment feature for active_partition.
+    Requires partman-base (>= 124).
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Felipe Castro
+	
+ -- Otavio Salvador <otavio@debian.org>  Tue, 05 Aug 2008 13:50:16 -0300
+
+partman-basicmethods (40) unstable; urgency=low
+
+  [ Colin Watson ]
+  * When changing filesystem, set the default mount options to the contents
+    of /lib/partman/mountoptions/${fs}_defaults if it exists.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+
+ -- Frans Pop <fjp@debian.org>  Wed, 16 Jul 2008 13:55:00 +0200
 
 partman-basicmethods (39) unstable; urgency=low
 
@@ -17,19 +49,6 @@ partman-basicmethods (39) unstable; urgency=low
   * Slovak (sk.po) by Ivan Masár
 
  -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:59:12 -0300
-
-partman-basicmethods (38ubuntu2) hardy; urgency=low
-
-  * Make choose_method/dont_use/choices executable again.
-
- -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Mar 2008 11:58:17 +0000
-
-partman-basicmethods (38ubuntu1) hardy; urgency=low
-
-  * When changing filesystem, set the default mount options to the contents
-    of /lib/partman/mountoptions/${fs}_defaults if it exists (LP: #160450).
-
- -- Colin Watson <cjwatson@ubuntu.com>  Tue, 04 Mar 2008 11:43:04 +0000
 
 partman-basicmethods (38) unstable; urgency=low
 

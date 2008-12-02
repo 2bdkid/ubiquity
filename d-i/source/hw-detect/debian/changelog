@@ -1,3 +1,200 @@
+hw-detect (1.70ubuntu3) jaunty; urgency=low
+
+  * Reinstate snd-powermac for i2s-a devices since apparently the lock-up
+    has been fixed (LP: #87652).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 27 Nov 2008 17:46:21 +0000
+
+hw-detect (1.70ubuntu2) jaunty; urgency=low
+
+  * Make dmraid logging a bit neater.
+  * 'dmraid -c -s' changed its output format; cope with both old and new.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Nov 2008 18:20:39 +0000
+
+hw-detect (1.70ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3rom, ps3disk, and ps3_gelic, and add
+      snd_ps3 to /etc/modules.
+    - Install elfspe2 on Cell (powerpc/ps3 and powerpc/cell) platforms.
+    - Add hooks for iSCSI support.
+    - disk-detect.sh: Do not check the kernel command line for any option
+      to enable dmraid support. If functional dmraid arrays are found, the
+      user will be asked if they wish to activate them.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Wed, 05 Nov 2008 10:56:29 +1100
+
+hw-detect (1.70) unstable; urgency=low
+
+  [ Frans Pop ]
+  * The partman-dmraid component is no longer needed for Serial ATA RAID
+    (dmraid) installations.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Danish (da.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Arangel Angov
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Albanian (sq.po) by Elian Myftiu
+  * Serbian (sr.po) by Veselin Mijušković
+  * Ukrainian (uk.po) by Borys Yanovych
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 21:57:19 -0300
+
+hw-detect (1.68) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Fix libc6-i686 queuing on smp. Closes: #497863
+
+  [ Jérémy Bobbio ]
+  * check-missing-firmware: Don't ask for firmware files that have already
+    been denied by the user in a previous question. Closes: #497395
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Hebrew (he.po) by Omer Zak
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Central Khmer (km.po) by KHOEM Sokhem
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Deng Xiyue
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 14 Sep 2008 20:16:35 +0000
+
+hw-detect (1.67) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Install virtio-modules when virtio devices are detected on the PCI bus.
+    (Closes: #497238)
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Catalan (ca.po) by Jordi Mallach
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Kumar Appaiah
+  * Croatian (hr.po) by Josip Rodin
+  * Malayalam (ml.po) by പ്രവീണ്‍ അരിമ്പ്രത്തൊടിയില്‍
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+
+ -- Jérémy Bobbio <lunar@debian.org>  Thu, 04 Sep 2008 12:32:35 +0000
+
+hw-detect (1.66) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * On frontends other than GTK+, only ask about PCMCIA resource range when
+    user decided to start PCMCIA.  (Closes: #479391)
+  * Fix ethdetect and hw-detect for NICs named differently than ethX.
+    (Closes: #495676)
+    Thanks to Frans Pop for suggesting a better implementation.
+
+  [ Ian Campbell ]
+  * Add Xen virtual Ethernet to list of known Ethernet drivers.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Belarusian (be.po) by Pavel Piatruk
+  * German (de.po) by Jens Seidel
+  * Dzongkha (dz.po) by Jurmey Rabgay(Bongop) (DIT,BHUTAN)
+  * Greek, Modern (el.po) by Emmanuel Galatoulas
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hindi (hi.po) by Kumar Appaiah
+  * Croatian (hr.po) by Josip Rodin
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Norwegian Bokmål (nb.po) by Hans Fredrik Nordhaug
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Jérémy Bobbio <lunar@debian.org>  Tue, 26 Aug 2008 12:19:11 +0200
+
+hw-detect (1.65) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Look for firmware files in a firmware subdirectory of the media, 
+    as well as at the top level, for neat freaks.
+  * Call check-missing-firmware at the end of ethdetect and disk-detect,
+    as those programs can manually load modules, that could need firmware too.
+
+  [ Frans Pop ]
+  * Starting with initramfs-tools 0.92d the module ide-generic will be loaded
+    if the all_generic_ide parameter is passed. Advantage is that with that
+    option the module is loaded last instead of first.
+  * If the megaraid_mbox driver is in use, wait for the RAID hardware
+    initialization to finish before proceeding with the installation and add
+    the 'rootdelay' boot parameter for the target system. Closes: #486298.
+
+  [ Joey Hess ]
+  * ethdetect: Some modules do not request firmware until their interface
+    has been brought up. So up and down every interface so missing firmware
+    can be detected. Closes: #491712
+  * check-missing-firmware: Don't display dups. Closes: #492246
+  * check-missing-firmware: Check that debs are the right architecture before
+    trying to use them. Closes: #492249
+  * post-base-installer: If dpkg fails to install a firmware package, likely
+    because it has dependencies outside base, remove it rather than leaving
+    the db in an inconsistent state. Note that bugs have been filed to get all
+    such firmware packages fixed. Closes: #492248
+  * check-missing-firmware: Avoid trailing space in $files that caused it to
+    look for firmware packages containing a file named "" (and probably match
+    any package). Closes: #492247
+  * check-missing-firmware: Add a 1 second sleep before reading the missing
+    firmware log, just in case a module delays requesting firmware
+    until after modprobe returns, resulting in the log not being written in
+    time. (No such modules currently known.)
+  * hw-detect: Fix syntax error in code added for #472487.
+  * Add test for syntax errors in scripts to build process.
+
+ -- Joey Hess <joeyh@debian.org>  Fri, 25 Jul 2008 13:32:08 -0400
+
+hw-detect (1.64) unstable; urgency=low
+
+  * floppy-retriever renamed to media-retriever.
+  * Change wording of question since drivers can now be loaded from other
+    media than floppies.
+  * Add a modified copy of udev's firmware.agent, that records to
+    /tmp/missing-firmware.
+  * Add check-missing-firmware.
+  * Add a post-base-installer hook to install firmware into /target.
+    Closes: #487228
+  * If firmware debs are installed, default apt-setup to using non-free.
+    This is so that apt can upgrade those debs.
+  * RM note: udev-udeb 0.124-1 has dropped the firmware.agent, so needs
+    this version of hw-detect. This version of hw-detect will work with
+    older versions of udev-udeb, although it will be indetermanate whether the
+    missing firmware detection works.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 07 Jul 2008 13:50:33 -0400
+
 hw-detect (1.63ubuntu4) intrepid; urgency=low
 
   * disk-detect.sh, debian/disk-detect.templates: If dmraid arrays are found,

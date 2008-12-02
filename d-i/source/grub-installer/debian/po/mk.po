@@ -3,19 +3,20 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
+# translation of debian-installer_packages_po_sublevel1_mk.po to Macedonian
 # translation of mk.po to
-# translation of mk.po to Macedonian
 # Macedonian strings from the debian-installer.
 #
 # Georgi Stanojevski, <glisha@gmail.com>, 2004, 2005, 2006.
 # Georgi Stanojevski <georgis@unet.com.mk>, 2005, 2006.
+# Arangel Angov <ufo@linux.net.mk>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: mk\n"
+"Project-Id-Version: debian-installer_packages_po_sublevel1_mk\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
 "POT-Creation-Date: 2008-04-28 22:53+0000\n"
-"PO-Revision-Date: 2006-10-15 15:53+0200\n"
-"Last-Translator: Georgi Stanojevski <glisha@gmail.com>\n"
+"PO-Revision-Date: 2008-09-20 13:56+0200\n"
+"Last-Translator: Arangel Angov <ufo@linux.net.mk>\n"
 "Language-Team: Macedonian <ossm-members@hedona.on.net.mk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +30,7 @@ msgstr ""
 #. :sl1:
 #: ../grub-installer.templates:1001 ../grub-installer.templates:2001
 msgid "Install the GRUB boot loader to the master boot record?"
-msgstr "Инсталирај го GRUB подигнувачот во главниот бут(MBR)?"
+msgstr "Да го инсталирам GRUB подигнувачот во MBR?"
 
 #. Type: boolean
 #. Description
@@ -88,16 +89,15 @@ msgstr ""
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
-#, fuzzy
 msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
-msgstr "Инсталирај го GRUB подигнувачот на тврд диск"
+msgstr "Инсталирај го подигнувачот GRUB на Serial ATA RAID дискот?"
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
 msgid "Installation of GRUB on Serial ATA RAID is experimental."
-msgstr ""
+msgstr "Инсталацијата на GRUB на Serial ATA RAID диск е експериментална?"
 
 #. Type: boolean
 #. Description
@@ -108,6 +108,9 @@ msgid ""
 "RAID disk. It is also assumed that disk is listed as the first hard disk in "
 "the boot order defined in the system's BIOS setup."
 msgstr ""
+"GRUB секогаш се инсталира во master boot record (MBR) на Serial ATA RAID "
+"дискот. Исто така се претпоставува дека дискот е запишан како прв во редот "
+"за стартување во системскиот BIOS."
 
 #. Type: boolean
 #. Description
@@ -117,7 +120,7 @@ msgstr ""
 #. :sl3:
 #: ../grub-installer.templates:3001 ../grub-installer.templates:5001
 msgid "The GRUB root device is: ${GRUBROOT}."
-msgstr ""
+msgstr "Кореновиот уред за GRUB е: ${GRUBROOT}."
 
 #. Type: error
 #. Description
@@ -137,9 +140,9 @@ msgstr "Не успеа конфигурирањето на GRUB"
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:4001
-#, fuzzy
 msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
-msgstr "Се случи грешки при поставувањето на енкриптираните простори."
+msgstr ""
+"Настана грешка при поставувањето на GRUB на Вашиот Serial ATA RAID диск."
 
 #. Type: error
 #. Description
@@ -148,24 +151,22 @@ msgstr "Се случи грешки при поставувањето на ен
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:4001 ../grub-installer.templates:6001
-#, fuzzy
 msgid "The GRUB installation has been aborted."
-msgstr "Конфигурацијата е откажана."
+msgstr "Инсталацијата на GRUB е откажана."
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:5001
-#, fuzzy
 msgid "Install the GRUB boot loader to the multipath device?"
-msgstr "Инсталирај го GRUB подигнувачот во главниот бут(MBR)?"
+msgstr "Инсталирај го подигнувачот GRUB на multipath уред?"
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:5001
 msgid "Installation of GRUB on multipath is experimental."
-msgstr ""
+msgstr "Инсталацијата на GRUB на multipath е експериментална."
 
 #. Type: boolean
 #. Description
@@ -176,21 +177,23 @@ msgid ""
 "device. It is also assumed that the WWID of this device is selected as boot "
 "device in the system's FibreChannel adapter BIOS."
 msgstr ""
+"GRUB секогаш се инсталира во master boot record (MBR) на multipath уредот. "
+"Исто така се претпоставува дека WWID на уредот е избран како уред за "
+"стартување во системскиот BIOS за FibreChannel адаптер."
 
 #. Type: error
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:6001
-#, fuzzy
 msgid "An error occurred while setting up GRUB for the multipath device."
-msgstr "Се случи грешки при поставувањето на енкриптираните простори."
+msgstr "Настана грешка при поставувањето на GRUB на multipath уредот."
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:7001
 msgid "Install the GRUB boot loader to XFS file system?"
-msgstr "Инсталирај го GRUB подигнувачот на XFS датотечен систем?"
+msgstr "Инсталирај го подигнувачот GRUB на XFS датотечен систем?"
 
 #. Type: boolean
 #. Description
@@ -200,9 +203,8 @@ msgid ""
 "The GRUB boot loader installation often fails or hangs when /boot is on a "
 "XFS file system. Using LILO in this situation is recommended."
 msgstr ""
-"Инсталацијата на GRUB подигнувачот често се замрзнува или откажува ако /boot "
-"е на XFS датотечен систем. Препорачливо е користење на LILO во вакви "
-"ситуации."
+"Инсталацијата на GRUB често се замрзнува или откажува ако /boot е на XFS "
+"датотечен систем. Во ваков случај препорачливо е користење на LILO."
 
 #. Type: string
 #. Description
@@ -222,10 +224,11 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
-"Треба да го направиш ново инсталираниот систем бутабилен, инсталирајќи го "
-"GRUB подигнувачот на бутабилен уред. Вообичаениот начин да се направи ова е "
-"да се инсталира GRUB на MBR од првиот тврд диск. Ако преферираш, може да го "
-"инсталираш GRUB и на друго место на дискот или на друг диск, па и на дискета."
+"Треба да го направите ново инсталираниот систем бутабилен, со инсталација на "
+"подигнувачот GRUB на уред за подигнување. Вообичаениот начин да се направи "
+"ова е да се инсталира GRUB на MBR од првиот тврд диск. Ако преферирате, може "
+"да го инсталираш GRUB и на друго место на дискот или на друг диск, па и на "
+"дискета."
 
 #. Type: string
 #. Description
@@ -271,19 +274,21 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
-"GRUB бут вчитувачот нуди многу моќни интерактивни особини, кои може да бидат "
-"искористени за да се компромитира твојот систем, ако неовластени корисници "
-"имаат пристап до машината кога таа се вклучув. За да се заштитиш од ова, "
-"може да одбереш лозинка кои ќе биде потребна кога ќе се уредува GRUB менито "
-"или ќе ве влегува во командниот интерфејс. Стандардно, секој корисник ќе "
-"може да активира било која ставка од менито без да внесе лозинка."
+"Подигнувачот GRUB нуди многу моќни интерактивни особини, кои може да бидат "
+"искористени за да се компромитира Вашиот систем, доколку неовластени "
+"корисници добијат пристап до машината кога таа се вклучув. За да се "
+"заштитите од ова, можете да одберете лозинка која ќе биде потребна кога ќе "
+"се уредува GRUB менито или ќе влезете во во командниот интерфејс. "
+"Стандардно, секој корисник ќе може да активира било која ставка од менито "
+"без да внесе лозинка."
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:9001
 msgid "If you do not wish to set a GRUB password, leave this field blank."
-msgstr "Ако не сакаш да поставиш лозинка за GRUB, остави го ова поле празно."
+msgstr ""
+"Ако не сакате да поставите лозинка за GRUB, оставете го ова поле празно."
 
 #. Type: password
 #. Description
@@ -296,20 +301,19 @@ msgstr "Поторно внеси ја лозинката да се потврд
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:10001
-#, fuzzy
 msgid ""
 "Please enter the same GRUB password again to verify that you have typed it "
 "correctly."
 msgstr ""
-"Те молам внеси ја повторно истата рут лозинка повторно за да се потврди дека "
-"правилно си ја внел."
+"Ве молам внесете ја истата лозинка за GRUB повторно и проверете дали сте ја "
+"внеле точно."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:11001
 msgid "Password input error"
-msgstr "Грешка при внес на лозинка"
+msgstr "Грешка при внесувањето на лозинка"
 
 #. Type: error
 #. Description
@@ -322,9 +326,8 @@ msgstr "Двете лозинки кои ги внесе не се исти. Т�
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:13001
-#, fuzzy
 msgid "GRUB installation failed"
-msgstr "Инсталацијата LILO не успеа"
+msgstr "Инсталацијата на GRUB не успеа"
 
 #. Type: error
 #. Description
@@ -334,13 +337,15 @@ msgid ""
 "The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
 "loader, the installed system will not boot."
 msgstr ""
+"Пакетот '${GRUB}' не успеа да се инсталира на /target/. Без подигнувачот "
+"GRUB инсталираниот систем нема да се подигне."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:14001
 msgid "Unable to install GRUB in ${BOOTDEV}"
-msgstr "Неможам да го инсталирам GRUB во ${BOOTDEV}"
+msgstr "Не можам да го инсталирам GRUB во ${BOOTDEV}"
 
 #. Type: error
 #. Description
@@ -364,36 +369,35 @@ msgstr "Ова е фатална грешка."
 #. :sl2:
 #: ../grub-installer.templates:15001
 msgid "Executing 'update-grub' failed."
-msgstr "Избршувањето на „update-grub“ не успеа."
+msgstr "Извршувањето на „update-grub“ не успеа."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:18001
 msgid "Installing GRUB boot loader"
-msgstr "Инсталирање на GRUB бут-вчитувачот"
+msgstr "Инсталирање на подигнувачот GRUB"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:19001
 msgid "Looking for other operating systems..."
-msgstr "Пребарувам за остнати оперативни системи..."
+msgstr "Барам останати оперативни системи..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:20001
-#, fuzzy
 msgid "Installing the '${GRUB}' package..."
-msgstr "Инсталирање на „grub“ пакетот..."
+msgstr "Го инсталирам пакетот '${GRUB}'..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:21001
 msgid "Determining GRUB boot device..."
-msgstr "Го одредувам бут уредот за GRUB..."
+msgstr "Го одредувам уредот за подигнување за GRUB..."
 
 #. Type: text
 #. Description

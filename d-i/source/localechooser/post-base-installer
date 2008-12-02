@@ -4,6 +4,11 @@ set -e
 
 . /usr/share/debconf/confmodule
 
+# Avoid locale errors when using apt-install (logical consequence
+# of the fact that locales is not yet installed).
+export IT_LANG_OVERRIDE=C
+
+
 db_get debian-installer/locale
 LOCALE="$RET"
 

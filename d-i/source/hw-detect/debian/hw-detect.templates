@@ -13,6 +13,11 @@ Type: text
 # :sl1:
 _Description: Starting PC card services...
 
+Template: hw-detect/hardware_init_step
+Type: text
+# :sl1:
+_Description: Waiting for hardware initialization...
+
 Template: hw-detect/select_modules
 Type: multiselect
 Choices: ${list}
@@ -61,14 +66,33 @@ Type: error
 # :sl2:
 _Description: Error while running '${CMD_LINE_PARAM}'
 
-Template: hw-detect/load_floppy
+Template: hw-detect/load_media
 Type: boolean
 Default: false
 # :sl2:
-_Description: Load missing drivers from a driver floppy?
+_Description: Load missing drivers from removable media?
  A driver for your hardware is not available. You may need
- to load drivers from a driver floppy. If you have such a floppy
- available now, put it in the drive before continuing.
+ to load drivers from removable media, such as a USB stick, or driver floppy.
+ .
+ If you have such media available now, insert it, and continue.
+
+Template: hw-detect/load_firmware
+Type: boolean
+Default: true
+# :sl2:
+_Description: Load missing firmware from removable media?
+ Some of your hardware needs non-free firmware files to operate. The
+ firmware can be loaded from removable media, such as a USB stick or
+ floppy.
+ .
+ The missing firmware files are: ${FILES}
+ .
+ If you have such media available now, insert it, and continue.
+
+Template: base-installer/progress/hw-detect
+Type: text
+# :sl1:
+_Description: Checking for firmware...
 
 # Temporary template to force old behavior of loading IDE modules by default
 Template: hw-detect/load-ide

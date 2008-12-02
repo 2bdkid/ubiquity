@@ -3,7 +3,7 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# translation of ml.po to malayalam
+# translation of Debian Installer Level 1 - sublevel 1 to malayalam
 # Copyright (c)  2006-2008 Praveen|പ്രവീണ്‍ A|എ <pravi.a@gmail.com>, Santhosh Thottingal <santhosh00@gmail.com>, Sreejith :: ശ്രീജിത്ത് കെ <sreejithk2000@gmail.com> and Debian Project
 # Credits:  V Sasi Kumar, Sreejith N, Seena N, Anivar Aravind, Hiran Venugopalan and Suresh P
 #
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Debian Installer Level 1\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
-"PO-Revision-Date: 2008-04-26 19:11-0800\n"
-"Last-Translator: Praveen|പ്രവീണ്‍ A|എ <pravi.a@gmail.com>\n"
+"POT-Creation-Date: 2008-07-23 22:50+0000\n"
+"PO-Revision-Date: 2008-09-01 10:21-0500\n"
+"Last-Translator: പ്രവീണ്‍ അരിമ്പ്രത്തൊടിയില്‍ <pravi.a@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc-"
 "discuss@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -63,7 +63,7 @@ msgstr ""
 #. :sl3:
 #: ../ethdetect.templates:2001
 msgid "Do you intend to use FireWire Ethernet?"
-msgstr "ഫയര്‍വയര്‍ (FireWire) ഈഥര്‍നെറ്റ്‌  ആണോ നിങ്ങള്‍ ഉപയോഗിയ്ക്കാന്‍ പോകുന്നതു്‌?"
+msgstr "നിങ്ങള്‍ ഫയര്‍വയര്‍ ഈഥര്‍നെറ്റ്‌ ഉപയോഗിയ്ക്കാന്‍ പോകുന്നുണ്ടോ?"
 
 #. Type: boolean
 #. Description
@@ -189,17 +189,24 @@ msgstr "'${CARDNAME}' എന്നതിനുള്ള '${MODULE}' എന്ന
 msgid "Starting PC card services..."
 msgstr "പിസി കാര്‍ഡ് സേവനങ്ങള്‍ ആരംഭിയ്ക്കുന്നു..."
 
+#. Type: text
+#. Description
+#. :sl1:
+#: ../hw-detect.templates:4001
+msgid "Waiting for hardware initialization..."
+msgstr "ഹാര്‍ഡ്‌വെയറിനെ ഒരുക്കാനായി കാത്തിരിയ്ക്കുന്നു..."
+
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:4001
+#: ../hw-detect.templates:5001
 msgid "Modules to load:"
 msgstr "ചേര്‍ക്കേണ്ട മൊഡ്യൂളുകള്‍:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:4001
+#: ../hw-detect.templates:5001
 msgid ""
 "The following Linux kernel modules were detected as matching your hardware. "
 "If you know some are unnecessary, or cause problems, you can choose not to "
@@ -213,14 +220,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:5001
+#: ../hw-detect.templates:6001
 msgid "Start PC card services?"
 msgstr "പിസി കാര്‍ഡ് സേവനങ്ങള്‍ ആരംഭിയ്ക്കട്ടെ?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:5001
+#: ../hw-detect.templates:6001
 msgid ""
 "Please choose whether PC card services should be started in order to allow "
 "the use of PCMCIA cards."
@@ -231,14 +238,14 @@ msgstr ""
 #. Type: string
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:6001
+#: ../hw-detect.templates:7001
 msgid "PCMCIA resource range options:"
 msgstr "പിസിഎംസിഐഎ വിഭവ നിരയുടെ ഐച്ഛികങ്ങള്‍:"
 
 #. Type: string
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:6001
+#: ../hw-detect.templates:7001
 msgid ""
 "Some PCMCIA hardware needs special resource configuration options in order "
 "to work, and can cause the computer to freeze otherwise. For example, some "
@@ -255,21 +262,21 @@ msgstr ""
 #. Type: string
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:6001
+#: ../hw-detect.templates:7001
 msgid "For most hardware, you do not need to specify anything here."
 msgstr "മിക്കവാറും ഹാര്‍ഡ്‌വെയറുകള്‍ക്ക് ഇവിടെ പ്രത്യേകമായി ഒന്നും ചെയ്യേണ്ടതില്ല."
 
 #. Type: string
 #. Description
 #. :sl3:
-#: ../hw-detect.templates:7001
+#: ../hw-detect.templates:8001
 msgid "Additional parameters for module ${MODULE}:"
 msgstr "${MODULE} മൊഡ്യൂളിനാവശ്യമായ അധിക പരാമീറ്ററുകള്‍:"
 
 #. Type: string
 #. Description
 #. :sl3:
-#: ../hw-detect.templates:7001
+#: ../hw-detect.templates:8001
 msgid ""
 "The module ${MODULE} failed to load. You may need to pass parameters to the "
 "module to make it work; this is common with older hardware. These parameters "
@@ -285,7 +292,7 @@ msgstr ""
 #. Type: string
 #. Description
 #. :sl3:
-#: ../hw-detect.templates:7001
+#: ../hw-detect.templates:8001
 msgid ""
 "If you don't know what to enter, consult your documentation, or leave it "
 "blank to not load the module."
@@ -296,26 +303,68 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:8001
+#: ../hw-detect.templates:9001
 msgid "Error while running '${CMD_LINE_PARAM}'"
 msgstr "'${CMD_LINE_PARAM}' പ്രവര്‍ത്തിപ്പിച്ചപ്പോള്‍ വന്ന തെറ്റു്"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:9001
-msgid "Load missing drivers from a driver floppy?"
-msgstr "കുറവുള്ള പ്രവര്‍ത്തകങ്ങള്‍ പ്രവര്‍ത്തക ഫ്ലോപ്പിയില്‍ നിന്നും ചേര്‍ക്കണോ?"
+#: ../hw-detect.templates:10001
+msgid "Load missing drivers from removable media?"
+msgstr "കുറവുള്ള പ്രവര്‍ത്തകങ്ങള്‍ നീക്കം ചെയ്യാവുന്ന മാധ്യമത്തില്‍ നിന്നും ചേര്‍ക്കണോ?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../hw-detect.templates:9001
+#: ../hw-detect.templates:10001
 msgid ""
 "A driver for your hardware is not available. You may need to load drivers "
-"from a driver floppy. If you have such a floppy available now, put it in the "
-"drive before continuing."
+"from removable media, such as a USB stick, or driver floppy."
 msgstr ""
-"നിങ്ങളുടെ ഹാര്‍ഡ്‌വെയറിനു് അനുയോജ്യമായ ഒരു പ്രവര്‍ത്തകം ലഭ്യമല്ല. ഒരു പ്രവര്‍ത്തക ഫ്ലോപ്പിയില്‍ നിന്നും "
-"ഈ പ്രവര്‍ത്തകങ്ങള്‍ ചേര്‍ക്കേണ്ടതായി വന്നേയ്ക്കാം. നിങ്ങളുടെ കൈവശം അത്തരത്തിലുള്ള ഫ്ലോപ്പിയുണ്ടെങ്കില്‍ "
-"അതു് ഡ്രൈവില്‍ നിക്ഷേപിച്ചതിനു ശേഷം തുടരുക."
+"നിങ്ങളുടെ ഹാര്‍ഡ്‌വെയറിനു് അനുയോജ്യമായ ഒരു പ്രവര്‍ത്തകം ലഭ്യമല്ല. പ്രവര്‍ത്തക ഫ്ലോപ്പിയോ യുഎസ്ബി "
+"സ്റ്റിക്കോ പോലുള്ള നീക്കം ചെയ്യാവുന്ന മാധ്യമത്തില്‍ നിന്നും ഈ പ്രവര്‍ത്തകങ്ങള്‍ ചേര്‍ക്കേണ്ടതായി "
+"വന്നേയ്ക്കാം."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../hw-detect.templates:10001 ../hw-detect.templates:11001
+msgid "If you have such media available now, insert it, and continue."
+msgstr "നിങ്ങളുടെ കയ്യില്‍ അങ്ങനെയൊരു മാധ്യമമമുണ്ടെങ്കില്‍, അതു് വച്ചു് തുടരൂ."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../hw-detect.templates:11001
+msgid "Load missing firmware from removable media?"
+msgstr "കുറവുള്ള പ്രവര്‍ത്തകങ്ങള്‍ നീക്കം ചെയ്യാവുന്ന മാധ്യമത്തില്‍ നിന്നും ചേര്‍ക്കണോ?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../hw-detect.templates:11001
+msgid ""
+"Some of your hardware needs non-free firmware files to operate. The firmware "
+"can be loaded from removable media, such as a USB stick or floppy."
+msgstr ""
+"നിങ്ങളുടെ ചില ഹാര്‍ഡ്‌വെയറിനു് പ്രവര്‍ത്തിയ്ക്കാന്‍ സ്വതന്ത്രമല്ലാത്ത ഫെംവെയര്‍ ഫയലുകള്‍ ആവശ്യമായി "
+"വന്നേയ്ക്കാം. ഫെംവെയര്‍ യുഎസ്ബി സ്റ്റിക്ക് അല്ലെങ്കില്‍ ഫ്ലോപ്പി തുടങ്ങിയ നീക്കം ചെയ്യാവുന്ന "
+"മാധ്യമത്തില്‍ നിന്നും ചേര്‍ക്കാവുന്നതാണു്."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../hw-detect.templates:11001
+msgid "The missing firmware files are: ${FILES}"
+msgstr "ഇല്ലാത്ത ഫെംവെയര്‍ ഫയലുകള്‍ ഇവയാണു്: ${FILES}"
+
+#. Type: text
+#. Description
+#. :sl1:
+#: ../hw-detect.templates:12001
+msgid "Checking for firmware..."
+msgstr "ഫേംവെയറുണ്ടോയെന്നു് നോക്കിക്കൊണ്ടിരിയ്ക്കുന്നു..."

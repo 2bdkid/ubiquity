@@ -4,6 +4,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 if [ "$1" ]; then
+	export LANG=C # avoid locale errors from perl
 	ROOT="$1"
 	chroot=chroot
 	log='log-output -t user-setup'
@@ -29,8 +30,6 @@ setpassword () {
 	PASSWD="$2"
 	if [ "$3" = true ]; then
 		OPTS=-e
-	else
-		OPTS=-m
 	fi
 	$chroot $ROOT chpasswd $OPTS <<EOF
 $USER:$PASSWD
@@ -199,7 +198,7 @@ EOF
 		# installed and the alternative is registered.
 		if $chroot $ROOT update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
 			$log $chroot $ROOT update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-sudo
-			$log $chroot $ROOT update-gconf-defaults
+			$log $chroot $ROOT update-gconf-defaults || true
 		fi
 	fi
 

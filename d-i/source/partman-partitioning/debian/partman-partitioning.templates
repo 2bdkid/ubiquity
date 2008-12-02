@@ -26,7 +26,8 @@ _Description: Write previous changes to disk and continue?
 
 Template: partman-partitioning/source_partition
 Type: select
-Choices: ${CHOICES}
+Choices-C: ${CHOICES}
+Choices: ${DESCRIPTIONS}
 # :sl2:
 _Description: Source partition:
  Please choose the partition which contains the data you want to copy.
@@ -115,12 +116,6 @@ __Choices: Beginning, End
 _Description: Location for the new partition:
  Please choose whether you want the new partition to be created at the
  beginning or at the end of the available space.
-
-Template: partman-partitioning/new_partition_fs
-Type: select
-Choices: ${CHOICES}
-# :sl1:
-_Description: File system for the new partition:
 
 Template: partman-partitioning/new_partition_type
 Type: select
@@ -220,6 +215,13 @@ Template: partman-partitioning/text/set_name
 Type: text
 # :sl2:
 _Description: Name:
+
+Template: partman-partitioning/text/biosgrub
+Type: text
+# :sl3:
+# Setting to reserve a small part of the disk for use by BIOS-based bootloaders
+# such as GRUB.
+_Description: Reserve BIOS boot area:
 
 Template: partman-partitioning/text/bootable
 Type: text

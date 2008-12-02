@@ -161,17 +161,50 @@ default_disk_label () {
 	esac
 }
 
+prepare_new_labels() {
+	local dev devs restart code
+	devs="$*"
+
+	restart=
+	for dev in $devs; do
+		[ -d "$dev" ] || continue
+
+		if [ -e /lib/partman/lib/lvm-remove.sh ]; then
+			. /lib/partman/lib/lvm-remove.sh
+			device_remove_lvm "$dev"
+			code=$?
+			if [ $code = 99 ]; then
+				restart=1
+			elif [ $code != 0 ]; then
+				return $code
+			fi
+		fi
+		if [ -e /lib/partman/lib/md-remove.sh ]; then
+			. /lib/partman/lib/md-remove.sh
+			device_remove_md "$dev"
+			code=$?
+			if [ $code = 99 ]; then
+				restart=1
+			elif [ $code != 0 ]; then
+				return $code
+			fi
+		fi
+	done
+
+	if [ "$restart" ]; then
+		stop_parted_server
+		restart_partman || return 1
+	fi
+
+	return 0
+}
+
 create_new_label() {
 	local dev default_type chosen_type types
 	dev="$1"
 	prompt_for_label="$2"
 
 	[ -d "$dev" ] || return 1
-
-	if [ -e /lib/partman/lib/lvm-remove.sh ]; then
-		. /lib/partman/lib/lvm-remove.sh
-		device_remove_lvm "$dev" || return 1
-	fi
 
 	cd $dev
 
@@ -238,10 +271,4 @@ create_new_label() {
 		close_dialog
 		enable_swap
 	fi
-
-	# Different types partition tables support different visuals.
-	# Some have partition names others don't have, some have extended
-	# and logical partitions, others don't. Hence we have to regenerate
-	# the list of the visuals.
-	rm -f visuals
 }

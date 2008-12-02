@@ -29,11 +29,11 @@ maybe_escape () {
 	text="$1"
 	shift
 	if [ "$can_escape" ]; then
-		db_capb backup escape
+		db_capb backup align escape
 		code=0
 		"$@" "$(printf '%s' "$text" | debconf-escape -e)" || code=$?
 		saveret="$RET"
-		db_capb backup
+		db_capb backup align
 		RET="$saveret"
 		return $code
 	else
@@ -41,7 +41,8 @@ maybe_escape () {
 	fi
 }
 
-debconf_select () {
+# Deprecated debconf_select() for templates not switched to Choices-C yet.
+old_debconf_select () {
 	local IFS priority template choices default_choice default x u newchoices code
 	priority="$1"
 	template="$2"
@@ -114,6 +115,58 @@ debconf_select () {
 	return $code
 }
 
+debconf_select () {
+	local IFS priority template choices default keys descriptions code x
+	priority="$1"
+	template="$2"
+	choices="$3"
+	default="$4"
+
+	if ! db_metaget $template choices-c; then
+		logger -t partman "warning: $template is not using Choices-C"
+		old_debconf_select "$@"
+		return $?
+	fi
+
+	if [ -z "$default" ]; then
+		db_get "$template" && default="$RET"
+	fi
+	keys=""
+	descriptions=""
+	IFS="$NL"
+	for x in $choices; do
+		local key plugin
+		restore_ifs
+		key="${x%$TAB*}"
+		keys="${keys:+${keys}, }$key"
+		descriptions="${descriptions:+${descriptions}, }$(
+			echo "${x#*$TAB}" |
+			sed "s/ *\$//g; s/^ /$debconf_select_lead/g; s/,/\\\\,/g; s/^ /\\\\ /")"
+
+		# If the question was asked via ask_user, this allow preseeding
+		# by using the name of the plugin responsible for the answer.
+		if [ -n "$default" ]; then
+			plugin="${key%%__________*}"
+			if [ "$default" = "$plugin" ] ||
+			   [ "$default" = "${plugin#[0-9][0-9]}" ]; then
+				default="$key"
+			fi
+		fi
+	done
+	# You can preseed questions asked through this function by using
+	# the key (the part before the tab).
+	if [ -n "$default" ]; then
+		db_set $template "$default"
+	fi
+	db_subst $template CHOICES "$keys"
+	db_subst $template DESCRIPTIONS "$descriptions"
+	code=0
+	db_input $priority $template || code=1
+	db_go || return 255
+	db_get $template
+	return $code
+}
+
 menudir_default_choice () {
 	printf "%s__________%s\n" "$(basename $1/??$2)" "$3" > $1/default_choice
 }
@@ -129,11 +182,22 @@ ask_user () {
 		default=""
 	fi
 	choices=$(
+		local skip_divider=1
 		for plugin in $dir/*; do
 			[ -d $plugin ] || continue
 			name=$(basename $plugin)
 			IFS="$NL"
 			for option in $($plugin/choices "$@"); do
+				# Skip a divider (only has space as description)
+				# if it's the first option or when two in a row
+				if echo "$option" | grep -q "$TAB *$"; then
+					if [ "$skip_divider" ]; then
+						continue
+					fi
+					skip_divider=1
+				else
+					skip_divider=
+				fi
 				printf "%s__________%s\n" $name "$option"
 			done
 			restore_ifs
@@ -149,7 +213,6 @@ ask_user () {
 
 partition_tree_choices () {
 	local IFS
-	local whitespace_hack=""
 	for dev in $DEVICES/*; do
 		[ -d $dev ] || continue
 		printf "%s//\t%s\n" $dev "$(device_name $dev)" # GETTEXT?
@@ -164,15 +227,9 @@ partition_tree_choices () {
 		while { read num id size type fs path name; [ "$id" ]; }; do
 			part=${dev}/$id
 			[ -f $part/view ] || continue
-			printf "%s//%s\t     %s\n" "$dev" "$id" $(cat $part/view)
+			printf "%s//%s\t%s\n" "$dev" "$id" $(cat $part/view)
 		done
 		restore_ifs
-	done | while read line; do
-		# A hack to make sure each line in the table is unique and
-		# selectable by debconf -- pad lines with varying amounts of
-		# whitespace.
-		whitespace_hack="$NBSP$whitespace_hack"
-		echo "$line$whitespace_hack"
 	done
 }
 
@@ -299,6 +356,11 @@ valid_human () {
 		if expr "$1" : "$regex" >/dev/null; then return 0; fi
 	done
 	return 1
+}
+
+convert_to_megabytes() {
+	local size="$1"
+	expr 0000000"$size" : '0*\(..*\)......$'
 }
 
 stop_parted_server () {
@@ -757,9 +819,22 @@ humandev () {
 		printf "$RET" ".CCISS" "-" "$controller" "$lun" "$part" "$linux"
 	    fi
 	    ;;
+	/dev/mmcblk[0-9])
+	    drive=$(echo $1 | sed 's,^/dev/mmcblk\([0-9]\).*,\1,')
+	    linux=${1#/dev/}
+	    db_metaget partman/text/mmc_disk description
+	    printf "$RET" "$(($drive + 1))" "$linux"
+	    ;;
+	/dev/mmcblk[0-9]p[0-9]*)
+	    drive=$(echo $1 | sed 's,^/dev/mmcblk\([0-9]\).*,\1,')
+	    part=$(echo $1 | sed 's,^/dev/mmcblk[0-9]p\([0-9][0-9]*\).*,\1,')
+	    linux=${1#/dev/}
+	    db_metaget partman/text/mmc_partition description
+	    printf "$RET" "$(($drive + 1))" "$part" "$linux"
+	    ;;
 	/dev/md*|/dev/md/*)
 	    device=`echo "$1" | sed -e "s/.*md\/\?\(.*\)/\1/"`
-	    type=`grep "^md${device}[ :]" /proc/mdstat | sed -e "s/^.* : active raid\([[:alnum:]]\).*/\1/"`
+	    type=`grep "^md${device}[ :]" /proc/mdstat | sed -e "s/^.* : active raid\([[:alnum:]]\{,2\}\).*/\1/"`
 	    db_metaget partman/text/raid_device description
 	    printf "$RET" ${type} ${device}
 	    ;;
@@ -768,7 +843,7 @@ humandev () {
 
 	    # First check for Serial ATA RAID devices
 	    if type dmraid >/dev/null 2>&1; then
-		for frdisk in $(dmraid -s -c | grep -v "No RAID disks"); do
+		for frdisk in $(dmraid -s -c | grep -iv "No RAID disks"); do
 			device=${1#/dev/mapper/}
 			case "$1" in
 			    /dev/mapper/$frdisk)
@@ -837,17 +912,17 @@ humandev () {
 	    disk="${1#/dev/}"
 	    humandev_dasd_disk /sys/block/$disk/$(readlink /sys/block/$disk/device)
 	    ;;
-	/dev/xvd[a-z])
-	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/xvd\([a-z]\).*,\1,')")
+	/dev/*vd[a-z])
+	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/x\?vd\([a-z]\).*,\1,')")
 	    drive=$(($drive - 96))
 	    linux=${1#/dev/}
 	    db_metaget partman/text/virtual_disk description
 	    printf "$RET" "$drive" "$linux"
 	    ;;
-	/dev/xvd[a-z][0-9]*)
-	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/xvd\([a-z]\).*,\1,')")
+	/dev/*vd[a-z][0-9]*)
+	    drive=$(printf '%d' "'$(echo $1 | sed 's,^/dev/x\?vd\([a-z]\).*,\1,')")
 	    drive=$(($drive - 96))
-	    part=$(echo $1 | sed 's,^/dev/xvd[a-z]\([0-9][0-9]*\).*,\1,')
+	    part=$(echo $1 | sed 's,^/dev/x\?vd[a-z]\([0-9][0-9]*\).*,\1,')
 	    linux=${1#/dev/}
 	    db_metaget partman/text/virtual_partition description
 	    printf "$RET" "$drive" "$part" "$linux"
@@ -934,10 +1009,13 @@ disable_swap () {
 
 # Lock a device or partition against further modifications
 partman_lock_unit() {
-	local device message dev testdev
+	local device message cwd dev testdev
 	device="$1"
 	message="$2"
 
+	# We need to preserve the current working directory as the caller might
+	# be working on a specific device.  See #488687 for details.
+	cwd="$(pwd)"
 	for dev in $DEVICES/*; do
 		[ -d "$dev" ] || continue
 		cd $dev
@@ -947,6 +1025,7 @@ partman_lock_unit() {
 			testdev=$(mapdevfs $(cat device))
 			if [ "$device" = "$testdev" ]; then
 				echo "$message" > locked
+				cd "$cwd"
 				return 0
 			fi
 		fi
@@ -961,13 +1040,16 @@ partman_lock_unit() {
 		done
 		close_dialog
 	done
+	cd "$cwd"
 }
 
 # Unlock a device or partition to allow further modifications
 partman_unlock_unit() {
-	local device dev testdev
+	local device cwd dev testdev
 	device="$1"
 
+	# See partman_lock_unit() for details about $cwd.
+	cwd="$(pwd)"
 	for dev in $DEVICES/*; do
 		[ -d "$dev" ] || continue
 		cd $dev
@@ -977,6 +1059,7 @@ partman_unlock_unit() {
 			testdev=$(mapdevfs $(cat device))
 			if [ "$device" = "$testdev" ]; then
 				rm -f locked
+				cd "$cwd"
 				return 0
 			fi
 		fi
@@ -991,6 +1074,7 @@ partman_unlock_unit() {
 		done
 		close_dialog
 	done
+	cd "$cwd"
 }
 
 [ "$PARTMAN_TEST" ] || log '*******************************************************'

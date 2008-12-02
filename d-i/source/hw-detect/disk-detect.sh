@@ -8,6 +8,10 @@ if [ "$(uname)" != Linux ]; then
 	exit 0
 fi
 
+log () { 
+	logger -t disk-detect "$@"
+}
+
 is_not_loaded() {
 	! ((cut -d" " -f1 /proc/modules | grep -q "^$1\$") || \
 	   (cut -d" " -f1 /proc/modules | sed -e 's/_/-/g' | grep -q "^$1\$"))
@@ -110,7 +114,9 @@ EOF
 	fi
 }
 
-hw-detect disk-detect/detect_progress_title || true
+if ! hw-detect disk-detect/detect_progress_title; then
+	log "hw-detect exited nonzero"
+fi
 
 while ! disk_found; do
 	CHOICES=""
@@ -140,16 +146,16 @@ while ! disk_found; do
 		fi
 	fi
 
-	if [ -e /usr/lib/debian-installer/retriever/floppy-retriever ]; then
+	if [ -e /usr/lib/debian-installer/retriever/media-retriever ]; then
 		db_capb backup
-		db_input critical hw-detect/load_floppy
+		db_input critical hw-detect/load_media
 		if ! db_go; then
 			exit 10
 		fi
 		db_capb
-		db_get hw-detect/load_floppy
+		db_get hw-detect/load_media
 		if [ "$RET" = true ] && \
-		   anna floppy-retriever && \
+		   anna media-retriever && \
 		   hw-detect disk-detect/detect_progress_title; then
 			continue
 		fi
@@ -170,9 +176,9 @@ if anna-install dmraid-udeb; then
 		module_probe dm-mod
 	fi
 
-	if [ "$(dmraid -c -s)" != "No RAID disks" ]; then
-		logger -t disk-detect "Serial ATA RAID disk(s) detected.
-		# Ask the user whether they want to activate dmraid devices."
+	if [ "$(dmraid -c -s | tr A-Z a-z)" != "no raid disks" ]; then
+		logger -t disk-detect "Serial ATA RAID disk(s) detected."
+		# Ask the user whether they want to activate dmraid devices.
 		db_input high disk-detect/activate_dmraid || true
 		db_go
 		db_get disk-detect/activate_dmraid
@@ -223,3 +229,5 @@ if [ "$RET" = true ]; then
 		fi
 	fi
 fi
+
+check-missing-firmware

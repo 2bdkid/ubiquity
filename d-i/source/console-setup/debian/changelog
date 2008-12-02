@@ -1,3 +1,104 @@
+console-setup (1.28ubuntu3) jaunty; urgency=low
+
+  * Create /dev/tty[1-6] in our initramfs script before trying to operate on
+    them (LP: #130444).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 26 Nov 2008 12:15:12 +0000
+
+console-setup (1.28ubuntu2) jaunty; urgency=low
+
+  * Default console-setup/ask_detect to false, since it's hard to back up
+    out of the detection widget once you've entered it.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 25 Nov 2008 16:48:28 +0000
+
+console-setup (1.28ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+    - If the detect-keyboard debconf plugin is available
+      (cdebconf-newt-detect-keys in the installer), then offer to use it to
+      detect the keyboard layout.
+    - Reset console-setup/toggle to the default if it's set to "No toggling"
+      and you select a non-Latin layout.
+    - Change the default font from Terminus to VGA where supported.
+    - Run kbd_mode on each tty in ACTIVE_CONSOLES rather than on the current
+      tty, since the current tty might belong to X and changing X's tty out
+      of raw mode is a very bad idea.
+    - Automatically save the font and keymap to /etc in
+      /etc/init.d/console-setup if it isn't being run from init. Similarly,
+      ensure that the font and keymap are saved to /etc during initial
+      installation.
+    - Disable workaround in ckbcomp for the kernel not applying Caps Lock to
+      non-ASCII letters, except for Turkish layouts; the cure is worse than
+      the disease because it makes Caps Lock equivalent to Shift Lock.
+    - Set keymap and font in the initramfs if possible.
+    - Set default variant for French to oss.
+    - Set default for Dutch to us(intl), not just us.
+    - Set default layout for Vietnam to 'us'.
+    - Set default layout for Kurdish to tr(ku).
+    - Fix handling of commas in layout and variant names.
+    - Fix keymap reduction not to try to express keymap A in terms of keymap
+      B when B includes keys not mapped by A.
+    - debian/config.proto: Set sparc default model to pc105.
+    - Remove 'exit 0' from the end of debian/config.proto; this will be
+      sourced from the postinst in the installer, and exiting in the
+      successful case means that /etc/default/console-setup never gets
+      generated.
+    - Stop running debconf-updatepo on clean.
+    - Update for new layouts and variants for Japan, Montenegro, and Serbia,
+      and migrate configuration files from the old layouts.
+    - Add a "Do not configure keyboard; keep kernel keymap" model option,
+      preseedable by console-setup/modelcode=SKIP.
+    - Drop the layout/variant priority to high on fresh installs.
+    - Honour OVERRIDE_ALLOW_PRESEEDING environment variable when deciding
+      whether to allow preseeding, which is ordinarily only allowed in d-i.
+    - If console-setup/layoutcode is preseeded but not marked as seen, then
+      set the default layout but don't lower the layout question priority or
+      preseed console-setup/ask_detect.
+    - Fix property counts in Goha and legacy BDF fonts.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Nov 2008 14:36:26 +0000
+
+console-setup (1.28) unstable; urgency=low
+
+  [ Debconf translations ]
+  * Belarusian. Closes: #487293
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 23 Sep 2008 19:49:58 +0200
+
+console-setup (1.27) unstable; urgency=low
+
+  [ Debconf translations ]
+  * French
+  * Basque. Closes: #490363
+  * Turkish. Closes: #490365
+  * Thai
+  * Bulgarian
+  * Swedish. Closes: #490569
+  * German. Closes: #490714
+  * Portuguese. Closes: #491011
+  * Vietnamese. Closes: #491046
+  * Bulgarian
+  * Czech
+  * Galician
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 18 Jul 2008 11:33:49 +0200
+
+console-setup (1.26) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Add a template for the main menu item name.
+
+  [ Debconf translations ]
+  * Russian. Closes: #487242
+  * Basque. Closes: #487313
+  * Turkish. Closes: #487439
+  * Swedish. Closes: #487308
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 08 Jul 2008 20:40:35 +0200
+
 console-setup (1.25ubuntu3) intrepid; urgency=low
 
   * Fix property counts in Goha and legacy BDF fonts.

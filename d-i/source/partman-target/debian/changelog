@@ -1,3 +1,72 @@
+partman-target (58ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use UUID= fstab syntax for all partitions if a UUID is available, and
+      add a comment above each UUID to indicate the corresponding device at
+      install time.
+    - Disable automatic mounting of USB removable devices.
+    - Don't use UUIDs in fstab for those device types that volumeid.postinst
+      refuses to convert.
+    - Mount CD-ROMs and floppies with 'exec'.
+    - Use the path of the file associated with a loop device in /etc/fstab,
+      rather than the filesystem's UUID or the loop device path.
+    - Always set the loop option for loop devices.
+    - Remove critical system files from the existing filesystem before
+      installing.
+    - Preserve the UID and GID of the initial user, if possible.  Requires a
+      patch to user-setup.
+    - Mount CD-ROMs and floppies with the "utf8" option by default.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 20 Nov 2008 15:55:19 +0000
+
+partman-target (58) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * active_partition/method/choices: remove check for the sataraid file;
+    Serial ATA RAID partitions are now treated like any other partition.
+    Patch based on work done by Luke Yelavich <themuso@ubuntu.com> in Ubuntu.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Greek, Modern (1453-) (el.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Omer Zak
+  * Croatian (hr.po) by Josip Rodin
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Peteris Krisjanis
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Serbian (sr.po) by Veselin Mijušković
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 22:11:23 -0300
+
+partman-target (56) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Update to the new debconf_select interface.
+    Requires partman-base (>= 124).
+  * Use cdebconf's new column alignment feature for active_partition.
+    Requires cdebconf (>= 0.133).
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Milo Casagrande
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Turkish (tr.po) by Mert Dirik
+	
+ -- Otavio Salvador <otavio@debian.org>  Tue, 05 Aug 2008 14:06:24 -0300
+
 partman-target (55ubuntu5) intrepid; urgency=low
 
   * Remove the cdrom mounpoint if the filesystem is not iso9660 or udf

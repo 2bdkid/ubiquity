@@ -1,16 +1,17 @@
 partman-auto/text/home_scheme ::
 
-50 500 100 ext3
+128 512 256 ext2
 	$primary{ }
 	$bootable{ }
 	method{ format }
 	format{ }
 	use_filesystem{ }
-	filesystem{ ext3 }
+	filesystem{ ext2 }
 	mountpoint{ /boot }
 	options/relatime{ relatime } .
 
 500 4000 7000 ext3
+	$lvmok{ }
 	$primary{ }
 	method{ format }
 	format{ }
@@ -20,10 +21,12 @@ partman-auto/text/home_scheme ::
 	options/relatime{ relatime } .
 
 96 512 300% linux-swap
+	$lvmok{ }
 	method{ swap }
 	format{ } .
 
 100 10000 1000000000 ext3
+	$lvmok{ }
 	method{ format }
 	format{ }
 	use_filesystem{ }

@@ -1,12 +1,20 @@
 ## Shared code for all guided partitioning components
 
-auto_init_disk() {
+auto_init_disks() {
 	local dev
-	dev="$1"
 
 	# Create new disk label; don't prompt for label
 	. /lib/partman/lib/disk-label.sh
-	create_new_label "$dev" no || return 1
+	prepare_new_labels "$@" || return 1
+
+	for dev in "$@"; do
+		create_new_label "$dev" no || return 1
+	done
+}
+
+get_last_free_partition_infos() {
+	local dev
+	dev="$1"
 
 	cd $dev
 
@@ -28,7 +36,6 @@ mark_partition_as_lvm() {
 	id=$1
 	shift
 
-	devfspv_devices="$devfspv_devices $path"
 	open_dialog GET_FLAGS $id
 	flags=$(read_paragraph)
 	close_dialog
@@ -128,7 +135,10 @@ create_primary_partitions() {
 		fi
 		shift; shift; shift; shift
 		if echo "$*" | grep -q "method{ lvm }"; then
+			pv_devices="$pv_devices $path"
 			mark_partition_as_lvm $id $*
+		elif echo "$*" | grep -q "method{ crypto }"; then
+			pv_devices="$pv_devices /dev/mapper/${path##*/}_crypt"
 		fi
 		setup_partition $id $*
 		primary=''
@@ -177,7 +187,10 @@ create_partitions() {
 	fi
 	shift; shift; shift; shift
 	if echo "$*" | grep -q "method{ lvm }"; then
+		pv_devices="$pv_devices $path"
 		mark_partition_as_lvm $id $*
+	elif echo "$*" | grep -q "method{ crypto }"; then
+		pv_devices="$pv_devices /dev/mapper/${path##*/}_crypt"
 	fi
 	setup_partition $id $*
 	free_space=$(partition_after $id)'
@@ -189,13 +202,18 @@ get_auto_disks() {
 	for dev in $DEVICES/*; do
 		[ -d "$dev" ] || continue
 
-		# Skip /dev/mapper/X (except multipath) devices and
-		# RAID (/dev/md/X and /dev/mdX) devices
 		device=$(cat $dev/device)
+		
+		# Skip software RAID (mdadm) devices (/dev/md/X and /dev/mdX)
 		$(echo "$device" | grep -Eq "/dev/md/?[0-9]*$") && continue
-		if echo $device | grep -q "^/dev/mapper/" && [ ! -f "$dev/sataraid" ]; then
-			dmtype=$(dm_table $device)
-			[ "$dmtype" = multipath ] || continue
+
+		# Skip device mapper devices (/dev/mapper/),
+		# except for dmraid or multipath devices
+		if echo $device | grep -q "^/dev/mapper/"; then
+			if [ ! -f "$dev/sataraid" ] && \
+			   ! is_multipath_dev $device; then
+				continue
+			fi
 		fi
 		printf "$dev\t$(device_name $dev)\n"
 	done
@@ -213,3 +231,22 @@ select_auto_disk() {
 
 # TODO: Add a select_auto_disks() function
 # Note: This needs a debconf_multiselect equiv.
+
+# Maps a devfs name to a partman directory
+dev_to_partman () {
+	local dev_name="$1"
+
+	local mapped_dev_name="$(mapdevfs $dev_name)"
+	if [ -n "$mapped_dev_name" ]; then
+		dev_name="$mapped_dev_name"
+	fi
+
+	for dev in $DEVICES/*; do
+		# mapdevfs both to allow for different ways to refer to the
+		# same device using devfs, and to allow user input in
+		# non-devfs form
+		if [ "$(mapdevfs $(cat $dev/device))" = "$dev_name" ]; then
+			echo $dev
+		fi
+	done
+}

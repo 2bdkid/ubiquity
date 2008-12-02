@@ -1,3 +1,70 @@
+partman-basicfilesystems (62ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Add minimal support for NTFS partitions using ntfs-3g.
+    - Mount FAT and NTFS filesystems at boot (fstab pass 1).
+    - Mount FAT and NTFS with umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+      file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Default to mounting ext2 with relatime.
+
+ -- Luke Yelavich <luke@barbiton.yelavich.home>  Tue, 11 Nov 2008 09:01:11 +1100
+
+partman-basicfilesystems (62) unstable; urgency=low
+
+  [ Giuseppe Iuculano ]
+  * init.d/autouse_swap: We no longer need to skip sataraid partitions.
+    Patch based on work done by Luke Yelavich <themuso@ubuntu.com> in Ubuntu.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Welsh (cy.po) by Jonathan Price
+  * Danish (da.po)
+  * Greek, Modern (1453-) (el.po)
+  * Hebrew (he.po) by Omer Zak
+  * Croatian (hr.po) by Josip Rodin
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Peteris Krisjanis
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Serbian (sr.po) by Veselin Mijušković
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Ukrainian (uk.po) by Євгеній Мещеряков
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 22:08:44 -0300
+
+partman-basicfilesystems (61) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Use cdebconf's new column alignment feature for active_partition.
+    Requires partman-base (>= 124).
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Finnish (fi.po) by Esko Arajärvi
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Milo Casagrande
+  * Marathi (mr.po) by Sampada
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Turkish (tr.po) by Mert Dirik
+  * Simplified Chinese (zh_CN.po) by Kov Chai
+	
+ -- Otavio Salvador <otavio@debian.org>  Tue, 05 Aug 2008 13:49:02 -0300
+
 partman-basicfilesystems (60ubuntu2) intrepid; urgency=low
 
   * init.d/autouse_swap: We no longer need to skip sataraid partitions.

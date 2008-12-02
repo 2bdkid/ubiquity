@@ -34,7 +34,7 @@ decode_recipe () {
 	if [ -z "$ram" ]; then
 		ram=$(grep ^MemTotal: /proc/meminfo | { read x y z; echo $y; })000
 	fi
-	ram=$(expr 0000000"$ram" : '0*\(..*\)......$') # convert to megabytes
+	ram=$(convert_to_megabytes $ram)
 	name="Unnamed.${unnamed}"
 	scheme=''
 	line=''
@@ -312,9 +312,10 @@ choose_recipe () {
 	fi
 
 	db_subst partman-auto/choose_recipe TARGET "$target"
-	debconf_select medium partman-auto/choose_recipe "$choices" "$default_recipe"
+	debconf_select medium partman-auto/choose_recipe \
+		"$choices" "$default_recipe"
 	if [ $? = 255 ]; then
-		exit 0
+		return 255
 	fi
 	recipe="$RET"
 }
