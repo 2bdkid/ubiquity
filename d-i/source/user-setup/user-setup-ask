@@ -201,61 +201,10 @@ while :; do
 		;;
 	    8)
 		db_get passwd/make-user
-		if [ "$RET" = true ]; then
-			db_input high user-setup/encrypted-private || true
-		fi
-		;;
-	    9)
-		db_get passwd/make-user
-		if [ "$RET" = true ]; then
-			db_get user-setup/encrypted-private
-			if [ "$RET" = true ]; then
-				db_input critical user-setup/encrypted-private-passphrase || true
-			fi
-		fi
-		;;
-	    10)
-		db_get passwd/make-user
-		if [ "$RET" = true ]; then
-			db_get user-setup/encrypted-private
-			if [ "$RET" = true ]; then
-				db_get user-setup/encrypted-private-passphrase
-				if [ "$RET" ]; then
-					db_input critical user-setup/encrypted-private-passphrase-again || true
-				fi
-			fi
-		fi
-		;;
-	    11)
-		db_get passwd/make-user
-		if [ "$RET" = true ]; then
-			db_get user-setup/encrypted-private
-			if [ "$RET" = true ]; then
-				db_get user-setup/encrypted-private-passphrase
-				ENCRYPTION_PW="$RET"
-				if [ "$ENCRYPTION_PW" ]; then
-					db_get user-setup/encrypted-private-passphrase-again
-					if [ "$ENCRYPTION_PW" != "$RET" ]; then
-						db_set user-setup/encrypted-private-passphrase ""
-						db_set user-setup/encrypted-private-passphrase-again ""
-						db_fset user-setup/password-mismatch seen false
-						db_input critical user-setup/password-mismatch
-						db_fset user-setup/encrypted-private-passphrase seen false
-						db_fset user-setup/encrypted-private-passphrase seen false
-						STATE=9
-						continue
-					fi
-				else
-					ENCRYPTION_PW="$(head -c 16 /dev/urandom | od -x | head -n 1 | sed 's/^0000000//' | sed 's/\s*//g')"
-					db_set user-setup/encrypted-private-passphrase "$ENCRYPTION_PW"
-					db_subst user-setup/encrypted-private-passphrase-display PASSPHRASE "$ENCRYPTION_PW"
-					db_input critical user-setup/encrypted-private-passphrase-display
-				fi
-			fi
-		fi
-		;;
-	    12)
-		db_subst user-setup/encrypted-private-passphrase-display PASSPHRASE ''
+# cjwatson 2008-12-17: Disabled for now until we get fixed kernel udebs
+#		if [ "$RET" = true ]; then
+#			db_input high user-setup/encrypt-home || true
+#		fi
 		;;
 	    *)
 		break

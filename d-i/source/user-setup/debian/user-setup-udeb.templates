@@ -150,60 +150,16 @@ _Description: Enable shadow passwords?
  that can only be read by special programs. The use of shadow passwords
  is strongly recommended, except in a few cases such as NIS environments.
 
-Template: user-setup/encrypted-private
+Template: user-setup/encrypt-home
 Type: boolean
 Default: false
 # :sl2:
-_Description: Set up an encrypted private directory?
- The contents of your home directory will normally be visible to all
- users on the system, to make it easier to share files among users. You
- can change this for individual files or directories by changing their
- permissions.
+_Description: Encrypt your home directory?
+ You may configure your home directory for encryption, such that any files
+ stored there remain private even if your computer is stolen.
  .
- In addition to the standard permissions system, it may be useful to set
- up an encrypted private directory so that those files remain private
- even if your computer is stolen. If you choose to do this, the
- directory will be called "Private".
-
-Template: user-setup/encrypted-private-passphrase
-Type: password
-# :sl2:
-_Description: Encryption passphrase:
- You may choose a passphrase to encrypt your private directory. If you
- leave this blank, a passphrase will be randomly generated for you. You
- will not normally need to use this passphrase, but it may be useful in
- case something goes wrong and you need to recover your encrypted data.
- .
- The overall strength of the encryption depends strongly on this
- passphrase, so you should take care to choose a passphrase that is
- not easy to guess. It should not be a word or sentence found in
- dictionaries, or a phrase that could be easily associated with you.
- .
- A good passphrase will contain a mixture of letters, numbers and
- punctuation. Passphrases are recommended to have a length of 20 or
- more characters.
- .
- There is no way to recover this passphrase if you lose it. To avoid
- losing data, you should normally write down the passphrase and keep it
- in a safe place separate from this computer.
-
-Template: user-setup/encrypted-private-passphrase-again
-Type: password
-# :sl2:
-_Description: Re-enter passphrase to verify:
- Please enter the same passphrase again to verify that you have typed it
- correctly.
-
-Template: user-setup/encrypted-private-passphrase-display
-Type: text
-# :sl2:
-#flag:translate!:3
-_Description: Keep this passphrase in a safe place!
- Your new encryption passphrase is as follows:
- .
- ${PASSPHRASE}
- .
- Please write this down and store it separately from this computer.
+ The system will seamlessly mount your encrypted home directory each time
+ you login and automatically unmount when you log out of all active sessions.
 
 Template: debian-installer/user-setup-udeb/title
 Type: title

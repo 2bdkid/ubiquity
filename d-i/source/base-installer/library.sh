@@ -775,7 +775,7 @@ EOT
 		else
 			SECMIRROR="$MIRROR"
 		fi
-		echo "deb $PROTOCOL://$MIRROR/ubuntu $DISTRIBUTION-security $COMPONENTS" >> /target/etc/apt/sources.list
+		echo "deb $PROTOCOL://$SECMIRROR/ubuntu $DISTRIBUTION-security $COMPONENTS" >> /target/etc/apt/sources.list
 		if db_get apt-setup/proposed && [ "$RET" = true ]; then
 			echo "deb $APTSOURCE $DISTRIBUTION-proposed $COMPONENTS" >> /target/etc/apt/sources.list
 		fi

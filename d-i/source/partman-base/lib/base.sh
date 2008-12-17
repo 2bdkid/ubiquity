@@ -121,6 +121,11 @@ debconf_select () {
 	template="$2"
 	choices="$3"
 	default="$4"
+	case $PARTMAN_SNOOP in
+		?*)
+			> /var/lib/partman/snoop
+			;;
+	esac
 
 	if ! db_metaget $template choices-c; then
 		logger -t partman "warning: $template is not using Choices-C"
@@ -135,7 +140,7 @@ debconf_select () {
 	descriptions=""
 	IFS="$NL"
 	for x in $choices; do
-		local key plugin
+		local key plugin option
 		restore_ifs
 		key="${x%$TAB*}"
 		keys="${keys:+${keys}, }$key"
@@ -152,6 +157,12 @@ debconf_select () {
 				default="$key"
 			fi
 		fi
+		option=$(echo "${x#*$TAB}" | sed "s/ *\$//g; s/^ /$debconf_select_lead/g")
+		case $PARTMAN_SNOOP in
+			?*)
+				echo "$key$TAB$option" >> /var/lib/partman/snoop
+				;;
+		esac
 	done
 	# You can preseed questions asked through this function by using
 	# the key (the part before the tab).

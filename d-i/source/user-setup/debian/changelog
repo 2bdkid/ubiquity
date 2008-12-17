@@ -1,3 +1,24 @@
+user-setup (1.23ubuntu3) jaunty; urgency=low
+
+  * Disable home directory encryption option for now, since the kernel
+    doesn't yet provide the right pieces (e.g. ecryptfs.ko) in udebs.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 17 Dec 2008 16:34:24 +0000
+
+user-setup (1.23ubuntu2) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  Changes for LP: #302870
+  * user-setup-apply: Add support for adduser --encrypt-home;  remove
+    deprecated encrypted-private (replaced in the installer by
+    encrypted home support)
+  * debian/user-setup-udeb.templates: Add encrypt-home debconf question;
+    remove deprecated encrypted-private
+  * user-setup-ask: prompt for encrypt-home; remove the more complicated
+    encrypted-private dialogs
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 10 Dec 2008 13:50:38 -0800
+
 user-setup (1.23ubuntu1) jaunty; urgency=low
 
   [ Evan Dandrea ]
