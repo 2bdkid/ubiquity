@@ -1,3 +1,15 @@
+partman-target (58ubuntu2) jaunty; urgency=low
+
+  * /media must be on the root file system (although subdirectories may be
+    mounted separately), since the installer relies on being able to mount
+    things like /media/cdrom during installation. Check this (LP: #16871).
+  * Expand comment above each UUID-mounted partition, based on a suggestion
+    by Daniel Pocock in Debian #509378.
+  * Add a note about 'vol_id --uuid' to the top of /etc/fstab; thanks to
+    Chris Cheney for the suggestion (LP: #221474).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 06 Jan 2009 17:18:06 +0000
+
 partman-target (58ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

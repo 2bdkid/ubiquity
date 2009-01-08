@@ -1,3 +1,10 @@
+apt-setup (1:0.37ubuntu7) jaunty; urgency=low
+
+  * Honour apt-setup/restricted, apt-setup/universe, and
+    apt-setup/multiverse when writing -backports lines (LP: #314462).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 08 Jan 2009 11:46:10 +0000
+
 apt-setup (1:0.37ubuntu6) intrepid; urgency=low
 
   * Check to make sure the CD filesystem is iso9660 before remounting it
@@ -61,7 +68,7 @@ apt-setup (1:0.37ubuntu1) intrepid; urgency=low
     - Reduce the mirror verification timeout to 10 seconds.
     - Disable the volatile service for Ubuntu, and don't ask the
       apt-setup/services-select question.
-    - Always disable the CD at the end of installation if no mirrors are
+    - Always disable the CD at the end of installation if any mirrors are
       present, even if it's a complete CD.
     - Pre-populate apt's lists directory with signed Release files for
       archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
@@ -315,7 +322,7 @@ apt-setup (1:0.31ubuntu1) hardy; urgency=low
     architectures.
   * Disable the volatile service for Ubuntu, and don't ask the
     apt-setup/services-select question.
-  * Always disable the CD at the end of installation if no mirrors are
+  * Always disable the CD at the end of installation if any mirrors are
     present, even if it's a complete CD. These days it's more irritating
     than not, and inserting the CD on a desktop system will produce a prompt
     anyway.

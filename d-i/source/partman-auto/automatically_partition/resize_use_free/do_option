@@ -19,7 +19,7 @@ if [ "$virtual" = no ] && [ -f $oldid/detected_filesystem ]; then
 	    ntfs)
 		get_ntfs_resize_range || resize_range_failed=1
 		;;
-	    ext2|ext3)
+	    ext2|ext3|ext4)
 		get_ext2_resize_range || resize_range_failed=1
 		;;
 	    *)

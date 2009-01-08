@@ -29,7 +29,7 @@ fstab=$(
 			else
 				uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)"
 				if [ "$uuid" ]; then
-					printf "# %s\n" "$(mapdevfs $fs)"
+					printf "# %s was on %s during installation\n" "$mp" "$(mapdevfs $fs)"
 					printf "%-15s %-15s %-7s %-15s %-7s %s\n" "UUID=$uuid" "${mp}" "$type" "$options" "$dump" "$pass"
 				else
 					printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"

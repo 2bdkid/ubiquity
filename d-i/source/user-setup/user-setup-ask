@@ -201,10 +201,9 @@ while :; do
 		;;
 	    8)
 		db_get passwd/make-user
-# cjwatson 2008-12-17: Disabled for now until we get fixed kernel udebs
-#		if [ "$RET" = true ]; then
-#			db_input high user-setup/encrypt-home || true
-#		fi
+		if [ "$RET" = true ]; then
+			db_input high user-setup/encrypt-home || true
+		fi
 		;;
 	    *)
 		break

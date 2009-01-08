@@ -60,8 +60,6 @@ disk_found() {
 module_probe() {
 	local module="$1"
 	local priority="$2"
-	local template=""
-	local question="$template/$module"
 	local modinfo=""
 	local devs=""
 	local olddevs=""
@@ -70,6 +68,7 @@ module_probe() {
 	if ! log-output -t disk-detect modprobe -v "$module"; then
 		# Prompt the user for parameters for the module.
 		local template="hw-detect/retry_params"
+		local question="$template/$module"
 		db_unregister "$question"
 		db_register "$template" "$question"
 		db_subst "$question" MODULE "$module"
@@ -172,8 +171,8 @@ done
 # Activate support for Serial ATA RAID
 if anna-install dmraid-udeb; then
 	# Device mapper support is required to run dmraid
-	if is_not_loaded dm-mod; then
-		module_probe dm-mod
+	if ! dmsetup version >/dev/null 2>&1; then
+		module_probe dm-mod || true
 	fi
 
 	if [ "$(dmraid -c -s | tr A-Z a-z)" != "no raid disks" ]; then
@@ -208,14 +207,16 @@ fi
 db_get disk-detect/multipath/enable
 if [ "$RET" = true ]; then
 	if anna-install multipath-udeb; then
-		MODULES="dm-mod dm-multipath dm-round-robin dm-emc"
 		# We need some dm modules...
 		depmod -a >/dev/null 2>&1 || true
-		for MODULE in $MODULES; do
-			if is_not_loaded $MODULE; then
-				module_probe $MODULE || true
-			fi
-		done
+		if ! dmsetup version >/dev/null 2>&1; then
+			module_probe dm-mod || true
+		fi
+		if ! dmsetup targets | cut -d' ' -f1 | grep -q '^multipath$'; then
+			module_probe dm-multipath || true
+		fi
+		# No way to check whether this is loaded already?
+		log-output -t disk-detect modprobe -v dm-round-robin || true
 
 		# Look for multipaths...
 		if multipath_probe; then

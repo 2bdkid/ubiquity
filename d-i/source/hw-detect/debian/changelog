@@ -1,3 +1,56 @@
+hw-detect (1.71ubuntu3) jaunty; urgency=low
+
+  * Improve checks for dm-* drivers being present to avoid relying on them
+    being built as modules.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 30 Dec 2008 14:38:36 +0000
+
+hw-detect (1.71ubuntu2) jaunty; urgency=low
+
+  * Backport from trunk:
+    - Ask the correct parameters question if modprobe fails.
+    - Cope with dm-mod being built-in.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 29 Dec 2008 21:28:16 +0000
+
+hw-detect (1.71ubuntu1) jaunty; urgency=low
+
+  [ Timo Aaltonen ]
+  * disk-detect.sh: Remove dm-emc from the multipath modules, since
+    it's gone since 2.6.27.
+
+  [ Colin Watson ]
+  * Resynchronise with Debian. Remaining changes:
+    - Remove FireWire Ethernet support.
+    - Register lp module on i386 and amd64.
+    - Exit zero if you continue all the way through ethdetect's errors about
+      having no network interfaces.
+    - Register rtc module on amd64.
+    - Drop priorities of a couple of ethdetect questions to medium.
+    - Install mouseemu on systems likely to have single-button mice (i.e.
+      Macs), but not powerpc64 since that causes an oops in the input layer.
+    - On powerpc/ps3 systems, load ps3rom, ps3disk, and ps3_gelic, and add
+      snd_ps3 to /etc/modules.
+    - Install elfspe2 on Cell (powerpc/ps3 and powerpc/cell) platforms.
+    - Add hooks for iSCSI support.
+    - disk-detect.sh: Do not check the kernel command line for any option
+      to enable dmraid support. If functional dmraid arrays are found, the
+      user will be asked if they wish to activate them.
+    - Make dmraid logging a bit neater.
+    - 'dmraid -c -s' changed its output format; cope with both old and new.
+    - Reinstate snd-powermac for i2s-a devices since apparently the lock-up
+      has been fixed.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Dec 2008 19:01:16 +0000
+
+hw-detect (1.71) unstable; urgency=low
+
+  * Pass all_generic_ide as a plain boot option instead of with the value 1 as
+    initramfs-tools ignores it otherwise. Whether or not initramfs-tools'
+    behavior is correct is debatable.
+
+ -- Frans Pop <fjp@debian.org>  Wed, 17 Dec 2008 20:54:19 +0100
+
 hw-detect (1.70ubuntu3) jaunty; urgency=low
 
   * Reinstate snd-powermac for i2s-a devices since apparently the lock-up

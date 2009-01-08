@@ -1,3 +1,26 @@
+user-setup (1.23ubuntu6) jaunty; urgency=low
+
+  [ Dustin Kirkland ]
+  * user-setup-apply: add support for initial passphrase wrapping,
+    in the encrypted home directory case, LP: #314482
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 06 Jan 2009 23:02:06 +0000
+
+user-setup (1.23ubuntu5) jaunty; urgency=low
+
+  * Load aes, cbc, and ecb modules after installing crypto-modules but
+    before running ecryptfs-setup-private.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 06 Jan 2009 15:35:10 +0000
+
+user-setup (1.23ubuntu4) jaunty; urgency=low
+
+  * Install crypto-modules if home directory encryption is requested
+    (LP: #309541).
+  * Re-enable home directory encryption option.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 06 Jan 2009 00:21:36 +0000
+
 user-setup (1.23ubuntu3) jaunty; urgency=low
 
   * Disable home directory encryption option for now, since the kernel

@@ -132,7 +132,7 @@ scan_disk () {
 			fi
 			;;
 
-		    ext2|ext3)
+		    ext2|ext3|ext4)
 			if ! type tune2fs >/dev/null 2>&1 || ! type resize2fs >/dev/null 2>&1; then
 				continue
 			fi
