@@ -3,7 +3,7 @@
 # «mythbuntu-ui» - Mythbuntu user interface
 #
 # Copyright (C) 2005 Junta de Andalucía
-# Copyright (C) 2005, 2006, 2007 Canonical Ltd.
+# Copyright (C) 2005, 2006, 2007, 2008 Canonical Ltd.
 # Copyright (C) 2007-2008, Mario Limonciello, for Mythbuntu
 # Copyright (C) 2007, Jared Greenwald, for Mythbuntu
 #
@@ -53,7 +53,10 @@ import MySQLdb
 #Lirc support
 from mythbuntu_common.lirc import LircHandler
 
-#Theme support
+#MySQL support
+from mythbuntu_common.mysql import MySQLHandler
+
+#Dictionary support
 from mythbuntu_common.dictionaries import *
 
 from ubiquity.misc import *
@@ -122,6 +125,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
         self.populate_lirc()
         self.populate_video()
+        self.populate_mysql()
         self.backup=False
 
     def run(self):
@@ -166,7 +170,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         #disable the mainline ubiquity autologin
         #we have mythbuntu specific offerings that behave
         #a little bit differently
-        self.auto_login.hide()
+        self.login_vbox.hide()
 
         # show interface
         got_intro = self.show_intro()
@@ -419,6 +423,13 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         self.video_driver.set_active(len(dictionary))
         self.tvoutstandard.set_active(0)
         self.tvouttype.set_active(0)
+    
+    def populate_mysql(self):
+        """Puts a new random mysql password into the UI for each run
+           This ensures that passwords don't ever get cached"""
+        self.mysql=MySQLHandler()
+        new_pass_caller = subprocess.Popen(['pwgen','-s','8'],stdout=subprocess.PIPE)
+        self.mysql_password.set_text(string.split(new_pass_caller.communicate()[0])[0])
 
     def mythbuntu_password(self,widget):
         """Checks that certain passwords meet requirements"""
@@ -473,21 +484,16 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
 
     def do_connection_test(self,widget):
         """Tests to make sure that the backend is accessible"""
-        host = self.mysql_server.get_text()
-        database = self.mysql_database.get_text()
-        user = self.mysql_user.get_text()
-        password = self.mysql_password.get_text()
-        try:
-            db = MySQLdb.connect(host=host, user=user, passwd=password,db=database)
-            cursor = db.cursor()
-            cursor.execute("SELECT NULL")
-            result = cursor.fetchone()
-            cursor.close()
-            db.close()
-            result = "Successful"
+        config={}
+        config["user"]=self.mysql_user.get_text()
+        config["password"]=self.mysql_password.get_text()
+        config["server"]=self.mysql_server.get_text()
+        config["database"]=self.mysql_database.get_text()
+        self.mysql.update_config(config)
+        result=self.mysql.do_connection_test() 
+        if result == "Successful":
             self.allow_go_forward(True)
-        except:
-            result = "Failure"
+        else:
             self.allow_go_forward(False)
         self.connection_results_label.show()
         self.connection_results.set_text(result)

@@ -1,3 +1,13 @@
+apt-setup (1:0.37ubuntu8) jaunty; urgency=low
+
+  * Remove /var/lib/install-cd.id if cd_type ends with /single, to avoid
+    unnecessary problems remounting the CD (LP: #294365).
+  * Enable all network sources, including security updates, even if the
+    network is unconfigured (LP: #256098).
+  * Fix handling of universe and multiverse in -backports lines.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 09 Jan 2009 15:41:53 +0000
+
 apt-setup (1:0.37ubuntu7) jaunty; urgency=low
 
   * Honour apt-setup/restricted, apt-setup/universe, and

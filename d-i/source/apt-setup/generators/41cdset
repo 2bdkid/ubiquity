@@ -12,6 +12,11 @@ fi
 # multi-arch CDs have cd_type 'non_complete'
 # KDE/Xfce CDs and multi-arch DVDs have '/single' postfix in cd_type
 cd_type=$(cat /cdrom/.disk/cd_type)
+case $cd_type in
+    */single)
+	rm -f /var/lib/install-cd.id # avoid remounting complications
+	;;
+esac
 if [ "$cd_type" != full_cd ] && [ "$cd_type" != dvd ]; then
 	exit 0
 fi

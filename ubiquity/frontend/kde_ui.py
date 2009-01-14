@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (C) 2006, 2007 Canonical Ltd.
+# Copyright (C) 2006, 2007, 2008, 2009 Canonical Ltd.
 #
 # Author(s):
 #   Jonathan Riddell <jriddell@ubuntu.com>
@@ -1818,6 +1818,14 @@ class Wizard(BaseFrontend):
                           "KDE frontend does not support auto-login yet")
 
     def get_auto_login(self):
+        return False
+    
+    def set_encrypt_home(self, value):
+        if value:
+            syslog.syslog(syslog.LOG_WARNING,
+                          "KDE frontend does not support home encryption yet")
+
+    def get_encrypt_home(self):
         return False
 
     def username_error(self, msg):

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Copyright (C) 2005 Javier Carranza and others for Guadalinex
-# Copyright (C) 2005, 2006 Canonical Ltd.
+# Copyright (C) 2005, 2006, 2007, 2008, 2009 Canonical Ltd.
 # Copyright (C) 2007 Mario Limonciello
 #
 # This program is free software; you can redistribute it and/or modify
@@ -1987,6 +1987,9 @@ exit 0"""
         # Keep packages we explicitly installed.
         recorded = self.query_recorded_installed()
         difference -= recorded
+
+        archdetect = subprocess.Popen(['archdetect'], stdout=subprocess.PIPE)
+        subarch = archdetect.communicate()[0].strip()
 
         if subarch.startswith('amd64/') or subarch.startswith('i386/') or subarch.startswith('lpia/'):
             if 'grub' not in recorded:

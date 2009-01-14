@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 # Copyright (C) 2005 Junta de Andalucía
-# Copyright (C) 2005, 2006, 2007 Canonical Ltd.
+# Copyright (C) 2005, 2006, 2007, 2008 Canonical Ltd.
 #
 # This file is part of Ubiquity.
 #
@@ -382,6 +382,14 @@ class BaseFrontend:
     def get_auto_login(self):
         """Returns true if the user should be automatically logged in."""
         self._abstract('get_auto_login')
+
+    def set_encrypt_home(self, value):
+        """Set whether the home directory should be encrypted."""
+        self._abstract('set_encrypt_home')
+
+    def get_encrypt_home(self):
+        """Returns true if the home directory should be encrypted."""
+        self._abstract('get_encrypt_home')
 
     def username_error(self, msg):
         """The selected username was bad."""

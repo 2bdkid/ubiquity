@@ -47,21 +47,6 @@ done
 
 # Don't test mirror if no network selected in netcfg
 echo "deb http://$host$directory $codename-security $dists" >> $file
-if db_get netcfg/dhcp_options && \
-   [ "$RET" = "Do not configure the network at this time" ]; then
-	CODE=9
-else
-	CODE=0
-	if ! apt-setup-verify --from $PROGRESS_FROM --to $PROGRESS_TO $file; then
-		db_subst apt-setup/service-failed HOST "$host"
-		db_input critical apt-setup/service-failed || true
-		if ! db_go; then
-			exit 10 # back up
-		fi
-		CODE=9
-	fi
-fi
-
 echo "deb-src http://$host$directory $codename-security $dists" >> $file
 
 # Security sources for Ubuntu universe; not used much, but e.g. unsupported
@@ -90,4 +75,4 @@ EOF
 
 apt-setup-signed-release security.ubuntu.com "$file"
 
-exit $CODE
+exit 0
