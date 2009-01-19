@@ -1,3 +1,24 @@
+ubiquity (1.11.4) jaunty; urgency=low
+
+  [ Mario Limonciello ]
+  * Mythbuntu specific changes:
+    - Don't reinvent the square with autologin.  It's provided 
+      by user-setup, so use it there.
+    - Eliminate mythbuntu_summary.py, and instead merge it into
+      mythbuntu_install.py
+    - Change definition overrides in mythbuntu_install.py so run() can
+      be used from install.py without code duplication in mythbuntu_install.py.
+      (LP: #178987), (LP: #201397), (LP: #293268)
+    - Change function overrides in mythbuntu_ui.py.  There should be no
+      full definition code duplication anymore.
+  * GTK specific changes:
+    - Move declaration of self.pages into __init__ instead so that it can
+      more easily overridden outside of run().
+  * Automatic update of included source packages: apt-setup
+    1:0.37ubuntu9.
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Mon, 19 Jan 2009 08:28:50 -0600
+
 ubiquity (1.11.3) jaunty; urgency=low
 
   [ Colin Watson ]

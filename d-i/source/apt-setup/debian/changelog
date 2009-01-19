@@ -1,3 +1,12 @@
+apt-setup (1:0.37ubuntu9) jaunty; urgency=low
+
+  * Use cdrom-detect/cdrom_fs when remounting the CD to ensure that we do so
+    using the same filesystem.
+  * Make sure apt-cdrom doesn't unmount the CD in the first place if cd_type
+    ends with /single (LP: #316618).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 14 Jan 2009 15:04:44 +0000
+
 apt-setup (1:0.37ubuntu8) jaunty; urgency=low
 
   * Remove /var/lib/install-cd.id if cd_type ends with /single, to avoid

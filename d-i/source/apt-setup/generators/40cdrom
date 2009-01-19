@@ -11,6 +11,16 @@ fi
 if [ ! -s /cdrom/.disk/info ]; then
 	exit 0
 fi
+REMOUNT_CD=true
+if [ "$OVERRIDE_LEAVE_CD_MOUNTED" ]; then
+	REMOUNT_CD=
+fi
+cd_type=$(cat /cdrom/.disk/cd_type)
+case $cd_type in
+    */single)
+	REMOUNT_CD=
+	;;
+esac
 
 cdfstype=$(mount | grep "on /cdrom " | cut -d' ' -f5)
 isofs=
@@ -19,9 +29,13 @@ if [ "$cdfstype" = "iso9660" ]; then
 fi
 
 remount_cd() {
-	if [ "$ROOT" ] && [ -n "$isofs" ] && [ ! -d /hd-media ] && [ -z "$OVERRIDE_LEAVE_CD_MOUNTED" ]; then
+	if [ "$ROOT" ] && [ -n "$isofs" ] && [ ! -d /hd-media ] && [ "$REMOUNT_CD" ]; then
+		fs=iso9660
+		if db_get cdrom-detect/cdrom_fs && [ "$RET" ]; then
+			fs="$RET"
+		fi
 		db_get cdrom-detect/cdrom_device
-		$logoutput mount -t iso9660 -o ro,exec $RET /cdrom || true
+		$logoutput mount -t "$fs" -o ro,exec $RET /cdrom || true
 	fi
 }
 
@@ -59,7 +73,7 @@ if [ "$ROOT" ]; then
 
 	# Allow apt-cdrom to manage mounting/unmounting CDs in /target
 	# (except for hd-media installs)
-	if [ ! -d /hd-media ] && [ -n "$isofs" ] && [ -z "$OVERRIDE_LEAVE_CD_MOUNTED" ]; then
+	if [ ! -d /hd-media ] && [ -n "$isofs" ] && [ "$REMOUNT_CD" ]; then
 		rm -f $ROOT/etc/apt/apt.conf.d/00NoMountCDROM
 
 		# Also removes the bind-mount in /target
@@ -75,7 +89,7 @@ if $logoutput $chroot $ROOT apt-cdrom add \
    </dev/null; then
 	cat $ROOT$tmp >> $file
 
-	if [ "$ROOT" ] && [ -n "$isofs" ] && [ ! -d /hd-media ]; then
+	if [ "$ROOT" ] && [ -n "$isofs" ] && [ ! -d /hd-media ] && [ "$REMOUNT_CD" ]; then
 		save_label
 	fi
 else

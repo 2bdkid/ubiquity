@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2005 Junta de Andalucía
 # Copyright (C) 2005, 2006, 2007, 2008 Canonical Ltd.
-# Copyright (C) 2007-2008, Mario Limonciello, for Mythbuntu
+# Copyright (C) 2007-2009, Mario Limonciello, for Mythbuntu
 # Copyright (C) 2007, Jared Greenwald, for Mythbuntu
 #
 # Authors:
@@ -37,69 +37,33 @@
 # You should have received a copy of the GNU General Public License along
 # with Ubiquity; if not, write to the Free Software Foundation, Inc., 51
 # Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-##################################################################################
 
+import sys
 import os
 import re
-import sys
 import string
 import subprocess
 import syslog
 import signal
+import inspect
 
 import gtk
-import MySQLdb
 
-#Lirc support
+#Mythbuntu common functionality
 from mythbuntu_common.lirc import LircHandler
-
-#MySQL support
 from mythbuntu_common.mysql import MySQLHandler
-
-#Dictionary support
 from mythbuntu_common.dictionaries import *
 
+#Mythbuntu ubiquity imports
+from ubiquity.components import mythbuntu, mythbuntu_install
+
+#Ubiquity imports
 from ubiquity.misc import *
-from ubiquity.components import console_setup, language, timezone, usersetup, \
-                                partman, partman_commit, \
-                                mythbuntu, mythbuntu_install, mythbuntu_summary
-import ubiquity.frontend.gtk_ui
-import ubiquity.components.mythbuntu_install
-import ubiquity.components.mythbuntu_summary
-ubiquity.frontend.gtk_ui.install = ubiquity.components.mythbuntu_install
-ubiquity.frontend.gtk_ui.summary = ubiquity.components.mythbuntu_summary
+import ubiquity.frontend.gtk_ui as ParentFrontend
+ParentFrontend.install = mythbuntu_install
+ParentFrontend.summary = mythbuntu_install
 
-
-BREADCRUMB_STEPS = {
-    "stepLanguage": 1,
-    "stepLocation": 2,
-    "stepKeyboardConf": 3,
-    "stepPartAuto": 4,
-    "stepPartAdvanced": 4,
-    "stepUserInfo": 5,
-    "mythbuntu_stepInstallType": 6,
-    "mythbuntu_stepCustomInstallType": 7,
-    "mythbuntu_stepPlugins": 8,
-    "tab_themes": 9,
-    "mythbuntu_stepServices": 10,
-    "mythbuntu_stepPasswords": 11,
-    "tab_remote_control": 12,
-    "mythbuntu_stepDrivers": 13,
-    "stepReady": 14,
-    "mythbuntu_stepBackendSetup": 15
-}
-BREADCRUMB_MAX_STEP = 15
-
-# Define what pages of the UI we want to load.  Note that most of these pages
-# are required for the install to complete successfully.
-SUBPAGES = [
-    "stepWelcome",
-    "stepLanguage",
-    "stepLocation",
-    "stepKeyboardConf",
-    "stepPartAuto",
-    "stepPartAdvanced",
-    "stepUserInfo",
+MYTHPAGES = [
     "mythbuntu_stepInstallType",
     "mythbuntu_stepCustomInstallType",
     "mythbuntu_stepPlugins",
@@ -108,290 +72,133 @@ SUBPAGES = [
     "mythbuntu_stepPasswords",
     "tab_remote_control",
     "mythbuntu_stepDrivers",
-    "stepReady",
     "mythbuntu_stepBackendSetup"
 ]
 
-ubiquity.frontend.gtk_ui.BREADCRUMB_STEPS = BREADCRUMB_STEPS
-ubiquity.frontend.gtk_ui.BREADCRUMB_MAX_STEP = BREADCRUMB_MAX_STEP
-ubiquity.frontend.gtk_ui.SUBPAGES = SUBPAGES
-
-class Wizard(ubiquity.frontend.gtk_ui.Wizard):
+class Wizard(ParentFrontend.Wizard):
 
 #Overriden Methods
     def __init__(self, distro):
+        #Remove migration assistant
         del os.environ['UBIQUITY_MIGRATION_ASSISTANT']
-        ubiquity.frontend.gtk_ui.Wizard.__init__(self,distro)
+        place=ParentFrontend.BREADCRUMB_STEPS["stepReady"]
 
+        #Max steps
+        ParentFrontend.BREADCRUMB_MAX_STEP = place + len(MYTHPAGES)
+
+        #update location of summary page
+        ParentFrontend.BREADCRUMB_STEPS["stepReady"]=place+len(MYTHPAGES)-1
+
+        #Add in final page
+        final_page=MYTHPAGES.pop()
+        ParentFrontend.BREADCRUMB_STEPS[final_page]=place+len(MYTHPAGES)+1
+        ParentFrontend.SUBPAGES.append(final_page)
+
+        #Add in individual mythpages pages
+        for string in MYTHPAGES:
+            ParentFrontend.BREADCRUMB_STEPS[string]=place
+            ParentFrontend.SUBPAGES.insert(len(ParentFrontend.SUBPAGES)-2,string)
+            place+=1
+
+        ParentFrontend.Wizard.__init__(self,distro)
+
+    def allow_change_step(self,allow):
+        """Normally used to determine if we can progress pages.  We have to override
+           this function to determine whether this is a skippable page."""
+
+        #This skipping condition only happens when called with False
+        if not allow:
+            #do stuff only if we are getting called from a function
+            #called run.  No not too ambiguous, right?
+            if inspect.stack()[1][3] == 'run':
+                new_name = self.dbfilter.__class__.__name__
+                advanced=self.get_advanced()
+                type = self.get_installtype()
+                if (not advanced and \
+                                     (new_name == 'MythbuntuInstallType' or \
+                                      new_name == 'MythbuntuPlugins' or \
+                                      new_name == 'MythbuntuThemes' or \
+                                      new_name == 'MythbuntuServices' or \
+                                      new_name == 'MythbuntuPasswords')) or \
+                   ('Frontend' not in type and \
+                                     (new_name == 'MythbuntuThemes' or \
+                                      new_name == 'MythbuntuRemote')):
+                    self.dbfilter.start(auto_process=True)
+                    if not self.backup:
+                        self.dbfilter.ok_handler()
+                    else:
+                        self.dbfilter.cancel_handler()
+                    self.dbfilter = mythbuntu.MythbuntuPageSkipper(self)
+                    self.dbfilter_status=None
+
+        #Finally do something releated to step changing
+        ParentFrontend.Wizard.allow_change_step(self,allow)
+
+    def customize_installer(self):
+        """Initial UI setup."""
+        #Prepopulate some dynamic pages
         self.populate_lirc()
         self.populate_video()
         self.populate_mysql()
         self.backup=False
 
-    def run(self):
-        """run the interface."""
-        def skip_pages(old_backup,old_name,new_name):
-            """Skips a mythbuntu page if we should"""
-            advanced=self.get_advanced()
-            #advanced install conditionally skips a few pages
-            if advanced:
-                type = self.get_installtype()
-                if (type == "Master Backend" or type == "Slave Backend") and \
-                   (new_name == 'MythbuntuThemes' or new_name == 'MythbuntuRemote'):
-                    if not old_backup:
-                        self.dbfilter.ok_handler()
-                    else:
-                        self.dbfilter.cancel_handler()
-                        self.backup=True
-            #standard install should fly right through forward
-            else:
-                if new_name == 'MythbuntuInstallType' or \
-                   new_name == 'MythbuntuPlugins' or \
-                   new_name == 'MythbuntuThemes' or \
-                   new_name == 'MythbuntuServices' or \
-                   new_name == 'MythbuntuPasswords':
-                    if not old_backup:
-                        self.dbfilter.ok_handler()
-                    else:
-                        self.dbfilter.cancel_handler()
-                        self.backup=True
+        #Default to auto login, but don't make it mandatory
+        #This requires disabling encrypted FS
+        self.set_auto_login(True)
+        self.login_encrypt.set_sensitive(False)
 
-        if os.getuid() != 0:
-            title = ('This installer must be run with administrative '
-                     'privileges, and cannot continue without them.')
-            dialog = gtk.MessageDialog(self.live_installer, gtk.DIALOG_MODAL,
-                                       gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE,
-                                       title)
-            dialog.run()
-            sys.exit(1)
+        #Remove their summary page.  ours is better
+        self.pages.pop()
 
-        self.disable_volume_manager()
-
-        #disable the mainline ubiquity autologin
-        #we have mythbuntu specific offerings that behave
-        #a little bit differently
-        self.login_vbox.hide()
-
-        # show interface
-        got_intro = self.show_intro()
-        self.allow_change_step(True)
-
-        # Declare SignalHandler
-        self.glade.signal_autoconnect(self)
-
-        # Some signals need to be connected by hand so that we have the
-        # handler ids.
-        self.username_changed_id = self.username.connect(
-            'changed', self.on_username_changed)
-        self.hostname_changed_id = self.hostname.connect(
-            'changed', self.on_hostname_changed)
-
-        # Start the interface
-        if got_intro:
-            global BREADCRUMB_STEPS, BREADCRUMB_MAX_STEP
-            for step in BREADCRUMB_STEPS:
-                BREADCRUMB_STEPS[step] += 1
-            BREADCRUMB_STEPS["stepWelcome"] = 1
-            BREADCRUMB_MAX_STEP += 1
-            ubiquity.frontend.gtk_ui.BREADCRUMB_STEPS = BREADCRUMB_STEPS
-            ubiquity.frontend.gtk_ui.BREADCRUMB_MAX_STEP = BREADCRUMB_MAX_STEP
-            first_step = self.stepWelcome
-        else:
-            first_step = self.stepLanguage
-        self.set_current_page(self.steps.page_num(first_step))
-        if got_intro:
-            # intro_label was the only focusable widget, but got can-focus
-            # removed, so we end up with no input focus and thus pressing
-            # Enter doesn't activate the default widget. Work around this.
-            self.next.grab_focus()
-
-        self.pages = [language.Language, timezone.Timezone,
-            console_setup.ConsoleSetup, partman.Partman,
-            usersetup.UserSetup, mythbuntu.MythbuntuAdvancedType,
+        #Insert all of our pages
+        for page in [mythbuntu.MythbuntuAdvancedType,
             mythbuntu.MythbuntuInstallType, mythbuntu.MythbuntuPlugins,
             mythbuntu.MythbuntuThemes, mythbuntu.MythbuntuServices,
             mythbuntu.MythbuntuPasswords, mythbuntu.MythbuntuRemote,
-            mythbuntu.MythbuntuDrivers, mythbuntu_summary.Summary]
-        self.pagesindex = 0
-        pageslen = len(self.pages)
+            mythbuntu.MythbuntuDrivers, mythbuntu_install.Summary]:
+            self.pages.append(page)
 
-        if got_intro:
-            gtk.main()
+        ParentFrontend.Wizard.customize_installer(self)
 
-        while(self.pagesindex < pageslen):
-            if not self.installing:
-                # Make sure any started progress bars are stopped.
-                while self.progress_position.depth() != 0:
-                    self.debconf_progress_stop()
-
-            old_backup = self.backup
-            self.backup = False
-            old_dbfilter = self.dbfilter
-            self.dbfilter = self.pages[self.pagesindex](self)
-
-            # Non-debconf steps are no longer possible as the interface is now
-            # driven by whether there is a question to ask.
-            if self.dbfilter is not None and self.dbfilter != old_dbfilter:
-                self.allow_change_step(False)
-                self.dbfilter.start(auto_process=True)
-                skip_pages(old_backup,old_dbfilter.__class__.__name__,self.dbfilter.__class__.__name__)
-            gtk.main()
-
-            if self.backup or self.dbfilter_handle_status():
-                if self.installing:
-                    self.progress_loop()
-                elif self.current_page is not None and not self.backup:
-                    self.process_step()
-                    if not self.stay_on_page:
-                        self.pagesindex = self.pagesindex + 1
-                    if 'UBIQUITY_AUTOMATIC' in os.environ:
-                        # if no debconf_progress, create another one, set start to pageindex
-                        self.debconf_progress_step(1)
-                        self.refresh()
-                if self.backup:
-                    if self.pagesindex > 0:
-                        step = self.step_name(self.steps.get_current_page())
-                        if not step == 'stepPartAdvanced':
-                            self.pagesindex = self.pagesindex - 1
-
-            self.back.show()
-
-            # TODO: Move this to after we're done processing GTK events, or is
-            # that not worth the CPU time?
-            if self.current_page == None:
-                break
-
-            while gtk.events_pending():
-                gtk.main_iteration()
-
-            # needed to be here for --automatic as there might not be any
-            # current page in the event all of the questions have been
-            # preseeded.
-            if self.pagesindex == pageslen:
-                # Ready to install
-                self.live_installer.hide()
-                self.current_page = None
-                self.installing = True
-                self.progress_loop()
-
-        #After (and if) install is done, decide what to do
-        if self.pagesindex == pageslen:
-            self.run_success_cmd()
-            if 'UBIQUITY_AUTOMATIC' in os.environ or self.get_installtype() == "Frontend":
-                if not self.get_reboot_seen():
-                    self.finished_dialog.run()
-                elif self.get_reboot():
-                    self.reboot()
-            else:
-                self.live_installer.show()
-                self.installing = False
-                self.steps.next_page()
-                self.back.hide()
-                self.quit.hide()
-                self.next.set_label("Finish")
-                gtk.main()
-                self.live_installer.hide()
-                self.finished_dialog.run()
-        return self.returncode
-
-    def process_step(self):
-        """Process and validate the results of this step."""
-
-        # setting actual step
-        step = self.step_name(self.steps.get_current_page())
-
-        #Figure out if this is a mythbuntu specific step
-        if step == "mythbuntu_stepBackendSetup":
-            syslog.syslog('Step_before = %s' % step)
-            self.live_installer.hide()
-            self.current_page = None
-            self.finished_dialog.run()
-        else:
-            ubiquity.frontend.gtk_ui.Wizard.process_step(self)
-
-    def progress_loop(self):
-        """prepare, copy and config the system in the core install process."""
-
-        syslog.syslog('progress_loop()')
-
-        self.current_page = None
-
-        self.debconf_progress_start(
-            0, 100, self.get_string('ubiquity/install/title'))
-        self.debconf_progress_region(0, 15)
-
-        dbfilter = partman_commit.PartmanCommit(self)
-        if dbfilter.run_command(auto_process=True) != 0:
-            while self.progress_position.depth() != 0:
-                self.debconf_progress_stop()
-            self.debconf_progress_window.hide()
-            self.return_to_partitioning()
-            return
-
-        # No return to partitioning from now on
-        self.installing_no_return = True
-
-        self.debconf_progress_region(15, 100)
-
-        dbfilter = mythbuntu_install.Install(self)
-        ret = dbfilter.run_command(auto_process=True)
-        if ret != 0:
+    def run_success_cmd(self):
+        """Runs mythbuntu post post install GUI step"""
+        if not 'UBIQUITY_AUTOMATIC' in os.environ and self.get_installtype() != "Frontend":
+            self.live_installer.show()
             self.installing = False
-            if ret == 3:
-                # error already handled by Install
-                sys.exit(ret)
-            elif (os.WIFSIGNALED(ret) and
-                  os.WTERMSIG(ret) in (signal.SIGINT, signal.SIGKILL,
-                                       signal.SIGTERM)):
-                sys.exit(ret)
-            elif os.path.exists('/var/lib/ubiquity/install.trace'):
-                tbfile = open('/var/lib/ubiquity/install.trace')
-                realtb = tbfile.read()
-                tbfile.close()
-                raise RuntimeError, ("Install failed with exit code %s\n%s" %
-                                     (ret, realtb))
-            else:
-                raise RuntimeError, ("Install failed with exit code %s; see "
-                                     "/var/log/syslog" % ret)
-
-        while self.progress_position.depth() != 0:
-            self.debconf_progress_stop()
-
-        # just to make sure
-        self.debconf_progress_window.hide()
-
-        self.installing = False
+            self.steps.next_page()
+            self.back.hide()
+            self.quit.hide()
+            self.next.set_label("Finish")
+            gtk.main()
+            self.live_installer.hide()
+        ParentFrontend.Wizard.run_success_cmd(self)
 
     def set_page(self, n):
+        if n == 'MythbuntuAdvancedType':
+            cur = self.mythbuntu_stepInstallType
+        elif n == 'MythbuntuRemote':
+            cur = self.tab_remote_control
+        elif n == 'MythbuntuDrivers':
+            cur = self.mythbuntu_stepDrivers
+        elif n == 'MythbuntuInstallType':
+            cur = self.mythbuntu_stepCustomInstallType
+        elif n == 'MythbuntuPlugins':
+            cur = self.mythbuntu_stepPlugins
+        elif n == 'MythbuntuThemes':
+            cur = self.tab_themes
+        elif n == 'MythbuntuPasswords':
+            cur = self.mythbuntu_stepPasswords
+            if "Master" not in self.get_installtype():
+                self.allow_go_forward(False)
+        elif n == 'MythbuntuServices':
+            cur = self.mythbuntu_stepServices
+        else:
+            ParentFrontend.Wizard.set_page(self,n)
+            return
         self.run_automation_error_cmd()
-        gtk_ui_pages  = ['Language', 'ConsoleSetup', 'Timezone', 'Partman', 'UserSetup', 'Summary', 'MigrationAssistant']
-        found = False
-        for item in gtk_ui_pages:
-            if n == item:
-                found = True
-                ubiquity.frontend.gtk_ui.Wizard.set_page(self,n)
-                break
-        if not found:
-            self.live_installer.show()
-            if n == 'MythbuntuAdvancedType':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepInstallType))
-            elif n == 'MythbuntuRemote':
-                self.set_current_page(self.steps.page_num(self.tab_remote_control))
-            elif n == 'MythbuntuDrivers':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepDrivers))
-            if n == 'MythbuntuInstallType':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepCustomInstallType))
-            elif n == 'MythbuntuPlugins':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepPlugins))
-            elif n == 'MythbuntuThemes':
-                self.set_current_page(self.steps.page_num(self.tab_themes))
-            elif n == 'MythbuntuPasswords':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepPasswords))
-                installtype=self.get_installtype()
-                if installtype != "Master Backend/Frontend" and installtype != "Master Backend":
-                    self.allow_go_forward(False)
-            elif n == 'MythbuntuServices':
-                self.set_current_page(self.steps.page_num(self.mythbuntu_stepServices))
+        self.backup = False
+        self.live_installer.show()
+        self.set_current_page(self.steps.page_num(cur))
 
 ####################
 #Helper Functions  #
@@ -423,7 +230,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         self.video_driver.set_active(len(dictionary))
         self.tvoutstandard.set_active(0)
         self.tvouttype.set_active(0)
-    
+
     def populate_mysql(self):
         """Puts a new random mysql password into the UI for each run
            This ensures that passwords don't ever get cached"""
@@ -477,8 +284,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
     def do_mythtv_setup(self,widget):
         """Spawn MythTV-Setup binary."""
         self.live_installer.hide()
-        while gtk.events_pending():
-            gtk.main_iteration()
+        self.refresh()
         execute_root("/usr/share/ubiquity/mythbuntu-setup")
         self.live_installer.show()
 
@@ -490,7 +296,7 @@ class Wizard(ubiquity.frontend.gtk_ui.Wizard):
         config["server"]=self.mysql_server.get_text()
         config["database"]=self.mysql_database.get_text()
         self.mysql.update_config(config)
-        result=self.mysql.do_connection_test() 
+        result=self.mysql.do_connection_test()
         if result == "Successful":
             self.allow_go_forward(True)
         else:
