@@ -205,6 +205,12 @@ while :; do
 			db_input high user-setup/encrypt-home || true
 		fi
 		;;
+	    9)
+		db_get user-setup/encrypt-home
+		if [ "$RET" = true ]; then
+			apt-install ecryptfs-utils 2>/dev/null
+		fi
+		;;
 	    *)
 		break
 		;;

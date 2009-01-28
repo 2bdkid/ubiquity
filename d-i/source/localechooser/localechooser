@@ -657,7 +657,7 @@ while :; do
 		if [ "$LOCALE" != "C" ]; then
 			POSSIBLELOCALES=$(grep -e "^${LANGUAGE%%_*}_${COUNTRYCODE}" $SUPPORTEDLOCALES | cut -d' ' -f1 || true)
 			if [ -z "$POSSIBLELOCALES" ]; then
-				POSSIBLELOCALES=$(grep -e "^${LANGUAGE%%_*}_${COUNTRYCODE_LANGUAGECHOOSER}" $SUPPORTEDLOCALES | cut -d' ' -f1 || true)
+				POSSIBLELOCALES=$(grep -e "^${LANGUAGE%%_*}_${DEFAULT_COUNTRY}" $SUPPORTEDLOCALES | cut -d' ' -f1 || true)
 			fi
 			if [ $(echo $POSSIBLELOCALES | wc -w) -gt 1 ]; then
 				CHOICES=""

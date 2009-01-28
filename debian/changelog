@@ -1,3 +1,29 @@
+ubiquity (1.11.5) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Full screen the window when in ONLY_UBIQUITY mode.  The extra screen
+    real estate makes the timezone map, among other widgets, easier to
+    use.
+  * Modified the keyboard setup page to produce a more visually obvious
+    suggestion.
+  * Automatic update of included source packages: grub-installer
+    1.36ubuntu1, localechooser 2.09ubuntu1, user-setup 1.23ubuntu8.
+
+  [ Mario Limonciello ]
+  * Adjust logic for detecting incomplete language support.  Just 
+    because a package doesn't "exist" doesn't mean that language support
+    isn't all there.  Some packages don't yet provide language-support-XY
+    packages. (LP: #290398)
+
+  [ Colin Watson ]
+  * Remove old XFS-on-/boot validation, no longer needed now that
+    grub-install has been fixed (LP: #8058).
+  * Default hostname to 'oem-laptop' or 'oem-desktop' as appropriate in OEM
+    mode, to allow OEM installations to be fully preseeded (thanks, Twisted
+    Lincoln, Inc.; LP: #321341).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 28 Jan 2009 17:00:46 +0000
+
 ubiquity (1.11.4) jaunty; urgency=low
 
   [ Mario Limonciello ]

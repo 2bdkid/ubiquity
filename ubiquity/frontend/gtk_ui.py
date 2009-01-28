@@ -463,7 +463,7 @@ class Wizard(BaseFrontend):
         self.photo.set_from_file(photo)
 
         if 'UBIQUITY_ONLY' in os.environ:
-            self.live_installer.set_type_hint(gtk.gdk.WINDOW_TYPE_HINT_DIALOG)
+            self.live_installer.fullscreen()
 
         if self.oem_config:
             self.live_installer.set_title(self.get_string('oem_config_title'))
@@ -480,6 +480,11 @@ class Wizard(BaseFrontend):
             self.username.set_editable(False)
             self.username.set_sensitive(False)
             self.username_edited = True
+            if self.laptop:
+                self.hostname.set_text('oem-laptop')
+            else:
+                self.hostname.set_text('oem-desktop')
+            self.hostname_edited = True
             self.login_vbox.hide()
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-gtk')
@@ -538,15 +543,6 @@ class Wizard(BaseFrontend):
                                    gobject.SPAWN_STDOUT_TO_DEV_NULL |
                                    gobject.SPAWN_STDERR_TO_DEV_NULL))
         return True
-
-
-    def set_window_hints(self, widget):
-        if 'UBIQUITY_ONLY' in os.environ:
-            # Disable minimise button.
-            widget.window.set_functions(
-                gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MOVE |
-                gtk.gdk.FUNC_MAXIMIZE)
-
 
     def set_locales(self):
         """internationalization config. Use only once."""
@@ -1380,6 +1376,7 @@ class Wizard(BaseFrontend):
             self.set_keyboard(self.current_layout)
 
     def set_keyboard (self, layout):
+        self.default_keyboard_layout = layout
         BaseFrontend.set_keyboard(self, layout)
         model = self.keyboardlayoutview.get_model()
         if model is None:
@@ -1395,6 +1392,8 @@ class Wizard(BaseFrontend):
             iterator = model.iter_next(iterator)
 
     def get_keyboard (self):
+        if self.suggested_keymap.get_active():
+            return unicode(self.default_keyboard_layout)
         selection = self.keyboardlayoutview.get_selection()
         (model, iterator) = selection.get_selected()
         if iterator is None:
@@ -1417,6 +1416,13 @@ class Wizard(BaseFrontend):
                               self.on_keyboard_variant_selected)
 
     def set_keyboard_variant (self, variant):
+        self.default_keyboard_variant = variant
+        # Make sure the "suggested option" is selected, otherwise this will
+        # change every time the user selects a new keyboard in the manual
+        # choice selection boxes.
+        if self.suggested_keymap.get_active():
+            self.suggested_keymap_label.set_property('label', variant)
+            self.suggested_keymap.toggled()
         model = self.keyboardvariantview.get_model()
         if model is None:
             return
@@ -1431,6 +1437,8 @@ class Wizard(BaseFrontend):
             iterator = model.iter_next(iterator)
 
     def get_keyboard_variant (self):
+        if self.suggested_keymap.get_active():
+            return unicode(self.default_keyboard_variant)
         selection = self.keyboardvariantview.get_selection()
         (model, iterator) = selection.get_selected()
         if iterator is None:
@@ -1438,6 +1446,12 @@ class Wizard(BaseFrontend):
         else:
             return unicode(model.get_value(iterator, 0))
 
+    def on_suggested_keymap_toggled (self, widget):
+        if self.suggested_keymap.get_active():
+            self.keyboard_layout_hbox.set_sensitive(False)
+        else:
+            self.keyboard_layout_hbox.set_sensitive(True)
+        
     def set_disk_layout(self, layout):
         self.disk_layout = layout
 

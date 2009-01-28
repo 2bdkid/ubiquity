@@ -118,11 +118,6 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for module in aes cbc ecb; do
 			modprobe -q "$module" || true
 		done
-		if ! $chroot $ROOT which ecryptfs-setup-private >/dev/null 2>&1; then
-			# try to work in d-i and out; it's better to
-			# use apt-install in d-i
-			apt-install ecryptfs-utils 2>/dev/null || $log $chroot $ROOT apt-get -q -y install ecryptfs-utils || true
-		fi
 	fi
 
 
