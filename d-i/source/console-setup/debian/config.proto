@@ -146,7 +146,8 @@ ask_debconf () {
     prefix=$3       # The prefix for $kbdnames
     default_code=$4 # The default choice (optional)
     choices=`echo "$kbdnames" | grep "^$prefix\*" | 
-        sed -e "s/^$prefix\*[^\*]*\*//" -e 's/,/\\\\,/g' -e 's/$/,/' | LC_ALL=C sort `
+        sed -e "s/^$prefix\*[^\*]*\*//" -e 's/,/\\\\,/g' | LC_ALL=C sort |
+        sed -e 's/$/,/'`
     choices=`echo $choices | sed 's/, *$//'`
 
     db_subst $template CHOICES "$choices"
@@ -1485,8 +1486,15 @@ while :; do
 		STATE=$(( $STATE + $STATE - $old_state ))
 	    elif [ "$unsupported_layout" = yes ]; then
 		if [ "$STATE" -ge "$old_state" ]; then
-		    db_input medium console-setup/dont_ask_layout || true
-		    db_go || true
+		    # This is an error template, so debconf ignores the seen
+		    # flag. Make sure that it's only asked at most once per
+		    # package installation.
+		    if ! db_fget console-setup/dont_ask_layout asked_this_run || \
+		       [ "$RET" = false ]; then
+			db_input medium console-setup/dont_ask_layout || true
+			db_go || true
+			db_fset console-setup/dont_ask_layout asked_this_run true
+		    fi
 		    db_set console-setup/layoutcode "$XKBLAYOUT"
 		    STATE=$(($STATE + 1))
 		else

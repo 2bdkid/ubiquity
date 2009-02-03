@@ -1,3 +1,12 @@
+partman-base (128ubuntu5) jaunty; urgency=low
+
+  * Resynchronise partman-commit with partman, fixing harmless warning about
+    stralign.
+  * Fix disabling of backup while displaying device/partition locked errors
+    to avoid clobbering the align capability.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 30 Jan 2009 21:31:30 +0000
+
 partman-base (128ubuntu4) jaunty; urgency=low
 
   * Cope with exception options, partition flags passed to SET_FLAGS, and

@@ -39,7 +39,7 @@ EOF
 		local UNWRAPPED_PASSPHRASE_FILE WRAPPED_PASSPHRASE_FILE MOUNT_PASSPHRASE
 		UNWRAPPED_PASSPHRASE_FILE=/dev/shm/.ecryptfs-$USER
 		WRAPPED_PASSPHRASE_FILE=/home/$USER/.ecryptfs/wrapped-passphrase
-		MOUNT_PASSPHRASE=$(cat $UNWRAPPED_PASSPHRASE_FILE)
+		MOUNT_PASSPHRASE=$($chroot $ROOT cat $UNWRAPPED_PASSPHRASE_FILE)
 		$chroot $ROOT ecryptfs-wrap-passphrase $WRAPPED_PASSPHRASE_FILE - <<EOF
 $MOUNT_PASSPHRASE
 $PASSWD
@@ -132,6 +132,10 @@ if [ "$RET" = true ] && ! is_system_user; then
 		HOME_EXISTED=1
 	fi
 
+	if [ -n "$ENCRYPT_HOME_OPT" ]; then
+		$log $chroot $ROOT mount -t sysfs sysfs /sys
+		$log $chroot $ROOT mount -t tmpfs tmpfs /dev/shm
+	fi
 	if [ -x $ROOT/usr/sbin/adduser ]; then
 		$log $chroot $ROOT adduser --disabled-password --gecos "$RET" $UIDOPT $ENCRYPT_HOME_OPT "$USER" >/dev/null || true
 	else
@@ -143,6 +147,10 @@ if [ "$RET" = true ] && ! is_system_user; then
 	db_set passwd/user-password ''
 	db_set passwd/user-password-again ''
 	setpassword "$USER" "$USER_PW" "$USER_PW_CRYPTED" "$ENCRYPT_HOME"
+	if [ -n "$ENCRYPT_HOME_OPT" ]; then
+		$log $chroot $ROOT umount /sys
+		$log $chroot $ROOT umount /dev/shm
+	fi
 
 	if [ "$HOME_EXISTED" ]; then
 		# The user's home directory already existed before we called

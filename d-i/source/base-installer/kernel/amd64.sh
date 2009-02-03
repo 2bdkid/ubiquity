@@ -1,20 +1,18 @@
 arch_get_kernel_flavour () {
 	VENDOR=`grep '^vendor_id' "$CPUINFO" | head -n1 | cut -d: -f2`
 	case "$VENDOR" in
-		" AuthenticAMD"*)	echo amd64-k8 ;;
-		" GenuineIntel"*)	echo em64t-p4 ;;
-		*)			echo amd64-generic ;;
+	    " AuthenticAMD"*)
+		echo amd64-k8 ;;
+	    " GenuineIntel"*)
+		echo em64t-p4 ;;
+	    *)
+		echo amd64-generic ;;
 	esac
 	return 0
 }
 
 arch_check_usable_kernel () {
-	# Generic and server kernels can be run on any machine.
-	if expr "$1" : '.*-server.*' >/dev/null; then return 0; fi
-	if expr "$1" : '.*-generic.*' >/dev/null; then return 0; fi
-	if expr "$1" : '.*-virtual.*' >/dev/null; then return 0; fi
-	if expr "$1" : '.*-xen.*' >/dev/null; then return 0; fi
-	if expr "$1" : '.*-rt.*' >/dev/null; then return 0; fi
+	if echo "$1" | grep -Eq -- "-(server|generic|virtual|xen|rt)(-.*)?$"; then return 0; fi
 
 	return 1
 }

@@ -154,6 +154,7 @@ package KeyboardNames;
     'SK-6200' => 'sk6200',
     'SK-7100' => 'sk7100',
     'SVEN Ergonomic 2500' => 'sven',
+    'SVEN Slim 303' => 'sven303',
     'Samsung SDM 4500P' => 'samsung4500',
     'Samsung SDM 4510P' => 'samsung4510',
     'Sun Type 4' => 'sun4',
@@ -338,6 +339,7 @@ package KeyboardNames;
 	'Tibetan (with ASCII numerals)' => 'tib_asciinum',
     },
     'cz' => {
+	'UCW layout (accented letters only)' => 'ucw',
 	'With <\|> key' => 'bksl',
 	'qwerty' => 'qwerty',
 	'qwerty, extended Backslash' => 'qwerty_bksl',
@@ -426,6 +428,7 @@ package KeyboardNames;
 	'Eliminate dead keys' => 'nodeadkeys',
 	'Extended' => 'extended',
 	'Polytonic' => 'polytonic',
+	'Simple' => 'simple',
     },
     'hr' => {
 	'US keyboard with Croatian digraphs' => 'unicodeus',

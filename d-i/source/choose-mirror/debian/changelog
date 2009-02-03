@@ -1,3 +1,18 @@
+choose-mirror (2.27ubuntu3) jaunty; urgency=low
+
+  * Fix build-dependencies broken in merge of 2.27, including restoring the
+    dependency on isoquery so that we can build a proper list of countries
+    (LP: #321225).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Jan 2009 22:04:58 +0000
+
+choose-mirror (2.27ubuntu2) jaunty; urgency=low
+
+  * Switch default mirror for armel and lpia to
+    ports.ubuntu.com/ubuntu-ports/.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Jan 2009 13:06:53 +0000
+
 choose-mirror (2.27ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

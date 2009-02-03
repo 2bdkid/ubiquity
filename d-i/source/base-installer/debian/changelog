@@ -1,3 +1,345 @@
+base-installer (1.98ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default, unless
+      apt-setup/restricted is preseeded to false.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite;
+      also -proposed if apt-setup/proposed is true.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Write out the resume partition as a UUID if possible.
+    - Install busybox-initramfs rather than busybox.
+    - If base-installer/use_unclean_target is asked, emit a warning to the
+      logs so that we know about it when diagnosing problems.
+    - Never select /dev/ramzswap* as a hibernation target.
+  * Backport from trunk (Ian Campbell, Frans Pop):
+    - Use -686 kernels for CentaurHauls processors again (effectively
+      undoing r55059) . According to 464962 the kernel has been fixed since
+      2.6.26-8. Closes: #504095
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Jan 2009 22:14:20 +0000
+
+base-installer (1.98) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Add support for AMD CPU families 16 (Phenom) and 17 (Griffin/Puma) on
+    i386 (thanks, Roger Mach and Soren Hansen).
+  
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bengali (bn.po) by Mahay Alam Khan (মাহে আলম খান)
+  * Bosnian (bs.po) by Armin Besirovic
+  * Danish (da.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Macedonian (mk.po) by Arangel Angov
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Albanian (sq.po) by Elian Myftiu
+  * Serbian (sr.po) by Veselin Mijušković
+  * Ukrainian (uk.po) by Євгеній Мещеряков
+
+ -- Otavio Salvador <otavio@debian.org>  Sun, 21 Sep 2008 21:49:10 -0300
+
+base-installer (1.96) unstable; urgency=low
+
+  * Only set driver inclusion policy if other than 'most'. The maintainer
+    of initramfs-tools assures us that the default will not change.
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hebrew (he.po) by Omer Zak
+  * Hindi (hi.po) by Kumar Appaiah
+  * Croatian (hr.po) by Josip Rodin
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Central Khmer (km.po) by KHOEM Sokhem
+  * Korean (ko.po) by Changwoo Ryu
+  * Malayalam (ml.po) by പ്രവീണ്‍ അരിമ്പ്രത്തൊടിയില്‍
+  * Marathi (mr.po) by Sampada
+  * Bokmål, Norwegian (nb.po) by Hans Fredrik Nordhaug
+  * Nepali (ne.po) by Shiva Prasad Pokharel
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Polish (pl.po) by Bartosz Fenski
+  * Tamil (ta.po) by Dr.T.Vasudevan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+  * Simplified Chinese (zh_CN.po) by Deng Xiyue
+
+ -- Frans Pop <fjp@debian.org>  Sun, 14 Sep 2008 12:18:24 +0200
+
+base-installer (1.95) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Install filesystem related packages after running the post-install hooks,
+    as the former might be interactive. Installing them after locales has
+    been installed avoids perl errors. Closes: #496130
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 28 Aug 2008 10:21:45 -0300
+
+base-installer (1.94) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Allow to select driver inclusion policy for initramfs-tools
+    Closes: #494466
+
+  [ Martin Michlmayr ]
+  * Use MODULES=dep on arm and armel.
+
+  [ Jérémy Bobbio ]
+  * i386: Use -486 flavour for all CentaurHauls processors.  As they lack long
+    NOP instructions, -686 kernels since 2.6.22+ fail to boot on these
+    processors even if they claim 686 compatibility.  Closes: #492751
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Greek, Modern (1453-) (el.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Mert Dirik
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Martin Michlmayr <tbm@cyrius.com>  Sun, 24 Aug 2008 21:47:33 +0300
+
+base-installer (1.93) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Improve kernel selection for AMD64. All k8 and most k7 systems support the
+    686 kernel flavor. Only older k7 systems without SSE support need 486.
+    Based on documentation the divider seems to be at family 6, model 6.
+    Closes: #490542.
+  * Avoid locale related errors up to the point where locales gets installed
+    by setting IT_LANG_OVERRIDE=C for apt-install.
+
+  [ Ian Campbell ]
+  * i386: If the installer is running a -bigmem kernel and the processors
+    support PAE then select a -bigmem kernel for installation. For
+    compatibility with running under Xen. Closes: #480054.
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Croatian (hr.po) by Josip Rodin
+  * Italian (it.po) by Milo Casagrande
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Slovak (sk.po) by Ivan Masár
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Otavio Salvador <otavio@debian.org>  Tue, 29 Jul 2008 12:08:43 -0300
+
+base-installer (1.92) unstable; urgency=low
+
+  * Call base-installer.d hooks after running debootstrap, for consistency
+    with live-installer. (So, pre_install_hooks is run after bootstrap, but
+    before anything is installed with apt. So the name still makes a kind
+    of sense, if you squint..)
+  * Remove sources.list before running base-installer.d hooks. Otherwise,
+    apt-install will try to run apt, rather than queuing, and apt is not
+    configured yet.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Slovenian (sl.po) by Matej Kovacic
+  * Tagalog (tl.po) by Eric Pareja
+  * Turkish (tr.po) by Mert Dirik
+  * Wolof (wo.po) by Mouhamadou Mamoune Mbacke
+
+ -- Joey Hess <joeyh@debian.org>  Sat, 21 Jun 2008 15:46:22 -0400
+
+base-installer (1.91) unstable; urgency=low
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay(Bongop) (DIT,BHUTAN)
+  * Basque (eu.po) by Iñaki Larrañaga Murgoitio
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Korean (ko.po) by Changwoo Ryu
+  * Marathi (mr.po) by Sampada
+  * Norwegian Bokmal (nb.po) by Hans Fredrik Nordhaug
+  * Norwegian Nynorsk (nn.po) by Håvard Korsvoll
+  * Punjabi (Gurmukhi) (pa.po) by Amanpreet Singh Alam
+  * Tamil (ta.po) by Dr.T.Vasudevan
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 08 May 2008 00:05:41 -0300
+
+base-installer (1.90) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Add versatile as known armel kernel flavour.
+
+  [ Frans Pop ]
+  * Remove Bdale Garbee and Sven Luther as Uploaders with many thanks for
+    their past contributions.
+  * Revert to bind-mounting the installation CD in /target because in some
+    cases the fact that the CD is already mounted on /cdrom can prevent the CD
+    from being scanned. Closes: #475639.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Jens Seidel
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Gujarati (gu.po) by Kartik Mistry
+  * Hebrew (he.po) by Lior Kaplan
+  * Japanese (ja.po) by Kenshi Muto
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Marathi (mr.po)
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Brar
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Romanian (ro.po) by Eddy Petrișor
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by Ming Hua
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Frans Pop <fjp@debian.org>  Mon, 28 Apr 2008 07:14:31 +0200
+
+base-installer (1.89) unstable; urgency=low
+
+  [ Martin Michlmayr ]
+  * Add a cpuinfo file from QNAP TS-109 (orion) to the test suite.
+  * Mark the orion flavour as unusable on non-Orion systems.
+
+  [ Frans Pop ]
+  * hppa: change test for SMP support to use /var/numcpus which is created
+    by rootskel (from version 1.59); the current test does not work as it
+    requires the D-I kernel to have SMP support, which it hasn't.
+    Thanks to Grant Grundler for his suggestions.
+  * powerpc: correctly recognize systems with 'RS64-IV (sstar)' cpu as
+    powerpc64 (closes: #469030).
+  * Add support for PA Semi's evaluation systems (#464429). Thanks to
+    Olof Johansson for the patch.
+  * Now that changing CDs is supported, stop bind-mounting /cdrom in /target
+    except for hd-media installs.
+  * This requires that /dev is bind-mounted in /target earlier; the
+    installation of packages required to mount file systems is left as a
+    separate step.
+
+  [ Otavio Salvador ]
+  * Add facility to include and exclude packages from the base system by
+    preseeding base-installer/includes and base-installer/excludes. Adding
+    packages using base_include and base_include CD files still works and
+    the packages are added to the preseeded ones.
+  * Add facility to use a specific script by preseeding
+    base-installer/script.
+
+  [ Martin Michlmayr ]
+  * Rename orion to orion5x to allow for support of other Orion
+    platforms in the future.
+
+  [ Updated translations ]
+  * Amharic (am.po) by Tegegne Tefera
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Serge Leblanc
+  * Basque (eu.po) by Piarres Beobide
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Jacobo Tarrio
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by Amanpreet Singh Alam
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Frans Pop <fjp@debian.org>  Wed, 19 Mar 2008 20:47:52 +0100
+
+base-installer (1.88) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Demote Transmeta Crusoe systems to use the 486 kernel.
+    Based on #464962, Crusoe lacks support for a long NOP instruction,
+    which gcc has begun using when optimising for the 686.
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Esko Arajärvi
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Turkish (tr.po) by Recai Oktaş
+  * Traditional Chinese (zh_TW.po) by Tetralet
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 15 Feb 2008 10:48:39 -0200
+
+base-installer (1.87) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Add a dependency on ${misc:Depends} for base-installer so that it
+    depends properly on debconf.
+
+  [ Aurelien Jarno ]
+  * Add support for the MIPS Malta platform.
+
+  [ Colin Watson ]
+  * Silence syslog noise if /usr/lib/base-installer.d or
+    /usr/lib/post-base-installer.d is empty.
+
+  [ Frans Pop ]
+  * Whitespace cleanup: reduce indentation in kernel selection scripts.
+  * Update kernel tests for i386 and powerpc.
+  * Change kernel usability tests for all arches so that by default any
+    postfix is allowed, but only when separated from the flavor by a hyphen.
+    This allows both standard postfixes (e.g. -smp) postfixes for custom built
+    images, and is used to support updated kernel meta packages for stable.
+  * mips/mipsel: allow fallback to 4kc-malta kernel for 5kc-malta.
+  * Add hack that allows default selection of kernel meta packages with a
+    postfix added to the name through preseeding, for example to support
+    selection of updated kernels for stable.
+
+  [ Updated translations ]
+  * Amharic (am.po) by tegegne tefera
+  * Korean (ko.po) by Changwoo Ryu
+  * Kurdish (ku.po) by Erdal Ronahi
+  * Latvian (lv.po) by Viesturs Zarins
+  * Malayalam (ml.po) by Praveen|പ്രവീണ്‍ A|എ
+  * Dutch (nl.po) by Frans Pop
+  * Panjabi (pa.po) by A S Alam
+
+ -- Frans Pop <fjp@debian.org>  Wed, 06 Feb 2008 17:31:00 +0100
+
 base-installer (1.86ubuntu9) jaunty; urgency=low
 
   * Use the correct mirror for -security in the event of

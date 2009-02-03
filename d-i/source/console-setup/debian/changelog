@@ -1,3 +1,14 @@
+console-setup (1.28ubuntu5) jaunty; urgency=low
+
+  * Backport from trunk:
+    - Sort the null variant to the top of the choices list rather than to the
+      bottom.
+  * Set and check a flag on console-setup/dont_ask_layout to make sure that
+    it's only asked at most once per package installation (LP: #320374).
+  * Update Keyboard/KeyboardNames.pl based on xkb-data 1.4-1ubuntu3.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 31 Jan 2009 12:07:37 +0000
+
 console-setup (1.28ubuntu4) jaunty; urgency=low
 
   * Set plain or shifted PrintScreen key to generate VoidSymbol rather than
