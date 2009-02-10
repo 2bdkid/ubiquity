@@ -45,7 +45,6 @@ import string
 import subprocess
 import syslog
 import signal
-import inspect
 
 import gtk
 
@@ -64,10 +63,7 @@ ParentFrontend.install = mythbuntu_install
 ParentFrontend.summary = mythbuntu_install
 
 MYTHPAGES = [
-    "mythbuntu_stepInstallType",
     "mythbuntu_stepCustomInstallType",
-    "mythbuntu_stepPlugins",
-    "tab_themes",
     "mythbuntu_stepServices",
     "mythbuntu_stepPasswords",
     "tab_remote_control",
@@ -102,38 +98,6 @@ class Wizard(ParentFrontend.Wizard):
 
         ParentFrontend.Wizard.__init__(self,distro)
 
-    def allow_change_step(self,allow):
-        """Normally used to determine if we can progress pages.  We have to override
-           this function to determine whether this is a skippable page."""
-
-        #This skipping condition only happens when called with False
-        if not allow:
-            #do stuff only if we are getting called from a function
-            #called run.  No not too ambiguous, right?
-            if inspect.stack()[1][3] == 'run':
-                new_name = self.dbfilter.__class__.__name__
-                advanced=self.get_advanced()
-                type = self.get_installtype()
-                if (not advanced and \
-                                     (new_name == 'MythbuntuInstallType' or \
-                                      new_name == 'MythbuntuPlugins' or \
-                                      new_name == 'MythbuntuThemes' or \
-                                      new_name == 'MythbuntuServices' or \
-                                      new_name == 'MythbuntuPasswords')) or \
-                   ('Frontend' not in type and \
-                                     (new_name == 'MythbuntuThemes' or \
-                                      new_name == 'MythbuntuRemote')):
-                    self.dbfilter.start(auto_process=True)
-                    if not self.backup:
-                        self.dbfilter.ok_handler()
-                    else:
-                        self.dbfilter.cancel_handler()
-                    self.dbfilter = mythbuntu.MythbuntuPageSkipper(self)
-                    self.dbfilter_status=None
-
-        #Finally do something releated to step changing
-        ParentFrontend.Wizard.allow_change_step(self,allow)
-
     def customize_installer(self):
         """Initial UI setup."""
         #Prepopulate some dynamic pages
@@ -151,9 +115,7 @@ class Wizard(ParentFrontend.Wizard):
         self.pages.pop()
 
         #Insert all of our pages
-        for page in [mythbuntu.MythbuntuAdvancedType,
-            mythbuntu.MythbuntuInstallType, mythbuntu.MythbuntuPlugins,
-            mythbuntu.MythbuntuThemes, mythbuntu.MythbuntuServices,
+        for page in [mythbuntu.MythbuntuInstallType, mythbuntu.MythbuntuServices,
             mythbuntu.MythbuntuPasswords, mythbuntu.MythbuntuRemote,
             mythbuntu.MythbuntuDrivers, mythbuntu_install.Summary]:
             self.pages.append(page)
@@ -174,18 +136,12 @@ class Wizard(ParentFrontend.Wizard):
         ParentFrontend.Wizard.run_success_cmd(self)
 
     def set_page(self, n):
-        if n == 'MythbuntuAdvancedType':
-            cur = self.mythbuntu_stepInstallType
-        elif n == 'MythbuntuRemote':
+        if n == 'MythbuntuRemote':
             cur = self.tab_remote_control
         elif n == 'MythbuntuDrivers':
             cur = self.mythbuntu_stepDrivers
         elif n == 'MythbuntuInstallType':
             cur = self.mythbuntu_stepCustomInstallType
-        elif n == 'MythbuntuPlugins':
-            cur = self.mythbuntu_stepPlugins
-        elif n == 'MythbuntuThemes':
-            cur = self.tab_themes
         elif n == 'MythbuntuPasswords':
             cur = self.mythbuntu_stepPasswords
             if "Master" not in self.get_installtype():
@@ -309,11 +265,6 @@ class Wizard(ParentFrontend.Wizard):
 #####################
 #Used to preset the status of an element in the GUI
 
-    def set_advanced(self,enable):
-        """Preseeds whether this is an advanced install"""
-        enable = create_bool(enable)
-        self.custominstall.set_active(enable)
-
     def set_installtype(self,type):
         """Preseeds the type of custom install"""
         if type == "Set Top Box":
@@ -328,16 +279,6 @@ class Wizard(ParentFrontend.Wizard):
             self.slave_be_fe.set_active(True)
         else:
             self.master_be_fe.set_active(True)
-
-    def set_themes(self,names):
-        """Preseeds the themes that will be removed"""
-        lists = [get_official_theme_dictionary(self),get_community_theme_dictionary(self)]
-        self._preseed_list(lists,names,False)
-
-    def set_plugin(self,name,value):
-        """Preseeds the status of a plugin"""
-        lists = [get_frontend_plugin_dictionary(self),get_backend_plugin_dictionary(self)]
-        self._preseed_list(lists,name,value)
 
     def set_service(self,name,value):
         """Preseeds the status of a service"""
@@ -426,10 +367,6 @@ class Wizard(ParentFrontend.Wizard):
 ##################
 #Functions for reading the status of Frontend elements
 
-    def get_advanced(self):
-        """Returns if this is an advanced install"""
-        return self.custominstall.get_active()
-
     def get_installtype(self):
         """Returns the current custom installation type"""
         if self.master_be_fe.get_active():
@@ -459,17 +396,6 @@ class Wizard(ParentFrontend.Wizard):
                 else:
                     total_list[item]=list[item].get_active_text()
         return total_list
-
-    def get_plugins(self):
-        """Returns the status of all the plugins"""
-        return self._build_static_list([get_frontend_plugin_dictionary(self),get_backend_plugin_dictionary(self)])
-
-    def get_themes(self,type):
-        """Returns the status of the theme dictionaries"""
-        if type == 'officialthemes':
-            return self._build_static_list([get_official_theme_dictionary(self)])
-        else:
-            return self._build_static_list([get_community_theme_dictionary(self)])
 
     def get_services(self):
         """Returns the status of all installable services"""
@@ -521,25 +447,6 @@ class Wizard(ParentFrontend.Wizard):
 #Toggle functions#
 ##################
 #Called when a widget changes and other GUI elements need to react
-
-    def toggle_meta(self,widget):
-        """Called whenever a request to enable / disable meta pages"""
-        if widget is not None:
-            list = []
-            name = widget.get_name()
-            if (name == 'officialthemes'):
-                list = get_official_theme_dictionary(self)
-            elif (name == 'communitythemes'):
-                list = get_community_theme_dictionary(self)
-            elif (name == 'frontendplugins'):
-                list = get_frontend_plugin_dictionary(self)
-            elif (name == 'backendplugins'):
-                list = get_backend_plugin_dictionary(self)
-
-            toggle = widget.get_active()
-            for item in list:
-                if list[item].flags() & gtk.SENSITIVE:
-                    list[item].set_active(toggle)
 
     def toggle_enablevnc(self,widget):
         """Called when the checkbox to turn on VNC is toggled"""
@@ -637,94 +544,47 @@ class Wizard(ParentFrontend.Wizard):
                 self.mythweb_expander.hide()
                 self.mysql_server_expander.hide()
 
-        def set_all_themes(self,enable):
-            """Enables all themes for defaults"""
-            self.communitythemes.set_active(enable)
-            self.officialthemes.set_active(enable)
-
-        def set_all_fe_plugins(self,enable):
-            """ Enables all frontend plugins for defaults"""
-            list = get_frontend_plugin_dictionary(self)
-            for item in list:
-                list[item].set_active(enable)
-
-        def set_all_be_plugins(self,enable):
-            """ Enables all backend plugins for defaults"""
-            list = get_backend_plugin_dictionary(self)
-            for item in list:
-                list[item].set_active(enable)
-
         if self.master_be_fe.get_active():
-            set_all_themes(self,True)
-            set_all_fe_plugins(self,True)
-            set_all_be_plugins(self,True)
             set_all_passwords(self,True)
             set_all_services(self,True)
             self.enablessh.set_active(True)
             self.enablesamba.set_active(True)
-            self.frontend_plugin_list.show()
-            self.backend_plugin_list.show()
-            self.febe_heading_label.set_label("Choose Frontend / Backend Plugins")
             self.master_backend_expander.hide()
             set_fe_drivers(self,True)
             set_be_drivers(self,True)
         elif self.slave_be_fe.get_active():
-            set_all_themes(self,True)
-            set_all_fe_plugins(self,True)
-            set_all_be_plugins(self,True)
             set_all_services(self,True)
             set_all_passwords(self,True)
             self.enablessh.set_active(True)
             self.enablesamba.set_active(True)
-            self.frontend_plugin_list.show()
-            self.backend_plugin_list.show()
-            self.febe_heading_label.set_label("Choose Frontend / Backend Plugins")
             self.mysql_server_expander.hide()
             self.mysql_option_hbox.hide()
             set_fe_drivers(self,True)
             set_be_drivers(self,True)
         elif self.master_be.get_active():
-            set_all_themes(self,False)
-            set_all_fe_plugins(self,False)
-            set_all_be_plugins(self,True)
             set_all_services(self,True)
             set_all_passwords(self,True)
             self.enablessh.set_active(True)
             self.enablesamba.set_active(True)
-            self.frontend_plugin_list.hide()
-            self.backend_plugin_list.show()
-            self.febe_heading_label.set_label("Choose Backend Plugins")
             self.master_backend_expander.hide()
             set_fe_drivers(self,False)
             set_be_drivers(self,True)
         elif self.slave_be.get_active():
-            set_all_themes(self,False)
-            set_all_fe_plugins(self,False)
-            set_all_be_plugins(self,True)
             set_all_services(self,True)
             set_all_passwords(self,True)
             self.enablessh.set_active(True)
             self.enablesamba.set_active(True)
-            self.frontend_plugin_list.hide()
-            self.backend_plugin_list.show()
-            self.febe_heading_label.set_label("Choose Backend Plugins")
             self.mysql_server_expander.hide()
             self.mysql_option_hbox.hide()
             set_fe_drivers(self,False)
             set_be_drivers(self,True)
         else:
-            set_all_themes(self,True)
-            set_all_fe_plugins(self,True)
-            set_all_be_plugins(self,False)
             set_all_services(self,True)
             set_all_passwords(self,True)
             self.enablessh.set_active(True)
             self.enablesamba.set_active(False)
             self.enablenfs.set_active(False)
             self.enablemysql.set_active(False)
-            self.frontend_plugin_list.show()
-            self.backend_plugin_list.hide()
-            self.febe_heading_label.set_label("Choose Frontend Plugins")
             self.mythweb_expander.hide()
             self.mysql_server_expander.hide()
             self.mysql_option_hbox.hide()
@@ -828,21 +688,3 @@ class Wizard(ParentFrontend.Wizard):
             if (not self.usemythwebpassword.get_active() or ((not self.mythweb_pass_error_image.flags() & gtk.VISIBLE) and (not self.mythweb_user_error_image.flags() & gtk.VISIBLE))):
                 self.allow_go_forward(True)
                 self.allow_go_backward(True)
-
-    def toggle_installtype (self,widget):
-        """Called whenever standard or full are toggled"""
-        if self.standardinstall.get_active() :
-            #Make sure that we have everything turned on in case they came back to this page
-            #and changed their mind
-            #Note: This will recursively handle changing the values on the pages
-            self.master_be_fe.set_active(True)
-            self.enablessh.set_active(True)
-            self.enablevnc.set_active(False)
-            self.enablenfs.set_active(False)
-            self.enablesamba.set_active(True)
-            self.enablemysql.set_active(False)
-
-        else:
-            self.master_backend_expander.hide()
-            self.mythweb_expander.show()
-            self.mysql_server_expander.show()

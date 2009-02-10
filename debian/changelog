@@ -1,3 +1,42 @@
+ubiquity (1.11.7) jaunty; urgency=low
+
+  [ Mario Limonciello ]
+  * bin/ubiquity-dm, debian/init: Fallback to noninteractive if automatic fails
+    - If the X server fails to startup (due to issues with vesa, or automatic
+      probing), don't fail the entire bootup.
+    - Fall back to noninteractive in these cases rather than attempting to start
+      gdm/kdm/etc.
+  * mythbuntu frontend: Remove all page skipping functionality.
+    - Realistically, it was a hack that only introduced race conditions on
+      fast hardware.
+    - Just ask all questions instead.
+    - Remove themes and plugins pages and all associated debconf templates.
+
+  [ Colin Watson ]
+  * Adjust the way we open the debug log so that sys.stderr doesn't end up
+    being fd 4.
+  * Stop taking account of progress bar cancellation in the implementation
+    of the PROGRESS START and PROGRESS STOP commands; neither cdebconf nor
+    debconf does so and thus confmodules don't expect it (LP: #313259).
+  * Catch partman/exception_handler and partman/exception_handler_note from
+    partman-commit as well as partman (LP: #324976).
+  * Don't default to logical if an extended partition already exists, only
+    if a real primary partition exists.
+  * Update translations from Launchpad.
+
+  [ Evan Dandrea ]
+  * Replace the previous iteration of the timezone map (zoommap) with a new
+    version (timezone_map) that should be easier to use, in accordance with the
+    JauntyUbiquityUsability specification.
+  * Use wrap_label, a replacement for GtkLabel from libview that does
+    height-for-width text wrapping to work around bgo 101968.
+  * Remove some unnecessary GtkAlignments.
+  * Automatic update of included source packages: partman-auto
+    83ubuntu3, partman-base 128ubuntu6, partman-partitioning 64ubuntu3,
+    partman-target 58ubuntu3, user-setup 1.23ubuntu10.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 10 Feb 2009 16:41:51 +0000
+
 ubiquity (1.11.6) jaunty; urgency=low
 
   [ Luke Yelavich ]

@@ -1,3 +1,21 @@
+partman-base (128ubuntu6) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * Only mark the partition table as changed due to CHANGE_FILE_SYSTEM if it
+    actually makes a change (i.e. the partition wasn't already using that
+    filesystem or didn't have that flag set). This avoids the partition
+    table being rewritten even if partman did nothing more than autousing
+    swap (LP: #287660).
+  * Add partman/default_filesystem template so that we can remove hardcoding
+    of ext3 from elsewhere in partman, and make the default filesystem
+    preseedable.
+
+  [ Evan Dandrea ]
+  * Filter out disks that have mounted partitions again.  This was
+    accidentally lost in the last Debian merge.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 06 Feb 2009 16:06:45 +0100
+
 partman-base (128ubuntu5) jaunty; urgency=low
 
   * Resynchronise partman-commit with partman, fixing harmless warning about

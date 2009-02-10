@@ -9,12 +9,12 @@ partman-auto/text/home_scheme ::
 	filesystem{ ext2r0 }
 	mountpoint{ /boot } .
 
-500 4000 7000 ext3
+500 4000 7000 $default_filesystem
 	$primary{ }
 	method{ format }
 	format{ }
 	use_filesystem{ }
-	filesystem{ ext3 }
+	$default_filesystem{ }
 	mountpoint{ / }
 	options/relatime{ relatime } .
 
@@ -22,11 +22,11 @@ partman-auto/text/home_scheme ::
 	method{ swap }
 	format{ } .
 
-100 10000 1000000000 ext3
+100 10000 1000000000 $default_filesystem
 	method{ format }
 	format{ }
 	use_filesystem{ }
-	filesystem{ ext3 }
+	$default_filesystem{ }
 	mountpoint{ /home }
 	options/relatime{ relatime } .
 

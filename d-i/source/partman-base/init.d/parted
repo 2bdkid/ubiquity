@@ -92,6 +92,7 @@ if [ ! -f /var/run/parted_server.pid ]; then
 	fi
 	IFS="$NL"
 	for partdev in $(parted_devices |
+		grep -v "$disks" |
 		sed 's,^/dev/\(ide\|scsi\|[hs]d\|md/\?[0-9]\+\),!/dev/\1,' |
 		sort |
 		sed 's,^!,,' ); do

@@ -1,3 +1,12 @@
+partman-target (58ubuntu3) jaunty; urgency=low
+
+  * Fix disk_containing function to use its argument rather than relying on
+    $dev.
+  * Fix use of udevinfo rather than udevadm info when checking if a disk is
+    USB.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 06 Feb 2009 16:23:57 +0100
+
 partman-target (58ubuntu2) jaunty; urgency=low
 
   * /media must be on the root file system (although subdirectories may be

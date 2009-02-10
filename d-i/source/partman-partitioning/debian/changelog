@@ -1,3 +1,12 @@
+partman-partitioning (64ubuntu3) jaunty; urgency=low
+
+  * Don't default to logical if an extended partition already exists, only
+    if a real primary partition exists.
+  * Honour partman/default_filesystem when creating new partitions. Requires
+    partman-base 128ubuntu6.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 09 Feb 2009 22:32:49 +0100
+
 partman-partitioning (64ubuntu2) jaunty; urgency=low
 
   * Add ext4 support (LP: #293465).

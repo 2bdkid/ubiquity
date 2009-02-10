@@ -1,3 +1,12 @@
+partman-auto (83ubuntu3) jaunty; urgency=low
+
+  * Add support for $default_filesystem as the partition type in a recipe,
+    and $default_filesystem{ } as an internal specifier. These are
+    equivalent to FS and filesystem{ FS } respectively, where FS is the
+    value of partman/default_filesystem. Requires partman-base 128ubuntu6.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 09 Feb 2009 22:30:54 +0100
+
 partman-auto (83ubuntu2) jaunty; urgency=low
 
   * Add ext4 support (LP: #293465).

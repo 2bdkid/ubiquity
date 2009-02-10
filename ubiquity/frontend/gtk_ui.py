@@ -52,7 +52,7 @@ import gtk.glade
 import debconf
 
 from ubiquity import filteredcommand, gconftool, i18n, osextras, validation, \
-                     zoommap, segmented_bar
+                     timezone_map, segmented_bar, wrap_label
 from ubiquity.misc import *
 from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 partman, partman_commit, \
@@ -508,12 +508,11 @@ class Wizard(BaseFrontend):
             self.tzmap = TimezoneMap(self)
             self.tzmap.tzmap.show()
         else:
-            pixmap = '/usr/share/ubiquity/pixmaps/earth.jpg'
-            full_zoom = True
-            font_selected = "white"
-            font_unselected = "orange"
-            args = (self, pixmap, full_zoom, font_selected, font_unselected)
-            self.tzmap = zoommap.ZoomMapWidget(*args)
+            self.tzdb = ubiquity.tz.Database()
+            self.tzmap = timezone_map.TimezoneMap(self.tzdb, '/usr/share/ubiquity/pixmaps')
+            self.tzmap.connect('city-selected', self.select_city)
+            self.timezone_map_window.add(self.tzmap)
+            self.setup_timezone_page()
             self.tzmap.show()
 
         if 'UBIQUITY_DEBUG' in os.environ:
@@ -524,6 +523,77 @@ class Wizard(BaseFrontend):
 
         # set initial bottom bar status
         self.allow_go_backward(False)
+
+    def setup_timezone_page(self):
+
+        renderer = gtk.CellRendererText()
+        self.timezone_zone_combo.pack_start(renderer, True)
+        self.timezone_zone_combo.add_attribute(renderer, 'text', 0)
+        list_store = gtk.ListStore(gobject.TYPE_STRING)
+        self.timezone_zone_combo.set_model(list_store)
+        self.timezone_zone_combo.connect('changed', self.zone_combo_selection_changed)
+        self.timezone_city_combo.connect('changed', self.city_combo_selection_changed)
+
+        renderer = gtk.CellRendererText()
+        self.timezone_city_combo.pack_start(renderer, True)
+        self.timezone_city_combo.add_attribute(renderer, 'text', 0)
+        city_store = gtk.ListStore(gobject.TYPE_STRING)
+        self.timezone_city_combo.set_model(city_store)
+        
+        self.regions = {}
+        for location in self.tzdb.locations:
+            region, city = location.zone.replace('_', ' ').split('/', 1)
+            if region in self.regions:
+                self.regions[region].append(city)
+            else:
+                self.regions[region] = [city]
+
+        r = self.regions.keys()
+        for region in r:
+            list_store.append([region])
+
+    def zone_combo_selection_changed(self, widget):
+        i = self.timezone_zone_combo.get_active()
+        m = self.timezone_zone_combo.get_model()
+        region = m[i][0]
+        
+        m = self.timezone_city_combo.get_model()
+        m.clear()
+        for city in self.regions[region]:
+            m.append([city])
+
+    def city_combo_selection_changed(self, widget):
+        i = self.timezone_zone_combo.get_active()
+        m = self.timezone_zone_combo.get_model()
+        region = m[i][0]
+        
+        i = self.timezone_city_combo.get_active()
+        if i < 0:
+            # There's no selection yet.
+            return
+        m = self.timezone_city_combo.get_model()
+        city = m[i][0].replace(' ', '_')
+        city = region + '/' + city
+        self.tzmap.select_city(city)
+
+    def select_city(self, widget, city):
+        region, city = city.replace('_', ' ').split('/', 1)
+        m = self.timezone_zone_combo.get_model()
+        iterator = m.get_iter_first()
+        while iterator:
+            if m[iterator][0] == region:
+                self.timezone_zone_combo.set_active_iter(iterator)
+                break
+            iterator = m.iter_next(iterator)
+        
+        m = self.timezone_city_combo.get_model()
+        iterator = m.get_iter_first()
+        while iterator:
+            if m[iterator][0] == city:
+                self.timezone_city_combo.set_active_iter(iterator)
+                break
+            iterator = m.iter_next(iterator)
+
 
     def poke_screensaver(self):
         """Attempt to make sure that the screensaver doesn't kick in."""
@@ -1224,8 +1294,6 @@ class Wizard(BaseFrontend):
 
 
     def debconf_progress_start (self, progress_min, progress_max, progress_title):
-        if self.progress_cancelled:
-            return False
         if self.current_page is not None:
             self.debconf_progress_window.set_transient_for(self.live_installer)
         else:
@@ -1244,7 +1312,6 @@ class Wizard(BaseFrontend):
         self.debconf_progress_set(0)
         self.progress_info.set_text('')
         self.debconf_progress_window.show()
-        return True
 
     def debconf_progress_set (self, progress_val):
         if self.progress_cancelled:
@@ -1272,9 +1339,7 @@ class Wizard(BaseFrontend):
         return True
 
     def debconf_progress_stop (self):
-        if self.progress_cancelled:
-            self.progress_cancelled = False
-            return False
+        self.progress_cancelled = False
         self.progress_position.stop()
         if self.progress_position.depth() == 0:
             self.debconf_progress_window.hide()
@@ -1283,7 +1348,6 @@ class Wizard(BaseFrontend):
                 '<big><b>' +
                 xml.sax.saxutils.escape(self.progress_position.title()) +
                 '</b></big>')
-        return True
 
     def debconf_progress_region (self, region_start, region_end):
         self.progress_position.set_region(region_start, region_end)
@@ -1351,13 +1415,19 @@ class Wizard(BaseFrontend):
 
 
     def set_timezone (self, timezone):
-        self.tzmap.set_tz_from_name(timezone)
-
+        self.select_city(None, timezone)
 
     def get_timezone (self):
-        return self.tzmap.get_selected_tz_name()
-
-
+        i = self.timezone_zone_combo.get_active()
+        m = self.timezone_zone_combo.get_model()
+        region = m[i][0]
+        
+        i = self.timezone_city_combo.get_active()
+        m = self.timezone_city_combo.get_model()
+        city = m[i][0].replace(' ', '_')
+        city = region + '/' + city
+        return city
+    
     def set_keyboard_choices(self, choices):
         layouts = gtk.ListStore(gobject.TYPE_STRING)
         self.keyboardlayoutview.set_model(layouts)
@@ -1786,12 +1856,12 @@ class Wizard(BaseFrontend):
         # question is going to be asked.
 
         if partition['parted']['type'] == 'pri/log':
-            # Is there already a primary or an extended partition?
+            # Is there already a primary partition?
             model = self.partition_list_treeview.get_model()
             for otherpart in [row[1] for row in model]:
                 if (otherpart['dev'] == partition['dev'] and
                     'id' in otherpart and
-                    otherpart['parted']['type'] in ('primary', 'logical')):
+                    otherpart['parted']['type'] == 'primary'):
                     self.partition_create_type_logical.set_active(True)
                     break
             else:

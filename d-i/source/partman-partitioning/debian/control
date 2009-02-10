@@ -11,7 +11,7 @@ Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/partman-partitioning/ubunt
 Package: partman-partitioning
 XC-Package-Type: udeb
 Architecture: any
-Depends: e2fsprogs-udeb, ${fs:Depends}, ${misc:Depends}
+Depends: partman-base (>= 128ubuntu6), e2fsprogs-udeb, ${fs:Depends}, ${misc:Depends}
 Description: Partitioning operations for partman
  This udeb provides partman with editing operations for creation
  of new partitions, deletion of partitions and initialisation of the

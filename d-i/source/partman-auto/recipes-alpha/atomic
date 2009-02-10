@@ -11,11 +11,11 @@ partman-auto/text/atomic_scheme ::
 	mountpoint{ /boot }
 	options/relatime{ relatime } .
 
-500 10000 1000000000 ext3
+500 10000 1000000000 $default_filesystem
 	method{ format }
 	format{ }
 	use_filesystem{ }
-	filesystem{ ext3 }
+	$default_filesystem{ }
 	mountpoint{ / }
 	options/relatime{ relatime } .
 
