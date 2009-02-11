@@ -9,7 +9,7 @@ partman-auto/text/multi_scheme ::
 	mountpoint{ /boot }
 	options/relatime{ relatime } .
 
-70 800 300 $default_filesystem
+120 800 350 $default_filesystem
 	$lvmok{ }
 	method{ format }
 	format{ }
@@ -50,7 +50,7 @@ partman-auto/text/multi_scheme ::
 	mountpoint{ /tmp }
 	options/relatime{ relatime } .
 
-300 3000 1000000000 $default_filesystem
+300 3000 -1 $default_filesystem
 	$lvmok{ }
 	method{ format }
 	format{ }

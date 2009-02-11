@@ -14,7 +14,7 @@ partman-auto/text/atomic_scheme ::
 	mountpoint{ /boot }
 	options/relatime{ relatime } .
 
-500 10000 1000000000 $default_filesystem
+500 10000 -1 $default_filesystem
 	$primary{ }
 	method{ format }
 	format{ }

@@ -1,3 +1,38 @@
+partman-auto (84ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Adjust default partition sizes for Ubuntu.
+    - Accept autopartitioning automatically rather than showing
+      choose_partition.
+    - Drop priority of partman-auto/choose_recipe question to medium.
+    - Offer resize_use_free autopartitioning method.
+    - Add support for partman-auto/method=loop via partman-auto-loop.
+    - Drop the bootable flag from i386/amd64 recipes; it can break existing
+      Windows installations when autopartitioning only free space rather
+      than a whole disk.
+    - Remove explicit $primary{ } specifiers from standard recipes. We only
+      need them to be primary if no other primary partitions exist already.
+    - Add relatime to all autopartitioning recipes.
+    - Make biggest_free respect the selection made in partman-auto/disk.
+    - Exit straight away if a called script is killed by a signal.
+    - Add ext4 support.
+    - Add support for $default_filesystem as the partition type in a recipe,
+      and $default_filesystem{ } as an internal specifier.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 11 Feb 2009 13:29:45 +0000
+
+partman-auto (84) unstable; urgency=low
+
+  * recipes.sh: correct error handling for non-existant recipe description.
+  * Increase minimum size of root partition in multi recipe. This is mainly
+    needed in case there is no separate /boot partition, but also to allow
+    for e.g. the /emul directory.
+  * Use "-1" instead of "1000000000" to indicate unlimited partition size in
+    partman recipes. This avoids an error when setting up LVM on disks larger
+    than 1GB. See: #510544.
+
+ -- Frans Pop <fjp@debian.org>  Mon, 12 Jan 2009 22:12:55 +0100
+
 partman-auto (83ubuntu3) jaunty; urgency=low
 
   * Add support for $default_filesystem as the partition type in a recipe,
