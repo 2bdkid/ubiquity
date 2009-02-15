@@ -1,3 +1,11 @@
+grub-installer (1.36ubuntu2) jaunty; urgency=low
+
+  * Check dmraid's exit code as well as parsing its output, the latter for
+    backward compatibility with dmraid << 1.0.0.rc15-1~exp4 only
+    (LP: #325947).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Feb 2009 12:42:05 +0000
+
 grub-installer (1.36ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian (XFS change fixes LP: #8058). Remaining

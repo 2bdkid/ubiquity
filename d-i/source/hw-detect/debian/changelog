@@ -1,3 +1,11 @@
+hw-detect (1.71ubuntu4) jaunty; urgency=low
+
+  * Check dmraid's exit code as well as parsing its output, the latter for
+    backward compatibility with dmraid << 1.0.0.rc15-1~exp4 only
+    (LP: #325947).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Feb 2009 10:19:04 +0000
+
 hw-detect (1.71ubuntu3) jaunty; urgency=low
 
   * Improve checks for dm-* drivers being present to avoid relying on them

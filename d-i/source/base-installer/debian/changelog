@@ -1,3 +1,11 @@
+base-installer (1.98ubuntu2) jaunty; urgency=low
+
+  * Check dmraid's exit code as well as parsing its output, the latter for
+    backward compatibility with dmraid << 1.0.0.rc15-1~exp4 only
+    (LP: #325947).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Feb 2009 12:36:32 +0000
+
 base-installer (1.98ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
