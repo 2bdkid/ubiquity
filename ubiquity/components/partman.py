@@ -444,11 +444,17 @@ class Partman(FilteredCommand):
                 del self.extra_options[tmp]
                 self.extra_options[self.resize_desc] = t
 
-            # Put 'Manual' at the bottom as it's a separate path from the other
-            # options.
-            if self.manual_desc in choices:
-                choices.remove(self.manual_desc)
+            tmp = self.manual_desc
+            self.manual_desc = \
+                self.description('ubiquity/text/custom_partitioning')
+            self.translation_mappings[self.manual_desc] = tmp
+            if tmp in choices:
+                choices.remove(tmp)
                 choices.append(self.manual_desc)
+            if tmp in self.extra_options:
+                t = self.extra_options[tmp]
+                del self.extra_options[tmp]
+                self.extra_options[self.manual_desc] = t
 
             self.frontend.set_autopartition_choices(
                 choices, self.extra_options,
@@ -1089,7 +1095,9 @@ class Partman(FilteredCommand):
         if self.current_question.endswith('automatically_partition'):
             (autopartition_choice, self.extra_choice) = \
                 self.frontend.get_autopartition_choice()
-            autopartition_choice = self.translation_mappings[autopartition_choice]
+            if autopartition_choice in self.translation_mappings:
+                autopartition_choice = \
+                    self.translation_mappings[autopartition_choice]
             if self.autopartition_question is not None:
                 self.preseed_as_c(self.autopartition_question, autopartition_choice)
             else:
