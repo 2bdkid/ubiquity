@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer.2006071\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2009-02-09 13:50+0100\n"
+"POT-Creation-Date: 2009-02-18 21:40+0000\n"
 "PO-Revision-Date: 2006-10-26 11:58+0400\n"
 "Last-Translator: Aiet Kolkhi <aietkolkhi@gmail.com>\n"
 "Language-Team: Georgian <www.gia.ge>\n"
@@ -283,13 +283,31 @@ msgstr "ცარიელი პაროლი დაუშვებელი�
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
-msgid "Enable shadow passwords?"
+#, fuzzy
+#| msgid "Enable shadow passwords?"
+msgid "Use weak password?"
 msgstr "გამოვიყენოთ shadow პაროლები?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Enable shadow passwords?"
+msgstr "გამოვიყენოთ shadow პაროლები?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -305,7 +323,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 #, fuzzy
 #| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
@@ -314,7 +332,7 @@ msgstr "პირადი დასტის დაშიფვრის გა
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
@@ -323,7 +341,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
@@ -332,7 +350,7 @@ msgstr ""
 #. Type: title
 #. Description
 #. :sl1:
-#: ../user-setup-udeb.templates:21001
+#: ../user-setup-udeb.templates:22001
 msgid "Set up users and passwords"
 msgstr "ანგარიშებისა და პაროლების კონფიგურაცია"
 
@@ -340,7 +358,7 @@ msgstr "ანგარიშებისა და პაროლების 
 #. Description
 #. finish-install progress bar item
 #. :sl1:
-#: ../user-setup-udeb.templates:22001
+#: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "მომხმარებლების და პაროლების დაყენება..."
 

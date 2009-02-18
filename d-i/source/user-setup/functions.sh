@@ -48,3 +48,7 @@ root_password () {
 
 	return 1
 }
+
+password_is_weak () {
+	[ "$(printf %s "$1" | wc -c)" -lt 8 ]
+}

@@ -140,6 +140,13 @@ _Description: Empty password
  You entered an empty password, which is not allowed.
  Please choose a non-empty password.
 
+Template: user-setup/password-weak
+Type: boolean
+# :sl2:
+_Description: Use weak password?
+ You entered a password that consists of less than eight characters, which
+ is considered too weak. You should choose a stronger password.
+
 Template: passwd/shadow
 Type: boolean
 Default: true

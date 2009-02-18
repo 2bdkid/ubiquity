@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nn\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2009-02-09 13:50+0100\n"
+"POT-Creation-Date: 2009-02-18 21:40+0000\n"
 "PO-Revision-Date: 2006-11-08 23:46+0100\n"
 "Last-Translator: Håvard Korsvoll <korsvoll@gmail.com>\n"
 "Language-Team: Norwegian nynorsk <i18n-nn@lister.ping.uio.no>\n"
@@ -288,13 +288,31 @@ msgstr ""
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
-msgid "Enable shadow passwords?"
+#, fuzzy
+#| msgid "Enable shadow passwords?"
+msgid "Use weak password?"
 msgstr "Ta i bruk skuggepassord?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Enable shadow passwords?"
+msgstr "Ta i bruk skuggepassord?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
 msgid ""
 "Shadow passwords make your system more secure because nobody is able to view "
 "even encrypted passwords. The passwords are stored in a separate file that "
@@ -309,14 +327,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
@@ -325,7 +343,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../user-setup-udeb.templates:20001
+#: ../user-setup-udeb.templates:21001
 msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
@@ -334,7 +352,7 @@ msgstr ""
 #. Type: title
 #. Description
 #. :sl1:
-#: ../user-setup-udeb.templates:21001
+#: ../user-setup-udeb.templates:22001
 msgid "Set up users and passwords"
 msgstr "Set opp brukarar og passord"
 
@@ -342,7 +360,7 @@ msgstr "Set opp brukarar og passord"
 #. Description
 #. finish-install progress bar item
 #. :sl1:
-#: ../user-setup-udeb.templates:22001
+#: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Set opp brukarar og passord ..."
 

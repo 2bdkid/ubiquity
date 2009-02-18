@@ -77,6 +77,24 @@ while :; do
 					db_fset passwd/root-password-again seen false
 					STATE=1
 					continue
+				elif password_is_weak "$ROOT_PW"; then
+					db_set user-setup/password-weak false
+					db_fset user-setup/password-weak seen false
+					db_input critical user-setup/password-weak
+					# TODO would be better to extend state machine
+					if ! db_go; then
+						STATE=1
+						continue
+					fi
+					db_get user-setup/password-weak || RET=
+					if [ "$RET" != true ]; then
+						# user doesn't want to force
+						# weak password
+						db_fset passwd/root-password seen false
+						db_fset passwd/root-password-again seen false
+						STATE=1
+						continue
+					fi
 				fi
 				db_get passwd/root-password-again
 				if [ "$ROOT_PW" != "$RET" ]; then
@@ -195,6 +213,26 @@ while :; do
 					db_fset passwd/user-password-again seen false
 					STATE=6
 					continue
+				elif [ "$USER_PW" ] && password_is_weak "$USER_PW"; then
+					db_set user-setup/password-weak false
+					db_fset user-setup/password-weak seen false
+					db_input critical user-setup/password-weak
+					# TODO would be better to extend state machine
+					if ! db_go; then
+						STATE=6
+						continue
+					fi
+					db_get user-setup/password-weak || RET=
+					if [ "$RET" != true ]; then
+						# user doesn't want to force
+						# weak password
+						db_set passwd/user-password ""
+						db_set passwd/user-password-again ""
+						db_fset passwd/user-password seen false
+						db_fset passwd/user-password-again seen false
+						STATE=6
+						continue
+					fi
 				fi
 			fi
 		fi
