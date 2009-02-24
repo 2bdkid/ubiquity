@@ -199,13 +199,13 @@ if [ "$RET" = true ] && ! is_system_user; then
 					"$GDMCONF"
 			fi
 	 
-			if $chroot $ROOT [ -f /etc/kde3/kdm/kdmrc ]; then
+			if $chroot $ROOT [ -f /etc/kde4/kdm/kdmrc ]; then
 				# Configure KDM autologin
 				$log $chroot $ROOT sed -i -r \
 					-e "s/^#?AutoLoginEnable=.*\$/AutoLoginEnable=true/" \
 					-e "s/^#?AutoLoginUser=.*\$/AutoLoginUser=$USER/" \
 					-e "s/^#?AutoReLogin=.*\$/AutoReLogin=true/" \
-					/etc/kde3/kdm/kdmrc
+					/etc/kde4/kdm/kdmrc
 			fi
 		fi
 	fi

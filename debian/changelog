@@ -1,3 +1,29 @@
+ubiquity (1.11.13) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * Add LSB init script header.
+  * Hide some excessively detailed progress messages from hw-detect
+    (LP: #91792).
+  * Automatic update of included source packages: partman-base 128ubuntu8,
+    user-setup 1.23ubuntu13.
+
+  [ Roman Shtylman ]
+  * kde_ui: Add SVG timezone map
+  * kde_ui: add new partition bars
+  * kde_ui: in advanced dialogue make grub settings a combo box
+  * kde_ui: add "auto login" option
+
+  [ Evan Dandrea ]
+  * Give the proper return value in the user-setup component's run
+    function.
+  * Restore the OS names in partition bars label code that was accidentally
+    commented out in a previous commit.
+  * Fix the code around showing ubiquity/text/part_auto_comment_*.
+  * Refactor the time zone code to avoid a dependency on python-numpy
+    (LP: #332978).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 24 Feb 2009 02:18:02 +0000
+
 ubiquity (1.11.12) jaunty; urgency=low
 
   * Handle user-setup's new weak password detection.

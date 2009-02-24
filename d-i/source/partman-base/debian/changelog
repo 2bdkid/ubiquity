@@ -1,3 +1,11 @@
+partman-base (128ubuntu8) jaunty; urgency=low
+
+  * Don't display the Back button when asking for confirmation, since it's
+    already a boolean "do you want to continue?" question and we ignore
+    backup anyway (LP: #9244).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 21 Feb 2009 10:26:23 +0000
+
 partman-base (128ubuntu7) jaunty; urgency=low
 
   * Check dmraid's exit code as well as parsing its output, the latter for
