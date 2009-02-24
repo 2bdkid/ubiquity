@@ -1,3 +1,11 @@
+partman-target (58ubuntu4) jaunty; urgency=low
+
+  * Escape spaces, tabs, newlines, and backslashes in fstab according to the
+    procedure described in getmntent(3) (LP: #38224).
+  * Use labels rather than UUIDs if they exist (LP: #320871).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 24 Feb 2009 13:10:14 +0000
+
 partman-target (58ubuntu3) jaunty; urgency=low
 
   * Fix disk_containing function to use its argument rather than relying on

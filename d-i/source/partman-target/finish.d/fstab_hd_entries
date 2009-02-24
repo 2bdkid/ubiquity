@@ -2,6 +2,19 @@
 
 [ -f /target/etc/fstab ] || exit 0
 
+escape () {
+	printf %s "$1" | \
+		sed 's/\\/\\134/g; s/ /\\040/g; s/	/\\011/g; s/\n/\\012/g'
+}
+
+# dev, mountpoint, type, options, dump, pass
+addfstab () {
+	printf "%-15s %-15s %-7s %-15s %-7s %s\n" \
+		"$(escape "$1")" "$(escape "$2")" \
+		"$(escape "$3")" "$(escape "$4")" \
+		"$5" "$6"
+}
+
 fstab=$(
 	for i in /lib/partman/fstab.d/*; do
 		[ -x "$i" ] || continue
@@ -14,7 +27,7 @@ fstab=$(
 	while read mp fs type options dump pass; do
 		case "$fs" in
 		    (/dev/disk/*|/dev/fd[0-9]*|/dev/mapper/*_crypt)
-			printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+			addfstab "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
 			;;
 		    (/*)
 			dev="/var/lib/partman/devices/$(echo "$fs" | sed 's:/:=:g')"
@@ -25,14 +38,16 @@ fstab=$(
 				else
 					options="loop,$options"
 				fi
-				printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$loop" "${mp}" "$type" "$options" "$dump" "$pass"
+				addfstab "$loop" "${mp}" "$type" "$options" "$dump" "$pass"
 			else
-				uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)"
-				if [ "$uuid" ]; then
+				if label="$(PATH="/lib/udev:$PATH" vol_id -l $fs)" && [ "$label" ]; then
 					printf "# %s was on %s during installation\n" "$mp" "$(mapdevfs $fs)"
-					printf "%-15s %-15s %-7s %-15s %-7s %s\n" "UUID=$uuid" "${mp}" "$type" "$options" "$dump" "$pass"
+					addfstab "LABEL=$label" "${mp}" "$type" "$options" "$dump" "$pass"
+				elif uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)" && [ "$uuid" ]; then
+					printf "# %s was on %s during installation\n" "$mp" "$(mapdevfs $fs)"
+					addfstab "UUID=$uuid" "${mp}" "$type" "$options" "$dump" "$pass"
 				else
-					printf "%-15s %-15s %-7s %-15s %-7s %s\n" "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
+					addfstab "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"
 				fi
 			fi
 			;;

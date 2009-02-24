@@ -125,7 +125,7 @@ open_in()
  * *str to the empty string). Caller is expected to free *str.
  */
 void
-iscan_line(char **str)
+iscan_line(char **str, int expect_leading_newline)
 {
         int c;
 
@@ -134,6 +134,11 @@ iscan_line(char **str)
         c = fgetc(infifo);
         if (c == EOF)
                 return;
+        if (c == '\n' && expect_leading_newline) {
+                c = fgetc(infifo);
+                if (c == EOF)
+                        return;
+        }
         while (c != EOF && c != '\n') {
                 if (isspace((unsigned char) c))
                         c = fgetc(infifo);
@@ -318,7 +323,7 @@ pseudo_exception(char *type, char *message, char **options)
         oprintf("\n");
         if (timer_was_started)
                 start_timer();
-        iscan_line(&str);
+        iscan_line(&str, 1);
         if (!str)
                 critical_error("No data in infifo.");
         if (!strcmp(str, "unhandled")) {
@@ -1503,7 +1508,7 @@ command_set_flags()
         for (flag = first; flag <= last; flag++)
                 states[flag - first] = false;
         while (1) {
-                iscan_line(&str);
+                iscan_line(&str, 1);
                 if (!str)
                         critical_error("No data in infifo!");
                 if (!strcmp(str, "NO_MORE"))
@@ -1563,7 +1568,7 @@ command_set_name()
         if (part == NULL || !ped_partition_is_active(part))
                 critical_error("No such active partition: %s", id);
         log("Partition found (%s)", id);
-        iscan_line(&name);
+        iscan_line(&name, 0);
         if (!name)
                 critical_error("No data in infifo!");
         log("Changing name to %s", name);

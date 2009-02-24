@@ -1,3 +1,10 @@
+clock-setup (0.97ubuntu2) jaunty; urgency=low
+
+  * Check for the existence of /etc/adjtime before running sed over it,
+    given util-linux 2.14.2-1ubuntu4.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 24 Feb 2009 13:51:25 +0000
+
 clock-setup (0.97ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
