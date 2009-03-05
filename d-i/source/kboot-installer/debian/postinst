@@ -86,8 +86,10 @@ mkdir -p "$etc"
 cat >"$etc/kboot.msg" <<EOF
 Ubuntu PS3 KBoot Loader.
 
-Hit enter to boot the default system. You can also use the shell by
-typing 'sh'. Exiting the shell returns to the kboot prompt.
+- Hit enter to boot the default system. 
+- Type 'game' and press the enter key to get back to the Sony XMB operating system.
+If this is for some reason not possible, carrying out a hard-reset (see PS3 instruction manual) will return to the XMB on next run.
+- You can also use the shell by typing 'sh'. Exiting the shell returns to the kboot prompt.
 
 EOF
 

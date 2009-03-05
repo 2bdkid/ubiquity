@@ -117,7 +117,7 @@ if [ ! -f /var/run/parted_server.pid ]; then
 			fi
 		fi
 
-		# Skip devices that are part of an activated dmraid device
+		# Skip devices that are part of a dmraid device
 		if type dmraid >/dev/null 2>&1 && \
 		   dmraid -r -c >/dev/null 2>&1; then
 			if part_of_sataraid $device && \

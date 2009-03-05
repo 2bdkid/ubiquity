@@ -51,8 +51,7 @@ process_device(PedDevice *dev)
 	if (is_cdrom(dev->path) || is_floppy(dev->path))
 		return;
 	/* Exclude compcache (http://code.google.com/p/compcache/) */
-	if (strstr(dev->path, "/dev/ccache") != NULL ||
-	    strstr(dev->path, "/dev/ramzswap") != NULL)
+	if (strstr(dev->path, "/dev/ramzswap") != NULL)
 		return;
 	printf("%s\t%lli\t%s\n",
 	       dev->path,

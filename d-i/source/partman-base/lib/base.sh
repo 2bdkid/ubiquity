@@ -533,6 +533,7 @@ error_handler () {
 	db_subst partman/exception_handler CHOICES "$options"
 	if
 	    expr "$options" : '.*,.*' >/dev/null \
+	    && db_fset partman/exception_handler seen false \
 	    && db_input $priority partman/exception_handler
 	then
 	    if db_go; then
@@ -544,6 +545,7 @@ error_handler () {
 	else
 	    db_subst partman/exception_handler_note TYPE "$type"
 	    maybe_escape "$message" db_subst partman/exception_handler_note DESCRIPTION
+	    db_fset partman/exception_handler_note seen false
 	    db_input $priority partman/exception_handler_note || true
 	    db_go || true
 	    write_line "unhandled"
@@ -855,7 +857,7 @@ humandev () {
 	    # First check for Serial ATA RAID devices
 	    if type dmraid >/dev/null 2>&1 && \
 	       dmraid -s -c >/dev/null 2>&1; then
-		for frdisk in $(dmraid -s -c | grep -iv "No RAID disks"); do
+		for frdisk in $(dmraid -s -c); do
 			device=${1#/dev/mapper/}
 			case "$1" in
 			    /dev/mapper/$frdisk)

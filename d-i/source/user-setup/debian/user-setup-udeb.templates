@@ -29,7 +29,13 @@ Default: false
 Description: for internal use only
 
 # Allow preseeding whether to permit a blank password for created non-root user
-Template: passwd/allow-password-empty
+Template: user-setup/allow-password-empty
+Type: boolean
+Default: false
+Description: for internal use only
+
+# Allow preseeding whether to permit a weak password for created user
+Template: user-setup/allow-password-weak
 Type: boolean
 Default: false
 Description: for internal use only

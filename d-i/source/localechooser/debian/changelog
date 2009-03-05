@@ -1,3 +1,12 @@
+localechooser (2.09ubuntu2) jaunty; urgency=low
+
+  * Don't add en_US.UTF-8 to the supported language pack set if the locale
+    is set to C; this is probably fine by people using the C locale, and it
+    means that lowmem installations avoid installing language-pack-en and
+    thereby calling localedef lots of times.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Feb 2009 04:34:00 +0000
+
 localechooser (2.09ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

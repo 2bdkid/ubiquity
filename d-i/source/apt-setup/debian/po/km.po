@@ -2,7 +2,7 @@
 # packages/po/km.po
 #
 # DO NOT MODIFY IT DIRECTLY: SUCH CHANGES WILL BE LOST
-# 
+#
 # translation of km.po to Khmer
 # translation of km.po to
 #
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: km\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"POT-Creation-Date: 2009-02-24 18:12+0000\n"
 "PO-Revision-Date: 2008-02-11 10:16+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -75,14 +75,14 @@ msgstr "កំពុង​វិភាគ​រក​ឃ្លាំង​ភា
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid "Cannot access repository"
 msgstr "មិន​អាច​ចូល​ដំណើរការ​ឃ្លាំង"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
 "made available to you at this time. You should investigate this later."
@@ -93,7 +93,7 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
 "list file."
@@ -105,7 +105,7 @@ msgstr "បាន​បន្ថែម​សេចក្ដី​អធិប្
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "ភាព​ទាន់សម័យ​សុវត្ថិភាព (from ${SEC_HOST})"
 
@@ -115,21 +115,21 @@ msgstr "ភាព​ទាន់សម័យ​សុវត្ថិភាព (f
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr "ភាព​ទាន់សម័យ​ស្ថិតស្ថេរ (from ${VOL_HOST})"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "សេវា​ត្រូវ​ប្រើ ៖"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -138,7 +138,7 @@ msgstr "ដេបៀន​មាន​សេវា​ពីរ ដែល​ផ�
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -149,7 +149,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
@@ -476,10 +476,15 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "សូម​ជ្រើស​ថា​តើ​អ្នក​ចង់​ធ្វើ​ឲ្យ​មាន​ផ្នែកទន់​នេះ​ឬ​ក៏​អត់ ។"
@@ -636,6 +641,27 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#, fuzzy
+#| msgid "Use software from the \"universe\" component?"
+msgid "Use software from the \"partner\" repository?"
+msgstr "ប្រើ​កម្មវិធី​ពី​ \"សាកលលោក\" សមាសភាគ ?"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
+msgid ""
+"Some additional software is available from Canonical's \"partner\" "
+"repository. This software is not part of Ubuntu, but is offered by Canonical "
+"and the respective vendors as a service to Ubuntu users."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid "Use backported software?"
 msgstr "ប្រើ​ផ្នែកទន់​ដែល​បាន​នាំ​បំណះ​ថយ ?"
 
@@ -643,7 +669,7 @@ msgstr "ប្រើ​ផ្នែកទន់​ដែល​បាន​នា
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

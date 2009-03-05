@@ -1,3 +1,11 @@
+partman-partitioning (64ubuntu4) jaunty; urgency=low
+
+  * Cope with rounding errors while asking for the new partition size; if
+    the value we convert back from human-readable notation is in the
+    round-off range at either end, just use the appropriate extreme.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Feb 2009 04:47:09 +0000
+
 partman-partitioning (64ubuntu3) jaunty; urgency=low
 
   * Don't default to logical if an extended partition already exists, only

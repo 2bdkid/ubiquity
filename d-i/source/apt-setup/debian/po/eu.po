@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: di_po_sublevel1_eu\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"POT-Creation-Date: 2009-02-24 18:12+0000\n"
 "PO-Revision-Date: 2008-05-05 15:34+0200\n"
 "Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
 "Language-Team: Basque <itzulpena@euskalgnu.org>\n"
@@ -74,14 +74,14 @@ msgstr "Eguneraketa hegazkor errepositorioa eskaneatzen..."
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid "Cannot access repository"
 msgstr "Ezin da biltegia ebatzi"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
 "made available to you at this time. You should investigate this later."
@@ -92,7 +92,7 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
 "list file."
@@ -106,7 +106,7 @@ msgstr ""
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "Segurtasun eguneraketak (${SEC_HOST}-etik)"
 
@@ -116,21 +116,21 @@ msgstr "Segurtasun eguneraketak (${SEC_HOST}-etik)"
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr "Eguneraketa hegazkorrak (${VOL_HOST}-etik)"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "Erabiliko diren zerbitzuak:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -141,7 +141,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -152,7 +152,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
@@ -495,10 +495,15 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -660,6 +665,27 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#, fuzzy
+#| msgid "Use software from the \"universe\" component?"
+msgid "Use software from the \"partner\" repository?"
+msgstr "\"Universe\" osagaieko softwarea erabili?"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
+msgid ""
+"Some additional software is available from Canonical's \"partner\" "
+"repository. This software is not part of Ubuntu, but is offered by Canonical "
+"and the respective vendors as a service to Ubuntu users."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid "Use backported software?"
 msgstr "Bertsio berrietara migraturiko softwarea erabili?"
 
@@ -667,7 +693,7 @@ msgstr "Bertsio berrietara migraturiko softwarea erabili?"
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

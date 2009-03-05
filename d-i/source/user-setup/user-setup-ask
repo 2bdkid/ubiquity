@@ -203,8 +203,7 @@ while :; do
 				fi
 				# Loop if the password is empty, and it's not
 				# specifically allowed by preseeding
-				db_get passwd/allow-password-empty
-				if [ "$RET" = false ] && [ -z "$USER_PW" ]; then
+				if password_is_empty "$USER_PW"; then
 					db_set passwd/user-password ""
 					db_set passwd/user-password-again ""
 					db_fset user-setup/password-empty seen false

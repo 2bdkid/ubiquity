@@ -686,7 +686,7 @@ while :; do
 			# Always support English (unless preseeded
 			# otherwise), so that we get English language packs
 			# etc.
-			if [ "$LOCALE" = en_US.UTF-8 ]; then
+			if [ "$LOCALE" = C ] || [ "$LOCALE" = en_US.UTF-8 ]; then
 				db_set $tpl_supportedlocales "$LOCALE"
 			else
 				db_set $tpl_supportedlocales "$LOCALE, en_US.UTF-8"

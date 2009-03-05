@@ -28,12 +28,12 @@ for dev in $DEVICES/*; do
 			open_dialog PARTITION_INFO $id
 			read_line x1 x2 x3 x4 x5 device x6
 			close_dialog
-			old_uuid=
+			rm -f $id/old_uuid
 			if [ -f $id/detected_filesystem ]; then
 				old_fs=$(cat $id/detected_filesystem)
 				if [ "$old_fs" = linux-swap ]; then
 					# Save the old UUID so that we can restore it later.
-					old_uuid="$(dd if=$device bs=1 skip=1036 count=16 2>/dev/null || true)"
+					dd if=$device of=$id/old_uuid bs=1 skip=1036 count=16 2>/dev/null || true
 				fi
 			fi
 			db_subst $template PARTITION "$num"
@@ -68,11 +68,12 @@ for dev in $DEVICES/*; do
 				db_go || true
 				exit 1
 			fi
-			if [ "$old_uuid" ]; then
+			if [ -s "$id/old_uuid" ]; then
 				# Restore the old UUID so that systems using UUIDs in
 				# /etc/fstab don't unexpectedly end up without swap.
-				printf %s "$old_uuid" | dd of=$device bs=1 seek=1036 count=16 conv=notrunc 2>/dev/null || true
+				dd if=$id/old_uuid of=$device bs=1 seek=1036 count=16 conv=notrunc 2>/dev/null || true
 			fi
+			rm -f $id/old_uuid
 			>$id/formatted
 		fi
 	done

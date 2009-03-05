@@ -2,12 +2,12 @@
 # packages/po/et.po
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"POT-Creation-Date: 2009-02-24 18:12+0000\n"
 "PO-Revision-Date: 2007-02-17 10:45+0300\n"
 "Last-Translator: Siim Põder <siim@p6drad-teel.net>\n"
 "Language-Team: Eesti <linuxiabi@hot.ee>\n"
@@ -65,7 +65,7 @@ msgstr "Turvauuenduste varamu skännimine..."
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 #, fuzzy
 msgid "Cannot access repository"
 msgstr "Ei pääse turvauuendustele ligi"
@@ -73,7 +73,7 @@ msgstr "Ei pääse turvauuendustele ligi"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 #, fuzzy
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
@@ -85,7 +85,7 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 #, fuzzy
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
@@ -100,7 +100,7 @@ msgstr ""
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr ""
 
@@ -110,14 +110,14 @@ msgstr ""
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr ""
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 #, fuzzy
 msgid "Services to use:"
 msgstr "Nimeserverite aadressid:"
@@ -125,7 +125,7 @@ msgstr "Nimeserverite aadressid:"
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -134,7 +134,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -143,7 +143,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
@@ -459,10 +459,15 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Palun vali, kas soovid säärast tarkvara saadavale tuua."
@@ -626,6 +631,27 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#, fuzzy
+#| msgid "Use software from the \"universe\" component?"
+msgid "Use software from the \"partner\" repository?"
+msgstr "Kasutada tarkvara \"universumi\" komponendist?"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
+msgid ""
+"Some additional software is available from Canonical's \"partner\" "
+"repository. This software is not part of Ubuntu, but is offered by Canonical "
+"and the respective vendors as a service to Ubuntu users."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid "Use backported software?"
 msgstr "Kasutada tagasi-arendatud tarkvara?"
 
@@ -633,7 +659,7 @@ msgstr "Kasutada tagasi-arendatud tarkvara?"
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

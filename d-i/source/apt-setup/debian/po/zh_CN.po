@@ -2,7 +2,7 @@
 # packages/po/zh_CN.po
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
-# 
+#
 # Simplified Chinese translation for Debian Installer.
 #
 # Copyright (C) 2003-2008 Software in the Public Interest, Inc.
@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"POT-Creation-Date: 2009-02-24 18:12+0000\n"
 "PO-Revision-Date: 2008-01-18 01:46-0600\n"
 "Last-Translator: Ming Hua <minghua-guest@users.alioth.debian.org>\n"
 "Language-Team: Debian Chinese [GB] <debian-chinese-gb@lists.debian.org>\n"
@@ -72,14 +72,14 @@ msgstr "正在扫描 volatile 更新软件源..."
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid "Cannot access repository"
 msgstr "无法访问软件源"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
 "made available to you at this time. You should investigate this later."
@@ -90,7 +90,7 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
 "list file."
@@ -102,7 +102,7 @@ msgstr "被注释掉的有关 ${HOST} 的条目已被加入到 /etc/apt/sources.
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "安全更新 (来自 ${SEC_HOST})"
 
@@ -112,21 +112,21 @@ msgstr "安全更新 (来自 ${SEC_HOST})"
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr "volatile 更新 (来自 ${VOL_HOST})"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "要使用的服务："
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -135,7 +135,7 @@ msgstr "Debian 有两个为已发布版本提供更新的服务：security (安�
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -144,7 +144,7 @@ msgstr "安全更新能够帮助您的系统抵御外来的攻击。强烈建议
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
@@ -471,10 +471,15 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "请您选择是否想使用这些软件。"
@@ -628,6 +633,27 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#, fuzzy
+#| msgid "Use software from the \"universe\" component?"
+msgid "Use software from the \"partner\" repository?"
+msgstr "使用“universe”组成部分的软件吗？"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
+msgid ""
+"Some additional software is available from Canonical's \"partner\" "
+"repository. This software is not part of Ubuntu, but is offered by Canonical "
+"and the respective vendors as a service to Ubuntu users."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid "Use backported software?"
 msgstr "使用移植回来的 (backported) 软件吗？"
 
@@ -635,7 +661,7 @@ msgstr "使用移植回来的 (backported) 软件吗？"
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

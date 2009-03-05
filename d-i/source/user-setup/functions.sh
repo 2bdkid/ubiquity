@@ -49,6 +49,23 @@ root_password () {
 	return 1
 }
 
+password_is_empty () {
+	db_get user-setup/allow-password-empty
+	if [ "$RET" = true ]; then
+		return 1 # don't consider this as empty if explicitly allowed
+	fi
+	# check old name too
+	db_get passwd/allow-password-empty
+	if [ "$RET" = true ]; then
+		return 1
+	fi
+	[ -z "$1" ]
+}
+
 password_is_weak () {
+	db_get user-setup/allow-password-weak
+	if [ "$RET" = true ]; then
+		return 1 # don't consider this as weak if explicitly allowed
+	fi
 	[ "$(printf %s "$1" | wc -c)" -lt 8 ]
 }

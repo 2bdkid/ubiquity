@@ -1,3 +1,70 @@
+partman-base (129ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Don't disable /dev/ramzswap* swap devices.
+    - Exclude devices that have mounted partitions.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 04 Mar 2009 11:50:50 +0000
+
+partman-base (129) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Disable backup while displaying device/partition locked errors; it
+      makes no sense and it can cause us to exit without closing the FIFO to
+      parted_server (closes: #505477, LP: #274219).
+    - Add support for explicit 'b' or 'B' suffixes on partition sizes to
+      force interpretation as bytes (closes: #322922).
+    - Add a small test suite for longint2human and human2longint.
+    - Exclude /dev/ramzswap devices (http://code.google.com/p/compcache/).
+    - Add partman/early_command hook to run arbitrary commands immediately
+      before partitioning (LP: #239348).
+    - Exit straight away if a called script is killed by a signal.
+    - Only mark the partition table as changed due to CHANGE_FILE_SYSTEM if
+      it actually makes a change (i.e. the partition wasn't already using
+      that filesystem or didn't have that flag set). This avoids the
+      partition table being rewritten even if partman did nothing more than
+      autousing swap (LP: #287660).
+    - Add partman/default_filesystem template so that we can remove
+      hardcoding of ext3 from elsewhere in partman, and make the default
+      filesystem preseedable.
+    - Check dmraid's exit code rather than parsing its output.
+    - Don't display the Back button when asking for confirmation, since it's
+      already a boolean "do you want to continue?" question and we ignore
+      backup anyway (LP: #9244).
+    - Cope with exception options, partition flags passed to SET_FLAGS, and
+      the partition name passed to SET_NAME being empty (closes: #268495).
+    - Use 'update-dev --settle' rather than 'update-dev' during commit.
+      Requires di-utils 1.66.
+  * Run 'depmod -a' after loading extra partman components, since they might
+    install further kernel modules as dependencies.
+  * Mark partman/exception_handler and partman/exception_handler_note unseen
+    before asking them; they're effectively error messages but implemented
+    using select and boolean templates, so won't necessarily be reshown
+    otherwise, and failures may be very confusing if these aren't shown.
+
+  [ Frans Pop ]
+  * Remove myself as uploader.
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * Galician (gl.po) by marce villarino
+  * Hindi (hi.po) by Kumar Appaiah
+  * Italian (it.po) by Milo Casagrande
+  * Kazakh (kk.po) by daur88
+  * Malayalam (ml.po) by Praveen Arimbrathodiyil
+  * Marathi (mr.po) by Sampada
+  * Tagalog (tl.po) by Eric Pareja
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 04 Mar 2009 11:11:31 +0000
+
 partman-base (128ubuntu9) jaunty; urgency=low
 
   * Deal with leading newlines while reading exception options and partition

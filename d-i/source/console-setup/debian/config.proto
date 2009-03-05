@@ -275,14 +275,14 @@ available_fontsizes () {
 }
 
 decode_codeset () {
-    pattern="^$(echo "$*" | sed 's/[^ #0-9;A-Za-z-]/\\&/g')\\*"
+    pattern="^$(echo "$*" | sed 's/[^ #()0-9;A-Za-z-]/\\&/g')\\*"
     echo "$codesets" | \
 	grep "$pattern" | \
 	sed 's/.*[*]//'
 }
 
 encode_codeset () {
-    pattern="\\*$(echo "$*" | sed 's/[^ #0-9;A-Za-z-]/\\&/g')\$"
+    pattern="\\*$(echo "$*" | sed 's/[^ #()0-9;A-Za-z-]/\\&/g')\$"
     echo "$codesets" | \
 	grep "$pattern" | \
 	sed 's/[*].*//'

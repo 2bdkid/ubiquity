@@ -2,7 +2,7 @@
 # packages/po/it.po
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
-# 
+#
 # Italian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"POT-Creation-Date: 2009-02-24 18:12+0000\n"
 "PO-Revision-Date: 2008-01-19 16:56+0100\n"
 "Last-Translator: Stefano Canepa <sc@linux.it>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -82,14 +82,14 @@ msgstr "Scansione degli aggiornamenti da «volatile» in corso."
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid "Cannot access repository"
 msgstr "Impossibile accedere al repository"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "The repository on ${HOST} couldn't be accessed, so its updates will not be "
 "made available to you at this time. You should investigate this later."
@@ -101,7 +101,7 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:9001
+#: ../apt-setup-udeb.templates:10001
 msgid ""
 "Commented out entries for ${HOST} have been added to the /etc/apt/sources."
 "list file."
@@ -113,7 +113,7 @@ msgstr "Le righe di ${HOST} in /etc/apt/sources.list sono state commentate."
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "aggiornamenti di sicurezza (da ${SEC_HOST})"
 
@@ -123,21 +123,21 @@ msgstr "aggiornamenti di sicurezza (da ${SEC_HOST})"
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl2:
-#: ../apt-setup-udeb.templates:10001
+#: ../apt-setup-udeb.templates:11001
 msgid "volatile updates (from ${VOL_HOST})"
 msgstr "aggiornamenti da «volatile» (da ${VOL_HOST})"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "Servizi da usare:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
 "volatile."
@@ -148,7 +148,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -159,7 +159,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl2:
-#: ../apt-setup-udeb.templates:10002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Volatile updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
@@ -507,10 +507,15 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr "Selezionare se si vuole che questo software sia reso disponibile."
@@ -614,8 +619,8 @@ msgid ""
 "prevent you from using, modifying, or sharing it."
 msgstr ""
 "Alcuni software non liberi sono disponibili sotto forma di pacchetto. Questo "
-"software non fa parte della distribuzione «main», ma il normale strumento "
-"per la gestione dei pacchetti può essere utilizzato per installarlo. Questo "
+"software non fa parte della distribuzione «main», ma il normale strumento per "
+"la gestione dei pacchetti può essere utilizzato per installarlo. Questo "
 "software ha varie licenze che ne limitano l'uso, la modifica o la "
 "condivisione."
 
@@ -638,8 +643,8 @@ msgid ""
 "management tools can be used to install it."
 msgstr ""
 "Alcuni software aggiuntivi sono disponibili sotto forma di pacchetto. Questo "
-"software è libero anche se non fa parte della distribuzione «main», i "
-"normali strumenti per la gestione dei pacchetti può essere utilizzato per "
+"software è libero anche se non fa parte della distribuzione «main», i normali "
+"strumenti per la gestione dei pacchetti può essere utilizzato per "
 "installarlo."
 
 #. Type: boolean
@@ -673,6 +678,27 @@ msgstr ""
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
+#, fuzzy
+#| msgid "Use software from the \"universe\" component?"
+msgid "Use software from the \"partner\" repository?"
+msgstr "Usare il software dal componente «universe»?"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:4001
+msgid ""
+"Some additional software is available from Canonical's \"partner\" "
+"repository. This software is not part of Ubuntu, but is offered by Canonical "
+"and the respective vendors as a service to Ubuntu users."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid "Use backported software?"
 msgstr "Usare software «ricompilato»?"
 
@@ -680,7 +706,7 @@ msgstr "Usare software «ricompilato»?"
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates-ubuntu:4001
+#: ../apt-mirror-setup.templates-ubuntu:5001
 msgid ""
 "Some software has been backported from the development tree to work with "
 "this release. Although this software has not gone through such complete "

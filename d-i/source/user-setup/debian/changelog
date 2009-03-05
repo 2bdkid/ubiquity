@@ -1,3 +1,14 @@
+user-setup (1.23ubuntu14) jaunty; urgency=low
+
+  * user-setup/password-weak can't be preseeded since that would interfere
+    with correct interactive behaviour, but create
+    user-setup/allow-password-weak which can.
+  * Rename passwd/allow-password-empty to user-setup/allow-password-empty,
+    for consistency with user-setup/password-empty. Provide compatibility
+    with the old name for one release.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Feb 2009 05:37:10 +0000
+
 user-setup (1.23ubuntu13) jaunty; urgency=low
 
   * updated to edit the kde4 kdmrc as kde4 is the default now

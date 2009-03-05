@@ -1,3 +1,11 @@
+hw-detect (1.71ubuntu5) jaunty; urgency=low
+
+  * Use 'update-dev --settle' rather than 'update-dev' after loading modules
+    (although not after installing new module packages, which may still
+    require a trigger). Requires di-utils 1.66.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 04 Mar 2009 16:31:50 +0000
+
 hw-detect (1.71ubuntu4) jaunty; urgency=low
 
   * Check dmraid's exit code as well as parsing its output, the latter for

@@ -1,3 +1,10 @@
+partman-basicfilesystems (62ubuntu2) jaunty; urgency=low
+
+  * When formatting swap partitions, save the old UUID in a file rather than
+    in a shell variable, as the latter approach eats NULs (LP: #336992).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 03 Mar 2009 12:54:26 +0000
+
 partman-basicfilesystems (62ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
