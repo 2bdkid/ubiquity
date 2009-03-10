@@ -370,7 +370,9 @@ static int choose_mirror(void) {
 		/* Prompt for mirror in selected country. */
 		list=debconf_list(mirrors_in(country));
 		debconf_subst(debconf, mir, "mirrors", list);
-		if (debconf_fget(debconf, mir, "seen") != 0 ||
+		if ((debconf_get(debconf, mir) == 0 &&
+		     strcmp(debconf->value, "CC.archive.ubuntu.com") == 0) ||
+		    debconf_fget(debconf, mir, "seen") != 0 ||
 		    strcmp(debconf->value, "true") != 0)
 			if (mirror_root(countryarchive))
 			    debconf_set(debconf, mir, countryarchive);

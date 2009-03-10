@@ -1,3 +1,24 @@
+ubiquity (1.11.16) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Incorporate the final time zone map artwork.  Support some
+    additional time zones on the map.
+
+  [ Colin Watson ]
+  * KDE frontend:
+    - grub_device_entry is now a combobox, so we need to use currentText()
+      rather than text() (LP: #337181).
+  * GTK frontend:
+    - Fix suggested keymap handling so that selecting that option after
+      selecting a custom keymap applies the suggested keymap (LP: #337998).
+  * Add a fudge of 20% to the size of each tree on the live filesystem
+    (other than / and /boot, which already have their own fudge factors) for
+    the purposes of the partition-too-small check (LP: #298318).
+  * Automatic update of included source packages: choose-mirror 2.27ubuntu4,
+    clock-setup 0.97ubuntu3, partman-partitioning 64ubuntu5.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Mar 2009 10:19:54 +0000
+
 ubiquity (1.11.15) jaunty; urgency=low
 
   [ Colin Watson ]
