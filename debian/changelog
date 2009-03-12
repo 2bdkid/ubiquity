@@ -1,3 +1,41 @@
+ubiquity (1.11.17) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Pack the timezone_map in an AspectFrame instead of a regular Gtk Frame.
+  * Plot the time zone cities using a Miller cylindrical map projection with
+    adjustments for the shifted left edge and missing arctic region of the
+    map.
+  * Account for daylight savings when highlighting a region in the
+    timezone_map (LP: #335355).
+  * Properly set the percent of each partition in the segmented_bar on the
+    advanced page (LP: #334826).
+  * Clean up the code around handling a partitioning choice change.
+    Show the format warning when the disk is automatically selected
+    (LP: #335704).
+  * Automatic update of included source packages: base-installer
+    1.98ubuntu3.
+
+  [ Colin Watson ]
+  * Stop the user-setup component from believing it's done after the user
+    selects "go back" at a weak password dialog (LP: #340549).
+  * Add ubiquity/keep-installed question which can be preseeded with a
+    space-separated list of packages to keep installed even if they aren't
+    in the desktop manifest and aren't in the list of language packs to keep
+    (LP: #290400).
+  * Expand dependencies of packages we know we want to keep (language packs,
+    etc.) before calculating which packages to blacklist from file copying
+    or to remove. This is more correct in the presence of Recommends of
+    language packs, and furthermore saves considerable time when
+    blacklisting. My test results for various language pack sets on a DVD:
+    - en: 4:00 -> 3:30
+    - de+en+es+fr+ja+ko+nb+nds+nl+nn+si+sk+sv: 5:30 -> 2:50
+    - all: 14:37 -> 0:10 (!)
+    This doesn't quite solve LP #335596 because testing a large number of
+    packages for removal when there genuinely are lots of packages to remove
+    is still quite slow, but it very significantly improves the worst cases.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 12 Mar 2009 23:04:00 +0000
+
 ubiquity (1.11.16) jaunty; urgency=low
 
   [ Evan Dandrea ]

@@ -1,3 +1,12 @@
+base-installer (1.98ubuntu3) jaunty; urgency=low
+
+  * Revert Joey's patch to call base-installer.d hooks after running
+    debootstrap, which broke console-setup's expectation of being able to
+    insert its configuration file into /target before console-setup is
+    installed by debootstrap (LP: #340308).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Mar 2009 09:47:12 +0000
+
 base-installer (1.98ubuntu2) jaunty; urgency=low
 
   * Check dmraid's exit code as well as parsing its output, the latter for
