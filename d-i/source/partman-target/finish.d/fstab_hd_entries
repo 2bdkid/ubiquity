@@ -40,11 +40,15 @@ fstab=$(
 				fi
 				addfstab "$loop" "${mp}" "$type" "$options" "$dump" "$pass"
 			else
+				case "$mp" in
+				    (/*)	desc="$mp" ;;
+				    (*)		desc="$type" ;;
+				esac
 				if label="$(PATH="/lib/udev:$PATH" vol_id -l $fs)" && [ "$label" ]; then
-					printf "# %s was on %s during installation\n" "$mp" "$(mapdevfs $fs)"
+					printf "# %s was on %s during installation\n" "$desc" "$(mapdevfs $fs)"
 					addfstab "LABEL=$label" "${mp}" "$type" "$options" "$dump" "$pass"
 				elif uuid="$(PATH="/lib/udev:$PATH" vol_id -u $fs)" && [ "$uuid" ]; then
-					printf "# %s was on %s during installation\n" "$mp" "$(mapdevfs $fs)"
+					printf "# %s was on %s during installation\n" "$desc" "$(mapdevfs $fs)"
 					addfstab "UUID=$uuid" "${mp}" "$type" "$options" "$dump" "$pass"
 				else
 					addfstab "$(mapdevfs $fs)" "${mp}" "$type" "$options" "$dump" "$pass"

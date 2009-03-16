@@ -62,8 +62,13 @@ if [ ! -f /var/run/parted_server.pid ]; then
 
 	# Exclude devices that have mounted partitions.
 	disks=
-	db_get partman/filter_mounted
-	if [ "$RET" != false ]; then
+	while :; do
+		disks=
+		parts=
+		db_get partman/filter_mounted
+		if [ "$RET" = false ]; then
+			break
+		fi
 		while read dev rest; do
 			# Taken from split_device() in grub-installer.
 			disk=
@@ -75,16 +80,35 @@ if [ ! -f /var/run/parted_server.pid ]; then
 					disk="$(echo "$dev" | sed 's,\(/dev/.*/c[0-9]\+d[0-9]\+\).*,\1,')"
 				;;
 			esac
-            		if [ -z "$disk" ]; then
+			if [ -z "$disk" ]; then
 				continue
 			fi
 			if [ -n "$disks" ]; then
 				disks="$disks\|$disk"
+				parts="$parts $dev"
 			else
 				disks="$disk"
+				parts="$dev"
 			fi
 		done < /proc/mounts
-    	fi
+		if [ -z "$disks" ]; then
+			break
+		fi
+		d="$(echo "$disks" | sed 's,\\|,\n,')"
+		db_capb escape		
+		db_subst partman/unmount_active DISKS "$(printf %s "$d" | debconf-escape -e)"
+		db_capb
+		db_fset partman/unmount_active seen false
+		db_reset partman/unmount_active
+		db_input critical partman/unmount_active || true
+		db_go || exit 10
+		db_get partman/unmount_active
+		if [ "$RET" = true ]; then
+			break
+		else
+			umount $parts || true
+		fi
+	done
 	if [ "$disks" ]; then
 		disks="^\($disks\)"
 	else

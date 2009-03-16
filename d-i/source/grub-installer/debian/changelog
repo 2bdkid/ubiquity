@@ -1,3 +1,15 @@
+grub-installer (1.36ubuntu3) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Clarify why we cannot always default to the device that contains the
+    boot partition for grub-installer/bootdev.
+
+  [ Steve Langasek ]
+  * Make grub2 available as an option in expert mode again, restoring the
+    Debian behavior.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 16 Mar 2009 00:13:02 -0700
+
 grub-installer (1.36ubuntu2) jaunty; urgency=low
 
   * Check dmraid's exit code as well as parsing its output, the latter for

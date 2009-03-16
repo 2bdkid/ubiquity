@@ -1,3 +1,11 @@
+partman-target (58ubuntu5) jaunty; urgency=low
+
+  * Issue an error message if two file systems are assigned the same label
+    (LP: #320872).
+  * Improve fstab comments for partitions without mount points (e.g. swap).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 16 Mar 2009 14:46:47 +0000
+
 partman-target (58ubuntu4) jaunty; urgency=low
 
   * Escape spaces, tabs, newlines, and backslashes in fstab according to the

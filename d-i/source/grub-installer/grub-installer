@@ -433,8 +433,8 @@ case "$bootfstype:$bootfslabel:$grub_package" in
 	# Ubuntu's grub package supports GPT, although Debian's doesn't.
 	: ;;
     *:*:grub)
-	#db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
-	#db_go || true
+	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
+	db_go || true
 	db_get grub-installer/grub2_instead_of_grub_legacy
 	if [ "$RET" = true ]; then
 		grub_package="grub-pc"
@@ -584,7 +584,10 @@ if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
 fi
 
 # Set a sensible default boot device as hd0 does not make sense when
-# installing from a removable disk.
+# installing from a removable disk.  We have to be specific here and not always
+# set the installation target to the disk that /boot resides on because we
+# cannot reliably determine the GRUB device name for a disk that was not the
+# boot device.
 cdfs=$(mount | grep "on /cdrom " | cut -d' ' -f5)
 if [ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]; then
 	db_fget grub-installer/bootdev seen

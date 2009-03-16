@@ -24,8 +24,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
-"Report-Msgid-Bugs-To: partman-target@packages.debian.org\n"
-"POT-Creation-Date: 2008-07-28 09:39+0100\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2009-03-16 14:44+0000\n"
 "PO-Revision-Date: 2008-07-05 18:33+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <debian-l10n-italian@lists.debian.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 #. Type: text
 #. Description
 #. :sl1:
-#: ../partman-target.templates:1001 ../partman-target.templates:10001
+#: ../partman-target.templates:1001 ../partman-target.templates:11001
 msgid "Help on partitioning"
 msgstr "Aiuto sul partizionamento"
 
@@ -158,13 +158,41 @@ msgstr ""
 #. Description
 #. :sl2:
 #: ../partman-target.templates:4001
-msgid "Identical mount points for two file systems"
+#, fuzzy
+#| msgid "Identical mount points for two file systems"
+msgid "Identical labels for two file systems"
 msgstr "punto di mount identico per due file system"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-target.templates:4001
+msgid ""
+"Two file systems are assigned the same label (${LABEL}): ${PART1} and "
+"${PART2}. Since file system labels are usually used as unique identifiers, "
+"this is likely to cause reliability problems later."
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:4001
+#, fuzzy
+#| msgid "Please correct this by changing mount points."
+msgid "Please correct this by changing labels."
+msgstr "Correggere cambiando i punti di mount."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001
+msgid "Identical mount points for two file systems"
+msgstr "punto di mount identico per due file system"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../partman-target.templates:5001
 msgid ""
 "Two file systems are assigned the same mount point (${MOUNTPOINT}): ${PART1} "
 "and ${PART2}."
@@ -175,21 +203,21 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:4001
+#: ../partman-target.templates:5001
 msgid "Please correct this by changing mount points."
 msgstr "Correggere cambiando i punti di mount."
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:5001
+#: ../partman-target.templates:6001
 msgid "No root file system"
 msgstr "Nessun file system di root"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:5001
+#: ../partman-target.templates:6001
 msgid "No root file system is defined."
 msgstr "Non è stato definito alcun file system di root."
 
@@ -199,21 +227,21 @@ msgstr "Non è stato definito alcun file system di root."
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:5001 ../partman-target.templates:6001
+#: ../partman-target.templates:6001 ../partman-target.templates:7001
 msgid "Please correct this from the partitioning menu."
 msgstr "Correggere l'errore dal menù di partizionamento."
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:6001
+#: ../partman-target.templates:7001
 msgid "Separate file system not allowed here"
 msgstr "File system separati non permessi"
 
 #. Type: error
 #. Description
 #. :sl2:
-#: ../partman-target.templates:6001
+#: ../partman-target.templates:7001
 msgid ""
 "You assigned a separate file system to ${MOUNTPOINT}, but in order for the "
 "system to start correctly this directory must be on the root file system."
@@ -225,14 +253,14 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "Do you want to resume partitioning?"
 msgstr "Riprendere il partizionamento?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid ""
 "The attempt to mount a file system with type ${TYPE} in ${DEVICE} at "
 "${MOUNTPOINT} failed."
@@ -243,32 +271,32 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-target.templates:7001
+#: ../partman-target.templates:8001
 msgid "You may resume partitioning from the partitioning menu."
 msgstr "È possibile riprendere il partizionamento dal menù di partizionamento."
 
 #. Type: select
 #. Description
-#: ../partman-target.templates:8001
+#: ../partman-target.templates:9001
 msgid "How to use this partition:"
 msgstr "Come usare questa partizione:"
 
 #. Type: text
 #. Description
 #. :sl2:
-#: ../partman-target.templates:9001
+#: ../partman-target.templates:10001
 msgid "Use as:"
 msgstr "Usato come:"
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
 msgstr ""
 
 #. Type: error
 #. Description
-#: ../partman-target.templates:11001
+#: ../partman-target.templates:12001
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
@@ -276,13 +304,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../partman-target.templates:12001
+#: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:13001
+#: ../partman-target.templates:14001
 #, fuzzy
 #| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
@@ -290,7 +318,7 @@ msgstr "Riprendere il partizionamento?"
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:13001
+#: ../partman-target.templates:14001
 msgid ""
 "The file system on ${PARTITION} assigned to ${MOUNTPOINT} has not been "
 "marked for formatting.  Directories containing system files (/etc, /lib, /"
@@ -300,7 +328,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../partman-target.templates:13001
+#: ../partman-target.templates:14001
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""

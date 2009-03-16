@@ -1,3 +1,28 @@
+ubiquity (1.11.18) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * broken_packages is fairly slow due to having to iterate over the whole
+    cache. Speed it up a bit by stopping when the number of broken packages
+    found reaches cache._depcache.BrokenCount; this improves blacklist
+    calculation time for the previously-mentioned DVD English-only install
+    from 3:30 to 2:30 (see LP #335596).
+  * GTK frontend:
+    - Restore set_window_hints method for use by windows other than the main
+      one (it was still called in the Glade file), just in case we're using
+      a window manager that pays attention to this. In these cases
+      maximisation doesn't really make sense so we no longer permit that.
+
+  [ Evan Dandrea ]
+  * Fix a bit of code that wasn't updated to reflect other changes in
+    remove_extras (LP: #342319).
+  * Start NetworkManager before ubiquity in only-ubiquity mode
+    (LP: #340929).
+  * Support the new partman/unmount_active question.
+  * Automatic update of included source packages: grub-installer
+    1.36ubuntu3, partman-base 129ubuntu2, partman-target 58ubuntu5.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 16 Mar 2009 17:02:01 +0000
+
 ubiquity (1.11.17) jaunty; urgency=low
 
   [ Evan Dandrea ]

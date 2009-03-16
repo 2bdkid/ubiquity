@@ -391,3 +391,15 @@ Type: boolean
 Default: true
 Description: for internal use; can be preseeded
  Filter out disks with mounted partitions.
+
+Template: partman/unmount_active
+Type: boolean
+#flag:translate!:3
+_Description: Unmount partitions that are in use?
+ The installer has detected that the following disks have mounted partitions:
+ .
+ ${DISKS}
+ .
+ Do you want the installer to try to unmount the partitions on these disks
+ before continuing?  If not, the installation will continue and the disks will
+ not be available as installation targets.
