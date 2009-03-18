@@ -94,19 +94,15 @@ if [ ! -f /var/run/parted_server.pid ]; then
 		if [ -z "$disks" ]; then
 			break
 		fi
-		d="$(echo "$disks" | sed 's,\\|,\n,')"
-		db_capb escape		
-		db_subst partman/unmount_active DISKS "$(printf %s "$d" | debconf-escape -e)"
-		db_capb
+		db_subst partman/unmount_active DISKS "$(echo "$disks" | sed 's:\\|:, :g')"
 		db_fset partman/unmount_active seen false
-		db_reset partman/unmount_active
 		db_input critical partman/unmount_active || true
 		db_go || exit 10
-		db_get partman/unmount_active
+		db_get partman/unmount_active || RET=
 		if [ "$RET" = true ]; then
-			break
-		else
 			umount $parts || true
+		else
+			break
 		fi
 	done
 	if [ "$disks" ]; then

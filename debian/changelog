@@ -1,3 +1,25 @@
+ubiquity (1.11.19) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * Update translations from Launchpad.
+  * Tighten frontend dependencies on ubiquity to prevent problems when one
+    architecture is out of sync.
+
+  [ Evan Dandrea ]
+  * Only create one virtual desktop when in only-ubiquity mode
+    (LP: #343451, LP: #321212).
+  * When the user selects "go back" in response to the weak password dialog,
+    select the text in the first password entry (LP: #344402).
+  * Add partman/unmount_active to the list of questions that mean "do you want
+    to continue?" in the partman component.
+  * Automatic update of included source packages: partman-base
+    129ubuntu3, partman-partitioning 64ubuntu6, user-setup 1.23ubuntu15.
+
+  [ Jonathan Riddell ]
+  * turn on wordwrap for long string in gui/qt/liveinstaller.ui
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 18 Mar 2009 21:41:26 +0000
+
 ubiquity (1.11.18) jaunty; urgency=low
 
   [ Colin Watson ]

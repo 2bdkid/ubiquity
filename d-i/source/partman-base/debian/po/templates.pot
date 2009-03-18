@@ -1,22 +1,14 @@
-#
-#    Translators, if you are not familiar with the PO format, gettext
-#    documentation is worth reading, especially sections dedicated to
-#    this format, e.g. by running:
-#         info -n '(gettext)PO Files'
-#         info -n '(gettext)Header Entry'
-#
-#    Some information specific to po-debconf are available at
-#            /usr/share/doc/po-debconf/README-trans
-#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
-#
-#    Developers do not need to manually edit POT or PO files.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-12-25 22:50+0000\n"
+"Report-Msgid-Bugs-To: partman-base@packages.debian.org\n"
+"POT-Creation-Date: 2009-03-18 18:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -528,4 +520,26 @@ msgstr ""
 #. :sl1:
 #: ../partman-base.templates:61001
 msgid "Partition disks"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:65001
+msgid "Unmount partitions that are in use?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:65001
+msgid ""
+"The installer has detected that the following disks have mounted partitions:"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../partman-base.templates:65001
+msgid ""
+"Do you want the installer to try to unmount the partitions on these disks "
+"before continuing?  If not, the installation will continue and the disks "
+"will not be available as installation targets."
 msgstr ""
