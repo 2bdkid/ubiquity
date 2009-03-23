@@ -1,3 +1,12 @@
+grub-installer (1.36ubuntu4) jaunty; urgency=low
+
+  * cciss and ida logical drive numbers may go up to 15, not just 9.
+  * Only check for the boot partition being on dmraid if the user allowed us
+    to activate dmraid, to cope with cases where dmraid is misdetected
+    (LP: #346001).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 20 Mar 2009 18:26:39 +0000
+
 grub-installer (1.36ubuntu3) jaunty; urgency=low
 
   [ Evan Dandrea ]

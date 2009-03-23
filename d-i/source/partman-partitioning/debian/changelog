@@ -1,3 +1,51 @@
+partman-partitioning (65ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add ORISIZE, PATH, RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE
+      substitutions to partman-partitioning/new_size in support of
+      ubiquity's resize widget.
+    - When creating a new partition, default to logical if a primary
+      partition already exists.
+    - Add NTFS dependencies on lpia.
+    - get_real_device: Add support for /dev/vd*, /dev/xvd*, /dev/cciss/*,
+      /dev/ida/*, and /dev/mmcblk*.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 20 Mar 2009 15:29:17 +0000
+
+partman-partitioning (65) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Exit straight away if a called script is killed by a signal.
+    - Add lpia support to default_disk_label (Emmet Hikory).
+    - Add ext4 support.
+    - Honour partman/default_filesystem when creating new partitions.
+      Requires partman-base 129.
+    - Cope with rounding errors while asking for the new partition size; if
+      the value we convert back from human-readable notation is in the
+      round-off range at either end, just use the appropriate extreme.
+    - Use 'update-dev --settle' rather than 'update-dev' after resizing or
+      committing. Requires di-utils 1.66.
+
+  [ Riku Voipio ]
+  * Consolidate ARM partitioning.
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by marce villarino
+  * Hindi (hi.po) by Kumar Appaiah
+  * Kazakh (kk.po) by daur88
+  * Malayalam (ml.po) by Praveen Arimbrathodiyil
+  * Marathi (mr.po) by Sampada
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Tagalog (tl.po) by Eric Pareja
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 04 Mar 2009 11:20:49 +0000
+
 partman-partitioning (64ubuntu6) jaunty; urgency=low
 
   * get_real_device: Add support for /dev/vd*, /dev/xvd*, /dev/cciss/*,
