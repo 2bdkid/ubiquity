@@ -50,6 +50,7 @@ class BaseFrontend:
         self.resize_choice = None
         self.manual_choice = None
         self.summary_device = None
+        self.grub_en = None
         self.popcon = None
         self.http_proxy_host = None
         self.http_proxy_port = 8080
@@ -80,6 +81,12 @@ class BaseFrontend:
             self.oem_id = db.get('oem-config/id')
         except debconf.DebconfError:
             self.oem_id = ''
+
+        if self.oem_config:
+            try:
+                db.set('passwd/auto-login', 'true')
+            except debconf.DebconfError:
+                pass
 
         # set commands
         # Note that this will never work if the database is locked, so you

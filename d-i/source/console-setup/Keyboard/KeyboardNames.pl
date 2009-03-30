@@ -305,7 +305,8 @@ package KeyboardNames;
 	'Wang model 724 azerty' => 'wang',
     },
     'bg' => {
-	'Phonetic' => 'phonetic',
+	'Standard Phonetic' => 'bas_phonetic',
+	'Traditional Phonetic' => 'phonetic',
     },
     'br' => {
 	'Dvorak' => 'dvorak',
@@ -532,6 +533,9 @@ package KeyboardNames;
 	'Kana' => 'kana',
 	'OADG 109A' => 'OADG109A',
     },
+    'kg' => {
+	'Phonetic' => 'phonetic',
+    },
     'kr' => {
 	'101/104 key Compatible' => 'kr104',
     },
@@ -668,9 +672,7 @@ package KeyboardNames;
 	'Svdvorak' => 'svdvorak',
     },
     'si' => {
-	'US keyboard with Slovenian digraphs' => 'unicodeus',
 	'US keyboard with Slovenian letters' => 'us',
-	'Use Slovenian digraphs' => 'unicode',
 	'Use guillemets for quotes' => 'alternatequotes',
     },
     'sk' => {

@@ -255,16 +255,10 @@ class DebconfInstallProgress(InstallProgress):
             self.started = False
 
 class InstallStepError(Exception):
-    """Raised when an install step fails.
-
-    Attributes:
-        message -- message returned with exception
-
-    """
+    """Raised when an install step fails."""
 
     def __init__(self, message):
         Exception.__init__(self, message)
-        self.message = message
 
 class Install:
 
@@ -587,6 +581,7 @@ class Install:
         # removed).
         if subarch.startswith('amd64/') or subarch.startswith('i386/') or subarch.startswith('lpia/'):
             keep.add('grub')
+            keep.add('grub-pc')
         elif subarch == 'powerpc/ps3':
             pass
         elif subarch.startswith('powerpc/'):
@@ -1124,6 +1119,15 @@ exit 0"""
               };
             }""")
         apt_conf_nmc.close()
+
+        # This will be reindexed after installation based on the full
+        # installed sources.list.
+        try:
+            shutil.rmtree(
+                os.path.join(self.target, 'var/lib/apt-xapian-index'),
+                ignore_errors=True)
+        except OSError:
+            pass
 
         dbfilter = apt_setup.AptSetup(None, self.db)
         ret = dbfilter.run_command(auto_process=True)
@@ -2003,29 +2007,6 @@ exit 0"""
                                        '/home/oem/Desktop/%s' % desktop_base)
                             break
 
-                # Some serious horribleness is needed here to handle absolute
-                # symlinks.
-                for name in ('gdm-cdd.conf', 'gdm.conf'):
-                    gdm_conf = osextras.realpath_root(
-                        self.target, os.path.join('/etc/gdm', name))
-                    if os.path.isfile(gdm_conf):
-                        self.chrex('sed', '-i.oem',
-                                   '-e', 's/^AutomaticLoginEnable=.*$/AutomaticLoginEnable=true/',
-                                   '-e', 's/^AutomaticLogin=.*$/AutomaticLogin=oem/',
-                                   '-e', 's/^TimedLoginEnable=.*$/TimedLoginEnable=true/',
-                                   '-e', 's/^TimedLogin=.*$/TimedLogin=oem/',
-                                   '-e', 's/^TimedLoginDelay=.*$/TimedLoginDelay=10/',
-                                   os.path.join('/etc/gdm', name));
-                        break
-
-                kdmrc = os.path.join(self.target, 'etc/kde4/kdm/kdmrc')
-                if os.path.isfile(kdmrc):
-                    misc.execute('sed', '-i.oem', '-r',
-                                 '-e', 's/^#?AutoLoginEnable=.*$/AutoLoginEnable=true/',
-                                 '-e', 's/^#?AutoLoginUser=.*$/AutoLoginUser=oem/',
-                                 '-e', 's/^#?AutoReLogin=.*$/AutoReLogin=true/',
-                                 kdmrc)
-
 		# Carry the locale setting over to the installed system.
 		# This mimics the behavior in 01oem-config-udeb.
                 di_locale = self.db.get('debian-installer/locale')
@@ -2074,6 +2055,8 @@ exit 0"""
         if subarch.startswith('amd64/') or subarch.startswith('i386/') or subarch.startswith('lpia/'):
             if 'grub' not in keep:
                 difference.add('grub')
+            if 'grub-pc' not in keep:
+                difference.add('grub-pc')
             if 'lilo' not in keep:
                 difference.add('lilo')
 

@@ -782,6 +782,11 @@ split_device () {
 			part="$(echo "$1" | sed 's,/dev/.*/c[0-9]\+d[0-9]\+p\([0-9]\+\),\1,')"
 			[ "$part" != "$1" ] || part=
 			;;
+		/dev/mmcblk*)
+			disk="$(echo "$1" | sed 's,\(/dev/mmcblk[0-9]\+\).*,\1,')"
+			part="$(echo "$1" | sed 's,/dev/mmcblk[0-9]\+p\([0-9]\+\),\1,')"
+			[ "$part" != "$1" ] || part=
+			;;
 	esac
 	echo "$disk $part"
 }

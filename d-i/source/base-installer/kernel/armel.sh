@@ -1,6 +1,6 @@
 arch_get_kernel_flavour () {
 	case "$SUBARCH" in
-	    iop32x|iop33x|ixp4xx|orion5x|versatile)
+	    imx51|iop32x|iop33x|ixp4xx|orion5x|versatile)
 		echo "$SUBARCH"
 		return 0 ;;
 	    ads)
@@ -21,18 +21,6 @@ arch_check_usable_kernel () {
 }
 
 arch_get_kernel () {
-	case "$KERNEL_MAJOR" in
-	    2.6)
-		case "$1" in
-		    bast)
-			echo "linux-image-$KERNEL_MAJOR-s3c2410"
-			;;
-		    *)
-			echo "linux-image-$KERNEL_MAJOR-$1"
-			;;
-		esac
-		;;
-	    *)	warning "Unsupported kernel major '$KERNEL_MAJOR'."
-		;;
-	esac
+	echo "linux-$1"
+	echo "linux-image-$1"
 }

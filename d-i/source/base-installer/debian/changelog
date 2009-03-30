@@ -1,3 +1,13 @@
+base-installer (1.98ubuntu4) jaunty; urgency=low
+
+  [ Michael Casadevall ]
+  * Fixed armel arch_get_kernel() call for Ubuntu/armel
+  * Updated the test suite for Ubuntu/armel
+  * Added imx51 to armel as a new sub-architecture and added its 
+    test suite (LP: #345534)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Mar 2009 11:41:54 +0000
+
 base-installer (1.98ubuntu3) jaunty; urgency=low
 
   * Revert Joey's patch to call base-installer.d hooks after running

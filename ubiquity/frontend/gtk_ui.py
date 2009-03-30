@@ -164,14 +164,18 @@ class Wizard(BaseFrontend):
         self.hostname_changed_id = None
         self.username_edited = False
         self.hostname_edited = False
-        self.grub_en = True
         self.installing = False
         self.installing_no_return = False
         self.returncode = 0
         self.partition_bars = {}
+        # FIXME: Grab this from the GTK theme.
+        self.release_color = 'D07316'
         self.auto_colors = ['3465a4', '73d216', 'f57900']
+        self.dev_colors = {}
         self.segmented_bar_vbox = None
         self.format_warnings = {}
+        self.format_warning = None
+        self.format_warning_align = None
 
         self.laptop = execute("laptop-detect")
 
@@ -520,13 +524,21 @@ class Wizard(BaseFrontend):
 
         self.action_bar = segmented_bar.SegmentedBarSlider()
         self.action_bar.h_padding = self.action_bar.bar_height / 2
-        self.action_bar_eb.add(self.action_bar)
-        self.action_bar.show()
+        sw = gtk.ScrolledWindow()
+        sw.add_with_viewport(self.action_bar)
+        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_NEVER)
+        sw.child.set_shadow_type(gtk.SHADOW_NONE)
+        sw.show_all()
+        self.action_bar_eb.add(sw)
         
         self.before_bar = segmented_bar.SegmentedBar()
         self.before_bar.h_padding = self.before_bar.bar_height / 2
-        self.before_bar_eb.add(self.before_bar)
-        self.before_bar.show()
+        sw = gtk.ScrolledWindow()
+        sw.add_with_viewport(self.before_bar)
+        sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_NEVER)
+        sw.child.set_shadow_type(gtk.SHADOW_NONE)
+        sw.show_all()
+        self.before_bar_eb.add(sw)
 
         if 'UBIQUITY_DEBUG' in os.environ:
             self.password_debug_warning_label.show()
@@ -562,6 +574,7 @@ class Wizard(BaseFrontend):
                 self.regions[region] = [city]
 
         r = self.regions.keys()
+        r.sort()
         for region in r:
             list_store.append([region])
 
@@ -1232,19 +1245,20 @@ class Wizard(BaseFrontend):
             self.on_language_treeview_selection_changed(selection)
         syslog.syslog('switched to page %s' % self.step_name(current))
 
-    def on_extra_button_toggled (self, widget):
-        if widget.get_active():
-            choice = unicode(widget.get_label(), 'utf-8', 'replace')
-            for align in self.format_warnings.itervalues():
-                align.hide()
-            for k in self.disk_layout.iterkeys():
-                if '(%s)' % k.strip('=dev=') in choice:
-                    self.before_bar.remove_all()
-                    self.create_bar(k)
-                    self.format_warnings[k].show()
-                    break
-    
-    def on_autopartition_toggled (self, widget, extra_buttons):
+    def on_extra_combo_changed (self, widget):
+        txt = widget.get_active_text()
+        for k in self.disk_layout.iterkeys():
+            if '(%s)' % k.strip('=dev=') in txt:
+                self.before_bar.remove_all()
+                self.create_bar(k)
+                break
+        if txt in self.format_warnings:
+            self.format_warning.set_text(self.format_warnings[txt])
+            self.format_warning_align.show_all()
+        else:
+            self.format_warning_align.hide()
+
+    def on_autopartition_toggled (self, widget, extra_combo):
         """Update autopartitioning screen when a button is selected."""
 
         choice = unicode(widget.get_label(), 'utf-8', 'replace')
@@ -1260,8 +1274,8 @@ class Wizard(BaseFrontend):
             self.action_bar.remove_all()
             self.action_bar.resize = -1
             if choice == self.manual_choice:
-                self.action_bar.add_segment_rgb(self.manual_choice, 1, \
-                    self.auto_colors[0])
+                self.action_bar.add_segment_rgb(self.manual_choice, -1, \
+                    self.release_color)
             elif choice == self.resize_choice:
                 for k in self.disk_layout:
                     for p in self.disk_layout[k]:
@@ -1272,10 +1286,9 @@ class Wizard(BaseFrontend):
                             break
             else:
                 # Use entire disk.
-                self.action_bar.add_segment_rgb(get_release_name(), 1, \
-                    self.auto_colors[0])
-                for b in extra_buttons:
-                    self.on_extra_button_toggled(b)
+                self.action_bar.add_segment_rgb(get_release_name(), -1, \
+                    self.release_color)
+                self.on_extra_combo_changed(extra_combo)
 
     # Callbacks provided to components.
 
@@ -1564,17 +1577,58 @@ class Wizard(BaseFrontend):
             if dev == 'free':
                 b.add_segment_rgb("Free Space", size, b.remainder_color)
             else:
-                b.add_segment_rgb(dev, size, self.auto_colors[i])
-                i = (i + 1) % len(self.auto_colors)
+                if dev in self.dev_colors:
+                    c = self.dev_colors[dev]
+                else:
+                    c = self.auto_colors[i]
+                    self.dev_colors[dev] = c
+                b.add_segment_rgb(dev, size, c)
                 if dev == self.resize_path and resize_bar:
-                    self.action_bar.add_segment_rgb(get_release_name(), 0, \
-                        self.auto_colors[i])
-                    i = (i + 1) % len(self.auto_colors)
+                    self.action_bar.add_segment_rgb(get_release_name(), -1,
+                        self.release_color)
+                i = (i + 1) % len(self.auto_colors)
+
+    def setup_format_warnings(self, extra_options):
+        for extra in extra_options:
+            for k in self.disk_layout.iterkeys():
+                if '(%s)' % k.strip('=dev=') not in extra:
+                    continue
+                l = []
+                for part, size in self.disk_layout[k]:
+                    if part == 'free':
+                        continue
+                    ret = find_in_os_prober(part)
+                    if ret and ret != 'swap':
+                        l.append(ret)
+                if l:
+                    # TODO evand 2008-11-05: i18n
+                    if len(l) == 1:
+                        txt = l[0]
+                    if len(l) == 2:
+                        txt = '%s and %s' % (l[0], l[1])
+                    elif len(l) > 2:
+                        l[-1] = 'and ' + l[-1]
+                        txt = ', '.join(l)
+                    txt = 'This will delete %s and replace' % txt
+                    if len(l) > 1:
+                        txt = txt + ' them with %s.' % get_release_name()
+                    else:
+                        txt = txt + ' it with %s.' % get_release_name()
+                    self.format_warnings[extra] = txt
 
     def set_autopartition_choices (self, choices, extra_options,
                                    resize_choice, manual_choice):
         BaseFrontend.set_autopartition_choices(self, choices, extra_options,
                                                resize_choice, manual_choice)
+
+        if resize_choice in choices:
+            self.resize_min_size, self.resize_max_size, \
+                self.resize_orig_size, self.resize_path = \
+                    extra_options[resize_choice]
+            self.action_bar.set_part_size(self.resize_orig_size)
+            self.action_bar.set_min(self.resize_min_size)
+            self.action_bar.set_max(self.resize_max_size)
+            self.action_bar.set_device(self.resize_path)
 
         for child in self.autopartition_choices_vbox.get_children():
             self.autopartition_choices_vbox.remove(child)
@@ -1584,7 +1638,7 @@ class Wizard(BaseFrontend):
         self.part_auto_choices_label.set_text(text)
 
         firstbutton = None
-        extra_buttons = []
+        extra_combo = None
         for choice in choices:
             button = gtk.RadioButton(firstbutton, choice, False)
             if firstbutton is None:
@@ -1598,70 +1652,37 @@ class Wizard(BaseFrontend):
                 if choice == resize_choice:
                     pass
                 elif choice != manual_choice:
+                    extra_combo = gtk.combo_box_new_text()
                     vbox = gtk.VBox(spacing=6)
                     alignment.add(vbox)
-                    extra_firstbutton = None
+                    vbox.add(extra_combo)
                     for extra in extra_options[choice]:
-                        extra_button = gtk.RadioButton(
-                            extra_firstbutton, extra, False)
-                        if extra_firstbutton is None:
-                            extra_firstbutton = extra_button
-                        vbox.add(extra_button)
-                        l = []
-                        for k in self.disk_layout.iterkeys():
-                            if '(%s)' % k.strip('=dev=') in extra:
-                                for part, size in self.disk_layout[k]:
-                                    if part == 'free':
-                                        continue
-                                    ret = find_in_os_prober(part)
-                                    if ret and ret != 'swap':
-                                        l.append(ret)
-                                a = gtk.Alignment(xscale=1, yscale=1)
-                                a.set_padding(0, 0, 12, 0)
-                                a.hide()
-                                self.format_warnings[k] = a
-                                break
-                        if l:
-                            # TODO evand 2008-11-05: i18n
-                            if len(l) == 1:
-                                txt = l[0]
-                            if len(l) == 2:
-                                txt = '%s and %s' % (l[0], l[1])
-                            elif len(l) > 2:
-                                l[-1] = 'and ' + l[-1]
-                                txt = ', '.join(l)
-                            txt = 'This will delete %s and replace' % txt
-                            if len(l) > 1:
-                                txt = txt + ' them with %s.' % get_release_name()
-                            else:
-                                txt = txt + ' it with %s.' % get_release_name()
-                            label = gtk.Label(txt)
-                            hbox = gtk.HBox(spacing=6)
-                            img = gtk.Image()
-                            img.set_from_icon_name('gtk-dialog-warning', gtk.ICON_SIZE_BUTTON)
-                            hbox.pack_start(img, expand=False, fill=False)
-                            hbox.pack_start(label, expand=False, fill=False)
-                            a.add(hbox)
-                            vbox.add(a)
-                        extra_buttons.append(extra_button)
-                        extra_button.connect('toggled', self.on_extra_button_toggled)
+                        extra_combo.append_text(extra)
+                    a = gtk.Alignment(xscale=1, yscale=1)
+                    a.set_padding(0, 0, 12, 0)
+                    a.hide()
+                    self.format_warning_align = a
+                    label = gtk.Label()
+                    self.format_warning = label
+                    hbox = gtk.HBox(spacing=6)
+                    img = gtk.Image()
+                    img.set_from_icon_name('gtk-dialog-warning', gtk.ICON_SIZE_BUTTON)
+                    hbox.pack_start(img, expand=False, fill=False)
+                    hbox.pack_start(label, expand=False, fill=False)
+                    a.add(hbox)
+                    vbox.add(a)
+                    
+                    self.setup_format_warnings(extra_options[choice])
+                    extra_combo.connect('changed', self.on_extra_combo_changed)
+                    extra_combo.set_active(0)
                 self.autopartition_choices_vbox.pack_start(alignment,
                                                    expand=False, fill=False)
                 self.autopartition_extras[choice] = alignment
-            button.connect('toggled', self.on_autopartition_toggled, extra_buttons)
-
-        if resize_choice in choices:
-            self.resize_min_size, self.resize_max_size, \
-                self.resize_orig_size, self.resize_path = \
-                    extra_options[resize_choice]
-            self.action_bar.set_part_size(self.resize_orig_size)
-            self.action_bar.set_min(self.resize_min_size)
-            self.action_bar.set_max(self.resize_max_size)
-            self.action_bar.set_device(self.resize_path)
+            button.connect('toggled', self.on_autopartition_toggled, extra_combo)
 
         if firstbutton is not None:
             firstbutton.set_active(True)
-            self.on_autopartition_toggled(firstbutton, extra_buttons)
+            self.on_autopartition_toggled(firstbutton, extra_combo)
         self.autopartition_choices_vbox.show_all()
 
         # make sure we're on the autopartitioning page
@@ -1684,11 +1705,10 @@ class Wizard(BaseFrontend):
         elif (choice != self.manual_choice and
               choice in self.autopartition_extras):
             vbox = self.autopartition_extras[choice].child
-            for button in vbox.get_children():
-                if isinstance(button, gtk.Button):
-                    if button.get_active():
-                        return choice, unicode(button.get_label(),
-                                               'utf-8', 'replace')
+            for child in vbox.get_children():
+                if isinstance(child, gtk.ComboBox):
+                    return choice, unicode(child.get_active_text(),
+                                           'utf-8', 'replace')
             else:
                 return choice, None
         else:
@@ -2339,11 +2359,6 @@ class Wizard(BaseFrontend):
                     c = self.auto_colors[i]
                     txt = '%s (%s)' % (path, fs)
                 partition_bar.add_segment_rgb(txt, size, c)
-        for item in cache_order:
-            if item in disk_cache:
-                dev = disk_cache[item]['device']
-                for seg in self.partition_bars[dev].segments:
-                    seg.set_percent(seg.get_percent() / total_size[dev])
         sel = self.partition_list_treeview.get_selection()
         if sel.count_selected_rows() == 0:
             sel.select_path(0)
@@ -2562,17 +2577,27 @@ class Wizard(BaseFrontend):
 
     def on_advanced_button_clicked (self, button):
         display = False
-        summary_device = self.get_summary_device()
         grub_en = self.get_grub()
+        summary_device = self.get_summary_device()
+
+        if grub_en is not None:
+            display = True
+            self.bootloader_vbox.show()
+            self.grub_enable.set_active(grub_en)
+        else:
+            self.bootloader_vbox.hide()
+            summary_device = None
 
         if summary_device is not None:
             display = True
-            self.bootloader_vbox.show()
+            self.grub_device_label.show()
+            self.grub_device_entry.show()
             self.grub_device_entry.child.set_text(summary_device)
             self.grub_device_entry.set_sensitive(grub_en)
             self.grub_device_label.set_sensitive(grub_en)
         else:
-            self.bootloader_vbox.hide()
+            self.grub_device_label.hide()
+            self.grub_device_entry.hide()
 
         if self.popcon is not None:
             display = True
@@ -2597,7 +2622,8 @@ class Wizard(BaseFrontend):
         response = self.advanced_dialog.run()
         self.advanced_dialog.hide()
         if response == gtk.RESPONSE_OK:
-            self.set_summary_device(self.grub_device_entry.child.get_text())
+            if summary_device is not None:
+                self.set_summary_device(self.grub_device_entry.child.get_text())
             self.set_popcon(self.popcon_checkbutton.get_active())
             self.set_grub(self.grub_enable.get_active())
             self.set_proxy_host(self.proxy_host_entry.get_text())

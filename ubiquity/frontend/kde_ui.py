@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# -*- kate: indent-mode python; space-indent true; indent-width 4; backspace-indents true
 #
 # Copyright (C) 2006, 2007, 2008, 2009 Canonical Ltd.
 #
@@ -179,7 +180,6 @@ class Wizard(BaseFrontend):
         self.username_edited = False
         self.hostname_edited = False
         self.previous_partitioning_page = WIDGET_STACK_STEPS["stepPartAuto"]
-        self.grub_en = True
         self.installing = False
         self.installing_no_return = False
         self.returncode = 0
@@ -438,6 +438,8 @@ class Wizard(BaseFrontend):
             else:
                 self.userinterface.hostname.setText('oem-desktop')
             self.hostname_edited = True
+            self.login_pass.hide()
+            self.login_auto.hide()
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-kde')
         else:
@@ -1224,12 +1226,12 @@ class Wizard(BaseFrontend):
         bFrame = self.userinterface.autopart_bar_frame
 
         # slot creator for extra options
-        def _on_extra_toggle(choice, bbar, abar):
+        def _on_extra_toggle(choice, wid1, wid2):
             def slot(enable):
-                if bbar:
-                    bbar.setVisible(enable)
-                if abar:
-                    abar.setVisible(enable)
+                if wid1:
+                    wid1.setVisible(enable)
+                if wid2:
+                    wid2.setVisible(enable)
             return slot
         
         # slot creator for main choice toggling
@@ -1239,6 +1241,12 @@ class Wizard(BaseFrontend):
                 if extra_frame:
                     extra_frame.setEnabled(enable)
             return slot
+            
+        # slot for when partition is resized on the bar
+        def partitionResized(path, size):
+            print path, size
+            self.resizePath = path
+            self.resizeSize = size
             
         firstbutton = None
         idCounter = 0
@@ -1254,8 +1262,8 @@ class Wizard(BaseFrontend):
                 firstbutton = button
             self.autopartition_vbox.addWidget(button)
 
-            before_bar = None
-            after_bar = None
+            before_frame = None
+            after_frame = None
 
             # make a new frames for bars to make hiding/showing multiple easier
             # this allows us to hide an entire main bullet with multiple sub bullets
@@ -1290,42 +1298,38 @@ class Wizard(BaseFrontend):
                             dev = d
                             break
                     
-                    
-                    before_frame = QGroupBox("Before Resize:", bar_frame)
-                    before_frame.setLayout(QVBoxLayout())
-                    layout.addWidget(before_frame)
-                    
-                    before_bar = PartitionsBar(before_frame)
-                    before_frame.layout().addWidget(before_bar)
-                    
-                    after_frame = QGroupBox("After Resize:", bar_frame)
-                    after_frame.setLayout(QVBoxLayout())
-                    layout.addWidget(after_frame)
-                    
-                    after_bar = PartitionsBar(after_frame)
-                    after_frame.layout().addWidget(after_bar)
-                    
                     min_size, max_size, orig_size, resize_path = extra_options[choice]
                         
                     #TODO use find_in_os_proper to give nice name
+                    dev = None
                     if dev:
                         for p in disks[dev]:
                             before_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
                             after_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
+                            
+                        before_frame = QGroupBox("Before Resize:", bar_frame)
+                        before_frame.setLayout(QVBoxLayout())
+                        layout.addWidget(before_frame)
+                        
+                        before_bar = PartitionsBar(before_frame)
+                        before_frame.layout().addWidget(before_bar)
+                        
+                        after_frame = QGroupBox("After Resize:", bar_frame)
+                        after_frame.setLayout(QVBoxLayout())
+                        layout.addWidget(after_frame)
+                        
+                        after_bar = PartitionsBar(after_frame)
+                        after_frame.layout().addWidget(after_bar)
                          
                         after_bar.setResizePartition(resize_path, 
-                            min_size, max_size, orig_size, 'Kubuntu')    
-                    else:
-                        bFrame.removeWidget(before_bar)
-                        bFrame.removeWidget(after_bar)
+                            min_size, max_size, orig_size, 'Kubuntu')     
+                            
+                        before_frame.setVisible(False)
+                        after_frame.setVisible(False)
                         
-                    def partitionResized(path, size):
-                        print path, size
-                        self.resizePath = path
-                        self.resizeSize = size
-                    
-                    QApplication.instance().connect(after_bar, 
-                        SIGNAL("partitionResized(PyQt_PyObject, PyQt_PyObject)"), partitionResized)
+                        QApplication.instance().connect(after_bar, 
+                            SIGNAL("partitionResized(PyQt_PyObject, PyQt_PyObject)"), 
+                            partitionResized)
                     
                 elif choice != manual_choice:
                     #list of possible full disk choices
@@ -1352,32 +1356,32 @@ class Wizard(BaseFrontend):
                                 dev = d
                                 break
                                 
-                        before_frame = QGroupBox("Before Install:", bar_frame)
-                        before_frame.setLayout(QVBoxLayout())
-                        layout.addWidget(before_frame)
-                        
-                        before_bar = PartitionsBar(before_frame)
-                        before_frame.layout().addWidget(before_bar)
-                        
-                        after_frame = QGroupBox("After Install:", bar_frame)
-                        after_frame.setLayout(QVBoxLayout())
-                        layout.addWidget(after_frame)
-                        
-                        after_bar = PartitionsBar(after_frame)
-                        after_frame.layout().addWidget(after_bar)
-                        
+                        #add the bars if we founs the device
                         if dev:
+                            before_frame = QGroupBox("Before Install:", bar_frame)
+                            before_frame.setLayout(QVBoxLayout())
+                            layout.addWidget(before_frame)
+                            
+                            before_bar = PartitionsBar(before_frame)
+                            before_frame.layout().addWidget(before_bar)
+                            
+                            after_frame = QGroupBox("After Install:", bar_frame)
+                            after_frame.setLayout(QVBoxLayout())
+                            layout.addWidget(after_frame)
+                            
+                            after_bar = PartitionsBar(after_frame)
+                            after_frame.layout().addWidget(after_bar)
+                        
                             for p in disks[dev]:
                                 before_bar.addPartition(p[6], int(p[2]), p[0], p[4], p[5])
-                        else:
-                            bFrame.removeWidget(before_bar)
-                        
-                        #FIXME, sometimes the before bar doesn't get a disk size??
-                        #happened in a virtual machine for me ~shtylman
-                        if before_bar.diskSize > 0:
-                            after_bar.addPartition('', before_bar.diskSize, '', '', 'Kubuntu')
-                        else:
-                            after_bar.addPartition('', 1, '', '', 'Kubuntu')
+                                
+                            if before_bar.diskSize > 0:
+                                after_bar.addPartition('', before_bar.diskSize, '', '', 'Kubuntu')
+                            else:
+                                after_bar.addPartition('', 1, '', '', 'Kubuntu')
+                                
+                            before_frame.setVisible(False)
+                            after_frame.setVisible(False)
                         
                         buttongroup.addButton(extra_button, extraIdCounter)
                         extra_id = buttongroup.id(extra_button)
@@ -1390,7 +1394,7 @@ class Wizard(BaseFrontend):
                         extraIdCounter += 1
                         
                         self.app.connect(extra_button, SIGNAL('toggled(bool)'),
-                            _on_extra_toggle(choice, before_bar, after_bar))
+                            _on_extra_toggle(choice, before_frame, after_frame))
                              
                     if extra_firstbutton is not None:
                         extra_firstbutton.setChecked(True)
@@ -1952,31 +1956,43 @@ class Wizard(BaseFrontend):
             i = text.find("\n")
         self.userinterface.ready_text.setText(text)
 
+    ## called to set all possible install locations for grub
     def set_grub_combo(self, options):
         ''' options gives us a possible list of install locations for the boot loader '''
-        #self.advanceddialog.grub_device_entry.clear()
+        self.advanceddialog.grub_device_entry.clear()
         ''' options is from summary.py grub_options() '''
-        #for opt in options:
-        #   self.advanceddialog.grub_device_entry.addItem(opt[0]);
-        pass
+        for opt in options:
+           self.advanceddialog.grub_device_entry.addItem(opt[0]);
 
     def on_advanced_button_clicked (self):
         self.translate_widget_children(self.advanceddialog)
         self.app.connect(self.advanceddialog.grub_enable, SIGNAL("stateChanged(int)"), self.toggle_grub)
         self.app.connect(self.advanceddialog.proxy_host_entry, SIGNAL("textChanged(const QString &)"), self.enable_proxy_spinbutton)
         display = False
-        summary_device = self.get_summary_device()
         grub_en = self.get_grub()
+        summary_device = self.get_summary_device()
+        if grub_en is not None:
+            self.advanceddialog.grub_enable.show()
+            self.advanceddialog.grub_enable.setChecked(grub_en)
+        else:
+            self.advanceddialog.grub_enable.hide()
+            summary_device = None
         if summary_device is not None:
             display = True
             self.advanceddialog.bootloader_group_label.show()
             self.advanceddialog.grub_device_label.show()
             self.advanceddialog.grub_device_entry.show()
             
-            self.advanceddialog.grub_device_entry.clear()
-            #using find_grub_target to get the actual install device
-            #TODO present user with a list of other options
-            self.advanceddialog.grub_device_entry.addItem(summary.find_grub_target())
+            # if the combo box does not yet have the target install device, add it
+            # select current device
+            target = summary.find_grub_target()
+            index = self.advanceddialog.grub_device_entry.findText(target)
+            if (index == -1):
+                self.advanceddialog.grub_device_entry.addItem(target)
+                index = self.advanceddialog.grub_device_entry.count() - 1
+            
+            # select the target device
+            self.advanceddialog.grub_device_entry.setCurrentIndex(index)
             
             self.advanceddialog.grub_device_entry.setEnabled(grub_en)
             self.advanceddialog.grub_device_label.setEnabled(grub_en)
@@ -2006,8 +2022,9 @@ class Wizard(BaseFrontend):
 
         response = self.advanceddialog.exec_()
         if response == QDialog.Accepted:
-            self.set_summary_device(
-                unicode(self.advanceddialog.grub_device_entry.currentText()))
+            if summary_device is not None:
+                self.set_summary_device(
+                    unicode(self.advanceddialog.grub_device_entry.currentText()))
             self.set_popcon(self.advanceddialog.popcon_checkbutton.isChecked())
             self.set_grub(self.advanceddialog.grub_enable.isChecked())
             self.set_proxy_host(unicode(self.advanceddialog.proxy_host_entry.text()))
@@ -2128,3 +2145,4 @@ class Wizard(BaseFrontend):
         if self.dbfilter is not None:
             self.dbfilter.cancel_handler()
         self.app.exit()
+		

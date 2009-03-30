@@ -21,6 +21,7 @@ for dev in $DEVICES/*; do
 		[ -f "$id/mountpoint" ] || continue
 		[ "$fs" != free ] || continue
 		[ -f "$id/format" ] && continue
+		[ -f "$id/formatted" ] && continue
 		count=$(($count + 1))
 		mp="$(cat "$id/mountpoint")"
 		echo "$mp,$path"

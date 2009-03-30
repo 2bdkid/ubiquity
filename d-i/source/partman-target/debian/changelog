@@ -1,3 +1,21 @@
+partman-target (58ubuntu6) jaunty; urgency=low
+
+  * Rather than pretending that partitions have no longer been formatted
+    after the partitioner is complete, reset their intended state from
+    "format the partition" to "keep and use the existing data". This still
+    solves the original problem reported in Debian bug #256090 while also
+    stopping partitions from being needlessly reformatted if you go back to
+    the partitioner after base system installation and then forward again
+    (LP: #29712).
+  * Don't clear partitions or complain about them not being formatted if
+    they've already been formatted by a previous partitioner run.
+  * Introduce partman/mount_style (choices: traditional, label, uuid) to
+    allow controlling how filesystems are mounted. Default this to uuid, and
+    stop using labels by default since they have unavoidable problems with
+    removable disks (LP: #347817).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Mar 2009 11:59:04 +0000
+
 partman-target (58ubuntu5) jaunty; urgency=low
 
   * Issue an error message if two file systems are assigned the same label

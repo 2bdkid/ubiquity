@@ -79,6 +79,9 @@ if [ ! -f /var/run/parted_server.pid ]; then
 				/dev/*/c*d*)
 					disk="$(echo "$dev" | sed 's,\(/dev/.*/c[0-9]\+d[0-9]\+\).*,\1,')"
 				;;
+				/dev/mmcblk*)
+					disk="$(echo "$dev" | sed 's,\(/dev/mmcblk[0-9]\+\).*,\1,')"
+				;;
 			esac
 			if [ -z "$disk" ]; then
 				continue

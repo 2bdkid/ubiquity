@@ -1,3 +1,74 @@
+ubiquity (1.12.0) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * Update for new message context system in GTK+ 2.15.1, and update
+    imported translations from gtk+2.0 2.16.0-1ubuntu2.
+  * Stop setting message attribute in InstallStepError; it isn't used and it
+    generates a deprecation warning with Python 2.6. Similarly, rename
+    PartedServerError's message attribute to parted_error.
+  * Always set auto-login for OEM installations.
+  * KDE frontend:
+    - Hide auto-login and require-password radio buttons for OEM
+      installations.
+  * Remove reimplementation of gdm and kdm auto-login support for OEM
+    installations, since user-setup handles this now and the duplication
+    causes oem-config to be unable to undo autologin (LP: #347900).
+  * Fix ubiquity/install_bootloader handling (LP: #348660):
+    - Check the seen flag rather its value when deciding whether to override
+      it with the UI's value.
+    - Outside automatic mode, default the UI's "Install boot loader"
+      question to the value of ubiquity/install_bootloader.
+  * Offer "Yes" and "No" choices for user-setup/password-weak (LP: #349173).
+  * Depend on grub | grub-pc, and don't remove grub-pc until after
+    grub-installer has had the chance to decide whether it wants to use it
+    (LP: #349835).
+  * Add a compatibility wrapper for update-dev to ensure that it never
+    attempts to call 'udevadm trigger', which isn't necessary in ubiquity
+    and can cause problems (LP: #349937).
+  * Permit dmraid-style /dev/mapper/* device names in advanced boot loader
+    selector, as well as disk and partition numbers over 9 (LP: #342354).
+  * Remove /target/var/lib/apt-xapian-index per Michael Vogt, since it needs
+    to be rebuilt based on the installed system's sources.list, and apt's
+    cron.daily script and/or synaptic will do this.
+  * Preserve ordering of automatic partitioning choices when replacing them
+    with our customised strings (LP: #351547).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: apt-setup 1:0.37ubuntu11,
+    base-installer 1.98ubuntu4, console-setup 1.28ubuntu7, grub-installer
+    1.36ubuntu5, hw-detect 1.71ubuntu6, partman-base 129ubuntu4,
+    partman-target 58ubuntu6.
+
+  [ Evan Dandrea ]
+  * Make the partman/unmount_active dialog a yes or no question
+    (LP: #346589).
+  * Sort the list of regions on the timezone page (LP: #344334).
+  * Merge Roman's city placement code into the GTK frontend.
+  * Work in bytes rather than percentages in the partition bar code
+    (LP: #336203).
+  * Fix partition bar slider (for resizing) code by adding correct
+    calculations for bounds checking and slider positioning.
+  * Properly encode data from os-prober (LP: #345573).
+  * Make sure that the before and after partitioning bars use the same
+    colors for the same partitions (LP: #289324).
+  * Fix the placement of the partition bars in scrolled windows when
+    necessary.
+  * Don't let the partition bars eat up any extra space.
+  * Move selecting a disk from radio buttons to a drop down box on the
+    automatic partitioning page.  This saves a lot of space when
+    multiple disks are present and makes the code a little cleaner
+    (LP 325958).
+
+  [ Roman Shtylman ]
+  * Partitions bars show and hide as appropriate
+  * Proper projection points for the cities in kde Timezone map
+
+  [ Mario Limonciello ]
+  * Mythbuntu:
+    - Don't prevent going forward in the UI if the connection test fails.
+      It's no longer necessary for 9.04 to actually work. (LP: #343432)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 30 Mar 2009 15:49:42 +0100
+
 ubiquity (1.11.20) jaunty; urgency=low
 
   * Disable the introduction page in preparation for the 9.04 Beta.
