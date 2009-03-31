@@ -1,3 +1,11 @@
+partman-partitioning (65ubuntu2) jaunty; urgency=low
+
+  * When resizing a non-virtual partition, update it after committing
+    changes, otherwise we might miss a change of filesystem that was just
+    committed (LP: #333356).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 31 Mar 2009 13:45:41 +0100
+
 partman-partitioning (65ubuntu1) jaunty; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
