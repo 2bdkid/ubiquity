@@ -304,7 +304,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "Se activează parolele ascunse ?"
 
@@ -316,6 +315,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Ați introdus o parolă ce conține mai puțin de opt caractere, aceasta fiind "
+"considerată slabă. Puteți alege o parolă mai puternică."
 
 #. Type: boolean
 #. Description
@@ -345,7 +346,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
 msgstr "Configurați un dosar privat și criptat?"
 
@@ -357,6 +357,9 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Puteți configurarea dosarul personal pentru criptare, astfel încât orice "
+"fișier stocat acolo va rămâne confidențial chiar și în cazul în care "
+"calculatorul este furat."
 
 #. Type: boolean
 #. Description
@@ -366,6 +369,8 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Sistemul va monta transparent dosarul personal criptat la fiecare "
+"autentificare și va demonta după ieșirea din toate sesiunile active."
 
 #. Type: title
 #. Description
@@ -381,93 +386,3 @@ msgstr "Pregătire utilizatori și parole"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Se pregătesc utilizatori și parole..."
-
-#~ msgid ""
-#~ "The contents of your home directory will normally be visible to all users "
-#~ "on the system, to make it easier to share files among users. You can "
-#~ "change this for individual files or directories by changing their "
-#~ "permissions."
-#~ msgstr ""
-#~ "Conținutul dosarului dumneavoastră acasă va fi în mod normal vizibil și "
-#~ "altor utilizatori din sistem, pentru a face mai ușoară partajarea "
-#~ "fișierelor între utilizatori. Puteți să schimbați acest lucru pentru "
-#~ "diferite fișiere sau dosare schimbându-le permisiunile."
-
-#~ msgid ""
-#~ "In addition to the standard permissions system, it may be useful to set "
-#~ "up an encrypted private directory so that those files remain private even "
-#~ "if your computer is stolen. If you choose to do this, the directory will "
-#~ "be called \"Private\"."
-#~ msgstr ""
-#~ "Pe lângă sistemul standard de permisiuni, poate fi de folos să puneți la "
-#~ "punct un dosar privat și criptat, astfel încât fișierele respective să "
-#~ "rămână private chiar dacă vă este furat calculatorul. Dacă alegeți să "
-#~ "faceți acest lucru, dosarul va fi denumit „Privat”."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "Parola-frază pentru criptare:"
-
-#~ msgid ""
-#~ "You may choose a passphrase to encrypt your private directory. If you "
-#~ "leave this blank, a passphrase will be randomly generated for you. You "
-#~ "will not normally need to use this passphrase, but it may be useful in "
-#~ "case something goes wrong and you need to recover your encrypted data."
-#~ msgstr ""
-#~ "Puteți alege o frază de criptare pentru criptarea dosarului dumneavoastră "
-#~ "privat. Dacă o lăsați necompletată, o frază de criptare va fi generată "
-#~ "aleatoriu pentru dumneavoastră. În mod normal nu va fi nevoie să folosiți "
-#~ "această frază de criptare, dar s-ar putea dovedi folositoare în caz că "
-#~ "ceva nu merge cum trebuie și trebuie să vă recuperați datele criptate."
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "Trebuie să activați o parolă pentru 'root', contul de administrare al "
-#~ "sistemului. Un utilizator rău-voitor sau necalificat care capătă acces la "
-#~ "contul de root poate provoca dezastre, deci ar trebui să aveți grijă să "
-#~ "alegeți o parolă de root care nu poate fi ușor ghicită. N-ar trebui să "
-#~ "fie un cuvânt care se găsește în dicționare sau un cuvânt care poate fi "
-#~ "asociat ușor cu dumneavoastră."
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "O parolă bună va conține un amestec de litere, numere și semne de "
-#~ "punctuație și ar trebui schimbată la intervale regulate de timp."
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "Parola nu poate fi recuperată în caz că o pierdeți. Pentru a preveni "
-#~ "pierderea informațiilor, ar trebui sa scrieți parola și să o țineți intr-"
-#~ "un loc sigur, separat de acest calculator."
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "Reintroduceți parola pentru verificare:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "Vă rugăm să introduceți din nou aceiași parolă de root pentru a verifica "
-#~ "faptul că ați scris-o corect."
-
-#~ msgid "Keep this passphrase in a safe place!"
-#~ msgstr "Puneți această frază de criptare într-un loc sigur!"
-
-#~ msgid "Your new encryption passphrase is as follows:"
-#~ msgstr "Noua frază de criptare este după cum urmează:"
-
-#~ msgid "Please write this down and store it separately from this computer."
-#~ msgstr "Scrieți-o și stocați-o separat de acest calculator."

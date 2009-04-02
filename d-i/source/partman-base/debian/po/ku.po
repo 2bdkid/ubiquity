@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ku\n"
-"Report-Msgid-Bugs-To: partman-base@packages.debian.org\n"
-"POT-Creation-Date: 2009-03-18 18:05+0000\n"
+"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
+"POT-Creation-Date: 2009-04-02 11:57+0100\n"
 "PO-Revision-Date: 2008-08-07 02:01+0200\n"
 "Last-Translator: Erdal Ronahi <erdal.ronahi@gmail.com>\n"
 "Language-Team: ku <ubuntu-l10n-kur@lists.ubuntu.com>\n"
@@ -566,6 +566,22 @@ msgstr ""
 #: ../partman-base.templates:65001
 msgid ""
 "Do you want the installer to try to unmount the partitions on these disks "
-"before continuing?  If not, the installation will continue and the disks "
-"will not be available as installation targets."
+"before continuing?  If you leave them mounted, you will not be able to "
+"create, delete, or resize partitions on these disks, but you may be able to "
+"install to existing partitions there."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../partman-base.templates:66001
+msgid "Installation medium on ${PARTITION}"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../partman-base.templates:66001
+msgid ""
+"Your installation medium is on ${PARTITION}. You will not be able to create, "
+"delete, or resize partitions on this disk, but you may be able to install to "
+"existing partitions there."
 msgstr ""

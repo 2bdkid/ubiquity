@@ -1,3 +1,21 @@
+partman-base (129ubuntu5) jaunty; urgency=low
+
+  * init.d/parted: Use more concise syntax for building up lists.
+  * Rewrite handling of mounted partitions. If the only thing mounted on a
+    disk is the installation medium and it uses more or less the whole disk,
+    then silently exclude that disk (LP: #347916); if the installation
+    medium is mounted but doesn't use the whole disk, issue a warning that
+    partitioning may be difficult; if anything else is mounted, offer to
+    unmount it.
+  * Note that partman/filter_mounted preseeding is no longer supported, as
+    its main use was to cope with the case of the installation medium being
+    mounted and that's now handled explicitly. If you need to stop questions
+    being asked, preseed partman/unmount_active and/or
+    partman/installation_medium_mounted as appropriate.
+  * I had to break the string freeze. Sorry.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 02 Apr 2009 18:59:02 +0100
+
 partman-base (129ubuntu4) jaunty; urgency=low
 
   * Handle filtering of mounted partitions on /dev/mmcblk* (LP: #348411).

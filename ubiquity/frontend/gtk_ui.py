@@ -1051,7 +1051,10 @@ class Wizard(BaseFrontend):
 
         step = self.step_name(self.steps.get_current_page())
 
-        if step == "stepUserInfo":
+        if step == "stepPartAuto":
+            self.part_advanced_warning_message.set_text('')
+            self.part_advanced_warning_hbox.hide()
+        elif step == "stepUserInfo":
             self.username_error_box.hide()
             self.password_error_box.hide()
             self.hostname_error_box.hide()
@@ -1559,9 +1562,10 @@ class Wizard(BaseFrontend):
             b = self.before_bar
             ret = []
             for part in self.disk_layout[disk]:
-                t = find_in_os_prober(part[0])
-                if t and t != 'swap':
-                    ret.append(t)
+                if part[0].startswith('/'):
+                    t = find_in_os_prober(part[0])
+                    if t and t != 'swap':
+                        ret.append(t)
             if len(ret) == 0:
                 s = self.get_string('ubiquity/text/part_auto_comment_none')
             elif len(ret) == 1:
@@ -1713,6 +1717,11 @@ class Wizard(BaseFrontend):
                 return choice, None
         else:
             return choice, None
+
+
+    def installation_medium_mounted (self, message):
+        self.part_advanced_warning_message.set_text(message)
+        self.part_advanced_warning_hbox.show_all()
 
 
     def partman_column_name (self, column, cell, model, iterator):
@@ -2333,7 +2342,7 @@ class Wizard(BaseFrontend):
             sw.child.set_shadow_type(gtk.SHADOW_NONE)
             sw.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_NEVER)
             sw.show_all()
-            self.part_advanced_vbox.pack_start(sw, expand=False, padding=6)
+            self.part_advanced_vbox.pack_start(sw, expand=False)
             self.part_advanced_vbox.reorder_child(sw, 0)
 
         for item in cache_order:
@@ -2431,6 +2440,7 @@ class Wizard(BaseFrontend):
         # TODO evand 2007-01-11 I'm on the fence as to whether or not skipping
         # the page would be better than showing the user this error.
         if not choices:
+            # TODO cjwatson 2009-04-01: i18n
             msg = 'There were no users or operating systems suitable for ' \
                   'importing from.'
             liststore = gtk.ListStore(str)

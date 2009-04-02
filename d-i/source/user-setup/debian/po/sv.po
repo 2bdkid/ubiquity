@@ -291,7 +291,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "Aktivera shadow-lösenord?"
 
@@ -303,6 +302,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Du angav ett lösenord som innehöll mindre än åtta tecken, vilket anses vara "
+"för svagt. Du bör välja ett starkare lösenord."
 
 #. Type: boolean
 #. Description
@@ -331,7 +332,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
 msgstr "Konfigurera en krypterad privat katalog?"
 
@@ -343,6 +343,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Du kan konfigurera din hemkatalog för kryptering, så att alla filer som "
+"lagras där kommer att kvarstå som privata även om din dator stjäls."
 
 #. Type: boolean
 #. Description
@@ -352,6 +354,9 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Systemet kommer sömlöst att montera din krypterade hemkatalog varje gång som "
+"du loggar in och automatiskt avmontera den när du loggar ut från alla aktiva "
+"sessioner."
 
 #. Type: title
 #. Description
@@ -367,91 +372,3 @@ msgstr "Skapa användare och lösenord"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Ställer in användare och lösenord..."
-
-#~ msgid ""
-#~ "The contents of your home directory will normally be visible to all users "
-#~ "on the system, to make it easier to share files among users. You can "
-#~ "change this for individual files or directories by changing their "
-#~ "permissions."
-#~ msgstr ""
-#~ "Innehållet i din hemkatalog kommer oftast att vara synligt för alla "
-#~ "användare på systemet för att göra det enklare att dela filer mellan "
-#~ "användare. Du kan ändra detta för individuella filer eller kataloger "
-#~ "genom att ändra deras rättigheter."
-
-#~ msgid ""
-#~ "In addition to the standard permissions system, it may be useful to set "
-#~ "up an encrypted private directory so that those files remain private even "
-#~ "if your computer is stolen. If you choose to do this, the directory will "
-#~ "be called \"Private\"."
-#~ msgstr ""
-#~ "I tillägg till standardrättigheterna så kan det vara användbart att "
-#~ "konfigurera en krypterad privat katalog så att dessa filer kvarstår som "
-#~ "privata om din dator blir stulen. Om du väljer att göra detta så kommer "
-#~ "katalogen att kallas för \"Private\"."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "Lösenfras för kryptering:"
-
-#~ msgid ""
-#~ "You may choose a passphrase to encrypt your private directory. If you "
-#~ "leave this blank, a passphrase will be randomly generated for you. You "
-#~ "will not normally need to use this passphrase, but it may be useful in "
-#~ "case something goes wrong and you need to recover your encrypted data."
-#~ msgstr ""
-#~ "Du kan välja en lösenfras för att kryptera din privata katalog. Om du "
-#~ "lämnar denna tom så kommer en lösenfras att genereras slumpmässigt åt "
-#~ "dig. Du behöver oftast inte använda denna lösenfras men den kan vara bra "
-#~ "att ha om någonting går fel och du behöver återställa ditt krypterade "
-#~ "data."
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "Nu måste du ange ett lösenord för \"root\", systemadministratörskontot. "
-#~ "En illvillig eller oerfaren användare med root-tillgång kan få "
-#~ "katastrofala följder, så du bör se till att välja ett root-lösenord som "
-#~ "inte är lätt att gissa. Det bör inte vara ett ord som kan hittas i "
-#~ "ordbok, inte heller ett ord som lätt kan förknippas med dig."
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "Ett bra lösenord innehåller en blandning av bokstäver, siffror och "
-#~ "specialtecken och bör ändras regelbundet."
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "Det finns inget sätt att återskapa denna lösenfras om du förlorar den. "
-#~ "För att undvika att data går förlorat bör du skriva ner denna lösenfras "
-#~ "och spara den på en säker plats, separerad från denna dator."
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "Ange lösenordet igen som bekräftelse:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "Ange samma root-lösenord igen för att bekräfta att du skrev det korrekt."
-
-#~ msgid "Keep this passphrase in a safe place!"
-#~ msgstr "Spara denna lösenfras på ett säkert ställe!"
-
-#~ msgid "Your new encryption passphrase is as follows:"
-#~ msgstr "Din nya krypteringslösenfras är som följer:"
-
-#~ msgid "Please write this down and store it separately from this computer."
-#~ msgstr "Skriv ner den och lagra den utanför datorn."

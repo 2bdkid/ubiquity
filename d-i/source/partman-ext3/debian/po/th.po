@@ -4,16 +4,16 @@
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
 # Thai translation of debian-installer.
-# Copyright (C) 2006-2008 Software in the Public Interest, Inc.
+# Copyright (C) 2006-2009 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2006-2008.
+# Theppitak Karoonboonyanan <thep@linux.thai.net>, 2006-2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-08-26 17:53+0000\n"
-"PO-Revision-Date: 2008-08-28 21:34+0700\n"
+"POT-Creation-Date: 2009-01-10 06:27+0000\n"
+"PO-Revision-Date: 2009-01-11 12:42+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <thep@linux.thai.net>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -25,8 +25,8 @@ msgstr ""
 #. :sl1:
 #: ../partman-ext3.templates:1001
 msgid ""
-"Checking the ext3 file system in partition #${PARTITION} of ${DEVICE}..."
-msgstr "กำลังตรวจสอบระบบแฟ้ม ext3 ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE}..."
+"Checking the ${TYPE} file system in partition #${PARTITION} of ${DEVICE}..."
+msgstr "กำลังตรวจสอบระบบแฟ้ม ${TYPE} ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE}..."
 
 #. Type: boolean
 #. Description
@@ -40,10 +40,10 @@ msgstr "กลับไปยังเมนูเพื่อแก้ไขข
 #. :sl2:
 #: ../partman-ext3.templates:2001
 msgid ""
-"The test of the file system with type ext3 in partition #${PARTITION} of "
+"The test of the file system with type ${TYPE} in partition #${PARTITION} of "
 "${DEVICE} found uncorrected errors."
 msgstr ""
-"การทดสอบระบบแฟ้มชนิด ext3 ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE} "
+"การทดสอบระบบแฟ้มชนิด ${TYPE} ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE} "
 "พบข้อผิดพลาดที่ยังไม่ได้รับการแก้ไข"
 
 #. Type: boolean
@@ -67,8 +67,9 @@ msgstr "สร้างระบบแฟ้มไม่สำเร็จ"
 #. :sl2:
 #: ../partman-ext3.templates:3001
 msgid ""
-"The ext3 file system creation in partition #${PARTITION} of ${DEVICE} failed."
-msgstr "สร้างระบบแฟ้ม ext3 ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE} ไม่สำเร็จ"
+"The ${TYPE} file system creation in partition #${PARTITION} of ${DEVICE} "
+"failed."
+msgstr "สร้างระบบแฟ้ม ${TYPE} ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE} ไม่สำเร็จ"
 
 #. Type: boolean
 #. Description
@@ -82,10 +83,11 @@ msgstr "คุณต้องการกลับไปยังเมนูแ
 #. :sl2:
 #: ../partman-ext3.templates:4001
 msgid ""
-"No mount point is assigned for the ext3 file system in partition #"
+"No mount point is assigned for the ${FILESYSTEM} file system in partition #"
 "${PARTITION} of ${DEVICE}."
 msgstr ""
-"ไม่มีการกำหนดตำแหน่งเมานท์สำหรับระบบแฟ้ม ext3 ในพาร์ทิชัน #${PARTITION} ของ ${DEVICE}"
+"ไม่มีการกำหนดตำแหน่งเมานท์สำหรับระบบแฟ้ม ${FILESYSTEM} ในพาร์ทิชัน #${PARTITION} ของ "
+"${DEVICE}"
 
 #. Type: boolean
 #. Description
@@ -124,20 +126,40 @@ msgstr "ext3"
 msgid "Ext3 journaling file system"
 msgstr "ระบบแฟ้ม journaling ext3"
 
+#. Type: text
+#. Description
+#. :sl1:
+#. File system name (untranslatable in many languages)
+#. Type: text
+#. Description
+#. :sl1:
+#. Short file system name (untranslatable in many languages)
+#: ../partman-ext3.templates:9001 ../partman-ext3.templates:11001
+msgid "ext4"
+msgstr "ext4"
+
+#. Type: text
+#. Description
+#. :sl2:
+#. File system name
+#: ../partman-ext3.templates:10001
+msgid "Ext4 journaling file system"
+msgstr "ระบบแฟ้ม journaling ext4"
+
 #. Type: boolean
 #. Description
 #. :sl2:
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-ext3.templates:9001 ../partman-ext3.templates:10001
+#: ../partman-ext3.templates:12001 ../partman-ext3.templates:13001
 msgid "Go back to the menu and correct this problem?"
 msgstr "ย้อนกลับไปที่เมนูเพื่อแก้ไขปัญหานี้หรือไม่?"
 
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-ext3.templates:9001
+#: ../partman-ext3.templates:12001
 msgid ""
 "Your boot partition has not been configured with the ext2 or ext3 file "
 "system. This is needed by your machine in order to boot. Please go back and "
@@ -153,7 +175,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-ext3.templates:9001 ../partman-ext3.templates:10001
+#: ../partman-ext3.templates:12001 ../partman-ext3.templates:13001
 msgid ""
 "If you do not go back to the partitioning menu and correct this error, the "
 "partition will be used as is.  This means that you may not be able to boot "
@@ -165,7 +187,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #. :sl2:
-#: ../partman-ext3.templates:10001
+#: ../partman-ext3.templates:13001
 msgid ""
 "Your boot partition is not located on the first primary partition of your "
 "hard disk.  This is needed by your machine in order to boot.  Please go back "

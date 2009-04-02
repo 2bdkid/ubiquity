@@ -326,7 +326,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "¿Habilito las contraseñas ocultas (shadow)?"
 
@@ -338,6 +337,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Ha introducido una contraseña, que tiene menos de ocho caracteres, lo cual "
+"es considerado demasiado débil. Debe elegir una contraseña más fuerte."
 
 #. Type: boolean
 #. Description
@@ -367,7 +368,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
 msgstr "¿Configurar un directorio privado y cifrado?"
 
@@ -379,6 +379,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Puede configurar su carpeta personal para ser cifrada, de manera que los "
+"archivos queden almacenados de forma privada, incluso si el equipo es robado."
 
 #. Type: boolean
 #. Description
@@ -388,6 +390,9 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"El sistema podrá montar su carpeta personal cifrada cada vez que inicie "
+"sesión y automáticamente desmontarla cuando salga de todas las sesiones "
+"activas."
 
 #. Type: title
 #. Description
@@ -403,92 +408,3 @@ msgstr "Configurar usuarios y contraseñas"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Configurando usuarios y contraseñas..."
-
-#~ msgid ""
-#~ "The contents of your home directory will normally be visible to all users "
-#~ "on the system, to make it easier to share files among users. You can "
-#~ "change this for individual files or directories by changing their "
-#~ "permissions."
-#~ msgstr ""
-#~ "Los contenidos de su directorio home normalmente serán visibles para "
-#~ "todos los usuarios en el sistema, para hacer más fácil compartir archivos "
-#~ "entre usuarios. Usted puede cambiar esto para archivos individuales o "
-#~ "directorios cambiando sus permisos."
-
-#~ msgid ""
-#~ "In addition to the standard permissions system, it may be useful to set "
-#~ "up an encrypted private directory so that those files remain private even "
-#~ "if your computer is stolen. If you choose to do this, the directory will "
-#~ "be called \"Private\"."
-#~ msgstr ""
-#~ "Además de los permisos estándar del sistema, puede ser útil establecer un "
-#~ "directorio privado cifrado para que esos archivos permanezcan privados "
-#~ "incluso si le roban su equipo. Si selecciona hacer esto, el directorio se "
-#~ "llamará «Private»."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "Frase de contraseña de cifrado:"
-
-#~ msgid ""
-#~ "You may choose a passphrase to encrypt your private directory. If you "
-#~ "leave this blank, a passphrase will be randomly generated for you. You "
-#~ "will not normally need to use this passphrase, but it may be useful in "
-#~ "case something goes wrong and you need to recover your encrypted data."
-#~ msgstr ""
-#~ "Puede seleccionar una contraseña para cifrar su directorio privado. Si lo "
-#~ "deja en blanco, se generará una contraseña aleatoria. Normalmente no "
-#~ "necesitará usar esta contraseña, pero puede ser útil en caso de que algo "
-#~ "vaya mal y necesite recuperar sus datos cifrados."
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "Necesita definir una contraseña para el superusuario («root»), la cuenta "
-#~ "de administración del sistema. Un usuario malicioso o sin la debida "
-#~ "calificación con acceso a la cuenta de administración puede acarrear unos "
-#~ "resultados desastrosos, así que debe tener cuidado para que la contraseña "
-#~ "del superusuario no sea fácil de adivinar. No debe ser una palabra de "
-#~ "diccionario, o una palabra que pueda asociarse fácilmente con usted."
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "Una buena contraseña debe contener una mezcla de letras, números y signos "
-#~ "de puntuación, y debe cambiarse regularmente."
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "No hay manera de recuperar esta frase de paso si la pierde. Para evitar "
-#~ "pérdidas de datos, debería escribir la frase de paso y guardarla en un "
-#~ "lugar seguro y alejado de este equipo."
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "Vuelva a introducir la contraseña para su verificación:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "Por favor, introduzca la misma contraseña de superusuario de nuevo para "
-#~ "verificar que la introdujo correctamente."
-
-#~ msgid "Keep this passphrase in a safe place!"
-#~ msgstr "Guarde esta frase de contraseña en un sitio seguro."
-
-#~ msgid "Your new encryption passphrase is as follows:"
-#~ msgstr "Su nueva frase de cifrado es como sigue:"
-
-#~ msgid "Please write this down and store it separately from this computer."
-#~ msgstr "Por favor, anote esto y guárdelo separado de este equipo."

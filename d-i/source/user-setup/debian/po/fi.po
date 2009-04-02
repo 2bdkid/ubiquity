@@ -290,7 +290,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "Otetaanko varjosalasanat (/etc/shadow) käyttöön?"
 
@@ -302,6 +301,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Syötit salasanan, joka sisältää vähemmän kuin kahdeksan merkkiä, mitä "
+"pidetään liian heikkona. Sinun tulisi valita vahvempi salasana."
 
 #. Type: boolean
 #. Description
@@ -331,7 +332,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
 msgstr "Luodaanko salattu yksityinen hakemisto?"
 
@@ -343,6 +343,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Kotikansio voidaan määritellä salatuksi, jolloin kaikki sinne tallennetut "
+"tiedostot pysyvät yksityisinä vaikka tietokoneesi varastettaisiin."
 
 #. Type: boolean
 #. Description
@@ -352,6 +354,9 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Järjestelmä liittää saumattomasti salatun kotikansion jokaisella "
+"kirjautumiskerralla, ja irrottaa sen kirjauduttaessa ulos kaikista "
+"aktiivisista istunnoista."
 
 #. Type: title
 #. Description
@@ -367,93 +372,3 @@ msgstr "Luo käyttäjätunnukset ja salasanat"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Tehdään käyttäjätunnukset ja salasanat..."
-
-#~ msgid ""
-#~ "The contents of your home directory will normally be visible to all users "
-#~ "on the system, to make it easier to share files among users. You can "
-#~ "change this for individual files or directories by changing their "
-#~ "permissions."
-#~ msgstr ""
-#~ "Kotihakemistosi sisältö näkyy tavallisesti kaikille järjestelmän "
-#~ "käyttäjille, jotta tiedostojen jakaminen olisi helpompaa. Voit muuttaa "
-#~ "tätä yksittäisille tiedostoille tai hakemistoille muuttamalla niiden "
-#~ "oikeuksia."
-
-#~ msgid ""
-#~ "In addition to the standard permissions system, it may be useful to set "
-#~ "up an encrypted private directory so that those files remain private even "
-#~ "if your computer is stolen. If you choose to do this, the directory will "
-#~ "be called \"Private\"."
-#~ msgstr ""
-#~ "Tavallisten oikeuksien asettamisen lisäksi voi olla hyödyllistä luoda "
-#~ "salattu yksityinen hakemisto, jotta siellä olevat tiedostot säilyvät "
-#~ "koskemattomina myös esimerkiksi varkauden sattuessa. Jos valitset tämän, "
-#~ "hakemistoa kutsutaan nimellä \"Private\" (\"Yksityinen\")."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "Salauksessa käytettävä salalause:"
-
-#~ msgid ""
-#~ "You may choose a passphrase to encrypt your private directory. If you "
-#~ "leave this blank, a passphrase will be randomly generated for you. You "
-#~ "will not normally need to use this passphrase, but it may be useful in "
-#~ "case something goes wrong and you need to recover your encrypted data."
-#~ msgstr ""
-#~ "Voit valita yksityisen hakemiston salaamiseen käytettävät salalauseen. "
-#~ "Jos kohta jätetään tyhjäksi, salalause luodaan sattumanvaraisesti. "
-#~ "Tavallisesti salalauseen käyttöä ei tarvita, mutta se voi olla "
-#~ "hyödyllinen salattujen tietojen pelastamiseksi mahdollisessa "
-#~ "ongelmatilanteessa."
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "Järjestelmän ylläpidon tekevälle pääkäyttäjälle (”root”) täytyy asettaa "
-#~ "salasana. Pahantahtoinen tai epäpätevä käyttäjä voi saada tuhoa aikaan "
-#~ "pääkäyttäjätunnuksella, joten pääkäyttäjän salasana kannattaa valita "
-#~ "huolellisesti, jottei sitä voi helposti arvata. Sen ei pitäisi olla "
-#~ "mikään sanakirjasta löytyvä sana eikä sana, jonka voi helposti liittää "
-#~ "sinuun, kuten keskimmäinen nimesi."
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "Hyvä salasana sisältää sekoituksen kirjaimia, numeroita ja välimerkkejä "
-#~ "ja se vaihdetaan säännöllisin väliajoin."
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "Tunnuslausetta ei ole mahdollista palauttaa, jos se hävitetään. Jotta "
-#~ "tietoja ei menetettäisi, tunnuslause tulisi kirjoittaa ylös ja pitää "
-#~ "turvallisessa paikassa erillään tietokoneesta."
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "Syötä salasana uudelleen varmuuden vuoksi:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "Syötäthän saman pääkäyttäjän salasanan uudelleen varmistaaksesi, että "
-#~ "kirjoitit sen oikein."
-
-#~ msgid "Keep this passphrase in a safe place!"
-#~ msgstr "Säilytä salalause turvallisessa paikassa!"
-
-#~ msgid "Your new encryption passphrase is as follows:"
-#~ msgstr "Uusi salauksen salalause on seuraava:"
-
-#~ msgid "Please write this down and store it separately from this computer."
-#~ msgstr "Kirjoita se ylös ja säilytä sitä tietokoneesta erillään."

@@ -1,3 +1,39 @@
+ubiquity (1.12.2) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * Add a comment to partman/commit.d/01unmount_busy to explain why this
+    script is still here despite similar code in partman-base.
+  * Using "Yes" and "No" buttons for the weak-password question turns out to
+    be more confusing than I'd hoped. Instead, use "Continue" and "Choose
+    another password" (breaking the string freeze, but at least for only one
+    string).
+  * Suppress unnecessary exception if find_in_os_prober fails.
+  * GTK frontend:
+    - Don't bother calling find_in_os_prober for partitions without real
+      devices (e.g. free space).
+    - Fix spacing on timezone page (LP: #336745).
+  * Fix handling of "yes" response to partman/unmount_active.
+  * Display a warning on the advanced partitioning screen if the
+    installation medium is mounted but not filling the whole disk, so that
+    the disk containing it is still offered for partitioning (LP: #347916).
+  * On armel, DEB_HOST_ARCH=armel but DEB_HOST_ARCH_CPU=arm. Check
+    DEB_HOST_ARCH rather than DEB_HOST_ARCH_CPU.
+  * Use the full size of the underlying images for the timezone map if the
+    screen is big enough.
+  * Install chroot-setup.sh and in-target from debian-installer-utils
+    (LP: #353941).
+  * Move bootloader dependencies to recommendations, to make it easier to
+    cope with grub and grub-pc conflicting (LP: #353273).
+  * Automatic update of included source packages: partman-auto 84ubuntu2,
+    partman-base 129ubuntu5, partman-ext3 56ubuntu1, user-setup
+    1.23ubuntu16.
+
+  [ Mario Limonciello ]
+  * Make sure mythbuntu installs have users installed into the 'video'
+    group. (LP: #351773)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 02 Apr 2009 23:12:54 +0100
+
 ubiquity (1.12.1) jaunty; urgency=low
 
   * Refactor architecture/subarchitecture detection slightly.

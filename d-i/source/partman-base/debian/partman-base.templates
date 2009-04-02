@@ -401,5 +401,13 @@ _Description: Unmount partitions that are in use?
  ${DISKS}
  .
  Do you want the installer to try to unmount the partitions on these disks
- before continuing?  If not, the installation will continue and the disks will
- not be available as installation targets.
+ before continuing?  If you leave them mounted, you will not be able to
+ create, delete, or resize partitions on these disks, but you may be able to
+ install to existing partitions there.
+
+Template: partman/installation_medium_mounted
+Type: note
+_Description: Installation medium on ${PARTITION}
+ Your installation medium is on ${PARTITION}. You will not be able to
+ create, delete, or resize partitions on this disk, but you may be able to
+ install to existing partitions there.

@@ -204,6 +204,9 @@ get_auto_disks() {
 
 		device=$(cat $dev/device)
 		
+		# Skip devices containing the installation medium
+		[ -e "$dev/installation_medium" ] && continue
+
 		# Skip software RAID (mdadm) devices (/dev/md/X and /dev/mdX)
 		$(echo "$device" | grep -Eq "/dev/md/?[0-9]*$") && continue
 

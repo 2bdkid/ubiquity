@@ -22,6 +22,9 @@ for dev in $DEVICES/*; do
 		case "$filesystem" in
 		    ext3|ext4)
 			[ ! -f "$id/mountpoint" ] || continue
+			RET=''
+			db_metaget partman/filesystem_short/"$filesystem" description || RET=''
+			[ "$RET" ] || RET="$filesystem"
 			db_subst partman-ext3/no_mount_point PARTITION "$num"
 			db_subst partman-ext3/no_mount_point FILESYSTEM "$filesystem"
 			db_subst partman-ext3/no_mount_point DEVICE $(humandev $(cat device))

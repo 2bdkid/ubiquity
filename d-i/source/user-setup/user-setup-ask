@@ -237,8 +237,10 @@ while :; do
 		fi
 		;;
 	    8)
+		db_get passwd/username
+		USER="$RET"
 		db_get passwd/make-user
-		if [ "$RET" = true ]; then
+		if [ "$RET" = true ] && [ ! -d "$ROOT/home/$USER" ]; then
 			db_input high user-setup/encrypt-home || true
 		fi
 		;;

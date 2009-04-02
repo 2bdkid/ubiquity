@@ -282,7 +282,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "シャドーパスワードを有効にしますか?"
 
@@ -294,6 +293,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"入力したパスワードは8文字未満であり、短すぎると思われます。より強力なパスワー"
+"ドを選ぶべきでしょう。"
 
 #. Type: boolean
 #. Description
@@ -322,7 +323,7 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "ホームディレクトリを暗号化しますか？"
 
 #. Type: boolean
 #. Description
@@ -332,6 +333,9 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"たとえコンピュータの盗難に遭ったとしても、ホームディレクトリに保存されている"
+"全てのファイルが保護されるように、ホームディレクトリの暗号化を設定することが"
+"できます。"
 
 #. Type: boolean
 #. Description
@@ -341,6 +345,8 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"そうすることで、システムはログイン毎に暗号化されたホームディレクトリをマウン"
+"トし、ログアウト時には自動的にアンマウントを行います。"
 
 #. Type: title
 #. Description
@@ -356,48 +362,3 @@ msgstr "ユーザーとパスワードのセットアップ"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "ユーザーとパスワードをセットアップ中..."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "暗号化パスフレーズ:"
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "'root' (システム管理者アカウント) のパスワードをここで設定する必要がありま"
-#~ "す。悪意のある、あるいは資格のないユーザが root 権限を得てしまうことは大損"
-#~ "害につながるので、root のパスワードは簡単に推測できるものにならないよう注"
-#~ "意を払うべきです。辞書に載っている単語や、あなたのミドルネームのようにあな"
-#~ "たに関連する語であってはなりません。"
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "良いパスワードは、アルファベット・数字・記号で構成されます。また、定期的に"
-#~ "パスワードは変更されるべきです。"
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "このパスフレーズを無くしても、パスフレーズを再発行する方法はありません。"
-#~ "データを失わないようにパスフレーズを書き留めてコンピュータから離れた安全な"
-#~ "場所に保存しておいてください。"
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "確認のため、再度パスワードを入力してください:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "確認のために、先ほど入力した同じ root のパスワードを再度入力してください。"

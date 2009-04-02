@@ -108,6 +108,10 @@ for dev in $DEVICES/*; do
 				fi
 			fi
 			if [ "$status" != OK ]; then
+				RET=''
+				db_metaget partman/filesystem_short/"$filesystem" description || RET=''
+				[ "$RET" ] || RET="$filesystem"
+				db_subst partman-ext3/create_failed TYPE "$RET"
 				db_subst partman-ext3/create_failed PARTITION "$num"
 				db_subst partman-ext3/create_failed DEVICE $(humandev $(cat device))
 				db_input critical partman-ext3/create_failed || true

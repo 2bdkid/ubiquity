@@ -271,7 +271,6 @@ msgstr "您输入的是空密码，且不被系统所接受。请选择一个非
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "启用 shadow 密码吗？"
 
@@ -282,7 +281,7 @@ msgstr "启用 shadow 密码吗？"
 msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
-msgstr ""
+msgstr "你输入的密码少于八个字符，属于弱口令。您应该选择一个更强的密码。"
 
 #. Type: boolean
 #. Description
@@ -310,7 +309,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 #, fuzzy
-#| msgid "Set up an encrypted private directory?"
 msgid "Encrypt your home directory?"
 msgstr "建立一个加密的私有目录？"
 
@@ -321,7 +319,7 @@ msgstr "建立一个加密的私有目录？"
 msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
-msgstr ""
+msgstr "您可以配置对主目录加密，这样即使电脑被盗，保存在那的文件也不会被窃取。"
 
 #. Type: boolean
 #. Description
@@ -331,6 +329,7 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"当您登录时系统会自动挂载您的加密主目录，在您登出所有活动会话时会自动卸载。"
 
 #. Type: title
 #. Description
@@ -346,71 +345,3 @@ msgstr "设置用户和密码"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "正在设置用户和密码..."
-
-#~ msgid ""
-#~ "The contents of your home directory will normally be visible to all users "
-#~ "on the system, to make it easier to share files among users. You can "
-#~ "change this for individual files or directories by changing their "
-#~ "permissions."
-#~ msgstr ""
-#~ "你的home目录中的内容通常对系统上所有用户可见，这使得用户间共享文件更简单。"
-#~ "你可以改变单独文件或者目录的权限来使之不可见。"
-
-#~ msgid ""
-#~ "In addition to the standard permissions system, it may be useful to set "
-#~ "up an encrypted private directory so that those files remain private even "
-#~ "if your computer is stolen. If you choose to do this, the directory will "
-#~ "be called \"Private\"."
-#~ msgstr ""
-#~ "在标准权限系统之外建立加密的私有目录也许挺有用，那样的话，那些文件即使在您"
-#~ "的计算机被盗的情况下仍保持私有。如果您选择这么做，这个目录将被叫做“私有”。"
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "加密口令句："
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "您需要为“root”用户 (即系统管理员帐号) 设置一个密码。如果恶意或无资格的用户"
-#~ "获得了 root 权限将可能会导致灾难性的结果，因此您应该小心地选择一个不容易猜"
-#~ "出的 root 密码。它不应该是一个能在字典中找得到的单词或者一个跟您本人有紧密"
-#~ "关系的词语。"
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "一个安全的密码应该是由字母、数字和标点符号混合而成，而且要定期更新。"
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "这样的密码句丢失后是不能被找回的。要避免丢失数据，你应该把密码句抄录下来，"
-#~ "并存放在此计算机外安全的地方。"
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "请再次输入密码以验证其正确性："
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr "为了保证您的密码正确无误，请再次输入相同的 root 密码。"
-
-#~ msgid "Keep this passphrase in a safe place!"
-#~ msgstr "把口令短语保存在安全的地方！"
-
-#~ msgid "Your new encryption passphrase is as follows:"
-#~ msgstr "您的新口令短语如后："
-
-#~ msgid "Please write this down and store it separately from this computer."
-#~ msgstr "请写下它并和该计算机分开存放。"

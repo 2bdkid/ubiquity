@@ -1,3 +1,30 @@
+partman-ext3 (56ubuntu1) jaunty; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Default to mounting ext3 and ext4 with relatime.
+    - Enable ext4 support.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 01 Apr 2009 11:30:11 +0100
+
+partman-ext3 (56) unstable; urgency=low
+
+  [ Colin Watson ]
+  * check.d/nomountpoint_ext3:
+    - partman-ext3/no_mount_point is a boolean, not a select (thanks,
+      Nicolas Valcárcel; LP: #256459).
+  * Add ext4 support, merged from Ubuntu. This requires several changes
+    outside d-i before it's functional: see
+    http://lists.debian.org/debian-boot/2009/01/msg00188.html.
+  * Disable ext4 support for now until bugs elsewhere in Debian are
+    resolved; it'll be a one-line change here to re-enable it.
+
+  [ Frans Pop ]
+  * Remove myself as uploader.
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 01 Apr 2009 11:01:56 +0100
+
 partman-ext3 (55ubuntu2) jaunty; urgency=low
 
   * Add ext4 support (LP: #293465). Some translatable strings are still

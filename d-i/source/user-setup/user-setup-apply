@@ -130,6 +130,9 @@ if [ "$RET" = true ] && ! is_system_user; then
 	HOME_EXISTED=
 	if [ -d "$ROOT/home/$USER" ]; then
 		HOME_EXISTED=1
+		# user-setup-ask shouldn't have allowed this, but for safety:
+		ENCRYPT_HOME="false"
+		ENCRYPT_HOME_OPT=
 	fi
 
 	if [ -n "$ENCRYPT_HOME_OPT" ]; then

@@ -295,7 +295,6 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:19001
 #, fuzzy
-#| msgid "Enable shadow passwords?"
 msgid "Use weak password?"
 msgstr "Gölge (shadow) parolaları etkinleştirilsin mi?"
 
@@ -307,6 +306,8 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Girdiğiniz parola, sekizden daha az karakterden oluşuyor ve çok zayıf "
+"görünüyor. Daha güçlü bir parola seçmelisiniz."
 
 #. Type: boolean
 #. Description
@@ -335,7 +336,7 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "Ev dizininiz şifrelensin mi?"
 
 #. Type: boolean
 #. Description
@@ -345,6 +346,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Ev dizininizi şifreleme için yapılandırabilirsiniz, böylelikle burada "
+"saklanan dosyalar bilgisayarınız çalınsa bile özel olarak kalırlar."
 
 #. Type: boolean
 #. Description
@@ -354,6 +357,9 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Sistem şifrelenmiş ana dizininizi her giriş yaptığınızda sorunsuz bir "
+"şekilde bağlayacak ve tüm etkin oturumlarınızdan çıkış yaptığınızda "
+"bağlantıyı otomatik olarak kaldıracaktır."
 
 #. Type: title
 #. Description
@@ -369,50 +375,3 @@ msgstr "Kullanıcıları ve parolaları oluştur"
 #: ../user-setup-udeb.templates:23001
 msgid "Setting users and passwords..."
 msgstr "Kullanıcılar ve parolalar ayarlanıyor..."
-
-#~ msgid "Encryption passphrase:"
-#~ msgstr "Şifreleme geçiş parolası:"
-
-#, fuzzy
-#~ msgid ""
-#~ "The overall strength of the encryption depends strongly on this "
-#~ "passphrase, so you should take care to choose a passphrase that is not "
-#~ "easy to guess. It should not be a word or sentence found in dictionaries, "
-#~ "or a phrase that could be easily associated with you."
-#~ msgstr ""
-#~ "Sistem yöneticisi 'root' için bir parola girmeniz gerekiyor. Kötü niyetli "
-#~ "veya yetersiz kabiliyetleri olan bir kullanıcının root haklarına sahip "
-#~ "olması çok kötü sonuçlar yaratabilir. Bu yüzden kolayca tahmin "
-#~ "edilemeyecek bir root parolası seçmeye özen göstermelisiniz. Bu parola "
-#~ "sözlükte bulunan bir kelime veya sizinle olan alâkasından dolayı "
-#~ "kolaylıkla keşfedilebilecek bir kelime olmamalı."
-
-#, fuzzy
-#~ msgid ""
-#~ "A good passphrase will contain a mixture of letters, numbers and "
-#~ "punctuation. Passphrases are recommended to have a length of 20 or more "
-#~ "characters."
-#~ msgstr ""
-#~ "İyi bir parola harfler, rakamlar ve noktalama işaretlerinin uygun bir "
-#~ "birleşiminden oluşmalı ve düzenli aralıklarla değiştirilmelidir."
-
-#~ msgid ""
-#~ "There is no way to recover this passphrase if you lose it. To avoid "
-#~ "losing data, you should normally write down the passphrase and keep it in "
-#~ "a safe place separate from this computer."
-#~ msgstr ""
-#~ "Eğer kaybederseniz bu şifreyi hatırlatmanın hiçbir yolu yoktur. Verileri "
-#~ "kaybetmemek için şifreyi not edin ve bu bilgisayardan ayrı güvenli bir "
-#~ "yerde saklayın."
-
-#, fuzzy
-#~ msgid "Re-enter passphrase to verify:"
-#~ msgstr "Doğrulamak için parolayı tekrar giriniz:"
-
-#, fuzzy
-#~ msgid ""
-#~ "Please enter the same passphrase again to verify that you have typed it "
-#~ "correctly."
-#~ msgstr ""
-#~ "Lütfen hatasız yazdığınızı doğrulamak için aynı root parolasını tekrar "
-#~ "giriniz."
