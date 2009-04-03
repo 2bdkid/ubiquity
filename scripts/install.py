@@ -1246,6 +1246,15 @@ exit 0"""
             # More extensive language support packages.
             to_install.append('language-support-%s' % lp)
 
+        # Filter the list of language packs to include only language packs
+        # that exist in the live filesystem's apt cache, so that we can tell
+        # the difference between "no such language pack" and "language pack
+        # not retrievable given apt configuration in /target" later on.
+        cache = Cache()
+        to_install = [lp for lp in to_install
+                         if self.get_cache_pkg(cache, lp) is not None]
+        del cache
+
         self.record_installed(to_install)
         self.langpacks = to_install
 
@@ -1256,7 +1265,7 @@ exit 0"""
         incomplete = False
         for pkg in self.langpacks:
             cachedpkg = self.get_cache_pkg(cache, pkg)
-            if cachedpkg is not None and not cachedpkg.isInstalled:
+            if cachedpkg is None or not cachedpkg.isInstalled:
                 incomplete = True
                 break
         if incomplete:
@@ -1327,6 +1336,8 @@ exit 0"""
         for line in swaps:
             words = line.split()
             if words[1] != 'partition':
+                continue
+            if not os.path.exists(words[0]):
                 continue
             if words[0].startswith('/dev/ramzswap'):
                 continue
@@ -1559,7 +1570,7 @@ exit 0"""
         print >>hosts, textwrap.dedent("""\
 
             # The following lines are desirable for IPv6 capable hosts
-            ::1     ip6-localhost ip6-loopback
+            ::1     localhost ip6-localhost ip6-loopback
             fe00::0 ip6-localnet
             ff00::0 ip6-mcastprefix
             ff02::1 ip6-allnodes

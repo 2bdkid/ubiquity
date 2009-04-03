@@ -1,3 +1,11 @@
+partman-base (129ubuntu6) jaunty; urgency=low
+
+  * Support partman/filter_mounted preseeding again, for some special cases
+    that know they can get away with modifying partitions after the one
+    containing the installation medium (LP: #354573).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 03 Apr 2009 23:28:17 +0100
+
 partman-base (129ubuntu5) jaunty; urgency=low
 
   * init.d/parted: Use more concise syntax for building up lists.

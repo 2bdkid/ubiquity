@@ -129,101 +129,106 @@ if [ ! -f /var/run/parted_server.pid ]; then
 		fi
 	done
 
-	# Get a list of active mounts in a more convenient format.
-	mounts=
-	while read dev mp rest; do
-		[ -e "$dev" ] || continue
-		mappeddev="$(mapdevfs "$dev")"
-		if [ "$mappeddev" ]; then
-			dev="$mappeddev"
-		fi
-		mounts="${mounts:+$mounts$NL}$dev $mp"
-	done < /proc/mounts
-	# For each disk, check for any active mounts on it. If the only
-	# thing mounted is the installation medium and it uses more or less
-	# the whole disk, then silently exclude that disk; if the
-	# installation medium is mounted but doesn't use the whole disk,
-	# issue a warning that partitioning may be difficult; if anything
-	# else is mounted, offer to unmount it.
-	disks_unmount=
-	parts_unmount=
-	part_warn=
-	for dev in $DEVICES/*; do
-		[ -d "$dev" ] || continue
-		cd $dev
-		free=0
-		parts=
-		instparts=
-		seen_unmounted=
-		open_dialog PARTITIONS
-		while { read_line num id size type fs path name; [ "$id" ]; }; do
-			if [ "$fs" = free ]; then
-				free="$(($free + $size))"
-				continue
+	db_get partman/filter_mounted
+	if [ "$RET" = true ]; then
+		# Get a list of active mounts in a more convenient format.
+		mounts=
+		while read dev mp rest; do
+			[ -e "$dev" ] || continue
+			mappeddev="$(mapdevfs "$dev")"
+			if [ "$mappeddev" ]; then
+				dev="$mappeddev"
 			fi
-			mappedpath="$(mapdevfs "$path")"
-			if [ "$mappedpath" ]; then
-				path="$mappedpath"
-			fi
-			mp=
-			IFS="$NL"
-			for line in $mounts; do
-				restore_ifs
-				if [ "$path" = "${line%% *}" ]; then
-					mp="${line#* }"
-					break
+			mounts="${mounts:+$mounts$NL}$dev $mp"
+		done < /proc/mounts
+		# For each disk, check for any active mounts on it. If the
+		# only thing mounted is the installation medium and it uses
+		# more or less the whole disk, then silently exclude that
+		# disk; if the installation medium is mounted but doesn't
+		# use the whole disk, issue a warning that partitioning may
+		# be difficult; if anything else is mounted, offer to
+		# unmount it.
+		disks_unmount=
+		parts_unmount=
+		part_warn=
+		for dev in $DEVICES/*; do
+			[ -d "$dev" ] || continue
+			cd $dev
+			free=0
+			parts=
+			instparts=
+			seen_unmounted=
+			open_dialog PARTITIONS
+			while { read_line num id size type fs path name; [ "$id" ]; }; do
+				if [ "$fs" = free ]; then
+					free="$(($free + $size))"
+					continue
 				fi
+				mappedpath="$(mapdevfs "$path")"
+				if [ "$mappedpath" ]; then
+					path="$mappedpath"
+				fi
+				mp=
 				IFS="$NL"
+				for line in $mounts; do
+					restore_ifs
+					if [ "$path" = "${line%% *}" ]; then
+						mp="${line#* }"
+						break
+					fi
+					IFS="$NL"
+				done
+				restore_ifs
+				if [ "$mp" = /cdrom ]; then
+					instparts="${instparts:+$instparts }$path"
+				elif [ "$mp" ]; then
+					parts="${parts:+$parts }$path"
+				else
+					seen_unmounted=1
+				fi
 			done
-			restore_ifs
-			if [ "$mp" = /cdrom ]; then
-				instparts="${instparts:+$instparts }$path"
-			elif [ "$mp" ]; then
-				parts="${parts:+$parts }$path"
-			else
-				seen_unmounted=1
+			close_dialog
+			if [ "$instparts" ]; then
+				if [ -z "$seen_unmounted" ] && \
+				   longint_le "$free" 16777216; then
+					# The installation medium uses more
+					# or less the whole disk.
+					open_dialog CLOSE
+					close_dialog
+					cd /
+					rm -rf "$dev"
+				else
+					# There's an installation medium
+					# here, but it doesn't use the whole
+					# disk.
+					part_warn="$instparts"
+					>installation_medium
+				fi
+			elif [ "$parts" ]; then
+				# Something other than an installation
+				# medium is mounted.
+				disks_unmount="${disks_unmount:+$disks_unmount }$(cat device)"
+				parts_unmount="${parts_unmount:+$parts_unmount }$parts"
 			fi
 		done
-		close_dialog
-		if [ "$instparts" ]; then
-			if [ -z "$seen_unmounted" ] && \
-			   longint_le "$free" 16777216; then
-				# The installation medium uses more or less
-				# the whole disk.
-				open_dialog CLOSE
-				close_dialog
-				cd /
-				rm -rf "$dev"
-			else
-				# There's an installation medium here, but
-				# it doesn't use the whole disk.
-				part_warn="$instparts"
-				>installation_medium
+		if [ "$disks_unmount" ]; then
+			db_subst partman/unmount_active DISKS "$(echo "$disks_unmount" | sed 's/ /, /g')"
+			db_fset partman/unmount_active seen false
+			db_input critical partman/unmount_active || true
+			db_go || exit 10
+			db_get partman/unmount_active || RET=
+			if [ "$RET" = true ]; then
+				umount $parts_unmount || true
 			fi
-		elif [ "$parts" ]; then
-			# Something other than an installation medium is
-			# mounted.
-			disks_unmount="${disks_unmount:+$disks_unmount }$(cat device)"
-			parts_unmount="${parts_unmount:+$parts_unmount }$parts"
 		fi
-	done
-	if [ "$disks_unmount" ]; then
-		db_subst partman/unmount_active DISKS "$(echo "$disks_unmount" | sed 's/ /, /g')"
-		db_fset partman/unmount_active seen false
-		db_input critical partman/unmount_active || true
-		db_go || exit 10
-		db_get partman/unmount_active || RET=
-		if [ "$RET" = true ]; then
-			umount $parts_unmount || true
+		if [ "$part_warn" ]; then
+			db_subst partman/installation_medium_mounted PARTITION "$part_warn"
+			db_fset partman/installation_medium_mounted seen false
+			db_capb align
+			db_input high partman/installation_medium_mounted || true
+			db_go || true
+			db_capb backup align
 		fi
-	fi
-	if [ "$part_warn" ]; then
-		db_subst partman/installation_medium_mounted PARTITION "$part_warn"
-		db_fset partman/installation_medium_mounted seen false
-		db_capb align
-		db_input high partman/installation_medium_mounted || true
-		db_go || true
-		db_capb backup align
 	fi
 
 	rm -rf /var/lib/partman/old_devices
