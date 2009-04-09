@@ -147,7 +147,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "2つのファイルシステムが同一のマウントポイントにあります"
 
@@ -166,7 +165,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "マウントポイントを変更してこれを修正してください。"
 
@@ -279,7 +277,7 @@ msgstr "利用方法:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "対立するファイルを削除できません"
 
 #. Type: error
 #. Description
@@ -288,20 +286,21 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"インストーラはインストールする対象からオペレーティングシステムファイルを削除"
+"する必要がありますが、削除できませんでした。インストールを継続することができ"
+"ません。"
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "対立するオペレーティングシステムファイルを削除しています..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "パーティショニングを再開しますか?"
+msgstr "partitionerに戻りますか？"
 
 #. Type: boolean
 #. Description
@@ -312,6 +311,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"${MOUNTPOINT}に割り当てられた${PARTITION} のファイルシステムはフォーマットで"
+"きません。割り当てられたマウントポイント以下に既に存在する、システムファイル"
+"のあるディレクトリ(/etc, /lib, /usr, /var, ...) はインストールの過程で削除さ"
+"れます。"
 
 #. Type: boolean
 #. Description
@@ -319,3 +322,4 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"インストールの前に重要なデータをバックアップしてあることを確かめてください。"

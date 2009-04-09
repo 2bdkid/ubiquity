@@ -157,7 +157,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Gleicher Einhängepunkt für zwei Dateisysteme"
 
@@ -176,7 +175,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Bitte beheben Sie das, indem Sie die Einhängepunkte ändern."
 
@@ -290,7 +288,7 @@ msgstr "Benutzen als:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Löschen der Konfliktdateien fehlgeschlagen"
 
 #. Type: error
 #. Description
@@ -299,20 +297,21 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Das Installationsprogramm muss Betriebssystemdateien vom Ziellaufwerk "
+"löschen. Der Versuch, diese zu löschen, ist fehlgeschlagen. Der "
+"Installationsvorgang kann nicht fortgesetzt werden."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Kollidierende Systemdateien werden gelöscht ..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Wollen Sie die Partitionierung fortsetzen?"
+msgstr "Möchten Sie zum Partitionsmenü zurückkehren?"
 
 #. Type: boolean
 #. Description
@@ -323,6 +322,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Das Dateisystem auf ${PARTITION}, das ${MOUNTPOINT} zugeordnet ist, wurde "
+"nicht für eine Formatierung gekennzeichnet. Verzeichnisse, die Systemdateien "
+"beinhalten (/etc, /lib, /usr, /var, ...), werden während der Installation "
+"gelöscht, wenn diese unter einem beliebigen Einhängepunkt bereits existieren."
 
 #. Type: boolean
 #. Description
@@ -330,3 +333,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Bitte stellen Sie sich, dass alle wichtigen Daten gesichert wurden, bevor "
+"Sie mit der Installation beginnen."

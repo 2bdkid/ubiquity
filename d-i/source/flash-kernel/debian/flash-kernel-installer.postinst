@@ -93,15 +93,33 @@ case "$machine" in
 			error "could not find fis configuration on $fis_dev"
 		fi
 		# required to assemble redboot script
-		load_initrd="fis load initramfs"
-		load_kernel="fis load kernel"
+		initrd_names="initrd initramfs"
+		for name in $initrd_names; do
+			if fis -d "$fis_dev" -o $fis_offset_hex list | grep -q "^[[:space:]]*$name:"; then
+		        initrd_name=$name
+		    fi
+		done
+		if [ -z "$initrd_name" ];then
+		    error "no fis partition with valid name for initramfs found"
+		fi
+		kernel_names="vmlinuz kernel"
+		for name in $kernel_names; do
+			if fis -d "$fis_dev" -o $fis_offset_hex list | grep -q "^[[:space:]]*$name:"; then
+		        kernel_name=$name
+		    fi
+		done
+		if [ -z "$kernel_name" ];then
+		    error "no fis partition with valid name for kernel found"
+		fi
+		load_initrd="fis load $initrd_name"
+		load_kernel="fis load $kernel_name"
 		# find target UUID
-		rootfs=$(findfs /)
-		vol_id=$(PATH="/lib/udev:$PATH" vol_id -u $rootfs)
+		rootfs="$(findfs /)"
+		vol_id="$(PATH="/lib/udev:$PATH" vol_id -u "$rootfs")"
 		# assemble cmdline
 		cmdline="\"root=UUID=$vol_id ro quiet\""
-		script="$load_initrd\\$load_kernel\\exec -r 0x1000000 -s 0x00940000 -c $cmdline"
-		fconfig -w -d "$fis_dev" -o $ofst -n boot_script_data -x "$script"
+		script="$load_initrd\\$load_kernel\\exec -r 0x1000000 -s 0x00940000 -c $cmdline\\"
+		fconfig -w -s -d "$fis_dev" -o $ofst -n boot_script_data -x "$script"
 	;;
 	"GLAN Tank")
 		in-target update-initramfs -u || true

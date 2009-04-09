@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: console-setup 1.22\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2008-07-04 21:16+0200\n"
+"POT-Creation-Date: 2008-07-11 20:12+0200\n"
 "PO-Revision-Date: 2008-07-13 22:25+0200\n"
 "Last-Translator: Helge Kreutzmann <debian@helgefjell.de>\n"
 "Language-Team: de <debian-l10n-german@lists.debian.org>\n"
@@ -667,7 +667,7 @@ msgstr ""
 #. Description
 #: ../console-setup.templates:15001
 msgid "Detect keyboard layout?"
-msgstr ""
+msgstr "Tastaturmodell erkennen?"
 
 #. Type: boolean
 #. Description
@@ -677,18 +677,21 @@ msgid ""
 "keys. If you do not want to do this, you will be able to select your "
 "keyboard layout from a list."
 msgstr ""
+"Sie können versuchen das Tastaturmodell anhand von Tasteneingaben erkennen "
+"zu lassen. Wenn Sie das nicht möchten, können sie das Tastaturmodell aus "
+"einer Liste wählen."
 
 #. Type: detect-keyboard
 #. Description
 #: ../console-setup.templates:16001
 msgid "Detecting your keyboard layout"
-msgstr ""
+msgstr "Ihr Tastaturmodell wird erkannt"
 
 #. Type: note
 #. Description
 #: ../console-setup.templates:17001
 msgid "Keyboard layout detection complete"
-msgstr ""
+msgstr "Tastaturmodell-Erkennung abgeschlossen"
 
 #. Type: note
 #. Description
@@ -698,12 +701,6 @@ msgid ""
 "\". If this is not correct, you can go back and select your layout from the "
 "full list instead."
 msgstr ""
-
-#~ msgid "Shift+Caps Lock"
-#~ msgstr "Umschalttaste+Feststelltaste"
-
-#~ msgid "Both Shift keys together"
-#~ msgstr "Beide Umschalttasten zusammen"
-
-#~ msgid "Both Control keys together"
-#~ msgstr "Beide Strg-Tasten zusammen"
+"Anhand der gedrückten Tasten wurde das Tastaturmodell »${LAYOUT}« ausgewählt. "
+"Falls diese Auswahl nicht richtig ist, können Sie zurück gehen und Ihr "
+"Modell stattdessen aus einer vollständigen Liste wählen."

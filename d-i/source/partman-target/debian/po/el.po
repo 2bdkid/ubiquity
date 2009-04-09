@@ -159,7 +159,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Ταυτόσημα σημεία επαφής για δύο συστήματα αρχείων"
 
@@ -178,7 +177,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Παρακαλώ διορθώστε αυτό το λάθος αλλάζοντας σημεία επαφής."
 
@@ -292,7 +290,7 @@ msgstr "Χρήση ως:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Αποτυχία αφαίρεσης των συγκρουόμενων αρχείων"
 
 #. Type: error
 #. Description
@@ -301,20 +299,21 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Το πρόγραμμα εγκατάστασης πρέπει να αφαιρέσει τα αρχεία του λειτουργικού "
+"συστήματος από την επιλεγμένη διαδρομή εγκατάστασης, αλλά απέτυχε να το "
+"κάνει. Η εγκατάσταση δεν μπορεί να συνεχιστεί."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Αφαίρεση συγκρουόμενων αρχείων λειτουργικού συστήματος..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Θέλετε να συνεχίσετε την διαμέριση;"
+msgstr "Θέλετε να επιστρέψετε στον οδηγό διαμέρισης;"
 
 #. Type: boolean
 #. Description
@@ -325,6 +324,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Το σύστημα αρχείων στην ${PARTITION} που έχει προσαρτηθεί στο ${MOUNTPOINT} "
+"δεν έχει επιλεχθεί για μορφοποίηση. Οι υπάρχοντες κατάλογοι με αρχεία "
+"συστήματος (/etc, /lib, /usr, /var, ...) σε όλα τα καθορισμένα σημεία "
+"προσάρτησης θα διαγραφούν κατά την εγκατάσταση."
 
 #. Type: boolean
 #. Description
@@ -332,3 +335,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Παρακαλώ επιβεβαιώστε ότι έχετε δημιουργήσει αντίγραφα ασφαλείας όλων των "
+"σημαντικών δεδομένων σας πριν την έναρξη της εγκατάστασης."

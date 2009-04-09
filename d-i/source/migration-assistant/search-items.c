@@ -53,13 +53,13 @@ const char* windowsxp_gaim (void) {
     free(accounts_file);
     if(fp != NULL) {
         fclose(fp);
-        return "Gaim";
+        return "Pidgin";
     }
     fp = fopen(accounts_file_new, "r");
     free(accounts_file_new);
     if(fp != NULL) {
         fclose(fp);
-        return "Gaim";
+        return "Pidgin";
     }
     return NULL;
 }
@@ -294,12 +294,12 @@ const char* linux_gaim (void) {
     fp = fopen(accounts_file, "r");
     if(fp != NULL) {
         fclose(fp);
-        return "Gaim";
+        return "Pidgin";
     }
     fp = fopen(accounts_file_new, "r");
     if(fp != NULL) {
         fclose(fp);
-        return "Gaim";
+        return "Pidgin";
     }
     return NULL;
 }

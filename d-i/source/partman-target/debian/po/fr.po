@@ -152,7 +152,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Points de montage identiques pour deux systèmes de fichiers"
 
@@ -171,7 +170,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Veuillez corriger cela en modifiant les points de montage."
 
@@ -285,7 +283,7 @@ msgstr "Utiliser comme :"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "La suppression des fichiers en conflit a échoué"
 
 #. Type: error
 #. Description
@@ -294,20 +292,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"L'installation nécessite la suppression de fichiers système, mais cette "
+"opération est impossible. L'installation ne peut pas continuer."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Suppression des fichiers système en conflit..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Souhaitez-vous recommencer le partitionnement ?"
+msgstr "Voulez-vous revenir à l'outil de partitionnement ?"
 
 #. Type: boolean
 #. Description
@@ -318,6 +316,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Le système de fichier sur ${PARTITION} assigné à ${MOUNTPOINT} n'a pas été "
+"marqué pour être formaté. Les dossiers contenant les fichiers systèmes (/"
+"etc, /lib, /usr, /var, ...) qui existent déjà sous tous les points de "
+"montages seront supprimés durant l'installation."
 
 #. Type: boolean
 #. Description
@@ -325,3 +327,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Veuillez vous assurer que vos données importantes ont été sauvegardées avant "
+"l'installation."

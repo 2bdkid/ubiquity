@@ -145,7 +145,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Identyczne punkty montowania dla dwóch systemów plików"
 
@@ -164,7 +163,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Proszę to poprawić zmieniając punkty montowania."
 
@@ -278,7 +276,7 @@ msgstr "Użyj jako:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Nie udało się usunąć plików powodujących konflikt."
 
 #. Type: error
 #. Description
@@ -287,20 +285,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Wymagane przez instalatora usunięcie plików systemowych z docelowego punktu "
+"instalacji nie powiodło się. Instalacja nie może być kontynuowana."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Usuwanie plików systemowych mogących powodować konflikty..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Czy chcesz kontynuować partycjonowanie?"
+msgstr "Czy powrócić do programu partycjonującego?"
 
 #. Type: boolean
 #. Description
@@ -311,6 +309,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"System plików na ${PARTITION}, przydzielony do ${MOUNTPOINT}, nie został "
+"wybrany do sformatowania. Katalogi zawierające pliki systemowe (/etc, /lib, /"
+"usr, /var, ...), istniejące już w wybranych punktach montowania zostaną "
+"usunięte w trakcie instalacji."
 
 #. Type: boolean
 #. Description
@@ -318,3 +320,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Przed instalacją upewnij się, iż zostały wykonane kopie zapasowe wszelkich "
+"istotnych danych."

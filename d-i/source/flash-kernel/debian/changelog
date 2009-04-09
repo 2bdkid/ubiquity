@@ -1,3 +1,13 @@
+flash-kernel (2.13ubuntu6) jaunty; urgency=low
+
+  * add checks for kernel and initramfs fis partitions
+  * allow more flexibility in naming kernel and initramfs fis partitions
+  * add final newline to exec redboot command, so we dont produce garbage in
+    serial terminal output
+  * quieten down teh fconfig write of the script
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 08 Apr 2009 14:40:28 +0200
+
 flash-kernel (2.13ubuntu5) jaunty; urgency=low
 
   * add support for Freescale MX51 Babbage Board to

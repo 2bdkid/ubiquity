@@ -69,6 +69,13 @@ for choice in $selection; do # Microsoft Windows XP Professional (/dev/hda1)
             IFS="$OLDIFS"
             itemsret=$($mapath/ma-search-items --path="$mountpoint" --ostype="$ostype" --user="$usr" 2>>/var/log/syslog) || \
                 (itemsret=; error "ma-search-items exited with an error for $usr.")
+            # FIXME: We should figure out if there are any items for each user
+            # before asking to import from the user.  Likewise, we should
+            # figure out if there are any users to import before asking to
+            # import from a partition.
+            if [ -z "$itemsret" ]; then
+                continue
+            fi
             formatted_user=`echo "$usr" | sed -e 's/ /+/g'`
             db_register migration-assistant/items migration-assistant/$path/$formatted_user/items
             db_subst migration-assistant/$path/$formatted_user/items choices "$itemsret"

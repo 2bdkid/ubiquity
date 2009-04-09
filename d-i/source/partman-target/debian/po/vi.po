@@ -150,7 +150,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Điểm lắp trùng cho hai hệ thống tập tin"
 
@@ -169,7 +168,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Hãy sửa chữa lỗi này bằng cách thay đổi điểm lắp."
 
@@ -282,7 +280,7 @@ msgstr "Dùng làm:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Không thể gỡ bỏ các tệp xung đột"
 
 #. Type: error
 #. Description
@@ -291,20 +289,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Trình cài đặt cần gỡ bỏ các tệp hệ điều hành khỏi nơi cài đặt đến, tuy nhiên "
+"không thể thực hiện được. Quá trình cài đặt không thể tiếp tục."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Đang gỡ các tệp hệ điều hành xung đột..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Bạn có muốn tiếp tục lại tạo phân vùng không?"
+msgstr "Bạn có muốn quay lại trình phân vùng đĩa?"
 
 #. Type: boolean
 #. Description
@@ -315,10 +313,13 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Phân vùng ${PARTITION} dùng để làm ${MOUNTPOINT} chưa được đánh dấu để "
+"format. Những thư mục đã tồn tại có tên như /etc, /lib, /usr, /var, ... sẽ "
+"bị xóa trong quá trình cài đặt."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
-msgstr ""
+msgstr "Đừng quên sao lưu tất cả các dữ liệu quan trọng trước khi cài đặt."

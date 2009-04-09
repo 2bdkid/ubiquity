@@ -154,7 +154,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Identiske monteringspunkter for to filsystemer"
 
@@ -173,7 +172,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Ret dette ved at ændre monteringspunkterne."
 
@@ -287,7 +285,7 @@ msgstr "Brug som:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Kunne ikke fjerne konflikterende filer"
 
 #. Type: error
 #. Description
@@ -296,20 +294,21 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Installationsprogrammet skal fjerne operativsystemsfiler fra "
+"installationsmålet, men det var ikke muligt. Installationen kan ikke "
+"forsætte."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Fjerner konflikterende operativsystemsfiler..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Vil du fortsætte partitioneringen?"
+msgstr "Vil du vende tilbage til partitioneringsprogrammet?"
 
 #. Type: boolean
 #. Description
@@ -320,6 +319,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Filsystemet på ${PARTITION} tildelt til ${MOUNTPOINT} er ikke blevet "
+"markeret til formattering. Kataloger der indeholder systemfiler (/etc, /"
+"lib, /usr, /var, ...), som allerede eksisterer under ethvert angivet "
+"monteringspunkt, vil blive slettet under installationen."
 
 #. Type: boolean
 #. Description
@@ -327,3 +330,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Du bør sikre dig, at du har sikkerhedskopieret alle vigtige data, før du "
+"installerer."

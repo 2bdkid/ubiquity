@@ -147,7 +147,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Kahdella tiedostojärjestelmällä on sama liitoskohta"
 
@@ -166,7 +165,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Korjaa tämä vaihtamalla liitoskohtia."
 
@@ -280,7 +278,7 @@ msgstr "Käyttö:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Ristiriitaisten tiedostojen poistaminen epäonnistui"
 
 #. Type: error
 #. Description
@@ -289,20 +287,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Asennusohjelman täytyy poistaa asennuskohteesta käyttöjärjestelmätiedostoja, "
+"mutta ei voinut tehdä sitä. Asennus ei voi jatkua."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Poistetaan ristiriitaisia käyttöjärjestelmätiedostoja..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Haluatko jatkaa osiointia?"
+msgstr "Haluatko palata osiointiin?"
 
 #. Type: boolean
 #. Description
@@ -313,6 +311,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Osiolla ${PARTITION} olevaa tiedostojärjestelmää, joka on liitetty "
+"kohteeseen ${MOUNTPOINT}, ei ole merkitty alustettavaksi. Määriteltyjen "
+"liitoskohtien alla olevat järjestelmätiedostoja sisältävät hakemistot (/"
+"etc, /lib, /usr, /var, ...) poistetaan asennuksen aikana."
 
 #. Type: boolean
 #. Description
@@ -320,3 +322,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Varmista ennen asentamista, että kaikista tärkeistä tiedostoista on "
+"varmuuskopiot."

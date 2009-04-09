@@ -150,7 +150,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Одинаковые точки монтирования для двух файловых систем"
 
@@ -169,7 +168,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Пожалуйста, поправьте точки монтирования."
 
@@ -283,7 +281,7 @@ msgstr "Использовать как:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Не удалось удалить конфликтующие файлы"
 
 #. Type: error
 #. Description
@@ -292,20 +290,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Не удалось удалить файлы операционной системы на целевом разделе. Установка "
+"не может быть продолжена."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Удаление конфликтующих файлов операционной системы..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Хотите ли вы продолжить разметку?"
+msgstr "Вернуться к программе разметки?"
 
 #. Type: boolean
 #. Description
@@ -316,6 +314,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Файловая система на ${PARTITION}, подключенная к ${MOUNTPOINT} не была "
+"помечена для форматирования. Уже имеющиеся каталоги, содержащие системные "
+"файлы (/etc, /lib, /usr, /var, ...) под любой определённой точкой "
+"монтирования будут удалены в процессе установки."
 
 #. Type: boolean
 #. Description
@@ -323,3 +325,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Перед установкой удостоверьтесь в том, что вы сделали резервную копию важных "
+"данных."

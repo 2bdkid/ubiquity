@@ -138,7 +138,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "两个文件系统指向同一挂载点"
 
@@ -157,7 +156,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "请通过改变挂载点来修正此错误。"
 
@@ -268,7 +266,7 @@ msgstr "用于："
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "删除冲突文件失败"
 
 #. Type: error
 #. Description
@@ -276,21 +274,19 @@ msgstr ""
 msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
-msgstr ""
+msgstr "安装程序需要删除安装目标中的操作系统文件，但未能成功。安装无法继续。"
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "正在删除冲突的操作系统文件..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "您是否希望重新分区？"
+msgstr "您希望返回到分区工具吗？"
 
 #. Type: boolean
 #. Description
@@ -301,10 +297,12 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"已经在 ${PARTITION} 上的${MOUNTPOINT} 的文件系统将不会被格式化。在已定义的挂"
+"载点中包含系统文件的目录（如 /etc, /lib, /usr, /var, ...）将会在安装时删除。"
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
-msgstr ""
+msgstr "请确认你已经在安装前备份了重要的数据。"

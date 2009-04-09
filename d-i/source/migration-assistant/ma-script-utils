@@ -192,7 +192,7 @@ add_user() {
 	fi
 
 	# Set the password
-	$chroot $ROOT chpasswd -m <<EOF
+	$chroot $ROOT chpasswd <<EOF
 $username:$password
 EOF
 

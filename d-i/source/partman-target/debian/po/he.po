@@ -142,7 +142,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "נקודות עגינה זהות על שתי מערכות קבצים"
 
@@ -161,7 +160,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "נא לתקן זאת על ידי שינוי נקודות העגינה."
 
@@ -274,7 +272,7 @@ msgstr "השתמש עבור:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "כשל בהסרת הקבצים המנוגדים"
 
 #. Type: error
 #. Description
@@ -283,20 +281,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"תוכנית ההתקנה אמורה להסיר את קבצי מערכת ההפעלה מיעד ההתקנה, אך אינה יכולה "
+"לעשות זאת. לא ניתן להמשיך בהתקנה."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "מסיר את קבצי המערכת המנוגדים..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "האם ברצונך להמשיך בחלוקה למחיצות?"
+msgstr "האם ברצונך לחזור ליוצר המחיצות?"
 
 #. Type: boolean
 #. Description
@@ -307,10 +305,13 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"מערכת הקבצים שעל גבי ${PARTITION} המוקצית ל${MOUNTPOINT} לא סומנה לאתחול. כל "
+"התיקיות המכילות קבצי מערכת (/etc, /lib, /usr, /var, ...) שכבר קיימות תחת כל "
+"נקודת עגינה מוגדרת ימחקו בתהליך ההתקנה."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
-msgstr ""
+msgstr "אנא וודא כי גיבית כל מידע קריטי טרם ההתקנה."

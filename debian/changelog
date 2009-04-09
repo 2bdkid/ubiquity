@@ -1,3 +1,40 @@
+ubiquity (1.12.6) jaunty; urgency=low
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Copy-and-paste gdm-signal from powermanagement-interface, since that
+      package is no longer in main and is slated to go away. In future we
+      ought to be able to use gnome-session D-BUS calls or similar for this
+      work (LP: #357101).
+  * Use gksudo --preserve-env / sudo -E so that we can check DESKTOP_SESSION
+    from the GTK frontend, and use other desktop environment variables in
+    future.
+  * Try a couple of different locations for NetworkManager's init script
+    (LP: #356813).
+  * Sync with console-setup 1.28ubuntu8: treat the Kazakhstan layout (kz) as
+    non-Latin (LP: #356816).
+  * Work around a debconf bug which broke the default time zone for some
+    countries: REGISTER does not appear to give a newly-registered question
+    the same default as the question associated with its template, unless we
+    also RESET it, so do that (LP: #356794).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: base-installer
+    1.98ubuntu6, console-setup 1.28ubuntu8, flash-kernel 2.13ubuntu6,
+    partman-auto 84ubuntu3, partman-base 129ubuntu7, partman-target
+    58ubuntu7, user-setup 1.23ubuntu18.
+
+  [ Evan Dandrea ]
+  * Provide translation support for the format warning on the automatic
+    partitioning page, and make it less tied to English grammar.  Thanks
+    Timo Jyrinki (LP: #356333).
+  * Only show the migration-assistant page if we have items we can
+    import.
+  * Don't let the time zone map image grow larger than the original.
+  * Automatic update of included source packages: migration-assistant
+    0.6.4.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 09 Apr 2009 14:46:10 +0100
+
 ubiquity (1.12.5) jaunty; urgency=low
 
   [ Robert Ancell ]

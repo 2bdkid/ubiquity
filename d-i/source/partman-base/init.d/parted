@@ -135,7 +135,7 @@ if [ ! -f /var/run/parted_server.pid ]; then
 		mounts=
 		while read dev mp rest; do
 			[ -e "$dev" ] || continue
-			mappeddev="$(mapdevfs "$dev")"
+			mappeddev="$(mapdevfs "$dev")" || true
 			if [ "$mappeddev" ]; then
 				dev="$mappeddev"
 			fi
@@ -164,7 +164,7 @@ if [ ! -f /var/run/parted_server.pid ]; then
 					free="$(($free + $size))"
 					continue
 				fi
-				mappedpath="$(mapdevfs "$path")"
+				mappedpath="$(mapdevfs "$path")" || true
 				if [ "$mappedpath" ]; then
 					path="$mappedpath"
 				fi

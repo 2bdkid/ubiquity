@@ -145,7 +145,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "Iste točke montiranja za dva datotečna sustava"
 
@@ -164,7 +163,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Molim ispravite to mijenjajući točke montiranja."
 
@@ -277,7 +275,7 @@ msgstr "Rabi kao:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Neuspjelo uklanjanje sukobljujućih datoteka."
 
 #. Type: error
 #. Description
@@ -286,20 +284,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Instalacija mora ukloniti datoteke operativnog sustava, ali to nije bilo "
+"moguće napraviti. Instalacija se ne može nastaviti."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Uklanjanje proturječnih datoteka operativnog sustava..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "ĂÂĂÂĂĹĄĂÂĂÂĂÂÄÂĂÂelite li nastaviti particioniranje?"
+msgstr "Želite li se vratiti na particioniranje?"
 
 #. Type: boolean
 #. Description
@@ -310,6 +308,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Datotečni sustav na ${PARTITION}, pridružen na ${MOUNTPOINT} nije označen za "
+"formatiranje. Direktoriji koji sadrže datoteke sustava (/etc, /lib, /usr, /"
+"var, ...), a postoje pod bilo kojom točkom montiranja, biti će obrisani "
+"prilikom instalacije."
 
 #. Type: boolean
 #. Description
@@ -317,3 +319,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Molim, provjerite jeste li sačuvali sigurnosnu kopiju svih ključnih podataka "
+"prije nastavka instalacije."

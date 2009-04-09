@@ -152,7 +152,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Identical mount points for two file systems"
 msgid "Identical labels for two file systems"
 msgstr "İki dosya sistemi için aynı bağlama noktası"
 
@@ -171,7 +170,6 @@ msgstr ""
 #. :sl2:
 #: ../partman-target.templates:4001
 #, fuzzy
-#| msgid "Please correct this by changing mount points."
 msgid "Please correct this by changing labels."
 msgstr "Lütfen bağlama noktasını değiştirerek bunu düzeltin."
 
@@ -285,7 +283,7 @@ msgstr "Nasıl kullanılacağı:"
 #. Description
 #: ../partman-target.templates:12001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Çakışan dosyalar kaldırılamadı"
 
 #. Type: error
 #. Description
@@ -294,20 +292,20 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Yükleyicinin, kurulum klasöründeki işletim sistemi dosyalarını kaldırması "
+"gerekli, fakat bu yapılamadı. Kurulum devam edemeyecek."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:13001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Çakışan işletim sistemi dosyaları kaldırılıyor..."
 
 #. Type: boolean
 #. Description
 #: ../partman-target.templates:14001
-#, fuzzy
-#| msgid "Do you want to resume partitioning?"
 msgid "Do you want to return to the partitioner?"
-msgstr "Bölümlemeye devam etmek istiyor musunuz?"
+msgstr "Bölücüye geri dönmek istiyor musun?"
 
 #. Type: boolean
 #. Description
@@ -318,6 +316,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Disk bölümü ${PARTITION} üzerinde ayrılan ${MOUNTPOINT} dosya sistemi "
+"biçimlendirme için işaretlenmemiş bulunmaktadır.  Hali hazırda herhangi bir "
+"bağlantı noktası altında tanılmlı olarak bulunan sistem dosyalarını içeren "
+"dizinler (/etc, /lib, /usr, /var, ...) kurulum sürecinde silineceklerdir."
 
 #. Type: boolean
 #. Description
@@ -325,3 +327,4 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Kurulumu yapmadan önce bütün önemli verilerinizi yedeklediğinizden emin olun."

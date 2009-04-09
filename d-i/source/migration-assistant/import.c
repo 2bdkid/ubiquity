@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
 		    target = gaim_import_yahoo;
 		else if(strcmp(optarg,"aimtriton") == 0)
 		    target = gaim_import_aimtriton;
-		else if(strcmp(optarg,"gaim") == 0)
+		else if(strcmp(optarg,"pidgin") == 0)
 		    target = gaim_import_gaim;
 		else if(strcmp(optarg,"firefox") == 0)
 		    target = firefox_import_firefox;
