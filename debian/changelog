@@ -1,3 +1,17 @@
+ubiquity (1.12.8) jaunty; urgency=low
+
+  [ Roman Shtylman ]
+  * KDE frontend:
+    - Fix display of automatic partitioning choices (LP: #358519).
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Fix window icon; gtk.window_set_default_icon_from_file seems to work
+      better if it's called before the window is created (LP: #358961).
+  * Update translations from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 12 Apr 2009 23:59:59 +0100
+
 ubiquity (1.12.7) jaunty; urgency=low
 
   [ Evan Dandrea ]
