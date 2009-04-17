@@ -40,7 +40,7 @@ if [ "$resize_range_failed" ] || [ -z "$maxsize" ]; then
 fi
 
 # Limit to sizes that will allow enough room for the installation.
-maxsize="$(expr "$maxsize" - \( 2 \* 1024 + 210 \) \* 1024 \* 1024)"
+maxsize="$(expr "$maxsize" - \( 2 \* 1024 + 510 \) \* 1024 \* 1024)"
 if ! longint_le $minsize $maxsize; then
 	db_input critical partman-partitioning/impossible_resize || true
 	if db_go; then
