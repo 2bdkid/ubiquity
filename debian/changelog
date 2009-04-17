@@ -1,3 +1,62 @@
+ubiquity (1.12.10) jaunty; urgency=low
+
+  [ Evan Dandrea ]
+  * Fix a crash when in OEM mode.  Child widgets are members of the
+    self.userinterface list (LP: #361668).
+  * Add support for displaying the "Use the largest continuous free space"
+    option in the partition bars.  Previously ubiquity would create a single
+    Ubuntu partition that filled the entire drive when this option was
+    selected (LP: #289663).
+  * Pack the SegmentedBar widgets in GtkFrames rather than GtkEventBoxes
+    to work around repainting issues (LP: #362334).
+  * Automatic update of included source packages: flash-kernel
+    2.13ubuntu7, user-setup 1.23ubuntu20.
+
+  [ Colin Watson ]
+  * Fix stripping of '=dev=' from device names when creating partition bars
+    to avoid reducing e.g. '=dev=vda' to 'a' (LP: #362466).
+  * KDE frontend:
+    - Start the resize slider at the maximum possible size for the partition
+      being resized; this is in line with the GTK frontend, and fixes the
+      situation where the previous default (half-way between the minimum
+      size and the current size) is out of range.
+    - Use a better colour to represent the results of automatic partitioning
+      (LP: #348461).
+  * Preseed tzsetup/selected up-front rather than filtering it and then
+    preseeding it; filtering it causes the backup state to be reset, which
+    causes an infinite loop when backing up from the timezone page when the
+    default country only has one timezone (LP: #361674).
+  * Preseed passwd/auto-login-backup=oem in OEM mode, so that the original
+    configuration files are available for restoration (LP: #361272).
+  * Add a little extra state machine debugging to the partman component.
+  * If an error/question dialog is displayed while changing steps is
+    disabled, we currently need to re-enable changing steps in order to get
+    a normal cursor, but that also enables the Back/Forward buttons and
+    allows people to violate assertions by being too quick (e.g. selecting
+    an autopartitioning choice while the installer is still busy analysing
+    the possible choices). We should clean this up properly later, but for
+    now just restore the allowed-change-step state when the dialog is
+    finished.
+  * Fix preseeding of the autopartitioning question to work in automatic
+    mode: it needs to be preseeded as unseen, otherwise going back from a
+    confirmation question doesn't work (LP: #361828). Remove an old code
+    path that would have been very complicated to fix for this and is
+    guaranteed to never be used nowadays.
+  * Update translations from Launchpad.
+
+  [ Jonathan Riddell ]
+  * KDE frontend:
+    - port reboot code to KDE 4, (LP: #360838)
+
+  [ Mario Limonciello ]
+  * Mythbuntu Frontend:
+    - Don't launch GUI applications from within the chroot as this causes 
+      problems when libGL.so.1 and friends are diverted.  Instead bind 
+      mount the necessary files to launch them outside the chroot.
+      (LP: #362419)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 17 Apr 2009 10:07:14 +0100
+
 ubiquity (1.12.9) jaunty; urgency=low
 
   * Update timezone map images.  Slight changes to the color and size of the

@@ -1,3 +1,20 @@
+user-setup (1.23ubuntu20) jaunty; urgency=low
+
+  * Add preseedable passwd/auto-login-backup question; if set (e.g. to
+    "oem") and passwd/auto-login=true, this backs up the previous contents
+    of the configuration files (e.g. to /etc/kde4/kdm/kdmrc.oem). This can
+    be used by oem-config to recover the old contents of the configuration
+    files later (LP: #361272).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 16 Apr 2009 14:28:56 +0100
+
+user-setup (1.23ubuntu19) jaunty; urgency=low
+
+  * Install ecryptfs-utils if it's already in use by users on an existing
+    /home (LP: #361627).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 15 Apr 2009 12:29:32 +0100
+
 user-setup (1.23ubuntu18) jaunty; urgency=low
 
   * Update Ubuntu-specific strings from Launchpad.

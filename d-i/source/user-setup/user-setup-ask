@@ -245,8 +245,15 @@ while :; do
 		fi
 		;;
 	    9)
-		db_get user-setup/encrypt-home
-		if [ "$RET" = true ]; then
+		ecryptfs_in_use=
+		for homedir in "$ROOT/home"/*; do
+			if [ -d "$homedir/.ecryptfs" ]; then
+				ecryptfs_in_use=1
+				break
+			fi
+		done
+		if [ "$ecryptfs_in_use" ] || \
+		   (db_get user-setup/encrypt-home && [ "$RET" = true ]); then
 			apt-install ecryptfs-utils 2>/dev/null
 		fi
 		;;

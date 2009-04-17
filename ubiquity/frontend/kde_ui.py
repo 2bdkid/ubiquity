@@ -439,8 +439,8 @@ class Wizard(BaseFrontend):
             else:
                 self.userinterface.hostname.setText('oem-desktop')
             self.hostname_edited = True
-            self.login_pass.hide()
-            self.login_auto.hide()
+            self.userinterface.login_pass.hide()
+            self.userinterface.login_auto.hide()
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-kde')
         else:
@@ -766,11 +766,10 @@ class Wizard(BaseFrontend):
         """Callback for main program to actually reboot the machine."""
 
         if 'DESKTOP_SESSION' in os.environ:
-            print "FIXME, port logout to KDE 4"
-            #execute('dcop', 'ksmserver', 'ksmserver', 'logout',
-            #        # ShutdownConfirmNo, ShutdownTypeReboot,
-            #        # ShutdownModeForceNow
-            #        '0', '1', '2')
+            execute('qdbus', 'org.kde.ksmserver', '/KSMServer', 'org.kde.KSMServerInterface.logout',
+                    # ShutdownConfirmNo, ShutdownTypeReboot,
+                    # ShutdownModeForceNow
+                    '0', '1', '2')
         else:
             execute('reboot')
 
@@ -1206,9 +1205,11 @@ class Wizard(BaseFrontend):
         self.disk_layout = layout
 
     def set_autopartition_choices (self, choices, extra_options,
-                                   resize_choice, manual_choice):
+                                   resize_choice, manual_choice,
+                                   biggest_free_choice):
         BaseFrontend.set_autopartition_choices(self, choices, extra_options,
-                                               resize_choice, manual_choice)
+                                               resize_choice, manual_choice,
+                                               biggest_free_choice)
 
         children = self.userinterface.autopartition_frame.children()
         for child in children:
@@ -1264,7 +1265,7 @@ class Wizard(BaseFrontend):
             self.autopartition_buttongroup.addButton(button, idCounter)
             id = self.autopartition_buttongroup.id(button)
 
-            #Qt changes the string by adding accelarators,
+            #Qt changes the string by adding accelerators,
             #so keep pristine string here as is returned later to partman
             self.autopartition_buttongroup_texts[id] = choice
             if firstbutton is None:
@@ -1285,40 +1286,81 @@ class Wizard(BaseFrontend):
             frame = None
 
             # if we have more information about the choice
-            if choice in extra_options:  
+            if choice in extra_options:
                 # label for the before device
                 dev = None
                 
                 frame = QFrame(self.userinterface.autopartition_frame)
                 frame.setEnabled(False)
                 
-                #indextation for the extra widgets
+                #indentation for the extra widgets
                 indent_hbox = QHBoxLayout()
                 self.autopartition_vbox.addLayout(indent_hbox)
                 indent_hbox.addSpacing(10)
                 indent_hbox.addWidget(frame)
                 
-                if choice == resize_choice:
-                    # information about what can be resized
-                    extra = extra_options[choice]
-                    
-                    for d in self.disk_layout:
-                        if "%s" % d.strip('=dev=') in extra[3]:
-                            dev = d
+                before_label = self.get_string('ubiquity/text/partition_layout_before')
+                after_label = self.get_string('ubiquity/text/partition_layout_after')
+                if choice == biggest_free_choice:
+                    biggest_free_id = extra_options[choice]
+                    dev = None
+                    for disk in disks:
+                        for p in disks[disk]:
+                            if p[1] == biggest_free_id:
+                                dev = disk
+                                break
+                        if dev:
                             break
-                    
-                    min_size, max_size, orig_size, resize_path = extra_options[choice]
-                        
-                    #TODO use find_in_os_proper to give nice name
                     if dev:
-                        before_frame = QGroupBox("Before Resize:", bar_frame)
+                        before_frame = QGroupBox(before_label, bar_frame)
                         before_frame.setLayout(QVBoxLayout())
                         layout.addWidget(before_frame)
                         
                         before_bar = PartitionsBar(before_frame)
                         before_frame.layout().addWidget(before_bar)
                         
-                        after_frame = QGroupBox("After Resize:", bar_frame)
+                        after_frame = QGroupBox(after_label, bar_frame)
+                        after_frame.setLayout(QVBoxLayout())
+                        layout.addWidget(after_frame)
+                        
+                        after_bar = PartitionsBar(after_frame)
+                        after_frame.layout().addWidget(after_bar)
+                        
+                        for p in disks[dev]:
+                            before_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
+                            if p[1] == biggest_free_id:
+                                after_bar.addPartition('', int(p[2]), int(p[0]), 'auto', get_release_name())
+                            else:
+                                after_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
+                           
+                        before_frame.setVisible(True)
+                        after_frame.setVisible(True)
+                elif choice == resize_choice:
+                    # information about what can be resized
+                    extra = extra_options[choice]
+                    for d in self.disk_layout:
+                        disk = d
+                        if disk.startswith('=dev='):
+                            disk = disk[5:]
+                        if "%s" % disk in extra[3]:
+                            dev = d
+                            break
+
+                    min_size, max_size, orig_size, resize_path = extra_options[choice]
+                    
+                    #TODO use find_in_os_prober to give nice name
+                    if dev:
+                        # TODO evand 2009-04-16: i18n.
+                        before_label = "Before Resize:"
+                        after_label = "After Resize:"
+                        before_frame = QGroupBox(before_label, bar_frame)
+                        before_frame.setLayout(QVBoxLayout())
+                        layout.addWidget(before_frame)
+                        
+                        before_bar = PartitionsBar(before_frame)
+                        before_frame.layout().addWidget(before_bar)
+                        
+                        after_frame = QGroupBox(after_label, bar_frame)
                         after_frame.setLayout(QVBoxLayout())
                         layout.addWidget(after_frame)
                         
@@ -1330,7 +1372,7 @@ class Wizard(BaseFrontend):
                             after_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
                         
                         after_bar.setResizePartition(resize_path, 
-                            min_size, max_size, orig_size, 'Kubuntu')     
+                            min_size, max_size, orig_size, get_release_name())
                            
                         before_frame.setVisible(True)
                         after_frame.setVisible(True)
@@ -1351,7 +1393,7 @@ class Wizard(BaseFrontend):
                     extraIdCounter = 0
                     
                     for extra in extra_options[choice]:
-                        #each extra choice needs to toogle a change in the before bar
+                        #each extra choice needs to toggle a change in the before bar
                         #extra is just a string with a general description
                         #each extra choice needs to be a before/after bar option
                         if extra == '':
@@ -1363,20 +1405,23 @@ class Wizard(BaseFrontend):
                         
                         dev = None
                         for d in self.disk_layout:
-                            if "(%s)" % d.strip('=dev=') in extra_button.text():
+                            disk = d
+                            if disk.startswith('=dev='):
+                                disk = disk[5:]
+                            if "(%s)" % disk in extra_button.text():
                                 dev = d
                                 break
                                 
-                        #add the bars if we founs the device
+                        #add the bars if we found the device
                         if dev:
-                            before_frame = QGroupBox("Before Install:", bar_frame)
+                            before_frame = QGroupBox(before_label, bar_frame)
                             before_frame.setLayout(QVBoxLayout())
                             layout.addWidget(before_frame)
                             
                             before_bar = PartitionsBar(before_frame)
                             before_frame.layout().addWidget(before_bar)
                             
-                            after_frame = QGroupBox("After Install:", bar_frame)
+                            after_frame = QGroupBox(after_label, bar_frame)
                             after_frame.setLayout(QVBoxLayout())
                             layout.addWidget(after_frame)
                             
@@ -1386,10 +1431,11 @@ class Wizard(BaseFrontend):
                             for p in disks[dev]:
                                 before_bar.addPartition(p[6], int(p[2]), p[0], p[4], p[5])
                                 
+                            release_name = get_release_name()
                             if before_bar.diskSize > 0:
-                                after_bar.addPartition('', before_bar.diskSize, '', '', 'Kubuntu')
+                                after_bar.addPartition('', before_bar.diskSize, '', 'auto', release_name)
                             else:
-                                after_bar.addPartition('', 1, '', '', 'Kubuntu')
+                                after_bar.addPartition('', 1, '', 'auto', release_name)
                                 
                             before_frame.setVisible(False)
                             after_frame.setVisible(False)
@@ -2071,9 +2117,14 @@ class Wizard(BaseFrontend):
 
     def error_dialog (self, title, msg, fatal=True):
         self.run_automation_error_cmd()
+        # TODO cjwatson 2009-04-16: We need to call allow_change_step here
+        # to get a normal cursor, but that also enables the Back/Forward
+        # buttons. Cursor handling should be controllable independently.
+        saved_allowed_change_step = self.allowed_change_step
         self.allow_change_step(True)
         # TODO: cancel button as well if capb backup
         QMessageBox.warning(self.userinterface, title, msg, QMessageBox.Ok)
+        self.allow_change_step(saved_allowed_change_step)
         if fatal:
             self.return_to_partitioning()
 
@@ -2082,6 +2133,10 @@ class Wizard(BaseFrontend):
         # I doubt we'll ever need more than three buttons.
         assert len(options) <= 3, options
 
+        # TODO cjwatson 2009-04-16: We need to call allow_change_step here
+        # to get a normal cursor, but that also enables the Back/Forward
+        # buttons. Cursor handling should be controllable independently.
+        saved_allowed_change_step = self.allowed_change_step
         self.allow_change_step(True)
         buttons = {}
         messageBox = QMessageBox(QMessageBox.Question, title, msg, QMessageBox.NoButton, self.userinterface)
@@ -2101,6 +2156,7 @@ class Wizard(BaseFrontend):
             buttons[button] = option
 
         response = messageBox.exec_()
+        self.allow_change_step(saved_allowed_change_step)
 
         if response < 0:
             return None

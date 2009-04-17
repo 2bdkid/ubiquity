@@ -75,7 +75,9 @@ case "$machine" in
 		fi
 	;;
 	"Freescale MX51 Babbage Board")
-		in-target update-initramfs -u || true
+		if ! anna-install redboot-tools-udeb; then
+			error "anna-install redboot-tools-udeb failed"
+		fi
 		if ! apt-install redboot-tools; then
 			error "apt-install redboot-tools failed"
 		fi
@@ -120,6 +122,7 @@ case "$machine" in
 		cmdline="\"root=UUID=$vol_id ro quiet\""
 		script="$load_initrd\\$load_kernel\\exec -r 0x1000000 -s 0x00940000 -c $cmdline\\"
 		fconfig -w -s -d "$fis_dev" -o $ofst -n boot_script_data -x "$script"
+		in-target update-initramfs -u || true
 	;;
 	"GLAN Tank")
 		in-target update-initramfs -u || true

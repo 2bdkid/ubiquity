@@ -28,6 +28,11 @@ Type: boolean
 Default: false
 Description: for internal use only
 
+# Back up the pre-auto-login configuration files?
+Template: passwd/auto-login-backup
+Type: string
+Description: for internal use only
+
 # Allow preseeding whether to permit a blank password for created non-root user
 Template: user-setup/allow-password-empty
 Type: boolean
