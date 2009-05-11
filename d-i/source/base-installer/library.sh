@@ -141,8 +141,7 @@ install_filesystems () {
 		fi
 
 		if type dmraid >/dev/null 2>&1; then
-			if dmraid -s -c >/dev/null 2>&1 && \
-			   [ "$(dmraid -s -c | grep -iv "No RAID disks")" ]; then
+			if dmraid -s -c >/dev/null 2>&1; then
 				apt-install dmraid
 			fi
 		fi
@@ -329,7 +328,7 @@ kernel_update_list () {
 	(set +e;
 	# Hack to get the metapackages in the right order; should be
 	# replaced by something better at some point.
-	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|386\|686\|k7\|generic\|server\|virtual\|rt\|xen\|power\|cell\|itanium\|mckinley\|sparc\|hppa\|lpia\)';
+	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|386\|686\|k7\|generic\|server\|virtual\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\|lpia\)';
 	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-2\.';
 	chroot /target apt-cache search ^linux-image-2. | sort -r) | \
 	cut -d" " -f1 | uniq > "$KERNEL_LIST.unfiltered"
@@ -578,7 +577,7 @@ EOF
 		# Select and set driver inclusion policy for initramfs-tools
 		if [ "$rd_generator" = initramfs-tools ]; then
 			if db_get base-installer/initramfs-tools/driver-policy && \
-			   [ "$RET" = "" ]; then
+			   [ -z "$RET" ]; then
 				# Get default for architecture
 				db_get base-installer/kernel/linux/initramfs-tools/driver-policy
 				db_set base-installer/initramfs-tools/driver-policy "$RET"

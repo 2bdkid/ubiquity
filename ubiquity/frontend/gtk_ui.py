@@ -540,6 +540,9 @@ class Wizard(BaseFrontend):
         sw.show_all()
         self.before_bar_eb.add(sw)
 
+        self.partition_create_mount_combo.child.set_activates_default(True)
+        self.partition_edit_mount_combo.child.set_activates_default(True)
+
         if 'UBIQUITY_DEBUG' in os.environ:
             self.password_debug_warning_label.show()
 
@@ -673,9 +676,6 @@ class Wizard(BaseFrontend):
 
         for widget in self.all_widgets:
             self.translate_widget(widget, self.locale)
-
-        self.partition_button_undo.set_label(
-            self.get_string('partman/text/undo_everything'))
 
     def translate_widget(self, widget, lang):
         if isinstance(widget, gtk.Button) and widget.get_use_stock():
@@ -1027,7 +1027,7 @@ class Wizard(BaseFrontend):
             else:
                 hostname_suffix = '-desktop'
             self.hostname.handler_block(self.hostname_changed_id)
-            self.hostname.set_text(widget.get_text() + hostname_suffix)
+            self.hostname.set_text(widget.get_text().strip() + hostname_suffix)
             self.hostname.handler_unblock(self.hostname_changed_id)
 
         complete = True
@@ -1286,11 +1286,11 @@ class Wizard(BaseFrontend):
 
         if widget.get_active():
             self.action_bar.remove_all()
-            self.action_bar.resize = -1
             if choice == self.manual_choice:
                 self.action_bar.add_segment_rgb(self.manual_choice, -1, \
                     self.release_color)
             elif choice == self.resize_choice:
+                self.action_bar.set_device(self.resize_path)
                 for k in self.disk_layout:
                     for p in self.disk_layout[k]:
                         if self.resize_path == p[0]:
@@ -1299,6 +1299,7 @@ class Wizard(BaseFrontend):
                             self.create_bar(k, type=choice)
                             return
             elif choice == self.biggest_free_choice:
+                self.action_bar.set_device(None)
                 for k in self.disk_layout:
                     for p in self.disk_layout[k]:
                         if self.biggest_free_id == p[2]:
@@ -1507,7 +1508,10 @@ class Wizard(BaseFrontend):
 
     def get_keyboard (self):
         if self.suggested_keymap.get_active():
-            return unicode(self.default_keyboard_layout)
+            if self.default_keyboard_layout is not None:
+                return None
+            else:
+                return unicode(self.default_keyboard_layout)
         selection = self.keyboardlayoutview.get_selection()
         (model, iterator) = selection.get_selected()
         if iterator is None:
@@ -1553,7 +1557,10 @@ class Wizard(BaseFrontend):
 
     def get_keyboard_variant (self):
         if self.suggested_keymap.get_active():
-            return unicode(self.default_keyboard_variant)
+            if self.default_keyboard_variant is None:
+                return None
+            else:
+                return unicode(self.default_keyboard_variant)
         selection = self.keyboardvariantview.get_selection()
         (model, iterator) = selection.get_selected()
         if iterator is None:
@@ -1604,7 +1611,8 @@ class Wizard(BaseFrontend):
             if type == self.biggest_free_choice and part[2] == self.biggest_free_id:
                 b.add_segment_rgb(get_release_name(), size, self.release_color)
             elif dev == 'free':
-                b.add_segment_rgb("Free Space", size, b.remainder_color)
+                s = self.get_string('ubiquity/text/partition_free_space')
+                b.add_segment_rgb(s, size, b.remainder_color)
             else:
                 if dev in self.dev_colors:
                     c = self.dev_colors[dev]
@@ -1656,7 +1664,6 @@ class Wizard(BaseFrontend):
             self.action_bar.set_part_size(self.resize_orig_size)
             self.action_bar.set_min(self.resize_min_size)
             self.action_bar.set_max(self.resize_max_size)
-            self.action_bar.set_device(self.resize_path)
         if biggest_free_choice in choices:
             self.biggest_free_id = extra_options[biggest_free_choice]
 
@@ -1706,6 +1713,7 @@ class Wizard(BaseFrontend):
                 self.autopartition_choices_vbox.pack_start(alignment,
                                                    expand=False, fill=False)
                 self.autopartition_extras[choice] = alignment
+                alignment.set_sensitive(False)
             button.connect('toggled', self.on_autopartition_toggled, extra_combo)
 
         if firstbutton is not None:
@@ -1883,7 +1891,7 @@ class Wizard(BaseFrontend):
         if partition_list_menu.get_children():
             partition_list_menu.append(gtk.SeparatorMenuItem())
         undo_item = gtk.MenuItem(
-            self.get_string('partman/text/undo_everything'))
+            self.get_string('partition_button_undo'))
         undo_item.connect('activate', self.on_partition_list_undo_activate)
         partition_list_menu.append(undo_item)
         partition_list_menu.show_all()
