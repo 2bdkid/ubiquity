@@ -14,7 +14,7 @@ convert_to_uuid() {
 			then
 				:
 			elif [ -b "$root" ]; then
-				uuid=$(/lib/udev/vol_id -u "$root" || true)
+				uuid=$(block-attr --uuid "$root" || true)
 				if [ -n "$uuid" ]; then
 					root="/dev/disk/by-uuid/$uuid"
 				fi

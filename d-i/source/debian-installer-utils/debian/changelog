@@ -1,3 +1,33 @@
+debian-installer-utils (1.68ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "usb-partition" type for detecting partitions on USB
+      drives; new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 12 May 2009 14:19:48 +0100
+
+debian-installer-utils (1.68) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Add 'dumb' terminfo file (used by s390; possibly useful for serial console).
+
+  [ Colin Watson ]
+  * vol_id is being merged into blkid upstream. So that we don't have to
+    keep tracking this kind of thing in several different udebs, add a
+    block-attr wrapper that tries both.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * Estonian (et.po) by Mattias Põldaru
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 12 May 2009 11:28:15 +0100
+
 debian-installer-utils (1.67ubuntu1) karmic; urgency=low
 
   [ Colin Watson ]

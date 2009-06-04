@@ -183,17 +183,6 @@ get_manual_hw_info() {
 	fi
 	get_rtc_info
 
-	# on some hppa systems, nic and scsi won't be found because they're
-	# not on a bus that udev understands ... 
-	if [ "`udpkg --print-architecture`" = hppa ]; then
-		echo "lasi_82596:LASI Ethernet"
-		register-module lasi_82596
-		echo "lasi700:LASI SCSI"
-		register-module -i lasi700
-		echo "zalon7xx:Zalon SCSI"
-		register-module -i zalon7xx
-	fi
-
 	case $SUBARCH in
 		powerpc/ps3)
 			echo "ps3rom:PS3 internal CD-ROM drive"
@@ -525,8 +514,8 @@ fi
 # Install udev into target
 apt-install udev || true
 
-# TODO: should this really be conditional on hotplug support?
-if [ -f /proc/sys/kernel/hotplug ]; then
+# Install usbutils
+if [ -d /sys/bus/usb ]; then
 	apt-install usbutils || true
 fi
 
@@ -564,7 +553,7 @@ fi
 # Install optimised libc based on CPU type
 case "$(udpkg --print-architecture)" in
     armel)
-	if grep -qw '^Features.* vfp' /proc/cpuinfo; then
+	if grep -q '^Features.* vfp\>' /proc/cpuinfo; then
 		apt-install libc6-vfp || true
 	fi
 	;;

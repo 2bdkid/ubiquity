@@ -1216,7 +1216,12 @@ exit 0"""
         langpacks = []
         try:
             langpack_db = self.db.get('pkgsel/language-packs')
-            langpacks = langpack_db.replace(',', '').split()
+            if langpack_db == 'ALL':
+                langpacks = subprocess.Popen(
+                    ['apt-cache', '-n', 'search', '^language-pack-[^-][^-]*$'],
+                    stdout=subprocess.PIPE).communicate()[0].split()
+            else:
+                langpacks = langpack_db.replace(',', '').split()
         except debconf.DebconfError:
             pass
         if not langpacks:
@@ -1377,7 +1382,7 @@ exit 0"""
             resume_uuid = None
             try:
                 resume_uuid = subprocess.Popen(
-                    ['vol_id', '-u', resume],
+                    ['block-attr', '--uuid', resume],
                     stdout=subprocess.PIPE).communicate()[0].rstrip('\n')
             except OSError:
                 pass
@@ -2126,7 +2131,7 @@ exit 0"""
                     if l[1].startswith('/cdrom') or l[1].startswith('/media/cdrom'):
                         try:
                             fstype = subprocess.Popen(
-                                ['vol_id', '--type', l[0]],
+                                ['block-attr', '--type', l[0]],
                                 stdout=subprocess.PIPE).communicate()[0].rstrip('\n')
                             if fstype != 'iso9660' and fstype != 'udf':
                                 continue

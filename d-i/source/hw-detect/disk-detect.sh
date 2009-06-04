@@ -175,8 +175,7 @@ if anna-install dmraid-udeb; then
 		module_probe dm-mod || true
 	fi
 
-	if dmraid -c -s >/dev/null 2>&1 && \
-	   [ "$(dmraid -c -s | tr A-Z a-z)" != "no raid disks" ]; then
+	if dmraid -c -s >/dev/null 2>&1; then
 		logger -t disk-detect "Serial ATA RAID disk(s) detected."
 		# Ask the user whether they want to activate dmraid devices.
 		db_input high disk-detect/activate_dmraid || true
@@ -188,10 +187,11 @@ if anna-install dmraid-udeb; then
 			mkdir -p /var/lib/disk-detect
 			touch /var/lib/disk-detect/activate_dmraid
 			logger -t disk-detect "Enabling dmraid support."
-			# Activate only those arrays which have all disks present.
+			# Activate only those arrays which have all disks
+			# present.
 			for dev in $(dmraid -r -c); do
 				[ -e "$dev" ] || continue
-				log-output -t disk-detect dmraid-activate $(basename $dev)
+				log-output -t disk-detect dmraid-activate "$(basename "$dev")"
 			done
 		fi
 	else

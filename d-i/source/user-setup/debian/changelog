@@ -1,3 +1,107 @@
+user-setup (1.26ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add the initial user to the adm, dip, lpadmin, and sambashare groups
+      too, and to the admin group if no root password is set. Do not add
+      them to the audio, video, floppy, dip, netdev, powerdev, or scanner
+      groups.
+    - Allow the admin group to gain root privileges using sudo.
+    - Default passwd/root-login to false.
+    - Create the spu group on powerpc/ps3 and powerpc/cell.
+    - Make is_system_user always return false if OVERRIDE_SYSTEM_USER is
+      set.
+    - Add preseedable passwd/auto-login question; if set to true, configure
+      gdm and kdm for automatic login. Add passwd/auto-login-backup question
+      which backs up the previous contents of the files as well.
+    - Ask whether the user wants to encrypt their home directory.
+    - If user-setup/allow-password-empty is preseeded to true, allow empty
+      passwords.
+    - Disable installation of pre-pkgsel.d/10kdesudo; it does nothing for
+      Ubuntu, and causes a confusing message that worries some people.
+    - Add weak password detection (purely length-based for now, matching
+      partman-crypto).
+    - Consider a password of '!' in shadow for root to be unset.
+  * Rearrange our templates file to put all Ubuntu-specific entries at the
+    end, to simplify future merges.
+  * Drop compatibility for passwd/allow-password-empty, as promised in the
+    changelog for 1.23ubuntu14.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 03 Jun 2009 15:19:28 +0100
+
+user-setup (1.26) unstable; urgency=low
+
+  [ Frans Pop ]
+  * user-setup-apply: remove unused variable OPTS.
+  * user-setup-apply: restore compatibility with Lenny version of passwd
+    (without PAM support).
+
+  [ Otavio Salvador ]
+  * user-setup-apply: use dpkg-query instead of dpkg -s to get the passwd
+    package version. Thanks to Adeodato Simó for the tip.
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 24 May 2009 15:07:22 +0200
+
+user-setup (1.25) unstable; urgency=low
+
+  * Brown paper bag release
+  * Do not use chpasswd when the password has been preseeded.
+    Thanks to Nicolas François for pointing this.
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 20 May 2009 19:31:55 +0200
+
+user-setup (1.24) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Be more careful about test arguments in the root_password function, in
+    case (for example) the encrypted password string is "!" (thanks, Uli
+    Heller; LP: #307443).
+
+  [ Joey Hess ]
+  * Add initial user to scanner group, (created by libsane).
+
+  [ Frans Pop ]
+  * Remove myself as uploader.
+
+  [ Luk Claes ]
+  * Add myself as uploader.
+  * Disable root account and activate sudo when there is no root passwd given.
+
+  [ Christian Perrier ]
+  * No longer use the "-m" switch of chpasswd. It uses PAM now and no
+    longer has this switch. The password will use settings from
+    libpam-runtime, so MD5 by default.
+    Closes: #529475
+  * Replace chpasswd by usermod to set pre-encrypted passwords.
+    Thanks to Jordi Pujol for the patch.
+    Closes: #528610
+  * Use 6 as debhelper compatibility level
+  * Bump Standards to 3.8.1 (checked, no change)
+  * Add lintian overrides
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Marcos Alvarez Costales
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * German (de.po) by Jens Seidel
+  * Esperanto (eo.po) by Felipe Castro
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Mattias Põldaru
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by marce villarino
+  * Hindi (hi.po) by Kumar Appaiah
+  * Italian (it.po) by Milo Casagrande
+  * Kazakh (kk.po) by daur88
+  * Malayalam (ml.po) by Praveen Arimbrathodiyil
+  * Marathi (mr.po) by Sampada
+  * Norwegian Bokmal (nb.po) by Hans Fredrik Nordhaug
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Tagalog (tl.po) by Eric Pareja
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 20 May 2009 09:40:54 +0200
+
 user-setup (1.23ubuntu20) jaunty; urgency=low
 
   * Add preseedable passwd/auto-login-backup question; if set (e.g. to

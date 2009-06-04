@@ -634,8 +634,8 @@ EOF
 		else
 			resume=
 		fi
-		if [ "$resume" ] && PATH="/lib/udev:$PATH" type vol_id >/dev/null 2>&1; then
-			resume_uuid="$(PATH="/lib/udev:$PATH" vol_id -u "$resume" || true)"
+		if [ "$resume" ]; then
+			resume_uuid="$(block-attr --uuid "$resume" || true)"
 			if [ "$resume_uuid" ]; then
 				resume="UUID=$resume_uuid"
 			fi
