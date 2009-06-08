@@ -853,11 +853,19 @@ make_active_partition () {
 			done
 		fi
 
-		if [ "$bootpart" ]; then
+		while [ "$bootpart" ]; do
 			echo -n "I: Setting partition $bootpart of $bootdisk to active..." >&2
-			sfdisk -A"$bootpart" "$bootdisk"
-			echo "done." >&2
-		fi
+			if sfdisk -A"$bootpart" "$bootdisk"; then
+				echo "done." >&2
+				break
+			elif [ "$bootpart" -lt 4 ]; then
+				echo "failed; trying next primary partition" >&2
+				bootpart="$(($bootpart + 1))"
+			else
+				echo "failed; run out of primary partitions to try. Hope your BIOS doesn't mind there being no active partition!" >&2
+				break
+			fi
+		done
 	fi
 }
 
