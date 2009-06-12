@@ -1,3 +1,12 @@
+grub-installer (1.37ubuntu3) karmic; urgency=low
+
+  * If using GRUB 2, don't try to edit menu.lst to change the timeout (LP:
+    #385995). We need to do something with the GRUB 2 timeout, but this is
+    blocked on settling on a way for grub-installer to adjust GRUB 2
+    configuration in general.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 12 Jun 2009 13:35:20 +0100
+
 grub-installer (1.37ubuntu2) karmic; urgency=low
 
   * If sfdisk fails to set the first primary partition we try as active, try
