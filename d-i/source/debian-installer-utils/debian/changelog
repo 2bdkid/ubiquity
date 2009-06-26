@@ -1,3 +1,24 @@
+debian-installer-utils (1.69ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "usb-partition" type for detecting partitions on USB
+      drives; new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Jun 2009 17:29:47 +0100
+
+debian-installer-utils (1.69) unstable; urgency=low
+
+  * block-attr: The 'type' builtin doesn't seem to handle variable
+    assignments in quite the way I'd expected; work around this by exporting
+    PATH as a separate command in a subshell.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 02 Jun 2009 13:02:50 +0100
+
 debian-installer-utils (1.68ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

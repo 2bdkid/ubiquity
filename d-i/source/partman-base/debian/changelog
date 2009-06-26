@@ -1,3 +1,48 @@
+partman-base (131ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use ext4 as the default filesystem for new partitions.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Jun 2009 19:54:16 +0100
+
+partman-base (131) unstable; urgency=low
+
+  * Adapt parted_server code to handle new GNU Parted swap filesystem
+    handling.
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 18 Jun 2009 10:18:28 -0300
+
+partman-base (130) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Don't disable /dev/ramzswap* swap devices (thanks, John
+      McCabe-Dansted; LP: #193552).
+
+  [ Christian Perrier ]
+  * Bump debhelper compatibility to 6
+  * Add myself to uploaders
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * Estonian (et.po) by Mattias Põldaru
+  * Italian (it.po) by Milo Casagrande
+  * Kazakh (kk.po) by Dauren Sarsenov
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 15 Jun 2009 23:02:10 +0200
+
 partman-base (129ubuntu8) karmic; urgency=low
 
   * Use ext4 as the default filesystem for new partitions.

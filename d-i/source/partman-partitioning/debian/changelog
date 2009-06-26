@@ -1,3 +1,63 @@
+partman-partitioning (68ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add ORISIZE, PATH, RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE
+      substitutions to partman-partitioning/new_size in support of
+      ubiquity's resize widget.
+    - When creating a new partition, default to logical if a primary
+      partition already exists.
+    - Add NTFS dependencies on lpia.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Jun 2009 22:06:35 +0100
+
+partman-partitioning (68) unstable; urgency=low
+
+  * Use cdebconf column alignment rather than stralign in toggle_biosgrub.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 25 Jun 2009 00:23:46 +0100
+
+partman-partitioning (67) unstable; urgency=low
+
+  * Remove dependency on partman-base; main-menu does not support circular
+    dependencies, and the versioned dependency is not all that critical
+    (thanks, Per Andersson).
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 18 Jun 2009 14:47:44 +0100
+
+partman-partitioning (66ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add ORISIZE, PATH, RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE
+      substitutions to partman-partitioning/new_size in support of
+      ubiquity's resize widget.
+    - When creating a new partition, default to logical if a primary
+      partition already exists.
+    - Add NTFS dependencies on lpia.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Jun 2009 15:36:01 +0100
+
+partman-partitioning (66) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - get_real_device: Add support for /dev/vd*, /dev/xvd*, /dev/cciss/*,
+      /dev/ida/*, and /dev/mmcblk* (LP: #282756).
+    - When resizing a non-virtual partition, update it after committing
+      changes, otherwise we might miss a change of filesystem that was just
+      committed (LP: #333356).
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * Estonian (et.po) by Mattias Põldaru
+  * Italian (it.po) by Milo Casagrande
+  * Kazakh (kk.po) by Dauren Sarsenov
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 13 Jun 2009 09:05:52 +0200
+
 partman-partitioning (65ubuntu2) jaunty; urgency=low
 
   * When resizing a non-virtual partition, update it after committing

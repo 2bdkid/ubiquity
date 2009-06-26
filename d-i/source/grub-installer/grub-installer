@@ -260,11 +260,11 @@ update_grub () {
 }
 
 findfs () {
-	mount | grep "on $ROOT${1%/} " | cut -d' ' -f1
+	mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f1
 }
 
 findfstype () {
-	mount | grep "on $ROOT${1%/} " | cut -d' ' -f5
+	mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f5
 }
 
 is_removable () {
@@ -352,7 +352,7 @@ frdev=""
 if [ "$found" = "0" ] && type dmraid >/dev/null 2>&1 && \
    dmraid -s -c >/dev/null 2>&1 && \
    db_get disk-detect/activate_dmraid && [ "$RET" = true ]; then
-	for frdisk in $(dmraid -s -c | grep -iv "No RAID disks"); do
+	for frdisk in $(dmraid -s -c); do
 		if echo "$disc_offered" | grep -q "/$frdisk[0-9]\+"; then
 			frdev=/dev/mapper/$frdisk
 			frbootpart=${disc_offered#$frdev}
@@ -422,16 +422,13 @@ case $ARCH in
 	grub_package="grub"
 	;;
     powerpc/*)
-	grub_package="grub-of"
+	grub_package="grub-ieee1275"
 	;;
 esac
 
 case "$bootfstype:$bootfslabel:$grub_package" in
     *:loop:*)
 	# Serial ATA RAID partition, currently only grub is supported
-	: ;;
-    *:gpt:*)
-	# Ubuntu's grub package supports GPT, although Debian's doesn't.
 	: ;;
     *:*:grub)
 	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
@@ -500,6 +497,8 @@ if ! apt-install $grub_package ; then
 	fi
 	exit 1
 fi
+
+grub_debian_version="$($chroot $ROOT dpkg-query -W -f '${Version}' $grub_package)"
 
 if [ "$frtype" = multipath ]; then
 	$chroot $ROOT umount /proc
@@ -1042,6 +1041,12 @@ fi
 tmpfile=/tmp/menu.lst.extras
 OLDIFS="$IFS"
 IFS="$newline"
+
+no_floppy=""
+if $chroot $ROOT dpkg --compare-versions $grub_debian_version ge 1.96+20090609-1 ; then
+	no_floppy="--no-floppy"
+fi
+
 for os in $(cat /tmp/os-probed); do
 	IFS="$OLDIFS"
 	title=$(echo "$os" | cut -d: -f2)

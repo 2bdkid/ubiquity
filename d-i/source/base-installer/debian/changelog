@@ -1,3 +1,56 @@
+base-installer (1.101ubuntu2) karmic; urgency=low
+
+  * Adjust for new PAE kernel package naming on i386.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Jun 2009 16:25:00 +0100
+
+base-installer (1.101ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default, unless
+      apt-setup/restricted is preseeded to false.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite;
+      also -proposed if apt-setup/proposed is true.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Install busybox-initramfs rather than busybox.
+    - Revert Joey's patch to call base-installer.d hooks after running
+      debootstrap, which broke console-setup's expectation of being able to
+      insert its configuration file into /target before console-setup is
+      installed by debootstrap.
+    - Add armel/imx51 subarchitecture.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Jun 2009 17:25:16 +0100
+
+base-installer (1.101) unstable; urgency=low
+
+  * Fix reversed script and mirror arguments to run-debootstrap (thanks,
+    Peter Miller; LP: #377814). This was apparently broken ever since the
+    facility to use a specific script was first introduced in base-installer
+    1.89!
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 10 Jun 2009 01:08:10 +0100
+
+base-installer (1.100) unstable; urgency=low
+
+  [ Frans Pop ]
+  * Drop support for the ppc64 architecture.
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Silently skip non-existent devices in /proc/swaps (LP: #290947).
+    - Write out the resume partition as a UUID if possible.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * Estonian (et.po) by Mattias Põldaru
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 02 Jun 2009 13:56:52 +0100
+
 base-installer (1.99ubuntu2) karmic; urgency=low
 
   * Use block-attr from di-utils 1.68.

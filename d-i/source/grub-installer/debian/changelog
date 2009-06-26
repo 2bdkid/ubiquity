@@ -1,3 +1,75 @@
+grub-installer (1.38ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed (only for GRUB Legacy right now).
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for Wubi. Setting this disables normal grub
+      installation, but still generates a device.map; it also hides the
+      menu.
+    - Handle cases where /boot is bind-mounted.
+    - Add support for writing an MBR on each disk in an mdadm-managed RAID
+      providing /boot.
+    - Properly make use of output from os-prober to configure the booting of
+      other operating systems on dmraid arrays. Attempt to guess where in
+      the device map the array belongs, by substituting the first drive in
+      the dmraid array for the dmraid array device node itself, and removing
+      any reference to other member disks of the array.
+    - Add support for lpia.
+    - Set a sensible default boot device when /cdrom is not iso9660, as this
+      is probably a USB install and (hd0) does not make sense when
+      installing from a removable disk.
+    - Use rootnoverify rather than root when chain-loading Microsoft
+      operating systems.
+  * Go back to using update-grub -y for GRUB Legacy for now; our grub
+    package is a bit old and still requires this.
+  * Default to grub2 for GPT systems.
+  * Allow grub/grub2 choice for ext4, though still default to grub2.
+  * Drop code to handle error messages in dmraid's output, which is no
+    longer needed.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 16 Jun 2009 02:46:23 +0100
+
+grub-installer (1.38) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Make findfs use the last of any mounts found, in case there's more than
+    one due to pilot error in the partitioner (LP: #289101).
+  * Use grub-ieee1275 on powerpc, not grub-of which no longer exists.
+
+  [ Max Vozeler ]
+  * Use grub2 when ext4 is chosen (closes: #529363).
+
+  [ Felix Zielcke ]
+  * Change the debhelper compat level to 7 and bump the build
+    dependency.
+  * Replace deprecated `dh_clean -k' with `dh_prep'.
+  * Remove the lintian overrides, they're no longer needed.
+  * Use UUIDs in the grub2 generated menuentrys. (Closes: #473401)
+  * Add drivemap in the grub2 generated menuentry for DOS/Windows in
+    case a recent grub2 gets installed.
+  * Don't pass -y to update-grub. grub-legacy in lenny just prints out a
+    warning.
+
+  [ Otavio Salvador ]
+  * Add Felix Zielcke in uploads field and set DM-Upload-allowed to
+    allow him to upload.
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 12 Jun 2009 16:04:27 -0300
+
 grub-installer (1.37ubuntu3) karmic; urgency=low
 
   * If using GRUB 2, don't try to edit menu.lst to change the timeout (LP:

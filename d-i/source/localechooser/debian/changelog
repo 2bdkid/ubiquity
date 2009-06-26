@@ -1,3 +1,53 @@
+localechooser (2.12ubuntu2) karmic; urgency=low
+
+  * mktemplates.shortlist sometimes seems to hang in "sed -e 's/,/\\\\,/'"
+    when running in a UTF-8 locale. Work around this by forcing LC_ALL=C,
+    which we need to be able to operate in anyway for buildds.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Jun 2009 20:20:52 +0100
+
+localechooser (2.12ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add a localechooser-data package containing lists useful for packages
+      that create automatic installation scripts.
+    - Always support English, unless preseeded otherwise.
+    - Drop fallbacks for Norwegian Bokmål and Nynorsk.
+    - Simplify use of locale-gen using the new command-line argument
+      facility in Ubuntu's locales package.
+    - Add encoding field to languagelist file and use the full SUPPORTED
+      file rather than SUPPORTED-short.
+    - If the language question was already marked as seen and the answer
+      didn't change, then don't recalculate the locale.
+    - If OVERRIDE_SHOW_ALL_LANGUAGES is set in the environment, display all
+      languages regardless of frontend.
+    - Allow preseeding of debian-installer/language.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Jun 2009 01:09:45 +0100
+
+localechooser (2.12) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Add commented entry for Kirghiz in languagelist
+  * Re-activate Estonian
+  * Switch to console-setup for all languages previously
+    using kbd
+
+  [ Frans Pop ]
+  * Drop support for the ppc64 architecture.
+
+  [ Colin Watson ]
+  * Explicitly use UTF-8 locales for Asturian and Breton.
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Marcos Alvarez Costales
+  * Bengali (bn.po) by Md. Rezwan Shahid
+  * Estonian (et.po) by Mattias Põldaru
+  * Italian (it.po) by Milo Casagrande
+  * Slovak (sk.po) by Ivan Masár
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 13 Jun 2009 12:06:09 +0200
+
 localechooser (2.11ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
