@@ -1,3 +1,30 @@
+debian-installer-utils (1.70ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "usb-partition" type for detecting partitions on USB
+      drives; new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 07 Jul 2009 12:52:08 +0100
+
+debian-installer-utils (1.70) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * di-utils-exit-installer: change template description to make it generic.
+
+  [ Colin Watson ]
+  * Change in-target and apt-install to pass through non-zero exit codes
+    unmolested rather than collapsing them to 1. In particular, this allows
+    cancellation exit codes from debconf-apt-progress to be detected by
+    apt-setup (see
+    http://lists.debian.org/debian-boot/2008/01/msg00094.html).
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 03 Jul 2009 14:26:17 +0100
+
 debian-installer-utils (1.69ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

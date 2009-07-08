@@ -172,6 +172,16 @@ _Description: Encrypt your home directory?
  The system will seamlessly mount your encrypted home directory each time
  you login and automatically unmount when you log out of all active sessions.
 
+Template: user-setup/encrypt-home-failed
+Type: error
+# :sl2:
+_Description: Home directory encryption failed
+ The installer failed to set up home directory encryption. Your home
+ directory will be unencrypted after installation. This is probably a bug,
+ and you may wish to investigate and reinstall.
+ .
+ Check /var/log/syslog or see virtual console 4 for the details.
+
 # Allow preseeding whether to automatically log in the first created user
 Template: passwd/auto-login
 Type: boolean

@@ -563,17 +563,17 @@ class Install:
         if (os.path.exists(manifest_desktop) and
             os.path.exists(manifest)):
             desktop_packages = set()
-            manifest = open(manifest_desktop)
-            for line in manifest:
+            manifest_file = open(manifest_desktop)
+            for line in manifest_file:
                 if line.strip() != '' and not line.startswith('#'):
                     desktop_packages.add(line.split()[0])
-            manifest.close()
+            manifest_file.close()
             live_packages = set()
-            manifest = open(manifest)
-            for line in manifest:
+            manifest_file = open(manifest)
+            for line in manifest_file:
                 if line.strip() != '' and not line.startswith('#'):
                     live_packages.add(line.split()[0])
-            manifest.close()
+            manifest_file.close()
             difference = live_packages - desktop_packages
         else:
             difference = set()
@@ -1042,7 +1042,10 @@ exit 0"""
         self.chrex('umount', '/proc')
 
         start_stop_daemon = os.path.join(self.target, 'sbin/start-stop-daemon')
-        os.rename('%s.REAL' % start_stop_daemon, start_stop_daemon)
+        if os.path.exists('%s.REAL' % start_stop_daemon):
+            os.rename('%s.REAL' % start_stop_daemon, start_stop_daemon)
+        else:
+            os.unlink(start_stop_daemon)
 
         policy_rc_d = os.path.join(self.target, 'usr/sbin/policy-rc.d')
         os.unlink(policy_rc_d)
@@ -1310,12 +1313,13 @@ exit 0"""
         so user-setup-apply would be too late."""
 
         home = os.path.join(self.target, 'home')
-        for homedir in os.listdir(home):
-            if os.path.isdir(os.path.join(home, homedir, '.ecryptfs')):
-                syslog.syslog('ecryptfs already in use in %s' %
-                              os.path.join(home, homedir))
-                self.record_installed(['ecryptfs-utils'])
-                break
+        if os.path.isdir(home):
+            for homedir in os.listdir(home):
+                if os.path.isdir(os.path.join(home, homedir, '.ecryptfs')):
+                    syslog.syslog('ecryptfs already in use in %s' %
+                                  os.path.join(home, homedir))
+                    self.record_installed(['ecryptfs-utils'])
+                    break
 
 
     def configure_timezone(self):
@@ -2092,17 +2096,17 @@ exit 0"""
         if (os.path.exists(manifest_desktop) and
             os.path.exists(manifest)):
             desktop_packages = set()
-            manifest = open(manifest_desktop)
-            for line in manifest:
+            manifest_file = open(manifest_desktop)
+            for line in manifest_file:
                 if line.strip() != '' and not line.startswith('#'):
                     desktop_packages.add(line.split()[0])
-            manifest.close()
+            manifest_file.close()
             live_packages = set()
-            manifest = open(manifest)
-            for line in manifest:
+            manifest_file = open(manifest)
+            for line in manifest_file:
                 if line.strip() != '' and not line.startswith('#'):
                     live_packages.add(line.split()[0])
-            manifest.close()
+            manifest_file.close()
             difference = live_packages - desktop_packages
         else:
             difference = set()
