@@ -77,6 +77,7 @@ serial="$(get_serial_console)"
 
 ## This is copied from update-grub; we've requested that it be moved
 ## to a utility or shell library
+## TODO: replace this with grub-probe
 device_map=$ROOT/boot/grub/device.map
 
 # Usage: convert os_device
@@ -171,14 +172,14 @@ convert () {
 		# GRUB's syntax
 		case "$host_os" in
 		    linux*)
-			echo "$tmp_drive" | sed "s%)$%,`expr $tmp_part - 1`)%"
+			echo "$tmp_drive" | sed "s%)$%,`expr $tmp_part - $partition_offset`)%"
 			;;
 		    gnu*)
 			if echo $tmp_part | grep "^s" >/dev/null; then
 				tmp_pc_slice=$(echo $tmp_part | \
 					sed "s%s\([0-9]*\)[a-g]*$%\1%")
 				tmp_drive=$(echo "$tmp_drive" | \
-					sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%")
+					sed "s%)%,\`expr "$tmp_pc_slice" - $partition_offset\`)%")
 				fi
 			if echo $tmp_part | grep "[a-g]$" >/dev/null; then
 				tmp_bsd_partition=$(echo "$tmp_part" | \
@@ -193,7 +194,7 @@ convert () {
 				tmp_pc_slice=$(echo $tmp_part | \
 					sed "s%s\([0-9]*\)[a-h]*$%\1%")
 				tmp_drive=$(echo "$tmp_drive" | \
-					sed "s%)%,\`expr "$tmp_pc_slice" - 1\`)%")
+					sed "s%)%,\`expr "$tmp_pc_slice" - $partition_offset\`)%")
 			fi
 			if echo $tmp_part | grep "[a-h]$" >/dev/null; then
 				tmp_bsd_partition=$(echo "$tmp_part" | \
@@ -356,7 +357,7 @@ if [ "$found" = "0" ] && type dmraid >/dev/null 2>&1 && \
 		if echo "$disc_offered" | grep -q "/$frdisk[0-9]\+"; then
 			frdev=/dev/mapper/$frdisk
 			frbootpart=${disc_offered#$frdev}
-			frgrubroot=$(($frbootpart - 1))
+			frgrubroot=$frbootpart
 			frtype=sataraid
 			found=1
 			break
@@ -371,7 +372,7 @@ if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
 			grep -q "^/dev/mapper/${frdisk}-part[0-9]\+"; then
 			frdev=/dev/mapper/$frdisk
 			frbootpart=${disc_offered#$frdev}
-			frgrubroot=$((${frbootpart#-part} - 1))
+			frgrubroot=${frbootpart#-part}
 			frtype=multipath
 			found=1
 			break
@@ -383,6 +384,12 @@ if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
 		$chroot $ROOT mount /proc
 		$chroot $ROOT dmsetup mknodes
 	fi
+elif type lvdisplay >/dev/null 2>&1 && \
+     (lvdisplay "$disc_offered" | grep -q 'LV Name' 2>/dev/null || \
+      [ -e "$(dirname "$disc_offered")/control" ]); then
+	# Don't set frdev/frdisk here, otherwise you'll end up in different
+	# code paths below ...
+	frtype=lvm
 fi
 # Check if the boot file system is on an mdadm device
 if [ "$found" = "0" ] && type mdadm >/dev/null 2>&1; then
@@ -426,11 +433,15 @@ case $ARCH in
 	;;
 esac
 
-case "$bootfstype:$bootfslabel:$grub_package" in
-    *:loop:*)
+case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
+    sataraid:*:*:*)
 	# Serial ATA RAID partition, currently only grub is supported
 	: ;;
-    *:*:grub)
+    lvm:*:*:*)
+	# Booting from LVM requires grub2
+	grub_package="grub-pc"
+	;;
+    *:*:*:grub)
 	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
 	db_go || true
 	db_get grub-installer/grub2_instead_of_grub_legacy
@@ -438,7 +449,7 @@ case "$bootfstype:$bootfslabel:$grub_package" in
 		grub_package="grub-pc"
 	fi
 	;;
-    *:*:*)
+    *:*:*:*)
 	db_subst grub-installer/grub_not_mature_on_this_platform ARCH $ARCH
 	db_input low grub-installer/grub_not_mature_on_this_platform || [ $? -eq 30 ]
 	db_go || true
@@ -454,11 +465,14 @@ case $grub_package in
 	grub_version="grub"
 	menu_file="menu.lst"
 	update_grub="update-grub -y"
+	partition_offset=1
+	frgrubroot=$(($frgrubroot - 1))
 	;;
     *)
 	grub_version="grub2"
 	menu_file="grub.cfg"
 	update_grub="update-grub"
+	partition_offset=0
 	;;
 esac
 
@@ -575,7 +589,7 @@ fi
 
 if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
 	if [ -e $ROOT$frdev ] && [ -e $ROOT$frdev$frbootpart ] && \
-	   [ $frgrubroot -ge 0 ]; then
+	   [ $frgrubroot -ge $((1 - $partition_offset)) ]; then
 		db_subst grub-installer/$frtype GRUBROOT $ROOT$frdev$frbootpart
 		q=grub-installer/$frtype
 	else
@@ -689,7 +703,7 @@ quit
 EOF
 }
 
-if [ -z "$frdisk" ]; then
+if [ -z "$frdisk" ] || ([ "$grub_version" = grub2 ] && [ "$frtype" = mdadm ]); then
 
 	# Install grub on each space separated disk in the list
 	bootdevs="$bootdev"

@@ -1,3 +1,61 @@
+grub-installer (1.39ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed (only for GRUB Legacy right now).
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for Wubi. Setting this disables normal grub
+      installation, but still generates a device.map; it also hides the
+      menu.
+    - Handle cases where /boot is bind-mounted.
+    - Add support for writing an MBR on each disk in an mdadm-managed RAID
+      providing /boot.
+    - Properly make use of output from os-prober to configure the booting of
+      other operating systems on dmraid arrays. Attempt to guess where in
+      the device map the array belongs, by substituting the first drive in
+      the dmraid array for the dmraid array device node itself, and removing
+      any reference to other member disks of the array.
+    - Add support for lpia.
+    - Set a sensible default boot device when /cdrom is not iso9660, as this
+      is probably a USB install and (hd0) does not make sense when
+      installing from a removable disk.
+    - Go back to using update-grub -y for GRUB Legacy for now; our grub
+      package is a bit old and still requires this.
+    - Default to grub2 for GPT systems.
+    - Allow grub/grub2 choice for ext4, though still default to grub2.
+  * If using grub2, then use ordinary grub-install for mdadm-managed RAID
+    /boot rather than trying to implement it ourselves.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 13 Jul 2009 12:09:43 +0100
+
+grub-installer (1.39) unstable; urgency=low
+
+  * Merge from Ubuntu:
+    - Use rootnoverify rather than root when chain-loading Microsoft
+      operating systems using GRUB Legacy, since we may not be able to mount
+      the partition (LP: #10661). From my reading of its code, this doesn't
+      seem to be necessary with GRUB 2.
+  * Extend rescue mode plugin to cope with GRUB 2.
+  * Allow /boot on LVM; this forces use of GRUB 2 (LP: #393432).
+  * Adjust partition offsets for GRUB 2. Moving to grub-probe would probably
+    be better in the long run, but this works for now. See #473401, #502446.
+  * Use search --fs-uuid rather than --fs_uuid in otheros.sh (LP: #396587).
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 08 Jul 2009 15:30:14 +0100
+
 grub-installer (1.38ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
