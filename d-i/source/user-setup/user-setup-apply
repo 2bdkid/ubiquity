@@ -217,7 +217,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 				cat > $ROOT/etc/gdm/custom.conf <<EOF
 [daemon]
 AutomaticLoginEnable=true
-AutomaticLogin=ubuntu
+AutomaticLogin=$USER
 TimedLoginEnable=true
 TimedLogin=$USER
 TimedLoginDelay=10
@@ -260,6 +260,13 @@ EOF
 		# installed and the alternative is registered.
 		if $chroot $ROOT update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
 			$log $chroot $ROOT update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-sudo
+			$log $chroot $ROOT update-gconf-defaults || true
+		fi
+	else
+		# Configure gksu to use su, via an alternative, if it's
+		# installed and the alternative is registered.
+		if $chroot $ROOT update-alternatives --display libgksu-gconf-defaults >/dev/null 2>&1; then
+			$log $chroot $ROOT update-alternatives --set libgksu-gconf-defaults /usr/share/libgksu/debian/gconf-defaults.libgksu-su
 			$log $chroot $ROOT update-gconf-defaults || true
 		fi
 	fi

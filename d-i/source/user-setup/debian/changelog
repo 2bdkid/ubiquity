@@ -1,3 +1,15 @@
+user-setup (1.27ubuntu5) karmic; urgency=low
+
+  [ Colin Watson ]
+  * If a root user is being created so we aren't in sudo mode, configure
+    libgksu to use su rather than sudo.
+
+  [ Martin Pitt ]
+  * user-setup-apply: Don't set AutomaticLogin=ubuntu, use the actual user
+    name. (LP: #402707)
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Tue, 21 Jul 2009 22:24:51 +0200
+
 user-setup (1.27ubuntu4) karmic; urgency=low
 
   * Use /etc/gdm/custom.conf rather than /etc/gdm/gdm.conf-custom (LP:
