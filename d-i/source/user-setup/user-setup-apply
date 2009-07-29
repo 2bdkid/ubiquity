@@ -26,13 +26,15 @@ fi
 # password has been pre-crypted (by preseeding), and a 'true' if
 # the home directory is encrypted
 setpassword () {
-	local USER PASSWD
+	local USER PASSWD PAM_SET_PWD
 	USER="$1"
 	PASSWD="$2"
 
 	local VERSION=$($chroot $ROOT dpkg-query -W -f '${Version}\n' passwd)
+	PAM_SET_PWD=false
 	if $chroot $ROOT dpkg --compare-versions "$VERSION" ge "1:4.1.4-1"; then
 		# support for versions with PAM support (Squeeze)
+		PAM_SET_PWD=true
 		if [ "$3" = true ]; then
 			$chroot $ROOT usermod --password=$PASSWD $USER
 		else
@@ -52,7 +54,9 @@ EOF
 $USER:$PASSWD
 EOF
 	fi
-	if [ "$4" = true ]; then
+	# If the password was set using PAM, pam_ecryptfs will handle the initial
+	# passphrase wrapping.  Otherwise, we need this hack...
+	if [ "$4" = true ] && [ "$PAM_SET_PWD" = false ]; then
 		local UNWRAPPED_PASSPHRASE_FILE WRAPPED_PASSPHRASE_FILE MOUNT_PASSPHRASE
 		UNWRAPPED_PASSPHRASE_FILE=/dev/shm/.ecryptfs-$USER
 		if [ -e "$UNWRAPPED_PASSPHRASE_FILE" ]; then

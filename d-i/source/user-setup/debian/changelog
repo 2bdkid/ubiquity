@@ -1,3 +1,14 @@
+user-setup (1.27ubuntu6) karmic; urgency=low
+
+  * user-setup-apply: karmic's merge brought in new functionality that
+    uses usermod to set the user's initial password, which walks the PAM
+    stack;  when this happens, pam_ecryptfs handles the initial passphrase
+    wrapping and the forceful hack in user-setup-apply is not needed;
+    in fact, it's broken because /dev/.ecryptfs-$USER will be cleaned up
+    by pam_ecryptfs; adjust conditional accordingly
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Tue, 28 Jul 2009 15:36:21 -0500
+
 user-setup (1.27ubuntu5) karmic; urgency=low
 
   [ Colin Watson ]
