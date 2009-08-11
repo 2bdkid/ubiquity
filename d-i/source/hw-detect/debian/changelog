@@ -1,3 +1,25 @@
+hw-detect (1.72ubuntu3) karmic; urgency=low
+
+  * Support preseeding of partman-iscsi/login/address.
+  * Don't call 'anna-install open-iscsi-udeb' if the iSCSI login choice is
+    selected; partman-iscsi must already be installed for this choice to be
+    offered, and it depends on open-iscsi-udeb already.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Aug 2009 18:05:43 +0100
+
+hw-detect (1.72ubuntu2) karmic; urgency=low
+
+  * Default iSCSI configuration to true, and stop installing open-iscsi-udeb
+    unconditionally here; partman-iscsi will take care of that. Instead,
+    offer iSCSI targets as a choice if partman-iscsi is available and no
+    disk devices are found, and implement compatibility with old-style
+    open-iscsi/targets preseeding (LP: #237460).
+  * Stop installing acpi, acpid, and acpi-support-base if acpi is available.
+    Most of these are going away and desktop facilities should take care of
+    whatever's left.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 10 Aug 2009 13:24:35 +0100
+
 hw-detect (1.72ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

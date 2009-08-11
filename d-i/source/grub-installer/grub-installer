@@ -1015,13 +1015,19 @@ if [ "$user_params" ] || [ "$bootdev_directory" ]; then
 	update_grub
 fi
 
-# TODO: Implement this (actually the opposite?) for grub2.
-if [ -z "$hide_menu" ] && [ -s /tmp/os-probed ] && [ "$grub_version" = grub ]; then
+if [ -z "$hide_menu" ] && [ -s /tmp/os-probed ]; then
 	# Other operating systems are installed, so show the menu by default
 	# and raise the timeout.
-	sed -i 's/^hiddenmenu[[:space:]]*$/#hiddenmenu/;
-		s/^\(timeout[[:space:]][[:space:]]*\).*/\110/' \
-		$ROOT/boot/grub/menu.lst
+	if [ "$grub_version" = grub ]; then
+		sed -i 's/^hiddenmenu[[:space:]]*$/#hiddenmenu/;
+			s/^\(timeout[[:space:]][[:space:]]*\).*/\110/' \
+			$ROOT/boot/grub/menu.lst
+	else
+		sed -i 's/^GRUB_HIDDEN_TIMEOUT=.*/#&/;
+			s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=10/' \
+			$ROOT/etc/default/grub
+		update_grub # propagate to grub.cfg
+	fi
 fi
 
 if [ "$serial" ] ; then

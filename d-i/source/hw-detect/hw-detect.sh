@@ -519,13 +519,6 @@ if [ -d /sys/bus/usb ]; then
 	apt-install usbutils || true
 fi
 
-# Install acpi
-if [ -d /proc/acpi ]; then
-	apt-install acpi || true
-	apt-install acpid || true
-	apt-install acpi-support-base || true
-fi
-
 # If hardware has support for pmu, install pbbuttonsd
 if [ -d /sys/class/misc/pmu/ ]; then
 	apt-install pbbuttonsd || true

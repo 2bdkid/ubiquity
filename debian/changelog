@@ -1,3 +1,19 @@
+ubiquity (1.99.5) karmic; urgency=low
+
+  [ Mario Limonciello ]
+  * When performing a Mythbuntu install w/ NVIDIA graphics, don't use the xorg
+    conf from the livefs as a base as it's nonexistent now. (LP: #411221)
+  * Properly process the output of apt-cache when pkgsel/language-packs is
+    preseeded to ALL.
+  * Automatic update of included source packages: grub-installer
+    1.40ubuntu2, hw-detect 1.72ubuntu3.
+
+  [ Michael Terry ]
+  * Sort language list with pyicu
+  * gtk: Translate timezones with pyicu
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Tue, 11 Aug 2009 10:13:55 -0500
+
 ubiquity (1.99.4) karmic; urgency=low
 
   [ Evan Dandrea ]
