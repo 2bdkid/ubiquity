@@ -252,6 +252,7 @@ while :; do
 		if [ "$ecryptfs_in_use" ] || \
 		   (db_get user-setup/encrypt-home && [ "$RET" = true ]); then
 			apt-install ecryptfs-utils 2>/dev/null
+			apt-install cryptsetup 2>/dev/null
 		fi
 		;;
 	    *)

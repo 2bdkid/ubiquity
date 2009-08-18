@@ -145,6 +145,11 @@ if [ "$RET" = true ] && ! is_system_user; then
 		for module in aes cbc ecb; do
 			modprobe -q "$module" || true
 		done
+		if ! $log $chroot $ROOT ecryptfs-setup-swap; then
+			echo "ecryptfs-setup-swap failed." >&2
+			db_input critical user-setup/encrypt-home-failed || true
+			db_go || true
+		fi
 	fi
 
 
