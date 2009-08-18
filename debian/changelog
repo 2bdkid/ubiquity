@@ -1,3 +1,44 @@
+ubiquity (1.99.7) karmic; urgency=low
+
+  [ Mario Limonciello ]
+  * mythbuntu_ui:
+    - Hide step_label during the last step just prior to reboot. (LP: #412823)
+    - Add a GtkCellRendererText and ListStore to drivers step.  The previous
+      conversion from glade->gtkbuilder appears to have not done for us.
+    - Link to the gtkbuilder remote file from mythbuntu-common.
+    - Fix broken MySQL service by mythbuntu-common changes.
+  * gtk:
+     - Drop logic to support glade files.
+  * Drop depends on python-glade2
+
+  [ Colin Watson ]
+  * Upgrade to debhelper v7. There's still some fairly significant ugliness
+    in our debian/rules, but this is a slight improvement.
+
+  [ Michael Terry ]
+  * kde: Enable timezone translation
+  * gtk: Remove separators from dialogs
+  * gtk: Convert glade files to GtkBuilder files (LP: #403542), which required
+    a minimum gtk+ version bump to 2.12
+  * Add menu icons for oem-config-prepare*.desktop (LP: #412832)
+
+  [ Harald Sitter ]
+  * Install the KDE desktop file to applications/kde4/ to prevent it from showing
+    up as KDE 3 application in KRunner (happens when stored in applications/kde/)
+
+  [ Roman Shtylman ]
+  * kde: fix text overflow/clipping on user info page when presented with errors
+   (LP: #413127)
+
+  [ Evan Dandrea ]
+  * Use "Require my password" rather than "Require a password" for the
+    sake of clarity.  Thanks Matthew Paul Thomas.
+  * Reset the internal pointer to the segment to be resized when
+    clearing the contents of the segmented bar in the GTK frontend
+    (LP: #386982).  Thanks Eitan Isaacson!
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Tue, 18 Aug 2009 00:27:47 -0500
+
 ubiquity (1.99.6) karmic; urgency=low
 
   [ Michael Terry ]
