@@ -12,6 +12,12 @@ arch_get_kernel_flavour () {
 	    esac
 	fi
 
+	# On systems with 3GB or more of RAM, PAE is needed to access it all.
+	if [ "x$BIGMEM" = "x-may-bigmem" ] && \
+	   [ "$MEMTOTAL" ] && [ "$MEMTOTAL" -gt 3145728 ]; then
+		BIGMEM="-bigmem"
+	fi
+
 	case "$VENDOR" in
 	    " AuthenticAMD"*)
 		case "$FAMILY" in
