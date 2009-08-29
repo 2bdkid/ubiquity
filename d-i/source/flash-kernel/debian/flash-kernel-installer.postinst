@@ -119,7 +119,7 @@ case "$machine" in
 		rootfs="$(findfs /)"
 		uuid="$(block-attr --uuid "$rootfs")"
 		# assemble cmdline
-		cmdline="\"root=UUID=$uuid ro quiet\""
+		cmdline="\"root=UUID=$uuid video=mxcfb:1024x768@60 ro quiet splash\""
 		script="$load_initrd\\$load_kernel\\exec -r 0x1000000 -s 0x00940000 -c $cmdline\\"
 		fconfig -w -s -d "$fis_dev" -o $ofst -n boot_script_data -x "$script"
 		in-target update-initramfs -u || true

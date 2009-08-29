@@ -47,6 +47,7 @@ from ubiquity.frontend.kde_components.Timezone import *
 from ubiquity.frontend.kde_components.PartitionBar import *
 from ubiquity.frontend.kde_components.PartitionModel import *
 from ubiquity.frontend.kde_components.ProgressDialog import *
+from ubiquity.frontend.kde_components.Keyboard import *
 
 import debconf
 
@@ -56,6 +57,7 @@ from ubiquity.components import console_setup, language, timezone, usersetup, \
                                 partman, partman_commit, summary, install
 import ubiquity.progressposition
 from ubiquity.frontend.base import BaseFrontend
+from ubiquity import keyboard_names
 
 # Define global path
 PATH = '/usr/share/ubiquity'
@@ -202,6 +204,7 @@ class Wizard(BaseFrontend):
         self.returncode = 0
         self.disk_layout = None
         self.progressDialog = ProgressDialog(0, 0, self.ui)
+        self.keyboardDisplay = None
         
         self.laptop = execute("laptop-detect")
         self.partition_tree_model = None
@@ -253,6 +256,10 @@ class Wizard(BaseFrontend):
 
         quitIcon = KIcon("dialog-close")
         self.ui.quit.setIcon(quitIcon)
+        
+        self.ui.keyboard_frame.setLayout(QVBoxLayout())
+        self.keyboardDisplay = Keyboard(self.ui.keyboard_frame)
+        self.ui.keyboard_frame.layout().addWidget(self.keyboardDisplay)
 
     def excepthook(self, exctype, excvalue, exctb):
         """Crash handler."""
@@ -318,6 +325,9 @@ class Wizard(BaseFrontend):
         #self.show_browser()
         got_intro = self.show_intro()
         self.allow_change_step(True)
+        
+        # do not show the decrypt option unless user has opted to use encryptfs
+        self.ui.login_encrypt.setVisible(False)
         
         # Declare SignalHandler
         self.ui.next.clicked.connect(self.on_next_clicked)
@@ -778,11 +788,12 @@ class Wizard(BaseFrontend):
 
         self.current_page = None
         
-        lang = self.get_language()
-        slides = '/usr/share/ubiquity-slideshow/%s/index.html' % lang
+        slides = '/usr/share/ubiquity-slideshow/slides/index.html'
         #TODO test if screen is big enough to show slides...
         try:
             if os.path.exists(slides):
+                lang = self.get_language()
+                slides = 'file://%s#locale=%s' % (slides, lang)
                 from PyQt4.QtWebKit import QWebView
                 from PyQt4.QtWebKit import QWebPage
                 
@@ -994,6 +1005,16 @@ class Wizard(BaseFrontend):
         if isinstance(self.dbfilter, console_setup.ConsoleSetup):
             layout = self.get_keyboard()
             if layout is not None:
+                
+                #skip updating keyboard if not using display
+                if self.keyboardDisplay:
+                    ly = keyboard_names.layouts[unicode(layout)]
+                    self.keyboardDisplay.setLayout(ly)
+                
+                    #no variants, force update by setting none
+                    #if not keyboard_names.variants.has_key(ly):
+                    #    self.keyboardDisplay.setVariant(None)
+                
                 self.current_layout = layout
                 self.dbfilter.change_layout(layout)
                 pass
@@ -1002,6 +1023,16 @@ class Wizard(BaseFrontend):
         if isinstance(self.dbfilter, console_setup.ConsoleSetup):
             layout = self.get_keyboard()
             variant = self.get_keyboard_variant()
+            
+            if self.keyboardDisplay:
+                var = None
+                ly = keyboard_names.layouts[layout]
+                if variant and keyboard_names.variants.has_key(ly):
+                    variantMap = keyboard_names.variants[ly]
+                    var = variantMap[unicode(variant)]
+                
+                self.keyboardDisplay.setVariant(var)
+            
             if layout is not None and variant is not None:
                 self.dbfilter.apply_keyboard(layout, variant)
 
@@ -1290,6 +1321,10 @@ class Wizard(BaseFrontend):
         
         if index > -1:
             self.ui.keyboard_layout_combobox.setCurrentIndex(index)
+            
+        if self.keyboardDisplay:
+            ly = keyboard_names.layouts[unicode(layout)]
+            self.keyboardDisplay.setLayout(ly)
 
     def get_keyboard (self):
         if self.ui.keyboard_layout_combobox.currentIndex() < 0:
@@ -1307,7 +1342,17 @@ class Wizard(BaseFrontend):
         
         if index > -1:
             self.ui.keyboard_variant_combobox.setCurrentIndex(index)
-
+            
+        if self.keyboardDisplay:
+            var = None
+            layout = keyboard_names.layouts[self.get_keyboard()]
+            if variant and keyboard_names.variants.has_key(layout):
+                variantMap = keyboard_names.variants[layout]
+                var = variantMap[unicode(variant)]
+            
+            self.keyboardDisplay.setVariant(var)
+            
+            
     def get_keyboard_variant(self):
         if self.ui.keyboard_variant_combobox.currentIndex() < 0:
             return None
@@ -2094,11 +2139,11 @@ class Wizard(BaseFrontend):
     
     def set_encrypt_home(self, value):
         if value:
-            syslog.syslog(syslog.LOG_WARNING,
-                          "KDE frontend does not support home encryption yet")
+            self.ui.login_encrypt.setVisible(True)
+        self.ui.login_encrypt.setChecked(value)
 
     def get_encrypt_home(self):
-        return False
+        return self.ui.login_encrypt.isChecked()
 
     def username_error(self, msg):
         self.ui.username_error_reason.setText(msg)

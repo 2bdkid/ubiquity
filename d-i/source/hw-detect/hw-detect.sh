@@ -524,20 +524,6 @@ if [ -d /sys/class/misc/pmu/ ]; then
 	apt-install pbbuttonsd || true
 fi
 
-# Install mouseemu on systems likely to have single-button mice
-case $SUBARCH in
-	i386/mac|amd64/mac)
-		apt-install mouseemu || true
-	;;
-	powerpc/powermac_*)
-		# mouseemu causes an oops somewhere in the input layer on
-		# powerpc64 at the moment, so don't install it.
-		if [ ! -d /proc/ppc64 ]; then
-			apt-install mouseemu || true
-		fi
-	;;
-esac
-
 # Install eject?
 if [ -n "$(list-devices cd; list-devices maybe-usb-floppy)" ]; then
 	apt-install eject || true

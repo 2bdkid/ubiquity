@@ -1,3 +1,32 @@
+ubiquity (1.99.13) karmic; urgency=low
+
+  [ Colin Watson ]
+  * Update translations from Launchpad.
+  * Upgrade to Automake 1.11.
+  * Recent versions of intltool need GETTEXT_PACKAGE. It's great that that
+    new requirement was documented nice and clearly. Oh, wait ...
+  * Update desktop translation files against new source text; all languages
+    need some retranslation work.
+  * Update imported translations from gtk+2.0 2.17.7-0ubuntu3.
+
+  [ Roman Shtylman ]
+  * fix for (LP: #413159). Acceptable for feature freeze, but still needs 
+   work and further review
+  * fix for (LP: #420226)
+
+  [ Evan Dandrea ]
+  * Fixes to the slideshow code.
+  * Automatic update of included source packages: flash-kernel
+    2.13ubuntu9, hw-detect 1.72ubuntu4.
+
+  [ Michael Terry ]
+  * Add Venezuela timezone (UTC-4.30)
+  * gtk: Start cycling through cities on the second click, not the third
+  * gtk: Don't have clicks on Texas use a Mexican timezone by default
+    LP: #371509 
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sat, 29 Aug 2009 13:22:52 +0100
+
 ubiquity (1.99.12) karmic; urgency=low
 
   [ Colin Watson ]
@@ -9,7 +38,10 @@ ubiquity (1.99.12) karmic; urgency=low
   * Automatic update of included source packages: base-installer
     1.101ubuntu4, user-setup 1.27ubuntu9.
 
- -- Evan Dandrea <evand@ubuntu.com>  Mon, 24 Aug 2009 21:25:36 +0100
+  [ Roman Shtylman ]
+  * Added support for encrypted home/swap login in kde installer 
+
+ -- Roman Shtylman <shtylman@gmail.com>  Mon, 24 Aug 2009 22:06:45 -0400
 
 ubiquity (1.99.11) karmic; urgency=low
 
