@@ -85,9 +85,6 @@ msgstr ""
 #. :sl1:
 #: ../user-setup-udeb.templates:6001
 #, fuzzy
-#| msgid ""
-#| "If you choose not to allow root to log in, then a user account will be "
-#| "created and given the power to become root using the 'sudo' command."
 msgid ""
 "The root user should not have an empty password. If you leave this empty, "
 "the root account will be disabled and the system's initial user account will "
@@ -350,7 +347,7 @@ msgstr "Gebruikers en wachtwoorden instellen..."
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 msgid "Use weak password?"
-msgstr ""
+msgstr "Onveilig wachtwoord gebruiken?"
 
 #. Type: boolean
 #. Description
@@ -360,13 +357,16 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"U heeft een wachtwoord van minder dan acht tekens ingevuld. Dit is geen "
+"sterk wachtwoord, en het wordt dan ook aangeraden om een sterker wachtwoord "
+"te gebruiken."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "Uw persoonlijke map versleutelen?"
 
 #. Type: boolean
 #. Description
@@ -376,6 +376,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"U kunt uw persoonlijke map laten versleutelen. Op deze manier worden uw "
+"persoonlijke bestanden beveiligd, zelfs na diefstal van uw computer."
 
 #. Type: boolean
 #. Description
@@ -385,6 +387,8 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"De computer zal uw versleutelde map naadloos aankoppelen wanneer u aanmeldt, "
+"en zal deze weer afkoppelen als alle actieve sessies zijn beëindigd."
 
 #. Type: error
 #. Description
@@ -409,3 +413,5 @@ msgstr ""
 #: ../user-setup-udeb.templates:22001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
+"Controleer /var/log/syslog of kijk op de vierde virtuele console (VT4) voor "
+"de details."

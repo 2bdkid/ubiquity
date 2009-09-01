@@ -88,9 +88,6 @@ msgstr ""
 #. :sl1:
 #: ../user-setup-udeb.templates:6001
 #, fuzzy
-#| msgid ""
-#| "If you choose not to allow root to log in, then a user account will be "
-#| "created and given the power to become root using the 'sudo' command."
 msgid ""
 "The root user should not have an empty password. If you leave this empty, "
 "the root account will be disabled and the system's initial user account will "
@@ -342,7 +339,7 @@ msgstr "Đang đặt các người dùng và mật khẩu..."
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 msgid "Use weak password?"
-msgstr ""
+msgstr "Dùng mật khẩu yếu?"
 
 #. Type: boolean
 #. Description
@@ -352,13 +349,15 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Bạn đã nhập một mật khẩu ít hơn tám ký tự, được xem là quá yếu. Bạn nên chọn "
+"một mật khẩu mạnh hơn."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "Mã hóa thư mục home của bạn?"
 
 #. Type: boolean
 #. Description
@@ -368,6 +367,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Bạn có thể chọn mã hóa thư mục cá nhân, giúp giữ bí mật cho các tài liệu cá "
+"nhân của bạn cho dù máy tính của bạn bị mất cắp."
 
 #. Type: boolean
 #. Description
@@ -377,6 +378,8 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Hệ thống sẽ tự động gắn kết thư mục cá nhân đã được mã hóa, và hủy gắn kết "
+"này mỗi khi bạn đăng xuất khỏi tất cả các phiên làm việc."
 
 #. Type: error
 #. Description
@@ -401,3 +404,5 @@ msgstr ""
 #: ../user-setup-udeb.templates:22001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
+"Xem bản ghi hệ thống « /var/log/syslog » hoặc bàn giao tiếp ảo 4 để tìm chi "
+"tiết."

@@ -279,7 +279,7 @@ msgstr "Použiť ako:"
 #. Description
 #: ../partman-target.templates:13001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Nepodarilo sa odstrániť konfliktné súbory"
 
 #. Type: error
 #. Description
@@ -288,12 +288,14 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Inštalátor musí odstrániť súbory operačného systému z cieľovej oblasti "
+"inštalácie, ale nepodarilo sa mu to. Inštalácia nemôže pokračovať."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:14001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Odstraňujú sa konfliktné súbory operačných systémov..."
 
 #. Type: boolean
 #. Description
@@ -310,6 +312,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"Súborový systém na ${PARTITION} priradený k ${MOUNTPOINT} nebol označený na "
+"naformátovanie. Adresáre obsahujúce systémové súbory (/etc, /lib, /usr, /"
+"var, ...), ktoré už existujú v ľubovoľnom definovanom bode pripojenia budú "
+"počas inštalácie zmazané."
 
 #. Type: boolean
 #. Description
@@ -317,3 +323,5 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Uistite sa prosím, že ste vykonali zálohy dôležitých údajov predtým, než "
+"budete pokračovať v inštalácii."

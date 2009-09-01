@@ -323,7 +323,7 @@ esac
 rootfs_nodevfs=$(mapdevfs $rootfs)
 bootfs_nodevfs=$(mapdevfs $bootfs)
 prefix=$(echo "$bootfs" | \
-  sed 's:\(/dev/\(cciss\|ida\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/[a-z]\+\).*:\1:')
+  sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[a-z]\+\).*:\1:')
 
 case $prefix in
     /dev/md)
@@ -335,7 +335,7 @@ case $prefix in
     /dev/loop)
 	disc_offered_devfs="$bootfs"
 	;;
-    /dev/[hsv]d[a-z]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/mmcblk[0-9])
+    /dev/[hsv]d[a-z]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*)
 	disc_offered_devfs="$prefix"
 	;;
     *)
@@ -428,6 +428,9 @@ case $ARCH in
 	# On PC/BIOS, default to GRUB Legacy
 	grub_package="grub"
 	;;
+    kfreebsd-i386/*|kfreebsd-amd64/*)
+	grub_package="grub-pc"
+	;;
     powerpc/*)
 	grub_package="grub-ieee1275"
 	;;
@@ -448,6 +451,10 @@ case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
 	if [ "$RET" = true ]; then
 		grub_package="grub-pc"
 	fi
+	;;
+    *:ufs:*:*)
+	# Booting from UFS requires grub2
+	grub_package="grub-pc"
 	;;
     *:*:*:*)
 	db_subst grub-installer/grub_not_mature_on_this_platform ARCH $ARCH
@@ -482,6 +489,45 @@ esac
 if [ "$(uname -s | tr '[A-Z]' '[a-z]')" = "linux" ]; then
 	bootremovable="$(is_removable /boot)"
 	[ -n "$bootremovable" ] || bootremovable="$(is_removable /)"
+fi
+
+user_params=$(user-params) || true
+defopt_params=""
+kopt_params=""
+got_quiet=""
+got_splash=""
+for u_param in $user_params; do
+	case "$u_param" in
+	    quiet)
+		got_quiet=1
+		defopt_params=${defopt_params:+$defopt_params }$u_param ;;
+	    splash)
+		got_splash=1
+		if db_get debian-installer/framebuffer && [ "$RET" = true ]; then
+			defopt_params=${defopt_params:+$defopt_params }$u_param
+		fi
+		;;
+	    *)
+		kopt_params=${kopt_params:+$kopt_params }$u_param ;;
+	esac
+done
+if [ "$grub_version" = grub2 ]; then
+	# Add user parameters to the menu file; some options are only added
+	# to the default entry for a kernel instead of all entries.
+	# We have to duplicate grub2's default for
+	# GRUB_CMDLINE_LINUX_DEFAULT here.
+	if [ -z "$got_splash" ] && \
+	   db_get debian-installer/framebuffer && [ "$RET" = true ]; then
+		defopt_params="splash${defopt_params:+ $defopt_params}"
+	fi
+	if [ -z "$got_quiet" ]; then
+		defopt_params="quiet${defopt_params:+ $defopt_params}"
+	fi
+	# (quoting to deconfuse vim)
+	chroot /target 'debconf-set-selections' <<EOF
+$grub_package grub2/linux_cmdline string $kopt_params
+$grub_package grub2/linux_cmdline_default string $defopt_params
+EOF
 fi
 
 db_progress START 0 6 grub-installer/progress/title
@@ -675,8 +721,8 @@ done
 
 if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev=
-	if ! [ -f "$device_map" ]; then
-		echo quit | grub --batch --device-map="$device_map" >/dev/null 2>&1
+	if [ "$grub_version" = grub ] && ! [ -f "$device_map" ]; then
+		echo quit | chroot /target /usr/sbin/grub --batch --device-map="${device_map#$ROOT}" >/dev/null 2>&1
 	fi
 fi
 
@@ -977,32 +1023,8 @@ if [ "$grub_version" = "grub" ] ; then
 	fi 
 fi
 
-# Add user parameters to menu.list; some options are only added to the
-# default entry for a kernel instead of all entries
-user_params=$(user-params) || true
-defopt_params=""
-kopt_params=""
 bootdev_directory=""
 hide_menu=""
-for u_param in $user_params; do
-	case "$u_param" in
-	    quiet)
-		defopt_params=${defopt_params:+$defopt_params }$u_param ;;
-	    splash)
-		if db_get debian-installer/framebuffer && [ "$RET" = true ]; then
-			defopt_params=${defopt_params:+$defopt_params }$u_param
-		fi
-		;;
-	    *)
-		kopt_params=${kopt_params:+$kopt_params }$u_param ;;
-	esac
-done
-if [ "$defopt_params" ]; then
-	sed -i "s!^\(# defoptions=.*\)!\1 $defopt_params!" $ROOT/boot/grub/$menu_file
-fi
-if [ "$kopt_params" ]; then
-	sed -i "s!^\(# kopt=.*\)!\1 $kopt_params!" $ROOT/boot/grub/$menu_file
-fi
 if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev_directory="$RET"
 	# Be careful to deal with either UUID-style or non-UUID-style groot.
@@ -1010,9 +1032,21 @@ if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	sed -i "s:^\(# groot=\)[^(].*:\1():; s:^\(# groot=([^)]*)\).*:\1$bootdev_directory:" $ROOT/boot/grub/$menu_file
 	hide_menu=1
 fi
-# In either case, update the Debian kernel entries
-if [ "$user_params" ] || [ "$bootdev_directory" ]; then
-	update_grub
+if [ "$grub_version" = grub ]; then
+	# Add user parameters to menu.lst; some options are only added to
+	# the default entry for a kernel instead of all entries. We can't do
+	# this in the same place as the grub2 case because we need the menu
+	# file to exist.
+	if [ "$defopt_params" ]; then
+		sed -i "s!^\(# defoptions=.*\)!\1 $defopt_params!" $ROOT/boot/grub/$menu_file
+	fi
+	if [ "$kopt_params" ]; then
+		sed -i "s!^\(# kopt=.*\)!\1 $kopt_params!" $ROOT/boot/grub/$menu_file
+	fi
+	# In either case, update the Debian kernel entries
+	if [ "$user_params" ] || [ "$bootdev_directory" ]; then
+		update_grub
+	fi
 fi
 
 if [ -z "$hide_menu" ] && [ -s /tmp/os-probed ]; then
@@ -1145,13 +1179,15 @@ if [ -s $tmpfile ] ; then
 		cat $tmpfile >> $ROOT/boot/grub/$menu_file
 		;;
 	    grub2)
-		cat > $ROOT/etc/grub.d/30_otheros << EOF
+		if ! chroot /target which os-prober >/dev/null 2>&1; then
+			cat > $ROOT/etc/grub.d/30_otheros << EOF
 #!/bin/sh
 exec tail -n +3 \$0
 EOF
-		cat $tmpfile >> $ROOT/etc/grub.d/30_otheros
-		chmod +x $ROOT/etc/grub.d/30_otheros
-		update_grub # propagate 30_otheros to grub.cfg
+			cat $tmpfile >> $ROOT/etc/grub.d/30_otheros
+			chmod +x $ROOT/etc/grub.d/30_otheros
+			update_grub # propagate 30_otheros to grub.cfg
+		fi
 		;;
 	esac
 	rm -f $tmpfile
@@ -1160,7 +1196,9 @@ fi
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_update_etc
 
-sed -i 's/do_bootloader = yes/do_bootloader = no/' $ROOT/etc/kernel-img.conf
+if [ -e $ROOT/etc/kernel-img.conf ] ; then
+	sed -i 's/do_bootloader = yes/do_bootloader = no/' $ROOT/etc/kernel-img.conf
+fi
 if [ -z "$(grep update-grub $ROOT/etc/kernel-img.conf)" ]; then
 	(
 		echo "postinst_hook = update-grub"

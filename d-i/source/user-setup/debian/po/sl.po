@@ -95,9 +95,6 @@ msgstr ""
 #. :sl1:
 #: ../user-setup-udeb.templates:6001
 #, fuzzy
-#| msgid ""
-#| "If you choose not to allow root to log in, then a user account will be "
-#| "created and given the power to become root using the 'sudo' command."
 msgid ""
 "The root user should not have an empty password. If you leave this empty, "
 "the root account will be disabled and the system's initial user account will "
@@ -347,7 +344,7 @@ msgstr "Pripravljam uporabnike in gesla..."
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 msgid "Use weak password?"
-msgstr ""
+msgstr "Uporabi šibko geslo?"
 
 #. Type: boolean
 #. Description
@@ -357,13 +354,15 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"Vnesli ste geslo, ki je sestavljeno iz manj kot osem znakov, zato je "
+"ocenjeno kot prešibko. Dobro bi bilo, da izberete močnejše geslo."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "Zakodiram vašo domačo mapo?"
 
 #. Type: boolean
 #. Description
@@ -373,6 +372,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"Nastavite lahko, da se vaša domača mapa zakodira, tako da bodo datoteke, ki "
+"so tam shranjene, ostale zasebne, tudi če vaš računalnik ukradejo."
 
 #. Type: boolean
 #. Description
@@ -382,6 +383,8 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"Sistem bo vašo zakodirano domačo mapo neopazno priklopil vedno, ko se boste "
+"prijavili in samodejno odklopil, ko se boste odjavili iz vseh aktivnih sej."
 
 #. Type: error
 #. Description
@@ -406,3 +409,4 @@ msgstr ""
 #: ../user-setup-udeb.templates:22001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
 msgstr ""
+"Preverite /var/log/syslog ali poglejte navidezno konzolo 4 za podrobnosti."

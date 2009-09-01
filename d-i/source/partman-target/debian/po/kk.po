@@ -277,7 +277,7 @@ msgstr "Пайдалану мақсаты:"
 #. Description
 #: ../partman-target.templates:13001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Өзара жанжал файлдарын өшіргенде қате кетті."
 
 #. Type: error
 #. Description
@@ -286,12 +286,14 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Орнатылатын дискі бөлімінде операциялық жүйенің файлдарын өшіргенде қате "
+"кетті. Орнату әрі қарай жалғастырылмайды."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:14001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Операциялық жүйенің өзара жанжал файлдарын өшіру..."
 
 #. Type: boolean
 #. Description
@@ -310,6 +312,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"${MOUNTPOINT} тіркеу нүктесіне тіркелген ${PARTITION} бөлімінің файлдық "
+"жүйесі пішімдеу үшін белгіленбеген. Ішінде жүйелік файлдар бар бумалар (/"
+"etc, /lib, /usr, /var, ...) кез-келген тіркеу нүктесінде, орнату кезінде "
+"өшіріледі."
 
 #. Type: boolean
 #. Description
@@ -317,3 +323,4 @@ msgstr ""
 msgid ""
 "Please ensure that you have backed up any critical data before installing."
 msgstr ""
+"Орнатудың алдында, сізде маңызды файлдардың көшірмесі барына көз жеткізіңіз."

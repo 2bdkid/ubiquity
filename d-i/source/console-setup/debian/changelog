@@ -1,3 +1,14 @@
+console-setup (1.34ubuntu2) karmic; urgency=low
+
+  * Add an apport hook.
+  * Update translations from Launchpad.
+  * Backport from trunk (Anton Zinoviev, LP: #390292):
+    - Do not issue warnings for unknown keycodes with AT keyboards (these
+      are multimedia keys and they are unnecessary on the console).  Thanks
+      to Anders Lagerås, closes: #531292.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 01 Sep 2009 11:49:34 +0100
+
 console-setup (1.34ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

@@ -1,3 +1,91 @@
+grub-installer (1.42ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed (only for GRUB Legacy right now).
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for Wubi. Setting this disables normal grub
+      installation, but still generates a device.map; it also hides the
+      menu.
+    - Handle cases where /boot is bind-mounted.
+    - Add support for writing an GRUB Legacy MBR on each disk in an
+      mdadm-managed RAID providing /boot. (GRUB 2 can handle this already.)
+    - Properly make use of output from os-prober to configure the booting of
+      other operating systems on dmraid arrays. Attempt to guess where in
+      the device map the array belongs, by substituting the first drive in
+      the dmraid array for the dmraid array device node itself, and removing
+      any reference to other member disks of the array.
+    - Set a sensible default boot device when /cdrom is not iso9660, as this
+      is probably a USB install and (hd0) does not make sense when
+      installing from a removable disk.
+    - Go back to using update-grub -y for GRUB Legacy for now; our grub
+      package is a bit old and still requires this.
+    - Default to grub2 for GPT systems.
+    - Allow grub/grub2 choice for ext4, though still default to grub2.
+  * Restrict code to generate device.map for loop installations to GRUB
+    Legacy (LP: #421873).
+  * Fix said code to run grub chrooted into /target.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 01 Sep 2009 13:50:59 +0100
+
+grub-installer (1.42) unstable; urgency=low
+
+  [ Felix Zielcke ]
+  * Check that /etc/kernel-img.conf exists before running sed over it.
+
+  [ Colin Watson ]
+  * Don't create /etc/grub.d/30_otheros if os-prober is already installed
+    for grub2 to use (LP: #419044).
+  * Pass user parameters to grub2 (closes: #470894).
+  * Add myself to Uploaders.
+
+  [ Updated translations ]
+  * Korean (ko.po) by Changwoo Ryu
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 01 Sep 2009 13:03:09 +0100
+
+grub-installer (1.41) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Add support for Ubuntu's lpia architecture ("Low-Power Intel
+      Architecture").
+  * Upgrade to debhelper v7.
+
+  [ Felix Zielcke ]
+  * Add support for /dev/rs/c[0-9]d[0-9] style devices.
+
+  [ Luca Favatella ]
+  * Add support for /dev/ad[0-9] and /dev/da[0-9] style devices (for 
+    GNU/kFreeBSD).
+  * Use grub-pc on GNU/kFreeBSD.
+
+  [ Aurelien Jarno ]
+  * Use grub-pc on UFS root filesystem, and don't display the not-mature
+    debconf warning in that case.
+  * Don't try to update /target/etc/mtab if it is already a symlink.
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Marcos Antonio Alvarez Costales
+  * Esperanto (eo.po) by Felipe Castro
+  * Estonian (et.po) by Mattias Põldaru
+  * Italian (it.po) by Milo Casagrande
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sat, 22 Aug 2009 22:32:20 +0200
+
 grub-installer (1.40ubuntu2) karmic; urgency=low
 
   * Handle showing the menu and raising the timeout for grub2 if other

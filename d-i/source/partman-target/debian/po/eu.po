@@ -283,7 +283,7 @@ msgstr "Honela erabili:"
 #. Description
 #: ../partman-target.templates:13001
 msgid "Failed to remove conflicting files"
-msgstr ""
+msgstr "Errorea fitxategi gatazkatsuak kentzean"
 
 #. Type: error
 #. Description
@@ -292,12 +292,15 @@ msgid ""
 "The installer needs to remove operating system files from the install "
 "target, but was unable to do so.  The install cannot continue."
 msgstr ""
+"Instalatzaileak sistema-eragilearen fitxategi batzuk kendu behar ditu "
+"instalazio-helburutik, baina ez da horretarako gai izan. Ezin da "
+"instalazioarekin jarraitu."
 
 #. Type: text
 #. Description
 #: ../partman-target.templates:14001
 msgid "Removing conflicting operating system files..."
-msgstr ""
+msgstr "Sistema-eragilearen fitxategi gatazkatsuak kentzen..."
 
 #. Type: boolean
 #. Description
@@ -314,6 +317,10 @@ msgid ""
 "usr, /var, ...) that already exist under any defined mountpoint will be "
 "deleted during the install."
 msgstr ""
+"${MOUNTPOINT} muntatze-puntura esleitutako ${PARTITION} partizioko fitxategi-"
+"sistema ez da formateatzeko markatu. Edozein muntatze-puntutan dauden eta "
+"sistemaren fitxategiak dituzten direktorioak (/etc, /lib, /usr, /var, ...) "
+"ezabatuko dira instalazioan zehar."
 
 #. Type: boolean
 #. Description
