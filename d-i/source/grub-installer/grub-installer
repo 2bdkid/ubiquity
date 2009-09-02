@@ -529,6 +529,12 @@ $grub_package grub2/linux_cmdline string $kopt_params
 $grub_package grub2/linux_cmdline_default string $defopt_params
 EOF
 fi
+if [ "$grub_package" = grub-pc ]; then
+	# Empty this for now to stop it being asked. We'll fix this up later.
+	chroot /target 'debconf-set-selections' <<EOF
+$grub_package grub-pc/install_devices multiselect
+EOF
+fi
 
 db_progress START 0 6 grub-installer/progress/title
 
@@ -826,6 +832,13 @@ else
 		write_grub
 	fi
 
+fi
+
+if [ "$grub_package" = grub-pc ]; then
+	# Do the same thing on upgrades.
+	chroot /target 'debconf-set-selections' <<EOF
+$grub_package grub-pc/install_devices multiselect $bootdev
+EOF
 fi
 
 # Split a device name into a disk device name and a partition number, if
