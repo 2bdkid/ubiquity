@@ -24,9 +24,33 @@ import signal
 
 import debconf
 
-from ubiquity.filteredcommand import FilteredCommand
+from ubiquity.plugin import *
 from ubiquity import parted_server
 from ubiquity.misc import *
+
+NAME = 'partman'
+
+class PageGtk(PluginUI):
+    part_page = None
+    plugin_widgets = 'stepPartAuto'
+    plugin_optional_widgets = 'stepPartAdvanced'
+
+    def get_current_page(self):
+        return self.part_page
+
+    def set_part_page(self, p):
+        self.part_page = p
+
+class PageKde(PluginUI):
+    part_page = None
+    plugin_widgets = ['stepPartAuto', 'stepPartAdvanced']
+    plugin_breadcrumb = 'ubiquity/text/breadcrumb_partition'
+
+    def get_current_page(self):
+        return self.part_page
+
+    def set_part_page(self, p):
+        self.part_page = p
 
 PARTITION_TYPE_PRIMARY = 0
 PARTITION_TYPE_LOGICAL = 1
@@ -37,14 +61,11 @@ PARTITION_PLACE_END = 1
 class PartmanOptionError(LookupError):
     pass
 
-class Partman(FilteredCommand):
-    def __init__(self, frontend=None):
-        FilteredCommand.__init__(self, frontend)
+class Page(Plugin):
+    def prepare(self):
         self.some_device_desc = ''
         self.resize_desc = ''
         self.manual_desc = ''
-
-    def prepare(self):
         # If an old parted_server is still running, clean it up.
         regain_privileges()
         if os.path.exists('/var/run/parted_server.pid'):
@@ -188,6 +209,8 @@ class Partman(FilteredCommand):
                 question = 'partman-efi/text/efi'
             elif method == 'newworld':
                 question = 'partman/method_long/newworld'
+            elif method == 'biosgrub':
+                question = 'partman/method_long/biosgrub'
             if question is not None:
                 return self.description(question)
         except debconf.DebconfError:
@@ -200,7 +223,7 @@ class Partman(FilteredCommand):
         except debconf.DebconfError:
             return filesystem
 
-    def create_use_as(self):
+    def create_use_as(self, devpart):
         """Yields the possible methods that a new partition may use."""
 
         # TODO cjwatson 2006-11-01: This is a particular pain; we can't find
@@ -225,6 +248,18 @@ class Partman(FilteredCommand):
             elif method == 'efi':
                 if os.path.exists('/var/lib/partman/efi'):
                     yield (method, method, self.method_description(method))
+            elif method == 'biosgrub':
+                # TODO cjwatson 2009-09-03: Quick kludge, since only GPT
+                # supports this method at the moment. Maybe it would be
+                # better to fetch VALID_FLAGS for each partition while
+                # building the cache?
+                dev = self.split_devpart(devpart)[0]
+                if dev is not None:
+                    dev = '%s/%s' % (parted_server.devices, dev)
+                    if (dev in self.disk_cache and
+                        'label' in self.disk_cache[dev] and
+                        self.disk_cache[dev]['label'] == 'gpt'):
+                        yield (method, method, self.method_description(method))
             else:
                 yield (method, method, self.method_description(method))
 
@@ -336,7 +371,7 @@ class Partman(FilteredCommand):
                 self.editing_partition['bad_mountpoint'] = True
         self.frontend.error_dialog(self.description(question),
                                    self.extended_description(question))
-        return FilteredCommand.error(self, priority, question)
+        return Plugin.error(self, priority, question)
 
     def run(self, priority, question):
         if self.done:
@@ -434,6 +469,7 @@ class Partman(FilteredCommand):
                 biggest_free = self.split_devpart(biggest_free)[1]
             self.extra_options[self.biggest_free_desc] = biggest_free
 
+            self.ui.set_part_page('stepPartAuto')
             self.frontend.set_autopartition_choices(
                 choices, self.extra_options, self.resize_desc,
                 self.manual_desc, self.biggest_free_desc)
@@ -497,6 +533,7 @@ class Partman(FilteredCommand):
                         self.building_cache = False
                         self.frontend.debconf_progress_stop()
                         self.frontend.refresh()
+                        self.ui.set_part_page('stepPartAdvanced')
                         self.frontend.update_partman(
                             self.disk_cache, self.partition_cache,
                             self.cache_order)
@@ -541,9 +578,13 @@ class Partman(FilteredCommand):
                         else:
                             if rebuild_all or arg not in self.disk_cache:
                                 device = parted.readline_device_entry('device')
+                                parted.open_dialog('GET_LABEL_TYPE')
+                                label = parted.read_line()
+                                parted.close_dialog()
                                 self.disk_cache[arg] = {
                                     'dev': dev,
-                                    'device': device
+                                    'device': device,
+                                    'label': label
                                 }
 
                     if self.update_partitions is None:
@@ -621,18 +662,21 @@ class Partman(FilteredCommand):
                         self.building_cache = False
                         self.frontend.debconf_progress_stop()
                         self.frontend.refresh()
+                        self.ui.set_part_page('stepPartAdvanced')
                         self.frontend.update_partman(
                             self.disk_cache, self.partition_cache,
                             self.cache_order)
             elif self.creating_partition:
                 devpart = self.creating_partition['devpart']
                 if devpart in self.partition_cache:
+                    self.ui.set_part_page('stepPartAdvanced')
                     self.frontend.update_partman(
                         self.disk_cache, self.partition_cache,
                         self.cache_order)
             elif self.editing_partition:
                 devpart = self.editing_partition['devpart']
                 if devpart in self.partition_cache:
+                    self.ui.set_part_page('stepPartAdvanced')
                     self.frontend.update_partman(
                         self.disk_cache, self.partition_cache,
                         self.cache_order)
@@ -660,7 +704,7 @@ class Partman(FilteredCommand):
             self.undoing = False
             self.finish_partitioning = False
 
-            FilteredCommand.run(self, priority, question)
+            Plugin.run(self, priority, question)
 
             if self.finish_partitioning or self.done:
                 if self.succeeded:
@@ -1044,7 +1088,7 @@ class Partman(FilteredCommand):
             if priority == 'critical' or priority == 'high':
                 self.frontend.error_dialog(self.description(question),
                                            self.extended_description(question))
-                return FilteredCommand.error(self, priority, question)
+                return Plugin.error(self, priority, question)
             else:
                 return True
 
@@ -1078,7 +1122,7 @@ class Partman(FilteredCommand):
                 self.preseed(question, 'false', seen=False)
             return True
 
-        return FilteredCommand.run(self, priority, question)
+        return Plugin.run(self, priority, question)
 
     def ok_handler(self):
         if self.current_question.endswith('automatically_partition'):

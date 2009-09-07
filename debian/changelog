@@ -1,3 +1,23 @@
+ubiquity (1.99.17) karmic; urgency=low
+
+  [ Colin Watson ]
+  * Add support for the biosgrub partman method, to be added in
+    partman-partitioning 71.
+
+  [ Mario Limonciello ]
+  * Use the usplash init script to stop usplash in the oem-config init script
+    It seems to do a better job, and prevents a black screen on boot with some
+    drivers that aren't as usplash friendly. (LP: #403021)
+
+  [ Evan Dandrea ]
+  * Merged Michael Terry's plugins branch (LP: #419989).  See
+    http://wiki.ubuntu.com/Ubiquity/Plugins for instructions on writing
+    new plugins.
+  * Automatic update of included source packages: clock-setup
+    0.98ubuntu2.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 07 Sep 2009 09:44:29 +0100
+
 ubiquity (1.99.16) karmic; urgency=low
 
   * Go back to using /var/log/oem-config.log for oem-config logging; it's

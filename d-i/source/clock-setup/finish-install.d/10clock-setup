@@ -63,11 +63,13 @@ if [ "$RET" = true ]; then
 	if [ -e "$adjtimefile" ]; then
 		sed -i -e 's:^LOCAL:UTC:' $adjtimefile
 	fi
+	UTC='--utc'
 else
 	sed -i -e 's:^UTC="yes":UTC="no":' -e 's:^UTC=yes:UTC=no:' $rcsfile
 	if [ -e "$adjtimefile" ]; then
 		sed -i -e 's:^UTC:LOCAL:' $adjtimefile
 	fi
+	UTC='--localtime'
 fi
 
 anna-install rtc-modules || true
@@ -99,7 +101,7 @@ cleanup () {
 }
 
 db_progress INFO clock-setup/progress/hwclock
-log-output -t clock-setup chroot /target hwclock --systohc --debug &
+log-output -t clock-setup chroot /target hwclock --systohc --debug --noadjfile $UTC &
 pid="$!"
 count=0
 
