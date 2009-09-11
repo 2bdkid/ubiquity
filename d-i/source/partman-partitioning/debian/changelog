@@ -1,3 +1,53 @@
+partman-partitioning (71ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add ORISIZE, PATH, RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE
+      substitutions to partman-partitioning/new_size in support of
+      ubiquity's resize widget.
+    - When creating a new partition, default to logical if a primary
+      partition already exists.
+    - Add NTFS dependencies on lpia.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 09 Sep 2009 01:26:40 +0100
+
+partman-partitioning (71) unstable; urgency=low
+
+  * Upgrade to debhelper v7.
+  * Convert BIOS GRUB boot area support to a method, thereby making it
+    impossible to accidentally put a filesystem on such a partition as well,
+    and making it simpler to preseed. See #491376. Thanks to Otavio Salvador
+    for reviewing this.
+  * Make partman-partitioning/bad_new_size,
+    partman-partitioning/big_new_size, and
+    partman-partitioning/small_new_size templates less terse (thanks, Evan
+    Dandrea; LP: #34974).
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Marcos Antonio Alvarez Costales
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Holger Wansing
+  * Greek, Modern (1453-) (el.po) by Emmanuel Galatoulas
+  * French (fr.po) by Christian Perrier
+  * Korean (ko.po) by Changwoo Ryu
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Simplified Chinese (zh_CN.po) by Deng Xiyue
+
+ -- Colin Watson <cjwatson@debian.org>  Mon, 07 Sep 2009 11:21:02 +0100
+
+partman-partitioning (70) unstable; urgency=low
+
+  [ Aurelien Jarno ]
+  * Use msdos disklabel (gpt on mac) on kfreebsd-amd64 and kfreebsd-i386,
+    as on amd64 and i386.
+  * Also depends on ntfsprogs-udeb on kfreebsd-amd64 and kfreebsd-i386. 
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sun, 23 Aug 2009 22:11:41 +0200
+
 partman-partitioning (69ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

@@ -27,7 +27,7 @@ autopartitioning_failed () {
 unnamed=0
 
 decode_recipe () {
-	local ignore ram line word min factor max fs -
+	local ignore ram line word min factor max fs iflabel label -
 	ignore="${2:+${2}ignore}"
 	unnamed=$(($unnamed + 1))
 	ram=$(grep ^Mem: /proc/meminfo | { read x y z; echo $y; }) # in bytes
@@ -93,7 +93,7 @@ decode_recipe () {
 				max=$min
 			fi
 			case "$4" in # allow only valid file systems
-			    ext2|ext3|ext4|xfs|reiserfs|jfs|linux-swap|fat16|fat32|hfs)
+			    ext2|ext3|ext4|xfs|reiserfs|jfs|linux-swap|fat16|fat32|hfs|ufs)
 				fs="$4"
 				;;
 			    \$default_filesystem)
@@ -111,7 +111,25 @@ decode_recipe () {
 			if [ "$ignore" ] && [ "$(echo $line | grep "$ignore")" ]; then
 				:
 			else
-				scheme="${scheme:+$scheme$NL}$line"
+				# Exclude partitions that are only for a different
+				# disk label. The $PWD check avoids problems when
+				# running from partman-auto-lvm, where we aren't in
+				# a subdirectory of $DEVICES while decoding the
+				# recipe; but we do need to perform this check early
+				# so that size calculations work. As a result, for
+				# now, $iflabel will not work when doing automatic
+				# LVM partitioning.
+				iflabel="$(echo $line | sed -n 's/.*\$iflabel{ \([^}]*\) }.*/\1/p')"
+				if [ "$iflabel" ] && [ "${PWD#$DEVICES/}" != "$PWD" ]; then
+					open_dialog GET_LABEL_TYPE
+					read_line label
+					close_dialog
+					if [ "$iflabel" = "$label" ]; then
+						scheme="${scheme:+$scheme$NL}$line"
+					fi
+				else
+					scheme="${scheme:+$scheme$NL}$line"
+				fi
 			fi
 			line=''
 			;;
