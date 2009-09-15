@@ -627,7 +627,7 @@ class Install:
             keep.add('grub')
             keep.add('grub-pc')
         elif (arch == 'armel' and
-              subarch in ('imx51', 'iop32x', 'ixp4xx', 'orion5x')):
+              subarch in ('dove', 'imx51', 'iop32x', 'ixp4xx', 'orion5x')):
             keep.add('flash-kernel')
         elif arch == 'powerpc' and subarch != 'ps3':
             keep.add('yaboot')
@@ -1047,6 +1047,7 @@ exit 0"""
             self.chrex('mount', '-t', 'proc', 'proc', '/proc')
         if not os.path.exists(os.path.join(self.target, 'sys/devices')):
             self.chrex('mount', '-t', 'sysfs', 'sysfs', '/sys')
+        misc.execute('mount', '--bind', '/dev', os.path.join(self.target, 'dev'))
 
         if x11 and 'DISPLAY' in os.environ:
             if 'SUDO_USER' in os.environ:
@@ -1079,6 +1080,7 @@ exit 0"""
             except OSError:
                 pass
 
+        self.chrex('umount', '/dev')
         self.chrex('umount', '/sys')
         self.chrex('umount', '/proc')
 
@@ -1732,7 +1734,7 @@ exit 0"""
                         raise InstallStepError(
                             "GrubInstaller failed with code %d" % ret)
                 elif (arch == 'armel' and
-                      subarch in ('imx51', 'iop32x', 'ixp4xx', 'orion5x')):
+                      subarch in ('dove', 'imx51', 'iop32x', 'ixp4xx', 'orion5x')):
                     from ubiquity.components import flash_kernel
                     dbfilter = flash_kernel.FlashKernel(None)
                     ret = dbfilter.run_command(auto_process=True)
