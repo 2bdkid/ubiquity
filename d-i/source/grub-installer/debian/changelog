@@ -1,3 +1,17 @@
+grub-installer (1.43ubuntu3) karmic; urgency=low
+
+  * Fix some hardcoded uses of /target.
+  * grub_write_divider is specific to GRUB Legacy; don't call it for GRUB 2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 23 Sep 2009 15:15:33 +0100
+
+grub-installer (1.43ubuntu2) karmic; urgency=low
+
+  * Explicitly install os-prober when using GRUB 2, since it does a better
+    job than the otheros script (LP: #433259).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 21 Sep 2009 12:28:32 +0100
+
 grub-installer (1.43ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

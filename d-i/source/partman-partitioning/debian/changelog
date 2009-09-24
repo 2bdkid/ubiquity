@@ -1,3 +1,29 @@
+partman-partitioning (72ubuntu1) karmic; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add ORISIZE, PATH, RAWMINSIZE, RAWCURSIZE, and RAWMAXSIZE
+      substitutions to partman-partitioning/new_size in support of
+      ubiquity's resize widget.
+    - When creating a new partition, default to logical if a primary
+      partition already exists.
+    - Add NTFS dependencies on lpia.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 23 Sep 2009 15:33:12 +0100
+
+partman-partitioning (72) unstable; urgency=low
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Felipe Castro
+  * Basque (eu.po) by Piarres Beobide
+  * Swedish (sv.po) by Daniel Nylander
+  * Turkish (tr.po) by Mert Dirik
+  * Vietnamese (vi.po) by Clytie Siddall
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 23 Sep 2009 10:36:25 +0100
+
 partman-partitioning (71ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

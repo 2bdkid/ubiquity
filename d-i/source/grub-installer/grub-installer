@@ -141,8 +141,8 @@ convert () {
 
 	# Adjust the device map to add a SATA RAID array.
 	if [ "$frtype" = "sataraid" ] && type dmraid >/dev/null 2>&1; then
-		temp_map=/target/tmp/sataraid.map
-		echo quit | chroot /target /usr/sbin/grub --batch --device-map=/tmp/sataraid.map >/dev/null 2>&1
+		temp_map=$ROOT/tmp/sataraid.map
+		echo quit | $chroot $ROOT /usr/sbin/grub --batch --device-map=/tmp/sataraid.map >/dev/null 2>&1
 
 		# Dmraid -r seems to list disks in reverse order to how they
 		# are detected by the kernel.
@@ -524,14 +524,14 @@ if [ "$grub_version" = grub2 ]; then
 		defopt_params="quiet${defopt_params:+ $defopt_params}"
 	fi
 	# (quoting to deconfuse vim)
-	chroot /target 'debconf-set-selections' <<EOF
+	$chroot $ROOT 'debconf-set-selections' <<EOF
 $grub_package grub2/linux_cmdline string $kopt_params
 $grub_package grub2/linux_cmdline_default string $defopt_params
 EOF
 fi
 if [ "$grub_package" = grub-pc ]; then
 	# Empty this for now to stop it being asked. We'll fix this up later.
-	chroot /target 'debconf-set-selections' <<EOF
+	$chroot $ROOT 'debconf-set-selections' <<EOF
 $grub_package grub-pc/install_devices multiselect
 EOF
 fi
@@ -550,6 +550,10 @@ case "$grub_package" in
 	;;
     grub-pc)
 	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy
+	# os-prober is only a Recommends so isn't installed by apt-install,
+	# but in Ubuntu we make sure it's installed since it does a better
+	# job than the otheros script.
+	apt-install os-prober || true
 	;;
 esac
 
@@ -728,7 +732,7 @@ done
 if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev=
 	if [ "$grub_version" = grub ] && ! [ -f "$device_map" ]; then
-		echo quit | chroot /target /usr/sbin/grub --batch --device-map="${device_map#$ROOT}" >/dev/null 2>&1
+		echo quit | $chroot $ROOT /usr/sbin/grub --batch --device-map="${device_map#$ROOT}" >/dev/null 2>&1
 	fi
 fi
 
@@ -836,7 +840,7 @@ fi
 
 if [ "$grub_package" = grub-pc ]; then
 	# Do the same thing on upgrades.
-	chroot /target 'debconf-set-selections' <<EOF
+	$chroot $ROOT 'debconf-set-selections' <<EOF
 $grub_package grub-pc/install_devices multiselect $bootdev
 EOF
 fi
@@ -1186,13 +1190,13 @@ IFS="$OLDIFS"
 rm -f /tmp/os-probed
 
 if [ -s $tmpfile ] ; then
-	grub_write_divider
 	case $grub_version in
 	    grub)
+		grub_write_divider
 		cat $tmpfile >> $ROOT/boot/grub/$menu_file
 		;;
 	    grub2)
-		if ! chroot /target which os-prober >/dev/null 2>&1; then
+		if ! $chroot $ROOT which os-prober >/dev/null 2>&1; then
 			cat > $ROOT/etc/grub.d/30_otheros << EOF
 #!/bin/sh
 exec tail -n +3 \$0

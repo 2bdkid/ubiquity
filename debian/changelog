@@ -1,3 +1,40 @@
+ubiquity (1.99.22) karmic; urgency=low
+
+  [ Michael Terry ]
+  * gtk: Don't assume there will be a country shortlist for the selected
+    language.  Fixes the lack of a default zone for Polish.  LP: #425011
+  * kde: Let back/forward/quit buttons activate when highlighted and the
+    user presses Enter.  Part of bug #46600
+
+  [ Evan Dandrea ]
+  * Suppress Pango warning about not being able to open /root/.pangorc.
+  * Use the page name instead of the new step name when considering both
+    partitioning pages.
+  * Fix broken conditional statement that prevented
+    process_autopartitioning and info_loop from being called.
+  * Disable the forward button for the usersetup page when coming from
+    both the automatic and manual partitioning pages, rather than just
+    the latter.
+  * Open a browser window when links are clicked on in the slideshow
+    (LP: #432145).
+  * Automatic update of included source packages: base-installer
+    1.102ubuntu1, flash-kernel 2.13ubuntu11, grub-installer 1.43ubuntu3,
+    partman-partitioning 72ubuntu1.
+
+  [ Roman Shtylman ]
+  * Fixed vertical spacer on keyboard page
+  * Removed underline from keyboard buttons
+  * Added ability to view shifted keys on keyboard display 
+
+  [ Colin Watson ]
+  * Mount /sys while running grub-installer, since os-prober needs to look
+    in /sys/block (LP: #430141).
+  * Install new dmi-available-memory program from base-installer
+    1.101ubuntu5.
+  * Don't respawn Upstart jobs on exit status 1.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 24 Sep 2009 09:40:12 -0700
+
 ubiquity (1.99.21) karmic; urgency=low
 
   * Install the init script (under a new, temporary name) as well as the

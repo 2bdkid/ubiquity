@@ -23,8 +23,14 @@ KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)
 MACHINE="$(uname -m)"
 NUMCPUS=$(cat /var/numcpus 2>/dev/null) || true
 CPUINFO=/proc/cpuinfo
-MEMTOTAL="$(grep '^MemTotal:[[:space:]]*' /proc/meminfo | \
-	    sed 's/^MemTotal:[[:space:]]*//; s/ .*//')"
+MEMTOTAL=0
+if [ -x /usr/lib/base-installer/dmi-available-memory ]; then
+	MEMTOTAL="$(/usr/lib/base-installer/dmi-available-memory)"
+fi
+if [ "$MEMTOTAL" = 0 ]; then
+	MEMTOTAL="$(grep '^MemTotal:[[:space:]]*' /proc/meminfo | \
+		    sed 's/^MemTotal:[[:space:]]*//; s/ .*//')"
+fi
 
 # files and directories
 APT_SOURCES=/target/etc/apt/sources.list
