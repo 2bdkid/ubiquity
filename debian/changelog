@@ -1,3 +1,22 @@
+ubiquity (1.99.23) karmic; urgency=low
+
+  [ Evan Dandrea ]
+  * Add missing definition of self.controller for the noninteractive
+    page in the language plugin.
+
+  [ Colin Watson ]
+  * Use an explicit state file to determine whether oem-config runs, since
+    with Upstart it's no longer straightforward to just add/remove rc*.d
+    symlinks (LP: #432180).
+  * We already avoid copy-blacklisting files in packages that have a prerm,
+    since they might require non-trivial work before removing their files.
+    Now also avoid copy-blacklisting files in dependencies of such packages,
+    as otherwise we risk leaving programs in the target system for a while
+    that don't have their library dependencies satisfied, causing confusion
+    when other programs try to use them (LP: #436613).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 25 Sep 2009 14:59:33 +0100
+
 ubiquity (1.99.22) karmic; urgency=low
 
   [ Michael Terry ]
