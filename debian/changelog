@@ -1,3 +1,13 @@
+ubiquity (1.99.24) karmic; urgency=low
+
+  * Reorganise clock handling. The system wall clock is now set as early as
+    possible, and not reset after partitioning; and the timezone and
+    hardware clock configuration are now changed in the live filesystem root
+    as well as in /target (LP: #431786).
+  * Update translations from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 27 Sep 2009 17:50:22 +0100
+
 ubiquity (1.99.23) karmic; urgency=low
 
   [ Evan Dandrea ]
