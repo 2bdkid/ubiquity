@@ -1,3 +1,16 @@
+flash-kernel (2.13ubuntu12) karmic; urgency=low
+
+  [ Michael Casadevall ]
+  * Misc updates and bug fixes to Dove implementation (LP: #430344)
+    - Update kernel cmdline to include splash, quiet, and ro, and to drop
+      console=tty0 since it is the default.
+    - Update boot script to remove partition scanning in boot script in order
+      to increase boot speed; try to obtain fs/interface/deveice/prefix from
+      caller and limit scan to the first two usb and ide partitions.
+    - Add a test to prevent booting of old images in memory.
+
+ -- Loïc Minier <loic.minier@ubuntu.com>  Tue, 06 Oct 2009 00:16:15 +0200
+
 flash-kernel (2.13ubuntu11) karmic; urgency=low
 
   [ Loïc Minier ]

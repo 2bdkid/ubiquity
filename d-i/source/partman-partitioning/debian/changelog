@@ -1,3 +1,12 @@
+partman-partitioning (72ubuntu2) karmic; urgency=low
+
+  * Set prefsize in get_*resize_range functions; pass RAWPREFSIZE instead of
+    RAWCURSIZE to ubiquity (preferred size instead of current size) and stop
+    passing ORISIZE. This allows ubiquity to set sensible preferred sizes
+    when resizing partitions (LP: #421407).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 06 Oct 2009 18:18:13 +0100
+
 partman-partitioning (72ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

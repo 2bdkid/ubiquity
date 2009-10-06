@@ -149,7 +149,7 @@ class Wizard(BaseFrontend):
         self.autopartition_extras = {}
         self.resize_min_size = None
         self.resize_max_size = None
-        self.resize_orig_size = None
+        self.resize_pref_size = None
         self.resize_path = ''
         self.new_size_scale = None
         self.ma_choices = []
@@ -224,8 +224,11 @@ class Wizard(BaseFrontend):
                     self.pageslen += 1
                     self.pages.append(mod)
 
+        self.toplevels = set()
         for widget in self.builder.get_objects():
             add_widget(self, widget)
+            if isinstance(widget, gtk.Window):
+                self.toplevels.add(widget)
         self.builder.connect_signals(self)
 
         self.translate_widgets()
@@ -253,6 +256,11 @@ class Wizard(BaseFrontend):
             for w in p.all_widgets:
                 for c in self.all_children(w):
                     widgets.append((c, prefix))
+        if not just_current:
+            for toplevel in self.toplevels:
+                if toplevel.name != 'live_installer':
+                    for c in self.all_children(toplevel):
+                        widgets.append((c, None))
         self.translate_widgets(lang=lang, widgets=widgets, reget=reget)
 
     def excepthook(self, exctype, excvalue, exctb):
@@ -1465,9 +1473,9 @@ class Wizard(BaseFrontend):
 
         if resize_choice in choices:
             self.resize_min_size, self.resize_max_size, \
-                self.resize_orig_size, self.resize_path = \
+                self.resize_pref_size, self.resize_path = \
                     extra_options[resize_choice]
-            self.action_bar.set_part_size(self.resize_orig_size)
+            self.action_bar.set_part_size(self.resize_pref_size)
             self.action_bar.set_min(self.resize_min_size)
             self.action_bar.set_max(self.resize_max_size)
         if biggest_free_choice in choices:

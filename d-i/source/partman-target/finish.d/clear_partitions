@@ -64,8 +64,14 @@ for part in $partitions; do
 		db_get passwd/username || true
 		username="$RET"
 		if [ -n "$username" ] && [ -d "$tmp/home/$username" ]; then
-			db_set passwd/user-uid "$(stat -c %u "$tmp/home/$username")" || true
-			db_set passwd/user-gid "$(stat -c %g "$tmp/home/$username")" || true
+			uid="$(stat -c %u "$tmp/home/$username")"
+			if [ -n "$uid" ] && [ "$uid" != 0 ]; then
+				db_set passwd/user-uid "$uid" || true
+			fi
+			gid="$(stat -c %g "$tmp/home/$username")"
+			if [ -n "$gid" ] && [ "$gid" != 0 ]; then
+				db_set passwd/user-gid "$gid" || true
+			fi
 		fi
 		umount $tmp
 	elif [ "$mp" = "/home" ]; then

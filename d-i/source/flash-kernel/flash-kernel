@@ -435,6 +435,10 @@ case "$machine" in
 	"Marvell DB-MV88F6781-BP Development Board")
 		check_subarch "dove"
 		tmp=$(tempfile)
+		uboot_kernel_load_addr=0x00200000
+		uboot_initramfs_load_addr=0x01100000
+		script_load_addr=0x1000
+
 		printf "Generating kernel u-boot image... " >&2
 		cat $kfile >> $tmp
 		mkimage -A arm -O linux -T kernel -C none -n "$desc" -a 0x00008000 \
@@ -462,10 +466,47 @@ case "$machine" in
 		# The UUID will come from the flash-kernel config file
 		cat >"$tmp.boot.script" <<EOF
 echo Starting Ubuntu...
-\${fs}load \${interface} \${device}:\${partition} 0x00200000 \${prefix}uImage
-\${fs}load \${interface} \${device}:\${partition} 0x01100000 \${prefix}uInitrd
-setenv bootargs console=tty0 mem=512M $rootfs
-bootm 0x00200000 0x01100000
+if test -n \${fs} && test -n \${interface} && test -n \${device} && test -n \${prefix}; then
+	\${fs}load \${interface} \${device} $uboot_kernel_load_addr \${prefix}uImage
+	\${fs}load \${interface} \${device} $uboot_initramfs_load_addr \${prefix}uInitrd
+	setenv bootargs mem=512M $rootfs ro quiet splash
+	bootm $uboot_kernel_load_addr $uboot_initramfs_load_addr
+fi
+
+echo boot information not recieved from u-boot, scanning for startup device
+
+if test -e \${reinitalize_devices}; then
+	usb start;
+	ide reset;
+fi
+
+for i in usb ide; do 
+	for j in 0 1; do
+		for l in / /boot/; do
+			for m in fat ext2; do
+				setenv interface \$i;
+				setenv device \$j;
+				setenv prefix \$l;
+				setenv fs \$m;
+
+				echo Scanning \${fs} \${interface} \${device} on prefix \${prefix} ...;
+
+				# This "if" avoids loading an old image but
+				# doesn't work in stock u-boot 1.3.4 and is
+				# only fixed in Canonical u-boot from October
+				# 1st or later
+
+				if \${fs}load \${interface} \${device} $script_load_addr \${prefix}boot.scr; then
+					if imi $script_load_addr; then
+						echo boot.scr found! Executing ...;
+						autoscr $script_load_addr;
+					fi;
+				fi
+			done;
+		done;
+	done;
+done
+echo No boot device found.;
 EOF
 		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d "$tmp.boot.script" \
 			"$tmp.boot.scr" >&2 1>/dev/null

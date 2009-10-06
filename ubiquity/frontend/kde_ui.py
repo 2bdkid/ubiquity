@@ -46,6 +46,7 @@ from PyKDE4.kdecore import *
 from ubiquity.frontend.kde_components.PartitionBar import *
 from ubiquity.frontend.kde_components.PartitionModel import *
 from ubiquity.frontend.kde_components.ProgressDialog import *
+from ubiquity.frontend.kde_components.SqueezeLabel import *
 
 import debconf
 
@@ -202,7 +203,8 @@ class Wizard(BaseFrontend):
                         breadcrumb = '------' # just a placeholder
                     if breadcrumb:
                         mod.breadcrumb_question = breadcrumb
-                        mod.breadcrumb = QLabel(self.get_string(breadcrumb))
+                        mod.breadcrumb = SqueezeLabel()
+                        mod.breadcrumb.setText(self.get_string(breadcrumb))
                         mod.breadcrumb.setObjectName(mod.breadcrumb_question)
                         label_index = self.ui.steps_widget.layout().count() - 2 # Room for install crumb
                         self.ui.steps_widget.layout().insertWidget(label_index, mod.breadcrumb)
@@ -1356,7 +1358,7 @@ class Wizard(BaseFrontend):
                             dev = d
                             break
 
-                    min_size, max_size, orig_size, resize_path = extra_options[choice]
+                    min_size, max_size, pref_size, resize_path = extra_options[choice]
                     
                     # TODO use find_in_os_prober to give nice name
                     if dev:
@@ -1368,7 +1370,7 @@ class Wizard(BaseFrontend):
                             after_bar.addPartition(p[6], int(p[2]), int(p[0]), p[4], p[5])
                         
                         after_bar.setResizePartition(resize_path, 
-                            min_size, max_size, orig_size, get_release_name())
+                            min_size, max_size, pref_size, get_release_name())
                         
                         self.resizePath = after_bar.resize_part.path
                         self.resizeSize = after_bar.resize_part.size
@@ -2102,7 +2104,12 @@ class Wizard(BaseFrontend):
         if self.installing and not self.installing_no_return:
             # Go back to the partitioner and try again.
             #self.live_installer.show()
-            self.pagesindex = self.pages.index(partman.Page)
+            self.pagesindex = -1
+            for page in self.pages:
+                if page.module.NAME == 'partman':
+                    self.pagesindex = self.pages.index(page)
+                    break
+            if self.pagesindex == -1: return
             self.dbfilter = partman.Page(self)
             self.set_current_page(self.previous_partitioning_page)
             self.ui.next.setText(self.get_string("next").replace('_', '&', 1))

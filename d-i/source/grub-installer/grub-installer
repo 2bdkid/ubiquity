@@ -339,7 +339,7 @@ case $prefix in
 	disc_offered_devfs="$prefix"
 	;;
     *)
-	disc_offered_devfs=$(echo "$bootfs_devfs" | sed "s:\(.*\)/.*:\1/disc:")
+	disc_offered_devfs=$(echo "$bootfs_nodevfs" | sed "s:\(.*\)/.*:\1/disc:")
 	;;
 esac
 disc_offered=$(mapdevfs "$disc_offered_devfs")
@@ -363,6 +363,7 @@ if [ "$found" = "0" ] && type dmraid >/dev/null 2>&1 && \
 			break
 		fi
 	done
+	[ "$found" = "1" ] || frdisk=
 fi
 # Check if the boot file system is on multipath
 if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
@@ -378,11 +379,13 @@ if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
 			break
 		fi
 	done
-	if [ "$frdisk" ]; then
+	if [ "$found" = "1" ]; then
 		# Create the device nodes for grub:
 		apt-install dmsetup
 		$chroot $ROOT mount /proc
 		$chroot $ROOT dmsetup mknodes
+	else
+		frdisk=
 	fi
 elif type lvdisplay >/dev/null 2>&1 && \
      (lvdisplay "$disc_offered" | grep -q 'LV Name' 2>/dev/null || \
@@ -655,6 +658,7 @@ if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
 	fi
 fi
 
+default_bootdev='(hd0)'
 # Set a sensible default boot device as hd0 does not make sense when
 # installing from a removable disk.  We have to be specific here and not always
 # set the installation target to the disk that /boot resides on because we
@@ -671,6 +675,9 @@ if [ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]; then
 		db_set grub-installer/bootdev "$disk"
 		state=2
 	fi
+elif [ "$grub_version" = grub2 ] && [ "$frtype" = mdadm ]; then
+	default_bootdev="$bootfs_nodevfs"
+	db_set grub-installer/bootdev "$default_bootdev"
 fi
 
 db_progress STEP 1
@@ -693,7 +700,7 @@ while : ; do
 					echo "(hd0) $bootremovable" > "$device_map"
 				fi
 			else
-				bootdev="(hd0)"
+				bootdev="$default_bootdev"
 			fi
 			break
 		else
@@ -759,7 +766,7 @@ quit
 EOF
 }
 
-if [ -z "$frdisk" ] || ([ "$grub_version" = grub2 ] && [ "$frtype" = mdadm ]); then
+if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 
 	# Install grub on each space separated disk in the list
 	bootdevs="$bootdev"

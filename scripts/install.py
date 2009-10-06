@@ -402,10 +402,8 @@ class Install:
             self.db.progress('INFO', 'ubiquity/install/apt')
             self.configure_apt()
 
-            self.db.progress('SET', count)
-            self.db.progress('REGION', count, count+len(self.plugins))
+            self.configure_plugins(count)
             count += len(self.plugins)
-            self.configure_plugins()
 
             self.db.progress('SET', count)
             self.db.progress('REGION', count, count+1)
@@ -854,7 +852,8 @@ class Install:
             os.makedirs(target_dir)
 
         for log_file in ('/var/log/syslog', '/var/log/partman',
-                         '/var/log/installer/version', '/var/log/casper.log'):
+                         '/var/log/installer/version', '/var/log/casper.log',
+                         '/var/log/installer/debug'):
             target_log_file = os.path.join(target_dir,
                                            os.path.basename(log_file))
             if os.path.isfile(log_file):
@@ -862,6 +861,14 @@ class Install:
                     syslog.syslog(syslog.LOG_ERR,
                                   'Failed to copy installation log file')
                 os.chmod(target_log_file, stat.S_IRUSR | stat.S_IWUSR)
+        media_info = '/cdrom/.disk/info'
+        if os.path.isfile(media_info):
+            try:
+                shutil.copy(media_info,
+                    os.path.join(self.target, 'var/log/installer/media-info'))
+            except (IOError, OSError):
+                pass
+                
         try:
             status = open(os.path.join(self.target, 'var/lib/dpkg/status'))
             status_gz = gzip.open(os.path.join(target_dir,
@@ -1047,6 +1054,18 @@ exit 0"""
         f.close()
         os.chmod(start_stop_daemon, 0755)
 
+        initctl = os.path.join(self.target, 'sbin/initctl')
+        if os.path.exists(initctl):
+            os.rename(initctl, '%s.REAL' % initctl)
+            f = open(initctl, 'w')
+            print >>f, """\
+#!/bin/sh
+echo 1>&2
+echo 'Warning: Fake initctl called, doing nothing.' 1>&2
+exit 0"""
+            f.close()
+            os.chmod(initctl, 0755)
+
         if not os.path.exists(os.path.join(self.target, 'proc/cmdline')):
             self.chrex('mount', '-t', 'proc', 'proc', '/proc')
         if not os.path.exists(os.path.join(self.target, 'sys/devices')):
@@ -1088,6 +1107,10 @@ exit 0"""
         self.chrex('umount', '/sys')
         self.chrex('umount', '/proc')
 
+        initctl = os.path.join(self.target, 'sbin/initctl')
+        if os.path.exists('%s.REAL' % initctl):
+            os.rename('%s.REAL' % initctl, initctl)
+
         start_stop_daemon = os.path.join(self.target, 'sbin/start-stop-daemon')
         if os.path.exists('%s.REAL' % start_stop_daemon):
             os.rename('%s.REAL' % start_stop_daemon, start_stop_daemon)
@@ -1122,7 +1145,7 @@ exit 0"""
             self.db.progress('STOP')
 
 
-    def configure_plugins(self):
+    def configure_plugins(self, count):
         """Apply plugin settings to installed system."""
         class Progress:
             def __init__(self, db):
@@ -1131,12 +1154,14 @@ exit 0"""
                 self._db.progress('INFO', title)
 
         for plugin in self.plugins:
+            self.db.progress('SET', count)
+            self.db.progress('REGION', count, count+1)
+            count += 1
             self.db.progress('INFO', ' ') # clear info in case plugin doesn't provide one
             inst = plugin.Install(None, db=self.db)
             ret = inst.install(self.target, Progress(self.db))
             if ret:
                 raise InstallStepError("Plugin %s failed with code %s" % (plugin.NAME, ret))
-            self.db.progress('STEP', 1)
 
 
     def configure_apt(self):
