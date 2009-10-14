@@ -132,7 +132,7 @@ if [ "$RET" ]; then
 fi
 
 # New-style preseeding
-if db_fget partman-iscsi/login/address && [ "$RET" = true ] && \
+if db_fget partman-iscsi/login/address seen && [ "$RET" = true ] && \
    db_get partman-iscsi/login/address && [ "$RET" ]; then
 	if ! pidof iscsid >/dev/null; then
 		iscsi-start

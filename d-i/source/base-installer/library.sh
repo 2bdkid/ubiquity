@@ -680,6 +680,18 @@ EOF
 	db_progress INFO base-installer/section/install_kernel_package
 	log-output -t base-installer apt-install "$KERNEL" || kernel_install_failed=$?
 
+	db_get base-installer/kernel/headers
+	if [ "$RET" = true ]; then
+		# Advance progress bar to 80% of allocated space for install_linux
+		update_progress 80 100
+
+		# Install kernel headers if possible
+		HEADERS="$(echo "$KERNEL" | sed 's/linux\(-image\|\)/linux-headers/')"
+		db_subst base-installer/section/install_kernel_package SUBST0 "$HEADERS"
+		db_progress INFO base-installer/section/install_kernel_package
+		log-output -t base-installer apt-install "$HEADERS" || true
+	fi
+
 	# Advance progress bar to 90% of allocated space for install_linux
 	update_progress 90 100
 
