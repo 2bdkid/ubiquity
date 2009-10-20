@@ -464,6 +464,7 @@ class Wizard(BaseFrontend):
             self.hostname_edited = True
             self.ui.login_pass.hide()
             self.ui.login_auto.hide()
+            self.ui.login_encrypt.hide()
             
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-kde')
@@ -790,8 +791,8 @@ class Wizard(BaseFrontend):
         slides = '/usr/share/ubiquity-slideshow/slides/index.html'
         #TODO test if screen is big enough to show slides...
         try:
+            lang = self.locale.split('_')[0]
             if os.path.exists(slides):
-                lang = self.locale.split('_')[0]
                 slides = 'file://%s#locale=%s' % (slides, lang)
                 from PyQt4.QtWebKit import QWebView
                 from PyQt4.QtWebKit import QWebPage
