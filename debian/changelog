@@ -1,3 +1,39 @@
+ubiquity (2.0.1) karmic; urgency=low
+
+  [ Evan Dandrea ]
+  * Check to see whether X crashed or ubiquity crashed before attempting
+    to bail into the noninteractive frontend from only-ubiquity mode
+    (LP: #444901).
+  * Wrap the format warning label while working around GTK+ label layout
+    problems (LP: #364617).
+
+  [ Colin Watson ]
+  * Rewrite X_LOADTEMPLATEFILE commands in case they refer to template files
+    in the /target chroot (LP: #452118).
+  * Install -generic-pae kernels if necessary; this requires some custom
+    hacks since -generic-pae isn't in the live filesystem (LP: #413135).
+  * Don't do kernel installation/removal in oem-config.
+  * Skip partition_too_small check during Wubi installs, as Wubi does some
+    of its own checks and the delay imposed by this check looks particularly
+    weird in Wubi. This may or may not be the cause of apparent hangs
+    towards the end of partitioning, but I suspect that it will at least get
+    rid of some conflated reports and make testing quicker.
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: clock-setup 0.98ubuntu3,
+    flash-kernel 2.13ubuntu13, grub-installer 1.43ubuntu6, partman-auto
+    89ubuntu2, partman-target 64ubuntu4.
+
+  [ Mario Limonciello ]
+  * Mythbuntu: Don't allow "removing" LIRC as it's not supported with install.
+
+  [ Roman Shtylman ]
+  * Fixed India timezone map (LP: #453009) 
+
+  [ Michael Casadevall ]
+  * Added support for partman-uboot in ubiquity (LP: #455713)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 Oct 2009 01:20:06 +0100
+
 ubiquity (2.0.0) karmic; urgency=low
 
   [ Colin Watson ]

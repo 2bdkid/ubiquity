@@ -72,6 +72,13 @@ else
 	UTC='--localtime'
 fi
 
+# If we didn't manage to sync the clock to NTP, then there is no point in
+# setting the hardware clock. At best, all we'll be doing is writing back
+# the value present when d-i started plus d-i's run-time; at worst, we'll
+# also introduce a timezone error.
+db_get clock-setup/ntp
+[ "$RET" = true ] || exit 0
+
 anna-install rtc-modules || true
 
 # This may not be necessary on all hardware; hwclock can do direct IO if

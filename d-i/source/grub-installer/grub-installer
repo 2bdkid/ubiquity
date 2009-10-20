@@ -440,8 +440,9 @@ case $ARCH in
 esac
 
 case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
-    sataraid:*:*:*)
-	# Serial ATA RAID partition, currently only grub is supported
+    sataraid:*:*:*|multipath:*:*:*)
+	# Serial ATA RAID partition or multipath, currently only grub is
+	# supported
 	: ;;
     lvm:*:*:*)
 	# Booting from LVM requires grub2
@@ -685,6 +686,13 @@ db_progress INFO grub-installer/progress/step_bootdev
 
 while : ; do
 	if [ "$state" = 1 ]; then
+		if [ "$frdev" ]; then
+			# If /boot is on SATA RAID/multipath, then there's
+			# only one possible answer; we don't support device
+			# selection yet. This is pretty nasty.
+			db_set $q true || true
+			db_fset $q seen true || true
+		fi
 		db_input $priority $q || true
 		if ! db_go; then
 			# back up to menu

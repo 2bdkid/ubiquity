@@ -1,3 +1,12 @@
+grub-installer (1.43ubuntu6) karmic; urgency=low
+
+  * Always use GRUB Legacy when /boot is on a multipath device.
+  * If /boot is on SATA RAID or multipath, don't ask a question to which
+    there's only one acceptable answer and the other causes grub-installer
+    to fall over (LP: #452118).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 15 Oct 2009 15:14:54 +0100
+
 grub-installer (1.43ubuntu5) karmic; urgency=low
 
   * Fix mishandling of loop variable that caused the semi-manual

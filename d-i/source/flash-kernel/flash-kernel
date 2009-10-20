@@ -469,7 +469,7 @@ echo Starting Ubuntu...
 if test -n \${fs} && test -n \${interface} && test -n \${device} && test -n \${prefix}; then
 	\${fs}load \${interface} \${device} $uboot_kernel_load_addr \${prefix}uImage
 	\${fs}load \${interface} \${device} $uboot_initramfs_load_addr \${prefix}uInitrd
-	setenv bootargs mem=512M $rootfs ro quiet splash
+	setenv bootargs $rootfs ro quiet splash
 	bootm $uboot_kernel_load_addr $uboot_initramfs_load_addr
 fi
 

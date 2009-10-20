@@ -1,12 +1,12 @@
 partman-auto/text/home_scheme ::
 
-128 512 256 ext2
+128 512 256 uboot
 	$primary{ }
 	$bootable{ }
 	method{ format }
 	format{ }
 	use_filesystem{ }
-	filesystem{ ext2 }
+	filesystem{ uboot }
 	mountpoint{ /boot } .
 
 500 4000 7000 $default_filesystem
