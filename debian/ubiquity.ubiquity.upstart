@@ -20,8 +20,6 @@ emits starting-dm
 script
     test -x /usr/bin/ubiquity-dm || exit 0
 
-    >/var/run/ubiquity.upstarted
-
     ubiquity=
     automatic=
     debug=
@@ -62,12 +60,12 @@ script
     setterm -blank 0
 
     if [ -n "$noninteractive" ]; then
-	exec ubiquity noninteractive
+	exec ubiquity noninteractive $debug
     else
 	if ! ubiquity-dm vt7 :0 ubuntu /usr/bin/ubiquity $debug $automatic --only; then
 	    # has X crashed, or has ubiquity?
             if ! [ -f /var/log/installer/version ]; then
-                exec ubiquity noninteractive
+                exec ubiquity noninteractive $debug
             fi
 	fi
     fi

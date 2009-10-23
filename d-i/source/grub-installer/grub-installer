@@ -240,20 +240,32 @@ hurd_convert () {
 
 # Run update-grub in $ROOT
 update_grub () {
+	# TODO cjwatson 2009-10-21: just use in-target?
 	umountproc=false
+	umountsys=false
 	if [ ! -e $ROOT/proc/cmdline ]; then
 		$chroot $ROOT mount /proc
 		umountproc=:
+	fi
+	if [ ! -d $ROOT/sys/devices ]; then
+		$chroot $ROOT mount -t sysfs sysfs /sys
+		umountsys=:
 	fi
 	if ! log-output -t grub-installer $chroot $ROOT $update_grub; then
 		error "Running '$update_grub' failed." 1>&2
 		db_input critical grub-installer/update-grub-failed || [ $? -eq 30 ]
 		db_go || true
 		db_progress STOP
+		if $umountsys; then
+			$chroot $ROOT umount /sys
+		fi
 		if $umountproc; then
 			$chroot $ROOT umount /proc
 		fi
 		exit 1
+	fi
+	if $umountsys; then
+		$chroot $ROOT umount /sys
 	fi
 	if $umountproc; then
 		$chroot $ROOT umount /proc
