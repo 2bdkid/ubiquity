@@ -279,6 +279,7 @@ class Install:
             '/cdrom', get_casper('LIVE_MEDIA_PATH', 'casper').lstrip('/'))
         self.kernel_version = platform.release()
         self.db = debconf.Debconf()
+        self.languages = []
         self.langpacks = []
         self.blacklist = {}
 
@@ -1304,6 +1305,7 @@ exit 0"""
             pass
 
         langpacks = []
+        all_langpacks = False
         try:
             langpack_db = self.db.get('pkgsel/language-packs')
             if langpack_db == 'ALL':
@@ -1311,6 +1313,7 @@ exit 0"""
                     ['apt-cache', '-n', 'search', '^language-pack-[^-][^-]*$'],
                     stdout=subprocess.PIPE).communicate()[0].rstrip().split('\n')
                 langpacks = map(lambda x: x.split('-')[2].strip(), apt_out)
+                all_langpacks = True
             else:
                 langpacks = langpack_db.replace(',', '').split()
         except debconf.DebconfError:
@@ -1327,6 +1330,7 @@ exit 0"""
         if not langpacks:
             langpack_db = self.db.get('debian-installer/locale')
             langpacks = [langpack_db.split('_')[0]]
+        self.languages = langpacks
         syslog.syslog('keeping language packs for: %s' % ' '.join(langpacks))
 
         try:
@@ -1334,7 +1338,10 @@ exit 0"""
         except debconf.DebconfError:
             return
 
+        cache = Cache()
+
         to_install = []
+        checker = osextras.find_on_path('check-language-support')
         for lp in langpacks:
             # Basic language packs, required to get localisation working at
             # all. We install these almost unconditionally; if you want to
@@ -1345,21 +1352,37 @@ exit 0"""
             for pattern in lppatterns:
                 to_install.append(pattern.replace('$LL', lp))
             # More extensive language support packages.
-            if osextras.find_on_path('check-language-support'):
+            # If pkgsel/language-packs is ALL, then speed things up by
+            # calling check-language-support just once.
+            if not all_langpacks and checker:
                 check_lang = subprocess.Popen(
                     ['check-language-support', '-l', lp, '--show-installed'],
                     stdout=subprocess.PIPE)
                 to_install.extend(check_lang.communicate()[0].strip().split())
             else:
                 to_install.append('language-support-%s' % lp)
+            if checker:
+                # Keep language-support-$LL installed if it happens to be in
+                # the live filesystem, since there's no point spending time
+                # removing it; but don't install it if it isn't in the live
+                # filesystem.
+                toplevel = 'language-support-%s' % lp
+                toplevel_pkg = self.get_cache_pkg(cache, toplevel)
+                if toplevel_pkg and toplevel_pkg.isInstalled:
+                    to_install.append(toplevel)
+        if all_langpacks and osextras.find_on_path('check-language-support'):
+            check_lang = subprocess.Popen(
+                ['check-language-support', '-a', '--show-installed'],
+                stdout=subprocess.PIPE)
+            to_install.extend(check_lang.communicate()[0].strip().split())
 
         # Filter the list of language packs to include only language packs
         # that exist in the live filesystem's apt cache, so that we can tell
         # the difference between "no such language pack" and "language pack
         # not retrievable given apt configuration in /target" later on.
-        cache = Cache()
         to_install = [lp for lp in to_install
                          if self.get_cache_pkg(cache, lp) is not None]
+
         del cache
 
         self.record_installed(to_install)
@@ -1371,9 +1394,16 @@ exit 0"""
 
         self.do_install(self.langpacks)
 
+        if len(self.languages) == 1 and self.languages[0] in ('C', 'en'):
+            return # always complete enough
+
         cache = Cache()
         incomplete = False
         for pkg in self.langpacks:
+            if pkg.startswith('gimp-help-'):
+                # gimp-help-common is far too big to fit on CDs, so don't
+                # worry about it.
+                continue
             cachedpkg = self.get_cache_pkg(cache, pkg)
             if cachedpkg is None or not cachedpkg.isInstalled:
                 incomplete = True
@@ -2070,6 +2100,20 @@ exit 0"""
 
         self.db.progress('STOP')
 
+    def traverse_for_kernel(self, cache, pkg):
+        kern = cache[pkg]
+        pkc = cache._depcache.GetCandidateVer(kern._pkg)
+        if pkc.DependsList.has_key('Depends'):
+            dependencies = pkc.DependsList['Depends']
+        else:
+            # Didn't find.
+            return None
+        for dep in dependencies:
+            name = dep[0].TargetPkg.Name
+            if name.startswith('linux-image-2.'):
+                return name
+            elif name.startswith('linux-'):
+                return self.traverse_for_kernel(cache, name)
 
     def remove_unusable_kernels(self):
         """Remove unusable kernels; keeping them may cause us to be unable
@@ -2097,6 +2141,12 @@ exit 0"""
                 # one, so we'd better update kernel_version to match.
                 if kernel.startswith('linux-image-2.'):
                     self.kernel_version = kernel[12:]
+                elif kernel.startswith('linux-generic-'):
+                    # Traverse dependencies to find the real kernel image.
+                    cache = Cache()
+                    kernel = self.traverse_for_kernel(cache, kernel)
+                    if kernel:
+                        self.kernel_version = kernel[12:]
             install_kernels_file.close()
 
         remove_kernels = set()

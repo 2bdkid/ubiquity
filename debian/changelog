@@ -1,3 +1,32 @@
+ubiquity (2.0.4) karmic; urgency=low
+
+  [ Evan Dandrea ]
+  * Do not install the live CD kernel in the target system when using
+    PAE (LP: #413135).
+  * Properly set the kernel version in the main install process when
+    using PAE so that symlinks get created for the kernel and initramfs.
+  * Automatic update of included source packages: partman-base
+    133ubuntu4.
+  * Automatic update of included source packages: grub-installer
+    1.43ubuntu8, partman-basicmethods 43ubuntu1.
+
+  [ Colin Watson ]
+  * Change apport hook to prefer syslog, partman, and casper.log from
+    /var/log/installer/ if they exist there, to support bug-filing after
+    installation.
+  * Don't set the "incomplete language support" note if only gimp-help-* is
+    missing, since it's far too big to fit on CDs (LP: #452516).
+  * Furthermore, always consider English as "complete enough". The packages
+    that are missing from an installation from the Ubuntu desktop CD are not
+    critical for a reasonable user experience.
+  * Make use of check-language-support -a if pkgsel/language-packs is ALL,
+    since that's orders of magnitude faster (LP: #458333).
+  * Keep language-support-$LL installed if it happens to be in the live
+    filesystem, since there's no point spending time removing it; but don't
+    install it if it isn't in the live filesystem (LP: #458333).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Sat, 24 Oct 2009 14:55:26 +0100
+
 ubiquity (2.0.3) karmic; urgency=low
 
   [ Colin Watson ]

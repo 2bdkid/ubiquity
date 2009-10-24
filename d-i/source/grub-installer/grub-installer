@@ -689,7 +689,30 @@ if [ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]; then
 		state=2
 	fi
 elif [ "$grub_version" = grub2 ] && [ "$frtype" = mdadm ]; then
-	default_bootdev="$bootfs_nodevfs"
+	# Check whether any of the RAIDed devices is a partition, and if so
+	# install to the corresponding disk instead, as GRUB 2 doesn't like
+	# installing to a RAID device composed of partitions.
+	# TODO: This duplicates some pretty horrible code from above. This
+	# should at least be turned into a function or something ...
+	disks=
+	use_disks=
+	for frdisk_one in $frdisk_list; do
+		prefix=$(echo "$frdisk_one" | \
+		  sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[a-z]\+\).*:\1:')
+		disks="${disks:+$disks }$prefix"
+		case $prefix in
+		    /dev/[hsv]d[a-z]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*)
+			if [ "$prefix" != "$frdisk_one" ]; then
+				use_disks=1
+			fi
+			;;
+		esac
+	done
+	if [ "$use_disks" ]; then
+		default_bootdev="$disks"
+	else
+		default_bootdev="$bootfs_nodevfs"
+	fi
 	db_set grub-installer/bootdev "$default_bootdev"
 fi
 
@@ -868,7 +891,7 @@ fi
 if [ "$grub_package" = grub-pc ]; then
 	# Do the same thing on upgrades.
 	$chroot $ROOT 'debconf-set-selections' <<EOF
-$grub_package grub-pc/install_devices multiselect $bootdev
+$grub_package grub-pc/install_devices multiselect $bootdevs
 EOF
 fi
 

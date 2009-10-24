@@ -1,3 +1,12 @@
+grub-installer (1.43ubuntu8) karmic; urgency=low
+
+  * If using GRUB 2 and installing to a RAID device any of whose components
+    are partitions, then default to installing to the MBRs of each of the
+    containing disks, since GRUB 2 will refuse to install to the partition
+    devices (LP: #457687).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 23 Oct 2009 22:02:19 +0100
+
 grub-installer (1.43ubuntu7) karmic; urgency=low
 
   * Mount /target/sys when running update-grub (LP: #456776).
