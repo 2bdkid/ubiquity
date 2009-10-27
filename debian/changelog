@@ -1,3 +1,25 @@
+ubiquity (2.0.5) karmic; urgency=low
+
+  [ Evan Dandrea ]
+  * Do not fail if linux-generic-pae is not in the package cache.
+    Thanks Colin Watson (LP: #461377).
+  * Really don't run oem-config again.  Thanks Colin Watson
+    (LP: #461546).
+  * Fix broken reference in the apport hook (LP: #461757).
+  * Add noninteractive pages for user-setup and migrationassistant as
+    well.
+  * Automatic update of included source packages: user-setup
+    1.27ubuntu11.
+
+  [ Colin Watson ]
+  * Run partman in the noninteractive frontend (otherwise we try to install
+    to the live CD root!).
+  * Explicitly print noninteractive output to the console (as the Python
+    debconf module redirects sys.stdout to sys.stderr which ends up in
+    /var/log/installer/debug).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 27 Oct 2009 13:21:40 +0000
+
 ubiquity (2.0.4) karmic; urgency=low
 
   [ Evan Dandrea ]

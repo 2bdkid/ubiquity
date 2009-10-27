@@ -52,6 +52,10 @@ class PageKde(PluginUI):
     def set_part_page(self, p):
         self.part_page = p
 
+class PageNoninteractive(PluginUI):
+    def set_part_page(self, p):
+        pass
+
 PARTITION_TYPE_PRIMARY = 0
 PARTITION_TYPE_LOGICAL = 1
 
