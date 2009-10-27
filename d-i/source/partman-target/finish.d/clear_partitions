@@ -56,8 +56,8 @@ for part in $partitions; do
 				continue
 				;;
 			esac
-			[ -e "$tmp/$x" ] && (rm -rf "$tmp/$x" &&
-			logger -t clear_partitions "Removing $x from / ($path)." ||
+			[ -e "$x" ] && (rm -rf "$x" &&
+			logger -t clear_partitions "Removing ${x#$tmp/} from / ($path)." ||
 			failed)
 		done
 		for x in $tmp/initrd* $tmp/vmlinuz*; do
