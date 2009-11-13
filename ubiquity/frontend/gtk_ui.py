@@ -33,9 +33,7 @@
 
 import sys
 import os
-import datetime
 import subprocess
-import math
 import traceback
 import syslog
 import atexit
@@ -66,6 +64,10 @@ from ubiquity.components import usersetup, \
 import ubiquity.progressposition
 import ubiquity.frontend.base
 from ubiquity.frontend.base import BaseFrontend
+
+# We create class attributes dynamically from UI files, and it's far too
+# tedious to list them all.
+__pychecker__ = 'no-classattr'
 
 # Define global path
 PATH = '/usr/share/ubiquity'
@@ -172,6 +174,7 @@ class Wizard(BaseFrontend):
         self.format_warning_align = None
         self.history = []
         self.builder = gtk.Builder()
+        self.grub_options = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
 
         self.laptop = execute("laptop-detect")
 
@@ -402,6 +405,12 @@ class Wizard(BaseFrontend):
         self.hostname_changed_id = self.hostname.connect(
             'changed', self.on_hostname_changed)
 
+        # Auto-connecting signals with additional parameters does not work.
+        self.grub_new_device_entry.connect('changed', self.grub_verify_loop,
+            self.grub_fail_okbutton)
+        self.grub_device_entry.connect('changed', self.grub_verify_loop,
+            self.advanced_okbutton)
+
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             self.debconf_progress_start(0, self.pageslen,
                 self.get_string('ubiquity/install/checking'))
@@ -570,6 +579,17 @@ class Wizard(BaseFrontend):
         if hasattr(self, 'stepPartAuto'):
             self.previous_partitioning_page = \
                 self.steps.page_num(self.stepPartAuto)
+        
+        for grub_entry in (self.grub_device_entry, self.grub_new_device_entry):
+            grub_entry.clear()
+            renderer = gtk.CellRendererText()
+            grub_entry.pack_start(renderer, True)
+            grub_entry.add_attribute(renderer, 'text', 0)
+            renderer = gtk.CellRendererText()
+            grub_entry.pack_start(renderer, True)
+            grub_entry.add_attribute(renderer, 'text', 1)
+            grub_entry.set_model(self.grub_options)
+            grub_entry.set_text_column(0)
 
         # set initial bottom bar status
         self.allow_go_backward(False)
@@ -626,6 +646,7 @@ class Wizard(BaseFrontend):
             core_names = ['ubiquity/text/%s' % q for q in self.language_questions]
             core_names.append('ubiquity/text/oem_config_title')
             core_names.append('ubiquity/text/oem_user_config_title')
+            core_names.append('ubiquity/imported/default-ltr')
             for stock_item in ('cancel', 'close', 'go-back', 'go-forward',
                                 'ok', 'quit'):
                 core_names.append('ubiquity/imported/%s' % stock_item)
@@ -819,7 +840,7 @@ class Wizard(BaseFrontend):
             # Now push fake history if needed
             i = old_index + 1
             while i < new_index:
-                for w in self.pages[i].widgets: # add 1 for each always-on widgets
+                for _ in self.pages[i].widgets: # add 1 for each always-on widgets
                     self.history.append((self.pages[i], None))
                 i += 1
 
@@ -920,6 +941,9 @@ class Wizard(BaseFrontend):
         if os.path.exists(slides):
             slides = 'file://%s#locale=%s' % (slides, lang)
             if sh >= 600 and sw >= 800:
+                ltr = i18n.get_string('default-ltr', lang, 'ubiquity/imported')
+                if ltr == 'default:RTL':
+                    slides += '#rtl'
                 try:
                     import webkit
                     webview = webkit.WebView()
@@ -993,6 +1017,7 @@ class Wizard(BaseFrontend):
                 txt = self.get_string('ubiquity/finished_restart_only')
                 self.finished_label.set_label(txt)
                 self.quit_button.hide()
+            self.finished_dialog.set_keep_above(True)
             self.finished_dialog.run()
         elif self.get_reboot():
             self.reboot()
@@ -1034,7 +1059,7 @@ class Wizard(BaseFrontend):
 
     # Callbacks
 
-    def on_quit_clicked(self, widget):
+    def on_quit_clicked(self, unused_widget):
         self.warning_dialog.show()
         response = self.warning_dialog.run()
         self.warning_dialog.hide()
@@ -1046,7 +1071,7 @@ class Wizard(BaseFrontend):
             return True # stop processing
 
 
-    def on_live_installer_delete_event(self, widget, event):
+    def on_live_installer_delete_event(self, widget, unused_event):
         return self.on_quit_clicked(widget)
 
 
@@ -1092,7 +1117,7 @@ class Wizard(BaseFrontend):
     def on_hostname_changed(self, widget):
         self.hostname_edited = (widget.get_text() != '')
 
-    def on_next_clicked(self, widget):
+    def on_next_clicked(self, unused_widget):
         """Callback to control the installation process between steps."""
 
         if not self.allowed_change_step or not self.allowed_go_forward:
@@ -1113,6 +1138,11 @@ class Wizard(BaseFrontend):
             self.username_error_box.hide()
             self.password_error_box.hide()
             self.hostname_error_box.hide()
+            
+            options = grub_options()
+            self.grub_options.clear()
+            for opt in options:
+                self.grub_options.append(opt)
 
         if self.dbfilter is not None:
             self.dbfilter.ok_handler()
@@ -1142,7 +1172,6 @@ class Wizard(BaseFrontend):
         """Processing identification step tasks."""
 
         error_msg = []
-        error = 0
 
         # Validation stuff
 
@@ -1187,7 +1216,7 @@ class Wizard(BaseFrontend):
         #        self.set_current_page(self.steps.page_num(self.stepMigrationAssistant))
 
 
-    def on_back_clicked(self, widget):
+    def on_back_clicked(self, unused_widget):
         """Callback to set previous screen."""
 
         if not self.allowed_change_step:
@@ -1215,14 +1244,15 @@ class Wizard(BaseFrontend):
             self.quit_main_loop()
 
 
-    def on_slideshow_link_clicked(self, view, frame, req, action, decision):
+    def on_slideshow_link_clicked(self, unused_view, unused_frame, req,
+                                  unused_action, decision):
         uri = req.get_uri()
         decision.ignore()
         subprocess.Popen(['sensible-browser', uri],
                          close_fds=True, preexec_fn=drop_all_privileges)
         return True
 
-    def link_button_browser (self, button, uri):
+    def link_button_browser (self, unused_button, uri):
         lang = self.locale
         lang = lang.split('.')[0] # strip encoding
         uri = uri.replace('${LANG}', lang)
@@ -1230,7 +1260,7 @@ class Wizard(BaseFrontend):
                          close_fds=True, preexec_fn=drop_all_privileges)
 
 
-    def on_steps_switch_page (self, foo, bar, current):
+    def on_steps_switch_page (self, unused_notebook, unused_page, current):
         if self.step_name(current) == 'usersetup':
             # Disable the forward button if nothing has been entered on the
             # usersetup page yet.
@@ -1385,7 +1415,7 @@ class Wizard(BaseFrontend):
             self.progress_cancel_button.hide()
             self.progress_cancelled = False
 
-    def on_progress_cancel_button_clicked (self, button):
+    def on_progress_cancel_button_clicked (self, unused_button):
         self.progress_cancelled = True
 
 
@@ -1579,7 +1609,7 @@ class Wizard(BaseFrontend):
         self.part_advanced_warning_hbox.show_all()
 
 
-    def partman_column_name (self, column, cell, model, iterator):
+    def partman_column_name (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition:
             # whole disk
@@ -1595,7 +1625,7 @@ class Wizard(BaseFrontend):
             free_space = self.get_string('partition_free_space')
             cell.set_property('text', '  %s' % free_space)
 
-    def partman_column_type (self, column, cell, model, iterator):
+    def partman_column_type (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition or 'method' not in partition:
             if ('parted' in partition and
@@ -1610,7 +1640,7 @@ class Wizard(BaseFrontend):
         else:
             cell.set_property('text', partition['method'])
 
-    def partman_column_mountpoint (self, column, cell, model, iterator):
+    def partman_column_mountpoint (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if isinstance(self.dbfilter, partman.Page):
             mountpoint = self.dbfilter.get_current_mountpoint(partition)
@@ -1620,7 +1650,7 @@ class Wizard(BaseFrontend):
             mountpoint = ''
         cell.set_property('text', mountpoint)
 
-    def partman_column_format (self, column, cell, model, iterator):
+    def partman_column_format (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition:
             cell.set_property('visible', False)
@@ -1635,7 +1665,7 @@ class Wizard(BaseFrontend):
             cell.set_property('active', False)
             cell.set_property('activatable', False)
 
-    def partman_column_format_toggled (self, cell, path, user_data):
+    def partman_column_format_toggled (self, unused_cell, path, user_data):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Page):
@@ -1648,7 +1678,7 @@ class Wizard(BaseFrontend):
         self.allow_change_step(False)
         self.dbfilter.edit_partition(devpart, format='dummy')
 
-    def partman_column_size (self, column, cell, model, iterator):
+    def partman_column_size (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition:
             cell.set_property('text', '')
@@ -1658,7 +1688,7 @@ class Wizard(BaseFrontend):
             size_mb = int(partition['parted']['size']) / 1000000
             cell.set_property('text', '%d MB' % size_mb)
 
-    def partman_column_used (self, column, cell, model, iterator):
+    def partman_column_used (self, unused_column, cell, model, iterator):
         partition = model[iterator][1]
         if 'id' not in partition or partition['parted']['fs'] == 'free':
             cell.set_property('text', '')
@@ -2047,7 +2077,7 @@ class Wizard(BaseFrontend):
         self.partition_button_undo.set_sensitive(True)
 
     def on_partition_list_treeview_row_activated (self, treeview,
-                                                  path, view_column):
+                                                  path, unused_view_column):
         if not self.allowed_change_step:
             return
         model = treeview.get_model()
@@ -2085,7 +2115,7 @@ class Wizard(BaseFrontend):
             partition = model[iterator][1]
         return (devpart, partition)
 
-    def on_partition_list_new_label_activate (self, widget):
+    def on_partition_list_new_label_activate (self, unused_widget):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Page):
@@ -2094,15 +2124,15 @@ class Wizard(BaseFrontend):
         devpart, partition = self.partition_list_get_selection()
         self.dbfilter.create_label(devpart)
 
-    def on_partition_list_new_activate (self, widget):
+    def on_partition_list_new_activate (self, unused_widget):
         devpart, partition = self.partition_list_get_selection()
         self.partman_create_dialog(devpart, partition)
 
-    def on_partition_list_edit_activate (self, widget):
+    def on_partition_list_edit_activate (self, unused_widget):
         devpart, partition = self.partition_list_get_selection()
         self.partman_edit_dialog(devpart, partition)
 
-    def on_partition_list_delete_activate (self, widget):
+    def on_partition_list_delete_activate (self, unused_widget):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Page):
@@ -2111,7 +2141,7 @@ class Wizard(BaseFrontend):
         devpart, partition = self.partition_list_get_selection()
         self.dbfilter.delete_partition(devpart)
 
-    def on_partition_list_undo_activate (self, widget):
+    def on_partition_list_undo_activate (self, unused_widget):
         if not self.allowed_change_step:
             return
         if not isinstance(self.dbfilter, partman.Page):
@@ -2269,7 +2299,7 @@ class Wizard(BaseFrontend):
 
     def ma_set_choices(self, choices):
 
-        def cell_data_func(column, cell, model, iterator):
+        def cell_data_func(unused_column, cell, model, iterator):
             val = model.get_value(iterator, 1)
             if model.iter_children(iterator):
                 # Windows XP...
@@ -2331,7 +2361,7 @@ class Wizard(BaseFrontend):
                         choice['items'] = new_items
                         kept = True
                         break
-                if kept == False:
+                if not kept:
                     piter = treestore.append(None, [False, choice])
                     for item in choice['items']:
                         treestore.append(piter, [False, item])
@@ -2417,28 +2447,14 @@ class Wizard(BaseFrontend):
         ready_buffer.set_text(text)
         self.ready_text.set_buffer(ready_buffer)
 
-    def set_grub_combo (self, options):
-        self.grub_device_entry.clear()
-        l = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
-        renderer = gtk.CellRendererText()
-        self.grub_device_entry.pack_start(renderer, True)
-        self.grub_device_entry.add_attribute(renderer, 'text', 0)
-        renderer = gtk.CellRendererText()
-        self.grub_device_entry.pack_start(renderer, True)
-        self.grub_device_entry.add_attribute(renderer, 'text', 1)
-        for opt in options:
-            l.append(opt)
-        self.grub_device_entry.set_model(l)
-        self.grub_device_entry.set_text_column(0)
-
-    def grub_verify_loop(self, widget):
+    def grub_verify_loop(self, widget, okbutton):
         if widget is not None:
             if validation.check_grub_device(widget.child.get_text()):
-                self.advanced_okbutton.set_sensitive(True)
+                okbutton.set_sensitive(True)
             else:
-                self.advanced_okbutton.set_sensitive(False)
+                okbutton.set_sensitive(False)
 
-    def on_advanced_button_clicked (self, button):
+    def on_advanced_button_clicked (self, unused_button):
         display = False
         grub_en = self.get_grub()
         summary_device = self.get_summary_device()
@@ -2549,6 +2565,38 @@ class Wizard(BaseFrontend):
         if fatal:
             self.return_to_partitioning()
 
+    def toggle_grub_fail (self, unused_widget):
+        if self.grub_no_new_device.get_active():
+            self.no_grub_warn.show()
+            self.grub_new_device_entry.set_sensitive(False)
+            self.abort_warn.hide()
+        elif self.grub_fail_option.get_active():
+            self.abort_warn.show()
+            self.no_grub_warn.hide()
+            self.grub_new_device_entry.set_sensitive(False)
+        else:
+            self.abort_warn.hide()
+            self.no_grub_warn.hide()
+            self.grub_new_device_entry.set_sensitive(True)
+
+    def bootloader_dialog (self, current_device):
+        l = self.skip_label.get_label()
+        l = l.replace('${RELEASE}', get_release_name())
+        self.skip_label.set_label(l)
+        self.grub_new_device_entry.child.set_text(current_device)
+        self.grub_new_device_entry.child.grab_focus()
+        response = self.bootloader_fail_dialog.run()
+        self.bootloader_fail_dialog.hide()
+        if response == gtk.RESPONSE_OK:
+            if self.grub_new_device.get_active():
+                return self.grub_new_device_entry.child.get_text()
+            elif self.grub_no_new_device.get_active():
+                return 'skip'
+            else:
+                return ''
+        else:
+            return ''
+        
     def question_dialog (self, title, msg, options, use_templates=True):
         self.run_automation_error_cmd()
         # TODO cjwatson 2009-04-16: We need to call allow_change_step here

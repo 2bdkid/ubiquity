@@ -135,7 +135,7 @@ class DebconfInstallProgress(InstallProgress):
             self.db.input('critical', self.error_template)
             self.db.go()
 
-    def statusChange(self, pkg, percent, status):
+    def statusChange(self, dummypkg, percent, status):
         self.percent = percent
         self.status = status
         self.db.progress('SET', int(percent))
@@ -292,6 +292,8 @@ class Install:
             self.source = None
             self.target = '/'
             return
+
+        assert os.path.ismount(self.target), 'Failed to mount the target.'
 
         self.select_language_packs()
         self.select_ecryptfs()
@@ -692,9 +694,7 @@ class Install:
         # Obviously doing os.walk() twice is inefficient, but I'd rather not
         # suck the list into ubiquity's memory, and I'm guessing that the
         # kernel's dentry cache will avoid most of the slowness anyway.
-        walklen = 0
-        for entry in os.walk(self.source):
-            walklen += 1
+        walklen = sum(1 for _ in os.walk(self.source))
         walkpos = 0
         walkprogress = 0
 
@@ -733,6 +733,7 @@ class Install:
         times = [(time_start, copied_size)]
         long_enough = False
         time_last_update = time_start
+        debug = 'UBIQUITY_DEBUG' in os.environ
         if self.db.get('ubiquity/install/md5_check') == 'false':
             md5_check = False
         else:
@@ -762,7 +763,8 @@ class Install:
                 os.mknod(targetpath, stat.S_IFSOCK | mode)
             elif stat.S_ISREG(st.st_mode):
                 if '/%s' % path in self.blacklist:
-                    syslog.syslog('Not copying %s' % path)
+                    if debug:
+                        syslog.syslog('Not copying %s' % path)
                     continue
                 if os.path.exists(targetpath):
                     os.unlink(targetpath)
@@ -1397,6 +1399,9 @@ exit 0"""
         if len(self.languages) == 1 and self.languages[0] in ('C', 'en'):
             return # always complete enough
 
+        if self.db.get('pkgsel/ignore-incomplete-language-support'):
+            return
+
         cache = Cache()
         incomplete = False
         for pkg in self.langpacks:
@@ -1460,8 +1465,8 @@ exit 0"""
             dbfilter = migrationassistant_apply.MigrationAssistantApply(None)
             ret = dbfilter.run_command(auto_process=True)
             if ret != 0:
-                raise InstallStepError("MigrationAssistantApply failed with code %d" % ret)
-
+                self.db.input('critical', 'ubiquity/install/broken_migration')
+                self.db.go()
 
     def get_resume_partition(self):
         biggest_size = 0
@@ -1677,6 +1682,9 @@ exit 0"""
         Unfortunately, at present we have to duplicate a fair bit of netcfg
         here, because it's hard to drive netcfg in a way that won't try to
         bring interfaces up and down."""
+        
+        if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
+            return
 
         # TODO cjwatson 2006-03-30: just call netcfg instead of doing all
         # this; requires a netcfg binary that doesn't bring interfaces up
@@ -1753,7 +1761,6 @@ exit 0"""
 
             for i in range(len(interfaces)):
                 dup = False
-                with_arp = False
 
                 if_name = if_names[interfaces[i]]
                 if if_name is None or if_name[0] != ARPHRD_ETHER:
@@ -1794,11 +1801,26 @@ exit 0"""
             try:
                 if arch in ('amd64', 'i386', 'lpia'):
                     from ubiquity.components import grubinstaller
-                    dbfilter = grubinstaller.GrubInstaller(None)
-                    ret = dbfilter.run_command(auto_process=True)
-                    if ret != 0:
-                        raise InstallStepError(
-                            "GrubInstaller failed with code %d" % ret)
+                    while 1:
+                        dbfilter = grubinstaller.GrubInstaller(None)
+                        ret = dbfilter.run_command(auto_process=True)
+                        if ret != 0:
+                            old_bootdev = self.db.get('grub-installer/bootdev')
+                            bootdev = 'ubiquity/install/new-bootdev'
+                            self.db.fset(bootdev, 'seen', 'false')
+                            self.db.set(bootdev, old_bootdev)
+                            self.db.input('critical', bootdev)
+                            self.db.go()
+                            response = self.db.get(bootdev)
+                            if response == 'skip':
+                                break
+                            if not response:
+                                raise InstallStepError(
+                                    "GrubInstaller failed with code %d" % ret)
+                            else:
+                                self.db.set('grub-installer/bootdev', response)
+                        else:
+                            break
                 elif (arch == 'armel' and
                       subarch in ('dove', 'imx51', 'iop32x', 'ixp4xx', 'orion5x')):
                     from ubiquity.components import flash_kernel

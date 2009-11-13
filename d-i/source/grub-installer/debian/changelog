@@ -1,3 +1,94 @@
+grub-installer (1.47ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Show the grub menu and raise the menu timeout if other operating
+      systems are installed (only for GRUB Legacy right now).
+    - Ask grub-installer/only_debian at medium priority.
+    - Remove splash boot parameter unless debian-installer/framebuffer=true.
+    - If / or /boot are on a removable device, install GRUB there by
+      default.
+    - Only mount /target/proc if it isn't already mounted.
+    - Support setting OVERRIDE_UNSUPPORTED_OS in the environment to force
+      grub-installer to use its default MBR selection method despite there
+      being unsupported operating systems on the disk.
+    - Unless grub-installer/make_active is preseeded to false, mark the
+      partition to which GRUB is being installed as bootable, or failing
+      that the first available primary partition on the disk to which GRUB
+      is being installed.
+    - Support grub-installer/bootdev_directory preseeding to make use of the
+      relative path feature of grub4dos, so that we can point grub4dos at
+      part of a disk for Wubi. Setting this disables normal grub
+      installation, but still generates a device.map (for GRUB Legacy only);
+      it also hides the menu.
+    - Handle cases where /boot is bind-mounted.
+    - Add support for writing an GRUB Legacy MBR on each disk in an
+      mdadm-managed RAID providing /boot. (GRUB 2 can handle this already.)
+    - Properly make use of output from os-prober to configure the booting of
+      other operating systems on dmraid arrays. Attempt to guess where in
+      the device map the array belongs, by substituting the first drive in
+      the dmraid array for the dmraid array device node itself, and removing
+      any reference to other member disks of the array.
+    - Set a sensible default boot device when /cdrom is not iso9660, as this
+      is probably a USB install and (hd0) does not make sense when
+      installing from a removable disk.
+    - Go back to using update-grub -y for GRUB Legacy for now; our grub
+      package is a bit old and still requires this.
+    - Default to grub2 for GPT systems.
+    - Allow grub/grub2 choice for ext4, though still default to grub2.
+    - Preseed grub-pc/install_devices based on grub-installer/bootdev.
+    - If /boot is on an MD device and we're using GRUB 2, install GRUB there
+      rather than (hd0); GRUB 2 will interpret that as meaning that it needs
+      to install to each of the RAID members.
+    - Always use GRUB Legacy when /boot is on a multipath device.
+    - Mount /target/sys when running update-grub.
+    - If using GRUB 2 and installing to a RAID device any of whose
+      components are partitions, then default to installing to the MBRs of
+      each of the containing disks, since GRUB 2 will refuse to install to
+      the partition devices.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 11 Nov 2009 16:49:33 +0000
+
+grub-installer (1.47) unstable; urgency=low
+
+  [ Colin Watson ]
+  * By request of grub2's Debian maintainers, pass --force to grub-install
+    when using GRUB 2, in order to override the warning about using
+    blocklists in the event that the user selected an installation location
+    that requires them.
+  * Fix typo in fallback case when computing $disc_offered_devfs.
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Fri, 16 Oct 2009 21:37:43 +0200
+
+grub-installer (1.46) unstable; urgency=low
+
+  [ Colin Watson ]
+  * grub_write_divider is specific to GRUB Legacy; don't call it for GRUB 2.
+
+  [ Felix Zielcke ]
+  * Merge from Ubuntu:
+    - Explicitly install os-prober when using GRUB 2, since it does a better
+      job than the otheros script.
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Tue, 29 Sep 2009 19:24:39 +0200
+
+grub-installer (1.45) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Fix some hardcoded uses of /target.
+
+  [ Felix Zielcke ]
+  * Install GRUB 2 by default.
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Mon, 21 Sep 2009 23:21:05 +0200
+
+grub-installer (1.44) unstable; urgency=low
+
+  * Try installing `grub-legacy' first before `grub' in case GRUB Legacy
+    has to be installed.
+  * Remove Robert Millan from Uploaders with his permission.
+
+ -- Felix Zielcke <fzielcke@z-51.de>  Mon, 21 Sep 2009 11:20:05 +0200
+
 grub-installer (1.43ubuntu8) karmic; urgency=low
 
   * If using GRUB 2 and installing to a RAID device any of whose components

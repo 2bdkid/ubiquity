@@ -1,3 +1,24 @@
+debian-installer-utils (1.71ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - user-params: Don't propagate vga=* or break=* to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "usb-partition" type for detecting partitions on USB
+      drives; new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 12 Nov 2009 03:21:30 -0800
+
+debian-installer-utils (1.71) unstable; urgency=low
+
+  [ Luca Favatella ]
+  * Add 'cons25' terminfo file (used by kfreebsd-i386).
+  * Make di-utils-terminfo Architecture: any to avoid size increase.
+
+ -- Colin Watson <cjwatson@debian.org>  Sat, 18 Jul 2009 20:58:07 +0200
+
 debian-installer-utils (1.70ubuntu2) karmic; urgency=low
 
   * list-devices: also allow platform-mxsdhci and platform-orion-ehci as

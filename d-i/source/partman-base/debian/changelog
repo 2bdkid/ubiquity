@@ -1,3 +1,44 @@
+partman-base (135ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use ext4 as the default filesystem for new partitions.
+    - Use linux-swap(v1) instead of linux-swap(new) to reflect changes to
+      parted.
+    - Build with -O2 on powerpc to avoid a suspected toolchain bug.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Nov 2009 12:31:13 +0000
+
+partman-base (135) unstable; urgency=low
+
+  [ Aurelien Jarno ]
+  * Allow the default filesystem to depends on the architecture.
+  * Change the default filesystem to ufs on GNU/kFreeBSD.
+  * Correctly detect cdrom and floppy drives on GNU/kFreeBSD.
+  * Add support for GNU/kFreeBSD in human_dev() and add the 
+    corresponding templates.
+
+ -- Aurelien Jarno <aurel32@debian.org>  Sun, 23 Aug 2009 18:57:00 +0200
+
+partman-base (134) unstable; urgency=low
+
+  * Change disable_swap to take $id as second optional argument. Some 
+    callers need this to disable swap on a partition.
+  * Add myself to uploaders.
+
+ -- Max Vozeler <xam@debian.org>  Thu, 06 Aug 2009 17:29:48 +0200
+
 partman-base (133ubuntu4) karmic; urgency=low
 
   * Build with -O2 on powerpc to avoid a suspected toolchain bug

@@ -1,3 +1,25 @@
+tzsetup (1:0.26ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Make it possible to select from a worldwide list of timezones if the
+      default list is insufficient.
+    - Offer UTC in worldwide list of timezones.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 10 Nov 2009 15:11:16 +0000
+
+tzsetup (1:0.26) unstable; urgency=low
+
+  * Also test that time/zone is not empty in post-base-installer script.
+    See #538344.
+  * Change Priority to optional since udeb gets pulled in by clock-setup
+    and is not functional by itself.
+
+  [ Updated translations ]
+  * Hindi (hi.po)
+  * Italian (it.po) by Milo Casagrande
+
+ -- Frans Pop <fjp@debian.org>  Sun, 02 Aug 2009 10:42:41 +0200
+
 tzsetup (1:0.25ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

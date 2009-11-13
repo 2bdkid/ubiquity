@@ -567,13 +567,25 @@ case "$grub_package" in
     grub-pc)
 	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy
 	# os-prober is only a Recommends so isn't installed by apt-install,
-	# but in Ubuntu we make sure it's installed since it does a better
+	# but we make sure it's installed since it does a better
 	# job than the otheros script.
 	apt-install os-prober || true
 	;;
 esac
 
-if ! apt-install $grub_package ; then
+exit_code=0
+case "$grub_package" in
+    grub)
+	if ! apt-install grub-legacy ; then
+		apt-install $grub_package || exit_code=$? 
+	fi
+	;;
+   *)
+	apt-install $grub_package || exit_code=$? 
+	;;
+esac
+
+if [ $exit_code -ne 0 ] ; then
 	db_progress STOP
 	info "Calling 'apt-install $grub_package' failed"
 	db_subst grub-installer/apt-install-failed GRUB "$grub_package"
@@ -838,6 +850,9 @@ if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 
 		if [ "$grub_version" = "grub" ] ; then
 			grub_install_params="$grub_install_params $recheck"
+		else
+			# install even if it requires blocklists
+			grub_install_params="$grub_install_params --force"
 		fi
 
 		info "Running $chroot $ROOT grub-install $grub_install_params \"$bootdev\""

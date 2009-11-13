@@ -974,6 +974,36 @@ humandev () {
 	    db_metaget partman/text/virtual_partition description
 	    printf "$RET" "$drive" "$part" "$linux"
 	    ;;
+	/dev/ad[0-9])
+	    drive=$(echo $1 | sed 's,/dev/ad\([0-9]\).*,\1,')
+	    drive=$(($drive + 1))
+	    kfreebsd=${1#/dev/}
+	    db_metaget partman/text/ata_disk description
+	    printf "$RET" "$drive" "$kfreebsd"
+	    ;;
+	/dev/ad[0-9]s[0-9]*)
+	    drive=$(echo $1 | sed 's,/dev/ad\([0-9]\).*,\1,')
+	    drive=$(($drive + 1))
+	    partition=$(echo $1 | sed 's,/dev/ad[0-9]s\([0-9]\).*,\1,')
+	    kfreebsd=${1#/dev/}
+	    db_metaget partman/text/ata_partition description
+	    printf "$RET" "$drive" "$part" "$kfreebsd"
+	    ;;
+	/dev/da[0-9])
+	    drive=$(echo $1 | sed 's,/dev/da\([0-9]\).*,\1,')
+	    drive=$(($drive + 1))
+	    kfreebsd=${1#/dev/}
+	    db_metaget partman/text/scsi_simple_disk description
+	    printf "$RET" "$drive" "$kfreebsd"
+	    ;;
+	/dev/da[0-9]s[0-9]*)
+	    drive=$(echo $1 | sed 's,/dev/da\([0-9]\).*,\1,')
+	    drive=$(($drive + 1))
+	    partition=$(echo $1 | sed 's,/dev/da[0-9]s\([0-9]\).*,\1,')
+	    kfreebsd=${1#/dev/}
+	    db_metaget partman/text/scsi_simple_partition description
+	    printf "$RET" "$drive" "$part" "$kfreebsd"
+	    ;;
 	*)
 	    # Check if it's an LVM1 device
 	    vg=`echo "$1" | sed -e 's,/dev/\([^/]\+\).*,\1,'`
@@ -1036,12 +1066,24 @@ enable_swap () {
 }
 
 disable_swap () {
+    local dev=$1
+    local id=$2
+
     [ -f /proc/swaps ] || return 0
-    if [ "$1" ] && [ -d "$1" ]; then
-	local path device dev
-	dev="$1"
+
+    if [ "$dev" ] && [ -d "$dev" ]; then
+	local device
 	cd $dev
-	device=$(cat device)
+	if [ "$id" ] && [ -d "$id" ]; then
+	    open_dialog PARTITION_INFO "$id"
+	    read_line x1 x2 x3 x4 x5 device x7
+	    close_dialog
+	    # Add space to ensure we won't match substrings.
+	    device="$device "
+	else
+	    device=$(cat device)
+	fi
+
 	grep "^$device" /proc/swaps \
 	    | while read path x; do
 		  swapoff $path

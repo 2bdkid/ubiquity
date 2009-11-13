@@ -1,3 +1,39 @@
+user-setup (1.28ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Add the initial user to the adm, dip, lpadmin, and sambashare groups
+      too, and to the admin group if no root password is set. Do not add
+      them to the audio, video, floppy, dip, netdev, powerdev, scanner, or
+      bluetooth groups.
+    - Allow the admin group to gain root privileges using sudo.
+    - Default passwd/root-login to false.
+    - Create the spu group on powerpc/ps3 and powerpc/cell.
+    - Make is_system_user always return false if OVERRIDE_SYSTEM_USER is
+      set.
+    - Add preseedable passwd/auto-login question; if set to true, configure
+      gdm and kdm for automatic login. Add passwd/auto-login-backup question
+      which backs up the previous contents of the files as well.
+    - Ask whether the user wants to encrypt their home directory.
+    - Zero out swap devices at the end of install when encryption is
+      enabled.
+    - If user-setup/allow-password-empty is preseeded to true, allow empty
+      passwords.
+    - Disable installation of pre-pkgsel.d/10kdesudo; it does nothing for
+      Ubuntu, and causes a confusing message that worries some people.
+    - Add weak password detection (purely length-based for now, matching
+      partman-crypto).
+    - Consider a password of '!' in shadow for root to be unset.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 11 Nov 2009 13:51:01 +0000
+
+user-setup (1.28) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Add initial user to new bluetooth group (split from netdev group
+    in bluez-utils 4.40-3)
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Tue, 21 Jul 2009 12:28:09 -0300
+
 user-setup (1.27ubuntu11) karmic; urgency=low
 
   * Check if filesystems are already mounted before attempting to mount
