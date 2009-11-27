@@ -1,3 +1,31 @@
+ubiquity (2.1.1) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Run success_cmd, error_cmd, and automation_error_cmd as root.
+  * Use /cdrom/casper/filesystem.size instead of calculating the size of
+    /rofs on each run.
+  * Include a progress message for ubiquity/success_command.
+  * Do not use the preseeded install progress message as the install
+    window title.  Use a more understandable string.
+  * Check the syntax of any shell scripts in the source tree as part of
+    debian/rules check.
+
+  [ Mario Limonciello ]
+  * When calling execute_root, don't pass a list because everything
+    passed is translated into a tupple.  Passing a list causes subprocess to
+    fail when invoked.
+
+  [ Colin Watson ]
+  * Add a button to the language page to upgrade the installer on the fly,
+    based on work by Michael Vogt several years ago (LP: #55505).
+  * GTK frontend:
+    - Only set the debconf progress window's transience and type hint when
+      it isn't already being shown.
+  * Automatic update of included source packages: debian-installer-utils
+    1.72ubuntu1.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Nov 2009 20:02:26 +0000
+
 ubiquity (2.1.0) lucid; urgency=low
 
   [ Evan Dandrea ]
