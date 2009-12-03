@@ -138,9 +138,9 @@ class Page(Plugin):
         because this preserves ordering and is reasonably fast to convert to
         a dictionary.)"""
 
+        options = []
         try:
             snoop = open('/var/lib/partman/snoop')
-            options = []
             for line in snoop:
                 line = unicode(line.rstrip('\n'), 'utf-8', 'replace')
                 fields = line.split('\t', 1)
@@ -149,9 +149,9 @@ class Page(Plugin):
                     options.append((key, option))
                     continue
             snoop.close()
-            return options
         except IOError:
-            return {}
+            pass
+        return options
 
     def snoop_menu(self, options):
         """Parse the raw snoop data into script, argument, and displayed
@@ -1176,14 +1176,14 @@ class Page(Plugin):
         self.exit_ui_loops()
 
     def edit_partition(self, devpart, size=None,
-                       method=None, mountpoint=None, format=None):
+                       method=None, mountpoint=None, fmt=None):
         assert self.current_question == 'partman/choose_partition'
         self.editing_partition = {
             'devpart': devpart,
             'size': size,
             'method': method,
             'mountpoint': mountpoint,
-            'format': format
+            'format': fmt
         }
         self.exit_ui_loops()
 
