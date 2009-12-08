@@ -682,10 +682,18 @@ EOF
 	# Advance progress bar to 30% of allocated space for install_linux
 	update_progress 30 100
 
+	# Always ignore Recommends for the kernel; we don't want to install
+	# bootloaders at this point
+	cat >$APT_CONFDIR/00InstallRecommendsKernel <<EOT
+APT::Install-Recommends "false";
+EOT
+
 	# Install the kernel
 	db_subst base-installer/section/install_kernel_package SUBST0 "$KERNEL"
 	db_progress INFO base-installer/section/install_kernel_package
 	log-output -t base-installer apt-install "$KERNEL" || kernel_install_failed=$?
+
+	rm -f $APT_CONFDIR/00InstallRecommendsKernel
 
 	db_get base-installer/kernel/headers
 	if [ "$RET" = true ]; then

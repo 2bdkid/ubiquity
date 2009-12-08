@@ -1,3 +1,10 @@
+base-installer (1.103ubuntu2) lucid; urgency=low
+
+  * Explicitly ignore Recommends while installing the kernel. We don't want
+    to install bootloaders at this point.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 04 Dec 2009 15:04:25 +0000
+
 base-installer (1.103ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
