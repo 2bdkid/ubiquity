@@ -1,3 +1,18 @@
+partman-base (135ubuntu2) lucid; urgency=low
+
+  * Avoid some unnecessary work in debconf_select when PARTMAN_SNOOP is not
+    set.
+  * Call sed outside debconf_select's inner loop. In my benchmarks using two
+    disks with eight partitions each, this reduces debconf_select's runtime
+    on partman/choose_partition from 0.69 seconds to 0.07 seconds.
+  * Cache the output of partition_tree_choices for each disk, invalidating
+    the cache whenever we update a partition on the disk. In the above
+    benchmark, this saves on the order of half a second every time we
+    redisplay the partition tree when nothing has changed (e.g. on backing
+    up from a partition).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 15 Dec 2009 23:32:31 +0000
+
 partman-base (135ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

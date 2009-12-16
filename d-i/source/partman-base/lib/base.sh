@@ -138,15 +138,21 @@ debconf_select () {
 	fi
 	keys=""
 	descriptions=""
+	case $PARTMAN_SNOOP in
+		?*)
+			echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; x; s/$TAB.*//; G; s/\\n/$TAB/" >> /var/lib/partman/snoop
+			;;
+	esac
+	# Use the hold space carefully here to allow us to make some
+	# substitutions on only the RHS (description).
+	choices="$(echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; s/,/\\\\,/g; s/^ /\\\\ /; x; s/$TAB.*//; G; s/\\n/$TAB/")"
 	IFS="$NL"
 	for x in $choices; do
-		local key plugin option
+		local key plugin
 		restore_ifs
 		key="${x%$TAB*}"
 		keys="${keys:+${keys}, }$key"
-		descriptions="${descriptions:+${descriptions}, }$(
-			echo "${x#*$TAB}" |
-			sed "s/ *\$//g; s/^ /$debconf_select_lead/g; s/,/\\\\,/g; s/^ /\\\\ /")"
+		descriptions="${descriptions:+${descriptions}, }${x#*$TAB}"
 
 		# If the question was asked via ask_user, this allow preseeding
 		# by using the name of the plugin responsible for the answer.
@@ -157,12 +163,6 @@ debconf_select () {
 				default="$key"
 			fi
 		fi
-		option=$(echo "${x#*$TAB}" | sed "s/ *\$//g; s/^ /$debconf_select_lead/g")
-		case $PARTMAN_SNOOP in
-			?*)
-				echo "$key$TAB$option" >> /var/lib/partman/snoop
-				;;
-		esac
 	done
 	# You can preseed questions asked through this function by using
 	# the key (the part before the tab).
@@ -259,7 +259,11 @@ partition_tree_choices () {
 	local IFS
 	for dev in $DEVICES/*; do
 		[ -d $dev ] || continue
-		printf "%s//\t%s\n" $dev "$(device_name $dev)" # GETTEXT?
+		if [ -e "$dev/partition_tree_cache" ]; then
+			cat "$dev/partition_tree_cache"
+			continue
+		fi
+		printf "%s//\t%s\n" $dev "$(device_name $dev)" >"$dev/partition_tree_cache" # GETTEXT?
 		cd $dev
 
 		open_dialog PARTITIONS
@@ -271,8 +275,9 @@ partition_tree_choices () {
 		while { read num id size type fs path name; [ "$id" ]; }; do
 			part=${dev}/$id
 			[ -f $part/view ] || continue
-			printf "%s//%s\t%s\n" "$dev" "$id" $(cat $part/view)
+			printf "%s//%s\t%s\n" "$dev" "$id" $(cat $part/view) >>partition_tree_cache
 		done
+		cat partition_tree_cache
 		restore_ifs
 	done
 }
@@ -440,6 +445,7 @@ update_partition () {
 	read_line part
 	close_dialog
 	[ "$part" ] || return 0
+	rm -f partition_tree_cache
 	for u in /lib/partman/update.d/*; do
 		[ -x "$u" ] || continue
 		$u $1 $part

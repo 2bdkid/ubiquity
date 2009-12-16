@@ -344,6 +344,7 @@ package KeyboardNames;
 	'German (Macintosh)' => 'de_mac',
 	'German, Sun dead keys' => 'de_sundeadkeys',
 	'German, eliminate dead keys' => 'de_nodeadkeys',
+	'Legacy' => 'legacy',
     },
     'cn' => {
 	'Tibetan' => 'tib',
