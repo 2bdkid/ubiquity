@@ -1,3 +1,12 @@
+partman-base (135ubuntu3) lucid; urgency=low
+
+  * Check for a per-menu 'no_show_choices' file in ask_user. If it exists,
+    don't reshow the menu. This is intended for use in Ubiquity, where it's
+    useful to drive partman back and forward through menus without
+    necessarily needing to recalculate the menu choices every time.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 21 Dec 2009 16:55:36 +0000
+
 partman-base (135ubuntu2) lucid; urgency=low
 
   * Avoid some unnecessary work in debconf_select when PARTMAN_SNOOP is not

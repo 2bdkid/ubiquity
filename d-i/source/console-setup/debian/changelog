@@ -1,3 +1,14 @@
+console-setup (1.34ubuntu6) lucid; urgency=low
+
+  * debian/console-setup.initramfs-hook: There's no harm having the hook
+    run in the non-framebuffer case, it just copies things into the
+    initramfs which may be useful.
+  * debian/rules: That means we can copy the hook into scripts/panic as
+    well (stripping the OPTION from it), so when we need a shell, we'll
+    load the keymap.
+
+ -- Scott James Remnant <scott@ubuntu.com>  Fri, 18 Dec 2009 14:56:03 +0000
+
 console-setup (1.34ubuntu5) lucid; urgency=low
 
   * We don't need the initramfs hooks if the initramfs doesn't load the

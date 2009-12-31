@@ -193,6 +193,10 @@ ask_user () {
 		default=""
 	fi
 	choices=$(
+		if [ -e $dir/no_show_choices ]; then
+			printf "dummy__________dummy$TAB\n"
+			exit 0
+		fi
 		local skip_divider=1
 		for plugin in $dir/*; do
 			[ -d $plugin ] || continue
