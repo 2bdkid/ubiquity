@@ -1,3 +1,22 @@
+ubiquity (2.1.7) lucid; urgency=low
+
+  [ Mario Limonciello ]
+  * Mythbuntu: Reconfigure mythbuntu-default-settings to ensure that the
+    DefaultSession is set.
+  * Only run hal-lock if hald is actually running due to changes in
+    hal 0.5.14-0ubuntu2.
+  * Widget names are no longer stored in the widget's internal name, but
+    rather in the object data.  Sync this information back to the widget's
+    internal name. (LP: #503710)
+  * Automatic update of included source packages: grub-installer
+    1.49ubuntu1.
+
+  [ Evan Dandrea ]
+  * Copy any network configuration set up by the user of the live CD to
+    the installed system.
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Wed, 06 Jan 2010 03:37:13 -0600
+
 ubiquity (2.1.6) lucid; urgency=low
 
   [ Colin Watson ]
