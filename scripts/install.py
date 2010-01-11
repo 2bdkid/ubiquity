@@ -445,10 +445,20 @@ class Install:
             self.remove_broken_cdrom()
             try:
                 self.copy_network_config()
-            except Exception, e:
-                syslog.syslog('Could not copy network config: %s' % str(e))
+            except:
+                syslog.syslog(syslog.LOG_WARNING,
+                    'Could not copy the network configuration:')
+                for line in traceback.format_exc().split('\n'):
+                    syslog.syslog(syslog.LOG_WARNING, line)
                 self.db.input('critical', 'ubiquity/install/broken_network_copy')
                 self.db.go()
+            try:
+                self.recache_apparmor()
+            except:
+                syslog.syslog(syslog.LOG_WARNING,
+                    'Could not create an Apparmor cache:')
+                for line in traceback.format_exc().split('\n'):
+                    syslog.syslog(syslog.LOG_WARNING, line)
                 
             self.copy_dcd()
 
@@ -2405,7 +2415,10 @@ exit 0"""
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             return
 
-        casper_user = os.path.expanduser('~%s' % os.environ['SUDO_USER'])
+        if 'SUDO_USER' in os.environ:
+            casper_user = os.path.expanduser('~%s' % os.environ['SUDO_USER'])
+        else:
+            casper_user = os.path.expanduser('~')
         target_user = self.db.get('passwd/username')
 
         # GTK
@@ -2452,6 +2465,21 @@ exit 0"""
         
         # KDE TODO
             
+    def recache_apparmor(self):
+        """Generate an apparmor cache in /etc/apparmor.d/cache to speed up boot
+        time."""
+        if not os.path.exists(os.path.join(self.target, 'etc/init.d/apparmor')):
+            syslog.syslog('Apparmor is not installed, so not generating cache.')
+            return
+        self.chrex('mount', '-t', 'proc', 'proc', '/proc')
+        self.chrex('mount', '-t', 'sysfs', 'sysfs', '/sys')
+        self.chrex('mount', '-t', 'securityfs',
+                   'securityfs', '/sys/kernel/security')
+        self.chrex('/etc/init.d/apparmor', 'recache')
+        self.chrex('umount', '/proc')
+        self.chrex('umount', '/sys/kernel/security')
+        self.chrex('umount', '/sys')
+
     def cleanup(self):
         """Miscellaneous cleanup tasks."""
 
