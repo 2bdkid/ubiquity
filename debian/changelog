@@ -1,3 +1,22 @@
+ubiquity (2.1.11) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Remove ubiquity on successful completion of oem-config (LP: #210779).
+
+  [ Didier Roche ]
+  * Rebuild needed to take 1.28ubuntu2 user-setup-apply version (LP: #507121)
+
+  [ Colin Watson ]
+  * Log calls to partman's freeze_choices and thaw_choices.
+  * Revert frozen choices change from 2.1.8.  Instead, arrange to thaw
+    choices for partman/choose_partition immediately *before* going back to
+    it at the end of building the cache, rather than just after it's
+    displayed when thawing choices has no immediate effect (LP: #506585).
+  * Automatic update of included source packages: partman-base 135ubuntu4,
+    user-setup 1.28ubuntu2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 16 Jan 2010 00:31:16 +0000
+
 ubiquity (2.1.10) lucid; urgency=low
 
   [ Colin Watson ]

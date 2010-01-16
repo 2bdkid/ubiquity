@@ -1,3 +1,12 @@
+partman-base (135ubuntu4) lucid; urgency=low
+
+  * Fix regression from calling sed outside debconf_select's inner loop:
+    remove empty choices, which confused cdebconf.  This notably happened
+    when asking partman-auto/choose_recipe with a trailing newline on the
+    choices list (LP: #507059).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 14 Jan 2010 01:39:30 +0000
+
 partman-base (135ubuntu3) lucid; urgency=low
 
   * Check for a per-menu 'no_show_choices' file in ask_user. If it exists,

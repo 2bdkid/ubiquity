@@ -140,12 +140,12 @@ debconf_select () {
 	descriptions=""
 	case $PARTMAN_SNOOP in
 		?*)
-			echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; x; s/$TAB.*//; G; s/\\n/$TAB/" >> /var/lib/partman/snoop
+			echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; x; s/$TAB.*//; G; s/\\n/$TAB/; s/^$TAB\$//" >> /var/lib/partman/snoop
 			;;
 	esac
 	# Use the hold space carefully here to allow us to make some
 	# substitutions on only the RHS (description).
-	choices="$(echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; s/,/\\\\,/g; s/^ /\\\\ /; x; s/$TAB.*//; G; s/\\n/$TAB/")"
+	choices="$(echo "$choices" | sed "h; s/.*$TAB//; s/ *\$//g; s/^ /$debconf_select_lead/g; s/,/\\\\,/g; s/^ /\\\\ /; x; s/$TAB.*//; G; s/\\n/$TAB/; s/^$TAB\$//")"
 	IFS="$NL"
 	for x in $choices; do
 		local key plugin

@@ -245,17 +245,24 @@ if [ "$RET" = true ] && ! is_system_user; then
 
 			if [ -d "$ROOT/etc/gdm" ]; then
 				# Configure GDM autologin
-				if [ -e "$ROOT/etc/gdm/custom.conf" ] && [ "$BACKUP" ]; then
-					mv "$ROOT/etc/gdm/custom.conf" "$ROOT/etc/gdm/custom.conf$BACKUP"
+				GDMCustomFile=$ROOT/etc/gdm/custom.conf
+				if [ -e "$GDMCustomFile" ] && [ "$BACKUP" ]; then
+					cp "$GDMCustomFile" "${GDMCustomFile}$BACKUP"
 				fi
-				cat > $ROOT/etc/gdm/custom.conf <<EOF
-[daemon]
-AutomaticLoginEnable=true
-AutomaticLogin=$USER
-TimedLoginEnable=true
-TimedLogin=$USER
-TimedLoginDelay=10
-EOF
+				AutologinParameters="AutomaticLoginEnable=true\n\
+AutomaticLogin=$USER\n\
+TimedLoginEnable=true\n\
+TimedLogin=$USER\n\
+TimedLoginDelay=10"
+
+				# Prevent from updating if parameters already present (persistent usb key)
+				if ! `grep -qs "AutomaticLogin=$USER" $GDMCustomFile` ; then
+					sed -i '/\(Automatic\|Timed\)Login/d' $GDMCustomFile
+					if ! `grep -qs '\[daemon\]' $GDMCustomFile` ; then
+						echo '[daemon]' >> $GDMCustomFile
+					fi
+					sed -i "s/\[daemon\]/\[daemon\]\n$AutologinParameters/" $GDMCustomFile
+				fi
 			fi
 	 
 			if $chroot $ROOT [ -f /etc/kde4/kdm/kdmrc ]; then
