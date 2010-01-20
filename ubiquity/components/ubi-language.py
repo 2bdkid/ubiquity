@@ -22,7 +22,10 @@ import debconf
 import PyICU
 
 from ubiquity.plugin import *
-from ubiquity import i18n, misc, auto_update
+from ubiquity import i18n
+from ubiquity import misc
+from ubiquity import auto_update
+from ubiquity import osextras
 
 NAME = 'language'
 AFTER = None
@@ -65,6 +68,7 @@ class PageGtk(PageBase):
             builder = gtk.Builder()
             builder.add_from_file('/usr/share/ubiquity/gtk/%s' % ui_file)
             builder.connect_signals(self)
+            self.controller.add_builder(builder)
             self.page = builder.get_object('stepLanguage')
             self.iconview = builder.get_object('language_iconview')
             self.treeview = builder.get_object('language_treeview')
@@ -325,16 +329,9 @@ class Page(Plugin):
         self.language_question = None
         self.initial_language = None
         self.db.fset('localechooser/languagelist', 'seen', 'false')
-        misc.regain_privileges()
-        try:
-            os.unlink('/var/lib/localechooser/preseeded')
-        except OSError:
-            pass
-        try:
-            os.unlink('/var/lib/localechooser/langlevel')
-        except OSError:
-            pass
-        misc.drop_privileges()
+        with misc.raised_privileges():
+            osextras.unlink_force('/var/lib/localechooser/preseeded')
+            osextras.unlink_force('/var/lib/localechooser/langlevel')
         if self.ui.controller.oem_config:
             try:
                 self.ui.set_oem_id(self.db.get('oem-config/id'))
@@ -425,8 +422,8 @@ class Page(Plugin):
 
     def cleanup(self):
         Plugin.cleanup(self)
-        # Done after sub-cleanup because now the debconf lock is clear for a reset/reget
-        i18n.reset_locale(db=self.db)
+        i18n.reset_locale(self.frontend)
+        self.frontend.stop_debconf()
         self.ui.controller.translate(just_me=False, reget=True)
 
 class Install(InstallPlugin):

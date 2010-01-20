@@ -78,19 +78,48 @@ UIDIR = os.path.join(PATH, 'gtk')
 # Define locale path
 LOCALEDIR = "/usr/share/locale"
 
+def wrap_fix(w, allocation):
+    # Until the extended layout branch of GTK+ gets merged (bgo #101968).
+    layout = w.get_layout()
+    old_width, old_height = layout.get_size()
+    if old_width / pango.SCALE == allocation.width:
+        return
+    layout.set_width(allocation.width * pango.SCALE)
+    unused, height = layout.get_size()
+    if old_height != height:
+        w.set_size_request(-1, height / pango.SCALE)
+
+def process_labels(w):
+    if isinstance(w, gtk.Container):
+        children = w.get_children()
+        for c in children:
+            process_labels(c)
+    elif isinstance(w, gtk.Label):
+        if w.get_line_wrap():
+            w.connect_after('size-allocate', wrap_fix)
+        w.set_property('can-focus', False)
+
 class Controller(ubiquity.frontend.base.Controller):
+    def add_builder(self, builder):
+        self._wizard.builders.append(builder)
+
     def translate(self, lang=None, just_me=True, reget=False):
         if lang:
             self._wizard.locale = lang
         self._wizard.translate_pages(lang, just_me, reget)
+
     def allow_go_forward(self, allowed):
         self._wizard.allow_go_forward(allowed)
+
     def allow_go_backward(self, allowed):
         self._wizard.allow_go_backward(allowed)
+
     def go_forward(self):
         self._wizard.next.activate()
+
     def go_backward(self):
         self._wizard.back.activate()
+
     def go_to_page(self, widget):
         self._wizard.set_current_page(self._wizard.steps.page_num(widget))
 
@@ -180,7 +209,7 @@ class Wizard(BaseFrontend):
         self.laptop = execute("laptop-detect")
 
         # set default language
-        self.locale = i18n.reset_locale()
+        self.locale = i18n.reset_locale(self)
 
         gobject.timeout_add(30000, self.poke_screensaver)
 
@@ -196,6 +225,7 @@ class Wizard(BaseFrontend):
         # load the main interface
         self.builder.add_from_file('%s/ubiquity.ui' % UIDIR)
 
+        self.builders = [self.builder]
         self.pages = []
         self.pagesindex = 0
         self.pageslen = 0
@@ -224,18 +254,22 @@ class Wizard(BaseFrontend):
                     mod.widgets = fill_out(widgets)
                     mod.optional_widgets = fill_out(optional_widgets)
                     mod.all_widgets = mod.widgets + mod.optional_widgets
+                    for w in mod.all_widgets:
+                        process_labels(w)
                     self.user_pageslen += len(mod.widgets)
                     self.pageslen += 1
                     self.pages.append(mod)
 
         self.toplevels = set()
-        for widget in self.builder.get_objects():
-            add_widget(self, widget)
-            if isinstance(widget, gtk.Window):
-                self.toplevels.add(widget)
+        for builder in self.builders:
+            for widget in builder.get_objects():
+                add_widget(self, widget)
+                if isinstance(widget, gtk.Window):
+                    self.toplevels.add(widget)
         self.builder.connect_signals(self)
 
-        self.translate_widgets()
+        self.stop_debconf()
+        self.translate_widgets(reget=True)
 
         self.customize_installer()
 
@@ -437,6 +471,7 @@ class Wizard(BaseFrontend):
                     ui = self.pages[self.pagesindex].ui
                 else:
                     ui = None
+                self.start_debconf()
                 self.dbfilter = self.pages[self.pagesindex].filter_class(self, ui=ui)
 
                 # Non-debconf steps are no longer possible as the interface is now
@@ -545,7 +580,6 @@ class Wizard(BaseFrontend):
             self.live_installer.set_icon_name("preferences-system")
             self.live_installer.window.set_functions(gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MOVE)
             self.quit.hide()
-            self.hostname_vbox.hide()
 
         if not 'UBIQUITY_AUTOMATIC' in os.environ:
             self.live_installer.show()
@@ -744,35 +778,14 @@ class Wizard(BaseFrontend):
             self.live_installer.window.set_cursor(cursor)
         self.back.set_sensitive(allowed and self.allowed_go_backward)
         self.next.set_sensitive(allowed and self.allowed_go_forward)
-        # Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070
-        if (self.back.get_property('visible') and
-            allowed and self.allowed_go_backward):
-            self.back.hide()
-            self.back.show()
-        if (self.next.get_property('visible') and
-            allowed and self.allowed_go_forward):
-            self.next.hide()
-            self.next.show()
-            self.next.grab_default()
         self.allowed_change_step = allowed
 
     def allow_go_backward(self, allowed):
         self.back.set_sensitive(allowed and self.allowed_change_step)
-        # Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070
-        if (self.back.get_property('visible') and
-            allowed and self.allowed_change_step):
-            self.back.hide()
-            self.back.show()
         self.allowed_go_backward = allowed
 
     def allow_go_forward(self, allowed):
         self.next.set_sensitive(allowed and self.allowed_change_step)
-        # Work around http://bugzilla.gnome.org/show_bug.cgi?id=56070
-        if (self.next.get_property('visible') and
-            allowed and self.allowed_change_step):
-            self.next.hide()
-            self.next.show()
-            self.next.grab_default()
         self.allowed_go_forward = allowed
 
 
@@ -933,20 +946,25 @@ class Wizard(BaseFrontend):
 
         syslog.syslog('progress_loop()')
 
-        self.current_page = None    
+        self.current_page = None
 
-        lang = self.locale.split('_')[0]
-        slides = '/usr/share/ubiquity-slideshow/slides/index.html'
+        slideshow_dir = '/usr/share/ubiquity-slideshow'
+        slideshow_locale = slideshow_get_available_locale(slideshow_dir, self.locale)
+        slideshow_main = slideshow_dir + '/slides/index.html'
+
         s = self.live_installer.get_screen()
         sh = s.get_height()
         sw = s.get_width()
         fail = None
-        if os.path.exists(slides):
-            slides = 'file://%s#?locale=%s' % (slides, lang)
+
+        if os.path.exists(slideshow_main):
             if sh >= 600 and sw >= 800:
-                ltr = i18n.get_string('default-ltr', lang, 'ubiquity/imported')
-                if ltr == 'default:RTL':
-                    slides += '?rtl'
+                slides = 'file://' + slideshow_main
+                if slideshow_locale != 'c': #slideshow will use default automatically
+                    slides += '#?locale=' + slideshow_locale
+                    ltr = i18n.get_string('default-ltr', slideshow_locale, 'ubiquity/imported')
+                    if ltr == 'default:RTL':
+                        slides += '?rtl'
                 try:
                     import webkit
                     webview = webkit.WebView()
@@ -961,7 +979,7 @@ class Wizard(BaseFrontend):
             else:
                 fail = 'Display < 800x600 (%sx%s).' % (sw, sh)
         else:
-            fail = 'No slides present for %s.' % lang
+            fail = 'No slides present for %s.' % slideshow_dir
         if fail:
             syslog.syslog('Not displaying the slideshow: %s' % fail)
 
@@ -970,6 +988,7 @@ class Wizard(BaseFrontend):
         self.debconf_progress_region(0, 15)
 
         if not self.oem_user_config:
+            self.start_debconf()
             dbfilter = partman_commit.PartmanCommit(self)
             if dbfilter.run_command(auto_process=True) != 0:
                 while self.progress_position.depth() != 0:
@@ -983,6 +1002,7 @@ class Wizard(BaseFrontend):
 
         self.debconf_progress_region(15, 100)
 
+        self.start_debconf()
         dbfilter = install.Install(self)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
@@ -1547,21 +1567,15 @@ class Wizard(BaseFrontend):
                     a.hide()
                     self.format_warning_align = a
                     label = gtk.Label()
+                    label.set_alignment(0, 0)
                     label.set_line_wrap(True)
-                    def wrap_fix(widget, allocation):
-                        # FIXME evand 2009-10-19: This is horrendous, but it's
-                        # all we have until the extended layout branch of GTK+
-                        # gets merged (bgo #101968).  The major side effect is
-                        # that you cannot shrink the window, even after you've
-                        # grown it.
-                        widget.set_size_request(allocation.width, -1)
-                    label.connect('size-allocate', wrap_fix)
+                    process_labels(label)
                     self.format_warning = label
                     hbox = gtk.HBox(spacing=6)
                     img = gtk.Image()
                     img.set_from_icon_name('gtk-dialog-warning', gtk.ICON_SIZE_BUTTON)
                     hbox.pack_start(img, expand=False, fill=False)
-                    hbox.pack_start(label, expand=True, fill=True)
+                    hbox.pack_start(label)
                     a.add(hbox)
                     vbox.add(a)
                     
@@ -2539,6 +2553,7 @@ class Wizard(BaseFrontend):
                     self.pagesindex = self.pages.index(page)
                     break
             if self.pagesindex == -1: return
+            self.start_debconf()
             self.dbfilter = partman.Page(self)
             self.set_current_page(self.previous_partitioning_page)
             self.next.set_label("gtk-go-forward")

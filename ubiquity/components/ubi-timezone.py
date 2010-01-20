@@ -38,6 +38,7 @@ class PageGtk(PluginUI):
         try:
             import gtk
             builder = gtk.Builder()
+            self.controller.add_builder(builder)
             builder.add_from_file('/usr/share/ubiquity/gtk/stepLocation.ui')
             builder.connect_signals(self)
             self.page = builder.get_object('stepLocation')
@@ -61,8 +62,6 @@ class PageGtk(PluginUI):
 
     def fill_timezone_boxes(self):
         m = self.region_combo.get_model()
-        if m.get_iter_first():
-            return
         tz = self.controller.dbfilter
 
         # Regions are a translated shortlist of regions, followed by full list
@@ -604,7 +603,7 @@ class Page(Plugin):
 
     def cleanup(self):
         Plugin.cleanup(self)
-        i18n.reset_locale(just_country=True, db=self.db)
+        i18n.reset_locale(self.frontend, just_country=True)
 
 class Install(InstallPlugin):
     def prepare(self, unfiltered=False):

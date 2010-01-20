@@ -257,7 +257,9 @@ TimedLoginDelay=10"
 
 				# Prevent from updating if parameters already present (persistent usb key)
 				if ! `grep -qs "AutomaticLogin=$USER" $GDMCustomFile` ; then
-					sed -i '/\(Automatic\|Timed\)Login/d' $GDMCustomFile
+					if [ -e "$GDMCustomFile" ]; then
+						sed -i '/\(Automatic\|Timed\)Login/d' $GDMCustomFile
+					fi
 					if ! `grep -qs '\[daemon\]' $GDMCustomFile` ; then
 						echo '[daemon]' >> $GDMCustomFile
 					fi

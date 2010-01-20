@@ -24,6 +24,7 @@ import os
 from ubiquity.plugin import *
 from ubiquity import keyboard_names
 from ubiquity import misc
+from ubiquity import osextras
 
 NAME = 'console_setup'
 AFTER = 'timezone'
@@ -38,6 +39,7 @@ class PageGtk(PluginUI):
         try:
             import gtk
             builder = gtk.Builder()
+            self.controller.add_builder(builder)
             builder.add_from_file('/usr/share/ubiquity/gtk/stepKeyboardConf.ui')
             builder.connect_signals(self)
             self.page = builder.get_object('stepKeyboardConf')
@@ -325,20 +327,13 @@ class Page(Plugin):
         # will think it's already configured and behave differently. Try to
         # save the old file for interest's sake, but it's not a big deal if
         # we can't.
-        misc.regain_privileges()
-        try:
-            os.unlink('/etc/default/console-setup.pre-ubiquity')
-        except OSError:
-            pass
-        try:
-            os.rename('/etc/default/console-setup',
-                      '/etc/default/console-setup.pre-ubiquity')
-        except OSError:
+        with misc.raised_privileges():
+            osextras.unlink_force('/etc/default/console-setup.pre-ubiquity')
             try:
-                os.unlink('/etc/default/console-setup')
+                os.rename('/etc/default/console-setup',
+                          '/etc/default/console-setup.pre-ubiquity')
             except OSError:
-                pass
-        misc.drop_privileges()
+                osextras.unlink_force('/etc/default/console-setup')
         # Make sure debconf doesn't do anything with crazy "preseeded"
         # answers to these questions. If you want to preseed these, use the
         # *code variants.
@@ -539,25 +534,8 @@ class Page(Plugin):
             args.extend(("-option", option))
         misc.execute("setxkbmap", *args)
 
-    def cleanup(self):
-        # TODO cjwatson 2006-09-07: I'd use dexconf, but it seems reasonable
-        # for somebody to edit /etc/X11/xorg.conf on the live CD and expect
-        # that to be carried over to the installed system (indeed, we've
-        # always supported that up to now). So we get this horrible mess
-        # instead ...
-
-        model = self.db.get('console-setup/modelcode')
-        layout = self.db.get('console-setup/layoutcode')
-        variant = self.db.get('console-setup/variantcode')
-        options = self.db.get('console-setup/optionscode')
-        self.apply_real_keyboard(model, layout, variant, options.split(','))
-
-        Plugin.cleanup(self)
-
-        if layout == '':
-            return
-
-        misc.regain_privileges()
+    @misc.raise_privileges
+    def rewrite_xorg_conf(self):
         oldconfigfile = '/etc/X11/xorg.conf'
         newconfigfile = '/etc/X11/xorg.conf.new'
         try:
@@ -640,7 +618,26 @@ class Page(Plugin):
         newconfig.close()
         oldconfig.close()
         os.rename(newconfigfile, oldconfigfile)
-        misc.drop_privileges()
+
+    def cleanup(self):
+        # TODO cjwatson 2006-09-07: I'd use dexconf, but it seems reasonable
+        # for somebody to edit /etc/X11/xorg.conf on the live CD and expect
+        # that to be carried over to the installed system (indeed, we've
+        # always supported that up to now). So we get this horrible mess
+        # instead ...
+
+        model = self.db.get('console-setup/modelcode')
+        layout = self.db.get('console-setup/layoutcode')
+        variant = self.db.get('console-setup/variantcode')
+        options = self.db.get('console-setup/optionscode')
+        self.apply_real_keyboard(model, layout, variant, options.split(','))
+
+        Plugin.cleanup(self)
+
+        if layout == '':
+            return
+
+        self.rewrite_xorg_conf()
 
 class Install(InstallPlugin):
     def prepare(self, unfiltered=False):

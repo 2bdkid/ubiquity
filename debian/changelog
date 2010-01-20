@@ -1,3 +1,65 @@
+ubiquity (2.1.12) lucid; urgency=low
+
+  [ Colin Watson ]
+  * Add osextras.unlink_force, equivalent to 'rm -f', to save on tedious
+    exception handling.
+  * Only restart debconf-communicator when changing language, not every time
+    we switch page.  This speeds up page transitions quite a bit, and should
+    incidentally fix LP: #508725 as well.
+  * GTK frontend:
+    - Check plugin builders as well when adding widgets (setting their
+      names, making them callable by the toplevel, etc.).  This fixes
+      translations of the language, timezone, and keyboard pages.
+  * Fix immediate retranslation when changing language.
+  * Add a semaphore to misc.regain_privileges and misc.drop_privileges, so
+    that a drop/regain pair always returns to the previous state.
+    misc.drop_all_privileges is now more clearly one-way, enforced by an
+    assertion.
+  * Add a context manager (raised_privileges) and a function decorator
+    (raise_privileges) that are equivalent to a
+    regain_privileges/drop_privileges pair, but that wrap up the required
+    try/finally logic to make it less likely that we'll end up at the wrong
+    privilege level by mistake.
+  * When attempting to upgrade the installer, only stop debconf-communicator
+    once we've determined that we actually have something to upgrade
+    (LP: #495175).
+  * Require Python 2.6, for the 'with' statement.
+  * Move default GRUB target calculation to ubiquity.misc, which is a better
+    location for common code than ubiquity.components.summary.  Try to avoid
+    using (hd0) as the target (prefer the first device from grub-mkdevicemap
+    output if possible), and, when installing from a non-CD medium, only
+    reset the default boot device if we would otherwise end up installing
+    GRUB to the installation medium.
+  * Initialise FilteredCommand.ui_loop_level earlier, just in case
+    (LP: #484452).
+
+  [ Evan Dandrea ]
+  * Allow the user to set a hostname in oem-config.
+  * Finally, finally, finally successfully work around GTK+ not
+    supporting height-for-width in labels.
+  * Remove labels created by plugins from the focus chain.
+  * Don't try to generate an apparmor cache in oem-config.
+  * Slightly better exception printing in scripts/install.py
+  * GNOME Bug #56070 (can't click button twice) has long since been
+    closed.  Remove hack.
+  * Automatic update of included source packages: localechooser
+    2.12ubuntu3, user-setup 1.28ubuntu3.
+
+  [ Mario Limonciello ]
+  * Drop old hack for reconfiguring mythbuntu-default-settings since
+    this is fixed in user-setup now.
+  * Drop old hack for copying ^xserver-xorg onto the target system.  No
+    longer necessary as thse variables don't exist in current installs.
+
+  [ Dylan McCall ]
+  * Use slideshow for language variants if available (LP: #476269).
+
+  [ Michael Terry ]
+  * Reset contents of timezone combo boxes every time the timezone page is
+    entered (LP: #461104).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 20 Jan 2010 15:35:08 +0000
+
 ubiquity (2.1.11) lucid; urgency=low
 
   [ Evan Dandrea ]

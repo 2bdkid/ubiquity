@@ -42,20 +42,10 @@ def get_supported_locales():
 
 
 # if 'just_country' is True, only the country is changing
-def reset_locale(just_country=False, db=None):
-    if db is None:
-        db = DebconfCommunicator('ubiquity', cloexec=True)
-        shutdown_db = True
-    else:
-        shutdown_db = False
-    di_locale = None
-    try:
-        di_locale = db.get('debian-installer/locale')
-        if di_locale not in get_supported_locales():
-            di_locale = db.get('debian-installer/fallbacklocale')
-    finally:
-        if shutdown_db:
-            db.shutdown()
+def reset_locale(frontend, just_country=False):
+    di_locale = frontend.db.get('debian-installer/locale')
+    if di_locale not in get_supported_locales():
+        di_locale = frontend.db.get('debian-installer/fallbacklocale')
     if not di_locale:
         # TODO cjwatson 2006-07-17: maybe fetch
         # languagechooser/language-name and set a language based on
@@ -116,15 +106,14 @@ def get_translations(languages=None, core_names=[], extra_prefixes=[]):
 
         _translations = {}
         devnull = open('/dev/null', 'w')
-        # necessary?
-        def subprocess_setup():
-            misc.regain_privileges()
         db = subprocess.Popen(
             ['debconf-copydb', 'templatedb', 'pipe',
              '--config=Name:pipe', '--config=Driver:Pipe',
              '--config=InFd:none',
              '--pattern=^(%s)' % prefixes],
-            stdout=subprocess.PIPE, stderr=devnull, preexec_fn=subprocess_setup)
+            stdout=subprocess.PIPE, stderr=devnull,
+            # necessary?
+            preexec_fn=misc.regain_privileges)
         question = None
         descriptions = {}
         fieldsplitter = re.compile(r':\s*')

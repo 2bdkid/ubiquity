@@ -28,6 +28,7 @@ sys.path.insert(0, '/usr/lib/ubiquity')
 
 from ubiquity import misc
 from ubiquity import im_switch
+from ubiquity import osextras
 
 VERSION = '@VERSION@'
 TARGET = '/target'
@@ -166,10 +167,7 @@ def start_debconf():
         # debconf already started, so just clean up the configuration file
         # if any (debconf has already read it by now).
         if 'DEBCONF_SYSTEMRC' in os.environ:
-            try:
-                os.unlink(os.environ['DEBCONF_SYSTEMRC'])
-            except OSError:
-                pass
+            osextras.unlink_force(os.environ['DEBCONF_SYSTEMRC'])
         return
 
     print >>sys.stderr, "debconf_ui selected; starting debconf frontend"
@@ -243,6 +241,7 @@ def install(frontend=None, query=False):
         open_terminal()
         start_debconf()
     ret = wizard.run()
+    wizard.stop_debconf()
     copy_debconf()
     unmount_target()
     if ret == 10:
@@ -253,9 +252,7 @@ def copy_debconf():
     if not TARGET:
         return
     targetdb = TARGET + '/var/cache/debconf/config.dat'
-    # xserver-xorg is temporary, pending a rework of bullet-proof-x; but
-    # note that xserver-xorg/config/inputdevice/keyboard/* is still needed
-    for q in ('^console-setup/','^xserver-xorg/'):
+    for q in ('^console-setup/'):
         misc.execute('debconf-copydb', 'configdb', 'targetdb', '-p', q,
                      '--config=Name:targetdb', '--config=Driver:File',
                      '--config=Filename:%s' % targetdb)
@@ -283,10 +280,7 @@ def prepend_path(directory):
 
 def release_lock():
     global lock
-    try:
-        os.unlink(LOCKFILE)
-    except OSError:
-        pass
+    osextras.unlink_force(LOCKFILE)
     if lock is not None:
         lock.close()
         lock = None
@@ -431,9 +425,7 @@ def main(oem_config):
 
     # Clean up old state.
     for name in ('apt-installed', 'apt-install-direct', 'remove-kernels'):
-        path = os.path.join('/var/lib/ubiquity', name)
-        if os.path.exists(path):
-            os.unlink(path)
+        osextras.unlink_force(os.path.join('/var/lib/ubiquity', name))
     shutil.rmtree("/var/lib/partman", ignore_errors=True)
 
     if oem_config and not options.query:

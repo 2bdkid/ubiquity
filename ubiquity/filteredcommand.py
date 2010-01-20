@@ -80,10 +80,14 @@ class FilteredCommand(UntrustedBase):
         self.current_question = None
         self.succeeded = False
         self.dbfilter = None
+        self.ui_loop_level = 0
 
     def start(self, auto_process=False):
         self.status = None
-        self.db = DebconfCommunicator(PACKAGE, cloexec=True)
+        if not self.db:
+            assert self.frontend is not None
+            self.frontend.start_debconf()
+            self.db = self.frontend.db
         self.ui_loop_level = 0
         prep = self.prepare()
         if prep is None:
@@ -148,8 +152,7 @@ class FilteredCommand(UntrustedBase):
         return ret
 
     def cleanup(self):
-        self.db.shutdown()
-        self.db = None
+        pass
 
     def run_command(self, auto_process=False):
         # TODO cjwatson 2006-02-25: Hack to allow _apply functions to be run
@@ -220,10 +223,10 @@ class FilteredCommand(UntrustedBase):
             # non-Python subprocesses, which need SIGPIPE set to the default
             # action.
             signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+            # Regain root.
+            misc.regain_privileges()
 
-        misc.regain_privileges()
         ret = subprocess.call(self.command, preexec_fn=subprocess_setup)
-        misc.drop_privileges()
         if ret != 0:
             # TODO: error message if ret != 10
             self.debug("%s exited with code %d", self.command, ret)

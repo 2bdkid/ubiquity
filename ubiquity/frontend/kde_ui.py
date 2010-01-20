@@ -40,7 +40,7 @@ from PyQt4 import uic
 from PyKDE4.kdeui import *
 from PyKDE4.kdecore import *
 
-#import all our custome kde components
+#import all our custom kde components
 from ubiquity.frontend.kde_components.PartitionBar import *
 from ubiquity.frontend.kde_components.PartitionModel import *
 from ubiquity.frontend.kde_components.ProgressDialog import *
@@ -107,14 +107,19 @@ class Controller(ubiquity.frontend.base.Controller):
         if lang:
             self._wizard.locale = lang
         self._wizard.translate_pages(lang, just_me, reget)
+
     def allow_go_forward(self, allowed):
         self._wizard.allow_go_forward(allowed)
+
     def allow_go_backward(self, allowed):
         self._wizard.allow_go_backward(allowed)
+
     def go_forward(self):
         self._wizard.ui.next.click()
+
     def go_backward(self):
         self._wizard.ui.back.click()
+
     def go_to_page(self, widget):
         self._wizard.set_current_page(self._wizard.ui.widgetStack.indexOf(widget))
 
@@ -142,16 +147,11 @@ class Wizard(BaseFrontend):
         about.addAuthor(ki18n("Jonathan Riddell"), KLocalizedString() ,"jriddell@ubuntu.com")
         about.addAuthor(ki18n("Roman Shtylman"), KLocalizedString() ,"shtylman@gmail.com")
         KCmdLineArgs.init([""],about)
-        
-        #undo the drop, this is needed to play nice with kde
-        os.setegid(0)
-        os.seteuid(0)
-        
-        self.app = KApplication()
-        self.app.setStyleSheet(file(os.path.join(UIDIR, "style.qss")).read())
 
-        # put the privileges back to user level
-        drop_privileges()
+        # raised privileges are needed to play nice with KDE
+        with raised_privileges():
+            self.app = KApplication()
+            self.app.setStyleSheet(file(os.path.join(UIDIR, "style.qss")).read())
 
         self.ui = UbiquityUI()
         
@@ -257,13 +257,14 @@ class Wizard(BaseFrontend):
         #self.app.connect(self.ui.partition_list_treeview, SIGNAL("activated(const QModelIndex&)"), self.on_partition_list_treeview_activated)
 
         # set default language
-        self.locale = i18n.reset_locale()
+        self.locale = i18n.reset_locale(self)
 
         self.debconf_callbacks = {}    # array to keep callback functions needed by debconf file descriptors
 
         self.customize_installer()
 
-        self.translate_widgets()
+        self.stop_debconf()
+        self.translate_widgets(reget=True)
         
         self.autopartition_buttongroup = QButtonGroup(self.ui.autopart_selection_frame)
         self.autopartition_buttongroup_texts = {}
@@ -341,10 +342,6 @@ class Wizard(BaseFrontend):
 
         self.disable_volume_manager()
 
-        # show interface
-        # TODO cjwatson 2005-12-20: Disabled for now because this segfaults in
-        # current dapper (https://bugzilla.ubuntu.com/show_bug.cgi?id=20338).
-        #self.show_browser()
         self.allow_change_step(True)
         
         # Declare SignalHandler
@@ -401,6 +398,7 @@ class Wizard(BaseFrontend):
                     ui = self.pages[self.pagesindex].ui
                 else:
                     ui = None
+                self.start_debconf()
                 self.dbfilter = self.pages[self.pagesindex].filter_class(self, ui=ui)
 
                 # Non-debconf steps are no longer possible as the interface is now
@@ -787,29 +785,30 @@ class Wizard(BaseFrontend):
         syslog.syslog('progress_loop()')
 
         self.current_page = None
-        
-        lang = self.locale.split('_')[0]
-        slides = '/usr/share/ubiquity-slideshow-kubuntu/slides/index.html'
+
+        slideshow_dir = '/usr/share/ubiquity-slideshow-kubuntu'
+        slideshow_locale = slideshow_get_available_locale(slideshow_dir, self.locale)
+        slideshow_main = slideshow_dir + '/slides/index.html'
+
         s = self.app.desktop().availableGeometry()
         fail = None
-        if os.path.exists(slides):
-            slides = 'file://%s#?locale=%s' % (slides, lang)
+        if os.path.exists(slideshow_main):
             if s.height >= 600 and s.width >= 800:
-                ltr = i18n.get_string('default-ltr', lang, 'ubiquity/imported')
-                if ltr == 'default:RTL':
-                    slides += '?rtl'
+                slides = 'file://' + slideshow_main
+                if slideshow_locale != 'c': #slideshow will use default automatically
+                    slides += '#?locale=' + slideshow_locale
+                    ltr = i18n.get_string('default-ltr', slideshow_locale, 'ubiquity/imported')
+                    if ltr == 'default:RTL':
+                        slides += '?rtl'
                 try:
                     from PyQt4.QtWebKit import QWebView
                     from PyQt4.QtWebKit import QWebPage
                     
                     #we need to get root privs to open a link because 
                     #the kapplication was started that way...
+                    @raise_privileges
                     def openLink(qUrl):
-                        os.setegid(0)
-                        os.seteuid(0)
-                    
                         QDesktopServices.openUrl(qUrl)
-                        drop_privileges()
                     
                     webView = QWebView()
                     
@@ -831,7 +830,7 @@ class Wizard(BaseFrontend):
             else:
                 fail = 'Display < 800x600 (%sx%s).' % (s.width, s.height)
         else:
-            fail = 'No slides present for %s.' % lang
+            fail = 'No slides present for %s.' % slideshow_dir
         if fail:
             syslog.syslog('Not displaying the slideshow: %s' % fail)
 
@@ -840,6 +839,7 @@ class Wizard(BaseFrontend):
         self.debconf_progress_region(0, 15)
 
         if not self.oem_user_config:
+            self.start_debconf()
             dbfilter = partman_commit.PartmanCommit(self)
             if dbfilter.run_command(auto_process=True) != 0:
                 while self.progress_position.depth() != 0:
@@ -853,6 +853,7 @@ class Wizard(BaseFrontend):
 
         self.debconf_progress_region(15, 100)
 
+        self.start_debconf()
         dbfilter = install.Install(self)
         ret = dbfilter.run_command(auto_process=True)
         if ret != 0:
@@ -1233,19 +1234,18 @@ class Wizard(BaseFrontend):
                 self.ui.autopart_selection_frame.layout().removeWidget(child)
                 #child.hide()
 
-        regain_privileges()
-        pserv = parted_server.PartedServer()
-        
-        disks = {} #dictionary dev -> list of partitions
-        for disk in pserv.disks():
-            d = disks[disk] = []
-            pserv.select_disk(disk)
-            for partition in pserv.partitions():
-                d.append(partition)
-                
-        # p_num, p_id, p_size, p_type, p_fs, p_path, p_name
-        drop_privileges()
-        
+        with raised_privileges():
+            pserv = parted_server.PartedServer()
+
+            disks = {} #dictionary dev -> list of partitions
+            for disk in pserv.disks():
+                d = disks[disk] = []
+                pserv.select_disk(disk)
+                for partition in pserv.partitions():
+                    d.append(partition)
+
+            # p_num, p_id, p_size, p_type, p_fs, p_path, p_name
+
         def _on_extra_toggle(extra_bar_frames):
             def slot(index):
                 for bf in extra_bar_frames:
@@ -2050,7 +2050,7 @@ class Wizard(BaseFrontend):
             
             # if the combo box does not yet have the target install device, add it
             # select current device
-            target = summary.find_grub_target()
+            target = grub_default()
             index = self.advanceddialog.grub_device_entry.findText(target)
             if (index == -1):
                 self.advanceddialog.grub_device_entry.addItem(target)
@@ -2116,6 +2116,7 @@ class Wizard(BaseFrontend):
                     self.pagesindex = self.pages.index(page)
                     break
             if self.pagesindex == -1: return
+            self.start_debconf()
             self.dbfilter = partman.Page(self)
             self.set_current_page(self.previous_partitioning_page)
             self.ui.next.setText(self.get_string("next").replace('_', '&', 1))
