@@ -399,7 +399,8 @@ if [ "$found" = "0" ] && type multipath >/dev/null 2>&1; then
 	else
 		frdisk=
 	fi
-elif type lvdisplay >/dev/null 2>&1 && \
+fi
+if [ "$found" = "0" ] && type lvdisplay >/dev/null 2>&1 && \
      (lvdisplay "$disc_offered" | grep -q 'LV Name' 2>/dev/null || \
       [ -e "$(dirname "$disc_offered")/control" ]); then
 	# Don't set frdev/frdisk here, otherwise you'll end up in different

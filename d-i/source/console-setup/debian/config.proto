@@ -330,6 +330,35 @@ else
     locale=C
 fi
 
+if [ "$LC_MESSAGES"  -a "$LC_MESSAGES" != C ]; then
+    messages=$LC_MESSAGES
+elif db_get debian-installer/locale && [ "$RET" ]; then
+    messages="$RET"
+else
+    messages=C
+fi
+
+messages_lang=$(echo $messages | sed 's/_.*//')
+messages_country=$(echo $messages | sed 's/.*_//;s/\..*//;s/@.*//')
+messages_modif=
+echo $messages | grep -v -q @ || messages_modif=$(echo $messages | sed 's/.*@//')
+
+lang_kbdnames () {
+    all_kbdnames | \
+        grep "^$1[*]" | \
+        sed "s/^$1[*]//"
+}
+
+kbdnames=$(lang_kbdnames ${messages_lang}_${messages_country}__${messages_modif})
+[ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames ${messages_lang}_${messages_country}__${messages_modif})
+[ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames ${messages_lang}_${messages_country})
+[ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames ${messages_lang})
+[ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames C)
+
+! type iconv >/dev/null || \
+    kbdnames="$(echo "$kbdnames" |
+                iconv -f UTF-8 -t $(locale charmap)//TRANSLIT)"
+
 case "$locale" in
     *KOI8*|*koi8*)
 	default_codeset=CyrKoi

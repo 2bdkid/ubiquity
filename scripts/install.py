@@ -459,7 +459,7 @@ class Install:
                     'Could not create an Apparmor cache:')
                 for line in traceback.format_exc().split('\n'):
                     syslog.syslog(syslog.LOG_WARNING, line)
-                
+
             self.copy_dcd()
 
             self.db.progress('SET', count)
@@ -657,7 +657,7 @@ class Install:
             del cache
             self.blacklist = {}
             return
- 
+
         cmd = ['dpkg', '-L']
         cmd.extend(difference)
         subp = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -700,7 +700,7 @@ class Install:
             md5_check = False
         else:
             md5_check = True
-        
+
         old_umask = os.umask(0)
         for dirpath, dirnames, filenames in os.walk(self.source):
             sp = dirpath[len(self.source) + 1:]
@@ -838,7 +838,7 @@ class Install:
                     os.path.join(self.target, 'var/log/installer/media-info'))
             except (IOError, OSError):
                 pass
-                
+
         try:
             status = open(os.path.join(self.target, 'var/lib/dpkg/status'))
             status_gz = gzip.open(os.path.join(target_dir,
@@ -1506,12 +1506,6 @@ exit 0"""
                 configfile.close()
 
         osextras.unlink_force(os.path.join(self.target, 'etc/usplash.conf'))
-        try:
-            modes = self.db.get('xserver-xorg/config/display/modes')
-            self.set_debconf('xserver-xorg/config/display/modes', modes)
-        except debconf.DebconfError:
-            pass
-
         osextras.unlink_force(os.path.join(self.target,
                                            'etc/popularity-contest.conf'))
         try:
@@ -1544,7 +1538,6 @@ exit 0"""
             pass
 
         packages = ['linux-image-' + self.kernel_version,
-                    'linux-restricted-modules-' + self.kernel_version,
                     'usplash',
                     'splashy',
                     'popularity-contest',
@@ -1635,7 +1628,7 @@ exit 0"""
         Unfortunately, at present we have to duplicate a fair bit of netcfg
         here, because it's hard to drive netcfg in a way that won't try to
         bring interfaces up and down."""
-        
+
         # TODO cjwatson 2006-03-30: just call netcfg instead of doing all
         # this; requires a netcfg binary that doesn't bring interfaces up
         # and down
@@ -1673,7 +1666,7 @@ exit 0"""
             ff02::2 ip6-allrouters
             ff02::3 ip6-allhosts""")
         hosts.close()
-        
+
         # Network Manager's ifupdown plugin has an inotify watch on
         # /etc/hostname, which can trigger a race condition if /etc/hostname is
         # written and immediately followed with /etc/hosts.
@@ -2325,7 +2318,7 @@ exit 0"""
             fp.close()
             fp = open(fstab, 'w')
             fp.writelines(ret)
-        except Exception, e:
+        except Exception:
             syslog.syslog(syslog.LOG_ERR, 'Exception during installation:')
             syslog.syslog(syslog.LOG_ERR, 'Unable to process /etc/fstab:')
             for line in traceback.format_exc().split('\n'):
@@ -2333,7 +2326,7 @@ exit 0"""
         finally:
             if fp:
                 fp.close()
-            
+
     def copy_tree(self, source, target, uid, gid):
         # Mostly stolen from copy_all.
         directory_times = []
@@ -2379,7 +2372,7 @@ exit 0"""
                 # os.utime() sets timestamp of target, not link
                 elif not stat.S_ISLNK(st.st_mode):
                     os.utime(targetpath, (st.st_atime, st.st_mtime))
-        
+
         # Apply timestamps to all directories now that the items within them
         # have been copied.
         for dirtime in directory_times:
@@ -2419,7 +2412,7 @@ exit 0"""
         subp.communicate()
         if subp.returncode == 0:
             return
-        
+
         from ubiquity import gconftool
         if gconftool.dump('/system/networking', os.path.join(self.target,
                           'tmp/live-network-config')):
@@ -2442,9 +2435,9 @@ exit 0"""
                 uid = int(uid)
                 gid = int(gid)
                 self.copy_tree(source_keyrings, target_keyrings, uid, gid)
-        
+
         # KDE TODO
-            
+
     def recache_apparmor(self):
         """Generate an apparmor cache in /etc/apparmor.d/cache to speed up boot
         time."""

@@ -36,6 +36,8 @@ class PageGtk(PluginUI):
         self.current_layout = None
         self.default_keyboard_layout = None
         self.default_keyboard_variant = None
+        self.calculate_variant = None
+        self.calculate_layout = None
         try:
             import gtk
             builder = gtk.Builder()
@@ -48,10 +50,46 @@ class PageGtk(PluginUI):
             self.keyboard_layout_hbox = builder.get_object('keyboard_layout_hbox')
             self.keyboardlayoutview = builder.get_object('keyboardlayoutview')
             self.keyboardvariantview = builder.get_object('keyboardvariantview')
+            self.calculate_keymap = builder.get_object('calculate_keymap')
+            self.calculate_keymap_label = builder.get_object('calculate_keymap_label')
+            self.calculate_keymap_button = builder.get_object('calculate_keymap_button')
+            self.calculate_keymap_button.connect('clicked', self.calculate_clicked)
+            self.manual_keymap = builder.get_object('manual_keymap')
         except Exception, e:
             self.debug('Could not create keyboard page: %s', e)
             self.page = None
         self.plugin_widgets = self.page
+
+    def calculate_result(self, w, keymap):
+        l = self.controller.dbfilter.get_locale()
+        keymap = keymap.split(':')
+        if len(keymap) == 1:
+            keymap.append('')
+        layout = keyboard_names.lang[l]['layouts_rev'][keymap[0]]
+        # Temporary workaround until I fix variants_rev
+        v = keyboard_names.lang[l]['variants'][keymap[0]]
+        idx = v.values().index(keymap[1])
+        variant = v.keys()[idx]
+        self.calculate_keymap_label.set_label(variant)
+        self.calculate_variant = variant
+        self.calculate_layout = layout
+        self.controller.dbfilter.apply_keyboard(layout, variant)
+        self.controller.allow_go_forward(True)
+
+        # Necessary to clean up references so self.query is garbage collected.
+        self.query.destroy()
+        self.query = None
+
+    def calculate_closed(self, *args):
+        self.query.destroy()
+        self.query = None
+
+    def calculate_clicked(self, *args):
+        from ubiquity.frontend.gtk_components.keyboard_query import KeyboardQuery
+        self.query = KeyboardQuery()
+        self.query.connect('layout_result', self.calculate_result)
+        self.query.connect('delete-event', self.calculate_closed)
+        self.query.run()
 
     def on_keyboardlayoutview_row_activated(self, *args):
         self.controller.go_forward()
@@ -162,6 +200,11 @@ class PageGtk(PluginUI):
                 return None
             else:
                 return unicode(self.default_keyboard_variant)
+        elif self.calculate_keymap.get_active():
+            if self.calculate_variant is None:
+                return None
+            else:
+                return unicode(self.calculate_variant)
         selection = self.keyboardvariantview.get_selection()
         (model, iterator) = selection.get_selected()
         if iterator is None:
@@ -169,17 +212,27 @@ class PageGtk(PluginUI):
         else:
             return unicode(model.get_value(iterator, 0))
 
-    def on_suggested_keymap_toggled(self, widget):
-        if self.suggested_keymap.get_active():
-            self.keyboard_layout_hbox.set_sensitive(False)
+    def on_keymap_toggled(self, widget):
+        self.controller.allow_go_forward(True)
+        self.calculate_keymap_button.set_sensitive(False)
+        self.keyboard_layout_hbox.set_sensitive(False)
+
+        if self.calculate_keymap.get_active():
+            self.calculate_keymap_button.set_sensitive(True)
+            if self.calculate_variant:
+                self.controller.dbfilter.apply_keyboard(self.calculate_layout,
+                                                        self.calculate_variant)
+            else:
+                self.controller.allow_go_forward(False)
+        elif self.manual_keymap.get_active():
+            self.keyboard_layout_hbox.set_sensitive(True)
+        elif self.suggested_keymap.get_active():
             if (self.default_keyboard_layout is not None and
                 self.default_keyboard_variant is not None):
                 self.current_layout = self.default_keyboard_layout
                 self.controller.dbfilter.change_layout(self.default_keyboard_layout)
                 self.controller.dbfilter.apply_keyboard(self.default_keyboard_layout,
                                                         self.default_keyboard_variant)
-        else:
-            self.keyboard_layout_hbox.set_sensitive(True)
 
 class PageKde(PluginUI):
     plugin_breadcrumb = 'ubiquity/text/breadcrumb_keyboard'
@@ -208,10 +261,11 @@ class PageKde(PluginUI):
 
     def on_keyboard_layout_selected(self):
         layout = self.get_keyboard()
+        l = self.controller.dbfilter.get_locale()
         if layout is not None:
             #skip updating keyboard if not using display
             if self.keyboardDisplay:
-                ly = keyboard_names.layouts[unicode(layout)]
+                ly = keyboard_names.lang[l]['layouts'][unicode(layout)]
                 self.keyboardDisplay.setLayout(ly)
             
                 #no variants, force update by setting none
@@ -227,9 +281,10 @@ class PageKde(PluginUI):
         
         if self.keyboardDisplay:
             var = None
-            ly = keyboard_names.layouts[layout]
+            l = self.controller.dbfilter.get_locale()
+            ly = keyboard_names.lang[l]['layouts'][layout]
             if variant and keyboard_names.variants.has_key(ly):
-                variantMap = keyboard_names.variants[ly]
+                variantMap = keyboard_names.lang[l]['variants'][ly]
                 var = variantMap[unicode(variant)]
             
             self.keyboardDisplay.setVariant(var)
@@ -254,7 +309,8 @@ class PageKde(PluginUI):
             self.page.keyboard_layout_combobox.setCurrentIndex(index)
         
         if self.keyboardDisplay:
-            ly = keyboard_names.layouts[unicode(layout)]
+            l = self.controller.dbfilter.get_locale()
+            ly = keyboard_names.lang[l]['layouts'][unicode(layout)]
             self.keyboardDisplay.setLayout(ly)
 
     def get_keyboard(self):
@@ -278,9 +334,10 @@ class PageKde(PluginUI):
         
         if self.keyboardDisplay:
             var = None
-            layout = keyboard_names.layouts[self.get_keyboard()]
-            if variant and keyboard_names.variants.has_key(layout):
-                variantMap = keyboard_names.variants[layout]
+            l = self.controller.dbfilter.get_locale()
+            layout = keyboard_names.lang[l]['layouts'][self.get_keyboard()]
+            if variant and keyboard_names.lang[l]['variants'].has_key(layout):
+                variantMap = keyboard_names.lang[l]['variants'][layout]
                 var = variantMap[unicode(variant)]
             
             self.keyboardDisplay.setVariant(var)
@@ -316,7 +373,6 @@ class PageNoninteractive(PluginUI):
         self.keyboard_variant = variant
 
     def get_keyboard_variant(self):
-        #print '*** get_keyboard_variant'
         return self.keyboard_variant
 
 class Page(Plugin):
@@ -341,6 +397,16 @@ class Page(Plugin):
         self.db.fset('console-setup/variant', 'seen', 'false')
         self.db.fset('console-setup/model', 'seen', 'false')
         self.db.fset('console-setup/codeset', 'seen', 'false')
+
+        # Roughly taken from console-setup's config.proto:
+        l = self.db.get('debian-installer/locale').rsplit('.', 1)[0]
+        if l not in keyboard_names.lang:
+            self.debug("Untranslated layout '%s'" % l)
+            l = l.rsplit('_', 1)[0]
+        if l not in keyboard_names.lang:
+            self.debug("Untranslated layout '%s'" % l)
+            l = 'C'
+        self._locale = l
 
         # Technically we should provide a version as the second argument,
         # but that isn't currently needed and it would require querying
@@ -498,19 +564,23 @@ class Page(Plugin):
 
         return (real_model, real_layout, real_variant, real_options)
 
+    def get_locale(self):
+        return self._locale
+
     def apply_keyboard(self, layout, variant):
         model = self.db.get('console-setup/modelcode')
 
-        if layout not in keyboard_names.layouts:
+        l = self.get_locale()
+        if layout not in keyboard_names.lang[l]['layouts']:
             self.debug("Unknown keyboard layout '%s'" % layout)
             return
-        layout = keyboard_names.layouts[layout]
+        layout = keyboard_names.lang[l]['layouts'][layout]
 
-        if layout not in keyboard_names.variants:
+        if layout not in keyboard_names.lang[l]['variants']:
             self.debug("No known variants for layout '%s'" % layout)
             variant = ''
-        elif variant in keyboard_names.variants[layout]:
-            variant = keyboard_names.variants[layout][variant]
+        elif variant in keyboard_names.lang[l]['variants'][layout]:
+            variant = keyboard_names.lang[l]['variants'][layout][variant]
         else:
             self.debug("Unknown keyboard variant '%s' for layout '%s'" %
                        (variant, layout))
