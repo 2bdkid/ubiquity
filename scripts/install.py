@@ -46,6 +46,7 @@ from hashlib import md5
 sys.path.insert(0, '/usr/lib/ubiquity')
 
 from ubiquity import misc
+from ubiquity import install_misc
 from ubiquity import osextras
 from ubiquity import plugin_manager
 from ubiquity.casper import get_casper
@@ -53,15 +54,6 @@ from ubiquity.components import apt_setup, usersetup_apply, \
                                 hw_detect, check_kernels, \
                                 migrationassistant_apply
 
-def debconf_disconnect():
-    """Disconnect from debconf. This is only to be used as a subprocess
-    preexec_fn helper."""
-    os.environ['DEBIAN_FRONTEND'] = 'noninteractive'
-    if 'DEBIAN_HAS_FRONTEND' in os.environ:
-        del os.environ['DEBIAN_HAS_FRONTEND']
-    if 'DEBCONF_USE_CDEBCONF' in os.environ:
-        # Probably not a good idea to use this in /target too ...
-        del os.environ['DEBCONF_USE_CDEBCONF']
 
 class DebconfFetchProgress(FetchProgress):
     """An object that reports apt's fetching progress using debconf."""
@@ -434,7 +426,11 @@ class Install:
             self.db.progress('REGION', count, count+1)
             count += 1
             self.db.progress('INFO', 'ubiquity/install/installing')
-            self.install_extras()
+
+            if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
+                self.install_oem_extras()
+            else:
+                self.install_extras()
 
             self.db.progress('SET', count)
             self.db.progress('REGION', count, count+4)
@@ -604,7 +600,7 @@ class Install:
                     difference.add(pkg)
 
         # Keep packages we explicitly installed.
-        keep = self.query_recorded_installed()
+        keep = install_misc.query_recorded_installed()
         arch, subarch = self.archdetect()
 
         # Less than ideal.  Since we cannot know which bootloader we'll need
@@ -998,97 +994,6 @@ class Install:
                 raise InstallStepError(
                     "Failed to detach loopback device %s" % dev)
 
-
-    def chroot_setup(self, x11=False):
-        """Set up /target for safe package management operations."""
-        if self.target == '/':
-            return
-
-        policy_rc_d = os.path.join(self.target, 'usr/sbin/policy-rc.d')
-        f = open(policy_rc_d, 'w')
-        print >>f, """\
-#!/bin/sh
-exit 101"""
-        f.close()
-        os.chmod(policy_rc_d, 0755)
-
-        start_stop_daemon = os.path.join(self.target, 'sbin/start-stop-daemon')
-        if os.path.exists(start_stop_daemon):
-            os.rename(start_stop_daemon, '%s.REAL' % start_stop_daemon)
-        f = open(start_stop_daemon, 'w')
-        print >>f, """\
-#!/bin/sh
-echo 1>&2
-echo 'Warning: Fake start-stop-daemon called, doing nothing.' 1>&2
-exit 0"""
-        f.close()
-        os.chmod(start_stop_daemon, 0755)
-
-        initctl = os.path.join(self.target, 'sbin/initctl')
-        if os.path.exists(initctl):
-            os.rename(initctl, '%s.REAL' % initctl)
-            f = open(initctl, 'w')
-            print >>f, """\
-#!/bin/sh
-echo 1>&2
-echo 'Warning: Fake initctl called, doing nothing.' 1>&2
-exit 0"""
-            f.close()
-            os.chmod(initctl, 0755)
-
-        if not os.path.exists(os.path.join(self.target, 'proc/cmdline')):
-            self.chrex('mount', '-t', 'proc', 'proc', '/proc')
-        if not os.path.exists(os.path.join(self.target, 'sys/devices')):
-            self.chrex('mount', '-t', 'sysfs', 'sysfs', '/sys')
-        misc.execute('mount', '--bind', '/dev', os.path.join(self.target, 'dev'))
-
-        if x11 and 'DISPLAY' in os.environ:
-            if 'SUDO_USER' in os.environ:
-                xauthority = os.path.expanduser('~%s/.Xauthority' %
-                                                os.environ['SUDO_USER'])
-            else:
-                xauthority = os.path.expanduser('~/.Xauthority')
-            if os.path.exists(xauthority):
-                shutil.copy(xauthority,
-                            os.path.join(self.target, 'root/.Xauthority'))
-
-            if not os.path.isdir(os.path.join(self.target, 'tmp/.X11-unix')):
-                os.mkdir(os.path.join(self.target, 'tmp/.X11-unix'))
-            misc.execute('mount', '--bind', '/tmp/.X11-unix',
-                         os.path.join(self.target, 'tmp/.X11-unix'))
-
-    def chroot_cleanup(self, x11=False):
-        """Undo the work done by chroot_setup."""
-        if self.target == '/':
-            return
-
-        if x11 and 'DISPLAY' in os.environ:
-            misc.execute('umount', os.path.join(self.target, 'tmp/.X11-unix'))
-            try:
-                os.rmdir(os.path.join(self.target, 'tmp/.X11-unix'))
-            except OSError:
-                pass
-            osextras.unlink_force(os.path.join(self.target,
-                                               'root/.Xauthority'))
-
-        self.chrex('umount', '/dev')
-        self.chrex('umount', '/sys')
-        self.chrex('umount', '/proc')
-
-        initctl = os.path.join(self.target, 'sbin/initctl')
-        if os.path.exists('%s.REAL' % initctl):
-            os.rename('%s.REAL' % initctl, initctl)
-
-        start_stop_daemon = os.path.join(self.target, 'sbin/start-stop-daemon')
-        if os.path.exists('%s.REAL' % start_stop_daemon):
-            os.rename('%s.REAL' % start_stop_daemon, start_stop_daemon)
-        else:
-            osextras.unlink_force(start_stop_daemon)
-
-        policy_rc_d = os.path.join(self.target, 'usr/sbin/policy-rc.d')
-        osextras.unlink_force(policy_rc_d)
-
-
     def run_target_config_hooks(self):
         """Run hook scripts from /usr/lib/ubiquity/target-config. This allows
         casper to hook into us and repeat bits of its configuration in the
@@ -1123,6 +1028,10 @@ exit 0"""
                 self._db = db
             def info(self, title):
                 self._db.progress('INFO', title)
+            def get(self, question):
+                return self._db.get(question)
+            def substitute(self, template, substr, data):
+                self._db.subst(template, substr, data)
 
         for plugin in self.plugins:
             self.db.progress('SET', count)
@@ -1218,32 +1127,6 @@ exit 0"""
         except KeyError:
             return None
 
-
-    def record_installed(self, pkgs):
-        """Record which packages we've explicitly installed so that we don't
-        try to remove them later."""
-
-        record_file = "/var/lib/ubiquity/apt-installed"
-        if not os.path.exists(os.path.dirname(record_file)):
-            os.makedirs(os.path.dirname(record_file))
-        record = open(record_file, "a")
-
-        for pkg in pkgs:
-            print >>record, pkg
-
-        record.close()
-
-
-    def query_recorded_installed(self):
-        apt_installed = set()
-        if os.path.exists("/var/lib/ubiquity/apt-installed"):
-            record_file = open("/var/lib/ubiquity/apt-installed")
-            for line in record_file:
-                apt_installed.add(line.strip())
-            record_file.close()
-        return apt_installed
-
-
     def mark_install(self, cache, pkg):
         cachedpkg = self.get_cache_pkg(cache, pkg)
         if cachedpkg is not None and not cachedpkg.isInstalled:
@@ -1266,11 +1149,17 @@ exit 0"""
 
     def select_language_packs(self):
         try:
+            master_disable = self.db.get('pkgsel/install-language-support')
+            if master_disable != '' and not misc.create_bool(master_disable):
+                return
+        except debconf.DebconfError:
+            pass
+        try:
             keep_packages = self.db.get('ubiquity/keep-installed')
             keep_packages = keep_packages.replace(',', '').split()
             syslog.syslog('keeping packages due to preseeding: %s' %
                           ' '.join(keep_packages))
-            self.record_installed(keep_packages)
+            install_misc.record_installed(keep_packages)
         except debconf.DebconfError:
             pass
 
@@ -1355,7 +1244,7 @@ exit 0"""
 
         del cache
 
-        self.record_installed(to_install)
+        install_misc.record_installed(to_install)
         self.langpacks = to_install
 
     def install_language_packs(self):
@@ -1412,7 +1301,7 @@ exit 0"""
                 if os.path.isdir(os.path.join(home, homedir, '.ecryptfs')):
                     syslog.syslog('ecryptfs already in use in %s' %
                                   os.path.join(home, homedir))
-                    self.record_installed(['ecryptfs-utils'])
+                    install_misc.record_installed(['ecryptfs-utils'])
                     break
 
 
@@ -1462,14 +1351,14 @@ exit 0"""
         hardware system in which has been installed on and need some
         automatic configurations to get work."""
 
-        self.chroot_setup()
+        install_misc.chroot_setup(self.target)
         try:
             dbfilter = hw_detect.HwDetect(None, self.db)
             ret = dbfilter.run_command(auto_process=True)
             if ret != 0:
                 raise InstallStepError("HwDetect failed with code %d" % ret)
         finally:
-            self.chroot_cleanup()
+            install_misc.chroot_cleanup(self.target)
 
         self.db.progress('INFO', 'ubiquity/install/hardware')
 
@@ -1510,16 +1399,16 @@ exit 0"""
                                            'etc/popularity-contest.conf'))
         try:
             participate = self.db.get('popularity-contest/participate')
-            self.set_debconf('popularity-contest/participate', participate)
+            install_misc.set_debconf(self.target, 'popularity-contest/participate', participate, self.db)
         except debconf.DebconfError:
             pass
 
         osextras.unlink_force(os.path.join(self.target, 'etc/papersize'))
         subprocess.call(['log-output', '-t', 'ubiquity', 'chroot', self.target,
                          'ucf', '--purge', '/etc/papersize'],
-                        preexec_fn=debconf_disconnect, close_fds=True)
+                        preexec_fn=install_misc.debconf_disconnect, close_fds=True)
         try:
-            self.set_debconf('libpaper/defaultpaper', '')
+            install_misc.set_debconf(self.target, 'libpaper/defaultpaper', '', self.db)
         except debconf.DebconfError:
             pass
 
@@ -1528,8 +1417,8 @@ exit 0"""
         osextras.unlink_force(os.path.join(
             self.target, 'etc/ssl/private/ssl-cert-snakeoil.key'))
 
-        self.chroot_setup(x11=True)
-        self.chrex('dpkg-divert', '--package', 'ubiquity', '--rename',
+        install_misc.chroot_setup(self.target, x11=True)
+        install_misc.chrex(self.target,'dpkg-divert', '--package', 'ubiquity', '--rename',
                    '--quiet', '--add', '/usr/sbin/update-initramfs')
         try:
             os.symlink('/bin/true', os.path.join(self.target,
@@ -1546,14 +1435,14 @@ exit 0"""
 
         try:
             for package in packages:
-                self.reconfigure(package)
+                install_misc.reconfigure(self.target, package)
         finally:
             osextras.unlink_force(os.path.join(self.target,
                                                'usr/sbin/update-initramfs'))
-            self.chrex('dpkg-divert', '--package', 'ubiquity', '--rename',
+            install_misc.chrex(self.target,'dpkg-divert', '--package', 'ubiquity', '--rename',
                        '--quiet', '--remove', '/usr/sbin/update-initramfs')
-            self.chrex('update-initramfs', '-c', '-k', self.kernel_version)
-            self.chroot_cleanup(x11=True)
+            install_misc.chrex(self.target,'update-initramfs', '-c', '-k', self.kernel_version)
+            install_misc.chroot_cleanup(self.target, x11=True)
 
         # Fix up kernel symlinks now that the initrd exists. Depending on
         # the architecture, these may be in / or in /boot.
@@ -1598,25 +1487,6 @@ exit 0"""
                     else:
                         continue
                 os.symlink(linksrc, linkdst)
-
-
-    def get_all_interfaces(self):
-        """Get all non-local network interfaces."""
-        ifs = []
-        ifs_file = open('/proc/net/dev')
-        # eat header
-        ifs_file.readline()
-        ifs_file.readline()
-
-        for line in ifs_file:
-            name = re.match('(.*?(?::\d+)?):', line.strip()).group(1)
-            if name == 'lo':
-                continue
-            ifs.append(name)
-
-        ifs_file.close()
-        return ifs
-
 
     def configure_network(self):
         """Automatically configure the network.
@@ -1691,7 +1561,7 @@ exit 0"""
 
             if_names = {}
             sock = socket.socket(socket.SOCK_DGRAM)
-            interfaces = self.get_all_interfaces()
+            interfaces = install_misc.get_all_interfaces()
             for i in range(len(interfaces)):
                 if_names[interfaces[i]] = struct.unpack('H6s',
                     fcntl.ioctl(sock.fileno(), SIOCGIFHWADDR,
@@ -1815,6 +1685,14 @@ exit 0"""
                 break
         return brokenpkgs
 
+    def warn_broken_packages(self, pkgs, err):
+        pkgs = ', '.join(pkgs)
+        syslog.syslog('broken packages after installation: %s' % pkgs)
+        self.db.subst('ubiquity/install/broken_install', 'ERROR', err)
+        self.db.subst('ubiquity/install/broken_install', 'PACKAGES', pkgs)
+        self.db.input('critical', 'ubiquity/install/broken_install')
+        self.db.go()
+
     def do_install(self, to_install):
         if self.langpacks:
             self.db.progress('START', 0, 10, 'ubiquity/langpacks/title')
@@ -1856,7 +1734,7 @@ exit 0"""
                 self.db, 'ubiquity/install/title',
                 'ubiquity/install/apt_info',
                 'ubiquity/install/apt_error_install')
-        self.chroot_setup()
+        install_misc.chroot_setup(self.target)
         commit_error = None
         try:
             try:
@@ -1877,7 +1755,7 @@ exit 0"""
                     syslog.syslog(syslog.LOG_ERR, line)
                 commit_error = str(e)
         finally:
-            self.chroot_cleanup()
+            install_misc.chroot_cleanup(self.target)
         self.db.progress('SET', 10)
 
         cache.open(None)
@@ -1885,14 +1763,7 @@ exit 0"""
             if commit_error is None:
                 commit_error = ''
             brokenpkgs = self.broken_packages(cache)
-            syslog.syslog('broken packages after installation: '
-                          '%s' % ', '.join(brokenpkgs))
-            self.db.subst('ubiquity/install/broken_install', 'ERROR',
-                          commit_error)
-            self.db.subst('ubiquity/install/broken_install', 'PACKAGES',
-                          ', '.join(brokenpkgs))
-            self.db.input('critical', 'ubiquity/install/broken_install')
-            self.db.go()
+            self.warn_broken_packages(brokenpkgs, commit_error)
 
         self.db.progress('STOP')
 
@@ -2035,7 +1906,7 @@ exit 0"""
         installprogress = DebconfInstallProgress(
             self.db, 'ubiquity/install/title', 'ubiquity/install/apt_info',
             'ubiquity/install/apt_error_remove')
-        self.chroot_setup()
+        install_misc.chroot_setup(self.target)
         commit_error = None
         try:
             try:
@@ -2049,7 +1920,7 @@ exit 0"""
                     syslog.syslog(syslog.LOG_ERR, line)
                 commit_error = str(e)
         finally:
-            self.chroot_cleanup()
+            install_misc.chroot_cleanup(self.target)
         self.db.progress('SET', 5)
 
         cache.open(None)
@@ -2155,7 +2026,7 @@ exit 0"""
         self.db.progress('REGION', 2, 5)
         try:
             if remove_kernels:
-                self.do_remove(remove_kernels, recursive=True)
+                install_misc.record_removed(remove_kernels, recursive=True)
         except:
             self.db.progress('STOP')
             raise
@@ -2163,12 +2034,48 @@ exit 0"""
         self.db.progress('STOP')
 
 
+    def install_oem_extras(self):
+        """Try to install additional packages requested by the distributor"""
+
+        extra_packages = self.db.get('oem-config/extra_packages')
+        if extra_packages:
+            extra_packages = extra_packages.replace(',', ' ').split()
+        else:
+            return
+        save_replace = None
+        save_override = None
+        try:
+            if 'DEBCONF_DB_REPLACE' in os.environ:
+                save_replace = os.environ['DEBCONF_DB_REPLACE']
+            if 'DEBCONF_DB_OVERRIDE' in os.environ:
+                save_override = os.environ['DEBCONF_DB_OVERRIDE']
+            os.environ['DEBCONF_DB_REPLACE'] = 'configdb'
+            os.environ['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
+            # We don't support asking questions on behalf of packages specified
+            # here yet, as we don't support asking arbitrary questions in
+            # components/install.py yet.  This is complicated not only by the
+            # present lack of dialogs for string and multiselect, but also
+            # because we don't have any way of discerning between questions
+            # asked by this module and questions asked by packages being
+            # installed.
+            cmd = ['debconf-apt-progress', '--', 'apt-get', '-y', 'install']
+            cmd += extra_packages
+            try:
+                subprocess.check_call(cmd)
+            except subprocess.CalledProcessError, e:
+                if e.returncode != 30:
+                    cache = Cache()
+                    brokenpkgs = self.broken_packages(cache)
+                    self.warn_broken_packages(brokenpkgs, str(e))
+        finally:
+            if save_replace:
+                os.environ['DEBCONF_DB_REPLACE'] = save_replace
+            if save_override:
+                os.environ['DEBCONF_DB_OVERRIDE'] = save_override
+
     def install_extras(self):
         """Try to install additional packages requested by installer
         components."""
-
-        if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
-            return
 
         # We only ever install these packages from the CD.
         sources_list = os.path.join(self.target, 'etc/apt/sources.list')
@@ -2185,7 +2092,7 @@ exit 0"""
         if not found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
 
-        self.do_install(self.query_recorded_installed())
+        self.do_install(install_misc.query_recorded_installed())
 
         if found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
@@ -2206,19 +2113,25 @@ exit 0"""
                         if os.path.exists(os.path.join(self.target,
                                                        desktop_file)):
                             desktop_base = os.path.basename(desktop_file)
-                            self.chrex('install', '-d',
+                            install_misc.chrex(self.target,'install', '-d',
                                        '-o', 'oem', '-g', 'oem',
                                        '/home/oem/Desktop')
-                            self.chrex('install', '-o', 'oem', '-g', 'oem',
+                            install_misc.chrex(self.target,'install', '-o', 'oem', '-g', 'oem',
                                        '/%s' % desktop_file,
                                        '/home/oem/Desktop/%s' % desktop_base)
                             break
 
-		# Carry the locale setting over to the installed system.
-		# This mimics the behavior in 01oem-config-udeb.
+                # Carry the locale setting over to the installed system.
+                # This mimics the behavior in 01oem-config-udeb.
                 di_locale = self.db.get('debian-installer/locale')
                 if di_locale:
-                    self.set_debconf('debian-installer/locale', di_locale)
+                    install_misc.set_debconf(self.target, 'debian-installer/locale', di_locale, self.db)
+                #in an automated install, this key needs to carry over
+                installable_lang = self.db.get('ubiquity/only-show-installable-languages')
+                if installable_lang:
+                    install_misc.set_debconf(self.target,
+                        'ubiquity/only-show-installable-languages',
+                        installable_lang, self.db)
         except debconf.DebconfError:
             pass
 
@@ -2256,7 +2169,7 @@ exit 0"""
             difference = set()
 
         # Keep packages we explicitly installed.
-        keep = self.query_recorded_installed()
+        keep = install_misc.query_recorded_installed()
 
         arch, subarch = self.archdetect()
 
@@ -2289,11 +2202,15 @@ exit 0"""
                     difference.add(pkg)
             del cache
 
+        install_misc.record_removed(difference)
+
         # Don't worry about failures removing packages; it will be easier
         # for the user to sort them out with a graphical package manager (or
         # whatever) after installation than it will be to try to deal with
         # them automatically here.
-        self.do_remove(difference)
+        (regular, recursive) = install_misc.query_recorded_removed()
+        self.do_remove(regular)
+        self.do_remove(recursive, recursive=True)
 
     def remove_broken_cdrom(self):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
@@ -2447,14 +2364,14 @@ exit 0"""
         if not os.path.exists(os.path.join(self.target, 'etc/init.d/apparmor')):
             syslog.syslog('Apparmor is not installed, so not generating cache.')
             return
-        self.chrex('mount', '-t', 'proc', 'proc', '/proc')
-        self.chrex('mount', '-t', 'sysfs', 'sysfs', '/sys')
-        self.chrex('mount', '-t', 'securityfs',
+        install_misc.chrex(self.target,'mount', '-t', 'proc', 'proc', '/proc')
+        install_misc.chrex(self.target,'mount', '-t', 'sysfs', 'sysfs', '/sys')
+        install_misc.chrex(self.target,'mount', '-t', 'securityfs',
                    'securityfs', '/sys/kernel/security')
-        self.chrex('/etc/init.d/apparmor', 'recache')
-        self.chrex('umount', '/proc')
-        self.chrex('umount', '/sys/kernel/security')
-        self.chrex('umount', '/sys')
+        install_misc.chrex(self.target,'/etc/init.d/apparmor', 'recache')
+        install_misc.chrex(self.target,'umount', '/proc')
+        install_misc.chrex(self.target,'umount', '/sys/kernel/security')
+        install_misc.chrex(self.target,'umount', '/sys')
 
     def cleanup(self):
         """Miscellaneous cleanup tasks."""
@@ -2475,11 +2392,6 @@ exit 0"""
             self.umount_source()
 
 
-    def chrex(self, *args):
-        """executes commands on chroot system (provided by *args)."""
-        return misc.execute('chroot', self.target, *args)
-
-
     def copy_debconf(self, package):
         """setting debconf database into installed system."""
 
@@ -2493,39 +2405,6 @@ exit 0"""
                      '^%s/' % package, '--config=Name:targetdb',
                      '--config=Driver:File','--config=Filename:' + targetdb)
 
-
-    def set_debconf(self, question, value):
-        try:
-            if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
-                dccomm = None
-                dc = self.db
-            else:
-                dccomm = subprocess.Popen(['log-output', '-t', 'ubiquity',
-                                           '--pass-stdout',
-                                           'chroot', self.target,
-                                           'debconf-communicate',
-                                           '-fnoninteractive', 'ubiquity'],
-                                          stdin=subprocess.PIPE,
-                                          stdout=subprocess.PIPE, close_fds=True)
-                dc = debconf.Debconf(read=dccomm.stdout, write=dccomm.stdin)
-            dc.set(question, value)
-            dc.fset(question, 'seen', 'true')
-        finally:
-            if dccomm:
-                dccomm.stdin.close()
-                dccomm.wait()
-
-
-    def reconfigure_preexec(self):
-        debconf_disconnect()
-        os.environ['XAUTHORITY'] = '/root/.Xauthority'
-
-    def reconfigure(self, package):
-        """executes a dpkg-reconfigure into installed system to each
-        package which provided by args."""
-        subprocess.call(['log-output', '-t', 'ubiquity', 'chroot', self.target,
-                         'dpkg-reconfigure', '-fnoninteractive', package],
-                        preexec_fn=self.reconfigure_preexec, close_fds=True)
 
 
 if __name__ == '__main__':

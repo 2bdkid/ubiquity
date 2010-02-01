@@ -123,6 +123,13 @@ class Controller(ubiquity.frontend.base.Controller):
     def go_to_page(self, widget):
         self._wizard.set_current_page(self._wizard.ui.widgetStack.indexOf(widget))
 
+    def toggle_top_level(self):
+        if self._wizard.ui.isVisible():
+            self._wizard.ui.hide()
+        else:
+            self._wizard.ui.show()
+        self._wizard.refresh()
+
 class Wizard(BaseFrontend):
 
     def __init__(self, distro):
@@ -202,7 +209,6 @@ class Wizard(BaseFrontend):
                     if breadcrumb:
                         mod.breadcrumb_question = breadcrumb
                         mod.breadcrumb = SqueezeLabel()
-                        mod.breadcrumb.setText(self.get_string(breadcrumb))
                         mod.breadcrumb.setObjectName(mod.breadcrumb_question)
                         label_index = self.ui.steps_widget.layout().count() - 2 # Room for install crumb
                         self.ui.steps_widget.layout().insertWidget(label_index, mod.breadcrumb)

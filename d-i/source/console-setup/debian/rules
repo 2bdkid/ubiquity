@@ -13,7 +13,7 @@ main_build:
 debian/kbdnames.gz: main_build
 	( cd Keyboard \
 	&& ./kbdnames-maker MyKeyboardNames.pl \
-		| grep -v '^C[*]' | grep -v '[*]model[*]' | sort | gzip -9 ) >$@
+		| grep -v '^C[*]' | sort | gzip -9 ) >$@
 
 debian/console-setup.config debian/console-setup-mini.config: debian/config.proto main_build
 	awk ' \
@@ -35,7 +35,7 @@ debian/console-setup.config debian/console-setup-mini.config: debian/config.prot
 } \
 /## *KBDNAMES *##/ { \
     printf "all_kbdnames () {\n cat <<'\''EOF'\'' \n"; \
-    system("cd Keyboard && ./kbdnames-maker MyKeyboardNames.pl | grep '\''^C[*]'\'' | grep -v '\''[*]model[*]'\''"); \
+    system("cd Keyboard && ./kbdnames-maker MyKeyboardNames.pl | grep '\''^C[*]'\''"); \
     printf "EOF\n [ ! -f /usr/share/console-setup-mini/kbdnames.gz ] || zcat /usr/share/console-setup-mini/kbdnames.gz \n}\n"; \
     next; \
 } \
@@ -228,6 +228,7 @@ install-udeb: build
 	dh_link -pconsole-setup-udeb usr/bin/ckbcomp-mini usr/bin/ckbcomp
 	dh_install -pconsole-setup-udeb setupcon bin
 	dh_install -p console-setup-udeb debian/console-setup.config usr/share/console-setup-mini
+	dh_install -p console-setup-udeb debian/kbdnames.gz usr/share/console-setup-mini
 	dh_installdirs -p console-setup-udeb lib/debian-installer.d
 	install -m0644 debian/console-setup-udeb.startup \
 		debian/console-setup-udeb/lib/debian-installer.d/S55console-setup

@@ -1,3 +1,11 @@
+debian-installer-utils (1.72ubuntu2) lucid; urgency=low
+
+  * Backport from trunk:
+    - list-devices: Add support for dmraid disks and partitions.  Exclude
+      disks and partitions that are already part of a dmraid set.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 27 Jan 2010 16:42:07 +0000
+
 debian-installer-utils (1.72ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

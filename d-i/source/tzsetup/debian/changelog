@@ -1,3 +1,25 @@
+tzsetup (1:0.26ubuntu4) lucid; urgency=low
+
+  * Set the geoip question to a higher priorty so it gets asked by
+    default.
+  * Properly go to the full list if the user says no to the geoip
+    question.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 29 Jan 2010 10:32:42 +0000
+
+tzsetup (1:0.26ubuntu3) lucid; urgency=low
+
+  * Fix the sed statement around the geoip detection to account for the
+    XML being on a single line.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 28 Jan 2010 22:42:09 +0000
+
+tzsetup (1:0.26ubuntu2) lucid; urgency=low
+
+  * Support getting the timezone from a geoip server (LP: #229884).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Mon, 25 Jan 2010 15:53:09 +0000
+
 tzsetup (1:0.26ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
