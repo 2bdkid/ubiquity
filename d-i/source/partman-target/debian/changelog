@@ -1,3 +1,11 @@
+partman-target (64ubuntu6) lucid; urgency=low
+
+  * Stop adding removable devices to /etc/fstab, now that apt knows how to
+    find CD-ROM devices using libudev (LP: #33512).
+  * Update translations of Ubuntu-specific strings from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 02 Feb 2010 15:41:10 -0800
+
 partman-target (64ubuntu5) karmic; urgency=low
 
   * Fix clearing of subdirectories of /usr and /var (LP: #461698).

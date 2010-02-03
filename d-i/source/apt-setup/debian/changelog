@@ -1,3 +1,14 @@
+apt-setup (1:0.42ubuntu2) lucid; urgency=low
+
+  * Remove Release files for old releases.
+  * Backport from trunk:
+    - Guard against future multiple-CD handling changes in apt.  If multiple
+      CDs are inserted then any one can satisfy a media-change request.  We
+      don't yet deal with multiple CDs everywhere, but at least we won't
+      break when 'apt-cdrom ident' starts returning multiple labels.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 02 Feb 2010 12:41:13 -0800
+
 apt-setup (1:0.42ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
