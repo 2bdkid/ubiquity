@@ -140,7 +140,7 @@ scan_disk () {
 			if [ "$virtual" = yes ]; then
 				get_resize_range
 			else
-				get_ext2_resize_range
+				get_real_resize_range "$oldid" "$fs"
 			fi
 			if [ "$cursize" ] && [ "$minsize" ]; then
 				thisfree="$(expr "$cursize" - "$minsize")"
@@ -160,7 +160,7 @@ scan_disk () {
 			if [ "$virtual" = yes ]; then
 				get_resize_range
 			else
-				get_ntfs_resize_range
+				get_real_resize_range "$oldid" "$fs"
 			fi
 			if [ "$cursize" ] && [ "$minsize" ]; then
 				thisfree="$(expr "$cursize" - "$minsize")"

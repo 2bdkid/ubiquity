@@ -24,7 +24,7 @@ while :; do
 		db_get tzsetup/geoip_server
 		if [ -n "$RET" ]; then
 			server="$RET"
-			if db_get mirror/http/proxy; then
+			if db_get mirror/http/proxy && [ "$RET" ]; then
 				export http_proxy="$RET"
 			fi
 			detected=$(wget "$server" -O - 2>/dev/null | grep "TimeZone" \

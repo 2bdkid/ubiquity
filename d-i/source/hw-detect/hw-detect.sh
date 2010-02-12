@@ -517,11 +517,6 @@ fi
 
 # Install optimised libc based on CPU type
 case "$(udpkg --print-architecture)" in
-    armel)
-	if grep -q '^Features.* vfp\>' /proc/cpuinfo; then
-		apt-install libc6-vfp || true
-	fi
-	;;
     i386)
 	case "$(grep '^cpu family' /proc/cpuinfo | head -n1 | cut -d: -f2)" in
 	    " 6"|" 15")

@@ -103,6 +103,34 @@ get_resize_range () {
 	prefsize=$cursize
 }
 
+# This function works only on non-virtual (i.e. committed) filesystems.  It
+# calls some external programs to discover the size, so caches for
+# efficiency.
+get_real_resize_range () {
+	# Keep this variable name in sync with other functions above.
+	local oldid="$1"
+	local fs="$2"
+
+	if [ -f "$oldid/real_resize_range_cache" ]; then
+		read minsize cursize maxsize prefsize \
+			< "$oldid/real_resize_range_cache"
+	else
+		local CODE=0
+		case $fs in
+		    ntfs)		get_ntfs_resize_range || CODE=$? ;;
+		    ext2|ext3|ext4)	get_ext2_resize_range || CODE=$? ;;
+		    *)			get_resize_range ;;
+		esac
+		case $CODE in
+		    0)
+			echo "$minsize $cursize $maxsize $prefsize" \
+				> "$oldid/real_resize_range_cache"
+			;;
+		esac
+		return $CODE
+	fi
+}
+
 human_resize_range () {
 	hminsize=$(longint2human $minsize)
 	hcursize=$(longint2human $cursize)

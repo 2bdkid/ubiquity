@@ -1,3 +1,10 @@
+partman-auto (89ubuntu3) lucid; urgency=low
+
+  * Use new get_real_resize_range function from partman-partitioning
+    72ubuntu3, which caches calls to tune2fs and ntfsresize.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 11 Feb 2010 01:45:12 +0000
+
 partman-auto (89ubuntu2) karmic; urgency=low
 
   * Change armel+dove automatic partitioning to use the uboot pseudo-filesystem

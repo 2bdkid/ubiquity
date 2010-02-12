@@ -835,6 +835,7 @@ Acquire::cdrom {
     Mount  "true";
     UMount "true";
   };
+  AutoDetect "false";
 }
 EOT
 

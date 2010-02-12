@@ -1,3 +1,28 @@
+grub-installer (1.49ubuntu4) lucid; urgency=low
+
+  * Preseed grub-pc/install_devices_empty while installing grub-pc, since we
+    deliberately defer calling grub-install until a later point.  Thanks to
+    Dustin Kirkland for debugging assistance.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 04 Feb 2010 12:24:22 -0800
+
+grub-installer (1.49ubuntu3) lucid; urgency=low
+
+  * Add $partition_offset to $bootpart when deciding which partition to make
+    active based on GRUB-style device names (found while testing fix for LP
+    #185878).
+  * Use grub-probe to convert device names rather than relying on
+    device.map.
+  * Only add removable devices to device.map if using GRUB Legacy.
+  * Use an appropriate OS device name rather than (hd0) if possible.
+  * When installing from a non-CD medium, we only need to reset the default
+    boot device if we would otherwise end up installing GRUB to the
+    installation medium.
+  * Convert device names to by-id form before preseeding
+    grub-pc/install_devices.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 03 Feb 2010 17:08:02 -0800
+
 grub-installer (1.49ubuntu2) lucid; urgency=low
 
   * Don't check for LVM when we've already worked out that we're installing

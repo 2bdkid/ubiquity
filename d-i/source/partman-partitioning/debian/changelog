@@ -1,3 +1,10 @@
+partman-partitioning (72ubuntu3) lucid; urgency=low
+
+  * Cache calls to tune2fs and ntfsresize, to make navigating through the
+    resize UI a little faster.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 11 Feb 2010 01:42:14 +0000
+
 partman-partitioning (72ubuntu2) karmic; urgency=low
 
   * Set prefsize in get_*resize_range functions; pass RAWPREFSIZE instead of
