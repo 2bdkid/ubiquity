@@ -1,3 +1,41 @@
+clock-setup (0.102ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Apparently OpenSolaris keeps the hardware clock in local time
+      (surprisingly).  Assume UTC=no if Solaris is detected.
+    - Pass --noadjfile to hwclock.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 13 Feb 2010 15:47:26 +0000
+
+clock-setup (0.102) unstable; urgency=low
+
+  * Use log-output when calling set-date-epoch.
+  * Upgrade to debhelper v7.
+
+  [ Updated translations ]
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Frans Pop <fjp@debian.org>  Wed, 16 Dec 2009 20:54:51 +0100
+
+clock-setup (0.101) unstable; urgency=low
+
+  * Remove no longer needed Lintian override for missing Standards-
+    Version field.
+  * If the current system date is before the epoch, rdate fails to set it to
+    the date obtained using NTP (#502336). Work around this by setting the date
+    to the epoch (1-1-1970) if the current date is smaller, before calling
+    rdate. Closes: #548128.
+
+  [ Updated translations ]
+  * Asturian (ast.po) by astur
+  * Danish (da.po) by Mads Lundby
+  * Galician (gl.po) by Marce Villarino
+
+ -- Frans Pop <fjp@debian.org>  Mon, 14 Dec 2009 21:54:16 +0100
+
 clock-setup (0.100ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
