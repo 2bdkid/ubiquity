@@ -85,6 +85,7 @@ class Page(Plugin):
 
             # Force autopartitioning to be re-run.
             shutil.rmtree('/var/lib/partman', ignore_errors=True)
+        self.thaw_choices('choose_partition')
         self.thaw_choices('active_partition')
 
         self.autopartition_question = None
@@ -105,6 +106,7 @@ class Page(Plugin):
         self.undoing = False
         self.finish_partitioning = False
         self.bad_auto_size = False
+        self.description_cache = {}
 
         questions = ['^partman-auto/.*automatically_partition$',
                      '^partman-auto/select_disk$',
@@ -206,6 +208,16 @@ class Page(Plugin):
             if os.access(os.path.join(directory, name), os.X_OK):
                 yield name[2:]
 
+    def description(self, question):
+        # We call this quite a lot on a small number of templates that never
+        # change, so add a caching layer.
+        try:
+            return self.description_cache[question]
+        except KeyError:
+            description = Plugin.description(self, question)
+            self.description_cache[question] = description
+            return description
+
     def method_description(self, method):
         try:
             question = None
@@ -229,8 +241,10 @@ class Page(Plugin):
         except debconf.DebconfError:
             return filesystem
 
-    def create_use_as(self, devpart):
-        """Yields the possible methods that a new partition may use."""
+    def use_as(self, devpart, create):
+        """Yields the possible methods that a partition may use.
+
+        If create is True, then only list methods usable on new partitions."""
 
         # TODO cjwatson 2006-11-01: This is a particular pain; we can't find
         # out the real list of possible uses from partman until after the
@@ -240,7 +254,12 @@ class Page(Plugin):
             if method == 'filesystem':
                 for fs in self.scripts('/lib/partman/valid_filesystems'):
                     if fs == 'ntfs':
-                        pass
+                        if not create and devpart in self.partition_cache:
+                            partition = self.partition_cache[devpart]
+                            if ('detected_filesystem' in partition and
+                                partition['detected_filesystem'] == 'ntfs'):
+                                yield (method, fs,
+                                       self.filesystem_description(fs))
                     elif fs == 'fat':
                         yield (method, 'fat16',
                                self.filesystem_description('fat16'))
@@ -276,6 +295,8 @@ class Page(Plugin):
         # partman until after the partition has been created, but we can at
         # least fish it out of the appropriate debconf template rather than
         # having to hardcode it.
+        # (Actually, getting it from partman tends to be unacceptably slow
+        # anyway.)
 
         if fs in ('fat16', 'fat32', 'ntfs'):
             question = 'partman-basicfilesystems/fat_mountpoint'
@@ -308,6 +329,19 @@ class Page(Plugin):
             return partition['mountpoint']
         else:
             return None
+
+    def build_free(self, devpart):
+        partition = self.partition_cache[devpart]
+        if partition['parted']['fs'] == 'free':
+            self.debug('Partman: %s is free space', partition)
+            # The alternative is descending into
+            # partman/free_space and checking for a
+            # 'new' script.  This is quicker.
+            partition['can_new'] = partition['parted']['type'] in \
+                ('primary', 'logical', 'pri/log')
+            return True
+        else:
+            return False
 
     def get_actions(self, devpart, partition):
         if devpart is None and partition is None:
@@ -552,6 +586,8 @@ class Page(Plugin):
                             state[1] = None
                             self.frontend.debconf_progress_step(1)
                             self.frontend.refresh()
+                        elif self.build_free(state[1]):
+                            state[1] = None
                         else:
                             break
 
@@ -692,6 +728,8 @@ class Page(Plugin):
                                 devpart = None
                                 self.frontend.debconf_progress_step(1)
                                 self.frontend.refresh()
+                            elif self.build_free(devpart):
+                                devpart = None
                             else:
                                 break
                     if devpart is not None:
@@ -815,18 +853,7 @@ class Page(Plugin):
                 raise AssertionError, "Arrived at %s unexpectedly" % question
 
         elif question == 'partman/free_space':
-            if self.building_cache:
-                state = self.__state[-1]
-                assert state[0] == 'partman/choose_partition'
-                partition = self.partition_cache[state[1]]
-                can_new = False
-                if self.find_script(menu_options, 'new'):
-                    can_new = True
-                partition['can_new'] = can_new
-                self.maybe_thaw_choose_partition()
-                # Back up to the previous menu.
-                return False
-            elif self.creating_partition:
+            if self.creating_partition:
                 self.preseed_script(question, menu_options, 'new')
                 return True
             else:
@@ -906,12 +933,20 @@ class Page(Plugin):
                                 parted.readline_part_entry(partition['id'],
                                                            entry)
 
+                partition['method_choices'] = []
+                for use in self.use_as(state[1],
+                                       partition['parted']['fs'] == 'free'):
+                    partition['method_choices'].append(use)
+
+                partition['mountpoint_choices'] = []
+                if 'method' in partition and 'acting_filesystem' in partition:
+                    filesystem = partition['acting_filesystem']
+                    for mpc in self.default_mountpoint_choices(filesystem):
+                        partition['mountpoint_choices'].append(mpc)
+
                 visit = []
                 for (script, arg, option) in menu_options:
-                    if arg in ('method', 'mountpoint'):
-                        visit.append((script, arg,
-                                      self.translate_to_c(question, option)))
-                    elif arg == 'format':
+                    if arg == 'format':
                         partition['can_activate_format'] = True
                     elif arg == 'resize':
                         visit.append((script, arg,
@@ -1051,16 +1086,7 @@ class Page(Plugin):
                 raise AssertionError, "Arrived at %s unexpectedly" % question
 
         elif question == 'partman-target/choose_method':
-            if self.building_cache:
-                state = self.__state[-1]
-                assert state[0] == 'partman/active_partition'
-                partition = self.partition_cache[state[1]]
-                partition['method_choices'] = []
-                for (script, arg, option) in menu_options:
-                    partition['method_choices'].append((script, arg, option))
-                # Back up to the previous menu.
-                return False
-            elif self.creating_partition or self.editing_partition:
+            if self.creating_partition or self.editing_partition:
                 if self.creating_partition:
                     request = self.creating_partition
                 else:
@@ -1075,22 +1101,7 @@ class Page(Plugin):
         elif question in ('partman-basicfilesystems/mountpoint',
                           'partman-basicfilesystems/fat_mountpoint',
                           'partman-uboot/mountpoint'):
-            if self.building_cache:
-                state = self.__state[-1]
-                assert state[0] == 'partman/active_partition'
-                partition = self.partition_cache[state[1]]
-                partition['mountpoint_choices'] = []
-                choices_c = self.choices_untranslated(question)
-                choices = self.choices(question)
-                assert len(choices_c) == len(choices)
-                for i in range(len(choices_c)):
-                    if choices_c[i].startswith('/'):
-                        partition['mountpoint_choices'].append((
-                            choices_c[i].split(' ')[0],
-                            choices_c[i], choices[i]))
-                # Back up to the previous menu.
-                return False
-            elif self.creating_partition or self.editing_partition:
+            if self.creating_partition or self.editing_partition:
                 if self.creating_partition:
                     request = self.creating_partition
                 else:
