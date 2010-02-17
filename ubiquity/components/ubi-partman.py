@@ -32,6 +32,8 @@ from ubiquity import osextras
 NAME = 'partman'
 AFTER = 'console_setup'
 WEIGHT = 10
+# Not useful in oem-config.
+OEM = False
 
 class PageBase(PluginUI):
     def __init__(self):
@@ -1550,7 +1552,7 @@ class Page(Plugin):
                             dev = 'free'
                         else:
                             dev = partition[5]
-                        ret.append((dev, size, partition[1]))
+                        ret.append((dev, size, partition[1], partition[4]))
                     layout[disk] = ret
             self.ui.set_disk_layout(layout)
             

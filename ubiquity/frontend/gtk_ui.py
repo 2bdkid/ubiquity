@@ -111,13 +111,22 @@ class Controller(ubiquity.frontend.base.Controller):
         self._wizard.translate_pages(lang, just_me, reget)
 
     def allow_go_forward(self, allowed):
-        self._wizard.allow_go_forward(allowed)
+        try:
+             self._wizard.allow_go_forward(allowed)
+        except AttributeError:
+            pass
 
     def allow_go_backward(self, allowed):
-        self._wizard.allow_go_backward(allowed)
+        try:
+            self._wizard.allow_go_backward(allowed)
+        except AttributeError:
+            pass
 
     def allow_change_step(self, allowed):
-        self._wizard.allow_change_step(allowed)
+        try:
+            self._wizard.allow_change_step(allowed)
+        except AttributeError:
+            pass
 
     def allowed_change_step(self):
         return self._wizard.allowed_change_step
@@ -1148,7 +1157,7 @@ class Wizard(BaseFrontend):
         return callback(source, debconf_condition)
 
     def debconf_progress_start (self, progress_min, progress_max, progress_title):
-        if self.current_page == self.steps.page_num(self.stepPartAdvanced):
+        if self.page_name(self.steps.get_current_page()) == 'stepPartAdvanced':
             self.partition_list_buttonbox.set_sensitive(False)
             self.part_advanced_recalculating_box.show()
             self.part_advanced_recalculating_spinner.start()
@@ -1200,7 +1209,7 @@ class Wizard(BaseFrontend):
         return True
 
     def debconf_progress_stop (self):
-        if self.current_page == self.steps.page_num(self.stepPartAdvanced):
+        if self.page_name(self.steps.get_current_page()) == 'stepPartAdvanced':
             self.partition_list_buttonbox.set_sensitive(True)
             self.part_advanced_recalculating_spinner.stop()
             self.part_advanced_recalculating_box.hide()

@@ -1,3 +1,36 @@
+ubiquity (2.1.21) lucid; urgency=low
+
+  [ Mario Limonciello ]
+  * Catch some attribute errors if plugins try to use the controller to
+    control allowing page changes too early during initialization due to
+    signal handlers.
+  * Update mythbuntu-services for changes in ubi-usersetup.
+  * Accomodate for the fact that passwd/user-passwd is no longer available
+    by the time the myth-* pages come up.
+
+  [ Evan Dandrea ]
+  * Consider a failure to set up the user-setup page to be a fatal
+    error.
+  * Add some missing imports and variables to the user-setup page.
+  * Add oem-config/install-language-support, which installs the
+    respective language support packages for the locale selected by the
+    user.
+  * Add an 'OEM' field to the plugins to declare whether a module is
+    suitable for use in oem-config (defaults to True).
+  * Don't assuming that the partman component is present when checking
+    to see if we're on the advanced partitioning page.
+  * Make usersetup depend on console_setup rather than partman, in case
+    the latter isn't present.
+  * Validate some fields on the usersetup page in real time.  Provide a
+    visual cue that the data entered is probably okay.
+  * Automatic update of included source packages: console-setup
+    1.34ubuntu10.
+
+  [ Roman Shtylman ]
+  * Fix for (LP: #522502)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 17 Feb 2010 16:31:17 +0000
+
 ubiquity (2.1.20) lucid; urgency=low
 
   * Convert migrationassistant, partman, summary, and usersetup to

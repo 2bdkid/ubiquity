@@ -48,7 +48,6 @@ package KeyboardNames;
     'Compaq Internet Keyboard (18 keys)' => 'compaqik18',
     'Compaq Internet Keyboard (7 keys)' => 'compaqik7',
     'Compaq iPaq Keyboard' => 'ipaq',
-    'Creative Desktop Wireless 7000' => 'creativedw7000',
     'DTK2000' => 'dtk2000',
     'Dell' => 'dell',
     'Dell 101-key PC' => 'dell101',
@@ -169,11 +168,6 @@ package KeyboardNames;
     'Trust Direct Access Keyboard' => 'trustda',
     'Trust Slimline' => 'trust_slimline',
     'Trust Wireless Keyboard Classic' => 'trust',
-    'TypeMatrix EZ-Reach 2020' => 'tm2020',
-    'TypeMatrix EZ-Reach 2030 PS2' => 'tm2030PS2',
-    'TypeMatrix EZ-Reach 2030 USB' => 'tm2030USB',
-    'TypeMatrix EZ-Reach 2030 USB (102/105:EU mode)' => 'tm2030USB-102',
-    'TypeMatrix EZ-Reach 2030 USB (106:JP mode)' => 'tm2030USB-106',
     'Unitek KB-1925' => 'unitekkb1925',
     'ViewSonic KU-306 Internet Keyboard' => 'vsonku306',
     'Winbook Model XP5' => 'winbook',
@@ -313,8 +307,8 @@ package KeyboardNames;
 	'Wang model 724 azerty' => 'wang',
     },
     'bg' => {
-	'New phonetic' => 'bas_phonetic',
-	'Traditional phonetic' => 'phonetic',
+	'Standard Phonetic' => 'bas_phonetic',
+	'Traditional Phonetic' => 'phonetic',
     },
     'br' => {
 	'Dvorak' => 'dvorak',
@@ -329,7 +323,7 @@ package KeyboardNames;
     },
     'by' => {
 	'Latin' => 'latin',
-	'Legacy' => 'legacy',
+	'Winkeys' => 'winkeys',
     },
     'ca' => {
 	'English' => 'eng',
@@ -506,7 +500,6 @@ package KeyboardNames;
 	'Malayalam Lalitha' => 'mal_lalitha',
 	'Oriya' => 'ori',
 	'Tamil' => 'tam',
-	'Tamil Keyboard with Numerals' => 'tam_keyboard_with_numerals',
 	'Tamil TAB Typewriter' => 'tam_TAB',
 	'Tamil TSCII Typewriter' => 'tam_TSCII',
 	'Tamil Unicode' => 'tam_unicode',
@@ -522,11 +515,13 @@ package KeyboardNames;
 	'Kurdish, Latin Q' => 'ku',
     },
     'ir' => {
+	'Keypad' => 'keypad',
 	'Kurdish, (F)' => 'ku_f',
 	'Kurdish, Arabic-Latin' => 'ku_ara',
 	'Kurdish, Latin Alt-Q' => 'ku_alt',
 	'Kurdish, Latin Q' => 'ku',
-	'Persian, with Persian Keypad' => 'pes_keypad',
+	'Pro' => 'pro',
+	'Pro Keypad' => 'pro_keypad',
     },
     'is' => {
 	'Dvorak' => 'dvorak',
@@ -538,7 +533,6 @@ package KeyboardNames;
 	'Eliminate dead keys' => 'nodeadkeys',
 	'Georgian' => 'geo',
 	'Macintosh' => 'mac',
-	'US keyboard with Italian letters' => 'us',
     },
     'jp' => {
 	'Kana' => 'kana',
@@ -661,7 +655,6 @@ package KeyboardNames;
 	'Z and ZHE swapped' => 'yz',
     },
     'ru' => {
-	'Bashkirian' => 'bak',
 	'Chuvash' => 'cv',
 	'Chuvash Latin' => 'cv_latin',
 	'DOS' => 'dos',

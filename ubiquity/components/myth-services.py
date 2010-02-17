@@ -22,7 +22,6 @@
 from ubiquity.plugin import *
 from mythbuntu_common.installer import *
 from mythbuntu_common.dictionaries import get_services_dictionary
-from mythbuntu_common.vnc import VNCHandler
 from ubiquity import install_misc
 from ubiquity import misc
 
@@ -87,8 +86,10 @@ class Page(Plugin):
         type = self.db.get('mythbuntu/install_type')
         self.ui.toggle_customtype(type)
 
+        passwd = self.db.get('passwd/user-password')
+
         #VNC hates us if we have short passwords
-        self.ui.toggle_offer_vnc(len(self.frontend.get_password()) >= 6)
+        self.ui.toggle_offer_vnc(len(passwd) >= 6)
 
         return (['/usr/share/ubiquity/ask-mythbuntu','services'], questions)
 
@@ -127,15 +128,6 @@ class Install(InstallPlugin):
 [mysqld]
 bind-address=0.0.0.0"""
             f.close()
-
-        if misc.create_bool(progress.get('mythbuntu/x11vnc')):
-            vnc=VNCHandler()
-            vnc.create_password(progress.get('passwd/user-password'))
-            directory = target + '/home/' + progress.get('passwd/username') + '/.vnc'
-            if not os.path.exists(directory):
-                os.makedirs(directory)
-            shutil.move('/root/.vnc/passwd', directory + '/passwd')
-            to_install.append('x11vnc')
 
         #Mark new items
         install_misc.record_installed(to_install)
