@@ -1,3 +1,20 @@
+ubiquity (2.1.22) lucid; urgency=low
+
+  * Use raised_privileges() in the noninteractive FE for init.
+  * Fix a couple of areas that broke in the noninteractive portions of
+    ubi-usersetup from the plugins conversion.
+  * Drop myth-summary.  Now that ubi-summary is a plugin, it's much more
+    difficult to override, and not worth the delta.
+  * Since both partman and usersetup now want to go after console_setup,
+    set partman's weight higher than usersetup's to restore the page.
+    (LP: #523648)
+  * Integrate 60mythbuntu target config into myth-passwords now that
+    user setup is a plugin.
+  * For user-setup's PageDebconf, inherit from PageBase for skeleton
+    functions that Page may use.
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Fri, 19 Feb 2010 10:41:33 -0600
+
 ubiquity (2.1.21) lucid; urgency=low
 
   [ Mario Limonciello ]
