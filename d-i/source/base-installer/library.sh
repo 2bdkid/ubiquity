@@ -707,6 +707,22 @@ EOT
 		log-output -t base-installer apt-install "$HEADERS" || true
 	fi
 
+	db_get base-installer/kernel/backports-modules
+	if [ "$RET" ]; then
+		BACKPORTS_MODULES="$RET"
+
+		# Advance progress bar to 85% of allocated space for install_linux
+		update_progress 85 100
+
+		# Install kernel backports modules if possible
+		for backports_module in $BACKPORTS_MODULES; do
+			LBM="$(echo "$KERNEL" | sed "s/linux\\(-image\\|\\)/linux-backports-modules-$backports_module-$DISTRIBUTION/")"
+			db_subst base-installer/section/install_kernel_package SUBST0 "$LBM"
+			db_progress INFO base-installer/section/install_kernel_package
+			log-output -t base-installer apt-install "$LBM" || true
+		done
+	fi
+
 	# Advance progress bar to 90% of allocated space for install_linux
 	update_progress 90 100
 
