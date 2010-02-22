@@ -4,17 +4,21 @@ import sys
 import optparse
 
 import glib
+import gobject
 import gtk
-import rsvg
+
+sys.path.insert(0, '/usr/lib/ubiquity')
+
+from ubiquity import i18n
 
 return_value = 0
 options = None
-svg = None
 window = None
 image = None
 button1 = None
 button2 = None
 fixed = None
+combo = None
 
 def recompute_button_positions():
     if button1:
@@ -30,6 +34,13 @@ def recompute_button_positions():
         y = window.allocation.height * options.button2_height
         if button2.allocation.x != x or button2.allocation.y != y:
             fixed.move(button2, int(x), int(y))
+
+    if combo:
+        requisition = combo.get_child_requisition()
+        x = window.allocation.width / 2 - requisition[0] / 2
+        y = window.allocation.height * 3 / 4
+        if combo.allocation.x != x or combo.allocation.y != y:
+            fixed.move(combo, int(x), int(y))
 
     return False
 
@@ -49,8 +60,31 @@ def button2_clicked(button):
 def fixed_size_allocate(widget, allocation):
     glib.timeout_add(100, recompute_button_positions)
 
+def create_language_model():
+    current_language, sorted_choices, language_display_map = \
+        i18n.get_languages()
+    default_locales = i18n.default_locales()
+
+    store = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+    current_language_index = 0
+    i = 0
+    for choice in sorted_choices:
+        if choice not in language_display_map:
+            continue
+        code = language_display_map[choice][1]
+        if code not in default_locales:
+            continue
+        locale = default_locales[code]
+        iter = store.append()
+        store.set(iter, 0, choice, 1, locale)
+        if choice == current_language:
+            current_language_index = i
+        i += 1
+
+    return store, current_language_index
+
 def window_size_allocate(widget, allocation):
-    global image, button1, button2
+    global image, button1, button2, combo
 
     orig_pixbuf = gtk.gdk.pixbuf_new_from_file(options.filename)
     pixbuf = orig_pixbuf.scale_simple(allocation.width, allocation.height,
@@ -72,13 +106,25 @@ def window_size_allocate(widget, allocation):
         button2.connect('map', button_mapped)
         fixed.put(button2, 0, 0)
         button2.show()
+
+        language_model, current_language = create_language_model()
+        combo = gtk.ComboBox(language_model)
+        combo.set_title('Language')
+
+        renderer = gtk.CellRendererText()
+        combo.pack_start(renderer, False)
+        combo.set_attributes(renderer, text=0)
+        combo.set_active(current_language)
+
+        fixed.put(combo, 0, 0)
+        combo.show()
     else:
         if (image.allocation.width != allocation.width or
             image.allocation.height != allocation.height):
             image.set_from_pixbuf(pixbuf)
 
 def main():
-    global options, svg, window, fixed
+    global options, window, fixed
 
     usage = '%prog [options]'
     parser = optparse.OptionParser(usage=usage)
@@ -92,8 +138,6 @@ def main():
     parser.add_option('-2', '--button2-y', type='float',
                       help='Button 2 height ratio')
     options, args = parser.parse_args()
-
-    svg = rsvg.Handle(file=options.filename)
 
     window = gtk.Window()
     window.set_title("Welcome to Ubuntu!")
@@ -110,6 +154,13 @@ def main():
     window.show_all()
 
     gtk.main()
+
+    language_iter = combo.get_active_iter()
+    if language_iter is None:
+        language = 'C'
+    else:
+        language = combo.get_model().get_value(language_iter, 1)
+    print language
 
     return return_value
 
