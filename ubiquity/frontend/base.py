@@ -42,7 +42,9 @@ class Controller:
     
         # For summary and install.
         self.get_grub = wizard.get_grub
+        self.set_grub = wizard.set_grub
         self.get_summary_device = wizard.get_summary_device
+        self.set_summary_device = wizard.set_summary_device
         self.get_popcon = wizard.get_popcon
         self.set_popcon = wizard.set_popcon
         self.set_proxy_host = wizard.set_proxy_host

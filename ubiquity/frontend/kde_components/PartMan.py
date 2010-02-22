@@ -332,7 +332,7 @@ class PartMan(QWidget):
                 edits = {'size': size, 'method': method,
                          'mountpoint': mountpoint}
                 if fmt is not None:
-                    edits['format'] = 'dummy'
+                    edits['fmt'] = 'dummy'
                 self.ctrlr.dbfilter.edit_partition(devpart, **edits)
     
     def on_partition_edit_use_combo_changed(self, *args):
@@ -360,8 +360,8 @@ class PartMan(QWidget):
                 self.ctrlr.dbfilter.default_mountpoint_choices(method):
                 self.edit_dialog.partition_edit_mount_combo.addItem(mp)
     
-    """ activated when parition lick clicked """
     def on_partition_list_treeview_activated(self, index):
+        """ activated when parition lick clicked """
         item = index.internalPointer()
         devpart = item.itemData[0]
         partition = item.itemData[1]

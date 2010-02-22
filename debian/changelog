@@ -1,3 +1,25 @@
+ubiquity (2.1.23) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Fix docstrings. They need to be the first statement in a function.
+  * Fix method call to set_summary_device in the advanced dialog.
+    Thanks Roman Shtylman.
+
+  [ Mario Limonciello ]
+  * Fix an UnboundLocalError in oem-config mode related to trusted_db.
+  * Remove all of the mythbuntu frontend from ubiquity.  Now that it's fully
+    stable, it's being moved to the mythbuntu-live-autostart package so that
+    it can benefit from being maintained by anyone in ~mythbuntu-dev.
+  * Automatic update of included source packages: grub-installer
+    1.49ubuntu5.
+
+  [ Roman Shtylman ]
+  * Fix for (LP: #424216) KDE ui on small screens
+  * Fix for (LP: #485322) KDE ui forward/install buttons
+  * Fix for (LP: #524090) KDE ui gray bar and scaling wallpaper
+
+ -- Mario Limonciello <superm1@ubuntu.com>  Sun, 21 Feb 2010 22:17:26 -0600
+
 ubiquity (2.1.22) lucid; urgency=low
 
   * Use raised_privileges() in the noninteractive FE for init.

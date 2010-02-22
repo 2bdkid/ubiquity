@@ -91,6 +91,19 @@ class UbiquityUI(KMainWindow):
         self.minimize_button.clicked.connect(self.showMinimized)
         
         self.setWindowTitle("%s %s" % (distro_name, distro_release))
+        
+        # don't use stylesheet cause we want to scale the wallpaper for various
+        # screen sizes as well as support larger screens
+        self.bgImage = QImage("/usr/share/ubiquity/qt/images/wallpaper.jpg");
+        self.scaledBgImage = self.bgImage
+    
+    def paintEvent(self, pe):
+        p = QPainter(self)
+        p.drawImage(0, 0, self.scaledBgImage)
+        
+    def resizeEvent(self, re):
+        self.scaledBgImage = self.bgImage.scaled(self.width(), self.height(), 
+                Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
 
     def setWizard(self, wizardRef):
         self.wizard = wizardRef
@@ -158,6 +171,11 @@ class Wizard(BaseFrontend):
             self.app.setStyleSheet(file(os.path.join(UIDIR, "style.qss")).read())
 
         self.ui = UbiquityUI()
+        
+        # handle smaller screens (old school eee pc
+        if (QApplication.desktop().screenGeometry().height() < 560):
+            self.ui.main_frame.setFixedHeight(470)
+            self.ui.main_frame.setStyleSheet(file(os.path.join(UIDIR, "style_small.qss")).read())
         
         # initially the steps widget is not visible
         # it becomes visible once the first step becomes active
@@ -714,8 +732,8 @@ class Wizard(BaseFrontend):
             self.stackLayout.setCurrentWidget(widget)
             self.on_steps_switch_page(current)
 
-    """prepare, copy and config the system in the core install process."""
     def progress_loop(self):
+        """prepare, copy and config the system in the core install process."""
         syslog.syslog('progress_loop()')
 
         self.current_page = None
@@ -841,13 +859,13 @@ class Wizard(BaseFrontend):
         elif self.get_reboot():
             self.reboot()
 
-    """reboot the system after installing process."""
     def reboot(self, *args):
+        """reboot the system after installing process."""
         self.returncode = 10
         self.quit()
 
-    """Callback for main program to actually reboot the machine."""
     def do_reboot(self):
+        """Callback for main program to actually reboot the machine."""
         if 'DESKTOP_SESSION' in os.environ:
             execute('qdbus', 'org.kde.ksmserver', '/KSMServer', 'org.kde.KSMServerInterface.logout',
                     # ShutdownConfirmNo, ShutdownTypeReboot,
@@ -856,8 +874,8 @@ class Wizard(BaseFrontend):
         else:
             execute('reboot')
 
-    """quit installer cleanly."""
     def quit(self):
+        """quit installer cleanly."""
         self.current_page = None
         if self.dbfilter is not None:
             self.dbfilter.cancel_handler()
@@ -876,8 +894,8 @@ class Wizard(BaseFrontend):
         else:
             return False
 
-    """Callback to control the installation process between steps."""
     def on_next_clicked(self):
+        """Callback to control the installation process between steps."""
         if not self.allowed_change_step or not self.allowed_go_forward:
             return
 
@@ -890,8 +908,8 @@ class Wizard(BaseFrontend):
         else:
             self.app.exit()
 
-    """Process and validate the results of this step."""
     def process_step(self):
+        """Process and validate the results of this step."""
 
         # setting actual step
         step_num = self.get_current_page()
@@ -905,8 +923,8 @@ class Wizard(BaseFrontend):
         if step == "stepPartAuto":
             self.process_autopartitioning()
 
-    """Processing automatic partitioning step tasks."""
     def process_autopartitioning(self):
+        """Processing automatic partitioning step tasks."""
         self.app.processEvents()
 
         # For safety, if we somehow ended up improperly initialised
@@ -917,8 +935,8 @@ class Wizard(BaseFrontend):
         else:
             self.set_current_page(self.step_index("stepUserInfo"))
 
-    """Callback to set previous screen."""
     def on_back_clicked(self):
+        """Callback to set previous screen."""
         if not self.allowed_change_step:
             return
 
