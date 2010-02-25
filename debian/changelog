@@ -1,3 +1,24 @@
+ubiquity (2.1.28) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Copy oem-config debconf questions only after we're done using the
+    database.
+
+  [ Mario Limonciello ]
+  * Don't mistakenly always show ubiquity running in debug mode warning in
+    oem-config mode.
+
+  [ Colin Watson ]
+  * KDE frontend:
+    - Fix partman component for use_as signature change (LP: #527468).
+    - on_partitionResized needs a self argument (LP: #527457).
+
+  [ Jonathan Riddell ]
+  * kde_ui.py: Always show progressDialog during the install stage (LP:
+    #527448)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Feb 2010 12:37:09 +0000
+
 ubiquity (2.1.27) lucid; urgency=low
 
   * Check whether choose_partition should be thawed when going back from
