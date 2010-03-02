@@ -1,3 +1,120 @@
+partman-base (138ubuntu1) lucid; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use ext4 as the default filesystem for new partitions.
+    - Use linux-swap(v1) instead of linux-swap(new) to reflect changes to
+      parted.
+    - Build with -O2 on powerpc to avoid a suspected toolchain bug.
+  * Build against parted 2.1.  We don't use its improved alignment features
+    yet, but we plan to do so by Lucid.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 26 Feb 2010 14:44:22 +0000
+
+partman-base (138) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Fix display of partman/text/dmraid_volume.  'dmraid -s -c -c <superset>'
+    doesn't seem to work (at least not for ISW), but 'dmraid -s -c -c
+    <device>' works and produces the information we need.
+
+  [ Frans Pop ]
+  * base.sh: fix incorrect variable use for kfreebsd in humandev().
+  * Add post-base-installer.d script to apt-install dmraid into target.
+    Included here as dmraid does not have a separate partman component.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+  * Panjabi (pa.po) by A S Alam
+  * Romanian (ro.po) by Eddy Petrișor
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Frans Pop <fjp@debian.org>  Mon, 22 Feb 2010 03:59:32 +0100
+
+partman-base (137) unstable; urgency=low
+
+  * Fix regression from calling sed outside debconf_select's inner loop:
+    remove empty choices, which confused cdebconf.  This notably happened
+    when asking partman-auto/choose_recipe with a trailing newline on the
+    choices list.
+
+  [ Updated translations ]
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 14 Jan 2010 01:35:40 +0000
+
+partman-base (136) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Upgrade to debhelper v7.
+  * Fix typo in partman-command that broke commands such as "partman-command
+    /dev/sda IS_CHANGED".
+  * Merge from Ubuntu:
+    - Call sed outside debconf_select's inner loop. In my benchmarks using
+      two disks with eight partitions each, this reduces debconf_select's
+      runtime on partman/choose_partition from 0.69 seconds to 0.07 seconds.
+    - Cache the output of partition_tree_choices for each disk, invalidating
+      the cache whenever we update a partition on the disk. In the above
+      benchmark, this saves on the order of half a second every time we
+      redisplay the partition tree when nothing has changed (e.g. on backing
+      up from a partition).
+
+  [ Aurelien Jarno ]
+  * [GNU/kFreeBSD] Add support for disk number > 10 and GPT naming scheme.
+
+  [ Frans Pop ]
+  * Remove no longer needed Lintian override for missing Standards-
+    Version field.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama M. Khayat
+  * Asturian (ast.po) by Marcos Antonio Alvarez Costales
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Ask Hjorth Larsen
+  * German (de.po) by Holger Wansing
+  * Greek (el.po) by Emmanuel Galatoulas
+  * Esperanto (eo.po) by Felipe Castro
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Estonian (et.po) by Mattias Põldaru
+  * Finnish (fi.po) by Esko Arajärvi
+  * French (fr.po) by Christian Perrier
+  * Galician (gl.po) by Marce Villarino
+  * Hindi (hi.po)
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Lithuanian (lt.po) by Kęstutis Biliūnas
+  * Marathi (mr.po) by Sampada
+  * Norwegian Bokmal (nb.po) by Hans Fredrik Nordhaug
+  * Dutch (nl.po) by Frans Pop
+  * Polish (pl.po) by Bartosz Fenski
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Swedish (sv.po) by Daniel Nylander
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Turkish (tr.po) by Mert Dirik
+  * Vietnamese (vi.po) by Clytie Siddall
+  * Simplified Chinese (zh_CN.po) by 苏运强
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 06 Jan 2010 22:38:01 +0100
+
 partman-base (135ubuntu4) lucid; urgency=low
 
   * Fix regression from calling sed outside debconf_select's inner loop:

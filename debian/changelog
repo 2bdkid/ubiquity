@@ -1,3 +1,36 @@
+ubiquity (2.1.29) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Align description labels to the top left on the user-setup page and get
+    rid of the width request (LP: #524827).
+  * Fix references to create_label and allow_change_step in the KDE
+    frontend's PartMan module (LP: #527932).
+  * str.split returns a list of one empty string when splitting on an
+    empty string.
+  * Update the KDE frontend with the new slideshow location (as of
+    ubiquity-slideshow 15).
+  * The timezone is perfectly usable at half its width and height, so
+    only request that.  This also means we're not trying to guess how
+    much space we can reasonably take up with the map, but rather
+    letting the rest of the interface determine the width and height of
+    the installer window.
+  * If the screen resolution is particularly low (< 600px height), allow
+    the user to scroll through the user setup page content.
+  * Left-align the labels on the segmented_bars.
+  * Make the segmented_bars narrower.
+  * Set the width of the language selection treeview to the minimum
+    required to fit the contents.  Do not allow it to expand.
+  * Move the greeter functionality into ubiquity itself, still
+    accessible with the maybe-ubiquity boot option (LP: #530713).
+  * Automatic update of included source packages: netcfg 1.51ubuntu2,
+    partconf 1.32ubuntu1, partman-base 138ubuntu1.
+
+  [ Colin Watson ]
+  * Fix choose_partition thawing to handle free space at the end of
+    update_partitions (LP: #527848).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 02 Mar 2010 21:11:41 +0000
+
 ubiquity (2.1.28) lucid; urgency=low
 
   [ Evan Dandrea ]
