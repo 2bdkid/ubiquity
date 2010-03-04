@@ -50,6 +50,9 @@ class PageBase(PluginUI):
 
     def get_oem_id(self):
         return ''
+    
+    def set_alpha_warning(self, show):
+        self.show_alpha_warning = show
 
 class PageGtk(PageBase):
     plugin_is_language = True
@@ -92,22 +95,28 @@ class PageGtk(PageBase):
                     pass
             self.install_ubuntu = builder.get_object('install_ubuntu')
             self.try_ubuntu = builder.get_object('try_ubuntu')
-            if not 'UBIQUITY_GREETER' in os.environ:
-                try_section_vbox = builder.get_object('try_section_vbox')
-                try_section_vbox and try_section_vbox.hide()
-                self.install_ubuntu and self.install_ubuntu.hide()
-            else:
-                self.install_ubuntu.connect('clicked',
-                        self.controller._wizard.on_next_clicked)
-                self.try_ubuntu.connect('clicked',
-                    self.controller._wizard.quit_installer)
-            self.try_text_label = builder.get_object('try_text_label')
-            self.ready_text_label = builder.get_object('ready_text_label')
+            if not self.only:
+                if not 'UBIQUITY_GREETER' in os.environ:
+                    try_section_vbox = builder.get_object('try_section_vbox')
+                    try_section_vbox and try_section_vbox.hide()
+                    self.install_ubuntu and self.install_ubuntu.hide()
+                else:
+                    self.install_ubuntu.connect('clicked',
+                            self.controller._wizard.on_next_clicked)
+                    self.try_ubuntu.connect('clicked',
+                        self.controller._wizard.quit_installer)
+                self.try_text_label = builder.get_object('try_text_label')
+                self.ready_text_label = builder.get_object('ready_text_label')
+                self.alpha_warning_label = builder.get_object('alpha_warning_label')
 
         except Exception, e:
             self.debug('Could not create language page: %s', e)
             self.page = None
         self.plugin_widgets = self.page
+
+    def set_alpha_warning(self, show):
+        if not show and not self.only:
+            self.alpha_warning_label.hide()
 
     def set_language_choices(self, choices, choice_map):
         import gtk, gobject
@@ -191,28 +200,31 @@ class PageGtk(PageBase):
         else:
             lang = 'C'
             
-        release_name = misc.get_release_name()
-        install_medium = misc.get_install_medium()
-        install_medium = i18n.get_string(install_medium, lang)
-        for widget in (self.try_text_label,
-                       self.try_ubuntu,
-                       self.install_ubuntu,
-                       self.ready_text_label):
-            text = i18n.get_string(gtk.Buildable.get_name(widget), lang)
-            text = text.replace('${RELEASE}', release_name)
-            text = text.replace('${MEDIUM}', install_medium)
-            widget.set_label(text)
-        if self.release_notes_label:
-            if self.release_notes_url and self.update_installer:
-                pass
-            elif self.release_notes_url:
-                text = i18n.get_string('release_notes_only', lang)
-                self.release_notes_label.set_markup(text)
-            elif self.update_installer:
-                text = i18n.get_string('update_installer_only', lang)
-                self.release_notes_label.set_markup(text)
-            else:
-                self.release_notes_label.hide()
+        if not self.only:
+            release_name = misc.get_release_name()
+            install_medium = misc.get_install_medium()
+            install_medium = i18n.get_string(install_medium, lang)
+            for widget in (self.try_text_label,
+                           self.try_ubuntu,
+                           self.install_ubuntu,
+                           self.ready_text_label,
+                           self.alpha_warning_label):
+                text = i18n.get_string(gtk.Buildable.get_name(widget), lang)
+                text = text.replace('${RELEASE}', release_name)
+                text = text.replace('${MEDIUM}', install_medium)
+                widget.set_label(text)
+            
+            if self.release_notes_label:
+                if self.release_notes_url and self.update_installer:
+                    pass
+                elif self.release_notes_url:
+                    text = i18n.get_string('release_notes_only', lang)
+                    self.release_notes_label.set_markup(text)
+                elif self.update_installer:
+                    text = i18n.get_string('update_installer_only', lang)
+                    self.release_notes_label.set_markup(text)
+                else:
+                    self.release_notes_label.hide()
 
     def set_oem_id(self, text):
         return self.oem_id_entry.set_text(text)
@@ -221,6 +233,7 @@ class PageGtk(PageBase):
         return self.oem_id_entry.get_text()
 
     def on_link_clicked(self, widget, uri):
+        # Connected in glade.
         if uri == 'update':
             if not auto_update.update(self.controller._wizard):
                 # no updates, so don't check again
@@ -388,6 +401,10 @@ class Page(Plugin):
                 self.ui.set_oem_id(self.db.get('oem-config/id'))
             except debconf.DebconfError:
                 pass
+        
+        if not self.ui.controller.oem_config:
+            show = self.db.get('ubiquity/show_alpha_warning') == 'true'
+            self.ui.set_alpha_warning(show)
 
         localechooser_script = '/usr/lib/ubiquity/localechooser/localechooser'
         if ('UBIQUITY_FRONTEND' in os.environ and

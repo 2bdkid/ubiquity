@@ -1,3 +1,19 @@
+ubiquity (2.1.30) lucid; urgency=low
+
+  [ Mario Limonciello ]
+  * Raise permissions for misc.execute calls in bin/ubiquity.
+  * Don't allow oem-user-config and oem-config to both be enabled.
+
+  [ Evan Dandrea ]
+  * Move the alpha warning for the GTK+ frontend to the language page.
+    It fits better there now that we have the greeter functionality.
+  * Push handling the progress bar when on the partitioning page
+    properly into ubi-partman.
+  * Show the advanced partitioning page immediately, now that its
+    progress is displayed in the window contents (LP: #336751).
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Wed, 03 Mar 2010 19:40:15 -0600
+
 ubiquity (2.1.29) lucid; urgency=low
 
   [ Evan Dandrea ]

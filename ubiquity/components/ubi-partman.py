@@ -108,6 +108,10 @@ class PageGtk(PageBase):
             self.part_advanced_warning_message = builder.get_object('part_advanced_warning_message')
             self.part_advanced_warning_hbox = builder.get_object('part_advanced_warning_hbox')
             self.part_auto_comment_label = builder.get_object('part_auto_comment_label')
+            self.partition_list_buttonbox = builder.get_object('partition_list_buttonbox')
+            self.part_advanced_recalculating_box = builder.get_object('part_advanced_recalculating_box')
+            self.part_advanced_recalculating_spinner = builder.get_object('part_advanced_recalculating_spinner')
+            self.part_advanced_recalculating_label = builder.get_object('part_advanced_recalculating_label')
 
             self.partition_bars = {}
             self.segmented_bar_vbox = None
@@ -152,6 +156,19 @@ class PageGtk(PageBase):
             self.debug('Could not create language page: %s', e)
             self.page = None
         self.plugin_widgets = self.page
+
+    def progress_start(self, *args):
+        self.partition_list_buttonbox.set_sensitive(False)
+        self.part_advanced_recalculating_box.show()
+        self.part_advanced_recalculating_spinner.start()
+
+    def progress_info(self, progress_info):
+        self.part_advanced_recalculating_label.set_text(progress_info)
+    
+    def progress_stop(self, *args):
+        self.partition_list_buttonbox.set_sensitive(True)
+        self.part_advanced_recalculating_spinner.stop()
+        self.part_advanced_recalculating_box.hide()
 
     def plugin_get_current_page(self):
         return self.current_page
@@ -1487,8 +1504,7 @@ class Page(Plugin):
             else:
                 break
             del self.update_partitions[0]
-            self.frontend.debconf_progress_step(1)
-            self.frontend.refresh()
+            self.progress_step('', 1)
 
     def maybe_thaw_choose_partition(self):
         # partman/choose_partition is special; it's the main control point
@@ -1627,8 +1643,7 @@ class Page(Plugin):
                 state = self.__state[-1]
                 if state[0] == question:
                     # advance to next partition
-                    self.frontend.debconf_progress_step(1)
-                    self.frontend.refresh()
+                    self.progress_step('', 1)
                     self.debug('Partman: update_partitions = %s',
                                self.update_partitions)
                     state[1] = None
@@ -1650,7 +1665,7 @@ class Page(Plugin):
                         self.__state.pop()
                         self.update_partitions = None
                         self.building_cache = False
-                        self.frontend.debconf_progress_stop()
+                        self.progress_stop()
                         self.frontend.refresh()
                         self.ui.current_page = self.ui.page_advanced
                         self.ui.update_partman(
@@ -1751,10 +1766,11 @@ class Page(Plugin):
                         }
 
                     drop_privileges()
-                    self.frontend.debconf_progress_start(
-                        0, len(self.update_partitions),
+                    # We want to immediately show the UI.
+                    self.ui.current_page = self.ui.page_advanced
+                    self.frontend.set_page(NAME)
+                    self.progress_start(0, len(self.update_partitions),
                         self.description('partman/progress/init/parted'))
-                    self.frontend.refresh()
                     self.debug('Partman: update_partitions = %s',
                                self.update_partitions)
 
@@ -1779,9 +1795,7 @@ class Page(Plugin):
                         self.thaw_choices('choose_partition')
                         self.update_partitions = None
                         self.building_cache = False
-                        self.frontend.debconf_progress_stop()
-                        self.frontend.refresh()
-                        self.ui.current_page = self.ui.page_advanced
+                        self.progress_stop()
                         self.ui.update_partman(
                             self.disk_cache, self.partition_cache,
                             self.cache_order)
@@ -2289,6 +2303,30 @@ class Page(Plugin):
         assert self.current_question == 'partman/choose_partition'
         self.undoing = True
         self.exit_ui_loops()
+
+    def progress_start(self, *args):
+        if hasattr(self.ui, 'progress_start'):
+            self.ui.progress_start(*args)
+        else:
+            Plugin.progress_start(self, *args)
+
+    def progress_info(self, progress_title, progress_info):
+        if hasattr(self.ui, 'progress_info'):
+            try:
+                self.ui.progress_info(self.description(progress_info))
+            except debconf.DebconfError:
+                pass
+            # We provide no means of cancelling the progress message,
+            # so always return True.
+            return True
+        else:
+            Plugin.progress_info(self, progress_title, progress_info)
+
+    def progress_stop(self, *args):
+        if hasattr(self.ui, 'progress_stop'):
+            self.ui.progress_stop(*args)
+        else:
+            Plugin.progress_stop(self, *args)
 
 # Notes:
 #
