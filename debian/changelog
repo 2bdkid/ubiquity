@@ -1,3 +1,31 @@
+ubiquity (2.1.32) lucid; urgency=low
+
+  [ Didier Roche ]
+  * scripts/install.py:
+   - copy the cached wallpaper created either by g-s-d or nautilus or by the
+     dedicated script in install mode. (LP: #530024)
+
+  [ Evan Dandrea ]
+  * WebKit puts file URLs in their own domain by default.  This means that
+    anything which checks for the same origin, such as creating an
+    XMLHttpRequest, will fail unless this is disabled (LP: #532502).
+  * Restore Colin's set_locale function.  However, this is only half the
+    puzzle.  We need to finish running the language component when the
+    exit button is pressed when in greeter mode.
+
+  [ Colin Watson ]
+  * KDE frontend:
+    - Fix references to PARTITION_* in PartMan module (LP: #528171).
+    - Drop real UID/GID when initialising KApplication.  The real and
+      effective IDs need to match, but raising them means we can't talk to
+      D-Bus.  Instead, use saved IDs to store our root privileges so that we
+      can get them back (LP: #526486).
+  * ubiquity-dm: Close stdout from dbus-launch.
+  * Automatic update of included source packages: apt-setup 1:0.42ubuntu3,
+    user-setup 1.28ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 06 Mar 2010 00:09:55 +0000
+
 ubiquity (2.1.31) lucid; urgency=low
 
   * Do not show the contents of the language page until the strings have
