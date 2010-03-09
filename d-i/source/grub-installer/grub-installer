@@ -106,7 +106,7 @@ convert () {
 	if [ "$partition_offset" != 0 ]; then
 		tmp_part="$(echo "$tmp_drive" | sed 's%.*,\([0-9]*\)).*%\1%')"
 		if [ "$tmp_part" ] && [ "$tmp_part" != "$tmp_drive" ]; then
-			tmp_drive="$(echo "$tmp_drive" | sed "s%\(.*,\)[0-9]*\().*\)%\1`expr $tmp_part - $partition_offset`%")"
+			tmp_drive="$(echo "$tmp_drive" | sed "s%\(.*,\)[0-9]*\().*\)%\1`expr $tmp_part - $partition_offset`\2%")"
 		fi
 	fi
 	echo "$tmp_drive"

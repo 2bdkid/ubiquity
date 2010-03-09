@@ -874,6 +874,7 @@ class Wizard(BaseFrontend):
         elif 'UBIQUITY_AUTOMATIC' not in os.environ:
             self.allow_go_backward(True)
 
+    def set_focus(self):
         # Make sure that something reasonable has the focus.  If the first
         # focusable item is a label or a button (often, the welcome text label
         # and the quit button), set the focus to the next button.
@@ -1267,7 +1268,8 @@ class Wizard(BaseFrontend):
                     break
             if self.pagesindex == -1: return
             self.start_debconf()
-            self.dbfilter = partman.Page(self)
+            ui = self.pages[self.pagesindex].ui
+            self.dbfilter = self.pages[self.pagesindex].filter_class(self, ui=ui)
             self.set_current_page(self.previous_partitioning_page)
             self.next.set_label("gtk-go-forward")
             self.translate_widget(self.next)
@@ -1381,6 +1383,7 @@ class Wizard(BaseFrontend):
     # Run the UI's main loop until it returns control to us.
     def run_main_loop (self):
         self.allow_change_step(True)
+        self.set_focus()
         gtk.main()
 
     # Return control to the next level up.

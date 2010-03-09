@@ -157,15 +157,16 @@ class PageGtk(PageBase):
             self.page = None
         self.plugin_widgets = self.page
 
-    def progress_start(self, *args):
+    def progress_start(self, progress_title):
         self.partition_list_buttonbox.set_sensitive(False)
+        self.part_advanced_recalculating_label.set_text(progress_title)
         self.part_advanced_recalculating_box.show()
         self.part_advanced_recalculating_spinner.start()
 
     def progress_info(self, progress_info):
         self.part_advanced_recalculating_label.set_text(progress_info)
     
-    def progress_stop(self, *args):
+    def progress_stop(self):
         self.partition_list_buttonbox.set_sensitive(True)
         self.part_advanced_recalculating_spinner.stop()
         self.part_advanced_recalculating_box.hide()
@@ -1113,7 +1114,7 @@ class PageKde(PageBase):
     def plugin_get_current_page(self):
         return self.current_page
 
-class PageNoninteractive(PluginUI):
+class PageNoninteractive(PageBase):
     def set_part_page(self, p):
         pass
 
@@ -1770,7 +1771,7 @@ class Page(Plugin):
                     self.ui.current_page = self.ui.page_advanced
                     self.frontend.set_page(NAME)
                     self.progress_start(0, len(self.update_partitions),
-                        self.description('partman/progress/init/parted'))
+                        'partman/progress/init/parted')
                     self.debug('Partman: update_partitions = %s',
                                self.update_partitions)
 
@@ -2304,14 +2305,16 @@ class Page(Plugin):
         self.undoing = True
         self.exit_ui_loops()
 
-    def progress_start(self, *args):
-        if hasattr(self.ui, 'progress_start'):
-            self.ui.progress_start(*args)
+    def progress_start(self, progress_min, progress_max, progress_title):
+        if (progress_title != 'partman/text/please_wait' and
+        hasattr(self.ui, 'progress_start')):
+            self.ui.progress_start(self.description(progress_title))
         else:
-            Plugin.progress_start(self, *args)
+            Plugin.progress_start(self, progress_min, progress_max, progress_title)
 
     def progress_info(self, progress_title, progress_info):
-        if hasattr(self.ui, 'progress_info'):
+        if (progress_info != 'partman-partitioning/progress_resizing' and
+        hasattr(self.ui, 'progress_info')):
             try:
                 self.ui.progress_info(self.description(progress_info))
             except debconf.DebconfError:
@@ -2322,11 +2325,12 @@ class Page(Plugin):
         else:
             Plugin.progress_info(self, progress_title, progress_info)
 
-    def progress_stop(self, *args):
-        if hasattr(self.ui, 'progress_stop'):
-            self.ui.progress_stop(*args)
+    def progress_stop(self, progress_title):
+        if (progress_title != 'partman/text/please_wait' and
+        hasattr(self.ui, 'progress_stop')):
+            self.ui.progress_stop()
         else:
-            Plugin.progress_stop(self, *args)
+            Plugin.progress_stop(self, progress_title)
 
 # Notes:
 #
