@@ -287,6 +287,12 @@ class Wizard(BaseFrontend):
         self.ui.setWindowIcon(KIcon("ubiquity"))
         self.allow_go_backward(False)
 
+        if not 'UBIQUITY_AUTOMATIC' in os.environ:
+            self.ui.show()
+
+        self.stop_debconf()
+        self.translate_widgets(reget=True)
+
         if self.oem_config:
             self.ui.setWindowTitle(self.get_string('oem_config_title'))
         elif self.oem_user_config:
@@ -297,13 +303,7 @@ class Wizard(BaseFrontend):
                 flags = flags ^ Qt.WindowCloseButtonHint
             self.ui.setWindowFlags(flags)
             self.ui.quit.hide()
-        
-        if not 'UBIQUITY_AUTOMATIC' in os.environ:
-            self.ui.show()
 
-        self.stop_debconf()
-        self.translate_widgets(reget=True)
-        
         iconLoader = KIconLoader()
         warningIcon = iconLoader.loadIcon("dialog-warning", KIconLoader.Desktop)
         
@@ -1048,11 +1048,11 @@ class Wizard(BaseFrontend):
         
         self.ui.progressCancel.setText(skipText)
         
-        #self.progressDialog.setWindowModality(Qt.WindowModal);
-        #self.progressDialog.setCancelText(skipText)
-        #self.progressDialog.setCancellable(False)
-        #self.progressDialog.setMaximum(total_steps)
-        #self.progressDialog.setWindowTitle(progress_title)
+        self.progressDialog.setWindowModality(Qt.WindowModal);
+        self.progressDialog.setCancelText(skipText)
+        self.progressDialog.setCancellable(False)
+        self.progressDialog.setMaximum(total_steps)
+        self.progressDialog.setWindowTitle(progress_title)
         #self.progressDialog.show()
         
         # TODO cancel button
@@ -1075,8 +1075,8 @@ class Wizard(BaseFrontend):
         self.progress_position.set(progress_val)
         fraction = self.progress_position.fraction()
         
-        #self.progressDialog.setProgressValue(
-        #    int(fraction * self.progressDialog.maximum()))
+        self.progressDialog.setProgressValue(
+            int(fraction * self.progressDialog.maximum()))
             
         self.ui.progressBar.setValue(int(fraction * self.ui.progressBar.maximum()))
         
@@ -1089,8 +1089,8 @@ class Wizard(BaseFrontend):
         self.progress_position.step(progress_inc)
         fraction = self.progress_position.fraction()
         
-        #self.progressDialog.setProgressValue(
-        #    int(fraction * self.progressDialog.maximum()))
+        self.progressDialog.setProgressValue(
+            int(fraction * self.progressDialog.maximum()))
         
         self.ui.progressBar.setValue(int(fraction * self.ui.progressBar.maximum()))
         
@@ -1101,7 +1101,7 @@ class Wizard(BaseFrontend):
         if self.progress_cancelled:
             return False
         
-        #self.progressDialog.setProgressLabel(progress_info)
+        self.progressDialog.setProgressLabel(progress_info)
         self.ui.progressBar.setFormat(progress_info + " %p%")
         
         return True
@@ -1109,10 +1109,10 @@ class Wizard(BaseFrontend):
     def debconf_progress_stop (self):
         self.progress_cancelled = False
         self.progress_position.stop()
-        #if self.progress_position.depth() == 0:
-        #    self.progressDialog.reset() # also hides dialog
-        #else:
-        #    self.progressDialog.setWindowTitle(self.progress_position.title())
+        if self.progress_position.depth() == 0:
+            self.progressDialog.reset() # also hides dialog
+        else:
+            self.progressDialog.setWindowTitle(self.progress_position.title())
         
         self.ui.content_widget.setEnabled(True)
         self.ui.progressBar.hide()
@@ -1122,11 +1122,11 @@ class Wizard(BaseFrontend):
 
     def debconf_progress_cancellable (self, cancellable):
         if cancellable:
-            #self.progressDialog.setCancellable(True)
+            self.progressDialog.setCancellable(True)
             self.ui.progressCancel.show()
         else:
             self.ui.progressCancel.hide()
-            #self.progressDialog.setCancellable(False)
+            self.progressDialog.setCancellable(False)
             self.progress_cancelled = False
 
     #def on_progress_cancel_button_clicked (self, button):
@@ -1203,6 +1203,7 @@ class Wizard(BaseFrontend):
                 text = option
             if text is None:
                 text = option
+            text = text.replace("_", "&")
             # Convention for options is to have the affirmative action last; KDE
             # convention is to have it first.
             if option == options[-1]:

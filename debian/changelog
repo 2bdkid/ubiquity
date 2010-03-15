@@ -1,3 +1,35 @@
+ubiquity (2.2.0) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Removed the alpha warning.  Welcome to Ubuntu 10.04 Beta 1.
+  * Align labels to the top on the language page (LP: #532876).
+  * The run method of GTK+ dialogs enters a nested main loop.  However,
+    the user can click the quit button (which calls the quit dialog's
+    run method) before the page is ready.  Once the page is actually ready,
+    another main loop is entered, and thus if the user hits the quit button
+    on the quit dialog at this point, nothing will happen.  Work around this
+    by managing the state of the quit dialog in the frontend.
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Fix label retranslation when clicking on update link (LP: #531864).
+  * KDE frontend:
+    - Use manual xauth code and sudo rather than kdesudo; the latter does
+      not permit passing through environment variables other than
+      one-by-one, which broke various things (LP: #526456, #538142).
+    - Construct the default hostname from the text in the username box, not
+      from the previous text in the hostname box (LP: #527704).
+  * Automatic update of included source packages: console-setup
+    1.34ubuntu11, grub-installer 1.49ubuntu7, partman-base 138ubuntu3,
+    partman-target 64ubuntu7.
+
+  [ Jonathan Riddell ]
+  * Ensure progressDialog is kept updated (LP: #538147)
+  * Set Qt style accelarators on question dialogue
+  * Do OEM config UI setup after translate_widgets, (LP: #539176)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Mar 2010 23:37:55 +0000
+
 ubiquity (2.1.35) lucid; urgency=low
 
   * KDE frontend:

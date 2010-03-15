@@ -932,7 +932,7 @@ make_active_partition () {
 	# TODO: this is gross and wrong; doing it with libparted would probably
 	# be slightly less unpleasant.
 	if [ "$bootdisk" ] && ! fdisk -l "$bootdisk" | grep '^/dev/' | grep -q '\*' && \
-	   ! fdisk -l "$bootdisk" | grep -q 'EFI GPT$'; then
+	   ! fdisk -l "$bootdisk" | grep -q 'GPT$'; then
 		if [ -z "$bootpart" ]; then
 			# bootdev must be set to a disk rather than a
 			# partition, or we'd already have an active partition

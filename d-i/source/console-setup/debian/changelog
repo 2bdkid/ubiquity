@@ -1,3 +1,21 @@
+console-setup (1.34ubuntu11) lucid; urgency=low
+
+  * Move boot tasks to a combination of two udev rules and a single Upstart
+    job, ensuring that they're run at points when we are able to satisfy the
+    constraints on the relevant ioctls.  This may not work optimally with
+    vgacon, but you have to go to special effort to use that with Ubuntu
+    now, and it at least shouldn't break (LP: #524439).
+  * Set default layout for Guernsey, Jersey, and the Isle of Man to gb
+    (LP: #533003).
+  * Fix incorrect FONT and ACM tests in initramfs script.
+  * Depend on kbd (>= 1.15-1ubuntu3) for a valuable loadkeys improvement.
+    This was previously a recommends, but the udev rule won't work without
+    kbd or console-tools anyway, I'm not really interested in supporting a
+    system without either installed, and console-tools is thoroughly
+    obsolete now.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 13 Mar 2010 12:56:30 +0000
+
 console-setup (1.34ubuntu10) lucid; urgency=low
 
   * debian/console-setup.console-setup.init,

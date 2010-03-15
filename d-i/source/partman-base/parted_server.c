@@ -645,7 +645,7 @@ add_extended_partition(PedDisk *disk, PedSector start, PedSector end)
                 return NULL;
         }
         if (!ped_disk_add_partition(disk, extended,
-                                    ped_constraint_any(disk->dev))) {
+                                    ped_device_get_optimal_aligned_constraint(disk->dev))) {
                 ped_partition_destroy(extended);
                 return NULL;
         }
@@ -661,7 +661,7 @@ maximize_extended_partition(PedDisk *disk)
         assert(has_extended_partition(disk));
         extended = ped_disk_extended_partition(disk);
         ped_disk_maximize_partition(disk, extended,
-                                    ped_constraint_any(disk->dev));
+                                    ped_device_get_optimal_aligned_constraint(disk->dev));
 }
 
 /* Makes the extended partition as small as possible or removes it if
@@ -697,7 +697,7 @@ add_primary_partition(PedDisk *disk, PedFileSystemType *fs_type,
                 log("Cannot create new primary partition.");
                 return NULL;
         }
-        if (!ped_disk_add_partition(disk, part, ped_constraint_any(disk->dev))) {
+        if (!ped_disk_add_partition(disk, part, ped_device_get_optimal_aligned_constraint(disk->dev))) {
                 log("Cannot add the primary partition to partition table.");
                 ped_partition_destroy(part);
                 return NULL;
@@ -724,7 +724,7 @@ add_logical_partition(PedDisk *disk, PedFileSystemType *fs_type,
                 minimize_extended_partition(disk);
                 return NULL;
         }
-        if (!ped_disk_add_partition(disk, part, ped_constraint_any(disk->dev))) {
+        if (!ped_disk_add_partition(disk, part, ped_device_get_optimal_aligned_constraint(disk->dev))) {
                 ped_partition_destroy(part);
                 minimize_extended_partition(disk);
                 return NULL;
@@ -2223,6 +2223,43 @@ command_is_busy()
 }
 
 void
+command_alignment_offset()
+{
+        char *id;
+        PedPartition *part;
+        PedAlignment *align;
+        log("command_alignment_offset()");
+        scan_device_name();
+        if (dev == NULL)
+                critical_error("The device %s is not opened.", device_name);
+        open_out();
+        if (1 != iscanf("%as", &id))
+                critical_error("Expected partition id");
+        part = partition_with_id(disk, id);
+        oprintf("OK\n");
+        align = ped_device_get_minimum_alignment(dev);
+
+        /* align->offset represents the offset of the lowest logical block
+         * on the disk from the disk's natural alignment, modulo the
+         * physical sector size (e.g. 4096 bytes), as a number of logical
+         * sectors (e.g. 512 bytes).  For a disk with 4096-byte physical
+         * sectors deliberately misaligned to make DOS-style 63-sector
+         * offsets work well, we would thus expect align->offset to be 1, as
+         * (1 + 63) * 512 / 4096 is an integer.
+         *
+         * To get the alignment offset of a *partition*, we thus need to
+         * start with align->offset (in bytes) plus the partition start
+         * position.
+         */
+        oprintf("%lld\n",
+                ((align->offset + part->geom.start) * dev->sector_size) %
+                dev->phys_sector_size);
+
+        ped_alignment_destroy(align);
+        free(id);
+}
+
+void
 make_fifo(char* name)
 {
     int status;
@@ -2397,6 +2434,8 @@ main_loop()
                         command_get_label_type();
                 else if (!strcasecmp(str, "IS_BUSY"))
                         command_is_busy();
+                else if (!strcasecmp(str, "ALIGNMENT_OFFSET"))
+                        command_alignment_offset();
                 else
                         critical_error("Unknown command %s", str);
                 free(str);

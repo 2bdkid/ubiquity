@@ -38,7 +38,7 @@ for console in $ACTIVE_CONSOLES; do
 		printf '\033%%@' >$console
 	fi
 
-	if [ -f "$FONT" ]; then
+	if [ "$FONT" ]; then
 		FONT="/etc/console-setup/${FONT##*/}"
 	else
 		FONT="/etc/console-setup/$CODESET-$FONTFACE$FONTSIZE.psf.gz"
@@ -51,7 +51,7 @@ for console in $ACTIVE_CONSOLES; do
 		fi
 	fi
 
-	if [ -f "$ACM" ]; then
+	if [ "$ACM" ]; then
 		ACM="/etc/console-setup/${ACM##*/}"
 	else
 		ACM="/etc/console-setup/$CHARMAP.acm.gz"
