@@ -69,7 +69,7 @@ script
     else
 	if ! ubiquity-dm vt7 :0 ubuntu /usr/bin/ubiquity $debug $automatic $choose --only; then
 	    # has X crashed, or has ubiquity?
-            if ! [ -f /var/log/installer/version ]; then
+            if [ "$automatic" ] && ! [ -f /var/log/installer/version ]; then
                 exec ubiquity noninteractive $debug
             fi
 	fi
