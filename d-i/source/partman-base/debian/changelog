@@ -1,3 +1,11 @@
+partman-base (138ubuntu4) lucid; urgency=low
+
+  * Don't source /usr/share/debconf/confmodule in init.d/parted;
+    /lib/partman/lib/base.sh will always source it for us.
+  * Tell libparted not to use cylinder alignment (LP: #539456).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 17 Mar 2010 00:21:07 +0000
+
 partman-base (138ubuntu3) lucid; urgency=low
 
   * Apply optimal alignment constraints to new partitions, or when
