@@ -1,3 +1,14 @@
+console-setup (1.34ubuntu12) lucid; urgency=low
+
+  * console-setup-tty: Only call setfont once, for both font and ACM.
+  * Don't try to call update-rc.d if it doesn't exist, such as in d-i
+    (LP: #540835).
+  * Don't gzip font or ACM files in /etc/console-setup/.  The space saving
+    is negligible, and it's more efficient not to need to uncompress them at
+    boot time.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 19 Mar 2010 11:08:58 +0000
+
 console-setup (1.34ubuntu11) lucid; urgency=low
 
   * Move boot tasks to a combination of two udev rules and a single Upstart

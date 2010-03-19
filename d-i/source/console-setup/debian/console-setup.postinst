@@ -136,9 +136,11 @@ boots. If you want to update it now, run 'setupcon' from a virtual console.
 EOF
 fi
 
-# upstart transition to a single job, not entirely handled by debhelper
-# autoscripts
-update-rc.d -f keyboard-setup remove >/dev/null
+if type update-rc.d >/dev/null; then
+    # upstart transition to a single job, not entirely handled by debhelper
+    # autoscripts
+    update-rc.d -f keyboard-setup remove >/dev/null
+fi
 
 #DEBHELPER#
 

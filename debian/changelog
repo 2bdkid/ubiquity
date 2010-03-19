@@ -1,3 +1,43 @@
+ubiquity (2.2.6) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Properly set the text for the release notes label after the user
+    runs the 'update this installer' option.
+  * Correctly set up GtkComboBoxEntry widgets (LP: #539204).
+  * In the KDE frontend, call reboot with root privileges and try
+    rebooting via dbus only if a KDE dbus session exists (LP: #540856).
+  * Remove the apport hook, it lives in Ubuntu's apport package now.
+  * Don't let the user select both "Try Ubuntu" and "Install Ubuntu".
+  * Provide visual feedback for clicking "Try Ubuntu" in the form of a
+    spinning cursor.
+  * Automatic update of included source packages: base-installer
+    1.103ubuntu5, console-setup 1.34ubuntu12, partman-base 139ubuntu1.
+
+  [ Colin Watson ]
+  * If pkgsel/install-language-support is set to false, then don't install
+    new language packs from the network, but nevertheless keep any language
+    packs that are in the live filesystem (LP: #540878).
+  * Install oem-config-kde in the KDE user-setup plugin (LP: #540895).
+  * Don't fall through to the failsafe X server if the main X server
+    succeeds (LP: #540938).
+  * ubiquity-frontend-gtk depends on gksu (LP: #540331).
+  * Change .desktop translation domain to ubiquity-desktop (LP: #540936).
+  * Report disk sizes in decimal units in the manual partitioner, for
+    consistency with partman and to abide by the new units policy
+    (LP: #539653).
+
+  [ Mario Limonciello ]
+  * Don't delete the cache too early in select_language_packs.
+
+  [ Roman Shtylman ]
+  * Fix for 100% cpu usage in kde frontend (LP: #538505)
+
+  [ Michael Terry ]
+  * Upstart jobs: start on starting uxlaunch, Moblin's display manager
+    (LP: #540257).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 19 Mar 2010 23:52:24 +0000
+
 ubiquity (2.2.5) lucid; urgency=low
 
   * Use a custom-generated locale when building keyboard_names.py

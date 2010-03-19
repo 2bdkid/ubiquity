@@ -29,7 +29,7 @@ def set_locale():
         locale = db.get('debian-installer/locale')
     except debconf.DebconfError:
         pass
-    
+
     if not locale:
         db.shutdown()
         return
@@ -218,6 +218,9 @@ EndSection
             except XStartupError:
                 if attempt == 'failsafe':
                     raise
+
+            if self.server_started:
+                break
 
         os.environ['DISPLAY'] = self.display
         os.environ['HOME'] = self.homedir

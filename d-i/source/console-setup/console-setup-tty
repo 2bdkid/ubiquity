@@ -43,21 +43,27 @@ setup_unicode () {
 setup_font () {
     # Set the font and ACM.  setfont will silently do nothing for a console
     # in graphics mode.
+    SETFONT_ARGS=
     if [ "$FONT" ]; then
 	FONT="/etc/console-setup/${FONT##*/}"
+	FONT="${FONT%.gz}"
     else
-	FONT="/etc/console-setup/$CODESET-$FONTFACE$FONTSIZE.psf.gz"
+	FONT="/etc/console-setup/$CODESET-$FONTFACE$FONTSIZE.psf"
     fi
     if [ -f "$FONT" ]; then
-	setfont -C "$1" "$FONT"
+	SETFONT_ARGS="${SETFONT_ARGS:+$SETFONT_ARGS }$FONT"
     fi
     if [ "$ACM" ]; then
 	ACM="/etc/console-setup/${ACM##*/}"
+	ACM="${ACM%.gz}"
     else
-	ACM="/etc/console-setup/$CHARMAP.acm.gz"
+	ACM="/etc/console-setup/$CHARMAP.acm"
     fi
     if [ -f "$ACM" ]; then
-	setfont -C "$1" -m "$ACM"
+	SETFONT_ARGS="${SETFONT_ARGS:+$SETFONT_ARGS }-m $ACM"
+    fi
+    if [ "$SETFONT_ARGS" ]; then
+	setfont -C "$1" $SETFONT_ARGS
     fi
 }
 
