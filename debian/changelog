@@ -1,3 +1,28 @@
+ubiquity (2.2.7) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Add inactive labels to the user setup page (LP: #537986).
+  * Fix KDE frontend's return_to_partitioning function.
+  * Fix the KDE frontend's format button on the advanced partitioning
+    page.
+  * Assign resize_path before its used in the KDE frontend's PartAuto.
+  * Set the keymap to a reasonable default when leaving the greeter
+    (LP: #539255).
+  * Change the timezone highlight around UTC+5, UTC+5.5, and UTC+8
+    (LP: #368060).
+  * Fix setting the window title when in automatic mode in the KDE
+    frontend (LP: #541829).
+  * Automatic update of included source packages: grub-installer
+    1.49ubuntu8.
+  * Update translations from Launchpad.
+
+  [ Mario Limonciello ]
+  * Return True for set_page, restoring UI only page functionality.
+  * Quit plymouth before running ubiquity in noninteractive from the
+    upstart job.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 23 Mar 2010 14:44:46 +0000
+
 ubiquity (2.2.6) lucid; urgency=low
 
   [ Evan Dandrea ]

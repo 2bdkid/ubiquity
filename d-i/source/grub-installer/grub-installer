@@ -803,6 +803,17 @@ if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 			grub_install_params="$grub_install_params --force"
 		fi
 
+		umountproc=false
+		umountsys=false
+		if [ ! -e $ROOT/proc/cmdline ]; then
+			$chroot $ROOT mount /proc
+			umountproc=:
+		fi
+		if [ ! -d $ROOT/sys/devices ]; then
+			$chroot $ROOT mount -t sysfs sysfs /sys
+			umountsys=:
+		fi
+
 		info "Running $chroot $ROOT grub-install $grub_install_params \"$bootdev\""
 		if log-output -t grub-installer $chroot $ROOT grub-install $grub_install_params "$bootdev"; then
 			info "grub-install ran successfully"
@@ -812,7 +823,20 @@ if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 			db_input critical grub-installer/grub-install-failed || [ $? -eq 30 ]
 			db_go || true
 			db_progress STOP
+			if $umountsys; then
+				$chroot $ROOT umount /sys
+			fi
+			if $umountproc; then
+				$chroot $ROOT umount /proc
+			fi
 			exit 1
+		fi
+
+		if $umountsys; then
+			$chroot $ROOT umount /sys
+		fi
+		if $umountproc; then
+			$chroot $ROOT umount /proc
 		fi
 	done
 

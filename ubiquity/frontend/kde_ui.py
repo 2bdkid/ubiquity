@@ -386,7 +386,7 @@ class Wizard(BaseFrontend):
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             self.debconf_progress_start(0, self.pageslen,
                 self.get_string('ubiquity/install/checking'))
-            self.debconf_progress_window.set_title(
+            self.progressDialog.setWindowTitle(
                 self.get_string('ubiquity/install/title'))
             self.refresh()
 
@@ -1169,7 +1169,8 @@ class Wizard(BaseFrontend):
                     break
             if self.pagesindex == -1: return
             self.start_debconf()
-            self.dbfilter = partman.Page(self)
+            ui = self.pages[self.pagesindex].ui
+            self.dbfilter = self.pages[self.pagesindex].filter_class(self, ui=ui)
             self.set_current_page(self.previous_partitioning_page)
             self.ui.next.setText(self.get_string("next").replace('_', '&', 1))
             self.ui.next.setIcon(self.forwardIcon)
