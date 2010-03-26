@@ -466,6 +466,8 @@ class Wizard(BaseFrontend):
                 self.get_string('ubiquity/install/checking'))
             self.debconf_progress_window.set_title(
                 self.get_string('ubiquity/install/title'))
+            self.install_progress_window.set_title(
+                self.get_string('ubiquity/install/title'))
             self.refresh()
 
         self.set_current_page(0)
@@ -632,7 +634,7 @@ class Wizard(BaseFrontend):
             'UBIQUITY_ONLY' in os.environ or
             'UBIQUITY_GREETER' in os.environ):
             f = gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MAXIMIZE | gtk.gdk.FUNC_MOVE
-            if not self.oem_user_config:
+            if not self.oem_user_config and not 'progress' in widget.get_name():
                 f |= gtk.gdk.FUNC_CLOSE
             widget.window.set_functions(f)
 
@@ -918,6 +920,7 @@ class Wizard(BaseFrontend):
     # Methods
 
     def switch_progress_windows(self, use_install_window=True):
+        self.debconf_progress_window.hide()
         if use_install_window:
             self.old_progress_window = self.debconf_progress_window
             self.old_progress_info = self.progress_info
