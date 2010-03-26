@@ -355,10 +355,6 @@ kbdnames=$(lang_kbdnames ${messages_lang}_${messages_country}__${messages_modif}
 [ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames ${messages_lang})
 [ -n "$kbdnames" ] || kbdnames=$(lang_kbdnames C)
 
-! type iconv >/dev/null || \
-    kbdnames="$(echo "$kbdnames" |
-                iconv -f UTF-8 -t $(locale charmap)//TRANSLIT)"
-
 case "$locale" in
     *KOI8*|*koi8*)
 	default_codeset=CyrKoi

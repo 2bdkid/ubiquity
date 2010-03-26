@@ -1,3 +1,38 @@
+ubiquity (2.2.9) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Correctly feed the calculated keyboard layout back to the running
+    component.  This has the side benefit of the calculated layout
+    getting selected in the treeviews (LP: #521831).
+  * Don't try to import the GTK LabelledEntry widget in the KDE frontend
+    (LP: #546792).
+  * Disable the context menu in the slideshow frame.  Thanks Dylan
+    McCall!
+  * Make sure the user we're not processing events before we've set up
+    the language list in the KDE frontend (LP 528678).
+  * Don't try to translate the greeter with the C locale.
+  * Don't destroy the main window when the close button is pressed
+    (LP: #543775).
+  * Properly handle exceptions around opening the release_notes_url file
+    in the KDE frontend (LP: #540266).  Hide the label if the release notes
+    do not exist.
+  * Handle window manager buttons properly in greeter mode
+    (LP 539827).
+  * Update DebconfInstallProgress for changes to python-apt
+    (LP: #546889).
+  * Make labels unselectable now that we're in beta, per foundations-
+    lucid-installer-design-improvements.
+  * Make the quit warning dialog transient for the main window (modal).
+  * Automatic update of included source packages: console-setup
+    1.34ubuntu13, grub-installer 1.49ubuntu9, partman-base 139ubuntu2.
+
+  [ Colin Watson ]
+  * Depend on uboot-mkimage and redboot-tools on armel, and ensure that the
+    appropriate one for the subarchitecture is kept installed, so that
+    flash-kernel can work properly without network access (LP: #537007).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 26 Mar 2010 17:59:52 +0000
+
 ubiquity (2.2.8) lucid; urgency=low
 
   * Set a wallpaper and cursor for the KDE frontend when in only-

@@ -599,13 +599,11 @@ if [ -s /tmp/os-probed ]; then
 		state=2
 	else
 		q=grub-installer/with_other_os
-		priority=high
 		db_subst $q OS_LIST "$supported_os_list"
 		state=1
 	fi
 else
 	q=grub-installer/only_debian
-	priority=medium
 	state=1
 fi
 
@@ -687,7 +685,7 @@ while : ; do
 			db_set $q true || true
 			db_fset $q seen true || true
 		fi
-		db_input $priority $q || true
+		db_input high $q || true
 		if ! db_go; then
 			# back up to menu
 			db_progress STOP

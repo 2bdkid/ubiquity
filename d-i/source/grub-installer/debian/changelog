@@ -1,3 +1,20 @@
+grub-installer (1.49ubuntu9) lucid; urgency=low
+
+  * Ask grub-installer/only_debian at high priority again (LP: #47135).
+    Originally, in Warty, we ensured that this question wouldn't be visible
+    by default to support simple installations of Ubuntu with as few
+    questions as possible.  However, since then, we wrote Ubiquity, which
+    has taken over responsibility for the simple installation case, and it's
+    become clear that automatically installing GRUB to the first disk's MBR
+    is inadequate for many more complex situations.  Ironically, Ubiquity
+    makes this option easily accessible from the "Advanced" dialog box, but
+    Ubuntu's d-i required a special boot parameter to display it.
+  * Update grub-installer/bootdev text to avoid GRUB device naming that
+    changed between GRUB Legacy and GRUB 2, and to use libata-style device
+    naming since that is more accurate for most people (LP: #391775)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 26 Mar 2010 11:34:43 +0000
+
 grub-installer (1.49ubuntu8) lucid; urgency=low
 
   * Bind-mount /proc and /sys while running grub-install (LP: #527210).

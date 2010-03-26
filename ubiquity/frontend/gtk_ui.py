@@ -521,7 +521,8 @@ class Wizard(BaseFrontend):
             self.quit_installer()
         elif not self.get_reboot_seen():
             self.live_installer.hide()
-            if 'UBIQUITY_ONLY' in os.environ:
+            if ('UBIQUITY_ONLY' in os.environ or
+                'UBIQUITY_GREETER' in os.environ):
                 txt = self.get_string('ubiquity/finished_restart_only')
                 self.finished_label.set_label(txt)
                 self.quit_button.hide()
@@ -579,7 +580,6 @@ class Wizard(BaseFrontend):
         elif self.oem_user_config:
             self.live_installer.set_title(self.get_string('oem_user_config_title'))
             self.live_installer.set_icon_name("preferences-system")
-            self.live_installer.window.set_functions(gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MOVE)
             self.quit.hide()
 
         if not 'UBIQUITY_AUTOMATIC' in os.environ:
@@ -628,10 +628,13 @@ class Wizard(BaseFrontend):
         return True
 
     def set_window_hints(self, widget):
-        if 'UBIQUITY_ONLY' in os.environ:
-            # Disable minimise button.
-            widget.window.set_functions(
-                gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MOVE)
+        if (self.oem_user_config or
+            'UBIQUITY_ONLY' in os.environ or
+            'UBIQUITY_GREETER' in os.environ):
+            f = gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MAXIMIZE | gtk.gdk.FUNC_MOVE
+            if not self.oem_user_config:
+                f |= gtk.gdk.FUNC_CLOSE
+            widget.window.set_functions(f)
 
     def set_locales(self):
         """internationalization config. Use only once."""
@@ -786,7 +789,7 @@ class Wizard(BaseFrontend):
         self.dbfilter_status = None
         label = gtk.Label(text)
         label.set_line_wrap(True)
-        label.set_selectable(True)
+        label.set_selectable(False)
         dialog.vbox.add(label)
         dialog.show_all()
         response = dialog.run()
@@ -965,8 +968,9 @@ class Wizard(BaseFrontend):
                     # such as creating a XMLHttpRequest, will fail unless this
                     # is disabled.
                     # http://www.gitorious.org/webkit/webkit/commit/624b9463c33adbffa7f6705210384d0d7cf122d6
-                    webview.get_settings().set_property(
-                        'enable-file-access-from-file-uris', True)
+                    s = webview.get_settings()
+                    s.set_property('enable-file-access-from-file-uris', True)
+                    s.set_property('enable-default-context-menu', False)
                     webview.open(slides)
                     self.slideshow_frame.add(webview)
                     webview.set_size_request(798, 500)
@@ -1075,6 +1079,8 @@ class Wizard(BaseFrontend):
 
     def on_quit_clicked(self, unused_widget):
         self.warning_dialog.show()
+        # Stop processing.
+        return True
 
     def on_quit_cancelled(self, unused_widget):
         self.warning_dialog.hide()
@@ -1393,7 +1399,7 @@ class Wizard(BaseFrontend):
         vbox.set_border_width(5)
         label = gtk.Label(msg)
         label.set_line_wrap(True)
-        label.set_selectable(True)
+        label.set_selectable(False)
         vbox.pack_start(label)
         vbox.show_all()
         dialog.vbox.pack_start(vbox)

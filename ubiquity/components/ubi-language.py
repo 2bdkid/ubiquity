@@ -206,19 +206,17 @@ class PageGtk(PageBase):
 
     def on_language_selection_changed(self, *args, **kwargs):
         lang = self.get_language()
-        if lang:
-            # strip encoding; we use UTF-8 internally no matter what
-            lang = lang.split('.')[0].lower()
-            self.controller.translate(lang)
-            import gtk
-            ltr = i18n.get_string('default-ltr', lang, 'ubiquity/imported')
-            if ltr == 'default:RTL':
-                gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
-            else:
-                gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
+        if not lang:
+            return
+        # strip encoding; we use UTF-8 internally no matter what
+        lang = lang.split('.')[0].lower()
+        self.controller.translate(lang)
+        import gtk
+        ltr = i18n.get_string('default-ltr', lang, 'ubiquity/imported')
+        if ltr == 'default:RTL':
+            gtk.widget_set_default_direction(gtk.TEXT_DIR_RTL)
         else:
-            lang = 'C'
-
+            gtk.widget_set_default_direction(gtk.TEXT_DIR_LTR)
         if not self.only:
             release_name = misc.get_release_name()
             install_medium = misc.get_install_medium()
@@ -306,9 +304,15 @@ class PageKde(PageBase):
                 self.release_notes_url = release_notes.read().rstrip('\n')
                 release_notes.close()
             except (KeyboardInterrupt, SystemExit):
+                raise
+            except:
                 pass
 
-            self.page.release_notes_label.linkActivated.connect(self.on_release_notes_link)
+            if self.release_notes_url:
+                self.page.release_notes_label.linkActivated.connect(
+                    self.on_release_notes_link)
+            else:
+                self.page.release_notes_label.hide()
 
             if not 'UBIQUITY_GREETER' in os.environ:
                 self.page.try_ubuntu.hide()
@@ -340,7 +344,6 @@ class PageKde(PageBase):
                lang = lang.split('.')[0].lower()
                url = self.release_notes_url.replace('${LANG}', lang)
                self.openURL(url)
-            pass
         elif link == "update":
             if not auto_update.update(self.controller._wizard):
                 # no updates, so don't check again
@@ -382,20 +385,18 @@ class PageKde(PageBase):
 
     def selected_language(self):
         lang = self.combobox.currentText()
-        if lang.isNull():
+        if lang.isNull() or not hasattr(self, 'language_choice_map'):
             return None
         else:
             return self.language_choice_map[unicode(lang)][1]
 
     def on_language_selection_changed(self):
         lang = self.selected_language()
-        if lang:
-            # strip encoding; we use UTF-8 internally no matter what
-            lang = lang.split('.')[0].lower()
-            self.controller.translate(lang)
-        else:
-            lang = 'C'
-
+        if not lang:
+            return
+        # strip encoding; we use UTF-8 internally no matter what
+        lang = lang.split('.')[0].lower()
+        self.controller.translate(lang)
         if not self.only:
             release_name = misc.get_release_name()
             install_medium = misc.get_install_medium()

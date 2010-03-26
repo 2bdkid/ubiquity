@@ -1,3 +1,11 @@
+console-setup (1.34ubuntu13) lucid; urgency=low
+
+  * Remove iconv transliteration.  We don't use non-UTF-8 locales, and
+    it breaks ubiquity as we haven't generated the configured locale by
+    the time we hit console-setup (LP: #542310).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 26 Mar 2010 12:50:50 +0000
+
 console-setup (1.34ubuntu12) lucid; urgency=low
 
   * console-setup-tty: Only call setfont once, for both font and ACM.

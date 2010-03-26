@@ -1,3 +1,11 @@
+partman-base (139ubuntu2) lucid; urgency=low
+
+  * Always leave a small gap at the end of the disk (except on device-mapper
+    devices), to avoid confusing mdadm by leaving the MD 0.90 superblock at
+    the end of the disk as well as the end of a partition (LP: #527401).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 26 Mar 2010 11:32:01 +0000
+
 partman-base (139ubuntu1) lucid; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
