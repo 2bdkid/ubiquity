@@ -343,7 +343,7 @@ kernel_update_list () {
 	(set +e;
 	# Hack to get the metapackages in the right order; should be
 	# replaced by something better at some point.
-	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|386\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\)';
+	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|386\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\|imx51\|dove\|omap\)';
 	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-2\.';
 	chroot /target apt-cache search ^linux-image-2. | sort -r) | \
 	cut -d" " -f1 | uniq > "$KERNEL_LIST.unfiltered"

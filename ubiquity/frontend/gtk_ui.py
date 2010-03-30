@@ -528,6 +528,8 @@ class Wizard(BaseFrontend):
                 txt = self.get_string('ubiquity/finished_restart_only')
                 self.finished_label.set_label(txt)
                 self.quit_button.hide()
+            with raised_privileges():
+                open('/var/run/reboot-required', "w").close()
             self.finished_dialog.set_keep_above(True)
             self.finished_dialog.run()
         elif self.get_reboot():
@@ -931,6 +933,8 @@ class Wizard(BaseFrontend):
             self.progress_info = self.install_progress_info
             self.progress_bar = self.install_progress_bar
             self.progress_cancel_button = self.install_progress_cancel_button
+            self.progress_cancel_button.set_label(
+                self.old_progress_cancel_button.get_label())
         else:
             self.debconf_progress_window = self.old_progress_window
             self.progress_info = self.old_progress_info
@@ -976,7 +980,17 @@ class Wizard(BaseFrontend):
                     s.set_property('enable-default-context-menu', False)
                     webview.open(slides)
                     self.slideshow_frame.add(webview)
-                    webview.set_size_request(798, 500)
+                    try:
+                        import ConfigParser
+                        cfg = ConfigParser.ConfigParser()
+                        cfg.read(os.path.join(slideshow_dir, 'slideshow.conf'))
+                        config_width = int(cfg.get('Slideshow','width'))
+                        config_height = int(cfg.get('Slideshow','height'))
+                    except:
+                        config_width = 798
+                        config_height = 451
+
+                    webview.set_size_request(config_width, config_height)
                     webview.connect('new-window-policy-decision-requested',
                                     self.on_slideshow_link_clicked)
                     self.slideshow_frame.show_all()
@@ -1070,6 +1084,12 @@ class Wizard(BaseFrontend):
 
     def quit_installer(self, *args):
         """quit installer cleanly."""
+
+        # Let the user know we're shutting down.
+        self.finished_dialog.window.set_cursor(self.watch)
+        self.quit_button.set_sensitive(False)
+        self.reboot_button.set_sensitive(False)
+        self.refresh()
 
         # exiting from application
         self.current_page = None

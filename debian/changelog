@@ -1,3 +1,34 @@
+ubiquity (2.2.11) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Get the slideshow dimensions from the slideshow.conf file as they
+    now vary from distribution to distribution.
+  * Give the installer window a slightly larger bottom edge to make the
+    grey border look less ugly.
+  * Connect the new installer window's skip button to the appropriate
+    function.
+  * Slighly tweak the layout so the progress widgets are more centered
+    in their frame.
+  * Translate the skip button in the new install window (LP: #551554).
+  * Update the interface when the user presses one of the buttons on the
+    finished_dialog (LP: #551574).
+  * Use the fancy new 'reboot required' panel notification
+    (LP: #551537).
+  * Move info_loop call from run to prepare so that it doesn't get
+    called with each debconf question asked in the user-setup component
+    (LP: #551742).
+  * Add only_this_page decorator to be used on functions that should
+    never be called once we've left their page.
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: base-installer
+    1.103ubuntu6, partman-base 139ubuntu3.
+  * Freeze exception (LP: #551503).
+
+  [ Mario Limonciello ]
+  * Fix installation of zh_CN and zh_TW language packs.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 30 Mar 2010 18:21:26 +0100
+
 ubiquity (2.2.10) lucid; urgency=low
 
   * Fix the default language selection for when only-show-installable-languages
