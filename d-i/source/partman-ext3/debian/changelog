@@ -1,3 +1,11 @@
+partman-ext3 (58ubuntu2) lucid; urgency=low
+
+  * Warn when reformatting an existing misaligned partition for use as
+    ext3/ext4, since it will result in poor performance and this is about
+    the only sensible opportunity to fix it (LP: #530071).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 31 Mar 2010 16:29:29 +0100
+
 partman-ext3 (58ubuntu1) karmic; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

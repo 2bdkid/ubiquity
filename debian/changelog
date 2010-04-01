@@ -1,3 +1,29 @@
+ubiquity (2.2.12) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Accept and discard arguments to the KDE frontend's
+    on_keyboard_layout_selected function (LP: #552399).
+
+  [ Colin Watson ]
+  * Fix pkgsel/ignore-incomplete-language-support check (LP: #527623).
+  * KDE frontend:
+    - Ensure that entries in extra_bar_frames are never None (LP: #536912).
+    - Lock out manual partitioning operations while the partitioning backend
+      is running (LP: #540203).
+  * Don't lower-case the locale attribute on frontends.  This was added a
+    long time ago; since then, it's become unnecessary since i18n.get_string
+    lower-cases the locale itself, and it prevented us from finding
+    slideshow files for language variants (LP: #476269).
+  * Automatic update of included source packages: partman-auto 89ubuntu4,
+    partman-ext3 58ubuntu2.
+
+  [ Jonathan Riddell ]
+  * Move oem-config-prepare-kde.desktop install directory to
+    /usr/share/applications/kde4/, else it is labelled as a KDE 3
+    application
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 01 Apr 2010 01:27:27 +0100
+
 ubiquity (2.2.11) lucid; urgency=low
 
   [ Evan Dandrea ]

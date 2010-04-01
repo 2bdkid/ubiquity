@@ -1,3 +1,10 @@
+partman-auto (89ubuntu4) lucid; urgency=low
+
+  * Ignore $iflabel{ } specifiers if we aren't in a subdirectory of $DEVICES
+    when decoding the recipe (LP: #538536).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 31 Mar 2010 16:12:08 +0100
+
 partman-auto (89ubuntu3) lucid; urgency=low
 
   * Use new get_real_resize_range function from partman-partitioning
