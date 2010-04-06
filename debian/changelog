@@ -1,3 +1,25 @@
+ubiquity (2.2.15) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Move the install window color setting code closer to when the window
+    is shown, so the colors don't get reset before then.
+  * Fix alpha warning being shown all the time with recent changes to
+    the KDE frontend.
+  * Define allowed_change_step in the KDE frontend to fix the manual
+    partitioner buttons not working (LP: #556180).
+  * Do not show the 'ready to install' or alpha warning text in the KDE
+    frontend when in oem-config mode (LP: #556577).
+  * Update timezone images to cover changes to the Russian timezones and
+    make further adjustments around UTC+5, UTC+5.5, and UTC+7
+    (LP: #368060).
+  * Automatic update of included source packages: grub-installer
+    1.49ubuntu11.
+
+  [ Jonathan Riddell ]
+  * Workaround PyQt unicode encoding error in ubi-console-setup.py, (LP: #556436)
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 06 Apr 2010 17:29:17 +0100
+
 ubiquity (2.2.14) lucid; urgency=low
 
   [ Jonathan Riddell ]
