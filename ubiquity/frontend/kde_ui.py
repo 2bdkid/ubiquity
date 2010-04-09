@@ -310,6 +310,9 @@ class Wizard(BaseFrontend):
                 flags = flags ^ Qt.WindowCloseButtonHint
             self.ui.setWindowFlags(flags)
             self.ui.quit.hide()
+            # TODO cjwatson 2010-04-07: provide alternative strings instead
+            self.ui.install_process_label.hide()
+            self.ui.breadcrumb_install.hide()
 
         iconLoader = KIconLoader()
         warningIcon = iconLoader.loadIcon("dialog-warning", KIconLoader.Desktop)
@@ -573,8 +576,10 @@ class Wizard(BaseFrontend):
             if name == 'step_label':
                 text = text.replace('${INDEX}', str(self.pagesindex+1))
                 text = text.replace('${TOTAL}', str(self.user_pageslen))
-            elif name == 'welcome_text_label' and self.oem_user_config:
-                text = self.get_string('welcome_text_oem_user_label', lang, prefix)
+            elif name == 'ready_text_label' and self.oem_user_config:
+                text = self.get_string('ready_text_oem_user_label', lang, prefix)
+            elif name == 'select_language_label' and self.oem_user_config:
+                text = self.get_string('select_language_oem_user_label', lang, prefix)
 
             if 'heading_label' in name:
                 widget.setText("<h2>" + text + "</h2>")
@@ -723,6 +728,14 @@ class Wizard(BaseFrontend):
     def add_history(self, page, widget):
         history_entry = (page, widget)
         if self.history:
+            # We may have skipped past child pages of the component.  Remove
+            # the history between the page we're on and the end of the list in
+            # that case.
+            if history_entry in self.history:
+                idx = self.history.index(history_entry)
+                if idx + 1 < len(self.history):
+                    self.history = self.history[:idx+1]
+                    return # The page is now effectively a dup
             # We may have either jumped backward or forward over pages.
             # Correct history in that case
             new_index = self.pages.index(page)
@@ -782,9 +795,6 @@ class Wizard(BaseFrontend):
                     from PyQt4.QtWebKit import QWebView
                     from PyQt4.QtWebKit import QWebPage
 
-                    #we need to get root privs to open a link because
-                    #the kapplication was started that way...
-                    @raise_privileges
                     def openLink(qUrl):
                         QDesktopServices.openUrl(qUrl)
 
@@ -1072,6 +1082,7 @@ class Wizard(BaseFrontend):
         # TODO cancel button
 
         self.ui.progressBar.setMaximum(total_steps)
+        self.ui.progressBar.setFormat(progress_title + " %p%")
         self.ui.progressBar.show()
 
         self.ui.content_widget.setEnabled(False)

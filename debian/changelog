@@ -1,3 +1,49 @@
+ubiquity (2.2.16) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Only show the update link and release notes when a critical update
+    is available (LP: #554570).
+  * Fix backing up to the language page in the KDE frontend (LP: #557225).
+  * Bring back the debconf translation for password_extra_label.  The
+    KDE frontend still uses it (LP: #557192).
+  * Fix a small typo that was preventing the duration string on the
+    language page from being translated (LP: #551633).
+  * Fix backing up past partitioning when manual partitioning was
+    selected (LP: #557210).
+  * Let the user know why we're starting a desktop session or rebooting
+    when ubiquity in only mode crashes.  If in automatic mode, the
+    default is to reboot.  Preseed ubiquity/reboot_on_failure to false
+    to start a desktop session instead (LP: #558371).
+  * Make oem-config/install-language-support false by default.  OEMs
+    should only be turning this on if they've provided all the possible
+    langpacks in oem-config/repository or can guarantee an Internet
+    connection (LP: #539710).
+  * Call ubiquity/failure_command if we crash in only ubiquity mode.
+
+  [ Amichai Rothman ]
+  * Fix KDE frontend's slideshow links not working (LP: #540278)
+  * Fix KDE progress bar and skip button too small (LP: #555707)
+  * Fix KDE skip button appearing as full-width button at the
+    bottom of the window and messing up dialog layout (LP: #540321)
+  * Fix progress bar updated file count out of range (LP: #550147) 
+  * Fix progress title not shown during some configuration steps
+
+  [ Colin Watson ]
+  * Update handling of "Ready to install" etc. templates to account for the
+    removal of the separate welcome page.
+  * KDE frontend:
+    - Hide install_process_label ("installation process") and
+      breadcrumb_install ("Install") when running as oem-config; providing
+      alternative strings would break string freeze, and the UI should look
+      OK without them (LP: #540929).
+  * GTK frontend:
+    - Re-fetch translations before calling plugin_translate (LP: #552673).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: partman-auto 89ubuntu5,
+    tzsetup 1:0.26ubuntu7.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 09 Apr 2010 19:29:50 +0100
+
 ubiquity (2.2.15) lucid; urgency=low
 
   [ Evan Dandrea ]

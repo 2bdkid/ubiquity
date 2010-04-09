@@ -1,3 +1,17 @@
+tzsetup (1:0.26ubuntu7) lucid; urgency=low
+
+  * Add a 15 second timeout to the wget of geoip.ubuntu.com
+    (LP: #556890).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 07 Apr 2010 11:00:33 +0100
+
+tzsetup (1:0.26ubuntu6) lucid; urgency=low
+
+  * Use LC_ALL=C when running sed over the geoip data, otherwise it
+    fails on UTF-8 text.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 06 Apr 2010 12:52:02 +0100
+
 tzsetup (1:0.26ubuntu5) lucid; urgency=low
 
   * Only set http_proxy if mirror/http/proxy is non-empty (LP: #519241).

@@ -27,8 +27,8 @@ while :; do
 			if db_get mirror/http/proxy && [ "$RET" ]; then
 				export http_proxy="$RET"
 			fi
-			detected=$(wget "$server" -O - 2>/dev/null | grep "TimeZone" \
-				| sed 's,.*<TimeZone>\(.*\)</TimeZone>.*,\1,')
+			detected=$(wget "$server" --timeout=15 -O - 2>/dev/null | grep "TimeZone" \
+				| LC_ALL=C sed 's,.*<TimeZone>\(.*\)</TimeZone>.*,\1,')
 		fi
 		if [ -n "$detected" ]; then
 			db_register time/zone time/zone # might be registered to something else
