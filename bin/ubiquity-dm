@@ -9,6 +9,8 @@ import errno
 import imp
 import grp
 
+import debconf
+
 sys.path.insert(0, '/usr/lib/ubiquity')
 
 import ubiquity.frontend
@@ -16,25 +18,21 @@ import pwd
 
 from ubiquity import osextras
 from ubiquity.casper import get_casper
+from ubiquity.debconfcommunicator import DebconfCommunicator
 
 background = '/usr/share/backgrounds/warty-final-ubuntu.png'
 
 def set_locale():
-    from ubiquity.debconfcommunicator import DebconfCommunicator
-    import debconf
-
     db = DebconfCommunicator('ubiquity', cloexec=True)
     locale = ''
     try:
         locale = db.get('debian-installer/locale')
     except debconf.DebconfError:
         pass
+    db.shutdown()
 
     if not locale:
-        db.shutdown()
         return
-
-    db.shutdown()
 
     default_locale = open('/etc/default/locale', 'w')
     print >>default_locale, 'LANG="%s"' % locale
@@ -59,7 +57,10 @@ def set_locale():
     print >>locale_gen, '%s UTF-8' % locale
     locale_gen.close()
 
-    subprocess.call(['/usr/sbin/locale-gen', locale])
+    logfile = open('/var/log/installer/dm', 'a')
+    subprocess.call(['/usr/sbin/locale-gen', locale],
+                    stdout=logfile, stderr=logfile)
+    logfile.close()
 
 class XStartupError(EnvironmentError):
     pass

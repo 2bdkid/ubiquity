@@ -1,3 +1,13 @@
+partman-base (139ubuntu4) lucid; urgency=low
+
+  * Ignore free space smaller than the grain size of the partition creation
+    constraint, rather than only free space smaller than a cylinder.
+  * Allow preseeding partman/alignment to "cylinder", "minimal", or
+    "optimal"; "cylinder" restores old alignment behaviour for the benefit
+    of those with crotchety BIOSes, while "optimal" is the default.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 12 Apr 2010 11:42:58 +0100
+
 partman-base (139ubuntu3) lucid; urgency=low
 
   * parted 2.1 changed the semantics of ped_disk_clobber: it now zeroes out

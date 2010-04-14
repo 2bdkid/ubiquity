@@ -1,3 +1,11 @@
+tzsetup (1:0.26ubuntu8) lucid; urgency=low
+
+  * Use '-T 15' rather than '--timeout=15', to avoid breaking busybox wget.
+    (It still doesn't actually understand the option, but not breaking is a
+    step up ...)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 13 Apr 2010 00:55:10 +0100
+
 tzsetup (1:0.26ubuntu7) lucid; urgency=low
 
   * Add a 15 second timeout to the wget of geoip.ubuntu.com
