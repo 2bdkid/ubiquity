@@ -1,3 +1,34 @@
+ubiquity (2.2.18) lucid; urgency=low
+
+  [ Evan Dandrea ]
+  * Force garbage collection so we don't end up with stray X resources
+    when we kill the X server (LP: #556555).
+  * Fix the Portuguese and Latvian translations of the variable name
+    RELEASE (LP: #564517).
+  * Fix a missing closing bold tag in the Portuguese and Polish
+    translations (LP: #564545).
+  * Fix labels not expanding vertically to fit their text (LP: #560114,
+    LP: #557164, LP: #520898).
+  * Do not translate variable names in the Amharic translation
+    (LP: #564582).
+  * Start the window manager via ck-launch-session so pulseaudio is
+    granted access to the sound devices (LP: #549738).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: console-setup
+    1.34ubuntu14, flash-kernel 2.13ubuntu16, hw-detect 1.73ubuntu3,
+    partman-auto 89ubuntu6, partman-base 139ubuntu5, partman-ext3
+    58ubuntu3, partman-target 64ubuntu8, user-setup 1.28ubuntu6.
+
+  [ Colin Watson ]
+  * Break out of oem-config-firstboot's main loop if oem-config-wrapper
+    succeeds (LP: #558593).
+  * Quit plymouth before starting either the emergency noninteractive
+    ubiquity frontend in automatic mode, or oem-config's debconf frontend.
+  * Get a controlling terminal before starting bterm, as otherwise bterm
+    won't reliably be able to take console input.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 16 Apr 2010 15:28:19 +0100
+
 ubiquity (2.2.17) lucid; urgency=low
 
   [ Mario Limonciello ]

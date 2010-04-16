@@ -1,3 +1,20 @@
+flash-kernel (2.13ubuntu16) lucid; urgency=low
+
+  * move uboot-envtools to a suggests, having it on the images will be handled
+    via seeding
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 16 Apr 2010 11:37:35 +0200
+
+flash-kernel (2.13ubuntu15) lucid; urgency=low
+
+  * add support for OMAP3 Beagle Board NAND flashing to flash-kernel
+  * add default setup for beagle uboot NAND booting to flash-kernel-installer
+  * add dependency on uboot-envtools for fw_setenv command
+  * add omap to supported subarch in flash-kernel-installer.isinstallable and
+    debian/control
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Thu, 15 Apr 2010 14:03:27 +0200
+
 flash-kernel (2.13ubuntu14) lucid; urgency=low
 
   * rebuild rest of main for armel armv7/thumb2 optimization;
