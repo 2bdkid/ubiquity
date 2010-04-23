@@ -1,3 +1,13 @@
+partman-auto (89ubuntu7) lucid; urgency=low
+
+  * Run clean_method before starting autopartitioning instead of in the
+    middle of performing a recipe, and call autopartition just once for
+    multi-disk partitioning.  This means that methods applied to partitions
+    of physical disks in RAID recipes are applied to all disks rather than
+    just the last one (LP: #566965).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 21 Apr 2010 10:43:22 +0100
+
 partman-auto (89ubuntu6) lucid; urgency=low
 
   * Update Ubuntu-specific translations from Launchpad.
