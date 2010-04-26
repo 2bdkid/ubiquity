@@ -187,7 +187,7 @@ case "$machine" in
 		fi
 		rootfs=$(findfs /)
 		uuid="$(block-attr --uuid "$rootfs")"
-		cmdline="root=UUID=$uuid ro quiet splash vram=12M omapfb.mode=dvi:1280x720MR-16@60"
+		cmdline="root=UUID=$uuid ro quiet splash vram=12M omapfb.mode=dvi:1280x720MR-16@60 fixrtc"
 		bootcmd="nand read 80000000 280000 400000;nand read 81600000 680000 1000000;bootm 80000000 81600000"
 		# create a default config for uboot-envtools
 		echo "/dev/mtd2 0x0000 0x20000 0x20000" > /target/etc/fw_env.config

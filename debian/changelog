@@ -1,3 +1,22 @@
+ubiquity (2.2.22) lucid; urgency=low
+
+  [ Colin Watson ]
+  * Don't configure the boot loader in oem-config.  By definition, we've
+    already succeeded in booting, and repeating the process is at best a
+    no-op and at worst harmful.
+  * debconf frontend:
+    - Make sure that progress bars are never nested, as this only works when
+      using debconffilter (LP: #530027).
+  * Automatic update of included source packages: console-setup
+    1.34ubuntu15, flash-kernel 2.13ubuntu17, hw-detect 1.73ubuntu4,
+    migration-assistant 0.6.5, partman-auto 89ubuntu8, partman-partitioning
+    72ubuntu4.
+
+  [ Roman Shtylman ]
+  * Fix for (LP: #568890) show all partitions in advanced dialog
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 26 Apr 2010 09:06:00 +0100
+
 ubiquity (2.2.21) lucid; urgency=low
 
   [ Evan Dandrea ]

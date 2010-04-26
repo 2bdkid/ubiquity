@@ -85,6 +85,7 @@ install-main: build
 	sed -e "/^OPTION=/d" \
 		< debian/console-setup.initramfs-top \
 		> debian/console-setup/usr/share/initramfs-tools/scripts/panic/console_setup
+	chmod 755 debian/console-setup/usr/share/initramfs-tools/scripts/panic/console_setup
 	install -d debian/console-setup/usr/share/apport/package-hooks
 	install -m644 debian/console-setup.apport \
 		debian/console-setup/usr/share/apport/package-hooks/source_console-setup.py

@@ -148,7 +148,7 @@ scan_disk () {
 			if [ "$virtual" = yes ]; then
 				get_resize_range
 			else
-				get_real_resize_range "$oldid" "$fs"
+				get_real_resize_range "$oldid" "$fs" || continue
 			fi
 			if [ "$cursize" ] && [ "$minsize" ]; then
 				thisfree="$(expr "$cursize" - "$minsize")"
@@ -168,7 +168,7 @@ scan_disk () {
 			if [ "$virtual" = yes ]; then
 				get_resize_range
 			else
-				get_real_resize_range "$oldid" "$fs"
+				get_real_resize_range "$oldid" "$fs" || continue
 			fi
 			if [ "$cursize" ] && [ "$minsize" ]; then
 				thisfree="$(expr "$cursize" - "$minsize")"
