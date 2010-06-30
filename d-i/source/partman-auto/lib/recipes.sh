@@ -320,7 +320,7 @@ choose_recipe () {
 			return 0
 		else
 			logger -t partman-auto \
-			"Expert recipe too large ($(min_size) > $free_size); skipping"
+			"Available disk space ($free_size) too small for expert recipe ($(min_size)); skipping"
 		fi
 	fi
 

@@ -17,15 +17,40 @@ error() {
 }
 
 findfs () {
-	mount | grep "on /target${1%/} " | cut -d' ' -f1
+	mount | grep "on /target${1%/} " | tail -n1 | cut -d' ' -f1
 }
 
 # Are we writing to flash or constructing an image on disk?
 write_to_flash() {
 	case "$machine" in
-		"Buffalo Linkstation Pro/Live" | "Buffalo/Revogear Kurobox Pro" | "GLAN Tank" | "HP Media Vault mv2120" | "Marvell DB-MV88F6781-BP Development Board")
+		"Buffalo Linkstation Pro/Live")
 			return 1
 		;;
+		"Buffalo/Revogear Kurobox Pro")
+			return 1
+		;;
+		"GLAN Tank")
+			return 1
+		;;
+		"HP Media Vault mv2120")
+			return 1
+		;;
+		"Marvell OpenRD Base Board")
+			return 1
+		;;
+		"Marvell OpenRD Client Board")
+			return 1
+		;;
+		"Marvell SheevaPlug Reference Board")
+			return 1
+		;;
+		"Marvell eSATA SheevaPlug Reference Board")
+			return 1
+		;;
+        "Marvell DB-MV88F6781-BP Development Board")
+            return 1
+        ;;
+		# Assume that we write to flash for all other devices
 		*)
 			return 0
 		;;
@@ -49,15 +74,10 @@ if ! apt-install flash-kernel; then
 	error "apt-install flash-kernel failed"
 fi
 
-# Set up flash-kernel to run on kernel upgrades.
-if ! grep -q flash-kernel /target/etc/kernel-img.conf; then
-	echo "postinst_hook = flash-kernel" >> \
-		/target/etc/kernel-img.conf
-fi
-
 # Temporarily move flash-kernel out of the way so update-initramfs
-# won't call flash-kernel; otherwise we'd call it twice.
+# won't call flash-kernel; otherwise we might call it twice.
 mv /target/usr/sbin/flash-kernel /target/tmp/flash-kernel.$$
+trap "mv /target/tmp/flash-kernel.$$ /target/usr/sbin/flash-kernel" EXIT HUP INT QUIT TERM
 
 db_progress STEP 1
 
@@ -196,14 +216,23 @@ case "$machine" in
 		in-target fw_setenv bootargs "${cmdline}"
 		in-target fw_setenv bootdelay 3
     ;;
-	"Thecus N2100" | "Thecus N4100")
-		in-target update-initramfs -u || true
-	;;
-	"QNAP TS-109/TS-209" | "QNAP TS-409")
+	"Marvell OpenRD Base Board" | "Marvell OpenRD Client Board" | "Marvell SheevaPlug Reference Board" | "Marvell eSATA SheevaPlug Reference Board")
 		in-target update-initramfs -u || true
 		if ! apt-install uboot-mkimage; then
 			error "apt-install uboot-mkimage failed"
 		fi
+	;;
+	"Thecus N2100" | "Thecus N4100")
+		in-target update-initramfs -u || true
+	;;
+	"QNAP TS-109/TS-209" | "QNAP TS-119/TS-219" | "QNAP TS-409" | "QNAP TS-41x")
+		in-target update-initramfs -u || true
+		if ! apt-install uboot-mkimage; then
+			error "apt-install uboot-mkimage failed"
+		fi
+	;;
+	"Lanner EM7210")
+		in-target update-initramfs -u || true
 	;;
 esac
 
@@ -214,6 +243,7 @@ else
 	db_progress INFO flash-kernel-installer/generating_image
 fi
 
+trap - EXIT HUP INT QUIT TERM
 mv /target/tmp/flash-kernel.$$ /target/usr/sbin/flash-kernel
 
 # We need the udev /dev which has the MTD devices

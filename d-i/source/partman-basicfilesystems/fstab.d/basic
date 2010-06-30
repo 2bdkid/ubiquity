@@ -16,6 +16,7 @@ if db_get debian-installer/locale; then
 	esac
 fi
 
+seen_efi=
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
@@ -51,8 +52,16 @@ for dev in $DEVICES/*; do
 			echo "$path" "$mountpoint" ext2 $options 0 $pass
 			;;
 		    fat16|fat32)
-			[ -f "$id/mountpoint" ] || continue
-			mountpoint=$(cat $id/mountpoint)
+			if [ -f "$id/mountpoint" ]; then
+				mountpoint=$(cat $id/mountpoint)
+			else
+				if [ "$method" = efi ] && [ -z "$seen_efi" ]; then
+					mountpoint=/boot/efi
+					seen_efi=1
+				else
+					continue
+				fi
+			fi
 			options=$(get_mountoptions $dev $id)
 			if [ "$utf8" ]; then
 				if [ "$options" = defaults ]; then
@@ -62,7 +71,10 @@ for dev in $DEVICES/*; do
 				fi
 			fi
 			# base-passwd defines gid 46 as group plugdev
-			echo "$path" "$mountpoint" vfat $options,umask=007,gid=46 0 1
+			if [ "$method" != efi ]; then
+				options="$options,umask=007,gid=46"
+			fi
+			echo "$path" "$mountpoint" vfat $options 0 1
 			;;
 		    ntfs)
 			[ -f "$id/mountpoint" ] || continue

@@ -1,3 +1,12 @@
+partman-efi (20ubuntu2) maverick; urgency=low
+
+  * Drop lpia support.
+  * Only create a fat32 partition on Intel Macs; other compliant EFI
+    implementations should (as I read it) be able to cope with fat16, and
+    the 256MB minimum size of fat32 is inconvenient.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 11 Jun 2010 00:54:08 +0100
+
 partman-efi (20ubuntu1) karmic; urgency=low
 
   * Resynchronize with Debian.  Remaining changes:
