@@ -2,6 +2,7 @@
 
 # Copyright (C) 2006  Joey Hess  <joeyh@debian.org>
 # Copyright (C) 2006, 2007, 2008, 2009  Martin Michlmayr <tbm@cyrius.com>
+# Copyright (C) 2009, 2010 Canonical Ltd
 
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -116,6 +117,172 @@ cleanup() {
 	done
 }
 
+# generic flash-kernel routines for specific subarchs
+omap_flash_kernel() {
+	if [ -n ${UBOOT_PART} ]; then
+		echo "Using u-boot partition: ${UBOOT_PART}" >&2
+		TMPMOUNT=$(mktemp -d)
+		mount $UBOOT_PART $TMPMOUNT
+		printf "Creating backups of uImage and uInitrd... " >&2
+		cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
+		cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
+		echo "done." >&2
+		printf "Generating kernel u-boot image... " >&2
+		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
+			-e 0x80008000 -n "Ubuntu Kernel" -d /boot/vmlinuz $TMPMOUNT/uImage >&2 1>/dev/null
+		echo "done." >&2
+		printf "Generating Initramfs u-boot image... " >&2
+		mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
+			-n "Ubuntu Initrd" -d /boot/initrd.img $TMPMOUNT/uInitrd >&2 1>/dev/null
+			echo "done." >&2
+		if [ -e /boot/boot.script ];then
+			printf "Generating u-boot configuration from /boot/boot.script... " >&2
+			cp $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
+			mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
+				$TMPMOUNT/boot.scr >&2 1>/dev/null
+			echo "done." >&2
+		fi
+		umount $TMPMOUNT
+		rm -rf $TMPMOUNT
+	else
+		initrd_nand_size="16777216"
+		check_mtd
+		kmtd=$(mtdblock "Kernel")
+		if [ -z "$kmtd" ]; then
+			error "Cannot find mtd partition 'Kernel'"
+		fi
+		check_dev_mtdblock "$kmtd"
+		kmtdsize=$(mtdsize "Kernel")
+		check_size "Kernel" $(($kfilesize + 8 + 64)) $kmtdsize
+
+		printf "Generating kernel u-boot image... " >&2
+		tmp=$(tempfile) 
+		cat $kfile >> $tmp
+		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
+			-e 0x80008000 -n "Ubuntu Kernel" -d $tmp $tmp.uboot >&2 1>/dev/null
+		echo "done." >&2
+
+		printf "Erasing Kernel NAND space... " >&2 
+		dd if=/dev/zero of=$kmtd bs=$kmtdsize count=1 2>/dev/null
+		echo "done." >&2
+
+		printf "Flashing kernel... " >&2
+		cat $tmp.uboot > $kmtd || error "failed."
+		echo "done." >&2
+		rm -f $tmp.uboot $tmp
+
+		imtd=$(mtdblock "File System")
+		if [ -z "$imtd" ]; then
+			error "Cannot find mtd partition for Initramfs"
+		fi
+		check_dev_mtdblock "$imtd"
+		check_size "Initramfs" $ifilesize $initrd_nand_size
+
+		printf "Generating Initramfs u-boot image... " >&2
+		tmp=$(tempfile) 
+		cat $ifile >> $tmp
+		mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
+			-n "Ubuntu Initrd" -d $tmp $tmp.uboot >&2 1>/dev/null
+		echo "done." >&2
+
+		printf "Erasing Initramfs NAND space... " >&2
+		dd if=/dev/zero of=$imtd bs=$initrd_nand_size count=1 2>/dev/null
+			echo "done." >&2
+
+		printf "Flashing Initramfs... " >&2
+		cat $tmp.uboot > $imtd || error "failed."
+		echo "done." >&2 
+		rm -f $tmp.uboot $tmp
+	fi
+}
+
+dove_flash_kernel() {
+	tmp=$(tempfile)
+	uboot_kernel_load_addr=0x00200000
+	uboot_initramfs_load_addr=0x01100000
+	script_load_addr=0x1000
+
+	printf "Generating kernel u-boot image... " >&2
+	cat $kfile >> $tmp
+	mkimage -A arm -O linux -T kernel -C none -n "$desc" -a 0x00008000 \
+		-e 0x00008000 -d $tmp $tmp.uboot >&2 1>/dev/null
+	echo "done." >&2
+	if [ -e /boot/uImage ]; then
+		echo "Creating backup of /boot/uImage." >&2
+		mv /boot/uImage /boot/uImage.bak
+	fi
+	echo "Creating new /boot/uImage." >&2
+	mv $tmp.uboot /boot/uImage
+	rm -f $tmp
+	printf "Generating initrd u-boot image... " >&2
+	mkimage -A arm -O linux -T ramdisk -C gzip -a 0x0 \
+		-e 0x0 -n "$idesc" -d "$ifile" "$tmp.uboot" >&2 1>/dev/null
+	echo "done." >&2
+	if [ -e /boot/uInitrd ]; then
+		echo "Creating backup of /boot/uInitrd." >&2
+		mv /boot/uInitrd /boot/uInitrd.bak
+	fi
+	echo "Creating new /boot/uInitrd." >&2
+	mv "$tmp.uboot" /boot/uInitrd
+	rm -f "$tmp.uboot"
+	printf "Generating new u-boot boot script..." >&2
+	# The UUID will come from the flash-kernel config file
+	cat >"$tmp.boot.script" <<EOF
+echo Starting Ubuntu...
+if test -n \${fs} && test -n \${interface} && test -n \${device} && test -n \${prefix}; then
+	\${fs}load \${interface} \${device} $uboot_kernel_load_addr \${prefix}uImage
+	\${fs}load \${interface} \${device} $uboot_initramfs_load_addr \${prefix}uInitrd
+	setenv bootargs $rootfs ro quiet splash
+	bootm $uboot_kernel_load_addr $uboot_initramfs_load_addr
+fi
+
+echo boot information not recieved from u-boot, scanning for startup device
+
+if test -e \${reinitalize_devices}; then
+	usb start;
+	ide reset;
+fi
+
+for i in usb ide; do 
+	for j in 0 1; do
+		for l in / /boot/; do
+			for m in fat ext2; do
+				setenv interface \$i;
+				setenv device \$j;
+				setenv prefix \$l;
+				setenv fs \$m;
+
+				echo Scanning \${fs} \${interface} \${device} on prefix \${prefix} ...;
+
+				# This "if" avoids loading an old image but
+				# doesn't work in stock u-boot 1.3.4 and is
+				# only fixed in Canonical u-boot from October
+				# 1st or later
+
+				if \${fs}load \${interface} \${device} $script_load_addr \${prefix}boot.scr; then
+					if imi $script_load_addr; then
+						echo boot.scr found! Executing ...;
+						autoscr $script_load_addr;
+					fi;
+				fi
+			done;
+		done;
+	done;
+done
+echo No boot device found.;
+EOF
+	mkimage -A arm -T script -C none -n "Ubuntu boot script" -d "$tmp.boot.script" \
+		"$tmp.boot.scr" >&2 1>/dev/null
+	echo "done." >&2
+	if [ -e /boot/boot.scr ]; then
+		echo "Creating backup of /boot/boot.scr." >&2
+		mv /boot/boot.scr /boot/boot.scr.bak
+	fi
+	echo "Creating new /boot/boot.scr." >&2
+	mv "$tmp.boot.scr" /boot/boot.scr
+	rm -f "$tmp.boot.script" "$tmp.boot.scr"
+}
+
 trap "cleanup" 0 HUP INT QUIT KILL SEGV PIPE TERM
 
 config="/etc/flash-kernel.conf"
@@ -130,6 +297,8 @@ else
 	machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 fi
 
+running_subarch=$(uname -r | sed -e 's/.*-//')
+
 if [ "x$1" = "x--supported" ]; then
 	case "$machine" in
 		"Buffalo Linkstation Pro/Live")		exit 0 ;;
@@ -141,6 +310,8 @@ if [ "x$1" = "x--supported" ]; then
 		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
 		"Linksys NSLU2")			exit 0 ;;
 		"OMAP3 Beagle Board")			exit 0 ;;
+		"OMAP4430 Panda Board")			exit 0 ;;
+		"OMAP4430 4430SDP board")		exit 0 ;;
 		"Marvell OpenRD Base Board")		exit 0 ;;
 		"Marvell OpenRD Client Board")		exit 0 ;;
 		"Marvell SheevaPlug Reference Board")	exit 0 ;;
@@ -150,7 +321,13 @@ if [ "x$1" = "x--supported" ]; then
 		"QNAP TS-41x")				exit 0 ;;
 		"Thecus N2100")				exit 0 ;;
 		"Lanner EM7210")			exit 0 ;;
-		*)					exit 1 ;;
+		*)
+			# we're supported if we have a generic fallback
+			case "$running_subarch" in
+				"dove" | "omap" | "omap4") exit 0 ;;
+			esac
+		exit 1
+		;;
 	esac
 fi
 
@@ -473,140 +650,18 @@ case "$machine" in
 	;;
 	"Marvell DB-MV88F6781-BP Development Board")
 		check_subarch "dove"
-		tmp=$(tempfile)
-		uboot_kernel_load_addr=0x00200000
-		uboot_initramfs_load_addr=0x01100000
-		script_load_addr=0x1000
-
-		printf "Generating kernel u-boot image... " >&2
-		cat $kfile >> $tmp
-		mkimage -A arm -O linux -T kernel -C none -n "$desc" -a 0x00008000 \
-			-e 0x00008000 -d $tmp $tmp.uboot >&2 1>/dev/null
-		echo "done." >&2
-		if [ -e /boot/uImage ]; then
-			echo "Creating backup of /boot/uImage." >&2
-			mv /boot/uImage /boot/uImage.bak
-		fi
-		echo "Creating new /boot/uImage." >&2
-		mv $tmp.uboot /boot/uImage
-		rm -f $tmp
-		printf "Generating initrd u-boot image... " >&2
-		mkimage -A arm -O linux -T ramdisk -C gzip -a 0x0 \
-			-e 0x0 -n "$idesc" -d "$ifile" "$tmp.uboot" >&2 1>/dev/null
-		echo "done." >&2
-		if [ -e /boot/uInitrd ]; then
-			echo "Creating backup of /boot/uInitrd." >&2
-			mv /boot/uInitrd /boot/uInitrd.bak
-		fi
-		echo "Creating new /boot/uInitrd." >&2
-		mv "$tmp.uboot" /boot/uInitrd
-		rm -f "$tmp.uboot"
-		printf "Generating new u-boot boot script..." >&2
-		# The UUID will come from the flash-kernel config file
-		cat >"$tmp.boot.script" <<EOF
-echo Starting Ubuntu...
-if test -n \${fs} && test -n \${interface} && test -n \${device} && test -n \${prefix}; then
-	\${fs}load \${interface} \${device} $uboot_kernel_load_addr \${prefix}uImage
-	\${fs}load \${interface} \${device} $uboot_initramfs_load_addr \${prefix}uInitrd
-	setenv bootargs $rootfs ro quiet splash
-	bootm $uboot_kernel_load_addr $uboot_initramfs_load_addr
-fi
-
-echo boot information not recieved from u-boot, scanning for startup device
-
-if test -e \${reinitalize_devices}; then
-	usb start;
-	ide reset;
-fi
-
-for i in usb ide; do 
-	for j in 0 1; do
-		for l in / /boot/; do
-			for m in fat ext2; do
-				setenv interface \$i;
-				setenv device \$j;
-				setenv prefix \$l;
-				setenv fs \$m;
-
-				echo Scanning \${fs} \${interface} \${device} on prefix \${prefix} ...;
-
-				# This "if" avoids loading an old image but
-				# doesn't work in stock u-boot 1.3.4 and is
-				# only fixed in Canonical u-boot from October
-				# 1st or later
-
-				if \${fs}load \${interface} \${device} $script_load_addr \${prefix}boot.scr; then
-					if imi $script_load_addr; then
-						echo boot.scr found! Executing ...;
-						autoscr $script_load_addr;
-					fi;
-				fi
-			done;
-		done;
-	done;
-done
-echo No boot device found.;
-EOF
-		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d "$tmp.boot.script" \
-			"$tmp.boot.scr" >&2 1>/dev/null
-		echo "done." >&2
-		if [ -e /boot/boot.scr ]; then
-			echo "Creating backup of /boot/boot.scr." >&2
-			mv /boot/boot.scr /boot/boot.scr.bak
-		fi
-		echo "Creating new /boot/boot.scr." >&2
-		mv "$tmp.boot.scr" /boot/boot.scr
-		rm -f "$tmp.boot.script" "$tmp.boot.scr"
+		dove_flash_kernel
 	;;
-	"OMAP3 Beagle Board")
-		initrd_nand_size="16777216"
-		check_mtd
-		kmtd=$(mtdblock "Kernel")
-		if [ -z "$kmtd" ]; then
-			error "Cannot find mtd partition 'Kernel'"
-		fi
-		check_dev_mtdblock "$kmtd"
-		kmtdsize=$(mtdsize "Kernel")
-		check_size "Kernel" $(($kfilesize + 8 + 64)) $kmtdsize
-
-		printf "Generating kernel u-boot image... " >&2
-		tmp=$(tempfile) 
-		cat $kfile >> $tmp
-		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
-			-e 0x80008000 -n "Ubuntu Kernel" -d $tmp $tmp.uboot >&2 1>/dev/null
-		echo "done." >&2
-
-		printf "Erasing Kernel NAND space... " >&2 
-		dd if=/dev/zero of=$kmtd bs=$kmtdsize count=1 2>/dev/null
-		echo "done." >&2
-
-		printf "Flashing kernel... " >&2
-		cat $tmp.uboot > $kmtd || error "failed."
-		echo "done." >&2
-		rm -f $tmp.uboot $tmp
-
-		imtd=$(mtdblock "File System")
-		if [ -z "$imtd" ]; then
-			error "Cannot find mtd partition for Initramfs"
-		fi
-		check_dev_mtdblock "$imtd"
-		check_size "Initramfs" $ifilesize $initrd_nand_size
-
-		printf "Generating Initramfs u-boot image... " >&2
-		tmp=$(tempfile) 
-		cat $ifile >> $tmp
-		mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
-			-n "Ubuntu Initrd" -d $tmp $tmp.uboot >&2 1>/dev/null
-		echo "done." >&2
-
-		printf "Erasing Initramfs NAND space... " >&2
-		dd if=/dev/zero of=$imtd bs=$initrd_nand_size count=1 2>/dev/null
-		echo "done." >&2
-
-		printf "Flashing Initramfs... " >&2
-		cat $tmp.uboot > $imtd || error "failed."
-		echo "done." >&2 
-		rm -f $tmp.uboot $tmp
+	"OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
+		case "$machine" in
+			"OMAP3 Beagle Board")
+				check_subarch "omap"
+			;;
+			"OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
+				check_subarch "omap4"
+			;;
+		esac
+		omap_flash_kernel
 	;;
 	"QNAP TS-109/TS-209" | "QNAP TS-119/TS-219" | "QNAP TS-409" | "QNAP TS-41x")
 		case "$machine" in
@@ -733,7 +788,24 @@ EOF
 		echo "done." >&2
 	;;
 	*)
-		error "Unsupported platform."
+		case "$running_subarch" in
+			"dove" | "omap" | "omap4")
+				echo "warning: using generic subarchitecture fallback for $running_subarch"
+				check_subarch $running_subarch
+
+				case "$subarch" in
+					"dove")
+						dove_flash_kernel
+					;;
+					"omap" | "omap4")
+						omap_flash_kernel
+					;;
+				esac
+		;;
+		*)
+			error "Unsupported platform."
+		;;
+		esac
 	;;
 esac
 

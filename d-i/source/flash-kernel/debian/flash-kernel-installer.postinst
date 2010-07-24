@@ -47,9 +47,9 @@ write_to_flash() {
 		"Marvell eSATA SheevaPlug Reference Board")
 			return 1
 		;;
-        "Marvell DB-MV88F6781-BP Development Board")
-            return 1
-        ;;
+		"Marvell DB-MV88F6781-BP Development Board")
+			return 1
+		;;
 		# Assume that we write to flash for all other devices
 		*)
 			return 0
@@ -59,6 +59,30 @@ write_to_flash() {
 
 machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 
+dove_flash_kernel_installer() {
+	in-target update-initramfs -u || true
+	if ! apt-install uboot-mkimage; then
+		error "apt-install uboot-mkimage failed"
+	fi
+
+	# Add the rootfs to the flash-kernel.conf file
+	rootfs=$(findfs /)
+	uuid="$(block-attr --uuid "$rootfs")"
+	echo "rootfs='root=UUID=$uuid'" > /target/etc/flash-kernel.conf
+}
+
+omap_flash_kernel_installer() {
+	in-target update-initramfs -u || true
+
+	if ! apt-install uboot-mkimage; then
+		error "apt-install uboot-mkimage failed"
+	fi
+
+	# Add the u-boot partition to the flash-kernl.conf file
+	# FIXME: figure out how to properly autodetect this
+	echo "UBOOT_PART=/dev/mmcblk0p1" > /target/etc/flash-kernel.conf
+}
+	# Add the rootfs to the flash-kernel.conf file
 if write_to_flash; then
 	db_progress START 0 3 flash-kernel-installer/progress
 else
@@ -188,34 +212,11 @@ case "$machine" in
 		fi
 	;;
 	"Marvell DB-MV88F6781-BP Development Board")
-		in-target update-initramfs -u || true
-		if ! apt-install uboot-mkimage; then
-			error "apt-install uboot-mkimage failed"
-		fi
-
-		# Add the rootfs to the flash-kernel.conf file
-		rootfs=$(findfs /)
-		uuid="$(block-attr --uuid "$rootfs")"
-		echo "rootfs='root=UUID=$uuid'" > /target/etc/flash-kernel.conf
+		dove_flash_kernel_installer
 	;;
 	"OMAP3 Beagle Board")
-		if ! apt-install uboot-mkimage; then
-			error "apt-install uboot-mkimage failed"
-		fi
-		if ! apt-install uboot-envtools; then
-			error "apt-install uboot-envtools failed"
-		fi
-		rootfs=$(findfs /)
-		uuid="$(block-attr --uuid "$rootfs")"
-		cmdline="root=UUID=$uuid ro quiet splash vram=12M omapfb.mode=dvi:1280x720MR-16@60 fixrtc"
-		bootcmd="nand read 80000000 280000 400000;nand read 81600000 680000 1000000;bootm 80000000 81600000"
-		# create a default config for uboot-envtools
-		echo "/dev/mtd2 0x0000 0x20000 0x20000" > /target/etc/fw_env.config
-		# set proper NAND boot defaults
-		in-target fw_setenv bootcmd "${bootcmd}"
-		in-target fw_setenv bootargs "${cmdline}"
-		in-target fw_setenv bootdelay 3
-    ;;
+	omap_flash_kernel_installer
+	;;
 	"Marvell OpenRD Base Board" | "Marvell OpenRD Client Board" | "Marvell SheevaPlug Reference Board" | "Marvell eSATA SheevaPlug Reference Board")
 		in-target update-initramfs -u || true
 		if ! apt-install uboot-mkimage; then
@@ -233,6 +234,15 @@ case "$machine" in
 	;;
 	"Lanner EM7210")
 		in-target update-initramfs -u || true
+	;;
+	*)
+		case "`archdetect`" in
+			"arm*/dove")
+				dove_flash_kernel_installer
+			;;
+			"arm*/omap" | "arm*/omap4")
+				omap_flash_kernel_installer
+			esac
 	;;
 esac
 
