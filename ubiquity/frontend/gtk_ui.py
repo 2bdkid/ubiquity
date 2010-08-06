@@ -58,7 +58,7 @@ from ubiquity import filteredcommand, gconftool, i18n, osextras, validation, \
                      wrap_label
 from ubiquity.misc import *
 from ubiquity.plugin import Plugin
-from ubiquity.components import install, partman_commit
+from ubiquity.components import install, plugininstall, partman_commit
 import ubiquity.progressposition
 import ubiquity.frontend.base
 from ubiquity.frontend.base import BaseFrontend
@@ -72,10 +72,11 @@ PATH = os.environ.get('UBIQUITY_PATH', False) or '/usr/share/ubiquity'
 
 # Define global pixmaps location
 PIXMAPS = os.environ.get('PIXMAPS', False) or '/usr/share/pixmaps'
-
+ 
 # Define ui path
 UIDIR = os.environ.get('UBIQUITY_GLADE', False) or os.path.join(PATH, 'gtk')
 os.environ['UBIQUITY_GLADE'] = UIDIR
+
 
 # Define locale path
 LOCALEDIR = "/usr/share/locale"
@@ -152,6 +153,13 @@ class Controller(ubiquity.frontend.base.Controller):
             self._wizard.live_installer.show()
         self._wizard.refresh()
 
+    def toggle_progress_section(self):
+        if self._wizard.progress_section.get_property('visible'):
+            self._wizard.progress_section.hide()
+        else:
+            self._wizard.progress_section.show()
+        self._wizard.refresh()
+
     def get_string(self, name, lang=None, prefix=None):
         return self._wizard.get_string(name, lang, prefix)
 
@@ -188,7 +196,6 @@ class Wizard(BaseFrontend):
                 widget.set_property('can-focus', False)
 
         BaseFrontend.__init__(self, distro)
-
         self.previous_excepthook = sys.excepthook
         sys.excepthook = self.excepthook
 
@@ -196,8 +203,7 @@ class Wizard(BaseFrontend):
         self.all_widgets = set()
         self.gconf_previous = {}
         self.thunar_previous = {}
-        self.language_questions = ('live_installer', 'step_label',
-                                   'quit', 'back', 'next',
+        self.language_questions = ('live_installer', 'quit', 'back', 'next',
                                    'warning_dialog', 'warning_dialog_label',
                                    'cancelbutton', 'exitbutton')
         self.current_page = None
@@ -216,6 +222,8 @@ class Wizard(BaseFrontend):
         self.history = []
         self.builder = gtk.Builder()
         self.grub_options = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
+        self.finished_installing = False
+        self.finished_pages = False
 
         self.laptop = execute("laptop-detect")
 
@@ -230,8 +238,19 @@ class Wizard(BaseFrontend):
         # set custom language
         self.set_locales()
 
-        gtk.window_set_default_icon_from_file(os.path.join(PIXMAPS,
-                                              'ubiquity.png'))
+        gtk.window_set_default_icon_from_file('/usr/share/pixmaps/'
+                                              'ubiquity.png')
+
+        # This needs to be done before the GtkBuilder objects are created.
+        style = gtk.Menu().rc_get_style()
+        bg = style.bg[gtk.STATE_NORMAL]
+        gtk.rc_parse_string('''
+        style "ubiquity" {
+            GtkProgressBar::min-horizontal-bar-height = 10
+            bg[ACTIVE] = "%s"
+        }
+        class "GtkProgressBar" style "ubiquity"
+        ''' % bg)
 
         # load the main interface
         self.builder.add_from_file('%s/ubiquity.ui' % UIDIR)
@@ -251,6 +270,7 @@ class Wizard(BaseFrontend):
                 mod.ui_class = mod.module.PageGtk
                 mod.controller = Controller(self)
                 mod.ui = mod.ui_class(mod.controller)
+                mod.title = mod.ui.get('plugin_title')
                 widgets = mod.ui.get('plugin_widgets')
                 optional_widgets = mod.ui.get('plugin_optional_widgets')
                 if not found_install:
@@ -318,13 +338,6 @@ class Wizard(BaseFrontend):
             # There's no sense retranslating the page we're leaving.
             if not_current and p == current_page:
                 continue
-            # Allow plugins to provide a hook for translation.
-            if hasattr(p.ui, 'plugin_translate'):
-                try:
-                    p.ui.plugin_translate(lang or self.locale)
-                except Exception, e:
-                    print >>sys.stderr, 'Could not translate page (%s): %s' \
-                                        % (p.module.NAME, str(e))
             prefix = p.ui.get('plugin_prefix')
             for w in p.all_widgets:
                 for c in self.all_children(w):
@@ -335,6 +348,18 @@ class Wizard(BaseFrontend):
                     for c in self.all_children(toplevel):
                         widgets.append((c, None))
         self.translate_widgets(lang=lang, widgets=widgets, reget=False)
+
+        # Allow plugins to provide a hook for translation.
+        for p in pages:
+            # There's no sense retranslating the page we're leaving.
+            if not_current and p == current_page:
+                continue
+            if hasattr(p.ui, 'plugin_translate'):
+                try:
+                    p.ui.plugin_translate(lang or self.locale)
+                except Exception, e:
+                    print >>sys.stderr, 'Could not translate page (%s): %s' \
+                                        % (p.module.NAME, str(e))
 
     def excepthook(self, exctype, excvalue, exctb):
         """Crash handler."""
@@ -473,6 +498,7 @@ class Wizard(BaseFrontend):
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             self.debconf_progress_start(0, self.pageslen,
                 self.get_string('ubiquity/install/checking'))
+            self.debconf_progress_cancellable(False)
             self.install_progress_window.set_title(
                 self.get_string('ubiquity/install/title'))
             self.refresh()
@@ -507,10 +533,6 @@ class Wizard(BaseFrontend):
                 self.pages[self.pagesindex].controller.dbfilter = None
 
             if self.backup or self.dbfilter_handle_status():
-                #TODO: superm1, Jan 2010 is there some kind of way that we are entering this normally?
-                #if self.installing:
-                #    self.progress_loop()
-                #elif
                 if self.current_page is not None and not self.backup:
                     self.process_step()
                     if not self.stay_on_page:
@@ -525,6 +547,13 @@ class Wizard(BaseFrontend):
 
             while gtk.events_pending():
                 gtk.main_iteration()
+
+        # There's still work to do (postinstall).  Lets keep the user
+        # entertained.
+        self.start_slideshow()
+        gtk.main()
+        # postinstall will exit here by calling gtk.main_quit in
+        # find_next_step.
 
         if self.oem_user_config:
             self.quit_installer()
@@ -544,47 +573,89 @@ class Wizard(BaseFrontend):
 
         return self.returncode
 
-    def win_size_req(self, widget, req):
-        s = widget.get_screen()
-        m = s.get_monitor_geometry(0)
-        w = -1
-        h = -1
+    def on_slideshow_link_clicked(self, unused_view, unused_frame, req,
+                                  unused_action, decision):
+        uri = req.get_uri()
+        decision.ignore()
+        subprocess.Popen(['sensible-browser', uri],
+                         close_fds=True, preexec_fn=drop_all_privileges)
+        return True
 
-        # What's the size of the WM border?
-        total_frame = widget.window.get_frame_extents()
-        (cur_x, cur_y, cur_w, cur_h, depth) = widget.window.get_geometry()
-        wm_w = total_frame.width - cur_w
-        wm_h = total_frame.height - cur_h
+    def start_slideshow(self):
+        slideshow_dir = '/usr/share/ubiquity-slideshow'
+        slideshow_locale = self.slideshow_get_available_locale(slideshow_dir, self.locale)
+        slideshow_locale = 'c'
+        slideshow_main = slideshow_dir + '/slides/index.html'
 
-        if req.width > m.width - wm_w:
-            w = m.width - wm_w
-        if req.height > m.height - wm_h:
-            h = m.height - wm_h
+        if not os.path.exists(slideshow_main):
+            self.page_mode.hide()
+            return
 
-        widget.set_size_request(w, h)
-        widget.resize(w, h)
+        slides = 'file://' + slideshow_main
+        if slideshow_locale != 'c': #slideshow will use default automatically
+            slides += '#?locale=' + slideshow_locale
+            ltr = i18n.get_string('default-ltr', slideshow_locale, 'ubiquity/imported')
+            if ltr == 'default:RTL':
+                slides += '?rtl'
+
+        import webkit
+        webview = webkit.WebView()
+        # WebKit puts file URLs in their own domain by default.
+        # This means that anything which checks for the same origin,
+        # such as creating a XMLHttpRequest, will fail unless this
+        # is disabled.
+        # http://www.gitorious.org/webkit/webkit/commit/624b9463c33adbffa7f6705210384d0d7cf122d6
+        s = webview.get_settings()
+        s.set_property('enable-file-access-from-file-uris', True)
+        s.set_property('enable-default-context-menu', False)
+        webview.connect('new-window-policy-decision-requested',
+                        self.on_slideshow_link_clicked)
+
+        self.webkit_scrolled_window.add(webview)
+        webview.open(slides)
+        # TODO do these in a page loaded callback
+        self.page_mode.show()
+        self.page_mode.set_current_page(1)
+        webview.show()
 
     def customize_installer(self):
         """Initial UI setup."""
 
-        PIXMAPSDIR = os.path.join(PATH, 'pixmaps', self.distro)
+        style = gtk.Menu().rc_get_style()
+        self.live_installer.set_style(style)
+        self.page_title.set_style(style)
+        self.install_progress_text.set_style(style)
+        self.install_details_expander.set_style(style)
+        # TODO lazy load
+        from vte import Terminal
+        self.vte = Terminal()
+        self.install_details_sw.add(self.vte)
+        self.vte.fork_command('tail', ['tail', '-f', '/var/log/installer/debug'])
+        self.vte.show()
+        # FIXME shrink the window horizontally instead of locking the window size.
+        self.live_installer.set_property('allow_grow', False)
+        # TODO move this into gtkwidgets as a subclass of GtkExpander.
+        def do_allocate(widget, allocation):
+            child = self.install_details_expander.get_label_widget()
+            a = child.get_allocation()
+            expander_size = widget.style_get_property('expander-size')
+            expander_spacing = widget.style_get_property('expander-spacing')
+            border_width = widget.get_property('border-width')
+            foucs_width = widget.style_get_property('focus-line-width')
+            focus_pad = widget.style_get_property('focus-padding')
 
-        # set pixmaps
-        if ( gtk.gdk.get_default_root_window().get_screen().get_width() > 1024 ):
-            logo = os.path.join(PIXMAPSDIR, "logo_1280.jpg")
-            photo = os.path.join(PIXMAPSDIR, "photo_1280.jpg")
-        else:
-            logo = os.path.join(PIXMAPSDIR, "logo_1024.jpg")
-            photo = os.path.join(PIXMAPSDIR, "photo_1024.jpg")
-        if not os.path.exists(logo):
-            logo = None
-        if not os.path.exists(photo):
-            photo = None
+            w = allocation.width - 2 * border_width - expander_size - \
+                2 * expander_spacing - 2 * focus_pad # - 2 * focus_width
+            a = gtk.gdk.Rectangle(a.x, a.y, w, child.size_request()[1])
+            child.size_allocate(a)
+        self.install_details_expander.connect('size-allocate', do_allocate)
 
-        self.logo_image.set_from_file(logo)
-        self.photo.set_from_file(photo)
-
-        self.live_installer.connect('size-request', self.win_size_req)
+        def expand(widget):
+            if widget.get_property('expanded'):
+                self.progress_cancel_button.show()
+            else:
+                self.progress_cancel_button.hide()
+        self.install_details_expander.connect('activate', expand)
 
         if self.custom_title:
             self.live_installer.set_title(self.custom_title)
@@ -595,8 +666,11 @@ class Wizard(BaseFrontend):
             self.live_installer.set_icon_name("preferences-system")
             self.quit.hide()
 
-        if not 'UBIQUITY_AUTOMATIC' in os.environ:
-            self.live_installer.show()
+        if 'UBIQUITY_AUTOMATIC' in os.environ:
+            #hide the notebook until the first page is ready
+            self.page_mode.hide()
+            self.progress_section.show()
+        self.live_installer.show()
         self.allow_change_step(False)
 
         if hasattr(self, 'stepPartAuto'):
@@ -705,10 +779,7 @@ class Wizard(BaseFrontend):
         name = widget.get_name()
 
         if isinstance(widget, gtk.Label):
-            if name == 'step_label':
-                text = text.replace('${INDEX}', str(min(self.user_pageslen, max(1, len(self.history)))))
-                text = text.replace('${TOTAL}', str(self.user_pageslen))
-            elif name == 'ready_text_label' and self.oem_user_config:
+            if name == 'ready_text_label' and self.oem_user_config:
                 text = self.get_string('ready_text_oem_user_label', lang)
             widget.set_markup(text)
 
@@ -726,7 +797,10 @@ class Wizard(BaseFrontend):
                 attrs.insert(pango.AttrScale(pango.SCALE_SMALL, 0, textlen))
                 widget.set_attributes(attrs)
             elif ('group_label' in name or 'warning_label' in name or
-                  name in ('drives_label', 'partition_method_label')):
+                  name in ('prepare_best_results',
+                           'prepare_foss_disclaimer',
+                           'drives_label',
+                           'partition_method_label')):
                 attrs = pango.AttrList()
                 attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, textlen))
                 widget.set_attributes(attrs)
@@ -751,7 +825,9 @@ class Wizard(BaseFrontend):
 
         elif isinstance(widget, gtk.Window):
             if name == 'live_installer':
-                if self.oem_config:
+                if self.custom_title:
+                    text = self.custom_title
+                elif self.oem_config:
                     text = self.get_string('oem_config_title', lang)
                 elif self.oem_user_config:
                     text = self.get_string('oem_user_config_title', lang)
@@ -875,6 +951,7 @@ class Wizard(BaseFrontend):
         # migration-assistant.
         self.backup = False
         self.live_installer.show()
+        self.page_mode.show()
         cur = None
         is_install = False
         for page in self.pages:
@@ -889,6 +966,16 @@ class Wizard(BaseFrontend):
                 elif page.optional_widgets:
                     cur = page.optional_widgets[0]
                 if cur:
+                    if page.title:
+                        title = self.get_string(page.title)
+                        title = title.replace('${RELEASE}', get_release().name)
+                        # TODO: Use attributes instead?  Would save having to
+                        # hardcode the size in here.
+                        self.page_title.set_markup(
+                            '<span size="xx-large">%s</span>' % title)
+                        self.title_section.show()
+                    else:
+                        self.title_section.hide()
                     cur.show()
                     is_install = page.ui.get('plugin_is_install')
                     break
@@ -897,6 +984,9 @@ class Wizard(BaseFrontend):
 
         if is_install and not self.oem_user_config:
             self.next.set_label(self.get_string('install_button'))
+        else:
+            self.next.set_label("gtk-go-forward")
+            self.translate_widget(self.next)
 
         num = self.steps.page_num(cur)
         if num < 0:
@@ -905,7 +995,12 @@ class Wizard(BaseFrontend):
 
         self.add_history(page, cur)
         self.set_current_page(num)
+
         if self.pagesindex == 0:
+            self.allow_go_backward(False)
+        elif self.pages[self.pagesindex - 1].module.NAME == 'partman':
+            # We're past partitioning.  Unless the install fails, there is no
+            # going back.
             self.allow_go_backward(False)
         elif 'UBIQUITY_AUTOMATIC' not in os.environ:
             self.allow_go_backward(True)
@@ -937,34 +1032,6 @@ class Wizard(BaseFrontend):
 
     # Methods
 
-    def switch_progress_windows(self, use_install_window=True):
-        self.debconf_progress_window.hide()
-        if use_install_window:
-            self.old_progress_window = self.debconf_progress_window
-            self.old_progress_info = self.progress_info
-            self.old_progress_bar = self.progress_bar
-            self.old_progress_cancel_button = self.progress_cancel_button
-            
-            self.debconf_progress_window = self.install_progress_window
-            self.progress_info = self.install_progress_info
-            self.progress_bar = self.install_progress_bar
-            self.progress_cancel_button = self.install_progress_cancel_button
-            self.progress_cancel_button.set_label(
-                self.old_progress_cancel_button.get_label())
-            
-            # Set the install window to the (presumably dark) theme colors.
-            a = gtk.Menu().rc_get_style()
-            bg = a.bg[gtk.STATE_NORMAL]
-            fg = a.fg[gtk.STATE_NORMAL]
-            self.install_progress_window.modify_bg(gtk.STATE_NORMAL, bg)
-            self.install_progress_info.modify_fg(gtk.STATE_NORMAL, fg)
-
-        else:
-            self.debconf_progress_window = self.old_progress_window
-            self.progress_info = self.old_progress_info
-            self.progress_bar = self.old_progress_bar
-            self.progress_cancel_button = self.old_progress_cancel_button
-
     def progress_loop(self):
         """prepare, copy and config the system in the core install process."""
         self.installing = True
@@ -972,60 +1039,6 @@ class Wizard(BaseFrontend):
         syslog.syslog('progress_loop()')
 
         self.live_installer.hide()
-        self.switch_progress_windows(use_install_window=True)
-
-        slideshow_dir = '/usr/share/ubiquity-slideshow'
-        slideshow_locale = self.slideshow_get_available_locale(slideshow_dir, self.locale)
-        slideshow_main = slideshow_dir + '/slides/index.html'
-
-        s = self.live_installer.get_screen()
-        sh = s.get_height()
-        sw = s.get_width()
-        fail = None
-
-        if os.path.exists(slideshow_main):
-            if sh >= 600 and sw >= 800:
-                slides = 'file://' + slideshow_main
-                if slideshow_locale != 'c': #slideshow will use default automatically
-                    slides += '#?locale=' + slideshow_locale
-                    ltr = i18n.get_string('default-ltr', slideshow_locale, 'ubiquity/imported')
-                    if ltr == 'default:RTL':
-                        slides += '?rtl'
-                try:
-                    import webkit
-                    webview = webkit.WebView()
-                    # WebKit puts file URLs in their own domain by default.
-                    # This means that anything which checks for the same origin,
-                    # such as creating a XMLHttpRequest, will fail unless this
-                    # is disabled.
-                    # http://www.gitorious.org/webkit/webkit/commit/624b9463c33adbffa7f6705210384d0d7cf122d6
-                    s = webview.get_settings()
-                    s.set_property('enable-file-access-from-file-uris', True)
-                    s.set_property('enable-default-context-menu', False)
-                    webview.open(slides)
-                    self.slideshow_frame.add(webview)
-                    try:
-                        import ConfigParser
-                        cfg = ConfigParser.ConfigParser()
-                        cfg.read(os.path.join(slideshow_dir, 'slideshow.conf'))
-                        config_width = int(cfg.get('Slideshow','width'))
-                        config_height = int(cfg.get('Slideshow','height'))
-                    except:
-                        config_width = 798
-                        config_height = 451
-
-                    webview.set_size_request(config_width, config_height)
-                    webview.connect('new-window-policy-decision-requested',
-                                    self.on_slideshow_link_clicked)
-                    self.slideshow_frame.show_all()
-                except ImportError:
-                    fail = 'Webkit not present.'
-            else:
-                fail = 'Display < 800x600 (%sx%s).' % (sw, sh)
-        else:
-            fail = 'No slides present for %s.' % slideshow_dir
-        if fail:
-            syslog.syslog('Not displaying the slideshow: %s' % fail)
 
         self.debconf_progress_start(
             0, 100, self.get_string('ubiquity/install/title'))
@@ -1073,8 +1086,6 @@ class Wizard(BaseFrontend):
 
         # just to make sure
         self.debconf_progress_window.hide()
-
-        self.run_success_cmd()
 
         #in case there are extra pages
         self.back.hide()
@@ -1149,6 +1160,12 @@ class Wizard(BaseFrontend):
         # entering. At present it's a little awkward to define actions that
         # occur upon entering a page without unwanted side-effects when the
         # user tries to go forward but fails due to validation.
+
+        # FIXME UGH.  I don't want this outside of the plugin.
+        if step == 'stepPartAsk' and not self.custom_partitioning.get_active():
+            self.set_current_page(self.steps.page_num(self.stepPartAuto))
+            self.allow_change_step(True)
+            return
         if step == "stepPartAuto":
             self.part_advanced_warning_message.set_text('')
             self.part_advanced_warning_hbox.hide()
@@ -1177,10 +1194,12 @@ class Wizard(BaseFrontend):
 
         if step.startswith("stepPart"):
             self.previous_partitioning_page = step_num
-
-        # Ready to install
-        if self.pages[self.pagesindex].ui.get('plugin_is_install'):
-            self.progress_loop()
+        if step == 'stepPartAuto':
+            self.quit.hide()
+            f = gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MINIMIZE | gtk.gdk.FUNC_MAXIMIZE | gtk.gdk.FUNC_MOVE
+            self.live_installer.window.set_functions(f)
+            self.allow_change_step(False)
+            self.refresh()
 
     def on_back_clicked(self, unused_widget):
         """Callback to set previous screen."""
@@ -1209,17 +1228,8 @@ class Wizard(BaseFrontend):
         else:
             self.quit_main_loop()
 
-    def on_slideshow_link_clicked(self, unused_view, unused_frame, req,
-                                  unused_action, decision):
-        uri = req.get_uri()
-        decision.ignore()
-        subprocess.Popen(['sensible-browser', uri],
-                         close_fds=True, preexec_fn=drop_all_privileges)
-        return True
-
     def on_steps_switch_page (self, unused_notebook, unused_page, current):
         self.current_page = current
-        self.translate_widget(self.step_label)
         name = self.step_name(current)
         if 'UBIQUITY_GREETER' in os.environ:
             if name == 'language':
@@ -1249,34 +1259,17 @@ class Wizard(BaseFrontend):
         return callback(source, debconf_condition)
 
     def debconf_progress_start (self, progress_min, progress_max, progress_title):
-        if self.progress_position.depth() == 0:
-            if self.current_page is not None:
-                self.debconf_progress_window.set_transient_for(
-                    self.live_installer)
-            else:
-                self.debconf_progress_window.set_transient_for(None)
-        if progress_title is None:
-            progress_title = ""
-        if self.progress_position.depth() == 0:
-            self.debconf_progress_window.set_title(progress_title)
-
         self.progress_position.start(progress_min, progress_max,
                                      progress_title)
-        self.progress_title.set_markup(
-            '<big><b>' +
-            xml.sax.saxutils.escape(self.progress_position.title()) +
-            '</b></big>')
         self.debconf_progress_set(0)
-        self.progress_info.set_text('')
-        self.debconf_progress_window.show()
+        self.debconf_progress_info(progress_title)
 
     def debconf_progress_set (self, progress_val):
         if self.progress_cancelled:
             return False
         self.progress_position.set(progress_val)
         fraction = self.progress_position.fraction()
-        self.progress_bar.set_fraction(fraction)
-        self.progress_bar.set_text('%s%%' % int(fraction * 100))
+        self.install_progress.set_fraction(fraction)
         return True
 
     def debconf_progress_step (self, progress_inc):
@@ -1284,36 +1277,27 @@ class Wizard(BaseFrontend):
             return False
         self.progress_position.step(progress_inc)
         fraction = self.progress_position.fraction()
-        self.progress_bar.set_fraction(fraction)
-        self.progress_bar.set_text('%s%%' % int(fraction * 100))
+        self.install_progress.set_fraction(fraction)
         return True
 
     def debconf_progress_info (self, progress_info):
         if self.progress_cancelled:
             return False
-        self.progress_info.set_markup(
-            '<i>' + xml.sax.saxutils.escape(progress_info) + '</i>')
+        self.install_progress_text.set_label(progress_info)
         return True
 
     def debconf_progress_stop (self):
         self.progress_cancelled = False
         self.progress_position.stop()
-        if self.progress_position.depth() == 0:
-            self.debconf_progress_window.hide()
-        else:
-            self.progress_title.set_markup(
-                '<big><b>' +
-                xml.sax.saxutils.escape(self.progress_position.title()) +
-                '</b></big>')
 
     def debconf_progress_region (self, region_start, region_end):
         self.progress_position.set_region(region_start, region_end)
 
     def debconf_progress_cancellable (self, cancellable):
         if cancellable:
-            self.progress_cancel_button.show()
+            self.progress_cancel_button.set_sensitive(True)
         else:
-            self.progress_cancel_button.hide()
+            self.progress_cancel_button.set_sensitive(False)
             self.progress_cancelled = False
 
     def on_progress_cancel_button_clicked (self, unused_button):
@@ -1321,11 +1305,55 @@ class Wizard(BaseFrontend):
 
 
     def debconffilter_done (self, dbfilter):
+        if not dbfilter.status:
+            self.find_next_step(dbfilter.__module__)
         if BaseFrontend.debconffilter_done(self, dbfilter):
             self.quit_main_loop()
             return True
         else:
             return False
+
+    def find_next_step(self, finished_step):
+        # TODO need to handle the case where debconffilters launched from
+        # here crash.  Factor code out of dbfilter_handle_status.
+        last_page = self.pages[-1].module.__name__
+        if finished_step == last_page:
+            self.finished_pages = True
+            if self.finished_installing:
+                dbfilter = plugininstall.Install(self, db=self.parallel_db)
+                dbfilter.start(auto_process=True)
+            elif self.oem_user_config:
+                self.progress_section.show()
+                dbfilter = plugininstall.Install(self)
+                dbfilter.start(auto_process=True)
+
+        elif finished_step == 'ubi-partman':
+            self.installing = True
+            self.progress_section.show()
+            from ubiquity.debconfcommunicator import DebconfCommunicator
+            self.parallel_db = DebconfCommunicator('ubiquity', cloexec=True,
+            # debconf-apt-progress, start_debconf()
+            env={'DEBCONF_DB_REPLACE': 'configdb',
+                 'DEBCONF_DB_OVERRIDE':'Pipe{infd:none outfd:none}'})
+            dbfilter = partman_commit.PartmanCommit(self, db=self.parallel_db)
+            dbfilter.start(auto_process=True)
+
+        # FIXME OH DEAR LORD.  Use isinstance.
+        elif finished_step == 'ubiquity.components.partman_commit':
+            dbfilter = install.Install(self, db=self.parallel_db)
+            dbfilter.start(auto_process=True)
+
+        elif finished_step == 'ubiquity.components.install':
+            self.finished_installing = True
+            if self.finished_pages:
+                dbfilter = plugininstall.Install(self, db=self.parallel_db)
+                dbfilter.start(auto_process=True)
+
+        elif finished_step == 'ubiquity.components.plugininstall':
+            self.installing = False
+            self.run_success_cmd()
+            #gtk.main_quit()
+            self.quit_main_loop()
 
     def grub_verify_loop(self, widget, okbutton):
         if widget is not None:
@@ -1341,9 +1369,6 @@ class Wizard(BaseFrontend):
 
         if self.installing and not self.installing_no_return:
             # Go back to the partitioner and try again.
-            self.slideshow_frame.hide()
-            self.switch_progress_windows(use_install_window=False)
-            self.live_installer.show()
             self.pagesindex = -1
             for page in self.pages:
                 if page.module.NAME == 'partman':
@@ -1399,7 +1424,7 @@ class Wizard(BaseFrontend):
 
     def bootloader_dialog (self, current_device):
         l = self.skip_label.get_label()
-        l = l.replace('${RELEASE}', get_release_name())
+        l = l.replace('${RELEASE}', get_release().name)
         self.skip_label.set_label(l)
         self.grub_new_device_entry.child.set_text(current_device)
         self.grub_new_device_entry.child.grab_focus()

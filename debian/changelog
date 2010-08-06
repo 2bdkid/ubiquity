@@ -1,3 +1,48 @@
+ubiquity (2.3.4) maverick; urgency=low
+
+  [ Mario Limonciello ]
+  * Also set the custom title when translating widgets.
+  * If there is at least one framebuffer device, fallback to fbdev rather
+    than vesa for bulletproof X.
+  * Remove extra imports in ubiquity-dm.
+  * Add a new template ubiquity/force_failsafe_graphics intended to force
+    installation to use vesa or fbdev, but not on the target system.  This is
+    primarily intended for systems where the installation kernel has known
+    graphics problems, but you are solving them in a post installation step.
+  * Fix packaging to install the new pieces introduced for the overhaul.
+  * debian/control: fix build-deps from redesign branch.
+  * install two new png files for the language page in the gtk frontend.
+  * Fix automatic mode in gtk_ui.
+  * Add a new controller function to allow disabling the progress_section
+    of the Window for pages it doesn't make sense on that might be shown
+    in automatic mode before the partitioner comes.
+  * Move the call to unmount_source back into install.py, it's only really
+    used there for file copy, not by plugins.
+  * Update some DebconfFetchProgress calls to DebconfAcquireProgress calls.
+  * Run success cmd after plugininstall finishes.
+  * Correct a few more deprecated apt calls.
+  * Don't show the warning page or the prepare page in oem-config for now.
+    The prepare page might make sense to re-enable, but will need a little
+    different wording if so.
+  * Update deprecated use of get_release_name() to get_release().name.
+  * Mark timezone to come after both partman and language so that it shows
+    up in oem-config too.
+  * Only run plugininstall after the last page in oem mode.
+  * If the slideshow doesn't exist, hide the page notebook rather than
+    showing the webkit 404 page.
+
+  [ Bilal Akhtar ]
+  * debian/ubiquity.templates:
+    - Add an underline symbol before the label of the install button
+      to make it accessible with the Alt key. (LP: #492825)
+
+  [ Evan Dandrea ]
+  * Merge maverick-redesign branch.  Fingers crossed.
+  * Automatic update of included source packages: clock-setup
+    0.103ubuntu1.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Fri, 06 Aug 2010 14:15:17 -0400
+
 ubiquity (2.3.3) maverick; urgency=low
 
   [ Mario Limonciello ]
