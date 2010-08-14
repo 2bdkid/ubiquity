@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 from ubiquity.plugin import *
-from ubiquity import misc, install_misc, osextras
+from ubiquity import misc, install_misc, osextras, i18n
 import os
 import subprocess
 
@@ -58,6 +58,7 @@ class PageGtk(PluginUI):
             builder.add_from_file(os.path.join(os.environ['UBIQUITY_GLADE'], 'stepPrepare.ui'))
             builder.connect_signals(self)
             self.page = builder.get_object('stepPrepare')
+            self.prepare_foss_disclaimer  = builder.get_object('prepare_foss_disclaimer')
             self.prepare_download_updates = builder.get_object('prepare_download_updates')
             self.prepare_nonfree_software = builder.get_object('prepare_nonfree_software')
             self.prepare_sufficient_space = builder.get_object('prepare_sufficient_space')
@@ -118,7 +119,7 @@ class PageGtk(PluginUI):
     def check_returncode(self, *args):
         if self.wget_retcode is not None or self.wget_proc is None:
             self.wget_proc = subprocess.Popen(
-                ['wget', '-q', WGET_URL, '--timeout=15'])
+                ['wget', '-q', WGET_URL, '--timeout=15', '-O', '/dev/null'])
         self.wget_retcode = self.wget_proc.poll()
         if self.wget_retcode is None:
             return True
@@ -155,6 +156,10 @@ class PageGtk(PluginUI):
         ether = self.controller.get_string('prepare_network_connection', lang)
         self.prepare_power_source.set_property('label', power)
         self.prepare_network_connection.set_property('label', ether)
+        release = misc.get_release()
+        text = i18n.get_string('prepare_foss_disclaimer', lang)
+        text = text.replace('${RELEASE}', '%s' % release.name)
+        self.prepare_foss_disclaimer.set_markup(text)
 
 class Page(Plugin):
     def prepare(self):

@@ -119,7 +119,7 @@ cleanup() {
 
 # generic flash-kernel routines for specific subarchs
 omap_flash_kernel() {
-	if [ -n ${UBOOT_PART} ]; then
+	if [ -n "${UBOOT_PART}" ]; then
 		echo "Using u-boot partition: ${UBOOT_PART}" >&2
 		TMPMOUNT=$(mktemp -d)
 		mount $UBOOT_PART $TMPMOUNT
@@ -129,11 +129,11 @@ omap_flash_kernel() {
 		echo "done." >&2
 		printf "Generating kernel u-boot image... " >&2
 		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
-			-e 0x80008000 -n "Ubuntu Kernel" -d /boot/vmlinuz $TMPMOUNT/uImage >&2 1>/dev/null
+			-e 0x80008000 -n "Ubuntu Kernel" -d $kfile $TMPMOUNT/uImage >&2 1>/dev/null
 		echo "done." >&2
 		printf "Generating Initramfs u-boot image... " >&2
 		mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
-			-n "Ubuntu Initrd" -d /boot/initrd.img $TMPMOUNT/uInitrd >&2 1>/dev/null
+			-n "Ubuntu Initrd" -d $ifile $TMPMOUNT/uInitrd >&2 1>/dev/null
 			echo "done." >&2
 		if [ -e /boot/boot.script ];then
 			printf "Generating u-boot configuration from /boot/boot.script... " >&2

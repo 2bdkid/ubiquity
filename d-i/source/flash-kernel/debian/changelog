@@ -1,3 +1,11 @@
+flash-kernel (2.28ubuntu5) maverick; urgency=low
+
+  * changes to omap_flash_kernel()
+    - add quotes around ${UBOOT_PART} -n test 
+    - use $kfile and $ifile instead of hardcoded /boot/vmlinuz and /boot/initrd.img 
+
+ -- John Rigby <john.rigby@linaro.org>  Wed, 04 Aug 2010 19:58:39 -0600
+
 flash-kernel (2.28ubuntu4) maverick; urgency=medium
 
   * Implement generic subarchitecture support (LP: #607723)
