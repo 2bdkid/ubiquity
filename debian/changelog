@@ -1,3 +1,13 @@
+ubiquity (2.3.7) maverick; urgency=low
+
+  * Don't show the warning text in ubi-warning until after it's translated.
+  * Hide the language plugin page if in greeter mode and advancing to keep the
+    other pages from growing. (which seems what Evan was trying to do in r4183)
+  * Fix the cut off text on the warning page. (LP: #615034)
+  * For plugininstall, use the actual debconf database, not the parallel database.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Sun, 15 Aug 2010 02:34:50 -0500
+
 ubiquity (2.3.6) maverick; urgency=low
 
   * Redirect console blanking setterm command to /dev/console so it is effective
