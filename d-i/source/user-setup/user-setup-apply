@@ -324,7 +324,7 @@ EOF
 		while read name device source options; do
 			if echo "$options" | grep -q "swap"; then
 				if swapoff $device; then
-					dd if=/dev/zero of=$device 2>/dev/null || true
+					dd if=/dev/zero of=$device bs=16M 2>/dev/null || true
 				fi
 			fi
 		done < $ROOT/etc/crypttab

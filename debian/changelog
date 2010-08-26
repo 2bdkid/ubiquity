@@ -1,3 +1,48 @@
+ubiquity (2.3.8) maverick; urgency=low
+
+  [ Mario Limonciello ]
+  * If a plugin declares a title, but it's not fetched properly from debconf,
+    hide the title bar rather than crash.
+  * Don't use "Ethernet" when indicating a user is connected to the network.
+    (LP: #615104, #615035)
+  * Make sure finished_label reflects the derivative name rather than
+    hardcoding to "Ubuntu".
+  * Set the buttons on the second autopartitioning screen appropriately
+    to the choices on the first.
+
+  [ Colin Watson ]
+  * Update d-i/update-control for Dpkg::Deps changes in dpkg 1.15.6.
+  * Make ubiquity-frontend-gtk Architecture: any, due to
+    /usr/lib/ubiquity/panel (LP: #616581).
+  * Remove build-locale on clean.
+  * Update build rules for changes in debian-installer-utils 1.78.
+
+  [ Jonathan Riddell ]
+  * Add prepare page to KDE frontend
+  * Update KDE Language page to closer follow GTK layout
+  * pixmaps/cd_in_tray.png moves to ubiquity.install-any and ubiquity replaces old
+    ubiquity-frontend-gtk
+  * In debian/rules move usr/lib/ubiquity/ubiquity/cheese* back to
+    ubiquity-frontend-gtk package, including it in ubiquity package brings in a lot
+    of Gnome dependencies
+  * In ubi-language.py check if release notes can be accessed as well as checking
+    for upgrade available and show correct label as appropriate
+
+  [ Evan Dandrea ]
+  * Add new non-free option text from Michael Forrest.
+  * Do not show the skip button by default.
+  * Make the keyboard guesser window modal again, making it closeable
+    and accepting of input.
+  * Add back ready_text_label for the KDE frontend.
+  * Add parallel operation support to the KDE frontend, with help from
+    Jonathan Riddell.
+  * Automatic update of included source packages: debian-installer-utils
+    1.79ubuntu1, flash-kernel 2.28ubuntu8, partman-auto 91ubuntu4,
+    partman-uboot 4, user-setup 1.28ubuntu8.
+  * Update translations from Launchpad.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 26 Aug 2010 20:50:32 +0100
+
 ubiquity (2.3.7) maverick; urgency=low
 
   * Don't show the warning text in ubi-warning until after it's translated.

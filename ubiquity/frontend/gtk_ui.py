@@ -557,8 +557,11 @@ class Wizard(BaseFrontend):
             if ('UBIQUITY_ONLY' in os.environ or
                 'UBIQUITY_GREETER' in os.environ):
                 txt = self.get_string('ubiquity/finished_restart_only')
-                self.finished_label.set_label(txt)
                 self.quit_button.hide()
+            else:
+                txt = self.finished_label.get_label()
+                txt = txt.replace('${RELEASE}', get_release().name)
+            self.finished_label.set_label(txt)
             with raised_privileges():
                 open('/var/run/reboot-required', "w").close()
             self.finished_dialog.set_keep_above(True)
@@ -579,7 +582,6 @@ class Wizard(BaseFrontend):
     def start_slideshow(self):
         slideshow_dir = '/usr/share/ubiquity-slideshow'
         slideshow_locale = self.slideshow_get_available_locale(slideshow_dir, self.locale)
-        slideshow_locale = 'c'
         slideshow_main = slideshow_dir + '/slides/index.html'
 
         if not os.path.exists(slideshow_main):
@@ -650,7 +652,7 @@ class Wizard(BaseFrontend):
                 self.progress_cancel_button.show()
             else:
                 self.progress_cancel_button.hide()
-        self.install_details_expander.connect('activate', expand)
+        self.install_details_expander.connect_after('activate', expand)
 
         if self.custom_title:
             self.live_installer.set_title(self.custom_title)
@@ -793,7 +795,6 @@ class Wizard(BaseFrontend):
                 widget.set_attributes(attrs)
             elif ('group_label' in name or 'warning_label' in name or
                   name in ('prepare_best_results',
-                           'prepare_foss_disclaimer',
                            'drives_label',
                            'partition_method_label')):
                 attrs = pango.AttrList()
@@ -961,15 +962,17 @@ class Wizard(BaseFrontend):
                 elif page.optional_widgets:
                     cur = page.optional_widgets[0]
                 if cur:
+                    title = None
                     if page.title:
                         title = self.get_string(page.title)
-                        title = title.replace('${RELEASE}', get_release().name)
-                        # TODO: Use attributes instead?  Would save having to
-                        # hardcode the size in here.
-                        self.page_title.set_markup(
-                            '<span size="xx-large">%s</span>' % title)
-                        self.title_section.show()
-                    else:
+                        if title:
+                            title = title.replace('${RELEASE}', get_release().name)
+                            # TODO: Use attributes instead?  Would save having to
+                            # hardcode the size in here.
+                            self.page_title.set_markup(
+                                '<span size="xx-large">%s</span>' % title)
+                            self.title_section.show()
+                    if not page.title or not title:
                         self.title_section.hide()
                     cur.show()
                     is_install = page.ui.get('plugin_is_install')

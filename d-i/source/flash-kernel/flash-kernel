@@ -124,8 +124,12 @@ omap_flash_kernel() {
 		TMPMOUNT=$(mktemp -d)
 		mount $UBOOT_PART $TMPMOUNT
 		printf "Creating backups of uImage and uInitrd... " >&2
-		cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
-		cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
+		if [ -e $TMPMOUNT/uImage ]; then
+			cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
+		fi
+		if [ -e $TMPMOUNT/uInitrd ]; then
+			cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
+		fi
 		echo "done." >&2
 		printf "Generating kernel u-boot image... " >&2
 		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
@@ -300,6 +304,11 @@ fi
 running_subarch=$(uname -r | sed -e 's/.*-//')
 
 if [ "x$1" = "x--supported" ]; then
+	# if FLASH_KERNEL_SKIP is set, its always unsupported
+	if [ -n "$FLASH_KERNEL_SKIP" ]; then
+		exit 1
+	fi
+
 	case "$machine" in
 		"Buffalo Linkstation Pro/Live")		exit 0 ;;
 		"Buffalo/Revogear Kurobox Pro")		exit 0 ;;
@@ -329,6 +338,10 @@ if [ "x$1" = "x--supported" ]; then
 		exit 1
 		;;
 	esac
+fi
+
+if [ -n "$FLASH_KERNEL_SKIP" ]; then
+	exit 0
 fi
 
 if [ -n "$1" ]; then

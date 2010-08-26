@@ -1,3 +1,25 @@
+flash-kernel (2.28ubuntu8) maverick; urgency=low
+
+  * Drop Vcs-Bzr; I've moved this to the package-import branch.
+
+ -- Loïc Minier <loic.minier@ubuntu.com>  Thu, 26 Aug 2010 16:43:26 +0200
+
+flash-kernel (2.28ubuntu7) maverick; urgency=low
+
+  * chmod +x flash-kernel in the source package, as in Debian.
+  * Don't try to make backup of uImage or uInitrd if they don't exist (i.e.
+    flash-kernel gets installed into the chroot, but the udeb logic never
+    ran).
+
+ -- Loïc Minier <loic.minier@linaro.org>  Thu, 26 Aug 2010 16:02:44 +0200
+
+flash-kernel (2.28ubuntu6) maverick; urgency=low
+
+  * skip flash-kernel with exit 0 if FLASH_KERNEL_SKIP env is set; in turn
+    make --supported fail with exit 1 if FLASH_KERNEL_SKIP is set (LP: #623276)
+
+ -- Alexander Sack <asac@linaro.org>  Tue, 24 Aug 2010 12:58:10 +0200
+
 flash-kernel (2.28ubuntu5) maverick; urgency=low
 
   * changes to omap_flash_kernel()

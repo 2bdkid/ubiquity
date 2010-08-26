@@ -30,7 +30,16 @@ decode_recipe () {
 	local ignore ram line word min factor max fs iflabel label -
 	ignore="${2:+${2}ignore}"
 	unnamed=$(($unnamed + 1))
-	ram=$(grep ^Mem: /proc/meminfo | { read x y z; echo $y; }) # in bytes
+	ram=
+	if [ -x /usr/lib/base-installer/dmi-available-memory ]; then
+		ram="$(/usr/lib/base-installer/dmi-available-memory)"000
+		if [ "$ram" = 0000 ]; then
+			ram=
+		fi
+	fi
+	if [ -z "$ram" ]; then
+		ram=$(grep ^Mem: /proc/meminfo | { read x y z; echo $y; }) # in bytes
+	fi
 	if [ -z "$ram" ]; then
 		ram=$(grep ^MemTotal: /proc/meminfo | { read x y z; echo $y; })000
 	fi
