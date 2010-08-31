@@ -291,7 +291,6 @@ class Wizard(BaseFrontend):
         self.progressDialog = ProgressDialog(0, 0, self.ui)
         self.finished_installing = False
         self.finished_pages = False
-        self.quitting = False
 
         self.laptop = execute("laptop-detect")
 
@@ -458,7 +457,7 @@ class Wizard(BaseFrontend):
 
             self.app.processEvents()
 
-        if not self.quitting:
+        if self.current_page is not None:
             borderCSS = "border-width: 6px; border-image: " \
                         "url(/usr/share/ubiquity/qt/images/label_border.png) " \
                         "6px;"
@@ -913,7 +912,6 @@ class Wizard(BaseFrontend):
         response = KMessageBox.questionYesNo(*args)
         if response == KMessageBox.Yes:
             self.current_page = None
-            self.quitting = True
             self.quit()
             return True
         else:
@@ -1100,6 +1098,18 @@ class Wizard(BaseFrontend):
         self.app.processEvents()
         if not dbfilter.status:
             self.find_next_step(dbfilter.__module__)
+        elif dbfilter.__module__ in ('ubiquity.components.install',
+                                     'ubiquity.components.plugininstall'):
+            # We don't want to try to retry a failing step here, because it
+            # will have the same set of inputs, and thus likely the same
+            # result.
+            # TODO: We may want to call return_to_partitioning after the crash
+            # dialog instead.
+            dialog = QDialog(self.ui)
+            uic.loadUi("%s/crashdialog.ui" % UIDIR, dialog)
+            dialog.beastie_url.setOpenExternalLinks(True)
+            dialog.exec_()
+            sys.exit(1)
         if BaseFrontend.debconffilter_done(self, dbfilter):
             self.app.exit()
             return True

@@ -1,3 +1,22 @@
+ubiquity (2.3.10) maverick; urgency=low
+
+  [ Evan Dandrea ]
+  * Handle crashes in parallel debconffilters by failing the
+    installation.
+  * Add a grub target device combobox on the GTK and KDE advanced
+    partitioning pages.
+  * Bootloader handling is now done in ubi-partman.  Do not overwrite it
+    with the default selection in plugininstall.
+  * Get rid of the quitting state variable and use the existing
+    current_page construct (LP: #627284).
+
+  [ Mario Limonciello ]
+  * Add a new script that uses python-aptdaemon-gtk for oem-config removal.
+  * If running with only installable languages, don't offer "No Localization"
+  * If only one language is available, mark the language page as complete.
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 31 Aug 2010 12:19:00 +0100
+
 ubiquity (2.3.9) maverick; urgency=low
 
   * Do not set up the Qt DBus main loop twice.  This was crashing on the
