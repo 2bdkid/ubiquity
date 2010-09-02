@@ -1,9 +1,31 @@
+ubiquity (2.3.14) maverick; urgency=low
+
+  [ Colin Watson ]
+  * KDE frontend:
+    - If the slideshow doesn't exist, hide self.ui.pageMode rather than
+      self.page_mode (LP: #627549).
+  * Set Debug::identcdrom=true for apt-cdrom if installing from a
+    non-ISO9660 filesystem, since otherwise apt-cdrom will include the free
+    blocks count of /cdrom in its database which is unreliable on read-write
+    filesystems, especially USB images with persistence enabled.  Thanks to
+    Manoj Iyer for patient testing (LP: #627672).
+
+  [ Mario Limonciello ]
+  * Provides indicator-renderer (LP: #616165)
+
+  [ Evan Dandrea ]
+  * Disconnect and destroy QSocketNotifiers when the dbfilter finishes.
+    Thanks Colin Watson (LP: #625586).
+  * add the check_hostname function back to ubi-usersetup (LP: #628317).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Thu, 02 Sep 2010 01:42:52 +0100
+
 ubiquity (2.3.13) maverick; urgency=low
 
   [ Mario Limonciello ]
   * When using xfsettingsd, set the background to black first.
   * Set release_notes_found to False initially to prevent a scenario it gets 
-    accessed before being set when offline.
+    accessed before being set when offline (LP: #628011).
 
   [ Evan Dandrea ]
   * Only set the label on the 'use entire disk' button if we're not
