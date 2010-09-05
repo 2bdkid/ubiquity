@@ -1,3 +1,28 @@
+ubiquity (2.3.16) maverick; urgency=low
+
+  [ Mario Limonciello ]
+  * Don't show logout option in only-ubiquity mode(s) (LP: #618744)
+  * Don't show a minimize option in only-ubiquity mode(s) (LP: #627656)
+  * Translate the page_title of the language page when languages are
+    swapped.
+  * Restore functionality to set the GTK slideshow size based on a 
+    configuration file that was lost in r4123.1.37.
+  * Parse the slideshow size when the GTK frontend first starts to
+    prevent the window resizing later.
+  * Automatic update of included source packages: grub-installer
+    1.55ubuntu1, partman-basicfilesystems 63ubuntu7, partman-efi
+    21ubuntu1.
+
+  [ Evan Dandrea ]
+  * Do not generate or show the bootloader options if we're on x86, or
+    bootloader installation is explicitly disabled (LP: #628582).
+  * Add correct URL for the Geonames service.
+
+  [ Colin Watson ]
+  * Remove a number of unused or duplicate imports.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Sun, 05 Sep 2010 01:40:01 -0500
+
 ubiquity (2.3.15) maverick; urgency=low
 
   * Clean stray QSocketNotifiers that were missed because their fd was

@@ -16,7 +16,6 @@ if db_get debian-installer/locale; then
 	esac
 fi
 
-seen_efi=
 for dev in $DEVICES/*; do
 	[ -d $dev ] || continue
 	cd $dev
@@ -52,16 +51,8 @@ for dev in $DEVICES/*; do
 			echo "$path" "$mountpoint" ext2 $options 0 $pass
 			;;
 		    fat16|fat32)
-			if [ -f "$id/mountpoint" ]; then
-				mountpoint=$(cat $id/mountpoint)
-			else
-				if [ "$method" = efi ] && [ -z "$seen_efi" ]; then
-					mountpoint=/boot/efi
-					seen_efi=1
-				else
-					continue
-				fi
-			fi
+			[ -f "$id/mountpoint" ] || continue
+			mountpoint=$(cat $id/mountpoint)
 			options=$(get_mountoptions $dev $id)
 			if [ "$utf8" ]; then
 				if [ "$options" = defaults ]; then
