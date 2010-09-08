@@ -513,10 +513,13 @@ db_progress INFO grub-installer/progress/step_install
 # to grub legacy, or vice-versa
 case "$grub_package" in
     grub)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub-pc
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub-pc grub-efi grub-efi-amd64 grub-efi-ia32
 	;;
     grub-pc)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-efi grub-efi-amd64 grub-efi-ia32
+	;;
+    grub-efi)
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-pc
 	;;
 esac
 
@@ -1162,6 +1165,15 @@ if [ "$grub_version" = grub ]; then
 	fi
 fi
 
+if db_get grub-installer/timeout
+then
+	# Check whether it's a number
+	if [ "$RET" -eq "$RET" ] 2> /dev/null
+	then
+		timeout="$RET"
+	fi
+fi
+
 if [ -z "$hide_menu" ] && [ -s /tmp/os-probed ]; then
 	# Other operating systems are installed, so show the menu by default
 	# and raise the timeout.
@@ -1172,6 +1184,18 @@ if [ -z "$hide_menu" ] && [ -s /tmp/os-probed ]; then
 	else
 		sed -i 's/^GRUB_HIDDEN_TIMEOUT=.*/#&/;
 			s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT=10/' \
+			$ROOT/etc/default/grub
+		update_grub # propagate to grub.cfg
+	fi
+elif [ -n "$timeout" ]; then
+	# Leave a slight delay
+	if [ "$grub_version" = grub ]; then
+		sed -i 's/^hiddenmenu[[:space:]]*$/#hiddenmenu/;
+			s/^\(timeout[[:space:]][[:space:]]*\).*/\1'$timeout'/' \
+			$ROOT/boot/grub/menu.lst
+	else
+		sed -i 's/^GRUB_HIDDEN_TIMEOUT=.*/#&/;
+			s/^GRUB_TIMEOUT=.*/GRUB_TIMEOUT='$timeout'/' \
 			$ROOT/etc/default/grub
 		update_grub # propagate to grub.cfg
 	fi

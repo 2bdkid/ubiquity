@@ -32,7 +32,20 @@
 #include <X11/Xutil.h>
 #include <libindicator/indicator-object.h>
 
+#include "na-tray-manager.h"
+#include "na-tray.h"
+
 #define ENTRY_DATA_NAME "indicator-custom-entry-data"
+
+typedef struct
+{
+  GdkScreen *screen;
+  guint screen_num;
+  GtkWidget *window;
+  NaTray *tray;
+  GtkWidget *box;
+  GtkLabel *count_label;
+} TrayData;
 
 enum {
 	STRUT_LEFT = 0,
@@ -169,7 +182,6 @@ load_module (const gchar * name, GtkWidget * menu)
     /* Connect to it's signals */
     g_signal_connect(G_OBJECT(io), INDICATOR_OBJECT_SIGNAL_ENTRY_ADDED,   G_CALLBACK(entry_added),    menu);
     g_signal_connect(G_OBJECT(io), INDICATOR_OBJECT_SIGNAL_ENTRY_REMOVED, G_CALLBACK(entry_removed),  menu);
-
     /* Work on the entries */
     GList * entries = indicator_object_get_entries(io);
     GList * entry = NULL;
@@ -201,18 +213,18 @@ on_realize(GtkWidget *win, gpointer data) {
 }
 
 static const char* indicators[] = {
-	"/usr/lib/indicators/3/libsoundmenu.so",
 	// Reboot, shut down, ...
 	"/usr/lib/indicators/3/libsession.so",
 	// Bluetooth
 	"/usr/lib/indicators/3/libapplication.so",
+	"/usr/lib/indicators/3/libsoundmenu.so",
 	NULL
 };
 static void
 set_background(GtkWidget *win) {
 	GdkPixbuf *pixbuf;
 	GtkPixmap *pixmap;
-	pixbuf = gdk_pixbuf_new_from_file("/usr/share/themes/Ambiance/gtk-2.0/panel_bg.png", NULL);
+	pixbuf = gdk_pixbuf_new_from_file("/usr/share/themes/Ambiance/gtk-2.0/apps/img/panel.png", NULL);
 	if (pixbuf) {
 		gdk_pixbuf_render_pixmap_and_mask(pixbuf, &pixmap, NULL, 0);
 		if (pixmap)
@@ -229,7 +241,24 @@ on_expose(GtkWidget* widget, gpointer userdata) {
 	return FALSE;
 }
 
-// TODO: Support system tray for network-manager.
+static TrayData*
+create_tray(GtkWidget* parent) {
+	TrayData *data;
+	GdkScreen* screen = gtk_widget_get_screen (parent);
+	if (na_tray_manager_check_running(screen)) {
+		g_warning("Another tray manager is running; overriding.");
+	}
+	data = g_new0 (TrayData, 1);
+	data->screen = screen;
+	data->screen_num = gdk_screen_get_number (screen);
+	data->tray = na_tray_new_for_screen (screen, GTK_ORIENTATION_HORIZONTAL);
+	gtk_box_pack_end (GTK_BOX (parent), GTK_WIDGET (data->tray), FALSE, FALSE, 0);
+
+	data->box = GTK_BIN (GTK_BIN (data->tray)->child)->child;
+	gtk_widget_show_all (parent);
+	return data;
+}
+
 int
 main(int argc, char* argv[]) {
 	GtkWidget *win;
@@ -249,16 +278,23 @@ main(int argc, char* argv[]) {
 		"widget_class \"*<GtkMenuBar>*\" style \"panel-menubar-style\"");
 
 	GtkWidget* menubar = gtk_menu_bar_new();
+	gtk_menu_bar_set_pack_direction(menubar, GTK_PACK_DIRECTION_RTL);
 	int i;
 	for(i = 0; indicators[i]; i++) {
 		if (!load_module(indicators[i], menubar)) {
 			g_error("Unable to load module");
 		}
 	}
-	gtk_container_add(GTK_CONTAINER(win), menubar);
+	GtkWidget* hbox = gtk_hbox_new(FALSE, 3);
+	gtk_container_add(GTK_CONTAINER(win), hbox);
+	gtk_box_pack_end(hbox, menubar, FALSE, FALSE, 0);
+	TrayData* tray = create_tray(hbox);
 	g_signal_connect(menubar, "expose-event", G_CALLBACK(on_expose), NULL);
+	g_signal_connect(win, "expose-event", G_CALLBACK(on_expose), NULL);
 	gtk_widget_show(menubar);
 	gtk_widget_show(win);
+	gdk_window_process_updates(win->window, TRUE);
+	gtk_widget_set_app_paintable(win, TRUE);
 	gtk_main();
 	return 0;
 }

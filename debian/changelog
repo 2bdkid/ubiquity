@@ -1,3 +1,63 @@
+ubiquity (2.3.17) maverick; urgency=low
+
+  [ Evan Dandrea ]
+  * Fetch the translations for the release_notes_only and
+    update_installer_only strings (LP: #629627).
+  * Don't use the same name for the error method and GTK label
+    (LP: #631046).
+  * Re-use the valid username check from user-setup in the GTK UI
+    (LP: #631046).
+  * Do not cut off the text of the Try and Install buttons by setting
+    their width to just the largest initial width of the two
+    (LP: #629437).
+  * Update the panel to use the new location for the panel background,
+    and force a redraw when setting it.
+  * If the username only contains non-alphanumeric characters, set the
+    hostname to ubuntu-{laptop,desktop}.
+  * Replace RELEASE with the release name in the KDE UI finished dialog
+    (LP: #628964).
+  * Do not look for a full path on non-paths when getting the default
+    grub target.
+  * Fix a crash when there are no disks present on the system
+    (LP: #631766).
+  * Don't let the user continue if there are no disks present, or if
+    there isn't enough free space on any of them to install.
+  * Fix UI bugs in the automatic partitioner page.  Better handle
+    determining what the desired partitioning recipe is (LP: #630450).
+  * Update the KDE partitioning UI to reflect changes to ubi-partman and
+    partman-auto.
+    - Use the already existent ubiquity variants of the d-i "Guided -" strings
+      (LP: #628864).
+    - Fix the automatic resize option failing to appear
+      (LP: #628897, LP: #628815).
+    - Use a combobox to select which disk to use on all options that support
+      multiple disks, not just the "use entire disk" option.
+  * Add notification area support in the panel.
+  * Drop ia64 and sparc.
+  * Run nm-applet in the ubiquity GTK session.
+
+  [ Colin Watson ]
+  * Factor out common /proc/mounts handling into a new
+    ubiquity.misc.mount_info function.
+  * Remove lpia architecture support.
+  * Handle grub-efi when installing on amd64/efi or i386/efi
+    subarchitectures (LP: #632642).
+
+  [ Mario Limonciello ]
+  * Adjust the fudge factor for showing languages on oem-config page
+    due to the changes to the default window size being much bigger.
+  * During oem-config's removal of ubiquity, remove other ubiquity
+    related items that might have potentially still been on the system
+    from a live-helper generated image.
+  * Refactor mount_info to also report ro/rw, and let plugininstall
+    key off that instead.
+  * Set the panel indicators to show up on the right to match the rest
+    of the desktop (LP: #632592)
+  * Automatic update of included source packages: grub-installer
+    1.55ubuntu3.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Wed, 08 Sep 2010 14:43:59 -0500
+
 ubiquity (2.3.16) maverick; urgency=low
 
   [ Mario Limonciello ]

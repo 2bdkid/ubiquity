@@ -33,7 +33,6 @@ import fcntl
 import traceback
 import syslog
 import gzip
-import contextlib
 import debconf
 import warnings
 warnings.filterwarnings("ignore", "apt API not stable yet", FutureWarning)
@@ -416,14 +415,8 @@ class Install(install_misc.InstallBase):
             }""")
         apt_conf_nmc.close()
 
-        cdfs = ''
-        with contextlib.closing(open('/proc/mounts')) as fp:
-            for line in fp:
-                line = line.split()
-                if line[1] == '/cdrom':
-                    cdfs = line[2]
-                    break
-        if cdfs != 'iso9660':
+        cdsrc, type, writable = misc.mount_info('/cdrom')
+        if writable == 'rw':
             # On non-read-only media, including filesystem statistics in the
             # apt-cdrom database entry is unreliable.  This will render the
             # database entry useless after installation, but that's OK since
@@ -790,12 +783,15 @@ class Install(install_misc.InstallBase):
             arch, subarch = install_misc.archdetect()
 
             try:
-                if arch in ('amd64', 'i386', 'lpia'):
+                if arch in ('amd64', 'i386'):
                     from ubiquity.components import grubinstaller
                     while 1:
                         dbfilter = grubinstaller.GrubInstaller(None, self.db)
                         ret = dbfilter.run_command(auto_process=True)
-                        if ret != 0:
+                        if subarch == 'efi' and ret != 0:
+                            raise install_misc.InstallStepError(
+                                "GrubInstaller failed with code %d" % ret)
+                        elif ret != 0:
                             old_bootdev = self.db.get('grub-installer/bootdev')
                             bootdev = 'ubiquity/install/new-bootdev'
                             self.db.fset(bootdev, 'seen', 'false')
@@ -1182,13 +1178,11 @@ class Install(install_misc.InstallBase):
 
         arch, subarch = install_misc.archdetect()
 
-        if arch in ('amd64', 'i386', 'lpia'):
-            if 'grub' not in keep:
-                difference.add('grub')
-            if 'grub-pc' not in keep:
-                difference.add('grub-pc')
-            if 'lilo' not in keep:
-                difference.add('lilo')
+        if arch in ('amd64', 'i386'):
+            for pkg in ('grub', 'grub-pc', 'grub-efi', 'grub-efi-amd64',
+                        'lilo'):
+                if pkg not in keep:
+                    difference.add(pkg)
 
         cache = Cache()
         difference -= install_misc.expand_dependencies_simple(cache, keep, difference)

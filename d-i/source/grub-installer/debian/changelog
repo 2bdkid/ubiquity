@@ -1,3 +1,18 @@
+grub-installer (1.55ubuntu3) maverick; urgency=low
+
+  * Purge grub-efi* when $grub_package is grub or grub-pc, and purge grub,
+    grub-legacy, and grub-pc when $grub_package is grub-efi (LP: #632642).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 08 Sep 2010 10:29:51 +0100
+
+grub-installer (1.55ubuntu2) maverick; urgency=low
+
+  [ Soren Hansen ]
+  * Add a preseedable grub-installer/timeout template to adjust the initial
+    GRUB timeout (LP: #628418).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 06 Sep 2010 12:07:05 +0100
+
 grub-installer (1.55ubuntu1) maverick; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

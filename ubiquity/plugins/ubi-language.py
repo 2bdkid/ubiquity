@@ -214,7 +214,7 @@ class PageGtk(PageBase):
         if self.only:
             self.iconview.set_model(list_store)
             self.iconview.set_text_column(0)
-            lang_per_column = self.iconview.get_allocation().height / 40
+            lang_per_column = self.iconview.get_allocation().height / 50
             columns = int(round(len(choices) / float(lang_per_column)))
             self.iconview.set_columns(columns)
         else:
@@ -314,12 +314,16 @@ class PageGtk(PageBase):
 
         # There doesn't appear to be a way to have a homogeneous layout for a
         # single row in a GtkTable.
+            self.try_ubuntu.set_size_request(-1, -1)
+            self.install_ubuntu.set_size_request(-1, -1)
         try_w = self.try_ubuntu.size_request()[0]
         install_w = self.install_ubuntu.size_request()[0]
         if try_w > install_w:
+            self.try_ubuntu.set_size_request(try_w, -1)
             self.install_ubuntu.set_size_request(try_w, -1)
         elif install_w > try_w:
             self.try_ubuntu.set_size_request(install_w, -1)
+            self.install_ubuntu.set_size_request(install_w, -1)
 
         self.update_release_notes_label()
         for w in self.page.get_children():
@@ -337,6 +341,8 @@ class PageGtk(PageBase):
         # just the critical update, or neither, as appropriate.
         if self.release_notes_label:
             if self.release_notes_found and self.update_installer:
+                text = i18n.get_string('release_notes_label', lang)
+                self.release_notes_label.set_markup(text)
                 self.release_notes_label.show()
             elif self.release_notes_found:
                 text = i18n.get_string('release_notes_only', lang)
@@ -626,6 +632,8 @@ class PageKde(PageBase):
         # just the critical update, or neither, as appropriate.
         if self.page.release_notes_label:
             if self.release_notes_found and self.update_installer:
+                text = i18n.get_string('release_notes_label', lang)
+                self.page.release_notes_label.setText(text)
                 self.page.release_notes_label.show()
             elif self.release_notes_found:
                 text = i18n.get_string('release_notes_only', lang)

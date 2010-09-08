@@ -481,6 +481,7 @@ class Wizard(BaseFrontend):
                 if ('UBIQUITY_ONLY' in os.environ or
                     'UBIQUITY_GREETER' in os.environ):
                     quitText = self.get_string('ubiquity/finished_restart_only')
+                quitText = quitText.replace('${RELEASE}', get_release().name)
                 messageBox = QMessageBox(QMessageBox.Question, titleText,
                                          quitText, QMessageBox.NoButton,
                                          self.ui)
@@ -597,6 +598,8 @@ class Wizard(BaseFrontend):
             core_names.append('ubiquity/text/oem_config_title')
             core_names.append('ubiquity/text/oem_user_config_title')
             core_names.append('ubiquity/text/breadcrumb_install')
+            core_names.append('ubiquity/text/release_notes_only')
+            core_names.append('ubiquity/text/update_installer_only')
             for stock_item in ('cancel', 'close', 'go-back', 'go-forward',
                                'ok', 'quit', 'yes', 'no'):
                 core_names.append('ubiquity/imported/%s' % stock_item)

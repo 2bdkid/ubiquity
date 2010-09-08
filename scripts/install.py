@@ -234,9 +234,13 @@ class Install(install_misc.InstallBase):
         # at file copy time, we should figure out why grub still fails when
         # apt-install-direct is present during configure_bootloader (code
         # removed).
-        if arch in ('amd64', 'i386', 'lpia'):
-            keep.add('grub')
-            keep.add('grub-pc')
+        if arch in ('amd64', 'i386'):
+            if subarch == 'efi':
+                keep.add('grub-efi')
+                keep.add('grub-efi-amd64')
+            else:
+                keep.add('grub')
+                keep.add('grub-pc')
         elif (arch == 'armel' and
               subarch in ('dove', 'imx51', 'iop32x', 'ixp4xx', 'orion5x', 'omap')):
             keep.add('flash-kernel')
