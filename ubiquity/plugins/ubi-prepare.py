@@ -19,6 +19,7 @@
 
 from ubiquity.plugin import *
 from ubiquity import misc, install_misc, osextras, i18n
+from hashlib import md5
 import os
 import sys
 import subprocess
@@ -36,7 +37,11 @@ PROPS = 'org.freedesktop.DBus.Properties'
 NM = 'org.freedesktop.NetworkManager'
 NM_PATH = '/org/freedesktop/NetworkManager'
 
-WGET_URL = 'http://www.ubuntu.com'
+JOCKEY = 'com.ubuntu.DeviceDriver'
+JOCKEY_PATH = '/DeviceDriver'
+
+WGET_URL = 'http://start.ubuntu.com/connectivity-check.html'
+WGET_HASH = '4589f42e1546aa47ca181e5d949d310b'
 
 # TODO: This cannot be a non-debconf plugin after all as OEMs may want to
 # preseed the 'install updates' and 'install non-free software' options.  So?
@@ -74,12 +79,18 @@ class PreparePageBase(PluginUI):
     def check_returncode(self, *args):
         if self.wget_retcode is not None or self.wget_proc is None:
             self.wget_proc = subprocess.Popen(
-                ['wget', '-q', WGET_URL, '--timeout=15', '-O', '/dev/null'])
+                ['wget', '-q', WGET_URL, '--timeout=15', '-O', '-'],
+                stdout=subprocess.PIPE)
         self.wget_retcode = self.wget_proc.poll()
         if self.wget_retcode is None:
             return True
         else:
-            state = self.wget_retcode == 0
+            state = False
+            if self.wget_retcode == 0:
+                h = md5()
+                h.update(self.wget_proc.stdout.read())
+                if WGET_HASH == h.hexdigest():
+                    state = True
             self.prepare_network_connection.set_state(state)
             self.controller.dbfilter.set_online_state(state)
             return False
@@ -264,7 +275,7 @@ class Page(Plugin):
         self.ui.set_download_updates(download_updates)
         self.ui.set_use_nonfree(use_nonfree)
         self.setup_sufficient_space()
-        return (['/usr/share/ubiquity/simple-plugins', 'prepare'], ['.*'])
+        return (['/usr/share/ubiquity/simple-plugins', 'prepare'], ['ubiquity/use_nonfree'])
 
     def setup_sufficient_space(self):
         # TODO move into prepare.
@@ -305,18 +316,22 @@ class Page(Plugin):
         self.preseed_bool('ubiquity/download_updates', download_updates)
         if use_nonfree:
             with misc.raised_privileges():
-                # Install non-free drivers (Broadcom STA).
-                proc = subprocess.Popen(['jockey-text', '-a'])
-                proc.communicate()
                 # Install ubuntu-restricted-addons.
                 self.preseed_bool('apt-setup/universe', True)
                 self.preseed_bool('apt-setup/multiverse', True)
-                install_misc.record_installed([self.ui.restricted_package_name])
-
+                self.preseed('ubiquity/nonfree_package',
+                    self.ui.restricted_package_name)
+                bus = dbus.SystemBus()
+                obj = bus.get_object(JOCKEY, JOCKEY_PATH)
+                i = dbus.Interface(obj, JOCKEY)
+                i.shutdown()
+                env = os.environ.copy()
+                env['DEBCONF_DB_REPLACE'] = 'configdb'
+                env['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
+                subprocess.Popen(['/usr/share/jockey/jockey-backend', '--timeout=120'], env=env)
         Plugin.ok_handler(self)
 
     def set_online_state(self, state):
-        # TODO make this a python property of the controller.  It does not need
-        # to be in debconf as preseeding it makes no sense whatsoever and it
-        # never needs to be communicated to a plugin.
+        # We maintain this state in debconf so that plugins, specficially the
+        # timezone plugin and apt-setup, can be told to not hit the Internet.
         self.preseed_bool('ubiquity/online', state)

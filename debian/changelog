@@ -1,3 +1,90 @@
+ubiquity (2.3.18) maverick; urgency=low
+
+  [ Evan Dandrea ]
+  * Improve the text on the prepare page, based on input from Matthew
+    Paul Thomas, Amanda Brock, and Andrew Sinclair
+    (LP: #635269, LP: #635260).
+  * Translate latitude and longitude from the Geonames service to its
+    respective Olsen timezone database entry.
+  * Add back the hostname entry (LP: #628087).
+  * Use a block device icon for cases where we cannot detect the
+    operating system on a partition.
+  * Set the amount of used space on a partition that we presume contains
+    no operating system (LP: #626299).
+  * Make requiring a password to log in the default again, matching the
+    behavior in the previous version of Ubuntu.
+  * Use the correct string for the resize partition option.
+  * Set the size of the disk on the automatic partitioning page
+    (LP: #626299).
+  * Use dmidecode to get a more unique suffix for the hostname
+    (LP: #628087).
+  * Also generate a sample hostname when generating a sample username
+    (LP: #634279).
+  * Only set the next button to 'Install Now' when not on the first
+    partitioning page (LP: #636392).
+  * Fix transposed latitude and longitude in geonames lookup.
+  * Provide a version parameter to the geoname lookup.
+  * Show the number of partitions that will be deleted when in 'use
+    entire disk' mode.
+  * Remove Pango markup from the debconf templates where possible.
+  * Properly set the partition widget description label.
+  * Use a GtkMenuBar rather than a GtkMenu as the source of the dark
+    styling to match recent changes to the default theme.
+  * Properly start a ConsoleKit session (LP: #631538).
+  * Fix the spacing on the automatic partitioning page.
+    gui/gtk/stepPartAuto.ui
+  * Correct layout based on suggestions from Matthew Paul Thomas.
+  * Correct layout on keyboard guesser.
+  * Run the Jockey backend with an in-memory debconf database, and run
+    the frontend asynchronously (LP: #627822).
+  * Don't show the GTK frontend until it's done constructing the UI.
+  * Show a spinning cursor on the X root window in addition to the
+    ubiquity window, so it's clear that the installer is loading the
+    next page even when the cursor is off the main window.
+  * Make return_to_partitioning work with parallel debconf instances
+    (LP: #637706).
+  * Added a Windows icon for the resize widget.  Thanks Otto Greenslade!
+  * Disable the alpha warning, albeit late.
+  * Add a command line option to not install a bootloader
+    (-b, --no-bootloader) (LP: #615033).
+  * Do not show 'free space' partitions in the bootloader target
+    combobox (LP: #615033).
+  * Meet the Geonames.org CC license requirements by adding 'Geonames.org'
+    to the map.
+  * Install the restricted package independent of the apt-installed
+    packages, since those are installed with just the live CD's
+    sources.list (LP: #638073).
+  * Disable the wireless plugin for now.  It's not ready for release.
+  * Make use of the new connectivity check page.
+  * Automatic update of included source packages: apt-setup
+    1:0.45ubuntu2, hw-detect 1.73ubuntu5.
+
+  [ Mario Limonciello ]
+  * Restore the functionality of the noninteractive frontend.
+  * Disable GVFS fuse daemon while in ubiquity-dm
+  * Remove oem user with userdel rather than deluser (the latter didn't support
+    doing it while oem was logged in) (LP: #624888)
+  * Run oem-config-wrapper as the user oem rather than root.
+    - Fixes issues with pulseaudio applet not working
+    - Prevents root terminals from ctrl-alt-t (LP: #594233)
+  * Disable general terminals from ctrl-alt-t unless running in debug mode.
+    (LP: #594233)
+  * Grab focus of the slideshow when it starts, keeping focus off the expander
+    in automatic mode.
+  * Don't allow progressing past the language page unless a valid language is
+    picked.
+  * Fix progressbar reporting messages reporting missing from plugininstall.py
+    in ubiquity or oem-config.
+
+  [ Colin Watson ]
+  * GTK frontend: Make user-setup entry boxes activate the Forward button
+    when Enter is pressed.
+  * Revert Debug::identcdrom=true for writable USB media; with changes in
+    apt 0.8.3ubuntu3, this is sufficient for stable apt-cdrom identification
+    of writable USB media (LP: #628290).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Wed, 15 Sep 2010 13:28:55 +0100
+
 ubiquity (2.3.17) maverick; urgency=low
 
   [ Evan Dandrea ]

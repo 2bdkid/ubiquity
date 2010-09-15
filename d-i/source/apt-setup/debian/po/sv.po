@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-06-26 22:47+0000\n"
+"POT-Creation-Date: 2010-09-15 09:44+0100\n"
 "PO-Revision-Date: 2009-07-19 12:03+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
@@ -507,11 +507,16 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
 #: ../apt-mirror-setup.templates:3001
 #: ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
+#: ../apt-mirror-setup.templates-ubuntu:7001
 msgid ""
 "Please choose whether you want this software to be made available to you."
 msgstr ""
@@ -715,3 +720,32 @@ msgstr ""
 "fungera med den här utgåvan. Även om den här programvaran inte har genomgått "
 "en kompletta tester såsom de andra paketen i utgåvan inkluderar den nyare "
 "versioner av vissa program som kan tillhandahålla användbara funktioner."
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:7001
+#, fuzzy
+#| msgid "Use software from the \"partner\" repository?"
+msgid "Use software from the \"extras\" repository?"
+msgstr "Använd programvara från förrådet \"partner\"?"
+
+#. Type: boolean
+#. Description
+#. This template is used by the Ubuntu version of d-i.
+#. :sl2:
+#: ../apt-mirror-setup.templates-ubuntu:7001
+#, fuzzy
+#| msgid ""
+#| "Some additional software is available from Canonical's \"partner\" "
+#| "repository. This software is not part of Ubuntu, but is offered by "
+#| "Canonical and the respective vendors as a service to Ubuntu users."
+msgid ""
+"Additional software is available from the Ubuntu \"extras\" repository. This "
+"software is not part of Ubuntu, but is offered by third-party developers who "
+"want to ship their latest software."
+msgstr ""
+"Ytterligare programvara finns tillgänglig från Canonicals \"partner\"-"
+"förråd. Denna programvara är inte en del av Ubuntu men den tillhandahålls av "
+"Canonical och respektive tillverkare som en tjänst till Ubuntu-användare."

@@ -180,6 +180,10 @@ class PageGtk(PageBase):
         self.plugin_widgets = self.page
 
     def plugin_get_current_page(self):
+        if self.current_page == self.page:
+            self.plugin_is_install = False
+        else:
+            self.plugin_is_install = True
         return self.current_page
 
     def set_disk_layout(self, layout):
@@ -231,7 +235,7 @@ class PageGtk(PageBase):
         m = self.part_auto_select_drive.get_model()
         val = m.get_value(i, 0)
 
-        partman_id = self.extra_options[self.use_device_choice][val]
+        partman_id = self.extra_options[self.use_device_choice][val][0]
         disk_id = partman_id.rsplit('/', 1)[1]
         return disk_id
 
@@ -280,14 +284,23 @@ class PageGtk(PageBase):
                 break
         assert size is not None, 'Could not find size for %s:\n%s\n%s' % \
             (str(resize_path), str(disk_id), str(self.disk_layout))
+
         title = find_in_os_prober(resize_path)
+        icon = self.resizewidget.get_child1().child
         if not title:
             # This is most likely a partition with some files on it.
-            # TODO need to determine the amount of space used by the files.
-            # Use gio.
             # TODO i18n
-            title = 'Files (%d GB)' % 0
-            self.resizewidget.get_child1().child.set_property('icon-name', 'folder')
+            title = 'Files (%s)' % format_size(resize_min_size)
+            icon.set_property('icon-name', 'folder')
+        else:
+            if 'windows' in title.lower():
+                PATH = os.environ.get('UBIQUITY_PATH', False) or '/usr/share/ubiquity'
+                icon.logo.set_from_file(os.path.join(PATH, 'pixmaps', 'windows_square.png'))
+            elif 'buntu' in title.lower():
+                icon.set_property('icon-name', 'distributor-logo')
+            else:
+                icon.set_property('icon-name', 'block-device')
+
         # TODO See if we can get the filesystem label first in misc.py,
         # caching lookups.
         extra = '%s (%s)' % (resize_path, fs)
@@ -313,6 +326,8 @@ class PageGtk(PageBase):
         self.part_auto_use_entire_disk.set_sensitive(True)
         s = self.controller.get_string('part_auto_use_entire_disk')
         self.part_auto_use_entire_disk.set_label(s)
+        allocate = self.controller.get_string('part_auto_allocate_label')
+        self.part_auto_allocate_label.set_text(allocate)
 
     def initialize_use_disk_mode(self):
         '''The selected partman ID will now be completely formatted if the user
@@ -326,13 +341,30 @@ class PageGtk(PageBase):
         self.part_auto_use_entire_partition.set_sensitive(False)
         self.part_auto_use_entire_disk.set_sensitive(False)
         # We don't want to hide it as we want to keep its size allocation.
-        self.part_auto_allocate_label.set_text('')
-        self.part_auto_hidden_label.set_text('')
+        entire = self.controller.get_string('part_auto_allocate_entire_label')
+        self.part_auto_allocate_label.set_text(entire)
+        # Set the number of partitions that will be deleted.
+        partition_count = len(self.disk_layout[disk_id])
+        if partition_count == 0:
+            self.part_auto_hidden_label.set_text('')
+        elif partition_count == 1:
+            deleted = self.controller.get_string('part_auto_deleted_label_one')
+            self.part_auto_hidden_label.set_markup(deleted)
+        else:
+            deleted = self.controller.get_string('part_auto_deleted_label')
+            self.part_auto_hidden_label.set_markup(deleted % partition_count)
         self.partition_container.set_current_page(1)
         # Set the filesystem and size of the partition.
         ext = '%s (%s)' % (disk_id.replace('=', '/'), self.default_filesystem)
         self.partitionbox.set_property('extra', ext)
-        self.partitionbox.set_size(0)
+        # Set the size of the disk.
+        i = self.part_auto_select_drive.get_active_iter()
+        if not i:
+            return
+        m = self.part_auto_select_drive.get_model()
+        val = m.get_value(i, 0)
+        size = self.extra_options[self.use_device_choice][val][1]
+        self.partitionbox.set_size(size)
 
     def part_auto_select_drive_changed (self, unused_widget):
         '''The user has selected a different disk drive from the drop down.
@@ -404,7 +436,7 @@ class PageGtk(PageBase):
             # can be resized, should one exist, so that selecting resize and
             # proceeding defaults to a resizable disk.
             if resize_choice in extra_options:
-                disk_id = extra_options[use_device_choice][disk].rsplit('/', 1)[1]
+                disk_id = extra_options[use_device_choice][disk][0].rsplit('/', 1)[1]
                 if disk_id in extra_options[resize_choice] and not selected:
                     selected = True
                 self.part_auto_select_drive.set_active_iter(i)
@@ -1238,7 +1270,8 @@ class Page(Plugin):
         self.local_progress = False
 
         self.install_bootloader = False
-        if self.db.get('ubiquity/install_bootloader') == 'true':
+        if (self.db.get('ubiquity/install_bootloader') == 'true' and
+                'UBIQUITY_NO_BOOTLOADER' not in os.environ):
             arch, subarch = archdetect()
             if arch in ('amd64', 'i386'):
                 self.install_bootloader = True
@@ -1717,7 +1750,20 @@ class Page(Plugin):
 
         elif question == 'partman-auto/select_disk':
             if self.auto_state is not None:
-                self.extra_options[self.auto_state[1]] = self.choices_display_map(question)
+                disks = {}
+                choices = self.choices(question)
+                choices_c = self.choices_untranslated(question)
+                with raised_privileges():
+                    for i in range(len(choices)):
+                        size = 0
+                        # It seemingly doesn't make sense to go through parted
+                        # server when all it would be doing is constructing the
+                        # path that we already have.
+                        with open(os.path.join(choices_c[i], 'size')) as fp:
+                            size = fp.readline()
+                        size = int(size)
+                        disks[choices[i]] = (choices_c[i], size)
+                self.extra_options[self.auto_state[1]] = disks
                 # Back up to autopartitioning question.
                 self.succeeded = False
                 return False

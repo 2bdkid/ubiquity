@@ -27,7 +27,7 @@
 import os, re
 
 from ubiquity import validation
-from ubiquity.misc import execute, execute_root
+from ubiquity.misc import execute, execute_root, dmimodel
 from ubiquity.plugin import *
 import debconf
 
@@ -42,20 +42,24 @@ def check_hostname(hostname):
     e = []
     for result in validation.check_hostname(unicode(hostname)):
         if result == validation.HOSTNAME_LENGTH:
-            e.append("The hostname must be between 1 and 63 characters long.")
+            e.append("Must be between 1 and 63 characters long.")
         elif result == validation.HOSTNAME_BADCHAR:
-            e.append("The hostname may only contain letters, digits, hyphens, "
-                     "and dots.")
+            e.append("May only contain letters, digits, hyphens, and dots.")
         elif result == validation.HOSTNAME_BADHYPHEN:
-            e.append("The hostname may not start or end with a hyphen.")
+            e.append("May not start or end with a hyphen.")
         elif result == validation.HOSTNAME_BADDOTS:
-            e.append('The hostname may not start or end with a dot, '
+            e.append('May not start or end with a dot, '
                      'or contain the sequence "..".')
     return "\n".join(e)
 
 class PageBase(PluginUI):
     def __init__(self):
-        self.laptop = execute("laptop-detect")
+        self.suffix = '-%s' % dmimodel()
+        if not self.suffix:
+            if execute("laptop-detect"):
+                self.suffix = '-laptop'
+            else:
+                self.suffix = '-desktop'
         self.allow_password_empty = False
 
     def set_fullname(self, value):
@@ -137,7 +141,9 @@ class PageGtk(PageBase):
         PageBase.__init__(self, *args, **kwargs)
         self.controller = controller
         self.username_changed_id = None
+        self.hostname_changed_id = None
         self.username_edited = False
+        self.hostname_edited = False
 
         import gtk
         from ubiquity.gtkwidgets import LabelledEntry
@@ -147,6 +153,7 @@ class PageGtk(PageBase):
         builder.connect_signals(self)
         self.page = builder.get_object('stepUserInfo')
         self.username = builder.get_object('username')
+        self.hostname = builder.get_object('hostname')
         self.fullname = builder.get_object('fullname')
         self.password = builder.get_object('password')
         self.verified_password = builder.get_object('verified_password')
@@ -154,10 +161,12 @@ class PageGtk(PageBase):
         self.login_encrypt = builder.get_object('login_encrypt')
         self.login_pass = builder.get_object('login_pass')
         self.username_error_label = builder.get_object('username_error_label')
+        self.hostname_error_label = builder.get_object('hostname_error_label')
         self.password_error_label = builder.get_object('password_error_label')
         self.login_vbox = builder.get_object('login_vbox')
 
         self.username_ok = builder.get_object('username_ok')
+        self.hostname_ok = builder.get_object('hostname_ok')
         self.fullname_ok = builder.get_object('fullname_ok')
         self.password_ok = builder.get_object('password_ok')
         self.password_strength = builder.get_object('password_strength')
@@ -166,6 +175,8 @@ class PageGtk(PageBase):
         # handler ids.
         self.username_changed_id = self.username.connect(
             'changed', self.on_username_changed)
+        self.hostname_changed_id = self.hostname.connect(
+            'changed', self.on_hostname_changed)
 
         if self.controller.oem_config:
             self.fullname.set_text('OEM Configuration (temporary user)')
@@ -175,6 +186,8 @@ class PageGtk(PageBase):
             self.username.set_editable(False)
             self.username.set_sensitive(False)
             self.username_edited = True
+            self.hostname.set_text('oem%s' % self.suffix)
+            self.hostname_edited = True
             self.login_vbox.hide()
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-gtk')
@@ -235,29 +248,26 @@ class PageGtk(PageBase):
         self.username_error_label.set_text(msg)
         self.username_error_label.show()
 
+    def hostname_error(self, msg):
+        self.hostname_ok.hide()
+        m = '<small><span foreground="darkred"><b>%s</b></span></small>' % msg
+        self.hostname_error_label.set_markup(m)
+        self.hostname_error_label.show()
+
     def password_error(self, msg):
         self.password_strength.hide()
         self.password_error_label.set_text(msg)
         self.password_error_label.show()
 
     def get_hostname (self):
-        if self.controller.oem_config:
-            user = 'oem'
-        else:
-            user = self.username.get_text()
-            user = re.sub(r'\W', '', user)
-            if not user:
-                user = 'ubuntu'
-        if self.laptop:
-            return '%s-laptop' % user
-        else:
-            return '%s-desktop' % user
+        return self.hostname.get_text()
 
-    def set_hostname (self):
-        pass
+    def set_hostname (self, value):
+        self.hostname.set_text(value)
 
     def clear_errors(self):
         self.username_error_label.hide()
+        self.hostname_error_label.hide()
         self.password_error_label.hide()
 
     # Callback functions.
@@ -266,7 +276,8 @@ class PageGtk(PageBase):
         """check if all entries from Identification screen are filled. Callback
         defined in ui file."""
 
-        if (self.username_changed_id is None):
+        if (self.username_changed_id is None or
+            self.hostname_changed_id is None):
             return
 
         if (widget is not None and widget.get_name() == 'fullname' and
@@ -277,6 +288,13 @@ class PageGtk(PageBase):
             new_username = new_username.lower()
             self.username.set_text(new_username)
             self.username.handler_unblock(self.username_changed_id)
+        elif (widget is not None and widget.get_name() == 'username' and
+              not self.hostname_edited):
+            self.hostname.handler_block(self.hostname_changed_id)
+            t = widget.get_text()
+            if t:
+                self.hostname.set_text(re.sub(r'\W', '', t) + self.suffix)
+            self.hostname.handler_unblock(self.hostname_changed_id)
 
         # Do some initial validation.  We have to process all the widgets so we
         # can know if we can really show the next button.  Otherwise we'd show
@@ -326,10 +344,26 @@ class PageGtk(PageBase):
             if passw == vpassw:
                 self.password_ok.show()
 
+        txt = self.hostname.get_text()
+        self.hostname_ok.show()
+        if txt:
+            error_msg = check_hostname(txt)
+            if error_msg:
+                self.hostname_error(error_msg)
+                complete = False
+                self.hostname_ok.hide()
+        else:
+            complete = False
+            self.hostname_ok.hide()
+            self.hostname_error_label.hide()
+
         self.controller.allow_go_forward(complete)
     
     def on_username_changed(self, widget):
         self.username_edited = (widget.get_text() != '')
+
+    def on_hostname_changed(self, widget):
+        self.hostname_edited = (widget.get_text() != '')
 
     def on_authentication_toggled(self, w):
         if w == self.login_auto and w.get_active():
@@ -369,10 +403,7 @@ class PageKde(PageBase):
             self.username_edited = True
             self.hostname_edited = True
 
-            if self.laptop:
-                self.page.hostname.setText('oem-laptop')
-            else:
-                self.page.hostname.setText('oem-desktop')
+            self.page.hostname.setText('oem%s' % self.suffix)
 
             # The UserSetup component takes care of preseeding passwd/user-uid.
             execute_root('apt-install', 'oem-config-kde')
@@ -401,17 +432,14 @@ class PageKde(PageBase):
             new_username = unicode(self.page.fullname.text()).split(' ')[0]
             new_username = new_username.encode('ascii', 'ascii_transliterate').lower()
             self.page.username.setText(new_username)
+            self.on_username_changed()
+            self.username_edited = False
             self.page.username.blockSignals(False)
 
     def on_username_changed(self):
         if not self.hostname_edited:
-            if self.laptop:
-                hostname_suffix = '-laptop'
-            else:
-                hostname_suffix = '-desktop'
-
             self.page.hostname.blockSignals(True)
-            self.page.hostname.setText(unicode(self.page.username.text()).strip() + hostname_suffix)
+            self.page.hostname.setText(unicode(self.page.username.text()).strip() + self.suffix)
             self.page.hostname.blockSignals(False)
 
         self.username_edited = (self.page.username.text() != '')

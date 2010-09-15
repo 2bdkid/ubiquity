@@ -140,7 +140,10 @@ def grub_options():
                 ostype = ''
                 if part[4] == 'linux-swap':
                     continue
+                if part[4] == 'free':
+                    continue
                 if os.path.exists(p.part_entry(part[1], 'format')):
+                    # Don't bother looking for an OS type.
                     pass
                 elif part[5] in oslist.keys():
                     ostype = oslist[part[5]]
@@ -421,5 +424,39 @@ def create_bool(text):
         return False
     else:
         return text
+
+@raise_privileges
+def dmimodel():
+    model = ''
+    try:
+        proc = subprocess.Popen(['dmidecode', '--string',
+            'system-manufacturer'], stdout=subprocess.PIPE)
+        manufacturer = proc.communicate()[0]
+        if not manufacturer:
+            return
+        manufacturer = manufacturer.lower()
+        if 'to be filled' in manufacturer:
+            # Don't bother with products in development.
+            return
+        if 'bochs' in manufacturer or 'vmware' in manufacturer:
+            model = 'virtual machine'
+            # VirtualBox sets an appropriate system-product-name.
+        else:
+            if 'lenovo' in manufacturer or 'ibm' in manufacturer:
+                key = 'system-version'
+            else:
+                key = 'system-product-name'
+            proc = subprocess.Popen(['dmidecode', '--string', key],
+                                    stdout=subprocess.PIPE)
+            model = proc.communicate()[0]
+        if 'apple' in manufacturer:
+            # MacBook4,1 - strip the 4,1
+            model = re.sub('[^a-zA-Z\s]', '', model)
+        # Replace each gap of non-alphanumeric characters with a dash.
+        # Ensure the resulting string does not begin or end with a dash.
+        model = re.sub('[^a-zA-Z0-9]+', '-', model).rstrip('-').lstrip('-')
+    except Exception:
+        syslog.syslog(syslog.LOG_ERR, 'Unable to determine the model from DMI')
+    return model
 
 # vim:ai:et:sts=4:tw=80:sw=4:

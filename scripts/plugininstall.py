@@ -117,9 +117,15 @@ class Install(install_misc.InstallBase):
     def run(self):
         '''Main entry point.'''
         # We pick up where install.py left off.
-        self.prev_count = 74
-        self.count = 74
-        self.end = 22 + len(self.plugins)
+        if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
+            self.prev_count = 0
+        else:
+            self.prev_count = 74
+        self.count = self.prev_count
+        self.start = self.prev_count
+        self.end = self.start + 22 + len(self.plugins)
+
+        self.db.progress('START', self.start, self.end, 'ubiquity/install/title')
 
         self.next_region()
         self.db.progress('INFO', 'ubiquity/install/network')
@@ -414,19 +420,6 @@ class Install(install_misc.InstallBase):
               AutoDetect "false";
             }""")
         apt_conf_nmc.close()
-
-        cdsrc, type, writable = misc.mount_info('/cdrom')
-        if writable == 'rw':
-            # On non-read-only media, including filesystem statistics in the
-            # apt-cdrom database entry is unreliable.  This will render the
-            # database entry useless after installation, but that's OK since
-            # we're probably going to remove the cdrom: entry from
-            # sources.list anyway.  This file will be left in place until
-            # the end of the install.
-            apt_conf_identcdrom = open(os.path.join(
-                self.target, 'etc/apt/apt.conf.d/00IdentCDROM'), 'w')
-            print >>apt_conf_identcdrom, 'Debug::identcdrom "true";'
-            apt_conf_identcdrom.close()
 
         # This will be reindexed after installation based on the full
         # installed sources.list.
@@ -774,7 +767,8 @@ class Install(install_misc.InstallBase):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             return
 
-        install_bootloader = self.db.get('ubiquity/install_bootloader')
+        install_bootloader = self.db.get('ubiquity/install_bootloader') \
+                and 'UBIQUITY_NO_BOOTLOADER' not in os.environ
         if install_bootloader == "true":
             misc.execute('mount', '--bind', '/proc', self.target + '/proc')
             misc.execute('mount', '--bind', '/sys', self.target + '/sys')
@@ -1015,6 +1009,10 @@ class Install(install_misc.InstallBase):
 
         if found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
+
+        if self.db.get('ubiquity/use_nonfree') == 'true':
+            package = self.db.get('ubiquity/nonfree_package')
+            self.do_install([package])
 
         # TODO cjwatson 2007-08-09: python reimplementation of
         # oem-config/finish-install.d/07oem-config-user. This really needs
@@ -1415,7 +1413,7 @@ class Install(install_misc.InstallBase):
                         env=env)
 
         for apt_conf in ('00NoMountCDROM', '00IgnoreTimeConflict',
-                         '00AllowUnauthenticated', '00IdentCDROM'):
+                         '00AllowUnauthenticated'):
             osextras.unlink_force(os.path.join(
                 self.target, 'etc/apt/apt.conf.d', apt_conf))
 

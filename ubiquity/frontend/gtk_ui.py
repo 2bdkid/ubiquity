@@ -101,6 +101,15 @@ def process_labels(w):
             w.connect_after('size-allocate', wrap_fix)
         w.set_property('can-focus', False)
 
+def set_root_cursor(cursor=None):
+    if cursor is None:
+        cursor = gtk.gdk.Cursor(gtk.gdk.ARROW)
+    win = gtk.gdk.get_default_root_window()
+    if win:
+        win.set_cursor(cursor)
+    while gtk.events_pending():
+        gtk.main_iteration()
+
 class Controller(ubiquity.frontend.base.Controller):
     def __init__(self, wizard):
         ubiquity.frontend.base.Controller.__init__(self, wizard)
@@ -222,6 +231,12 @@ class Wizard(BaseFrontend):
         self.grub_options = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
         self.finished_installing = False
         self.finished_pages = False
+        self.parallel_db = None
+
+        # To get a "busy mouse":
+        self.watch = gtk.gdk.Cursor(gtk.gdk.WATCH)
+        set_root_cursor(self.watch)
+        atexit.register(set_root_cursor)
 
         self.laptop = execute("laptop-detect")
 
@@ -230,9 +245,6 @@ class Wizard(BaseFrontend):
 
         gobject.timeout_add(30000, self.poke_screensaver)
 
-        # To get a "busy mouse":
-        self.watch = gtk.gdk.Cursor(gtk.gdk.WATCH)
-
         # set custom language
         self.set_locales()
 
@@ -240,7 +252,7 @@ class Wizard(BaseFrontend):
                                               'ubiquity.png')
 
         # This needs to be done before the GtkBuilder objects are created.
-        style = gtk.Menu().rc_get_style()
+        style = gtk.MenuBar().rc_get_style()
         bg = style.bg[gtk.STATE_NORMAL]
         gtk.rc_parse_string('''
         style "ubiquity" {
@@ -364,6 +376,13 @@ class Wizard(BaseFrontend):
             issubclass(exctype, SystemExit)):
             return
 
+        # Restore the default cursor if we were using a spinning cursor on the
+        # root window.
+        try:
+            set_root_cursor()
+        except Exception:
+            pass
+
         tbtext = ''.join(traceback.format_exception(exctype, excvalue, exctb))
         syslog.syslog(syslog.LOG_ERR,
                       "Exception in GTK frontend (invoking crash handler):")
@@ -414,6 +433,20 @@ class Wizard(BaseFrontend):
             except:
                 pass
         return previous
+
+    def disable_terminal(self):
+        terminal_key = '/apps/metacity/global_keybindings/run_command_terminal'
+        self.gconf_previous[terminal_key] = gconftool.get(terminal_key)
+        gconftool.set(terminal_key, 'string', 'disabled')
+        atexit.register(self.enable_terminal)
+
+    def enable_terminal(self):
+        terminal_key = '/apps/metacity/global_keybindings/run_command_terminal'
+        if self.gconf_previous[terminal_key] == '':
+            gconftool.unset(terminal_key)
+        else:
+            gconftool.set(terminal_key, 'string',
+                          self.gconf_previous[terminal_key])
 
     def disable_logout_indicator(self):
         logout_key = '/apps/indicator-session/suppress_logout_menuitem'
@@ -491,7 +524,6 @@ class Wizard(BaseFrontend):
             dialog = gtk.MessageDialog(self.live_installer, gtk.DIALOG_MODAL,
                                        gtk.MESSAGE_ERROR, gtk.BUTTONS_CLOSE,
                                        title)
-            dialog.set_has_separator(False)
             dialog.run()
             sys.exit(1)
 
@@ -499,6 +531,8 @@ class Wizard(BaseFrontend):
 
         if 'UBIQUITY_ONLY' in os.environ:
             self.disable_logout_indicator()
+            if not 'UBIQUITY_DEBUG' in os.environ:
+                self.disable_terminal()
 
         # show interface
         self.allow_change_step(True)
@@ -580,6 +614,7 @@ class Wizard(BaseFrontend):
             with raised_privileges():
                 open('/var/run/reboot-required', "w").close()
             self.finished_dialog.set_keep_above(True)
+            set_root_cursor()
             self.finished_dialog.run()
         elif self.get_reboot():
             self.reboot()
@@ -629,11 +664,12 @@ class Wizard(BaseFrontend):
         self.page_mode.show()
         self.page_mode.set_current_page(1)
         webview.show()
+        webview.grab_focus()
 
     def customize_installer(self):
         """Initial UI setup."""
 
-        style = gtk.Menu().rc_get_style()
+        style = gtk.MenuBar().rc_get_style()
         self.live_installer.set_style(style)
         self.page_title.set_style(style)
         self.install_progress_text.set_style(style)
@@ -682,7 +718,7 @@ class Wizard(BaseFrontend):
             #hide the notebook until the first page is ready
             self.page_mode.hide()
             self.progress_section.show()
-        self.live_installer.show()
+            self.live_installer.show()
         self.allow_change_step(False)
 
         if hasattr(self, 'stepPartAuto'):
@@ -835,6 +871,11 @@ class Wizard(BaseFrontend):
                 attrs = pango.AttrList()
                 attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, textlen))
                 widget.set_attributes(attrs)
+            elif 'part_auto_hidden_label' in name or 'part_auto_deleted_label' in name:
+                attrs = pango.AttrList()
+                attrs.insert(pango.AttrScale(pango.SCALE_SMALL, 0, textlen))
+                attrs.insert(pango.AttrWeight(pango.WEIGHT_BOLD, 0, textlen))
+                widget.set_attributes(attrs)
 
         elif isinstance(widget, gtk.Button):
             # TODO evand 2007-06-26: LP #122141 causes a crash unless we keep a
@@ -871,6 +912,7 @@ class Wizard(BaseFrontend):
             cursor = self.watch
         if self.live_installer.window:
             self.live_installer.window.set_cursor(cursor)
+            set_root_cursor(cursor)
         self.back.set_sensitive(allowed and self.allowed_go_backward)
         self.next.set_sensitive(allowed and self.allowed_go_forward)
         self.allowed_change_step = allowed
@@ -904,7 +946,6 @@ class Wizard(BaseFrontend):
                             (gtk.STOCK_QUIT, gtk.RESPONSE_CLOSE,
                              'Continue anyway', 1,
                              'Try again', 2))
-        dialog.set_has_separator(False)
         self.dbfilter_status = None
         label = gtk.Label(text)
         label.set_line_wrap(True)
@@ -981,7 +1022,12 @@ class Wizard(BaseFrontend):
         # need to be asked, otherwise you wont be able to back up past
         # migration-assistant.
         self.backup = False
+        visible = self.live_installer.get_property('visible')
         self.live_installer.show()
+        # Work around a bug in the wrap_fix code whereby the layout does not
+        # get properly rendered due to the window not being visible.
+        if not visible:
+            self.live_installer.resize_children()
         self.page_mode.show()
         cur = None
         is_install = False
@@ -1159,6 +1205,7 @@ class Wizard(BaseFrontend):
 
         # Let the user know we're shutting down.
         self.finished_dialog.window.set_cursor(self.watch)
+        set_root_cursor(self.watch)
         self.quit_button.set_sensitive(False)
         self.reboot_button.set_sensitive(False)
         self.refresh()
@@ -1199,10 +1246,12 @@ class Wizard(BaseFrontend):
         # user tries to go forward but fails due to validation.
 
         # FIXME UGH.  I don't want this outside of the plugin.
-        if step == 'stepPartAsk' and not self.custom_partitioning.get_active():
-            self.set_current_page(self.steps.page_num(self.stepPartAuto))
-            self.allow_change_step(True)
-            return
+        if step == 'stepPartAsk':
+            self.next.set_label(self.get_string('install_button'))
+            if not self.custom_partitioning.get_active():
+                self.set_current_page(self.steps.page_num(self.stepPartAuto))
+                self.allow_change_step(True)
+                return
         if step == "stepPartAuto":
             self.part_advanced_warning_message.set_text('')
             self.part_advanced_warning_hbox.hide()
@@ -1377,6 +1426,9 @@ class Wizard(BaseFrontend):
             self.installing = True
             self.progress_section.show()
             from ubiquity.debconfcommunicator import DebconfCommunicator
+            if self.parallel_db is not None:
+                # Partitioning failed and we're coming back through again.
+                self.parallel_db.shutdown()
             self.parallel_db = DebconfCommunicator('ubiquity', cloexec=True,
             # debconf-apt-progress, start_debconf()
             env={'DEBCONF_DB_REPLACE': 'configdb',
@@ -1414,6 +1466,9 @@ class Wizard(BaseFrontend):
         """
 
         if self.installing and not self.installing_no_return:
+            # Stop the currently displayed page.
+            if self.dbfilter is not None:
+                self.dbfilter.cancel_handler()
             # Go back to the partitioner and try again.
             self.pagesindex = -1
             for page in self.pages:
@@ -1421,14 +1476,17 @@ class Wizard(BaseFrontend):
                     self.pagesindex = self.pages.index(page)
                     break
             if self.pagesindex == -1: return
+
             self.start_debconf()
             ui = self.pages[self.pagesindex].ui
             self.dbfilter = self.pages[self.pagesindex].filter_class(self, ui=ui)
-            self.set_current_page(self.previous_partitioning_page)
+            self.allow_change_step(False)
+            self.dbfilter.start(auto_process=True)
             self.next.set_label("gtk-go-forward")
             self.translate_widget(self.next)
-            self.backup = True
             self.installing = False
+            self.progress_section.hide()
+            self.quit.show()
 
     def error_dialog (self, title, msg, fatal=True):
         # TODO: cancel button as well if capb backup
@@ -1446,7 +1504,6 @@ class Wizard(BaseFrontend):
             msg = title
         dialog = gtk.MessageDialog(transient, gtk.DIALOG_MODAL,
                                    gtk.MESSAGE_ERROR, gtk.BUTTONS_OK, msg)
-        dialog.set_has_separator(False)
         dialog.set_title(title)
         dialog.run()
         self.allow_change_step(saved_allowed_change_step)
@@ -1512,7 +1569,6 @@ class Wizard(BaseFrontend):
             text = str(text)
             buttons.extend((text, len(buttons) / 2 + 1))
         dialog = gtk.Dialog(title, transient, gtk.DIALOG_MODAL, tuple(buttons))
-        dialog.set_has_separator(False)
         vbox = gtk.VBox()
         vbox.set_border_width(5)
         label = gtk.Label(msg)
