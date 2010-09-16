@@ -75,7 +75,7 @@ class Install(install_misc.InstallBase):
         if os.path.exists('/var/lib/ubiquity/langpacks'):
             with open('/var/lib/ubiquity/langpacks') as langpacks:
                 for line in langpacks:
-                    self.langpacks.add(line.strip())
+                    self.langpacks.append(line.strip())
 
         # Load plugins
         modules = plugin_manager.load_plugins()
@@ -767,9 +767,8 @@ class Install(install_misc.InstallBase):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             return
 
-        install_bootloader = self.db.get('ubiquity/install_bootloader') \
-                and 'UBIQUITY_NO_BOOTLOADER' not in os.environ
-        if install_bootloader == "true":
+        inst_boot = self.db.get('ubiquity/install_bootloader')
+        if inst_boot == 'true' and 'UBIQUITY_NO_BOOTLOADER' not in os.environ:
             misc.execute('mount', '--bind', '/proc', self.target + '/proc')
             misc.execute('mount', '--bind', '/sys', self.target + '/sys')
             misc.execute('mount', '--bind', '/dev', self.target + '/dev')
