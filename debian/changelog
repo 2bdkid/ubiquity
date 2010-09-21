@@ -1,3 +1,35 @@
+ubiquity (2.4.0) maverick; urgency=low
+
+  [ Sebastian Heinlein ]
+  * Rework oem-config-gtk to use a mainloop (LP: #637517)
+
+  [ Evan Dandrea ]
+  * Call gconftool-2 --set with --config-source.
+  * Better lock down the installer environment when past partitioning.
+  * Lock down the installer environment when at partitioning commit,
+    rather than just after automatic partitioning (and not manual
+    partitioning) (LP: #640604, LP: #641897).
+  * Do not show the quit button in OEM mode.
+  * Depend on aptdaemon (LP: #641051).
+  * Fix the skip download button (LP: #628311).
+  * Make the '[type here to change]' string translatable (LP: #642989).
+  * Disable the non-free software option if multiverse and restricted
+    are disabled via preseed (LP: #641676).
+  * Install kubuntu-restricted-addons, not kubuntu-restricted-extras
+    (LP: #643614).
+  * Clear hostname error when fixed (LP: #640661).
+  * Deal with broken /cdrom symlinks (LP: #642274).
+  * Disable locking the screen and switching users in the installer
+    session (LP: #644016).
+  * Update translations from Launchpad.
+
+  [ Colin Watson ]
+  * Stop ubiquity and oem-config when stopping display managers.  This
+    should guarantee that X has exited by the time we try to start plymouth
+    on shutdown (LP: #628630).
+
+ -- Evan Dandrea <evand@ubuntu.com>  Tue, 21 Sep 2010 10:09:28 +0100
+
 ubiquity (2.3.19) maverick; urgency=low
 
   * Make sure /var/lib/ubiquity/langpacks gets generated (LP: #630924).
