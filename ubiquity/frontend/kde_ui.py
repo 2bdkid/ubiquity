@@ -145,6 +145,14 @@ class Controller(ubiquity.frontend.base.Controller):
     def get_string(self, name, lang=None, prefix=None):
         return self._wizard.get_string(name, lang, prefix)
 
+    def setNextButtonTextInstallNow(self, checked):
+        self._wizard.ui.next.setText(self.get_string('install_button').replace('_', '&', 1))
+        self._wizard.ui.next.setIcon(self._wizard.applyIcon)
+
+    def setNextButtonTextNext(self, checked):
+        self._wizard.ui.next.setText(self.get_string('next').replace('_', '&', 1))
+        self._wizard.ui.next.setIcon(self._wizard.forwardIcon)
+
 class Wizard(BaseFrontend):
 
     def __init__(self, distro):
@@ -581,6 +589,17 @@ class Wizard(BaseFrontend):
                 #for c in self.all_children(toplevel):
                     #widgets.append((c, None))
         self.translate_widgets(lang=lang, widgets=widgets, reget=reget)
+        # Allow plugins to provide a hook for translation.
+        for p in pages:
+            # There's no sense retranslating the page we're leaving.
+            if not_current and p == current_page:
+                continue
+            if hasattr(p.ui, 'plugin_translate'):
+                try:
+                    p.ui.plugin_translate(lang or self.locale)
+                except Exception, e:
+                    print >>sys.stderr, 'Could not translate page (%s): %s' \
+                                        % (p.module.NAME, str(e))
 
     # translates widget text based on the object names
     # widgets is a list of (widget, prefix) pairs

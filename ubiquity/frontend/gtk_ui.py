@@ -678,7 +678,9 @@ class Wizard(BaseFrontend):
         from vte import Terminal
         self.vte = Terminal()
         self.install_details_sw.add(self.vte)
-        self.vte.fork_command('tail', ['tail', '-f', '/var/log/installer/debug'])
+        self.vte.fork_command('tail',
+                             ['tail', '-f', '/var/log/installer/debug',
+                                      '-f', '/var/log/syslog', '-q'])
         self.vte.show()
         # FIXME shrink the window horizontally instead of locking the window size.
         self.live_installer.set_property('allow_grow', False)
@@ -1067,6 +1069,12 @@ class Wizard(BaseFrontend):
         self.page_mode.show()
         cur = None
         is_install = False
+        if 'UBIQUITY_GREETER' in os.environ:
+            for page in self.pages:
+                if page.module.NAME == 'language':
+                    # The greeter page is quite large.  Hide it upon leaving.
+                    page.ui.page.hide()
+                    break
         for page in self.pages:
             if page.module.NAME == n:
                 # Now ask ui class which page we want to be showing right now
