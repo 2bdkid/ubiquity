@@ -310,12 +310,14 @@ if [ "x$1" = "x--supported" ]; then
 	fi
 
 	case "$machine" in
+		"ARM-Versatile Express CA9x4")		exit 0 ;;
 		"Buffalo Linkstation Pro/Live")		exit 0 ;;
 		"Buffalo/Revogear Kurobox Pro")		exit 0 ;;
 		"D-Link DNS-323")			exit 0 ;;
 		"Freescale MX51 Babbage Board")		exit 0 ;;
 		"GLAN Tank")				exit 0 ;;
 		"HP Media Vault mv2120")		exit 0 ;;
+		"IGEP v2 board")            exit 0 ;;
 		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
 		"Linksys NSLU2")			exit 0 ;;
 		"OMAP3 Beagle Board")			exit 0 ;;
@@ -377,6 +379,42 @@ fi
 subarch=$(echo "$kfile" | sed -e 's/.*-//')
 
 case "$machine" in
+	"ARM-Versatile Express CA9x4")
+		check_subarch "vexpress"
+		check_mtd
+
+		kmtd=$(mtdblock "kernel")
+		if [ -z "$kmtd" ]; then
+			error "Cannot find mtd partition 'kernel'"
+		fi
+		check_dev_mtdblock "$kmtd"
+		kmtdsize=$(mtdsize "kernel")
+		check_size "kernel" $(($kfilesize + 64)) $kmtdsize
+		printf "Generating a u-boot compatible kernel image... " >&2
+		mkimage -A arm -O linux -T kernel -C none -a 0x60008000 \
+			-e 0x60008000 -n "$desc" -d $kfile $kfile.uboot \
+			>&2 1>/dev/null
+		printf "Writing kernel to flash... " >&2
+		cat $kfile.uboot > $kmtd || error "failed."
+		echo "done." >&2
+		rm -f $kfile.uboot
+
+		imtd=$(mtdblock "initrd")
+		if [ -z "$imtd" ]; then
+			error "Cannot find mtd partition for initrd"
+		fi
+		check_dev_mtdblock "$imtd"
+		imtdsize=$(mtdsize "initrd")
+		check_size "initrd" $ifilesize $imtdsize 
+		printf "Generating u-boot compatible initrd image... " >&2
+		mkimage -A arm -O linux -T ramdisk -C none -a 0x81000000 \
+			-e 0x81000000 -n "$idesc" -d $ifile $ifile.uboot \
+			>&2 1>/dev/null
+		printf "Writing initrd to flash... " >&2
+		cat $ifile.uboot > $imtd || error "failed."
+		echo "done." >&2 
+		rm -f $ifile.uboot
+	;;
 	"Buffalo Linkstation Pro/Live" | "Buffalo/Revogear Kurobox Pro")
 		check_subarch "orion5x"
 		tmp="$(tempfile)"
@@ -665,9 +703,9 @@ case "$machine" in
 		check_subarch "dove"
 		dove_flash_kernel
 	;;
-	"OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
+	"IGEP v2 board" | "OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
 		case "$machine" in
-			"OMAP3 Beagle Board")
+			"IGEP v2 board"|"OMAP3 Beagle Board")
 				check_subarch "omap"
 			;;
 			"OMAP4430 4430SDP board" | "OMAP4430 Panda Board")

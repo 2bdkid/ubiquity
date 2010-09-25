@@ -1,3 +1,31 @@
+ubiquity (2.4.2) maverick; urgency=low
+
+  [ Jonathon Riddell ]
+  * gui/qt/stepLanguage.ui: nicer icons and better layout on
+    language page (LP: #628808)
+
+  [ Mario Limonciello ]
+  * Set the LANG before running oem-config-remove.
+  * Prevent a crash of debconf-communicate when removing oem-config.
+    (LP: #641478)
+  * Raise privileges when running the language page in only-installable
+    mode. (LP: #647792)
+  * Automatic update of included source packages: flash-kernel
+    2.28ubuntu10.
+
+  [ Evan Dandrea ]
+  * Don't let Jockey's automatic driver installation failing cause the
+    entire prepare page to fail.
+  * Make sure $LANGUAGE gets set in the parallel debconf child process,
+    so that we get translated descriptions (LP: #646109).
+  * Set the effective UID in regain_privileges_save so we don't try to
+    setgroups([]) as a regular user (LP: #646827).
+
+  [ Didier Roche ]
+  * depends on latest libindicator-dev for ABI change (LP: #637692, #647739)
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Sat, 25 Sep 2010 18:24:06 -0500
+
 ubiquity (2.4.1) maverick; urgency=low
 
   [ Evan Dandrea ]
