@@ -324,7 +324,13 @@ EOF
 		while read name device source options; do
 			if echo "$options" | grep -q "swap"; then
 				if swapoff $device; then
-					dd if=/dev/zero of=$device bs=16M 2>/dev/null || true
+					if [ ! -b $device ]; then
+						ONE_MEG=$((1024*1024))
+						size=$(($(stat -c %s ${device})/${ONE_MEG}))
+						dd if=/dev/zero of=$device bs=${ONE_MEG} count=$size 2>/dev/null || true
+					else
+						dd if=/dev/zero of=$device bs=16M 2>/dev/null || true
+					fi
 				fi
 			fi
 		done < $ROOT/etc/crypttab

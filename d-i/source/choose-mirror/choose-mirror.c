@@ -224,6 +224,8 @@ static int cross_validate_release(struct release_t *release) {
 	return ret;
 }
 
+static int manual_entry;
+
 /*
  * Fetch a Release file, extract its Suite and Codename and check its valitity.
  */
@@ -233,6 +235,28 @@ static int get_release(struct release_t *release, const char *name) {
 	char *hostname, *directory;
 	char line[80];
 	char buf[SUITE_LENGTH];
+
+	if (base_on_cd && ! manual_entry) {
+		/* We have the base system on the CD, so instead of trying
+		 * to contact the mirror (which might take some time to time
+		 * out if there's no network connection), let's just assume
+		 * that the CD will be sufficient to get a basic system up,
+		 * setting codename = suite.  Note that this is an
+		 * Ubuntu-specific change since (a) Debian netinst CDs etc.
+		 * may not be able to install a complete system from the
+		 * network and (b) codename != suite in Debian.
+		 *
+		 * We only do this for mirrors in our mirror list, since we
+		 * assume that those have a good chance of not being typoed.
+		 * For manually-entered mirrors, we still do full mirror
+		 * validation.
+		 */
+		di_log(DI_LOG_LEVEL_INFO, "base system installable from CD; skipping mirror check");
+		release->name = strdup(name);
+		release->suite = strdup(name);
+		release->status = IS_VALID | GET_CODENAME;
+		return 1;
+	}
 
 	hostname = add_protocol("hostname");
 	debconf_get(debconf, hostname);
@@ -534,8 +558,6 @@ static int set_country(void) {
 	return 0;
 }
 
-static int manual_entry;
-
 static int choose_mirror(void) {
 	char *list;
 	char *countryarchive;
@@ -620,33 +642,6 @@ static int validate_mirror(void) {
 		debconf_set(debconf, host, mirror);
 		root = mirror_root(mirror);
 		free(mirror);
-
-		if (base_on_cd) {
-			/* We have the base system on the CD, so instead of
-			 * trying to contact the mirror (which might take
-			 * some time to time out if there's no network
-			 * connection), let's just assume that the CD will
-			 * be sufficient to get a basic system up, setting
-			 * codename = suite. Note that this is an
-			 * Ubuntu-specific change since (a) Debian netinst
-			 * CDs etc. may not be able to install a complete
-			 * system from the network and (b) codename != suite
-			 * in Debian.
-			 *
-			 * We only do this for mirrors in our mirror list,
-			 * since we assume that those have a good chance of
-			 * not being typoed. For manually-entered mirrors,
-			 * we still do full mirror validation.
-			 */
-			di_log(DI_LOG_LEVEL_INFO, "base system installable from CD; skipping mirror check");
-			debconf_get(debconf, DEBCONF_BASE "suite");
-			if (*debconf->value) {
-				di_log(DI_LOG_LEVEL_INFO, "falling back to codename %s", debconf->value);
-				debconf_set(debconf, DEBCONF_BASE "codename", debconf->value);
-				exit(0);
-			}
-		}
-
 		if (root == NULL)
 			valid = 0;
 		else
@@ -809,6 +804,12 @@ int check_arch (void) {
 	FILE *f = NULL;
 	char *hostname, *directory, *codename = NULL;
 	int valid = 0;
+
+	if (base_on_cd && ! manual_entry) {
+		/* See comment in get_release. */
+		di_log(DI_LOG_LEVEL_INFO, "base system installable from CD; skipping architecture check");
+		return 0;
+	}
 
 	hostname = add_protocol("hostname");
 	debconf_get(debconf, hostname);
