@@ -135,7 +135,7 @@ static char *get_default_suite(void) {
 	char buf[SUITE_LENGTH];
 
 	debconf_get(debconf, DEBCONF_BASE "suite");
-	if (! base_on_cd && strlen(debconf->value) > 0) {
+	if (strlen(debconf->value) > 0) {
 		/* Use preseeded or previously selected value. */
 		suite = strdup(debconf->value);
 	} else {
