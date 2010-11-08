@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <sys/ioctl.h>
 #include <sys/utsname.h>
+#include <sys/wait.h>
 #include <arpa/inet.h>
 #include <net/if.h>
 #include <time.h>
@@ -38,8 +39,8 @@ const char* dhclient_request_options_udhcpc[] = { "subnet",
                                                   "broadcast",
                                                   "router",
                                                   "domain",
-                                                  "namesrv",
                                                   "hostname",
+                                                  "dns",
                                                   "ntpsrv", /* extra */
                                                   NULL };
 
@@ -53,7 +54,7 @@ static pid_t dhcp_pid = -1;
 static void netcfg_write_dhcp (char *iface, char *dhostname)
 {
     FILE *fp;
-    
+
     if ((fp = file_open(INTERFACES_FILE, "a"))) {
         fprintf(fp, "\n# The primary network interface\n");
         fprintf(fp, "auto %s\n", iface);
@@ -77,9 +78,16 @@ static void netcfg_write_dhcp (char *iface, char *dhostname)
 /* Returns 1 if no default route is available */
 static short no_default_route (void)
 {
+#if defined(__FreeBSD_kernel__)
+    int status;
+
+    status = system("exec /lib/freebsd/route show default >/dev/null 2>&1");
+
+    return WEXITSTATUS(status) != 0;
+#else
     FILE* iproute = NULL;
     char buf[256] = { 0 };
-    
+
     if ((iproute = popen("ip route", "r")) != NULL) {
         while (fgets (buf, 256, iproute) != NULL) {
             if (buf[0] == 'd' && strstr (buf, "default via ")) {
@@ -89,8 +97,9 @@ static short no_default_route (void)
         }
         pclose(iproute);
     }
-    
+
     return 1;
+#endif
 }
 
 /*
@@ -100,7 +109,7 @@ static short no_default_route (void)
  * lease or because it succeeded and daemonized itself), this
  * gets the child's exit status and sets dhcp_pid to -1
  */
-static void dhcp_client_sigchld(int sig __attribute__ ((unused))) 
+static void dhcp_client_sigchld(int sig __attribute__ ((unused)))
 {
     if (dhcp_pid <= 0)
         return;
@@ -112,7 +121,7 @@ static void dhcp_client_sigchld(int sig __attribute__ ((unused)))
 }
 
 
-/* 
+/*
  * This function will start whichever DHCP client is available
  * using the provided DHCP hostname, if supplied
  *
@@ -124,12 +133,11 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
     const char **ptr;
     char **arguments;
     int options_count;
-    enum { DHCLIENT, DHCLIENT3, PUMP, UDHCPC } dhcp_client;
-    
-    if (access("/var/lib/dhcp3", F_OK) == 0)
-        dhcp_client = DHCLIENT3;
-    else if (access("/sbin/dhclient", F_OK) == 0)
-        dhcp_client = DHCLIENT;
+    enum { DHCLIENT, PUMP, UDHCPC } dhcp_client;
+    int dhcp_seconds;
+
+    if (access("/sbin/dhclient", F_OK) == 0)
+		dhcp_client = DHCLIENT;
     else if (access("/sbin/pump", F_OK) == 0)
         dhcp_client = PUMP;
     else if (access("/sbin/udhcpc", F_OK) == 0)
@@ -139,11 +147,14 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
         debconf_go(client);
         exit(1);
     }
-    
+
+    debconf_get(client, "netcfg/dhcp_timeout");
+    dhcp_seconds = atoi(client->value);
+
     if ((dhcp_pid = fork()) == 0) { /* child */
         /* disassociate from debconf */
         fclose(client->out);
-        
+
         /* get dhcp lease */
         switch (dhcp_client) {
         case PUMP:
@@ -151,38 +162,12 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
                 execlp("pump", "pump", "-i", interface, "-h", dhostname, NULL);
             else
                 execlp("pump", "pump", "-i", interface, NULL);
-            
+
             break;
-            
+
         case DHCLIENT:
             /* First, set up dhclient.conf */
             if ((dc = file_open(DHCLIENT_CONF, "w"))) {
-                fprintf(dc, "send dhcp-class-identifier \"d-i\";\n");
-                fprintf(dc, "request ");
-
-                for (ptr = dhclient_request_options_dhclient; *ptr; ptr++) {
-                    fprintf(dc, *ptr);
-
-                    /* look ahead to see if it is the last entry */
-                    if (*(ptr + 1))
-                        fprintf(dc, ", ");
-                    else
-                        fprintf(dc, ";\n");
-                }
-
-                if (dhostname) {
-                    fprintf(dc, "send host-name \"%s\";\n", dhostname);
-                }
-                fclose(dc);
-            }
-            
-            execlp("dhclient", "dhclient", "-e", interface, NULL);
-            break;
-            
-        case DHCLIENT3:
-            /* Different place.. */
-            
-            if ((dc = file_open(DHCLIENT3_CONF, "w"))) {
                 fprintf(dc, "send vendor-class-identifier \"d-i\";\n" );
                 fprintf(dc, "request ");
 
@@ -199,9 +184,10 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
                 if (dhostname) {
                     fprintf(dc, "send host-name \"%s\";\n", dhostname);
                 }
+                fprintf(dc, "timeout %d;\n", dhcp_seconds);
                 fclose(dc);
             }
-            
+
             execlp("dhclient", "dhclient", "-1", interface, NULL);
             break;
 
@@ -211,11 +197,12 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
             for (ptr = dhclient_request_options_udhcpc; *ptr; ptr++)
                 options_count++;
 
-            /* alloc the required memory for arguments:
-               double of number of options since we need -O for each
-               one plus 5 fixed ones plus 2 that are optional
-               depending on hostname being set or not. */
-            arguments = malloc((options_count * 2 + 8) * sizeof(char **));
+            /* Allow space for:
+                options: options_count * 2
+                 params: 5
+               hostname: 2
+                   NULL: 1 */
+            arguments = malloc((options_count * 2 + 5 + 2 + 1) * sizeof(char **));
 
             /* set the command options */
             options_count = 0;
@@ -242,7 +229,7 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
         }
         if (errno != 0)
             di_error("Could not exec dhcp client: %s", strerror(errno));
-        
+
         return 1; /* should NEVER EVER get here */
     }
     else if (dhcp_pid == -1)
@@ -257,7 +244,7 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
 
 static int kill_dhcp_client(void)
 {
-    system("killall.sh"); 
+    system("killall.sh");
     return 0;
 }
 
@@ -278,18 +265,18 @@ int poll_dhcp_client (struct debconfclient *client)
     int seconds_slept = 0;
     int ret = 1;
     int dhcp_seconds;
-    
+
     debconf_get(client, "netcfg/dhcp_timeout");
-    
+
     dhcp_seconds = atoi(client->value);
-    
+
     /* show progress bar */
     debconf_capb(client, "backup progresscancel");
     debconf_progress_start(client, 0, dhcp_seconds, "netcfg/dhcp_progress");
     if (debconf_progress_info(client, "netcfg/dhcp_progress_note") == 30)
         goto stop;
     netcfg_progress_displayed = 1;
-    
+
     /* wait between 2 and dhcp_seconds seconds for a DHCP lease */
     while ( ((dhcp_pid > 0) || (seconds_slept < 2))
             && (seconds_slept < dhcp_seconds) ) {
@@ -299,11 +286,11 @@ int poll_dhcp_client (struct debconfclient *client)
             goto stop;
     }
     /* Either the client exited or time ran out */
-    
+
     /* got a lease? display a success message */
     if (!(dhcp_pid > 0) && (dhcp_exit_status == 0)) {
         ret = 0;
-        
+
         debconf_capb(client, "backup"); /* stop displaying cancel button */
         if (debconf_progress_set(client, dhcp_seconds) == 30)
             goto stop;
@@ -311,13 +298,13 @@ int poll_dhcp_client (struct debconfclient *client)
             goto stop;
         sleep(2);
     }
-    
+
  stop:
     /* stop progress bar */
     debconf_progress_stop(client);
     debconf_capb(client, "backup");
     netcfg_progress_displayed = 0;
-    
+
     return ret;
 }
 
@@ -334,23 +321,23 @@ int poll_dhcp_client (struct debconfclient *client)
 int ask_dhcp_options (struct debconfclient *client)
 {
     int ret;
-    
+
     if (is_wireless_iface(interface)) {
         debconf_metaget(client, "netcfg/internal-wifireconf", "description");
         debconf_subst(client, "netcfg/dhcp_options", "wifireconf", client->value);
     }
     else /* blank from last time */
         debconf_subst(client, "netcfg/dhcp_options", "wifireconf", "");
-    
+
     /* critical, we don't want to enter a loop */
     debconf_input(client, "critical", "netcfg/dhcp_options");
     ret = debconf_go(client);
-    
+
     if (ret == 30)
         return GO_BACK;
-    
+
     debconf_get(client, "netcfg/dhcp_options");
-    
+
     /* strcmp sucks */
     if (client->value[0] == 'R') {	/* _R_etry ... or _R_econfigure ... */
         size_t len = strlen(client->value);
@@ -397,10 +384,10 @@ int netcfg_activate_dhcp (struct debconfclient *client)
 {
     char* dhostname = NULL;
     enum { START, POLL, ASK_OPTIONS, DHCP_HOSTNAME, HOSTNAME, DOMAIN, HOSTNAME_SANS_NETWORK } state = START;
-    
+
     kill_dhcp_client();
     loop_setup();
-    
+
     for (;;) {
         switch (state) {
         case START:
@@ -426,28 +413,31 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                  */
 
                 /* Before doing anything else, check for a default route */
-                
+
                 if (no_default_route()) {
                     debconf_input(client, "critical", "netcfg/no_default_route");
                     debconf_go(client);
                     debconf_get(client, "netcfg/no_default_route");
-                    
+
                     if (!strcmp(client->value, "false")) {
                         state = ASK_OPTIONS;
                         break;
                     }
                 }
-                
+
                 /*
                  * Set defaults for domain name and hostname
                  */
-                
+
+#ifndef MAXHOSTNAMELEN
+#define MAXHOSTNAMELEN 63
+#endif
                 char buf[MAXHOSTNAMELEN + 1] = { 0 };
                 char *ptr = NULL;
                 FILE *d = NULL;
-                
+
                 have_domain = 0;
-                
+
                 /*
                  * Default to the domain name returned via DHCP, if any
                  */
@@ -456,7 +446,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                     fgets(domain, _UTSNAME_LENGTH, d);
                     fclose(d);
                     unlink(DOMAIN_FILE);
-                    
+
                     if (!empty_str(domain) && verify_hostname(domain) == 0) {
                         debconf_set(client, "netcfg/get_domain", domain);
                         have_domain = 1;
@@ -472,9 +462,9 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                     fgets(ntpservers, DHCP_OPTION_LEN, d);
                     fclose(d);
                     unlink(NTP_SERVER_FILE);
-                    
+
                     if (!empty_str(ntpservers)) {
-                        debconf_set(client, "netcfg/dhcp_ntp_servers", 
+                        debconf_set(client, "netcfg/dhcp_ntp_servers",
                                     ntpservers);
                     }
                 }
@@ -498,7 +488,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                 } else {
                     struct ifreq ifr;
                     struct in_addr d_ipaddr = { 0 };
-                    
+
                     ifr.ifr_addr.sa_family = AF_INET;
                     strncpy(ifr.ifr_name, interface, IFNAMSIZ);
                     if (ioctl(skfd, SIOCGIFADDR, &ifr) == 0) {
@@ -508,7 +498,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                     else
                         di_warning("ioctl failed (%s)", strerror(errno));
                 }
-                
+
                 /*
                  * Default to the domain name that is the domain part
                  * of the hostname, if any
@@ -517,23 +507,23 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                     debconf_set(client, "netcfg/get_domain", ptr + 1);
                     have_domain = 1;
                 }
-                
+
                 /* Make sure we have NS going if the DHCP server didn't serve it up */
                 if (resolv_conf_entries() <= 0) {
                     char *nameservers = NULL;
-                    
+
                     if (netcfg_get_nameservers (client, &nameservers) == GO_BACK) {
                         state = ASK_OPTIONS;
                         break;
                     }
-                    
+
                     netcfg_nameservers_to_array (nameservers, nameserver_array);
                 }
-                
+
                 state = HOSTNAME;
             }
             break;
-            
+
         case ASK_OPTIONS:
             /* DHCP client may still be running */
             switch (ask_dhcp_options (client)) {
@@ -588,7 +578,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                 state = START;
             }
             break;
-            
+
         case HOSTNAME:
             if (netcfg_get_hostname (client, "netcfg/get_hostname", &hostname, 1)) {
                 /*
@@ -602,7 +592,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
             else
                 state = DOMAIN;
             break;
-            
+
         case DOMAIN:
             if (!have_domain && netcfg_get_domain (client, &domain, "medium"))
                 state = HOSTNAME;
@@ -612,7 +602,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                 return 0;
             }
             break;
-            
+
         case HOSTNAME_SANS_NETWORK:
             if (netcfg_get_hostname (client, "netcfg/get_hostname", &hostname, 0))
                 state = ASK_OPTIONS;
@@ -625,31 +615,31 @@ int netcfg_activate_dhcp (struct debconfclient *client)
             break;
         }
     }
-} 
+}
 
 /* returns number of 'nameserver' entries in resolv.conf */
 int resolv_conf_entries (void)
 {
     FILE *f;
     int count = 0;
-    
+
     if ((f = fopen(RESOLV_FILE, "r")) != NULL) {
         char buf[256];
-        
+
         while (fgets(buf, 256, f) != NULL) {
             char *ptr;
-            
+
             if ((ptr = strchr(buf, ' ')) != NULL) {
                 *ptr = '\0';
                 if (strcmp(buf, "nameserver") == 0)
                     count++;
             }
         }
-        
+
         fclose(f);
     }
     else
         count = -1;
-    
+
     return count;
 }

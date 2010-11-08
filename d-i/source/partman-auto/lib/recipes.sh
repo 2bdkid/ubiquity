@@ -27,16 +27,19 @@ autopartitioning_failed () {
 unnamed=0
 
 decode_recipe () {
-	local ignore ram line word min factor max fs iflabel label -
+	local ignore ram line word min factor max fs iflabel label map map_end -
 	ignore="${2:+${2}ignore}"
 	unnamed=$(($unnamed + 1))
 	ram=
-	if [ -x /usr/lib/base-installer/dmi-available-memory ]; then
-		ram="$(/usr/lib/base-installer/dmi-available-memory)"000
-		if [ "$ram" = 0000 ]; then
-			ram=
+	for map in /sys/firmware/memmap/*; do
+		[ -d "$map" ] || continue
+		if [ "$(cat $map/type)" = "System RAM" ]; then
+			map_end="$(cat $map/end)"
+			if [ $(($map_end > ${ram:-0})) = 1 ]; then
+				ram="$(printf %d $map_end)"
+			fi
 		fi
-	fi
+	done
 	if [ -z "$ram" ]; then
 		ram=$(grep ^Mem: /proc/meminfo | { read x y z; echo $y; }) # in bytes
 	fi

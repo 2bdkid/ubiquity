@@ -34,8 +34,8 @@ def get_supported_locales():
         _supported_locales = {}
         supported = open('/usr/share/i18n/SUPPORTED')
         for line in supported:
-            (locale, charset) = line.split(None, 1)
-            _supported_locales[locale] = charset
+            (slocale, charset) = line.split(None, 1)
+            _supported_locales[slocale] = charset
         supported.close()
     return _supported_locales
 
@@ -191,11 +191,9 @@ string_questions = {
     'closebutton1': 'ubiquity/imported/close',
     'cancelbutton1': 'ubiquity/imported/cancel',
     'okbutton1': 'ubiquity/imported/ok',
-    'advanced_cancelbutton': 'ubiquity/imported/cancel',
-    'advanced_okbutton': 'ubiquity/imported/ok',
 }
 
-string_extended = set('grub_device_label')
+string_extended = set(('grub_device_label',))
 
 def map_widget_name(prefix, name):
     """Map a widget name to its translatable template."""

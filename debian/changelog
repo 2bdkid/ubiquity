@@ -1,3 +1,38 @@
+ubiquity (2.5.0) natty; urgency=low
+
+  [ Colin Watson ]
+  * Log which package (albeit only the first one) caused us to declare
+    language support incomplete.
+  * Initialise release_notes_found in KDE prepare plugin, so that it doesn't
+    break in oem-config mode (LP: #656983).
+  * Re-enable alpha warning for natty.
+  * Fix ubiquity.i18n.string_extended set creation syntax.
+  * GTK frontend:
+    - Display inline error messages for bad usernames, rather than just
+      silently greying out the Forward button (LP: #555896).
+    - Use gobject.timeout_add_seconds rather than gobject.timeout_add in a
+      couple of places where the exact timeout period isn't critical.
+  * Adjust for changes in base-installer 1.113ubuntu1.
+  * Install new files from apt-setup 1:0.48ubuntu1.
+  * Automatic update of included source packages: apt-setup 1:0.48ubuntu1,
+    base-installer 1.113ubuntu1, choose-mirror 2.35ubuntu1, clock-setup
+    0.104ubuntu1, debian-installer-utils 1.80ubuntu1, hw-detect 1.80ubuntu1,
+    netcfg 1.56ubuntu1, partconf 1.34, partman-auto 93ubuntu1, partman-base
+    145ubuntu1, partman-basicfilesystems 67ubuntu1, partman-basicmethods 45,
+    partman-btrfs 3, partman-ext3 60ubuntu1, partman-jfs 31,
+    partman-newworld 23, partman-partitioning 77ubuntu1, partman-reiserfs
+    48, partman-target 69ubuntu1, partman-xfs 45, preseed 1.46,
+    yaboot-installer 1.1.17ubuntu1.
+
+  [ Evan Dandrea ]
+  * Merge with the maverick-cleanup branch.
+
+  [ Martin Pitt ]
+  * debian/rules: Run dh_scour to compress shipped SVG images. Add
+    python-scour build dependency.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 08 Nov 2010 14:00:56 +0000
+
 ubiquity (2.4.8) maverick; urgency=low
 
   * Automatic update of included source packages: apt-setup

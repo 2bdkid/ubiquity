@@ -7,7 +7,6 @@
 #define NETWORKS_FILE   "/etc/networks"
 #define RESOLV_FILE     "/etc/resolv.conf"
 #define DHCLIENT_CONF	"/etc/dhclient.conf"
-#define DHCLIENT3_CONF	"/etc/dhcp3/dhclient.conf"
 #define DOMAIN_FILE     "/tmp/domain_name"
 #define NTP_SERVER_FILE "/tmp/dhcp-ntp-servers"
 
@@ -129,6 +128,8 @@ extern const char *inet_mtop (int src, char *dst, socklen_t cnt);
 extern void parse_args (int argc, char** argv);
 extern void open_sockets (void);
 extern void reap_old_files (void);
+
+extern void netcfg_update_entropy (void);
 
 extern int netcfg_write_resolv (char*, struct in_addr *);
 

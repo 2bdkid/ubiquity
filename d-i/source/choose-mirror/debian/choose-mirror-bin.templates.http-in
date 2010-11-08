@@ -32,9 +32,7 @@ Type: select
 Choices: ${mirrors}
 Default: CC.archive.ubuntu.com
 Default[armel]: ports.ubuntu.com
-Default[ia64]: ports.ubuntu.com
 Default[powerpc]: ports.ubuntu.com
-Default[sparc]: ports.ubuntu.com
 # :sl1:
 _Description: Ubuntu archive mirror:
  Please select an Ubuntu archive mirror. You should use a mirror in
@@ -56,9 +54,7 @@ Template: mirror/http/directory
 Type: string
 Default: /ubuntu/
 Default[armel]: /ubuntu-ports/
-Default[ia64]: /ubuntu-ports/
 Default[powerpc]: /ubuntu-ports/
-Default[sparc]: /ubuntu-ports/
 # :sl2:
 _Description: Ubuntu archive mirror directory:
  Please enter the directory in which the mirror of the Ubuntu archive is

@@ -28,7 +28,7 @@ import os, re
 
 from ubiquity import validation
 from ubiquity.misc import execute, execute_root, dmimodel
-from ubiquity.plugin import *
+from ubiquity import plugin
 import debconf
 
 NAME = 'usersetup'
@@ -54,7 +54,26 @@ def check_hostname(hostname):
                      'or contain the sequence "..".')
     return "\n".join(e)
 
-class PageBase(PluginUI):
+def check_username(username):
+    """Returns a newline separated string of reasons why the username is
+    invalid."""
+    # TODO: i18n
+    e = []
+    # Ahem.  We can cheat here by inserting newlines where needed.  Hopefully
+    # by the time we translate this, GTK+ will have decent layout management.
+    if username:
+        if not re.match('[a-z]', username[0]):
+            e.append("Must start with a lower-case letter.")
+        # Technically both these conditions might hold.  However, the common
+        # case seems to be that somebody starts typing their name beginning
+        # with an upper-case letter, and it's probably sufficient to just
+        # issue the first error in that case.
+        elif not re.match('^[-a-z0-9_]+$', username):
+            e.append("May only contain lower-case letters,\n"
+                     "digits, hyphens, and underscores.")
+    return "\n".join(e)
+
+class PageBase(plugin.PluginUI):
     def __init__(self):
         self.suffix = dmimodel()
         if self.suffix:
@@ -150,7 +169,6 @@ class PageGtk(PageBase):
         self.hostname_edited = False
 
         import gtk
-        from ubiquity.gtkwidgets import LabelledEntry
         builder = gtk.Builder()
         self.controller.add_builder(builder)
         builder.add_from_file('/usr/share/ubiquity/gtk/stepUserInfo.ui')
@@ -258,7 +276,8 @@ class PageGtk(PageBase):
 
     def username_error(self, msg):
         self.username_ok.hide()
-        self.username_error_label.set_text(msg)
+        m = '<small><span foreground="darkred"><b>%s</b></span></small>' % msg
+        self.username_error_label.set_markup(m)
         self.username_error_label.show()
 
     def hostname_error(self, msg):
@@ -269,7 +288,8 @@ class PageGtk(PageBase):
 
     def password_error(self, msg):
         self.password_strength.hide()
-        self.password_error_label.set_text(msg)
+        m = '<small><span foreground="darkred"><b>%s</b></span></small>' % msg
+        self.password_error_label.set_markup(m)
         self.password_error_label.show()
 
     def get_hostname (self):
@@ -320,10 +340,17 @@ class PageGtk(PageBase):
             self.fullname_ok.hide()
 
         text = self.username.get_text()
-        if re.match('^[a-z][-a-z0-9_]*$', text):
-            self.username_ok.show()
+        if text:
+            error_msg = check_username(text)
+            if error_msg:
+                self.username_error(error_msg)
+                complete = False
+            else:
+                self.username_ok.show()
+                self.username_error_label.hide()
         else:
             self.username_ok.hide()
+            self.username_error_label.hide()
             complete = False
 
         passw = self.password.get_text()
@@ -397,7 +424,6 @@ class PageKde(PageBase):
         self.controller = controller
 
         from PyQt4 import uic
-        from PyQt4.QtGui import QDialog
         from PyKDE4.kdeui import KIconLoader
 
         self.plugin_widgets = uic.loadUi('/usr/share/ubiquity/qt/stepUserSetup.ui')
@@ -620,7 +646,7 @@ class PageNoninteractive(PageBase):
     def clear_errors(self):
         pass
 
-class Page(Plugin):
+class Page(plugin.Plugin):
     def prepare(self, unfiltered=False):
         if ('UBIQUITY_FRONTEND' not in os.environ or
             os.environ['UBIQUITY_FRONTEND'] != 'debconf_ui'):
@@ -694,7 +720,7 @@ class Page(Plugin):
                 self.ui.set_username(value)
 
     def run(self, priority, question):
-        return Plugin.run(self, priority, question)
+        return plugin.Plugin.run(self, priority, question)
 
     def ok_handler(self):
         self.ui.clear_errors()
@@ -738,7 +764,7 @@ class Page(Plugin):
             else:
                 self.preseed('netcfg/get_domain', '')
 
-        Plugin.ok_handler(self)
+        plugin.Plugin.ok_handler(self)
 
     def error(self, priority, question):
         if question.startswith('passwd/username-'):
@@ -748,9 +774,9 @@ class Page(Plugin):
         else:
             self.ui.error_dialog(self.description(question),
                                        self.extended_description(question))
-        return Plugin.error(self, priority, question)
+        return plugin.Plugin.error(self, priority, question)
 
-class Install(InstallPlugin):
+class Install(plugin.InstallPlugin):
     def prepare(self, unfiltered=False):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             environ = {'OVERRIDE_SYSTEM_USER': '1'}
@@ -762,9 +788,9 @@ class Install(InstallPlugin):
     def error(self, priority, question):
         self.ui.error_dialog(self.description(question),
                              self.extended_description(question))
-        return InstallPlugin.error(self, priority, question)
+        return plugin.InstallPlugin.error(self, priority, question)
 
     def install(self, target, progress, *args, **kwargs):
         progress.info('ubiquity/install/user')
-        return InstallPlugin.install(self, target, progress, *args, **kwargs)
+        return plugin.InstallPlugin.install(self, target, progress, *args, **kwargs)
 

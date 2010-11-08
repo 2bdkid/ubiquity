@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: debian-installer.2006071\n"
 "Report-Msgid-Bugs-To: choose-mirror@packages.debian.org\n"
 "POT-Creation-Date: 2010-01-26 22:47+0000\n"
-"PO-Revision-Date: 2008-09-09 00:29+0400\n"
+"PO-Revision-Date: 2010-06-16 23:08+0400\n"
 "Last-Translator: Aiet Kolkhi <aietkolkhi@gmail.com>\n"
 "Language-Team: Georgian\n"
 "MIME-Version: 1.0\n"
@@ -39,16 +39,15 @@ msgstr "Ubuntu-ს არქივის სარკის შემოწმ�
 #. Description
 #. :sl1:
 #: ../choose-mirror-bin.templates-in:6001
-#, fuzzy
 msgid "Downloading Release files..."
-msgstr "Release-ფაილის ჩამოტვირთვა..."
+msgstr "Release-ფაილების ჩამოტვირთვა..."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../choose-mirror-bin.templates-in:7001
 msgid "Go back and try a different mirror?"
-msgstr ""
+msgstr "გსირთ დაბრუნება და სხვა სარკის (სერვერის) ცდა?"
 
 #. Type: boolean
 #. Description
@@ -60,6 +59,11 @@ msgid ""
 "release for your installation, but normally you should go back and select a "
 "different mirror that does support the correct version."
 msgstr ""
+"მითითებული (ნაგულისხმევი) Debian ვერსია (${RELEASE}) ამორჩეულ სარკეზე "
+"(სერვერზე) არ არის ხელმისაწვდომი. თქვენ შეგიძლიათ გააგრძელოთ და "
+"საინსტალაციოდ სხვა გამოშვება ამოირჩიოთ, თუმცა უმეტეს შემთხვევაში "
+"რეკომენდირებულია დაბრუნება და სხვა სარკის ამორჩევა, რომელსახ სწორი ვერსიის "
+"მხარდაჭერა გააჩნია."
 
 #. Type: error
 #. Description
@@ -72,11 +76,10 @@ msgstr "არქივის სარკის პრობლემა"
 #. Description
 #. :sl2:
 #: ../choose-mirror-bin.templates-in:8001
-#, fuzzy
 msgid ""
 "An error has been detected while trying to use the specified Ubuntu archive "
 "mirror."
-msgstr "შეცდომა ბირთვის ინსტალაციისას."
+msgstr "შრიფტის ზომა:"
 
 #. Type: error
 #. Description
@@ -88,6 +91,10 @@ msgid ""
 "broken (for example because an invalid Release file was found); mirror does "
 "not support the correct Ubuntu version."
 msgstr ""
+"შეცდომის შესაძლო მიზეზებია: არასწორი სარკის მითითება; სარკე არ არის "
+"ხელმისაწვდომი (სავარაუდოდ ქსელის არასტაბილური კავშირის გამო); სარკე "
+"გატეხილია (მაგ. არასწორი ფორმატის მქონე Release ფაილის გამო); სარკეს Debian-"
+"ის სწორი ვერსია არ გააჩნია."
 
 #. Type: error
 #. Description
@@ -97,14 +104,15 @@ msgid ""
 "Additional details may be available in /var/log/syslog or on virtual console "
 "4."
 msgstr ""
+"შეიძლება დამატებითი მონაცემების ნახვა /var/log/syslog მდებარეობიდან, 4-ე "
+"ვირტუალურ კონსოლზე."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../choose-mirror-bin.templates-in:8001
-#, fuzzy
 msgid "Please check the specified mirror or try a different one."
-msgstr "დაწვრილებით იხილეთ syslog."
+msgstr "შრიფტის ზომა:"
 
 #. Type: error
 #. Description
@@ -128,9 +136,8 @@ msgstr ""
 #. Description
 #. :sl2:
 #: ../choose-mirror-bin.templates-in:10001
-#, fuzzy
 msgid "oldstable"
-msgstr "სტაბილური"
+msgstr "oldstable"
 
 #. Type: text
 #. Description

@@ -4,17 +4,17 @@
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
 # Catalan messages for debian-installer.
-# Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008 Software in the Public Interest, Inc.
+# Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004, 2006, 2007, 2008.
+# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004, 2006, 2007, 2008, 2010.
 # Guillem Jover <guillem@debian.org>, 2005, 2007.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer lenny\n"
+"Project-Id-Version: debian-installer squeeze\n"
 "Report-Msgid-Bugs-To: hw-detect@packages.debian.org\n"
-"POT-Creation-Date: 2009-07-21 22:48+0000\n"
-"PO-Revision-Date: 2008-09-17 16:55+0200\n"
+"POT-Creation-Date: 2010-06-01 22:47+0000\n"
+"PO-Revision-Date: 2010-06-26 16:46+0200\n"
 "Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -100,7 +100,7 @@ msgstr "S'està detectant el maquinari de xarxa"
 #. Description
 #. Main menu item
 #. :sl1:
-#: ../ethdetect.templates:5001
+#: ../ethdetect.templates:6001
 msgid "Detect network hardware"
 msgstr "Detecta el maquinari de xarxa"
 
@@ -394,3 +394,31 @@ msgstr "Els fitxers de microprogramari que manquen són: ${FILES}"
 #: ../hw-detect.templates:12001
 msgid "Checking for firmware..."
 msgstr "S'està comprovant el microprogramari..."
+
+#. Type: text
+#. Description
+#. Main menu item
+#. :sl3:
+#: ../driver-injection-disk-detect.templates:1001
+msgid "Detect virtual driver disks from hardware manufacturer"
+msgstr "Detecta els discs virtuals de controladors de fabricants de maquinari"
+
+#. Type: boolean
+#. Description
+#. :sl3:
+#: ../driver-injection-disk-detect.templates:2001
+msgid "Load drivers from internal virtual driver disk?"
+msgstr ""
+"Voleu carregar els controladors des d'un disc virtual de controladors intern?"
+
+#. Type: boolean
+#. Description
+#. :sl3:
+#: ../driver-injection-disk-detect.templates:2001
+msgid ""
+"Installing on this hardware may require some drivers provided by the "
+"manufacturer to be loaded from the built-in driver injection disk."
+msgstr ""
+"La instaŀlació en aquest maquinari pot requerir la càrrega d'alguns "
+"controladors proveïts pel fabricant al disc d'injecció de controladors "
+"integrats."

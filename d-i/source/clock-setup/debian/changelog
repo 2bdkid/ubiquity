@@ -1,3 +1,32 @@
+clock-setup (0.104ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Apparently OpenSolaris keeps the hardware clock in local time
+      (surprisingly).  Assume UTC=no if Solaris is detected.
+    - Pass --noadjfile to hwclock.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 12 Oct 2010 11:47:56 +0100
+
+clock-setup (0.104) unstable; urgency=low
+
+  * Don't bind mount /dev to /target/dev before calling hwclock. It is
+    already done on Linux, or devfs mounted twice on GNU/kFreeBSD, 
+    during the whole install process.
+
+  [ Updated translations ]
+  * Asturian (ast.po) by maacub
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Armin Beširović
+  * Danish (da.po) by Jacob Sparre Andersen
+  * Persian (fa.po) by Ebrahim Byagowi
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
+  * Telugu (te.po) by Arjuna Rao Chavala
+
+ -- Aurelien Jarno <aurel32@debian.org>  Mon, 23 Aug 2010 00:16:40 +0200
+
 clock-setup (0.103ubuntu1) maverick; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

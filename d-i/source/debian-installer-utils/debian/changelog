@@ -1,3 +1,39 @@
+debian-installer-utils (1.80ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 15 Oct 2010 11:58:35 +0100
+
+debian-installer-utils (1.80) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Record mountpoints immediately after mounting /target/proc, /target/sys,
+    etc.  Add a chroot_cleanup_localmounts function to chroot-setup.sh which
+    differs from chroot_cleanup in that it undoes just these mounts rather
+    than checking for others created since chroot_setup was called, mainly
+    for use by apt-setup.
+
+  [ Samuel Thibault ]
+  * debian/rules: Add mach-color terminfo on hurd.
+
+  [ Otavio Salvador ]
+  * Provide a consistent mtab file in /target to allow usage of this
+    information by tasksel and other utilities during install.
+
+  [ Updated translations ]
+  * Danish (da.po) by Anders Jenbo
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 14 Oct 2010 12:00:27 -0300
+
 debian-installer-utils (1.79ubuntu1) maverick; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

@@ -3,31 +3,35 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Serbian/Cyrillic translation of cp6Linux.
+# Serbian/Cyrillic messages for debian-installer.
+# Copyright (C) 2010 Software in the Public Interest, Inc.
 # Copyright (C) 2008 THE cp6Linux'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the cp6Linux package.
+# This file is distributed under the same license as the debian-installer package.
+# Karolina Kalic <karolina@janos.in.rs>, 2010.
+# Janos Guljas <janos@janos.in.rs>, 2010.
 # Veselin Mijušković <veselin.mijuskovic@gmail.com>, 2008.
 # , fuzzy
 #
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: cp6Linux 2008\n"
+"Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: base-installer@packages.debian.org\n"
 "POT-Creation-Date: 2009-10-06 22:47+0000\n"
-"PO-Revision-Date: 2008-09-19 22:27+0100\n"
-"Last-Translator: Veselin Mijušković <panzer@cp6linux.org>\n"
+"PO-Revision-Date: 2010-08-08 02:26+0100\n"
+"Last-Translator: Karolina Kalic <karolina@janos.in.rs>\n"
 "Language-Team: Serbian/Cyrillic\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../base-installer.templates:1001
 msgid "Proceed with installation to unclean target?"
-msgstr "Да наставим са инсталацијом на неочишћен циљни фајл систем?"
+msgstr "Наставити са инсталацијом на неочишћен циљни фајл систем?"
 
 #. Type: boolean
 #. Description
@@ -38,8 +42,8 @@ msgid ""
 "could cause problems with the installation process, and if you proceed, some "
 "of the existing files may be overwritten."
 msgstr ""
-"Циљни фајл систем садржи фајлове од прошле инсталације. Ови фајловимогу "
-"узроковати проблеме са процесом инсталације и, ако наставите, некиод "
+"Циљни фајл систем садржи фајлове од прошле инсталације. Ови фајлови могу "
+"узроковати проблеме са процесом инсталације и, ако наставите, неки од "
 "постојећих фајлова могу бити преписани."
 
 #. Type: error
@@ -47,7 +51,7 @@ msgstr ""
 #. :sl2:
 #: ../base-installer.templates:2001
 msgid "No file system mounted on /target"
-msgstr "Ни један фајл систем није закачен на /target"
+msgstr "Ни један фајл систем није монтиран на /target"
 
 #. Type: error
 #. Description
@@ -57,7 +61,7 @@ msgid ""
 "Before the installation can proceed, a root file system must be mounted on /"
 "target. The partitioner and formatter should have done this for you."
 msgstr ""
-"Пре него што инсталација настави, root фајл систем мора бити закаченна /"
+"Пре него што инсталација настави, root фајл систем мора бити монтиран /"
 "target. Програм за партиционисање и форматирање је требало то да учини за "
 "вас."
 
@@ -66,7 +70,7 @@ msgstr ""
 #. :sl2:
 #: ../base-installer.templates:3001
 msgid "Not installing to unclean target"
-msgstr "Не инсталирам на неочишћени циљни фајл систем."
+msgstr "Онемогућено инсталирање на неочишћени циљни фајл систем."
 
 #. Type: error
 #. Description
@@ -78,7 +82,7 @@ msgid ""
 "install."
 msgstr ""
 "Инсталација на циљни фајл систем је прекинута. Требало би да се вратите "
-"назад и обришете или форматирате циљни фајл систем пренего што наставите "
+"назад и обришете или форматирате циљни фајл систем пре него што наставите "
 "инсталацију."
 
 #. Type: text
@@ -86,49 +90,49 @@ msgstr ""
 #. :sl1:
 #: ../base-installer.templates:4001
 msgid "Preparing to install the base system..."
-msgstr "Припремам инсталацију основног система..."
+msgstr "Припремање инсталације основног система..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:5001 ../bootstrap-base.templates:31001
 msgid "Installing the base system"
-msgstr "Инсталирам основни систем"
+msgstr "Инсталирање основног систем"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:6001
 msgid "Running ${SCRIPT}..."
-msgstr "Извршавам ${SCRIPT}..."
+msgstr "Извршавање скрипте ${SCRIPT}..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:7001
 msgid "Setting up the base system..."
-msgstr "Подешавам основни систем..."
+msgstr "Подешавање основног система..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:8001 ../bootstrap-base.templates:60001
 msgid "Configuring APT sources..."
-msgstr "Конфигуришем изворе за APT..."
+msgstr "Конфигурисање извора за APT..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:9001
 msgid "Updating the list of available packages..."
-msgstr "Ажурирам листу доступних пакета..."
+msgstr "Ажурирање листе доступних пакета..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../base-installer.templates:10001
 msgid "Installing extra packages..."
-msgstr "Инсталирам додатне пакете..."
+msgstr "Инсталирање додатних пакета..."
 
 #. Type: text
 #. Description
@@ -136,7 +140,7 @@ msgstr "Инсталирам додатне пакете..."
 #. :sl1:
 #: ../base-installer.templates:11001
 msgid "Installing extra packages - retrieving and installing ${SUBST0}..."
-msgstr "Инсталирам доддатне пакете - довлачим и инсталирам ${SUBST0}..."
+msgstr "Инсталирање додатних пакета - преузимање и инсталирање ${SUBST0}..."
 
 #. Type: text
 #. Description
@@ -154,7 +158,7 @@ msgstr "Инсталирај основни систем"
 #. :sl2:
 #: ../bootstrap-base.templates:3001
 msgid "Cannot install base system"
-msgstr "Не могу да инсталирам основни систем"
+msgstr "Немогућа инсталација основног система"
 
 #. Type: error
 #. Description
@@ -166,9 +170,8 @@ msgid ""
 "The installer cannot figure out how to install the base system. No "
 "installable CD-ROM was found and no valid mirror was configured."
 msgstr ""
-"Програм за инсталацију не може да смисли како да инсталира основни систем. "
-"Није пронађен ни један ЦД-РОМ са инсталацијом и ниједан валидан мирор није "
-"конфигурисан."
+"Програм за инсталацију не може да инсталира основни систем. Није пронађен ни "
+"један CD-ROM са инсталацијом и ниједан валидан мирор није конфигурисан."
 
 #. Type: error
 #. Description
@@ -205,28 +208,28 @@ msgstr ""
 #: ../bootstrap-base.templates:20001 ../bootstrap-base.templates:21001
 #: ../bootstrap-base.templates:22001 ../bootstrap-base.templates:23001
 msgid "Debootstrap Error"
-msgstr "Грешка програма 'debootstrap'"
+msgstr "Грешка програма „debootstrap“"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:4001
 msgid "Failed to determine the codename for the release."
-msgstr "Не могу да одредим кодно име за ово издање."
+msgstr "Немогуће одредити кодно име за ово издање."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:5001
 msgid "Failed to install the base system"
-msgstr "Нисам успео да инсталирам основни систем"
+msgstr "Неуспело инсталирање основног система"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:5001
 msgid "The base system installation into /target/ failed."
-msgstr "Није успела инсталација основног система на /target."
+msgstr "Неуспела инсталација основног система на /target."
 
 #. Type: error
 #. Description
@@ -269,14 +272,14 @@ msgstr "Грешка при инсталацији основног систем
 msgid ""
 "The debootstrap program exited with an error (return value ${EXITCODE})."
 msgstr ""
-"Програм 'debootstrap' је завршио за грешком (повратна вредност ${EXITCODE})."
+"Програм „debootstrap“ је завршио за грешком (повратна вредност ${EXITCODE})."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:7001
 msgid "The debootstrap program exited abnormally."
-msgstr "Програм 'debootstrap' није завршио нормално."
+msgstr "Програм „debootstrap“ није завршио нормално."
 
 #. Type: error
 #. Description
@@ -289,7 +292,7 @@ msgstr "Дошло је до следеће грешке:"
 #. Description
 #: ../bootstrap-base.templates:9001
 msgid "Tool to use to generate boot initrd:"
-msgstr "Алат који се користи за генерисање покретачког 'initrd'-а:"
+msgstr "Алат који се користи за генерисање покретачког „initrd“-а:"
 
 #. Type: select
 #. Description
@@ -308,7 +311,7 @@ msgstr ""
 #. :sl3:
 #: ../bootstrap-base.templates:10001
 msgid "Unsupported initrd generator"
-msgstr "Неподржани генератор 'initrd'-а"
+msgstr "Неподржани генератор „initrd“-а"
 
 #. Type: error
 #. Description
@@ -318,28 +321,28 @@ msgid ""
 "The package ${GENERATOR} that was selected to generate the initrd is not "
 "supported."
 msgstr ""
-"Пакет ${GENERATOR} који је одабран за генерисање 'initrd'-а није подржан."
+"Пакет ${GENERATOR} који је изабран за генерисање „initrd“-а није подржан."
 
 #. Type: select
 #. Choices
 #. :sl3:
 #: ../bootstrap-base.templates:11001
 msgid "generic: include all available drivers"
-msgstr ""
+msgstr "генерички: укључи све доступне драјвере"
 
 #. Type: select
 #. Choices
 #. :sl3:
 #: ../bootstrap-base.templates:11001
 msgid "targeted: only include drivers needed for this system"
-msgstr ""
+msgstr "циљано: укључи само драјвере потребне за систем"
 
 #. Type: select
 #. Description
 #. :sl3:
 #: ../bootstrap-base.templates:11002
 msgid "Drivers to include in the initrd:"
-msgstr ""
+msgstr "Драјвери у оквиру „initrd“-а:"
 
 #. Type: select
 #. Description
@@ -350,6 +353,9 @@ msgid ""
 "file system. It therefore needs to contain all drivers and supporting "
 "programs required to do that."
 msgstr ""
+"Основна функција „initrd“-а је да омогући кернелу монтирање root фајл "
+"система. Због тога треба да садржи све драјвере и програме који су потребни "
+"за то."
 
 #. Type: select
 #. Description
@@ -362,13 +368,17 @@ msgid ""
 "smaller targeted initrd there is a very small chance that not all needed "
 "drivers are included."
 msgstr ""
+"Генерички initrd је много већи од циљаног и може бити толико велики да неки "
+"бут лоудери неће моћи да га учитају, али има предност да се може користити "
+"на било ком хардверсом систему. Са циљаним initrd-ом постоји веома мала да "
+"нису укључени сви драјвери."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:12001
 msgid "Unable to install the selected kernel"
-msgstr "Не могу да инсталирам одабрани кернел."
+msgstr "Немогуће инсталирање изабраног кернела."
 
 #. Type: error
 #. Description
@@ -377,7 +387,7 @@ msgstr "Не могу да инсталирам одабрани кернел."
 msgid ""
 "An error was returned while trying to install the kernel into the target "
 "system."
-msgstr "Настала је грешка при покушају да инсталирам кернел на циљни систем."
+msgstr "Настала је грешка при покушају инсталације кернела на циљни систем."
 
 #. Type: error
 #. Description
@@ -411,15 +421,15 @@ msgid ""
 "The list shows the available kernels. Please choose one of them in order to "
 "make the system bootable from the hard drive."
 msgstr ""
-"Листа приказује доступне кернеле. Молим, одаберите један од њих да би систем "
-"могао да се покрене са хард диска."
+"Листа приказује доступне кернеле. Изаберите један од њих да би систем могао "
+"да се покрене са хард диска."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:15001
 msgid "Continue without installing a kernel?"
-msgstr "Да ли желите да наставите без инсталирања кернела?"
+msgstr "Наставити без инсталирања кернела?"
 
 #. Type: boolean
 #. Description
@@ -448,7 +458,7 @@ msgstr ""
 #. :sl2:
 #: ../bootstrap-base.templates:16001
 msgid "Cannot install kernel"
-msgstr "Не могу да инсталирам кернел"
+msgstr "Немогућа инсталација кернела"
 
 #. Type: error
 #. Description
@@ -462,7 +472,7 @@ msgstr "Програм за инсталацију не може да нађе �
 #. :sl2:
 #: ../bootstrap-base.templates:17001
 msgid "Unable to install ${PACKAGE}"
-msgstr "Не могу да инсталирам ${PACKAGE}"
+msgstr "Иннсталирање ${PACKAGE} несупешно"
 
 #. Type: error
 #. Description
@@ -481,7 +491,7 @@ msgstr ""
 #. SUBST0 is a Release file name.
 #: ../bootstrap-base.templates:18001
 msgid "Failed getting Release file ${SUBST0}."
-msgstr "Нисам успео да довучем 'Release' датотеку ${SUBST0}."
+msgstr "Неуспело преузимање „Release“ фајла ${SUBST0}."
 
 #. Type: error
 #. Description
@@ -489,7 +499,7 @@ msgstr "Нисам успео да довучем 'Release' датотеку ${S
 #. SUBST0 is a Release.gpg file name
 #: ../bootstrap-base.templates:19001
 msgid "Failed getting Release signature file ${SUBST0}."
-msgstr "Нисам успео да довучем потпис Release датотеке ${SUBST0}."
+msgstr "Неуспело преузимање потписа „Release“ фајла ${SUBST0}."
 
 #. Type: error
 #. Description
@@ -497,15 +507,14 @@ msgstr "Нисам успео да довучем потпис Release дато�
 #. SUBST0 is a gpg key ID
 #: ../bootstrap-base.templates:20001
 msgid "Release file signed by unknown key (key id ${SUBST0})"
-msgstr ""
-"Датотека 'Release' потписана је непознатим кључем (ознака кључа ${SUBST0})"
+msgstr "„Release“ фајл потписан је непознатим кључем (ознака кључа ${SUBST0})"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../bootstrap-base.templates:21001
 msgid "Invalid Release file: no valid components."
-msgstr "Неисправна 'Release' датотека: нема валидних компоненти."
+msgstr "Неисправан „Release“ фајл: нема валидних компоненти."
 
 #. Type: error
 #. Description
@@ -513,7 +522,7 @@ msgstr "Неисправна 'Release' датотека: нема валидни
 #. SUBST0 is a filename
 #: ../bootstrap-base.templates:22001
 msgid "Invalid Release file: no entry for ${SUBST0}."
-msgstr "Неисправна 'Release' датотека: нема ставке за ${SUBST0}."
+msgstr "Неисправан „Release“ фајл: нема ставке за ${SUBST0}."
 
 #. Type: error
 #. Description
@@ -525,8 +534,8 @@ msgid ""
 "Couldn't retrieve ${SUBST0}. This may be due to a network problem or a bad "
 "CD, depending on your installation method."
 msgstr ""
-"Не могу да довучем ${SUBST0}. Разлог може бити проблем са мрежом или лош ЦД, "
-"зависно од одабраног метода инсталације."
+"Неуспело преузимање ${SUBST0}. Разлог може бити проблем са мрежом или лош "
+"CD, зависно од изабраног метода инсталације."
 
 #. Type: error
 #. Description
@@ -538,7 +547,7 @@ msgid ""
 "If you are installing from CD-R or CD-RW, burning the CD at a lower speed "
 "may help."
 msgstr ""
-"Ако инсталирате са нарезаног ЦД-а, нарезивање са мањом брзином може помоћи."
+"Ако инсталирате са нарезаног CD-а, нарезивање са мањом брзином може помоћи."
 
 #. Type: text
 #. Description
@@ -546,7 +555,7 @@ msgstr ""
 #. Release is a filename which should not be translated
 #: ../bootstrap-base.templates:24001
 msgid "Retrieving Release file"
-msgstr "Довлачим 'Release' датотеку"
+msgstr "Преузимање „Release“ фајла"
 
 #. Type: text
 #. Description
@@ -554,7 +563,7 @@ msgstr "Довлачим 'Release' датотеку"
 #. Release is a filename which should not be translated
 #: ../bootstrap-base.templates:25001
 msgid "Retrieving Release file signature"
-msgstr "Довлачим потпис 'Release' датотеке"
+msgstr "Преузимање потписа „Release“ фајла"
 
 #. Type: text
 #. Description
@@ -562,7 +571,7 @@ msgstr "Довлачим потпис 'Release' датотеке"
 #. "packages" here can be translated
 #: ../bootstrap-base.templates:26001
 msgid "Finding package sizes"
-msgstr "Рачунам величине пакета"
+msgstr "Рачунање величине пакета"
 
 #. Type: text
 #. Description
@@ -570,7 +579,7 @@ msgstr "Рачунам величине пакета"
 #. Packages is a filename which should not be translated
 #: ../bootstrap-base.templates:27001
 msgid "Retrieving Packages files"
-msgstr "Довлачим 'Packages' датотеке"
+msgstr "Преузимање „Packages“ фајлова"
 
 #. Type: text
 #. Description
@@ -578,7 +587,7 @@ msgstr "Довлачим 'Packages' датотеке"
 #. Packages is a filename which should not be translated
 #: ../bootstrap-base.templates:28001
 msgid "Retrieving Packages file"
-msgstr "Довлачим 'Packages' датотеку"
+msgstr "Преузимање „Packages“ фајла"
 
 #. Type: text
 #. Description
@@ -586,7 +595,7 @@ msgstr "Довлачим 'Packages' датотеку"
 #. "packages" here can be translated
 #: ../bootstrap-base.templates:29001
 msgid "Retrieving packages"
-msgstr "Довлачим пакете"
+msgstr "Преузимање пакета"
 
 #. Type: text
 #. Description
@@ -594,7 +603,7 @@ msgstr "Довлачим пакете"
 #. "packages" here can be translated
 #: ../bootstrap-base.templates:30001
 msgid "Extracting packages"
-msgstr "Извлачим пакете"
+msgstr "Отпакивање пакета"
 
 #. Type: text
 #. Description
@@ -605,7 +614,7 @@ msgstr "Извлачим пакете"
 #. be installed on the base system because of dependency resolution
 #: ../bootstrap-base.templates:32001
 msgid "Installing core packages"
-msgstr "Инсталирам кључне пакете"
+msgstr "Инсталирање основних пакета"
 
 #. Type: text
 #. Description
@@ -616,14 +625,14 @@ msgstr "Инсталирам кључне пакете"
 #. packages from the core packages depends on them
 #: ../bootstrap-base.templates:33001
 msgid "Unpacking required packages"
-msgstr "Распакујем захтеване пакете"
+msgstr "Отпакивање потребних пакета"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:34001
 msgid "Configuring required packages"
-msgstr "Конфигуришем захтеване пакете"
+msgstr "Конфигурисање потребних пакета"
 
 #. Type: text
 #. Description
@@ -632,7 +641,7 @@ msgstr "Конфигуришем захтеване пакете"
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
 #: ../bootstrap-base.templates:35001
 msgid "Unpacking the base system"
-msgstr "Распакујем основни систем"
+msgstr "Отпакивање основног система"
 
 #. Type: text
 #. Description
@@ -641,7 +650,7 @@ msgstr "Распакујем основни систем"
 #. See http://www.debian.org/doc/debian-policy/ch-binary.html#s3.7
 #: ../bootstrap-base.templates:36001
 msgid "Configuring the base system"
-msgstr "Конфигуришем основни систем"
+msgstr "Конфигурисање основног система"
 
 #. Type: text
 #. Description
@@ -656,7 +665,7 @@ msgstr "${SECTION}: ${INFO}..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:38001
 msgid "Validating ${SUBST0}..."
-msgstr "Вршим валидацију ${SUBST0}..."
+msgstr "Проверавање ${SUBST0}..."
 
 #. Type: text
 #. Description
@@ -664,7 +673,7 @@ msgstr "Вршим валидацију ${SUBST0}..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:39001
 msgid "Retrieving ${SUBST0}..."
-msgstr "Довлачим ${SUBST0}..."
+msgstr "Преузимање ${SUBST0}..."
 
 #. Type: text
 #. Description
@@ -672,7 +681,7 @@ msgstr "Довлачим ${SUBST0}..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:40001
 msgid "Extracting ${SUBST0}..."
-msgstr "Извлачим ${SUBST0}..."
+msgstr "Отпакивање ${SUBST0}..."
 
 #. Type: text
 #. Description
@@ -680,7 +689,7 @@ msgstr "Извлачим ${SUBST0}..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:41001
 msgid "Unpacking ${SUBST0}..."
-msgstr "Распакујем ${SUBST0}..."
+msgstr "Отпакивање ${SUBST0}..."
 
 #. Type: text
 #. Description
@@ -688,14 +697,14 @@ msgstr "Распакујем ${SUBST0}..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:42001
 msgid "Configuring ${SUBST0}..."
-msgstr "Конфигуришем ${SUBST0}..."
+msgstr "Конфигурисање ${SUBST0}..."
 
 #. Type: text
 #. Description
 #. Release is a filename which should not be translated
 #: ../bootstrap-base.templates:43001
 msgid "Checking Release signature"
-msgstr "Проверавам потпис 'Release' датотеке"
+msgstr "Провера потписа „Release“ фајла"
 
 #. Type: text
 #. Description
@@ -704,14 +713,14 @@ msgstr "Проверавам потпис 'Release' датотеке"
 #. Release is a filename which should not be translated
 #: ../bootstrap-base.templates:44001
 msgid "Valid Release signature (key id ${SUBST0})"
-msgstr "Валидан потпис 'Release' датотеке (ознака кључа ${SUBST0})"
+msgstr "Валидан потпис „Release“ фајла (ознака кључа ${SUBST0})"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:45001
 msgid "Resolving dependencies of base packages..."
-msgstr "Одређујем зависности основних пакета..."
+msgstr "Одређивање зависности основних пакета..."
 
 #. Type: text
 #. Description
@@ -719,7 +728,7 @@ msgstr "Одређујем зависности основних пакета...
 #. SUBST0 is a list of packages
 #: ../bootstrap-base.templates:46001
 msgid "Found additional base dependencies: ${SUBST0}"
-msgstr "Пронашао сам додатне основне зависности: ${SUBST0}"
+msgstr "Пронађене су додатне основне зависности: ${SUBST0}"
 
 #. Type: text
 #. Description
@@ -727,7 +736,7 @@ msgstr "Пронашао сам додатне основне зависност
 #. SUBST0 is a list of packages
 #: ../bootstrap-base.templates:47001
 msgid "Found additional required dependencies: ${SUBST0}"
-msgstr "Пронашао сам захтеване зависности: ${SUBST0}"
+msgstr "Пронађене су потребне зависности: ${SUBST0}"
 
 #. Type: text
 #. Description
@@ -735,14 +744,14 @@ msgstr "Пронашао сам захтеване зависности: ${SUBST
 #. SUBST0 is a list of packages
 #: ../bootstrap-base.templates:48001
 msgid "Found packages in base already in required: ${SUBST0}"
-msgstr "Пронађени основни пакети већ у списку захтеваних: ${SUBST0}"
+msgstr "Пронађени основни пакети већ у списку потребних: ${SUBST0}"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:49001
 msgid "Resolving dependencies of required packages..."
-msgstr "Одређујем зависности захтеваних пакета..."
+msgstr "Одређивање зависности потребних пакета..."
 
 #. Type: text
 #. Description
@@ -751,7 +760,7 @@ msgstr "Одређујем зависности захтеваних пакет�
 #. SUBST1 is a mirror
 #: ../bootstrap-base.templates:50001
 msgid "Checking component ${SUBST0} on ${SUBST1}..."
-msgstr "Проверавам компоненту ${SUBST0} на ${SUBST1}..."
+msgstr "Проверавање компоненте ${SUBST0} на ${SUBST1}..."
 
 #. Type: text
 #. Description
@@ -762,7 +771,7 @@ msgstr "Проверавам компоненту ${SUBST0} на ${SUBST1}..."
 #. be installed on the base system because of dependency resolution
 #: ../bootstrap-base.templates:51001
 msgid "Installing core packages..."
-msgstr "Инсталирам кључне пакете..."
+msgstr "Инсталирање основних пакета..."
 
 #. Type: text
 #. Description
@@ -773,7 +782,7 @@ msgstr "Инсталирам кључне пакете..."
 #. packages from the core packages depends on them
 #: ../bootstrap-base.templates:52001
 msgid "Unpacking required packages..."
-msgstr "Распакујем захтеване пакете..."
+msgstr "Отпакивање потребних пакета..."
 
 #. Type: text
 #. Description
@@ -784,28 +793,28 @@ msgstr "Распакујем захтеване пакете..."
 #. packages from the core packages depends on them
 #: ../bootstrap-base.templates:53001
 msgid "Configuring required packages..."
-msgstr "Конфигуришем захтеване пакете..."
+msgstr "Конфигурисање потребних пакета..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:54001
 msgid "Installing base packages..."
-msgstr "Инсталирам основне пакете..."
+msgstr "Инсталирање основних пакета..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:55001
 msgid "Unpacking the base system..."
-msgstr "Распакујем основни систем..."
+msgstr "Отпакивање основног система..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:56001
 msgid "Configuring the base system..."
-msgstr "Конфигуришем основни систем..."
+msgstr "Конфигурисање основног система..."
 
 #. Type: text
 #. Description
@@ -820,7 +829,7 @@ msgstr "Основни систем успешно инсталиран."
 #. :sl2:
 #: ../bootstrap-base.templates:58001
 msgid "Debootstrap warning"
-msgstr "Упозорење програма 'debootstrap'"
+msgstr "Упозорење програма „debootstrap“"
 
 #. Type: error
 #. Description
@@ -836,21 +845,21 @@ msgstr "Упозорење: ${INFO}"
 #. :sl2:
 #: ../bootstrap-base.templates:59001
 msgid "Retrying failed download of ${SUBST0}"
-msgstr "Покушавам поновно довлачење ${SUBST0}"
+msgstr "Поновно преузимање ${SUBST0}"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:61001
 msgid "Selecting the kernel to install..."
-msgstr "Одабирам кернел за инсталацију..."
+msgstr "Бирање кернела за инсталацију..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../bootstrap-base.templates:62001
 msgid "Installing the kernel..."
-msgstr "Инсталирам кернел..."
+msgstr "Инсталирање кернела..."
 
 #. Type: text
 #. Description
@@ -858,4 +867,4 @@ msgstr "Инсталирам кернел..."
 #. SUBST0 is a package name
 #: ../bootstrap-base.templates:63001
 msgid "Installing the kernel - retrieving and installing ${SUBST0}..."
-msgstr "Инсталирам кернел - довлачим и инсталирам ${SUBST0}..."
+msgstr "Инсталирање кернела - преузимање и инсталирање ${SUBST0}..."
