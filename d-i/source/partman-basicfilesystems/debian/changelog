@@ -1,3 +1,52 @@
+partman-basicfilesystems (68ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Add minimal support for NTFS partitions using ntfs-3g.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+      file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Stop checking ext2 filesystems using libparted, since it can't deal
+      with those created with recent versions of mke2fs.  We were already
+      refraining from checking ext3 and ext4 filesystems using libparted for
+      the same reason.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 10:58:10 +0000
+
+partman-basicfilesystems (68) unstable; urgency=low
+
+  [ Updated translations ]
+  * Asturian (ast.po) by maacub
+  * Bengali (bn.po) by Israt Jahan
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Ask Hjorth Larsen
+  * Estonian (et.po) by Mattias Põldaru
+  * Persian (fa.po) by Behrad Eslamifar
+  * Galician (gl.po) by Jorge Barreiro
+  * Hungarian (hu.po) by SZERVÁC Attila
+  * Indonesian (id.po) by Arief S Fitrianto
+  * Icelandic (is.po) by Sveinn í Felli
+  * Italian (it.po) by Milo Casagrande
+  * Korean (ko.po) by Changwoo Ryu
+  * Dutch (nl.po) by Eric Spreen
+  * Telugu (te.po) by Arjuna Rao Chavala
+  * Ukrainian (uk.po) by Borys Yanovych
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 12 Nov 2010 16:21:41 -0200
+
 partman-basicfilesystems (67ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

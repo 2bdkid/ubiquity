@@ -75,6 +75,14 @@ grub_serial_console() {
 
 serial="$(get_serial_console)"
 
+grub_probe () {
+	if [ "$is_grub_common_installed" != true ]; then
+		apt-install grub-common
+		is_grub_common_installed=true
+	fi
+	$chroot $ROOT grub-probe $@
+}
+
 device_map=$ROOT/boot/grub/device.map
 
 # Usage: convert os_device
@@ -98,7 +106,7 @@ convert () {
 		mv $temp_map $device_map
 	fi
 
-	tmp_drive="$($chroot $ROOT grub-probe -d -t drive "$1")" || exit $?
+	tmp_drive="$(grub_probe -d -t drive "$1")" || exit $?
 	if [ "$partition_offset" != 0 ]; then
 		tmp_part="$(echo "$tmp_drive" | sed 's%.*,\([0-9]*\)).*%\1%')"
 		if [ "$tmp_part" ] && [ "$tmp_part" != "$tmp_drive" ]; then
@@ -126,42 +134,33 @@ hurd_convert () {
 	echo "$dr_type${dr_num}s$dr_part"
 }
 
+# This should probably be rewritten using udevadm or similar.
+device_to_disk () {
+	echo "$1" | \
+		sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[a-z]\+\).*:\1:'
+}
+
 # Run update-grub in $ROOT
 update_grub () {
-	# TODO cjwatson 2009-10-21: just use in-target?
-	umountproc=false
-	umountsys=false
-	if [ ! -e $ROOT/proc/cmdline ]; then
-		$chroot $ROOT mount /proc
-		umountproc=:
+	local in_target
+	if [ "$ROOT" = /target ]; then
+		in_target='in-target'
+	else
+		in_target="log-output -t grub-installer $chroot $ROOT"
 	fi
-	if [ ! -d $ROOT/sys/devices ]; then
-		$chroot $ROOT mount -t sysfs sysfs /sys
-		umountsys=:
-	fi
-	if ! log-output -t grub-installer $chroot $ROOT $update_grub; then
+	if ! $in_target $update_grub; then
 		error "Running '$update_grub' failed." 1>&2
 		db_input critical grub-installer/update-grub-failed || [ $? -eq 30 ]
 		db_go || true
 		db_progress STOP
-		if $umountsys; then
-			$chroot $ROOT umount /sys
-		fi
-		if $umountproc; then
-			$chroot $ROOT umount /proc
-		fi
 		exit 1
-	fi
-	if $umountsys; then
-		$chroot $ROOT umount /sys
-	fi
-	if $umountproc; then
-		$chroot $ROOT umount /proc
 	fi
 }
 
 findfs () {
-	mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f1
+	if ! grub_probe -t device $1; then
+		mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f1
+	fi
 }
 
 findfstype () {
@@ -275,8 +274,7 @@ esac
 # This code to set disc_offered was taken from lilo-installer
 rootfs_nodevfs=$(mapdevfs $rootfs)
 bootfs_nodevfs=$(mapdevfs $bootfs)
-prefix=$(echo "$bootfs" | \
-  sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[a-z]\+\).*:\1:')
+prefix=$(device_to_disk "$bootfs")
 
 case $prefix in
     /dev/md)
@@ -411,6 +409,10 @@ case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
 	;;
     *:ufs:*:*)
 	# Booting from UFS requires grub2
+	grub_package="grub-pc"
+	;;
+    *:zfs:*:*)
+	# Booting from ZFS requires grub2
 	grub_package="grub-pc"
 	;;
     *:ext2fs:*:grub-pc | *:xfs:*:grub-pc)
@@ -641,27 +643,34 @@ default_bootdev_os="$($chroot $ROOT grub-mkdevicemap --no-floppy -m - | head -n1
 if [ "$default_bootdev_os" ]; then
 	default_bootdev="$($chroot $ROOT readlink -f "$default_bootdev_os")"
 else
-	default_bootdev='(hd0)'
+	default_bootdev="(hd0)"
 fi
-# Set a sensible default boot device as hd0 does not make sense when
-# installing from a removable disk.  We have to be specific here and not always
-# set the installation target to the disk that /boot resides on because we
-# cannot reliably determine the GRUB device name for a disk that was not the
-# boot device.
+
+# Set a sensible default boot device, so that we aren't installing GRUB to
+# installation media which may be removed later.  The disk containing /cdrom
+# is very unlikely to be a sensible default.  If we had to fall back to
+# (hd0), then we can't tell exactly which disk that is, but if /cdrom seems
+# to be a USB stick then (hd0) may not be safe.  If we hit either of those
+# checks, then try the disk containing /boot instead.
 cdsrc=$(mount | grep "on /cdrom " | cut -d' ' -f1)
 cdfs=$(mount | grep "on /cdrom " | cut -d' ' -f5)
+hybrid=false
+if db_get cdrom-detect/hybrid; then
+	hybrid="$RET"
+fi
 if [ "$grub_package" = grub-efi ]; then
 	# No need for install device selection on EFI.
 	bootdev=efi-dummy
 	state=3
-elif ([ "$cdsrc" = "$default_bootdev" ] || [ "$default_bootdev" = '(hd0)' ]) && \
-     [ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]; then
+elif [ "$cdsrc" = "$default_bootdev" ] || \
+     ([ "$default_bootdev" = '(hd0)' ] && \
+      (([ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]) || \
+       [ "$hybrid" = true ])); then
 	db_fget grub-installer/bootdev seen
 	if [ "$RET" != true ]; then
 		bootfs=$(findfs /boot)
 		[ "$bootfs" ] || bootfs="$(findfs /)"
-		disk=$(echo "$bootfs" | \
-		sed 's:\(/dev/\(cciss\|ida\)/c[0-9]d[0-9]\|/dev/[a-z]\+\).*:\1:')
+		disk=$(device_to_disk "$bootfs")
 		db_set grub-installer/bootdev "$disk"
 		state=2
 	fi
@@ -1052,6 +1061,11 @@ fi
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_config_loader
 
+if [ "$bootfstype" = "zfs" ]; then
+  # Required by update-grub on ZFS
+  cp /boot/zfs/zpool.cache $ROOT/boot/zfs/
+fi
+
 # Delete for idempotency
 rm -f $ROOT/boot/grub/$menu_file
 update_grub
@@ -1251,10 +1265,9 @@ for os in $(cat /tmp/os-probed); do
 		partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
 		grubdrive=$(convert "$partition") || true
 		if [ -n "$grubdrive" ]; then
-			case $grub_package in
+			case $grub_version in
 			    grub)	grub_write_chain ;;
-			    grub-pc | grub-efi)
-					grub2_write_chain ;;
+			    grub2)	grub2_write_chain ;;
 			esac
 		fi
 		;;

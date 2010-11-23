@@ -1,3 +1,34 @@
+clock-setup (0.105ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Apparently OpenSolaris keeps the hardware clock in local time
+      (surprisingly).  Assume UTC=no if Solaris is detected.
+    - Pass --noadjfile to hwclock.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 10:35:58 +0000
+
+clock-setup (0.105) unstable; urgency=low
+
+  [ Joey Hess ]
+  * Avoid installing os-prober (and all its filesystem module dependencies)
+    when on an architecture that cannot possibly run one of the known OSs
+    that may need a local clock. Closes: #594965
+
+  [ Aurelien Jarno ]
+  * Add kfreebsd-amd64, kfreebsd-i386 and hurd-i386 in the list of 
+    architectures that may run the known OSs that may need a local clock.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Anders Jenbo
+  * Icelandic (is.po) by Sveinn  Felli
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 12 Nov 2010 10:04:12 -0200
+
 clock-setup (0.104ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

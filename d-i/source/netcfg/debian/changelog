@@ -1,3 +1,50 @@
+netcfg (1.57ubuntu2) natty; urgency=low
+
+  * Temporarily include <linux/if.h> rather than <net/if.h> on Linux, to
+    work around LP #673073.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 12:04:04 +0000
+
+netcfg (1.57ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Drop priority of netcfg/get_domain to medium for non-static
+      configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Call /usr/lib/network-manager/ifblacklist_migrate.sh from
+      finish-install if present, so that 'auto dhcp' interfaces are disabled
+      if network-manager is in use. May be preseeded away with
+      netcfg/network-manager.
+    - Bump the DHCP timeout to 30 seconds.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 10:54:21 +0000
+
+netcfg (1.57) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Don't duplicate localhost definition for IPv4 and IPv6. Closes:
+    #595107.
+
+  [ Petter Reinholdtsen ]
+  * Log detected link status to make it possible to see if link
+    detection work properly or not.
+
+  [ Otavio Salvador ]
+  * netcfg: do not provide an empty /etc/dhcp3 dir.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+  * Catalan (ca.po) by Jordi Mallach
+  * Danish (da.po) by Anders Jenbo
+  * Persian (fa.po) by Behrad Eslamifar
+  * Icelandic (is.po) by Sveinn  Felli
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Romanian (ro.po) by Andrei Popescu
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 12 Nov 2010 14:27:38 -0200
+
 netcfg (1.56ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

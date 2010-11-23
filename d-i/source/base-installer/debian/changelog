@@ -1,3 +1,49 @@
+base-installer (1.114ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default, unless
+      apt-setup/restricted is preseeded to false.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite;
+      also -proposed if apt-setup/proposed is true.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Install busybox-initramfs rather than busybox.
+    - Revert Joey's patch to call base-installer.d hooks after running
+      debootstrap, which broke console-setup's expectation of being able to
+      insert its configuration file into /target before console-setup is
+      installed by debootstrap.
+    - Add armel/imx51, armel/dove, and armel/omap subarchitectures.
+    - Install kernel headers to match the kernel. This may be overridden by
+      setting base-installer/kernel/headers to false.
+    - Add base-installer/kernel/backports-modules template, which may be
+      preseeded to install selected linux-backports-modules-* packages.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 10:07:26 +0000
+
+base-installer (1.114) unstable; urgency=low
+
+  [ Petter Reinholdtsen ]
+  * Prefer 686 kernel over 486 kernel for VIA C7-D CPUs, ie family 6
+    model 13 (Closes: #517121).
+
+  [ Colin Watson ]
+  * Unset MACHINE before running tests, to avoid environment pollution.
+
+  [ Otavio Salvador ]
+  * Avoid using UUID for swap partitions stored at LVM. Closes: #568877.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+  * Catalan (ca.po) by Jordi Mallach
+  * Persian (fa.po) by Behrad Eslamifar
+  * Icelandic (is.po) by Sveinn í Felli
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Sat, 13 Nov 2010 08:58:32 -0200
+
 base-installer (1.113ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

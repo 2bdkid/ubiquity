@@ -26,7 +26,11 @@
 #include <iwlib.h>
 #endif
 #include <net/if_arp.h>
+#ifdef __linux__
+#include <linux/if.h>
+#else
 #include <net/if.h>
+#endif
 #include <errno.h>
 #include <assert.h>
 #include <ctype.h>

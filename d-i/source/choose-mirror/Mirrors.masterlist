@@ -685,8 +685,7 @@ Location: Gda&#324;sk
 Sponsor: Technical University of Gda&#324;sk http://www.task.gda.pl/
 IPv6: no
 
-Site: ftp2.de.debian.org
-Alias: ftp.rfc822.org
+Site: ftp.rfc822.org
 Alias: source.rfc822.org
 Type: Push-Primary
 Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
@@ -1567,12 +1566,12 @@ IPv6: no
 
 Site: debian.yorku.ca
 Type: leaf
-X-Archive-architecture: amd64 i386
-X-Archive-http: /debian/
-X-Archive-upstream: ftp.egr.msu.edu
+Archive-architecture: amd64 i386
+Archive-http: /debian/
+Archive-upstream: ftp.egr.msu.edu
 CDImage-http: /debian-cd/
 Security-http: /debian-security/
-Maintainer: Chris Russel <russel@yorku.ca>, Ramon Kagan <rkagan@YorkU.CA>
+Maintainer: debian-mirrors@yorku.ca 
 Country: CA Canada
 Location: Toronto, Ontario
 Sponsor: York University http://www.yorku.ca/
@@ -2827,13 +2826,21 @@ Archive-ftp: /debian/
 Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
 Archive-http: /debian/
 Archive-rsync: debian/
+Archive-upstream: kassia.debian.org
+Archive-method: push
+Backports-ftp: /debian-backports/
+Backports-http: /debian-backports/
+Backports-rsync: debian-backports/
+Backports-upstream: syncproxy3.eu.debian.org
+Backports-method: push
 CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
 CDImage-rsync: debian-cd/
-NonUS-ftp: /debian-non-US/
-NonUS-http: /debian-non-US/
-NonUS-rsync: debian-non-US/
-Archive-upstream: kassia.debian.org
+Volatile-ftp: /debian/
+Volatile-http: /debian/
+Volatile-rsync: debian/
+Volatile-upstream: kassia.debian.org
+Volatile-method: push
 Maintainer: Colm MacCarthaigh <mirrors@heanet.ie>
 Country: IE Ireland
 Location: Dublin
@@ -2857,12 +2864,12 @@ IPv6: no
 Site: linux.iq.usp.br
 Alias: torio.iq.usp.br
 Type: leaf
-Archive-architecture: amd64 i386
-Archive-http: /debian/
+X-Archive-architecture: amd64 i386
+X-Archive-http: /debian/
 Archive-upstream: ftp.br.debian.org
-NonUS-http: /debian-non-US/
-NonUS-upstream: non-us.debian.org
-Maintainer: Michel Loos <loos@qt1.iq.usp.br>
+X-NonUS-http: /debian-non-US/
+X-NonUS-upstream: non-us.debian.org
+Maintainer:  Waldemar Pires Correa Junior <wjunior@iq.usp.br>, mirror@iq.usp.br 
 Country: BR Brazil
 Location: S&atilde;o Paulo
 Sponsor: IQ-USP http://www.iq.usp.br/
@@ -3994,7 +4001,7 @@ Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-am
 Archive-http: /debian/
 Archive-upstream: http.us.debian.org
 Security-http: /debian-security/
-Maintainer: Gustavo Lopez <glopez@unesr.edu.ve>, Ernesto Hernandez-Novich <emhn@telcel.net.ve>
+Maintainer: Ernesto Hernandez-Novich <emhn@itverx.com.ve>, tecnologia@unesr.edu.ve
 Country: VE Venezuela
 Location: Caracas
 Sponsor: Universidad Nacional Experimental Simon Rodriguez http://www.unesr.edu.ve
@@ -4309,7 +4316,7 @@ Archive-upstream: ftp.tr.debian.org
 Volatile-ftp: /debian-volatile/
 Volatile-http: /debian-volatile/
 Volatile-upstream: ftp.de.debian.org
-Maintainer: Can Burak Cilingir <canburak@cs.bilgi.edu.tr>
+Maintainer: onurgu@cs.bilgi.edu.tr, mirrors@cs.bilgi.edu.tr
 Country: TR Turkey
 Location: Istanbul
 Sponsor: Istanbul Bilgi University - Department of Computer Science http://cs.bilgi.edu.tr/
@@ -4479,10 +4486,10 @@ IPv6: no
 Site: debian.bsnet.se
 Alias: gelehallon.bsnet.se
 Type: leaf
-Archive-ftp: /debian/
-Archive-http: /debian/
-Archive-upstream: ftp.se.debian.org
-Archive-architecture: amd64 i386
+X-Archive-ftp: /debian/
+X-Archive-http: /debian/
+X-Archive-upstream: ftp.se.debian.org
+X-Archive-architecture: amd64 i386
 Maintainer: Martin Bagge <brother@bsnet.se>
 Country: SE Sweden
 Location: Ronneby
@@ -4692,12 +4699,18 @@ Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-am
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
-Archive-upstream: merikanto.debian.org
+Archive-upstream: syncproxy3.eu.debian.org
 Archive-method: push
+Backports-ftp: /debian-backports/
+Backports-http: /debian-backports/
+Backports-rsync: debian-backports/
+Backports-upstream: syncproxy3.eu.debian.org
+Backports-method: push
 Volatile-ftp: /debian-volatile/
 Volatile-http: /debian-volatile/
 Volatile-rsync: debian-volatile/
-Volatile-upstream: volatile-master.debian.org
+Volatile-upstream: kassia.debian.org
+Backports-method: push
 Maintainer: Matus UHLAR - fantomas <ftpmaster@nextra.sk>
 Country: SK Slovakia
 Location: Bratislava
@@ -4792,11 +4805,15 @@ IPv6: no
 
 Site: mirrors.fe.up.pt
 Type: leaf
+Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
 Archive-ftp: /debian/
 Archive-http: /debian/
-Archive-upstream: ftp.pt.debian.org
 Archive-rsync: debian/
-Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
+Archive-upstream: ftp.pt.debian.org
+Backports-ftp: /debian-backports/
+Backports-http: /debian-backports/
+Backports-rsync: debian-backports/
+Backports-upstream: ftp.nl.debian.org
 CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
 CDImage-rsync: debian-cd/
@@ -5599,15 +5616,22 @@ Country: UA Ukraine
 Sponsor: WatsonHome http://watson.zp.ua/
 
 Site: mirror.ayous.org
+Alias: sinclair.farm.ftbfs.de
 Type: leaf
 Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
-Archive-upstream: farbror.acc.umu.se
+Archive-upstream: kassia.debian.org
+Archive-method: push
+X-Backports-ftp: /debian-backports/
+X-Backports-http: /debian-backports/
+X-Backports-rsync: debian-backports/
 Volatile-http: /debian-volatile/
 Volatile-ftp: /debian-volatile/
 Volatile-rsync: debian-volatile/
+Volatile-upstream: kassia.debian.org
+Volatile-method: push
 IPv6: no
 Maintainer: Joerg Jaspert <joerg@debian.org>, Martin Zobel-Helas <zobel@debian.org>
 Country: DE Germany
@@ -5984,18 +6008,29 @@ Location: 39-41, Zarqaynar str., Tashkent
 Sponsor: Sharq Telekom http://www.st.uz/
 Comments: 30Mbps
 
-Site: ftp.halifax.rwth-aachen.de
-Type: leaf
+Site: ftp2.de.debian.org
+Includes: ftp.halifax.rwth-aachen.de 
+Type: Push-Primary
 Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
-Archive-upstream: ftp.de.debian.org
+Archive-upstream: kassia.debian.org
+Archive-method: push
+Country: DE Germany
+
+Site: ftp.halifax.rwth-aachen.de
+Type: Push-Primary
+Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
+Archive-ftp: /debian/
+Archive-http: /debian/
+Archive-rsync: debian/
+Archive-upstream: kassia.debian.org
 Archive-method: push
 Backports-ftp: /debian-backports/
 Backports-http: /debian-backports/
 Backports-rsync: debian-backports/
-Backports-upstream: ftp.de.debian.org
+Backports-upstream: syncproxy3.eu.debian.org 
 Backports-method: push
 CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
@@ -6005,7 +6040,7 @@ CDImage-method: push
 Volatile-ftp: /debian-volatile/
 Volatile-http: /debian-volatile/
 Volatile-rsync: debian-volatile/
-Volatile-upstream: ftp.de.debian.org
+Volatile-upstream: kassia.debian.org
 Volatile-method: push
 IPv6: no
 Maintainer: Carsten Otto <ftp@halifax.rwth-aachen.de>
@@ -6971,14 +7006,6 @@ Country: NL Netherlands
 Location: Hoofddorp
 Sponsor: Sipo.nl Webhosting, Eindhoven, The Netherlands, http://www.sipo.nl
 
-Site: debian.acantho.net
-Backports-ftp: /backports.org
-Backports-http: /backports.org/
-Backports-rsync: backports.org/
-Maintainer: Guido Trotter <ultrotter@debian.org>
-Country: IT Italy
-Location: Bologna
-
 Site: mirror.buildd.net
 Backports-http: /debian-backports/
 Backports-upstream: syncproxy3.eu.debian.org
@@ -7051,6 +7078,17 @@ Country: TR Turkey
 Sponsor: TM Telekom http://www.turkmesh.com.tr/
 Comment: 100Mbps
 
+Site: ftp.lt.debian.org
+Includes: debian.mirror.vu.lt
+Type: Push-Secondary
+Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
+Archive-ftp: /debian/
+Archive-http: /debian/
+Archive-rsync: debian/
+Archive-upstream: ftp.de.debian.org
+Country: LT Lithuania
+Comment: Primary mirror cluster for Lithuania
+
 Site: debian.mirror.vu.lt
 Aliases: e450.vu.lt
 Type: Push-Secondary
@@ -7078,6 +7116,7 @@ IPv6: no
 Maintainer: Arnoldas Sareckis <hostmaster@vu.lt>
 Country: LT Lithuania
 Location: Lithuania, Vilnius (Vilnius University)
+Sponsor: Vilnius University http://www.vu.lt/
 Comment: The mirror is updated four times a day.
  The mirror has the following connectivity:
  -Up to 240 Mbps to GEANT;
@@ -7088,6 +7127,7 @@ Comment: The mirror is updated four times a day.
 Site: mirrors.ispros.com.bd
 Type: leaf
 Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
+Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
 IPv6: no
@@ -7187,3 +7227,38 @@ Country: DK Denmark
 Location: Taastrup, Denmark
 Sponsor: Rackhosting.com http://rackhosting.com/
 Comment: 1Gbps
+
+Site: debian.unal.edu.co
+Type: leaf
+Archive-architecture: alpha amd64 arm armel hppa hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 sparc
+Archive-ftp: /debian/
+Archive-http: /debian/
+Archive-rsync: debian/
+Backports-ftp: /debian-backports/
+Backports-http: /debian-backports/
+Backports-rsync: debian-backports/
+Volatile-ftp: /debian-volatile/
+Volatile-http: /debian-volatile/
+Volatile-rsync: debian-volatile/
+IPv6: no
+Archive-upstream: ftp.br.debian.org
+Backports-upstream: ftp.br.debian.org
+Volatile-upstream: ftp.br.debian.org
+Updates: twice
+Maintainer: Ernesto Parra <mirrors_fcbog@unal.edu.co>
+Country: CO Colombia
+Location: National University of Colombia
+Sponsor: Departament of Chemistry, Computer Center http://www.unal.edu.co/
+Comment: 300Mbps
+
+Site: debian.au.mirrormax.net
+Type: leaf
+Volatile-http: /debian-volatile/
+IPv6: no
+Volatile-upstream: volatile-master.debian.org
+Updates: twice
+Maintainer: Shane <admin@mirrormax.net>
+Country: AU Australia
+Location: Sydney
+Sponsor: MirrorMax http://www.mirrormax.net/
+Comment: 100Mbps

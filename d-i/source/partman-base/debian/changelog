@@ -1,3 +1,37 @@
+partman-base (146ubuntu2) natty; urgency=low
+
+  * Fix link line ordering to avoid breaking with 'ld --as-needed'.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 11:53:41 +0000
+
+partman-base (146ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use ext4 as the default filesystem for new partitions.
+    - Build with -O2 on powerpc to avoid a suspected toolchain bug.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 15 Nov 2010 10:56:16 +0000
+
+partman-base (146) unstable; urgency=low
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 12 Nov 2010 16:20:32 -0200
+
 partman-base (145ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

@@ -227,6 +227,7 @@ if [ -d /sys/bus/platform/devices/s3c2440-usbgadget -o \
 	
 	log "Detected S3C2410/S3C2440 SoC, loading g_ether"
 	load_module g_ether
+	register-module g_ether
 fi
 
 # If using real hotplug, re-run the rc scripts to pick up new modules.
@@ -343,9 +344,9 @@ if [ -z "$LOAD_IDE" ] && is_not_loaded ide-generic && \
 		if db_get debian-installer/add-kernel-opts && [ "$RET" ]; then
 			kopts="$RET"
 		fi
-		if ! echo "$kopt" | grep -Eq "(^| )all_generic_ide( |$)"; then
+		if ! echo "$kopt" | grep -Eq "(^| )all_generic_ide(=1|)( |$)"; then
 			db_set debian-installer/add-kernel-opts \
-				"${kopts:+$kopts }all_generic_ide"
+				"${kopts:+$kopts }all_generic_ide=1"
 		fi
 	fi
 fi
