@@ -275,6 +275,23 @@ TimedLoginDelay=10"
 					-e "s/^#?AutoReLogin=.*\$/AutoReLogin=true/" \
 					/etc/kde4/kdm/kdmrc
 			fi
+
+			if $chroot $ROOT [ -f /etc/lxdm/lxdm.conf ]; then
+    				# Configure LXDM autologin with LXDE session
+   				$log $chroot $ROOT sed -i$BACKUP -r \
+        				-e "s/^# autologin=dgod/autologin=$USER/" \
+        				-e "s/^# session/session/" \
+        				/etc/lxdm/lxdm.conf
+			fi
+
+			if $chroot $ROOT [ -f /etc/xdg/lubuntu/lxdm/lxdm.conf ]; then
+    				# Configure LXDM autologin with Lubuntu session
+				$log $chroot $ROOT sed -i$BACKUP -r \
+			        	-e "s/^# autologin=dgod/autologin=$USER/" \
+			        	-e "s/^# session/session/" \
+			        	-e "s/startlxde/startlubuntu/" \
+			        	/etc/xdg/lubuntu/lxdm/lxdm.conf
+			fi
 		fi
 	fi
 
