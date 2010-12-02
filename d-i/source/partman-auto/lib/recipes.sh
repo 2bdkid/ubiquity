@@ -34,10 +34,10 @@ decode_recipe () {
 	for map in /sys/firmware/memmap/*; do
 		[ -d "$map" ] || continue
 		if [ "$(cat $map/type)" = "System RAM" ]; then
-			map_end="$(cat $map/end)"
-			if [ $(($map_end > ${ram:-0})) = 1 ]; then
-				ram="$(printf %d $map_end)"
-			fi
+			map_start="$(printf %d "$(cat $map/start)")"
+			map_end="$(printf %d "$(cat $map/end)")"
+			ram="$(expr "${ram:-0}" + \
+				    "$map_end" - "$map_start" + 1)"
 		fi
 	done
 	if [ -z "$ram" ]; then
