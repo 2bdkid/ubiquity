@@ -1,3 +1,12 @@
+netcfg (1.57ubuntu3) natty; urgency=low
+
+  * Revert <net/if.h> avoidance from 1.57ubuntu2; linux-libc-dev has been
+    fixed.
+  * Strip trailing dots from domain when writing to /etc/hosts
+    (LP: #255117).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 Dec 2010 14:24:55 +0000
+
 netcfg (1.57ubuntu2) natty; urgency=low
 
   * Temporarily include <linux/if.h> rather than <net/if.h> on Linux, to

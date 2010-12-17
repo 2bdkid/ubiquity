@@ -353,6 +353,10 @@ if [ "$found" = "0" ] && type mdadm >/dev/null 2>&1; then
 			grep " active sync " 2>/dev/null | \
 			sed "s/^.* active sync\s*//" 2>/dev/null \
 	); do
+		case $frdisk in
+		    /dev/*)	;;
+		    *)		continue ;;
+		esac
 		# Build a list of devices in the mirror
 		frdisk_list="$frdisk_list $frdisk"
 		frdev=

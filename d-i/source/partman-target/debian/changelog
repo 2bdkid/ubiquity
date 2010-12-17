@@ -1,3 +1,40 @@
+partman-target (71ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Disable automatic mounting of USB removable devices.
+    - Mount floppies with 'exec' and 'utf8'.
+    - Use the path of the file associated with a loop device in /etc/fstab,
+      rather than the filesystem's UUID or the loop device path.
+    - Always set the loop option for loop devices.
+    - Remove critical system files from the existing filesystem before
+      installing.
+    - Preserve the UID and GID of the initial user, if possible.  Requires a
+      patch to user-setup.
+    - Don't clear partitions or complain about them not being formatted if
+      they've already been formatted by a previous partitioner run.
+    - Recommend blkid rather than vol_id in /etc/fstab.
+    - Stop adding removable devices to /etc/fstab, now that apt knows how to
+      find CD-ROM devices using libudev.
+    - Mount /proc with nodev,noexec,nosuid.
+    - Notify user-setup if there is an encrypted home partition present.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 06 Dec 2010 14:11:51 +0000
+
+partman-target (71) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Build-depend on debhelper (>= 7.0.50~) for override support.
+
+  [ Aurelien Jarno ]
+  * Fix generation of fstab CD-ROM entries on GNU/kFreeBSD (closes: 
+    #601144).
+
+  [ Updated translations ]
+  * Lao (lo.po) by Anousak Souphavanh
+  * Sinhala (si.po) by Danishka Navin
+
+ -- Aurelien Jarno <aurel32@debian.org>  Fri, 03 Dec 2010 22:12:57 +0100
+
 partman-target (70ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

@@ -1,3 +1,10 @@
+partman-auto (93ubuntu3) natty; urgency=low
+
+  * Change the x86 atomic recipes to make the minimum swap size be 100% of
+    RAM, so that hibernate always works (LP: #345126).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 Dec 2010 14:43:31 +0000
+
 partman-auto (93ubuntu2) natty; urgency=low
 
   * Fix memory size calculations to use the total of the sizes of all memory
