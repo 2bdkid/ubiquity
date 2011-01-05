@@ -15,7 +15,7 @@ prereqs)
 	;;
 esac
 
-. /etc/default/console-setup
+. /etc/default/console-setup || exit 0
 
 [ "$ACTIVE_CONSOLES" ] || exit 0
 

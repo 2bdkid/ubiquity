@@ -3,13 +3,18 @@
 # Provides:          console-setup
 # Required-Start:    $remote_fs
 # Required-Stop:
-# Should-Start:      console-screen
+# Should-Start:      console-screen kbd
 # Default-Start:     S
 # Default-Stop:
+# X-Interactive:     true
 # Short-Description: Set console font and keymap
 ### END INIT INFO
 
 set -e
+
+# This script is used jointly by console-setup and console-setup-mini.
+# It belongs to keyboard-configuration because it is forbidden two
+# different packages to share common configuration file.
 
 test -f /bin/setupcon || exit 0
 

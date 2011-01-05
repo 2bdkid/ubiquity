@@ -1,12 +1,13 @@
 #!/bin/sh
 ### BEGIN INIT INFO
 # Provides:          keyboard-setup
-# Required-Start:    mountkernfs udev
+# Required-Start:    mountkernfs
 # Required-Stop:
-# Should-Start:      keymap
+# Should-Start:      keymap udev
 # X-Start-Before:    checkroot
 # Default-Start:     S
 # Default-Stop:
+# X-Interactive:     true
 # Short-Description: Set preliminary keymap
 # Description:       Set the console keyboard as early as possible
 #                    so during the file systems checks the administrator
@@ -15,6 +16,9 @@
 ### END INIT INFO
 
 set -e
+
+# This script is not used by keyboard-configuration.  It is used
+# jointly by console-setup and console-setup-mini
 
 test -f /bin/setupcon || exit 0
 

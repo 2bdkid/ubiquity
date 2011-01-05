@@ -1,3 +1,25 @@
+debian-installer-utils (1.82ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 05 Jan 2011 13:45:40 +0000
+
+debian-installer-utils (1.82) unstable; urgency=low
+
+  [ Updated translations ]
+  * Lao (lo.po) by Anousak Souphavanh
+  * Northern Sami (se.po) by Børre Gaup
+  * Sinhala (si.po) by Danishka Navin
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 19:52:53 -0200
+
 debian-installer-utils (1.81ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

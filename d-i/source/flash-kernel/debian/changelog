@@ -1,3 +1,12 @@
+flash-kernel (2.28ubuntu11) natty; urgency=low
+
+  * mkimage moved from the uboot-mkimage to the u-boot package:
+    - update control to suggest u-boot | uboot-mkimage.
+    - update flash-kernel-installer.postinst to use a common function to
+      install mkimage and try installing u-boot in-target first.
+
+ -- Loïc Minier <loic.minier@linaro.org>  Mon, 20 Dec 2010 10:47:49 +0100
+
 flash-kernel (2.28ubuntu10) maverick; urgency=low
 
   * merge versatile espress support from Matt Waddel <matt.waddel@linaro.org>
