@@ -1,3 +1,43 @@
+netcfg (1.59ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Drop priority of netcfg/get_domain to medium for non-static
+      configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Call /usr/lib/network-manager/ifblacklist_migrate.sh from
+      finish-install if present, so that 'auto dhcp' interfaces are disabled
+      if network-manager is in use. May be preseeded away with
+      netcfg/network-manager.
+    - Bump the DHCP timeout to 30 seconds.
+    - Strip trailing dots from domain when writing to /etc/hosts.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 05 Jan 2011 17:16:06 +0000
+
+netcfg (1.59) unstable; urgency=low
+
+  [ Matt Palmer ]
+  * Modify the DHCP configuration process to write out elements of
+    resolv.conf that the user has entered manually, because the DHCP server
+    didn't supply them.  Closes: #362029.
+  * Add an ethtool-lite Makefile target, to assist people in building a
+    standalone ethtool-lite for debugging purposes.  Closes: #608452.
+
+  [ Updated translations ]
+  * Northern Sami (se.po) by Børre Gaup
+
+ -- Otavio Salvador <otavio@ossystems.com.br>  Sun, 02 Jan 2011 14:29:22 -0200
+
+netcfg (1.58) unstable; urgency=low
+
+  [ Updated translations ]
+  * Lao (lo.po) by Anousak Souphavanh
+  * Northern Sami (se.po) by Børre Gaup
+  * Sinhala (si.po) by Danishka Navin
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 20:06:41 -0200
+
 netcfg (1.57ubuntu3) natty; urgency=low
 
   * Revert <net/if.h> avoidance from 1.57ubuntu2; linux-libc-dev has been
