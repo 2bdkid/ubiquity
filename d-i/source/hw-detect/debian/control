@@ -47,3 +47,17 @@ XC-Package-Type: udeb
 Architecture: any
 Depends: ${shlibs:Depends}
 Description: Hardware architecture detector
+
+Package: archdetect-deb
+Section: utils
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Hardware architecture detector
+ This package provides the 'archdetect' tool, which displays the current
+ machine architecture and subarchitecture.  The architecture corresponds to
+ that built into dpkg, and describes the CPU (and possibly kernel) types;
+ the subarchitecture distinguishes machines with different boot arrangements
+ that require special handling.
+ .
+ This package would be called 'archdetect', but a udeb of that name already
+ existed for use in the installer.

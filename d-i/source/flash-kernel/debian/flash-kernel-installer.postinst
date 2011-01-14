@@ -21,7 +21,7 @@ findfs () {
 }
 
 install_mkimage() {
-	if ! apt-install uboot-mkimage; then
+	if ! apt-install u-boot-tools && ! apt-install uboot-mkimage; then
 		error "apt-install uboot-mkimage failed"
 	fi
 }

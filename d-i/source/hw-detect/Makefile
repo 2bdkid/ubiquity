@@ -27,6 +27,8 @@ fidir=$(DESTDIR)/usr/lib/finish-install.d
 sharedir=$(DESTDIR)/usr/share/hw-detect/
 postbaseinstallerdir=$(DESTDIR)/usr/lib/post-base-installer.d/
 prepkgseldir=$(DESTDIR)/usr/lib/pre-pkgsel.d/
+usrbindir=$(DESTDIR)/usr/bin
+man1dir=$(DESTDIR)/usr/share/man/man1
 
 INSTALL=install
 INSTALL_DATA = ${INSTALL} -m 644
@@ -92,8 +94,10 @@ install-archdetect: archdetect
 	$(INSTALL) archdetect $(bindir)
 
 install-archdetect-deb: archdetect
-	$(INSTALL) -d $(bindir)
-	$(INSTALL) archdetect $(bindir)
+	$(INSTALL) -d $(usrbindir)
+	$(INSTALL) archdetect $(usrbindir)
+	$(INSTALL) -d $(man1dir)
+	$(INSTALL) archdetect.1 $(man1dir)
 
 archdetect: archdetect.o 
 	${CC} ${LDFLAGS} -o $@ $^ -ldebian-installer
