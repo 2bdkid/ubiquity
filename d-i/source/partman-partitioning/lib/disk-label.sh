@@ -1,7 +1,7 @@
 # Calling scripts should also source base.sh if create_new_label is called
 
 default_disk_label () {
-	if [ -x /bin/archdetect ]; then
+	if which archdetect 2>&1 >/dev/null; then
 		archdetect=$(archdetect)
 	else
 		archdetect=unknown/generic
