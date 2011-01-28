@@ -1,3 +1,27 @@
+partman-efi (23ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Automatically use existing EFI system partitions on Intel Macs as EFI
+      boot partitions.
+    - Create fat32 EFI partitions with the name "EFI System Partition" by
+      default on Intel Macs.
+    - choose_method/efi/do_option: Make sure no mountpoint is set.
+    - Remove efi-modules dependency; it seems to be built into Ubuntu
+      kernels now.
+    - Require partman-base >= 129 to support a null value for the name.
+    - Automatically mount the first method=efi filesystem we see on
+      /boot/efi.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 26 Jan 2011 14:47:11 +0000
+
+partman-efi (23) unstable; urgency=low
+
+  [ Updated translations ]
+  * Lao (lo.po) by Anousak Souphavanh
+  * Sinhala (si.po) by Danishka Navin
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 20:25:29 -0200
+
 partman-efi (22ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

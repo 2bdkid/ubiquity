@@ -1,3 +1,36 @@
+console-setup (1.57ubuntu5) natty; urgency=low
+
+  * Drop misguided Ubuntu-specific code to migrate from console-setup/* to
+    keyboard-configuration/* question names.  This is already handled on
+    upgrade by reading the old /etc/default/console-setup file
+    (LP: #698263).
+  * console-setup-udeb (<< 1.53) didn't set the seen flag in the installed
+    system.  Cope with this and avoid asking the layout and variant
+    questions again if the default debconf priority is at least high
+    (LP: #705883).
+  * If we detect the above breakage (upgrading from anything between
+    1.57ubuntu1 and 1.57ubuntu4 inclusive, and the XKB* values in
+    /etc/default/keyboard differ from the commented-out values in
+    /etc/default/console-setup), reset to the commented-out values in
+    /etc/default/console-setup.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Jan 2011 12:19:42 +0000
+
+console-setup (1.57ubuntu4) natty; urgency=low
+
+  * Include pc105.tree for ubiquity.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Mon, 24 Jan 2011 16:53:59 +0000
+
+console-setup (1.57ubuntu3) natty; urgency=low
+
+  * Correct fix for LP: #634402: explicitly check readability of
+    /etc/default/keyboard and /etc/default/console-setup in initramfs hooks,
+    rather than trying to guard '.' with '||' which doesn't work
+    (LP: #701954).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 20 Jan 2011 20:55:01 +0000
+
 console-setup (1.57ubuntu2) natty; urgency=low
 
   * Make keyboard-configuration replace old console-setup/console-setup-mini

@@ -1,3 +1,45 @@
+partman-basicfilesystems (69ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Add minimal support for NTFS partitions using ntfs-3g.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+      file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Stop checking ext2 filesystems using libparted, since it can't deal
+      with those created with recent versions of mke2fs.  We were already
+      refraining from checking ext3 and ext4 filesystems using libparted for
+      the same reason.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 26 Jan 2011 14:24:14 +0000
+
+partman-basicfilesystems (69) unstable; urgency=low
+
+  [ Updated translations ]
+  * Dzongkha (dz.po) by Jurmey Rabgay
+  * Central Khmer (km.po) by Khoem Sokhem
+  * Lao (lo.po) by Anousak Souphavanh
+  * Latvian (lv.po) by Aigars Mahinovs
+  * Malayalam (ml.po) by Praveen Arimbrathodiyil
+  * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel
+  * Northern Sami (se.po) by Børre Gaup
+  * Sinhala (si.po) by Danishka Navin
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 20:20:05 -0200
+
 partman-basicfilesystems (68ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

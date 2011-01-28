@@ -1,3 +1,26 @@
+ubiquity (2.5.12) natty; urgency=low
+
+  [ Mario Limonciello ]
+  * Fix oem-config-remove-gtk for changes in AptClient's commit_packages.
+    (LP: #708722)
+
+  [ Evan Dandrea ]
+  * Update translations from Launchpad.
+  * If a session indicator gconf key starts unset, make sure it ends
+    that way (LP: #684052).
+  * Fix mistake in the cleanup branch merge that broke translations
+    (LP: #691671).
+  * pc105.tree is included in console-setup now, which speeds up
+    ubiquity builds.
+  * Detect hostname collisions (LP: #634187).
+
+  [ Colin Watson ]
+  * Automatic update of included source packages: clock-setup 0.106ubuntu1,
+    console-setup 1.57ubuntu5, partman-basicfilesystems 69ubuntu1,
+    partman-efi 23ubuntu1, partman-partitioning 79ubuntu1.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Jan 2011 15:06:19 +0000
+
 ubiquity (2.5.11) natty; urgency=low
 
   * Automatic update of included source packages: partman-partitioning

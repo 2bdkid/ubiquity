@@ -785,9 +785,7 @@ class Wizard(BaseFrontend):
                     '/apps/indicator-session/suppress_restart_menuitem',
                     '/apps/indicator-session/suppress_shutdown_menuitem',
                     '/desktop/gnome/lockdown/disable_user_switching'):
-            val = gconftool.get(key)
-            if val:
-                self.gconf_previous[key] = val
+            self.gconf_previous[key] = gconftool.get(key)
             gconftool.set(key, 'bool', 'true')
 
         self.quit.hide()
@@ -805,7 +803,10 @@ class Wizard(BaseFrontend):
                     '/apps/indicator-session/suppress_shutdown_menuitem',
                     '/desktop/gnome/lockdown/disable_user_switching'):
             if key in self.gconf_previous:
-                gconftool.set(key, 'bool', self.gconf_previous[key])
+                if self.gconf_previous[key] == '':
+                    gconftool.unset(key)
+                else:
+                    gconftool.set(key, 'bool', self.gconf_previous[key])
         if not self.oem_user_config:
             self.quit.show()
         f = gtk.gdk.FUNC_RESIZE | gtk.gdk.FUNC_MAXIMIZE | \
@@ -882,6 +883,8 @@ class Wizard(BaseFrontend):
         name = widget.get_name()
 
         if isinstance(widget, gtk.Label):
+            widget.set_markup(text)
+
             # Ideally, these attributes would be in the ui file (and can be if
             # we bump required gtk+ to 2.16), but as long as we support glade
             # files, we can't make the change.
