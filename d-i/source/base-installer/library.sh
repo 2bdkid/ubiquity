@@ -138,7 +138,7 @@ setup_dev() {
 	case "$OS" in
 		linux) setup_dev_linux ;;
 		kfreebsd) setup_dev_kfreebsd ;;
-		*) ;;
+		*) warning "setup_dev called for an unknown OS ($OS)." ;;
 	esac	
 }
 
@@ -369,6 +369,8 @@ kernel_present () {
 
 pick_kernel () {
 	kernel_update_list
+	
+	db_settitle debian-installer/bootstrap-base/title
 
 	# Check for overrides
 	if db_get base-installer/kernel/override-image && [ "$RET" ]; then
@@ -595,6 +597,7 @@ EOF
 				db_get base-installer/kernel/linux/initramfs-tools/driver-policy
 				db_set base-installer/initramfs-tools/driver-policy "$RET"
 			fi
+			db_settitle debian-installer/bootstrap-base/title
 			db_input medium base-installer/initramfs-tools/driver-policy || true
 			if ! db_go; then
 				db_progress stop
@@ -852,7 +855,7 @@ install_kernel() {
 	case "$OS" in
 		linux) install_kernel_linux ;;
 		kfreebsd) install_kernel_kfreebsd ;;
-		*) ;;
+		*) warning "install_kernel called for an unknown OS ($OS)." ;;
 	esac	
 }
 
@@ -886,6 +889,9 @@ configure_apt () {
 			if ! mount -t firmlink $DIRECTORY $tdir ; then
 				warning "failed to bind mount $tdir"
 			fi
+			;;
+			*)
+			warning "configure_apt called with unknown OS ($OS)."
 			;;
 		esac
 

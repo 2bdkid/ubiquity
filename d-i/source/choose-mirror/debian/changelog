@@ -1,3 +1,45 @@
+choose-mirror (2.37ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Use Ubuntu mirrors.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror. For ports architectures (armel, powerpc) use
+      ports.ubuntu.com instead.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+    - Don't check if archive.ubuntu.com is reachable before asking for a
+      proxy.
+    - Allow preseeding the default CC.archive.ubuntu.com setup by preseeding
+      mirror/http/mirror to CC.archive.ubuntu.com, and likewise for
+      mirror/ftp/mirror.
+    - Force xgettext to use UTF-8 encoding when generating templates files,
+      to cope with Côte d'Ivoire.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 31 Jan 2011 18:48:20 +0000
+
+choose-mirror (2.37) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Use "mirror" as default hostname for custom FTP or HTTP mirror
+    Closes: #605579
+
+  [ Updated translations ]
+  * Lao (lo.po) by Anousak Souphavanh
+  * Northern Sami (se.po) by Børre Gaup
+  * Sinhala (si.po) by Danishka Navin
+  * Slovenian (sl.po) by Vanja Cvelbar
+  * Telugu (te.po) by Arjuna Rao Chavala
+
+ -- Otavio Salvador <otavio@debian.org>  Fri, 24 Dec 2010 19:33:11 -0200
+
 choose-mirror (2.36ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

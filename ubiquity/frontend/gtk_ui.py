@@ -601,7 +601,7 @@ class Wizard(BaseFrontend):
 
         if self.oem_user_config:
             self.quit_installer()
-        elif not self.get_reboot_seen():
+        elif not self.get_reboot_seen() or not self.get_shutdown_seen():
             self.live_installer.hide()
             if ('UBIQUITY_ONLY' in os.environ or
                 'UBIQUITY_GREETER' in os.environ):
@@ -618,6 +618,8 @@ class Wizard(BaseFrontend):
             self.finished_dialog.run()
         elif self.get_reboot():
             self.reboot()
+        elif self.get_shutdown():
+            self.shutdown()
 
         return self.returncode
 
@@ -732,7 +734,11 @@ class Wizard(BaseFrontend):
         self.grub_new_device_entry.pack_start(renderer, True)
         self.grub_new_device_entry.add_attribute(renderer, 'text', 1)
 
-        #Parse the slideshow size early to prevent the window from growing
+        # Only show the Shutdown Now button if explicitly asked to.
+        if not self.show_shutdown_button:
+            self.shutdown_button.hide()
+
+        # Parse the slideshow size early to prevent the window from growing
         self.slideshow = '/usr/share/ubiquity-slideshow'
         if os.path.exists(self.slideshow):
             try:
@@ -1152,7 +1158,11 @@ class Wizard(BaseFrontend):
 
         self.returncode = 10
         self.quit_installer()
+    def shutdown(self, *args):
+        """Shutdown the system after installing process."""
 
+        self.returncode = 11
+        self.quit_installer()
     def do_reboot(self):
         """Callback for main program to actually reboot the machine."""
 
@@ -1168,6 +1178,23 @@ class Wizard(BaseFrontend):
             manager.RequestReboot()
         else:
             misc.execute_root("reboot")
+
+    def do_shutdown(self):
+        """Callback for main program to actually shutdown the machine."""
+
+        try:
+            session = dbus.Bus.get_session()
+            gnome_session = session.name_has_owner('org.gnome.SessionManager')
+        except dbus.exceptions.DBusException:
+            gnome_session = False
+
+        if gnome_session:
+            manager = session.get_object('org.gnome.SessionManager',
+                                         '/org/gnome/SessionManager')
+            manager.RequestShutdown()
+        else:
+            misc.execute_root("poweroff")
+
 
     def quit_installer(self, *args):
         """quit installer cleanly."""
