@@ -358,7 +358,7 @@ if [ "$found" = "0" ] && type mdadm >/dev/null 2>&1; then
 		    *)		continue ;;
 		esac
 		# Build a list of devices in the mirror
-		frdisk_list="$frdisk_list $frdisk"
+		frdisk_list="$frdisk_list $(mapdevfs "$frdisk" || true)"
 		frdev=
 		frtype="mdadm"
 		found=1
@@ -404,12 +404,7 @@ case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
 	grub_package="grub-pc"
 	;;
     *:*:*:grub)
-	db_input low grub-installer/grub2_instead_of_grub_legacy || [ $? -eq 30 ]
-	db_go || exit 10
-	db_get grub-installer/grub2_instead_of_grub_legacy
-	if [ "$RET" = true ]; then
-		grub_package="grub-pc"
-	fi
+	grub_package="grub-pc"
 	;;
     *:ufs:*:*)
 	# Booting from UFS requires grub2
@@ -656,8 +651,10 @@ fi
 # (hd0), then we can't tell exactly which disk that is, but if /cdrom seems
 # to be a USB stick then (hd0) may not be safe.  If we hit either of those
 # checks, then try the disk containing /boot instead.
+# The same goes for /hd-media, so avoid installing there as well.
 cdsrc=$(mount | grep "on /cdrom " | cut -d' ' -f1)
 cdfs=$(mount | grep "on /cdrom " | cut -d' ' -f5)
+hdsrc=$(mount | grep "on /hd-media " | cut -d' ' -f1)
 hybrid=false
 if db_get cdrom-detect/hybrid; then
 	hybrid="$RET"
@@ -666,10 +663,14 @@ if [ "$grub_package" = grub-efi ]; then
 	# No need for install device selection on EFI.
 	bootdev=efi-dummy
 	state=3
-elif [ "$cdsrc" = "$default_bootdev" ] || \
+elif [ "$(device_to_disk "$cdsrc")" = "$default_bootdev" ] || \
+     ([ -n "$hdsrc" ] && [ "$(device_to_disk "$hdsrc")" = "$default_bootdev" ]) || \
      ([ "$default_bootdev" = '(hd0)' ] && \
       (([ -n "$cdfs" ] && [ "$cdfs" != "iso9660" ]) || \
-       [ "$hybrid" = true ])); then
+       [ "$hybrid" = true ])) || \
+     ([ "$default_bootdev" != '(hd0)' ] && \
+      ! partmap "$default_bootdev" >/dev/null && \
+      ! grub_probe -t fs -d "$default_bootdev" >/dev/null); then
 	db_fget grub-installer/bootdev seen
 	if [ "$RET" != true ]; then
 		bootfs=$(findfs /boot)

@@ -118,34 +118,88 @@ cleanup() {
 }
 
 # generic flash-kernel routines for specific subarchs
+
+omap_flash_kernel_and_initrd() {
+	printf "Creating backups of uImage and uInitrd... " >&2
+	if [ -e $TMPMOUNT/uImage ]; then
+		cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
+	fi
+	if [ -e $TMPMOUNT/uInitrd ]; then
+		cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
+	fi
+	echo "done." >&2
+	printf "Generating kernel u-boot image... " >&2
+	mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
+		-e 0x80008000 -n "Ubuntu Kernel" -d $kfile $TMPMOUNT/uImage >&2 1>/dev/null
+	echo "done." >&2
+	printf "Generating Initramfs u-boot image... " >&2
+	mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
+		-n "Ubuntu Initrd" -d $ifile $TMPMOUNT/uInitrd >&2 1>/dev/null
+		echo "done." >&2
+	if [ -e /boot/boot.script ];then
+		printf "Generating u-boot configuration from /boot/boot.script... " >&2
+		cp $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
+		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
+			$TMPMOUNT/boot.scr >&2 1>/dev/null
+		echo "done." >&2
+	fi
+}
+
+omap_flash_bootloader() {
+	case "$machine" in
+		"IGEP v2 board")
+			XLOADERDIR=igep0020
+			UBOOTDIR=igep0020
+                ;;
+                "OMAP3 Beagle Board")
+			XLOADERDIR=omap3530beagle
+			UBOOTDIR=omap3_beagle
+		;;
+		"OMAP4430 Panda Board")
+			XLOADERDIR=omap4430panda
+			UBOOTDIR=omap4_panda
+		;;
+		*)
+			error "Bootloader update not supported on $machine."
+		;;
+	esac
+
+	XLOADER=/usr/lib/x-loader/$XLOADERDIR/MLO
+	UBOOT=/usr/lib/u-boot/$UBOOTDIR/u-boot.bin
+
+	if [ -z "$BOOTLOADER_FILES" ];then
+		BOOTLOADER_FILES="$XLOADER $UBOOT"
+	fi
+
+	for f in $BOOTLOADER_FILES;do
+		F=$(basename $f)
+		#Check whether the file is already written to the boot partition
+		S1=$(md5sum $f 2>/dev/null|cut -f1 -d\ )
+		S2=$(md5sum $TMPMOUNT/$F 2>/dev/null|cut -f1 -d\ )
+    		if [ "$S1" != "$S2" ];then
+      			if [ -e $TMPMOUNT/$F ];then
+        			mv -f $TMPMOUNT/$F $TMPMOUNT/$F.bak
+			fi
+   			cp $f $TMPMOUNT/
+      			echo $f copied to the boot partition. >&2
+		else
+			echo $f is already installed in the boot partition. >&2
+      		fi
+	done
+}
+
 omap_flash_kernel() {
 	if [ -n "${UBOOT_PART}" ]; then
 		echo "Using u-boot partition: ${UBOOT_PART}" >&2
 		TMPMOUNT=$(mktemp -d)
 		mount $UBOOT_PART $TMPMOUNT
-		printf "Creating backups of uImage and uInitrd... " >&2
-		if [ -e $TMPMOUNT/uImage ]; then
-			cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
+
+		if [ -n "$UPDATE_BOOTLOADER" ];then
+			omap_flash_bootloader
+		else
+			omap_flash_kernel_and_initrd
 		fi
-		if [ -e $TMPMOUNT/uInitrd ]; then
-			cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
-		fi
-		echo "done." >&2
-		printf "Generating kernel u-boot image... " >&2
-		mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
-			-e 0x80008000 -n "Ubuntu Kernel" -d $kfile $TMPMOUNT/uImage >&2 1>/dev/null
-		echo "done." >&2
-		printf "Generating Initramfs u-boot image... " >&2
-		mkimage -A arm -O linux -T ramdisk -C none -a 0x0 -e 0x0 \
-			-n "Ubuntu Initrd" -d $ifile $TMPMOUNT/uInitrd >&2 1>/dev/null
-			echo "done." >&2
-		if [ -e /boot/boot.script ];then
-			printf "Generating u-boot configuration from /boot/boot.script... " >&2
-			cp $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
-			mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
-				$TMPMOUNT/boot.scr >&2 1>/dev/null
-			echo "done." >&2
-		fi
+
 		umount $TMPMOUNT
 		rm -rf $TMPMOUNT
 	else
@@ -344,6 +398,13 @@ fi
 
 if [ -n "$FLASH_KERNEL_SKIP" ]; then
 	exit 0
+fi
+
+if [ "x$1" = "x--update-bootloader" ]; then
+  UPDATE_BOOTLOADER=y
+  shift
+  BOOTLOADER_FILES=$@
+  shift $#
 fi
 
 if [ -n "$1" ]; then

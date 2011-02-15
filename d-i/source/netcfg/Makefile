@@ -1,8 +1,11 @@
+NETCFG_VERSION = $(shell dpkg-parsechangelog | grep ^Version: |sed 's/Version: //')
+NETCFG_BUILD_DATE = $(shell date '+%Y%m%d-%H%M')
+
 CC		= gcc
 TARGETS		?= netcfg-static netcfg
 
 LDOPTS		= -ldebconfclient -ldebian-installer
-CFLAGS		= -W -Wall -DNDEBUG 
+CFLAGS		= -W -Wall -DNDEBUG -DNETCFG_VERSION="\"$(NETCFG_VERSION)\"" -DNETCFG_BUILD_DATE="\"$(NETCFG_BUILD_DATE)\""
 COMMON_OBJS	= netcfg-common.o wireless.o
 
 WIRELESS	= 1
@@ -26,7 +29,7 @@ endif
 
 all: $(TARGETS)
 
-netcfg-static: netcfg-static.o static.o
+netcfg-static: netcfg-static.o static.o ethtool-lite.o
 netcfg: netcfg.o dhcp.o static.o ethtool-lite.o
 
 ethtool-lite: ethtool-lite-test.o

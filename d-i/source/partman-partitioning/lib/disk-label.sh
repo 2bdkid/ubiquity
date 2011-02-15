@@ -124,6 +124,8 @@ default_disk_label () {
 		    *)
 			echo UNKNOWN;;
 		esac;;
+	    ppc64)
+		echo mac;;
 	    s390)
 		echo msdos;;
 	    sh4)

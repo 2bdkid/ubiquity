@@ -3,26 +3,24 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# translation of nb.po to Norwegian Bokmål
-# Copyright (C) 2003 Software in the Public Interest, Inc.
+# translation of lo.po to Lao
+# Lao translation of debian-installer.
+# Copyright (C) 2006-2010 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Knut Yrvin <knuty@skolelinux.no>, 2004.
-# Klaus Ade Johnstad <klaus@skolelinux.no>, 2004.
-# Axel Bojer <axelb@skolelinux.no>, 2004.
-# Bjørn Steensrud <bjornst@powertech.no>, 2004-2007.
-# Hans Fredrik Nordhaug <hans@nordhaug.priv.no>, 2005, 2007-2010.
+# Anousak Souphavanh <anousak@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: nb\n"
+"Project-Id-Version: lo\n"
 "Report-Msgid-Bugs-To: grub-installer@packages.debian.org\n"
 "POT-Creation-Date: 2010-12-16 22:52+0000\n"
-"PO-Revision-Date: 2010-08-25 17:46+0200\n"
-"Last-Translator: Hans Fredrik Nordhaug <hans@nordhaug.priv.no>\n"
-"Language-Team: Norwegian Bokmål <i18n-nb@lister.ping.uio.no>\n"
+"PO-Revision-Date: 2010-11-26 09:11+0700\n"
+"Last-Translator: Anousak Souphavanh <anousak@gmail.com>\n"
+"Language-Team: Lao <lo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #. Type: boolean
 #. Description
@@ -32,8 +30,7 @@ msgstr ""
 #. :sl1:
 #: ../grub-installer.templates:1001 ../grub-installer.templates:2001
 msgid "Install the GRUB boot loader to the master boot record?"
-msgstr ""
-"Vil du installere oppstartslasteren Grub på hovedoppstartssporet (MBR)?"
+msgstr "ຈະຕິດຕັ້ງບູຕໂຫລດເດີ GRUB ລົງໃນມາສເຕີບູຕເຣຄອດຫລືບໍ່?"
 
 #. Type: boolean
 #. Description
@@ -42,8 +39,7 @@ msgstr ""
 msgid ""
 "The following other operating systems have been detected on this computer: "
 "${OS_LIST}"
-msgstr ""
-"Følgende andre operativsystemer er funnet på denne maskinen: ${OS_LIST}"
+msgstr "ກວດເຫັນລະບົບປະຕິບັດການອື່ນໃນເຄື່ອງຄອມພິວເຕີນນີ້: ${OS_LIST}"
 
 #. Type: boolean
 #. Description
@@ -55,10 +51,9 @@ msgid ""
 "When your computer boots, you will be able to choose to load one of these "
 "operating systems or your new system."
 msgstr ""
-"Hvis alle dine operativsystemer er listet opp ovenfor, så bør det være trygt "
-"å installere oppstartslasteren i hovedoppstartssporet på den første "
-"harddisken. Når maskinen starter vil du få valget mellom å starte ett av "
-"disse operativsystemene eller det nye Debian-systemet."
+"ຖ້າລະບົບປະຕິບັການທັ້ງໝົດຂອງທ່ານຢູ່ໃນລາຍການຂ້າງເທິງນີ້ "
+"ກໍ່ອາດຈະປອດໄພທີ່ຈະຕິດຕັ້ງບູຕໂຫລດເດີລົງໃນມາສເຕີຂອງຣາດດີສໂຕທຳອິດຂອງທ່ານ "
+"ຖ້າເຄື່ອງຂອງທ່ານບູຕທ່ານຈະສາມາດເລືອກໂຫລດລະບົບປະຕິບັດການເຫລົ່ານີ້ ຫລືຈະໂຫລດລະບົບໃໝ່ທີ່ຫາກໍ່ຕິດຕັ້ງນີ້."
 
 #. Type: boolean
 #. Description
@@ -69,9 +64,8 @@ msgid ""
 "computer. If so, it should be safe to install the GRUB boot loader to the "
 "master boot record of your first hard drive."
 msgstr ""
-"Det ser ut til at denne Debian-installasjonen er det eneste operativsystemet "
-"på denne maskinen. Hvis det er riktig, skulle det være trygt å installere "
-"oppstartslasteren Grub på hovedoppstartssporet på den første harddisken."
+"ເບີ່ງຄືວ່າ ລະບົບທີ່ຕິດຕັ້ງໃໝ່ນີ້ ຈະເປັນພຽງລະບົບປະຕິບັດການໜຶ່ງທີ່ຢູ່ໃນເຄື່ອງຄອມພິວເຕີນີ້ ຫາກເປັນເຊັ່ນນັ້ນ "
+"ກໍ່ຈະປອດໄພທີ່ຈະຕິດຕັ້ງບູຕໂຫລດເດີ GRUB ລົງໃນມາສເຕີບູຕເຣຄອດຂອງຮາດດີສໂຕທຳອິດຂອງທ່ານ."
 
 #. Type: boolean
 #. Description
@@ -83,24 +77,24 @@ msgid ""
 "operating system temporarily unbootable, though GRUB can be manually "
 "configured later to boot it."
 msgstr ""
-"Advarsel: Hvis installasjonsprogrammet ikke oppdaget et annet operativsystem "
-"som finnes på maskinen, så blir det midlertidig umulig å starte dette andre "
-"systemet hvis hovedoppstartssporet endres, men Grub kan senere settes opp "
-"manuelt slik at det andre systemet kan startes."
+"ຄຳເຕືອນ: "
+"ຖ້າໂປຣແກມການຕິດຕັ້ງບໍ່ສາມາດກວດລະບົບປະຕິບັດການອື່ນທີ່ມີຢູ່ໃນເຄື່ອງທ່ານເຫັນການປ່ຽນແປງມາສເຕີບູຕເຣຄອດຈະເຮັດໃຫ້ບໍ່ສາມາດບູຕລະບົບປະຕິບັດການດັ່ງກ່າວໄດ້ຊົ່ວຄາວ "
+"ຫາກແມ່ນຫວາຈະສາມາດຕິດຕັ້ງ GRUB ໃນພາຍຫລັງໃຫ້ສາມາດບູຕໄດ້ກໍ່ຕາມ."
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
+#, fuzzy
 msgid "Install the GRUB boot loader to the Serial ATA RAID disk?"
-msgstr "Installer oppstartssystemet GRUB på den serielle ATA RAID-disken?"
+msgstr "ຕິດຕັ້ງບູຕໂຫລດເດີ GRUB ລົງໃນຮາດດີສ໌"
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:3001
 msgid "Installation of GRUB on Serial ATA RAID is experimental."
-msgstr "Installasjon av GRUB på seriell ATA RAID er eksperimentelt."
+msgstr ""
 
 #. Type: boolean
 #. Description
@@ -111,9 +105,6 @@ msgid ""
 "RAID disk. It is also assumed that disk is listed as the first hard disk in "
 "the boot order defined in the system's BIOS setup."
 msgstr ""
-"GRUB installeres alltid i hovedoppstartssektoren (MBR) på den serielle ATA "
-"RAID-disken. Det er også antatt at den disken er listet som første "
-"harddisken i oppstartsrekkefølge definert i systemets BIOS-oppsett."
 
 #. Type: boolean
 #. Description
@@ -123,7 +114,7 @@ msgstr ""
 #. :sl3:
 #: ../grub-installer.templates:3001 ../grub-installer.templates:5001
 msgid "The GRUB root device is: ${GRUBROOT}."
-msgstr "Rotenheten for GRUB er: ${GRUBROOT}."
+msgstr ""
 
 #. Type: error
 #. Description
@@ -137,7 +128,7 @@ msgstr "Rotenheten for GRUB er: ${GRUBROOT}."
 #: ../grub-installer.templates:4001 ../grub-installer.templates:6001
 #: ../grub-installer.templates:14001
 msgid "Unable to configure GRUB"
-msgstr "Klarte ikke å sette opp GRUB"
+msgstr "ບໍ່ສາມາດຕັ້ງຄ່າ GRUB"
 
 #. Type: error
 #. Description
@@ -145,7 +136,6 @@ msgstr "Klarte ikke å sette opp GRUB"
 #: ../grub-installer.templates:4001
 msgid "An error occurred while setting up GRUB for your Serial ATA RAID disk."
 msgstr ""
-"Det oppsto en feil mens GRUB ble satt opp for din serielle ATA RAID disk."
 
 #. Type: error
 #. Description
@@ -154,22 +144,24 @@ msgstr ""
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:4001 ../grub-installer.templates:6001
+#, fuzzy
 msgid "The GRUB installation has been aborted."
-msgstr "Installasjonen av GRUB ble avbrutt."
+msgstr "ການຄັດລອກຖຶກຍົກເລີກ."
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:5001
+#, fuzzy
 msgid "Install the GRUB boot loader to the multipath device?"
-msgstr "Vil du installere oppstartslasteren Grub på multipath-enheten?"
+msgstr "ຈະຕິດຕັ້ງບູຕໂຫລດເດີ GRUB ລົງໃນມາສເຕີບູຕເຣຄອດຫລືບໍ່?"
 
 #. Type: boolean
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:5001
 msgid "Installation of GRUB on multipath is experimental."
-msgstr "Installasjon av GRUB på multipath er eksperimentelt."
+msgstr ""
 
 #. Type: boolean
 #. Description
@@ -180,23 +172,21 @@ msgid ""
 "device. It is also assumed that the WWID of this device is selected as boot "
 "device in the system's FibreChannel adapter BIOS."
 msgstr ""
-"GRUB installeres alltid i hovedoppstartssektoren (MBR) på multipath-enheten. "
-"Det er også antatt at WWID-en for denne enheten er valgt som oppstartsenhet "
-"i systemets FibreChannel adapter BIOS."
 
 #. Type: error
 #. Description
 #. :sl3:
 #: ../grub-installer.templates:6001
+#, fuzzy
 msgid "An error occurred while setting up GRUB for the multipath device."
-msgstr "Det oppsto en feil mens GRUB ble satt opp for multipath-enheten."
+msgstr "ເກີດຂໍ້ມູນຜິດພາດໃນຂະນຂຽນການປ່ຽນແປງຕ່າງໆ ລົງໃນອຸປະກອນເກັບຂໍ້ມູນ."
 
 #. Type: string
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:7001
 msgid "Device for boot loader installation:"
-msgstr "Enheten oppstartslasteren skal installeres på:"
+msgstr "ອຸປະກອນສຳລັບຕິດຕັ້ງບູດໂຫຼດເດີ:"
 
 #. Type: string
 #. Description
@@ -209,12 +199,9 @@ msgid ""
 "can install GRUB elsewhere on the drive, or to another drive, or even to a "
 "floppy."
 msgstr ""
-"Du må gjøre det mulig å starte opp det nyinstallerte systemet, ved å "
-"installere oppstartslasteren Grub på en enhet som er oppstartbar. Den "
-"vanlige måten å gjøre dette på, er å installere Grub på hovedoppstartssporet "
-"(MBR) på den første harddisken. Hvis du foretrekker det kan du installere "
-"Grub andre steder på harddisken, eller på en annen harddisk, eller til og "
-"med på en diskett."
+"ເຈົ້າຕອ້ງເຮັດໃຫ້ລະບົບທີ່ຫາກໍ່ຕິດຕັ້ງໃໝ່ນີ້ບູດໄດ້ ໂດຍຕິດຕັ້ງບູດໂຫຼດເດີ GRUB ໃນອຸປະກອນທີ່ບູດໄດ້ "
+"ວິທີປົກກະຕິກໍຄືຕິດຕັ້ງGRUBລົງໃນມາດສະເຕີບູດເລດຄອດຂອງຮາດດິດຕົວທຳອິດຂອງເຈົ້າຫຼືຖ້າເຈົ້າຕອ້ງການ "
+"ເຈົ້າສາມາດຕິດຕັ້ງ  GRUB ໃນບອ່ນອື່ນໄດຣ ໃນໄດຣອື່ນຫຼືແມ້ແຕ່ໃນແຜ່ນຟຣອບປີ "
 
 #. Type: string
 #. Description
@@ -226,9 +213,9 @@ msgstr ""
 #| "device in /dev. Below are some examples:\n"
 #| " - \"(hd0)\" or \"/dev/hda\" will install GRUB to the master boot record\n"
 #| "   of your first hard drive (IDE);\n"
-#| " - \"(hd0,1)\" or \"/dev/hda2\" will use the second partition of your\n"
+#| " - \"(hd0,2)\" or \"/dev/hda2\" will use the second partition of your\n"
 #| "   first IDE drive;\n"
-#| " - \"(hd2,4)\" or \"/dev/sdc5\" will use the first extended partition of\n"
+#| " - \"(hd2,5)\" or \"/dev/sdc5\" will use the first extended partition of\n"
 #| "   your third drive (SCSI here);\n"
 #| " - \"(fd0)\" or \"/dev/fd0\" will install GRUB to a floppy."
 msgid ""
@@ -241,22 +228,21 @@ msgid ""
 "   drive;\n"
 " - \"/dev/fd0\" will install GRUB to a floppy."
 msgstr ""
-"Enheten kan oppgis ved å bruke GRUBs notasjon «(hdn, m)», eller som en enhet "
-"i /dev. Nedenfor er noen eksempler: \n"
-" - «(hd0)» eller «/dev/hda» vil installere GRUB på hovedoppstartsporet på \n"
-"   den første harddisken (IDE);\n"
-" - «(hd0, 1)» eller «/dev/hda2» vil bruke den andre partisjonen på\n"
-"    den første harddisken (IDE);\n"
-" - «(hd2,5)» eller «/dev/sdc5» vil bruke den første utvidede partisjonen på \n"
-"   den tredje harddisken (SCSI);\n"
-" - «(fd0)» or «/dev/fd0» vil installere GRUB på en diskett."
+"ອຸປະກອນສາມາດລະບຸໄດ້ໂດຍອາໃສຮູບແບບ \"(hdn,m)\"ຂອງ GRUB ຫຼືໂດຍອ້າງອຸປະກອນໃສ່ໃນ /dev "
+"ດັ່ງຕົວຢ່ງຂ້າງລຸ່ມ:\n"
+" - \"(hd0)\" ຫຼື \"/dev/hda\" ຈະຕິດຕັ້ງ GRUB ລົງໃນມາດສະເຕີບູດເລດຄອດຂອງຮາດດິດ\n"
+"   IDE ຕົວແລກຂອງເຈົ້າ\n"
+" - \"(hd0,2)\"ຫຼື \"/dev/hda2\" ຈະໃຊ້ພາທິຊັ້ນທີສອງຂອງຮາດດິດ IDE ຕົວແລກຂອງເຈົ້າ\n"
+" - \"(hd2,5)\" ຫຼື \"/dev/sdc5\" ຫຼືຈະໃຊ້ພາທິຊັ້ນຂະຫຍາຍພາທິຊັນແລກຂອງຮາດດິດ SCSI\n"
+"  ຕົວທີສາມຂອງເຈົ້າ\n"
+" - \"(fd0)\" ຫຼື \"/dev/fd0\" ຈະຕິດຕັ້ງ GRUB ລົງໃນແຜ່ນຟຣອບປີ້"
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:8001
 msgid "GRUB password:"
-msgstr "GRUB passord:"
+msgstr "ລະຫັດຜ່ານ GRUB:"
 
 #. Type: password
 #. Description
@@ -270,26 +256,24 @@ msgid ""
 "GRUB command-line interface. By default, any user will still be able to "
 "start any menu entry without entering the password."
 msgstr ""
-"GRUB oppstartslaster har mange kraftige interaktive egenskaper, som kan "
-"brukes til å bryte inn i systemet ditt hvis uvedkommende brukere har tilgang "
-"til maskinen mens den starter. Som forsvar mot dette kan du velge et passord "
-"som må oppgis før meny-oppføringer kan endres eller GRUBs kommandolinje kan "
-"brukes. Som standard kan alle brukere starte alle menyoppføringer uten å "
-"oppgi noe passord."
+"ບູດໂຫຼດເດີ GRUB ມີຄວາມສາມາດໃນການໂຕ້ຕອບທີ່ມີພະລັງ ຊື່ງສາມາດຖືກເພື່ອບຸກລຸກລະບົບຂອງເຈົ້າໄດ້ "
+"ຖ້າຜູ້ທີ່ບໍ່ມສິດທິສາມາດເຂົ້າເຖິງເຄື່ອງຕອນທີ່ເປີດໄດ້ ດັ່ງນັ້ນ ເພື່ອປອ້ງກັນສະຖານະການດັ່ງກ່າວ "
+"ເຈົ້າອາດເລືອກລະຫັດຜ່ານ ຊື່ງຈະບັງຄັບໃຫ້ປອ້ນກອ່ນທີ່ຈະແກ້ໄຂລາຍການຫຼືເຂົ້າສູ່ສວ່ນຕິດຕໍ່ GRUB ແບບເສັ້ນຄຳສັ່ງ "
+"ຄ່າປົກກະຕິກໍຄື ຜູ້ໃຊ້ໃດໆກໍຕາມ ຈະຍັງສາມາດເລືອກລາຍການບູດໃດໆກໍໄດ້ໂດຍບໍ່ຕອ້ງປອ້ນລະຫັດຜ່ານ "
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:8001
 msgid "If you do not wish to set a GRUB password, leave this field blank."
-msgstr "Hvis du ikke vil innføre et GRUB-passord, så la feltet stå tomt."
+msgstr "ຫາກເຈົ້າບໍ່ຕອ້ງການຕັ້ງລະຫັດຜ່ານ GRUB ກໍປະຊອ່ງນີ້ໃຫ້ຫວ່າງໄວ້"
 
 #. Type: password
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:9001
 msgid "Re-enter password to verify:"
-msgstr "Skriv passordet på nytt som en sjekk:"
+msgstr "ປ້ອນລະຫັດຜ່ານອີກເທື່ອໜຶ່ງເພື່ອກວດສອບ:"
 
 #. Type: password
 #. Description
@@ -298,30 +282,28 @@ msgstr "Skriv passordet på nytt som en sjekk:"
 msgid ""
 "Please enter the same GRUB password again to verify that you have typed it "
 "correctly."
-msgstr ""
-"Skriv inn det samme GRUB-passordet på nytt for å kontrollere at du tastet "
-"det inn korrekt."
+msgstr "ກະລຸນາປອ້ນລະຫັດຜ່ານເດີມສຳລັບ GRUB ອີກຄັ້ງ ເພື່ອກວດສອບວ່າເຈົ້າພິມບໍ່ຜິດ "
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:10001
 msgid "Password input error"
-msgstr "Feil ved inntastingen av passordet"
+msgstr "ການປ້ອນລະຫັດຜ່ານຜິດພາດ"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:10001
 msgid "The two passwords you entered were not the same. Please try again."
-msgstr "De to passordene du oppga var ikke like. Prøv igjen."
+msgstr "ລະຫັດຜ່ານທີ່ເຈົ້າປອ້ນທັງສອງເທື່ອບໍ່ຕົງກັນ ກະລຸນາລອງໃໝ່"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:12001
 msgid "GRUB installation failed"
-msgstr "Klarte ikke installere GRUB"
+msgstr "ຕິດຕັ້ງ GRUB ບໍ່ສຳເລັດ"
 
 #. Type: error
 #. Description
@@ -331,22 +313,21 @@ msgid ""
 "The '${GRUB}' package failed to install into /target/. Without the GRUB boot "
 "loader, the installed system will not boot."
 msgstr ""
-"Installasjon av pakken «${GRUB}» i /target/ mislyktes. Uten "
-"oppstartsbehandleren GRUB så vil ikke det installert systemet starte opp."
+"ຕິດຕັ້ງແພັກເກັດ ${GRUB} ລົງໃນ /target/ ບໍ່ສຳເລັດ ຖ້າບໍ່ມີບູດໂຫຼດເດີ GRUBລະບົບທີ່ຕິດຕັ້ງຈະບູດບໍ່ໄດ້"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:13001
 msgid "Unable to install GRUB in ${BOOTDEV}"
-msgstr "Klarte ikke å installere GRUB på ${BOOTDEV}"
+msgstr "ບໍ່ສາມາດຕິດຕັ້ງ GRUB ລົງໃນ ${BOOTDEV}"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:13001
 msgid "Executing 'grub-install ${BOOTDEV}' failed."
-msgstr "Kommandoen «grub-install ${BOOTDEV}» mislyktes."
+msgstr "ການເຮັດວຽກຄຳສັ່ງ 'grub-install ${BOOTDEV}' ລົ້ມເຫຼວ"
 
 #. Type: error
 #. Description
@@ -356,63 +337,63 @@ msgstr "Kommandoen «grub-install ${BOOTDEV}» mislyktes."
 #. :sl2:
 #: ../grub-installer.templates:13001 ../grub-installer.templates:14001
 msgid "This is a fatal error."
-msgstr "Dette er en kritisk feil."
+msgstr "ຖືເປັນຄວາມຜິດພາດຮ້າຍແຮງ"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../grub-installer.templates:14001
 msgid "Executing 'update-grub' failed."
-msgstr "Kommandoen «update-grub» mislyktes."
+msgstr "ການເຮັດວຽກຄຳສັ່ງ 'update-grub' ລົ້ມເຫຼວ"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:17001
 msgid "Installing GRUB boot loader"
-msgstr "Installerer oppstartssystemet GRUB"
+msgstr "ກຳລັງຕິດຕັ້ງບູຕໂຫລດເດີ GRUB"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:18001
 msgid "Looking for other operating systems..."
-msgstr "Leter etter andre operativsystemer ..."
+msgstr "ກຳລັງກວດຫາລະບົບປະຕິບັດການອື່ນ..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:19001
 msgid "Installing the '${GRUB}' package..."
-msgstr "Installerer «${GRUB}»-pakka ..."
+msgstr "ກຳລັງຕິດຕັ້ງແພກເກັດ '${GRUB}'..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:20001
 msgid "Determining GRUB boot device..."
-msgstr "Avgjør oppstartsenhet for GRUB ..."
+msgstr "ກຳລັງພິຈາລະນາອຸປະກອນບູຕສຳຫລັບ GRUB..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:21001
 msgid "Running \"grub-install ${BOOTDEV}\"..."
-msgstr "Kjører «grub-install ${BOOTDEV}» ..."
+msgstr "ກຳລັງເຮັດງານ \"grub-install ${BOOTDEV}\"..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:22001
 msgid "Running \"update-grub\"..."
-msgstr "Kjører «update-grub» ..."
+msgstr "ກຳລັງເຮັດງານ\"update-grub\"..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../grub-installer.templates:23001
 msgid "Updating /etc/kernel-img.conf..."
-msgstr "Oppdaterer /etc/kernel-img.conf ..."
+msgstr "ກຳລັງປັບປຸງຂໍ້ມູນ /etc/kernel-img.conf..."
 
 #. Type: text
 #. Description
@@ -420,7 +401,7 @@ msgstr "Oppdaterer /etc/kernel-img.conf ..."
 #. :sl1:
 #: ../grub-installer.templates:24001
 msgid "Install the GRUB boot loader on a hard disk"
-msgstr "Installer oppstartssystemet GRUB på en harddisk"
+msgstr "ຕິດຕັ້ງບູຕໂຫລດເດີ GRUB ລົງໃນຮາດດີສ໌"
 
 #. Type: text
 #. Description
@@ -428,4 +409,4 @@ msgstr "Installer oppstartssystemet GRUB på en harddisk"
 #. :sl2:
 #: ../grub-installer.templates:25001
 msgid "Reinstall GRUB boot loader"
-msgstr "Installer oppstartssystemet GRUB på nytt"
+msgstr "ຕິດຕັ້ງບູດໂຫຼດເດີ GRUB ໃໝ່"

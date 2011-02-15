@@ -111,13 +111,19 @@ static short no_default_route (void)
  */
 static void dhcp_client_sigchld(int sig __attribute__ ((unused)))
 {
+    di_debug("dhcp_client_sigchld() called");
     if (dhcp_pid <= 0)
+        /* Already cleaned up */
         return;
+
     /*
      * I hope it's OK to call waitpid() from the SIGCHLD signal handler
      */
-    waitpid(dhcp_pid,&dhcp_exit_status,0);
-    dhcp_pid = -1;
+    di_debug("Waiting for dhcp_pid = %i", dhcp_pid);
+    waitpid(dhcp_pid, &dhcp_exit_status, WNOHANG);
+    if (WIFEXITED(dhcp_exit_status)) {
+        dhcp_pid = -1;
+    }
 }
 
 
@@ -135,6 +141,7 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
     int options_count;
     enum { DHCLIENT, PUMP, UDHCPC } dhcp_client;
     int dhcp_seconds;
+    char dhcp_seconds_str[16];
 
     if (access("/sbin/dhclient", F_OK) == 0)
 		dhcp_client = DHCLIENT;
@@ -150,6 +157,7 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
 
     debconf_get(client, "netcfg/dhcp_timeout");
     dhcp_seconds = atoi(client->value);
+    snprintf(dhcp_seconds_str, sizeof dhcp_seconds_str, "%d", dhcp_seconds-1);
 
     if ((dhcp_pid = fork()) == 0) { /* child */
         /* disassociate from debconf */
@@ -197,12 +205,11 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
             for (ptr = dhclient_request_options_udhcpc; *ptr; ptr++)
                 options_count++;
 
-            /* Allow space for:
-                options: options_count * 2
-                 params: 5
-               hostname: 2
-                   NULL: 1 */
-            arguments = malloc((options_count * 2 + 5 + 2 + 1) * sizeof(char **));
+            arguments = malloc((options_count * 2  /* -O <option> repeatedly */
+                                + 9    /* Other arguments (listed below) */
+                                + 2    /* dhostname (maybe) */
+                                + 1    /* NULL */
+                               ) * sizeof(char **));
 
             /* set the command options */
             options_count = 0;
@@ -211,9 +218,13 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
             arguments[options_count++] = interface;
             arguments[options_count++] = "-V";
             arguments[options_count++] = "d-i";
+            arguments[options_count++] = "-T";
+            arguments[options_count++] = "1";
+            arguments[options_count++] = "-t";
+            arguments[options_count++] = dhcp_seconds_str;
             for (ptr = dhclient_request_options_udhcpc; *ptr; ptr++) {
                 arguments[options_count++] = "-O";
-                arguments[options_count++] = *ptr;
+                arguments[options_count++] = (char *)*ptr;
             }
 
             if (dhostname) {
@@ -232,10 +243,12 @@ int start_dhcp_client (struct debconfclient *client, char* dhostname)
 
         return 1; /* should NEVER EVER get here */
     }
-    else if (dhcp_pid == -1)
+    else if (dhcp_pid == -1) {
+        di_warning("DHCP fork failed; this is unlikely to end well");
         return 1;
-    else {
+    } else {
         /* dhcp_pid contains the child's PID */
+        di_warning("Started DHCP client; PID is %i", dhcp_pid);
         signal(SIGCHLD, &dhcp_client_sigchld);
         return 0;
     }
@@ -428,10 +441,6 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                 /*
                  * Set defaults for domain name and hostname
                  */
-
-#ifndef MAXHOSTNAMELEN
-#define MAXHOSTNAMELEN 63
-#endif
                 char buf[MAXHOSTNAMELEN + 1] = { 0 };
                 char *ptr = NULL;
                 FILE *d = NULL;
@@ -447,7 +456,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                     fclose(d);
                     unlink(DOMAIN_FILE);
 
-                    if (!empty_str(domain) && verify_hostname(domain) == 0) {
+                    if (!empty_str(domain) && valid_domain(domain)) {
                         debconf_set(client, "netcfg/get_domain", domain);
                         have_domain = 1;
                     }
@@ -478,7 +487,7 @@ int netcfg_activate_dhcp (struct debconfclient *client)
                 if (gethostname(buf, sizeof(buf)) == 0
                     && !empty_str(buf)
                     && strcmp(buf, "(none)")
-                    && verify_hostname(buf) == 0
+                    && valid_domain(buf)
                     ) {
                     di_info("DHCP hostname: \"%s\"", buf);
                     debconf_set(client, "netcfg/get_hostname", buf);

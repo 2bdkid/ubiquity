@@ -2461,7 +2461,7 @@ if (@layouts) {
 	    $oldline = $_;
 	    next;
 	}
-	if (/^! ?\$([a-zA-Z0-9]+) ?= ?(.+)$/) {
+	if (/^! ?\$([a-zA-Z0-9_]+) ?= ?(.+)$/) {
 	    $rules_variables{$1} = [ split ' ', $2 ];
 	    next;
 	}

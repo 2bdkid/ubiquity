@@ -1,3 +1,58 @@
+netcfg (1.60ubuntu2) natty; urgency=low
+
+  * Build for ppc64.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 08 Feb 2011 19:23:18 +0000
+
+netcfg (1.60ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Drop priority of netcfg/get_domain to medium for non-static
+      configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Call /usr/lib/network-manager/ifblacklist_migrate.sh from
+      finish-install if present, so that 'auto dhcp' interfaces are disabled
+      if network-manager is in use. May be preseeded away with
+      netcfg/network-manager.
+    - Bump the DHCP timeout to 30 seconds.
+    - Strip trailing dots from domain when writing to /etc/hosts.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 08 Feb 2011 13:00:39 +0000
+
+netcfg (1.60) unstable; urgency=low
+
+  [ Matt Palmer ]
+  * Increase the frequency of DHCP discover packets sent during DHCP
+    configuration using udhcpc.  This should ameliorate some problems with
+    DHCP configuration when a link is slow to become available.
+    Thanks to Ferenc Wagner for the patch.
+  * Clarify the requirements for hostnames.  Closes: #399071.
+  * Modify ethtool-lite so that it distinguishes between "ethtool failed"
+    and "ethtool says link is down".  This should reduce link up/link down
+    confusion.  Closes: #496647.
+  * Wait for up to 3 seconds (in 0.25s increments) looking for the link on
+    an interface.  Add a progress bar to show the progress of this
+    operation.  Closes: #414117.
+  * Wait for link detection on static interface configuration.
+    Closes: #606515.
+  * Release DHCP lease at the completion of the install.  Closes: #610553.
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+  * Basque (eu.po) by Piarres Beobide
+  * French (fr.po) by Christian Perrier
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Nepali (ne.po)
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Telugu (te.po) by Arjuna Rao Chavala
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Matt Palmer <mpalmer@debian.org>  Sun, 06 Feb 2011 12:59:07 +1100
+
 netcfg (1.59ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
