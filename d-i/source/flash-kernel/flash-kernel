@@ -341,6 +341,38 @@ EOF
 	rm -f "$tmp.boot.script" "$tmp.boot.scr"
 }
 
+efikamx_flash_kernel() {
+        tmp=$(tempfile)
+        printf "Generating kernel u-boot image... " >&2
+        mkimage -A arm -O linux -T kernel -C none -a 0x90008000 \
+            -e 0x90008000 -d $kfile $tmp.uboot >&2 1>/dev/null
+        echo "done." >&2
+
+        if [ -e /boot/uImage ]; then
+                mv /boot/uImage /boot/uImage.bak
+        fi
+        mv $tmp.uboot /boot/uImage
+
+        if [ -e /boot/uInitrd ]; then
+		printf "Generating initrd u-boot image... " >&2
+		mkimage -A arm -O linux -T ramdisk -C gzip -a 0x0 \
+			-e 0x0 -n "$idesc" -d "$ifile" "$tmp.uboot" >&2 1>/dev/null
+		echo "done." >&2
+                mv /boot/uInitrd /boot/uInitrd.bak
+		echo "Creating new /boot/uInitrd." >&2
+		mv "$tmp.uboot" /boot/uInitrd
+		rm -f "$tmp.uboot"
+        fi
+
+	if [ -e /boot/boot.script ];then
+		cp /boot/boot.scr /boot/boot.scr.bak
+		printf "Generating u-boot configuration from /boot/boot.script... " >&2
+		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
+			/boot/boot.scr >&2 1>/dev/null
+		echo "done." >&2
+	fi
+}
+
 trap "cleanup" 0 HUP INT QUIT KILL SEGV PIPE TERM
 
 config="/etc/flash-kernel.conf"
@@ -370,6 +402,8 @@ if [ "x$1" = "x--supported" ]; then
 		"D-Link DNS-323")			exit 0 ;;
 		"Freescale MX51 Babbage Board")		exit 0 ;;
 		"GLAN Tank")				exit 0 ;;
+		"Genesi Efika MX (Smartbook)")          exit 0 ;;
+		"Genesi Efika MX (Smarttop)")           exit 0 ;;
 		"HP Media Vault mv2120")		exit 0 ;;
 		"IGEP v2 board")            exit 0 ;;
 		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
@@ -898,6 +932,10 @@ case "$machine" in
 			dd if=/dev/zero bs=$pad count=1 2>/dev/null
 		) > "$imtd" || error "failed."
 		echo "done." >&2
+	;;
+	"Genesi Efika MX (Smartbook)" | "Genesi Efika MX (Smarttop)")
+                #check_subarch $running_subarch
+                efikamx_flash_kernel
 	;;
 	*)
 		case "$running_subarch" in
