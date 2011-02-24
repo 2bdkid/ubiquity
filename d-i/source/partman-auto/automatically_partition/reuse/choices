@@ -43,6 +43,7 @@ for dev in $DEVICES/*; do
 	cd $dev
 	open_dialog PARTITIONS
 	while { read_line num id size type fs path name; [ "$id" ]; }; do
+		[ "$fs" != free ] || continue
 		part=$dev//$id
 		blockdev --setro $path
 		cleanup_ro_partitions="$cleanup_ro_partitions $path"
