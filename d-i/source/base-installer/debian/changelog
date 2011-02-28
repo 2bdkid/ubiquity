@@ -1,3 +1,40 @@
+base-installer (1.116ubuntu1) natty; urgency=low
+
+  * Resynchronise with Debian (LP: #724822).  Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default, unless
+      apt-setup/restricted is preseeded to false.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host) as well as the unadorned suite;
+      also -proposed if apt-setup/proposed is true.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Install busybox-initramfs rather than busybox.
+    - Revert Joey's patch to call base-installer.d hooks after running
+      debootstrap, which broke console-setup's expectation of being able to
+      insert its configuration file into /target before console-setup is
+      installed by debootstrap.
+    - Add armel/imx51, armel/dove, and armel/omap subarchitectures.
+    - Install kernel headers to match the kernel. This may be overridden by
+      setting base-installer/kernel/headers to false.
+    - Add base-installer/kernel/backports-modules template, which may be
+      preseeded to install selected linux-backports-modules-* packages.
+    - Run dpkg with --force-unsafe-io during installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 25 Feb 2011 10:22:02 +0000
+
+base-installer (1.116) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Support AMD CPU family 20 (thanks, Keng-Yü Lin; LP: #676838).
+
+  [ Joey Hess ]
+  * pkgdetails: Return the value of the field specified by the
+    DEBOOTSTRAP_CHECKSUM_FIELD environment variable.
+
+ -- Joey Hess <joeyh@debian.org>  Mon, 21 Feb 2011 20:26:59 -0400
+
 base-installer (1.115ubuntu1) natty; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

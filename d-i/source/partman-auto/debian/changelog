@@ -1,3 +1,24 @@
+partman-auto (93ubuntu8) natty; urgency=low
+
+  [ Evan Dandrea ]
+  * Signal to clear_partitions in partman-target that it should not
+    notify the user about the unformatted partitions we have set up.
+
+  [ Colin Watson ]
+  * Guard against 'grep -s DISTRIB_ID $mountpoint/etc/lsb-release' returning
+    false and causing parted_server communications to get out of sync
+    (LP: #726131).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 28 Feb 2011 16:22:32 +0000
+
+partman-auto (93ubuntu7) natty; urgency=low
+
+  * Split out the replace option from resize_use_free.
+  * Don't warn about partitions not marked for formatting when using the
+    reuse choice.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Sun, 27 Feb 2011 01:44:25 +0000
+
 partman-auto (93ubuntu6) natty; urgency=low
 
   * Don't explode on unpartitioned space in the reuse option (LP:

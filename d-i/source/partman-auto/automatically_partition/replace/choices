@@ -14,7 +14,7 @@ cleanup () {
 }
 trap cleanup EXIT HUP INT QUIT TERM
 
-reuse=
+replace=
 disks=
 if db_get partman-auto/disk; then
 	disks="$RET"
@@ -52,9 +52,9 @@ for dev in $DEVICES/*; do
 			release="$(grep -s DISTRIB_ID $mountpoint/etc/lsb-release)" || true
 			umount $path || true
 			if [ "${release##DISTRIB_ID=}" = "Ubuntu" ]; then
-				db_subst partman-auto/text/reuse PARTITION "$(humandev "$path")"
-				db_metaget partman-auto/text/reuse description
-				reuse="$reuse$NL$part$TAB$RET"
+				db_subst partman-auto/text/replace PARTITION "$(humandev "$path")"
+				db_metaget partman-auto/text/replace description
+				replace="$replace$NL$part$TAB$RET"
 			fi
 		fi
 		blockdev --setrw $path
@@ -62,6 +62,7 @@ for dev in $DEVICES/*; do
 	close_dialog
 done
 
-if [ "$reuse" ]; then
-	printf %s "$reuse"
+if [ "$replace" ]; then
+	printf %s "$replace"
 fi
+

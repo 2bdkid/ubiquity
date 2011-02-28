@@ -150,8 +150,8 @@ omap_flash_bootloader() {
 		"IGEP v2 board")
 			XLOADERDIR=igep0020
 			UBOOTDIR=igep0020
-                ;;
-                "OMAP3 Beagle Board")
+		;;
+		"OMAP3 Beagle Board")
 			XLOADERDIR=omap3530beagle
 			UBOOTDIR=omap3_beagle
 		;;
@@ -176,15 +176,15 @@ omap_flash_bootloader() {
 		#Check whether the file is already written to the boot partition
 		S1=$(md5sum $f 2>/dev/null|cut -f1 -d\ )
 		S2=$(md5sum $TMPMOUNT/$F 2>/dev/null|cut -f1 -d\ )
-    		if [ "$S1" != "$S2" ];then
-      			if [ -e $TMPMOUNT/$F ];then
-        			mv -f $TMPMOUNT/$F $TMPMOUNT/$F.bak
+		if [ "$S1" != "$S2" ];then
+			if [ -e $TMPMOUNT/$F ];then
+				mv -f $TMPMOUNT/$F $TMPMOUNT/$F.bak
 			fi
-   			cp $f $TMPMOUNT/
-      			echo $f copied to the boot partition. >&2
+			cp $f $TMPMOUNT/
+			echo $f copied to the boot partition. >&2
 		else
 			echo $f is already installed in the boot partition. >&2
-      		fi
+		fi
 	done
 }
 
@@ -342,27 +342,27 @@ EOF
 }
 
 efikamx_flash_kernel() {
-        tmp=$(tempfile)
-        printf "Generating kernel u-boot image... " >&2
-        mkimage -A arm -O linux -T kernel -C none -a 0x90008000 \
-            -e 0x90008000 -d $kfile $tmp.uboot >&2 1>/dev/null
-        echo "done." >&2
+	tmp=$(tempfile)
+	printf "Generating kernel u-boot image... " >&2
+	mkimage -A arm -O linux -T kernel -C none -a 0x90008000 \
+		-e 0x90008000 -d $kfile $tmp.uboot >&2 1>/dev/null
+	echo "done." >&2
 
-        if [ -e /boot/uImage ]; then
-                mv /boot/uImage /boot/uImage.bak
-        fi
-        mv $tmp.uboot /boot/uImage
+	if [ -e /boot/uImage ]; then
+		mv /boot/uImage /boot/uImage.bak
+	fi
+	mv $tmp.uboot /boot/uImage
 
-        if [ -e /boot/uInitrd ]; then
+	if [ -e /boot/uInitrd ]; then
 		printf "Generating initrd u-boot image... " >&2
 		mkimage -A arm -O linux -T ramdisk -C gzip -a 0x0 \
 			-e 0x0 -n "$idesc" -d "$ifile" "$tmp.uboot" >&2 1>/dev/null
 		echo "done." >&2
-                mv /boot/uInitrd /boot/uInitrd.bak
+		mv /boot/uInitrd /boot/uInitrd.bak
 		echo "Creating new /boot/uInitrd." >&2
 		mv "$tmp.uboot" /boot/uInitrd
 		rm -f "$tmp.uboot"
-        fi
+	fi
 
 	if [ -e /boot/boot.script ];then
 		cp /boot/boot.scr /boot/boot.scr.bak
@@ -371,13 +371,14 @@ efikamx_flash_kernel() {
 			/boot/boot.scr >&2 1>/dev/null
 		echo "done." >&2
 	fi
+	rm -f "$tmp"
 }
 
 trap "cleanup" 0 HUP INT QUIT KILL SEGV PIPE TERM
 
 config="/etc/flash-kernel.conf"
 if [ -r "$config" ]; then
-    . "$config"
+	. "$config"
 fi
 
 if [ "x$1" = "x--machine" ]; then
@@ -402,10 +403,10 @@ if [ "x$1" = "x--supported" ]; then
 		"D-Link DNS-323")			exit 0 ;;
 		"Freescale MX51 Babbage Board")		exit 0 ;;
 		"GLAN Tank")				exit 0 ;;
-		"Genesi Efika MX (Smartbook)")          exit 0 ;;
-		"Genesi Efika MX (Smarttop)")           exit 0 ;;
+		"Genesi Efika MX (Smartbook)")		exit 0 ;;
+		"Genesi Efika MX (Smarttop)")		exit 0 ;;
 		"HP Media Vault mv2120")		exit 0 ;;
-		"IGEP v2 board")            exit 0 ;;
+		"IGEP v2 board")			exit 0 ;;
 		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
 		"Linksys NSLU2")			exit 0 ;;
 		"OMAP3 Beagle Board")			exit 0 ;;
@@ -435,10 +436,10 @@ if [ -n "$FLASH_KERNEL_SKIP" ]; then
 fi
 
 if [ "x$1" = "x--update-bootloader" ]; then
-  UPDATE_BOOTLOADER=y
-  shift
-  BOOTLOADER_FILES=$@
-  shift $#
+	UPDATE_BOOTLOADER=y
+	shift
+	BOOTLOADER_FILES=$@
+	shift $#
 fi
 
 if [ -n "$1" ]; then
@@ -934,8 +935,8 @@ case "$machine" in
 		echo "done." >&2
 	;;
 	"Genesi Efika MX (Smartbook)" | "Genesi Efika MX (Smarttop)")
-                #check_subarch $running_subarch
-                efikamx_flash_kernel
+		check_subarch "mx51"
+		efikamx_flash_kernel
 	;;
 	*)
 		case "$running_subarch" in

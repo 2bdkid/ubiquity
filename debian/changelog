@@ -1,3 +1,21 @@
+ubiquity (2.5.19) natty; urgency=low
+
+  [ Colin Watson ]
+  * Automatic update of included source packages: base-installer
+    1.116ubuntu1, console-setup 1.57ubuntu8, flash-kernel 2.28ubuntu15,
+    partman-auto 93ubuntu8, partman-target 71ubuntu2.
+
+  [ Bryce Harrington ]
+  * Revert "Queue a redraw of the panel after setting the background".  This
+    change is implicated in a memory leak leading to OOM conditions and
+    eventual crash of Xserver.  (Possible fix for LP: #714829, would reopen
+    693300)
+
+  [ Mario Limonciello ]
+  * Fix reference leak in panel set_background function.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 28 Feb 2011 19:54:45 +0000
+
 ubiquity (2.5.18) natty; urgency=low
 
   * Automatic update of included source packages: partman-auto

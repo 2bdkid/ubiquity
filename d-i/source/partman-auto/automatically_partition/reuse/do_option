@@ -15,13 +15,13 @@ setup_reuse_partition () {
 	mkdir -p $1/options
 	rm -f $1/format
 	>$1/use_filesystem
+	>$1/reuse
 }
 
 path=
 cleanup () {
-	set +e
-	umount $path && rmdir $mountpoint
-	blockdev --setrw $path
+	umount $path && rmdir $mountpoint || true
+	blockdev --setrw $path || true
 }
 
 setup_reuse_partition $id
@@ -31,7 +31,7 @@ update_partition $dev $id
 open_dialog PARTITION_INFO $id
 read_line num i size type fs path name
 close_dialog
-mountpoint="$(mktemp -d /tmp/partman-auto.XXXXXX)"
+mountpoint="$(mktemp -d)"
 blockdev --setro $path
 mount $path $mountpoint 3>&-
 trap cleanup EXIT HUP INT QUIT TERM
@@ -49,7 +49,7 @@ if [ -f "$mountpoint/etc/fstab" ]; then
 		for dev in $DEVICES/*; do
 			cd $dev
 			open_dialog PARTITIONS
-			partitions=$(read_paragraph)
+			partitions="$(read_paragraph)"
 			close_dialog
 			echo "$partitions" |
 			while { read num i size type fs p name; [ "$i" ]; }; do

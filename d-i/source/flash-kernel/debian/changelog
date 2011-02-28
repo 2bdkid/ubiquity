@@ -1,3 +1,13 @@
+flash-kernel (2.28ubuntu15) natty; urgency=low
+
+  * Fix tabs vs. spaces.
+  * Uncomment check_subarch call for EfikaMX and replace "$running_subarch"
+    with "mx51" which seems more consistent and is similar to other boards;
+    see LP #671027.
+  * efikamx_flash_kernel(): remove $tmp.
+
+ -- Loïc Minier <loic.minier@linaro.org>  Mon, 28 Feb 2011 16:10:02 +0100
+
 flash-kernel (2.28ubuntu14) natty; urgency=low
  
   [ Marcin Juszkiewicz ]
