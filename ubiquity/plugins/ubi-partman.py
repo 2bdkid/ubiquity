@@ -54,6 +54,9 @@ class PageBase(plugin.PluginUI):
         '''The default filesystem used when creating partitions.'''
         self.default_filesystem = fs
 
+    def set_autopartition_options(self, options, extra_options):
+        pass
+
     def get_autopartition_choice(self):
         """Get the selected autopartitioning choice."""
         pass
@@ -225,6 +228,7 @@ class PageGtk(PageBase):
         else:
             # Return control to partman, which will call
             # get_autopartition_choice and start partitioninging the device.
+            self.controller.switch_to_install_interface()
             return False
 
     def plugin_on_back_clicked(self):
@@ -467,7 +471,6 @@ class PageGtk(PageBase):
         self.current_page = self.page_ask
 
     def get_autopartition_choice (self):
-        # TODO fix resizing not showing the progress_section
         if self.reuse_partition.get_active():
             return self.extra_options['reuse'][0][0], None
 
