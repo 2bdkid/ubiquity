@@ -1,3 +1,37 @@
+ubiquity (2.5.23) natty; urgency=low
+
+  [ Evan Dandrea ]
+  * Ensure we always have an automatic partitioning option selected.
+  * Merge in latest change to apt-clone from Michael Vogt:
+    - Current apt_pkg API methods.
+    - Better command line argument parsing.
+    - Set DPkg::Chroot-Directory (LP 727758).
+  * Do not attempt to proceed to a second page with the biggest_free
+    option (LP: #727842, LP: #652852).  This will change once we have an
+    interface for the biggest_free option.
+  * If the partition table is full and a copy of Windows exists, replace the
+    resize option with a copy of wubi.exe to the Windows startup folder,
+    followed by a reboot.
+  * Temporary fix for translations with carriage returns (LP: #730498).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: console-setup
+    1.57ubuntu10.
+
+  [ Colin Watson ]
+  * Set Dir::Media::MountPath as well as Acquire::cdrom::mount (in line with
+    base-installer), and pass all the options set by configure_apt to
+    python-apt as well so that attempts to install packages from python-apt
+    will behave consistently (LP: #727783).
+
+  [ Julien Lavergne ]
+  * bin/ubiquity-dm:
+   - Wait lxsession before launching the panel, to have theming support.
+     (LP: #684802)
+  * src/panel/panel.c
+   - Load lxpanel background for the panel when it's available.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Mon, 07 Mar 2011 09:16:26 +0000
+
 ubiquity (2.5.22) natty; urgency=low
 
   [ Evan Dandrea ]

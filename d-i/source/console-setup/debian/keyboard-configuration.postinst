@@ -83,11 +83,9 @@ if type plymouth >/dev/null && plymouth --ping; then
     # setting the keymap breaks with plymouth in raw mode, and setting the
     # font will currently also break if on vgacon
     setupcon --save-only
-elif \
-    [ -d /lib/debian-installer.d ] && keyboard_present
-then
+elif keyboard_present; then
     if [ "$DISPLAY" ] && which setxkbmap >/dev/null; then
-	setxkbmap -option '' -model "$model" "$layout" "$variant" "$options"
+	setxkbmap -option '' -model "$model" "$layout" "$variant" "$options" || true
 	# setting the font corrupts X
 	setupcon --save-only
 	setupcon --force -k

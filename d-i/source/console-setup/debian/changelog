@@ -1,3 +1,22 @@
+console-setup (1.57ubuntu10) natty; urgency=low
+
+  * Don't fail to configure keyboard-configuration if setxkbmap fails to
+    talk to the X display (LP: #728764).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 04 Mar 2011 13:40:49 +0000
+
+console-setup (1.57ubuntu9) natty; urgency=low
+
+  * The console-setup udev rule accidentally went missing in 1.57ubuntu1.
+    Reinstall it, this time in keyboard-configuration (LP: #713746).
+  * Load the new keyboard configuration immediately when running
+    'dpkg-reconfigure keyboard-configuration' in an installed system
+    (LP: #713062).
+  * Make setupcon explicitly exit 0, so that postinsts don't fail in the
+    event that loadkeys can't find a console.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 03 Mar 2011 16:14:06 +0000
+
 console-setup (1.57ubuntu8) natty; urgency=low
 
   * Move keyboard detection templates from console-setup.templates to
