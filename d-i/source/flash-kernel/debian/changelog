@@ -1,3 +1,19 @@
+flash-kernel (2.28ubuntu17) natty; urgency=low
+
+  * IMX51: transition from redboot -> uboot
+  * IMX53: Add imx53 loco board support
+
+ -- Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>  Tue, 08 Mar 2011 02:53:43 +0800
+
+flash-kernel (2.28ubuntu16) natty; urgency=low
+
+  * Don't check any subarch for the EfikaMX case, install whatever kernel is
+    apt-get install-ed; we can't get to a consensus on how to solve this
+    cleanly, so at least this will allow installation for people who know what
+    they are doing; LP: #671027.
+
+ -- Loïc Minier <loic.minier@ubuntu.com>  Mon, 07 Mar 2011 12:15:26 +0100
+
 flash-kernel (2.28ubuntu15) natty; urgency=low
 
   * Fix tabs vs. spaces.
