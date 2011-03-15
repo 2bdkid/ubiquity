@@ -59,7 +59,7 @@ if [ -f "$mountpoint/etc/fstab" ]; then
 					# Swap will be automatically used.
 					continue
 				fi
-				u="$(blkid -o value -s UUID $p)"
+				u="$(blkid -o value -s UUID $p)" || true
 				if [ "$uuid" = "$u" ]; then
 					setup_reuse_partition $i
 					echo "$mp" > $i/mountpoint
