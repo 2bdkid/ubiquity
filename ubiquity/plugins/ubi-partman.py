@@ -54,6 +54,9 @@ class PageBase(plugin.PluginUI):
         '''The default filesystem used when creating partitions.'''
         self.default_filesystem = fs
 
+    def set_autopartition_heading(self, heading):
+        pass
+
     def set_autopartition_options(self, options, extra_options):
         pass
 
@@ -108,6 +111,7 @@ class PageGtk(PageBase):
             self.part_advanced_vbox = builder.get_object('part_advanced_vbox')
 
             # Ask page
+            self.part_ask_heading = builder.get_object('part_ask_heading')
             self.use_device_title = builder.get_object('use_device_title')
             self.use_device_desc = builder.get_object('use_device_desc')
             self.replace_partition = builder.get_object('replace_partition')
@@ -472,6 +476,9 @@ class PageGtk(PageBase):
             self.debug('No active iterator for grub device entry.')
             return misc.grub_default()
 
+    def set_autopartition_heading(self, heading):
+        self.part_ask_heading.set_label(heading)
+
     def set_autopartition_options(self, options, extra_options):
         # TODO Need to select a radio button when resize isn't around.
         self.extra_options = extra_options
@@ -495,14 +502,8 @@ class PageGtk(PageBase):
 
         if 'reuse' in options:
             self.reuse_partition.show()
-            alpha_title = '<small><b>(alpha)</b></small>'
-            self.reuse_partition_title.set_markup(
-                '%s %s' % (options['reuse'].title, alpha_title))
-            alpha_desc = ('<small><span foreground="firebrick"><b>'
-                          'Make a full backup of your files before '
-                          'selecting this option.</b></span></small>')
-            self.reuse_partition_desc.set_markup(
-                '%s\n%s' % (fmt % options['reuse'].desc, alpha_desc))
+            self.reuse_partition_title.set_markup(options['reuse'].title)
+            self.reuse_partition_desc.set_markup(fmt % options['reuse'].desc)
             self.reuse_partition_desc.set_sensitive(False)
         else:
             self.reuse_partition.hide()
@@ -1265,6 +1266,9 @@ class PageKde(PageBase):
         else:
             return misc.grub_default()
 
+    def set_autopartition_heading(self, heading):
+        pass
+
     def set_autopartition_options(self, options, extra_options):
         use_device = self.controller.dbfilter.some_device_desc
         resize_choice = self.controller.dbfilter.resize_desc
@@ -1734,9 +1738,39 @@ class Page(plugin.Plugin):
                     return PartitioningOption(title, desc)
         return None
 
-    # TODO this function should be easily testable by constructing a fake
-    # layout and Mock db.
-    def calculate_autopartitioning_options(self, layout):
+    def calculate_autopartitioning_heading(self, operating_systems,
+                                           has_ubuntu):
+        os_count = len(operating_systems)
+        if os_count == 0:
+            q = 'ubiquity/partitioner/heading_no_detected'
+            return self.extended_description(q)
+        if os_count == 1:
+            q = 'ubiquity/partitioner/heading_one'
+            self.db.subst(q, 'OS', operating_systems[0])
+            return self.extended_description(q)
+        elif os_count == 2 and has_ubuntu:
+            q = 'ubiquity/partitioner/heading_dual'
+            self.db.subst(q, 'OS1', operating_systems[0])
+            self.db.subst(q, 'OS2', operating_systems[1])
+            return self.extended_description(q)
+        else:
+            q = 'ubiquity/partitioner/heading_multiple'
+            return self.extended_description(q)
+
+    def calculate_operating_systems(self, layout):
+        # Get your #2 pencil ready, it's time to crunch some numbers.
+        operating_systems = []
+        for disk in layout:
+            for partition in layout[disk]:
+                system = misc.find_in_os_prober(partition.device)
+                if system and system != 'swap':
+                    operating_systems.append(system)
+        ubuntu_systems = filter(lambda x: x.lower().find('buntu') != -1,
+                                operating_systems)
+        return (operating_systems, ubuntu_systems)
+
+    def calculate_autopartitioning_options(self, operating_systems,
+                                           ubuntu_systems):
         '''
         There are six possibilities we have to consider:
         - Just Windows (or Mac, ...) is present
@@ -1751,19 +1785,9 @@ class Page(plugin.Plugin):
         finite set.
         '''
         options = {}
-        wubi_option = 'wubi' in self.extra_options
-
-        # Get your #2 pencil ready, it's time to crunch some numbers.
-        operating_systems = []
         release = misc.get_release()
-        for disk in layout:
-            for partition in layout[disk]:
-                system = misc.find_in_os_prober(partition.device)
-                if system and system != 'swap':
-                    operating_systems.append(system)
         os_count = len(operating_systems)
-        ubuntu_systems = filter(lambda x: x.lower().find('buntu') != -1,
-                                operating_systems)
+        wubi_option = 'wubi' in self.extra_options
 
         if wubi_option:
             pass
@@ -1786,6 +1810,7 @@ class Page(plugin.Plugin):
         # We always have the manual partitioner, and it always has the same
         # title and description.
         q = 'ubiquity/partitioner/advanced'
+        self.db.subst(q, 'DISTRO', release.name)
         title = self.description(q)
         desc = self.extended_description(q)
         options['manual'] = PartitioningOption(title, desc)
@@ -1837,7 +1862,11 @@ class Page(plugin.Plugin):
                 options['use_device'] = opt
 
                 if wubi_option or resize_option:
-                    q = 'ubiquity/partitioner/single_os_resize'
+                    if resize_option:
+                        q = 'ubiquity/partitioner/single_os_resize'
+                    else:
+                        q = 'ubiquity/partitioner/ubuntu_inside'
+                    self.db.subst(q, 'OS', system)
                     self.db.subst(q, 'DISTRO', release.name)
                     title = self.description(q)
                     desc = self.extended_description(q)
@@ -1857,6 +1886,8 @@ class Page(plugin.Plugin):
                 options['replace'] = opt
 
             q = 'ubiquity/partitioner/ubuntu_and_os_format'
+            system = (set(operating_systems) - set(ubuntu_systems)).pop()
+            self.db.subst(q, 'OS', system)
             self.db.subst(q, 'CURDISTRO', ubuntu)
             title = self.description(q)
             desc = self.extended_description(q)
@@ -2030,7 +2061,13 @@ class Page(plugin.Plugin):
             self.ui.set_disk_layout(layout)
             self.ui.set_default_filesystem(self.db.get('partman/default_filesystem'))
 
-            options = self.calculate_autopartitioning_options(layout)
+            operating_systems, ubuntu_systems = \
+                self.calculate_operating_systems(layout)
+            has_ubuntu = len(ubuntu_systems) > 0
+            heading = self.calculate_autopartitioning_heading(
+                            operating_systems, has_ubuntu)
+            options = self.calculate_autopartitioning_options(
+                            operating_systems, ubuntu_systems)
             if self.debug_enabled():
                 import pprint
                 self.debug('options:')
@@ -2041,6 +2078,7 @@ class Page(plugin.Plugin):
                 printer = pprint.PrettyPrinter()
                 for line in printer.pformat(self.extra_options).split('\n'):
                     self.debug('%s', line)
+            self.ui.set_autopartition_heading(heading)
             self.ui.set_autopartition_options(options, self.extra_options)
 
         elif question == 'partman-auto/select_disk':

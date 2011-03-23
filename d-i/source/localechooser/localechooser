@@ -856,7 +856,7 @@ while :; do
 
 		CHOICES=
 		# *.UTF-8@euro locales are deprecated; don't use them
-		for i in $(grep -v '\.UTF-8@euro$' $SUPPORTEDLOCALES | cut -d' ' -f1 | grep -v "^$LOCALE$"); do
+		for i in $(grep -v '^#' $SUPPORTEDLOCALES | grep -v '\.UTF-8@euro$' | cut -d' ' -f1 | grep -v "^$LOCALE$"); do
 			CHOICES="${CHOICES:+$CHOICES, }$i"
 		done
 

@@ -10,6 +10,12 @@ CONFIGFILE=/etc/default/console-setup
 
 if [ "$1" = "configure" ]; then
     
+    # Remove non-update-alternatives-maintained config file
+    [ -f /etc/vtrgb ] && [ ! -h /etc/vtrgb ] && (md5sum /etc/vtrgb | grep -qs e7c707883505a6e15e6e42aedcab64a1) && rm -f /etc/vtrgb
+    update-alternatives --remove vtrgb /usr/share/console-setup/vtrgb 2>/dev/null || true
+    update-alternatives --install /etc/vtrgb vtrgb "$CONFIGDIR/vtrgb" 50
+    update-alternatives --install /etc/vtrgb vtrgb "$CONFIGDIR/vtrgb.vga" 20
+
     db_get console-setup/codesetcode
     codeset="$RET"
     db_get console-setup/fontface47

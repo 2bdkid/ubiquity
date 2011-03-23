@@ -70,7 +70,9 @@ install-main: build
 	rm -rf debian/console-setup/etc/console-setup/ckb/
 	dh_install -pconsole-setup Keyboard/pc105.tree \
 		usr/share/console-setup
-
+	dh_installinit --no-start --upstart-only --name setvtrgb
+	install -m 644 debian/vtrgb debian/console-setup/etc/console-setup/
+	install -m 644 debian/vtrgb.vga debian/console-setup/etc/console-setup/
 
 	install -d debian/keyboard-configuration/usr/share/console-setup/
 	rm debian/console-setup/etc/default/keyboard
@@ -245,6 +247,8 @@ install-udeb: build
 		debian/console-setup-udeb/usr/lib/base-installer.d/20console-setup
 	dh_installdirs -p console-setup-udeb etc/default
 	dh_installdirs -p console-setup-udeb etc/console-setup/
+	install -m 644 debian/vtrgb debian/console-setup-udeb/etc/
+	install -m 644 debian/vtrgb.vga debian/console-setup-udeb/etc/
 	cp config.kbd debian/console-setup-udeb/usr/share/console-setup-mini/keyboard
 	$(pre) --mini debian/console-setup-udeb/usr/lib/base-installer.d/20console-setup
 	$(pre) --mini debian/console-setup-udeb/usr/share/console-setup-mini/keyboard-configuration.config

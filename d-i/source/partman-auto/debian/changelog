@@ -1,3 +1,27 @@
+partman-auto (93ubuntu13) natty; urgency=low
+
+  * Make sure we have a partition selected for autopartitioning, not the
+    disk, when using the replace option (LP: #738366).
+  * Lazily unmount partitions in reuse/replace.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Wed, 23 Mar 2011 16:36:49 +0000
+
+partman-auto (93ubuntu12) natty; urgency=low
+
+  * Disable swap partitions on the same disk before deleting the
+    partition in the replace option (LP: #740881).
+
+ -- Evan Dandrea <ev@ubuntu.com>  Wed, 23 Mar 2011 11:36:14 +0000
+
+partman-auto (93ubuntu11) natty; urgency=low
+
+  * Fix a bug whereby reuse/do_option was filling debconf with garbage by not
+    using the correct delimeter for read_paragraph.
+  * Refactor reuse/do_option so that it doesn't call blkid in an O(n^2)
+    fashion.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Tue, 22 Mar 2011 03:00:55 +0000
+
 partman-auto (93ubuntu10) natty; urgency=low
 
   * Guard against blkid returning non-zero (LP: #729394).

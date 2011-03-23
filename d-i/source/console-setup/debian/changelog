@@ -1,3 +1,61 @@
+console-setup (1.57ubuntu17) natty; urgency=low
+
+  * debian/vtrgb: Design team wanted a slightly different grey; more contrast
+    when white on grey
+  * debian/console-setup.postinst: fix failure to find file to md5sum;
+    go back to installing the original vtrgb as a lower priority alternative
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Mon, 21 Mar 2011 21:38:00 -0500
+
+console-setup (1.57ubuntu16) natty; urgency=low
+
+  * debian/console-setup.postinst: don't add the vtrgb.vga 
+    alternate to update-alternatives;  let other packages or humans do this;
+    otherwise, every time this package upgrades, it would overwrite others'
+    overiding choices
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 20 Mar 2011 17:54:21 -0500
+
+console-setup (1.57ubuntu15) natty; urgency=low
+
+  * debian/vtrgb.vga, debian/rules, debian/console-setup.postinst:
+    - install a vga configuration, for easy reference by others who want to go
+      back to legacy mode
+    - relocate the stock vtrgb from /usr to /etc, such that it can be edited
+      by an admin, LP: #738992
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Sun, 20 Mar 2011 17:19:34 -0500
+
+console-setup (1.57ubuntu14) natty; urgency=low
+
+  * Install setvtrgb job with --no-start --upstart-only (LP: #738159).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 19 Mar 2011 12:07:57 +0000
+
+console-setup (1.57ubuntu13) natty; urgency=low
+
+  * debian/rules, debian/console-setup.postinst: use update-alternatives
+    to allow other packages to install different console color values,
+    LP: #737948
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Fri, 18 Mar 2011 22:02:12 -0500
+
+console-setup (1.57ubuntu12) natty; urgency=low
+
+  * Tolerate absence of setupcon in keyboard-configuration.postinst
+    (LP: #733497).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 18 Mar 2011 11:28:34 +0000
+
+console-setup (1.57ubuntu11) natty; urgency=low
+
+  * Address console-setup portion of LP: #730672, by installing
+    the conffile and applying it at upstart
+    - debian/vtrgb: Ubuntu's virtual terminal color scheme
+    - debian/console-setup.setvtrgb.upstart: run setvtrgb during upstart
+
+ -- Dustin Kirkland <kirkland@ubuntu.com>  Thu, 17 Mar 2011 17:10:50 -0500
+
 console-setup (1.57ubuntu10) natty; urgency=low
 
   * Don't fail to configure keyboard-configuration if setxkbmap fails to

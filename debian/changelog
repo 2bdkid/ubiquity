@@ -1,3 +1,35 @@
+ubiquity (2.5.28) natty; urgency=low
+
+  [ Evan Dandrea ]
+  * Update the descriptions for the automatic partitioning options to match
+    changes to the specification (LP: #736959).
+  * Mount /proc and friends for apt-clone.
+  * Use the noninteractive debconf frontend when calling apt-clone.
+  * apt-clone is now a separate package.
+  * Add a partitioning heading to help clarify what operating systems
+    may be acted upon by the installer.
+  * Remove ' (loader)' from the os-prober operating system descriptions on
+    the initial partitioning page.
+  * Properly substitute in the non-Ubuntu system when generating descriptions
+    for dual boot partitioning.
+  * Remove alpha warning for reuse option in preparation for the 11.04 Beta.
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: console-setup
+    1.57ubuntu17, grub-installer 1.60ubuntu2, localechooser 2.34ubuntu3,
+    partman-auto 93ubuntu13, partman-auto-loop 0ubuntu19.
+
+  [ Colin Watson ]
+  * Preprocess our variant of keyboard-configuration.postinst, so that it
+    includes the keyboard_present function.
+  * Start oem-config-debconf on stopping rc RUNLEVEL=[2345], rather than on
+    (filesystem and stopped udevtrigger); this guarantees that we will never
+    end up without a controlling terminal because tty1 has already started.
+  * Don't run the oem-config job in recovery mode (thanks, Shih-Yuan Lee;
+    LP: #734695).
+  * Run plugininstall in debconf frontend (LP: #740183).
+
+ -- Evan Dandrea <ev@ubuntu.com>  Wed, 23 Mar 2011 20:22:00 +0000
+
 ubiquity (2.5.27) natty; urgency=low
 
   * Drop code related to debian-installer/fallbacklocale, since that
