@@ -31,14 +31,15 @@ from ubiquity import osextras
 from ubiquity.install_misc import archdetect
 from collections import namedtuple
 
-PartitioningOption = namedtuple('PartitioningOption', ['title', 'desc'])
-
-
 NAME = 'partman'
 AFTER = 'prepare'
 WEIGHT = 11
 # Not useful in oem-config.
 OEM = False
+
+PartitioningOption = namedtuple('PartitioningOption', ['title', 'desc'])
+Partition = namedtuple('Partition', ['device', 'size', 'id', 'filesystem'])
+
 
 class PageBase(plugin.PluginUI):
     def __init__(self, *args, **kwargs):
@@ -1764,7 +1765,8 @@ class Page(plugin.Plugin):
             for partition in layout[disk]:
                 system = misc.find_in_os_prober(partition.device)
                 if system and system != 'swap':
-                    operating_systems.append(system)
+                    if not system.startswith('Windows Recovery'):
+                        operating_systems.append(system)
         ubuntu_systems = filter(lambda x: x.lower().find('buntu') != -1,
                                 operating_systems)
         return (operating_systems, ubuntu_systems)
@@ -1970,8 +1972,6 @@ class Page(plugin.Plugin):
 
             with misc.raised_privileges():
                 # {'/dev/sda' : ('/dev/sda1', 24973242, '32256-2352430079'), ...
-                Partition = namedtuple('Partition',
-                                       ['device', 'size', 'id', 'filesystem'])
                 parted = parted_server.PartedServer()
                 layout = {}
                 for disk in parted.disks():

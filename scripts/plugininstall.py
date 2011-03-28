@@ -215,6 +215,8 @@ class Install(install_misc.InstallBase):
                 'Could not restore packages from the previous install:')
             for line in traceback.format_exc().split('\n'):
                 syslog.syslog(syslog.LOG_WARNING, line)
+            self.db.input('critical', 'ubiquity/install/broken_apt_clone')
+            self.db.go()
         try:
             self.copy_network_config()
         except:
@@ -1301,6 +1303,7 @@ class Install(install_misc.InstallBase):
         codename = lsb_release.get_distro_information()['CODENAME']
         if not os.path.exists(working):
             return
+        install_misc.chroot_setup(self.target)
         try:
             misc.execute('mount', '--bind', '/proc', self.target + '/proc')
             misc.execute('mount', '--bind', '/sys', self.target + '/sys')
@@ -1308,13 +1311,8 @@ class Install(install_misc.InstallBase):
             subprocess.check_call(['apt-clone', 'restore-new-distro',
                 working, codename, '--destination', self.target],
                 preexec_fn=install_misc.debconf_disconnect)
-        except subprocess.CalledProcessError:
-            # TODO input an error question.
-            syslog.syslog(syslog.LOG_WARNING,
-                'Could not restore packages from the previous install:')
-            for line in traceback.format_exc().split('\n'):
-                syslog.syslog(syslog.LOG_WARNING, line)
         finally:
+            install_misc.chroot_cleanup(self.target)
             misc.execute('umount', '-f', self.target + '/proc')
             misc.execute('umount', '-f', self.target + '/sys')
             misc.execute('umount', '-f', self.target + '/dev')
@@ -1493,6 +1491,13 @@ class Install(install_misc.InstallBase):
                 print >>oem_id_file, oem_id
                 oem_id_file.close()
         except (debconf.DebconfError, IOError):
+            pass
+        try:
+            path = os.path.join(self.target, 'ubiquity-apt-clone')
+            if os.path.exists(path):
+                shutil.move(path,
+                            os.path.join(self.target, 'var/log/installer'))
+        except IOError:
             pass
 
     def cleanup(self):

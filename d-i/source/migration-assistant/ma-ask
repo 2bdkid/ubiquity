@@ -6,6 +6,8 @@ set -e
 . /usr/share/debconf/confmodule
 . /usr/share/migration-assistant/ma-script-utils
 
+newns "$@"
+
 if [ -z "$1" ]; then
     mapath="/usr/bin"
 else

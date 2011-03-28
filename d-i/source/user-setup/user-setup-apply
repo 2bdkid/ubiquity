@@ -318,11 +318,13 @@ TimedLoginDelay=10"
 		if [ -e $ROOT/etc/sudoers ]; then
 			$log $chroot $ROOT addgroup --system admin >/dev/null 2>&1 || true
 			$log $chroot $ROOT adduser "$USER" admin >/dev/null 2>&1 || true
-			cat <<EOF >>$ROOT/etc/sudoers
+                        if ! egrep -q "^%admin[[:space:]]+ALL=\(ALL\)[[:space:]]+ALL$" $ROOT/etc/sudoers; then
+			    cat <<EOF >>$ROOT/etc/sudoers
 
 # Members of the admin group may gain root privileges
 %admin ALL=(ALL) ALL
 EOF
+                        fi
 		else
 			# sudo failed to install, system won't be usable
 			exit 1

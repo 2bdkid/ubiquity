@@ -27,6 +27,7 @@ from ubiquity import misc, im_switch
 
 # if 'just_country' is True, only the country is changing
 def reset_locale(frontend, just_country=False):
+    frontend.start_debconf()
     di_locale = frontend.db.get('debian-installer/locale')
     if not di_locale:
         # TODO cjwatson 2006-07-17: maybe fetch
@@ -176,7 +177,7 @@ string_questions = {
     'okbutton1': 'ubiquity/imported/ok',
 }
 
-string_extended = set(('grub_device_label',))
+string_extended = set()
 
 def map_widget_name(prefix, name):
     """Map a widget name to its translatable template."""

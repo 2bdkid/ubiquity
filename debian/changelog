@@ -1,3 +1,33 @@
+ubiquity (2.5.30) natty; urgency=low
+
+  [ Evan Dandrea ]
+  * Add an error message for apt-clone failing.
+  * Do not consider Windows Recovery partitions in the list of operating
+    systems.
+  * Add unit tests, which can be run via ./tests/run or by building the
+    package.  To override a failing test causing the package build to
+    fail, use the UBIQUITY_NO_TESTS environment variable.
+  * Divert initctl around apt-clone to prevent packages with Upstart
+    jobs from failing to be reinstalled.
+  * Ensure that the partition description labels all wrap at the same
+    point (LP: #741664).
+  * Move test dependencies into build-depends.  Thanks Colin Watson!
+  * Move the apt-clone working directory into /var/log/installer at the
+    end of installation (LP: #739492).
+  * Set the next button back to its original label once done calculating
+    its size.
+  * Automatic update of included source packages: migration-assistant
+    0.6.9, user-setup 1.28ubuntu14.
+
+  [ Colin Watson ]
+  * Start debconf in ubiquity.i18n.reset_locale if it isn't already running
+    (LP: #649895).
+  * Remove grub_device_label from string_extended, now that the boot loader
+    question is only asked from the partitioning page rather than a separate
+    dialog (LP: #726740).
+
+ -- Evan Dandrea <ev@ubuntu.com>  Mon, 28 Mar 2011 18:30:33 +0100
+
 ubiquity (2.5.29) natty; urgency=low
 
   * Remove cy from LINGUAS. Fixes build failure.
