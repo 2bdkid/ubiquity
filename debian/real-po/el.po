@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
 "PO-Revision-Date: 2010-10-02 15:34+0000\n"
 "Last-Translator: sterios prosiniklis <steriosprosiniklis@gmail.com>\n"
 "Language-Team: <en@li.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:25+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:16+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -66,6 +66,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -76,6 +78,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -87,12 +90,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "Δοκιμάστε το ${RELEASE}"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "Εγκατάσταση του ${RELEASE}"
@@ -124,6 +129,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -355,6 +362,7 @@ msgstr "Κατανομή χώρου στο δίσκο"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr ""
@@ -416,6 +424,7 @@ msgstr "Συνέχεια χωρίς διαχειριστή εκκίνησης."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -659,6 +668,7 @@ msgstr "Διαχειριστής εκκίνησης"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1054,27 +1064,17 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "Σφάλμα ενημέρωσης προγράμματος εγκατάστασης"
+msgstr ""
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"Εμφανίστηκε ένα σφάλμα κατά την αντιγραφή των ρυθμίσεων του δικτύου. Η "
-"εγκατάσταση θα συνεχιστεί, αλλά το δίκτυο θα πρέπει να ρυθμιστεί ξανά στο "
-"εγκατεστημένο σύστημα."
 
 #. Type: text
 #. Description
@@ -1341,6 +1341,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "Προετοιμασία εγκατάστασης του ${RELEASE}"
@@ -1432,6 +1433,7 @@ msgstr "Για επιτυχημένο αποτέλεσμα, παρακαλούμ
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "έχει τουλάχιστον ${SIZE} διαθέσιμου χώρου στον δίσκο"
@@ -1450,6 +1452,7 @@ msgstr "είναι συνδεδεμένος στο διαδίκτυο"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1534,12 +1537,15 @@ msgstr "[πληκτρολογήστε  εδώ για αλλαγή]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
@@ -1548,6 +1554,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
 msgid "Install ${DISTRO} alongside ${OS}"
 msgstr ""
@@ -1569,6 +1577,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
 msgid "Install ${DISTRO} inside ${OS}"
 msgstr ""
@@ -1581,6 +1591,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
@@ -1589,12 +1600,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1603,6 +1616,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr ""
@@ -1618,14 +1633,19 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr ""
@@ -1648,6 +1668,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1657,26 +1679,29 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
 msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "Ο υπολογιστής αυτός έχει εγκατεστημένα ${OS}."
+msgstr ""
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
@@ -1686,22 +1711,18 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr "Ο υπολογιστής αυτός δεν έχει εγκατεστημένα λειτουργικά συστήματα."
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
-msgstr "Ο υπολογιστής αυτός δεν έχει εγκατεστημένα λειτουργικά συστήματα."
+msgstr ""
 
 #. Type: title
 #. Description
@@ -1766,142 +1787,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "Αφαίρεση πακέτων"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "Η απάντηση στις ερωτήσεις θα διαρκέσει μόνο λίγα λεπτά."
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "Μεταφορά εγγράφων και ρυθμίσεων"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "Πως θέλετε να κάνετε τη κατάτμηση του δίσκου;"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr "Ο υπολογιστής αυτός έχει περισσότερα από ένα λειτουργικά συστήματα."
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "Που θα θέλετε να εγκαταστήσετε το ${RELEASE};"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr ""
-#~ "Αυτό θα διαγράψει το/τα ${SYSTEMS} και θα εγκαταστήσει το ${RELEASE}."
-
-#~ msgid "Ready to install"
-#~ msgstr "Έτοιμο για εγκατάσταση"
-
-#~ msgid "Details"
-#~ msgstr "Λεπτομέρειες"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr ""
-#~ "Το νέο σας λειτουργικό σύστημα θα εγκατασταθεί τώρα με τις παρακάτω "
-#~ "ρυθμίσεις:"
-
-#~ msgid "Advanced..."
-#~ msgstr "Ειδικές επιλογές..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "Βήμα ${INDEX}/${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "Ανίχνευση αρχείων..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "Καθορισμός ονόματος συστήματος...."
-
-#~ msgid "Applying configuration"
-#~ msgstr "Εφαρμογή ρυθμίσεων"
-
-#~ msgid "Continue with installation."
-#~ msgstr "Συνέχεια της εγκατάστασης."
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "Χρήση ολόκληρης της κατάτμησης"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "Χρήση ολόκληρου του δίσκου"
-
-#~ msgid "Advanced Options"
-#~ msgstr "Προχωρημένες Επιλογές"
-
-#~ msgid "Popularity contest"
-#~ msgstr "Διαγωνισμός δημοφιλίας"
-
-#~ msgid "Port:"
-#~ msgstr "Θύρα:"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " Γλώσσα: ${LANGUAGE}\n"
-#~ " Διάταξη πληκτρολογίου: ${KEYMAP}\n"
-#~ " Όνομα: ${FULLNAME}\n"
-#~ " Όνομα χρήστη: ${USERNAME}\n"
-#~ " Τοποθεσία: ${LOCATION}\n"
-#~ " Βοηθός μετάβασης:\n"
-#~ " ${MIGRATE}"
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "Διαγραφή και χρήση ολόκληρου του δίσκου"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr ""
-#~ "Μόλις απαντήσετε μερικές ερωτήσεις, ο υπολογιστής θα είναι έτοιμος για "
-#~ "χρήση."
-
-#~ msgid "Summary"
-#~ msgstr "Σύνοψη"
-
-#~ msgid "Install boot loader"
-#~ msgstr "Εγκατάσταση διαχειριστή εκκίνησης"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "Διαμεσολαβητής HTTP:"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "Συμμετοχή στην έρευνα χρήσης των εφαρμογών"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "Ορίστε τις κατατμήσεις χειροκίνητα (για προχωρημένους)"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "Αυτόματη ανίχνευση διάταξης πληκτρολογίου"
-
-#~ msgid "Network proxy"
-#~ msgstr "Διαμεσολαβητής δικτύου (proxy)"
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "Χρήση του μεγαλύτερου συνεχούς ελεύθερου μέρους του δίσκου"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "Αυτή είναι μια προ-έκδοση του προγράμματος εγκατάστασης του ${RELEASE} "
-#~ "live ${MEDIUM}. Δεν είναι η τελική έκδοση. Αυτή θα περιλαμβάνεται στην "
-#~ "τελική έκδοση του ${RELEASE} που θα είναι έτοιμη τον Οκτώβρη του 2010."
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "Είστε έτοιμοι για την εγκατάσταση; Μόλις απαντήσετε σε μερικές ερωτήσεις, "
-#~ "τα περιεχόμενα του live ${MEDIUM} θα εγκατασταθούν σε αυτόν τον "
-#~ "υπολογιστή ώστε να μπορείτε να χρησιμοποιήσετε το ${RELEASE} χωρίς το "
-#~ "${MEDIUM}."
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "Προσδιορισμός διάταξης πληκτρολογίου"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "Εγκατάσταση παράλληλα με άλλα λειτουργικά συστήματα"

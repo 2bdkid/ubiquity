@@ -1,3 +1,32 @@
+ubiquity (2.5.33) natty; urgency=low
+
+  [ Colin Watson ]
+  * Shut down the debconf-communicator instance started in DM.run.  This
+    should reduce the number of spurious crash reports we get.
+  * KDE frontend:
+    - Force the SIGCHLD handler installed by QProcessManager to use
+      SA_RESTART, in the hope of avoiding problems with Python's lack of
+      EINTR-safety (LP: #745014).
+    - Show ext2 and btrfs in the same colour as ext3 and ext4, rather than
+      in the same colour as free space.
+  * localechooser/supported-locales only lists additional locales, so
+    calculate the set of language packs to install using the union of it and
+    debian-installer/locale (LP: #741304).
+  * Do a quick check at startup to see if the debconf database is locked by
+    something else, and exit slightly more gracefully than by raising an
+    exception (LP: #746020).
+  * GTK frontend:
+    - Fix the partman plugin to convert the return value of
+      gtk.TreeModel.get_value to Unicode before looking it up in a dict
+      (LP: #746408).
+  * Update translations from Launchpad (LP: #745924, #746500).
+  * Automatic update of included source packages: flash-kernel 2.28ubuntu18.
+
+  [ Evan Dandrea ]
+  * Clarify substitution variables in the debconf templates using comments.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sat, 02 Apr 2011 13:03:38 +0100
+
 ubiquity (2.5.32) natty; urgency=low
 
   * Fix test failure on non-x86 architectures.

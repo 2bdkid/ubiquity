@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
-"PO-Revision-Date: 2011-03-23 17:17+0000\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
+"PO-Revision-Date: 2011-03-28 14:40+0000\n"
 "Last-Translator: Michael Moroni <michael.moroni@mailoo.org>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:24+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:17+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -66,6 +66,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -76,6 +78,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -86,12 +89,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "Elprovi ${RELEASE}-n"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "Instali ${RELEASE}-n"
@@ -120,6 +125,8 @@ msgstr "Eble vi volas <a href=\"update\">ĝisdatigi ĉi tiun instalilon</a>."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -350,6 +357,7 @@ msgstr "Atribui disklokon"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr "Dosieroj (${SIZE})"
@@ -410,6 +418,7 @@ msgstr "Daŭrigi sen praŝargilo."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -645,6 +654,7 @@ msgstr "Praŝargilo"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1032,26 +1042,17 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "Eraro dum ĝisdatigo de instalilo"
+msgstr ""
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"Okazis eraro dum kopio de la retaj agordoj. La instadado daŭriĝos, sed vi "
-"devos mem agordi la reton en la instalita sistemo."
 
 #. Type: text
 #. Description
@@ -1307,6 +1308,7 @@ msgstr "La instalilon trafis neriparebla eraro kaj ĝi nun restartiĝos."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "Preparas por instalo de ${RELEASE}"
@@ -1397,6 +1399,7 @@ msgstr "Por plej bonaj rezultoj, estu certa ke tiu ĉi komputilo:"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "havas almenaŭ ${SIZE} da uzebla diskloko"
@@ -1415,6 +1418,7 @@ msgstr "estas konektita al la interreto"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1499,29 +1503,30 @@ msgstr "[tajpu ĉi tie por ŝanĝi]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "Anstataŭigi ${OS} per ${DISTRO}"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all of your ${OS} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
 "${OS} programs, documents, photos, music, and any other files."
 msgstr ""
-"Ĉit tio <b>forigos</b> ĉiujn viajn programarojn, dokumentojn, fotojn, "
-"muzikoj kaj iujn ajn dosierojn de ${OS}."
+"<span foreground=\"darkred\">Atenton:</span> Ĉi tio forigos ĉiujn viajn "
+"programarojn, dokumentojn, fotojn, muzikon kaj aliajn dosierojn de ${OS}."
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
 msgid "Install ${DISTRO} alongside ${OS}"
-msgstr ""
+msgstr "Instali ${DISTRO} flanke al ${OS}"
 
 #. Type: text
 #. Description
@@ -1542,20 +1547,21 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
-#, fuzzy
-#| msgid "Reinstall ${CURDISTRO}"
 msgid "Install ${DISTRO} inside ${OS}"
-msgstr "Reinstali ${CURDISTRO}"
+msgstr "Instali ${DISTRO} en ${OS}"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Something else"
-msgstr ""
+msgstr "Alio"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
@@ -1564,26 +1570,27 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr "Forigi kaj reinstali ${CURDISTRO}"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your ${CURDISTRO} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
 msgstr ""
-"Ĉit tio <b>forigos</b> ĉiujn viajn programarojn, dokumentojn, fotojn, "
-"muzikoj kaj iujn ajn dosierojn de ${CURDISTRO}."
+"<span foreground=\"darkred\">Atenton:</span> Ĉi tio forigos ĉiujn viajn "
+"programarojn, dokumentojn, fotojn, muzikon kaj aliajn dosierojn de "
+"${CURDISTRO}."
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr "Ĝisdatigi ${CURDISTRO} al ${VER}"
@@ -1596,17 +1603,24 @@ msgstr "Ĝisdatigi ${CURDISTRO} al ${VER}"
 msgid ""
 "No files will be deleted. Installed software will be kept where possible."
 msgstr ""
+"Neniu dosiero estos forigita. Instalitaj programaroj estos mantenitaj kie "
+"eblas."
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
-msgstr ""
+msgstr "Instali ${DISTRO} ${VER} flanke al ${CURDISTRO}"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "Forigi diskon kaj instali ${DISTRO}"
@@ -1620,6 +1634,8 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
 msgstr ""
+"<span foreground=\"darkred\">Atenton:</span> Ĉi tio forigos ĉiujn dosierojn "
+"en la durdisko."
 
 #. Type: text
 #. Description
@@ -1629,66 +1645,68 @@ msgstr "Forigi ĉiun kaj reinstali"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your programs, documents, photos, music, and "
-#| "other files in both ${OS} and ${CURDISTRO}."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and other files in both ${OS} and "
 "${CURDISTRO}."
 msgstr ""
-"Ĉit tio <b>forigos</b> ĉiujn viajn programarojn, dokumentojn, fotojn, "
-"muzikoj kaj iujn ajn dosierojn ambaŭ de ${OS} kaj ${CURDISTRO}."
+"<span foreground=\"darkred\">Atenton:</span> Ĉi tio forigos ĉiujn viajn "
+"programarojn, dokumentojn, fotojn, muzikon kaj aliajn dosierojn de ambaŭ "
+"${OS} kaj ${CURDISTRO}."
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "Reinstali ${CURDISTRO}"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
-msgstr ""
+msgstr "Instali ${DISTRO} flanke de ili"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "Ĉi tiu komputilo havas operaciumo ${OS} sur ĝi."
+msgstr "Ĉi tiu komputilo aktuale enhavas ${OS}. Kion vi volas fari?"
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
 msgstr ""
+"Ĉi tiu komputilo aktuale enhavas ${OS1} kaj ${OS2}. Kion vi volas fari?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr "Ĉi tiu komputilo havas neniujn operaciumojn sur ĝi."
+msgstr ""
+"Ĉi tiu komputilo aktuale enhavas pliajn operaciumojn. Kion vi volas fari?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
-msgstr "Ĉi tiu komputilo havas neniujn operaciumojn sur ĝi."
+msgstr ""
+"Ĉi tiu komputilo aktuale ne enhavas troveblajn operaciumojn. Kion vi volas "
+"fari?"
 
 #. Type: title
 #. Description
@@ -1752,158 +1770,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "Forigas pakaĵojn"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "Respondado pri la demandoj probable daŭros nur kelkajn minutojn."
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "Migru dokumentojn kaj agordaĵojn"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "Kiel vi volas partigi la diskon?"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr "Ĉi tiu komputilo havas plurajn operaciumojn sur ĝi."
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "Kien vi volas instali ${RELEASE}?"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr "Ĉi tio forigos ${SYSTEMS} kaj instalos ${RELEASE}."
-
-#~ msgid "Ready to install"
-#~ msgstr "Pretas por instalado"
-
-#~ msgid "Details"
-#~ msgstr "Detaloj"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr "Via nova operaciumo estos nun instalita kun la sekvaj agordoj:"
-
-#~ msgid "Advanced..."
-#~ msgstr "Por progresantoj..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "Paŝo ${INDEX}/${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "Skananta dosierojn..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "Fiksanta komputilan nomon..."
-
-#~ msgid "Applying configuration"
-#~ msgstr "Apliki agordon"
-
-#~ msgid "Continue with installation."
-#~ msgstr "Daŭrigi la instaladon."
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "Uzi tutan subdiskon"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "Uzi tutan diskon"
-
-#~ msgid ""
-#~ "You can upgrade ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr ""
-#~ "Vi povas ĝisdatigi ${CURDISTRO} sen perdi iujn ajn viajn gravajn "
-#~ "dokumentojn aŭ aplikaĵojn."
-
-#~ msgid ""
-#~ "You can reinstall ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr ""
-#~ "Vi povas reinstali ${CURDISTRO} sen perdi iujn ajn gravajn dokumentojn aŭ "
-#~ "aplikaĵojn."
-
-#~ msgid ""
-#~ "This will <b>erase</b> all your programs, documents, photos, music, and "
-#~ "any other files in all operating systems."
-#~ msgstr ""
-#~ "Ĉit tio <b>forigos</b> ĉiujn viajn programarojn, dokumentojn, fotojn, "
-#~ "muzikoj kaj iujn ajn dosierojn en ĉiuj viaj operaciumoj."
-
-#~ msgid "Advanced Options"
-#~ msgstr "Altnivelaj Opcioj"
-
-#~ msgid "Install boot loader"
-#~ msgstr "Instali praŝargilon"
-
-#~ msgid "Popularity contest"
-#~ msgstr "Konkurso pri populareco"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "Partoprenu pritaksadon de uzo de pakoj"
-
-#~ msgid "Network proxy"
-#~ msgstr "Reta prokurilo"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "HTTP-prokurilo"
-
-#~ msgid "Port:"
-#~ msgstr "Pordo:"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " Lingvo: ${LANGUAGE}\n"
-#~ " Klavara aranĝo: ${KEYMAP}\n"
-#~ " Nomo: ${FULLNAME}\n"
-#~ " Salutnomo: ${USERNAME}\n"
-#~ " Loko: ${LOCATION}\n"
-#~ " Migra Asistilo:\n"
-#~ " ${MIGRATE}"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr ""
-#~ "Respondinte kelkajn demandojn, ĉi tiu komputilo estos preta por uzo."
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "Viŝi kaj uzi la tutan diskon"
-
-#~ msgid "Summary"
-#~ msgstr "Resumo"
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "Ĉu preta por instali? Respondinte kelkajn demandojn, la enhavo de la viva "
-#~ "${MEDIUM} povas esti instalata al tiu ĉi komputilo por ke vi povu ruli "
-#~ "${RELEASE}-n plenrapide sen la ${MEDIUM}."
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "Uzi la plej grandan seninterrompan spacon"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "Specifi diskpartojn mane (progresinte)"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "Tio ĉi estas antaŭ-eldono de la viva ${MEDIUM}-instalilo de ${RELEASE}. "
-#~ "Ĝi ne estas definitiva eldono; tiu venos kun la fina eldono de ${RELEASE} "
-#~ "en oktobro 2010"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "Eltrovi klavarfasonon"
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "Eltrovi klavarfasonon"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "Instali apud aliaj operaciumoj"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
 "PO-Revision-Date: 2010-10-02 15:38+0000\n"
 "Last-Translator: Khaled Hosny <khaledhosny@eglug.org>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:24+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:16+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -65,6 +65,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -73,6 +75,7 @@ msgstr "يمكنك تجربة ${RELEASE} من دون أي تعديل في حاس
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -83,12 +86,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "جرّب ${RELEASE}"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "ثبّت ${RELEASE}"
@@ -117,6 +122,8 @@ msgstr "ربما ترغب <a href=\"update\">بتحديث المثبت</a>."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -342,6 +349,7 @@ msgstr "خصص مساحة القرص"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr ""
@@ -400,6 +408,7 @@ msgstr "تابع دون محمل إقلاع."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -635,6 +644,7 @@ msgstr "محمّل الإقلاع"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1017,26 +1027,17 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "خطأ في تحديث المثبت"
+msgstr ""
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"حدث خطأ في نسخ اإعدادات الشبكة. سيستمر التثبيت، لكن يجب ضبط إعدادات الشبكة "
-"بعد تثبيت النظام."
 
 #. Type: text
 #. Description
@@ -1287,6 +1288,7 @@ msgstr "واجه المثبت خطأ غير قابل للإصلاح و سيعي�
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "يحضّر لتثبيت ${RELEASE}"
@@ -1376,6 +1378,7 @@ msgstr "لأفضل النتائج، تأكد من أن هذا الحاسوب:"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "به على الأقل ${SIZE} مساحة خالية"
@@ -1394,6 +1397,7 @@ msgstr "موصل بالإنترنت"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1476,12 +1480,15 @@ msgstr "[اكتب هنا لتغييرها]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
@@ -1490,6 +1497,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
 msgid "Install ${DISTRO} alongside ${OS}"
 msgstr ""
@@ -1511,6 +1520,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
 msgid "Install ${DISTRO} inside ${OS}"
 msgstr ""
@@ -1523,6 +1534,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
@@ -1531,12 +1543,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1545,6 +1559,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr ""
@@ -1560,14 +1576,19 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr ""
@@ -1590,6 +1611,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1599,26 +1622,29 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
 msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "يحتوي هذا الحاسوب على نظام التشغيل ‪${OS}‬"
+msgstr ""
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
@@ -1628,22 +1654,18 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr "لا يحتوي هذا الحاسوب على نظام تشغيل"
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
-msgstr "لا يحتوي هذا الحاسوب على نظام تشغيل"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -1706,135 +1728,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "يحذف الحزم"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "لن تستغرق الإجابة على الأسئلة أكثر من بضعة دقائق."
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "انقل الإعدادات والمستندات"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "كيف تريد تقسيم القرص؟"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr "يحتوي هذا الحاسوب على عدة أنظمة تشغيل"
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "أين تريد وضع ${RELEASE}؟"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr "هذا سيحذف ${SYSTEMS} ويثبّت ${RELEASE}."
-
-#~ msgid "Ready to install"
-#~ msgstr "مستعد للتثبيت"
-
-#~ msgid "Details"
-#~ msgstr "التفاصيل"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr "سيُثبّت نظام التشغيل الجديد الآن وفقا للإعدادات التالية:"
-
-#~ msgid "Advanced..."
-#~ msgstr "متقدم..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "خطوة ${INDEX}\\${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "يفحص الملفات..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "يضبط اسم الحاسوب..."
-
-#~ msgid "Applying configuration"
-#~ msgstr "تطبيق التضبيط"
-
-#~ msgid "Continue with installation."
-#~ msgstr "تابع التثبيت."
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "استخدم الجزء كله"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "استخدم القرص كله"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "حدد الأقسام يدويا (متقدم)"
-
-#~ msgid "Advanced Options"
-#~ msgstr "الخيارات المتقدّمة"
-
-#~ msgid "Install boot loader"
-#~ msgstr "ثبّت محمّل الإقلاع"
-
-#~ msgid "Popularity contest"
-#~ msgstr "مسابقة الشعبية"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "شارك في استبيان استخدام الحزم"
-
-#~ msgid "Network proxy"
-#~ msgstr "وسيط الشبكة"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "وسيط HTTP:"
-
-#~ msgid "Port:"
-#~ msgstr "المنفذ:"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr "بمجرد إجابتك لبعض الأسئلة سيكون هذا الحاسوب جاهزا للاستخدام."
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "امسح القرص واستخدمه كاملا"
-
-#~ msgid "Summary"
-#~ msgstr "ملخّص"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " اللغه: ${LANGUAGE}\n"
-#~ " تخطيط لوحة المفاتيح: ${KEYMAP}\n"
-#~ " الاسم الكامل: ${FULLNAME}\n"
-#~ " اسم الولوج: ${USERNAME}\n"
-#~ " المكان: ${LOCATION}\n"
-#~ " مساعد الانتقال:\n"
-#~ " ${MIGRATE}"
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "استخدم أكبر مساحة متاحة متصلة"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "ثبّت بجوار أنظمة تشغيل أخرى"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "حدد تخطيط لوحة المفاتيح"
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "جاهز للتثبيت؟ بعد إجابتك عن بضعة أسئلة، ستتمكن من تثبيت محتوى ${MEDIUM} "
-#~ "الحي على هذا الحاسوب حيث سيمكنك تشغيل ${RELEASE} بالسرعة الكاملة دون أن "
-#~ "تحتاج ${MEDIUM}."
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "حدد تخطيط لوحة المفاتيح"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "هذه إصدارة أولية من مثبت${MEDIUM}  ${RELEASE} الحي. ليست الإصدارة "
-#~ "النهائية التي ستأتي مع إصدارة ${RELEASE} النهائية في أكتوبر 2010."

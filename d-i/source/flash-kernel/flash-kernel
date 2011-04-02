@@ -155,7 +155,7 @@ omap_flash_bootloader() {
 			XLOADERDIR=omap3530beagle
 			UBOOTDIR=omap3_beagle
 		;;
-		"OMAP4430 Panda Board")
+		"OMAP4430 Panda Board" | "OMAP4 Panda board")
 			XLOADERDIR=omap4430panda
 			UBOOTDIR=omap4_panda
 		;;
@@ -451,7 +451,7 @@ if [ "x$1" = "x--supported" ]; then
 		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
 		"Linksys NSLU2")			exit 0 ;;
 		"OMAP3 Beagle Board")			exit 0 ;;
-		"OMAP4430 Panda Board")			exit 0 ;;
+		"OMAP4430 Panda Board" | "OMAP4 Panda board")	exit 0 ;;
 		"OMAP4430 4430SDP board")		exit 0 ;;
 		"Marvell OpenRD Base Board")		exit 0 ;;
 		"Marvell OpenRD Client Board")		exit 0 ;;
@@ -783,12 +783,12 @@ case "$machine" in
 		check_subarch "dove"
 		dove_flash_kernel
 	;;
-	"IGEP v2 board" | "OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
+	"IGEP v2 board" | "OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board" | "OMAP4 Panda board")
 		case "$machine" in
 			"IGEP v2 board"|"OMAP3 Beagle Board")
 				check_subarch "omap"
 			;;
-			"OMAP4430 4430SDP board" | "OMAP4430 Panda Board")
+			"OMAP4430 4430SDP board" | "OMAP4430 Panda Board" | "OMAP4 Panda board")
 				check_subarch "omap4"
 			;;
 		esac

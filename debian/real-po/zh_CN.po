@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
-"PO-Revision-Date: 2011-03-12 02:58+0000\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
+"PO-Revision-Date: 2011-03-30 14:38+0000\n"
 "Last-Translator: Xhacker Liu <liu.dongyuan@gmail.com>\n"
 "Language-Team: Simplified Chinese <debian-chinese-gb@lists.debian.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:25+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:16+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -65,6 +65,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -73,6 +75,7 @@ msgstr "您可以直接从此 ${MEDIUM} 尝试 ${RELEASE}，而不用对您的�
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -83,12 +86,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "试用 ${RELEASE}"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "安装 ${RELEASE}"
@@ -117,6 +122,8 @@ msgstr "您可能希望 <a href=\"update\">更新安装程序</a>。"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -341,6 +348,7 @@ msgstr "分配磁盘空间"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr "文件 (${SIZE})"
@@ -399,6 +407,7 @@ msgstr "继续，不安装启动引导程序。"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -633,6 +642,7 @@ msgstr "引导程序"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1011,26 +1021,19 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "升级安装程序时发生错误"
+msgstr "恢复安装的应用程序时出现错误"
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"在复制网络设置时发生错误。安装程序将会继续，但是您必须在新安装的系统上再次配"
-"置网络设置。"
+"在恢复预安装的应用程序时发生了一个错误。安装会继续，但您可能需要在计算机重新"
+"启动后手动重新安装一些程序。"
 
 #. Type: text
 #. Description
@@ -1276,6 +1279,7 @@ msgstr "安装程序遇到了一个不可修复的错误，现在将会重新启
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "准备安装 ${RELEASE}"
@@ -1360,6 +1364,7 @@ msgstr "要获得最佳的体验，请确定这台计算机："
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "有至少 ${SIZE} 可用的磁盘空间"
@@ -1378,6 +1383,7 @@ msgstr "已经连接到互联网"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1458,29 +1464,30 @@ msgstr "[在此输入以更改]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "将 ${OS} 替换为 ${DISTRO}"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all of your ${OS} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
 "${OS} programs, documents, photos, music, and any other files."
-msgstr "这将会<b>删除</b> ${OS} 中的全部程序、文档、图片、音乐等等所有文件。"
+msgstr ""
+"<span foreground=\"darkred\">注意：</span>这会删除 ${OS} 里面的全部程序、文"
+"档、照片、音乐和其他文件。"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
-#, fuzzy
-#| msgid "Install ${DISTRO} alongside it"
 msgid "Install ${DISTRO} alongside ${OS}"
-msgstr "并存安装 ${DISTRO}"
+msgstr "安装 ${DISTRO}，与 ${OS} 共存"
 
 #. Type: text
 #. Description
@@ -1499,47 +1506,49 @@ msgstr "不会删除文件。您可以在每次电脑启动的时候选择操作
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
-#, fuzzy
-#| msgid "Install ${DISTRO} alongside it"
 msgid "Install ${DISTRO} inside ${OS}"
-msgstr "并存安装 ${DISTRO}"
+msgstr "安装 ${DISTRO}，替代 ${OS}"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Something else"
-msgstr ""
+msgstr "其他选项"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
 "for ${DISTRO}."
-msgstr ""
+msgstr "您可以自己创建、调整分区，或者为 ${DISTRO} 选择多个分区。"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
-msgstr "删除 ${CURDISTRO} 并重新安装"
+msgstr "卸载 ${CURDISTRO} 并重新安装"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your ${CURDISTRO} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
 msgstr ""
-"将会<b>删除</b> ${CURDISTRO} 中的全部程序、文档、图片、音乐等等所有文件。"
+"<span foreground=\"darkred\">注意：</span>这会删除 ${CURDISTRO} 里面的全部程"
+"序、文档、照片、音乐和其他文件。"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr "升级 ${CURDISTRO} 到 ${VER}"
@@ -1551,20 +1560,23 @@ msgstr "升级 ${CURDISTRO} 到 ${VER}"
 #: ../ubiquity.templates:229001 ../ubiquity.templates:233001
 msgid ""
 "No files will be deleted. Installed software will be kept where possible."
-msgstr ""
+msgstr "不会删除文件。会尽量保留已安装的软件。"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
-#, fuzzy
-#| msgid "Install ${DISTRO} ${VER} alongside"
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
-msgstr "并存安装 ${DISTRO} ${VER}"
+msgstr "安装 ${DISTRO} ${VER}，与 ${CURDISTRO} 共存"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "清除整个磁盘并安装 ${DISTRO}"
@@ -1577,7 +1589,7 @@ msgstr "清除整个磁盘并安装 ${DISTRO}"
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
-msgstr ""
+msgstr "<span foreground=\"darkred\">注意：</span>这会删除磁盘上的全部文件。"
 
 #. Type: text
 #. Description
@@ -1587,73 +1599,70 @@ msgstr "删除全部并重新安装"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your programs, documents, photos, music, and "
-#| "other files in both ${OS} and ${CURDISTRO}."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and other files in both ${OS} and "
 "${CURDISTRO}."
 msgstr ""
-"这将会<b>删除</b> ${OS} 和 ${CURDISTRO} 中的全部程序、文档、图片、音乐等等所"
-"有文件。"
+"<span foreground=\"darkred\">注意：</span>这会删除 ${OS} 和 ${CURDISTRO} 里面"
+"的全部程序、文档、照片、音乐和其他文件。"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "重新安装 ${CURDISTRO}"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
-msgstr "并存安装 ${DISTRO}"
+msgstr "安装 ${DISTRO}，与其他系统共存"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "这台计算机已安装了 ${OS} 操作系统。"
+msgstr "这台计算机已经安装了 ${OS}。您准备怎么做？"
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
-msgstr ""
+msgstr "这台计算机已经安装了 ${OS1} 和 ${OS2}。您准备怎么做？"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr "这台计算机没有安装操作系统。"
+msgstr "这台计算机已经安装了多个操作系统。您准备怎么做？"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
-msgstr "这台计算机没有安装操作系统。"
+msgstr "这台计算机似乎没有安装操作系统。您准备怎么做？"
 
 #. Type: title
 #. Description
 #. Info message displayed when running in OEM mode
 #: ../oem-config-check.templates:2001
 msgid "OEM mode (for manufacturers only)"
-msgstr "OEM模式 (制造商专用)"
+msgstr "OEM 模式 (制造商专用)"
 
 #. Type: text
 #. Description
@@ -1677,7 +1686,7 @@ msgstr "正在准备 OEM 配置..."
 #. Description
 #: ../oem-config-udeb.templates:3001
 msgid "Ready for OEM configuration"
-msgstr "OEM配置准备完毕"
+msgstr "OEM 配置准备完毕"
 
 #. Type: text
 #. Description
@@ -1707,161 +1716,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "正在删除软件包"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "回答这些问题只需要花费您几分钟的时间。"
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "迁移文档和设置"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "您希望如何对硬盘进行分区？"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr "这台计算机安装了多个操作系统。"
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "您要将 ${RELEASE} 安装在哪里？"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr "这将会删除 ${SYSTEMS} 并安装 ${RELEASE}。"
-
-#~ msgid "Ready to install"
-#~ msgstr "准备开始安装"
-
-#~ msgid "Details"
-#~ msgstr "详情"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr "您的新操作系统将采用以下设置进行安装："
-
-#~ msgid "Advanced..."
-#~ msgstr "高级..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "步骤 ${INDEX}/${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "正在扫描文件..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "正在设置计算机名..."
-
-#~ msgid "Applying configuration"
-#~ msgstr "正在应用设置"
-
-#~ msgid "Continue with installation."
-#~ msgstr "继续安装。"
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "使用整个分区"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "使用整个磁盘"
-
-#~ msgid ""
-#~ "You can upgrade ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr "您可以升级 ${CURDISTRO} 且不丢失任何重要的文档和程序。"
-
-#~ msgid ""
-#~ "Still on the fence? You can install ${DISTRO} ${VER} alongside your "
-#~ "existing copy of ${CURDISTRO}."
-#~ msgstr "还在牢笼里？您可以并存安装 ${DISTRO} ${VER} 且不影响 ${CURDISTRO}。"
-
-#~ msgid ""
-#~ "Ready to take the plunge? A clean install erases your entire hard disk "
-#~ "and installs ${DISTRO}."
-#~ msgstr "要来个大冒险？这会清除您的整个硬盘并安装 ${DISTRO}。"
-
-#~ msgid ""
-#~ "You can reinstall ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr "您可以重新安装 ${CURDISTRO} 且不丢失任何重要文档和程序。"
-
-#~ msgid ""
-#~ "This will <b>erase</b> all your programs, documents, photos, music, and "
-#~ "any other files in all operating systems."
-#~ msgstr ""
-#~ "这将会<b>删除</b>所有系统中的全部程序、文档、图片、音乐等等所有文件。"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "手动指定分区(高级)"
-
-#~ msgid "Advanced Options"
-#~ msgstr "高级选项"
-
-#~ msgid "Popularity contest"
-#~ msgstr "流行度对比"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "参加软件包使用调查"
-
-#~ msgid "Network proxy"
-#~ msgstr "网络代理"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "HTTP 代理："
-
-#~ msgid "Port:"
-#~ msgstr "端口："
-
-#~ msgid "Summary"
-#~ msgstr "概要"
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "清空并使用整个硬盘"
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "使用最大的连续空闲空间"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr "在回答一些问题以后，这台电脑就可以使用了。"
-
-#~ msgid "Install boot loader"
-#~ msgstr "安装引导程序"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " 语言：${LANGUAGE}\n"
-#~ " 键盘布局：${KEYMAP}\n"
-#~ " 全名：${FULLNAME}\n"
-#~ " 登录名：${USERNAME}\n"
-#~ " 位置：${LOCATION}\n"
-#~ " 迁移助手：\n"
-#~ " ${MIGRATE}"
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "准备好安装了吗？一旦您完成回答几个问题，这张 Live ${MEDIUM} 上的内容就可以"
-#~ "被安装到这台计算机上。这样您便可以不再需要这张 ${MEDIUM}，并且以全速来运"
-#~ "行 ${RELEASE}。"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "决定键盘布局"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "这是${RELEASE} 的 Live ${MEDIUM} 的预览版安装程序，它还不是最终版本， 最终"
-#~ "版会在2010年十月 ${RELEASE} 发布时一并推出。"
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "查看键盘布局"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "与其他操作系统共存"

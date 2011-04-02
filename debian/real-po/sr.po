@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
-"PO-Revision-Date: 2011-03-08 07:23+0000\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
+"PO-Revision-Date: 2011-03-30 01:22+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Ubuntu Serbian Translators\n"
 "Language: Serbian (sr)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:24+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:16+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -68,6 +68,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -78,6 +80,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -88,12 +91,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "Пробајте ${RELEASE}"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "Инсталирајте ${RELEASE}"
@@ -123,6 +128,8 @@ msgstr "Можда желите да <a href=\"update\">ажурирате ов�
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -353,6 +360,7 @@ msgstr "Распоређивање простора на диску"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr "Датотеке (${SIZE})"
@@ -413,6 +421,7 @@ msgstr "Наставите без покретача система."
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -650,6 +659,7 @@ msgstr "Покретач система"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1041,27 +1051,20 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "Грешка ажурирања инсталера"
+msgstr "Грешка приликом враћања имсталираних програма"
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"Дошло је до грешке приликом умножавања поставки мреже. Инсталација ће се "
-"наставити, али подешавања мреже ће морати поново да буду постављена у "
-"инсталираном систему."
+"Дошло је до грешке приликом враћања претходно инсталираних програма. "
+"Инсталација ће се наставити, али мораћете ручно да поново инсталирате неке "
+"програме након поновног подизања система рачунара."
 
 #. Type: text
 #. Description
@@ -1320,6 +1323,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "Припремам се да инсталирам ${RELEASE}"
@@ -1410,6 +1414,7 @@ msgstr "За најбоље резултате, уверите се да ова�
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "има најмање ${SIZE} доступног простора на диску"
@@ -1428,6 +1433,7 @@ msgstr "је повезан на Интернет"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1513,31 +1519,30 @@ msgstr "[куцајте овде да промените]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "Мењам „${OS}“ са „${DISTRO}“"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all of your ${OS} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
 "${OS} programs, documents, photos, music, and any other files."
 msgstr ""
-"Ово ће <b>избрисати</b> све програме, документа, фотографије, музику и било "
-"које друге датотеке вашег оперативног система „${OS}“"
+"<span foreground=\"darkred\">Упозорење:</span> Ово ће избрисати све ваше "
+"${OS} програме, документа, фотографије, музику и било које друге датотеке."
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
-#, fuzzy
-#| msgid "Install ${DISTRO} alongside it"
 msgid "Install ${DISTRO} alongside ${OS}"
-msgstr "Инсталирај „${DISTRO}“ поред њега"
+msgstr "Инсталирајте ${DISTRO} поред ${OS}а"
 
 #. Type: text
 #. Description
@@ -1558,48 +1563,52 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
-#, fuzzy
-#| msgid "Install ${DISTRO} alongside it"
 msgid "Install ${DISTRO} inside ${OS}"
-msgstr "Инсталирај „${DISTRO}“ поред њега"
+msgstr "Инсталирајте ${DISTRO} унутар ${OS}а"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Something else"
-msgstr ""
+msgstr "Нешто друго"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
 "for ${DISTRO}."
 msgstr ""
+"Можете сами да направите или да промените величину партиција, или да "
+"изаберете више партиција за ${DISTRO}."
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr "Избриши „${CURDISTRO}“ и поново инсталирај"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your ${CURDISTRO} programs, documents, photos, "
-#| "music, and any other files."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
 msgstr ""
-"Ово ће <b>избрисати</b> све програме, документа, фотографије, музику и било "
-"коју другу датотеку ваше дистрибуције „${CURDISTRO}“"
+"<span foreground=\"darkred\">Упозорење:</span> Ово ће избрисати све ваше "
+"${CURDISTRO} програме, документа, фотографије, музику и било које друге "
+"датотеке."
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr "Надогради „${CURDISTRO}“ на ${VER}"
@@ -1612,19 +1621,24 @@ msgstr "Надогради „${CURDISTRO}“ на ${VER}"
 msgid ""
 "No files will be deleted. Installed software will be kept where possible."
 msgstr ""
+"Датотеке неће бити избрисане. Инсталирани програми ће бити задржани тамо где "
+"је то могуће."
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
-#, fuzzy
-#| msgid "Install ${DISTRO} ${VER} alongside"
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
-msgstr "Инсталирај „${DISTRO}“ ${VER} поред овог"
+msgstr "Инсталирајте ${DISTRO} ${VER} поред ${CURDISTRO}"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "Обриши диск и инсталирај „${DISTRO}“"
@@ -1638,6 +1652,8 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
 msgstr ""
+"<span foreground=\"darkred\">Упозорење:</span> Ово ће избрисати све датотеке "
+"на диску."
 
 #. Type: text
 #. Description
@@ -1647,66 +1663,71 @@ msgstr "Обриши све и поново инсталирај"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
-#, fuzzy
-#| msgid ""
-#| "This will <b>erase</b> all your programs, documents, photos, music, and "
-#| "other files in both ${OS} and ${CURDISTRO}."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and other files in both ${OS} and "
 "${CURDISTRO}."
 msgstr ""
-"Ово ће <b>избрисати</b> све ваше програме, документа, фотографије, музику и "
-"остале датотеке како у „${OS}“ тако и у „${CURDISTRO}“."
+"<span foreground=\"darkred\">Упозорење:</span> Ово ће избрисати све ваше "
+"програме, документа, фотографије, музику и друге датотеке како на ${OS} тако "
+"и на ${CURDISTRO}."
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "Поново инсталирај „${CURDISTRO}“"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
 msgstr "Инсталирај „${DISTRO}“ поред њих"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "На овом рачунару је инсталиран ${OS}"
+msgstr ""
+"На овом рачунару тренутно је инсталиран „${OS}“. Шта бисте желели да урадите?"
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
 msgstr ""
+"На овом рачунару тренутно су инсталирани „${OS1}“ и „${OS2}“. Шта бисте "
+"желели да урадите?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr "На овом рачунару нема инсталираних оперативних система."
+msgstr ""
+"На овом рачунару тренутно је инсталирано више оперативних система. Шта бисте "
+"желели да урадите?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
-msgstr "На овом рачунару нема инсталираних оперативних система."
+msgstr ""
+"На овом рачунару тренутно нема инсталираних оперативних система. Шта бисте "
+"желели да урадите?"
 
 #. Type: title
 #. Description
@@ -1770,173 +1791,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "Уклањам пакете"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "Требаће Вам тек неколико минута да одговорите на питања."
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "Преузети документа и подешавања"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "Како желите да поделите диск?"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr "На овом рачунару је инсталирано више оперативних система."
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "Где желите да инсталирате ${RELEASE}?"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr "Ово ће обрисати ${SYSTEMS} и инсталирати ${RELEASE}."
-
-#~ msgid "Ready to install"
-#~ msgstr "Спремни за инсталацију"
-
-#~ msgid "Details"
-#~ msgstr "Детаљи"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr ""
-#~ "Ваш нови оперативни систем ће бити инсталиран са следећим поставкама:"
-
-#~ msgid "Advanced..."
-#~ msgstr "Напредно..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "Корак ${INDEX} од ${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "Претражујем датотеке..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "Постављам име рачунара..."
-
-#~ msgid "Applying configuration"
-#~ msgstr "Примењујем подешавање"
-
-#~ msgid "Continue with installation."
-#~ msgstr "Наставите инсталацију."
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "Користи читаву партицију"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "Користи читав диск"
-
-#~ msgid ""
-#~ "You can upgrade ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr ""
-#~ "Можете да надоградите „${CURDISTRO}“ на новију верзију а да не изгубите "
-#~ "ниједан од ваших важних докумената или програма."
-
-#~ msgid ""
-#~ "Still on the fence? You can install ${DISTRO} ${VER} alongside your "
-#~ "existing copy of ${CURDISTRO}."
-#~ msgstr ""
-#~ "Још увек се двоумите? Можете да инсталирате „${DISTRO} ${VER}“ поред "
-#~ "вашег већ постојећег примерка дистрибуције „${CURDISTRO}“."
-
-#~ msgid ""
-#~ "Ready to take the plunge? A clean install erases your entire hard disk "
-#~ "and installs ${DISTRO}."
-#~ msgstr ""
-#~ "Да ли сте спремни за скок? Чиста инсталација брише читав чврсти диск и "
-#~ "инсталира „${DISTRO}“."
-
-#~ msgid ""
-#~ "You can reinstall ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr ""
-#~ "Можете поново да инсталирате „${CURDISTRO}“ а да не изгубите ниједан од "
-#~ "ваших важних докумената или програма."
-
-#~ msgid ""
-#~ "This will <b>erase</b> all your programs, documents, photos, music, and "
-#~ "any other files in all operating systems."
-#~ msgstr ""
-#~ "Ово ће <b>избрисати</b> све ваше програме, документа, фотографије, музику "
-#~ "и било коју другу датотеку на свим оперативним системима."
-
-#~ msgid "Popularity contest"
-#~ msgstr "Такмичење у популарности"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "Учествујте у анкети коришћења пакета"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " Језик: ${LANGUAGE}\n"
-#~ " Распоред тастатуре: ${KEYMAP}\n"
-#~ " Име: ${FULLNAME}\n"
-#~ " Корисничко име: ${USERNAME}\n"
-#~ " Локација: ${LOCATION}\n"
-#~ " Миграциони асистент:\n"
-#~ " ${MIGRATE}"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "Ручно подешавање партиција (напредно)"
-
-#~ msgid "Port:"
-#~ msgstr "Порт:"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr ""
-#~ "Чим одговорите на пар питања, овај рачунар ће бити спреман за употребу."
-
-#~ msgid "Summary"
-#~ msgstr "Сажетак"
-
-#~ msgid "Install boot loader"
-#~ msgstr "Инсталирај покретач система"
-
-#~ msgid "Advanced Options"
-#~ msgstr "Напредне могућности"
-
-#~ msgid "Network proxy"
-#~ msgstr "Посредник мреже"
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "Обриши и искористи цео диск"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "Ово је пред-издање пробног ${MEDIUM} ${RELEASE} инсталера. То није "
-#~ "коначно издање; оно ће доћи са коначним ${RELEASE} издањем у Октобру 2010."
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "Пронађи распоред тастатуре"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "Пронађите распоред тастатуре"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "ХТТП посредник:"
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "Да ли сте спремни за инсталацију? Након што одговорите на неколико "
-#~ "питања, садржај са пробног ${MEDIUM}-а може бити инсталиран на овом "
-#~ "рачунару тако да ћете моћи да користите ${RELEASE} пуном брзином без "
-#~ "употребе ${MEDIUM}-а."
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "Искористи највећи непрекидан слободан простор"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "Инсталирај поред других оперативних система"

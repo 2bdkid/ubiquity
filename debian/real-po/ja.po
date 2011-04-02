@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2011-03-28 18:28+0100\n"
-"PO-Revision-Date: 2011-03-21 17:11+0000\n"
+"POT-Creation-Date: 2011-04-02 13:00+0100\n"
+"PO-Revision-Date: 2011-03-29 11:38+0000\n"
 "Last-Translator: Shushi Kurose <md81bird@hitaki.net>\n"
 "Language-Team: Debian L10n Japanese <debian-l10n-japanese@lists.debian.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-23 17:24+0000\n"
-"X-Generator: Launchpad (build 12633)\n"
+"X-Launchpad-Export-Date: 2011-04-02 11:17+0000\n"
+"X-Generator: Launchpad (build 12710)\n"
 
 #. Type: text
 #. Description
@@ -27,7 +27,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:4001
 msgid "Manual configuration (advanced)"
-msgstr ""
+msgstr "手動設定 (詳細)"
 
 #. Type: text
 #. Description
@@ -66,6 +66,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:9001
 msgid ""
 "You can try ${RELEASE} without making any changes to your computer, directly "
@@ -76,6 +78,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:9001
 msgid ""
 "Or if you're ready, you can install ${RELEASE} alongside (or instead of) "
@@ -87,12 +90,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:10001
 msgid "Try ${RELEASE}"
 msgstr "${RELEASE} を試す"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:11001
 msgid "Install ${RELEASE}"
 msgstr "${RELEASE} をインストール"
@@ -124,6 +129,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
+#. MEDIUM is a variable substituted into this string, and may be 'CD'
 #: ../ubiquity.templates:16001
 msgid ""
 "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is not "
@@ -355,6 +362,7 @@ msgstr "ディスク領域の割り当て"
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '100 GB'
 #: ../ubiquity.templates:49001
 msgid "Files (${SIZE})"
 msgstr "ファイル (${SIZE})"
@@ -415,6 +423,7 @@ msgstr "ブートローダなしで続けます。"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:58001
 msgid ""
 "You will need to manually install a bootloader in order to start ${RELEASE}."
@@ -653,6 +662,7 @@ msgstr "ブートローダ"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:95001
 msgid ""
 "Installation has finished.  You can continue testing ${RELEASE} now, but "
@@ -1041,26 +1051,17 @@ msgstr ""
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid "Error updating installer"
 msgid "Error restoring installed applications"
-msgstr "アップデートインストーラのエラー"
+msgstr ""
 
 #. Type: error
 #. Description
 #: ../ubiquity.templates:138001
-#, fuzzy
-#| msgid ""
-#| "An error occurred while copying the network settings.  The installation "
-#| "will continue, but the network configuration will have to be set up again "
-#| "in the installed system."
 msgid ""
 "An error occurred while restoring previously-installed applications.  The "
 "installation will continue, but you may have to manually reinstall some "
 "applications after the computer reboots."
 msgstr ""
-"ネットワーク設定のコピー中にエラーが発生しました。インストールは継続します"
-"が、システムのインストール後に再度ネットワークの設定を行う必要があります。"
 
 #. Type: text
 #. Description
@@ -1320,6 +1321,7 @@ msgstr "インストーラに回復不能なエラーが発生しました。再
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:189001
 msgid "Preparing to install ${RELEASE}"
 msgstr "${RELEASE} のインストール準備"
@@ -1410,6 +1412,7 @@ msgstr "正常にインストールするためコンピュータを確認して
 
 #. Type: text
 #. Description
+#. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:205001
 msgid "has at least ${SIZE} available drive space"
 msgstr "最低 ${SIZE} のディスクの空き容量があること"
@@ -1428,6 +1431,7 @@ msgstr "インターネットに接続されていること"
 
 #. Type: text
 #. Description
+#. RELEASE is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:208001
 msgid ""
 "${RELEASE} uses third-party software to display Flash, MP3 and other media, "
@@ -1512,12 +1516,15 @@ msgstr "[変更するにはここに入力]"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:224001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "${OS}を${DISTRO}で置き換える"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:224001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will erase all of your "
@@ -1526,6 +1533,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:225001
 msgid "Install ${DISTRO} alongside ${OS}"
 msgstr ""
@@ -1544,14 +1553,16 @@ msgid ""
 "No files will be deleted. You can choose which operating system you want "
 "each time the computer starts up."
 msgstr ""
+"ファイルは削除されません。コンピュータを起動する時に、オペレーティングシステ"
+"ムを選択することができます。"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:226001
-#, fuzzy
-#| msgid "Reinstall ${CURDISTRO}"
 msgid "Install ${DISTRO} inside ${OS}"
-msgstr "${CURDISTRO}の再インストール"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -1561,6 +1572,7 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:227001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
@@ -1569,12 +1581,14 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr "${CURDISTRO}を削除して再インストール"
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:228001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1583,6 +1597,8 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
+#. VER is a variable substituted into this string, and may be '11.04'
 #: ../ubiquity.templates:229001
 msgid "Upgrade ${CURDISTRO} to ${VER}"
 msgstr "${CURDISTRO}を${VER}にアップグレード"
@@ -1598,14 +1614,19 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
+#. VER is a variable substituted into this string, and may be '11.04'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:230001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
 msgstr ""
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:231001 ../ubiquity.templates:234001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "ディスクを削除して${DISTRO}をインストール"
@@ -1628,6 +1649,8 @@ msgstr "完全に削除して再インストール"
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:232001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
@@ -1637,26 +1660,29 @@ msgstr ""
 
 #. Type: text
 #. Description
+#. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 #: ../ubiquity.templates:233001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "${CURDISTRO}の再インストール"
 
 #. Type: text
 #. Description
+#. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #: ../ubiquity.templates:235001
 msgid "Install ${DISTRO} alongside them"
 msgstr ""
 
 #. Type: text
 #. Description
+#. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:236001
-#, fuzzy
-#| msgid "This computer has ${OS} on it."
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "このコンピュータには ${OS} がインストールされています。"
+msgstr ""
 
 #. Type: text
 #. Description
+#. OS1 is a variable substituted into this string, and may be 'Windows 7'
+#. OS2 is a variable substituted into this string, and may be 'Mac OS X'
 #: ../ubiquity.templates:237001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
@@ -1666,24 +1692,18 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
 msgstr ""
-"このコンピュータにはオペレーティングシステムがインストールされていません。"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
-#, fuzzy
-#| msgid "This computer has no operating systems on it."
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
 msgstr ""
-"このコンピュータにはオペレーティングシステムがインストールされていません。"
 
 #. Type: title
 #. Description
@@ -1747,147 +1767,3 @@ msgstr ""
 #: ../oem-config.templates:2001
 msgid "Removing packages"
 msgstr "パッケージを削除しています"
-
-#~ msgid "Answering the questions should only take a few minutes."
-#~ msgstr "質問への回答は数分で終わります。"
-
-#~ msgid "Migrate documents and settings"
-#~ msgstr "ドキュメントと設定のインポート"
-
-#~ msgid "How do you want to partition the disk?"
-#~ msgstr "どのようにディスクを分割しますか？"
-
-#~ msgid "This computer has several operating systems on it."
-#~ msgstr ""
-#~ "このコンピュータには複数のオペレーティングシステムがインストールされていま"
-#~ "す。"
-
-#~ msgid "Where do you want to put ${RELEASE}?"
-#~ msgstr "どこに ${RELEASE} をインストールしますか？"
-
-#~ msgid "This will delete ${SYSTEMS} and install ${RELEASE}."
-#~ msgstr "${SYSTEMS} を削除して ${RELEASE} をインストールします。"
-
-#~ msgid "Ready to install"
-#~ msgstr "インストール準備完了"
-
-#~ msgid "Details"
-#~ msgstr "詳細"
-
-#~ msgid ""
-#~ "Your new operating system will now be installed with the following "
-#~ "settings:"
-#~ msgstr "新しいオペレーティングシステムは、以下の設定でインストールされます:"
-
-#~ msgid "Advanced..."
-#~ msgstr "拡張..."
-
-#~ msgid "Step ${INDEX}/${TOTAL}"
-#~ msgstr "ステップ ${INDEX}/${TOTAL}"
-
-#~ msgid "Scanning files..."
-#~ msgstr "ファイルを検査しています..."
-
-#~ msgid "Setting computer name..."
-#~ msgstr "コンピュータの名前を設定しています..."
-
-#~ msgid "Applying configuration"
-#~ msgstr "設定の適用"
-
-#~ msgid "Continue with installation."
-#~ msgstr "インストールを続けます。"
-
-#~ msgid "Use Entire Partition"
-#~ msgstr "パーティション全体を使用"
-
-#~ msgid "Use Entire Disk"
-#~ msgstr "ディスク全体を使用"
-
-#~ msgid ""
-#~ "You can upgrade ${CURDISTRO} without losing any of your important "
-#~ "documents or applications."
-#~ msgstr ""
-#~ "大切なドキュメントやアプリケーションを削除することなく${CURDISTRO}をアップ"
-#~ "グレードできます。"
-
-#~ msgid "Use the largest continuous free space"
-#~ msgstr "連続する最大の空き領域を使用する"
-
-#~ msgid "Specify partitions manually (advanced)"
-#~ msgstr "手動でパーティションを設定する（高度な知識が必要です）"
-
-#~ msgid "Advanced Options"
-#~ msgstr "詳細オプション"
-
-#~ msgid "Install boot loader"
-#~ msgstr "ブートローダーをインストール"
-
-#~ msgid "Popularity contest"
-#~ msgstr "人気投票"
-
-#~ msgid "Participate in the package usage survey"
-#~ msgstr "パッケージの使用調査に参加してください"
-
-#~ msgid "Network proxy"
-#~ msgstr "ネットワークのプロキシ"
-
-#~ msgid "HTTP proxy:"
-#~ msgstr "HTTP プロキシ:"
-
-#~ msgid "Port:"
-#~ msgstr "ポート番号:"
-
-#~ msgid ""
-#~ " Language: ${LANGUAGE}\n"
-#~ " Keyboard layout: ${KEYMAP}\n"
-#~ " Name: ${FULLNAME}\n"
-#~ " Login name: ${USERNAME}\n"
-#~ " Location: ${LOCATION}\n"
-#~ " Migration Assistant:\n"
-#~ " ${MIGRATE}"
-#~ msgstr ""
-#~ " 言語: ${LANGUAGE}\n"
-#~ " キーボードレイアウト: ${KEYMAP}\n"
-#~ " フルネーム: ${FULLNAME}\n"
-#~ " ログイン名: ${USERNAME}\n"
-#~ " 地域: ${LOCATION}\n"
-#~ " 移行アシスタント:\n"
-#~ " ${MIGRATE}"
-
-#~ msgid "Erase and use the entire disk"
-#~ msgstr "ディスク全体を削除してから使用する"
-
-#~ msgid "Summary"
-#~ msgstr "要約"
-
-#~ msgid "Once you answer a few questions, this computer will be ready to use."
-#~ msgstr ""
-#~ "いくつかの質問に答えるだけで、このコンピュータをすぐに利用することができま"
-#~ "す。"
-
-#~ msgid ""
-#~ "Ready to install?  Once you answer a few questions, the contents of the "
-#~ "live ${MEDIUM} can be installed on this computer so you can run "
-#~ "${RELEASE} at full speed without the ${MEDIUM}."
-#~ msgstr ""
-#~ "インストールしてもいいですか？いくつかの質問に回答すると live ${MEDIUM} の"
-#~ "内容はこのコンピュータにインストールされ ${MEDIUM} を使わずに本来の速度で "
-#~ "${RELEASE} を動かすことができます。"
-
-#~ msgid ""
-#~ "This is a pre-release of the ${RELEASE} live ${MEDIUM} installer. It is "
-#~ "not a final release; that will come with the final release of ${RELEASE} "
-#~ "in October 2010."
-#~ msgstr ""
-#~ "このインストーラは ${RELEASE} ライブ ${MEDIUM} インストーラのプレリリース"
-#~ "版です。最終リリースではありません。${RELEASE} の最終リリースは2010年10月"
-#~ "になります。"
-
-#~ msgid "Figure out keyboard layout"
-#~ msgstr "キーボードレイアウトの検出"
-
-#~ msgid "Figure Out Keyboard Layout"
-#~ msgstr "キーボードレイアウトを検出"
-
-#~ msgid "Install alongside other operating systems"
-#~ msgstr "他の OS と共存させてインストールする"
