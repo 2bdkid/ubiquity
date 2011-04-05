@@ -1,3 +1,20 @@
+ubiquity (2.5.34) natty; urgency=low
+
+  [ Colin Watson ]
+  * Force the output of 'locale charmap' to UTF-8 while running
+    console-setup (LP: #730576).
+
+  [ Evan Dandrea ]
+  * Bump panel indicators ABI (LP: #745681).
+
+  [ Mario Limonciello ]
+  * Modify oem-config-remove-gtk to look in /var/lib/dpkg/info again
+    rather than /var/lib/dpkg/info/*/ for installed packages.
+  * Remove cryptsetup after oem-config if ecryptfs is not in use.
+    Thanks Tony Espy.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Tue, 05 Apr 2011 17:36:07 -0500
+
 ubiquity (2.5.33) natty; urgency=low
 
   [ Colin Watson ]
