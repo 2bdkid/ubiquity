@@ -50,6 +50,8 @@ suite="$RET"
 if (! db_get apt-setup/restricted || [ "$RET" = false ]) && \
    (! db_get apt-setup/multiverse || [ "$RET" = false ]); then
 	disable_service partner
+elif db_get apt-setup/partner && [ "$RET" = true ]; then
+	enable_service partner
 fi
 if db_get apt-setup/extras && [ "$RET" = true ]; then
 	enable_service extras

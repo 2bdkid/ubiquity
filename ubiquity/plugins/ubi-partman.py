@@ -284,7 +284,7 @@ class PageGtk(PageBase):
             return False
 
     def plugin_on_back_clicked(self):
-        if self.current_page in self.plugin_optional_widgets:
+        if self.current_page == self.page_auto:
             title = self.controller.get_string(self.plugin_title)
             self.controller._wizard.page_title.set_markup(
                 '<span size="xx-large">%s</span>' % title)
@@ -297,6 +297,9 @@ class PageGtk(PageBase):
             self.plugin_is_install = False
             return True
         else:
+            # If we're on the first page (ask), then we want to go back to
+            # prepare. If we're on the advanced page, then we want to go back
+            # to the first page (ask).
             return False
 
     def set_disk_layout(self, layout):
@@ -2037,7 +2040,15 @@ class Page(plugin.Plugin):
                     parted.select_disk(dev)
                     size = int(parted.partition_info(p_id)[2])
                     key = biggest_free[0][2]
-                    self.extra_options['biggest_free'] = (key, size)
+                    filesystem_size = 0
+                    try:
+                        with open('/cdrom/casper/filesystem.size') as fp:
+                            filesystem_size = int(fp.readline())
+                    except IOError:
+                        self.debug('Could not determine filesystem size.')
+                    fudge = 200 * 1024 * 1024 # 200 MB
+                    if size > filesystem_size + fudge:
+                        self.extra_options['biggest_free'] = (key, size)
 
                 # TODO: Add misc.find_in_os_prober(info[5]) ...and size?
                 reuse = self.find_script(menu_options, 'reuse')

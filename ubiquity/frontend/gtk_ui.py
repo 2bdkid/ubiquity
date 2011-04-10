@@ -606,6 +606,7 @@ class Wizard(BaseFrontend):
         # postinstall will exit here by calling gtk.main_quit in
         # find_next_step.
 
+        self.unlock_environment()
         if self.oem_user_config:
             self.quit_installer()
         elif not (self.get_reboot_seen() or self.get_shutdown_seen()):
@@ -810,6 +811,7 @@ class Wizard(BaseFrontend):
         self.refresh()
 
     def unlock_environment(self):
+        syslog.syslog('Reverting lockdown the desktop environment.')
         for key in ('/apps/indicator-session/suppress_logout_menuitem',
                     '/apps/indicator-session/suppress_logout_restart_menuitem',
                     '/apps/indicator-session/suppress_restart_menuitem',
