@@ -22,7 +22,7 @@ setup_reuse_partition () {
 
 path=
 cleanup () {
-	umount -l $path && rmdir $mountpoint || true
+	umount -l $mountpoint && rmdir $mountpoint || true
 	blockdev --setrw $path || true
 }
 
@@ -78,8 +78,8 @@ for dev in $DEVICES/*; do
 	close_dialog
 
 	for part in $partitions; do
-			setup_reuse_partition $part
-			update_partition $dev $part
+		setup_reuse_partition $part
+		update_partition $dev $part
 	done
 done
 

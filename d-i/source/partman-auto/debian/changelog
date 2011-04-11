@@ -1,3 +1,12 @@
+partman-auto (93ubuntu14) natty; urgency=low
+
+  * Fix reuse and replace options to umount using the path name
+    instead of the device name to work around a bug where ntfs-3g
+    on dmraid can not be unmounted with the device name, which
+    then caused the installer to hang (LP: #725408).
+
+ -- Phillip Susi <psusi@cfl.rr.com>  Sun, 10 Apr 2011 12:27:57 -0400
+
 partman-auto (93ubuntu13) natty; urgency=low
 
   * Make sure we have a partition selected for autopartitioning, not the

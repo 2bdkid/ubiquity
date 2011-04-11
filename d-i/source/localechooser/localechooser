@@ -491,14 +491,6 @@ else
 	INITIAL_LANGUAGE=""
 fi
 
-db_fget $tpl_languagelist seen
-if [ "$RET" = true ]; then
-	db_get $tpl_languagelist
-	PREVIOUS_LANGUAGE="$RET"
-else
-	PREVIOUS_LANGUAGE=""
-fi
-
 # Find the display level and set languages in the template
 # Needs to be done before checking preseeding, so we can preseed the
 # correct template.
@@ -510,6 +502,14 @@ locale_preseeded=""
 if [ ! -f /var/lib/localechooser/preseeded ]; then
 	do_preseed
 	>/var/lib/localechooser/preseeded
+fi
+
+db_fget $tpl_languagelist seen
+if [ "$RET" = true ]; then
+	db_get $tpl_languagelist
+	PREVIOUS_LANGUAGE="$RET"
+else
+	PREVIOUS_LANGUAGE=""
 fi
 
 
@@ -588,6 +588,10 @@ while :; do
 		   [ "$X_INSTALLATION_MEDIUM" = "floppy" ]; then
 			db_input high localechooser/translation/none-yet || true
 		fi
+
+		# The language was changed, so a preseeded locale is no
+		# longer relevant.
+		locale_preseeded=""
 		;;
 
 	   12)	# Warn if translation is incomplete

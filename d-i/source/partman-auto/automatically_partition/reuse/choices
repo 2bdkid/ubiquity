@@ -50,7 +50,7 @@ for dev in $DEVICES/*; do
 		if [ -n "$t" ] && [ "$t" != "swap" ] && \
 		mount -o ro $path $mountpoint 3>&-; then
 			release="$(grep -s DISTRIB_ID $mountpoint/etc/lsb-release)" || true
-			umount -l $path || true
+			umount -l $mountpoint || true
 			if [ "${release##DISTRIB_ID=}" = "Ubuntu" ]; then
 				db_subst partman-auto/text/reuse PARTITION "$(humandev "$path")"
 				db_metaget partman-auto/text/reuse description
