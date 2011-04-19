@@ -125,6 +125,28 @@ class PageGtk(PageBase):
             self.custom_partitioning_title = builder.get_object('custom_partitioning_title')
             self.custom_partitioning_desc = builder.get_object('custom_partitioning_desc')
 
+            # Ask page accessibility
+            self.atk_use_device = self.use_device.get_accessible()
+            self.atk_use_device_title = self.use_device_title.get_accessible()
+            self.atk_use_device_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_use_device)
+            self.atk_use_device.add_relationship(atk.RELATION_LABELLED_BY, self.atk_use_device_title)
+            self.atk_replace_partition = self.replace_partition.get_accessible()
+            self.atk_replace_partition_title = self.replace_partition_title.get_accessible()
+            self.atk_replace_partition_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_replace_partition)
+            self.atk_replace_partition.add_relationship(atk.RELATION_LABELLED_BY, self.atk_replace_partition_title)
+            self.atk_reuse_partition = self.reuse_partition.get_accessible()
+            self.atk_reuse_partition_title = self.reuse_partition_title.get_accessible()
+            self.atk_reuse_partition_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_reuse_partition)
+            self.atk_reuse_partition.add_relationship(atk.RELATION_LABELLED_BY, self.atk_reuse_partition_title)
+            self.atk_resize_use_free = self.resize_use_free.get_accessible()
+            self.atk_resize_use_free_title = self.resize_use_free_title.get_accessible()
+            self.atk_resize_use_free_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_resize_use_free)
+            self.atk_resize_use_free.add_relationship(atk.RELATION_LABELLED_BY, self.atk_resize_use_free_title)
+            self.atk_custom_partitioning = self.custom_partitioning.get_accessible()
+            self.atk_custom_partitioning_title = self.custom_partitioning_title.get_accessible()
+            self.atk_custom_partitioning_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_custom_partitioning)
+            self.atk_custom_partitioning.add_relationship(atk.RELATION_LABELLED_BY, self.atk_custom_partitioning_title)
+
             # Advanced page
             self.partition_create_mount_combo = builder.get_object('partition_create_mount_combo')
             self.partition_edit_mount_combo = builder.get_object('partition_edit_mount_combo')
@@ -161,6 +183,7 @@ class PageGtk(PageBase):
             self.resize_pref_size = None
             self.resize_path = ''
             self.auto_colors = ['3465a4', '73d216', 'f57900']
+            self.extra_options = {}
 
             self.partition_create_mount_combo.child.set_activates_default(True)
             self.partition_edit_mount_combo.child.set_activates_default(True)
@@ -453,11 +476,10 @@ class PageGtk(PageBase):
         self.custom_partitioning.set_active(True)
         self.controller.go_forward()
 
-    def set_grub_options(self):
+    def set_grub_options(self, default):
         import gtk, gobject
         self.bootloader_vbox.show()
         options = misc.grub_options()
-        default = misc.grub_default()
         if default.startswith('/'):
             default = os.path.realpath(default)
         l = gtk.ListStore(gobject.TYPE_STRING, gobject.TYPE_STRING)
@@ -1256,9 +1278,8 @@ class PageKde(PageBase):
         self.disk_layout = layout
         self.partAuto.setDiskLayout(layout)
 
-    def set_grub_options(self):
+    def set_grub_options(self, default):
         options = misc.grub_options()
-        default = misc.grub_default()
         if default.startswith('/'):
             default = os.path.realpath(default)
         self.partMan.setGrubOptions(options, default)
@@ -2745,9 +2766,13 @@ class Page(plugin.Plugin):
         else:
             self.finish_partitioning = True
         self.succeeded = True
+        self.exit_ui_loops()
+
+    def exit_ui_loops(self):
         if self.install_bootloader:
             self.preseed('grub-installer/bootdev', self.ui.get_grub_choice())
-        self.exit_ui_loops()
+
+        plugin.Plugin.exit_ui_loops(self)
 
     # TODO cjwatson 2006-11-01: Do we still need this?
     def rebuild_cache(self):
@@ -2828,7 +2853,12 @@ class Page(plugin.Plugin):
 
     def maybe_update_grub(self):
         if self.install_bootloader:
-            self.ui.set_grub_options()
+            grub_bootdev=self.db.get("grub-installer/bootdev")
+            if grub_bootdev and grub_bootdev in (part[0] for part in misc.grub_options()):
+                default = grub_bootdev
+            else:
+                default = misc.grub_default()
+            self.ui.set_grub_options(default)
 
 # Notes:
 #

@@ -402,10 +402,12 @@ imx_flash_kernel() {
 	rm -f "$tmp"
 
 	if [ -e /boot/boot.script ];then
-		mv $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
+		if [ -e $TMPMOUNT/boot.scr ]; then
+			mv $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
+		fi
 		printf "Generating u-boot configuration from /boot/boot.script... " >&2
 		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
-			/boot/boot.scr >&2 1>/dev/null
+			$TMPMOUNT/boot.scr >&2 1>/dev/null
 		echo "done." >&2
 	fi
 
@@ -628,20 +630,20 @@ case "$machine" in
 	;;
 	"Freescale MX51 Babbage Board")
 		case $subarch in
-			"imx5"|"mx51")
+			"mx5"|"mx51")
 				:
 			;;
 			*)
 				# Not actually the real expected kfile
 				# subarch, but will raise a sensible error
-				check_subarch "imx5 or mx51"
+				check_subarch "mx5 or mx51"
 			;;
 		esac
 		IMX_KERNEL_ADDR=0x90008000
 		imx_flash_kernel
 	;;
 	"Freescale MX53 LOCO Board")
-		check_subarch "imx5"
+		check_subarch "mx5"
 		IMX_KERNEL_ADDR=0x70008000
 		imx_flash_kernel
 	;;

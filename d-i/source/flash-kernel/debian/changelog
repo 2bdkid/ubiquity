@@ -1,3 +1,13 @@
+flash-kernel (2.28ubuntu19) natty; urgency=low
+
+  * IMX: Replace imx5 subarch with mx5; matches upstream kernel more closely
+    and seems to be what Debian will be using.  It's easier to do the change
+    now, before there is any in archive kernel with the "imx5" subarch name.
+  * IMX: Use proper location for boot.script ($TMPMOUNT rather than /boot);
+    it wasn't possible to use this functionality with the incorrect directory.
+
+ -- Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>  Fri, 15 Apr 2011 15:11:40 +0800
+
 flash-kernel (2.28ubuntu18) natty; urgency=low
 
   * match omap4 hardware on "OMAP4 Panda board" as well (LP: #744862)

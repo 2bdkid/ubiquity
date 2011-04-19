@@ -1,3 +1,11 @@
+console-setup (1.57ubuntu19) natty; urgency=low
+
+  * Don't copy keyboard-configuration questions to /target in OEM mode.
+    oem-config will ask them later, and copying these confuses it
+    (LP: #741304).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 15 Apr 2011 12:43:41 +0100
+
 console-setup (1.57ubuntu18) natty; urgency=low
 
   * Don't use the default keyboard variant if the layout is overridden by

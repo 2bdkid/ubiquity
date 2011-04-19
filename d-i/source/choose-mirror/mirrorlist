@@ -128,9 +128,14 @@ if ($type =~ /(.*)list/) {
 	my $type=$1;
  	open (LIST, ">debian/${type}list-countries") or die "debian/${type}list-countries: $!";
 	foreach my $id (0..$#data) {
-		next unless exists $data[$id]->{"archive-$type"} and
-		                    exists $data[$id]->{country};
-		my $cc = $data[$id]->{country};
+		my $cc;
+		if (exists $data[$id]->{type} and $data[$id]->{type} =~ /geodns/i) {
+			$cc='GB'; # location of Ubuntu master archive
+		}
+		else {
+			$cc=$data[$id]->{country};
+		}
+		next unless exists $data[$id]->{"archive-$type"} and defined $cc;
 		die "Error: country code '$cc' does not occur in iso-3166 table"
 			unless exists $iso3166{$cc};
 		$countries{$iso3166{$cc}} = $cc;

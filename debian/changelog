@@ -1,3 +1,47 @@
+ubiquity (2.6.6) natty; urgency=low
+
+  [ Jonathan Riddell ]
+  * bin/ubiquity-dm: use correct KDE wallpaper path
+
+  [ Colin Watson ]
+  * Don't copy keyboard-configuration questions to /target in OEM mode, and
+    reset any values that come from the live filesystem build.  oem-config
+    will ask them later, and copying these confuses it (LP: #741304).
+  * GTK frontend:
+    - Avoid a crash if the automatic partitioning page is never displayed.
+
+  [ Evan Dandrea ]
+  * Remove the 'Bootloader device' line.  See LP #726740.
+  * Do not reset the bootloader choice unless it's absolutely necessary
+    (LP: #756920). Thanks Stéphane Graber!
+  * Move installation of the nvidia driver to after the removal of
+    unneeded kernels. Divert update-initramfs for the duration and
+    trigger it afterwards (LP: #759804).
+  * Make the 'name already exists on the network' warning message not
+    block the user from moving forward (LP: #760884).
+  * Briefly shut down the debconf database to flush any changes before
+    starting the parallel database (LP: #761094).
+  * Fix removal of slideshow packages for non-GTK frontends
+    (LP: #745607).
+  * Set the locale again after the timezone page so that the slideshow
+    can have country-specific translations (LP: #758658).
+  * Automatic update of included source packages: base-installer
+    1.116ubuntu2, choose-mirror 2.37ubuntu2, console-setup 1.57ubuntu19,
+    flash-kernel 2.28ubuntu19, user-setup 1.28ubuntu15.
+  * Update translations from Launchpad.
+
+  [ Mario Limonciello ]
+  * Show the oem-config slideshow in oem-config rather than the ubuntu one.
+  * Uninstall the oem-config slideshow after install is done (LP: #759935).
+
+  [ Julien Lavergne ]
+  * Disable ubiquity panel for openbox session. 
+
+  [ Mackenzie Morgan ]
+  * Make radio buttons use label wording for screen reader (LP: #749653)
+
+ -- Evan Dandrea <ev@ubuntu.com>  Tue, 19 Apr 2011 11:45:53 +0100
+
 ubiquity (2.6.5) natty; urgency=low
 
   * Fix broken home directory lookup (LP: #759401).

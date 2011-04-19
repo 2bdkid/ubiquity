@@ -747,7 +747,10 @@ class Wizard(BaseFrontend):
             self.shutdown_button.hide()
 
         # Parse the slideshow size early to prevent the window from growing
-        self.slideshow = '/usr/share/ubiquity-slideshow'
+        if self.oem_user_config:
+            self.slideshow = '/usr/share/oem-config-slideshow'
+        else:
+            self.slideshow = '/usr/share/ubiquity-slideshow'
         if os.path.exists(self.slideshow):
             try:
                 cfg = ConfigParser.ConfigParser()
@@ -1416,6 +1419,10 @@ class Wizard(BaseFrontend):
                 dbfilter.start(auto_process=True)
 
         elif finished_step == 'ubi-partman':
+            # Flush changes to the database so that when the parallel db
+            # starts, it does so with the most recent changes.
+            self.stop_debconf()
+            self.start_debconf()
             options = misc.grub_options()
             self.grub_options.clear()
             for opt in options:
