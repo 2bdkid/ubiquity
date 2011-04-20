@@ -405,7 +405,7 @@ if [ "$font_only" != yes ] && [ "$XKBMODEL" != unknown ] && \
 	if \
 	    [ "$VARIANT" = '' ] \
 	    && which gzip >/dev/null \
-	    && [ -d /usr/share/X11/xkb ] # /usr is mounted
+	    && [ -d /usr/share ] # /usr is mounted
 	then
 	    if \
 		[ ! -f /etc/console-setup/cached.kmap.gz ] \
@@ -432,7 +432,7 @@ if [ "$font_only" != yes ] && [ "$XKBMODEL" != unknown ] && \
 		then
 		    eval loadkeys /etc/console-setup/cached.kmap.gz $verbose
 		else
-		    if [ -d /usr/share/X11/xkb ]; then
+		    if [ -d /usr/share ]; then
 			ckbcomp $acm_option $rules_option \
 			    -model "$XKBMODEL" \
 			    "$XKBLAYOUT" "$XKBVARIANT" "$XKBOPTIONS" \

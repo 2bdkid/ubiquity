@@ -1,3 +1,23 @@
+ubiquity (2.6.7) natty; urgency=low
+
+  [ Evan Dandrea ]
+  * Fix missing import on the partitioning page.
+  * Repack debs in apt-clone.
+  * Disable the upgrade/reinstall option when no Internet connection is
+    available.  See LP 766171 for details.
+  * Update translations from Launchpad.
+  * Don't ever show scrollbars in the slideshow.  The window growing
+    slightly is not ideal, but still better than this. See LP 529201
+    for details.
+  * Defend against temporary mountpoints not existing before attempting
+    to remove them (LP: #759716).
+
+  [ Colin Watson ]
+  * Automatic update of included source packages: console-setup
+    1.57ubuntu20, grub-installer 1.60ubuntu3, partman-auto 93ubuntu15.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 21 Apr 2011 00:34:54 +0100
+
 ubiquity (2.6.6) natty; urgency=low
 
   [ Jonathan Riddell ]

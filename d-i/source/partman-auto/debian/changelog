@@ -1,3 +1,12 @@
+partman-auto (93ubuntu15) natty; urgency=low
+
+  * Add $reusemethod internal specifier, which excludes the partition if a
+    partition with the same method already exists.
+  * If there is an existing BIOS Boot Partition, reuse it rather than
+    creating a new one (LP: #746313).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 20 Apr 2011 17:50:59 +0100
+
 partman-auto (93ubuntu14) natty; urgency=low
 
   * Fix reuse and replace options to umount using the path name

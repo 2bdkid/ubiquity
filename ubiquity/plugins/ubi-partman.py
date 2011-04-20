@@ -126,6 +126,7 @@ class PageGtk(PageBase):
             self.custom_partitioning_desc = builder.get_object('custom_partitioning_desc')
 
             # Ask page accessibility
+            import atk
             self.atk_use_device = self.use_device.get_accessible()
             self.atk_use_device_title = self.use_device_title.get_accessible()
             self.atk_use_device_title.add_relationship(atk.RELATION_LABEL_FOR, self.atk_use_device)
@@ -236,7 +237,8 @@ class PageGtk(PageBase):
             pass
         finally:
             subprocess.call(['umount', mount_path])
-            os.rmdir(mount_path)
+            if os.path.exists(mount_path):
+                os.rmdir(mount_path)
 
     def plugin_on_next_clicked(self):
         reuse = self.reuse_partition.get_active()
@@ -1733,6 +1735,10 @@ class Page(plugin.Plugin):
     def calculate_reuse_option(self):
         '''Takes the current Ubuntu version on disk and the release we're about
         to install as parameters.'''
+
+        if self.db.get('ubiquity/online') != 'true':
+            self.debug('Not online, so not showing the upgrade option.')
+            return None
         # TODO: verify that ubuntu is the same partition as one of the ones
         #       offered in the reuse options.
         release = misc.get_release()
@@ -2045,7 +2051,8 @@ class Page(plugin.Plugin):
                             pass
                         finally:
                             subprocess.call(['umount', mount_path])
-                            os.rmdir(mount_path)
+                            if os.path.exists(mount_path):
+                                os.rmdir(mount_path)
 
                 biggest_free = self.find_script(menu_options, 'biggest_free')
                 if biggest_free:
