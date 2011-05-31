@@ -1,3 +1,32 @@
+ubiquity (2.7.0) oneiric; urgency=low
+
+  [ Evan Dandrea ]
+  * Prevent the OOM killer from selecting ubiquity.  See  LP #770865.
+  * Ensure that the partition ComboBoxEntry can be focused
+    (LP: #769043).
+  * Hide the other pages when starting the slideshow so that verbose
+    languages that cause the window to grow do not leave lots of
+    whitespace on the slideshow (LP: #770253).
+  * Don't offer the download updates option when there is no Internet
+    connection. See LP: 651932.
+  * Provide access to the keymaps most-relevant for the currently
+    selected language in the keyboard indicator (LP: #656777).
+  * gnome-settings-daemon no longer daemonizes (LP: #788859).
+  * Automatic update of included source packages: partman-auto
+    93ubuntu16.
+
+  [ Colin Watson ]
+  * Re-enable alpha warning for oneiric.
+  * Make ubiquity/nonfree_package preseedable, and allow it to contain
+    multiple whitespace-separated package names.
+
+  [ Mario Limonciello ]
+  * In automatic ubiquity mode, don't clobber grub-installer/bootdev
+    because of the U/I widget not being populated.  Fixes preseeded
+    grub-installer/bootdev.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Tue, 31 May 2011 14:56:14 +0100
+
 ubiquity (2.6.10) natty; urgency=low
 
   * Add __init__ methods to ubi-timezone's PageDebconf and

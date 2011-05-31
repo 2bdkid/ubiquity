@@ -90,6 +90,9 @@ class PreparePageBase(plugin.PluginUI):
                 if WGET_HASH == h.hexdigest():
                     state = True
             self.prepare_network_connection.set_state(state)
+            self.prepare_download_updates.set_sensitive(state)
+            if not state:
+                self.prepare_download_updates.set_active(False)
             self.controller.dbfilter.set_online_state(state)
             return False
 
@@ -331,8 +334,9 @@ class Page(plugin.Plugin):
                 # Install ubuntu-restricted-addons.
                 self.preseed_bool('apt-setup/universe', True)
                 self.preseed_bool('apt-setup/multiverse', True)
-                self.preseed('ubiquity/nonfree_package',
-                    self.ui.restricted_package_name)
+                if self.db.fget('ubiquity/nonfree_package', 'seen') != 'true':
+                    self.preseed('ubiquity/nonfree_package',
+                        self.ui.restricted_package_name)
                 bus = dbus.SystemBus()
                 obj = bus.get_object(JOCKEY, JOCKEY_PATH)
                 i = dbus.Interface(obj, JOCKEY)
