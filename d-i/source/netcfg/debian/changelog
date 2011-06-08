@@ -1,3 +1,78 @@
+netcfg (1.62ubuntu2) oneiric; urgency=low
+
+  * finish-install.d/55netcfg: call ifblacklist_migrate.sh from
+    /usr/lib/NetworkManager now. (LP: #790604)
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 31 May 2011 16:02:49 +0100
+
+netcfg (1.62ubuntu1) oneiric; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Drop priority of netcfg/get_domain to medium for non-static
+      configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Call /usr/lib/network-manager/ifblacklist_migrate.sh from
+      finish-install if present, so that 'auto dhcp' interfaces are disabled
+      if network-manager is in use. May be preseeded away with
+      netcfg/network-manager.
+    - Bump the DHCP timeout to 30 seconds.
+    - Strip trailing dots from domain when writing to /etc/hosts.
+    - Build for ppc64.
+    - Move release-dhcp-lease finish-install script after unmounting
+      filesystems, to avoid interfering with iSCSI.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 03 May 2011 16:18:01 +0100
+
+netcfg (1.62) unstable; urgency=low
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Pavel Piatruk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * German (de.po) by Holger Wansing
+  * Esperanto (eo.po) by Felipe Castro
+  * Estonian (et.po) by Mattias Põldaru
+  * Bokmål, Norwegian (nb.po) by Hans Fredrik Nordhaug
+  * Russian (ru.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Swedish (sv.po) by Daniel Nylander
+  * Uyghur (ug.po) by Sahran
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 23 Apr 2011 11:39:38 +0200
+
+netcfg (1.61) unstable; urgency=low
+
+  [ Konstantinos Margaritis]
+  * Added armhf in arch field. Closes: #605013.
+
+  [ Robert Edmonds ]
+  * Wait for the network to be usable before trying to use it
+    (in the case of STP-enabled switch for instance
+    Use busybox's arping with the '-f' flag (quit on first ARP reply).  
+    Wait up to 45 seconds for an ARP reply from the default gateway
+    Closes: #537271
+
+  [ Samuel Thibault ]
+  * Make netcfg depend on isc-dhcp-client-udeb on hurd-any too, for the same
+    reason as kfreebsd: no support for udhcp in busybox.
+  * dhcp.c: Implement no_default_route on Hurd.
+  * Increase the frequency of DHCP discover packets sent during DHCP
+    configuration using dhclient too.
+  * netcfg.h: Fix the isc-dhcp dhclient.conf path.
+
+  [ Updated translations ]
+  * Bengali (bn.po) by Israt Jahan
+  * Esperanto (eo.po) by Felipe Castro
+  * Georgian (ka.po) by Aiet Kolkhi
+  * Korean (ko.po) by Changwoo Ryu
+  * Marathi (mr.po) by sampada
+  * Nepali (ne.po)
+  * Romanian (ro.po) by Eddy Petrișor
+
+ -- Otavio Salvador <otavio@debian.org>  Sat, 12 Mar 2011 14:40:39 -0300
+
 netcfg (1.60ubuntu3) natty; urgency=low
 
   * Move release-dhcp-lease finish-install script after unmounting

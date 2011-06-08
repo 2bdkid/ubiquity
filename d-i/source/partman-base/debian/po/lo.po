@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lo\n"
 "Report-Msgid-Bugs-To: partman-base@packages.debian.org\n"
-"POT-Creation-Date: 2010-03-19 22:53+0000\n"
+"POT-Creation-Date: 2011-01-30 18:04+0000\n"
 "PO-Revision-Date: 2010-11-26 09:11+0700\n"
 "Last-Translator: Anousak Souphavanh <anousak@gmail.com>\n"
 "Language-Team: Lao <lo@li.org>\n"
@@ -453,11 +453,29 @@ msgstr "SCSI%s, ພາທິຊັນ #%s (%s)"
 
 #. Type: text
 #. Description
+#. For example MMC/SD card #1 (mmcblk0)
+#. :sl3:
+#: ../partman-base.templates:51001
+#, no-c-format
+msgid "MMC/SD card #%s (%s)"
+msgstr ""
+
+#. Type: text
+#. Description
+#. For example MMC/SD card #1, partition #2 (mmcblk0p2)
+#. :sl3:
+#: ../partman-base.templates:52001
+#, fuzzy, no-c-format
+msgid "MMC/SD card #%s, partition #%s (%s)"
+msgstr "Multipath %s (ພາທີຊັນ #%s)"
+
+#. Type: text
+#. Description
 #. :sl3:
 #: ../partman-base.templates:53001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "RAID%s device #%s"
-msgstr "IDE%s ສະເລບ (%s)"
+msgstr "RAID%s ອຸປະກອນ #%s"
 
 #. Type: text
 #. Description
@@ -465,25 +483,25 @@ msgstr "IDE%s ສະເລບ (%s)"
 #: ../partman-base.templates:54001
 #, no-c-format
 msgid "Encrypted volume (%s)"
-msgstr ""
+msgstr "ໂວລໍ້າເຂົ້າລະຫັດ (%s)"
 
 #. Type: text
 #. Description
 #. For example: Serial ATA RAID isw_dhiiedgihc_Volume0 (mirror)
 #. :sl3:
 #: ../partman-base.templates:55001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Serial ATA RAID %s (%s)"
-msgstr "ATA%s (%s)"
+msgstr "Serial ATA RAID %s (%s)"
 
 #. Type: text
 #. Description
 #. For example: Serial ATA RAID isw_dhiiedgihc_Volume01 (partition #1)
 #. :sl3:
 #: ../partman-base.templates:56001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Serial ATA RAID %s (partition #%s)"
-msgstr "ATA%s, ພາທິຊັນ #%s (%s)"
+msgstr "Serial ATA RAID %s (ພາທິຊັນ #%s)"
 
 #. Type: text
 #. Description
@@ -502,15 +520,15 @@ msgstr "ATA%s, ພາທິຊັນ #%s (%s)"
 #: ../partman-base.templates:57001
 #, no-c-format
 msgid "Multipath %s (WWID %s)"
-msgstr ""
+msgstr "Multipath %s (WWID %s)"
 
 #. Type: text
 #. Description
 #. :sl3:
 #: ../partman-base.templates:58001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Multipath %s (partition #%s)"
-msgstr "ATA%s, ພາທິຊັນ #%s (%s)"
+msgstr "Multipath %s (ພາທີຊັນ #%s)"
 
 #. Type: text
 #. Description
@@ -518,7 +536,7 @@ msgstr "ATA%s, ພາທິຊັນ #%s (%s)"
 #: ../partman-base.templates:59001
 #, no-c-format
 msgid "LVM VG %s, LV %s"
-msgstr ""
+msgstr "LVM VG %s, LV %s"
 
 #. Type: text
 #. Description
@@ -526,23 +544,23 @@ msgstr ""
 #: ../partman-base.templates:60001
 #, no-c-format
 msgid "Loopback (loop%s)"
-msgstr ""
+msgstr "ຄືນກັບ (loop%s)"
 
 #. Type: text
 #. Description
 #. :sl5:
 #: ../partman-base.templates:61001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "DASD %s (%s)"
-msgstr "ATA%s (%s)"
+msgstr "DASD %s (%s)"
 
 #. Type: text
 #. Description
 #. :sl5:
 #: ../partman-base.templates:62001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "SCSI%s (%s,%s,%s), ພາທິຊັນ #%s (%s)"
+msgstr "DASD %s (%s), ພາທີເຊິນ #%s"
 
 #. Type: text
 #. Description
@@ -551,16 +569,16 @@ msgstr "SCSI%s (%s,%s,%s), ພາທິຊັນ #%s (%s)"
 #: ../partman-base.templates:63001
 #, no-c-format
 msgid "Virtual disk %s (%s)"
-msgstr ""
+msgstr "ດິກສຂອງແທ້ %s (%s)"
 
 #. Type: text
 #. Description
 #. eg. Virtual disk 1, partition #1 (xvda1)
 #. :sl4:
 #: ../partman-base.templates:64001
-#, fuzzy, no-c-format
+#, no-c-format
 msgid "Virtual disk %s, partition #%s (%s)"
-msgstr "ATA%s, ພາທິຊັນ #%s (%s)"
+msgstr "ດິກສຂອງແທ້ %s,ພາຣທິຊັ້ນ #%s (%s)"
 
 #. Type: text
 #. Description

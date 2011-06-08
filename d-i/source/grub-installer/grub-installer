@@ -38,16 +38,16 @@ info "architecture: $ARCH"
 get_serial_console() {
 	# Get the last 'console=' entry (if none, the whole string is returned)
 	local defconsole="$(sed -e 's/.*\(console=[^ ]*\).*/\1/' /proc/cmdline)"
-	if echo "$defconsole" | grep -q console=ttyS; then
+	if echo "$defconsole" | grep -qe 'console=\(ttyS\|com\)'; then
 		echo "$defconsole"
 	fi
 }
 
 grub_serial_console() {
 	#$1=output of get_serial_console
-	local serconsole=${1##console=}
-	local device=${serconsole%%,*}
-	local unit=${device##ttyS}
+	local serconsole=${1##console=ttyS}
+	serconsole=${serconsole##console=com}
+	local unit=${serconsole%%,*}
 	local options=""
 	if echo $serconsole | grep -q ","; then
 		options=${serconsole##*,}
@@ -137,7 +137,7 @@ hurd_convert () {
 # This should probably be rewritten using udevadm or similar.
 device_to_disk () {
 	echo "$1" | \
-		sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[a-z]\+\).*:\1:'
+		sed 's:\(/dev/\(cciss\|ida\|rs\)/c[0-9]d[0-9][0-9]*\|/dev/mmcblk[0-9]\|/dev/\(ad\|da\)[0-9]\+\|/dev/[hs]d[0-9]\+\|/dev/[a-z]\+\).*:\1:'
 }
 
 # Run update-grub in $ROOT
@@ -164,7 +164,12 @@ findfs () {
 }
 
 findfstype () {
-	mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f5
+	case "$(udpkg --print-os)" in
+	    hurd)
+		fsysopts "$ROOT$1" | sed 's:^/hurd/\([^ ]*\)fs .*:\1:' ;;
+	    *)
+		mount | grep "on $ROOT${1%/} " | tail -n1 | cut -d' ' -f5 ;;
+	esac
 }
 
 is_removable () {
@@ -286,7 +291,7 @@ case $prefix in
     /dev/loop)
 	disc_offered_devfs="$bootfs"
 	;;
-    /dev/[hsv]d[a-z]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*)
+    /dev/[hsv]d[a-z0-9]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*)
 	disc_offered_devfs="$prefix"
 	;;
     *)
@@ -393,9 +398,15 @@ case $ARCH in
     kfreebsd-i386/*|kfreebsd-amd64/*)
 	grub_package="grub-pc"
 	;;
+    hurd-i386/*)
+	grub_package="grub-pc"
+	;;
     powerpc/*)
 	grub_package="grub-ieee1275"
 	;;
+    *)
+	info "Unknown architecture $ARCH, defaulting to grub-legacy"
+	grub_package="grub"
 esac
 
 case "$frtype:$bootfstype:$bootfslabel:$grub_package" in
@@ -464,7 +475,10 @@ for u_param in $user_params; do
 	case "$u_param" in
 	    quiet)
 		got_quiet=1
-		defopt_params=${defopt_params:+$defopt_params }$u_param ;;
+		if ! db_get debian-installer/quiet || [ "$RET" = true ]; then
+			defopt_params=${defopt_params:+$defopt_params }$u_param
+		fi
+		;;
 	    splash)
 		got_splash=1
 		;;
@@ -487,7 +501,8 @@ if [ "$grub_version" = grub2 ]; then
 	   (! db_get debian-installer/splash || [ "$RET" = true ]); then
 		defopt_params="splash${defopt_params:+ $defopt_params}"
 	fi
-	if [ -z "$got_quiet" ]; then
+	if [ -z "$got_quiet" ] && \
+	   (! db_get debian-installer/quiet || [ "$RET" = true ]); then
 		defopt_params="quiet${defopt_params:+ $defopt_params}"
 	fi
 	# (quoting to deconfuse vim)
@@ -514,13 +529,13 @@ db_progress INFO grub-installer/progress/step_install
 # to grub legacy, or vice-versa
 case "$grub_package" in
     grub)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub-pc grub-efi grub-efi-amd64 grub-efi-ia32 grub-gfxpayload-lists
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub-pc-bin grub-pc grub-efi grub-efi-amd64-bin grub-efi-amd64 grub-efi-ia32-bin grub-efi-ia32 grub-gfxpayload-lists
 	;;
     grub-pc)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-efi grub-efi-amd64 grub-efi-ia32
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-efi grub-efi-amd64-bin grub-efi-amd64 grub-efi-ia32-bin grub-efi-ia32
 	;;
     grub-efi)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-pc grub-gfxpayload-lists
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub grub-legacy grub-pc-bin grub-pc grub-gfxpayload-lists
 	;;
 esac
 
@@ -560,6 +575,8 @@ fi
 db_progress STEP 1
 db_progress INFO grub-installer/progress/step_os-probe
 os-prober > /tmp/os-probed || true
+
+db_settitle debian-installer/grub-installer/title
 
 # Work out what probed OSes can be booted from grub
 tmpfile=/tmp/menu.lst.extras
@@ -1068,6 +1085,7 @@ db_progress INFO grub-installer/progress/step_config_loader
 
 if [ "$bootfstype" = "zfs" ]; then
   # Required by update-grub on ZFS
+  mkdir -p $ROOT/boot/zfs
   cp /boot/zfs/zpool.cache $ROOT/boot/zfs/
 fi
 
