@@ -344,9 +344,9 @@ kernel_update_list () {
 	(set +e;
 	# Hack to get the metapackages in the right order; should be
 	# replaced by something better at some point.
-	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\|imx51\|dove\|omap\)';
-	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-2\.';
-	chroot /target apt-cache search ^linux-image-2. | sort -r;
+	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\|imx51\|dove\|omap\|omap4\)';
+	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-[2-9]\.';
+	chroot /target apt-cache search '^linux-image-[2-9]\.' | sort -r;
 	chroot /target apt-cache search ^kfreebsd-image;
 	chroot /target apt-cache search ^gnumach-image) | \
 	cut -d" " -f1 | uniq > "$KERNEL_LIST.unfiltered"
@@ -490,6 +490,11 @@ install_kernel_linux () {
 	target_kernel_major="$(echo "$KERNEL" | sed 's/^kernel-image-//; s/^linux-image-//; s/-.*//' | cut -d . -f 1,2)"
 	case $target_kernel_major in
 		2.?)	;;
+		[3-9].*)
+			# As far as our debconf templates are concerned,
+			# this is essentially 2.6.
+			target_kernel_major=2.6
+			;;
 		*)
 			# something went wrong; use major version of
 			# installation kernel

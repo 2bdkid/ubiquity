@@ -1,3 +1,18 @@
+ubiquity (2.7.9) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * Use pycompile (python-minimal) rather than py_compilefiles
+    (python-central).
+  * Add lightdm to lists of display managers in Upstart jobs (LP: #798328).
+  * Automatic update of included source packages: base-installer
+    1.119ubuntu3, netcfg 1.63ubuntu1.
+
+  [ Mackenzie Morgan ]
+  * make ubi-prepare.py handle cases where prepare_download_updates
+    is Qt too (LP: #791446)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 16 Jun 2011 23:20:29 +0100
+
 ubiquity (2.7.8) oneiric; urgency=low
 
   * Fix xvfb-run error handling.

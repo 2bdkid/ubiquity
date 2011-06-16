@@ -1,3 +1,35 @@
+netcfg (1.63ubuntu1) oneiric; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Drop priority of netcfg/get_domain to medium for non-static
+      configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Call /usr/lib/NetworkManager/ifblacklist_migrate.sh from
+      finish-install if present, so that 'auto dhcp' interfaces are disabled
+      if network-manager is in use. May be preseeded away with
+      netcfg/network-manager.
+    - Bump the DHCP timeout to 30 seconds.
+    - Strip trailing dots from domain when writing to /etc/hosts.
+    - Build for ppc64.
+    - Move release-dhcp-lease finish-install script after unmounting
+      filesystems, to avoid interfering with iSCSI.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 16 Jun 2011 18:10:47 +0100
+
+netcfg (1.63) unstable; urgency=low
+
+  * If BOOTIF= is set on the Linux command line, look for an interface with
+    that address and use it by default (closes: #615600, LP: #56679).
+
+  [ Updated translations ]
+  * Asturian (ast.po) by MAAC
+  * German (de.po) by Holger Wansing
+  * Italian (it.po) by Milo Casagrande
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 16 Jun 2011 18:03:01 +0100
+
 netcfg (1.62ubuntu2) oneiric; urgency=low
 
   * finish-install.d/55netcfg: call ifblacklist_migrate.sh from
