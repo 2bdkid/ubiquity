@@ -1,3 +1,11 @@
+grub-installer (1.64ubuntu3) oneiric; urgency=low
+
+  * When /boot is on a loopback device (i.e. Wubi), install GRUB there.
+    This was always done the next time grub-install was run, but by mistake
+    wasn't done at initial installation.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 21 Jun 2011 12:41:24 +0100
+
 grub-installer (1.64ubuntu2) oneiric; urgency=low
 
   * Remove 'quiet' from target system command line if debian-installer/quiet

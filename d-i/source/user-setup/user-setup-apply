@@ -303,6 +303,15 @@ TimedLoginDelay=10"
 			        	-e "s/startlxde/startlubuntu/" \
 			        	/etc/xdg/lubuntu/lxdm/lxdm.conf
 			fi
+
+			if $chroot $ROOT [ -f /etc/lightdm/lightdm.conf ]; then
+				# Configure LightDM autologin
+				$log $chroot $ROOT sed -i$BACKUP -r \
+					-e "s/^#default-user=.*/default-user=$USER/" \
+					-e "s/^#default-user-timeout=.*/default-user-timeout=0/" \
+					-e "s/^#pam-service=.*/pam-service=lightdm-autologin/" \
+					/etc/lightdm/lightdm.conf
+			fi
 		fi
 	fi
 

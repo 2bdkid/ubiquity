@@ -374,6 +374,12 @@ if [ "$found" = "0" ] && echo "$bootfs" | grep -qs "^\/dev\/vd[a-z]"; then
 	frdisk=
 	found=1
 fi
+# Check if the boot file system is on a loopback device
+if [ "$found" = "0" ] && echo "$bootfs" | grep -qs '^/dev/loop'; then
+	frdev="$bootfs"
+	frtype="loop"
+	found=1
+fi
 
 info "Identified partition label for $bootfs: $bootfslabel"
 
@@ -641,7 +647,7 @@ else
 	state=1
 fi
 
-if [ "$frdev" ] && [ "$frtype" != "sataraid" ]; then
+if [ "$frdev" ] && [ "$frtype" != "sataraid" ] && [ "$frtype" != "loop" ]; then
 	if [ -e $ROOT$frdev ] && [ -e $ROOT$frdev$frbootpart ] && \
 	   [ $frgrubroot -ge $((1 - $partition_offset)) ]; then
 		db_subst grub-installer/$frtype GRUBROOT $ROOT$frdev$frbootpart
@@ -793,11 +799,10 @@ while : ; do
 	fi
 done
 
-if db_get grub-installer/bootdev_directory && [ "$RET" ]; then
+if [ "$grub_version" = grub ] && [ ! -f "$device_map" ] && \
+   db_get grub-installer/bootdev_directory && [ "$RET" ]; then
 	bootdev=
-	if [ "$grub_version" = grub ] && ! [ -f "$device_map" ]; then
-		echo quit | $chroot $ROOT /usr/sbin/grub --batch --device-map="${device_map#$ROOT}" >/dev/null 2>&1
-	fi
+	echo quit | $chroot $ROOT /usr/sbin/grub --batch --device-map="${device_map#$ROOT}" >/dev/null 2>&1
 fi
 
 db_progress STEP 1
@@ -1097,7 +1102,7 @@ update_grub
 # For dmraid we can end up with e.g. '(sil_aiahbgbgaaaj1)', or we can end up
 # with '(hd0,0)' when it should be a higher partition
 # TODO: This should really be better supported in update-grub
-if [ "$frdev" ] && \
+if [ "$grub_version" = grub ] && [ "$frdev" ] && \
    ! grep -q "^# groot=(hd0,$frgrubroot)" $ROOT/boot/grub/$menu_file; then
 	info "Fixing up the grub root to '(hd0,$frgrubroot)'"
 	sed -i "/^# groot/s/(.*)/(hd0,$frgrubroot)/" $ROOT/boot/grub/$menu_file
