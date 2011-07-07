@@ -1,3 +1,50 @@
+flash-kernel (2.28ubuntu26) oneiric; urgency=low
+
+  * Dropping appending the root to /etc/flash-kernel.conf as its not needed
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Thu, 30 Jun 2011 08:27:19 -0700
+
+flash-kernel (2.28ubuntu25) oneiric; urgency=low
+
+  * Set the root partition for Panda
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Thu, 30 Jun 2011 06:15:22 -0700
+
+flash-kernel (2.28ubuntu24) oneiric; urgency=low
+
+  * Build a *working* boot.scr for Panda
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Thu, 30 Jun 2011 06:08:39 -0700
+
+flash-kernel (2.28ubuntu23) oneiric; urgency=low
+
+  * Extend f-k-i to properly write out the create the boot script
+  * Make flash-kernel --update-bootloader on OMAP also install a kernel+ramdisk
+  * Correctly handle a lack of boot.scr on the boot partition
+  * Properly unmount the FAT partition after bootloader update
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Wed, 29 Jun 2011 04:31:41 -0700
+
+flash-kernel (2.28ubuntu22) oneiric; urgency=low
+
+  * Add omap4 to the subarchitecture list for the udeb
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Mon, 27 Jun 2011 08:28:58 -0700
+
+flash-kernel (2.28ubuntu21) oneiric; urgency=low
+
+  * Add flash-kernel-installer support for OMAP4
+  * Revert last upload due to brokeness
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Mon, 27 Jun 2011 10:39:24 +0000
+
+flash-kernel (2.28ubuntu20) natty-proposed; urgency=low
+
+  * Omit the check_subarch check for OMAP boards if linaro kernels are in use
+    (LP: #721147)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 20 May 2011 15:53:30 +0200
+
 flash-kernel (2.28ubuntu19) natty; urgency=low
 
   * IMX: Replace imx5 subarch with mx5; matches upstream kernel more closely

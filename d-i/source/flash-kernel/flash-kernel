@@ -120,13 +120,17 @@ cleanup() {
 # generic flash-kernel routines for specific subarchs
 
 omap_flash_kernel_and_initrd() {
-	printf "Creating backups of uImage and uInitrd... " >&2
+	printf "Creating backups of boot files ... " >&2
 	if [ -e $TMPMOUNT/uImage ]; then
 		cp $TMPMOUNT/uImage $TMPMOUNT/uImage.bak
 	fi
 	if [ -e $TMPMOUNT/uInitrd ]; then
 		cp $TMPMOUNT/uInitrd $TMPMOUNT/uInitrd.bak
 	fi
+	if [ -e $TMPMOUNT/boot.scr ]; then
+		cp $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
+	fi
+
 	echo "done." >&2
 	printf "Generating kernel u-boot image... " >&2
 	mkimage -A arm -O linux -T kernel -C none -a 0x80008000 \
@@ -138,7 +142,6 @@ omap_flash_kernel_and_initrd() {
 		echo "done." >&2
 	if [ -e /boot/boot.script ];then
 		printf "Generating u-boot configuration from /boot/boot.script... " >&2
-		cp $TMPMOUNT/boot.scr $TMPMOUNT/boot.scr.bak
 		mkimage -A arm -T script -C none -n "Ubuntu boot script" -d /boot/boot.script \
 			$TMPMOUNT/boot.scr >&2 1>/dev/null
 		echo "done." >&2
@@ -167,6 +170,13 @@ omap_flash_bootloader() {
 	XLOADER=/usr/lib/x-loader/$XLOADERDIR/MLO
 	UBOOT=/usr/lib/u-boot/$UBOOTDIR/u-boot.bin
 
+	# Ensure that the input files EXIST
+	if [ ! -e "$XLOADER" ]; then
+		error "$XLOADER doesn't exist. Make sure proper x-loader package is installed"
+	fi
+	if [ ! -e "$UBOOT" ]; then
+		error "$UBOOT doesn't exist. Make sure proper u-boot package is installed"
+	fi
 	if [ -z "$BOOTLOADER_FILES" ];then
 		BOOTLOADER_FILES="$XLOADER $UBOOT"
 	fi
@@ -196,9 +206,9 @@ omap_flash_kernel() {
 
 		if [ -n "$UPDATE_BOOTLOADER" ];then
 			omap_flash_bootloader
-		else
-			omap_flash_kernel_and_initrd
 		fi
+
+		omap_flash_kernel_and_initrd
 
 		umount $TMPMOUNT
 		rm -rf $TMPMOUNT
