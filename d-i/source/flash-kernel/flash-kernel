@@ -473,6 +473,7 @@ if [ "x$1" = "x--supported" ]; then
 		"QNAP TS-119/TS-219")			exit 0 ;;
 		"QNAP TS-41x")				exit 0 ;;
 		"Thecus N2100")				exit 0 ;;
+		"Toshiba AC100 / Dynabook AZ")			exit 0 ;;
 		"Lanner EM7210")			exit 0 ;;
 		*)
 			# we're supported if we have a generic fallback
@@ -897,6 +898,66 @@ case "$machine" in
 			dd if=/dev/zero bs=$pad count=1 2>/dev/null
 		) > "$imtd" || error "failed."
 		echo "done." >&2
+	;;
+	"Toshiba AC100 / Dynabook AZ")
+		AC_IMG=""
+		AC_SIZE=""
+		AC_MMC="/dev/mmcblk0"
+
+		TMPIMAGE=$(tempfile)
+		CONFIG=""
+
+		find_ac100_bootpart()
+		{
+			for dev in $(ls ${AC_MMC}?? 2>/dev/null); do
+				if abootimg -i $dev >/dev/null 2>&1; then
+					size=$(abootimg -i $dev |grep "image size"|cut -d ' ' -f5)
+					 if [ $size -gt 5242880 ]; then
+						 AC_IMG=$dev
+						 AC_SIZE=$size
+						 return 0
+					 fi
+				fi
+			done
+			return 1
+		}
+
+		build_ac100_bootimage()
+		{
+			if [ -e /boot/bootimg.cfg ]; then
+				abootimg --create $TMPIMAGE -f /boot/bootimg.cfg -k $kfile \
+					-r $ifile >/dev/null 2>&1 || return 1
+				imagesize=$(wc -c "$TMPIMAGE" | awk '{print $1}')
+				check_size "Bootimage" $imagesize $AC_SIZE
+			else
+				printf "Could not find /boot/bootimg.cfg."
+				return 1
+			fi
+		}
+
+		write_ac100_bootimage()
+		{
+			printf "Writing boot image to $AC_IMG ... "
+			dd if=$TMPIMAGE of=$AC_IMG >/dev/null 2>&1 || return 1
+			echo "done." >&2
+		}
+
+		if ! find_ac100_bootpart; then
+			rm -rf $TMPIMAGE
+			error "Could not find boot image partition on $AC_MMC."
+		fi
+
+		if ! build_ac100_bootimage; then
+			rm -rf $TMPIMAGE
+			error "Could not create temporary boot image."
+		fi
+
+		if ! write_ac100_bootimage; then
+			rm -rf $TMPIMAGE
+			error "Can not flash to $AC_IMG"
+		fi
+
+		rm -rf $TMPIMAGE
 	;;
 	"Lanner EM7210")
 		# Really: Intel SS4000-e and compatibles
