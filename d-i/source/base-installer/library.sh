@@ -988,7 +988,12 @@ EOT
 		else
 			SECMIRROR="$MIRROR"
 		fi
-		echo "deb $PROTOCOL://$SECMIRROR/ubuntu $DISTRIBUTION-security $COMPONENTS" >> $APT_SOURCES
+		if db_get apt-setup/security_path; then
+			SECDIRECTORY="$RET"
+		else
+			SECDIRECTORY=/ubuntu
+		fi
+		echo "deb $PROTOCOL://$SECMIRROR$SECDIRECTORY $DISTRIBUTION-security $COMPONENTS" >> $APT_SOURCES
 		if db_get apt-setup/proposed && [ "$RET" = true ]; then
 			echo "deb $APTSOURCE $DISTRIBUTION-proposed $COMPONENTS" >> $APT_SOURCES
 		fi

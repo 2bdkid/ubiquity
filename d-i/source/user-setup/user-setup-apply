@@ -203,6 +203,7 @@ if [ "$RET" = true ] && ! is_system_user; then
 			$log $chroot $ROOT mount -t sysfs sysfs /sys
 			umountsys=:
 		fi
+		mkdir -p $ROOT/dev/shm
 		$log $chroot $ROOT mount -t tmpfs tmpfs /dev/shm
 	fi
 	if [ -x $ROOT/usr/sbin/adduser ]; then
@@ -307,9 +308,7 @@ TimedLoginDelay=10"
 			if $chroot $ROOT [ -f /etc/lightdm/lightdm.conf ]; then
 				# Configure LightDM autologin
 				$log $chroot $ROOT sed -i$BACKUP -r \
-					-e "s/^#default-user=.*/default-user=$USER/" \
-					-e "s/^#default-user-timeout=.*/default-user-timeout=0/" \
-					-e "s/^#pam-service=.*/pam-service=lightdm-autologin/" \
+					-e "s/^#autologin-user=.*/autologin-user=$USER/" \
 					/etc/lightdm/lightdm.conf
 			fi
 		fi

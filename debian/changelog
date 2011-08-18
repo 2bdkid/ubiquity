@@ -1,3 +1,47 @@
+ubiquity (2.7.15) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * Remove dead code from debian/oem-config.oem-config.upstart.
+  * Prefer recent versions of ntfs-3g to ntfsprogs, as ntfsresize has moved
+    to ntfs-3g.
+
+  [ Evan Dandrea ]
+  * Change the first partitioning page title to 'Installation Type.'
+    Thanks Matthew Paul Thomas.
+  * Merge PyGI branch. Ubiquity now uses PyGI and GTK+3.
+  * Feature Freeze exception (LP: #825274).
+  * Automatic update of included source packages: base-installer
+    1.119ubuntu4, console-setup 1.57ubuntu23, flash-kernel 2.28ubuntu28,
+    netcfg 1.68ubuntu1, partman-auto-loop 0ubuntu20, partman-
+    basicfilesystems 71ubuntu1, partman-efi 24ubuntu2, partman-
+    partitioning 81ubuntu2, tzsetup 1:0.26ubuntu10, user-setup
+    1.28ubuntu18.
+
+  [ Brian Murray ]
+  * Instead of sending people to +filebug recommend using apport
+
+  [ Luke Yelavich ]
+  * Add support for launching high contrast, screen reader, keyboard modifiers,
+    and onscreen keyboard accessibility profiles in maybe-ubiquity mode, high
+    contrast and screen reader profiles being launcheable either from an
+    indicator, or via keyboard shortcut, the rest of the profiles available
+    via the indicator only
+  * bin/ubiquity-dm:
+    - Start at-spi either when an appropriate accessibility profile is enabled,
+      or when maybe-ubiquity mode is enabled
+    - Remove references to orbit, as the a11y stack now uses dbus
+  * debian/control: Add python-appindicator as a dependency of
+    ubiquity-frontend-gtk
+  * Play the system-ready sound once accessibility profile support code has
+    been run to signal the user that a profile shortcut key can be pressed
+  * Enable caret browsing/text cursor movement in the slideshow if the screen
+    reader accessibility profile is enabled
+
+  [ Mario Limonciello ]
+  * Fix calls to get_size() in ubiquity-dm from pygi transition.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Thu, 18 Aug 2011 17:56:46 +0100
+
 ubiquity (2.7.14) oneiric; urgency=low
 
   * When copying symlinks, just try unlinking and handle exceptions, rather

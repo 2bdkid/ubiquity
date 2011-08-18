@@ -1,5 +1,6 @@
-#! /bin/sh -e
+#! /bin/sh
 # Disable 'auto dhcp' interfaces if network-manager is in use.
+set -e
 
 . /usr/share/debconf/confmodule
 
