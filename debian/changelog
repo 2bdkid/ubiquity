@@ -1,3 +1,18 @@
+ubiquity (2.7.17) oneiric; urgency=low
+
+  [ Evan Dandrea ]
+  * Make sure the webcam module is built before running tests.
+
+  [ Colin Watson ]
+  * Use a stamp file for 'debian/rules install' to try to avoid duplicate
+    runs (e.g. when repeatedly running tests).
+  * Mark the debian/rules tests target as phony, to allow repeated runs more
+    easily.
+  * Don't fail gtkwidgets tests if /usr/share/pixmaps/faces doesn't exist
+    (i.e. gnome-control-center-data isn't installed).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 25 Aug 2011 00:09:32 +0100
+
 ubiquity (2.7.16) oneiric; urgency=low
 
   [ Colin Watson ]
