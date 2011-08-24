@@ -1,3 +1,19 @@
+console-setup (1.57ubuntu25) oneiric; urgency=low
+
+  * Backport from upstream (Anton Zinoviev):
+    - Include Terminus font in the compiled packages.  Do not depend, but
+      conflict/provide/replace console-terminus.  New upstream version of
+      the Terminus font (4.32).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Aug 2011 13:53:08 +0100
+
+console-setup (1.57ubuntu24) oneiric; urgency=low
+
+  * Fix default keyboard selection for language/country combinations lacking
+    a proper combined locale (LP: #814448).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 19 Aug 2011 15:13:13 +0100
+
 console-setup (1.57ubuntu23) oneiric; urgency=low
 
   * Explicitly build-depend on liblocale-gettext-perl for kbdnames-maker,

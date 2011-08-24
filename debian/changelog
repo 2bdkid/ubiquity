@@ -1,3 +1,25 @@
+ubiquity (2.7.16) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * Update translations from Launchpad.
+  * Enable code in console-setup 1.57ubuntu24 to fix default keyboard
+    selection for language/country combinations lacking a proper combined
+    locale (LP: #814448).
+  * Rename libwebcam to libubiwebcam to avoid clashing with the existing
+    libwebcam0 package.
+
+  [ Evan Dandrea ]
+  * Move noninteractive frontend to PyGI bindings for GObject (LP:
+    #829186).
+  * Make the webcam page match its specified design.
+  * Automatic update of included source packages: console-setup
+    1.57ubuntu25.
+
+  [ Jeremy Bicha ]
+  * Allow users to enter their own mount point in the partitoner (LP: #831431)
+
+ -- Evan Dandrea <ev@ubuntu.com>  Wed, 24 Aug 2011 13:58:08 +0100
+
 ubiquity (2.7.15) oneiric; urgency=low
 
   [ Colin Watson ]

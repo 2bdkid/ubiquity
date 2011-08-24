@@ -25,9 +25,11 @@ Description: system-wide keyboard preferences
 Package: console-setup
 Section: utils
 Architecture: all
-Depends: debconf (>= 0.5) | debconf-2.0, console-terminus (>= 4.26), xkb-data (>= 0.9), keyboard-configuration, initramfs-tools (>= 0.85eubuntu12), kbd (>= 1.15-1ubuntu3), ${misc:Depends}
+Depends: debconf (>= 0.5) | debconf-2.0, xkb-data (>= 0.9), keyboard-configuration, initramfs-tools (>= 0.85eubuntu12), kbd (>= 1.15-1ubuntu3), ${misc:Depends}
 Suggests: lsb-base (>= 3.0-6), locales
-Conflicts: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
+Conflicts: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6), console-terminus
+Provides: console-terminus
+Replaces: console-terminus
 Description: console font and keymap setup program
  This package provides the Linux console with the same
  keyboard configuration scheme as the X Window System. As a result,

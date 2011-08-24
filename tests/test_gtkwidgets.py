@@ -1,10 +1,11 @@
 #!/usr/bin/python
 
 import unittest
-from ubiquity import segmented_bar
+from ubiquity import segmented_bar, gtkwidgets
 from test import test_support
 from gi.repository import Gtk, GObject, TimezoneMap
-import sys
+import sys, os
+import mock
 
 class WidgetTests(unittest.TestCase):
     def setUp(self):
@@ -45,6 +46,18 @@ class WidgetTests(unittest.TestCase):
         GObject.timeout_add(500, Gtk.main_quit)
         Gtk.main()
 
+    def test_face_selector_save_to(self, *args):
+        from gi.repository import GdkPixbuf
+        WRITE_TO = '/tmp/nonexistent-directory/windows_square.png'
+        fs = gtkwidgets.FaceSelector()
+        fs.selected_image = Gtk.Image()
+        pb = GdkPixbuf.Pixbuf.new_from_file('pixmaps/windows_square.png')
+        fs.selected_image.set_from_pixbuf(pb)
+        fs.save_to(WRITE_TO)
+        self.assertTrue(os.path.exists(WRITE_TO))
+        import shutil
+        shutil.rmtree(os.path.dirname(WRITE_TO))
+
 udevinfo = """
 UDEV_LOG=3
 DEVPATH=/devices/pci0000:00/0000:00:1c.1/0000:03:00.0/net/wlan0
@@ -62,7 +75,6 @@ ID_MM_CANDIDATE=1
 
 
 from ubiquity import nm
-import mock
 import dbus
 class NetworkManagerTests(unittest.TestCase):
     def setUp(self):
