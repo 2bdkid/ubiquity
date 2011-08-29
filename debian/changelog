@@ -1,3 +1,24 @@
+ubiquity (2.7.19) oneiric; urgency=low
+
+  [ Stéphane Graber ]
+  * Properly handle unicode in calls to preseed (LP: #831455)
+  * Properly handle unicode for device and mountpoints name (LP: #833813)
+  * Port Ubiquity's accessibility indicator to gobject introspection
+  * Fix a minor gobject introspection port issue (Gdk.CONTROL_MASK should
+    be Gdk.ModifierType.CONTROL_MASK)
+  * Fix ubi-timezone changed() function missing a parameter
+
+  [ Colin Watson ]
+  * Adjust timezone tests for change in timezone changed() signature.
+  * Mock ubiquity.misc.drop_privileges and ubiquity.misc.regain_privileges
+    during test_face_selector_save_to.
+  * Mock ubiquity.frontend.base.drop_privileges in GTK frontend tests to
+    cope with 'from ubiquity.misc import drop_privileges' form.
+  * Mock ubiquity.nm.wireless_hardware_present in GTK frontend tests, as it
+    may not be able to talk to D-Bus.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 29 Aug 2011 17:26:51 +0100
+
 ubiquity (2.7.18) oneiric; urgency=low
 
   * Properly handle unicode around the hostname (LP: #831309).

@@ -301,10 +301,10 @@ class Wizard(BaseFrontend):
         # Put up the a11y indicator in maybe-ubiquity mode
         if ('UBIQUITY_GREETER' in os.environ and os.path.exists('/usr/bin/casper-a11y-enable')):
             try:
-                import appindicator
-                self.indicator = appindicator.Indicator('ubiquity', 'accessibility-directory',
-                    appindicator.CATEGORY_OTHER)
-                self.indicator.set_status(appindicator.STATUS_ACTIVE)
+                from gi.repository import AppIndicator3 as AppIndicator
+                self.indicator = AppIndicator.Indicator.new('ubiquity', 'accessibility-directory',
+                    AppIndicator.IndicatorCategory.OTHER)
+                self.indicator.set_status(AppIndicator.IndicatorStatus.ACTIVE)
                 self.indicator.set_menu(self.builder.get_object('a11y_indicator_menu'))
                 self.live_installer.connect('key-press-event', self.a11y_profile_keys)
                 if os.path.exists('/usr/bin/canberra-gtk-play'):
@@ -507,9 +507,9 @@ class Wizard(BaseFrontend):
             self.thunar_set_volmanrc(self.thunar_previous)
 
     def a11y_profile_keys(self, window, event):
-        if event.state & Gdk.CONTROL_MASK and event.keyval == Gdk.keyval_from_name('h'):
+        if event.state & Gdk.ModifierType.CONTROL_MASK and event.keyval == Gdk.keyval_from_name('h'):
             self.a11y_profile_high_contrast_activate()
-        elif event.state & Gdk.CONTROL_MASK and event.keyval == Gdk.keyval_from_name('s'):
+        elif event.state & Gdk.ModifierType.CONTROL_MASK and event.keyval == Gdk.keyval_from_name('s'):
             self.a11y_profile_screen_reader_activate()
 
     def a11y_profile_high_contrast_activate(self, widget=None):
