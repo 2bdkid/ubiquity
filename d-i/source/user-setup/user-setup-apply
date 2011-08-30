@@ -305,11 +305,20 @@ TimedLoginDelay=10"
 			        	/etc/xdg/lubuntu/lxdm/lxdm.conf
 			fi
 
-			if $chroot $ROOT [ -f /etc/lightdm/lightdm.conf ]; then
+			if $chroot $ROOT [ -d /etc/lightdm ]; then
 				# Configure LightDM autologin
-				$log $chroot $ROOT sed -i$BACKUP -r \
-					-e "s/^#autologin-user=.*/autologin-user=$USER/" \
-					/etc/lightdm/lightdm.conf
+				LightDMCustomFile=$ROOT/etc/lightdm/lightdm.conf
+				AutologinParameters="allow-guest=false\n\
+autologin-guest=false\n\
+autologin-user=$USER\n\
+autologin-user-timeout=0\n\
+autologin-session=lightdm-autologin"
+				if ! grep -qs '^autologin-user' $LightDMCustomFile; then
+					if ! grep -qs '^\[SeatDefaults\]' $LightDMCustomFile; then
+						echo '[SeatDefaults]' >> $LightDMCustomFile
+					fi
+					sed -i "s/\[SeatDefaults\]/\[SeatDefaults\]\n$AutologinParameters/" $LightDMCustomFile
+				fi
 			fi
 		fi
 	fi
