@@ -151,15 +151,15 @@ omap_flash_kernel_and_initrd() {
 omap_flash_bootloader() {
 	case "$machine" in
 		"IGEP v2 board")
-			XLOADERDIR=igep0020
+			XLOADERDIR=x-loader/igep0020
 			UBOOTDIR=igep0020
 		;;
 		"OMAP3 Beagle Board")
-			XLOADERDIR=omap3530beagle
+			XLOADERDIR=x-loader/omap3530beagle
 			UBOOTDIR=omap3_beagle
 		;;
 		"OMAP4430 Panda Board" | "OMAP4 Panda board")
-			XLOADERDIR=omap4430panda
+			XLOADERDIR=u-boot/omap4_panda
 			UBOOTDIR=omap4_panda
 		;;
 		*)
@@ -167,7 +167,7 @@ omap_flash_bootloader() {
 		;;
 	esac
 
-	XLOADER=/usr/lib/x-loader/$XLOADERDIR/MLO
+	XLOADER=/usr/lib/$XLOADERDIR/MLO
 	UBOOT=/usr/lib/u-boot/$UBOOTDIR/u-boot.bin
 
 	# Ensure that the input files EXIST

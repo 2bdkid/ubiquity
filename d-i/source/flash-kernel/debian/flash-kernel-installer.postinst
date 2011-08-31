@@ -93,10 +93,6 @@ omap4_flash_kernel_installer() {
 	# Find the rootfs
 	rootfs=$(findfs /)
 
-        if ! apt-install x-loader-omap4-panda; then
-                error "apt-install x-loader failed"
-        fi
-
         if ! apt-install u-boot-linaro-omap4-panda; then
                 error "apt-install u-boot failed"
         fi

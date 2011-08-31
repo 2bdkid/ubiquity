@@ -1,3 +1,21 @@
+ubiquity (2.7.25) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * /apps/metacity/general/num_workspaces should be an int, not a boolean.
+  * Automatic update of included source packages: flash-kernel 2.28ubuntu29.
+
+  [ Evan Dandrea ]
+  * Don't try to connect signals on the release notes label in the oem-
+    config version of the language page, as it doesn't exist there.
+  * Construct a GtkTreeCellDataFunc with the correct number of arguments
+    in the migration assistant plugin (LP: #829987).
+  * Don't let the text wrap for the language names in oem-config.
+
+  [ Stéphane Graber ]
+  * Properly sort the keyboard list (LP: #770320)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 31 Aug 2011 20:52:07 +0100
+
 ubiquity (2.7.24) oneiric; urgency=low
 
   * Use only gtk3 in oem-config-remove-gtk (2.7.23 was also using gtk2).
