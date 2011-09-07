@@ -1,3 +1,12 @@
+user-setup (1.28ubuntu20) oneiric; urgency=low
+
+  * In the oem-config scenario, just sed out the oem user for the correct user
+    as the rest of the lightdm config is put in place already from install.
+  * Don't restrict guest login from login screen if autologin was configured, 
+    just restrict autologin for guest specifically.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Tue, 06 Sep 2011 13:23:34 -0500
+
 user-setup (1.28ubuntu19) oneiric; urgency=low
 
   * Write out a lightdm configuration if one does not exist when

@@ -391,7 +391,10 @@ class Wizard(BaseFrontend):
             self.crash_detail_label.set_text(tbtext)
             self.crash_dialog.run()
             self.crash_dialog.hide()
-
+            self.live_installer.hide()
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            misc.execute_root("apport-bug", "ubiquity")
             sys.exit(1)
 
     def thunar_set_volmanrc (self, fields):
@@ -710,7 +713,7 @@ color : @dark_fg_color;
 background-color : @dark_bg_color;
 }
 
-GtkEntry, GtkButton, GtkLabel, GtkTreeView row, GtkComboBox *, GtkDrawingArea {
+GtkEntry, GtkButton, GtkLabel, GtkIconView, GtkTreeView row, GtkComboBox *, GtkDrawingArea {
 color : @fg_color
 }''')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
@@ -1216,6 +1219,7 @@ color : @fg_color
             # expect recursive main loops to be exited and
             # debconffilter_done() to be called when the filter exits
         else:
+            self.find_next_step(self.pages[self.pagesindex].module.__name__)
             self.quit_main_loop()
 
     def process_step(self):
@@ -1251,6 +1255,7 @@ color : @fg_color
             # expect recursive main loops to be exited and
             # debconffilter_done() to be called when the filter exits
         else:
+            self.find_next_step(self.pages[self.pagesindex].module.__name__)
             self.quit_main_loop()
 
     def on_steps_switch_page (self, unused_notebook, unused_page, current):
@@ -1340,6 +1345,10 @@ color : @fg_color
             # dialog instead.
             self.crash_dialog.run()
             self.crash_dialog.hide()
+            self.live_installer.hide()
+            while Gtk.events_pending():
+                Gtk.main_iteration()
+            misc.execute_root("apport-bug", "ubiquity")
             sys.exit(1)
         if BaseFrontend.debconffilter_done(self, dbfilter):
             self.quit_main_loop()

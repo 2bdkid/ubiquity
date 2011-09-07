@@ -308,8 +308,7 @@ TimedLoginDelay=10"
 			if $chroot $ROOT [ -d /etc/lightdm ]; then
 				# Configure LightDM autologin
 				LightDMCustomFile=$ROOT/etc/lightdm/lightdm.conf
-				AutologinParameters="allow-guest=false\n\
-autologin-guest=false\n\
+				AutologinParameters="autologin-guest=false\n\
 autologin-user=$USER\n\
 autologin-user-timeout=0\n\
 autologin-session=lightdm-autologin"
@@ -318,6 +317,9 @@ autologin-session=lightdm-autologin"
 						echo '[SeatDefaults]' >> $LightDMCustomFile
 					fi
 					sed -i "s/\[SeatDefaults\]/\[SeatDefaults\]\n$AutologinParameters/" $LightDMCustomFile
+				#oem config scenario
+				else
+					sed -i "s/^\(\(str  *\)\?autologin-user\)=.*$/\1=$USER/g;" $ROOT/etc/lightdm/lightdm.conf
 				fi
 			fi
 		fi

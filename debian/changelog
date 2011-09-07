@@ -1,3 +1,24 @@
+ubiquity (2.7.28) oneiric; urgency=low
+
+  [ Stéphane Graber ]
+  * Update stepUserInfo.ui to trigger info_loop() when the hostname is changed.
+    (LP: #828181)
+
+  [ Mario Limonciello ]
+  * Reorder the imports in oem-config-remove-gtk to fix an import error due
+    the fallbacks in aptdaemon. (LP: #837288)
+  * Show the wireless page after either prepare or language to make sure
+    it shows in both ubiquity and oem-config modes.
+  * Call out to find_next_step even on non debconf driven pages. (LP: #843237)
+  * Don't assume /target is where the new face is being put.
+  * When the installer crashes, file a bug using apport-bug rather than
+    directing users to a terminal window. (LP: #843933)
+  * Fix the colors in the oem-config language selector. (LP: #838672)
+  * Automatic update of included source packages: netcfg 1.68ubuntu2,
+    user-setup 1.28ubuntu20.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Wed, 07 Sep 2011 16:55:46 -0500
+
 ubiquity (2.7.27) oneiric; urgency=low
 
   * Disable test_set_indicator_keymaps as set_indicator_keymaps itself is
