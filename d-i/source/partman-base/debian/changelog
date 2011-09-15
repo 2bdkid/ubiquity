@@ -1,3 +1,52 @@
+partman-base (151ubuntu1) oneiric; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Build with -O2 on powerpc to avoid a suspected toolchain bug.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 08 Sep 2011 18:51:05 +0100
+
+partman-base (151) unstable; urgency=low
+
+  [ Otavio Salvador ]
+  * Add ZFS description support. Thanks to Robert Millan
+    <rmh@debian.org> for the patch. Closes: #635398.
+
+  [ Colin Watson ]
+  * Localise some more variables in partman_lock_unit and
+    partman_unlock_unit.
+
+  [ Updated translations ]
+  * Asturian (ast.po) by MAAC
+  * Czech (cs.po) by Miroslav Kure
+  * German (de.po) by Holger Wansing
+  * Basque (eu.po)
+  * French (fr.po) by Christian Perrier
+  * Hebrew (he.po) by Lior Kaplan
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Macedonian (mk.po) by Arangel Angov
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Sinhala (si.po) by Yuri Kozlov
+  * Slovak (sk.po) by Ivan Masár
+  * Thai (th.po) by Theppitak Karoonboonyanan
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 08 Sep 2011 18:36:48 +0100
+
 partman-base (150ubuntu1) oneiric; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

@@ -75,25 +75,11 @@ dove_flash_kernel_installer() {
 	echo "rootfs='root=UUID=$uuid'" > /target/etc/flash-kernel.conf
 }
 
-omap_flash_kernel_installer() {
-	in-target update-initramfs -u || true
-
-	install_mkimage
-
-	# Add the u-boot partition to the flash-kernl.conf file
-	# FIXME: figure out how to properly autodetect this
-	echo "UBOOT_PART=/dev/mmcblk0p1" > /target/etc/flash-kernel.conf
-}
-
-omap4_flash_kernel_installer() {
-	in-target update-initramfs -u || true
-
-	install_mkimage
-
+omap_install_uboot() {
 	# Find the rootfs
 	rootfs=$(findfs /)
 
-        if ! apt-install u-boot-linaro-omap4-panda; then
+        if ! apt-install $uboot_pkg; then
                 error "apt-install u-boot failed"
         fi
 
@@ -123,6 +109,24 @@ EOF
 	rm -f /target/usr/sbin/flash-kernel
 
 }
+
+omap_flash_kernel_installer() {
+	in-target update-initramfs -u || true
+
+	install_mkimage
+
+	uboot_pkg="u-boot-linaro-omap3-beagle"
+	omap_install_uboot
+}
+
+omap4_flash_kernel_installer() {
+	in-target update-initramfs -u || true
+
+	install_mkimage
+	uboot_pkg="u-boot-linaro-omap4-panda"
+	omap_install_uboot
+}
+
 	# Add the rootfs to the flash-kernel.conf file
 if write_to_flash; then
 	db_progress START 0 3 flash-kernel-installer/progress

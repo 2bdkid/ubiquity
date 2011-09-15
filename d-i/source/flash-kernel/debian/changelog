@@ -1,3 +1,17 @@
+flash-kernel (2.28ubuntu31) oneiric; urgency=low
+
+  * Make flash-kernel-installer properly install uboot on OMAP3 (LP: #820621)
+
+ -- Michael Casadevall <mcasadevall@ubuntu.com>  Mon, 12 Sep 2011 14:59:31 -0700
+
+flash-kernel (2.28ubuntu30) oneiric; urgency=low
+
+  * remove spurious development shellscript
+  * add /etc/initramfs/post-update.d/ script to move the flash-kernel call
+    out of update-initramfs
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 09 Sep 2011 12:07:06 +0200
+
 flash-kernel (2.28ubuntu29) oneiric; urgency=low
 
   * make sure flash-kernel-installer uses the right MLO when installing
