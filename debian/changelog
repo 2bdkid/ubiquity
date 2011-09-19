@@ -1,3 +1,43 @@
+ubiquity (2.7.30) oneiric; urgency=low
+
+  [ Harald Sitter ]
+  * [KDE] Fix language selection comobox position within grid (LP: #743062)
+  * [KDE] Make intro label miminum expanding, otherwise word wrap will not
+    work for vast amounts of text
+
+  [ Evan Dandrea ]
+  * Unset UBUNTU_MENUPROXY so our custom panel doesn't lose its
+    indicators (LP: #837287).
+  * Port the panel to GTK3.
+  * Manually connect the activate-link signal on the advanced
+    partitioning tool link on the automatic partitioning page.
+    GtkBuilder signal mapping appears to be broken (LP: #852054).
+  * The first partitioning page does not translate its options ahead of
+    time, so ensure that the placeholder text isn't so long as to create
+    the installer window to grow excessively large before partitioning
+    is reached (LP: #837406).
+  * Use the new network-manager interface on the prepare page to disable
+    options that need an Internet connection when one is not available
+    (LP: #848938).
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: flash-kernel
+    2.28ubuntu33.
+
+  [ Stéphane Graber ]
+  * Change wallpaper C program to accept a path to a wallpaper as a parameter.
+  * Update ubiquity-dm to set the right wallpaper for Edubuntu.
+  * Fix ibus in Ubiquity (LP: #838850)
+
+  [ Aurélien Gâteau ]
+  * gui/qt/stepKeyboardConf.ui
+   - Put keyboard variable combobox on separate line (LP: #851160)
+
+  [ Jonathan Riddell ]
+  * kde_ui.py
+   - Fix breakage in debfilter crash dialogue
+
+ -- Evan Dandrea <ev@ubuntu.com>  Mon, 19 Sep 2011 19:37:28 +0100
+
 ubiquity (2.7.29) oneiric; urgency=low
 
   * Add power indicator to the installer panel.

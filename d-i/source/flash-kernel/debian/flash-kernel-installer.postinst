@@ -115,6 +115,11 @@ omap_flash_kernel_installer() {
 
 	install_mkimage
 
+	# xloader is still a separate package for beagle
+	if ! apt-install x-loader-omap3-beagle; then
+		error "apt-install x-loader-omap3-beagle failed"
+	fi
+
 	uboot_pkg="u-boot-linaro-omap3-beagle"
 	omap_install_uboot
 }
