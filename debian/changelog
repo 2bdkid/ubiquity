@@ -1,3 +1,18 @@
+ubiquity (2.7.31) oneiric; urgency=low
+
+  [ Evan Dandrea ]
+  * Build-depend on the GTK3 version of libindicator.
+
+  [ Colin Watson ]
+  * Move setup_power_watch out of the ubi-prepare plugin into a new
+    ubiquity.upower module, allowing us to patch it out more easily while
+    running tests.  Patch ubiquity.nm.add_connection_watch and
+    ubiquity.nm.has_connection in the GTK frontend tests as well.
+  * Automatic update of included source packages: apt-setup 1:0.49ubuntu9,
+    netcfg 1.68ubuntu4.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 20 Sep 2011 01:10:22 +0100
+
 ubiquity (2.7.30) oneiric; urgency=low
 
   [ Harald Sitter ]

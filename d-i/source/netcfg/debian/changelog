@@ -1,3 +1,20 @@
+netcfg (1.68ubuntu4) oneiric; urgency=low
+
+  * print-dhcpv6-info: Exit immediately if reason is not BOUND6, RENEW6, or
+    REBIND6.
+  * Don't bother unlinking /var/lib/netcfg/dhcp6c-finished unless we're
+    using dhcp6c.
+  * print-dhcpv6-info: Actually apply IPv6 address and resolv.conf entries
+    received from the DHCPv6 server.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 19 Sep 2011 21:40:25 +0100
+
+netcfg (1.68ubuntu3) oneiric; urgency=low
+
+  * Make print-dhcp6c-info and print-dhcpv6-info executable.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 19 Sep 2011 19:53:11 +0100
+
 netcfg (1.68ubuntu2) oneiric; urgency=low
 
   * Rebuild source package without spurious BASE/THIS/OTHER files.

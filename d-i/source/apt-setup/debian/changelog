@@ -1,3 +1,16 @@
+apt-setup (1:0.49ubuntu9) oneiric; urgency=low
+
+  * Fix non-i386 builds.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 19 Sep 2011 23:19:19 +0100
+
+apt-setup (1:0.49ubuntu8) oneiric; urgency=low
+
+  * Make apt-setup-udeb Architecture: any so that we can use different
+    multiarch defaults on different architectures (LP: #853738).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 19 Sep 2011 22:05:04 +0100
+
 apt-setup (1:0.49ubuntu7) oneiric; urgency=low
 
   * Enable multiarch by default for amd64 installations.  This can be
