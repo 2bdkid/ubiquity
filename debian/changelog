@@ -1,11 +1,21 @@
+ubiquity (2.7.36) oneiric; urgency=low
+
+  * Showing and hiding the release notes and update the instaler links
+    are now handled in the Internet connectivity callback (LP: #856213).
+  * Enter the GTK main loop to avoid the wallpaper setting resources
+    being cleaned up (LP: #854179).
+
+ -- Evan Dandrea <ev@ubuntu.com>  Thu, 22 Sep 2011 17:59:55 +0100
+
 ubiquity (2.7.35) oneiric; urgency=low
 
+  [ Evan Dandrea ]
   * Don't show the battery warning when the system is not battery
     powered (LP: #848000).
   * Move network watch initialization for the KDE frontend to the
     correct place (LP: #855763).
 
- -- Evan Dandrea <ev@ubuntu.com>  Wed, 21 Sep 2011 20:59:34 +0100
+ -- Stéphane Graber <stgraber@ubuntu.com>  Wed, 21 Sep 2011 15:52:42 -0400
 
 ubiquity (2.7.34) oneiric; urgency=low
 
