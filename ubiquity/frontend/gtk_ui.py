@@ -173,8 +173,9 @@ class Wizard(BaseFrontend):
                 return
             name = Gtk.Buildable.get_name(widget)
             widget.set_name(name)
-            atk_desc = widget.get_accessible()
-            atk_desc.set_name(name)
+            if 'UBIQUITY_LDTP' in os.environ:
+                atk_desc = widget.get_accessible()
+                atk_desc.set_name(name)
             self.all_widgets.add(widget)
             setattr(self, widget.get_name(), widget)
             # We generally want labels to be selectable so that people can

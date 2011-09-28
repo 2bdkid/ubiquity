@@ -1,3 +1,13 @@
+console-setup (1.57ubuntu26) oneiric; urgency=low
+
+  * Backport translations from console-setup 1.63, without which
+    keyboard-configuration is completely untranslated (and, indeed,
+    untranslatable).  LP: #838669.
+  * Bump dependency on debconf as well, to make sure we can parse sr@latin
+    translation templates.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 26 Sep 2011 15:44:41 +0100
+
 console-setup (1.57ubuntu25) oneiric; urgency=low
 
   * Backport from upstream (Anton Zinoviev):

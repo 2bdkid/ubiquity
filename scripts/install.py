@@ -31,6 +31,7 @@ import warnings
 warnings.filterwarnings("ignore", "apt API not stable yet", FutureWarning)
 import apt_pkg
 from apt.cache import Cache
+import signal
 
 sys.path.insert(0, '/usr/lib/ubiquity')
 
@@ -44,6 +45,8 @@ class Install(install_misc.InstallBase):
 
     def __init__(self):
         """Initial attributes."""
+
+        self.update_proc = None
 
         if os.path.isdir('/rofs'):
             self.source = '/rofs'
@@ -118,8 +121,8 @@ class Install(install_misc.InstallBase):
             # imagine.  Have those spin until the lock is released.
             if self.db.get('ubiquity/download_updates') == 'true':
                 cmd = ['/usr/share/ubiquity/update-apt-cache']
-                subprocess.Popen(cmd, stdin=subprocess.PIPE,
-                                 stdout=subprocess.PIPE)
+                self.update_proc = subprocess.Popen(cmd, stdin=subprocess.PIPE,
+                                                    stdout=subprocess.PIPE).pid
             try:
                 self.copy_all()
             except EnvironmentError, e:
@@ -151,6 +154,14 @@ class Install(install_misc.InstallBase):
 
         if self.source == '/var/lib/ubiquity/source':
             self.umount_source()
+
+        if self.update_proc:
+            try:
+                os.killpg(self.update_proc, signal.SIGTERM)
+                syslog.syslog('Terminated ubiquity update process.')
+            except OSError, e:
+                if e.errno != errno.ESRCH:
+                    raise
 
     def find_cd_kernel(self):
         """Find the boot kernel on the CD, if possible."""
