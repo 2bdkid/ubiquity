@@ -1,3 +1,14 @@
+netcfg (1.68ubuntu6) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * Backport from trunk:
+    - Don't log "Starting netcfg" messages when invoked as ptom.
+
+  [ Stéphane Graber ]
+  * Flush all addresses and routes before configuring interfaces (LP: #848072)
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Thu, 29 Sep 2011 13:46:34 -0400
+
 netcfg (1.68ubuntu5) oneiric; urgency=low
 
   * Don't preseed IP addresses as hostnames (LP: #856088).

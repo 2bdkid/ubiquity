@@ -210,7 +210,7 @@ omap_flash_kernel() {
 
 		omap_flash_kernel_and_initrd
 
-		umount $TMPMOUNT
+		umount -l $TMPMOUNT
 		rm -rf $TMPMOUNT
 	else
 		initrd_nand_size="16777216"
@@ -421,7 +421,7 @@ imx_flash_kernel() {
 		echo "done." >&2
 	fi
 
-	umount $TMPMOUNT
+	umount -l $TMPMOUNT
 	rmdir $TMPMOUNT
 }
 

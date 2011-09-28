@@ -1267,74 +1267,77 @@ if $chroot $ROOT dpkg --compare-versions $grub_debian_version ge 1.96+20090609-1
 	no_floppy="--no-floppy"
 fi
 
-for os in $(cat /tmp/os-probed); do
-	IFS="$OLDIFS"
-	title=$(echo "$os" | cut -d: -f2)
-	shortname=$(echo "$os" | cut -d: -f3)
-	type=$(echo "$os" | cut -d: -f4)
-	case "$type" in
-	    chain)
-		partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
-		grubdrive=$(convert "$partition") || true
-		if [ -n "$grubdrive" ]; then
-			case $grub_version in
-			    grub)	grub_write_chain ;;
-			    grub2)	grub2_write_chain ;;
-			esac
-		fi
-		;;
-	    linux)
-		partition=$(echo "$os" | cut -d: -f1)
-		mappedpartition=$(mapdevfs "$partition")
-		IFS="$newline"
-		for entry in $(linux-boot-prober "$partition"); do
-			IFS="$OLDIFS"
-			bootpart=$(echo "$entry" | cut -d: -f2)
-			mappedbootpart=$(mapdevfs "$bootpart") || true
-			if [ -z "$mappedbootpart" ]; then
-				mappedbootpart="$bootpart"
-			fi
-			label=$(echo "$entry" | cut -d : -f3)
-			if [ -z "$label" ]; then
-				label="$title"
-			fi
-			kernel=$(echo "$entry" | cut -d : -f4)
-			initrd=$(echo "$entry" | cut -d : -f5)
-			if echo "$kernel" | grep -q '^/boot/' && \
-			   [ "$mappedbootpart" != "$mappedpartition" ]; then
-				# separate /boot partition
-				kernel=$(echo "$kernel" | sed 's!^/boot!!')
-				initrd=$(echo "$initrd" | sed 's!^/boot!!')
-				grubdrive=$(convert "$mappedbootpart") || true
-			else
-				grubdrive=$(convert "$mappedpartition") || true
-			fi
-			params="$(echo "$entry" | cut -d : -f6-) $serial"
-			case $grub_version in
-			    grub)	grub_write_linux ;;
-			    grub2)	grub2_write_linux ;;
-			esac
-			IFS="$newline"
-		done
+if [ "$grub_version" != grub2 ] || \
+   ! $chroot $ROOT which os-prober >/dev/null 2>&1; then
+	for os in $(cat /tmp/os-probed); do
 		IFS="$OLDIFS"
-		;;
-	    hurd)
-		partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
-		grubdrive=$(convert "$partition") || true
-		hurddrive=$(hurd_convert "$partition") || true
-		# Use the standard hurd boilerplate to boot it.
-		case $grub_version in
-		    grub)	grub_write_hurd ;;
-		    grub2)	grub2_write_hurd ;;
+		title=$(echo "$os" | cut -d: -f2)
+		shortname=$(echo "$os" | cut -d: -f3)
+		type=$(echo "$os" | cut -d: -f4)
+		case "$type" in
+		    chain)
+			partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
+			grubdrive=$(convert "$partition") || true
+			if [ -n "$grubdrive" ]; then
+				case $grub_version in
+				    grub)	grub_write_chain ;;
+				    grub2)	grub2_write_chain ;;
+				esac
+			fi
+			;;
+		    linux)
+			partition=$(echo "$os" | cut -d: -f1)
+			mappedpartition=$(mapdevfs "$partition")
+			IFS="$newline"
+			for entry in $(linux-boot-prober "$partition"); do
+				IFS="$OLDIFS"
+				bootpart=$(echo "$entry" | cut -d: -f2)
+				mappedbootpart=$(mapdevfs "$bootpart") || true
+				if [ -z "$mappedbootpart" ]; then
+					mappedbootpart="$bootpart"
+				fi
+				label=$(echo "$entry" | cut -d : -f3)
+				if [ -z "$label" ]; then
+					label="$title"
+				fi
+				kernel=$(echo "$entry" | cut -d : -f4)
+				initrd=$(echo "$entry" | cut -d : -f5)
+				if echo "$kernel" | grep -q '^/boot/' && \
+				   [ "$mappedbootpart" != "$mappedpartition" ]; then
+					# separate /boot partition
+					kernel=$(echo "$kernel" | sed 's!^/boot!!')
+					initrd=$(echo "$initrd" | sed 's!^/boot!!')
+					grubdrive=$(convert "$mappedbootpart") || true
+				else
+					grubdrive=$(convert "$mappedpartition") || true
+				fi
+				params="$(echo "$entry" | cut -d : -f6-) $serial"
+				case $grub_version in
+				    grub)	grub_write_linux ;;
+				    grub2)	grub2_write_linux ;;
+				esac
+				IFS="$newline"
+			done
+			IFS="$OLDIFS"
+			;;
+		    hurd)
+			partition=$(mapdevfs $(echo "$os" | cut -d: -f1))
+			grubdrive=$(convert "$partition") || true
+			hurddrive=$(hurd_convert "$partition") || true
+			# Use the standard hurd boilerplate to boot it.
+			case $grub_version in
+			    grub)	grub_write_hurd ;;
+			    grub2)	grub2_write_hurd ;;
+			esac
+			;;
+		    *)
+			info "unhandled: $os"
+			;;
 		esac
-		;;
-	    *)
-		info "unhandled: $os"
-		;;
-	esac
-	IFS="$newline"
-done
-IFS="$OLDIFS"
+		IFS="$newline"
+	done
+	IFS="$OLDIFS"
+fi
 rm -f /tmp/os-probed
 
 if [ -s $tmpfile ] ; then

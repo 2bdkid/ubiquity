@@ -21,6 +21,7 @@
 
 */
 
+#include "netcfg.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -31,7 +32,6 @@
 #ifdef WIRELESS
 #include <iwlib.h>
 #endif
-#include "netcfg.h"
 
 static method_t netcfg_method = DHCP;
 
@@ -81,12 +81,15 @@ int main(int argc, char *argv[])
     char *defiface = NULL, *defwireless = NULL;
     response_t res;
     struct netcfg_interface interface;
+    char buf[256];
+    int rv = 0;
 
     /* initialize libd-i */
     di_system_init("netcfg");
     netcfg_interface_init(&interface);
 
-    di_info("Starting netcfg v.%s (built %s)", NETCFG_VERSION, NETCFG_BUILD_DATE);
+    if (strcmp(basename(argv[0]), "ptom") != 0)
+        di_info("Starting netcfg v.%s (built %s)", NETCFG_VERSION, NETCFG_BUILD_DATE);
 
     parse_args (argc, argv);
     reap_old_files ();
@@ -127,6 +130,31 @@ int main(int argc, char *argv[])
              * the interfaces are taken up and down, it appears to
              * leave it in an inconsistant state */
             kill_wpa_supplicant();
+
+            /* Reset all interfaces first */
+            get_all_ifs(1, &ifaces);
+            while (*ifaces) {
+                di_debug("Flushing addresses and routes on interface: %s\n", *ifaces);
+
+                /* Flush all IPv4 addresses */
+                snprintf(buf, sizeof(buf), "ip -f inet addr flush dev %s", *ifaces);
+                rv |= di_exec_shell_log(buf);
+
+                /* Flush all IPv6 addresses */
+                snprintf(buf, sizeof(buf), "ip -f inet6 addr flush dev %s", *ifaces);
+                rv |= di_exec_shell_log(buf);
+
+                /* Flush all IPv4 routes */
+                snprintf(buf, sizeof(buf), "ip -f inet route flush dev %s", *ifaces);
+                rv |= di_exec_shell_log(buf);
+
+                /* Flush all IPv6 routes */
+                snprintf(buf, sizeof(buf), "ip -f inet6 route flush dev %s", *ifaces);
+                rv |= di_exec_shell_log(buf);
+
+                ifaces++;
+            }
+
 
             /* Choose a default by looking for link */
             if (get_all_ifs(1, &ifaces) > 1) {

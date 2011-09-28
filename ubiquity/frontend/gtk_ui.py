@@ -41,6 +41,8 @@ import gettext
 import ConfigParser
 
 import dbus
+from dbus.mainloop.glib import DBusGMainLoop
+DBusGMainLoop(set_as_default=True)
 
 #in query mode we won't be in X, but import needs to pass
 if 'DISPLAY' in os.environ:
@@ -782,7 +784,7 @@ color : @fg_color
             self.shutdown_button.hide()
 
         # Parse the slideshow size early to prevent the window from growing
-        if self.oem_user_config:
+        if self.oem_user_config and os.path.exists('/usr/share/oem-config-slideshow'):
             self.slideshow = '/usr/share/oem-config-slideshow'
         else:
             self.slideshow = '/usr/share/ubiquity-slideshow'
@@ -849,7 +851,7 @@ color : @fg_color
         self.refresh()
 
     def unlock_environment(self):
-        syslog.syslog('Reverting lockdown the desktop environment.')
+        syslog.syslog('Reverting lockdown of the desktop environment.')
         for key in ('/apps/indicator-session/suppress_logout_menuitem',
                     '/apps/indicator-session/suppress_logout_restart_menuitem',
                     '/apps/indicator-session/suppress_restart_menuitem',

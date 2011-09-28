@@ -1,3 +1,18 @@
+grub-installer (1.68ubuntu4) oneiric; urgency=low
+
+  * Remove spurious newline from debian/po/bs.po, fixing ubiquity FTBFS.
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Thu, 29 Sep 2011 18:04:42 -0600
+
+grub-installer (1.68ubuntu3) oneiric; urgency=low
+
+  * Only process the output of os-prober into boot menu entries if we're
+    actually going to use them; if we're using GRUB 2 and os-prober is
+    installed, then it will deal with this itself and do a better job of it
+    (LP: #851704).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 29 Sep 2011 09:00:21 +0100
+
 grub-installer (1.68ubuntu2) oneiric; urgency=low
 
   * Really allow grub/grub2 choice for ext4 (lost in merge).
