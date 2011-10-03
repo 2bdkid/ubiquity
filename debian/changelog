@@ -1,3 +1,28 @@
+ubiquity (2.8.2) oneiric; urgency=low
+
+  [ Colin Watson ]
+  * Preserve ordering of disks returned by partman-auto rather than
+    shuffling them based on dictionary ordering (LP: #770711).  This uses
+    collections.OrderedDict, which requires Python >= 2.7.
+  * Run only those parts of oem-config-prepare that require root access as
+    root; in particular displaying confirmation dialogs is now done as the
+    calling user, which avoids KDE confusion (LP: #856418).
+  * Go back to killing update-apt-cache's process group, but this time make
+    sure that it's in a separate process group and make more of an effort to
+    ensure that it terminates (LP: #743359).
+  * Update translations from Launchpad.
+
+  [ Stéphane Graber ]
+  * Make ubiquity also update gsettings (LP: #800760)
+    - Add a new gsettings module similar to the gconftool one
+    - Update ubiquity-dm for gconf to gsettings migration
+    - Get PROXY configuration from gsettings
+    - Update gtk_ui to set/restore gsettings values
+  * Update copy_network_config to work with Network Manager now storing
+    everything system wide.
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Mon, 03 Oct 2011 17:31:46 -0400
+
 ubiquity (2.8.1) oneiric; urgency=low
 
   * Build-depend on gir1.2-soup-2.4 for timezone tests.
