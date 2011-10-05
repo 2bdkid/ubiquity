@@ -24,7 +24,7 @@ from ubiquity import gsettings
 
 class AptSetup(FilteredCommand):
     def _gsettings_http_proxy(self):
-        if gsettings.get('org.gnome.system.proxy', 'mode') == 'none':
+        if gsettings.get('org.gnome.system.proxy', 'mode') in ('none', None):
             return None
 
         host = gsettings.get('org.gnome.system.proxy.http', 'host')
@@ -34,16 +34,21 @@ class AptSetup(FilteredCommand):
         if port == '':
             port = '8080'
 
+        if not host.startswith("http://"):
+            host = "http://%s" % host
+
         auth = gsettings.get('org.gnome.system.proxy.http', 'use-authentication')
         if auth == True:
             user = gsettings.get('org.gnome.system.proxy.http', 'authentication-user')
             password = gsettings.get('org.gnome.system.proxy.http', 'authentication-password')
-            return 'http://%s:%s@%s:%s/' % (host, port, user, password)
+            return '%s:%s@%s:%s/' % (host, port, user, password)
         else:
-            return 'http://%s:%s/' % (host, port)
+            return '%s:%s/' % (host, port)
 
     def _gsettings_no_proxy(self):
-        return ','.join(gsettings.get_list('org.gnome.system.proxy', 'ignore-hosts'))
+        ignore_list = gsettings.get_list('org.gnome.system.proxy', 'ignore-hosts')
+        if ignore_list:
+            return ','.join(gsettings.get_list('org.gnome.system.proxy', 'ignore-hosts'))
 
     def prepare(self):
         env = {}

@@ -530,6 +530,14 @@ EndSection
                     raise
             processes -= done
         signal.alarm(0)
+
+        # Clear the console so we don't see boot-time messages on switch
+        try:
+            vthandle = open('/dev/tty' + self.vt[2:], 'r+')
+            subprocess.call(['clear'], stdin=vthandle, stdout=vthandle)
+        except IOError:
+            pass
+
         kill_if_exists(server.pid, signal.SIGTERM)
         server.wait()
 
