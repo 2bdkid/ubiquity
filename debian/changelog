@@ -1,3 +1,39 @@
+ubiquity (2.8.4) oneiric; urgency=low
+
+  [ Evan Dandrea ]
+  * Handle the keyboard query window closed callback being fired twice
+    (LP: #865493).
+  * Allow focusing of labels when we're in the screen reader
+    acessibility profile, so that Orca can read them
+    (LP: #856782, LP: #856773).
+  * Make sure we account for the size of the installation and swap
+    partition when calculating the bounds for the partition resizer
+    (LP: #769350).
+
+  [ Colin Watson ]
+  * Don't install duplicate copies of console-setup-apply,
+    localechooser-apply, and netcfg-wrapper.
+  * Bump fallback Ubuntu version number in ubi-language to 11.10.
+  * Update translations from Launchpad.
+  * For cases where selecting a different location may imply a different
+    dialect of the language, i.e. Portuguese and Chinese, take care to set
+    LANG to something reflecting the location and
+    LANGUAGE/LC_MESSAGES/LC_CTYPE/LC_COLLATE to something reflecting the
+    language (LP: #590108).  This roughly matches the behaviour of
+    language-selector.
+  * Automatic update of included source packages: localechooser 2.37ubuntu2,
+    partman-partitioning 81ubuntu3.
+
+  [ Stéphane Graber ]
+  * Update ubiquity-dm to export self.username as SUDO_USER.
+    Make gsettings work properly later on during the install.
+  * Whenever we call wget, set --tries=1 instead of the default
+    of 20.
+  * If we think we're offline, don't try to contact geoip or run
+    rdate. (LP: #868668)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 06 Oct 2011 02:20:53 +0100
+
 ubiquity (2.8.3) oneiric; urgency=low
 
   * Skip LTSP from the list of networks to copy to the target.

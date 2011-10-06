@@ -1,3 +1,14 @@
+localechooser (2.37ubuntu2) oneiric; urgency=low
+
+  * For cases where selecting a different location may imply a different
+    dialect of the language, i.e. Portuguese and Chinese, take care to set
+    LANG to something reflecting the location and
+    LANGUAGE/LC_MESSAGES/LC_CTYPE/LC_COLLATE to something reflecting the
+    language (LP: #590108).  This roughly matches the behaviour of
+    language-selector.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 05 Oct 2011 23:27:33 +0100
+
 localechooser (2.37ubuntu1) oneiric; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

@@ -34,7 +34,7 @@ try:
     import lsb_release
     _ver = lsb_release.get_distro_information()['RELEASE']
 except:
-    _ver = '10.10'
+    _ver = '11.10'
 _wget_url = 'http://changelogs.ubuntu.com/ubiquity/%s-update-available' % _ver
 
 _release_notes_url_path = '/cdrom/.disk/release_notes_url'
@@ -302,7 +302,7 @@ class PageGtk(PageBase):
         import subprocess
         if self.wget_retcode is not None or self.wget_proc is None:
             self.wget_proc = subprocess.Popen(
-                ['wget', '-q', _wget_url, '--timeout=15', '-O', '/dev/null'])
+                ['wget', '-q', _wget_url, '--timeout=15', '--tries=1', '-O', '/dev/null'])
         self.wget_retcode = self.wget_proc.poll()
         if self.wget_retcode is None:
             return True
@@ -552,7 +552,7 @@ class PageKde(PageBase):
         from PyQt4.QtCore import SIGNAL
         if self.wget_retcode is not None or self.wget_proc is None:
             self.wget_proc = subprocess.Popen(
-                ['wget', '-q', _wget_url, '--timeout=15', '-O', '/dev/null'])
+                ['wget', '-q', _wget_url, '--timeout=15', '--tries=1', '-O', '/dev/null'])
         self.wget_retcode = self.wget_proc.poll()
         if self.wget_retcode is None:
             return True
@@ -684,7 +684,7 @@ class Page(plugin.Plugin):
 class Install(plugin.InstallPlugin):
     def prepare(self, unfiltered=False):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
-            return (['/usr/lib/ubiquity/localechooser-apply'], [])
+            return (['/usr/share/ubiquity/localechooser-apply'], [])
         else:
             return (['sh', '-c',
                      '/usr/lib/ubiquity/localechooser/post-base-installer ' +
