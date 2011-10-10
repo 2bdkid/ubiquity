@@ -68,16 +68,17 @@ class PageGtk(plugin.PluginUI):
         self.have_selection = True
         self.use_wireless.set_active(True)
         assert self.state is not None
-        if self.state not in (nm.NM_STATE_DISCONNECTED,
-                              nm.NM_STATE_CONNECTED_GLOBAL):
-            return
         frontend = self.controller._wizard
-        if self.nmwidget.is_row_connected():
+        if self.state == nm.NM_STATE_CONNECTING:
             frontend.translate_widget(frontend.next)
             self.next_normal = True
         else:
-            frontend.next.set_label(self.connect_text)
-            self.next_normal = False
+            if (not self.nmwidget.is_row_an_ap()) or self.nmwidget.is_row_connected():
+                frontend.translate_widget(frontend.next)
+                self.next_normal = True
+            else:
+                frontend.next.set_label(self.connect_text)
+                self.next_normal = False
 
     def wireless_toggled(self, unused):
         frontend = self.controller._wizard
@@ -99,6 +100,9 @@ class PageGtk(plugin.PluginUI):
             self.nmwidget.disconnect_from_ap()
             return True
         else:
+            frontend.connecting_spinner.hide()
+            frontend.connecting_spinner.stop()
+            frontend.connecting_label.hide()
             return False
 
     def plugin_on_next_clicked(self):
@@ -107,6 +111,9 @@ class PageGtk(plugin.PluginUI):
             self.nmwidget.connect_to_ap()
             return True
         else:
+            frontend.connecting_spinner.hide()
+            frontend.connecting_spinner.stop()
+            frontend.connecting_label.hide()
             return False
 
     def state_changed(self, unused, state):
@@ -115,32 +122,24 @@ class PageGtk(plugin.PluginUI):
         frontend = self.controller._wizard
         if not self.use_wireless.get_active():
             return
-        if state in (nm.NM_STATE_DISCONNECTED, nm.NM_STATE_CONNECTED_GLOBAL):
+        if state != nm.NM_STATE_CONNECTING:
             frontend.connecting_spinner.hide()
             frontend.connecting_spinner.stop()
             frontend.connecting_label.hide()
-            if state == nm.NM_STATE_DISCONNECTED:
-                frontend.next.set_label(self.connect_text)
-                self.next_normal = False
-            else:
-                frontend.translate_widget(frontend.next)
-                self.next_normal = True
             self.controller.allow_go_forward(True)
 
             frontend.translate_widget(frontend.back)
             self.back_normal = False
             frontend.back.set_sensitive(True)
-            self.selection_changed(None)
         else:
             frontend.connecting_spinner.show()
             frontend.connecting_spinner.start()
             frontend.connecting_label.show()
 
-            frontend.next.set_sensitive(False)
-            frontend.translate_widget(frontend.next)
             self.next_normal = True
 
             frontend.back.set_label(self.stop_text)
             self.back_normal = False
             frontend.back.set_sensitive(True)
+        self.selection_changed(None)
 
