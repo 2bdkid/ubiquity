@@ -244,8 +244,43 @@ class NetworkManagerTreeView(Gtk.TreeView):
 
         self.append_column(ssid_column)
         self.set_headers_visible(False)
+        self.setup_row_expansion_handling(model)
+
+    def setup_row_expansion_handling(self, model):
+        """
+        If the user collapses a row, save that state. If all the APs go away
+        and then return, such as when the user toggles the wifi kill switch,
+        the UI should keep the row collapsed if it already was, or expand it.
+        """
         self.expand_all()
-        # TODO expand by default
+        self.rows_changed_id = None
+        def queue_rows_changed(*args):
+            if self.rows_changed_id:
+                GObject.source_remove(self.rows_changed_id)
+            self.rows_changed_id = GObject.idle_add(self.rows_changed)
+        model.connect('row-inserted', queue_rows_changed)
+        model.connect('row-deleted', queue_rows_changed)
+
+        self.user_collapsed = {}
+        def collapsed(self, iterator, path, collapse):
+            udi = model[iterator][0]
+            self.user_collapsed[udi] = collapse
+        self.connect('row-collapsed', collapsed, True)
+        self.connect('row-expanded', collapsed, False)
+
+    def rows_changed(self, *args):
+        model = self.get_model()
+        i = model.get_iter_first()
+        while i:
+            udi = model[i][0]
+            try:
+                if not self.user_collapsed[udi]:
+                    path = model.get_path(i)
+                    self.expand_row(path, False)
+            except KeyError:
+                path = model.get_path(i)
+                self.expand_row(path, False)
+            i = model.iter_next(i)
 
     def get_state(self):
         return self.wifi_model.get_state()
@@ -363,18 +398,22 @@ class NetworkManagerWidget(Gtk.VBox):
         self.add(scrolled_window)
         self.hbox = Gtk.HBox(spacing=6)
         self.pack_start(self.hbox, False, True, 0)
-        password_label = Gtk.Label('Password:')
+        self.password_label = Gtk.Label('Password:')
         self.password_entry.set_visibility(False)
         self.password_entry.connect('activate', self.connect_to_ap)
         self.display_password = Gtk.CheckButton('Display password')
         self.display_password.connect('toggled', self.display_password_toggled)
-        self.hbox.pack_start(password_label, False, True, 0)
+        self.hbox.pack_start(self.password_label, False, True, 0)
         self.hbox.pack_start(self.password_entry, True, True, 0)
         self.hbox.pack_start(self.display_password, False, True, 0)
         self.hbox.set_sensitive(False)
         self.selection = self.view.get_selection()
         self.selection.connect('changed', self.changed)
         self.show_all()
+
+    def translate(self, password_label_text, display_password_text):
+        self.password_label.set_label(password_label_text)
+        self.display_password.set_label(display_password_text)
     
     def get_state(self):
         return self.view.get_state()
