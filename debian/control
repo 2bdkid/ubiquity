@@ -10,7 +10,7 @@ Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-installer/ubiquity/trunk
 
 Package: ubiquity
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, debconf (>= 1.4.72ubuntu5), ubiquity-frontend-${mangled-version}, ubiquity-artwork-${mangled-version}, laptop-detect, lsb-release, ubiquity-casper, python-apt (>= 0.6.16.2ubuntu4), ${console-setup-depends}, iso-codes, passwd, adduser, os-prober, rdate, ntfs-3g (>= 1:2011.1.15AR.4+2011.4.12-1) [any-alpha any-amd64 any-i386] | ntfsprogs [any-alpha any-amd64 any-i386], ecryptfs-utils, cryptsetup, python-pyicu, reiserfsprogs, language-selector-common (>= 0.4.16), archdetect-deb, dpkg-repack, apt-clone
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, debconf (>= 1.4.72ubuntu5), ubiquity-frontend-${mangled-version}, ubiquity-artwork-${mangled-version}, laptop-detect, lsb-release, ubiquity-casper, python-apt (>= 0.6.16.2ubuntu4), ${console-setup-depends}, iso-codes, passwd, adduser, os-prober, rdate, ntfs-3g (>= 1:2011.1.15AR.4+2011.4.12-1) [any-alpha any-amd64 any-i386] | ntfsprogs [any-alpha any-amd64 any-i386], ecryptfs-utils, cryptsetup, python-pyicu, reiserfsprogs, language-selector-common (>= 0.4.16), archdetect-deb, dpkg-repack, apt-clone, wget, grub-common [any-amd64 any-i386]
 Recommends: grub-pc [any-amd64 any-i386] | grub [any-amd64 any-i386] | grub-efi [any-amd64 any-i386], flash-kernel [armel], uboot-mkimage [armel], uboot-envtools [armel], redboot-tools [armel], yaboot [powerpc], hfsutils [powerpc], dmraid, btrfs-tools
 Conflicts: ubuntu-express, espresso, espresso-utils, espresso-locale, espresso-keyboard-setup, espresso-kbd-chooser, espresso-timezone, user-setup (<< 0.05ubuntu6), partman, espresso-grub, espresso-yaboot
 Replaces: ubuntu-express, espresso, espresso-utils, espresso-locale, espresso-keyboard-setup, espresso-kbd-chooser, espresso-timezone, user-setup (<< 0.05ubuntu6), partman, espresso-grub, espresso-yaboot, ubiquity-frontend-gtk (<< 2.3.8)
@@ -43,7 +43,7 @@ Description: Ubuntu artwork for Ubiquity live installer
 
 Package: ubiquity-frontend-gtk
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, ubiquity (= ${binary:Version}), python-dbus, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0, gir1.2-gstreamer-0.10, gir1.2-soup-2.4, gir1.2-vte-2.90, gir1.2-webkit-3.0, iso-codes, x-window-manager, gksu, python-xklavier, gir1.2-timezonemap-1.0, python-libxml2, python-cairo, python-appindicator, gstreamer0.10-plugins-good
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${python:Depends}, ubiquity (= ${binary:Version}), python-dbus, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0, gir1.2-gstreamer-0.10, gir1.2-soup-2.4, gir1.2-vte-2.90, gir1.2-webkit-3.0, iso-codes, x-window-manager, gksu, python-xklavier, gir1.2-timezonemap-1.0, python-libxml2, python-cairo, python-gobject-cairo, gir1.2-appindicator3-0.1, gstreamer0.10-plugins-good
 Suggests: gnome-control-center
 Conflicts: ubuntu-express-frontend-gtk, espresso-frontend-gtk, ubiquity (<< 2.4.3)
 Replaces: ubuntu-express-frontend-gtk, espresso-frontend-gtk, ubiquity (<< 2.4.3)

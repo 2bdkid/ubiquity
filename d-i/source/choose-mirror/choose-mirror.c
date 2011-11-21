@@ -684,7 +684,7 @@ static int set_proxy(void) {
 
 	debconf_get(debconf, px);
 	if (debconf->value != NULL && strlen(debconf->value)) {
-		if (strchr(debconf->value, '://')) {
+		if (strstr(debconf->value, "://")) {
 			setenv(proxy_var, debconf->value, 1);
 		} else {
 			char *proxy_value;
@@ -757,29 +757,33 @@ int set_codename (void) {
 	char *suite;
 	int i;
 
-	/* As suite has been determined previously, this should not fail */
-	debconf_get(debconf, DEBCONF_BASE "suite");
-	if (strlen(debconf->value) > 0) {
-		suite = strdup(debconf->value);
+	/* If preseed specifies codename, omit the codename check */
+	debconf_get(debconf, DEBCONF_BASE "codename");
+	if (! strlen(debconf->value)) {
+		/* As suite has been determined previously, this should not fail */
+		debconf_get(debconf, DEBCONF_BASE "suite");
+		if (strlen(debconf->value) > 0) {
+			suite = strdup(debconf->value);
 
-		for (i=0; releases[i].name != NULL; i++) {
-			if (strcmp(releases[i].name, suite) == 0 ||
-			    strcmp(releases[i].suite, suite) == 0) {
-				char *codename;
+			for (i=0; releases[i].name != NULL; i++) {
+				if (strcmp(releases[i].name, suite) == 0 ||
+				    strcmp(releases[i].suite, suite) == 0) {
+					char *codename;
 
-				if (releases[i].status & GET_CODENAME)
-					codename = releases[i].name;
-				else
-					codename = releases[i].suite;
-				debconf_set(debconf, DEBCONF_BASE "codename", codename);
-				di_log(DI_LOG_LEVEL_INFO,
-					"suite/codename set to: %s/%s",
-					suite, codename);
-				break;
+					if (releases[i].status & GET_CODENAME)
+						codename = releases[i].name;
+					else
+						codename = releases[i].suite;
+					debconf_set(debconf, DEBCONF_BASE "codename", codename);
+					di_log(DI_LOG_LEVEL_INFO,
+						"suite/codename set to: %s/%s",
+						suite, codename);
+					break;
+				}
 			}
-		}
 
-		free(suite);
+			free(suite);
+		}
 	}
 
 	return 0;

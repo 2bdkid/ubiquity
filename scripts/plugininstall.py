@@ -1072,7 +1072,8 @@ class Install(install_misc.InstallBase):
         except debconf.DebconfError:
             inst_langpacks = False
         if inst_langpacks:
-            self.langpacks = self.select_language_packs()
+            self.select_language_packs()
+            recorded = install_misc.query_recorded_installed()
 
         try:
             extra_packages = self.db.get('oem-config/extra_packages')
@@ -1087,7 +1088,7 @@ class Install(install_misc.InstallBase):
                 return
 
         if inst_langpacks:
-            extra_packages += self.langpacks
+            extra_packages += recorded
 
         save_replace = None
         save_override = None
@@ -1440,7 +1441,9 @@ class Install(install_misc.InstallBase):
 
         if oem_remove_extras:
             installed = (desktop_packages | keep - regular - recursive)
-            p = os.path.join(self.target, '/var/lib/ubiquity/installed-packages')
+            if not os.path.exists(os.path.join(self.target, 'var/lib/ubiquity')):
+                os.makedirs(os.path.join(self.target, 'var/lib/ubiquity'))
+            p = os.path.join(self.target, 'var/lib/ubiquity/installed-packages')
             with open(p, 'w') as fp:
                 for line in installed:
                     print >>fp, line

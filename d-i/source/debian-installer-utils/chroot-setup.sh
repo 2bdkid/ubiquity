@@ -101,7 +101,7 @@ EOF
 					/target/dev/pts
 			fi
 
-			if [ -d /target/run ] && [ ! -d /target/run/lock ]; then
+			if ! mountpoints | grep -q '^/target/run$'; then
 				mount --bind /run /target/run
 			fi
 		;;
@@ -154,6 +154,11 @@ EOF
 	# Avoid apt-listchanges doing anything.
 	APT_LISTCHANGES_FRONTEND=none
 	export APT_LISTCHANGES_FRONTEND
+	# Sometimes sudo may need to be removed (e.g. when installing
+	# sudo-ldap).  There's no situation in which doing this during d-i
+	# is a problem, so unconditionally override the guard in sudo.prerm.
+	SUDO_FORCE_REMOVE=yes
+	export SUDO_FORCE_REMOVE
 
 	return 0
 }

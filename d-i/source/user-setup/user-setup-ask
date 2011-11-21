@@ -256,8 +256,14 @@ while :; do
 		done
 		if [ "$ecryptfs_in_use" ] || \
 		   (db_get user-setup/encrypt-home && [ "$RET" = true ]); then
-			apt-install ecryptfs-utils 2>/dev/null
-			apt-install cryptsetup 2>/dev/null
+			# If the user wants an encrypted home, we *must* have the
+			# cleartext password here!
+			db_get passwd/user-password || true
+			if ! test "$RET" ; then
+				db_set passwd/user-password-crypted ""
+				STATE=7
+				continue
+			fi
 		fi
 		;;
 	    *)
