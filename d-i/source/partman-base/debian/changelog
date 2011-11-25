@@ -1,3 +1,10 @@
+partman-base (151ubuntu3) precise; urgency=low
+
+  * choose_partition/partition_tree/do_option: 'local' is not legal outside
+    a function (and current dash rejects this; LP: #885654).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 25 Nov 2011 17:46:39 +0000
+
 partman-base (151ubuntu2) oneiric; urgency=low
 
   * Handle /dev/zram* the same way as /dev/ramzswap* (exclude from
