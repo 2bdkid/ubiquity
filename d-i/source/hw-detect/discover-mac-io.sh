@@ -44,6 +44,22 @@ for dir in $(find "/proc/device-tree/" -type d); do
 	elif [ "$name" = mesh ] || ([ "$device_type" = scsi ] && [ "$compatible" = chrp,mesh0 ]); then
 		echo "mesh:Macintosh Enhanced SCSI Hardware"
 		register-module mesh
+	# drivers/ata
+	elif [ "$device_type" = ata ] ; then
+		case "$compatible" in
+		    keylargo-ata)
+		        echo "pata_macio:KeyLargo ATA"
+		        register-module -i pata_macio
+                        ;;
+		    heathrow-ata)
+		        echo "pata_macio:Heathrow/Paddington ATA"
+		        register-module -i pata_macio
+                        ;;
+		    ohare-ata)
+		        echo "pata_macio:OHare ATA"
+		        register-module -i pata_macio
+		        ;;
+		esac
 	# sound/ppc, sound/oss/dmasound
 	elif [ "$name" = awacs ]; then
 		# probably best to go for ALSA

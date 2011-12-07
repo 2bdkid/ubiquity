@@ -98,9 +98,22 @@ check_missing () {
 			if grep -q "^$fwfile$" $DENIED 2>/dev/null; then
 				continue
 			fi
-
-			modules="$module${modules:+ $modules}"
+			
 			files="$fwfile${files:+ $files}"
+
+			if [ "$module" = usbcore ]; then
+				# Special case for USB bus, which puts the
+				# real module information in a subdir of
+				# the devpath.
+				for dir in $(find "$devpath" -maxdepth 1 -mindepth 1 -type d); do
+					module=$(get_module "$dir")
+					if [ -n "$module" ]; then
+						modules="$module${modules:+ $modules}"
+					fi
+				done
+			else
+				modules="$module${modules:+ $modules}"
+			fi
 		done
 	done
 
