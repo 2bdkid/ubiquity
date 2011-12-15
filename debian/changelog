@@ -1,3 +1,22 @@
+ubiquity (2.9.8) precise; urgency=low
+
+  [ Colin Watson ]
+  * GTK frontend:
+    - Some automatic partitioning options change the text on the next button
+      to "Install Now".  Make sure that this works even when changing to the
+      automatic partitioning page with one of those options automatically
+      selected (LP: #766265).
+  * Automatic update of included source packages: base-installer
+    1.122ubuntu3, partman-auto 93ubuntu18, partman-basicfilesystems
+    71ubuntu2.
+
+  [ Stéphane Graber ]
+  * Use username associated with uid 999 rather than hardcoding 'ubuntu'
+    in Ubiquity. This is important now that casper sets the username and
+    hostname based on media name. (LP: #290351)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 15 Dec 2011 18:57:10 +0000
+
 ubiquity (2.9.7) precise; urgency=low
 
   * Add a few armhf -> armel symlinks to fix the armhf build.

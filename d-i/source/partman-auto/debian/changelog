@@ -1,3 +1,10 @@
+partman-auto (93ubuntu18) precise; urgency=low
+
+  * Remove the use of 'local' in shell scripts outside of functions.  Newer
+    shell script interpreters in precise complain otherwise.
+
+ -- Mario Limonciello <Mario_Limonciello@Dell.com>  Wed, 14 Dec 2011 14:23:35 -0600
+
 partman-auto (93ubuntu17) precise; urgency=low
 
   * Don't offer resize_use_free autopartitioning method on armhf (already
