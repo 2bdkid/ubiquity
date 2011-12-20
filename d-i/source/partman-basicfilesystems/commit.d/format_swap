@@ -24,6 +24,7 @@ for dev in $DEVICES/*; do
 				continue
 			fi
 			log "Try to format swap space in $dev/$id"
+			disable_swap "$dev" "$id" || true
 			template=partman-basicfilesystems/progress_swap_formatting
 			open_dialog PARTITION_INFO $id
 			read_line x1 x2 x3 x4 x5 device x6
