@@ -155,7 +155,7 @@ omap_flash_bootloader() {
 			UBOOTDIR=igep0020
 		;;
 		"OMAP3 Beagle Board")
-			XLOADERDIR=x-loader/omap3530beagle
+			XLOADERDIR=u-boot/omap3_beagle
 			UBOOTDIR=omap3_beagle
 		;;
 		"OMAP4430 Panda Board" | "OMAP4 Panda board")
@@ -384,6 +384,33 @@ efikamx_flash_kernel() {
 	rm -f "$tmp"
 }
 
+imx_update_dtb() {
+	model=""
+	if [ -e /proc/device-tree/model ]; then
+		model=$(cat /proc/device-tree/model)
+	fi
+	dtbvers=$(echo "$kfile" | sed -e 's/[^-]*-//')
+	case "$model" in
+		"Freescale i.MX6 Quad SABRE Lite Board")
+			dtbfile=/boot/dt-$dtbvers/imx6q-sabrelite.dtb
+		;;
+		"Freescale i.MX6 Quad Armadillo2 Board")
+			dtbfile=/boot/dt-$dtbvers/imx6q-arm2.dtb
+		;;
+		*)
+			dtbfile=""
+		;;
+	esac
+	if [ -e "$dtbfile" ]; then
+		if [ -e $TMPMOUNT/board.dtb ]; then 
+			mv $TMPMOUNT/board.dtb $TMPMOUNT/board.dtb.bak
+		fi
+		printf "Generating device tree dtb... " >&2
+		cp "$dtbfile" $TMPMOUNT/board.dtb
+		echo "done." >&2
+	fi
+}
+
 imx_flash_kernel() {
 	echo "Using u-boot partition: ${UBOOT_PART}" >&2
 	TMPMOUNT=$(mktemp -d)
@@ -421,6 +448,8 @@ imx_flash_kernel() {
 		echo "done." >&2
 	fi
 
+	imx_update_dtb
+
 	umount -l $TMPMOUNT
 	rmdir $TMPMOUNT
 }
@@ -455,6 +484,7 @@ if [ "x$1" = "x--supported" ]; then
 		"D-Link DNS-323")			exit 0 ;;
 		"Freescale MX51 Babbage Board")		exit 0 ;;
 		"Freescale MX53 LOCO Board")		exit 0 ;;
+		"Freescale i.MX6 Quad (Device Tree)")	exit 0 ;;
 		"GLAN Tank")				exit 0 ;;
 		"Genesi Efika MX (Smartbook)")		exit 0 ;;
 		"Genesi Efika MX (Smarttop)")		exit 0 ;;
@@ -656,6 +686,11 @@ case "$machine" in
 	"Freescale MX53 LOCO Board")
 		check_subarch "mx5"
 		IMX_KERNEL_ADDR=0x70008000
+		imx_flash_kernel
+	;;
+	"Freescale i.MX6 Quad (Device Tree)")
+		check_subarch "mx6"
+		IMX_KERNEL_ADDR=0x10008000
 		imx_flash_kernel
 	;;
 	"GLAN Tank")

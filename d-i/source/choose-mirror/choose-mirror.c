@@ -114,6 +114,21 @@ static inline int has_mirror(char *country) {
 	return (mirrors[0] == NULL) ? 0 : 1;
 }
 
+/* Returns true if there is a mirror in the specified country, discounting
+ * GeoDNS.
+ */
+static int has_real_mirror(const char *country) {
+	int i;
+	struct mirror_t *mirrors = mirror_list();
+
+	for (i = 0; mirrors[i].site != NULL; i++) {
+		if (mirrors[i].country &&
+		    strcmp(mirrors[i].country, country) == 0)
+			return 1;
+	}
+	return 0;
+}
+
 /* Returns the root of the mirror, given the hostname. */
 static char *mirror_root(char *mirror) {
 	int i;
@@ -502,7 +517,7 @@ static int choose_country(void) {
 		/* Not set yet. Seed with a default value. */
 		if ((debconf_get(debconf, "debian-installer/country") == 0) &&
 		    (debconf->value != NULL) &&
-		    has_mirror(debconf->value)) {
+		    has_real_mirror(debconf->value)) {
 			country = strdup (debconf->value);
 			debconf_set(debconf, DEBCONF_BASE "country", country);
 		}
