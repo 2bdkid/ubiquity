@@ -1,3 +1,10 @@
+netcfg (1.68ubuntu8) precise; urgency=low
+
+  * Don't copy /etc/resolv.conf to target if resolvconf is installed.  (We
+    already write resolvconf configuration to /etc/network/interfaces.)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 27 Jan 2012 17:50:50 +0000
+
 netcfg (1.68ubuntu7) oneiric; urgency=low
 
   * Fix crash when there are no network interfaces (LP: #870212).
