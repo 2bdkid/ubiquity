@@ -266,10 +266,18 @@ omap_flash_kernel() {
 
 dove_flash_kernel() {
 	tmp=$(tempfile)
-	uboot_kernel_load_addr=0x00200000
-	uboot_initramfs_load_addr=0x01100000
-	script_load_addr=0x1000
-
+	case $subarch in
+		"dove")
+			uboot_kernel_load_addr=0x00200000
+			uboot_initramfs_load_addr=0x01100000
+			script_load_addr=0x1000
+			;;
+		"armadaxp")
+			uboot_kernel_load_addr=0x02000000
+			uboot_initramfs_load_addr=0x20000000
+			script_load_addr=0x1000
+			;;
+	esac
 	printf "Generating kernel u-boot image... " >&2
 	cat $kfile >> $tmp
 	mkimage -A arm -O linux -T kernel -C none -n "$desc" -a 0x00008000 \
@@ -490,7 +498,6 @@ if [ "x$1" = "x--supported" ]; then
 		"Genesi Efika MX (Smarttop)")		exit 0 ;;
 		"HP Media Vault mv2120")		exit 0 ;;
 		"IGEP v2 board")			exit 0 ;;
-		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
 		"Linksys NSLU2")			exit 0 ;;
 		"OMAP3 Beagle Board")			exit 0 ;;
 		"OMAP4430 Panda Board" | "OMAP4 Panda board")	exit 0 ;;
@@ -499,6 +506,8 @@ if [ "x$1" = "x--supported" ]; then
 		"Marvell OpenRD Client Board")		exit 0 ;;
 		"Marvell SheevaPlug Reference Board")	exit 0 ;;
 		"Marvell eSATA SheevaPlug Reference Board")	exit 0 ;;
+		"Marvell DB-MV88F6781-BP Development Board") exit 0 ;;
+		"Marvell Armada XP Development Board") exit 0 ;;
 		"QNAP TS-109/TS-209" | "QNAP TS-409")	exit 0 ;;
 		"QNAP TS-119/TS-219")			exit 0 ;;
 		"QNAP TS-41x")				exit 0 ;;
@@ -508,7 +517,7 @@ if [ "x$1" = "x--supported" ]; then
 		*)
 			# we're supported if we have a generic fallback
 			case "$running_subarch" in
-				"dove" | "omap" | "omap4") exit 0 ;;
+				"armadaxp" | "dove" | "omap" | "omap4") exit 0 ;;
 			esac
 		exit 1
 		;;
@@ -831,6 +840,10 @@ case "$machine" in
 		check_subarch "dove"
 		dove_flash_kernel
 	;;
+	"Marvell Armada XP Development Board")
+		check_subarch "armadaxp"
+		dove_flash_kernel
+	;;
 	"IGEP v2 board" | "OMAP3 Beagle Board" | "OMAP4430 4430SDP board" | "OMAP4430 Panda Board" | "OMAP4 Panda board")
 		case "$machine" in
 			"IGEP v2 board"|"OMAP3 Beagle Board")
@@ -1031,12 +1044,12 @@ case "$machine" in
 	;;
 	*)
 		case "$running_subarch" in
-			"dove" | "omap" | "omap4")
+			"armadaxp" | "dove" | "omap" | "omap4")
 				echo "warning: using generic subarchitecture fallback for $running_subarch"
 				check_subarch $running_subarch
 
 				case "$subarch" in
-					"dove")
+					"armadaxp" | "dove")
 						dove_flash_kernel
 					;;
 					"omap" | "omap4")

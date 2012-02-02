@@ -56,6 +56,9 @@ write_to_flash() {
 		"Marvell DB-MV88F6781-BP Development Board")
 			return 1
 		;;
+		"Marvell Armada XP Development Board")
+			return 1
+		;;
 		# Assume that we write to flash for all other devices
 		*)
 			return 0
@@ -249,9 +252,6 @@ case "$machine" in
 			error "apt-install apex-nslu2 failed"
 		fi
 	;;
-	"Marvell DB-MV88F6781-BP Development Board")
-		dove_flash_kernel_installer
-	;;
 	"OMAP3 Beagle Board")
 		omap_flash_kernel_installer
 	;;
@@ -261,6 +261,12 @@ case "$machine" in
 	"Marvell OpenRD Base Board" | "Marvell OpenRD Client Board" | "Marvell SheevaPlug Reference Board" | "Marvell eSATA SheevaPlug Reference Board")
 		in-target update-initramfs -u || true
 		install_mkimage
+	;;
+	"Marvell DB-MV88F6781-BP Development Board")
+		dove_flash_kernel_installer
+	;;
+	"Marvell Armada XP Development Board")
+		dove_flash_kernel_installer
 	;;
 	"Thecus N2100" | "Thecus N4100")
 		in-target update-initramfs -u || true
@@ -274,7 +280,7 @@ case "$machine" in
 	;;
 	*)
 		case "`archdetect`" in
-			"arm*/dove")
+			"arm*/dove" | "arm*/armadaxp")
 				dove_flash_kernel_installer
 			;;
 			"arm*/omap" | "arm*/omap4")

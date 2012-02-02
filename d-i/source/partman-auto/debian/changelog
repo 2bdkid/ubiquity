@@ -1,3 +1,11 @@
+partman-auto (93ubuntu19) precise; urgency=low
+
+  * Close mount's fds 6 and 7 when running within an
+    open_dialog/close_dialog pair, so that if ntfs-3g is in use it doesn't
+    keep those fds open in the background and cause havoc (LP: #912031).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 02 Feb 2012 14:47:27 +0000
+
 partman-auto (93ubuntu18) precise; urgency=low
 
   * Remove the use of 'local' in shell scripts outside of functions.  Newer
