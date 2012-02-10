@@ -1160,6 +1160,7 @@ class Wizard(BaseFrontend):
         if finished_step == last_page and not self.backup:
             self.finished_pages = True
             if self.finished_installing or self.oem_user_config:
+                self.debconf_progress_info('')
                 self.ui.progressBar.show()
                 dbfilter = plugininstall.Install(self)
                 dbfilter.start(auto_process=True)
@@ -1194,6 +1195,8 @@ class Wizard(BaseFrontend):
             if self.finished_pages:
                 dbfilter = plugininstall.Install(self)
                 dbfilter.start(auto_process=True)
+            else:
+                self.ui.progressBar.hide()
 
         elif finished_step == 'ubiquity.components.plugininstall':
             self.installing = False

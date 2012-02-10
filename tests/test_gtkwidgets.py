@@ -4,9 +4,15 @@
 import unittest
 from ubiquity import segmented_bar, gtkwidgets
 from test import test_support
-from gi.repository import Gtk, GObject, TimezoneMap
+from gi.repository import Gtk, TimezoneMap
 import sys, os
 import mock
+
+
+class MockController(object):
+    def get_string(self, name, lang=None, prefix=None):
+        return "%s: %s" % (lang, name)
+
 
 class WidgetTests(unittest.TestCase):
     def setUp(self):
@@ -35,8 +41,7 @@ class WidgetTests(unittest.TestCase):
         sb.remove_all()
         self.assertEqual(sb.segments, [])
         self.win.show_all()
-        GObject.timeout_add(500, Gtk.main_quit)
-        Gtk.main()
+        gtkwidgets.refresh()
 
     def test_timezone_map(self):
         tzmap = TimezoneMap.TimezoneMap()
@@ -44,8 +49,7 @@ class WidgetTests(unittest.TestCase):
         #tzmap.select_city('America/New_York')
         self.win.show_all()
         self.win.connect('destroy', Gtk.main_quit)
-        GObject.timeout_add(500, Gtk.main_quit)
-        Gtk.main()
+        gtkwidgets.refresh()
 
     @mock.patch('ubiquity.misc.drop_privileges')
     @mock.patch('ubiquity.misc.regain_privileges')
@@ -53,7 +57,7 @@ class WidgetTests(unittest.TestCase):
         from gi.repository import GdkPixbuf, Gst
         Gst.init(sys.argv)
         WRITE_TO = '/tmp/nonexistent-directory/windows_square.png'
-        fs = gtkwidgets.FaceSelector()
+        fs = gtkwidgets.FaceSelector(None)
         fs.selected_image = Gtk.Image()
         pb = GdkPixbuf.Pixbuf.new_from_file('pixmaps/windows_square.png')
         fs.selected_image.set_from_pixbuf(pb)
@@ -61,6 +65,16 @@ class WidgetTests(unittest.TestCase):
         self.assertTrue(os.path.exists(WRITE_TO))
         import shutil
         shutil.rmtree(os.path.dirname(WRITE_TO))
+
+    def test_face_selector_translated(self):
+        fs = gtkwidgets.FaceSelector(MockController())
+        fs.translate('zz')
+        self.assertEqual('zz: webcam_photo_label', fs.photo_label.get_text())
+        self.assertEqual(
+            'zz: webcam_existing_label', fs.existing_label.get_text())
+        self.assertEqual(
+            'zz: webcam_take_button',
+            fs.webcam.get_property('take-button').get_label())
 
     def test_state_box(self):
         sb = gtkwidgets.StateBox('foobar')

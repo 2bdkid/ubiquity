@@ -1,3 +1,27 @@
+netcfg (1.68ubuntu11) precise; urgency=low
+
+  * Drop additional debug statements that were included in ubuntu10 by
+    mistake...
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Tue, 07 Feb 2012 09:27:24 -0500
+
+netcfg (1.68ubuntu10) precise; urgency=low
+
+  * Fix bug where netcfg gets the wrong return value of dhclient6 and
+    marked the DHCPv6 connection as failed when it shouldn't.
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Mon, 06 Feb 2012 21:18:45 -0500
+
+netcfg (1.68ubuntu9) precise; urgency=low
+
+  * Add a post-base-install hook to detect resolvconf and copy
+    /run/resolvconf/resolv.conf to outside the target so that when /run
+    is bind-mounted DNS resolving continues to work. (LP: #926447)
+  * Apply patch from Alec Warner making netcfg respect netcfg/dhcpv6_timeout
+    and running dhclient in one-shot mode (-1). (LP: #917905)
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Mon, 06 Feb 2012 12:05:02 -0500
+
 netcfg (1.68ubuntu8) precise; urgency=low
 
   * Don't copy /etc/resolv.conf to target if resolvconf is installed.  (We

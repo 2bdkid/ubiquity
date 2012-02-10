@@ -21,22 +21,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-import subprocess
+import fcntl
+from hashlib import md5
 import os
-import debconf
-from ubiquity import misc
-from ubiquity import osextras
 import re
 import shutil
-
-from apt.progress.text import AcquireProgress
-from apt.progress.base import InstallProgress
-import traceback
-import syslog
-import fcntl
+import subprocess
 import sys
+import syslog
+import traceback
+
 from apt.cache import Cache
-from hashlib import md5
+from apt.progress.base import InstallProgress
+from apt.progress.text import AcquireProgress
+import debconf
+
+from ubiquity import misc
+from ubiquity import osextras
 
 def debconf_disconnect():
     """Disconnect from debconf. This is only to be used as a subprocess
@@ -852,7 +853,7 @@ class InstallBase:
                 toplevel_pkg = get_cache_pkg(cache, toplevel)
                 if toplevel_pkg and toplevel_pkg.is_installed:
                     to_install.append(toplevel)
-        if all_langpacks and osextras.find_on_path('check-language-support'):
+        if all_langpacks and checker:
             check_lang = subprocess.Popen(
                 ['check-language-support', '-a', '--show-installed'],
                 stdout=subprocess.PIPE)

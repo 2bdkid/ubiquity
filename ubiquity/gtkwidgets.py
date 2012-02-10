@@ -1,9 +1,16 @@
 #!/usr/bin/python
 
+import os
+
+import cairo
 from gi.repository import Gtk, Gdk, GObject, Pango
 from gi.repository import UbiquityWebcam, GdkPixbuf
+
 from ubiquity import misc
-import cairo, os
+
+def refresh():
+    while Gtk.events_pending():
+        Gtk.main_iteration()
 
 def draw_round_rect(c, r, x, y, w, h):
     c.move_to(x+r,y)
@@ -347,15 +354,15 @@ FACES_PATH = '/usr/share/pixmaps/faces'
 
 class FaceSelector(Gtk.VBox):
     __gtype_name__ = 'FaceSelector'
-    def __init__(self):
+    def __init__(self, controller):
         Gtk.VBox.__init__(self)
         self.set_homogeneous(False)
         self.set_spacing(12)
+        self.controller = controller
 
         vb_left = Gtk.VBox.new(False, 3)
-        # TODO i18n
-        l = Gtk.Label('Take a photo:')
-        vb_left.pack_start(l, False, False, 0)
+        self.photo_label = Gtk.Label('Take a photo:')
+        vb_left.pack_start(self.photo_label, False, False, 0)
         f = Gtk.Frame()
         self.webcam = UbiquityWebcam.Webcam()
         self.webcam.connect('image-captured', self.image_captured)
@@ -363,9 +370,8 @@ class FaceSelector(Gtk.VBox):
         vb_left.add(f)
 
         vb_right = Gtk.VBox.new(False, 3)
-        # TODO i18n
-        l = Gtk.Label('Or choose an existing picture:')
-        vb_right.pack_start(l, False, False, 0)
+        self.existing_label = Gtk.Label('Or choose an existing picture:')
+        vb_right.pack_start(self.existing_label, False, False, 0)
         iv = Gtk.IconView()
         iv.connect('selection-changed', self.selection_changed)
         sw = Gtk.ScrolledWindow()
@@ -391,6 +397,14 @@ class FaceSelector(Gtk.VBox):
                 pb = GdkPixbuf.Pixbuf.new_from_file(
                                     os.path.join(FACES_PATH, path))
                 m.append([pb])
+
+    def translate(self, lang):
+        self.photo_label.set_text(
+            self.controller.get_string('webcam_photo_label', lang))
+        self.existing_label.set_text(
+            self.controller.get_string('webcam_existing_label', lang))
+        self.webcam.get_property('take-button').set_label(
+            self.controller.get_string('webcam_take_button', lang))
 
     def webcam_play(self):
         self.webcam.play()

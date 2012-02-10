@@ -522,12 +522,14 @@ static int choose_country(void) {
 			debconf_set(debconf, DEBCONF_BASE "country", country);
 		}
 	} else {
-		country = debconf->value;
+		country = strdup(debconf->value);
 	}
 
 	/* Ensure 'country' is set to something. */
-	if (country == NULL || *country == 0)
-		country = "GB";
+	if (country == NULL || *country == 0 || !has_real_mirror(country)) {
+		free(country);
+		country = strdup("GB");
+	}
 
 	char *countries;
 	countries = add_protocol("countries");

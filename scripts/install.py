@@ -26,12 +26,11 @@ import stat
 import subprocess
 import time
 import syslog
+import signal
+
 import debconf
-import warnings
-warnings.filterwarnings("ignore", "apt API not stable yet", FutureWarning)
 import apt_pkg
 from apt.cache import Cache
-import signal
 
 sys.path.insert(0, '/usr/lib/ubiquity')
 
@@ -153,7 +152,6 @@ class Install(install_misc.InstallBase):
                     sys.exit(3)
                 else:
                     raise
-        self.db.progress('INFO', 'ubiquity/install/waiting')
 
         if self.source == '/var/lib/ubiquity/source':
             self.umount_source()

@@ -33,11 +33,10 @@ import fcntl
 import traceback
 import syslog
 import gzip
-import debconf
-import warnings
-warnings.filterwarnings("ignore", "apt API not stable yet", FutureWarning)
-import apt_pkg
 import pwd
+
+import debconf
+import apt_pkg
 from apt.cache import Cache
 
 sys.path.insert(0, '/usr/lib/ubiquity')
