@@ -2,13 +2,11 @@
 # -*- coding: utf8; -*-
 
 import unittest
-import mock
-import sys, os
 
-from ubiquity import i18n
 from gi.repository import Gtk
+import mock
 
-os.environ['UBIQUITY_GLADE'] = 'gui/gtk'
+from ubiquity import i18n, plugin_manager
 
 def side_effect_factory(real_method):
     new_path = 'd-i/source/localechooser/debian/localechooser' \
@@ -28,9 +26,7 @@ class LanguageTests(unittest.TestCase):
             patcher.start()
             self.addCleanup(patcher.stop)
 
-        sys.path.insert(0, 'ubiquity/plugins')
-        ubi_language = __import__('ubi-language')
-        sys.path.pop(0)
+        ubi_language = plugin_manager.load_plugin('ubi-language')
 
         controller = mock.Mock()
         controller.oem_user_config = True

@@ -388,17 +388,21 @@ class Install(install_misc.InstallBase):
                 sourcepath = os.path.join(self.source, relpath)
                 targetpath = os.path.join(self.target, relpath)
                 st = os.lstat(sourcepath)
+
+                # Is the path blacklisted?
+                if (not stat.S_ISDIR(st.st_mode) and
+                    '/%s' % relpath in self.blacklist):
+                    if debug:
+                        syslog.syslog('Not copying %s' % relpath)
+                    continue
+
+                # Remove the target if necessary and if we can.
+                install_misc.remove_target(
+                    self.source, self.target, relpath, st)
+
+                # Now actually copy source to target.
                 mode = stat.S_IMODE(st.st_mode)
                 if stat.S_ISLNK(st.st_mode):
-                    try:
-                        os.unlink(targetpath)
-                    except OSError, e:
-                        if e.errno == errno.ENOENT:
-                            pass
-                        elif e.errno == errno.EISDIR:
-                            os.rmdir(targetpath)
-                        else:
-                            raise
                     linkto = os.readlink(sourcepath)
                     os.symlink(linkto, targetpath)
                 elif stat.S_ISDIR(st.st_mode):
@@ -413,13 +417,9 @@ class Install(install_misc.InstallBase):
                 elif stat.S_ISSOCK(st.st_mode):
                     os.mknod(targetpath, stat.S_IFSOCK | mode)
                 elif stat.S_ISREG(st.st_mode):
-                    if '/%s' % relpath in self.blacklist:
-                        if debug:
-                            syslog.syslog('Not copying %s' % relpath)
-                        continue
-                    osextras.unlink_force(targetpath)
                     install_misc.copy_file(self.db, sourcepath, targetpath, md5_check)
 
+                # Copy metadata.
                 copied_size += st.st_size
                 os.lchown(targetpath, st.st_uid, st.st_gid)
                 if not stat.S_ISLNK(st.st_mode):
@@ -428,7 +428,11 @@ class Install(install_misc.InstallBase):
                     directory_times.append((targetpath, st.st_atime, st.st_mtime))
                 # os.utime() sets timestamp of target, not link
                 elif not stat.S_ISLNK(st.st_mode):
-                    os.utime(targetpath, (st.st_atime, st.st_mtime))
+                    try:
+                        os.utime(targetpath, (st.st_atime, st.st_mtime))
+                    except Exception:
+                        # We can live with timestamps being wrong.
+                        pass
 
                 if int((copied_size * 90) / total_size) != copy_progress:
                     copy_progress = int((copied_size * 90) / total_size)
@@ -458,7 +462,7 @@ class Install(install_misc.InstallBase):
             (directory, atime, mtime) = dirtime
             try:
                 os.utime(directory, (atime, mtime))
-            except OSError:
+            except Exception:
                 # I have no idea why I've been getting lots of bug reports
                 # about this failing, but I really don't care. Ignore it.
                 pass
@@ -484,7 +488,11 @@ class Install(install_misc.InstallBase):
             os.lchown(target_kernel, 0, 0)
             os.chmod(target_kernel, 0644)
             st = os.lstat(kernel)
-            os.utime(target_kernel, (st.st_atime, st.st_mtime))
+            try:
+                os.utime(target_kernel, (st.st_atime, st.st_mtime))
+            except Exception:
+                # We can live with timestamps being wrong.
+                pass
 
         os.umask(old_umask)
 
