@@ -526,7 +526,9 @@ static int choose_country(void) {
 	}
 
 	/* Ensure 'country' is set to something. */
-	if (country == NULL || *country == 0 || !has_real_mirror(country)) {
+	if (country == NULL || *country == 0 ||
+	    (strcmp(country, MANUAL_ENTRY) != 0 &&
+	     !has_real_mirror(country))) {
 		free(country);
 		country = strdup("GB");
 	}

@@ -1,3 +1,36 @@
+ubiquity (2.9.20) precise; urgency=low
+
+  [ Colin Watson ]
+  * Restore old fallback code in case /cdrom/casper/filesystem.size doesn't
+    exist (LP: #557388).
+  * Fix some more uses of deprecated python-apt APIs.
+  * ubiquity-dm: Try openbox after openbox-lubuntu (LP: #888107).
+  * Thomson SA is now called Technicolor SA (LP: #856992).
+  * Limit maximum length of username editing widgets to 32 (LP: #831319).
+  * UTF-8-encode the syslog message when a geoname lookup fails, since it
+    might include non-ASCII characters entered by the user (LP: #928891).
+  * Run test suite under xvfb-run by default when running it from the
+    command line.  'tests/run --no-xvfb' inhibits this behaviour for cases
+    where it's useful to see the UIs constructed by the test suite.
+  * Stop manually inserting newlines in hostname and username errors.  GTK+
+    3 seems to do a reasonable job of wrapping these by itself now.
+  * Port the user page from GtkTable to GtkGrid, so that we get sensible
+    height-for-width geometry management (LP: #830933).
+  * Internationalise hostname and username validation errors (LP: #784825).
+
+  [ Mario Limonciello ]
+  * Have two separate failsafe attempts for 'fbdev' and 'vesa'.  It's
+    possible that /dev/fb0 will exist but be backed by a VGA framebuffer
+    causing X to exit non-zero.
+
+  [ Stéphane Graber ]
+  * Use the Xubuntu wallpaper when available. (LP: #936572)
+  * Detect bogus DNS servers and ignore them. (LP: #760884)
+  * Automatic update of included source packages: base-installer
+    1.122ubuntu5, choose-mirror 2.39ubuntu4.
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Tue, 21 Feb 2012 21:09:02 -0500
+
 ubiquity (2.9.19) precise; urgency=low
 
   * Install pixmaps/windows_square.png in ubiquity-frontend-gtk.

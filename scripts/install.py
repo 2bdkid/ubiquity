@@ -76,19 +76,19 @@ class Install(install_misc.InstallBase):
             self.db.progress('INFO', 'ubiquity/install/blacklist')
             self.generate_blacklist()
 
-        apt_pkg.InitConfig()
-        apt_pkg.Config.set("Dir", self.target)
-        apt_pkg.Config.set("Dir::State::status",
+        apt_pkg.init_config()
+        apt_pkg.config.set("Dir", self.target)
+        apt_pkg.config.set("Dir::State::status",
                            os.path.join(self.target, 'var/lib/dpkg/status'))
-        apt_pkg.Config.set("APT::GPGV::TrustedKeyring",
+        apt_pkg.config.set("APT::GPGV::TrustedKeyring",
                            os.path.join(self.target, 'etc/apt/trusted.gpg'))
-        apt_pkg.Config.set("Acquire::gpgv::Options::",
+        apt_pkg.config.set("Acquire::gpgv::Options::",
                            "--ignore-time-conflict")
-        apt_pkg.Config.set("DPkg::Options::", "--root=%s" % self.target)
+        apt_pkg.config.set("DPkg::Options::", "--root=%s" % self.target)
         # We don't want apt-listchanges or dpkg-preconfigure, so just clear
         # out the list of pre-installation hooks.
-        apt_pkg.Config.clear("DPkg::Pre-Install-Pkgs")
-        apt_pkg.InitSystem()
+        apt_pkg.config.clear("DPkg::Pre-Install-Pkgs")
+        apt_pkg.init_system()
 
     def run(self):
         """Run the install stage: copy everything to the target system, then
@@ -335,9 +335,25 @@ class Install(install_misc.InstallBase):
         self.db.progress('INFO', 'ubiquity/install/copying')
 
         fs_size = os.path.join(self.casper_path, 'filesystem.size')
-        assert os.path.exists(fs_size), "Missing filesystem.size."
-        with open(fs_size) as total_size_fp:
-            total_size = int(total_size_fp.readline())
+        if os.path.exists(fs_size):
+            with open(fs_size) as total_size_fp:
+                total_size = int(total_size_fp.readline())
+        else:
+            # Fallback in case an Ubuntu derivative forgets to put
+            # /casper/filesystem.size on the CD, or to account for things
+            # like CD->USB transformation tools that don't copy this file.
+            # This is slower than just reading the size from a file, but
+            # better than crashing.
+            #
+            # Obviously doing os.walk() twice is inefficient, but I'd rather
+            # not suck the list into ubiquity's memory, and I'm guessing
+            # that the kernel's dentry cache will avoid most of the slowness
+            # anyway.
+            total_size = 0
+            for dirpath, dirnames, filenames in os.walk(self.source):
+                for name in dirnames + filenames:
+                    fqpath = os.path.join(dirpath, name)
+                    total_size += os.lstat(fqpath).st_size
 
         # Progress bar handling:
         # We sample progress every half-second (assuming time.time() gives

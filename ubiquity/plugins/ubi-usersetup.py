@@ -30,7 +30,7 @@ import re
 import debconf
 
 from ubiquity import validation
-from ubiquity.misc import execute, execute_root, dmimodel, utf8
+from ubiquity import misc
 from ubiquity import plugin
 
 NAME = 'usersetup'
@@ -38,49 +38,43 @@ AFTER = 'console_setup'
 WEIGHT = 10
 
 def check_hostname(hostname):
-    """Returns a newline separated string of reasons why the hostname is
-    invalid."""
-    # TODO: i18n
-    e = []
-    # Ahem.  We can cheat here by inserting newlines where needed.  Hopefully
-    # by the time we translate this, GTK+ will have decent layout management.
-    for result in validation.check_hostname(utf8(hostname)):
+    """Returns a list of reasons why the hostname is invalid."""
+    errors = []
+    for result in validation.check_hostname(misc.utf8(hostname)):
         if result == validation.HOSTNAME_LENGTH:
-            e.append("Must be between 1 and 63 characters long.")
+            errors.append('hostname_error_length')
         elif result == validation.HOSTNAME_BADCHAR:
-            e.append("May only contain letters, digits,\nhyphens, and dots.")
+            errors.append('hostname_error_badchar')
         elif result == validation.HOSTNAME_BADHYPHEN:
-            e.append("May not start or end with a hyphen.")
+            errors.append('hostname_error_badhyphen')
         elif result == validation.HOSTNAME_BADDOTS:
-            e.append('May not start or end with a dot,\n'
-                     'or contain the sequence "..".')
-    return "\n".join(e)
+            errors.append('hostname_error_baddots')
+    return errors
 
 def check_username(username):
-    """Returns a newline separated string of reasons why the username is
-    invalid."""
-    # TODO: i18n
-    # Ahem.  We can cheat here by inserting newlines where needed.  Hopefully
-    # by the time we translate this, GTK+ will have decent layout management.
+    """Returns a list of reasons why the username is invalid."""
     if username:
         if not re.match('[a-z]', username[0]):
-            return "Must start with a lower-case letter."
+            return ['username_error_badfirstchar']
         # Technically both these conditions might hold.  However, the common
         # case seems to be that somebody starts typing their name beginning
         # with an upper-case letter, and it's probably sufficient to just
         # issue the first error in that case.
         elif not re.match('^[-a-z0-9_]+$', username):
-            return ("May only contain lower-case letters,\n"
-                    "digits, hyphens, and underscores.")
-    return ''
+            return ['username_error_badchar']
+    return []
+
+def make_error_string(controller, errors):
+    """Returns a newline-separated string of translated error reasons."""
+    return "\n".join([controller.get_string(error) for error in errors])
 
 class PageBase(plugin.PluginUI):
     def __init__(self):
-        self.suffix = dmimodel()
+        self.suffix = misc.dmimodel()
         if self.suffix:
             self.suffix = '-%s' % self.suffix
         else:
-            if execute("laptop-detect"):
+            if misc.execute("laptop-detect"):
                 self.suffix = '-laptop'
             else:
                 self.suffix = '-desktop'
@@ -225,9 +219,10 @@ class PageGtk(PageBase):
             self.hostname_edited = True
             self.login_vbox.hide()
             # The UserSetup component takes care of preseeding passwd/user-uid.
-            execute_root('apt-install', 'oem-config-gtk',
-                                        'oem-config-slideshow-ubuntu')
+            misc.execute_root('apt-install', 'oem-config-gtk',
+                                             'oem-config-slideshow-ubuntu')
 
+        self.resolver_ok = True
         self.plugin_widgets = self.page
 
     def plugin_translate(self, lang):
@@ -321,7 +316,7 @@ class PageGtk(PageBase):
         if (widget is not None and widget.get_name() == 'fullname' and
             not self.username_edited):
             self.username.handler_block(self.username_changed_id)
-            new_username = utf8(widget.get_text().split(' ')[0])
+            new_username = misc.utf8(widget.get_text().split(' ')[0])
             new_username = new_username.encode('ascii', 'ascii_transliterate')
             new_username = new_username.lower()
             self.username.set_text(new_username)
@@ -346,9 +341,9 @@ class PageGtk(PageBase):
 
         text = self.username.get_text()
         if text:
-            error_msg = check_username(text)
-            if error_msg:
-                self.username_error(error_msg)
+            errors = check_username(text)
+            if errors:
+                self.username_error(make_error_string(self.controller, errors))
                 complete = False
             else:
                 self.username_ok.show()
@@ -392,9 +387,9 @@ class PageGtk(PageBase):
         txt = self.hostname.get_text()
         self.hostname_ok.show()
         if txt:
-            error_msg = check_hostname(txt)
-            if error_msg:
-                self.hostname_error(error_msg)
+            errors = check_hostname(txt)
+            if errors:
+                self.hostname_error(make_error_string(self.controller, errors))
                 complete = False
                 self.hostname_ok.hide()
             else:
@@ -432,11 +427,27 @@ class PageGtk(PageBase):
             self.hostname_ok.hide()
 
     def hostname_timeout(self, widget):
-        if self.hostname_ok.get_property('visible'):
+        if self.hostname_ok.get_property('visible') and self.resolver_ok :
             hostname = widget.get_text()
             for host in (hostname, '%s.local' % hostname):
                 self.resolver.lookup_by_name_async(
                     host, None, self.lookup_result, None)
+
+    def detect_bogus_result(self, hostname = 'xyzzy_does_not_exist'):
+        # bug 760884
+        # On networks where DNS fakes a response for unknown hosts,
+        # don't display a warning for hostnames that already exist.
+        self.resolver.lookup_by_name_async(
+            hostname, None, self.bogus_lookup_result, None)
+
+    def bogus_lookup_result(self, resolver, result, unused):
+        from gi.repository import GObject
+        try:
+            resolver.lookup_by_name_finish(result)
+        except GObject.GError:
+            self.resolver_ok = True
+        else:
+            self.resolver_ok = False
 
     def on_authentication_toggled(self, w):
         if w == self.login_auto and w.get_active():
@@ -478,7 +489,7 @@ class PageKde(PageBase):
             self.page.hostname.setText('oem%s' % self.suffix)
 
             # The UserSetup component takes care of preseeding passwd/user-uid.
-            execute_root('apt-install', 'oem-config-kde')
+            misc.execute_root('apt-install', 'oem-config-kde')
 
         iconLoader = KIconLoader()
         warningIcon = iconLoader.loadIcon("dialog-warning", KIconLoader.Desktop)
@@ -778,11 +789,11 @@ class Page(plugin.Plugin):
         hostname = self.ui.get_hostname()
 
         # check if the hostname had errors
-        error_msg = check_hostname(hostname)
+        errors = check_hostname(hostname)
 
         # showing warning message is error is set
-        if len(error_msg) != 0:
-            self.ui.hostname_error(error_msg)
+        if errors:
+            self.ui.hostname_error(make_error_string(self.controller, errors))
             self.done = False
             self.enter_ui_loop()
             return
