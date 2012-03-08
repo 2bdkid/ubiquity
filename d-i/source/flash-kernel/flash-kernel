@@ -682,6 +682,9 @@ case "$machine" in
 		case $subarch in
 			"mx5"|"mx51")
 				:
+				if [ -n "${UBOOT_PART}" ]; then
+					UBOOT_PART=/dev/mmcblk0p1
+				fi
 			;;
 			*)
 				# Not actually the real expected kfile
@@ -849,9 +852,17 @@ case "$machine" in
 			"IGEP v2 board"|"OMAP3 Beagle Board")
 				check_subarch "omap"
 			;;
-			"OMAP4430 4430SDP board" | "OMAP4430 Panda Board" | "OMAP4 Panda board")
+			"OMAP4430 Panda Board" | "OMAP4 Panda board")
 				check_subarch "omap4"
+				if [ -z "${UBOOT_PART}" ]; then
+					export UBOOT_PART=/dev/mmcblk0p1
+				fi
 			;;
+			"OMAP4430 4430SDP board") 
+				check_subarch "omap4"
+				if [ -z "${UBOOT_PART}" ]; then
+					export UBOOT_PART=/dev/mmcblk1p1
+				fi
 		esac
 		omap_flash_kernel
 	;;

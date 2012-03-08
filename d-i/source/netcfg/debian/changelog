@@ -1,3 +1,11 @@
+netcfg (1.68ubuntu13) precise; urgency=low
+
+  * When wireless detection doesn't find any network and the user doesn't
+    enter any essid, skip directly to the hostname dialog rather than
+    prompt for security options on a non-existing network. (LP: #36426)
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Mon, 05 Mar 2012 15:41:00 -0500
+
 netcfg (1.68ubuntu12) precise; urgency=low
 
   * Apply patch from Matthew L. Dailey to fix the dns- entries in

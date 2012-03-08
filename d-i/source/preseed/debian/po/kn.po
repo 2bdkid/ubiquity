@@ -3,22 +3,28 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Portuguese messages for debian-installer.
-# Copyright (C) 2003 Software in the Public Interest, Inc.
-# Console-setup strings translations:
-# (identified by "./console-setup.templates")
-# Copyright (C) 2003-2011 Miguel Figueiredo <elmig@debianpt.org>
-# This file is distributed under the same license as debian-installer.
+# Kannada Translations
+# Vikram Vincent <vincentvikram@gmail.com>, 2007, 2010, 2011.
+# Raghavendra S <raghuarr@gmail.com>, 2010.
 #
+# Translators:
+# shashi kiran <shashi859@gmail.com>, 2010, 2011.
+# Prabodh CP <prabodhcp@gmail.com>, 2011.
+#
+# Credits: Thanks to contributions from Free Software Movement Karnataka (FSMK), 2011.
+#
+# Translations from iso-codes:
+#   Shankar Prasad <svenkate@redhat.com>, 2009.
+#   Vikram Vincent <vincentvikram@gmail.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: kn\n"
 "Report-Msgid-Bugs-To: preseed@packages.debian.org\n"
 "POT-Creation-Date: 2011-01-30 18:05+0000\n"
-"PO-Revision-Date: 2011-01-29 19:28+0100\n"
-"Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
-"Language-Team:  Portuguese <traduz@debianpt.org>\n"
-"Language: pt\n"
+"PO-Revision-Date: 2011-12-17 11:35+0530\n"
+"Last-Translator: Prabodh C P <prabodh@fsmk.org>\n"
+"Language-Team: Kannada <debian-l10n-kannada@lists.debian.org>\n"
+"Language: kn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +34,7 @@ msgstr ""
 #. :sl2:
 #: ../preseed-common.templates:1001
 msgid "Failed to retrieve the preconfiguration file"
-msgstr "Falhou obter o ficheiro de pré-configuração"
+msgstr "ಪೂರ್ವಸಂಯೋಜನಾ ಕಡತವನ್ನು ಹಿಂಪಡೆಯುವಲ್ಲಿ ವಿಫಲವಾಗಿದೆ."
 
 #. Type: error
 #. Description
@@ -38,15 +44,15 @@ msgid ""
 "The file needed for preconfiguration could not be retrieved from "
 "${LOCATION}. The installation will proceed in non-automated mode."
 msgstr ""
-"O ficheiro necessário para a pré-configuração não pode ser obtido de "
-"${LOCATION}. A instalação vai continuar em modo não-automático."
+"ಪೂರ್ವಸಂಯೋಜನೆಗೆ ಬೇಕಾದ ಕಡತವನ್ನು ${LOCATION}ನಿಂದ ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ. "
+"ಅನುಸ್ಥಾಪನೆಯು ಸ್ವಯಂಚಾಲಿತವಲ್ಲದ ವಿಧಾನದಲ್ಲಿ ಮುಂದುವರೆಯುವುದು."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../preseed-common.templates:2001
 msgid "Failed to process the preconfiguration file"
-msgstr "Falhou o processamento do ficheiro de pré-configuração"
+msgstr "ಪೂರ್ವಸಂಯೋಜನಾ ಕಡತವನ್ನು ಸಂಸ್ಕರಿಸುವಲ್ಲಿ ವಿಫಲವಾಗಿದೆ."
 
 #. Type: error
 #. Description
@@ -56,15 +62,15 @@ msgid ""
 "The installer failed to process the preconfiguration file from ${LOCATION}. "
 "The file may be corrupt."
 msgstr ""
-"O instalador falhou o processamento do ficheiro de pré-configuração a partir "
-"de ${LOCATION}. O ficheiro pode estar corrompido."
+"${LOCATION}ನಲ್ಲಿರುವ ಪೂರ್ವಸಂಯೋಜನಾ ಕಡತವನ್ನು ಸಂಸ್ಕರಿಸುವಲ್ಲಿ ಅನುಸ್ಥಾಪಕವು ವಿಫಲವಾಗಿದೆ. "
+"ಪ್ರಾಯಶಃ ಕಡತವು ಹಾಳಗಿರಬಹುದು."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../preseed-common.templates:10001
 msgid "Failed to run preseeded command"
-msgstr "Falhou a execução do comando preseed"
+msgstr "ಮುಂಚಿತವಾಗಿ ಆಯ್ಕೆಯಾದ ಆಜ್ಞೆಯನ್ನು ನೆಡೆಸುವಲ್ಲಿ ವಿಫಲವಾಗಿದೆ."
 
 #. Type: error
 #. Description
@@ -73,22 +79,23 @@ msgstr "Falhou a execução do comando preseed"
 msgid ""
 "Execution of preseeded command \"${COMMAND}\" failed with exit code ${CODE}."
 msgstr ""
-"A execução do comando preseed (\"${COMMAND}\") falhou com o código de saída "
-"${CODE}."
+"ಮುಂಚಿತವಾಗಿ ಆಯ್ಕೆಯಾದ ಆಜ್ಞೆ \"${COMMAND}\" ನ ಚಾಲನೆ ${CODE} ನಿರ್ಗಮನ ಸಂಕೇತದೊಂದಿಗೆ "
+"ವಿಫಲವಾಗಿದೆ."
 
 #. Type: text
 #. Description
 #. Main menu item
 #: ../network-preseed.templates:1001
 msgid "Download debconf preconfiguration file"
-msgstr "Fazer o download do ficheiro de pré-configuração debconf"
+msgstr "debconf ಕಡತವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿಕೊಳ್ಳಿ"
 
 #. Type: string
 #. Description
 #. :sl3:
 #: ../network-preseed.templates:2001
+#, fuzzy
 msgid "Location of initial preconfiguration file:"
-msgstr "Localização do ficheiro de pré-configuração inicial:"
+msgstr "debconf ಕಡತವನ್ನು ಲೋಡ್ ಮಾಡು"
 
 #. Type: string
 #. Description
@@ -99,9 +106,6 @@ msgid ""
 "preconfiguration file (which can in turn pull in other files). To do that, "
 "you need to provide a (perhaps partial) URL."
 msgstr ""
-"De modo a fazer uma instalação automatizada, tem de fornecer um ficheiro de "
-"preconfiguração (que por sua vez pode obter outros ficheiros). Para fazer "
-"isso, tem de indicar um URL (talvez parcial)."
 
 #. Type: string
 #. Description
@@ -117,15 +121,6 @@ msgid ""
 "  floppy://preseed.cfg\n"
 "  file:///hd-media/kiosk/./preseed.cfg"
 msgstr ""
-"Isto pode ser tão simples como o nome da máquina onde os seus ficheiros de "
-"preseed se encontram ou até um URL completo. Qualquer um destes pode "
-"funcionar:\n"
-"  intra\t\t[para exemplo.com, estes três são equivalentes]\n"
-"  intra.exemplo.com\n"
-"  http://intra.exemplo.com/d-i/./lenny/preseed.cfg\n"
-"  http://192.168.0.1/~phil/test47.txt\n"
-"  floppy://preseed.cfg\n"
-"  file:///hd-media/kiosk/./preseed.cfg"
 
 #. Type: string
 #. Description
@@ -135,20 +130,17 @@ msgid ""
 "For fully automated installs, preseed/url should itself be preseeded (via "
 "kernel command line, DHCP, or syslinux.cfg on customised media)"
 msgstr ""
-"Para instalações totalmente automatizadas, dever ser feiro preseed ao "
-"próprio  preseed/url (através da linha de comandos do kernel, DHCP ou "
-"syslinux.cfg em media personalizada)."
 
 #. Type: string
 #. Description
 #. :sl3:
 #: ../network-preseed.templates:2001
 msgid "See http://wiki.debian.org/DebianInstaller/Preseed for inspiration."
-msgstr "Para inspiração veja http://wiki.debian.org/DebianInstaller/Preseed."
+msgstr ""
 
 #. Type: text
 #. Description
 #. Main menu item
 #: ../file-preseed.templates:1001
 msgid "Load debconf preconfiguration file"
-msgstr "Carregar o ficheiro de pré-configuração debconf"
+msgstr "debconf ಕಡತವನ್ನು ಲೋಡ್ ಮಾಡು"

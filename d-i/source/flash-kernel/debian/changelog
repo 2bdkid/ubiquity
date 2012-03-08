@@ -1,3 +1,17 @@
+flash-kernel (2.28ubuntu41) precise; urgency=low
+
+  * Fix for a potential no-mtd and no /etc/flash-kernel.conf issue on mx5.
+    Thanks to Tobin Davis for that fix.
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Mon, 05 Mar 2012 17:41:22 +0100
+
+flash-kernel (2.28ubuntu40) precise; urgency=low
+
+  * set defaults for UBOOT_PART on various OMAP4 platforms if it is not set,
+    thanks to Tobin Davis for that fix (LP: 626749)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Mon, 05 Mar 2012 14:41:03 +0100
+
 flash-kernel (2.28ubuntu39) precise; urgency=low
 
   * Change from Tobin Davis to define ArmadaXP as a non-flash device.
