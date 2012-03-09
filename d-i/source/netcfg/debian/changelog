@@ -1,3 +1,10 @@
+netcfg (1.68ubuntu14) precise; urgency=low
+
+  * Fix detection of empty domains when writing to /etc/hosts in the case
+    where there is no static IP address (LP: #950664).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 09 Mar 2012 16:06:35 +0000
+
 netcfg (1.68ubuntu13) precise; urgency=low
 
   * When wireless detection doesn't find any network and the user doesn't

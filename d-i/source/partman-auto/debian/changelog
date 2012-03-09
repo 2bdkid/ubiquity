@@ -1,3 +1,11 @@
+partman-auto (93ubuntu20) precise; urgency=low
+
+  * Reuse existing swap partitions and EFI System Partitions, if any, rather
+    than creating new ones (LP: #311299).
+  * Update Ubuntu-specific translations from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 09 Mar 2012 15:22:39 +0000
+
 partman-auto (93ubuntu19) precise; urgency=low
 
   * Close mount's fds 6 and 7 when running within an
