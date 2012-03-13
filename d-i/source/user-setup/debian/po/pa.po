@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pa\n"
 "Report-Msgid-Bugs-To: user-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-07-03 13:45+0100\n"
+"POT-Creation-Date: 2012-02-16 22:49+0000\n"
 "PO-Revision-Date: 2010-07-18 19:41+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -222,10 +222,11 @@ msgstr "ਗਲਤ ਯੂਜ਼ਰ ਨਾਂ"
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:11001
+#, fuzzy
 msgid ""
 "The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
-"more lower-case letters."
+"more lower-case letters, and must be no more than 32 characters long."
 msgstr ""
 "ਦਿੱਤਾ ਯੂਜ਼ਰ ਨਾਂ ਗਲਤ ਹੈ। ਯਾਦ ਰੱਖੋ ਕਿ ਯੂਜ਼ਰ ਨਾਂ ਛੋਟੇ ਅੱਖਰਾਂ ਨਾਲ ਹੀ ਸ਼ੁਰੂ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ, ਜਿਸ ਵਿੱਚ "
 "ਬਾਅਦ ਵਿੱਚ ਕੋਈ ਵੀ ਅੰਕ ਜਾਂ ਛੋਟੇ ਅੱਖਰ ਹੋ ਸਕਦੇ ਹਨ।"
@@ -335,7 +336,7 @@ msgstr "ਯੂਜ਼ਰ ਅਤੇ ਪਾਸਵਰਡ ਸੈੱਟ ਕੀਤਾ �
 #. :sl2:
 #: ../user-setup-udeb.templates:20001
 msgid "Use weak password?"
-msgstr ""
+msgstr "ਸੌਖਾ ਪਾਸਵਰਡ ਹੀ ਵਰਤਣਾ ਹੈ?"
 
 #. Type: boolean
 #. Description
@@ -345,13 +346,15 @@ msgid ""
 "You entered a password that consists of less than eight characters, which is "
 "considered too weak. You should choose a stronger password."
 msgstr ""
+"ਤੁਸੀਂ ਇੱਕ ਪਾਸਵਰਡ ਭਰਿਆ ਹੈ ਜਿਸ ਵਿੱਚ ਅੱਠ ਤੋਂ ਘੱਟ ਅੱਖਰ ਹਨ, ਜੋ ਕਮਜ਼ੋਰ ਮੰਨਿਆ ਜਾਂਦਾ ਹੈ। ਤੁਹਾਨੂੰ ਸਖਤ "
+"ਸ਼ਬਦ ਚੁਣਨਾ ਚਾਹੀਦਾ ਹੈ।"
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:21001
 msgid "Encrypt your home directory?"
-msgstr ""
+msgstr "ਘਰ ਡਾਇਰੈਕਟਰੀ ਇੰਕ੍ਰਿਪਟ ਕਰਨੀ ਹੈ?"
 
 #. Type: boolean
 #. Description
@@ -361,6 +364,8 @@ msgid ""
 "You may configure your home directory for encryption, such that any files "
 "stored there remain private even if your computer is stolen."
 msgstr ""
+"ਤੁਸੀਂ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਇੰਕ੍ਰਿਪਟ ਕਰਨ ਦੀ ਚੋਣ ਕਰ ਸਕਦੇ ਹੋ, ਤਾਂ ਕਿ ਉੱਥੇ ਸਟੋਰ ਕੀਤੀ ਕੋਈ ਵੀ ਫਾਇਲ "
+"ਪ੍ਰਾਈਵੇਟ ਰਹੇ, ਭਾਵੇਂ ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਦੀ ਚੋਰੀ ਵੀ ਹੋ ਜਾਵੇ।"
 
 #. Type: boolean
 #. Description
@@ -370,13 +375,15 @@ msgid ""
 "The system will seamlessly mount your encrypted home directory each time you "
 "login and automatically unmount when you log out of all active sessions."
 msgstr ""
+"ਸਿਸਟਮ ਤੁਹਾਨੂੰ ਪਤਾ ਲੱਗੇ ਦਿੱਤੇ ਬਿਨਾਂ ਹੀ ਇੰਕ੍ਰਿਪਟ ਕੀਤੀ ਘਰ ਡਾਇਰੈਕਟਰੀ ਨੂੰ ਤੁਹਾਡੇ ਵਲੋਂ ਲਾਗਇਨ ਕਰਨ ਸਮੇਂ "
+"ਮਾਊਂਟ ਕਰੇਗਾ ਤੇ ਤੁਹਾਡੇ ਵਲੋਂ ਸਭ ਐਕਟਿਵ ਸ਼ੈਸ਼ਨਾਂ 'ਚੋਂ ਲਾਗ ਆਉਟ ਕਰਨ ਸਮੇਂ ਆਟੋਮੈਟਿਕ ਹੀ ਅਣ-ਮਾਊਂਟ ਕਰੇਗਾ।"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:22001
 msgid "Home directory encryption failed"
-msgstr ""
+msgstr "ਘਰ ਡਾਇਰੈਕਟਰੀ ਇੰਕ੍ਰਿਪਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #. Type: error
 #. Description

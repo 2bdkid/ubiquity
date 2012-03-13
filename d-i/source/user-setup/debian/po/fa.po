@@ -7,14 +7,27 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # , 2005.
+#
+# Translations from iso-codes:
+#   Alastair McKinstry - further translations from ICU-3.0
+#   Alastair McKinstry <mckinstry@computer.org>, 2001,2004.
+#   Free Software Foundation, Inc., 2001,2003,2004
+#   Roozbeh Pournader <roozbeh@farsiweb.info>, 2004,2005.
+#   Sharif FarsiWeb, Inc., 2004
+#   Tobias Quathamer <toddy@debian.org>, 2007.
+#     Translations taken from ICU SVN on 2007-09-09
+#   Translations from kde:
+#   - FarsiKDE Team <info@farsikde.org>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: user-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-04-28 22:50+0000\n"
-"PO-Revision-Date: 2010-07-29 02:08+0330\n"
-"Last-Translator: Ebrahim Byagowi <ebraminio@gmail.com>\n"
+"POT-Creation-Date: 2012-02-16 22:49+0000\n"
+"PO-Revision-Date: 2012-02-18 00:04+0330\n"
+"Last-Translator: Hamid <hamid.r1988@gmail.com>\n"
 "Language-Team: Debian-l10n-persian <debian-l10n-persian@lists.debian.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -216,11 +229,11 @@ msgstr "نام‌کاربری نامعتبر"
 msgid ""
 "The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
-"more lower-case letters."
+"more lower-case letters, and must be no more than 32 characters long."
 msgstr ""
 "نام‌کاربری که وارد کرده‌اید نامعتبر است. توجه کنید که نام‌های‌کاربری باید با "
 "حرف‌کوچک شروع شوند، که می‌تواند با هر ترکیبی از اعداد و حروف‌کوچک بیشتر دنبال "
-"شود."
+"شود و همچنین نباید بیشتر از ۳۲ کارکتر طول داشته باشند."
 
 #. Type: error
 #. Description
@@ -325,3 +338,68 @@ msgstr "ایجاد نام‌های کاربری و کلمات عبور."
 #: ../user-setup-udeb.templates:19001
 msgid "Setting users and passwords..."
 msgstr "تنظیم نام‌های کاربری و کلمات عبور"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Use weak password?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid "Encrypt your home directory?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"You may configure your home directory for encryption, such that any files "
+"stored there remain private even if your computer is stolen."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"The system will seamlessly mount your encrypted home directory each time you "
+"login and automatically unmount when you log out of all active sessions."
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Home directory encryption failed"
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid ""
+"The installer failed to set up home directory encryption. Your home "
+"directory will be unencrypted after installation. This is probably a bug, "
+"and you may wish to investigate and reinstall."
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""

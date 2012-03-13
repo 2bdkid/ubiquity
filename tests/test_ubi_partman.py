@@ -298,10 +298,9 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         self.assertIn('reuse', options)
         self.assertItemsEqual(reuse, options['reuse'])
 
-    # 'This computer currently has Ubuntu 11.04 on it.'
-    @unittest.skipIf(True, 'functionality currently broken.')
+    # 'This computer currently has Ubuntu 12.04 on it.'
     def test_same_ubuntu_only(self):
-        operating_system = u'Ubuntu 11.04'
+        operating_system = u'Ubuntu 12.04'
         misc.find_in_os_prober.return_value = operating_system
         part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ext4')
         layout = { '=dev=sda' : [part] }
@@ -322,7 +321,6 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         self.page.db.subst(question, 'CURDISTRO', operating_system)
         title = self.page.description(question)
         desc = self.page.extended_description(question)
-        reuse = ubi_partman.PartitioningOption(title, desc)
 
         operating_systems, ubuntu_systems = \
             self.page.calculate_operating_systems(layout)
@@ -334,8 +332,43 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         self.assertIn('manual', options)
         self.assertItemsEqual(self.manual, options['manual'])
 
-        self.assertIn('reuse', options)
-        self.assertItemsEqual(reuse, options['reuse'])
+        self.assertNotIn('reuse', options)
+
+    # 'This computer currently has Ubuntu 90.10 on it.'
+    def test_newer_ubuntu_only(self):
+        operating_system = u'Ubuntu 90.10'
+        misc.find_in_os_prober.return_value = operating_system
+        part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ext4')
+        layout = { '=dev=sda' : [part] }
+        self.page.extra_options = {}
+        self.page.extra_options['use_device'] = ('debconf-return-value',
+                                                 [{'disk-desc': 0}])
+        self.page.extra_options['reuse'] = [(0, '/dev/sda1')]
+
+        question = 'ubiquity/partitioner/ubuntu_format'
+        question_has_variables(question, ['CURDISTRO'])
+        self.page.db.subst(question, 'CURDISTRO', operating_system)
+        title = self.page.description(question)
+        desc = self.page.extended_description(question)
+        use_device = ubi_partman.PartitioningOption(title, desc)
+
+        question = 'ubiquity/partitioner/ubuntu_reinstall'
+        question_has_variables(question, ['CURDISTRO'])
+        self.page.db.subst(question, 'CURDISTRO', operating_system)
+        title = self.page.description(question)
+        desc = self.page.extended_description(question)
+
+        operating_systems, ubuntu_systems = \
+            self.page.calculate_operating_systems(layout)
+        options = self.page.calculate_autopartitioning_options(
+                        operating_systems, ubuntu_systems)
+        self.assertIn('use_device', options)
+        self.assertItemsEqual(use_device, options['use_device'])
+
+        self.assertIn('manual', options)
+        self.assertItemsEqual(self.manual, options['manual'])
+
+        self.assertNotIn('reuse', options)
 
     # 'This computer currently has multiple operating systems on it.'
     def test_multiple_operating_systems(self):

@@ -12,19 +12,19 @@
 # in doc/i18n/i18n.txt
 #
 #
-# Danishka Navin <danishka@gmail.com>, 2009.
+# Danishka Navin <danishka@gmail.com>, 2009, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: user-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-04-28 22:50+0000\n"
-"PO-Revision-Date: 2010-11-13 23:01+0530\n"
+"POT-Creation-Date: 2012-02-16 22:49+0000\n"
+"PO-Revision-Date: 2012-02-28 10:16+0530\n"
 "Last-Translator: Danishka Navin <danishka@gmail.com>\n"
 "Language-Team: Sinhala <info@hanthana.org>\n"
+"Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: si\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Type: boolean
@@ -216,10 +216,10 @@ msgstr "වලංගු නොවන පරිශීලක නාමයක්"
 msgid ""
 "The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
-"more lower-case letters."
+"more lower-case letters, and must be no more than 32 characters long."
 msgstr ""
-"ඔබ ඇතුළත් කල  පරිශීලක නාමය වලංගු නොවේ, පරිශීලක නාම කුඩා අකුරකින් ඇරඹී ඉන් පසුව ඕනෑම අංක හා "
-"තවත් කුඩා අකුරු සංයෝජනයකින් යුක්ත විය හැකි බව සලකන්න."
+"ඔබ ඇතුළත් කල පරිශීලක නාමය වැරදියි. පරිශීලක නම ඇරඹිය යුත්තේ කුඩා අකුරකින් වන අතර එයින් පසු ඕනෑම "
+"අංක හෝ කුඩා අකුරු සංයුක්තයක් පැවතිය හැක. අක්‍ෂර 32 කට වඩා දිගු නොවිය යුතුයි."
 
 #. Type: error
 #. Description
@@ -323,3 +323,68 @@ msgstr "පරිශීලක සහ රහස්පදය සැකසීම"
 #: ../user-setup-udeb.templates:19001
 msgid "Setting users and passwords..."
 msgstr "පරිශීලක සහ රහස්පදය සකසමින්..."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Use weak password?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid "Encrypt your home directory?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"You may configure your home directory for encryption, such that any files "
+"stored there remain private even if your computer is stolen."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"The system will seamlessly mount your encrypted home directory each time you "
+"login and automatically unmount when you log out of all active sessions."
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Home directory encryption failed"
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid ""
+"The installer failed to set up home directory encryption. Your home "
+"directory will be unencrypted after installation. This is probably a bug, "
+"and you may wish to investigate and reinstall."
+msgstr ""
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""

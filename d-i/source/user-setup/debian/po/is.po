@@ -8,21 +8,30 @@
 # This file is distributed under the same license as debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 #
+# Copyright (C) 2010 Free Software Foundation
+#
 # zorglubb <debian-user-icelandic@lists.debian.org>, 2008.
 # Sveinn í Felli <sveinki@nett.is>, 2010.
-# Copyright (C) 2010 Free Software Foundation
+# Alastair McKinstry, <mckinstry@computer.org>, 2002.
+# Sveinn í Felli <sveinki@nett.is>, 2010, 2011.
+# Alastair McKinstry <mckinstry@computer.org>, 2002.
+# Translations from iso-codes:
+# Copyright (C) 2002,2003, 2010, 2011 Free Software Foundation, Inc.
+# Translations from KDE:
+# Þórarinn Rúnar Einarsson <thori@mindspring.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po_sublevel1_is\n"
 "Report-Msgid-Bugs-To: user-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-04-28 22:50+0000\n"
-"PO-Revision-Date: 2010-10-12 13:30+0000\n"
+"POT-Creation-Date: 2012-02-16 22:49+0000\n"
+"PO-Revision-Date: 2011-12-27 21:05+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
-"Language-Team: Icelandic <rglug@rglug.org>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: is\n"
+">\n"
 
 #. Type: boolean
 #. Description
@@ -138,7 +147,7 @@ msgid ""
 "result in disaster. You should create a normal user account to use for those "
 "day-to-day tasks."
 msgstr ""
-"Það er ekki góð hugmynd að nota root reikninginn í dagleg verk, eins og að "
+"Það er ekki góð hugmynd að nota root aðganginn í dagleg verk, eins og að "
 "lesa tölvupóst, þar sem smávægileg mistök geta haft slæmar afleiðingar. Þú "
 "ættir að búa til venjulegan notanda til að nota í þessi daglegu verk."
 
@@ -152,7 +161,7 @@ msgid ""
 "'imurdock' or 'rms'."
 msgstr ""
 "ATHUGAÐU að þú getur búið til fleiri notendur með því að skrifa 'adduser "
-"<notendanafn>' sem root, þar sem <notendanafn> er er notendanafnið, t.d "
+"<notendanafn>' sem root, þar sem <notendanafn> er er notandanafnið, t.d "
 "'jon' eða 'siggi'."
 
 #. Type: string
@@ -212,18 +221,19 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:11001
 msgid "Invalid username"
-msgstr "Ógilt notendanafn"
+msgstr "Ógilt notandanafn"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../user-setup-udeb.templates:11001
+#, fuzzy
 msgid ""
 "The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
-"more lower-case letters."
+"more lower-case letters, and must be no more than 32 characters long."
 msgstr ""
-"Notandanafnið sem þú valdir er ógilt. Athugaðu að notandanöfn verða að byrja "
+"Notandanafnið sem þú valdir er ógilt. Athugaðu að notendanöfn verða að byrja "
 "á lágstaf sem fylgja má eftir með hverskonar samsetningu talna og fleiri "
 "lágstafa."
 
@@ -267,7 +277,7 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:15001
 msgid "Password input error"
-msgstr "Villa í innslátti á lykilorði"
+msgstr "Villa í innslætti á lykilorði"
 
 #. Type: error
 #. Description
@@ -281,7 +291,7 @@ msgstr "Lykilorðin sem þú slóst inn voru ekki eins. Reyndu aftur."
 #. :sl2:
 #: ../user-setup-udeb.templates:16001
 msgid "Empty password"
-msgstr "Tómt lykilorð:"
+msgstr "Tómt lykilorð"
 
 #. Type: error
 #. Description
@@ -299,7 +309,7 @@ msgstr ""
 #. :sl2:
 #: ../user-setup-udeb.templates:17001
 msgid "Enable shadow passwords?"
-msgstr "Virkja skugga-lykilorð"
+msgstr "Virkja skugga-lykilorð?"
 
 #. Type: boolean
 #. Description
@@ -330,3 +340,79 @@ msgstr "Stilla notendur og lykilorð"
 #: ../user-setup-udeb.templates:19001
 msgid "Setting users and passwords..."
 msgstr "Stilli notendur og lykilorð..."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Use weak password?"
+msgstr "Viltu nota óöruggt lykilorð?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+"Þú skrifaðir lykilorð sem er minna en átta stafa langt, og er því óöruggt. "
+"Reyndu að finna öruggara lykilorð."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid "Encrypt your home directory?"
+msgstr "Viltu dulrita heimasvæðið þitt?"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"You may configure your home directory for encryption, such that any files "
+"stored there remain private even if your computer is stolen."
+msgstr ""
+"Þú getur dulritað heimasvæðið þitt, það merkir að ekki er hægt að skoða "
+"skrárnar sem eru geymdar þar ef tölvunni þinni er stolið."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"The system will seamlessly mount your encrypted home directory each time you "
+"login and automatically unmount when you log out of all active sessions."
+msgstr ""
+"Kerfið mun tengjast dulrituða heimasvæðinu þínu í hvert sinn sem þú skráir "
+"þig inn, og það um aftengja það þegar þú skráir þig út."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Home directory encryption failed"
+msgstr "Dulritun heimamöppu mistókst"
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid ""
+"The installer failed to set up home directory encryption. Your home "
+"directory will be unencrypted after installation. This is probably a bug, "
+"and you may wish to investigate and reinstall."
+msgstr ""
+"Uppsetningarforritinu mistókst að dulrita heimamöppu. Heimamappan þín verður "
+"því ódulrituð eftir uppsetninguna. Þetta er væntanlega villa sem þú gætir "
+"viljað rannsaka betur og keyra síðan uppsetninguna aftur."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""
+"Skoðaðu skránna /var/log/syslog, eða sýndarstjórnskjá (virtual console) 4 "
+"fyrir nánari upplýsingar."

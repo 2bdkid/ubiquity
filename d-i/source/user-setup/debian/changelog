@@ -1,3 +1,110 @@
+user-setup (1.41ubuntu1) precise; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Add the initial user to the adm, lpadmin, and sambashare groups too.
+      Do not add them to the audio, video, floppy, netdev, powerdev,
+      scanner, or bluetooth groups.
+    - Default passwd/root-login to false.
+    - Create the spu group on powerpc/ps3 and powerpc/cell.
+    - Make is_system_user always return false if OVERRIDE_SYSTEM_USER is
+      set.
+    - Add preseedable passwd/auto-login question; if set to true, configure
+      gdm, kdm, lxdm, and lightdm for automatic login.  Add
+      passwd/auto-login-backup question which backs up the previous contents
+      of the files as well.
+    - Ask whether the user wants to encrypt their home directory.
+    - Allow forcing the encrypted home option.
+    - If a user requests an encrypted-home, we must have their login
+      passphrase, in order to wrap their mount passphrase; it's
+      fundamentally incompatible to preseed encrypted-home AND a crypted
+      password; if this happens, send the user back to password selection.
+    - Zero out swap devices at the end of install when encryption is
+      enabled.
+    - Provide a progress message for wiping swap space.
+    - If user-setup/allow-password-empty is preseeded to true, allow empty
+      passwords.
+    - Disable installation of pre-pkgsel.d/10kdesudo; it does nothing for
+      Ubuntu, and causes a confusing message that worries some people.
+    - Add weak password detection (purely length-based for now, matching
+      partman-crypto).
+    - Consider a password of '!' in shadow for root to be unset.
+    - Don't restrict guest login from login screen if autologin was
+      configured, just restrict autologin for guest specifically.
+  * Update Ubuntu-specific translations from Launchpad.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 13 Mar 2012 12:36:20 +0000
+
+user-setup (1.41) unstable; urgency=low
+
+  * Check that usernames are no more than 32 characters long (closes:
+    #571750).
+
+  [ Updated translations ]
+  * Arabic (ar.po) by Ossama Khayat
+  * Asturian (ast.po) by Mikel González
+  * Belarusian (be.po) by Viktar Siarheichyk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Bosnian (bs.po) by Armin Besirovic
+  * Catalan (ca.po) by Jordi Mallach
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Joe Hansen
+  * German (de.po) by Holger Wansing
+  * Greek, Modern (1453-) (el.po)
+  * Esperanto (eo.po) by Felipe Castro
+  * Spanish (es.po) by Javier Fernández-Sanguino
+  * Estonian (et.po) by Mattias Põldaru
+  * Persian (fa.po) by Hamid
+  * French (fr.po) by Christian Perrier
+  * Hindi (hi.po) by Kumar Appaiah
+  * Indonesian (id.po) by Mahyuddin Susanto
+  * Icelandic (is.po) by Sveinn í Felli
+  * Italian (it.po) by Milo Casagrande
+  * Japanese (ja.po) by Kenshi Muto
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Kannada (kn.po) by Prabodh C P
+  * Korean (ko.po) by Changwoo Ryu
+  * Marathi (mr.po) by sampada
+  * Dutch (nl.po) by Jeroen Schot
+  * Polish (pl.po) by Marcin Owsiany
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Russian (ru.po) by Yuri Kozlov
+  * Sinhala (si.po) by Danishka Navin
+  * Slovak (sk.po) by Ivan Masár
+  * Serbian (sr.po) by Karolina Kalic
+  * Swedish (sv.po) by Martin Bagge / brother
+  * Thai (th.po) by Kiatkachorn Ratanatharathorn
+  * Turkish (tr.po) by Mert Dirik
+  * Uyghur (ug.po) by Sahran
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 07 Mar 2012 23:56:11 +0000
+
+user-setup (1.40) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Fix typo in German translation. Closes: #633553
+
+  [ Joey Hess ]
+  * Add first user to debian-tor group, which will allow vidalia to be used
+    to control tor.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Viktar Siarheichyk
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * German (de.po) by Holger Wansing
+  * Hebrew (he.po) by Lior Kaplan
+  * Hindi (hi.po) by Kumar Appaiah
+  * Italian (it.po) by Milo Casagrande
+  * Kannada (kn.po) by vignesh prabhu
+  * Macedonian (mk.po) by Arangel Angov
+  * Polish (pl.po) by Marcin Owsiany
+  * Romanian (ro.po) by Ioan Eugen Stan
+  * Sinhala (si.po) by Danishka Navin
+  * Turkish (tr.po) by Mert Dirik
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Otavio Salvador <otavio@debian.org>  Sat, 19 Nov 2011 16:21:23 -0200
+
 user-setup (1.39ubuntu2) precise; urgency=low
 
   * apt-install ecryptfs-utils and cryptsetup in user-setup-apply, not

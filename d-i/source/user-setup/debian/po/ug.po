@@ -5,25 +5,27 @@
 #
 #
 #
-# Debian Installer master translation file template
+# Debian Installer master translation for Uyghur
 # Don't forget to properly fill-in the header of PO files
 #
 # Debian Installer translators, please read the D-I i18n documentation
 # in doc/i18n/i18n.txt
 #
 #
+# Translations from iso-codes:
+# Sahran <sahran.ug@gmail.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: user-setup@packages.debian.org\n"
-"POT-Creation-Date: 2009-04-28 22:50+0000\n"
-"PO-Revision-Date: 2011-03-24 09:40+0600\n"
+"POT-Creation-Date: 2012-02-16 22:49+0000\n"
+"PO-Revision-Date: 2012-02-27 17:17+0600\n"
 "Last-Translator: Sahran <sahran.ug@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #. Type: boolean
 #. Description
@@ -49,7 +51,7 @@ msgstr ""
 #. :sl1:
 #: ../user-setup-udeb.templates:6001
 msgid "Root password:"
-msgstr "Root ئىمى:"
+msgstr "ئالىي ئىشلەتكۈچى(Root) ئىمى:"
 
 #. Type: password
 #. Description
@@ -227,11 +229,11 @@ msgstr "ئىناۋەتسىز ئىشلەتكۈچى ئاتى"
 msgid ""
 "The username you entered is invalid. Note that usernames must start with a "
 "lower-case letter, which can be followed by any combination of numbers and "
-"more lower-case letters."
+"more lower-case letters, and must be no more than 32 characters long."
 msgstr ""
 "سىز كىرگۈزگەن ئىشلەتكۈچى ئاتى ئىناۋەتسىز. دىققەت، ئىشلەتكۈچى ئاتى چوقۇم بىر "
-"ھەرپتىن باشلىنىپ، ئاخىرىغا ھەر قانداق سان ۋە باشقا كىچىك يېزىلىشتىكى ھەرپلەر "
-"كەلسە بولىدۇ."
+"كىچىك ھەرپتىن باشلىنىپ، ئاخىرىغا ھەر قانداق سان ۋە باشقا كىچىك ھەرپلەر كەلسە "
+"بولىدۇ,32 ھەرپتىن ئۇزۇن بولماسلىقى لازىم."
 
 #. Type: error
 #. Description
@@ -336,3 +338,80 @@ msgstr "ئىشلەتكۈچى ۋە ئىم سەپلەش"
 #: ../user-setup-udeb.templates:19001
 msgid "Setting users and passwords..."
 msgstr "ئىشلەتكۈچى ۋە ئىم سەپلەۋاتىدۇ…"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid "Use weak password?"
+msgstr "ئاجىز ئىم ئىشلىتەمسىز؟"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:20001
+msgid ""
+"You entered a password that consists of less than eight characters, which is "
+"considered too weak. You should choose a stronger password."
+msgstr ""
+"سىز كىرگۈزگەن ئىم جۈملىسىدىكى ھەرپ سانى سەككىزدىن ئاز، بۇنداق بولسا بەك "
+"ئاجىز. سىز تېخىمۇ كۈچلۈك ئىم تاللاڭ."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid "Encrypt your home directory?"
+msgstr "ماكان مۇندەرىجىڭىزنى شىفىرلامسىز؟"
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"You may configure your home directory for encryption, such that any files "
+"stored there remain private even if your computer is stolen."
+msgstr ""
+"ماكان مۇندەرىجىنى شىفىرلاپ سەپلىسىڭىز بولىدۇ، ئەگەر كومپيۇتېرىڭىز "
+"ئوغرىلانغان تەقدىردىمۇ ساقلىغان ھۆججەتلىرىڭىزنى ئوغرىلىۋالالمايدۇ."
+
+#. Type: boolean
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:21001
+msgid ""
+"The system will seamlessly mount your encrypted home directory each time you "
+"login and automatically unmount when you log out of all active sessions."
+msgstr ""
+"سىز سىستېمىغا كىرگەندە شىفىرلىق ماكان مۇندەرىجە ئۆزلۈكىدىن ئېگەرلىنىدۇ، "
+"ھەرىكەتتىكى ھەممە پروگراممىدىن چېكىنىپ تىزىمدىن چىققاندا ئۆزلۈكىدىن "
+"ئېگەرسىزلىنىدۇ."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Home directory encryption failed"
+msgstr "ماكان مۇندەرىجىنى شىفىرلىيالمىدى."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid ""
+"The installer failed to set up home directory encryption. Your home "
+"directory will be unencrypted after installation. This is probably a bug, "
+"and you may wish to investigate and reinstall."
+msgstr ""
+"ئورناتقۇچ ماكان مۇندەرىجىنى شىفىرلىيالمىدى. ئورنىتىش تاماملانغاندا ماكان "
+"مۇندەرىجىنىڭ شىفىرى يېشىۋېتىلىدۇ. بۇ كەمتۈك بولۇشى مۇمكىن، تەكشۈرۈپ قايتا "
+"ئورنىتىپ بېقىڭ."
+
+#. Type: error
+#. Description
+#. :sl2:
+#: ../user-setup-udeb.templates:22001
+msgid "Check /var/log/syslog or see virtual console 4 for the details."
+msgstr ""
+"/var/log/syslog نى تەكشۈرۈڭ ياكى 4-مەۋھۇم كونترول سۇپىسىنى(console) كۆرۈپ "
+"تېخىمۇ كۆپ تەپسىلىي ئۇچۇرغا ئېرىشىڭ."
