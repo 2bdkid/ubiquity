@@ -579,7 +579,6 @@ def set_indicator_keymaps(locale):
     from gi.repository import Xkl, GdkX11
     from ubiquity import gsettings
 
-    # FIXME: Code below needs porting to gsettings (not done yet as the function is disabled)
     xpath = "//iso_639_3_entry[@part1_code='%s']"
     gsettings_key = ['org.gnome.libgnomekbd.keyboard','layouts']
     variants = []
@@ -595,23 +594,78 @@ def set_indicator_keymaps(locale):
         else:
             variants.append(item_str(args[1].name))
 
-    lang = locale.split('_')[0]
+    def restrict_list(variants, lang):
+        new_variants = []
+        language = lang[0]
+        try:
+            country = lang[1].split('.')[0].lower()
+        except IndexError:
+            country = ''
+
+        # Prioritize the layout matching the language (if any)
+        if language in variants:
+            variants.remove(language)
+            new_variants.append(language)
+
+        # Catch cases where the country is the important part (US)
+        if country in variants:
+            variants.remove(country)
+            new_variants.append(country)
+
+        # Uniquify our list (just in case)
+        variants = set(variants)
+
+        if len(variants) > 4:
+            # We have a problem, X only supports 4
+
+            # Add as many entry as we can that are layouts without variant
+            country_variants = sorted([entry for entry in variants if '\t' not in entry])
+            for entry in country_variants[:4-len(new_variants)]:
+                new_variants.append(entry)
+                variants.remove(entry)
+
+            if len(new_variants) < 4:
+                # We can add some more
+                simple_variants = sorted([entry for entry in variants if '_' not in entry])
+                for entry in simple_variants[:4-len(new_variants)]:
+                    new_variants.append(entry)
+                    variants.remove(entry)
+
+            if len(new_variants) < 4:
+                # Now just add anything left
+                for entry in variants[:4-len(new_variants)]:
+                    new_variants.append(entry)
+                    variants.remove(entry)
+        else:
+            new_variants += list(variants)
+
+        # gsettings doesn't understand utf8
+        new_variants = [str(variant) for variant in new_variants]
+
+        print new_variants
+        return new_variants
+
+    lang = locale.split('_')
     fp = libxml2.parseFile('/usr/share/xml/iso-codes/iso_639_3.xml')
     context = fp.xpathNewContext()
-    nodes = context.xpathEvalExpression(xpath % lang)
+    nodes = context.xpathEvalExpression(xpath % lang[0])
     if nodes:
-        code = nodes[0].prop('part2_code')
         display = GdkX11.x11_get_default_xdisplay()
         engine = Xkl.Engine.get_instance(display)
         configreg = Xkl.ConfigRegistry.get_instance(engine)
         configreg.load(False)
-        configreg.foreach_language_variant(code, process_variant, None)
-        if variants:
-            gsettings.set_list(gsettings_key[0], gsettings_key[1], variants)
-            return
+
+        # Apparently part2_code doesn't always work (fails with French)
+        for prop in ('part2_code', 'id', 'part1_code'):
+            if nodes[0].hasProp(prop):
+                code = nodes[0].prop(prop)
+                configreg.foreach_language_variant(code, process_variant, None)
+                if variants:
+                    gsettings.set_list(gsettings_key[0], gsettings_key[1], restrict_list(variants, lang))
+                    return
 
     # Use the system default if no other keymaps can be determined.
-    gsettings.set_list(gsettings_key[0], gsettings_key[1], '')
+    gsettings.set_list(gsettings_key[0], gsettings_key[1], [])
 
 NM = 'org.freedesktop.NetworkManager'
 NM_STATE_CONNECTED_GLOBAL = 70

@@ -1,3 +1,28 @@
+ubiquity (2.9.29) precise; urgency=low
+
+  [ Oliver Grawert ]
+  * disable gnome-settings-daemon power management plugin during install to
+    make sure things like lid closing or accidential pressing of power or
+    suspend buttons do not put us into suspend mode (LP: #948163)
+
+  [ Stéphane Graber ]
+  * ubi-partman: Ignore None cell values, we'll get another event
+    when they actually contain something anyway. (LP: #939450)
+  * Fix set_indicator_keymaps to always send an array of strings to
+    gsettings and also go through more of the possible language codes as
+    Xkl doesn't seem to always work with part2_code (LP: #955844)
+  * Restrict the list of keyboard layouts added to the indicator to 4
+    and try to be clever as to which one to select.
+  * Only use the keyboard indicator when in greeter mode, otherwise it'd
+    override any previously selected keyboard layout (from gfxboot or from
+    the user session)
+  * Update indicator tests to match the new code, ensuring we don't have
+    more than 4 entries and that languages with variants work fine.
+  * Automatic update of included source packages: console-setup
+    1.70ubuntu3, partman-auto 93ubuntu22, partman-efi 24ubuntu3.
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Thu, 15 Mar 2012 18:12:41 -0400
+
 ubiquity (2.9.28) precise; urgency=low
 
   * ubiquity-bluetooth-agent: Don't touch /tmp/ubiquity-bluetooth-done

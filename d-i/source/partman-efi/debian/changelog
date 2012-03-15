@@ -1,3 +1,14 @@
+partman-efi (24ubuntu3) precise; urgency=low
+
+  * On x86 architectures, create EFI system partitions using FAT32 rather
+    than FAT16, and require newly-created ones to have a minimum size of
+    34091008 bytes, experimentally verified as the minimum libparted will
+    accept (LP: #811485).
+  * Never format EFI system partitions that already contain a filesystem
+    (LP: #769669).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 14 Mar 2012 14:31:13 +0000
+
 partman-efi (24ubuntu2) oneiric; urgency=low
 
   * Be case insensitive on matching the name EFI System Partition when 

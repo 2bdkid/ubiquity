@@ -2,18 +2,19 @@
 # packages/po/ar.po
 #
 # DO NOT MODIFY IT DIRECTLY : SUCH CHANGES WILL BE LOST
-# 
+#
 # translation of debian-installer_packages_po.po to Arabic
 # Ossama M. Khayat <okhayat@yahoo.com>, 2006, 2007.
 # Arabic messages for debian-installer. Copyright (C) 2003 Software in the Public Interest, Inc. This file is distributed under the same license as debian-installer. Ossama M. Khayat <okhayat@yahoo.com>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po\n"
-"Report-Msgid-Bugs-To: debian-boot@lists.debian.org\n"
-"POT-Creation-Date: 2008-01-26 07:32+0000\n"
+"Report-Msgid-Bugs-To: partman-efi@packages.debian.org\n"
+"POT-Creation-Date: 2012-03-14 12:33+0000\n"
 "PO-Revision-Date: 2007-01-21 16:33+0300\n"
 "Last-Translator: Ossama M. Khayat <okhayat@yahoo.com>\n"
 "Language-Team: Arabic <support@arabeyes.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,3 +79,21 @@ msgstr "EFIboot"
 #: ../partman-efi.templates:7001
 msgid "EFI-fat16"
 msgstr "EFI-fat16"
+
+#. Type: error
+#. Description
+#. :sl5:
+#: ../partman-efi.templates:8001
+#, fuzzy
+#| msgid "EFI boot partition"
+msgid "EFI partition too small"
+msgstr "جزء إقلاع EFI"
+
+#. Type: error
+#. Description
+#. :sl5:
+#: ../partman-efi.templates:8001
+msgid ""
+"EFI boot partitions on this architecture cannot be created with a size less "
+"than 35 MB. Please make the EFI boot partition larger."
+msgstr ""
