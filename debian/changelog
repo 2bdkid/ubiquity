@@ -1,3 +1,37 @@
+ubiquity (2.9.30) precise; urgency=low
+
+  [ Adam Conrad ]
+  * Drop gui/qt/images/squares.png and replace it with a single pixel
+    transparent PNG as a placeholder for future changes (LP: #942543)
+
+  [ Evan Dandrea ]
+  * Lazily unmount partitions in the check for a Windows partition to
+    install Wubi on when we have a full partition table (LP: #956531).
+  * Add a small program for testing the Gstreamer webcam code.
+  * Fix broken test video output in the GI webcam module.
+
+  [ Stéphane Graber ]
+  * set_indicator_keymaps() doesn't actually receive a full locale but
+    instead just the language code. That means that the code trying to
+    guess a layout based on the default country won't work.
+    Drop all of that code and replace by a static map to override the
+    default keyboard layout/variant for a language. (LP: #956912)
+  * Merge and update Alessio Treglia's branch to make the slideshow
+    optional depending on (ubiquity/hide_slideshow) (LP: #690912)
+  * Also call setxkbmap directly from set_indicator_keymaps() to ensure
+    we actually switch to the first layout in the list. (LP: #956912)
+  * Properly mark the KeyboardQuery dialog as a child of ubiquity.
+    (LP: #955265)
+
+  [ Martin Pitt ]
+  * tests/test_migrationassistant.py: Fix to work with pygobject 3.1.92.
+
+  [ Barry Warsaw ]
+  * When Try Ubuntu has been clicked once, don't respond to subsequent
+    clicks.  (LP: #911907)
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Mon, 19 Mar 2012 18:02:48 -0400
+
 ubiquity (2.9.29) precise; urgency=low
 
   [ Oliver Grawert ]
