@@ -581,6 +581,7 @@ def set_indicator_keymaps(lang):
 
     xpath = "//iso_639_3_entry[@part1_code='%s']"
     gsettings_key = ['org.gnome.libgnomekbd.keyboard','layouts']
+    lang = lang.split('_')[0]
     variants = []
 
     # Map inspired from that of gfxboot-theme-ubuntu that's itself
@@ -691,9 +692,9 @@ def set_indicator_keymaps(lang):
     fp = libxml2.parseFile('/usr/share/xml/iso-codes/iso_639_3.xml')
     context = fp.xpathNewContext()
     nodes = context.xpathEvalExpression(xpath % lang)
+    display = GdkX11.x11_get_default_xdisplay()
+    engine = Xkl.Engine.get_instance(display)
     if nodes:
-        display = GdkX11.x11_get_default_xdisplay()
-        engine = Xkl.Engine.get_instance(display)
         configreg = Xkl.ConfigRegistry.get_instance(engine)
         configreg.load(False)
 

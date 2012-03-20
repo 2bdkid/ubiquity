@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: partman-partitioning@packages.debian.org\n"
-"POT-Creation-Date: 2009-09-04 22:47+0000\n"
+"POT-Creation-Date: 2012-03-20 18:16+0000\n"
 "PO-Revision-Date: 2009-09-05 19:54+0400\n"
 "Last-Translator: Yuri Kozlov <yuray@komyakino.ru>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
@@ -621,3 +621,50 @@ msgstr "Резервная загрузочная область BIOS"
 #: ../partman-partitioning.templates:37001
 msgid "biosgrub"
 msgstr "biosgrub"
+
+#. Type: boolean
+#. Description
+#. :sl5:
+#. Type: boolean
+#. Description
+#. :sl5:
+#: ../partman-partitioning.templates:38001
+#: ../partman-partitioning.templates:39001
+msgid "Go back to the menu and correct this problem?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl5:
+#: ../partman-partitioning.templates:38001
+msgid ""
+"The partition table format in use on your disks normally requires you to "
+"create a separate partition for boot loader code. This partition should be "
+"marked for use as an \"EFI boot partition\" and should be at least 35 MB in "
+"size. Note that this is not the same as a partition mounted on /boot."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl5:
+#. Type: boolean
+#. Description
+#. :sl5:
+#: ../partman-partitioning.templates:38001
+#: ../partman-partitioning.templates:39001
+msgid ""
+"If you do not go back to the partitioning menu and correct this error, boot "
+"loader installation may fail later, although it may still be possible to "
+"install the boot loader to a partition."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#. :sl5:
+#: ../partman-partitioning.templates:39001
+msgid ""
+"The partition table format in use on your disks normally requires you to "
+"create a separate partition for boot loader code. This partition should be "
+"marked for use as a \"Reserved BIOS boot area\" and should be at least 1 MB "
+"in size. Note that this is not the same as a partition mounted on /boot."
+msgstr ""

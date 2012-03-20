@@ -2024,6 +2024,10 @@ my %xkbsym_table = (
     'dead_stroke' => '002d',         # hyphen
     'dead_belowdot' => '0323',       # ???? Vietnamese
     'dead_hook' => '0309',           # ???? Vietnamese
+    'dead_belowcomma' => 'VoidSymbol',
+    'dead_currency' => 'VoidSymbol',
+    'dead_doublegrave' => 'VoidSymbol',
+    'dead_invertedbreve' => 'VoidSymbol',
     'dead_iota' => '03b9',           # ???? Greek
     'dead_horn' => '031b',           # ???? Greek
     'dead_psili' => 'VoidSymbol',    # ???? Greek
@@ -3948,11 +3952,11 @@ print $KEYMAP;
 print "strings as usual\n";
 
 if ($charmap && -f "/etc/console-setup/compose.${charmap}.inc") {
-    system("cat /etc/console-setup/compose.${charmap}.inc");
+    system("cat", "/etc/console-setup/compose.${charmap}.inc");
 }
 
 if (! $compact && -f "/etc/console-setup/remap.inc") {
-    system("cat /etc/console-setup/remap.inc");
+    system("cat", "/etc/console-setup/remap.inc");
 }
 
 exit 0;

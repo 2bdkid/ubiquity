@@ -29,7 +29,7 @@ arch_check_usable_kernel () {
 }
 
 arch_get_kernel () {
-	if [ "$1" = "powerpc64" ]; then
+	if [ "$1" = "powerpc64" ] || [ "$1" = "powerpc" ]; then
 		SMP=-smp
 	else
 		SMP=
