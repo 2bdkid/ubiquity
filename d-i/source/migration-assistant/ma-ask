@@ -29,7 +29,7 @@ do
     target="$(readlink -e "$target")" || target=
     home="$(grep ' /target/home ' /proc/mounts | cut -d' ' -f1)"
     home="$(readlink -e "$home")" || home=
-    if [ "$target" = "$location" ] || "$home" = "$location" ]; then
+    if [ "$target" = "$location" ] || [ "$home" = "$location" ]; then
 	    continue
     fi
     if [ -z "$tmp" ]; then

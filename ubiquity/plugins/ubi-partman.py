@@ -40,6 +40,28 @@ OEM = False
 PartitioningOption = namedtuple('PartitioningOption', ['title', 'desc'])
 Partition = namedtuple('Partition', ['device', 'size', 'id', 'filesystem'])
 
+# List of file system types that reserve extra space for grub.  Found by
+# grepping for "reserved_first_sector = 1" in the grub2 source as per 
+# https://bugs.launchpad.net/ubuntu/+source/ubiquity/+bug/959724
+# Only those file systems that set this to 1 can have the boot loader
+# installed on them.  This is that list, with values taken from the .name
+# entry in the matching structs.
+FS_RESERVED_FIRST_SECTOR = set([
+    'btrfs',
+    'ext2',
+    'fat',
+    'hfsplus',
+    'nilfs2',
+    'ntfs',
+    # Add a few ext variants that aren't explicitly described in grub2.
+    'ext3',
+    'ext4',
+    # Add a few fat variants.
+    'fat16',
+    'fat32',
+    # Others?
+    ])
+
 
 class PageBase(plugin.PluginUI):
     def __init__(self, *args, **kwargs):
@@ -367,6 +389,13 @@ class PageGtk(PageBase):
 
         (resize_min_size, resize_max_size, resize_pref_size,
          resize_path, size, fs) = self.extra_options['resize'][disk_id][1:]
+
+        # Make sure we always have enough space to install using the
+        # same install_size as everywhere else in ubiquity
+        real_max_size = size - misc.install_size()
+        if real_max_size < resize_max_size:
+            resize_max_size = real_max_size
+
         self.resizewidget.set_property('min_size', int(resize_min_size))
         self.resizewidget.set_property('max_size', int(resize_max_size))
 
@@ -458,20 +487,20 @@ class PageGtk(PageBase):
         self.controller.go_forward()
         return True
 
-    def set_grub_options(self, default):
+    def set_grub_options(self, default, grub_installable):
         from gi.repository import Gtk, GObject
         self.bootloader_vbox.show()
         options = misc.grub_options()
-        if default.startswith('/'):
-            default = os.path.realpath(default)
         l = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
         self.grub_device_entry.set_model(l)
         selected = False
         for opt in options:
-            i = l.append(opt)
-            if opt[0] == default:
-                self.grub_device_entry.set_active_iter(i)
-                selected = True
+            path = opt[0]
+            if grub_installable.get(path, False):
+                i = l.append(opt)
+                if path == default:
+                    self.grub_device_entry.set_active_iter(i)
+                    selected = True
         if not selected:
             i = l.append([default, ''])
             self.grub_device_entry.set_active_iter(i)
@@ -1283,11 +1312,9 @@ class PageKde(PageBase):
         self.disk_layout = layout
         self.partAuto.setDiskLayout(layout)
 
-    def set_grub_options(self, default):
+    def set_grub_options(self, default, grub_installable):
         options = misc.grub_options()
-        if default.startswith('/'):
-            default = os.path.realpath(default)
-        self.partMan.setGrubOptions(options, default)
+        self.partMan.setGrubOptions(options, default, grub_installable)
 
     def get_grub_choice(self):
         choice = self.partMan.getGrubChoice()
@@ -1385,14 +1412,7 @@ class Page(plugin.Plugin):
             if arch in ('amd64', 'i386'):
                 self.install_bootloader = True
 
-        filesystem_size = 5 * 1024 * 1024 * 1024 # 5GB
-        try:
-            with open('/cdrom/casper/filesystem.size') as fp:
-                filesystem_size = int(fp.readline())
-        except IOError:
-            self.debug('Could not determine filesystem size.')
-        fudge = 200 * 1024 * 1024 # 200 MB
-        self.installation_size = filesystem_size + fudge
+        self.installation_size = misc.install_size()
 
         questions = ['^partman-auto/.*automatically_partition$',
                      '^partman-auto/select_disk$',
@@ -2907,13 +2927,50 @@ class Page(plugin.Plugin):
             self.local_progress = False
 
     def maybe_update_grub(self):
-        if self.install_bootloader:
-            grub_bootdev=self.db.get("grub-installer/bootdev")
-            if grub_bootdev and grub_bootdev in (part[0] for part in misc.grub_options()):
-                default = grub_bootdev
-            else:
-                default = misc.grub_default()
-            self.ui.set_grub_options(default)
+        if not self.install_bootloader:
+            return
+        paths = [part[0] for part in misc.grub_options()]
+        # Get the default boot device.
+        grub_bootdev = self.db.get("grub-installer/bootdev")
+        if grub_bootdev and grub_bootdev in paths:
+            default = grub_bootdev
+        else:
+            default = misc.grub_default()
+        # Create a reverse mapping from grub options device path to the file
+        # system type being installed on that option.  Then later we'll make
+        # sure that grub can actually be installed on that path's file system.
+        fstype_by_path = {}
+        for key, value in self.partition_cache.items():
+            path = value.get('parted', {}).get('path')
+            fstype = value.get('parted', {}).get('fs', 'free')
+            if path is not None:
+                # Duplicate paths should not be possible, but if we find one,
+                # the first one (<wink>, i.e. random) wins.
+                if path in fstype_by_path:
+                    self.debug('already found path %s with type %s',
+                               path, fstype_by_path[path])
+                else:
+                    fstype_by_path[path] = fstype
+        if default.startswith('/'):
+            default = os.path.realpath(default)
+        # Now, create a dictionary mapping boot device path to a flag
+        # indicating whether grub can or cannot be installed on that path's
+        # file system.  Use 'free' as a default since grub can never be
+        # installed on free space.
+        grub_installable = {}
+        for path in paths:
+            fstype = fstype_by_path.get(path, 'free')
+            can_install = fstype in FS_RESERVED_FIRST_SECTOR
+            grub_installable[path] = can_install
+            self.debug('device path: %s, fstype: %s, grub installable? %s',
+                       path, fstype, 'yes' if can_install else 'no')
+        # Let grub offer to install to all the disk devices.
+        for key, value in self.disk_cache.items():
+            device = value.get('device')
+            if device is not None:
+                grub_installable[device] = True
+                self.debug('device path: %s grub installable? yes', device)
+        self.ui.set_grub_options(default, grub_installable)
 
 # Notes:
 #

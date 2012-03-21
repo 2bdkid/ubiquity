@@ -33,6 +33,17 @@
 
 #define ENTRY_DATA_NAME "indicator-custom-entry-data"
 
+
+static gchar * indicator_order[] = {
+  "indicator-session-devices",
+  "indicator-sound",
+  "nm-applet",
+  "bluetooth-manager",
+  "ubiquity",
+  "keyboard",
+  NULL
+};
+
 enum {
 	STRUT_LEFT = 0,
 	STRUT_RIGHT = 1,
@@ -109,9 +120,6 @@ entry_added (IndicatorObject * io, IndicatorObjectEntry * entry, gpointer user_d
     if (entry->image != NULL) {
         gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(entry->image), FALSE, FALSE, 0);
     }
-    if (entry->label != NULL) {
-        gtk_box_pack_start(GTK_BOX(hbox), GTK_WIDGET(entry->label), FALSE, FALSE, 0);
-    }
     gtk_container_add(GTK_CONTAINER(menuitem), hbox);
     gtk_widget_show(hbox);
 
@@ -119,7 +127,24 @@ entry_added (IndicatorObject * io, IndicatorObjectEntry * entry, gpointer user_d
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(menuitem), GTK_WIDGET(entry->menu));
     }
 
-    gtk_menu_shell_append(GTK_MENU_SHELL(user_data), menuitem);
+    if (entry->name_hint != NULL) {
+        int i;
+        int found = 0;
+        for (i = 0; indicator_order[i] != NULL; i++) {
+            if (g_strcmp0(entry->name_hint, indicator_order[i]) == 0) {
+                gtk_menu_shell_insert(GTK_MENU_SHELL(user_data), menuitem, i);
+                found = 1;
+                break;
+            }
+        }
+        if (found == 0) {
+            gtk_menu_shell_append(GTK_MENU_SHELL(user_data), menuitem);
+        }
+    }
+    else {
+        gtk_menu_shell_append(GTK_MENU_SHELL(user_data), menuitem);
+    }
+
     gtk_widget_show(menuitem);
 
     g_object_set_data(G_OBJECT(menuitem), ENTRY_DATA_NAME, entry);
@@ -201,7 +226,6 @@ on_realize(GtkWidget *win, gpointer data) {
 
 static const char* indicators[] = {
 	"/usr/lib/indicators3/7/libsession.so",
-	// Bluetooth
 	"/usr/lib/indicators3/7/libapplication.so",
 	"/usr/lib/indicators3/7/libsoundmenu.so",
 	NULL
@@ -245,20 +269,30 @@ on_draw(GtkWidget *widget, cairo_t *cr, gpointer userdata) {
 int
 main(int argc, char* argv[]) {
 	GtkWidget *win;
+	GtkCssProvider *cssprovider;
+
 	/* Disable global menus */
 	g_unsetenv ("UBUNTU_MENUPROXY");
 	gtk_init(&argc, &argv);
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 	g_signal_connect(win, "realize", G_CALLBACK(on_realize), NULL);
 
-	gtk_css_provider_load_from_data(gtk_css_provider_get_default(),
+	cssprovider = gtk_css_provider_new ();
+	gtk_css_provider_load_from_data(cssprovider,
 			"GtkMenuBar {\n"
-			"-GtkMenuBar-internal-padding: 0;\n"
-			"-GtkMenuBar-shadow-type: none;\n"
-			"}\nGtkWidget {\n"
-			"-GtkWidget-focus-line-width: 0;\n"
-			"-GtkWidget-focus-padding: 0;\n"
-			"}", -1, NULL);
+			"    -GtkMenuBar-internal-padding: 0;\n"
+			"    -GtkMenuBar-shadow-type: none;\n"
+			"}\n"
+			"GtkWidget {\n"
+			"    -GtkWidget-focus-line-width: 0;\n"
+			"    -GtkWidget-focus-padding: 0;\n"
+			"}\n"
+			".menuitem {\n"
+			"    padding: 0px 0px 0px 0px;\n"
+			"}\n", -1, NULL);
+
+	gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+		GTK_STYLE_PROVIDER (cssprovider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 	GtkWidget* menubar = gtk_menu_bar_new();
 	gtk_menu_bar_set_pack_direction(GTK_MENU_BAR(menubar), GTK_PACK_DIRECTION_RTL);
