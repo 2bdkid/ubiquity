@@ -12,6 +12,7 @@ class TestFrontend(unittest.TestCase):
         for obj in ('ubiquity.misc.drop_privileges',
                     'ubiquity.misc.regain_privileges',
                     'ubiquity.misc.execute',
+                    'ubiquity.misc.dmimodel',
                     'ubiquity.frontend.base.drop_privileges',
                     'ubiquity.frontend.gtk_ui.Wizard.customize_installer',
                     'ubiquity.nm.wireless_hardware_present',
@@ -20,15 +21,19 @@ class TestFrontend(unittest.TestCase):
                     'ubiquity.misc.has_connection',
                     'ubiquity.upower.setup_power_watch',
                     'dbus.mainloop.glib.DBusGMainLoop',
-                    'gi.repository.UbiquityWebcam.Webcam.available'):
+                    'gi.repository.UbiquityWebcam.Webcam.available',
+                    'ubiquity.i18n.reset_locale',
+                    ):
             patcher = mock.patch(obj)
-            patcher.start()
+            patched_obj = patcher.start()
             self.addCleanup(patcher.stop)
             if obj in ('ubiquity.misc.wireless_hardware_present',
                        'ubiquity.misc.has_connection'):
-                patcher.return_value = False
+                patched_obj.return_value = False
             elif obj == 'gi.repository.UbiquityWebcam.Webcam.available':
-                patcher.return_value = True
+                patched_obj.return_value = True
+            elif obj == 'ubiquity.i18n.reset_locale':
+                patched_obj.return_value = 'en_US.UTF-8'
 
     def test_question_dialog(self):
         from ubiquity.frontend import gtk_ui
