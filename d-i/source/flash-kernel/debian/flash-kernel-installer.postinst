@@ -38,6 +38,9 @@ write_to_flash() {
 		"GLAN Tank")
 			return 1
 		;;
+		"Highbank")
+			return 1
+		;;
 		"HP Media Vault mv2120")
 			return 1
 		;;
@@ -69,6 +72,16 @@ write_to_flash() {
 machine=$(grep "^Hardware" /proc/cpuinfo | sed 's/Hardware\s*:\s*//')
 
 dove_flash_kernel_installer() {
+	in-target update-initramfs -u || true
+	install_mkimage
+
+	# Add the rootfs to the flash-kernel.conf file
+	rootfs=$(findfs /)
+	uuid="$(block-attr --uuid "$rootfs")"
+	echo "rootfs='root=UUID=$uuid'" > /target/etc/flash-kernel.conf
+}
+
+highbank_flash_kernel_installer() {
 	in-target update-initramfs -u || true
 	install_mkimage
 
@@ -213,6 +226,9 @@ case "$machine" in
 	;;
 	"GLAN Tank")
 		in-target update-initramfs -u || true
+	;;
+	"Highbank")
+		highbank_flash_kernel_installer
 	;;
 	"HP Media Vault mv2120")
 		if ! apt-install mv2120-utils; then
