@@ -410,12 +410,13 @@ class PageGtk(PageBase):
     def on_hostname_changed(self, widget):
         self.hostname_edited = (widget.get_text() != '')
 
-        # Let's not call this every time the user presses a key.
-        from gi.repository import GObject
-        if self.hostname_timeout_id:
-            GObject.source_remove(self.hostname_timeout_id)
-        self.hostname_timeout_id = GObject.timeout_add(300,
-                                        self.hostname_timeout, widget)
+        if not 'UBIQUITY_AUTOMATIC' in os.environ:
+            # Let's not call this every time the user presses a key.
+            from gi.repository import GObject
+            if self.hostname_timeout_id:
+                GObject.source_remove(self.hostname_timeout_id)
+            self.hostname_timeout_id = GObject.timeout_add(300,
+                                            self.hostname_timeout, widget)
 
     def lookup_result(self, resolver, result, unused):
         from gi.repository import GObject
@@ -743,6 +744,10 @@ class Page(plugin.Plugin):
         # We need to call info_loop as we switch to the page so the next button
         # gets disabled.
         self.ui.info_loop(None)
+
+        # Trigger the bogus DNS server detection
+        if not 'UBIQUITY_AUTOMATIC' in os.environ and hasattr(self.ui, 'detect_bogus_result'):
+            self.ui.detect_bogus_result()
 
         # We intentionally don't listen to passwd/auto-login or
         # user-setup/encrypt-home because we don't want those alone to force
