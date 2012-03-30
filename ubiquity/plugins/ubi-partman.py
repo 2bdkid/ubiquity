@@ -1504,6 +1504,13 @@ class Page(plugin.Plugin):
         else:
             return None, None
 
+    def devpart_disk(self, devpart):
+        dev = self.split_devpart(devpart)[0]
+        if dev:
+            return '%s/%s//' % (parted_server.devices, dev)
+        else:
+            return None
+
     def subdirectories(self, directory):
         for name in sorted(os.listdir(directory)):
             if os.path.isdir(os.path.join(directory, name)):
@@ -1584,13 +1591,11 @@ class Page(plugin.Plugin):
                 # supports this method at the moment. Maybe it would be
                 # better to fetch VALID_FLAGS for each partition while
                 # building the cache?
-                dev = self.split_devpart(devpart)[0]
-                if dev is not None:
-                    dev = '%s/%s' % (parted_server.devices, dev)
-                    if (dev in self.disk_cache and
-                        'label' in self.disk_cache[dev] and
-                        self.disk_cache[dev]['label'] == 'gpt'):
-                        yield (method, method, self.method_description(method))
+                disk = self.devpart_disk(devpart)
+                if (disk is not None and disk in self.disk_cache and
+                    'label' in self.disk_cache[disk] and
+                    self.disk_cache[disk]['label'] == 'gpt'):
+                    yield (method, method, self.method_description(method))
             else:
                 yield (method, method, self.method_description(method))
 
@@ -2243,6 +2248,15 @@ class Page(plugin.Plugin):
                         for devpart in self.update_partitions:
                             if devpart in self.partition_cache:
                                 del self.partition_cache[devpart]
+                            # We don't get a separate notification when a
+                            # disk label is changed, only a notification
+                            # about the free-space slot covering the whole
+                            # disk.  Therefore, clear the corresponding disk
+                            # from the disk cache just in case its label has
+                            # changed.
+                            disk = self.devpart_disk(devpart)
+                            if disk and disk in self.disk_cache:
+                                del self.disk_cache[disk]
 
                     # Initialise any items we haven't heard of yet.
                     for script, arg, option in matches:
@@ -2263,7 +2277,7 @@ class Page(plugin.Plugin):
                                 device = parted.readline_device_entry('device')
                                 parted.open_dialog('GET_LABEL_TYPE')
                                 try:
-                                    label = parted.read_line()
+                                    label = parted.read_line()[0]
                                 finally:
                                     parted.close_dialog()
                                 self.disk_cache[arg] = {

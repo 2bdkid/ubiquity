@@ -166,6 +166,14 @@ _Description: Continue with partitioning?
  If you can, please help to add support for your partition table type
  to libparted.
 
+Template: partman-partitioning/default_label
+Type: string
+Description: for internal use; can be preseeded
+ You may preseed this template to override the partitioner's
+ platform-specific default choice of disk label.  For example, on x86
+ architectures it may be useful to set this to "gpt" to cause new partition
+ tables to be created using GPT.
+
 Template: partman-partitioning/choose_label
 Type: select
 Choices: ${CHOICES}

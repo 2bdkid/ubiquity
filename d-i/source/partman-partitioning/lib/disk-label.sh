@@ -193,7 +193,12 @@ create_new_label() {
 	db_subst partman-partitioning/choose_label CHOICES "$types"
 	PRIORITY=critical
 
-	default_label=$(default_disk_label)
+	db_get partman-partitioning/default_label
+	if [ "$RET" ]; then
+		default_label="$RET"
+	else
+		default_label=$(default_disk_label)
+	fi
 
 	# Use gpt instead of msdos disklabel for disks larger than 2TiB
 	if expr "$types" : ".*gpt.*" >/dev/null; then

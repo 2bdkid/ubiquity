@@ -1,3 +1,54 @@
+partman-partitioning (85ubuntu1) precise; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Make sure to wipe disk label on Sun disks before creating a new one.
+    - Depend on ntfs-3g-udeb as well as ntfsprogs-udeb.
+    - Add PATH, RAWMINSIZE, RAWPREFSIZE, and RAWMAXSIZE substitutions to
+      partman-partitioning/new_size in support of ubiquity's resize widget.
+    - Cache calls to tune2fs and ntfsresize, to make navigating through the
+      resize UI a little faster.
+    - Check that minimum filesystem sizes reported by tune2fs and ntfsresize
+      are between the minimum partition size and the current partition size;
+      if not, refuse to resize the partition at all.
+    - Use the GPT disk label by default on *i386/efi and *amd64/efi
+      subarchitectures.
+    - Support archdetect being anywhere on PATH.
+    - Use mac as the default disk label on ppc64.
+    - Save the swap size for ubiquity.
+    - On systems with only GPT disks, check that an EFI System Partition or
+      a BIOS Boot Partition exists, as appropriate.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 30 Mar 2012 15:20:01 +0100
+
+partman-partitioning (85) unstable; urgency=low
+
+  * Allow overriding the default disk label selection by preseeding
+    partman-partitioning/default_label.  This is particularly useful if you
+    want to force GPT on a sub-2TB disk on x86
+    (partman-partitioning/default_label=gpt), but may come in handy in other
+    situations too.
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Timo Jyrinki
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 30 Mar 2012 15:03:30 +0100
+
+partman-partitioning (84) unstable; urgency=low
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Mikel González
+  * Bulgarian (bg.po) by Damyan Ivanov
+  * Danish (da.po) by Joe Hansen
+  * Estonian (et.po) by Mattias Põldaru
+  * Hebrew (he.po) by Lior Kaplan
+  * Indonesian (id.po) by Mahyuddin Susanto
+  * Icelandic (is.po) by Sveinn í Felli
+  * Kannada (kn.po) by Prabodh C P
+  * Dutch (nl.po) by Jeroen Schot
+  * Polish (pl.po) by Marcin Owsiany
+
+ -- Otavio Salvador <otavio@debian.org>  Thu, 15 Mar 2012 15:10:16 -0300
+
 partman-partitioning (83ubuntu2) precise; urgency=low
 
   * On systems with only GPT disks, check that an EFI System Partition or a
