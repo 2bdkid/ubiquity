@@ -1,3 +1,16 @@
+ubiquity (2.10.6) precise; urgency=low
+
+  [ Stéphane Graber ]
+  * ubiquity-dm: Use macinnis_wallpaper.png by default for ubuntu studio.
+    (LP: #971159)
+
+  [ Colin Watson ]
+  * Work around LP #972324 by unsetting TMPDIR for xvfb-run and setting it
+    again for the inferior command.
+  * Fix DEP-8 control file to stop trying to run Xvfb inside Xvfb.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 03 Apr 2012 14:06:44 +0100
+
 ubiquity (2.10.5) precise; urgency=low
 
   * Exit early from ubiquity_webcam_play and ubiquity_webcam_stop if priv or
