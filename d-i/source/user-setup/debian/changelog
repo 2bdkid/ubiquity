@@ -1,3 +1,24 @@
+user-setup (1.42ubuntu3) precise; urgency=low
+
+  * user-setup-apply:
+    - Revert the change from 1.42ubuntu2.  We'll handle this in ubiquity
+      instead; in d-i, it seems to be too difficult to get right without the
+      aid of script libraries from cryptsetup.
+    - If OVERRIDE_ALREADY_ENCRYPTED_SWAP is set in the environment, assume
+      that encrypted swap has already been set up rather than re-creating
+      and re-zeroing swap (LP: #979350).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 19 Apr 2012 02:46:54 +0100
+
+user-setup (1.42ubuntu2) precise; urgency=low
+
+  * user-setup-apply: After zeroing to-be-encrypted swap devices, attempt to
+    format and enable the encrypted device (may help slightly with LP
+    #979350, and in any event should make things faster on systems that
+    don't run out of memory).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 18 Apr 2012 17:37:32 +0100
+
 user-setup (1.42ubuntu1) precise; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

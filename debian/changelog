@@ -1,3 +1,29 @@
+ubiquity (2.10.14) precise-proposed; urgency=low
+
+  [ Colin Watson ]
+  * Install ubiquity-frontend-$frontend along with oem-config-$frontend to
+    improve dependency resolution; with the packaging the way it is at the
+    moment, apt may sometimes select ubiquity-frontend-kde to resolve
+    ubiquity's dependency on a frontend before realising that oem-config-gtk
+    already depends on ubiquity-frontend-gtk.
+  * Don't default to installing GRUB to a removable device with /cdrom
+    mounted from it, even if /cdrom's filesystem isn't iso9660
+    (LP: #984989).
+  * If encrypting the user's home directory, wipe and enable encrypted swap
+    before starting the slideshow, because running the slideshow can use up
+    a lot of memory so we won't be able to disable swap once that's in
+    progress (LP: #979350).
+  * Automatic update of included source packages: apt-setup 1:0.55ubuntu3,
+    partman-base 153ubuntu4, user-setup 1.42ubuntu3.
+  * If /etc/network/interfaces doesn't exist when configuring the network in
+    oem-config, write out a skeleton one (LP: #985305).
+
+  [ Stéphane Graber ]
+  * Always install oem-config-slideshow-ubuntu in OEM mode, also for
+    alternate installs (LP: #984736)
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 19 Apr 2012 03:30:44 +0100
+
 ubiquity (2.10.13) precise-proposed; urgency=low
 
   * Update translations from Launchpad.
