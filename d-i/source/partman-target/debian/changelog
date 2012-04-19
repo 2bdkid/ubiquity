@@ -1,3 +1,13 @@
+partman-target (77ubuntu2) precise; urgency=low
+
+  * Exit 0 at the end of finish.d/clear_partitions, so that partman-commit
+    will carry on even if the final rmdir fails (which is a bug in itself,
+    but shouldn't blow away the whole install; LP: #985526).
+  * Use 'umount -l' in finish.d/clear_partitions, to work around an as yet
+    unidentified race that keeps the filesystem busy (LP: #946663).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 19 Apr 2012 11:54:45 +0100
+
 partman-target (77ubuntu1) precise; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

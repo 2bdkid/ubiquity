@@ -79,7 +79,10 @@ for part in $partitions; do
 				db_set passwd/user-uid "$uid" || true
 			fi
 		fi
-		umount $tmp
+		# Nothing should have anything in $tmp open at this point,
+		# but apparently something does:
+		#   https://bugs.launchpad.net/bugs/946663
+		umount -l $tmp
 	elif [ "$mp" = "/home" ]; then
 		mount $path $tmp 3>&- || failed
 		# Preserve the UID, if possible.
@@ -91,7 +94,10 @@ for part in $partitions; do
 				db_set passwd/user-uid "$uid" || true
 			fi
 		fi
-		umount $tmp
+		# Nothing should have anything in $tmp open at this point,
+		# but apparently something does:
+		#   https://bugs.launchpad.net/bugs/946663
+		umount -l $tmp
 	else
 		case "$mp" in
 			/usr/local|/usr/local/*|/var/local|/var/local/*|/usr/src|/usr/src/*)
@@ -104,7 +110,11 @@ for part in $partitions; do
 				mount $path $tmp 3>&- || failed
 				logger -t clear_partitions "Removing everything from $mp ($path)."
 				rm -rf $tmp/* || failed
-				umount $tmp
+				# Nothing should have anything in $tmp open
+				# at this point, but apparently something
+				# does:
+				#   https://bugs.launchpad.net/bugs/946663
+				umount -l $tmp
 				break
 			fi
 		done
@@ -113,3 +123,5 @@ for part in $partitions; do
 done
 db_progress STOP
 rmdir $tmp
+
+exit 0
