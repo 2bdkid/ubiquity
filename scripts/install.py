@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8; Mode: Python; indent-tabs-mode: nil; tab-width: 4 -*-
 
 # Copyright (C) 2005 Javier Carranza and others for Guadalinex
@@ -19,6 +19,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import sys
 import os
 import errno
@@ -37,13 +39,13 @@ sys.path.insert(0, '/usr/lib/ubiquity')
 from ubiquity import misc
 from ubiquity import install_misc
 from ubiquity import osextras
-from ubiquity.casper import get_casper
 
 
 class Install(install_misc.InstallBase):
 
     def __init__(self):
         """Initial attributes."""
+        install_misc.InstallBase.__init__(self)
 
         self.update_proc = None
 
@@ -55,9 +57,6 @@ class Install(install_misc.InstallBase):
             self.source = '/UNIONFS'
         else:
             self.source = '/var/lib/ubiquity/source'
-        self.target = '/target'
-        self.casper_path = os.path.join(
-            '/cdrom', get_casper('LIVE_MEDIA_PATH', 'casper').lstrip('/'))
         self.db = debconf.Debconf()
         self.blacklist = {}
 
@@ -79,9 +78,9 @@ class Install(install_misc.InstallBase):
         apt_pkg.init_config()
         apt_pkg.config.set("Dir", self.target)
         apt_pkg.config.set("Dir::State::status",
-                           os.path.join(self.target, 'var/lib/dpkg/status'))
+                           self.target_file('var/lib/dpkg/status'))
         apt_pkg.config.set("APT::GPGV::TrustedKeyring",
-                           os.path.join(self.target, 'etc/apt/trusted.gpg'))
+                           self.target_file('etc/apt/trusted.gpg'))
         apt_pkg.config.set("Acquire::gpgv::Options::",
                            "--ignore-time-conflict")
         apt_pkg.config.set("DPkg::Options::", "--root=%s" % self.target)
@@ -127,7 +126,7 @@ class Install(install_misc.InstallBase):
                     stdout=subprocess.PIPE, preexec_fn=subprocess_setup).pid
             try:
                 self.copy_all()
-            except EnvironmentError, e:
+            except EnvironmentError as e:
                 if e.errno in (errno.ENOENT, errno.EIO, errno.EFAULT,
                                errno.ENOTDIR, errno.EROFS):
                     if e.filename is None:
@@ -160,7 +159,7 @@ class Install(install_misc.InstallBase):
             for i in range(10):
                 try:
                     os.killpg(self.update_proc, signal.SIGTERM)
-                except OSError, e:
+                except OSError as e:
                     if e.errno == errno.ESRCH:
                         break
                     else:
@@ -169,9 +168,11 @@ class Install(install_misc.InstallBase):
             else:
                 try:
                     os.killpg(self.update_proc, signal.SIGKILL)
-                except OSError, e:
+                except OSError as e:
                     if e.errno != errno.ESRCH:
                         raise
+            self.update_proc.stdin.close()
+            self.update_proc.stdout.close()
             syslog.syslog('Terminated ubiquity update process.')
 
     def find_cd_kernel(self):
@@ -208,31 +209,27 @@ class Install(install_misc.InstallBase):
         manifest = os.path.join(self.casper_path, 'filesystem.manifest')
         if os.path.exists(manifest_remove) and os.path.exists(manifest):
             difference = set()
-            manifest_file = open(manifest_remove)
-            for line in manifest_file:
-                if line.strip() != '' and not line.startswith('#'):
-                    difference.add(line.split()[0])
-            manifest_file.close()
+            with open(manifest_remove) as manifest_file:
+                for line in manifest_file:
+                    if line.strip() != '' and not line.startswith('#'):
+                        difference.add(line.split()[0])
             live_packages = set()
-            manifest_file = open(manifest)
-            for line in manifest_file:
-                if line.strip() != '' and not line.startswith('#'):
-                    live_packages.add(line.split()[0])
-            manifest_file.close()
+            with open(manifest) as manifest_file:
+                for line in manifest_file:
+                    if line.strip() != '' and not line.startswith('#'):
+                        live_packages.add(line.split()[0])
             desktop_packages = live_packages - difference
         elif os.path.exists(manifest_desktop) and os.path.exists(manifest):
             desktop_packages = set()
-            manifest_file = open(manifest_desktop)
-            for line in manifest_file:
-                if line.strip() != '' and not line.startswith('#'):
-                    desktop_packages.add(line.split()[0])
-            manifest_file.close()
+            with open(manifest_desktop) as manifest_file:
+                for line in manifest_file:
+                    if line.strip() != '' and not line.startswith('#'):
+                        desktop_packages.add(line.split()[0])
             live_packages = set()
-            manifest_file = open(manifest)
-            for line in manifest_file:
-                if line.strip() != '' and not line.startswith('#'):
-                    live_packages.add(line.split()[0])
-            manifest_file.close()
+            with open(manifest) as manifest_file:
+                for line in manifest_file:
+                    if line.strip() != '' and not line.startswith('#'):
+                        live_packages.add(line.split()[0])
             difference = live_packages - desktop_packages
         else:
             difference = set()
@@ -293,9 +290,9 @@ class Install(install_misc.InstallBase):
 
         # Consider only packages that don't have a prerm, and which can
         # therefore have their files removed without any preliminary work.
-        difference = set(filter(
-            lambda x: not os.path.exists('/var/lib/dpkg/info/%s.prerm' % x),
-            difference))
+        difference = {
+            x for x in difference
+            if not os.path.exists('/var/lib/dpkg/info/%s.prerm' % x)}
 
         confirmed_remove = set()
         for pkg in sorted(difference):
@@ -319,7 +316,9 @@ class Install(install_misc.InstallBase):
 
         cmd = ['dpkg', '-L']
         cmd.extend(difference)
-        subp = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subp = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            universal_newlines=True)
         res = subp.communicate()[0].splitlines()
         u = {}
         for x in res:
@@ -385,12 +384,12 @@ class Install(install_misc.InstallBase):
             with open('/proc/sys/vm/dirty_writeback_centisecs') as dwc:
                 dirty_writeback_centisecs = int(dwc.readline())
             with open('/proc/sys/vm/dirty_writeback_centisecs', 'w') as dwc:
-                print >>dwc, '3000\n'
+                print('3000\n', file=dwc)
         if os.path.exists('/proc/sys/vm/dirty_expire_centisecs'):
             with open('/proc/sys/vm/dirty_expire_centisecs') as dec:
                 dirty_expire_centisecs = int(dec.readline())
             with open('/proc/sys/vm/dirty_expire_centisecs', 'w') as dec:
-                print >>dec, '6000\n'
+                print('6000\n', file=dec)
 
         old_umask = os.umask(0)
         for dirpath, dirnames, filenames in os.walk(self.source):
@@ -426,7 +425,7 @@ class Install(install_misc.InstallBase):
                     if not os.path.isdir(targetpath):
                         try:
                             os.mkdir(targetpath, mode)
-                        except OSError, e:
+                        except OSError as e:
                             # there is a small window where update-apt-cache
                             # can race with us since it creates
                             # "/target/var/cache/apt/...". Hence, ignore
@@ -496,14 +495,14 @@ class Install(install_misc.InstallBase):
         # Revert to previous kernel flush times.
         if dirty_writeback_centisecs is not None:
             with open('/proc/sys/vm/dirty_writeback_centisecs', 'w') as dwc:
-                print >>dwc, dirty_writeback_centisecs
+                print(dirty_writeback_centisecs, file=dwc)
         if dirty_expire_centisecs is not None:
             with open('/proc/sys/vm/dirty_expire_centisecs', 'w') as dec:
-                print >>dec, dirty_expire_centisecs
+                print(dirty_expire_centisecs, file=dec)
 
         # Try some possible locations for the kernel we used to boot. This
         # lets us save a couple of megabytes of CD space.
-        bootdir = os.path.join(self.target, 'boot')
+        bootdir = self.target_file('boot')
         kernel = self.find_cd_kernel()
         if kernel:
             prefix = os.path.basename(kernel).split('-', 1)[0]
@@ -512,7 +511,7 @@ class Install(install_misc.InstallBase):
             osextras.unlink_force(target_kernel)
             install_misc.copy_file(self.db, kernel, target_kernel, md5_check)
             os.lchown(target_kernel, 0, 0)
-            os.chmod(target_kernel, 0644)
+            os.chmod(target_kernel, 0o644)
             st = os.lstat(kernel)
             try:
                 os.utime(target_kernel, (st.st_atime, st.st_mtime))
@@ -535,26 +534,25 @@ class Install(install_misc.InstallBase):
             raise install_misc.InstallStepError("No source device found for %s" % fsfile)
 
         dev = ''
-        sysloops = filter(lambda x: x.startswith(blockdev_prefix),
-                          os.listdir('/sys/block'))
-        sysloops.sort()
+        sysloops = sorted([x for x in os.listdir('/sys/block')
+                           if x.startswith(blockdev_prefix)])
         for sysloop in sysloops:
             try:
-                sysloopf = open(os.path.join('/sys/block', sysloop, 'size'))
-                sysloopsize = sysloopf.readline().strip()
-                sysloopf.close()
+                with open(os.path.join('/sys/block', sysloop,
+                                       'size')) as sysloopf:
+                    sysloopsize = sysloopf.readline().strip()
                 if sysloopsize == '0':
-                    devnull = open('/dev/null')
                     if osextras.find_on_path('udevadm'):
                         udevinfo_cmd = ['udevadm', 'info']
                     else:
                         udevinfo_cmd = ['udevinfo']
                     udevinfo_cmd.extend(
                         ['-q', 'name', '-p', os.path.join('/block', sysloop)])
-                    udevinfo = subprocess.Popen(
-                        udevinfo_cmd, stdout=subprocess.PIPE, stderr=devnull)
+                    with open('/dev/null') as devnull:
+                        udevinfo = subprocess.Popen(
+                            udevinfo_cmd, stdout=subprocess.PIPE,
+                            stderr=devnull, universal_newlines=True)
                     devbase = udevinfo.communicate()[0]
-                    devnull.close()
                     if udevinfo.returncode != 0:
                         devbase = sysloop
                     dev = '/dev/%s' % devbase
@@ -591,15 +589,13 @@ class Install(install_misc.InstallBase):
 
         if fs_preseed == '':
             # Simple autodetection on unionfs systems
-            mounts = open('/proc/mounts')
-            for line in mounts:
-                (device, fstype) = line.split()[1:3]
-                if fstype == 'squashfs' and os.path.exists(device):
-                    misc.execute('mount', '--bind', device, self.source)
-                    self.mountpoints.append(self.source)
-                    mounts.close()
-                    return
-            mounts.close()
+            with open('/proc/mounts') as mounts:
+                for line in mounts:
+                    (device, fstype) = line.split()[1:3]
+                    if fstype == 'squashfs' and os.path.exists(device):
+                        misc.execute('mount', '--bind', device, self.source)
+                        self.mountpoints.append(self.source)
+                        return
 
             # Manual detection on non-unionfs systems
             fsfiles = [os.path.join(self.casper_path, 'filesystem.cloop'),
@@ -638,8 +634,8 @@ class Install(install_misc.InstallBase):
             assert self.mountpoints
 
             misc.execute('mount', '-t', 'unionfs', '-o',
-                         'dirs=' + ':'.join(map(lambda x: '%s=ro' % x,
-                                                self.mountpoints)),
+                         'dirs=' + ':'.join(['%s=ro' % x
+                                             for x in self.mountpoints]),
                          'unionfs', self.source)
             self.mountpoints.append(self.source)
 
@@ -669,7 +665,7 @@ class Install(install_misc.InstallBase):
         need to make this decision before generating the file copy blacklist
         so user-setup-apply would be too late."""
 
-        home = os.path.join(self.target, 'home')
+        home = self.target_file('home')
         if os.path.isdir(home):
             for homedir in os.listdir(home):
                 if os.path.isdir(os.path.join(home, homedir, '.ecryptfs')):

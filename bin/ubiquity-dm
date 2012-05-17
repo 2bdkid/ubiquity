@@ -1,4 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
+
+from __future__ import print_function
 
 import os
 import sys
@@ -17,7 +19,8 @@ sys.path.insert(0, '/usr/lib/ubiquity')
 import ubiquity.frontend
 from ubiquity import osextras
 from ubiquity import gsettings
-from ubiquity.misc import create_bool
+from ubiquity import gconftool
+from ubiquity.misc import create_bool, utf8
 from ubiquity.casper import get_casper
 from ubiquity.debconfcommunicator import DebconfCommunicator
 
@@ -48,33 +51,28 @@ def set_locale():
     if not locale:
         return
 
-    default_locale = open('/etc/default/locale', 'w')
-    print >>default_locale, 'LANG="%s"' % locale
-    default_locale.close()
+    with open('/etc/default/locale', 'w') as default_locale:
+        print('LANG="%s"' % locale, file=default_locale)
 
-    environment = open('/etc/environment')
-    environment_lines = environment.readlines()
-    environment.close()
-    environment = open('/etc/environment', 'w')
-    seen_lang = False
-    for line in environment_lines:
-        if line.startswith('LANG='):
-            print >>environment, 'LANG="%s"' % locale
-            seen_lang = True
-        else:
-            print >>environment, line.rstrip('\n')
-    if not seen_lang:
-        print >>environment, 'LANG="%s"' % locale
-    environment.close()
+    with open('/etc/environment') as environment:
+        environment_lines = environment.readlines()
+    with open('/etc/environment', 'w') as environment:
+        seen_lang = False
+        for line in environment_lines:
+            if line.startswith('LANG='):
+                print('LANG="%s"' % locale, file=environment)
+                seen_lang = True
+            else:
+                print(line.rstrip('\n'), file=environment)
+        if not seen_lang:
+            print('LANG="%s"' % locale, file=environment)
 
-    locale_gen = open('/etc/locale.gen', 'w')
-    print >>locale_gen, '%s UTF-8' % locale
-    locale_gen.close()
+    with open('/etc/locale.gen', 'w') as locale_gen:
+        print('%s UTF-8' % locale, file=locale_gen)
 
-    logfile = open('/var/log/installer/dm', 'a')
-    subprocess.call(['/usr/sbin/locale-gen', locale],
-                    stdout=logfile, stderr=logfile)
-    logfile.close()
+    with open('/var/log/installer/dm', 'a') as logfile:
+        subprocess.call(['/usr/sbin/locale-gen', locale],
+                        stdout=logfile, stderr=logfile)
 
 class XStartupError(EnvironmentError):
     pass
@@ -155,10 +153,11 @@ class DM:
         signal.signal(signal.SIGUSR1, signal.SIG_IGN)
 
     def run(self, *program):
+        extras = []
         null = open('/dev/null', 'w')
         try:
             os.makedirs('/var/log/installer')
-        except OSError, e:
+        except OSError as e:
             # be happy if someone already created the path
             if e.errno != errno.EEXIST:
                 raise
@@ -205,8 +204,8 @@ class DM:
                 command.extend(['-config', xorg_conf_failsafe])
                 command.extend(['-logfile', '/var/log/Xorg.%s.log' % attempt])
 
-                xorg_conf_failsafe_file = open(xorg_conf_failsafe, 'w')
-                print >>xorg_conf_failsafe_file, '''\
+                with open(xorg_conf_failsafe, 'w') as xorg_conf_failsafe_file:
+                    print('''\
 Section "Device"
 	Identifier	"Configured Video Device"
 	Driver		"%s"
@@ -221,8 +220,7 @@ Section "Screen"
 	Monitor		"Configured Monitor"
 	Device		"Configured Video Device"
 EndSection
-''' % attempt
-                xorg_conf_failsafe_file.close()
+''' % attempt, file=xorg_conf_failsafe_file)
 
             server = subprocess.Popen(
                 command, stdin=null, stdout=logfile, stderr=logfile,
@@ -270,7 +268,7 @@ EndSection
             dbus_subp = subprocess.Popen(
                 ['dbus-launch', '--exit-with-session'],
                 stdin=null, stdout=subprocess.PIPE, stderr=logfile,
-                preexec_fn=self.drop_privileges)
+                preexec_fn=self.drop_privileges, universal_newlines=True)
             for line in dbus_subp.stdout:
                 try:
                     name, value = line.rstrip('\n').split('=', 1)
@@ -280,6 +278,13 @@ EndSection
             dbus_subp.stdout.close()
             dbus_subp.wait()
 
+        # dconf writer
+        if os.path.exists("/usr/lib/dconf/dconf-service"):
+            extras.append(subprocess.Popen(
+                ['/usr/lib/dconf/dconf-service'],
+                stdin=null, stdout=logfile, stderr=logfile,
+                preexec_fn=self.drop_privileges))
+
         gconfd_running = False
         if (self.frontend == 'gtk_ui' and
             osextras.find_on_path('gconftool-2')):
@@ -288,7 +293,9 @@ EndSection
                             preexec_fn=self.drop_privileges)
             gconfd_running = True
 
-        extras = []
+            # Enable compositing in metacity (not default upstream yet)
+            gconftool.set("/apps/metacity/general/compositing_manager", "boolean", "true")
+
         if self.frontend == 'gtk_ui':
             gconf_dir = ('xml:readwrite:%s' %
                 os.path.expanduser('~%s/.gconf' %
@@ -489,10 +496,10 @@ EndSection
             title = ''
             message = ''
             try:
-                title = unicode(db.metaget(question, 'description'),
-                                'utf-8', 'replace')
-                message = unicode(db.metaget(question, 'extended_description'),
-                                  'utf-8', 'replace')
+                title = utf8(db.metaget(question, 'description'),
+                             errors='replace')
+                message = utf8(db.metaget(question, 'extended_description'),
+                               errors='replace')
             except debconf.DebconfError:
                 pass
             db.shutdown()
@@ -515,7 +522,7 @@ EndSection
         def kill_if_exists(pid, signum):
             try:
                 os.kill(pid, signum)
-            except OSError, e:
+            except OSError as e:
                 if e.errno != errno.ESRCH:
                     raise
 
@@ -541,7 +548,7 @@ EndSection
                 try:
                     process.wait()
                     done.add(process)
-                except OSError, e:
+                except OSError as e:
                     if e.errno == errno.EINTR:
                         continue
                     raise
@@ -550,13 +557,16 @@ EndSection
 
         # Clear the console so we don't see boot-time messages on switch
         try:
-            vthandle = open('/dev/tty' + self.vt[2:], 'r+')
-            subprocess.call(['clear'], stdin=vthandle, stdout=vthandle)
+            with open('/dev/tty' + self.vt[2:], 'r+') as vthandle:
+                subprocess.call(['clear'], stdin=vthandle, stdout=vthandle)
         except IOError:
             pass
 
         kill_if_exists(server.pid, signal.SIGTERM)
         server.wait()
+
+        logfile.close()
+        null.close()
 
         if reboot:
             subprocess.Popen(['reboot'])

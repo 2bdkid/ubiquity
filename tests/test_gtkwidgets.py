@@ -1,13 +1,19 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8; -*-
+
+from __future__ import unicode_literals
 
 import os
 import sys
-from test import test_support
+try:
+    from test.support import run_unittest
+except ImportError:
+    from test.test_support import run_unittest
 import unittest
 
 from gi.repository import Gtk, TimezoneMap
 import mock
+import six
 
 from ubiquity import segmented_bar, gtkwidgets
 
@@ -23,14 +29,14 @@ class WidgetTests(unittest.TestCase):
         def excepthook(exctype, value, tb):
             # Workaround for http://bugzilla.gnome.org/show_bug.cgi?id=616279
             Gtk.main_quit()
-            self.err = exctype, tb
+            self.err = exctype, value, tb
         sys.excepthook = excepthook
         self.win = Gtk.Window()
 
     def tearDown(self):
         self.win.hide()
         if self.err:
-            raise self.err[0], None, self.err[1]
+            six.reraise(*self.err)
 
     def test_segmented_bar(self):
         sb = segmented_bar.SegmentedBar()
@@ -152,12 +158,12 @@ class NetworkManagerTests(unittest.TestCase):
     def test_decode_ssid_utf8(self):
         ssid = [dbus.Byte(82), dbus.Byte(195), dbus.Byte(169), dbus.Byte(115),
                 dbus.Byte(101), dbus.Byte(97), dbus.Byte(117)]
-        self.assertEqual(nm.decode_ssid(ssid), u'Réseau')
+        self.assertEqual(nm.decode_ssid(ssid), 'Réseau')
 
     def test_decode_ssid_latin1(self):
         ssid = [dbus.Byte(82), dbus.Byte(233), dbus.Byte(115), dbus.Byte(101),
                 dbus.Byte(97), dbus.Byte(117)]
-        self.assertEqual(nm.decode_ssid(ssid), u'R\ufffdseau')
+        self.assertEqual(nm.decode_ssid(ssid), 'R\ufffdseau')
 
     def test_ssid_in_model(self):
         iterator = self.model.append(None, ['/foo', 'Intel', 'Wireless'])
@@ -220,4 +226,4 @@ class NetworkManagerTests(unittest.TestCase):
         mock_cell.set_property.assert_called_with('text', 'Orange')
 
 if __name__ == '__main__':
-    test_support.run_unittest(WidgetTests, NetworkManagerTests)
+    run_unittest(WidgetTests, NetworkManagerTests)

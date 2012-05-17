@@ -5,8 +5,6 @@ from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 from gi.repository import Gtk, GObject
 
-from ubiquity.misc import utf8
-
 NM = 'org.freedesktop.NetworkManager'
 NM_DEVICE = 'org.freedesktop.NetworkManager.Device'
 NM_DEVICE_WIFI = 'org.freedesktop.NetworkManager.Device.Wireless'
@@ -24,13 +22,12 @@ NM_STATE_CONNECTED_GLOBAL = 70
 # TODO: DBus exceptions.  Catch 'em all.
 
 def decode_ssid(characters):
-    ssid = ''.join([chr(int(char)) for char in characters])
-    return utf8(ssid, errors='replace')
+    return bytearray(characters).decode('UTF-8', 'replace')
 
 def get_prop(obj, iface, prop):
     try:
         return obj.Get(iface, prop, dbus_interface=dbus.PROPERTIES_IFACE)
-    except dbus.DBusException, e:
+    except dbus.DBusException as e:
         if e.get_dbus_name() == 'org.freedesktop.DBus.Error.UnknownMethod':
             return None
         else:
@@ -41,7 +38,9 @@ def get_vendor_and_model(udi):
     model = ''
     cmd = ['/sbin/udevadm', 'info', '--path=%s' % udi, '--query=property']
     with open('/dev/null', 'w') as devnull:
-        out = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=devnull)
+        out = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stderr=devnull,
+            universal_newlines=True)
         out = out.communicate()
     if not out[1]:
         for prop in out[0].split('\n'):
@@ -140,10 +139,10 @@ class NetworkManager:
                 try:
                     sec = conn_obj.GetSecrets('802-11-wireless-security',
                                               dbus_interface=NM_SETTINGS_CONN)
-                    sec = sec['802-11-wireless-security'].values()[0]
+                    sec = list(sec['802-11-wireless-security'].values())[0]
                     ssid = decode_ssid(props['802-11-wireless']['ssid'])
                     self.passphrases_cache[ssid] = sec
-                except dbus.exceptions.DBusException, e:
+                except dbus.exceptions.DBusException as e:
                     if e.get_dbus_name() != NM_ERROR_NOSECRETS:
                         raise
 

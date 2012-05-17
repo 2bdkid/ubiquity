@@ -1,4 +1,3 @@
-#!/usr/bin/python
 # -*- coding: utf-8; Mode: Python; indent-tabs-mode: nil; tab-width: 4 -*-
 
 import os
@@ -10,29 +9,26 @@ import syslog
 import shutil
 import contextlib
 
+import six
+
 from ubiquity import osextras
 
 def utf8(s, errors="strict"):
     """Decode a string as UTF-8 if it isn't already Unicode."""
-    if isinstance(s, unicode):
+    if isinstance(s, six.text_type):
         return s
     else:
-        return unicode(s, "utf-8", errors)
+        return six.text_type(s, "utf-8", errors)
 
 def is_swap(device):
-    swap = False
-    fp = None
     try:
-        fp = open('/proc/swaps')
-        for line in fp:
-            if line.startswith(device + ' '):
-                swap = True
-    except:
-        swap = False
-    finally:
-        if fp:
-            fp.close()
-    return swap
+        with open('/proc/swaps') as fp:
+            for line in fp:
+                if line.startswith(device + ' '):
+                    return True
+    except Exception:
+        pass
+    return False
 
 _dropped_privileges = 0
 
@@ -141,8 +137,9 @@ def grub_options():
     l = []
     try:
         oslist = {}
-        subp = subprocess.Popen(['os-prober'], stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
+        subp = subprocess.Popen(
+            ['os-prober'], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            universal_newlines=True)
         result = subp.communicate()[0].splitlines()
         for res in result:
             res = res.split(':')
@@ -150,22 +147,12 @@ def grub_options():
         p = PartedServer()
         for disk in p.disks():
             p.select_disk(disk)
-            dev = ''
-            mod = ''
-            size = ''
-            try:
-                fp = open(p.device_entry('model'))
+            with open(p.device_entry('model')) as fp:
                 mod = fp.readline()
-                fp.close()
-                fp = open(p.device_entry('device'))
+            with open(p.device_entry('device')) as fp:
                 dev = fp.readline()
-                fp.close()
-                fp = open(p.device_entry('size'))
+            with open(p.device_entry('size')) as fp:
                 size = fp.readline()
-                fp.close()
-            finally:
-                if fp:
-                    fp.close()
             if dev and mod:
                 if size.isdigit():
                     size = format_size(int(size))
@@ -225,7 +212,7 @@ def is_removable(device):
     removable_bus = False
     subp = subprocess.Popen(['udevadm', 'info', '-q', 'property',
                              '-n', device],
-                            stdout=subprocess.PIPE)
+                            stdout=subprocess.PIPE, universal_newlines=True)
     for line in subp.communicate()[0].splitlines():
         line = line.strip()
         if line.startswith('DEVPATH='):
@@ -240,15 +227,17 @@ def is_removable(device):
             devpath = os.path.dirname(devpath)
         is_removable = removable_bus
         try:
-            if open('/sys%s/removable' % devpath).readline().strip() != '0':
-                is_removable = True
+            with open('/sys%s/removable' % devpath) as removable:
+                if removable.readline().strip() != '0':
+                    is_removable = True
         except IOError:
             pass
         if is_removable:
             try:
                 subp = subprocess.Popen(['udevadm', 'info', '-q', 'name',
                                          '-p', devpath],
-                                        stdout=subprocess.PIPE)
+                                        stdout=subprocess.PIPE,
+                                        universal_newlines=True)
                 return ('/dev/%s' %
                         subp.communicate()[0].splitlines()[0].strip())
             except Exception:
@@ -274,7 +263,8 @@ def udevadm_info(args):
     fullargs = ['udevadm', 'info', '-q', 'property']
     fullargs.extend(args)
     udevadm = {}
-    subp = subprocess.Popen(fullargs, stdout=subprocess.PIPE)
+    subp = subprocess.Popen(
+        fullargs, stdout=subprocess.PIPE, universal_newlines=True)
     for line in subp.communicate()[0].splitlines():
         line = line.strip()
         if '=' not in line:
@@ -312,7 +302,7 @@ def cdrom_mount_info():
 def grub_device_map():
     """Return the contents of the default GRUB device map."""
     subp = subprocess.Popen(['grub-mkdevicemap', '--no-floppy', '-m', '-'],
-                            stdout=subprocess.PIPE)
+                            stdout=subprocess.PIPE, universal_newlines=True)
     return subp.communicate()[0].splitlines()
 
 def grub_default():
@@ -386,7 +376,7 @@ def find_in_os_prober(device):
         syslog.syslog(syslog.LOG_ERR, "Error in find_in_os_prober:")
         for line in traceback.format_exc().split('\n'):
             syslog.syslog(syslog.LOG_ERR, line)
-    return unicode('')
+    return six.u('')
 
 @raise_privileges
 def os_prober():
@@ -395,8 +385,9 @@ def os_prober():
 
     if not _os_prober_called:
         _os_prober_called = True
-        subp = subprocess.Popen(['os-prober'], stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
+        subp = subprocess.Popen(
+            ['os-prober'], stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            universal_newlines=True)
         result = subp.communicate()[0].splitlines()
         for res in result:
             res = res.split(':')
@@ -461,22 +452,18 @@ def get_release_name():
                   category=DeprecationWarning)
 
     if not get_release_name.release_name:
-        fp = None
         try:
-            fp = open('/cdrom/.disk/info')
-            line = fp.readline()
-            if line:
-                line = line.split()
-                if line[2] == 'LTS':
-                    get_release_name.release_name = ' '.join(line[:3])
-                else:
-                    get_release_name.release_name = ' '.join(line[:2])
+            with open('/cdrom/.disk/info') as fp:
+                line = fp.readline()
+                if line:
+                    line = line.split()
+                    if line[2] == 'LTS':
+                        get_release_name.release_name = ' '.join(line[:3])
+                    else:
+                        get_release_name.release_name = ' '.join(line[:2])
         except:
             syslog.syslog(syslog.LOG_ERR,
                 "Unable to determine the distribution name from /cdrom/.disk/info")
-        finally:
-            if fp:
-                fp.close()
         if not get_release_name.release_name:
             get_release_name.release_name = 'Ubuntu'
     return get_release_name.release_name
@@ -505,7 +492,7 @@ def execute(*args):
 
     try:
         status = subprocess.call(log_args)
-    except IOError, e:
+    except IOError as e:
         syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
         syslog.syslog(syslog.LOG_ERR,
                       "OS error(%s): %s" % (e.errno, e.strerror))
@@ -560,8 +547,9 @@ def dmimodel():
         # Silence annoying warnings during the test suite.
         kwargs['stderr'] = open('/dev/null', 'w')
     try:
-        proc = subprocess.Popen(['dmidecode', '--string',
-            'system-manufacturer'], stdout=subprocess.PIPE, **kwargs)
+        proc = subprocess.Popen(
+            ['dmidecode', '--string', 'system-manufacturer'],
+            stdout=subprocess.PIPE, universal_newlines=True, **kwargs)
         manufacturer = proc.communicate()[0]
         if not manufacturer:
             return
@@ -578,7 +566,8 @@ def dmimodel():
             else:
                 key = 'system-product-name'
             proc = subprocess.Popen(['dmidecode', '--string', key],
-                                    stdout=subprocess.PIPE)
+                                    stdout=subprocess.PIPE,
+                                    universal_newlines=True)
             model = proc.communicate()[0]
         if 'apple' in manufacturer:
             # MacBook4,1 - strip the 4,1
@@ -596,7 +585,10 @@ def dmimodel():
     return model
 
 def set_indicator_keymaps(lang):
-    import libxml2
+    try:
+        import xml.etree.cElementTree as ElementTree
+    except ImportError:
+        import xml.etree.ElementTree as ElementTree
     from gi.repository import Xkl, GdkX11
     # GdkX11.x11_get_default_xdisplay() segfaults if Gtk hasn't been
     # imported; possibly finer-grained than this, but anything using this
@@ -607,7 +599,6 @@ def set_indicator_keymaps(lang):
     # pacify pyflakes
     Gtk
 
-    xpath = "//iso_639_3_entry[@part1_code='%s']"
     gsettings_key = ['org.gnome.libgnomekbd.keyboard','layouts']
     lang = lang.split('_')[0]
     variants = []
@@ -717,9 +708,9 @@ def set_indicator_keymaps(lang):
 
         execute("setxkbmap", "-layout", ",".join(kb_layouts), "-variant", ",".join(kb_variants))
 
-    fp = libxml2.parseFile('/usr/share/xml/iso-codes/iso_639_3.xml')
-    context = fp.xpathNewContext()
-    nodes = context.xpathEvalExpression(xpath % lang)
+    iso_639_3 = ElementTree.parse('/usr/share/xml/iso-codes/iso_639_3.xml')
+    nodes = [element for element in iso_639_3.findall('iso_639_3_entry')
+             if element.get('part1_code') == lang]
     display = GdkX11.x11_get_default_xdisplay()
     engine = Xkl.Engine.get_instance(display)
     if nodes:
@@ -728,8 +719,8 @@ def set_indicator_keymaps(lang):
 
         # Apparently part2_code doesn't always work (fails with French)
         for prop in ('part2_code', 'id', 'part1_code'):
-            if nodes[0].hasProp(prop):
-                code = nodes[0].prop(prop)
+            code = nodes[0].get(prop)
+            if code is not None:
                 configreg.foreach_language_variant(code, process_variant, None)
                 if variants:
                     restricted_variants = restrict_list(variants)
@@ -749,7 +740,7 @@ def get_prop(obj, iface, prop):
     import dbus
     try:
         return obj.Get(iface, prop, dbus_interface=dbus.PROPERTIES_IFACE)
-    except dbus.DBusException, e:
+    except dbus.DBusException as e:
         if e.get_dbus_name() == 'org.freedesktop.DBus.Error.UnknownMethod':
             return None
         else:

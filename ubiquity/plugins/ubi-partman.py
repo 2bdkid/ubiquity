@@ -46,7 +46,7 @@ Partition = namedtuple('Partition', ['device', 'size', 'id', 'filesystem'])
 # Only those file systems that set this to 1 can have the boot loader
 # installed on them.  This is that list, with values taken from the .name
 # entry in the matching structs.
-FS_RESERVED_FIRST_SECTOR = set([
+FS_RESERVED_FIRST_SECTOR = {
     'btrfs',
     'ext2',
     'fat',
@@ -60,7 +60,7 @@ FS_RESERVED_FIRST_SECTOR = set([
     'fat16',
     'fat32',
     # Others?
-    ])
+    }
 
 
 class PageBase(plugin.PluginUI):
@@ -266,7 +266,7 @@ class PageGtk(PageBase):
                 m = self.part_auto_select_drive.get_model()
                 m.clear()
                 extra_resize = self.extra_options['resize']
-                disk_ids = extra_resize.keys()
+                disk_ids = list(extra_resize.keys())
                 disks = self.extra_options['use_device'][1]
                 # FIXME: perhaps it makes more sense to store the disk
                 # description.
@@ -428,7 +428,7 @@ class PageGtk(PageBase):
         try:
             dev, partnum = re.search(r'(.*\D)(\d+)$', resize_path).groups()
             dev = '%s%d' % (dev, int(partnum) + 1)
-        except Exception, e:
+        except Exception as e:
             dev = 'unknown'
             self.debug('Could not determine new partition number: %s', e)
             self.debug('extra_options: %s' % str(self.extra_options))
@@ -1084,7 +1084,7 @@ class PageGtk(PageBase):
                 dev = partition['device']
             else:
                 dev = partition['parent']
-            for p in self.partition_bars.itervalues():
+            for p in self.partition_bars.values():
                 p.hide()
             self.partition_bars[dev].show()
         for action in self.controller.dbfilter.get_actions(devpart, partition):
@@ -1171,7 +1171,7 @@ class PageGtk(PageBase):
         from gi.repository import Gtk, GObject
         from ubiquity import segmented_bar
         if self.partition_bars:
-            for p in self.partition_bars.itervalues():
+            for p in list(self.partition_bars.values()):
                 self.segmented_bar_vbox.remove(p)
                 del p
 
@@ -1370,7 +1370,8 @@ class Page(plugin.Plugin):
             # If an old parted_server is still running, clean it up.
             if os.path.exists('/var/run/parted_server.pid'):
                 try:
-                    pidline = open('/var/run/parted_server.pid').readline()
+                    with open('/var/run/parted_server.pid') as pidfile:
+                        pidline = pidfile.readline()
                     pidline = pidline.strip()
                     pid = int(pidline)
                     os.kill(pid, signal.SIGTERM)
@@ -1447,15 +1448,14 @@ class Page(plugin.Plugin):
 
         options = []
         try:
-            snoop = open('/var/lib/partman/snoop')
-            for line in snoop:
-                line = misc.utf8(line.rstrip('\n'), errors='replace')
-                fields = line.split('\t', 1)
-                if len(fields) == 2:
-                    (key, option) = fields
-                    options.append((key, option))
-                    continue
-            snoop.close()
+            with open('/var/lib/partman/snoop') as snoop:
+                for line in snoop:
+                    line = misc.utf8(line.rstrip('\n'), errors='replace')
+                    fields = line.split('\t', 1)
+                    if len(fields) == 2:
+                        (key, option) = fields
+                        options.append((key, option))
+                        continue
         except IOError:
             pass
         return options
@@ -1739,7 +1739,8 @@ class Page(plugin.Plugin):
         set of choices may not be valid; you must cache whatever you need
         before calling this method."""
         self.debug('Partman: Freezing choices for %s', menu)
-        open('/lib/partman/%s/no_show_choices' % menu, 'w').close
+        with open('/lib/partman/%s/no_show_choices' % menu, 'w'):
+            pass
 
     @misc.raise_privileges
     def thaw_choices(self, menu):
@@ -1849,8 +1850,8 @@ class Page(plugin.Plugin):
                 if system and system != 'swap':
                     if not system.startswith('Windows Recovery'):
                         operating_systems.append(system)
-        ubuntu_systems = filter(lambda x: x.lower().find('buntu') != -1,
-                                operating_systems)
+        ubuntu_systems = [x for x in operating_systems
+                          if x.lower().find('buntu') != -1]
         return (operating_systems, ubuntu_systems)
 
     def calculate_autopartitioning_options(self, operating_systems,
@@ -2290,7 +2291,8 @@ class Page(plugin.Plugin):
                                 }
 
                     if self.update_partitions is None:
-                        self.update_partitions = self.partition_cache.keys()
+                        self.update_partitions = list(
+                            self.partition_cache.keys())
                     else:
                         self.update_partitions = [devpart
                             for devpart in self.update_partitions

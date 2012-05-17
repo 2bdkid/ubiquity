@@ -1,3 +1,23 @@
+debian-installer-utils (1.89ubuntu1) quantal; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices: new "mmc-partition" type for detecting partitions on MMC
+      devices.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 02 May 2012 12:17:11 +0100
+
+debian-installer-utils (1.89) unstable; urgency=low
+
+  [ Scott Moser ]
+  * Add --quiet to dpkg-divert calls in chroot_setup (LP: #912431).
+
+ -- Colin Watson <cjwatson@debian.org>  Fri, 06 Jan 2012 12:19:04 +0000
+
 debian-installer-utils (1.88ubuntu2) precise; urgency=low
 
   [ Scott Moser ]

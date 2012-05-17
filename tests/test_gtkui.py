@@ -1,8 +1,13 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8; -*-
 
+from __future__ import print_function, unicode_literals
+
 import os
-from test import test_support
+try:
+    from test.support import EnvironmentVarGuard
+except ImportError:
+    from test.test_support import EnvironmentVarGuard
 import unittest
 
 import mock
@@ -40,13 +45,13 @@ class TestFrontend(unittest.TestCase):
         ui = gtk_ui.Wizard('test-ubiquity')
         with mock.patch('gi.repository.Gtk.Dialog.run') as run:
             run.return_value = 0
-            ret = ui.question_dialog(title=u'♥', msg=u'♥',
-                                     options=(u'♥', u'£'))
-            self.assertEqual(ret, u'£')
+            ret = ui.question_dialog(title='♥', msg='♥',
+                                     options=('♥', '£'))
+            self.assertEqual(ret, '£')
             run.return_value = 1
-            ret = ui.question_dialog(title=u'♥', msg=u'♥',
-                                     options=(u'♥', u'£'))
-            self.assertEqual(ret, u'♥')
+            ret = ui.question_dialog(title='♥', msg='♥',
+                                     options=('♥', '£'))
+            self.assertEqual(ret, '♥')
 
     # TODO: I'm not entirely sure this makes sense, but the numbers are
     # currently rather unstable and seem to depend quite a lot on the theme.
@@ -56,7 +61,7 @@ class TestFrontend(unittest.TestCase):
                      'only testable against a build tree')
     def test_pages_fit_on_a_netbook(self):
         from ubiquity.frontend import gtk_ui
-        with test_support.EnvironmentVarGuard() as env:
+        with EnvironmentVarGuard() as env:
             env['UBIQUITY_MIGRATION_ASSISTANT'] = '1'
             ui = gtk_ui.Wizard('test-ubiquity')
             ui.translate_pages()
@@ -120,7 +125,8 @@ class TestFrontend(unittest.TestCase):
                 ]
             deb_host_arch = subprocess.Popen(
                 ['dpkg-architecture', '-qDEB_HOST_ARCH'],
-                stdout=subprocess.PIPE).communicate()[0].strip()
+                stdout=subprocess.PIPE,
+                universal_newlines=True).communicate()[0].strip()
             if deb_host_arch not in ('amd64', 'i386'):
                 # grub-installer not available, but this template won't be
                 # displayed anyway.

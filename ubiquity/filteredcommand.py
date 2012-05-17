@@ -1,4 +1,3 @@
-#! /usr/bin/python
 # -*- coding: utf-8; Mode: Python; indent-tabs-mode: nil; tab-width: 4 -*-
 
 # Copyright (C) 2005, 2006, 2007, 2008 Canonical Ltd.
@@ -18,13 +17,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import sys
 import os
-import types
 import signal
 import subprocess
 
 import debconf
+import six
 
 from ubiquity.debconffilter import DebconfFilter
 from ubiquity import misc
@@ -65,8 +66,10 @@ class UntrustedBase(object):
             # bizarre time formatting code per syslogd
             time_str = time.ctime()[4:19]
             message = fmt % args
-            print >>sys.stderr, (u'%s %s: %s' %
-                (time_str, PACKAGE, message)).encode('utf-8')
+            line = six.u('%s %s: %s') % (time_str, PACKAGE, message)
+            if sys.version < '3':
+                line = line.encode('utf-8')
+            print(line, file=sys.stderr)
 
 class FilteredCommand(UntrustedBase):
     def __init__(self, frontend, db=None, ui=None):
@@ -92,7 +95,7 @@ class FilteredCommand(UntrustedBase):
             self.run(None, None)
             return
         self.command = ['log-output', '-t', PACKAGE, '--pass-stdout']
-        if isinstance(prep[0], types.StringTypes):
+        if isinstance(prep[0], six.string_types):
             self.command.append(prep[0])
         else:
             self.command.extend(prep[0])
@@ -132,7 +135,7 @@ class FilteredCommand(UntrustedBase):
             return self.dbfilter.process_line()
         except Exception:
             import traceback
-            print >>sys.stderr, 'Exception caught in process_line:'
+            print('Exception caught in process_line:', file=sys.stderr)
             traceback.print_exc(file=sys.stderr)
             return False
 
@@ -160,7 +163,7 @@ class FilteredCommand(UntrustedBase):
             if prep is None:
                 return
             self.command = ['log-output', '-t', PACKAGE, '--pass-stdout']
-            if isinstance(prep[0], types.StringTypes):
+            if isinstance(prep[0], six.string_types):
                 self.command.append(prep[0])
             else:
                 self.command.extend(prep[0])
@@ -172,7 +175,7 @@ class FilteredCommand(UntrustedBase):
                 env = {}
 
             def subprocess_setup():
-                for key, value in env.iteritems():
+                for key, value in env.items():
                     os.environ[key] = value
                 os.environ['LC_COLLATE'] = 'C'
                 # Python installs a SIGPIPE handler by default. This is bad
@@ -215,7 +218,7 @@ class FilteredCommand(UntrustedBase):
         def subprocess_setup():
             os.environ['HOME'] = '/root'
             os.environ['LC_COLLATE'] = 'C'
-            for key, value in env.iteritems():
+            for key, value in env.items():
                 os.environ[key] = value
             # Python installs a SIGPIPE handler by default. This is bad for
             # non-Python subprocesses, which need SIGPIPE set to the default
@@ -333,10 +336,11 @@ class FilteredCommand(UntrustedBase):
 
     def preseed(self, name, value, seen=True):
         value = misc.debconf_escape(value)
-        try:
-            value = value.encode("UTF-8", "ignore")
-        except UnicodeDecodeError:
-            pass
+        if sys.version < '3':
+            try:
+                value = value.encode("UTF-8", "ignore")
+            except UnicodeDecodeError:
+                pass
 
         try:
             self.db.set(name, value)

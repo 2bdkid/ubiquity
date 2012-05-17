@@ -17,6 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import os
 import datetime
 import time
@@ -178,9 +180,9 @@ class Location(object):
 
         # Grab md5sum of the timezone file for later comparison
         try:
-            tz_file = file(os.path.join('/usr/share/zoneinfo', self.zone) ,'rb')
-            self.md5sum = hashlib.md5(tz_file.read()).digest()
-            tz_file.close()
+            with open(os.path.join(
+                '/usr/share/zoneinfo', self.zone), 'rb') as tz_file:
+                self.md5sum = hashlib.md5(tz_file.read()).digest()
         except IOError:
             self.md5sum = None
 
@@ -202,12 +204,11 @@ class _Database(object):
     def __init__(self):
         self.locations = []
         iso3166 = Iso3166()
-        tzdata = open(TZ_DATA_FILE)
-        for line in tzdata:
-            if line.startswith('#'):
-                continue
-            self.locations.append(Location(line, iso3166))
-        tzdata.close()
+        with open(TZ_DATA_FILE) as tzdata:
+            for line in tzdata:
+                if line.startswith('#'):
+                    continue
+                self.locations.append(Location(line, iso3166))
 
         # Build mappings from timezone->location and country->locations
         self.cc_to_locs = {}
@@ -228,9 +229,9 @@ class _Database(object):
             return self.tz_to_loc[tz]
         except:
             try:
-                tz_file = file(os.path.join('/usr/share/zoneinfo', tz), 'rb')
-                md5sum = hashlib.md5(tz_file.read()).digest()
-                tz_file.close()
+                with open(os.path.join(
+                    '/usr/share/zoneinfo', tz), 'rb') as tz_file:
+                    md5sum = hashlib.md5(tz_file.read()).digest()
 
                 for loc in self.locations:
                     if md5sum == loc.md5sum:
@@ -240,7 +241,7 @@ class _Database(object):
                 pass
 
             # If not found, oh well, just warn and move on.
-            print >> sys.stderr, 'Could not understand timezone', tz
+            print('Could not understand timezone', tz, file=sys.stderr)
             self.tz_to_loc[tz] = None # save it for the future
             return None
 

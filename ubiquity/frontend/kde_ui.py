@@ -24,6 +24,8 @@
 # with Ubiquity; if not, write to the Free Software Foundation, Inc., 51
 # Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import sys
 import os
 import traceback
@@ -31,8 +33,11 @@ import syslog
 import atexit
 import signal
 import dbus
+from functools import reduce
 
 # kde gui specifics
+import sip
+sip.setapi("QVariant", 1)
 from PyQt4 import QtCore, QtGui, uic
 from PyKDE4 import kdeui, kdecore
 
@@ -72,17 +77,14 @@ class UbiquityUI(kdeui.KMainWindow):
         distro_release = ""
 
         ## setup the release and codename
-        fp = open("/etc/lsb-release", 'r')
-
-        for line in fp:
-            if "DISTRIB_ID=" in line:
-                name = str.strip(line.split("=")[1], '\n')
-                if name != "Ubuntu":
-                    distro_name = name
-            elif "DISTRIB_RELEASE=" in line:
-                distro_release = str.strip(line.split("=")[1], '\n')
-
-        fp.close()
+        with open("/etc/lsb-release", 'r') as fp:
+            for line in fp:
+                if "DISTRIB_ID=" in line:
+                    name = str.strip(line.split("=")[1], '\n')
+                    if name != "Ubuntu":
+                        distro_name = name
+                elif "DISTRIB_RELEASE=" in line:
+                    distro_release = str.strip(line.split("=")[1], '\n')
 
         self.distro_name_label.setText(distro_name)
         self.distro_release_label.setText(distro_release)
@@ -167,19 +169,19 @@ class Wizard(BaseFrontend):
 
         appName     = "kubuntu-ubiquity"
         catalog     = ""
-        programName = kdecore.ki18n ("Installer")
+        programName = kdecore.ki18n (b"Installer")
         ver         = "1.0"
-        description = kdecore.ki18n ("Live CD Installer for Kubuntu")
+        description = kdecore.ki18n (b"Live CD Installer for Kubuntu")
         rights      = kdecore.KAboutData.License_GPL
-        copy        = kdecore.ki18n ("(c) 2006 Canonical Ltd")
-        text        = kdecore.ki18n ("none")
+        copy        = kdecore.ki18n (b"(c) 2006 Canonical Ltd")
+        text        = kdecore.ki18n (b"none")
         homePage    = "http://wiki.kubuntu.org/KubuntuUbiquity"
         bugEmail    = "jriddell@ubuntu.com"
 
         about = kdecore.KAboutData (appName, catalog, programName, ver, description,
                             rights, copy, text, homePage, bugEmail)
-        about.addAuthor(kdecore.ki18n("Jonathan Riddell"), kdecore.KLocalizedString() ,"jriddell@ubuntu.com")
-        about.addAuthor(kdecore.ki18n("Roman Shtylman"), kdecore.KLocalizedString() ,"shtylman@gmail.com")
+        about.addAuthor(kdecore.ki18n(b"Jonathan Riddell"), kdecore.KLocalizedString() ,"jriddell@ubuntu.com")
+        about.addAuthor(kdecore.ki18n(b"Roman Shtylman"), kdecore.KLocalizedString() ,"shtylman@gmail.com")
         kdecore.KCmdLineArgs.init([""],about)
 
         # KApplication won't initialise if real UID != effective UID.  On
@@ -190,7 +192,8 @@ class Wizard(BaseFrontend):
         misc.drop_privileges_save()
         try:
             self.app = kdeui.KApplication()
-            self.app.setStyleSheet(file(os.path.join(UIDIR, "style.qss")).read())
+            with open(os.path.join(UIDIR, "style.qss")) as style:
+                self.app.setStyleSheet(style.read())
         finally:
             misc.regain_privileges_save()
 
@@ -202,7 +205,8 @@ class Wizard(BaseFrontend):
         # handle smaller screens (old school eee pc
         if (QtGui.QApplication.desktop().screenGeometry().height() < 560):
             self.ui.main_frame.setFixedHeight(470)
-            self.ui.main_frame.setStyleSheet(file(os.path.join(UIDIR, "style_small.qss")).read())
+            with open(os.path.join(UIDIR, "style_small.qss")) as style:
+                self.ui.main_frame.setStyleSheet(style.read())
 
         # initially the steps widget is not visible
         # it becomes visible once the first step becomes active
@@ -365,9 +369,9 @@ class Wizard(BaseFrontend):
                       "Exception in KDE frontend (invoking crash handler):")
         for line in tbtext.split('\n'):
             syslog.syslog(syslog.LOG_ERR, line)
-        print >>sys.stderr, ("Exception in KDE frontend"
-                             " (invoking crash handler):")
-        print >>sys.stderr, tbtext
+        print("Exception in KDE frontend (invoking crash handler):",
+              file=sys.stderr)
+        print(tbtext, file=sys.stderr)
 
         self.post_mortem(exctype, excvalue, exctb)
 
@@ -624,9 +628,9 @@ class Wizard(BaseFrontend):
             if hasattr(p.ui, 'plugin_translate'):
                 try:
                     p.ui.plugin_translate(lang or self.locale)
-                except Exception, e:
-                    print >>sys.stderr, 'Could not translate page (%s): %s' \
-                                        % (p.module.NAME, str(e))
+                except Exception as e:
+                    print('Could not translate page (%s): %s' %
+                          (p.module.NAME, str(e)), file=sys.stderr)
 
     # translates widget text based on the object names
     # widgets is a list of (widget, prefix) pairs
@@ -726,8 +730,8 @@ class Wizard(BaseFrontend):
             widget.setWindowTitle(text)
 
         else:
-            print "WARNING: unknown widget: " + name
-            print "Type: ", type(widget)
+            print("WARNING: unknown widget: " + name)
+            print("Type: ", type(widget))
 
     def allow_change_step(self, allowed):
         if allowed:

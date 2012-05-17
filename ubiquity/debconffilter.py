@@ -17,6 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import sys
 import os
 import fcntl
@@ -112,8 +114,8 @@ class DebconfFilter:
             import time
             # bizarre time formatting code per syslogd
             time_str = time.ctime()[4:19]
-            print >>sys.stderr, "%s debconf (%s): %s" % (time_str, key,
-                                                         ' '.join(args))
+            print("%s debconf (%s): %s" % (time_str, key, ' '.join(args)),
+                  file=sys.stderr)
 
     # Returns None if non-blocking and can't read a full line right now;
     # returns '' at end of file; otherwise as fileobj.readline().
@@ -130,14 +132,16 @@ class DebconfFilter:
 
             try:
                 text = os.read(self.subout_fd, 512)
+                if sys.version >= '3':
+                    text = text.decode()
                 if text == '':
                     ret = self.toread
                     self.toread = ''
                     self.toreadpos = 0
                     return ret
                 self.toread += text
-            except OSError, (err, _):
-                if err == errno.EAGAIN or err == errno.EWOULDBLOCK:
+            except OSError as e:
+                if e.errno in (errno.EAGAIN, errno.EWOULDBLOCK):
                     return None
                 else:
                     raise
@@ -196,7 +200,7 @@ class DebconfFilter:
                 os.environ['PERL_DL_NONLAZY'] = '1'
             os.environ['HOME'] = '/root'
             os.environ['LC_COLLATE'] = 'C'
-            for key, value in extra_env.iteritems():
+            for key, value in extra_env.items():
                 os.environ[key] = value
             # Python installs a SIGPIPE handler by default. This is bad for
             # non-Python subprocesses, which need SIGPIPE set to the default
@@ -207,7 +211,7 @@ class DebconfFilter:
 
         self.subp = subprocess.Popen(
             command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-            preexec_fn=subprocess_setup)
+            preexec_fn=subprocess_setup, universal_newlines=True)
         self.subin = self.subp.stdin
         self.subout = self.subp.stdout
         self.subout_fd = self.subout.fileno()
@@ -420,7 +424,7 @@ class DebconfFilter:
 
         try:
             if not self.escaping:
-                params = map(misc.debconf_escape, params)
+                params = [misc.debconf_escape(param) for param in params]
             data = self.db.command(command, *params)
             self.reply(0, data)
 
@@ -429,7 +433,7 @@ class DebconfFilter:
             # properly skipped over in multi-stage backups.
             if command == 'INPUT':
                 self.next_go_backup = False
-        except debconf.DebconfError, e:
+        except debconf.DebconfError as e:
             self.reply(*e.args)
 
         return True

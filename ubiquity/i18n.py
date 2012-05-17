@@ -17,12 +17,17 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import re
 import subprocess
 import codecs
 import os
 import locale
 import sys
+from functools import reduce
+
+import six
 
 from ubiquity import misc, im_switch
 
@@ -40,9 +45,9 @@ def reset_locale(frontend, just_country=False):
         os.environ['LANGUAGE'] = di_locale
         try:
             locale.setlocale(locale.LC_ALL, '')
-        except locale.Error, e:
-            print >>sys.stderr, 'locale.setlocale failed: %s (LANG=%s)' % \
-                                (e, di_locale)
+        except locale.Error as e:
+            print('locale.setlocale failed: %s (LANG=%s)' % (e, di_locale),
+                  file=sys.stderr)
         if not just_country:
             misc.execute_root('fontconfig-voodoo',
                                 '--auto', '--force', '--quiet')
@@ -100,11 +105,11 @@ def get_translations(languages=None, core_names=[], extra_prefixes=[]):
             preexec_fn=misc.regain_privileges)
         question = None
         descriptions = {}
-        fieldsplitter = re.compile(r':\s*')
+        fieldsplitter = re.compile(br':\s*')
 
         for line in db.stdout:
-            line = line.rstrip('\n')
-            if ':' not in line:
+            line = line.rstrip(b'\n')
+            if b':' not in line:
                 if question is not None:
                     _translations[question] = descriptions
                     descriptions = {}
@@ -112,44 +117,47 @@ def get_translations(languages=None, core_names=[], extra_prefixes=[]):
                 continue
 
             (name, value) = fieldsplitter.split(line, 1)
-            if value == '':
+            if value == b'':
                 continue
             name = name.lower()
-            if name == 'name':
-                question = value
-            elif name.startswith('description'):
-                namebits = name.split('-', 1)
+            if name == b'name':
+                question = value.decode()
+            elif name.startswith(b'description'):
+                namebits = name.split(b'-', 1)
                 if len(namebits) == 1:
                     lang = 'c'
+                    decoded_value = value.decode('ASCII', 'replace')
                 else:
-                    lang = namebits[1].lower()
-                    # TODO: recode from specified encoding
-                    lang = lang.split('.')[0]
+                    lang = namebits[1].lower().decode()
+                    lang, encoding = lang.split('.', 1)
+                    decoded_value = value.decode(encoding, 'replace')
                 if (use_langs is None or lang in use_langs or
                     question in core_names):
-                    value = strip_context(question, value)
-                    descriptions[lang] = value.replace('\\n', '\n')
-            elif name.startswith('extended_description'):
-                namebits = name.split('-', 1)
+                    decoded_value = strip_context(question, decoded_value)
+                    descriptions[lang] = decoded_value.replace('\\n', '\n')
+            elif name.startswith(b'extended_description'):
+                namebits = name.split(b'-', 1)
                 if len(namebits) == 1:
                     lang = 'c'
+                    decoded_value = value.decode('ASCII', 'replace')
                 else:
-                    lang = namebits[1].lower()
-                    # TODO: recode from specified encoding
-                    lang = lang.split('.')[0]
+                    lang = namebits[1].lower().decode()
+                    lang, encoding = lang.split('.', 1)
+                    decoded_value = value.decode(encoding, 'replace')
                 if (use_langs is None or lang in use_langs or
                     question in core_names):
-                    value = strip_context(question, value)
+                    decoded_value = strip_context(question, decoded_value)
                     if lang not in descriptions:
-                        descriptions[lang] = value.replace('\\n', '\n')
+                        descriptions[lang] = decoded_value.replace('\\n', '\n')
                     # TODO cjwatson 2006-09-04: a bit of a hack to get the
                     # description and extended description separately ...
                     if question in ('grub-installer/bootdev',
                                     'partman-newworld/no_newworld',
                                     'ubiquity/text/error_updating_installer'):
                         descriptions["extended:%s" % lang] = \
-                            value.replace('\\n', '\n')
+                            decoded_value.replace('\\n', '\n')
 
+        db.stdout.close()
         db.wait()
         devnull.close()
 
@@ -219,7 +227,7 @@ def get_string(name, lang, prefix=None):
         else:
             text = translations[question]['c']
 
-    return misc.utf8(text, errors='replace')
+    return text
 
 
 # Based on code by Walter Dörwald:
@@ -232,7 +240,7 @@ def ascii_transliterate(exc):
     if ord(s) in range(128):
         return s, exc.start + 1
     else:
-        return u'', exc.start + 1
+        return six.u(''), exc.start + 1
 
 codecs.register_error('ascii_transliterate', ascii_transliterate)
 
@@ -259,7 +267,7 @@ def get_languages(current_language_index=-1, only_installable=False):
         line = misc.utf8(line)
         if line == '' or line == '\n':
             continue
-        code, name, trans = line.strip(u'\n').split(u':')[1:]
+        code, name, trans = line.strip('\n').split(':')[1:]
         if code in ('C', 'dz', 'km'):
             i += 1
             continue
@@ -320,17 +328,16 @@ def get_languages(current_language_index=-1, only_installable=False):
     return current_language, sorted_choices, language_display_map
 
 def default_locales():
-    languagelist = open('/usr/lib/ubiquity/localechooser/languagelist')
-    defaults = {}
-    for line in languagelist:
-        line = misc.utf8(line)
-        if line == '' or line == '\n':
-            continue
-        bits = line.strip(u'\n').split(u';')
-        code = bits[0]
-        locale = bits[4]
-        defaults[code] = locale
-    languagelist.close()
+    with open('/usr/lib/ubiquity/localechooser/languagelist') as languagelist:
+        defaults = {}
+        for line in languagelist:
+            line = misc.utf8(line)
+            if line == '' or line == '\n':
+                continue
+            bits = line.strip('\n').split(';')
+            code = bits[0]
+            locale = bits[4]
+            defaults[code] = locale
     return defaults
 
 # vim:ai:et:sts=4:tw=80:sw=4:

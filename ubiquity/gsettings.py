@@ -44,9 +44,10 @@ def get(schema, key, user = None):
     if not user:
         user = os.getenv("SUDO_USER", os.getenv("USER", "root"))
 
-    subp = subprocess.Popen(['sudo', '-u', user, 'dbus-launch', 'gsettings', 'get', schema, key],
+    subp = subprocess.Popen(['sudo', '-u', user, 'gsettings', 'get', schema, key],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                            preexec_fn=misc.drop_all_privileges)
+                            preexec_fn=misc.drop_all_privileges,
+                            universal_newlines=True)
     value = subp.communicate()[0].rstrip('\n')
 
     if not value:
@@ -98,7 +99,7 @@ def set(schema, key, value, user = None):
     if value == True:
         value = "true"
 
-    subprocess.call(['sudo', '-u', user, 'dbus-launch', 'gsettings', 'set', schema, key, str(value)],
+    subprocess.call(['sudo', '-u', user, 'gsettings', 'set', schema, key, str(value)],
                      preexec_fn=misc.drop_all_privileges)
 
 def set_list(schema, key, values, user = None):
@@ -115,5 +116,5 @@ def unset(schema, key, user = None):
     if not user:
         user = os.getenv("SUDO_USER", os.getenv("USER", "root"))
 
-    subprocess.call(['sudo', '-u', user, 'dbus-launch', 'gsettings', 'reset', schema, key],
+    subprocess.call(['sudo', '-u', user, 'gsettings', 'reset', schema, key],
                      preexec_fn=misc.drop_all_privileges)

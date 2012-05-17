@@ -1,10 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+
 import subprocess
 import sys
 
 from PyQt4.QtCore import Qt, QRectF
 from PyQt4.QtGui import QWidget, QFont, QPainter, QPen, QPainterPath, QColor
+
+if sys.version >= '3':
+    unichr = chr
 
 IMG_DIR = "/usr/share/ubiquity/qt/images"
 
@@ -228,9 +233,11 @@ class Keyboard(QWidget):
             variantParam = "-variant %s" % self.variant
 
         cmd="ckbcomp -model pc106 -layout %s %s -compact" % (self.layout, variantParam)
-        #print cmd
+        #print(cmd)
 
-        pipe = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=None)
+        pipe = subprocess.Popen(
+            cmd, shell=True, stdout=subprocess.PIPE, stderr=None,
+            universal_newlines=True)
         cfile = pipe.communicate()[0]
 
         #clear the current codes

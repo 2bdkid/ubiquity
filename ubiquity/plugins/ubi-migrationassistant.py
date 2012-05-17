@@ -20,6 +20,7 @@ import syslog
 import os
 
 import debconf
+import six
 
 from ubiquity import plugin
 
@@ -58,7 +59,7 @@ class PageGtk(PageBase):
             builder.connect_signals(self)
             self.page = builder.get_object('stepMigrationAssistant')
             self.matreeview = builder.get_object('matreeview')
-        except Exception, e:
+        except Exception as e:
             self.debug('Could not create migration-assistant page: %s', e)
             self.page = None
         self.plugin_widgets = self.page
@@ -115,7 +116,7 @@ class PageGtk(PageBase):
                 text = model.get_value(iterator, 1)
 
             try:
-                cell.set_property("markup", unicode(text))
+                cell.set_property("markup", six.text_type(text))
             except:
                 cell.set_property("text", '%s  %s (%s)' % \
                     (val['user'], val['os'], val['part']))
@@ -274,7 +275,7 @@ class Page(plugin.Plugin):
                 except KeyError:
                     users[c['part']] = [c['user']]
 
-        for p in users.iterkeys():
+        for p in users.keys():
             question = 'migration-assistant/%s/users' % p
             self.db.register('migration-assistant/users', question)
             self.preseed(question, ', '.join(users[p]))
@@ -320,7 +321,7 @@ class Page(plugin.Plugin):
                     self.db.set('migration-assistant/%s/users' % part, '')
                 # Prune out partitions that do not have any users.
                 self.db.set('migration-assistant/partitions', ", ".join(ret))
-            except debconf.DebconfError, e:
+            except debconf.DebconfError as e:
                 for line in str(e).split('\n'):
                     syslog.syslog(syslog.LOG_ERR, line)
                 self.db.set('migration-assistant/partitions', '')

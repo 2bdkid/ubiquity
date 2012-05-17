@@ -1,9 +1,18 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
+from __future__ import unicode_literals
 
-from itertools import izip, izip_longest
+try:
+    # < 3.0
+    from itertools import izip as zip, izip_longest as zip_longest
+except ImportError:
+    # >= 3.0; the zip builtin returns an iterator
+    from itertools import zip_longest
 import os
-from test import test_support
+try:
+    from test.support import run_unittest
+except ImportError:
+    from test.test_support import run_unittest
 import unittest
 
 import debconf
@@ -11,6 +20,12 @@ import debconf
 import mock
 
 from ubiquity import misc, plugin_manager
+
+
+# Monkey-patch for Python 2/3 compatibility.
+if not hasattr(unittest.TestCase, 'assertCountEqual'):
+    unittest.TestCase.assertCountEqual = unittest.TestCase.assertItemsEqual
+
 
 ubi_partman = plugin_manager.load_plugin('ubi-partman')
 
@@ -21,43 +36,49 @@ def question_has_variables(question, lookup_variables):
         templates_dat = '/var/cache/debconf/templates.dat'
     else:
         templates_dat = 'tests/templates.dat'
-    with open(templates_dat) as templates:
+    # Templates files are (at least in theory) mixed-encoding, so we must
+    # treat them as binary data and decode only marked elements.  In this
+    # function, we only care about question and variable names, which should
+    # always be ASCII.
+    with open(templates_dat, 'rb') as templates:
         for line in templates:
-            if found_question and line == '\n':
+            if found_question and line == b'\n':
                 break
 
-            if line.startswith('Name: %s' % question):
+            if line.startswith(('Name: %s' % question).encode()):
                 found_question = True
                 continue
             elif not found_question:
                 continue
 
-            if line.startswith('Description:'):
+            if line.startswith(b'Description:'):
                 last = 13
-            elif line.startswith('Extended_description:'):
+            elif line.startswith(b'Extended_description:'):
                 last = 22
             else:
                 continue
 
             while True:
-                start = line.find('${', last)
+                start = line.find(b'${', last)
                 if start != -1:
-                    end = line.find('}', last)
+                    end = line.find(b'}', last)
                     if end != -1:
-                        existing_variables.append(line[start+2:end])
+                        existing_variables.append(line[start+2:end].decode())
                         last = end + 1
                     else:
-                        exc = 'Expected to find } on \'%s\'' % line
-                        raise EOFError, exc
+                        exc = ('Expected to find } on \'%s\'' %
+                               line.decode(errors='replace'))
+                        raise EOFError(exc)
                 else:
                     break
     if not found_question:
-        raise AssertionError, 'Never found the question: %s' % question
+        raise AssertionError('Never found the question: %s' % question)
     only_in_lookup = set(lookup_variables) - set(existing_variables)
     only_in_template = set(existing_variables) - set(lookup_variables)
     if only_in_lookup or only_in_template:
-        raise AssertionError, ('%s\nOnly in lookup: %s\nOnly in template: %s' %
-            (question, ', '.join(only_in_lookup), ', '.join(only_in_template)))
+        raise AssertionError(('%s\nOnly in lookup: %s\nOnly in template: %s' %
+            (question, ', '.join(only_in_lookup),
+             ', '.join(only_in_template))))
 
 
 # These tests skip when their dependencies are not met and tests/run takes
@@ -141,8 +162,8 @@ class TestPageBase(unittest.TestCase):
 class TestPage(TestPageBase):
     def test_description(self):
         question = 'partman-auto/init_automatically_partition'
-        description = unicode(self.page.db.metaget(question, 'description'),
-                              'utf-8', 'replace')
+        description = misc.utf8(self.page.db.metaget(question, 'description'),
+                                'replace')
         self.assertEqual(self.page.description(question), description)
         self.assertIn(question, self.page.description_cache)
 
@@ -162,7 +183,7 @@ class TestPage(TestPageBase):
             default_mountpoints = [default[0] for default in
                                    self.page.default_mountpoint_choices(fs)]
             self.assertTrue(len(default_mountpoints) > 0)
-            self.assertItemsEqual(mountpoints, default_mountpoints)
+            self.assertCountEqual(mountpoints, default_mountpoints)
 
     def test_method_description(self):
         # FIXME: move this into the Directory tests, following use_as()
@@ -461,7 +482,7 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
 
     # 'This computer currently has Windows on it.'
     def test_windows_only(self):
-        operating_system = u'Windows XP'
+        operating_system = 'Windows XP'
         misc.find_in_os_prober.return_value = operating_system
         part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ntfs')
         layout = { '=dev=sda' : [part] }
@@ -491,11 +512,11 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         options = self.page.calculate_autopartitioning_options(
                         operating_systems, ubuntu_systems)
         self.assertIn('resize', options)
-        self.assertItemsEqual(resize, options['resize'])
+        self.assertCountEqual(resize, options['resize'])
         self.assertIn('use_device', options)
-        self.assertItemsEqual(replace, options['use_device'])
+        self.assertCountEqual(replace, options['use_device'])
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
     # 'This computer currently has no operating systems on it.'
     def test_empty(self):
@@ -514,14 +535,14 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
                         operating_systems, ubuntu_systems)
 
         self.assertIn('use_device', options)
-        self.assertItemsEqual(use_device, options['use_device'])
+        self.assertCountEqual(use_device, options['use_device'])
 
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
     # 'This computer currently has Ubuntu 10.04 on it.'
     def test_older_ubuntu_only(self):
-        operating_system = u'Ubuntu 10.04'
+        operating_system = 'Ubuntu 10.04'
         misc.find_in_os_prober.return_value = operating_system
         part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ext4')
         layout = { '=dev=sda' : [part] }
@@ -550,17 +571,17 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         options = self.page.calculate_autopartitioning_options(
                         operating_systems, ubuntu_systems)
         self.assertIn('use_device', options)
-        self.assertItemsEqual(use_device, options['use_device'])
+        self.assertCountEqual(use_device, options['use_device'])
 
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
         self.assertIn('reuse', options)
-        self.assertItemsEqual(reuse, options['reuse'])
+        self.assertCountEqual(reuse, options['reuse'])
 
     # 'This computer currently has Ubuntu 12.04 on it.'
     def test_same_ubuntu_only(self):
-        operating_system = u'Ubuntu 12.04'
+        operating_system = 'Ubuntu 12.04'
         misc.find_in_os_prober.return_value = operating_system
         part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ext4')
         layout = { '=dev=sda' : [part] }
@@ -587,16 +608,16 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         options = self.page.calculate_autopartitioning_options(
                         operating_systems, ubuntu_systems)
         self.assertIn('use_device', options)
-        self.assertItemsEqual(use_device, options['use_device'])
+        self.assertCountEqual(use_device, options['use_device'])
 
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
         self.assertNotIn('reuse', options)
 
     # 'This computer currently has Ubuntu 90.10 on it.'
     def test_newer_ubuntu_only(self):
-        operating_system = u'Ubuntu 90.10'
+        operating_system = 'Ubuntu 90.10'
         misc.find_in_os_prober.return_value = operating_system
         part = ubi_partman.Partition('/dev/sda1', 0, '1234-1234', 'ext4')
         layout = { '=dev=sda' : [part] }
@@ -623,16 +644,16 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         options = self.page.calculate_autopartitioning_options(
                         operating_systems, ubuntu_systems)
         self.assertIn('use_device', options)
-        self.assertItemsEqual(use_device, options['use_device'])
+        self.assertCountEqual(use_device, options['use_device'])
 
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
         self.assertNotIn('reuse', options)
 
     # 'This computer currently has multiple operating systems on it.'
     def test_multiple_operating_systems(self):
-        operating_systems = [u'Ubuntu 10.04', u'Windows XP', u'Mac OSX']
+        operating_systems = ['Ubuntu 10.04', 'Windows XP', 'Mac OSX']
         def side_effect(*args, **kwargs):
             return operating_systems.pop()
         misc.find_in_os_prober.side_effect = side_effect
@@ -665,13 +686,13 @@ class TestCalculateAutopartitioningOptions(unittest.TestCase):
         options = self.page.calculate_autopartitioning_options(
                         operating_systems, ubuntu_systems)
         self.assertIn('use_device', options)
-        self.assertItemsEqual(use_device, options['use_device'])
+        self.assertCountEqual(use_device, options['use_device'])
 
         self.assertIn('resize', options)
-        self.assertItemsEqual(resize, options['resize'])
+        self.assertCountEqual(resize, options['resize'])
 
         self.assertIn('manual', options)
-        self.assertItemsEqual(self.manual, options['manual'])
+        self.assertCountEqual(self.manual, options['manual'])
 
 
 def _fake_grub_options_pairs(paths, descriptions):
@@ -681,7 +702,7 @@ def _fake_grub_options_pairs(paths, descriptions):
     def grub_options():
         return [(path, description)
                 for path, description
-                in izip_longest(paths, descriptions, fillvalue='')]
+                in zip_longest(paths, descriptions, fillvalue='')]
     return grub_options
 
 class TestPageGtk(unittest.TestCase):
@@ -725,12 +746,12 @@ class TestPageGtk(unittest.TestCase):
         row_text = []
         for row in self.gtk.grub_device_entry.get_model():
             row_text.append(' '.join(row))
-        for want, got in izip(expected, row_text):
+        for want, got in zip(expected, row_text):
             self.assertEqual(want, got)
 
 
 if __name__ == '__main__':
-    test_support.run_unittest(
+    run_unittest(
         TestCalculateAutopartitioningOptions,
         TestPage,
         TestPageGrub,

@@ -1,15 +1,19 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import grp
 import os
 import pwd
-from test import test_support
+try:
+    from test.support import EnvironmentVarGuard, run_unittest
+except ImportError:
+    from test.test_support import EnvironmentVarGuard, run_unittest
 import unittest
 
 # These tests require Mock 0.7.0
 import mock
 
 from ubiquity import misc
+from helpers import builtin_patch, text_file_type
 
 _proc_swaps = [
     'Filename\t\t\t\tType\t\tSize\tUsed\tPriority',
@@ -38,15 +42,15 @@ _proc_mounts = [
 ]
 
 
-class EnvironmentVarGuard(test_support.EnvironmentVarGuard):
-    """Stronger version of test_support.EnvironmentVarGuard.
+class EnvironmentVarGuardRestore(EnvironmentVarGuard):
+    """Stronger version of EnvironmentVarGuard.
 
     This class restores os.environ even if something within its context
     manipulates os.environ directly.
     """
 
     def __init__(self):
-        test_support.EnvironmentVarGuard.__init__(self)
+        EnvironmentVarGuard.__init__(self)
         self._environ = self._environ.copy()
 
 
@@ -55,15 +59,16 @@ class MiscTests(unittest.TestCase):
     def setUp(self):
         misc.get_release.release_info = None
 
-    @mock.patch('__builtin__.open')
+    @builtin_patch('open')
     def test_is_swap(self, mock_open):
-        magic = mock.MagicMock(spec=file)
+        magic = mock.MagicMock(spec=text_file_type)
         mock_open.return_value = magic
+        magic.__enter__.return_value = magic
         magic.__iter__.return_value = iter(_proc_swaps)
         self.assertTrue(misc.is_swap('/dev/sda5'))
         self.assertFalse(misc.is_swap('/dev/sda'))
 
-    @mock.patch('__builtin__.open')
+    @builtin_patch('open')
     def test_is_swap_fail(self, mock_open):
         mock_open.side_effect = Exception('Ka-blamo!')
         self.assertFalse(misc.is_swap('/dev/sda5'))
@@ -89,9 +94,9 @@ class MiscTests(unittest.TestCase):
         # os.access, raise an exception as a side effect.
         pass
 
-    @mock.patch('__builtin__.open')
+    @builtin_patch('open')
     def test_get_release(self, mock_open):
-        magic = mock.MagicMock(spec=file)
+        magic = mock.MagicMock(spec=text_file_type)
         magic.__enter__.return_value = magic
         mock_open.return_value = magic
         magic.readline.return_value = _disk_info
@@ -99,14 +104,14 @@ class MiscTests(unittest.TestCase):
         self.assertEqual(release.name, 'Ubuntu-Server')
         self.assertEqual(release.version, '10.04.1 LTS')
 
-    @mock.patch('__builtin__.open')
+    @builtin_patch('open')
     def test_get_release_fail(self, mock_open):
         mock_open.side_effect = Exception('Pow!')
         release = misc.get_release()
         self.assertEqual(release.name, 'Ubuntu')
         self.assertEqual(release.version, '')
 
-    #@mock.patch('__builtin__.os.path.exists')
+    #@mock.patch('os.path.exists')
     #def windows_startup_folder(self, mock_exists):
     #    #mock_exists.return_value = True
     #    locations = [
@@ -123,9 +128,9 @@ class MiscTests(unittest.TestCase):
 
     #    self.assertEqual(misc.windows_startup_folder('/tmp/tmp.XXXXXX'))
 
-    @mock.patch('__builtin__.open')
+    @builtin_patch('open')
     def test_mount_info(self, mock_open):
-        magic = mock.MagicMock(spec=file)
+        magic = mock.MagicMock(spec=text_file_type)
         magic.__enter__.return_value = magic
         mock_open.return_value = magic
         # TODO come up with better mountpoints.
@@ -259,7 +264,7 @@ class PrivilegeTests(unittest.TestCase):
     @mock.patch('os.seteuid')
     @mock.patch('os.setgroups')
     def test_drop_privileges(self, *args):
-        with test_support.EnvironmentVarGuard() as env:
+        with EnvironmentVarGuard() as env:
             env['SUDO_UID'] = '1000'
             env['SUDO_GID'] = '1000'
             misc.drop_privileges()
@@ -281,7 +286,7 @@ class PrivilegeTests(unittest.TestCase):
     @mock.patch('os.setreuid')
     def test_drop_all_privileges(self, *args):
         pwd.getpwuid.return_value.pw_dir = 'fakeusr'
-        with EnvironmentVarGuard():
+        with EnvironmentVarGuardRestore():
             os.environ['SUDO_UID'] = '1000'
             os.environ['SUDO_GID'] = '1000'
             misc.drop_all_privileges()
@@ -422,4 +427,4 @@ class GrubDefaultTests(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    test_support.run_unittest(MiscTests, PrivilegeTests, GrubDefaultTests)
+    run_unittest(MiscTests, PrivilegeTests, GrubDefaultTests)

@@ -24,10 +24,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import os
 import re
+import sys
 
 import debconf
+import six
 
 from ubiquity import validation
 from ubiquity import misc
@@ -318,7 +322,7 @@ class PageGtk(PageBase):
             self.username.handler_block(self.username_changed_id)
             new_username = misc.utf8(widget.get_text().split(' ')[0])
             new_username = new_username.encode('ascii', 'ascii_transliterate')
-            new_username = new_username.lower()
+            new_username = new_username.decode().lower()
             new_username = re.sub('^[^a-z]+', '', new_username)
             new_username = re.sub('[^-a-z0-9_]', '', new_username)
             self.username.set_text(new_username)
@@ -515,8 +519,9 @@ class PageKde(PageBase):
         # If the user did not manually enter a username create one for him.
         if not self.username_edited:
             self.page.username.blockSignals(True)
-            new_username = unicode(self.page.fullname.text()).split(' ')[0]
-            new_username = new_username.encode('ascii', 'ascii_transliterate').lower()
+            new_username = six.text_type(self.page.fullname.text()).split(' ')[0]
+            new_username = new_username.encode('ascii', 'ascii_transliterate')
+            new_username = new_username.decode().lower()
             self.page.username.setText(new_username)
             self.on_username_changed()
             self.username_edited = False
@@ -525,7 +530,7 @@ class PageKde(PageBase):
     def on_username_changed(self):
         if not self.hostname_edited:
             self.page.hostname.blockSignals(True)
-            self.page.hostname.setText(unicode(self.page.username.text()).strip() + self.suffix)
+            self.page.hostname.setText(six.text_type(self.page.username.text()).strip() + self.suffix)
             self.page.hostname.blockSignals(False)
 
         self.username_edited = (self.page.username.text() != '')
@@ -540,22 +545,22 @@ class PageKde(PageBase):
         self.hostname_edited = (self.page.hostname.text() != '')
 
     def set_fullname(self, value):
-        self.page.fullname.setText(unicode(value, "UTF-8"))
+        self.page.fullname.setText(misc.utf8(value))
 
     def get_fullname(self):
-        return unicode(self.page.fullname.text())
+        return six.text_type(self.page.fullname.text())
 
     def set_username(self, value):
-        self.page.username.setText(unicode(value, "UTF-8"))
+        self.page.username.setText(misc.utf8(value))
 
     def get_username(self):
-        return unicode(self.page.username.text())
+        return six.text_type(self.page.username.text())
 
     def get_password(self):
-        return unicode(self.page.password.text())
+        return six.text_type(self.page.password.text())
 
     def get_verified_password(self):
-        return unicode(self.page.verified_password.text())
+        return six.text_type(self.page.verified_password.text())
 
     def set_auto_login(self, value):
         return self.page.login_auto.setChecked(value)
@@ -590,7 +595,7 @@ class PageKde(PageBase):
         self.page.hostname_error_reason.show()
 
     def get_hostname (self):
-        return unicode(self.page.hostname.text())
+        return six.text_type(self.page.hostname.text())
 
     def set_hostname (self, value):
         self.page.hostname.setText(value)
@@ -668,12 +673,15 @@ class PageNoninteractive(PageBase):
 
     def username_error(self, msg):
         """The selected username was bad."""
-        print >>self.console, '\nusername error: %s' % msg
-        self.username = raw_input('Username: ')
+        print('\nusername error: %s' % msg, file=self.console)
+        if sys.version >= '3':
+            self.username = input('Username: ')
+        else:
+            self.username = raw_input('Username: ')
 
     def password_error(self, msg):
         """The selected password was bad."""
-        print >>self.console, '\nBad password: %s' % msg
+        print('\nBad password: %s' % msg, file=self.console)
         import getpass
         self.password = getpass.getpass('Password: ')
         self.verifiedpassword = getpass.getpass('Password again: ')

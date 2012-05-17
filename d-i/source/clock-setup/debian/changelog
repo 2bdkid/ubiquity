@@ -1,3 +1,22 @@
+clock-setup (0.110ubuntu1) quantal; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Pass --noadjfile to hwclock.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 02 May 2012 13:03:59 +0100
+
+clock-setup (0.110) unstable; urgency=low
+
+  * /etc/default/hwclock supersedes /etc/default/rcS as the location
+   for the UTC configuration option.  Use /etc/default/hwclock, but
+   fall back to /etc/default/rcS if it is not present, for backward
+   compatibility. (Roger Leigh) Closes: #659611
+
+ -- Joey Hess <joeyh@debian.org>  Sun, 12 Feb 2012 15:28:20 -0400
+
 clock-setup (0.109ubuntu1) precise; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

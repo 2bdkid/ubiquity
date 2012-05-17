@@ -17,9 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+from __future__ import print_function
+
 import os
+import sys
 
 import debconf
+import six
 
 from ubiquity import plugin
 from ubiquity import i18n
@@ -91,6 +95,7 @@ class PageGtk(PageBase):
 
         self.release_notes_url = ''
         self.update_installer = True
+        self.updating_installer = False
         self.release_notes_label = builder.get_object('release_notes_label')
         self.release_notes_found = False
         if self.release_notes_label:
@@ -98,9 +103,8 @@ class PageGtk(PageBase):
             if self.controller.oem_config or auto_update.already_updated():
                 self.update_installer = False
             try:
-                release_notes = open(_release_notes_url_path)
-                self.release_notes_url = release_notes.read().rstrip('\n')
-                release_notes.close()
+                with open(_release_notes_url_path) as release_notes:
+                    self.release_notes_url = release_notes.read().rstrip('\n')
                 self.release_notes_found = True
             except (KeyboardInterrupt, SystemExit):
                 raise
@@ -321,7 +325,7 @@ class PageGtk(PageBase):
             return False
 
     def update_release_notes_label(self):
-        print "update_release_notes_label()"
+        print("update_release_notes_label()")
         lang = self.get_language()
         if not lang:
             return
@@ -354,6 +358,9 @@ class PageGtk(PageBase):
             lang = 'C'
         lang = lang.split('.')[0] # strip encoding
         if uri == 'update':
+            if self.updating_installer:
+                return True
+            self.updating_installer = True
             if not auto_update.update(self.controller._wizard):
                 # no updates, so don't check again
                 if self.release_notes_url:
@@ -361,6 +368,7 @@ class PageGtk(PageBase):
                     self.release_notes_label.set_markup(text)
                 else:
                     self.release_notes_label.hide()
+            self.updating_installer = False
         elif uri == 'release-notes':
             import subprocess
             uri = self.release_notes_url.replace('${LANG}', lang)
@@ -405,13 +413,13 @@ class PageKde(PageBase):
 
             self.release_notes_url = ''
             self.update_installer = True
+            self.updating_installer = False
             if self.controller.oem_config or auto_update.already_updated():
                 self.update_installer = False
             self.release_notes_found = False
             try:
-                release_notes = open(_release_notes_url_path)
-                self.release_notes_url = release_notes.read().rstrip('\n')
-                release_notes.close()
+                with open(_release_notes_url_path) as release_notes:
+                    self.release_notes_url = release_notes.read().rstrip('\n')
                 self.release_notes_found = True
             except (KeyboardInterrupt, SystemExit):
                 raise
@@ -442,11 +450,20 @@ class PageKde(PageBase):
                     self.widgetHidden.append(w)
                     w.hide()
 
-        except Exception, e:
+        except Exception as e:
             self.debug('Could not create language page: %s', e)
             self.page = None
 
         self.plugin_widgets = self.page
+
+    @staticmethod
+    def make_qstring(s):
+        """Python 2/3 compatibility hack."""
+        if sys.version >= '3':
+            return s
+        else:
+            from PyQt4.QtCore import QString
+            return QString(s)
 
     @plugin.only_this_page
     def on_try_ubuntu_clicked(self, *args):
@@ -475,10 +492,14 @@ class PageKde(PageBase):
                 url = self.release_notes_url.replace('${LANG}', lang)
                 self.openURL(url)
         elif link == "update":
+            if self.updating_installer:
+                return
+            self.updating_installer = True
             if not auto_update.update(self.controller._wizard):
                 # no updates, so don't check again
                 text = i18n.get_string('release_notes_only', lang)
                 self.page.release_notes_label.setText(text)
+            self.updating_installer = False
 
     def openURL(self, url):
         from PyQt4.QtGui import QDesktopServices
@@ -491,15 +512,14 @@ class PageKde(PageBase):
         regain_privileges_save()
 
     def set_language_choices(self, choices, choice_map):
-        from PyQt4.QtCore import QString
         PageBase.set_language_choices(self, choices, choice_map)
         self.combobox.clear()
         for choice in choices:
-            self.combobox.addItem(QString(unicode(choice)))
+            self.combobox.addItem(self.make_qstring(six.text_type(choice)))
 
     def set_language(self, language):
-        from PyQt4.QtCore import QString
-        index = self.combobox.findText(QString(unicode(language)))
+        index = self.combobox.findText(
+            self.make_qstring(six.text_type(language)))
         if index < 0:
             self.combobox.addItem("C")
         else:
@@ -515,10 +535,10 @@ class PageKde(PageBase):
 
     def selected_language(self):
         lang = self.combobox.currentText()
-        if lang.isNull() or not hasattr(self, 'language_choice_map'):
+        if not lang or not hasattr(self, 'language_choice_map'):
             return None
         else:
-            return self.language_choice_map[unicode(lang)][1]
+            return self.language_choice_map[six.text_type(lang)][1]
 
     def on_language_selection_changed(self):
         lang = self.selected_language()
@@ -602,7 +622,7 @@ class PageKde(PageBase):
         return self.page.oem_id_entry.setText(text)
 
     def get_oem_id(self):
-        return unicode(self.page.oem_id_entry.text())
+        return six.text_type(self.page.oem_id_entry.text())
 
 class PageDebconf(PageBase):
     plugin_title = 'ubiquity/text/language_heading_label'

@@ -1,7 +1,9 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 
 # Wrapper script to run Ubiquity as root using the appropriate privilege
 # escalation method for the frontend.
+
+from __future__ import print_function
 
 import sys
 import os
@@ -94,7 +96,7 @@ def main():
             import tempfile
             xauthority = tempfile.NamedTemporaryFile(prefix='ubiquity-',
                                                      suffix='-xauth')
-            os.chmod(xauthority.name, 0600) # root can still read it
+            os.chmod(xauthority.name, 0o600) # root can still read it
             xauth_extract = subprocess.Popen(
                 ['xauth', 'extract', '-', os.environ['DISPLAY']],
                 stdout=subprocess.PIPE)
@@ -102,6 +104,7 @@ def main():
                 ['xauth', '-f', xauthority.name, 'merge', '-'],
                 stdin=xauth_extract.stdout)
             xauth_merge.wait()
+            xauth_extract.stdout.close()
             xauth_extract.wait()
             toexec = ['sudo', '-E', 'XAUTHORITY=%s' % xauthority.name]
         else:
@@ -116,7 +119,8 @@ def main():
     # Apparently killing a few processes up-front helps.
     try:
         lowmem = False
-        archdetect = subprocess.Popen(['archdetect'], stdout=subprocess.PIPE)
+        archdetect = subprocess.Popen(
+            ['archdetect'], stdout=subprocess.PIPE, universal_newlines=True)
         arch = archdetect.communicate()[0].strip()
         if arch == 'powerpc/ps3':
             with open('/proc/meminfo') as meminfo:
@@ -147,7 +151,7 @@ def main():
         pass
 
     if 'UBIQUITY_WRAPPER_DEBUG' in os.environ:
-        print >>sys.stderr, toexec
+        print(toexec, file=sys.stderr)
     os.execvp(toexec[0], toexec)
     sys.exit(127)
 
