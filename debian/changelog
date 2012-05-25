@@ -1,3 +1,21 @@
+ubiquity (2.11.2) quantal; urgency=low
+
+  [ Colin Watson ]
+  * If ubiquity is started up in a non-UTF-8 locale, force it into C.UTF-8
+    and fail immediately if that's unavailable (LP: #1003851).
+  * KDE fails to round-trip strings containing U+FEFF ZERO WIDTH NO-BREAK
+    SPACE, such as the translations of a few language names.  Strip these
+    from language name translations.
+  * Install debconf-set from debian-installer-utils, useful for preseeding.
+
+  [ Evan Dandrea ]
+  * Remove migration-assistant following foundations-q-testing-
+    migration-assistant. Thanks Dmitrijs Ledkovs!
+  * Automatic update of included source packages: base-installer
+    1.122ubuntu8, flash-kernel 2.28ubuntu43.
+
+ -- Evan Dandrea <ev@ubuntu.com>  Fri, 25 May 2012 15:47:47 +0100
+
 ubiquity (2.11.1) quantal; urgency=low
 
   * Fix handling of pipes to update-apt-cache.
