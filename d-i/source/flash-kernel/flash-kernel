@@ -275,7 +275,7 @@ highbank_do_bootscr() {
 echo Starting Ubuntu...
 mw.l 800000 0 10000
 scsi scan
-sysboot scsi 0 ext2 0x100000 boot.cfg
+sysboot -p scsi 0 ext2 0x100000 boot.cfg
 EOF
 	mkimage -A arm -T script -C none -n "Ubuntu boot script" -d "$tmp.boot.script" \
 		"$tmp.boot.scr" >&2 1>/dev/null
