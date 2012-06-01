@@ -1,3 +1,34 @@
+ubiquity (2.11.4) quantal; urgency=low
+
+  [ Colin Watson ]
+  * Force the locale to en_US.UTF-8 for the timezone tests.
+  * Fix seddery of clock-setup/finish-install.d/10clock-setup to handle
+    changes in clock-setup 0.110 (LP: #1003443).
+  * Automatic update of included source packages: flash-kernel
+    3.0~rc.4ubuntu1.
+  * In the shell script syntax check, filter out *.po and *.pot files
+    straight away before doing the slower check using file(1).  There are
+    lots of these and it takes quite a long time otherwise.
+  * Add several Lintian overrides.
+
+  [ Dmitrijs Ledkovs ]
+  * Remove migration-assistant's UI definitions.
+
+  [ Martin Pitt ]
+  * scripts/simple-plugins, ubiquity/plugins/ubi-prepare.py: Move from Jockey
+    to "ubuntu-drivers autoinstall". Add ubuntu-drivers-common Recommends: for
+    this.
+  * scripts/plugininstall.py: Drop jockey --check-composite call. It is
+    obsolete as the free drivers now provide 3D support. Automatic
+    installation of graphics drivers is controlled and covered by
+    ubuntu-drivers autoinstall now.
+
+  [ Mario Limonciello ]
+  * Don't encode callbacks in UTF8 in the timezone plugin anymore.  The strings
+    are already unicode.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 01 Jun 2012 14:49:41 +0100
+
 ubiquity (2.11.3) quantal; urgency=low
 
   * Automatic update of included source packages: flash-kernel 2.28ubuntu45.
