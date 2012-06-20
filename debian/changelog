@@ -1,3 +1,42 @@
+ubiquity (2.11.6) quantal; urgency=low
+
+  [ Dmitrijs Ledkovs ]
+  * Run debconf-updatepo to remove migration-assistant translations.
+
+  [ Alan Bell ]
+  * Adjust the default use_device_title label to make more sense when read
+    by screen readers (LP: #1010179).
+
+  [ Stéphane Graber ]
+  * Port ubiquity-bluetooth-agent from the old python-gobject to the
+    gi version of gobject as required with python3. (LP: #1013172)
+
+  [ Matthew Paul Thomas ]
+  * Improvements to the third-party software text:
+    - Changes "display" to "play" (since MP3 is about audio, not video).
+    - Adds mention of graphics drivers (because the installer may install a
+      Nvidia proprietary driver).
+    - Changes "wireless" to "wi-fi".
+    - Changes "closed-source" to "proprietary", matching Ubuntu Software
+      Center.
+    - Removes repetition of "the software", by changing "the software's
+      documentation" to "its documentation".
+
+  [ Colin Watson ]
+  * Add XS-Testsuite header, as per current DEP-8.
+  * debian/tests/control: Depend on python3-mock rather than python-mock
+    (LP: #1015400).
+  * Automatic update of included source packages: apt-setup 1:0.56ubuntu2,
+    partconf 1.38, partman-basicmethods 50, partman-jfs 36, partman-newworld
+    27, partman-reiserfs 53, partman-xfs 50.
+
+  [ Luke Yelavich ]
+  * Show the a11y profile indicator in oem-config as well as in
+    maybe-ubiquity mode.
+  * bin/ubiquity-dm: Load at-spi for both OEM config and ubiquity.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 20 Jun 2012 09:37:32 +0100
+
 ubiquity (2.11.5) quantal-proposed; urgency=low
 
   * Force the DBUS signature of AddAndActivateConnection (LP: #1008898)
