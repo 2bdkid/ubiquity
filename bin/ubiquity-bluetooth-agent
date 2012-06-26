@@ -1,5 +1,11 @@
 #!/usr/bin/python3
-import dbus, dbus.service, dbus.mainloop.glib, os, sys
+
+import os
+import sys
+
+import dbus
+import dbus.service
+import dbus.mainloop.glib
 from gi.repository import GObject
 
 class Rejected(dbus.DBusException):
@@ -54,7 +60,6 @@ class Agent(dbus.service.Object):
         return
 
 def exit_handler():
-    import os
     if not os.path.exists("/tmp/ubiquity-bluetooth-done"):
         with open("/tmp/ubiquity-bluetooth-done", "w+"):
             pass

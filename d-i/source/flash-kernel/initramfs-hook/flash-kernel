@@ -7,6 +7,12 @@ if ! which flash-kernel >/dev/null 2>&1; then
     exit 0
 fi
 
+# we dont want to run if FLASH_KERNEL_SKIP is set, the ubuntu
+# image build system uses this
+if [ -n "$FLASH_KERNEL_SKIP" ]; then
+        exit 0
+fi
+
 abi="$1"
 # ignored
 _initrd="$2"

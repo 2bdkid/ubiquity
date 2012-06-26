@@ -1,3 +1,22 @@
+ubiquity (2.11.7) quantal-proposed; urgency=low
+
+  [ Colin Watson ]
+  * Remove hardcoded paths to xfsettingsd and various accessibility tools.
+  * Automatic update of included source packages: clock-setup 0.112ubuntu1,
+    debian-installer-utils 1.91ubuntu1, flash-kernel 3.0~rc.4ubuntu4,
+    partman-base 156ubuntu1, partman-basicfilesystems 74ubuntu1,
+    partman-btrfs 9ubuntu1, partman-ext3 70ubuntu1, preseed 1.51ubuntu1.
+
+  [ Harald Sitter ]
+  * Fix bogus attribute access in usersetup plugin leading to crashes with
+    the KDE frontend (LP: #1008255)
+
+  [ Oliver Grawert ]
+  * adjust arm bootloader installation, we have not used this part of ubiquity
+    in some years and everything was outdated
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 26 Jun 2012 11:12:34 +0100
+
 ubiquity (2.11.6) quantal; urgency=low
 
   [ Dmitrijs Ledkovs ]

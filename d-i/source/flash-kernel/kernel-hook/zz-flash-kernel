@@ -9,6 +9,13 @@ if ! which flash-kernel >/dev/null 2>&1; then
     exit 0
 fi
 
+# we dont want to run if FLASH_KERNEL_SKIP is set, the ubuntu
+# image build system uses this
+if [ -n "$FLASH_KERNEL_SKIP" ]; then
+        exit 0
+fi
+
+
 # this script is used as postinst.d and postrm.d script; this is used to
 # differentiate between the two
 self="$0"

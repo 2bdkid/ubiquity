@@ -1,3 +1,24 @@
+flash-kernel (3.0~rc.4ubuntu4) quantal; urgency=low
+
+  * also add FLASH_KERNEL_SKIP to the initramfs post update script, this
+    should finally fix ac100 image building
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 22 Jun 2012 11:20:39 +0200
+
+flash-kernel (3.0~rc.4ubuntu3) quantal; urgency=low
+
+  * re-add support for the FLASH_KERNEL_SKIP env variable, so the image build
+    infrastructure has a chance to skip the automated flash-kernel run during
+    image builds.
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 20 Jun 2012 16:41:28 +0200
+
+flash-kernel (3.0~rc.4ubuntu2) quantal; urgency=low
+
+  * add "quiet splash" as default options to omap bootscr
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 20 Jun 2012 16:25:31 +0200
+
 flash-kernel (3.0~rc.4ubuntu1) quantal; urgency=low
 
   [ dann frazier ]
