@@ -1,3 +1,11 @@
+flash-kernel (3.0~rc.4ubuntu7) quantal; urgency=low
+
+  * make sure the call to abootimg -i does not make the script fail (checking
+    non bootimg devices makes it return 1 even though there is no error, this
+    in turn makes teh whole script fail since we run with "set -e")
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 17 Jul 2012 13:20:43 +0200
+
 flash-kernel (3.0~rc.4ubuntu6) quantal; urgency=low
 
   * add DB entry for "OMAP3 Beagle Board" (funnily thats missing)
