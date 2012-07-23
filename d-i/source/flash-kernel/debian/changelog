@@ -1,3 +1,17 @@
+flash-kernel (3.0~rc.4ubuntu9) quantal; urgency=low
+
+  * Also add omap and omap4 to flash-kernel-installer.isinstallable.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Fri, 20 Jul 2012 11:42:33 +1000
+
+flash-kernel (3.0~rc.4ubuntu8) quantal; urgency=low
+
+  * debian/control: Re-add omap and omap4 to the flash-kernel-installer
+    XB-Subarchitecture field. These appear to have been lost somewhere along
+    the way.
+
+ -- Luke Yelavich <themuso@ubuntu.com>  Fri, 20 Jul 2012 11:39:08 +1000
+
 flash-kernel (3.0~rc.4ubuntu7) quantal; urgency=low
 
   * make sure the call to abootimg -i does not make the script fail (checking

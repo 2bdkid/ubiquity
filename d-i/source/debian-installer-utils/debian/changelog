@@ -1,3 +1,18 @@
+debian-installer-utils (1.91ubuntu3) quantal; urgency=low
+
+  * make sure we also detect platform-omap MMCs
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 20 Jul 2012 19:29:57 +0200
+
+debian-installer-utils (1.91ubuntu2) quantal; urgency=low
+
+  * log-output: Always install a no-op SIGCHLD handler, in case the
+    subsidiary process starts a daemon which does not fully disconnect its
+    standard file descriptors (LP: #1021293).  See also the changelog for
+    1.36ubuntu2.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 20 Jul 2012 17:12:34 +0100
+
 debian-installer-utils (1.91ubuntu1) quantal; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

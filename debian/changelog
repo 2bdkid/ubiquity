@@ -1,3 +1,15 @@
+ubiquity (2.11.18) quantal; urgency=low
+
+  * Don't bother keeping track of keyboard model names and identifiers, as
+    nothing in ubiquity uses them right now.
+  * Fix reversed uses of methods mapping between keyboard layout/variant IDs
+    and human-readable names, and improve method naming and documentation to
+    make this mistake less likely in future (LP: #1027207, #1027620).
+  * Automatic update of included source packages: debian-installer-utils
+    1.91ubuntu3, flash-kernel 3.0~rc.4ubuntu9, netcfg 1.68ubuntu15.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 23 Jul 2012 11:02:13 +0100
+
 ubiquity (2.11.17) quantal; urgency=low
 
   * ubiquity/plugins/ubi-partman.py: Remove a stray comma, which broke this
