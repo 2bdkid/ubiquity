@@ -1,3 +1,67 @@
+flash-kernel (3.0~rc.4ubuntu17) quantal; urgency=low
+
+  * sigh, not only drop the creation of /var/lib/flash-kernel/configured but
+    also the check for its existance, else we will always exit 0
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 07 Aug 2012 20:03:20 +0200
+
+flash-kernel (3.0~rc.4ubuntu16) quantal; urgency=low
+
+  * re-add a diversion for update-initramfs to live-installers
+    post-base-installer.d to avoid update-initramfs runs before
+    flash-kernel is configured
+  * re-add a check for the diverted update-initramfs to
+    flash-kernel-installer, so it gets reverted before we try to call
+    update-initramfs
+  * drop teh super ugly hack that added a /var/lib/flash-kernel/configured
+    file to actually check if flash-kernel is configured
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 07 Aug 2012 19:52:51 +0200
+
+flash-kernel (3.0~rc.4ubuntu15) quantal; urgency=low
+
+  * Fix armadaxp kernel load address (LP: #1026835).
+
+ -- Robie Basak <robie.basak@ubuntu.com>  Tue, 31 Jul 2012 16:31:30 +0100
+
+flash-kernel (3.0~rc.4ubuntu14) quantal-proposed; urgency=low
+
+  * better do the "configured" check in /var/lib
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 25 Jul 2012 18:03:18 +0200
+
+flash-kernel (3.0~rc.4ubuntu13) quantal-proposed; urgency=low
+
+  * add very very ugly temporary workaround to make quantal A3 arm server
+    installs possible (yes, i suck)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 25 Jul 2012 17:16:16 +0200
+
+flash-kernel (3.0~rc.4ubuntu12) quantal; urgency=low
+
+  * remove the diversion code again, it doesnt help since
+    flash-kernel-installer.udeb only comes into play to late so the
+    post-base-installer.d file isnt available at live-installer time
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 25 Jul 2012 14:38:24 +0200
+
+flash-kernel (3.0~rc.4ubuntu11) quantal; urgency=low
+
+  * make post-base-installer.d/01flash-kernel-diversion actually an executable
+    shell script
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 24 Jul 2012 15:33:46 +0200
+
+flash-kernel (3.0~rc.4ubuntu10) quantal; urgency=low
+
+  * add a diversion for update-initramfs to live-installers
+    post-base-installer.d to avoid update-initramfs runs before
+    flash-kernel is configured
+  * add a check for the diverted update-initramfs to flash-kernel-installer,
+    so it gets reverted before we try to call update-initramfs
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 24 Jul 2012 15:28:37 +0200
+
 flash-kernel (3.0~rc.4ubuntu9) quantal; urgency=low
 
   * Also add omap and omap4 to flash-kernel-installer.isinstallable.

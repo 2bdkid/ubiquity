@@ -24,6 +24,12 @@ findfs () {
 	mount | grep "on /target${1%/} " | tail -n1 | cut -d' ' -f1
 }
 
+# check if live-installer diverted update-initramfs, revert before we move on
+if [ -e /target/usr/sbin/update-initramfs.flash-kernel-diverted ];then
+		rm -f /target/usr/sbin/update-initramfs
+		in-target dpkg-divert --remove --local --rename /usr/sbin/update-initramfs
+fi
+
 machine="$(get_cpuinfo_hardware)"
 
 if machine_uses_flash "$machine"; then
