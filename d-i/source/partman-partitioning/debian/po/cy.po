@@ -3,30 +3,28 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Translation of Debian Installer templates to Brazilian Portuguese.
+# translation of Debian Installer templates to Welsh
+# Copyright (C) 2004-2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Felipe Augusto van de Wiel (faw) <faw@debian.org>, 2008-2012.
+# Jonathan Price <mynamesnotclive@notclive.co.uk>, 2008.
 #
 # Translations from iso-codes:
-#   Alastair McKinstry <mckinstry@computer.org>, 2001-2002.
-#   Free Software Foundation, Inc., 2000
-#   Juan Carlos Castro y Castro <jcastro@vialink.com.br>, 2000-2005.
-#   Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2006-2009.
-#   Lisiane Sztoltz <lisiane@conectiva.com.br>
-#   Tobias Quathamer <toddy@debian.org>, 2007.
-#     Translations taken from ICU SVN on 2007-09-09
+#   Alastair McKinstry <mckinstry@debian.org>, 2004.
+#   - translations from ICU-3.0
+#   Dafydd Harries <daf@muse.19inch.net>, 2002,2004,2006.
+#   Free Software Foundation, Inc., 2002,2004
+#   Alastair McKinstry <mckinstry@computer.org>, 2001
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: partman-partitioning@packages.debian.org\n"
 "POT-Creation-Date: 2012-03-28 22:48+0000\n"
-"PO-Revision-Date: 2012-04-07 19:57-0300\n"
-"Last-Translator: Felipe Augusto van de Wiel (faw) <faw@debian.org>\n"
-"Language-Team: Brazilian Portuguese <debian-l10n-portuguese@lists.debian."
-"org>\n"
-"Language: pt_BR\n"
+"PO-Revision-Date: 2012-06-14 09:46-0000\n"
+"Last-Translator: Dafydd Tomos <l10n@da.fydd.org>\n"
+"Language-Team: Welsh <>\n"
+"Language: cy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,21 +34,21 @@ msgstr ""
 #. :sl2:
 #: ../partman-partitioning.templates:1001
 msgid "Resizing partition..."
-msgstr "Redimensionando partição..."
+msgstr "Yn ailfeintio'r rhaniad..."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:2001
 msgid "Copying partition..."
-msgstr "Copiando partição..."
+msgstr "Yn copïo'r rhaniad..."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../partman-partitioning.templates:3001
 msgid "Computing the new state of the partition table..."
-msgstr "Computando o novo estado da tabela de partições..."
+msgstr "Yn cyfrifo cyflwr newydd y tabl rhaniad..."
 
 #. Type: boolean
 #. Description
@@ -61,7 +59,7 @@ msgstr "Computando o novo estado da tabela de partições..."
 #: ../partman-partitioning.templates:4001
 #: ../partman-partitioning.templates:8001
 msgid "Write previous changes to disk and continue?"
-msgstr "Gravar as mudanças anteriores em disco e continuar?"
+msgstr "Ysgrifennu'r newidiadau blaenorol i'r disg a pharhau?"
 
 #. Type: boolean
 #. Description
@@ -71,8 +69,8 @@ msgid ""
 "Before you can select a partition to copy, any previous changes have to be "
 "written to disk."
 msgstr ""
-"Antes que você possa selecionar uma partição para copiar, quaisquer mudanças "
-"prévias precisam ser gravadas em disco."
+"Cyn dewis rhaniad i copïo, rhaid i'r newidiadau blaenorol gael eu "
+"hysgrifennu i ddisg."
 
 #. Type: boolean
 #. Description
@@ -83,21 +81,21 @@ msgstr ""
 #: ../partman-partitioning.templates:4001
 #: ../partman-partitioning.templates:8001
 msgid "You cannot undo this operation."
-msgstr "Você não pode desfazer esta operação."
+msgstr "Ni allwch ddadwneud y weithred hon."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:4001
 msgid "Please note that the copy operation may take a long time."
-msgstr "Por favor, note que a operação de cópia pode demandar muito tempo."
+msgstr "Sylwer y gall y weithred copïo gymryd amser hir."
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:5001
 msgid "Source partition:"
-msgstr "Partição origem:"
+msgstr "Rhaniad ffynhonnell:"
 
 #. Type: select
 #. Description
@@ -105,14 +103,14 @@ msgstr "Partição origem:"
 #: ../partman-partitioning.templates:5001
 msgid "Please choose the partition which contains the data you want to copy."
 msgstr ""
-"Por favor, escolha a partição que contém os dados que você deseja copiar."
+"Os gwelwch yn dda, dewiswch y rhaniad sy'n cynnwys y data hoffech gopïo."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:6001
 msgid "Copy operation failure"
-msgstr "Falha na operação de cópia"
+msgstr "Methiant gweithred copïo"
 
 #. Type: error
 #. Description
@@ -123,40 +121,35 @@ msgstr "Falha na operação de cópia"
 #: ../partman-partitioning.templates:6001
 #: ../partman-partitioning.templates:13001
 msgid "An error occurred while writing the changes to the storage devices."
-msgstr ""
-"Um erro ocorreu durante a gravação das mudanças nos dispositivos de "
-"armazenamento."
+msgstr "Digwyddodd gwall wrth ysgrifennu'r newidiadau i'r dyfeisiau storfa."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:6001
 msgid "The copy operation has been aborted."
-msgstr "A operação de cópia foi abortada."
+msgstr "Mae'r broses copïo wedi'i derfynu."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:7001
 msgid "The resize operation is impossible"
-msgstr "A operação de redimensionamento é impossível"
+msgstr "Mae'r weithred ailfeintio yn amhosib"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:7001
 msgid "Because of an unknown reason it is impossible to resize this partition."
-msgstr ""
-"Devido a uma razão desconhecida é impossível redimensionar esta partição."
+msgstr "Oherwydd rheswm anhysbys, mae'n amhosib ailfeintio'r rhaniad hwn."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:7001
 msgid "Check /var/log/syslog or see virtual console 4 for the details."
-msgstr ""
-"Verifique o arquivo /var/log/syslog ou consulte o console virtual 4 para os "
-"detalhes."
+msgstr "Gwiriwch /var/log/syslog neu gwelwch consol rhithwir 4 am y manylion."
 
 #. Type: boolean
 #. Description
@@ -166,17 +159,15 @@ msgid ""
 "Before you can select a new partition size, any previous changes have to be "
 "written to disk."
 msgstr ""
-"Antes que você possa selecionar um novo tamanho de partição, quaisquer "
-"mudanças prévias precisam ser gravadas em disco."
+"Cyn dewis maint rhaniad newydd, rhaid i newidiadau blaenorol gael eu "
+"hysgrifennu i ddisg."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:8001
 msgid "Please note that the resize operation may take a long time."
-msgstr ""
-"Por favor, note que a operação de redimensionamento pode demandar muito "
-"tempo."
+msgstr "Sylwer y gall y weithred ailfeintio gymryd amser hir."
 
 #. Type: string
 #. Description
@@ -187,7 +178,7 @@ msgstr ""
 #: ../partman-partitioning.templates:9001
 #: ../partman-partitioning.templates:14001
 msgid "New partition size:"
-msgstr "Novo tamanho de partição:"
+msgstr "Maint y rhaniad newydd:"
 
 #. Type: string
 #. Description
@@ -197,8 +188,8 @@ msgid ""
 "The minimum size for this partition is ${MINSIZE} (or ${PERCENT}) and its "
 "maximum size is ${MAXSIZE}."
 msgstr ""
-"O tamanho mínimo para esta partição é ${MINSIZE} (ou ${PERCENT}) e o tamanho "
-"máximo é ${MAXSIZE}."
+"Y maint lleiaf ar gyfer y rhaniad hwn yw ${MINSIZE} (neu ${PERCENT}) a'r "
+"maint mwyaf yw ${MAXSIZE}."
 
 #. Type: string
 #. Description
@@ -213,16 +204,16 @@ msgid ""
 "Hint: \"max\" can be used as a shortcut to specify the maximum size, or "
 "enter a percentage (e.g. \"20%\") to use that percentage of the maximum size."
 msgstr ""
-"Dica: \"max\" pode ser usado como um atalho para especificar o tamanho "
-"máximo, ou informe uma porcentagem (e.g. \"20%\") para usar essa porcentagem "
-"do tamanho máximo."
+"Awgrym: gellir defnyddio \"max\" fel llwybr byr i nodi y maint mwyaf, neu "
+"mewnosod canran (e.e. \"20%\") ar gyfer defnyddio'r canran hynny o'r maint "
+"mwyaf."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:10001
 msgid "The size entered is invalid"
-msgstr "O tamanho informado é inválido"
+msgstr "Mae'r maint a roddwyd yn annilys."
 
 #. Type: error
 #. Description
@@ -233,16 +224,15 @@ msgid ""
 "size followed by an optional unit of measure (e.g. \"200 GB\"). The default "
 "unit of measure is the megabyte."
 msgstr ""
-"O tamanho informado não foi entendido. Por favor, informe um tamanho inteiro "
-"positivo seguido por uma unidade de medida opcional (e.g. \"200 GB\"). A "
-"unidade padrão de medida é o megabyte."
+"Ni ddeallwyd y maint o roddwyd. Rhowch cyfanrif positif wedi ei ddilyn gan "
+"uned o fesur (e.e. '200GB'). Yr uned o fesur diofyn yw'r megabeit."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:11001
 msgid "The size entered is too large"
-msgstr "O tamanho informado é muito grande"
+msgstr "Mae'r maint a roddwyd yn rhy fawr."
 
 #. Type: error
 #. Description
@@ -252,15 +242,15 @@ msgid ""
 "The size you entered is larger than the maximum size of the partition. "
 "Please enter a smaller size to continue."
 msgstr ""
-"O tamanho que você informou é maior que o tamanho máximo da partição. Por "
-"favor, informe um tamanho menor para continuar."
+"Mae'r maint a roddwyd yn fwy na uchafswm maint y rhaniad. Rhowch faint yn "
+"llai i barhau."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:12001
 msgid "The size entered is too small"
-msgstr "O tamanho informado é muito pequeno"
+msgstr "Mae'r maint a roddwyd yn rhy fach."
 
 #. Type: error
 #. Description
@@ -270,57 +260,57 @@ msgid ""
 "The size you entered is smaller than the minimum size of the partition. "
 "Please enter a larger size to continue."
 msgstr ""
-"O tamanho que você informou é menor que o tamanho mínimo da partição. Por "
-"favor, informe um tamanho maior para continuar."
+"Mae'r maint a roddwyd yn llai na lleiafswm maint y rhaniad. Rhowch faint yn "
+"fwy  i barhau."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:13001
 msgid "Resize operation failure"
-msgstr "Falha na operação de redimensionamento"
+msgstr "Methiant gweithred ailfeintio"
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:13001
 msgid "The resize operation has been aborted."
-msgstr "A operação de redimensionamento foi abortada."
+msgstr "Mae'r weithred ailfeintio wedi'i derfynu."
 
 #. Type: string
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:14001
 msgid "The maximum size for this partition is ${MAXSIZE}."
-msgstr "O tamanho máximo para esta partição é ${MAXSIZE}."
+msgstr "Y maint mwyaf ar gyfer y rhaniad hwn yw ${MAXSIZE}."
 
 #. Type: error
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:15001
 msgid "Invalid size"
-msgstr "Tamanho inválido"
+msgstr "Maint annilys"
 
 #. Type: select
 #. Choices
 #. :sl1:
 #: ../partman-partitioning.templates:16001
 msgid "Beginning"
-msgstr "Início"
+msgstr "Dechrau"
 
 #. Type: select
 #. Choices
 #. :sl1:
 #: ../partman-partitioning.templates:16001
 msgid "End"
-msgstr "Fim"
+msgstr "Diwedd"
 
 #. Type: select
 #. Description
 #. :sl1:
 #: ../partman-partitioning.templates:16002
 msgid "Location for the new partition:"
-msgstr "Localização para a nova partição:"
+msgstr "Lleoliad y rhaniad newydd:"
 
 #. Type: select
 #. Description
@@ -330,43 +320,43 @@ msgid ""
 "Please choose whether you want the new partition to be created at the "
 "beginning or at the end of the available space."
 msgstr ""
-"Por favor, escolha se você deseja que a nova partição seja criada no início "
-"ou no final do espaço disponível."
+"Os gwelwch yn dda, dewiswch os ydych chi eisiau i'r rhaniad newydd gael ei "
+"greu ar ddechrau neu ddiwedd y gofod sydd ar gael."
 
 #. Type: select
 #. Choices
 #. :sl1:
 #: ../partman-partitioning.templates:17001
 msgid "Primary"
-msgstr "Primária"
+msgstr "Cynradd"
 
 #. Type: select
 #. Choices
 #. :sl1:
 #: ../partman-partitioning.templates:17001
 msgid "Logical"
-msgstr "Lógica"
+msgstr "Rhesymegol"
 
 #. Type: select
 #. Description
 #. :sl1:
 #: ../partman-partitioning.templates:17002
 msgid "Type for the new partition:"
-msgstr "Tipo para a nova partição:"
+msgstr "Math y rhaniad newydd:"
 
 #. Type: multiselect
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:18001
 msgid "Flags for the new partition:"
-msgstr "Flags para a nova partição:"
+msgstr "Baneri ar gyfer y rhaniad newydd:"
 
 #. Type: string
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:19001
 msgid "Partition name:"
-msgstr "Nome da partição:"
+msgstr "Enw rhaniad:"
 
 #. Type: boolean
 #. Description
@@ -377,7 +367,7 @@ msgstr "Nome da partição:"
 #: ../partman-partitioning.templates:20001
 #: ../partman-partitioning.templates:21001
 msgid "Continue with partitioning?"
-msgstr "Continuar com o particionamento?"
+msgstr "Parhau gyda'r rhaniadu?"
 
 #. Type: boolean
 #. Description
@@ -388,9 +378,9 @@ msgid ""
 "partition tables on your architecture.  Please send an e-mail message to "
 "debian-boot@lists.debian.org with information."
 msgstr ""
-"Este particionador não possui informações sobre o tipo padrão de tabelas de "
-"partições usadas em sua arquitetura de hardware. Por favor, envie uma "
-"mensagem em inglês para debian-boot@lists.debian.org com essa informação."
+"Nid oes gan y rhaniadydd hwn gwybodaeth am y math diofyn o'r tablau rhaniad "
+"ar eich pensaerniaeth. Os gwelwch yn dda, danfonwch ebost at debian-"
+"boot@lists.debian.org gyda'r wybodaeth hon."
 
 #. Type: boolean
 #. Description
@@ -400,8 +390,8 @@ msgid ""
 "Please note that if the type of the partition table is unsupported by "
 "libparted, then this partitioner will not work properly."
 msgstr ""
-"Por favor, note que se não houver suporte para o tipo da tabela de partição "
-"pela libparted, o particionador não funcionará corretamente."
+"Sylwer os nad yw math y tabl rhaniad wedi ei gynnal gan libparted, yna ni "
+"fydd y rhaniadydd yma'n gweithio'n iawn."
 
 #. Type: boolean
 #. Description
@@ -412,9 +402,9 @@ msgid ""
 "support for the partition tables used on your architecture.  It is strongly "
 "recommended that you exit this partitioner."
 msgstr ""
-"Este particionador é baseado na biblioteca libparted, a qual não possui "
-"suporte para a tabela de partições usada em sua arquitetura de hardware. É "
-"altamente recomendado que você não use este particionador."
+"Mae'r rhaniadydd hwn wedi ei seilio ar y llyfrgell libparted sydd heb "
+"gynhaliaeth ar gyfer y tablau rhaniad a ddefnyddir ar eich pensaerniaeth. "
+"Argymhellir yn gryf eich bod chi'n gadael y rhaniadydd hwn."
 
 #. Type: boolean
 #. Description
@@ -424,29 +414,29 @@ msgid ""
 "If you can, please help to add support for your partition table type to "
 "libparted."
 msgstr ""
-"Se possível, por favor, ajude a adicionar o suporte para o tipo de sua "
-"tabela de partições à libparted."
+"Os y medrwch, cynorthwywch i ychwanegu cynhaliaeth ar gyfer eich math o tabl "
+"rhaniad i libparted os gwelwch yn dda."
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:23001
 msgid "Partition table type:"
-msgstr "Tipo de tabela de partições:"
+msgstr "Math o tabl rhaniad:"
 
 #. Type: select
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:23001
 msgid "Select the type of partition table to use."
-msgstr "Selecione o tipo de tabela de partições a ser usado."
+msgstr "Dewiswch y math o dabl rhaniad i'w ddefnyddio."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:24001
 msgid "Create new empty partition table on this device?"
-msgstr "Criar nova tabela de partições vazia neste dispositivo?"
+msgstr "Creu tabl rhaniad newydd gwag ar y ddyfais hwn?"
 
 #. Type: boolean
 #. Description
@@ -457,25 +447,23 @@ msgid ""
 "creating a new partition table on the device, then all current partitions "
 "will be removed."
 msgstr ""
-"Você selecionou um disco inteiro para ser particionado. Se você continuar "
-"com a criação da nova tabela de partições no dispositivo, todas as partições "
-"atuais serão removidas."
+"Rydych wedi dewis dyfais cyfan i'w rhaniadu. Os ydych chi'n parhau gyda "
+"chreu tabl rhaniad newydd ar y ddyfais hwn, yna caiff pob rhaniad cyfredol "
+"ei ddinistrio."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:24001
 msgid "Note that you will be able to undo this operation later if you wish."
-msgstr ""
-"Note que será possível desfazer esta operação posteriormente se assim você "
-"desejar."
+msgstr "Sylwer y cewch ddadwneud y weithred hon yn hwyrach os hoffech."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:25001
 msgid "Write a new empty partition table?"
-msgstr "Gravar uma nova tabela de partições vazia?"
+msgstr "Ysgrifennu tabl rhaniad newydd gwag?"
 
 #. Type: boolean
 #. Description
@@ -486,9 +474,9 @@ msgid ""
 "tables in libparted, the newly created partition table has to be written to "
 "the disk immediately."
 msgstr ""
-"Devido às limitações da implementação atual das tabelas de partições Sun na "
-"biblioteca libparted, a nova tabela de partições criada precisa ser gravada "
-"em disco imediatamente."
+"Oherwydd cyfyngiadau yng ngweithrediad cyfredol o'r tablau rhaniad Sun yn "
+"libparted, rhaid i'r tabl rhaniad newydd gael ei ysgrifennu i ddisg ar "
+"unwaith."
 
 #. Type: boolean
 #. Description
@@ -498,8 +486,8 @@ msgid ""
 "You will NOT be able to undo this operation later and all existing data on "
 "the disk will be irreversibly removed."
 msgstr ""
-"Você NÃO conseguirá desfazer essa operação posteriormente e todos os dados "
-"no disco serão irreversivelmente removidos."
+"NI fyddwch yn gallu dadwneud y weithred hon wedyn, a chaiff yr holl ddata ar "
+"y ddisg ei ddileu yn anadferadwy."
 
 #. Type: boolean
 #. Description
@@ -509,15 +497,15 @@ msgid ""
 "Confirm whether you actually want to create a new partition table and write "
 "it to disk."
 msgstr ""
-"Confirme se você deseja criar uma nova tabela de partições e gravá-la no "
-"disco."
+"Cadarnhewch eich bod wir eisiau creu tabl rhaniad newydd a'i ysgrifennu i "
+"ddisg."
 
 #. Type: boolean
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:26001
 msgid "Are you sure you want a bootable logical partition?"
-msgstr "Você tem certeza que deseja uma partição lógica inicializável?"
+msgstr "A ydych yn sicr eich bod eisiau rhaniad ymgychwyn rhesymegol?"
 
 #. Type: boolean
 #. Description
@@ -529,11 +517,10 @@ msgid ""
 "logical partitions is normally discouraged. Some BIOS versions are known to "
 "fail to boot if there is no bootable primary partition."
 msgstr ""
-"Você está tentando definir a \"flag\" de inicialização em uma partição "
-"lógica. Geralmente, a \"flag\" de inicialização só é útil em partições "
-"primárias, portanto defini-la em partições lógicas é normalmente "
-"desencorajado. Algumas versões de BIOS são conhecidas por falhar se não há "
-"uma partição primária inicializável."
+"Yr ydych yn ceisio rhoi'r faner cychwynadwy ar raniad rhesymegol. Mae'r "
+"faner cychwynadwy fel rheol ond yn ddefnyddiol ar brif rhaniad, felly "
+"gwrthodir ei osod ar rhaniadau rhesymegol. Mae rhai fersiynau BIOS yn methu "
+"cychwyn os nad oes yna unrhyw brif raniadau cychwynadwy."
 
 #. Type: boolean
 #. Description
@@ -544,80 +531,79 @@ msgid ""
 "you are using a custom boot manager that pays attention to bootable logical "
 "partitions, then setting this flag may make sense."
 msgstr ""
-"No entanto, se você tem certeza que sua BIOS não tem este problema, ou se "
-"você está usando um gerenciador de inicialização personalizado que presta "
-"atenção em partições lógicas inicializáveis, então definir esta \"flag\" "
-"pode fazer sentido."
+"Er hynny, os ydych yn sicr nad yw'ch BIOS yn dioddef o'r broblem hyn, neu os "
+"ydych yn defnyddio rheolwr ymgychwyn pwrpasol sy'n cymryd sylw o rhaniadau "
+"rhesymegol cychwynadwy, yna bydd gosod y faner yma yn gwneud synnwyr."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:27001
 msgid "Set the partition flags"
-msgstr "Definir flags da partição"
+msgstr "Gosod y baneri rhaniad"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:28001
 msgid "Name:"
-msgstr "Nome:"
+msgstr "Enw:"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:29001
 msgid "Bootable flag:"
-msgstr "Flag inicializável:"
+msgstr "Baner cychwynadwy:"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:30001
 msgid "on"
-msgstr "ligado"
+msgstr "ymlaen"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:31001
 msgid "off"
-msgstr "desligado"
+msgstr "i ffwrdd"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:32001
 msgid "Resize the partition (currently ${SIZE})"
-msgstr "Redimensionar a partição (atualmente ${SIZE})"
+msgstr "Ailfeintio y rhaniad (${SIZE} ar hyn o bryd)"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:33001
 msgid "Copy data from another partition"
-msgstr "Copiar os dados de outra partição"
+msgstr "Copïo data o rhaniad arall"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:34001
 msgid "Delete the partition"
-msgstr "Excluir a partição"
+msgstr "Dileu'r rhaniad"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:35001
 msgid "Create a new partition"
-msgstr "Criar uma nova partição"
+msgstr "Creu rhaniad newydd"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-partitioning.templates:36001
 msgid "Create a new empty partition table on this device"
-msgstr "Criar uma nova tabela de partições vazia neste dispositivo"
+msgstr "Creu tabl rhaniadau newydd gwag ar y ddyfais hon"
 
 #. Type: text
 #. Description
@@ -626,7 +612,7 @@ msgstr "Criar uma nova tabela de partições vazia neste dispositivo"
 #. such as GRUB.
 #: ../partman-partitioning.templates:37001
 msgid "Reserved BIOS boot area"
-msgstr "Área reservada de inicialização do BIOS"
+msgstr "Ardal ymgychwyn BIOS neilltuedig"
 
 #. Type: text
 #. Description
@@ -646,7 +632,7 @@ msgstr "biosgrub"
 #: ../partman-partitioning.templates:38001
 #: ../partman-partitioning.templates:39001
 msgid "Go back to the menu and correct this problem?"
-msgstr "Voltar ao menu e corrigir esse problema?"
+msgstr ""
 
 #. Type: boolean
 #. Description

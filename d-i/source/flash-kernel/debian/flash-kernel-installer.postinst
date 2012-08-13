@@ -71,7 +71,7 @@ case "$machine" in
 		:
 	;;
 	*)
-		in-target update-initramfs -u || true
+		in-target update-initramfs -c -k $(uname -r) || true
 	;;
 esac
 

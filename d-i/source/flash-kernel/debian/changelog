@@ -1,3 +1,24 @@
+flash-kernel (3.0~rc.4ubuntu20) quantal; urgency=low
+
+  * seemingly -k all doesnt want to work with -c, use -k $(uname -r) for now
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 10 Aug 2012 18:29:34 +0200
+
+flash-kernel (3.0~rc.4ubuntu19) quantal; urgency=low
+
+  * flash-kernel-installer.postinst: now that we have a diversion in place
+    there isnt a pre-existing initrd, instead of calling update-initramfs -u
+    we better call update-initramfs -c -k all to create one from scratch,
+    fixes (LP: #1035269)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Fri, 10 Aug 2012 17:49:00 +0200
+
+flash-kernel (3.0~rc.4ubuntu18) quantal; urgency=low
+
+  * make post-base-installer.d/01flash-kernel-diversion executable
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Thu, 09 Aug 2012 13:59:15 +0200
+
 flash-kernel (3.0~rc.4ubuntu17) quantal; urgency=low
 
   * sigh, not only drop the creation of /var/lib/flash-kernel/configured but
