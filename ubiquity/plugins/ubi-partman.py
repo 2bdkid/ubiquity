@@ -137,40 +137,30 @@ class PageGtk(PageBase):
         self.partition_container = builder.get_object('partition_container')
         self.part_auto_select_drive = builder.get_object(
             'part_auto_select_drive')
-        self.resize_use_free = builder.get_object('resize_use_free')
-        self.custom_partitioning = builder.get_object('custom_partitioning')
-        self.use_device = builder.get_object('use_device')
-        self.reuse_partition = builder.get_object('reuse_partition')
+        self.resize_use_free = builder.get_object('resize_use_free_title')
+        self.custom_partitioning = builder.get_object(
+            'custom_partitioning_title')
+        self.replace_partition = builder.get_object('replace_partition_title')
+        self.use_device = builder.get_object('use_device_title')
+        self.reuse_partition = builder.get_object('reuse_partition_title')
+        self.use_lvm = builder.get_object('use_lvm_title')
+        self.use_crypto = builder.get_object('use_crypto_title')
         self.part_auto_allocate_label = builder.get_object(
             'part_auto_allocate_label')
         self.part_auto_hidden_label = builder.get_object(
             'part_auto_hidden_label')
         self.part_advanced_vbox = builder.get_object('part_advanced_vbox')
-        self.use_lvm = builder.get_object('use_lvm')
-        self.use_crypto = builder.get_object('use_crypto')
 
         # Ask page
         self.part_ask_heading = builder.get_object('part_ask_heading')
-        self.use_device_title = builder.get_object('use_device_title')
         self.use_device_desc = builder.get_object('use_device_desc')
-        self.replace_partition = builder.get_object('replace_partition')
-        self.replace_partition_title = builder.get_object(
-            'replace_partition_title')
         self.replace_partition_desc = builder.get_object(
             'replace_partition_desc')
-        self.reuse_partition_title = builder.get_object(
-            'reuse_partition_title')
         self.reuse_partition_desc = builder.get_object('reuse_partition_desc')
-        self.resize_use_free_title = builder.get_object(
-            'resize_use_free_title')
         self.resize_use_free_desc = builder.get_object('resize_use_free_desc')
-        self.custom_partitioning_title = builder.get_object(
-            'custom_partitioning_title')
         self.custom_partitioning_desc = builder.get_object(
             'custom_partitioning_desc')
-        self.use_lvm_title = builder.get_object('use_lvm_title')
         self.use_lvm_desc = builder.get_object('use_lvm_desc')
-        self.use_crypto_title = builder.get_object('use_crypto_title')
         self.use_crypto_desc = builder.get_object('use_crypto_desc')
 
         # Advanced page
@@ -229,17 +219,31 @@ class PageGtk(PageBase):
             'part_advanced_recalculating_label')
 
         # Crypto page
-
-        self.auto_password = builder.get_object(
-            'auto_password')
-        self.password_error_label = builder.get_object(
-            'password_error_label')
-        self.auto_verified_password = builder.get_object(
-            'auto_verified_password')
+        self.crypto_grid = builder.get_object(
+            'crypto_grid')
+        self.password_grid = builder.get_object(
+            'password_grid')
+        self.password = builder.get_object(
+            'password')
+        self.verified_password = builder.get_object(
+            'verified_password')
         self.password_strength = builder.get_object(
             'password_strength')
-        self.password_ok = builder.get_object(
-            'password_ok')
+        self.password_match = builder.get_object(
+            'password_match')
+        self.password_strength_pages = {
+            'empty': 0,
+            'too_short': 1,
+            'weak': 2,
+            'fair': 3,
+            'good': 4,
+            'strong': 5,
+        }
+        self.password_match_pages = {
+            'empty': 0,
+            'mismatch': 1,
+            'ok': 2,
+        }
 
         self.partition_bars = {}
         self.segmented_bar_vbox = None
@@ -323,7 +327,7 @@ class PageGtk(PageBase):
         one_disk = len(disks) == 1
 
         if custom:
-            self.set_page_title(self.custom_partitioning_title.get_text())
+            self.set_page_title(self.custom_partitioning.get_label())
             self.current_page = self.page_advanced
             self.controller.go_to_page(self.current_page)
             self.controller.toggle_next_button('install_button')
@@ -367,7 +371,7 @@ class PageGtk(PageBase):
 
         if self.current_page == self.page_ask and not done_partitioning:
             if resize:
-                self.set_page_title(self.resize_use_free_title.get_text())
+                self.set_page_title(self.resize_use_free.get_label())
                 if 'wubi' in self.extra_options:
                     self.configure_wubi_and_reboot()
                     return True
@@ -386,7 +390,7 @@ class PageGtk(PageBase):
                 self.initialize_resize_mode()
 
             if use_device:
-                self.set_page_title(self.use_device_title.get_text())
+                self.set_page_title(self.use_device.get_label())
                 self.initialize_use_disk_mode()
 
             self.current_page = self.page_auto
@@ -649,16 +653,17 @@ class PageGtk(PageBase):
         for option in option_to_widget:
             name = option_to_widget[option]
             opt_widget = getattr(self, name)
-            opt_title = getattr(self, name + '_title')
             opt_desc = getattr(self, name + '_desc')
 
             if option in options:
                 opt_widget.show()
-                opt_title.set_label(options[option].title)
+                opt_desc.show()
+                opt_widget.set_label(options[option].title)
                 opt_desc.set_markup(fmt % options[option].desc)
                 opt_desc.set_sensitive(False)
             else:
                 opt_widget.hide()
+                opt_desc.hide()
 
             # dmitrij.ledkov 2012-07-23: Hide LVM from the UI, until
             # we design user-friendly way of expressing this, or we
@@ -666,14 +671,10 @@ class PageGtk(PageBase):
             if option == 'some_device_lvm':
                 if 'UBIQUITY_PARTAUTO_LVM' in os.environ:
                     opt_widget.show()
+                    opt_desc.show()
                 else:
                     opt_widget.hide()
-
-            if option == 'some_device_crypto':
-                if 'UBIQUITY_PARTAUTO_CRYPTO' in os.environ:
-                    opt_widget.show()
-                else:
-                    opt_widget.hide()
+                    opt_desc.hide()
 
         # Process the default selection
         self.part_ask_option_changed(None)
@@ -1439,20 +1440,32 @@ class PageGtk(PageBase):
 
     # Crypto Page
     def info_loop(self, unused_widget):
-        complete = validation.gtk_password_validate(
-            self.controller,
-            self.auto_password,
-            self.auto_verified_password,
-            self.password_ok,
-            self.password_error_label,
-            self.password_strength
-            )
+        complete = True
+        passw = self.password.get_text()
+        vpassw = self.verified_password.get_text()
+
+        if passw != vpassw or not passw:
+            complete = False
+            self.password_match.set_current_page(
+                self.password_match_pages['empty'])
+            if passw and (len(vpassw) / float(len(passw)) > 0.8):
+                self.password_match.set_current_page(
+                    self.password_match_pages['mismatch'])
+        else:
+            self.password_match.set_current_page(
+                self.password_match_pages['ok'])
+
+        if passw:
+            txt = validation.human_password_strength(passw)[0]
+            self.password_strength.set_current_page(
+                self.password_strength_pages[txt])
+
         self.controller.allow_go_forward(complete)
         return complete
 
     def get_crypto_keys(self):
         if self.info_loop(None):
-            return self.auto_password.get_text()
+            return self.password.get_text()
         else:
             return False
 

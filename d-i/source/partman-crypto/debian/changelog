@@ -1,3 +1,27 @@
+partman-crypto (54ubuntu1) quantal; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Skip loading partman-crypto-loop for now, as it is not supported.
+    - Disable partition erasing by default, as it's very slow and only of
+      moderate value.
+    - Warn that the passphrase cannot be recovered if lost.
+    - Allow preseeding the first passphrase prompt and
+      partman-crypto/weak_passphrase.
+    - Add an "Activate existing encrypted volumes" option to the
+      partman-crypto main menu.
+    - Move apt-install cryptsetup call to finish.d.  
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 14 Aug 2012 08:44:57 +0100
+
+partman-crypto (54) unstable; urgency=low
+
+  [ Bastian Blank ]
+  * Disable loop-aes support. (closes: #680943)
+  * Support and use xts-plain64 by default. (closes: #482092)
+    - Double key size if xts mode is selected.
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 03 Aug 2012 10:36:03 +0200
+
 partman-crypto (53ubuntu2) quantal; urgency=low
 
   * Move apt-install cryptsetup call to finish.d.
