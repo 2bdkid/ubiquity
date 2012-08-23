@@ -1,3 +1,26 @@
+flash-kernel (3.0~rc.4ubuntu22) quantal; urgency=low
+
+  * do not move the original uEnvtxt.omap to the target, use a copy instead
+  * make /etc/default/flash-kernel a proper conffile
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Thu, 23 Aug 2012 11:49:01 +0200
+
+flash-kernel (3.0~rc.4ubuntu21) quantal; urgency=low
+
+  * switch omap3 and omap4 to uEnv.txt/preEnv.txt (the former holds all active
+    boot commands, the latter holds the kernel commandline only)
+  * enable generation of a /etc/default/flash-kernel file from
+    flash-kernel-installer holding a UBOOT_DEFAULTS variable with distro
+    default settings (ro quiet splash)
+  * enable UUID detection of the currently used root device
+  * if uEnv.txt is defined in the db for an arch, generate preEnv.txt from
+    UBOOT_DEFAULTS and UUID detection data
+  * switch omap3 and omap4 from Bootloader-sets-root: no to yes, we now
+    generate a root=UUID= line on the fly for arches using uEnv.txt/preEnv.txt
+  * introduce bootscript/uEnvtxt.omap
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 22 Aug 2012 21:56:09 +0200
+
 flash-kernel (3.0~rc.4ubuntu20) quantal; urgency=low
 
   * seemingly -k all doesnt want to work with -c, use -k $(uname -r) for now

@@ -101,6 +101,11 @@ fi
 trap - EXIT HUP INT QUIT TERM
 mv /target/tmp/flash-kernel.$$ /target/usr/sbin/flash-kernel
 
+# set ubuntu defaults
+if echo $(get_machine_field "$machine" "U-Boot-Script-Name") | grep -q "uEnvtxt"; then
+		export VOLID=$(blkid -o value $(findfs /)|head -1)
+fi
+
 # We need the udev /dev which has the MTD devices
 mount -o bind /dev /target/dev
 if ! in-target flash-kernel; then

@@ -221,26 +221,26 @@ Method: generic
 U-Boot-Kernel-Address: 0x80008000
 U-Boot-Initrd-Address: 0x0
 U-Boot-Script-Address: 0x0
-U-Boot-Script-Name: bootscr.omap
+U-Boot-Script-Name: uEnvtxt.omap
 Boot-Device: /dev/mmcblk0p1
 Boot-Kernel-Path: uImage
 Boot-Initrd-Path: uInitrd
-Boot-Script-Path: boot.scr
+Boot-Script-Path: preEnv.txt
 Required-Packages: u-boot-tools
-Bootloader-sets-root: no
+Bootloader-sets-root: yes
 
 Machine: OMAP4 Panda board
 Method: generic
 U-Boot-Kernel-Address: 0x80008000
 U-Boot-Initrd-Address: 0x0
 U-Boot-Script-Address: 0x0
-U-Boot-Script-Name: bootscr.omap
+U-Boot-Script-Name: uEnvtxt.omap
 Boot-Device: /dev/mmcblk0p1
 Boot-Kernel-Path: uImage
 Boot-Initrd-Path: uInitrd
-Boot-Script-Path: boot.scr
+Boot-Script-Path: preEnv.txt
 Required-Packages: u-boot-tools
-Bootloader-sets-root: no
+Bootloader-sets-root: yes
 
 Machine: QNAP TS-109/TS-209
 Kernel-Flavors: orion5x
