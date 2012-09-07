@@ -181,6 +181,14 @@ class PageGtk(PageBase):
         self.part_auto_select_drive.add_attribute(cell, 'markup', 1)
         self.plugin_widgets = self.page_ask
 
+        # Annoyngly, the inline toolbar has custom background, which
+        # I do not know how to remove =(
+        partition_toolbar_style = self.partition_toolbar.get_style_context()
+        partition_toolbar_style.add_class(Gtk.STYLE_CLASS_INLINE_TOOLBAR)
+        for wdg in self.partition_toolbar.get_children():
+            self.partition_toolbar.child_set_property(wdg, 'homogeneous',
+                                                      False)
+
         # GtkBuilder signal mapping is broken (LP: #852054).
         self.part_auto_hidden_label.connect('activate-link',
                 self.part_auto_hidden_label_activate_link)
@@ -219,22 +227,23 @@ class PageGtk(PageBase):
         parent = self.password_grid.get_parent()
         if auto:
             new_parent = self.crypto_grid
-            below = self.crypto_description_2
+            crypto_widgets = [
+                ('crypto_label', 'crypto_description_2', 'bottom', 1, 1),
+                ('password_grid', 'crypto_label', 'right', 1, 2)]
         else:
             new_parent = self.partition_dialog_grid
-            below = self.partition_encrypt_checkbutton
+            crypto_widgets = [
+                ('password_grid', 'partition_encrypt_checkbutton', 'bottom', 1,
+                 2),
+                ('crypto_label', 'password_grid', 'left', 1, 1)]
         if parent == new_parent:
             return
-        crypto_widgets = [
-            ('password_grid', below, 'bottom', 1, 2),
-            ('crypto_label', 'password_grid', 'left', 1, 1),
+        crypto_widgets += [
             ('verified_crypto_label', 'crypto_label', 'bottom', 1, 1),
             ('crypto_warning', 'verified_crypto_label', 'bottom', 2, 1),
             ('crypto_extra_label', 'crypto_warning', 'bottom', 1, 1),
             ('crypto_overwrite_space', 'crypto_extra_label', 'right', 1, 1),
-            ('crypto_extra_time', 'crypto_overwrite_space', 'bottom', 1, 1),
-        ]
-
+            ('crypto_extra_time', 'crypto_overwrite_space', 'bottom', 1, 1)]
         for widget, sibling, direction, width, height in crypto_widgets:
             widget = getattr(self, widget)
             if isinstance(sibling, str):
@@ -245,7 +254,7 @@ class PageGtk(PageBase):
                 parent.remove(widget)
             new_parent.attach_next_to(widget, sibling, direction,
                                       width, height)
-
+            widget.show()
         self.crypto_overwrite_space.set_active(False)
 
     def plugin_on_next_clicked(self):
@@ -295,16 +304,19 @@ class PageGtk(PageBase):
 
         if (self.current_page == self.page_crypto and
             not self.get_crypto_keys()):
+            # Stop until encryption keys are setup
             self.controller.allow_go_forward(False)
             return True
 
-        # We already have all that we need from the user.
+        # Do we have all that we need from the user?
         done_partitioning = \
           (resize and biggest_free) or \
           (use_device and one_disk) or \
           reuse or replace
 
-        if self.current_page == self.page_ask and not done_partitioning:
+        # Looks like not... go to disk space allocation page
+        if (self.current_page in [self.page_ask, self.page_crypto]
+            and not done_partitioning):
             if resize:
                 self.set_page_title(self.resize_use_free.get_label())
                 if 'wubi' in self.extra_options:
@@ -340,7 +352,7 @@ class PageGtk(PageBase):
         return False
 
     def plugin_on_back_clicked(self):
-        if self.current_page == self.page_auto:
+        if self.current_page in [self.page_auto, self.page_crypto]:
             title = self.controller.get_string(self.plugin_title)
             self.controller._wizard.page_title.set_markup(
                 '<span size="xx-large">%s</span>' % title)
@@ -349,6 +361,7 @@ class PageGtk(PageBase):
             # If we arrived at a second partitioning page, then the option
             # selected on the first page would not cause the forward button to
             # be marked as Install Now.
+            self.controller.allow_go_forward(True)
             self.controller.toggle_next_button()
             self.plugin_is_install = False
             return True
@@ -1047,6 +1060,17 @@ class PageGtk(PageBase):
                 if fmt is not None:
                     edits['fmt'] = 'dummy'
                 self.controller.dbfilter.edit_partition(devpart, **edits)
+
+    def plugin_translate(self, lang):
+        symbolic_widgets = ['partition_button_new', 'partition_button_delete']
+        for widget_name in symbolic_widgets:
+            widget = getattr(self, widget_name)
+            text = widget.get_label()
+            if len(text) == 0:
+                continue
+            a11y = widget.get_accessible()
+            a11y.set_name(text)
+            widget.set_label('')
 
     @plugin.only_this_page
     def on_partition_use_combo_changed(self, combobox):

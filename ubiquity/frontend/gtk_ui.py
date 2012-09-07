@@ -40,10 +40,7 @@ import traceback
 import syslog
 import atexit
 import gettext
-try:
-    import configparser
-except ImportError:
-    import ConfigParser as configparser
+import configparser
 from functools import reduce
 
 import dbus
@@ -852,22 +849,11 @@ class Wizard(BaseFrontend):
 
         self.live_installer.set_default_icon_from_file(os.path.join(PIXMAPS,
                                                         'ubiquity.png'))
-        provider = Gtk.CssProvider()
-        provider.load_from_data(b'''\
-#live_installer,
-#page_title,
-#install_progress_text,
-#install_details_expander {
-color : @dark_fg_color;
-background-color : @dark_bg_color;
-}
+        for eventbox in ['title_eventbox', 'progress_eventbox']:
+            box = self.builder.get_object(eventbox)
+            style = box.get_style_context()
+            style.add_class('menubar')
 
-GtkEntry, GtkButton, GtkLabel, GtkIconView, GtkTreeView row, GtkComboBox,
-GtkDrawingArea {
-color : @fg_color
-}''')
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(),
-            provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         # TODO lazy load
         from gi.repository import Vte
         self.vte = Vte.Terminal()
@@ -1018,10 +1004,7 @@ color : @fg_color
         gettext.bindtextdomain(domain, LOCALEDIR)
         self.builder.set_translation_domain(domain)
         gettext.textdomain(domain)
-        kwargs = {}
-        if sys.version < '3':
-            kwargs['unicode'] = 1
-        gettext.install(domain, LOCALEDIR, **kwargs)
+        gettext.install(domain, LOCALEDIR)
 
     def translate_reget(self, lang):
         if lang is None:

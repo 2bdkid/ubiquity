@@ -515,15 +515,8 @@ class Install(install_misc.InstallBase):
                     if dup:
                         continue
 
-                    if sys.version < '3':
-                        def get_byte(ba, c):
-                            return ord(ba[c])
-                    else:
-                        def get_byte(ba, c):
-                            return ba[c]
-
                     line = (interfaces[i] + " mac " +
-                            ':'.join(['%02x' % get_byte(if_name[1], c)
+                            ':'.join(['%02x' % if_name[1][c]
                                       for c in range(6)]))
                     line += " arp %d" % if_name[0]
                     print(line, file=iftab)
@@ -1036,13 +1029,6 @@ class Install(install_misc.InstallBase):
                     if ret != 0:
                         raise install_misc.InstallStepError(
                             "FlashKernel failed with code %d" % ret)
-                elif arch == 'powerpc' and subarch == 'ps3':
-                    from ubiquity.components import kbootinstaller
-                    dbfilter = kbootinstaller.KbootInstaller(None, self.db)
-                    ret = dbfilter.run_command(auto_process=True)
-                    if ret != 0:
-                        raise install_misc.InstallStepError(
-                            "KbootInstaller failed with code %d" % ret)
                 elif arch == 'powerpc':
                     from ubiquity.components import yabootinstaller
                     dbfilter = yabootinstaller.YabootInstaller(None, self.db)
