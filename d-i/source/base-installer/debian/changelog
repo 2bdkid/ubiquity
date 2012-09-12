@@ -1,3 +1,19 @@
+base-installer (1.122ubuntu11) quantal; urgency=low
+
+  * Move debconf templates relating to kernel installation from
+    bootstrap-base to base-installer (LP: #1049011).
+  * Allow live-installer to override the title template used by kernel
+    installation code.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Sep 2012 10:30:40 +0100
+
+base-installer (1.122ubuntu10) quantal; urgency=low
+
+  * Move /usr/lib/base-installer/kernel.sh from bootstrap-base to
+    base-installer (LP: #1028453).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 09 Sep 2012 13:13:49 +0100
+
 base-installer (1.122ubuntu9) quantal; urgency=low
 
   * Cherry-pick from upstream (Ben Hutchings):

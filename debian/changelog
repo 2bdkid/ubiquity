@@ -1,3 +1,34 @@
+ubiquity (2.11.32) quantal; urgency=low
+
+  [ Jeremy Bicha ]
+  * Allow specifying a manual mount point in advanced partitioner
+    (LP: #1047275).
+
+  [ Dmitrijs Ledkovs ]
+  * Revert test string, to a user friendly one as it is visible in the UI.
+  * Automatic update of included source packages: base-installer
+    1.122ubuntu11, partman-auto-lvm 45ubuntu3, tzsetup 1:0.26ubuntu12.
+  * pep8 fixes in Riddell's code
+
+  [ Colin Watson ]
+  * Remove a couple of vestiges of migration-assistant.
+  * Catch OverflowError as well as ValueError from datetime functions, for
+    forward-compatibility with Python 3.3.
+  * Use importlib rather than __import__.
+  * Install fetch-url for apt-setup's local generator (LP: #1049535).
+
+  [ Jonathan Riddell ]
+  * ubiquity/plugins/ubi-partman.py and
+    ubiquity/frontend/kde_components/PartAuto.py
+   - add options for LUKS and LVM automatic partitioning to KDE frontend
+     (LP: #1048712)
+
+  [ Simon Steinbeiß ]
+  * Disable xfwm4's compositor in ubiquity-dm to prevent screen-corruption
+    (LP: #924909)
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Wed, 12 Sep 2012 22:45:51 +0100
+
 ubiquity (2.11.31) quantal; urgency=low
 
   [ Colin Watson ]

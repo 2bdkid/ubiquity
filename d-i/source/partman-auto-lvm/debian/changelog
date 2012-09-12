@@ -1,3 +1,10 @@
+partman-auto-lvm (45ubuntu3) quantal; urgency=low
+
+  * After creating partitions, wait for devices to settle and wipe
+    left-over LVM from them. (Closes: #542441) (LP: #154086)
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Mon, 10 Sep 2012 13:05:06 +0100
+
 partman-auto-lvm (45ubuntu2) quantal; urgency=low
 
   * Set locale to "C" when calling vgs for available free space. (LP: #1045812)

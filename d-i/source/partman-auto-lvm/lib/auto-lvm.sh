@@ -258,6 +258,20 @@ auto_lvm_prepare() {
 		close_dialog
 		device_cleanup_partitions
 	done
+
+	# Remove zombie LVMs which happed to be left-over on the newly
+	# created partition, because the disk was not zeroed out.
+	# Wait for devices to settle
+	if type update-dev >/dev/null 2>&1; then
+		log-output -t update-dev update-dev --settle
+	fi
+	# Give LVM a kick to rescan devices
+	/sbin/vgdisplay 2>/dev/null
+	# Finally purge LVM remains
+	for dev in $devs; do
+	    device_remove_lvm $dev
+	done
+
 	update_all
 }
 
