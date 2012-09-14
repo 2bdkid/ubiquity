@@ -47,6 +47,16 @@ FK_DIR="/usr/share/flash-kernel"
 
 . /usr/share/initramfs-tools/hook-functions
 
+machine="$(get_cpuinfo_hardware)"
+
+# Should we override the root device or merely provide a default root
+# device?
+blsr="$(get_machine_field "$machine" "Bootloader-sets-root")"
+
+if [ "$blsr" = "yes" ] || [ -n "$FLASH_KERNEL_SKIP" ]; then
+	exit 0
+fi
+
 # Record the root filesystem device for use during boot
 rootdev=$(egrep '^[^# 	]+[ 	]+/[ 	]' /etc/fstab | awk '{print $1}') || true
 
@@ -91,22 +101,9 @@ if [ ! -e "$rootdev" ]; then
 	pause_error
 fi
 
-machine="$(get_cpuinfo_hardware)"
-
-# Should we override the root device or merely provide a default root
-# device?
-blsr="$(get_machine_field "$machine" "Bootloader-sets-root")"
-
-if [ "$blsr" = "no" ]; then
-	# The boot loader doesn't pass root= on the command line, so
-	# provide a default.
-	install -d $DESTDIR/conf/conf.d
-	echo "ROOT=\"$rootdev\"" > $DESTDIR/conf/conf.d/default_root
-else
-	# The boot loader passes a bogus root= (e.g. root=/dev/ram), so
-	# override the command line parameter.
-	install -d $DESTDIR/conf
-	echo "ROOT=\"$rootdev\"" >> $DESTDIR/conf/param.conf
-fi
+# The boot loader doesn't pass root= on the command line, so
+# provide a default.
+install -d $DESTDIR/conf/conf.d
+echo "ROOT=\"$rootdev\"" > $DESTDIR/conf/conf.d/default_root
 
 # vim:noexpandtab shiftwidth=8

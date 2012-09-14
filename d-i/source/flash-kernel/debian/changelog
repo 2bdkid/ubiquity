@@ -1,3 +1,15 @@
+flash-kernel (3.0~rc.4ubuntu23) quantal; urgency=low
+
+  * initramfs-tools/hooks/flash_kernel_set_root:
+    - make sure that if we dont want to override the bootloader root= option by
+      setting "Bootloader-sets-root: yes", we actually dont do it
+    - Also check for FLASH_KERNEL_SKIP to avoid setting up the root parameter
+      in case flash-kernel will not be used
+    - this is a slightly different approach to fix bug (LP: #1034734) than the
+      patch attached to the bug.
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Thu, 13 Sep 2012 14:02:48 +0200
+
 flash-kernel (3.0~rc.4ubuntu22) quantal; urgency=low
 
   * do not move the original uEnvtxt.omap to the target, use a copy instead
