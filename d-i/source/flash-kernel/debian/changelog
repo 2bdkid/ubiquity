@@ -1,3 +1,12 @@
+flash-kernel (3.0~rc.4ubuntu25) quantal; urgency=low
+
+  * make sure we only rename the bootrom partition so udisks hides it,
+    when using mkdosfs for setting the label like we did in jasper (where
+    we cached the contents before doing this) MLO and u-boot.bin are gone
+    (LP: #1055938).
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Tue, 25 Sep 2012 10:31:32 +0200
+
 flash-kernel (3.0~rc.4ubuntu24) quantal; urgency=low
 
   * hide the boot device from udisk's automounting after installation

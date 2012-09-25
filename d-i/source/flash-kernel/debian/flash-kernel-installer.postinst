@@ -106,7 +106,7 @@ if echo $(get_machine_field "$machine" "U-Boot-Script-Name") | grep -q "uEnvtxt"
 		export VOLID=$(blkid -o value $(findfs /)|head -1)
 		# hide the boot partition from udisks automounting
 		bootdev=$(get_machine_field "$machine" "Boot-Device")
-		[ -b $bootdev ] && in-target mkdosfs -n "SERVICEV001" $bootdev
+		[ -b $bootdev ] && in-target dosfslabel $bootdev "SERVICEV001"
 fi
 
 # We need the udev /dev which has the MTD devices

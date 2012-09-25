@@ -1092,7 +1092,7 @@ class PageGtk(PageBase):
     def on_partition_use_combo_changed(self, combobox):
         model = combobox.get_model()
         iterator = combobox.get_active_iter()
-        maybe_crypto = iterator and model[iterator][0] == 'crypto'
+        maybe_crypto = bool(iterator and model[iterator][0] == 'crypto')
         self.show_encryption_passphrase(maybe_crypto)
         # If the selected method isn't a filesystem, then selecting a mount
         # point makes no sense. TODO cjwatson 2007-01-31: Unfortunately we
@@ -1100,21 +1100,18 @@ class PageGtk(PageBase):
         known_filesystems = ('ext4', 'ext3', 'ext2', 'filesystem',
                              'btrfs', 'reiserfs', 'jfs', 'xfs',
                              'fat16', 'fat32', 'ntfs', 'uboot')
-        if iterator is None or model[iterator][0] not in known_filesystems:
-            self.partition_mount_combo.get_child().set_text('')
-            self.partition_mount_combo.set_sensitive(False)
-            self.partition_edit_format_checkbutton.set_sensitive(False)
-        else:
+        show = bool(iterator and model[iterator][0] in known_filesystems)
+        self.partition_mount_combo.set_visible(show)
+        self.partition_mount_label.set_visible(show)
+        self.partition_edit_format_checkbutton.set_sensitive(show)
+        mount_model = self.partition_mount_combo.get_model()
+        if show and mount_model:
             self.partition_dialog_okbutton.set_sensitive(True)
-            self.partition_mount_combo.set_sensitive(True)
-            self.partition_edit_format_checkbutton.set_sensitive(True)
-            mount_model = self.partition_mount_combo.get_model()
-            if mount_model is not None:
-                fs = model[iterator][1]
-                mount_model.clear()
-                for mp, choice_c, choice in \
-                    self.controller.dbfilter.default_mountpoint_choices(fs):
-                    mount_model.append([mp, choice])
+            fs = model[iterator][1]
+            mount_model.clear()
+            for mp, choice_c, choice in \
+                self.controller.dbfilter.default_mountpoint_choices(fs):
+                mount_model.append([mp, choice])
 
     def on_partition_list_treeview_button_press_event(self, widget, event):
         from gi.repository import Gdk
@@ -1792,17 +1789,30 @@ class Page(plugin.Plugin):
         else:
             return False
 
+    def build_locked(self, devpart):
+        if os.path.exists(os.path.join(devpart, 'locked')):
+            self.debug('Partman: %s is locked', devpart)
+            self.partition_cache[devpart]['locked'] = True
+            return True
+        else:
+            if 'locked' in self.partition_cache[devpart]:
+                del(self.partition_cache[devpart]['locked'])
+            return False
+
     def get_actions(self, devpart, partition):
         if devpart is None and partition is None:
             return
-        if 'id' not in partition:
+        if 'id' not in partition and partition.get('label', '') != 'loop':
             yield 'new_label'
         if 'can_new' in partition and partition['can_new']:
             yield 'new'
+        disk = self.disk_cache.get(
+            '/var/lib/partman/devices/%s//' % partition['dev'], {})
         if ('id' in partition and partition['parted']['fs'] != 'free' and
             not partition.get('locked', False)):
             yield 'edit'
-            yield 'delete'
+            if disk.get('label', '') != 'loop':
+                yield 'delete'
         # TODO cjwatson 2006-12-22: options for whole disks
 
     def set(self, question, value):
@@ -1866,19 +1876,6 @@ class Page(plugin.Plugin):
                 self.creating_partition['bad_mountpoint'] = True
             elif self.editing_partition:
                 self.editing_partition['bad_mountpoint'] = True
-        elif question == 'partman-base/partlocked':
-            if self.building_cache:
-                # xnox 2012-09-17:
-                # Bah, the partition we are trying to sniff / cache is
-                # locked due to being active as part of a complex
-                # LVM/LUKS/MD device. I am not sure if it is possible
-                # to 'unlock' partitions from partman. If it is
-                # possible to 'unlock' them, then cache rebuilding
-                # will enter the 'partman/active_partition' question
-                # below and the locked flag should be cleared there.
-                state = self.__state[-1]
-                partition = self.partition_cache[state[1]]
-                partition['locked'] = True
         self.frontend.error_dialog(self.description(question),
                                    self.extended_description(question))
         return plugin.Plugin.error(self, priority, question)
@@ -1906,7 +1903,7 @@ class Page(plugin.Plugin):
             devpart = self.update_partitions[0]
             if devpart not in self.partition_cache:
                 self.debug('Partman: %s not found in cache', devpart)
-            elif self.build_free(devpart):
+            elif self.build_free(devpart) or self.build_locked(devpart):
                 pass
             else:
                 break
