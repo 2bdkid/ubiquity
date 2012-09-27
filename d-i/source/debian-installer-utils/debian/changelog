@@ -1,3 +1,10 @@
+debian-installer-utils (1.91ubuntu5) quantal-proposed; urgency=low
+
+  * prevent list-devices-linux from returning entries for extended partitions
+    (ID_PART_ENTRY_TYPE 0x5,0xf and 0x85) (LP: #1028905)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Thu, 27 Sep 2012 13:11:57 +0200
+
 debian-installer-utils (1.91ubuntu4) quantal; urgency=low
 
   * Remove unnecessary sourcing of preseed.sh from fetch-url (LP: #1049535).

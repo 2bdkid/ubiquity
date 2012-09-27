@@ -1,3 +1,12 @@
+flash-kernel (3.0~rc.4ubuntu26) quantal-proposed; urgency=low
+
+  * make sure that /dev is bind mounted in /target when running
+    update-initramfs from flash-kernel-installer, else we do not find the boot
+    media (this is only a workaround for LP: #1056482 actual fixing of the
+    netinst environment is needed to fix this properly)
+
+ -- Oliver Grawert <ogra@ubuntu.com>  Wed, 26 Sep 2012 15:27:06 +0200
+
 flash-kernel (3.0~rc.4ubuntu25) quantal; urgency=low
 
   * make sure we only rename the bootrom partition so udisks hides it,

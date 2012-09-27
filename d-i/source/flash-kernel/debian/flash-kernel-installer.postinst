@@ -71,7 +71,9 @@ case "$machine" in
 		:
 	;;
 	*)
+		mount -o bind /dev /target/dev
 		in-target update-initramfs -c -k $(uname -r) || true
+		umount /target/dev || true
 	;;
 esac
 

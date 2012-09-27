@@ -168,7 +168,7 @@ for x in $syspaths; do
 			match=:
 		fi
 	fi
-	if $match; then
+	if $match && ! device_info env "$devpath" | egrep -q '^ID_PART_ENTRY_TYPE=0x(5|f|85)$'; then
 		device_name "/sys$devpath"
 	fi
 done
