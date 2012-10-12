@@ -96,6 +96,10 @@ class PageBase(plugin.PluginUI):
         """Update the manual partitioner display."""
         pass
 
+    def show_bootloader_options(self):
+        """Show the boot loader options."""
+        pass
+
     def get_grub_choice(self):
         return misc.grub_default()
 
@@ -543,6 +547,9 @@ class PageGtk(PageBase):
         self.custom_partitioning.set_active(True)
         self.controller.go_forward()
         return True
+
+    def show_bootloader_options(self):
+        self.bootloader_grid.show()
 
     def set_grub_options(self, default, grub_installable):
         from gi.repository import Gtk, GObject
@@ -1536,6 +1543,7 @@ class Page(plugin.Plugin):
             arch, subarch = archdetect()
             if arch in ('amd64', 'i386'):
                 self.install_bootloader = True
+                self.ui.show_bootloader_options()
 
         self.installation_size = misc.install_size()
 
