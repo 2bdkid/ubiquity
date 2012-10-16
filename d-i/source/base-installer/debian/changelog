@@ -1,3 +1,10 @@
+base-installer (1.122ubuntu13) quantal; urgency=low
+
+  * Consider signed images in kernel_update_list and install_kernel_linux
+    (LP: #1067250).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 16 Oct 2012 10:38:12 +0100
+
 base-installer (1.122ubuntu12) quantal; urgency=low
 
   * On amd64/efi, install a signed kernel if the SecureBoot variable is set.
