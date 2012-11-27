@@ -105,7 +105,7 @@ mv /target/tmp/flash-kernel.$$ /target/usr/sbin/flash-kernel
 
 # set ubuntu defaults
 if echo $(get_machine_field "$machine" "U-Boot-Script-Name") | grep -q "uEnvtxt"; then
-		export VOLID=$(blkid -o value $(findfs /)|head -1)
+		export VOLID=$(blkid -o value -s UUID $(findfs /))
 		# hide the boot partition from udisks automounting
 		bootdev=$(get_machine_field "$machine" "Boot-Device")
 		[ -b $bootdev ] && in-target dosfslabel $bootdev "SERVICEV001"

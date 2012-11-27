@@ -1,3 +1,36 @@
+ubiquity (2.13.4) raring; urgency=low
+
+  [ Colin Watson ]
+  * Huge pile of minor changes to make ubiquity compatible with pep8 1.3.
+
+  [ Dmitrijs Ledkovs ]
+  * Clear "Read release notes or update the installer" if neither action
+    are possible. (LP: #1066302)
+  * If there is only one disk & use_device recipe is used, change next step
+    button to "Install Now". (LP: #1050044)
+  * When auto-partitioning is not possible, allow to manually partition
+    the same drive installation medium is on. (LP: #1053030)
+  * Fix the question_dialog height-for-width (LP: #862270)
+  * Fonconfig-voodoo is gone, not sure if some other "fontconfig"ury
+    should be called instead. (LP: #1043031)
+  * Fix partman test_windows_only: if resize option is available, use_disk
+    should be available as well.
+  * Fix test_translated, after moving question dialog into glade from
+    construction by hand.
+  * Automatic update of included source packages: base-installer
+    1.122ubuntu14, debian-installer-utils 1.91ubuntu6, flash-kernel
+    3.0~rc.4ubuntu28.
+
+  [ Martin Pitt ]
+  * ubiquity/gtkwidgets.py: Don't use GObject.constants, just use the
+    constants from GObject as intended. Fixes a crash with pygobject
+    3.7.2.
+  * Use glib API from the GLib GI module instead of GObject. The latter
+    has been deprecated for a long time and triggers warnings with pygobject
+    3.7.2.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 27 Nov 2012 11:47:01 +0000
+
 ubiquity (2.13.3) raring; urgency=low
 
   * Use simplified form of super(), available from Python 3.
