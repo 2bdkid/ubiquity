@@ -1,3 +1,35 @@
+ubiquity (2.13.8) raring; urgency=low
+
+  [ Colin Watson ]
+  * Honour base-installer/kernel/altmeta when deciding which kernels to
+    install or keep installed.
+
+  [ Dmitrijs Ledkovs ]
+  * Moving question dialog to use a glade ui file, made it non
+    "re-entrant" safe, i.e. it started to remember previous action area
+    buttons. The fix is to clear action area, all other parts of the
+    dialog are always reset with something fresh. (LP: #1087823)
+  * ubiquity-dm: compiz actually doesn't have bg-image.
+  * ubi-partman: Do not allow to select encryption without lvm
+    (LP: #1093957).
+  * Automatic update of included source packages: debian-installer-utils
+    1.94ubuntu1, flash-kernel 3.0~rc.4ubuntu29, localechooser
+    2.49ubuntu1, netcfg 1.68ubuntu17, partman-auto 105ubuntu2, partman-
+    auto-lvm 46ubuntu2, partman-base 163ubuntu1, partman-ext3 74ubuntu1,
+    partman-jfs 38, partman-partitioning 89ubuntu1, partman-target
+    80ubuntu1, preseed 1.57ubuntu2, user-setup 1.47ubuntu1.
+
+  [ Scott Kitterman ]
+  * Change encrypt home question to checkbox and indent it under the login
+    option to make it clear it is a sub question to the login option
+    (LP: #1066225)
+
+  [ Jesse Sung ]
+  * Fix multiple issues with Back/Stop and Continue/Connect buttons on
+    wireless page (LP: #883615).
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Wed, 09 Jan 2013 15:40:19 +0000
+
 ubiquity (2.13.7) raring; urgency=low
 
   * Use dh-autoreconf to avoid huge diffs when the autotools are updated.

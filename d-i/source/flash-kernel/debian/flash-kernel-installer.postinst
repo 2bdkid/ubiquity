@@ -71,8 +71,9 @@ case "$machine" in
 		:
 	;;
 	*)
+		latest_version=$(in-target --pass-stdout sh -c 'linux-version list | linux-version sort | tail -n1')
 		mount -o bind /dev /target/dev
-		in-target update-initramfs -c -k $(uname -r) || true
+		in-target update-initramfs -c -k $latest_version
 		umount /target/dev || true
 	;;
 esac

@@ -1,3 +1,17 @@
+partman-auto (105ubuntu2) raring; urgency=low
+
+  * Reuse & Replace recipes:
+    - Avoid using blkid, as it may sometimes hang indefinitely without
+      timing out. See blkid bugs http://pad.lv/987718 and
+      http://pad.lv/1044111. This change should address (LP: #1085991)
+    - Skip mounting filesystems that ought to not be Ubuntu root
+      filesystems (empty, swap, fat, ntfs, hfs). This also should speed up
+      automatic partitioning page.
+    - Silence warnings from umount in the clean-up (typically should
+      already be unmounted)
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Wed, 02 Jan 2013 14:00:50 +0000
+
 partman-auto (105ubuntu1) raring; urgency=low
 
   * Resynchronise with Debian. Remaining changes:

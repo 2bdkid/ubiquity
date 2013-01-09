@@ -28,7 +28,7 @@ TERMNAMES += c/cons25 x/xterm
 endif
 
 ifeq ($(DEB_HOST_ARCH_OS),hurd)
-TERMNAMES += h/hurd g/gnu-mach-color
+TERMNAMES += h/hurd m/mach-gnu-color
 endif
 
 TERMS = $(foreach term,$(TERMNAMES),\
