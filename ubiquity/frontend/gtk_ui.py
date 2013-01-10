@@ -669,7 +669,7 @@ class Wizard(BaseFrontend):
         os.environ['UBIQUITY_A11Y_PROFILE'] = 'screen-reader'
         if osextras.find_on_path('orca'):
             self.orca_process = subprocess.Popen(
-                ['orca', '-n'], preexec_fn=misc.drop_all_privileges)
+                ['orca'], preexec_fn=misc.drop_all_privileges)
 
     def a11y_profile_keyboard_modifiers_activate(self, widget=None):
         subprocess.call(
@@ -905,6 +905,7 @@ class Wizard(BaseFrontend):
                 self.get_string('oem_user_config_title'))
             self.live_installer.set_icon_name("preferences-system")
             self.quit.hide()
+            self.back.hide()
 
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             # Hide the notebook until the first page is ready.
@@ -1263,6 +1264,14 @@ class Wizard(BaseFrontend):
             self.allow_go_backward(False)
         elif 'UBIQUITY_AUTOMATIC' not in os.environ:
             self.allow_go_backward(True)
+
+        # If we are in oem-config, ensure the back button is displayed if
+        # and only if we are not on the first page.
+        if self.oem_user_config:
+            if self.pagesindex > 0:
+                self.back.show()
+            else:
+                self.back.hide()
         return True
 
     def set_page_title(self, page, lang=None):
