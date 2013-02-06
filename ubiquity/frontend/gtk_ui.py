@@ -732,6 +732,9 @@ class Wizard(BaseFrontend):
             if hasattr(page.ui, 'plugin_skip_page'):
                 if page.ui.plugin_skip_page():
                     skip = True
+            automatic = False
+            if hasattr(page.ui, 'is_automatic'):
+                automatic = page.ui.is_automatic
 
             if not skip and not page.filter_class:
                 # This page is just a UI page
@@ -763,7 +766,7 @@ class Wizard(BaseFrontend):
                     self.process_step()
                     if not self.stay_on_page:
                         self.pagesindex = self.pagesindex + 1
-                    if 'UBIQUITY_AUTOMATIC' in os.environ:
+                    if automatic:
                         # if no debconf_progress, create another one, set
                         # start to pageindex
                         self.debconf_progress_step(1)
@@ -1268,10 +1271,7 @@ class Wizard(BaseFrontend):
         # If we are in oem-config, ensure the back button is displayed if
         # and only if we are not on the first page.
         if self.oem_user_config:
-            if self.pagesindex > 0:
-                self.back.show()
-            else:
-                self.back.hide()
+            self.back.set_visible(self.pagesindex > 0)
         return True
 
     def set_page_title(self, page, lang=None):

@@ -403,7 +403,7 @@ class PageGtk(PageBase):
     def on_hostname_changed(self, widget):
         self.hostname_edited = (widget.get_text() != '')
 
-        if not 'UBIQUITY_AUTOMATIC' in os.environ:
+        if not self.is_automatic:
             # Let's not call this every time the user presses a key.
             from gi.repository import GLib
             if self.hostname_timeout_id:
@@ -505,6 +505,7 @@ class PageKde(PageBase):
         #self.page.verified_password.textChanged[str].connect(
         #    self.on_verified_password_changed)
         self.page.login_pass.clicked[bool].connect(self.on_login_pass_clicked)
+        self.page.login_auto.clicked[bool].connect(self.on_login_auto_clicked)
 
         self.page.password_debug_warning_label.setVisible(
             'UBIQUITY_DEBUG' in os.environ)
@@ -565,6 +566,9 @@ class PageKde(PageBase):
 
     def on_login_pass_clicked(self, checked):
         self.page.login_encrypt.setEnabled(checked)
+
+    def on_login_auto_clicked(self, checked):
+        self.page.login_encrypt.setEnabled(not(checked))
 
     def set_encrypt_home(self, value):
         self.page.login_encrypt.setChecked(value)
@@ -753,8 +757,7 @@ class Page(plugin.Plugin):
         self.ui.info_loop(None)
 
         # Trigger the bogus DNS server detection
-        if (not 'UBIQUITY_AUTOMATIC' in os.environ and
-                hasattr(self.ui, 'detect_bogus_result')):
+        if (not self.is_automatic and hasattr(self.ui, 'detect_bogus_result')):
             self.ui.detect_bogus_result()
 
         # We intentionally don't listen to passwd/auto-login or

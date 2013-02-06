@@ -116,6 +116,8 @@ default_disk_label () {
 			echo msdos;;
 		    cell)
 			echo msdos;;
+		    fsl)
+			echo gpt;;
 		    *)
 			echo UNKNOWN;;
 		esac;;
