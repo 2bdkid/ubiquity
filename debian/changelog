@@ -1,3 +1,51 @@
+ubiquity (2.13.13) raring; urgency=low
+
+  [ Dmitrijs Ledkovs ]
+  * Bump Standards version and override some lintian tags (ubiquity is
+    weird).
+  * Override expander style, which is hardcoded in light-themes to a
+    light color. (LP: #1100922)
+  * Consolidate CssProvider and add make minimal progress bar width 10px,
+    in preparation for dot-progress of all steps.
+  * Fix colour unit test, the green is no longer what it used to be...
+  * Switch to "NotShowIn=KDE" for ubiquity-gtk desktop files, as most !kde
+    desktop environments use gtk frontend.
+  * Show progress dots for plugin pages and show progress bar only during
+    slideshow.
+
+  [ Colin Watson ]
+  * Decode the output of apt_pkg.size_to_str() if necessary when
+    substituting it into Unicode strings (LP: #877756, #1132918).
+  * Update translations from Launchpad.
+
+  [ Aurélien Gâteau ]
+  * Turns the Ubiquity KDE window into a regular window and rework
+    the layout of widgets to provide more space to the main content.
+    The labels on the left now wrap to the next line if they are too long,
+    ensuring they are never truncated.
+  * KDE: Improve the layout of Prepare step
+  * KDE: fix integration of the webview responsible for showing the slideshow
+  * KDE: fix various issues with right-to-left languages
+
+  [ Julien Lavergne ]
+  * Use feh to draw the wallpaper on Lubuntu when using ubiquity-dm.
+
+  [ Ma Jun (Kylin Team) ]
+  * Fix referencing variable before assignment (LP: #945027)
+
+  [ Kobe Lee ]
+  * Show OS column in manual partitioning page. (LP: #1100694)
+
+  [ Stéphane Graber ]
+  * Fix crash in ubi-console-setup when quickly moving back and worth between
+    pages. (LP: #944614)
+
+  [ Jonathan Riddell ]
+  * Add back compositing to kwin on live CD (in ubiquity-dm), whatever was wrong
+    in 2008 should be fixed now and its making us look ugly
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 07 Mar 2013 19:53:52 +0000
+
 ubiquity (2.13.12) raring; urgency=low
 
   [ Colin Watson ]

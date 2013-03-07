@@ -254,13 +254,22 @@ class Wizard(BaseFrontend):
         # set custom language
         self.set_locales()
 
-        # Thin progress bar
+        # Get the default window background color for the the current
+        # theme and set it as the background for the inline toolbar
+        # Make a thin Progress bar
         provider = Gtk.CssProvider()
         provider.load_from_data(b'''\
+            .inline-toolbar.toolbar {
+                background: @theme_bg_color;
+                border-color: transparent;
+                border-width: 0px;
+                padding: 0px;
+            }
             GtkProgressBar {
-              -GtkProgressBar-min-horizontal-bar-height : 10
-            }''')
-
+              -GtkProgressBar-min-horizontal-bar-height : 10;
+              -GtkProgressBar-min-horizontal-bar-width : 10;
+            }
+            ''')
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
             provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
@@ -317,21 +326,20 @@ class Wizard(BaseFrontend):
                     self.toplevels.add(widget)
         self.builder.connect_signals(self)
 
-        # Get the default window background color for the the current
-        # theme and set it as the background for the inline toolbar
-        window_style = self.live_installer.get_style_context()
-        bg = window_style.lookup_color('theme_bg_color')[1].to_string()
-        provider = Gtk.CssProvider()
-        provider.load_from_data(('''\
-            .inline-toolbar.toolbar {
-                background: %s;
-                border-color: transparent;
-                border-width: 0px;
-                padding: 0px;
-            }''' % bg).encode())
-        Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(),
-            provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+        for mod in self.pages:
+            progress = Gtk.ProgressBar()
+            progress.set_size_request(10, 10)
+            progress.set_fraction(0)
+            self.dot_grid.add(progress)
+
+        next_style = self.next.get_style_context()
+        next_style.add_class('ubiquity-next')
+
+        self.progress_pages = {
+            'empty': 0,
+            'dot_grid': 1,
+            'progress_bar': 2,
+        }
 
         self.stop_debconf()
         self.translate_widgets(reget=True)
@@ -827,6 +835,9 @@ class Wizard(BaseFrontend):
         return True
 
     def start_slideshow(self):
+        self.progress_mode.set_current_page(
+            self.progress_pages['progress_bar'])
+
         if not self.slideshow:
             self.page_mode.hide()
             return
@@ -879,7 +890,8 @@ class Wizard(BaseFrontend):
 
         self.live_installer.set_default_icon_from_file(
             os.path.join(PIXMAPS, 'ubiquity.png'))
-        for eventbox in ['title_eventbox', 'progress_eventbox']:
+        for eventbox in ['title_eventbox', 'progress_eventbox',
+                         'install_details_expander']:
             box = self.builder.get_object(eventbox)
             style = box.get_style_context()
             style.add_class('menubar')
@@ -918,11 +930,18 @@ class Wizard(BaseFrontend):
             self.quit.hide()
             self.back.hide()
 
+        self.progress_section.show()
+
         if 'UBIQUITY_AUTOMATIC' in os.environ:
             # Hide the notebook until the first page is ready.
             self.page_mode.hide()
-            self.progress_section.show()
+            self.progress_mode.set_current_page(
+                self.progress_pages['progress_bar'])
             self.live_installer.show()
+        else:
+            self.progress_mode.set_current_page(
+                self.progress_pages['dot_grid'])
+            self.progress_mode.show_all()
         self.allow_change_step(False)
 
         # The default instantiation of GtkComboBoxEntry creates a
@@ -1463,6 +1482,10 @@ class Wizard(BaseFrontend):
                 self.navigation_control.hide()
             else:
                 self.navigation_control.show()
+        for i in range(len(self.pages))[:current + 1]:
+            self.dot_grid.get_child_at(i, 0).set_fraction(1)
+        for i in range(len(self.pages))[current + 1:]:
+            self.dot_grid.get_child_at(i, 0).set_fraction(0)
 
         syslog.syslog('switched to page %s' % name)
 
@@ -1556,7 +1579,6 @@ class Wizard(BaseFrontend):
     def switch_to_install_interface(self):
         self.installing = True
         self.lockdown_environment()
-        self.progress_section.show()
 
     def find_next_step(self, finished_step):
         # TODO need to handle the case where debconffilters launched from
