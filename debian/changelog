@@ -1,3 +1,21 @@
+ubiquity (2.13.18) raring; urgency=low
+
+  [ Aurélien Gâteau ]
+  * KDE: create web view manually to ensure it starts slideshow
+  * KDE: Fix the cancel button. It was missing its icon and not connected to
+    an action
+
+  [ Jonathan Riddell ]
+  * 01oem-config-udeb install kubuntu slideshow for oem-config in Kubuntu
+  * KDE: Untick encrypt tickbox when selecting login automatically LP: #1131459
+
+  [ Dmitrijs Ledkovs ]
+  * Drop compiz from alternative supported window managers for
+    ubiquity-dm. This reverts to using metacity. It has proven to be
+    unreliable.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Fri, 22 Mar 2013 15:40:56 +0000
+
 ubiquity (2.13.17) raring; urgency=low
 
   * Remove webcam step (LP: #1118589):
