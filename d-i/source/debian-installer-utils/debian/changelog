@@ -1,3 +1,28 @@
+debian-installer-utils (1.95ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices:
+      + New "mmc-partition" type for detecting partitions on MMC devices.
+      + Make sure we also detect platform-omap MMCs.
+      + Don't return entries for extended partitions.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+    - log-output: Always install a no-op SIGCHLD handler, in case the
+      subsidiary process starts a daemon which does not fully disconnect its
+      standard file descriptors.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Sun, 28 Apr 2013 15:24:04 +0100
+
+debian-installer-utils (1.95) unstable; urgency=low
+
+  [ Updated translations ]
+  * Romanian (ro.po) by Ioan Eugen Stan
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 30 Mar 2013 14:42:37 +0100
+
 debian-installer-utils (1.94ubuntu1) raring; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
