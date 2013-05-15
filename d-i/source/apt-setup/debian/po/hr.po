@@ -8,18 +8,29 @@
 # This file is distributed under the same license as debian-installer.
 #
 #
+# Translations from iso-codes:
+#   Alastair McKinstry <mckinstry@computer.org>, 2001, 2004.
+#   Free Software Foundation, Inc., 2000,2004
+#   Josip Rodin, 2008
+#   Krunoslav Gernhard, 2004
+#   Vladimir Vuksan <vuksan@veus.hr>, 2000.
+#   Vlatko Kosturjak, 2001
+# Tomislav Krznar <tomislav.krznar@gmail.com>, 2012.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Debian-installer 1st-stage master file HR\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2011-10-25 12:19+0100\n"
-"PO-Revision-Date: 2010-07-06 22:40+0200\n"
-"Last-Translator: Josip Rodin <joy+ditrans@linux.hr>\n"
+"POT-Creation-Date: 2012-10-01 22:03+0000\n"
+"PO-Revision-Date: 2012-06-18 16:28+0200\n"
+"Last-Translator: Tomislav Krznar <tomislav.krznar@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
 
 #. Type: text
 #. Description
@@ -41,31 +52,31 @@ msgstr "Podešavam apt"
 
 #. Type: text
 #. Description
-#. :sl1:
+#. :sl2:
 #: ../apt-setup-udeb.templates:3001
 msgid "Running ${SCRIPT}..."
 msgstr "Izvršavam ${SCRIPT}..."
 
 #. Type: text
 #. Description
-#. :sl1:
+#. :sl2:
 #: ../apt-setup-udeb.templates:4001
 msgid "Scanning local repositories..."
 msgstr "Pretražujem lokalne repozitorije..."
 
 #. Type: text
 #. Description
-#. :sl1:
+#. :sl2:
 #: ../apt-setup-udeb.templates:5001
 msgid "Scanning the security updates repository..."
 msgstr "Pretražujem repozitorij sigurnosnih osvježenja..."
 
 #. Type: text
 #. Description
-#. :sl1:
+#. :sl2:
 #: ../apt-setup-udeb.templates:6001
-msgid "Scanning the volatile updates repository..."
-msgstr "Pretražujem repozitorij nestalnih osvježenja (volatile)..."
+msgid "Scanning the release updates repository..."
+msgstr "Pretražujem repozitorij nadogradnji izdanja (release)..."
 
 #. Type: select
 #. Choices
@@ -88,10 +99,8 @@ msgstr "Ignoriraj"
 #. Type: select
 #. Description
 #: ../apt-setup-udeb.templates:7002
-#, fuzzy
-#| msgid "Downloading a file failed:"
 msgid "Downloading local repository key failed:"
-msgstr "Skidanje datoteke nije uspjelo:"
+msgstr "Preuzimanje ključa lokalnog repozitorija nije uspjelo:"
 
 #. Type: select
 #. Description
@@ -102,24 +111,20 @@ msgid ""
 "The installer failed to download the public key used to sign the local "
 "repository at ${MIRROR}:"
 msgstr ""
+"Instaler nije uspio preuzeti javni ključ korišten za potpisivanje lokalnog "
+"repozitorija na ${MIRROR}:"
 
 #. Type: select
 #. Description
 #: ../apt-setup-udeb.templates:7002
-#, fuzzy
-#| msgid ""
-#| "The installer failed to access the mirror. This may be a problem with "
-#| "your network, or with the mirror. You can choose to retry the download, "
-#| "select a different mirror, or ignore the problem and continue without all "
-#| "the packages from this mirror."
 msgid ""
 "This may be a problem with your network, or with the server hosting this "
 "key. You can choose to retry the download, or ignore the problem and "
 "continue without all the packages from this repository."
 msgstr ""
-"Instalacijski program nije uspio pristupiti zrcalnom poslužitelju. Možda je "
-"problem u vašoj mreži ili sa tim poslužiteljem. Možete pokušati iznova, "
-"izabrati neki drugi, ili ignorirati problem te nastaviti bez tih paketa."
+"Možda je problem u vašoj mreži ili sa tim poslužiteljem. Možete pokušati "
+"iznova, izabrati neki drugi, ili ignorirati problem te nastaviti bez tih "
+"paketa."
 
 #. Type: error
 #. Description
@@ -155,7 +160,7 @@ msgstr ""
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl3:
+#. :sl1:
 #. Type: multiselect
 #. Choices
 #. SEC_HOST, PARTNER_HOST, and EXTRAS_HOST are host names (e.g.
@@ -172,14 +177,14 @@ msgstr "sigurnosne nadogradnje (sa ${SEC_HOST})"
 #. SEC_HOST and VOL_HOST are host names (e.g. security.debian.org)
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl3:
+#. :sl1:
 #: ../apt-setup-udeb.templates:11001
-msgid "volatile updates (from ${VOL_HOST})"
-msgstr "volatile nadogradnje (sa ${VOL_HOST})"
+msgid "release updates"
+msgstr "nadogradnje izdanja (release)"
 
 #. Type: multiselect
 #. Description
-#. :sl3:
+#. :sl1:
 #. Type: multiselect
 #. Description
 #. :sl2:
@@ -189,18 +194,18 @@ msgstr "Usluge za koristiti:"
 
 #. Type: multiselect
 #. Description
-#. :sl3:
+#. :sl1:
 #: ../apt-setup-udeb.templates:11002
 msgid ""
 "Debian has two services that provide updates to releases: security and "
-"volatile."
+"release updates."
 msgstr ""
 "Debian ima dvije usluge koje pružaju nadogradnje za izdanja: security "
-"(sigurnosne) i volatile (nestalne)."
+"(sigurnosne) i release (nadogradnje izdanja)."
 
 #. Type: multiselect
 #. Description
-#. :sl3:
+#. :sl1:
 #. Type: multiselect
 #. Description
 #. :sl2:
@@ -214,19 +219,18 @@ msgstr ""
 
 #. Type: multiselect
 #. Description
-#. :sl3:
+#. :sl1:
 #: ../apt-setup-udeb.templates:11002
 msgid ""
-"Volatile updates provide more current versions for software that changes "
+"Release updates provide more current versions for software that changes "
 "relatively frequently and where not having the latest version could reduce "
-"the usability of the software. An example is the virus signatures for a "
-"virus scanner. This service is only available for stable and oldstable "
-"releases."
+"the usability of the software. It also provides regression fixes. This "
+"service is only available for stable and oldstable releases."
 msgstr ""
-"Nestalne (volatile) nadogradnje pružaju ažurnije inačice programa koji se "
+"Nadogradnje izdanja (release) pružaju ažurnije inačice programa koji se "
 "mijenjaju relativno često, i gdje nemanje najnovije inačice može smanjiti "
-"iskoristivost programa. Primjer su podaci o virusima za anti-virusni "
-"program. Ova usluga je dostupna samo za izdanja 'stable' i 'oldstable'."
+"iskoristivost programa. Primjer su podaci o virusima za antivirusni program. "
+"Ova usluga je dostupna samo za izdanja 'stable' i 'oldstable'."
 
 #. Type: multiselect
 #. Choices

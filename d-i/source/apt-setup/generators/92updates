@@ -6,27 +6,21 @@ set -e
 file="$1"
 
 db_get apt-setup/services-select
-if ! echo "$RET" | grep -q volatile; then
+if ! echo "$RET" | grep -q updates; then
 	exit
 fi
-
-db_get apt-setup/volatile_host
-host="$RET"
-[ "$host" ] || exit
 
 if db_get mirror/codename && [ "$RET" ]; then
 	codename="$RET"
 	db_get mirror/suite
 	suite="$RET"
 
-	if [ "$codename" != "lenny" ]; then
-		db_get mirror/protocol
-		protocol="$RET"
-		db_get mirror/$protocol/hostname
-		host="$RET"
-		db_get mirror/$protocol/directory
-		directory="/${RET#/}"
-	fi
+	db_get mirror/protocol
+	protocol="$RET"
+	db_get mirror/$protocol/hostname
+	host="$RET"
+	db_get mirror/$protocol/directory
+	directory="/${RET#/}"
 else
 	db_get cdrom/codename
 	codename="$RET"
@@ -44,10 +38,16 @@ for dist in contrib non-free; do
 done
 
 # Don't test mirror if no network selected in netcfg
-if [ "$codename" = "lenny" ]; then
-	echo "deb http://$host/debian-volatile $codename/volatile $dists" >> $file
-else
+echo "# ${codename}-updates, previously known as 'volatile'" >> $file
+
+if  [ -n "$protocol" ] && [ -n "$host" ]; then
 	echo "deb $protocol://${host}${directory} ${codename}-updates $dists" >> $file
+else
+	echo "# A network mirror was not selected during install.  The following entries" >> $file
+	echo "# are provided as examples, but you should amend them as appropriate" >> $file
+	echo "# for your mirror of choice." >> $file
+	echo "#" >> $file
+	echo "# deb http://ftp.debian.org/debian/ ${codename}-updates $dists" >> $file
 fi
 if db_get netcfg/dhcp_options && \
    [ "$RET" = "Do not configure the network at this time" ]; then
@@ -65,10 +65,10 @@ else
 	fi
 fi
 
-if [ "$codename" = "lenny" ]; then
-	echo "deb-src http://$host/debian-volatile $codename/volatile $dists" >> $file
-else
+if [ -n "$protocol" ] && [ -n "$host" ]; then
 	echo "deb-src $protocol://${host}${directory} ${codename}-updates $dists" >> $file
+else
+	echo "# deb-src http://ftp.debian.org/debian/ ${codename}-updates $dists" >> $file
 fi
 
 exit $CODE
