@@ -292,10 +292,16 @@ abootimg_get_image_size() {
 android_flash() {
 	local device="$1"
 
-	printf "Flashing kernel and initramfs to $device... " >&2
-	abootimg -u "$device" -k "$kfile" -r "$ifile" >/dev/null ||
-		error "failed."
-	echo "done." >&2
+	if [ -z "$android_skip_initrd" ]; then
+		printf "Flashing kernel and initramfs to $device... " >&2
+		abootimg -u "$device" -k "$kfile" -r "$ifile" >/dev/null ||
+			error "failed."
+		echo "done." >&2
+	else
+		printf "Flashing the kernel (skipping initrd) to $device... " >&2
+		abootimg -u "$device" -k "$kfile" >/dev/null || error "failed."
+		echo "done." >&2
+	fi
 }
 
 main() {
@@ -383,6 +389,7 @@ boot_initrd_path="$(get_machine_field "$machine" "Boot-Initrd-Path")" || :
 boot_script_path="$(get_machine_field "$machine" "Boot-Script-Path")" || :
 boot_multi_path="$(get_machine_field "$machine" "Boot-Multi-Path")" || :
 android_boot_device="$(get_machine_field "$machine" "Android-Boot-Device")" || :
+android_skip_initrd="$(get_machine_field "$machine" "Android-Skip-Initrd")" || :
 
 if [ -n "$mtd_kernel" ] || [ -n "$mtd_initrd" ]; then
 	if [ ! -e "$PROC_MTD" ]; then
@@ -438,16 +445,19 @@ tmpdir="$(mktemp -dt "$self.XXXXXXXX")"
 
 case "$method" in
 	"android")
-		part=""
-		largest_size="-1"
-		for p in "$android_boot_device"*[0-9]; do
-			abootimg="$(LC_ALL=C abootimg -i "$p" 2>/dev/null || true)"
-			image_size="$(abootimg_get_image_size "$abootimg")"
-			if [ -n "$image_size" ] &&
-				[ "$image_size" -gt "$largest_size" ]; then
-				part="$p"
-			fi
-		done
+		if abootimg -i "$android_boot_device" > /dev/null 2>&1; then
+			part="$android_boot_device"
+		else
+			largest_size="-1"
+			for p in "$android_boot_device"*[0-9]; do
+				abootimg="$(LC_ALL=C abootimg -i "$p" 2>/dev/null || true)"
+				image_size="$(abootimg_get_image_size "$abootimg")"
+				if [ -n "$image_size" ] &&
+					[ "$image_size" -gt "$largest_size" ]; then
+					part="$p"
+				fi
+			done
+		fi
 		if [ -z "$part" ]; then
 			error "Couldn't find Android boot partition on $android_boot_device"
 		fi

@@ -306,3 +306,10 @@ Method: android
 Android-Boot-Device: /dev/mmcblk0
 Required-Packages: abootimg
 Bootloader-sets-root: yes
+
+Machine: QCT APQ8064 MAKO
+Method: android
+Android-Boot-Device: /dev/block/platform/msm_sdcc.1/by-name/boot
+Android-Skip-Initrd: yes
+Required-Packages: abootimg
+Bootloader-sets-root: yes
