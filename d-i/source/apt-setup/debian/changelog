@@ -1,3 +1,64 @@
+apt-setup (1:0.80ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when checking
+      /cdrom/.disk/base_installable.
+    - Set the mirror verification timeout to 30 seconds.
+    - Adjust services-select for Ubuntu, removing volatile and adding
+      partner (apt-setup/partner) and extras (apt-setup/extras).
+    - Always disable the CD at the end of installation if any mirrors are
+      present, even if it's a complete CD.
+    - Pre-populate apt's lists directory with signed Release files for
+      archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
+      against downgrade attacks right from initial installation.
+    - Run 'apt-get update' for all sources.list lines produced by a single
+      generator in one go, and don't comment out sources.list lines if it
+      fails.
+    - Make the path to security updates configurable, as well as the host.
+    - Remove restricted from cdrom entry if apt-setup/restricted is false.
+    - Make sure apt-cdrom doesn't unmount the CD if cd_type ends with
+      /single.
+    - Enable all network sources, including security updates, even if the
+      network is unconfigured.
+    - Honour apt-setup/restricted, apt-setup/universe, and
+      apt-setup/multiverse when writing -backports lines.
+    - Run 'apt-get update', without downloading package lists or cleaning up
+      old files, after moving the sources.list generated during base system
+      installation back into place.
+    - If OVERRIDE_LEAVE_CD_MOUNTED is set, don't unmount /cdrom; this is a
+      bad idea in a live CD environment!
+    - Enable backports by default now that we have NotAutomatic enabled and
+      working.
+    - Add Release files for saucy.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 17 May 2013 15:24:03 +0100
+
+apt-setup (1:0.80) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Update comment on apt-setup/services-select Choices field.
+  * generators/01setup: Cope with the case where ROOT is unset.
+  * generators/01setup: If apt-setup/multiarch is empty, remove any existing
+    foreign architectures (as might have been set up by e.g. a live
+    filesystem build).
+  * Bail out cleanly from cdrom generator if /cdrom/.disk/info doesn't exist
+    or has zero size, to guard against image creation errors (LP: #245519).
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 12 May 2013 12:49:46 +0200
+
 apt-setup (1:0.79ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
