@@ -1,3 +1,44 @@
+partman-basicfilesystems (78ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Add minimal support for NTFS partitions using ntfs-3g.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+      file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+    - Stop using libparted to format swap partitions.
+    - Disable existing swap partitions before formatting them.
+    - Use mkdosfs to create FAT filesystems, since libparted cannot handle
+      doing that on non-512-sector disks.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 28 May 2013 14:04:11 +0100
+
+partman-basicfilesystems (78) unstable; urgency=low
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 18 May 2013 14:51:20 +0200
+
+partman-basicfilesystems (77) unstable; urgency=low
+
+  [ Updated translations ]
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 05 Nov 2012 06:50:23 +0100
+
 partman-basicfilesystems (76ubuntu4) raring; urgency=low
 
   * Fix dangerous reuse of $device in format_basicfilesystems, introduced in
