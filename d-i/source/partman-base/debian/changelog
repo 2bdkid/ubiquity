@@ -1,3 +1,34 @@
+partman-base (166ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use the device's logical sector size throughout rather than
+      PED_SECTOR_SIZE_DEFAULT.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 03 Jun 2013 12:45:44 +0100
+
+partman-base (166) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Use correct compiler when cross-building.
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 15 May 2013 19:10:25 +0200
+
 partman-base (165ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

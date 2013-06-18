@@ -134,6 +134,26 @@ strcount(const char *s, int c)
     return ret;
 }
 
+int umount_target_sort(const void *v1, const void *v2)
+{
+    char *m1, *m2;
+
+    m1 = *(char **)v1;
+    m2 = *(char **)v2;
+    if (m1 == NULL && m2 == NULL)
+	return 0;
+    else if (m1 == NULL)
+	return -1;
+    else if (m2 == NULL)
+	return 1;
+    if (strstr(m1, m2) == m1)
+	return -1;
+    else if (strstr(m2, m1) == m2)
+	return 1;
+    else
+	return strcmp(m2, m1);
+}
+
 /*
  * 
  */
@@ -144,25 +164,6 @@ umount_target(void)
     char buf[1024], mnt[1024];
     char *mounts[1024];
     int i, m_count = 0;
-    int sort_func(const void *v1, const void *v2)
-    {
-	char *m1, *m2;
-
-	m1 = *(char **)v1;
-	m2 = *(char **)v2;
-	if (m1 == NULL && m2 == NULL)
-	    return 0;
-	else if (m1 == NULL)
-	    return -1;
-	else if (m2 == NULL)
-	    return 1;
-	if (strstr(m1, m2) == m1)
-	    return -1;
-	else if (strstr(m2, m1) == m2)
-	    return 1;
-	else
-	    return strcmp(m2, m1);
-    }
 
     if ((fp = fopen("/proc/mounts", "r")) == NULL)
         return 0;
@@ -175,7 +176,7 @@ umount_target(void)
     fclose(fp);
     if (m_count == 0)
 	return 1;
-    qsort(mounts, m_count, sizeof(char *), sort_func);
+    qsort(mounts, m_count, sizeof(char *), umount_target_sort);
     for (i = 0; i < m_count; i++) {
 	if (umount(mounts[i]) < 0)
 	    return 0;

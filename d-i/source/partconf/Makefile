@@ -6,6 +6,8 @@ endif
 
 LIBS = -lparted
 
+STRIP = strip
+
 PARTCONF_OBJS = util.o partconf.o find-parts.o
 
 all: partconf find-partitions mkfstab mountpoint
@@ -28,10 +30,10 @@ find-parts.o: find-parts.c partconf.h
 
 small: CFLAGS += -Os
 small: clean partconf find-partitions mkfstab mountpoint
-	strip --remove-section=.comment --remove-section=.note partconf
-	strip --remove-section=.comment --remove-section=.note find-partitions
-	strip --remove-section=.comment --remove-section=.note mkfstab
-	strip --remove-section=.comment --remove-section=.note mountpoint
+	$(STRIP) --remove-section=.comment --remove-section=.note partconf
+	$(STRIP) --remove-section=.comment --remove-section=.note find-partitions
+	$(STRIP) --remove-section=.comment --remove-section=.note mkfstab
+	$(STRIP) --remove-section=.comment --remove-section=.note mountpoint
 
 test-mkfstab: mkfstab.c mkfstab.h
 	$(CC) $(CFLAGS) -o test-mkfstab -DTEST mkfstab.c $(LIBS) -ldebian-installer

@@ -1,3 +1,18 @@
+partconf (1.41) unstable; urgency=low
+
+  [ Milan Kupcevic ]
+  * Exclude CD/DVD drives from partition search. (thanks, Frank Fegert)
+    Closes: #332227
+
+  [ Colin Watson ]
+  * Use correct compiler and strip when cross-building.
+  * Avoid use of nested functions, fixing build with clang.
+  * Fix -Wsign-compare warnings in build_part_choices.
+  * Remove unnecessary comparison which triggered a -Wtype-limits warning.
+  * Mark argc and argv in mkfstab's main() as unused.
+
+ -- Colin Watson <cjwatson@debian.org>  Tue, 04 Jun 2013 14:37:34 +0100
+
 partconf (1.40) unstable; urgency=low
 
   [ Updated translations ]

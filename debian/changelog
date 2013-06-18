@@ -1,3 +1,32 @@
+ubiquity (2.15.7) saucy; urgency=low
+
+  [ Colin Watson ]
+  * Consistently consider closing a question dialog as a negative response,
+    not a positive one (LP: #1177115).
+
+  [ Dmitrijs Ledkovs ]
+  * Use staging U1 APIs, as production is not enabled for unverified
+    accounts yet.
+  * Move to automake-1.13
+  * Include policykit policy file to allow pkexec ubiquity as an X11
+    application for any frontend/flavour.
+  * Drop all other privilege escalation methods, as pkexec is available on
+    all flavours.
+  * Drop "--desktop %k" from desktop files, not needed with pkexec.
+  * U1 plugin: do not use subprocess.Popen.wait(), as it may cause
+    block thus causing a deadlock.
+  * Shade U1 logos with #DED9CB to match color scheme.
+  * Automatic update of included source packages: clock-setup
+    0.115ubuntu1, partconf 1.41, partman-auto 107ubuntu1, partman-base
+    166ubuntu1, partman-target 83ubuntu1, yaboot-installer
+    1.1.27ubuntu1.
+
+  [ Jeremy Bicha ]
+  * Use spaces not hyphens in release name such as "Ubuntu GNOME" not
+    "Ubuntu-GNOME".
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Tue, 18 Jun 2013 13:04:40 +0100
+
 ubiquity (2.15.6) saucy; urgency=low
 
   * Merge U1 plugin, without activating it by default at the moment. This

@@ -262,8 +262,10 @@ void mapdevfs(struct fstab_entry *entry) {
 	}
 }
 
+#define ATTRIBUTE_UNUSED __attribute__ ((__unused__))
+
 #ifndef TEST
-int main(int argc, char *argv[]) {
+int main(int argc ATTRIBUTE_UNUSED, char *argv[] ATTRIBUTE_UNUSED) {
 	int i = 0;
 	FILE *outfile = NULL;
 
@@ -323,7 +325,7 @@ int main(int argc, char *argv[]) {
 	return(EXIT_SUCCESS);
 }
 #else
-int main(int argc, char **argv) {
+int main(int argc ATTRIBUTE_UNUSED, char **argv ATTRIBUTE_UNUSED) {
 	struct fstab_entry proc_entry = {"proc", "/proc", "proc", "defaults"};
 	struct fstab_entry tmpfs_entry = {"none", "/tmp", "tmpfs", "defaults"};
 	assert(!has_device(&proc_entry));

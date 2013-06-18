@@ -50,7 +50,8 @@ build_part_choices(struct partition *parts[], const int part_count)
 {
     char *list[part_count];
     char *tmp, *tmp2;
-    int i, max_len, len;
+    int i;
+    size_t max_len, len;
 
     //printf("part_count=%d\n", part_count);
     if (part_count <= 0)
@@ -63,7 +64,7 @@ build_part_choices(struct partition *parts[], const int part_count)
     }
     // pad with spaces
     for (i = 0; i < part_count; i++) {
-        asprintf(&list[i], "%-*s", max_len, parts[i]->description);
+        asprintf(&list[i], "%-*s", (int)max_len, parts[i]->description);
     }
     max_len = strlen("n/a");
     for (i = 0; i < part_count; i++) {
@@ -72,7 +73,7 @@ build_part_choices(struct partition *parts[], const int part_count)
     }
     // add and pad
     for (i = 0; i < part_count; i++) {
-        asprintf(&tmp, "%s  %-*s", list[i], max_len,
+        asprintf(&tmp, "%s  %-*s", list[i], (int)max_len,
                 (parts[i]->size > 0) ? size_desc(parts[i]->size) : "n/a");
         free(list[i]);
         list[i] = tmp;
@@ -86,7 +87,7 @@ build_part_choices(struct partition *parts[], const int part_count)
             max_len = strlen(parts[i]->fstype);
     }
     for (i = 0; i < part_count; i++) {
-        asprintf(&tmp, "%s  %-*s", list[i], max_len,
+        asprintf(&tmp, "%s  %-*s", list[i], (int)max_len,
                 (parts[i]->op.filesystem != NULL) ? parts[i]->op.filesystem :
                 (parts[i]->fstype != NULL) ? parts[i]->fstype : "n/a");
         free(list[i]);
@@ -99,7 +100,7 @@ build_part_choices(struct partition *parts[], const int part_count)
     }
     if (max_len > 0)
         for (i = 0; i < part_count; i++) {
-            asprintf(&tmp, "%s  %-*s", list[i], max_len,
+            asprintf(&tmp, "%s  %-*s", list[i], (int)max_len,
                     (parts[i]->op.mountpoint != NULL) ? parts[i]->op.mountpoint : "");
             free(list[i]);
             list[i] = tmp;

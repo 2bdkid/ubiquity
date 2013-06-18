@@ -113,6 +113,60 @@ test_raid(struct partition *p)
     fclose(fp);
 }
 
+/**
+ * Determine if a device is a CD-ROM/DVD based on major/minor device
+ * number. Based on information from Linux's Documentation/devices.txt.
+ */
+bool
+is_cdrom(const char * const device_name)
+{
+    struct stat st;
+
+    if (stat(device_name, &st) != 0)
+            return false;
+
+    switch (major(st.st_rdev)) {
+        case 11: /* SCSI CD-ROM devices */
+        case 113: /* Parallel port ATAPI CD-ROM devices */
+            return true;
+        default:
+            break;
+    }
+
+    if (minor(st.st_rdev) == 0) {
+        switch (major(st.st_rdev)) {
+            case 15: /* Sony CDU-31A/CDU-33A CD-ROM */
+            case 16: /* GoldStar CD-ROM */
+            case 17: /* Optics Storage CD-ROM */
+            case 18: /* Sanyo CD-ROM */
+            case 20: /* Hitachi CD-ROM */
+            case 23: /* Mitsumi proprietary CD-ROM */
+            case 24: /* Sony CDU-535 CD-ROM */
+            case 29: /* Aztech/Orchid/Okano/Wearnes CD-ROM */
+            case 30: /* Philips LMS CM-205 CD-ROM */
+            case 32: /* Philips LMS CM-206 CD-ROM */
+                return true;
+            default:
+                break;
+        }
+    }
+
+    if (minor(st.st_rdev) <= 3) {
+        switch (major(st.st_rdev)) {
+            case 25: /* First Matsushita (Panasonic/SoundBlaster: CD-ROM */
+            case 26: /* Second Matsushita (Panasonic/SoundBlaster: CD-ROM */
+            case 27: /* Fourth Matsushita (Panasonic/SoundBlaster: CD-ROM */
+            case 28: /* Third Matsushita (Panasonic/SoundBlaster: CD-ROM */
+            case 46: /* Parallel port ATAPI CD-ROM devices */
+                return true;
+            default:
+                break;
+        }
+    }
+
+    return false;
+}
+
 #ifndef FIND_PARTS_MAIN
 int
 block_partition(const char *part)
@@ -181,6 +235,8 @@ get_all_partitions(struct partition *parts[], const int max_parts, bool ignore_f
         if (dev->read_only)
             continue;
         if (strstr(dev->path, "/dev/mtd") == dev->path)
+            continue;
+        if (is_cdrom(dev->path))
             continue;
         if (!ped_disk_probe(dev))
             continue;

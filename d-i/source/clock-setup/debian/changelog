@@ -1,3 +1,23 @@
+clock-setup (0.115ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Pass --noadjfile to hwclock.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 05 Jun 2013 11:49:59 +0100
+
+clock-setup (0.115) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Use correct compiler when cross-building.
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 16 May 2013 17:33:59 +0200
+
 clock-setup (0.114ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
