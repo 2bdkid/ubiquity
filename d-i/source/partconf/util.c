@@ -5,6 +5,8 @@
 #include <stdarg.h>
 #include <sys/mount.h>
 
+#include "xasprintf.h"
+
 char *
 size_desc(long long bytes)
 {
@@ -37,19 +39,23 @@ modprobe(const char *mod)
     FILE *fp;
     char *cmd;
     char printk[1024] = "";
+    int got_printk = 0;
 
     if ((fp = fopen("/proc/sys/kernel/printk", "r")) != NULL) {
-        fgets(printk, sizeof(printk), fp);
+        if (fgets(printk, sizeof(printk), fp) != NULL)
+	    got_printk = 1;
         fclose(fp);
     }
-    if ((fp = fopen("/proc/sys/kernel/printk", "w")) != NULL) {
+    if (got_printk && (fp = fopen("/proc/sys/kernel/printk", "w")) != NULL) {
         fputs("0\n", fp);
         fclose(fp);
     }
-    asprintf(&cmd, "modprobe %s >>/var/log/messages 2>&1", mod);
-    system(cmd);
+    cmd = xasprintf("modprobe %s >>/var/log/messages 2>&1", mod);
+    if (system(cmd) != 0) {
+        /* ignore failures */
+    }
     free(cmd);
-    if ((fp = fopen("/proc/sys/kernel/printk", "w")) != NULL) {
+    if (got_printk && (fp = fopen("/proc/sys/kernel/printk", "w")) != NULL) {
         fputs(printk, fp);
         fclose(fp);
     }
@@ -67,7 +73,7 @@ check_proc_mounts(const char *mntpoint)
 
     if ((fp = fopen("/proc/mounts", "r")) == NULL)
         return 0;
-    asprintf(&tmp, "/target%s", mntpoint);
+    tmp = xasprintf("/target%s", mntpoint);
     while (fgets(buf, sizeof(buf), fp) != NULL) {
         sscanf(buf, "%*s %s", mnt);
         if (strcmp(tmp, mnt) == 0) {
@@ -92,7 +98,9 @@ check_proc_swaps(const char *dev)
 
     if ((fp = fopen("/proc/swaps", "r")) == NULL)
         return 0;
-    fgets(buf, sizeof(buf), fp);
+    if (fgets(buf, sizeof(buf), fp) == NULL) {
+	/* ignore failures; we'll get them again on the next line */
+    }
     while (fgets(buf, sizeof(buf), fp) != NULL) {
         if (strstr(buf, dev) == buf) {
             fclose(fp);

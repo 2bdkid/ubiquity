@@ -1,5 +1,7 @@
+#include <errno.h>
+
+#include "xasprintf.h"
 #include "mkfstab.h"
-#include "errno.h"
 
 static int has_device(struct fstab_entry *entry) {
 	return (strcmp(entry->typ, "proc") != 0
@@ -159,7 +161,7 @@ void get_fstab_d_dir() {
 			continue;
 
 		/* skipping directories */
-		asprintf(&fullname, "%s/%s", FSTAB_D, dentry->d_name);
+		fullname = xasprintf("%s/%s", FSTAB_D, dentry->d_name);
 		if(stat(fullname, &sbuf) == -1) {
 			fprintf(stderr, "%s: %s\n", strerror(errno), fullname);
 			continue;
@@ -235,7 +237,7 @@ void get_swapspaces() {
 			continue;
 
 		sscanf(line, "%s %*s %*s %*s %*s", filesystem);
-		asprintf(&swline, "%s\tnone\tswap\tsw", filesystem);
+		swline = xasprintf("%s\tnone\tswap\tsw", filesystem);
 		insert_line(swline);
 	}
 
@@ -273,7 +275,9 @@ int main(int argc ATTRIBUTE_UNUSED, char *argv[] ATTRIBUTE_UNUSED) {
 	printf("W: using local mode!\n\n");
 #endif
 
-	system("modprobe floppy 1>/dev/null 2>&1");
+	if (system("modprobe floppy 1>/dev/null 2>&1") != 0) {
+		/* ignore failures */
+	}
 
 	get_filesystems();
 	get_swapspaces();

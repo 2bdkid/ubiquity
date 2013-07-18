@@ -151,9 +151,13 @@ class Wizard(BaseFrontend):
         sys.excepthook = self.excepthook
 
         self.app = QtGui.QApplication([])
+        # The "hicolor" icon theme gets picked when Ubiquity is running as a
+        # DM. This causes some icons to be missing. Hardcode the theme name to
+        # prevent that.
+        QtGui.QIcon.setThemeName('oxygen')
         self._apply_stylesheet()
 
-        self.app.setWindowIcon(QtGui.QIcon.fromTheme("ubiquity"))
+        self.app.setWindowIcon(QtGui.QIcon.fromTheme("ubiquity-kde"))
         import dbus.mainloop.qt
         dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
 

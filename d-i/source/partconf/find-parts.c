@@ -14,6 +14,7 @@
 #include <getopt.h>
 #endif
 
+#include "xasprintf.h"
 #include "partconf.h"
 
 // If it's an LVM volume, it's on the form
@@ -35,7 +36,7 @@ test_lvm(struct partition *p)
     *vol++ = '\0';
     if (strchr(vol, '/') != NULL)
         return;
-    asprintf(&procfile, "/proc/lvm/VGs/%s/LVs/%s", grp, vol);
+    procfile = xasprintf("/proc/lvm/VGs/%s/LVs/%s", grp, vol);
     if ((fp = fopen(procfile, "r")) == NULL)
         return;
     while (fgets(buf, sizeof(buf), fp) != NULL) {
@@ -106,7 +107,7 @@ test_raid(struct partition *p)
             sscanf(buf, "%lld", &blocks);
             p->size = blocks * 512L;
             free(p->description);
-            asprintf(&p->description, "RAID logical volume %d", volno);
+            p->description = xasprintf("RAID logical volume %d", volno);
             break;
         }
     }
@@ -185,7 +186,7 @@ block_partition(const char *part)
         if(entry->d_name[0] == '.')
             continue;
 
-        asprintf(&cmd, "/bin/sh %s/%s \"%s\" 1>/dev/null 2>&1",
+        cmd = xasprintf("/bin/sh %s/%s \"%s\" 1>/dev/null 2>&1",
             BLOCK_D, entry->d_name, part);
         ret = system(cmd);
         if(ret != 0) {
@@ -268,7 +269,7 @@ get_all_partitions(struct partition *parts[], const int max_parts, bool ignore_f
 
                 if (sscanf(p->path, "/dev/hd%c%d", &drive, &part) == 2
                         && drive >= 'a' && drive <= 'z')
-                    asprintf(&p->description, "IDE%d %s\\, part. %d",
+                    p->description = xasprintf("IDE%d %s\\, part. %d",
                             (drive - 'a') / 2 + 1, targets[(drive - 'a') % 2],
                             part);
                 else
@@ -303,7 +304,7 @@ get_all_partitions(struct partition *parts[], const int max_parts, bool ignore_f
                             const char *bus_id = basename(buf);
                             if (sscanf(bus_id, "%d:%d:%d:%d",
                                         &host, &bus, &target, &lun) == 4) {
-                                asprintf(&p->description, "SCSI%d (%d\\,%d\\,%d) part. %d",
+                                p->description = xasprintf("SCSI%d (%d\\,%d\\,%d) part. %d",
                                         host + 1, bus, target, lun, part);
                                 done = 1;
                             }
