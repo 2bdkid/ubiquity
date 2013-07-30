@@ -1,3 +1,34 @@
+debian-installer-utils (1.98ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - Use /proc/self/fd/4 rather than /dev/fd/4 in fetch-url-methods/http;
+      the latter doesn't seem to exist in d-i.
+    - list-devices:
+      + New "mmc-partition" type for detecting partitions on MMC devices.
+      + Make sure we also detect platform-omap MMCs.
+      + Don't return entries for extended partitions.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+    - log-output: Always install a no-op SIGCHLD handler, in case the
+      subsidiary process starts a daemon which does not fully disconnect its
+      standard file descriptors.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 23 Jul 2013 00:09:42 +0100
+
+debian-installer-utils (1.98) unstable; urgency=low
+
+  [ Joey Hess ]
+  * fetch-url: Try to mountmedia when getting a file, to support preseed
+    via USB from netboot.
+
+  [ Dmitrijs Ledkovs ]
+  * Set debian source format to '3.0 (native)'.
+  * Bump debhelper compat level to 9.
+  * Set Vcs-* to canonical format.
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 13 Jul 2013 14:19:06 +0200
+
 debian-installer-utils (1.97ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
