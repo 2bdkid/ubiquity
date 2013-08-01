@@ -23,6 +23,7 @@ import importlib
 import locale
 import optparse
 import os
+import pwd
 import shutil
 import subprocess
 import sys
@@ -498,6 +499,10 @@ def main(oem_config):
     parser.add_option('--sso', dest='u1_sso',
                       action='store_true',
                       help='Force enable the u1 SSO page.')
+    parser.add_option('--wireless', dest='wireless',
+                      action='store_true',
+                      help='Force enable the wireless page, even if network '
+                           'is available.')
 
     (options, args) = parser.parse_args()
 
@@ -543,6 +548,15 @@ def main(oem_config):
             'https://login.staging.ubuntu.com/api/v2/'
         os.environ['UBUNTU_ONE_URL'] = 'https://staging.one.ubuntu.com/'
         os.environ['DEBUG_SSO_API'] = '1'
+
+    if options.wireless:
+        os.environ['UBIQUITY_WIRELESS'] = '1'
+
+    uid = os.getenv('PKEXEC_UID', False)
+    if uid:
+        # pkexec doesn't set username, but it's used in a few places.
+        # fake it from PKEXEC =)
+        os.environ['SUDO_USER'] = pwd.getpwuid(int(uid)).pw_name
 
     acquire_lock()
 

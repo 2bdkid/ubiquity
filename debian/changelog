@@ -1,3 +1,19 @@
+ubiquity (2.15.13) saucy; urgency=low
+
+  [ Aurélien Gâteau ]
+  * [KDE] Add network manager wifi setup page
+  * Refactor network manager code to create a separte GTK class and
+    base class for both frontends to use
+
+  [ Dmitrijs Ledkovs ]
+  * Properly drop privileges with pkexec by deriving UID/GID/username from
+    PKEXEC_UID.
+
+  [ Jeremy Bicha ]
+  * Rename ubiquity-gtkui.desktop to ubiquity.desktop (LP: #1203223, #1203224)
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 01 Aug 2013 21:10:09 +0100
+
 ubiquity (2.15.12) saucy; urgency=low
 
   [ Rohan Garg ]
