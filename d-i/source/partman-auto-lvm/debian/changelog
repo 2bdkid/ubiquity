@@ -1,3 +1,22 @@
+partman-auto-lvm (50ubuntu1) saucy; urgency=low
+
+  * Resynchronise with Debian. Remaining changes:
+    - Accept autopartitioning automatically.
+    - Change fallback VG name to Ubuntu.
+    - Ask how much of the VG should be used for logical volumes, rather than
+      unconditionally using it all.
+    - Set locale to "C" when calling vgs for available free space.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Fri, 02 Aug 2013 11:37:55 +0100
+
+partman-auto-lvm (50) unstable; urgency=low
+
+  [ Dmitrijs Ledkovs ]
+  * Remove debian/source/format. Any default is ok & no need to specify it.
+  * Set debian source format to '3.0 (native)'.
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 13 Jul 2013 13:38:50 +0200
+
 partman-auto-lvm (49ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian. Remaining changes:
