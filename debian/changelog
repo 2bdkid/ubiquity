@@ -1,3 +1,21 @@
+ubiquity (2.15.15) saucy; urgency=low
+
+  [ Tim Lunn ]
+  * Add Ubuntu GNOME background to ubiquity-dm (LP: #1204312)
+  * Use gnome-shell as wm in ubiquity-dm on Ubuntu GNOME (LP: #1214732)
+  * export XDG_SESSION_ID to provide access to hijacked logind session
+
+  [ Dmitrijs Ledkovs ]
+  * Add gnome-shell as alternative window manager dependency on the
+    ubiquity binary package.
+  * Enable U1 page, if U1 is part of the image.
+  * Do not try to install U1 keyring into encrypted home directories, not
+    supported at the moment. (LP: #1217143)
+  * Automatic update of included source packages: partman-basicmethods
+    55.
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Thu, 29 Aug 2013 01:26:09 +0100
+
 ubiquity (2.15.14) saucy; urgency=low
 
   * Port autopilot tests to updated API for retrieving application proxy
