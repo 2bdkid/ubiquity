@@ -97,8 +97,14 @@ Boot-Multi-Path: /boot/uImage.bin
 Required-packages: u-boot-tools
 Bootloader-sets-root: yes
 
-Machine: Highbank
+Machine: Calxeda Highbank
 Kernel-Flavors: generic highbank
+Required-Packages: u-boot-tools
+Boot-Script-Path: /boot/boot.scr
+U-Boot-Script-Name: bootscr.highbank
+
+Machine: Calxeda ECX-2000
+Kernel-Flavors: generic-lpae generic highbank
 Required-Packages: u-boot-tools
 Boot-Script-Path: /boot/boot.scr
 U-Boot-Script-Name: bootscr.highbank
