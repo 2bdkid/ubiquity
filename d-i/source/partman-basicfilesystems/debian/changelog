@@ -1,3 +1,10 @@
+partman-basicfilesystems (78ubuntu2) saucy; urgency=low
+
+  * Always use mkfs.ext2 to create ext2 filesystems, since libparted's ext2
+    code is deprecated and can't handle large sector sizes (LP: #1215458).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Sep 2013 13:29:43 +0100
+
 partman-basicfilesystems (78ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:

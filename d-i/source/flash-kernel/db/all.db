@@ -236,6 +236,7 @@ Required-Packages: u-boot-tools
 Bootloader-sets-root: yes
 
 Machine: OMAP4 Panda board
+Machine: TI OMAP4 PandaBoard
 Method: generic
 U-Boot-Kernel-Address: 0x80008000
 U-Boot-Initrd-Address: 0x0
@@ -247,6 +248,8 @@ Boot-Initrd-Path: uInitrd
 Boot-Script-Path: preEnv.txt
 Required-Packages: u-boot-tools
 Bootloader-sets-root: yes
+DTB-Kernel-Version: 3.11
+DTB-Id: omap4-panda-es.dtb
 
 Machine: QNAP TS-109/TS-209
 Kernel-Flavors: orion5x

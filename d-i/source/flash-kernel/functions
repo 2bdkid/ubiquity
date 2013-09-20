@@ -187,6 +187,17 @@ gen_kernel() {
 	} >"$output"
 }
 
+append_dtb() {
+	local kernel="$1"
+	local dtb="$2"
+	local output="$3"
+
+	{
+		cat "$kernel"
+		cat "$dtb"
+	} >"$output"
+}
+
 flash_kernel() {
 	local input_file="$1"
 	local output_mtd="$2"
@@ -386,6 +397,8 @@ machine_id="$(get_machine_field "$machine" "Machine-Id")" || :
 method="$(get_machine_field "$machine" "Method")" || method="generic"
 mtd_kernel="$(get_machine_field "$machine" "Mtd-Kernel")" || :
 mtd_initrd="$(get_machine_field "$machine" "Mtd-Initrd")" || :
+dtb_name="$(get_machine_field "$machine" "DTB-Id")" || :
+dtb_kver="$(get_machine_field "$machine" "DTB-Kernel-Version")" || :
 ukaddr="$(get_machine_field "$machine" "U-Boot-Kernel-Address")" || :
 uiaddr="$(get_machine_field "$machine" "U-Boot-Initrd-Address")" || :
 umaddr="$(get_machine_field "$machine" "U-Boot-Multi-Address")" || :
@@ -477,6 +490,17 @@ case "$method" in
 		if [ -n "$machine_id" ]; then
 			gen_kernel "$kernel" "$tmpdir/kernel" "$machine_id"
 			kernel="$tmpdir/kernel"
+		fi
+		if [ -n "dtb_kver" ]; then
+			if dpkg --compare-versions "$kvers" ge "$dtb_kver" >/dev/null; then
+				dtb="/lib/firmware/$kvers/device-tree/$dtb_name"
+				if [ ! -f "$dtb" ] ; then
+					error "Couldn't find $dtb"
+				fi
+				append_dtb "$kernel" "$dtb" "$tmpdir/kernel.dtb"
+				mv "$tmpdir/kernel.dtb" "$tmpdir/kernel"
+				kernel="$tmpdir/kernel"
+			fi
 		fi
 		if [ -n "$ukaddr" ]; then
 			mkimage_kernel "$ukaddr" "$desc" "$kernel" \

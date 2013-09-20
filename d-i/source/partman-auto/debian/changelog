@@ -1,3 +1,10 @@
+partman-auto (107ubuntu2) saucy; urgency=low
+
+  * Bump EFI partition size range to 512-1024MB, in line with Debian; 100MB
+    is too small on a disk with 4KiB logical sectors (LP: #1065281).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 12 Sep 2013 13:49:08 +0100
+
 partman-auto (107ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
