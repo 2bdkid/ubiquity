@@ -1,3 +1,26 @@
+ubiquity (2.15.20) saucy; urgency=low
+
+  [ Colin Watson ]
+  * (Build-)depend on python3-icu rather than transitional python3-pyicu.
+
+  [ Howard Chan ]
+  * Fix the new Ubuntu Studio wallpaper backdrop for ubiquity. (LP: #1229651)
+
+  [ Dmitrijs Ledkovs ]
+  * Add dependencies on python3-pam.
+  * Establish a PAM session with logind "greeter" mode in ubiquity-dm,
+    resolving the following bugs:
+    - WiFi page not working (LP: #1178638) (LP: #1220193)
+    - Sound system / a11y not available (LP: #1229416)
+    - and maybe others.
+  * Automatic update of included source packages: flash-kernel
+    3.0~rc.4ubuntu41.
+
+  [ Lars Uebernickel ]
+  * Force ubiquity/panel to 28 pixels height. (LP: #1207890)
+
+ -- Dmitrijs Ledkovs <dmitrij.ledkov@ubuntu.com>  Wed, 25 Sep 2013 13:36:05 +0100
+
 ubiquity (2.15.19) saucy; urgency=low
 
   [ Colin Watson ]

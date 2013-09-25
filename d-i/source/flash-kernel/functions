@@ -491,7 +491,7 @@ case "$method" in
 			gen_kernel "$kernel" "$tmpdir/kernel" "$machine_id"
 			kernel="$tmpdir/kernel"
 		fi
-		if [ -n "dtb_kver" ]; then
+		if [ -n "$dtb_kver" ]; then
 			if dpkg --compare-versions "$kvers" ge "$dtb_kver" >/dev/null; then
 				dtb="/lib/firmware/$kvers/device-tree/$dtb_name"
 				if [ ! -f "$dtb" ] ; then
