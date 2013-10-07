@@ -287,6 +287,34 @@ U-Boot-Kernel-Address: 0x00008000
 Required-Packages: u-boot-tools
 Bootloader-sets-root: yes
 
+Machine: SAMSUNG SSDK5440 board based on EXYNOS5440
+Kernel-Flavors: exynos5 exynos generic
+U-Boot-Kernel-Address: 0x80008000
+U-Boot-Initrd-Address: 0x80000000
+U-Boot-Script-Address: 0x80001000
+U-Boot-Script-Name: bootscr.exynos5
+DTB-Id: exynos5440-ssdk5440.dtb
+DTB-Kernel-Version: 3.11
+Boot-Kernel-Path: /boot/uImage
+Boot-Initrd-Path: /boot/uInitrd
+Boot-Script-Path: /boot/boot.scr
+Required-Packages: u-boot-tools
+Bootloader-sets-root: no
+
+Machine: SAMSUNG SD5v1 board based on EXYNOS5440
+Kernel-Flavors: exynos5 generic
+U-Boot-Kernel-Address: 0x80008000
+U-Boot-Initrd-Address: 0x80000000
+U-Boot-Script-Address: 0x80001000
+U-Boot-Script-Name: bootscr.exynos5
+DTB-Id: exynos5440-sd5v1.dtb
+DTB-Kernel-Version: 3.11
+Boot-Kernel-Path: /boot/uImage
+Boot-Initrd-Path: /boot/uInitrd
+Boot-Script-Path: /boot/boot.scr
+Required-Packages: u-boot-tools
+Bootloader-sets-root: no
+
 Machine: Seagate FreeAgent DockStar
 Kernel-Flavors: kirkwood
 U-Boot-Kernel-Address: 0x00008000
