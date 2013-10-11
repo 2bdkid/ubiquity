@@ -54,7 +54,8 @@ WEIGHT = 10
  PAGE_SPINNER,
  PAGE_TC,
  PAGE_ABOUT,
- ) = range(5)
+ PAGE_OFFLINE,
+ ) = range(6)
 
 
 class Page(plugin.Plugin):
@@ -141,28 +142,6 @@ class PageGtk(plugin.PluginUI):
         self.account_creation_successful = False
 
         self.hostname = ""
-
-        # TODO xnox 2012-03-07 add URL link handling hook like in slideshow
-        from gi.repository import WebKit
-        # We have no significant browsing interface, so there isn't much point
-        # in WebKit creating a memory-hungry cache.
-        WebKit.set_cache_model(WebKit.CacheModel.DOCUMENT_VIEWER)
-        self.webview = WebKit.WebView()
-        # WebKit puts file URLs in their own domain by default.
-        # This means that anything which checks for the same origin,
-        # such as creating a XMLHttpRequest, will fail unless this
-        # is disabled.
-        # http://www.gitorious.org/webkit/webkit/commit/624b946
-        if (os.environ.get('UBIQUITY_A11Y_PROFILE') == 'screen-reader'):
-            s = self.webview.get_settings()
-            s.set_property('enable-caret-browsing', True)
-        self.webview.connect(
-            'new-window-policy-decision-requested',
-            self.controller._wizard.on_slideshow_link_clicked)
-
-        self.webkit_tc_view.add(self.webview)
-        self.webview.open(UBUNTU_TC_URL)
-        self.webview.show()
 
         from gi.repository import Soup
         self.soup = Soup
@@ -272,9 +251,6 @@ class PageGtk(plugin.PluginUI):
     def plugin_set_online_state(self, state):
         self.online = state
 
-    def plugin_skip_page(self):
-        return not self.online
-
     def plugin_get_current_page(self):
         self.page.show_all()
         PATH = (os.environ.get('UBIQUITY_PATH', False) or
@@ -290,7 +266,10 @@ class PageGtk(plugin.PluginUI):
         self.note.set_current_page(self.progress_page)
         self.u1_learn_more.connect(
             'activate-link', self.on_u1_learn_more_activate)
-        self.notebook_main.set_current_page(PAGE_LOGIN)
+        if self.online:
+            self.notebook_main.set_current_page(PAGE_LOGIN)
+        else:
+            self.notebook_main.set_current_page(PAGE_OFFLINE)
         self.on_notebook_main_switch_page(None, None, None)
         self.skip_step = False
         return self.page
@@ -482,6 +461,27 @@ class PageGtk(plugin.PluginUI):
         self.notebook_main.set_current_page(PAGE_TC)
         self.controller._wizard.skip.hide()
         self.on_notebook_main_switch_page(None, None, None)
+        # TODO xnox 2012-03-07 add URL link handling hook like in slideshow
+        from gi.repository import WebKit
+        # We have no significant browsing interface, so there isn't much point
+        # in WebKit creating a memory-hungry cache.
+        WebKit.set_cache_model(WebKit.CacheModel.DOCUMENT_VIEWER)
+        self.webview = WebKit.WebView()
+        # WebKit puts file URLs in their own domain by default.
+        # This means that anything which checks for the same origin,
+        # such as creating a XMLHttpRequest, will fail unless this
+        # is disabled.
+        # http://www.gitorious.org/webkit/webkit/commit/624b946
+        if (os.environ.get('UBIQUITY_A11Y_PROFILE') == 'screen-reader'):
+            s = self.webview.get_settings()
+            s.set_property('enable-caret-browsing', True)
+        self.webview.connect(
+            'new-window-policy-decision-requested',
+            self.controller._wizard.on_slideshow_link_clicked)
+
+        self.webkit_tc_view.add(self.webview)
+        self.webview.open(UBUNTU_TC_URL)
+        self.webview.show()
         self.webview.grab_focus()
 
     def on_notebook_main_switch_page(self, notebook, label, tab_number):
