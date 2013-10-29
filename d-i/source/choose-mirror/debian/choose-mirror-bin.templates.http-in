@@ -30,7 +30,7 @@ Template: mirror/http/mirror
 Type: select
 Choices: ${mirrors}
 Default: CC.archive.ubuntu.com
-Default[armel]: ports.ubuntu.com
+Default[arm64]: ports.ubuntu.com
 Default[armhf]: ports.ubuntu.com
 Default[powerpc]: ports.ubuntu.com
 # :sl1:
@@ -54,7 +54,7 @@ _Description: Ubuntu archive mirror hostname:
 Template: mirror/http/directory
 Type: string
 Default: /ubuntu/
-Default[armel]: /ubuntu-ports/
+Default[arm64]: /ubuntu-ports/
 Default[armhf]: /ubuntu-ports/
 Default[powerpc]: /ubuntu-ports/
 # :sl2:

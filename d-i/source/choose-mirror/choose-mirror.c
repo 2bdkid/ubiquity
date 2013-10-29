@@ -1,5 +1,7 @@
 #include <debian-installer.h>
 #include <cdebconf/debconfclient.h>
+#include <errno.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -31,6 +33,23 @@ static int base_on_cd = 0;
 /* Available releases (suite/codename) on the mirror. */
 static struct release_t releases[MAXRELEASES];
 
+static char *xasprintf(const char *format, ...)
+{
+	va_list args;
+	char *result;
+
+	va_start(args, format);
+	if (vasprintf(&result, format, args) < 0) {
+		if (errno == ENOMEM) {
+			fputs("Out of memory!\n", stderr);
+			abort();
+		}
+		return NULL;
+	}
+
+	return result;
+}
+
 /*
  * Returns a string on the form "DEBCONF_BASE/protocol/supplied". The
  * calling function is responsible for freeing the string afterwards.
@@ -39,7 +58,7 @@ static char *add_protocol(char *string) {
 	char *ret;
 
 	assert(protocol != NULL); /* Fetched by choose_protocol */
-	asprintf(&ret, DEBCONF_BASE "%s/%s", protocol, string);
+	ret = xasprintf(DEBCONF_BASE "%s/%s", protocol, string);
 	return ret;
 }
 
@@ -291,8 +310,8 @@ static int get_release(struct release_t *release, const char *name) {
 		p[0] = '\0';
 	}
 
-	asprintf(&command, "wget -q %s://%s%s/dists/%s/Release -O - | grep -E '^(Suite|Codename):'",
-		 protocol, hostname, directory, name);
+	command = xasprintf("wget -q %s://%s%s/dists/%s/Release -O - | grep -E '^(Suite|Codename):'",
+			    protocol, hostname, directory, name);
 	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
 	f = popen(command, "r");
 	free(command);
@@ -461,7 +480,7 @@ static int find_releases(void) {
 static char *l10n_suite(const char *name) {
 	char *template, *l10n_name;
 
-	asprintf(&template, "%ssuites/%s", DEBCONF_BASE, name);
+	template = xasprintf("%ssuites/%s", DEBCONF_BASE, name);
 	if (! debconf_metaget(debconf, template, "description") &&
 	    strlen(debconf->value))
 		l10n_name = strdup(debconf->value);
@@ -707,7 +726,7 @@ static int set_proxy(void) {
 	char *px = add_protocol("proxy");
 	char *proxy_var;
 
-	asprintf(&proxy_var, "%s_proxy", protocol);
+	proxy_var = xasprintf("%s_proxy", protocol);
 
 	debconf_get(debconf, px);
 	if (debconf->value != NULL && strlen(debconf->value)) {
@@ -715,7 +734,7 @@ static int set_proxy(void) {
 			setenv(proxy_var, debconf->value, 1);
 		} else {
 			char *proxy_value;
-			asprintf(&proxy_value, "http://%s", debconf->value);
+			proxy_value = xasprintf("http://%s", debconf->value);
 			setenv(proxy_var, proxy_value, 1);
 			free(proxy_value);
 		}
@@ -753,8 +772,8 @@ static int choose_suite(void) {
 
 		choices_c[i] = name;
 		if (strcmp(name, releases[i].name) != 0)
-			asprintf(&choices[i], "%s${!TAB}-${!TAB}%s", releases[i].name,
-				 l10n_suite(name));
+			choices[i] = xasprintf("%s${!TAB}-${!TAB}%s", releases[i].name,
+					       l10n_suite(name));
 		else
 			choices[i] = l10n_suite(name);
 		if (releases[i].status & IS_DEFAULT) {
@@ -843,8 +862,8 @@ int check_arch (void) {
 	if (strlen(debconf->value) > 0) {
 		codename = strdup(debconf->value);
 
-		asprintf(&command, "wget -q %s://%s%s/dists/%s/main/binary-%s/Release -O - | grep ^Architecture:",
-			 protocol, hostname, directory, codename, ARCH_TEXT);
+		command = xasprintf("wget -q %s://%s%s/dists/%s/main/binary-%s/Release -O - | grep ^Architecture:",
+				    protocol, hostname, directory, codename, ARCH_TEXT);
 		di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
 		f = popen(command, "r");
 		free(command);

@@ -25,6 +25,7 @@ templates:=$(templates) debian/choose-mirror-bin.templates.both-in
 OBJS=$(subst .c,.o,$(wildcard *.c))
 BIN=choose-mirror
 LIBS=-ldebconfclient -ldebian-installer
+STRIP=strip
 
 # Derivative distributions may want to change these.
 #MIRRORLISTURL=http://anonscm.debian.org/viewvc/webwml/webwml/english/mirror/Mirrors.masterlist?revision=HEAD
@@ -50,6 +51,22 @@ $(MASTERLIST): force-try-update
 		fi; \
 	fi
 force-try-update: ;
+
+check-masterlist:
+	if [ -d .git ] && which git >/dev/null 2>&1; then \
+		last=`git log --format=format:%at -- $(MASTERLIST)|head -1`; \
+		now=`date +%s`; \
+		if [ $$((now-last)) -gt $$((60*60*24*14)) ]; then \
+			printf "\n\n*** WARNING: $(MASTERLIST) was last committed more\n"; \
+			printf "*** than 2 weeks ago, maybe it needs an update?"; \
+			echo; echo; echo "You can try the following command to run a sync, and use git diff/git commit:"; \
+			echo "   make $(MASTERLIST)";\
+			sleep 5; \
+		fi; \
+	fi
+else
+check-masterlist:
+	:
 endif
 
 debian/iso_3166.tab:
@@ -79,7 +96,7 @@ $(BIN): $(OBJS)
 	$(CC) -o $(BIN) $(OBJS) $(LIBS) $(LDFLAGS)
 
 strip: $(BIN)
-	strip --remove-section=.comment --remove-section=.note $(BIN)
+	$(STRIP) --remove-section=.comment --remove-section=.note $(BIN)
 
 # Size optimized and stripped binary target.
 small: CFLAGS:=-Os $(CFLAGS) -DSMALL
