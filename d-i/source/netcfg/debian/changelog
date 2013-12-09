@@ -1,3 +1,34 @@
+netcfg (1.112ubuntu1) trusty; urgency=low
+
+  * Merge from Debian unstable. Remaining changes:
+    - Set default hostname to 'ubuntu'.
+    - Set priority for get_domain to high for static configurations.
+    - Set priority for get_domain to medium for non-static configurations.
+    - Use 'auto <interface>' for all interfaces, dropping allow-hotplug
+      which doesn't work with current udev.
+    - Set DHCP and DHCPv6 timeout to 30s.
+    - Use isc-dhcp-client-udeb on all architectures.
+    - Flush all addresses and routes before configuring interfaces
+      (LP: #848072)
+    - Don't copy /etc/resolv.conf to target if resolvconf is installed.
+      (We already write resolvconf configuration to /etc/network/interfaces.)
+    - Add a post-base-install hook to detect resolvconf and copy
+      /run/resolvconf/resolv.conf to outside the target so that when /run
+      is bind-mounted DNS resolving continues to work. (LP: #926447)
+    - Apply patch from Alec Warner making netcfg respect netcfg/dhcpv6_timeout
+      and running dhclient in one-shot mode (-1). (LP: #917905)
+    - Fix FTBFS by checking the return value of fgets and fscanf.
+    - Fix nm-conf to generate a valid NetworkManager static configuration file.
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Thu, 14 Nov 2013 17:37:34 -0500
+
+netcfg (1.112) unstable; urgency=low
+
+  [ Updated translations ]
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 09 Nov 2013 19:16:58 +0100
+
 netcfg (1.111ubuntu1) trusty; urgency=low
 
   * Merge from Debian unstable. Remaining changes:

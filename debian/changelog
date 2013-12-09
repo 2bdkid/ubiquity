@@ -1,3 +1,36 @@
+ubiquity (2.17.1) trusty; urgency=low
+
+  [ Dmitrijs Ledkovs ]
+  * Drop ntfsprogs alternative depends.
+  * Merge packaging change to add debian-menu entry.
+  * Tidy up autopilot tests warnings.
+  * Move autopilot tests to lp:ubiquity and python3.
+  * Bump to automake-1.14
+  * Automatic update of included source packages: flash-kernel
+    3.0~rc.4ubuntu44, grub-installer 1.78ubuntu9, netcfg 1.112ubuntu1,
+    partman-base 169ubuntu1, partman-basicfilesystems 86ubuntu2,
+    partman-efi 25ubuntu6, partman-ext3 80ubuntu1, yaboot-installer
+    1.1.29ubuntu1.
+
+  [ Brian Murray ]
+  * Use the apt cache with with so that we close the cache when we are
+    done with it (LP: #1051935)
+  
+  [ Dan Chapman ]
+  * Autopilot tests update.
+  * Autopilot tests for Edubuntu's extra install pages
+  
+  [ Jean-Baptiste Lallement ]
+  * Join auto-pilot runner.
+  * fix tests to be pep8 compliant
+  * add directory autopilot/ to tests/run-pep8
+
+  [ Huan Peng ]
+  * Replace "Ubuntu" with the correct flavour name in several templates
+    (LP: #1197220).
+
+ -- Dmitrijs Ledkovs <xnox@ubuntu.com>  Mon, 09 Dec 2013 16:05:50 +0000
+
 ubiquity (2.17.0) trusty; urgency=low
 
   [ Aurélien Gâteau ]

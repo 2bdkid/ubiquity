@@ -1,3 +1,38 @@
+partman-base (169ubuntu1) trusty; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use the device's logical sector size throughout rather than
+      PED_SECTOR_SIZE_DEFAULT.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 30 Oct 2013 07:39:57 -0700
+
+partman-base (169) unstable; urgency=low
+
+  [ Updated translations ]
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 08 Sep 2013 16:17:13 +0200
+
+partman-base (168) unstable; urgency=low
+
+  [ Updated translations ]
+  * Tajik (tg.po)
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 17 Aug 2013 07:39:49 +0200
+
 partman-base (167ubuntu1) saucy; urgency=low
 
   * Resynchronise with Debian.  Remaining changes:
