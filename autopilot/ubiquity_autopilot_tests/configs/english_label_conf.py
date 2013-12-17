@@ -22,7 +22,10 @@ def get_distribution():
         for line in f:
             distro = line[:max(line.find(' '), 0) or None]
             if distro:
-                return str(distro)
+                if distro == 'Ubuntu-GNOME':
+                    return str(distro.replace('-', ' '))
+                else:
+                    return str(distro)
             raise SystemError("Could not get distro name")
 
 
@@ -72,7 +75,7 @@ def generate_config():
         '<span size="small"><span foreground="darkred">Warning:</span> ' \
         'This will delete any files on the disk.</span>'
     stepPartAsk['use_crypto'] = \
-        'Encrypt the new Ubuntu installation for security'
+        'Encrypt the new {0} installation for security'.format(distro_flavor)
     stepPartAsk['use_crypto_desc'] = \
         '<span size="small">You will choose a security key in the ' \
         'next step.</span>'
@@ -107,7 +110,7 @@ def generate_config():
     stepPartCrypto["crypto_extra_time"] = \
         'The installation may take much longer.'
     stepPartCrypto["crypto_description_2"] = \
-        'Any files outside of Ubuntu will not be encrypted.'
+        'Any files outside of {0} will not be encrypted.'.format(distro_flavor)
     stepPartCrypto["crypto_overwrite_space"] = 'Overwrite empty disk space'
 
     #CREATE STEP LOCATION CONFIG
