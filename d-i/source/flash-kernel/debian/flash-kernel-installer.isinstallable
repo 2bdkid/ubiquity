@@ -38,6 +38,9 @@ case "`archdetect`" in
 	arm*/omap4)
 		exit 0
 	;;
+	arm64/xgene)
+		exit 0
+	;;
 	# Don't activate it by default
 	*)
 		exit 1
