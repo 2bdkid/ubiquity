@@ -447,6 +447,9 @@ case $ARCH in
 	grub_package="grub-ieee1275"
 	experimental_arch
 	;;
+    ppc64el/*)
+	grub_package="grub-ieee1275"
+	;;
     mipsel/loongson-2f)
 	grub_package="grub-yeeloong"
 	;;
@@ -733,6 +736,10 @@ case $ARCH:$grub_package in
 		db_set grub-installer/bootdev "$default_bootdev"
 	fi
 	;;
+    ppc64el/*:grub-ieee1275)
+	bootdev="$(/usr/lib/grub-installer/prep-bootdev)"
+	state=3
+	;;
     *)
 	# No need for install device selection on other platforms.
 	bootdev=dummy
@@ -865,7 +872,7 @@ if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 
 		CODE=0
 		case $ARCH:$grub_package in
-		    *:grub|*:grub-pc|sparc:grub-ieee1275)
+		    *:grub|*:grub-pc|sparc:grub-ieee1275|ppc64el/*:grub-ieee1275)
 			info "Running $chroot $ROOT grub-install $grub_install_params \"$bootdev\""
 			log-output -t grub-installer $chroot $ROOT grub-install $grub_install_params "$bootdev" || CODE=$?
 			;;
@@ -878,7 +885,7 @@ if [ -z "$frdisk" ] || [ "$grub_version" = grub2 ]; then
 			info "grub-install ran successfully"
 		else
 			case $ARCH:$grub_package in
-			    *:grub|*:grub-pc|sparc:grub-ieee1275)
+			    *:grub|*:grub-pc|sparc:grub-ieee1275|ppc64el/*:grub-ieee1275)
 				error "Running 'grub-install $grub_install_params \"$bootdev\"' failed."
 				;;
 			    *)

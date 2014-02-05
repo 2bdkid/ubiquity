@@ -1,3 +1,31 @@
+grub-installer (1.78ubuntu14) trusty; urgency=medium
+
+  * Only look for the prep flag, not boot as well; these appear to be
+    mutually exclusive on GPT.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 31 Jan 2014 15:16:35 +0000
+
+grub-installer (1.78ubuntu13) trusty; urgency=medium
+
+  * Fix ppc64el detection in boot device hack.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 31 Jan 2014 14:33:11 +0000
+
+grub-installer (1.78ubuntu12) trusty; urgency=medium
+
+  * Add a hack to pick the right boot device on ppc64el.  This should really
+    be done in grub-install instead, and will need to be done there in order
+    to support major GRUB upgrades properly, but this will tide us over for
+    now.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 31 Jan 2014 12:50:09 +0000
+
+grub-installer (1.78ubuntu11) trusty; urgency=medium
+
+  * Add ppc64el support.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 24 Jan 2014 17:11:23 +0000
+
 grub-installer (1.78ubuntu10) trusty; urgency=medium
 
   * Handle NVMe devices, based on the debug logs from Colin

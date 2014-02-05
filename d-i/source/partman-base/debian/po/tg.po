@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: partman-base@packages.debian.org\n"
 "POT-Creation-Date: 2011-07-27 22:47+0000\n"
-"PO-Revision-Date: 2013-08-18 00:02+0500\n"
+"PO-Revision-Date: 2013-12-03 12:47+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: Tajik <victor.ibragimov@gmail.com>\n"
 "Language: Tajik\n"
@@ -79,7 +79,7 @@ msgstr ""
 #. :sl2:
 #: ../partman-base.templates:6001
 msgid "Partition in use"
-msgstr "Қисмбандии истифодашуда"
+msgstr "Қисми диски истифодашуда"
 
 #. Type: error
 #. Description
@@ -92,7 +92,7 @@ msgid ""
 "No modifications can be made to the partition #${PARTITION} of device "
 "${DEVICE} for the following reasons:"
 msgstr ""
-"Ба сабабҳои зерин, ягон тағйирот ба қисмбандии #${PARTITION} дар дастгоҳи "
+"Ба сабабҳои зерин, ягон тағйирот ба қисми диски #${PARTITION} дар дастгоҳи "
 "${DEVICE} татбиқ карда намешавад:"
 
 #. Type: select
@@ -105,10 +105,10 @@ msgid ""
 "etc.), a free space to create partitions, or a device to initialize its "
 "partition table."
 msgstr ""
-"Ин хулосаи қисмбандиҳо ва нуқтаҳои васлкунии дар айни ҳол конфигуратсия "
-"шудаи шумо мебошад. Қисмбандиеро барои тағйир додани танзимоти он (системаи "
-"файлӣ, нуқтаи васлкунӣ ва ғайра), фазои озод барои эҷод кардани қисмбандиҳо, "
-"ё ки дастгоҳро барои оғоз додани ҷадвали қисмбандиҳои он интихоб кунед."
+"Ин хулосаи қисмҳои диск ва нуқтаҳои васлкунии дар айни ҳол конфигуратсия "
+"шудаи шумо мебошад. Қисми дискеро барои тағйир додани танзимоти он (системаи "
+"файлӣ, нуқтаи васлкунӣ ва ғайра), фазои озод барои эҷод кардани қисмҳо, ё ки "
+"дастгоҳ барои оғоз додани ҷадвали қисмбандии он интихоб кунед."
 
 #. Type: boolean
 #. Description
@@ -172,15 +172,15 @@ msgid ""
 "WARNING: This will destroy all data on any partitions you have removed as "
 "well as on the partitions that are going to be formatted."
 msgstr ""
-"ОГОҲӢ: Ин тамоми иттилоотро дар қисмбандиҳои тозашуда, ва инчунин дар "
-"қисмбандиҳое, ки бояд формат карда шаванд, вайрон мекунад."
+"ОГОҲӢ: Ин тамоми иттилоотро дар қисмҳои диски тозашуда, ва инчунин дар "
+"қисмҳои диске, ки бояд формат карда шаванд, вайрон мекунад."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-base.templates:13001
 msgid "The following partitions are going to be formatted:"
-msgstr "Қисмбандиҳои зерин формат карда мешаванд:"
+msgstr "Қисмҳои диски зерин формат карда мешаванд:"
 
 #. Type: text
 #. Description
@@ -188,7 +188,7 @@ msgstr "Қисмбандиҳои зерин формат карда мешава
 #. for example: "partition #6 of IDE0 master as ext3 journaling file system"
 #: ../partman-base.templates:14001
 msgid "partition #${PARTITION} of ${DEVICE} as ${TYPE}"
-msgstr "қисмбандии #${PARTITION} дар ${DEVICE} ҳамчун ${TYPE}"
+msgstr "қисми диски #${PARTITION} дар ${DEVICE} ҳамчун ${TYPE}"
 
 #. Type: text
 #. Description
@@ -235,7 +235,7 @@ msgid ""
 "You are editing partition #${PARTITION} of ${DEVICE}. ${OTHERINFO} "
 "${DESTROYED}"
 msgstr ""
-"Шумо қисмбандии #${PARTITION} дар ${DEVICE} таҳрир карда истодаед. "
+"Шумо қисми диски #${PARTITION}-ро дар ${DEVICE} таҳрир карда истодаед. "
 "${OTHERINFO} ${DESTROYED}"
 
 #. Type: text
@@ -243,14 +243,14 @@ msgstr ""
 #. :sl2:
 #: ../partman-base.templates:20001
 msgid "This partition is formatted with the ${FILESYSTEM}."
-msgstr "Ин қисмбандӣ бо ${FILESYSTEM} формат карда шудааст."
+msgstr "Ин қисми диск бо ${FILESYSTEM} формат карда шудааст."
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../partman-base.templates:21001
 msgid "No existing file system was detected in this partition."
-msgstr "Системаи файлии мавҷудбуда дар ин қисмбандӣ муайян карда шуд."
+msgstr "Системаи файлии мавҷудбуда дар ин қисми диск муайян карда шуд."
 
 #. Type: text
 #. Description
@@ -264,7 +264,7 @@ msgstr "Ҳамаи иттилоот дар он НЕСТ КАРДА МЕШАВА
 #. :sl2:
 #: ../partman-base.templates:23001
 msgid "The partition starts from ${FROMCHS} and ends at ${TOCHS}."
-msgstr "Қисмбандӣ дар ${FROMCHS} оғоз ва дар ${TOCHS} хотима меёбад."
+msgstr "Қисми диск дар ${FROMCHS} оғоз ва дар ${TOCHS} хотима меёбад."
 
 #. Type: note
 #. Description
@@ -278,7 +278,7 @@ msgstr "Фазои озод дар ${FROMCHS} оғоз ва дар ${TOCHS} хо
 #. :sl1:
 #: ../partman-base.templates:26001
 msgid "Partitions formatting"
-msgstr "Форматкунии қисмбандӣ"
+msgstr "Форматкунии қисмҳои диск"
 
 #. Type: text
 #. Description
@@ -309,14 +309,14 @@ msgstr "Танзими қисмбандӣ ба анҷом расид"
 #. :sl1:
 #: ../partman-base.templates:31001
 msgid "Finish partitioning and write changes to disk"
-msgstr "Ба анҷом расонидани қисмгузорӣ ва навиштани тағйирот ба диск"
+msgstr "Ба анҷом расонидани қисмбандӣ ва навиштани тағйирот ба диск"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../partman-base.templates:32001
 msgid "Undo changes to partitions"
-msgstr "Ботил сохтани тағйироти қисмбандиҳо"
+msgstr "Ботил сохтани тағйироти қисмҳои диск"
 
 #. Type: text
 #. Description
@@ -324,7 +324,7 @@ msgstr "Ботил сохтани тағйироти қисмбандиҳо"
 #: ../partman-base.templates:34001
 #, no-c-format
 msgid "Dump partition info in %s"
-msgstr "Нигоҳ доштани иттилооти қисмбандӣ дар %s"
+msgstr "Нигоҳ доштани иттилооти қисми диск дар %s"
 
 #. Type: text
 #. Description
@@ -395,7 +395,7 @@ msgstr "ATA ()"
 #: ../partman-base.templates:42001
 #, no-c-format
 msgid "ATA%s, partition #%s (%s)"
-msgstr "ATA, қисмбандӣ # ()"
+msgstr "ATA, қисми диск # ()"
 
 #. Type: text
 #. Description
@@ -422,7 +422,7 @@ msgstr "IDE slave ()"
 #: ../partman-base.templates:45001
 #, no-c-format
 msgid "IDE%s master, partition #%s (%s)"
-msgstr "IDE master, қисмбандии # ()"
+msgstr "IDE master, қисми диск # ()"
 
 #. Type: text
 #. Description
@@ -431,7 +431,7 @@ msgstr "IDE master, қисмбандии # ()"
 #: ../partman-base.templates:46001
 #, no-c-format
 msgid "IDE%s slave, partition #%s (%s)"
-msgstr "IDE slave, қисмбандии # ()"
+msgstr "IDE slave, қисми диск # ()"
 
 #. Type: text
 #. Description
@@ -447,7 +447,7 @@ msgstr "SCSI (,,) ()"
 #: ../partman-base.templates:48001
 #, no-c-format
 msgid "SCSI%s (%s,%s,%s), partition #%s (%s)"
-msgstr "SCSI (,,), қисмбандии # ()"
+msgstr "SCSI (,,), қисми диск # ()"
 
 #. Type: text
 #. Description
@@ -463,7 +463,7 @@ msgstr "SCSI ()"
 #: ../partman-base.templates:50001
 #, no-c-format
 msgid "SCSI%s, partition #%s (%s)"
-msgstr "SCSI, қисмбандии # ()"
+msgstr "SCSI, қисми диск # ()"
 
 #. Type: text
 #. Description
@@ -481,7 +481,7 @@ msgstr "Корти MMC/SD #%s (%s)"
 #: ../partman-base.templates:52001
 #, no-c-format
 msgid "MMC/SD card #%s, partition #%s (%s)"
-msgstr "Корти MMC/SD #%s, қисмбандии #%s (%s)"
+msgstr "Корти MMC/SD #%s, қисми диски #%s (%s)"
 
 #. Type: text
 #. Description
@@ -515,7 +515,7 @@ msgstr "ATA RAID сериягӣ: %s (%s)"
 #: ../partman-base.templates:56001
 #, no-c-format
 msgid "Serial ATA RAID %s (partition #%s)"
-msgstr "ATA RAID сериягӣ: %s (қисмбандӣ #%s)"
+msgstr "ATA RAID сериягӣ: %s (қисми диски #%s)"
 
 #. Type: text
 #. Description
@@ -542,7 +542,7 @@ msgstr "Бисёрмасир %s (WWID %s)"
 #: ../partman-base.templates:58001
 #, no-c-format
 msgid "Multipath %s (partition #%s)"
-msgstr "Бисёрмасир %s (қисмбандӣ #%s)"
+msgstr "Бисёрмасир %s (қисми диски #%s)"
 
 #. Type: text
 #. Description
@@ -582,7 +582,7 @@ msgstr "DASD %s (%s)"
 #: ../partman-base.templates:63001
 #, no-c-format
 msgid "DASD %s (%s), partition #%s"
-msgstr "DASD %s (%s), қисмбандии #%s"
+msgstr "DASD %s (%s), қисми диски #%s"
 
 #. Type: text
 #. Description
@@ -600,7 +600,7 @@ msgstr "Диски виртуалии %s (%s)"
 #: ../partman-base.templates:65001
 #, no-c-format
 msgid "Virtual disk %s, partition #%s (%s)"
-msgstr "Диски виртуалии %s, қисмбандии #%s (%s)"
+msgstr "Диски виртуалии %s, қисми диски #%s (%s)"
 
 #. Type: text
 #. Description
