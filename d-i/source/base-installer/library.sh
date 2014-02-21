@@ -28,6 +28,7 @@ KERNEL_FLAVOUR=$(uname -r | cut -d - -f 3-)
 MACHINE="$(uname -m)"
 NUMCPUS=$(cat /var/numcpus 2>/dev/null) || true
 CPUINFO=/proc/cpuinfo
+OFCPUS=/proc/device-tree/cpus/
 
 # files and directories
 APT_SOURCES=/target/etc/apt/sources.list
@@ -172,6 +173,13 @@ EOT
 		cat > $APT_CONFDIR/00AllowUnauthenticated << EOT
 APT::Get::AllowUnauthenticated "true";
 Aptitude::CmdLine::Ignore-Trust-Violations "true";
+EOT
+	fi
+
+	if [ "$PROTOCOL" = https ] && db_get debian-installer/allow_unauthenticated_ssl && [ "$RET" = true ]; then
+		# This file will be left in place on the installed system.
+		cat > $APT_CONFDIR/00AllowUnauthenticatedSSL << EOT
+Acquire::https::Verify-Peer "false";
 EOT
 	fi
 
@@ -348,7 +356,7 @@ kernel_update_list () {
 	# Hack to get the metapackages in the right order; should be
 	# replaced by something better at some point.
 	chroot /target apt-cache search ^linux-signed- | grep '^linux-signed-\(generic\|server\|virtual\|preempt\|rt\|xen\)';
-	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|ia64\|sparc\|hppa\|imx51\|dove\|omap\|omap4\|armadaxp\|keystone\)';
+	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|omap\|omap4\|keystone\)';
 	chroot /target apt-cache search ^linux-signed-image- | grep -v '^linux-signed-image-[2-9]\.';
 	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-[2-9]\.';
 	chroot /target apt-cache search '^linux-signed-image-[2-9]\.' | sort -r;

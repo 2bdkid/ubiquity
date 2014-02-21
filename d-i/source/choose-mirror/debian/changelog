@@ -1,3 +1,75 @@
+choose-mirror (2.55ubuntu1) trusty; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Use Ubuntu mirrors.
+    - Ubuntu branding.
+    - Set default country to GB.
+    - Never ask mirror/suite, mark it untranslatable, and give it
+      appropriate choices for Ubuntu.
+    - Pick CC.archive.ubuntu.com (for the country selected in the installer)
+      as the default mirror. For ports architectures (armel, powerpc) use
+      ports.ubuntu.com instead.
+    - Drop the priorities of the country/mirror questions to medium if we're
+      installing from a CD that includes the base system.
+    - Support setting OVERRIDE_BASE_INSTALLABLE in the environment to force
+      choose-mirror to assume that the base system is installable.
+    - Skip mirror validation if the base system is installable and we're
+      installing from a mirror in the masterlist.
+    - Don't check if archive.ubuntu.com is reachable before asking for a
+      proxy.
+    - Allow preseeding the default CC.archive.ubuntu.com setup by preseeding
+      mirror/http/mirror to CC.archive.ubuntu.com, and likewise for
+      mirror/ftp/mirror.
+    - Force xgettext to use UTF-8 encoding when generating templates files,
+      to cope with Côte d'Ivoire.
+    - Only default mirror/country to the value of debian-installer/country
+      if the latter has any mirrors; otherwise, fall through to defaulting
+      to GB.
+    - Exclude all-countries mirrors such as ports.ubuntu.com when
+      determining whether there is a mirror in the country specified in
+      debian-installer/country.
+    - If the selected country has no mirror (excluding all-countries
+      mirrors), then fall back to the default.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Feb 2014 15:14:37 +0000
+
+choose-mirror (2.55) unstable; urgency=medium
+
+  * Add HTTPS support (LP: #1135163).  This is enabled by default here as it
+    isn't unreasonably large, but won't be usable unless GNU wget has been
+    added to the initrd.
+  * Update Mirrors.masterlist.
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 12 Feb 2014 14:16:51 +0000
+
+choose-mirror (2.54) unstable; urgency=low
+
+  * Update Mirrors.masterlist
+  * Add myself to Uploaders.
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 29 Jan 2014 22:41:32 +0100
+
+choose-mirror (2.53) unstable; urgency=low
+
+  [ Cyril Brulebois ]
+  * Update Mirrors.masterlist
+
+  [ Updated translations ]
+  * Bosnian (bs.po) by Amila Valjevčić
+  * Hungarian (hu.po) by Judit Gyimesi
+
+ -- Cyril Brulebois <kibi@debian.org>  Tue, 10 Dec 2013 00:02:44 +0100
+
+choose-mirror (2.52) unstable; urgency=low
+
+  [ Colin Watson ]
+  * Make check-masterlist a no-op target if MIRRORLISTURL is undefined.
+
+  [ Updated translations ]
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 25 Oct 2013 06:38:42 +0200
+
 choose-mirror (2.50ubuntu2) trusty; urgency=medium
 
   * Add ppc64el support.

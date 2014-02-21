@@ -29,7 +29,7 @@ protocol_fetch() {
 	if wget --version 2>/dev/null | grep -q 'GNU Wget'; then
 		options=--no-verbose
 		if [ "https" = "$proto" ] && \
-		   db_get debian-installer/allow_unauthenticated && [ "$RET" = true ]; then
+		   db_get debian-installer/allow_unauthenticated_ssl && [ "$RET" = true ]; then
 			options="$options --no-check-certificate"
 		fi
 	else

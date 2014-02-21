@@ -1,3 +1,24 @@
+debian-installer-utils (1.105ubuntu1) trusty; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - user-params: Don't propagate vga=*, break=*, *-ubiquity, or
+      noninteractive to installed system.
+    - list-devices:
+      + New "mmc-partition" type for detecting partitions on MMC devices.
+      + Make sure we also detect platform-omap MMCs.
+      + Don't return entries for extended partitions.
+    - Don't include the battery subsystem on calls to udevadm trigger.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Wed, 12 Feb 2014 12:21:39 +0000
+
+debian-installer-utils (1.105) unstable; urgency=medium
+
+  * Use debian-installer/allow_unauthenticated_ssl to imply wget
+    --no-check-certificate, rather than overloading
+    debian-installer/allow_unauthenticated.
+
+ -- Colin Watson <cjwatson@debian.org>  Wed, 12 Feb 2014 11:39:54 +0000
+
 debian-installer-utils (1.104ubuntu1) trusty; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

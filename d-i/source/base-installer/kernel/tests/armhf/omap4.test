@@ -1,13 +1,17 @@
-subarch armadaxp
-cpuinfo armadaxp.cpuinfo
+subarch omap4
+cpuinfo omap4.cpuinfo
 majors 2.6
-flavour armadaxp
+flavour omap4 armmp
 kernel-2.6 \
-  linux-armadaxp \
-  linux-image-armadaxp
+  linux-omap4 \
+  linux-image-omap4 \
+  linux-generic \
+  linux-image-generic
 usable \
-  linux-image-armadaxp \
-  linux-image-11-armadaxp
+  linux-image-generic \
+  linux-image-11-generic \
+  linux-image-omap4 \
+  linux-image-11-omap4
 unusable \
   linux-iop32x \
   linux-ixp4xx \
@@ -24,6 +28,4 @@ unusable \
   linux-image-2.6.18-4-iop32x \
   linux-image-2.6.18-4-netwinder \
   linux-image-2.6.18-4-rpc \
-  linux-image-2.6.18-4-s3c2410 \
-  linux-image-imx51 \
-  linux-image-11-imx51
+  linux-image-2.6.18-4-s3c2410
