@@ -1,3 +1,22 @@
+grub-installer (1.78ubuntu16) trusty; urgency=low
+
+  [ Dave Chiluk ]
+  * Force grub-installer/bootdev to take precedence over only_debian and
+    with_other_os. (LP: #1012629)
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 27 Feb 2014 17:04:45 +0000
+
+grub-installer (1.78ubuntu15) trusty; urgency=medium
+
+  * Cherrypick 1.92 changes:
+    * Adapt patch from Guilhem Moulin to always honor
+    grub-installer/bootdev, when it was preseeded, instead of insisting on
+    automatic detection which may lead to unpredictable results (e.g. use
+    a different device, or fail unattended installation). Closes:
+    #666974. LP: #1012629.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 25 Feb 2014 16:43:41 +0000
+
 grub-installer (1.78ubuntu14) trusty; urgency=medium
 
   * Only look for the prep flag, not boot as well; these appear to be

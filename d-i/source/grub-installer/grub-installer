@@ -751,7 +751,11 @@ db_progress STEP 1
 db_progress INFO grub-installer/progress/step_bootdev
 
 while : ; do
-	if [ "$state" = 1 ]; then
+	db_fget grub-installer/bootdev seen
+	if [ "$RET" = true ] && db_get grub-installer/bootdev && [ "$RET" ] ; then
+		bootdev=$RET
+		break
+	elif [ "$state" = 1 ]; then
 		if [ "$frdev" ]; then
 			# If /boot is on SATA RAID/multipath, then there's
 			# only one possible answer; we don't support device

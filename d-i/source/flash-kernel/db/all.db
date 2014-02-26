@@ -132,6 +132,16 @@ Optional-Packages: mv2120-utils
 Required-packages: u-boot-tools
 Bootloader-sets-root: yes
 
+Machine: HP ProLiant m400 Server Cartridge
+U-Boot-Kernel-Address: 0x80000
+U-Boot-Initrd-Address: 0x0
+U-Boot-Script-Address: 0x4004000000
+U-Boot-Script-Name: bootscr.xgene
+Required-Packages: u-boot-tools
+Boot-Kernel-Path: /boot/uImage
+Boot-Initrd-Path: /boot/uInitrd
+Boot-Script-Path: /boot/boot.scr
+
 Machine: HP t5325 Thin Client
 Kernel-Flavors: kirkwood
 Machine-Id: 2846

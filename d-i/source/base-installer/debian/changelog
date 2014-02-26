@@ -1,3 +1,63 @@
+base-installer (1.144ubuntu1) trusty; urgency=medium
+
+  [ Colin Watson ]
+  * Resynchronise with Debian.  Remaining changes:
+    - Use and depend on the Ubuntu keyring.
+    - Enable the restricted component by default, unless
+      apt-setup/restricted is preseeded to false.
+    - Set up the default sources.list to look in -updates and -security (the
+      latter from apt-setup/security_host and apt-setup/security_path) as
+      well as the unadorned suite; also -proposed if apt-setup/proposed is
+      true.
+    - Use Ubuntu kernel image names.
+    - Allow preseeding base-installer/kernel/override-image to force a given
+      kernel to be used.
+    - Install busybox-initramfs rather than busybox.
+    - Revert Joey's patch to call base-installer.d hooks after running
+      debootstrap, which broke console-setup's expectation of being able to
+      insert its configuration file into /target before console-setup is
+      installed by debootstrap.
+    - Add armhf/keystone, armhf/omap, and armhf/omap4 subarchitectures.
+    - Install kernel headers to match the kernel. This may be overridden by
+      setting base-installer/kernel/headers to false.
+    - Add base-installer/kernel/backports-modules template, which may be
+      preseeded to install selected linux-backports-modules-* packages.
+    - Move some kernel installation support code from bootstrap-base to
+      base-installer, and allow live-installer to override the title
+      template used by that.
+    - Add powerpc/e500 and powerpc/e500mc subarchitectures.
+    - Add overlay archive support.
+    - Add arm64 and ppc64el architectures.
+
+  [ dann frazier ]
+  * Add arm64 kernel selection tests (LP: #1284712).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 27 Feb 2014 14:01:50 +0000
+
+base-installer (1.144) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Remove some unused variables from tests.
+  * Set Acquire::https::Verify-Host "false" as well as
+    Acquire::https::Verify-Peer "false" if
+    debian-installer/allow_unauthenticated_ssl=true, to match the behaviour
+    of "wget --no-check-certificate" (thanks to Mark Russell for the
+    report).
+
+  [ Paul Wise ]
+  * Allow preseeding the debootstrap variant to use
+
+  [ Adam Conrad ]
+  * Add POWER7+ and POWER8 support to powerpc64.
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 27 Feb 2014 10:15:15 +0000
+
+base-installer (1.143ubuntu2) trusty; urgency=medium
+
+  * Cherry-pick POWER7+ and POWER8 support from Debian for powerpc64.
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Tue, 25 Feb 2014 17:53:44 -0700
+
 base-installer (1.143ubuntu1) trusty; urgency=medium
 
   [ Colin Watson ]

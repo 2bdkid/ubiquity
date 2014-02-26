@@ -179,9 +179,12 @@ EOT
 	if [ "$PROTOCOL" = https ] && db_get debian-installer/allow_unauthenticated_ssl && [ "$RET" = true ]; then
 		# This file will be left in place on the installed system.
 		cat > $APT_CONFDIR/00AllowUnauthenticatedSSL << EOT
+Acquire::https::Verify-Host "false";
 Acquire::https::Verify-Peer "false";
 EOT
 	fi
+
+	[ ! -d "$DPKG_CONFDIR" ] && mkdir -p "$DPKG_CONFDIR"
 
 	# Disable all syncing; it's unnecessary in an installation context,
 	# and can slow things down quite a bit.
