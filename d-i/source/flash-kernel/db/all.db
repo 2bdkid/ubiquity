@@ -1,16 +1,16 @@
 # somewhat RFC2822 based, but case sensitive, not tolerant to spaces etc.
 
-Machine: APM X-Gene CPU Potenza
+Machine: APM X-Gene Mustang board
 U-Boot-Kernel-Address: 0x80000
 U-Boot-Initrd-Address: 0x0
 U-Boot-Script-Address: 0x4004000000
-U-Boot-Script-Name: bootscr.xgene
+U-Boot-Script-Name: bootscr.xgene-mustang
 Required-Packages: u-boot-tools
 Boot-Kernel-Path: /boot/uImage
 Boot-Initrd-Path: /boot/uInitrd
-Boot-Dtb-Path: /boot/mustang.dtb
+Boot-Dtb-Path: /boot/apm-mustang.dtb
 Boot-Script-Path: /boot/boot.scr
-DTB-Id: mustang.dtb
+DTB-Id: apm-mustang.dtb
 
 Machine: Buffalo Linkstation LiveV3 (LS-CHL)
 Kernel-Flavors: orion5x
