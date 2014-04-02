@@ -1063,7 +1063,7 @@ class InstallBase:
         # the difference between "no such language pack" and "language pack
         # not retrievable given apt configuration in /target" later on.
         to_install = [
-            lp for lp in to_install if get_cache_pkg(cache, lp) is not None]
+            pkg for pkg in to_install if get_cache_pkg(cache, pkg) is not None]
 
         install_new = True
         try:
@@ -1081,8 +1081,8 @@ class InstallBase:
             # ought to be willing to install packages from the package pool
             # on the CD as well.
             to_install = [
-                lp for lp in to_install
-                if get_cache_pkg(cache, lp).is_installed]
+                pkg for pkg in to_install
+                if get_cache_pkg(cache, pkg).is_installed]
 
         del cache
         record_installed(to_install)

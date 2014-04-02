@@ -1,3 +1,10 @@
+grub-installer (1.78ubuntu19) trusty; urgency=medium
+
+  * If grub-installer/bootdev was set to (hd0), override it to the OS device
+    name for the first disk if possible (LP: #1292628).
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Fri, 28 Mar 2014 13:11:31 +0000
+
 grub-installer (1.78ubuntu18) trusty; urgency=medium
 
   * When wiping the PReP partition on ppc64el/grub-ieee1275, limit the write
