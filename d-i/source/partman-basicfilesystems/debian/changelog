@@ -1,3 +1,52 @@
+partman-basicfilesystems (97ubuntu1) utopic; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Add minimal support for NTFS partitions using ntfs-3g.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+      file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+    - Disable existing swap partitions before formatting them.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 07 Jul 2014 11:06:56 +0100
+
+partman-basicfilesystems (97) unstable; urgency=medium
+
+  * dosfstools has a good deal of Linux-specific code and isn't currently
+    buildable on non-Linux architectures, so we can't create or check FAT
+    filesystems on non-Linux without libparted, although we can mount
+    existing FAT filesystems.  Make the dosfstools-udeb dependency
+    Linux-only, and disable relevant features at run-time when it is
+    unavailable (closes: #753964).
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 06 Jul 2014 21:51:13 +0100
+
+partman-basicfilesystems (96) unstable; urgency=low
+
+  [ Phillip Susi ]
+  * Remove reliance on libparted's filesystem handling (closes: #738922):
+    - Use only mkswap instead of parted to format swap, since this is no
+      longer supported in parted3.
+    - Remove parted-based swap checking, as there is no such thing as
+      fscking swap.
+    - Use dosfstools to format and check fat filesystems rather than
+      libparted.
+    - Use mke2fs instead of libparted.
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 06 Jul 2014 01:32:41 +0100
+
 partman-basicfilesystems (95ubuntu1) utopic; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:
