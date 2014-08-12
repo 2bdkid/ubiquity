@@ -1,3 +1,31 @@
+partman-base (175ubuntu1) utopic; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+    - Use the device's logical sector size throughout rather than
+      PED_SECTOR_SIZE_DEFAULT.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Mon, 11 Aug 2014 17:09:57 +0100
+
+partman-base (175) unstable; urgency=medium
+
+  * Make tests cope with parted 3.2 automatically creating a partition when
+    creating a fresh loop label (closes: #757662).
+
+ -- Colin Watson <cjwatson@debian.org>  Sun, 10 Aug 2014 16:34:36 +0100
+
 partman-base (174ubuntu2) utopic; urgency=medium
 
   * Rebuild against libparted2.
