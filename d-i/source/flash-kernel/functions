@@ -351,6 +351,29 @@ android_flash() {
 	fi
 }
 
+include_only_flavors() {
+	# include_only_flavors(flav1, flav2, flav3)
+	# filter lines of input in uname -r format (X.Y.Z-N-flavor)
+	# and filter-out anything that is not in the listed input
+	# if exactly zero flavors are given, then assume everything is a match
+	local cur_uname cur_flav allowed_flav
+	while read cur_uname; do
+		if [ $# -eq 0 ]; then
+			echo "$cur_uname"
+		else
+			# could use cur_flav=$(get_kfile_suffix "$cur_uname")
+			# but this is much faster.
+			cur_flav=${cur_uname#*-*-}
+			for allowed_flav in "$@"; do
+				if [ "${cur_flav}" = "${allowed_flav}" ]; then
+					echo "$cur_uname"
+					break
+				fi
+			done
+		fi
+	done
+}
+
 main() {
 if [ "x$1" = "x--machine" ]; then
 	machine="$2"
@@ -369,7 +392,9 @@ fi
 # kernel + initrd installation/upgrade mode, with optional version
 
 kvers="$1"
-latest_version=$(linux-version list | linux-version sort | tail -1)
+
+kflavors="$(get_machine_field "$machine" "Kernel-Flavors")"
+latest_version=$(linux-version list | include_only_flavors $kflavors | linux-version sort | tail -1)
 if [ -n "$kvers" ] && [ "$kvers" != "$latest_version" ]; then
 	echo "Ignoring old or unknown version $kvers (latest is $latest_version)" >&2
 	exit 0
@@ -412,7 +437,7 @@ if ! check_supported "$machine"; then
 	error "Unsupported platform."
 fi
 
-if kflavors="$(get_machine_field "$machine" "Kernel-Flavors")"; then
+if [ -n "$kflavors" ]; then
 	if ! check_kflavors "$kfile_suffix" $kflavors; then
 		echo "Kernel suffix $kfile_suffix does not match any of the expected flavors ($kflavors), therefore not writing it to flash." >&2
 		exit 0
