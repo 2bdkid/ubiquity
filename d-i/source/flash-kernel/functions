@@ -393,7 +393,8 @@ fi
 
 kvers="$1"
 
-kflavors="$(get_machine_field "$machine" "Kernel-Flavors")"
+# if get_machine_field returns non-zero, then all flavors are allowed
+kflavors="$(get_machine_field "$machine" "Kernel-Flavors")" || :
 latest_version=$(linux-version list | include_only_flavors $kflavors | linux-version sort | tail -1)
 if [ -n "$kvers" ] && [ "$kvers" != "$latest_version" ]; then
 	echo "Ignoring old or unknown version $kvers (latest is $latest_version)" >&2
