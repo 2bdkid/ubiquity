@@ -1,3 +1,14 @@
+ubiquity (2.19.8) utopic; urgency=medium
+
+  [ Colin Watson ]
+  * Avoid closing /dev/urandom persistent FD on oem-config startup (thanks,
+    Jamin W. Collins; LP: #1362920).
+
+  [ Chris Bainbridge ]
+  * Fix Windows UEFI detection. (LP: #1265192)
+
+ -- Stéphane Graber <stgraber@ubuntu.com>  Fri, 12 Sep 2014 14:35:57 -0400
+
 ubiquity (2.19.7) utopic; urgency=medium
 
   * Update ubiquity.ubiquity.upstart and bin/ubiquity to add support for SDDM
