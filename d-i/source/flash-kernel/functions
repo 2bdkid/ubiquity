@@ -187,33 +187,18 @@ gen_kernel() {
 	} >"$output"
 }
 
-append_ubootvars() {
-	local input="$1"
-	local output="$2"
-	local default_conf_file="/usr/share/flash-kernel/ubootenv.d/default.conf"
-	local user_conf_file="/etc/flash-kernel/ubootenv.d/"
-	local tmp_conf_file="$(dirname "$2")/tmp_conf_file"
-
-	if [ -r "$default_conf_file" ]; then
-		sed -e "/^#/d" < "$default_conf_file" > "$output"
-
-		for files in "$(find $user_conf_file -type f)"; do
-			if [ -r "$files" ]; then
-				sed -e "/^#/d" -e "/^$/d" < "$files" >> "$tmp_conf_file"
+gen_ubootenv() {
+	ENVSTUBDIRS="/etc/flash-kernel/ubootenv.d /usr/share/flash-kernel/ubootenv.d"
+	ENVSTUBS="$(find $ENVSTUBDIRS -type f -regex '.*/[0-9a-zA-Z_-]+' -printf '%f\n' | LC_ALL=C sort -u)"
+	for file in $ENVSTUBS; do
+		for dir in $ENVSTUBDIRS; do
+			if [ -f $dir/$file ]; then
+				cat $dir/$file
+				break
 			fi
 		done
-
-		if [ -s "$tmp_conf_file" ]; then
-			while read -r line ; do
-				uservar="$(echo $line | awk '{print $2}')"
-				sed -i "/.*$uservar.*/c$line" "$output"
-				grep -q "$uservar" "$output" || echo "$line" >> "$output"
-			done < "$tmp_conf_file"
-		fi
-	fi
-	cat "$input" >> "$output"
+	done
 }
-
 
 append_dtb() {
 	local kernel="$1"
@@ -280,10 +265,19 @@ mkimage_script() {
 	local sdesc="$2"
 	local sdata="$3"
 	local script="$4"
+	local tdata="$tmpdir/$(basename $sdata)"
+
+	local ubootenv="$(mktemp --tmpdir=$tmpdir)"
+	gen_ubootenv > $ubootenv
 
 	printf "Generating boot script u-boot image... " >&2
+	sed -e "/@@UBOOT_ENV_EXTRA@@/{
+		s/@@UBOOT_ENV_EXTRA@@//g
+		r $ubootenv
+		}" < $sdata > $tdata
+
 	mkimage -A arm -O linux -T script -C none -a "$saddr" -e "$saddr" \
-		-n "$sdesc" -d "$sdata" "$script" >&2 1>/dev/null
+		-n "$sdesc" -d "$tdata" "$script" >&2 1>/dev/null
 	echo "done." >&2
 }
 
@@ -628,8 +622,7 @@ case "$method" in
 			case $usname in
 				bootscr*)
 					boot_script_path="$boot_mnt_dir/$boot_script_path"
-					append_ubootvars "$BOOTSCRIPTS_DIR/$usname" "$tmpdir/bootscript"
-					boot_script="$tmpdir/bootscript"
+					boot_script="$BOOTSCRIPTS_DIR/$usname"
 					mkimage_script "$usaddr" "boot script" "$boot_script" \
 						"$tmpdir/boot.scr"
 					boot_script="$tmpdir/boot.scr"

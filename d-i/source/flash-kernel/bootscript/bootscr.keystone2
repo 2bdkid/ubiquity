@@ -1,31 +1,5 @@
-setenv interface scsi
-echo Starting Ubuntu...
-if test -n ${fs} && test -n ${interface} && test -n ${device} && test -n ${prefix}; then
-	${fs}load ${interface} ${device} ${kernel_addr_r} ${prefix}uImage
-	${fs}load ${interface} ${device} ${ramdisk_addr_r} ${prefix}uInitrd
-	setenv bootargs ro quiet ${args_vendor} $rootfs
-	bootm ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-else
-	echo boot information not recieved from u-boot, scanning for startup device
-
-	for i in ext2 ext4; do
-		for j in 0 1; do
-			for k in / /boot/; do
-				setenv fs $i;
-				setenv device $j;
-				setenv prefix $k;
-
-				echo Scanning ${fs} ${interface} ${device} on prefix ${prefix} ...;
-
-				if ${fs}load ${interface} ${device} ${script_addr_r} ${prefix}boot.scr; then
-					if iminfo ${script_addr_r}; then
-						echo boot.scr found! Executing ...;
-						source ${script_addr_r};
-					fi;
-				fi;
-			done;
-		done;
-	done;
-fi;
-
-echo No boot device found.;
+setenv bootargs "console=ttyS0,${baudrate}n8r ro pci=firmware rio-scan.static_enum=1 rio-scan.scan=0"
+@@UBOOT_ENV_EXTRA@@
+load scsi 0 ${kernel_addr_r} vmlinuz
+load scsi 0 ${ramdisk_addr_r} initrd.img
+bootz ${kernel_addr_r} ${ramdisk_addr_r}:${filesize} ${fdt_addr_r}
