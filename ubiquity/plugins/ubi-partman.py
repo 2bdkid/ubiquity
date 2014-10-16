@@ -403,6 +403,11 @@ class PageGtk(PageBase):
         disk_id = partman_id.rsplit('/', 1)[1]
         return disk_id
 
+    def count_partitions(self, disk_id):
+        return len([
+            partition for partition in self.disk_layout[disk_id]
+            if partition.device != "free"])
+
     def set_part_auto_hidden_label(self):
         '''Sets the number of partitions in the "X smaller partitions are
         hidden" label.  It subtracts one from the total count to account for
@@ -411,7 +416,7 @@ class PageGtk(PageBase):
         disk_id = self.get_current_disk_partman_id()
         if not disk_id:
             return
-        partition_count = len(self.disk_layout[disk_id]) - 1
+        partition_count = self.count_partitions(disk_id) - 1
         if partition_count == 0:
             self.part_auto_hidden_label.set_text('')
         elif partition_count == 1:
@@ -523,7 +528,7 @@ class PageGtk(PageBase):
         entire = self.controller.get_string('part_auto_allocate_entire_label')
         self.part_auto_allocate_label.set_text(entire)
         # Set the number of partitions that will be deleted.
-        partition_count = len(self.disk_layout[disk_id])
+        partition_count = self.count_partitions(disk_id)
         if partition_count == 0:
             self.part_auto_hidden_label.set_text('')
         elif partition_count == 1:
@@ -2141,7 +2146,10 @@ class Page(plugin.Plugin):
 
         if os_count == 0:
             # "There are no operating systems present" case
-            q = 'ubiquity/partitioner/no_systems_format'
+            # Ideally we would know this for sure.  However, there may well
+            # be other things on the disk that we haven't correctly
+            # detected, so we must be conservative.
+            q = 'ubiquity/partitioner/multiple_os_format'
             self.db.subst(q, 'DISTRO', release.name)
             title = self.description(q)
             desc = self.extended_description(q)
@@ -2151,8 +2159,18 @@ class Page(plugin.Plugin):
             system = operating_systems[0]
             if len(ubuntu_systems) == 1:
                 # "An older version of Ubuntu is present" case
-                q = 'ubiquity/partitioner/ubuntu_format'
-                self.db.subst(q, 'CURDISTRO', system)
+                if 'replace' in self.extra_options:
+                    q = 'ubiquity/partitioner/ubuntu_format'
+                    self.db.subst(q, 'CURDISTRO', system)
+                    title = self.description(q)
+                    desc = self.extended_description(q)
+                    opt = PartitioningOption(title, desc)
+                    options['replace'] = opt
+
+                # There may well be other things on the disk that we haven't
+                # correctly detected, so we must be conservative.
+                q = 'ubiquity/partitioner/multiple_os_format'
+                self.db.subst(q, 'DISTRO', release.name)
                 title = self.description(q)
                 desc = self.extended_description(q)
                 opt = PartitioningOption(title, desc)
@@ -2177,8 +2195,10 @@ class Page(plugin.Plugin):
                     options['reuse'] = reuse
             else:
                 # "Just Windows (or Mac, ...) is present" case
-                q = 'ubiquity/partitioner/single_os_replace'
-                self.db.subst(q, 'OS', system)
+                # Ideally we would know this for sure.  However, there may
+                # well be other things on the disk that we haven't correctly
+                # detected, so we must be conservative.
+                q = 'ubiquity/partitioner/multiple_os_format'
                 self.db.subst(q, 'DISTRO', release.name)
                 title = self.description(q)
                 desc = self.extended_description(q)
@@ -2209,10 +2229,10 @@ class Page(plugin.Plugin):
                 opt = PartitioningOption(title, desc)
                 options['replace'] = opt
 
-            q = 'ubiquity/partitioner/ubuntu_and_os_format'
-            system = (set(operating_systems) - set(ubuntu_systems)).pop()
-            self.db.subst(q, 'OS', system)
-            self.db.subst(q, 'CURDISTRO', ubuntu)
+            # There may well be other things on the disk that we haven't
+            # correctly detected, so we must be conservative.
+            q = 'ubiquity/partitioner/multiple_os_format'
+            self.db.subst(q, 'DISTRO', release.name)
             title = self.description(q)
             desc = self.extended_description(q)
             opt = PartitioningOption(title, desc)
@@ -3107,10 +3127,26 @@ class Page(plugin.Plugin):
                 raise AssertionError("Arrived at %s unexpectedly" % question)
 
         elif question.startswith('partman/confirm'):
-            self.db.set('ubiquity/partman-confirm', question[8:])
-            self.preseed(question, 'true', seen=False)
-            self.succeeded = True
-            self.done = True
+            response = self.frontend.question_dialog(
+                self.description(question),
+                self.extended_description(question),
+                ('ubiquity/text/go_back', 'ubiquity/text/continue'))
+            if response == 'ubiquity/text/continue':
+                self.db.set('ubiquity/partman-confirm', question[8:])
+                self.preseed(question, 'true', seen=False)
+                self.succeeded = True
+                self.done = True
+            else:
+                self.preseed(question, 'false', seen=False)
+                if self.autopartition_question is not None:
+                    # Try autopartitioning again.
+                    with misc.raised_privileges():
+                        parted = parted_server.PartedServer()
+                        for disk in parted.disks():
+                            parted.select_disk(disk)
+                            parted.open_dialog('UNDO')
+                            parted.close_dialog()
+                        osextras.unlink_force('/var/lib/partman/initial_auto')
             return True
 
         elif question == 'partman/exception_handler':
