@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer wheezy\n"
 "Report-Msgid-Bugs-To: partman-lvm@packages.debian.org\n"
-"POT-Creation-Date: 2011-08-01 22:50+0000\n"
+"POT-Creation-Date: 2014-09-15 22:01+0000\n"
 "PO-Revision-Date: 2012-10-18 18:34+0200\n"
 "Last-Translator: Jordi Mallach <jordi@debian.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -428,12 +428,11 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl3:
-#. Type: error
-#. Description
-#. :sl3:
-#: ../partman-lvm.templates:32001 ../partman-lvm.templates:46001
-msgid "Error while reducing volume group"
-msgstr "S'ha produït un error en reduir el grup de volums"
+#: ../partman-lvm.templates:32001
+#, fuzzy
+#| msgid "Error while deleting volume group"
+msgid "Error while creating volume group"
+msgstr "S'ha produït un error en suprimir el grup de volums"
 
 #. Type: error
 #. Description
@@ -657,6 +656,13 @@ msgid ""
 msgstr ""
 "No s'ha seleccionat cap volum físic. S'ha avortat la reducció del grup de "
 "volums."
+
+#. Type: error
+#. Description
+#. :sl3:
+#: ../partman-lvm.templates:46001
+msgid "Error while reducing volume group"
+msgstr "S'ha produït un error en reduir el grup de volums"
 
 #. Type: error
 #. Description

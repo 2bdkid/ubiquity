@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: partman-lvm@packages.debian.org\n"
-"POT-Creation-Date: 2011-08-01 22:50+0000\n"
+"POT-Creation-Date: 2014-09-15 22:01+0000\n"
 "PO-Revision-Date: 2012-06-24 19:11-0300\n"
 "Last-Translator: Felipe Augusto van de Wiel (faw) <faw@debian.org>\n"
 "Language-Team: Brazilian Portuguese <debian-l10n-portuguese@lists.debian."
@@ -433,12 +433,11 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl3:
-#. Type: error
-#. Description
-#. :sl3:
-#: ../partman-lvm.templates:32001 ../partman-lvm.templates:46001
-msgid "Error while reducing volume group"
-msgstr "Erro reduzindo o grupo de volumes"
+#: ../partman-lvm.templates:32001
+#, fuzzy
+#| msgid "Error while deleting volume group"
+msgid "Error while creating volume group"
+msgstr "Erro na exclusão do grupo de volumes"
 
 #. Type: error
 #. Description
@@ -666,6 +665,13 @@ msgid ""
 msgstr ""
 "Nenhum volume físico foi selecionado. A redução do grupo de volumes foi "
 "abortada."
+
+#. Type: error
+#. Description
+#. :sl3:
+#: ../partman-lvm.templates:46001
+msgid "Error while reducing volume group"
+msgstr "Erro reduzindo o grupo de volumes"
 
 #. Type: error
 #. Description

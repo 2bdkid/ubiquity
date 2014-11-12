@@ -1,3 +1,59 @@
+partman-base (179ubuntu1) vivid; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Ubiquity integration: If PARTMAN_NO_COMMIT is set, then exit rather
+      than running commit.d and finish.d scripts; add a partman-commit
+      script; dump extra information to /var/lib/partman/snoop if
+      PARTMAN_SNOOP is set; check for per-menu 'no_show_choices' file in
+      ask_user and don't reshow the menu if it exists.
+    - Don't skip over dmraid devices if the user chooses not to activate
+      them.
+    - If the only thing mounted on a disk is the installation medium and it
+      uses more or less the whole disk, then silently exclude that disk; if
+      the installation medium is mounted but doesn't use the whole disk,
+      issue a warning that partitioning may be difficult; if anything else
+      is mounted, offer to unmount it. partman/filter_mounted=false disables
+      this.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Nov 2014 13:48:44 +0000
+
+partman-base (179) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Build-depend on libparted-dev rather than transitional package
+    libparted0-dev.
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 15 Oct 2014 08:21:20 +0200
+
+partman-base (178) unstable; urgency=medium
+
+  [ Karsten Merker ]
+  * Fix error handling in the is_sunxi_system() function in parted_server.c
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 06 Sep 2014 11:27:52 +0200
+
+partman-base (177) unstable; urgency=medium
+
+  [ Karsten Merker ]
+  * Make sure that the firmware area on the MMC device of sunxi-based
+    systems is not overwritten when creating a new disklabel.
+    Closes: #751704.
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 06 Sep 2014 08:30:11 +0200
+
+partman-base (176) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Merge from Ubuntu:
+    - Use the device's logical sector size throughout rather than
+      PED_SECTOR_SIZE_DEFAULT (closes: #474698, LP: #1065281).
+
+  [ Updated translations ]
+  * Danish (da.po) by Joe Hansen
+  * Estonian (et.po) by Mattias Põldaru
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 28 Aug 2014 19:42:48 +0100
+
 partman-base (175ubuntu1) utopic; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

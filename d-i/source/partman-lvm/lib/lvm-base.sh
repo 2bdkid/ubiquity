@@ -477,7 +477,8 @@ lv_create() {
 	lv="$2"
 	extents="$3"
 
-	log-output -t partman-lvm lvcreate -l "$extents" -n "$lv" $vg
+	# Do not ask if signatures should be wiped, to avoid hanging the installer (BTS #757818).
+	log-output -t partman-lvm lvcreate --wipesignatures n -l "$extents" -n "$lv" $vg
 	return $?
 }
 

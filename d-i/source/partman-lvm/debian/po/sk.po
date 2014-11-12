@@ -29,7 +29,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: partman-lvm@packages.debian.org\n"
-"POT-Creation-Date: 2011-08-01 22:50+0000\n"
+"POT-Creation-Date: 2014-09-15 22:01+0000\n"
 "PO-Revision-Date: 2011-10-31 14:24+0100\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
@@ -433,12 +433,11 @@ msgstr ""
 #. Type: error
 #. Description
 #. :sl3:
-#. Type: error
-#. Description
-#. :sl3:
-#: ../partman-lvm.templates:32001 ../partman-lvm.templates:46001
-msgid "Error while reducing volume group"
-msgstr "Chyba pri zmenšovaní skupiny zväzkov"
+#: ../partman-lvm.templates:32001
+#, fuzzy
+#| msgid "Error while deleting volume group"
+msgid "Error while creating volume group"
+msgstr "Chyba pri mazaní skupiny zväzkov"
 
 #. Type: error
 #. Description
@@ -661,6 +660,13 @@ msgid ""
 msgstr ""
 "Neboli zvolené žiadne fyzické zväzky. Zmenšovanie skupiny zväzkov bolo "
 "prerušené."
+
+#. Type: error
+#. Description
+#. :sl3:
+#: ../partman-lvm.templates:46001
+msgid "Error while reducing volume group"
+msgstr "Chyba pri zmenšovaní skupiny zväzkov"
 
 #. Type: error
 #. Description

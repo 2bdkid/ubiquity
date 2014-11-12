@@ -1,3 +1,97 @@
+partman-basicfilesystems (104ubuntu1) vivid; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+    - Disable existing swap partitions before formatting them.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Tue, 11 Nov 2014 14:29:36 +0000
+
+partman-basicfilesystems (104) unstable; urgency=low
+
+  [ Updated translations ]
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 22 Oct 2014 09:25:48 +0200
+
+partman-basicfilesystems (103) unstable; urgency=low
+
+  [ Updated translations ]
+  * Danish (da.po) by Joe Hansen
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 20 Oct 2014 07:31:47 +0200
+
+partman-basicfilesystems (102) unstable; urgency=low
+
+  [ Updated translations ]
+  * Ukrainian (uk.po) by Anton Gladky
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 17 Oct 2014 08:45:40 +0200
+
+partman-basicfilesystems (101) unstable; urgency=low
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 02 Oct 2014 07:25:45 +0200
+
+partman-basicfilesystems (100) unstable; urgency=low
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+  * Ukrainian (uk.po) by Anton Gladky
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 25 Sep 2014 07:29:13 +0200
+
+partman-basicfilesystems (99) unstable; urgency=low
+
+  [ Updated translations ]
+  * German (de.po) by Holger Wansing
+  * Japanese (ja.po) by Kenshi Muto
+  * Korean (ko.po) by Changwoo Ryu
+  * Russian (ru.po) by Yuri Kozlov
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 20 Sep 2014 12:47:23 +0200
+
+partman-basicfilesystems (98) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Add minimal support for NTFS partitions using ntfs-3g.
+  * mount.d/basic: Close mount's fd 3 so that it doesn't inherit a debconf
+    file descriptor, to prevent log-output hanging when ntfs-3g is in use.
+
+  [ Steven Chamberlain ]
+  * Skip commit.d/format_swap on kfreebsd-*, whose swap partitions do
+    not need to be formatted (Closes: #757987)
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+  * Danish (da.po) by Joe Hansen
+  * German (de.po) by Holger Wansing
+  * Estonian (et.po) by Mattias Põldaru
+  * French (fr.po) by Christian Perrier
+  * Marathi (mr.po) by sampada
+  * Bokmål, Norwegian (nb.po) by Hans Fredrik Nordhaug
+  * Panjabi (pa.po) by A S Alam
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Slovak (sk.po) by Ivan Masár
+  * Thai (th.po) by Theppitak Karoonboonyanan
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 04 Sep 2014 11:52:30 +0100
+
 partman-basicfilesystems (97ubuntu1) utopic; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

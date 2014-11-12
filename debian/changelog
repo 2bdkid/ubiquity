@@ -1,3 +1,21 @@
+ubiquity (2.21.0) vivid; urgency=medium
+
+  [ Colin Watson ]
+  * Go forward rather than back in response to partman-crypto/passphrase and
+    partman-crypto/passphrase-again questions if the UI is not available but
+    they have been preseeded (LP: #1386113).
+
+  [ Iain Lane ]
+  * Port the Vte widget to use the 2.91 API.
+
+  [ Dimitri John Ledkov ]
+  * Automatic update of included source packages: choose-mirror
+    2.57ubuntu2, netcfg 1.119ubuntu2, partconf 1.46, partman-base
+    179ubuntu1, partman-basicfilesystems 104ubuntu1, partman-lvm 98,
+    preseed 1.64ubuntu2.
+
+ -- Dimitri John Ledkov <dimitri.j.ledkov@linux.intel.com>  Wed, 12 Nov 2014 14:34:42 +0000
+
 ubiquity (2.20.0) utopic; urgency=medium
 
   * Exclude free space from counts of deleted partitions.

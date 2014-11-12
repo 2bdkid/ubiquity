@@ -1330,6 +1330,27 @@ command_dump()
         oprintf("OK\n");
 }
 
+/* Check whether we are running on a sunxi-based system. */
+int
+is_sunxi_system()
+{
+        int cpuinfo_handle;
+        int result = 0;
+        char buf[4096];
+        int length;
+
+        if ((cpuinfo_handle = open("/proc/cpuinfo", O_RDONLY)) != -1) {
+                length = read(cpuinfo_handle, buf, sizeof(buf)-1);
+                if (length > 0) {
+                        buf[length]='\0';
+                        if (strstr(buf, "Allwinner") != NULL)
+                                result = 1;
+                }
+                close(cpuinfo_handle);
+        }
+        return result;
+}
+
 void
 command_commit()
 {
@@ -1337,6 +1358,20 @@ command_commit()
         if (dev == NULL)
                 critical_error("The device %s is not opened.", device_name);
         log("command_commit()");
+
+        /* The boot device on sunxi-based systems needs special handling.
+         * By default partman calls ped_disk_clobber when writing the
+         * partition table, but on sunxi-based systems this would overwrite
+         * the firmware area, resulting in an unbootable system (see
+         * bug #751704).
+         */
+        if (is_sunxi_system() && !strcmp(disk->dev->path, "/dev/mmcblk0")) {
+                disk->needs_clobber = 0;
+                log("Sunxi platform detected. Disabling ped_disk_clobber " \
+                    "for the boot device %s to protect the firmware " \
+                    "area.", disk->dev->path);
+        }
+
         open_out();
         if (disk != NULL && named_is_changed(device_name))
                 ped_disk_commit(disk);
