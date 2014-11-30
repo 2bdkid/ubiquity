@@ -1330,9 +1330,10 @@ command_dump()
         oprintf("OK\n");
 }
 
-/* Check whether we are running on a sunxi-based system. */
+/* Check whether we are running on a sunxi-based, freescale-based, or
+   AM33XX (beaglebone black) system. */
 int
-is_sunxi_system()
+is_system_with_firmware_on_disk()
 {
         int cpuinfo_handle;
         int result = 0;
@@ -1344,6 +1345,10 @@ is_sunxi_system()
                 if (length > 0) {
                         buf[length]='\0';
                         if (strstr(buf, "Allwinner") != NULL)
+                                result = 1;
+                        else if (strstr(buf, "Freescale") != NULL)
+                                result = 1;
+                        else if (strstr(buf, "AM33XX") != NULL)
                                 result = 1;
                 }
                 close(cpuinfo_handle);
@@ -1365,9 +1370,9 @@ command_commit()
          * the firmware area, resulting in an unbootable system (see
          * bug #751704).
          */
-        if (is_sunxi_system() && !strcmp(disk->dev->path, "/dev/mmcblk0")) {
+        if (is_system_with_firmware_on_disk() && !strcmp(disk->dev->path, "/dev/mmcblk0")) {
                 disk->needs_clobber = 0;
-                log("Sunxi platform detected. Disabling ped_disk_clobber " \
+                log("Sunxi/Freescale/AM33XX detected. Disabling ped_disk_clobber" \
                     "for the boot device %s to protect the firmware " \
                     "area.", disk->dev->path);
         }

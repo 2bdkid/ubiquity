@@ -1,3 +1,10 @@
+partman-efi (25ubuntu7) vivid; urgency=medium
+
+  * fstab.d/efi: force umask in mount options to ensure directory never
+    ends up with incorrect permissions. (LP: #1390183)
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 18 Nov 2014 08:39:09 -0500
+
 partman-efi (25ubuntu6) trusty; urgency=low
 
   * Use mkfs.fat rather than mkdosfs if it exists (LP: #1257702).
