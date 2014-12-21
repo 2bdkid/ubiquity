@@ -1,3 +1,12 @@
+console-setup (1.70ubuntu11) vivid; urgency=medium
+
+  * Make debian/keyboard-configuration.console-setup.init do the same as the
+    corresponding .upstart: I. e. just call loadkeys instead of setupcon, and
+    don't check the current console. (Font loading is already done via udev
+    rules). (LP: #1400393)
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Wed, 17 Dec 2014 07:55:34 +0100
+
 console-setup (1.70ubuntu10) vivid; urgency=medium
 
   * Add all language-packs as build dependencies, to get translated names

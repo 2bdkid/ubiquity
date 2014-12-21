@@ -1,3 +1,39 @@
+partman-basicfilesystems (108ubuntu1) vivid; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - If partman/automount is preseeded to true, automatically mount
+      partitions with usefully-mountable filesystems on subdirectories of
+      /media.
+    - Mount FAT filesystems at boot (fstab pass 1).
+    - Mount FAT (other than EFI System Partitions) and NTFS with
+      umask=007,gid=46 (static group plugdev).
+    - When formatting over the top of an existing swap partition, preserve
+      its UUID to avoid leaving systems that use UUIDs in /etc/fstab without
+      swap.
+    - Special case loopmounted filesystems as it's safer to format the
+      underlying file, not the device.
+    - Allow armel/omap to use FAT for /boot, since the problems with it can
+      be worked around while it's difficult to use anything else given uboot
+      limitations.
+    - Disable existing swap partitions before formatting them.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 11 Dec 2014 12:15:36 +0000
+
+partman-basicfilesystems (108) unstable; urgency=low
+
+  [ Updated translations ]
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+  * Simplified Chinese (zh_CN.po) by YunQiang Su
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 07 Dec 2014 21:41:24 +0100
+
+partman-basicfilesystems (107) unstable; urgency=low
+
+  [ Updated translations ]
+  * Polish (pl.po) by Michał Kułach
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 19 Nov 2014 08:16:14 +0100
+
 partman-basicfilesystems (106ubuntu1) vivid; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

@@ -167,7 +167,9 @@ class DM:
     def drop_privileges(self):
         os.setgroups(self.groups)
         os.setgid(self.gid)
+        os.setegid(self.gid)
         os.setuid(self.uid)
+        os.seteuid(self.uid)
 
     def server_preexec(self):
         signal.signal(signal.SIGUSR1, signal.SIG_IGN)
@@ -416,8 +418,20 @@ EndSection
 
                 if osextras.find_on_path('marco'):
                     gsettings_keys.append(
-                        ('org.mate.marco.general', 'compositing-manager',
-                         'true'))
+                        ('org.mate.desktop.lockdown', 'disable-lock-screen',
+                         'true'),
+                        ('org.mate.desktop.lockdown', 'disable-user-switching',
+                         'true'),
+                        ('org.mate.SettingsDaemon.plugins.background',
+                         'active', 'true'),
+                        ('org.mate.desktop.background', 'draw-background',
+                         'true'),
+                        ('org.mate.desktop.background', 'show-desktop-icons',
+                         'false'),
+                        ('org.mate.Marco.general', 'compositing-manager',
+                         'true')
+                        ('org.mate.Marco.general', 'num-workspaces',
+                         '1'))
 
                 for gs_schema, gs_key, gs_value in gsettings_keys:
                     subprocess.call(
@@ -427,6 +441,8 @@ EndSection
 
                 usd = '/usr/lib/unity-settings-daemon/unity-settings-daemon'
                 gsd = '/usr/lib/gnome-settings-daemon/gnome-settings-daemon'
+                msd = '/usr/bin/mate-settings-daemon'
+
                 if osextras.find_on_path(usd):
                     extras.append(subprocess.Popen(
                         [usd], stdin=null, stdout=logfile, stderr=logfile,
@@ -435,6 +451,11 @@ EndSection
                 elif osextras.find_on_path(gsd):
                     extras.append(subprocess.Popen(
                         [gsd], stdin=null, stdout=logfile, stderr=logfile,
+                        preexec_fn=self.drop_privileges))
+
+                elif osextras.find_on_path(msd):
+                    extras.append(subprocess.Popen(
+                        [msd], stdin=null, stdout=logfile, stderr=logfile,
                         preexec_fn=self.drop_privileges))
 
                 elif background_image and osextras.find_on_path('feh'):
@@ -497,8 +518,7 @@ EndSection
                     stdin=null, stdout=logfile, stderr=logfile,
                     preexec_fn=self.drop_privileges))
 
-            if (os.path.exists('/usr/lib/ubiquity/panel') and
-                    "xfwm4" not in wm_cmd):
+            if os.path.exists('/usr/lib/ubiquity/panel'):
                 if ("openbox-lubuntu" not in wm_cmd and
                         "openbox" not in wm_cmd and
                         "gnome-shell" not in wm_cmd):

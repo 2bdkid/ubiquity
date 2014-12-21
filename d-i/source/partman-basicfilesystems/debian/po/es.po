@@ -17,7 +17,7 @@
 # Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2005
 # Rubén Porras Campo <nahoo@inicia.es>, 2005
 # Omar Campagne <ocampagne@gmail.com>, 2010
-# Javier Fernández-Sanguino <jfs@debian.org>, 2003-2012
+# Javier Fernández-Sanguino <jfs@debian.org>, 2003-2012, 2014
 #
 # Equipo de traducción al español, por favor lean antes de traducir
 # los siguientes documentos:
@@ -59,8 +59,8 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: partman-basicfilesystems@packages.debian.org\n"
 "POT-Creation-Date: 2014-08-31 22:00+0000\n"
-"PO-Revision-Date: 2013-10-07 19:13+0200\n"
-"Last-Translator: Javier Fernández-Sanguino <jfs@debian.org>\n"
+"PO-Revision-Date: 2014-12-03 00:47+0100\n"
+"Last-Translator: Javier Fernández-Sanguino Peña <jfs@debian.org>\n"
 "Language-Team:  Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -627,9 +627,8 @@ msgstr "fat32"
 #. Description
 #. :sl2:
 #: ../partman-basicfilesystems.templates:36001
-#, fuzzy
 msgid "NTFS journaling file system"
-msgstr "sistema de ficheros transaccional JFS"
+msgstr "sistema de ficheros transaccional NTFS"
 
 #. Type: text
 #. Description
@@ -637,7 +636,7 @@ msgstr "sistema de ficheros transaccional JFS"
 #. Short file system name (untranslatable in many languages)
 #: ../partman-basicfilesystems.templates:37001
 msgid "ntfs"
-msgstr ""
+msgstr "ntfs"
 
 #. Type: text
 #. Description
@@ -688,7 +687,7 @@ msgstr ""
 #. a 65 columns limit (which means 65 characters in single-byte languages)
 #: ../partman-basicfilesystems.templates:44001
 msgid "noatime - do not update inode access times at each access"
-msgstr "noatime - no actualizar la fecha de acceso de inodo tras acceder"
+msgstr "noatime - no actual. marcas de tiempo de inodos tras cada acceso"
 
 #. Type: text
 #. Description
@@ -696,9 +695,8 @@ msgstr "noatime - no actualizar la fecha de acceso de inodo tras acceder"
 #. Note to translators: Please keep your translations of this string below
 #. a 65 columns limit (which means 65 characters in single-byte languages)
 #: ../partman-basicfilesystems.templates:45001
-#, fuzzy
 msgid "nodiratime - do not update directory inode access times"
-msgstr "noatime - no actualizar la fecha de acceso de inodo tras acceder"
+msgstr "nodiratime - no actual. marcas de tiempo en inodos de directorio"
 
 #. Type: text
 #. Description
@@ -807,7 +805,7 @@ msgstr "notail - no empaqueta los ficheros en el árbol del sistema de fichero."
 #. a 65 columns limit (which means 65 characters in single-byte languages)
 #: ../partman-basicfilesystems.templates:57001
 msgid "discard - trim freed blocks from underlying block device"
-msgstr ""
+msgstr "discard - recortar bloques libres del dispositivo de bloques"
 
 #. Type: text
 #. Description
@@ -842,15 +840,14 @@ msgstr "¿Desea volver al menú y corregir este error?"
 #. Description
 #. :sl5:
 #: ../partman-basicfilesystems.templates:60001
-#, fuzzy
 msgid ""
 "Your boot partition has not been configured with the ext2 file system. This "
 "is needed by your machine in order to boot. Please go back and use the ext2 "
 "file system."
 msgstr ""
 "La partición de arranque no ha sido configurada con el sistema de ficheros "
-"ext2 o ext3. Esto es necesario para el arranque del sistema. Por favor, "
-"vuelva atrás y utilice el sistema de ficheros ext2 o ext3."
+"ext2. Esto es necesario para el arranque del sistema. Por favor, vuelva "
+"atrás y utilice el sistema de ficheros ext2."
 
 #. Type: boolean
 #. Description
@@ -873,13 +870,11 @@ msgstr ""
 #. Description
 #. :sl5:
 #: ../partman-basicfilesystems.templates:61001
-#, fuzzy
 msgid ""
 "Your boot partition is not located on the first partition of your hard disk. "
 "This is needed by your machine in order to boot.  Please go back and use "
 "your first partition as a boot partition."
 msgstr ""
-"La partición de arranque no está ubicada en la primera partición primaria "
-"del disco duro. Esto es necesario para que el sistema arranque. Por favor, "
-"vuelva atrás y utilice la primera partición primaria como partición de "
-"arranque."
+"La partición de arranque no está ubicada en la primera partición de su disco "
+"duro. Esto es necesario para que el sistema arranque. Por favor, vuelva "
+"atrás y utilice la primera partición primaria como partición de arranque."
