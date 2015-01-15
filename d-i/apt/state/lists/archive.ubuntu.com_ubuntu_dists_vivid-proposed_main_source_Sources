@@ -1,0 +1,1154 @@
+Package: ant
+Binary: ant, ant-gcj, ant-optional, ant-optional-gcj, ant-doc
+Version: 1.9.4-3
+Section: java
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Build-Depends: antlr, cdbs (>= 0.4.8), debhelper (>= 9), default-jdk, gcj-native-helper, junit, junit4, libbcel-java (>= 5.0), libbsf-java (>= 2.3.0rc1), libcommons-logging-java, libcommons-net-java, libmail-java, libjdepend-java, libjsch-java, liblog4j1.2-java, liboro-java, libregexp-java, libxalan2-java (>= 2.4.0), libxml-commons-resolver1.1-java (>= 1.2-7~), maven-repo-helper (>> 1.0)
+Architecture: any all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/a/ant
+Files:
+ d0033484913706f3059e235e7b3474dd 2565 ant_1.9.4-3.dsc
+ 72c0bd8efd5bc60ecdc981b98ca0cf4d 3196488 ant_1.9.4.orig.tar.xz
+ b0dd284801a574168014c8fc0a132baa 29048 ant_1.9.4-3.debian.tar.xz
+Uploaders: Matthias Klose <doko@debian.org>, Ludovic Claude <ludovic.claude@laposte.net>, Torsten Werner <twerner@debian.org>, James Page <james.page@canonical.com>, Emmanuel Bourg <ebourg@apache.org>
+Homepage: http://ant.apache.org
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-java/trunk/ant/
+Vcs-Svn: svn://anonscm.debian.org/pkg-java/trunk/ant
+Package-List:
+ ant deb java optional arch=all
+ ant-doc deb doc optional arch=all
+ ant-gcj deb java optional arch=any
+ ant-optional deb java optional arch=all
+ ant-optional-gcj deb java optional arch=any
+Checksums-Sha1:
+ 37ec77ab39ac947dbc1fe9ac0bb7fdd64a7708b2 2565 ant_1.9.4-3.dsc
+ b2cbc717e64ca82b4e272e88e307d0f6234b02d9 3196488 ant_1.9.4.orig.tar.xz
+ 926dc5a585ee0e5e898a12f524a2000b09c3241c 29048 ant_1.9.4-3.debian.tar.xz
+Checksums-Sha256:
+ 2843320500aee422a24a72f6aa337b3197d67bcae72fc65d638087d42265f84b 2565 ant_1.9.4-3.dsc
+ 4fd9efab23ac54439cd82f9e3216d059b2c04cab39eb4e2b245717fe5ee9ff10 3196488 ant_1.9.4.orig.tar.xz
+ f777aa2b2c12b79c245b298f1fc90a4be7df32075e02f7f71c6c4ce697ef72c5 29048 ant_1.9.4-3.debian.tar.xz
+
+Package: bcel
+Binary: libbcel-java, libbcel-java-doc
+Version: 6.0~rc3-1
+Section: libs
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Build-Depends: cdbs (>= 0.4.5.3), debhelper (>= 9), libmaven-javadoc-plugin-java
+Build-Depends-Indep: maven-debian-helper, default-jdk, default-jdk-doc
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/b/bcel
+Files:
+ 899c156cb782eb2b8fe7fde56c08e3c6 2097 bcel_6.0~rc3-1.dsc
+ d343adfc57dafbb845ea8ddfbaa1e797 652016 bcel_6.0~rc3.orig.tar.xz
+ ac5bda2a1f766c22494dfb2fceb7f7c3 5472 bcel_6.0~rc3-1.debian.tar.xz
+Uploaders: Torsten Werner <twerner@debian.org>, Emmanuel Bourg <ebourg@apache.org>
+Homepage: http://commons.apache.org/bcel/
+Vcs-Browser: http://anonscm.debian.org/cgit/pkg-java/bcel.git
+Vcs-Git: git://anonscm.debian.org/pkg-java/bcel.git
+Package-List:
+ libbcel-java deb java optional arch=all
+ libbcel-java-doc deb doc optional arch=all
+Checksums-Sha1:
+ dba1b5126e5d185c88d85f45bfb6b22db591271c 2097 bcel_6.0~rc3-1.dsc
+ 94a5cbf611b3e8ed732d9fa58a6f026357f16996 652016 bcel_6.0~rc3.orig.tar.xz
+ fd71169afc162e78b981e8bd3a5a9afe5b5bc546 5472 bcel_6.0~rc3-1.debian.tar.xz
+Checksums-Sha256:
+ 75fa76292a61f65774ec709c9b691bfc839b3fb97ed32966ad73d0a7e0dbdcea 2097 bcel_6.0~rc3-1.dsc
+ 08b527a689d0ee313bccc1438c79c7e67acce553abc2f9b0f848033a5da36a3c 652016 bcel_6.0~rc3.orig.tar.xz
+ e8f12d456eee501d59cdeef58b91c66c8f9bec6bec746a48abfd544d6accc197 5472 bcel_6.0~rc3-1.debian.tar.xz
+
+Package: btrfs-tools
+Binary: btrfs-tools, btrfs-tools-udeb, btrfs-tools-dbg
+Version: 3.17-1.1
+Priority: optional
+Section: admin
+Maintainer: Dimitri John Ledkov <xnox@debian.org>
+Build-Depends: debhelper (>= 9), e2fslibs-dev, libacl1-dev, libblkid-dev, liblzo2-dev, uuid-dev, zlib1g-dev, asciidoc, xmlto
+Architecture: linux-any
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/b/btrfs-tools
+Files:
+ 530b8ecf6fdae99ffe2368cac98235c6 1975 btrfs-tools_3.17-1.1.dsc
+ 1abac9ab6c00b551142306431a7f6017 370560 btrfs-tools_3.17.orig.tar.xz
+ 7d6f21bee907967fd1971de561b6dd11 10804 btrfs-tools_3.17-1.1.debian.tar.xz
+Homepage: http://btrfs.wiki.kernel.org/
+Package-List:
+ btrfs-tools deb admin optional arch=linux-any
+ btrfs-tools-dbg deb debug extra arch=linux-any
+ btrfs-tools-udeb udeb debian-installer optional arch=linux-any
+Checksums-Sha1:
+ 70508267ce72bbe9cb2485470c2769fecf89358c 1975 btrfs-tools_3.17-1.1.dsc
+ 09bdb95277031e3206707db9c92da649d5fb4300 370560 btrfs-tools_3.17.orig.tar.xz
+ 5b6ea2d5d711800ca69bbffbfb7de7e91a3db0dd 10804 btrfs-tools_3.17-1.1.debian.tar.xz
+Checksums-Sha256:
+ 9b5dc855d50b9a873e4ed997958b557c5e70c34049e80a7609e08fcc7a57f145 1975 btrfs-tools_3.17-1.1.dsc
+ ecafbf71e729c7e907dac488c2e0c94983dd38420f56dce85e2a4310a06bf0a0 370560 btrfs-tools_3.17.orig.tar.xz
+ c3c361adbc5f819f4fd96bcbee1f534cae8e6c6c1e541af621cd323ae36e1a35 10804 btrfs-tools_3.17-1.1.debian.tar.xz
+
+Package: cinder
+Binary: python-cinder, cinder-common, cinder-api, cinder-volume, cinder-scheduler, cinder-backup
+Version: 1:2015.1~b1-0ubuntu5
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Chuck Short <zulcss@ubuntu.com>
+Build-Depends: debhelper (>= 9~), dh-systemd, openstack-pkg-tools (>= 21ubuntu5~), python-all (>= 2.6)
+Build-Depends-Indep: python-anyjson (>= 0.3.3), python-babel (>= 1.3), python-barbicanclient (>= 2.1.0), python-coverage (>= 3.6), python-crypto (>= 2.6), python-eventlet (>= 0.15.2), python-fixtures (>= 0.3.14), python-glanceclient (>= 1:0.15.0), python-greenlet (>= 0.3.2), python-hacking (>= 0.9.2), python-iso8601 (>= 0.1.9), python-keystoneclient (>= 1:0.11.1), python-keystonemiddleware (>= 1.0.0), python-kombu (>= 2.5.0), python-lxml (>= 2.3), python-migrate (>= 0.9.1), python-mock (>= 1.0), python-mox (>= 0.5.3), python-mysqldb, python-netaddr (>= 0.7.12), python-novaclient (>= 1:2.18.0), python-oslo.concurrency (>= 0.3.0), python-oslo.config (>= 1:1.4.0), python-oslo.db (>= 1.1.0), python-oslo.i18n (>= 1.0.0), python-oslo.messaging (>= 1.4.0), python-oslo.rootwrap (>= 1.3.0), python-oslo.serialization (>= 1.0.0), python-oslo.utils (>= 1.1.0), python-oslosphinx (>= 2.2.0), python-oslotest (>= 1:1.2.0), python-osprofiler (>= 0.3.0), python-paramiko (>= 1.13.0), python-paste, python-pastedeploy (>= 1.5.0), python-pbr (>= 0.6), python-psycopg2, python-requests (>= 2.2.0), python-routes (>= 1.12.3), python-setuptools, python-six (>= 1.7.0), python-sphinx (>= 1.1.2), python-sqlalchemy (>= 0.9.7), python-stevedore (>= 1.1.0), python-subunit (>= 0.0.18), python-suds (>= 0.4), python-swiftclient (>= 1:2.2.0), python-taskflow (>= 0.4), python-testtools (>= 0.9.36), python-webob (>= 1.2.3), python-xattr (>= 0.4), testrepository (>= 0.0.18)
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/c/cinder
+Files:
+ 6deeffe6a9bcf7cca0ba81f0ab18801c 3784 cinder_2015.1~b1-0ubuntu5.dsc
+ 6cece1adbd208ef0eb4568774d787f37 1959958 cinder_2015.1~b1.orig.tar.gz
+ 550faed7cf5e8ae63bdebef762f1f54a 15376 cinder_2015.1~b1-0ubuntu5.debian.tar.xz
+Homepage: http://launchpad.net/cinder
+Vcs-Browser: http://bazaar.launchpad.net/~ubuntu-server-dev/cinder/kilo/files
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-server-dev/cinder/kilo
+Testsuite: autopkgtest
+Package-List:
+ cinder-api deb net extra arch=all
+ cinder-backup deb net extra arch=all
+ cinder-common deb net extra arch=all
+ cinder-scheduler deb net extra arch=all
+ cinder-volume deb net extra arch=all
+ python-cinder deb python extra arch=all
+Checksums-Sha1:
+ 0049a44819207be60488b213731140d93b37644f 3784 cinder_2015.1~b1-0ubuntu5.dsc
+ 5a7be61dfac3addf3eee73f845f662f322f6f2d8 1959958 cinder_2015.1~b1.orig.tar.gz
+ ccf263d0d934e20127e2625de4f92ea3d88ef1c4 15376 cinder_2015.1~b1-0ubuntu5.debian.tar.xz
+Checksums-Sha256:
+ c2dd89b81537b07c9b9f574cc2fccb986f62534b0d9526f5b926cf2bf8985569 3784 cinder_2015.1~b1-0ubuntu5.dsc
+ 5f4d3324979b10d57ec60b89f0cafd55fc2c99369103670219e8eae7d26fb2ad 1959958 cinder_2015.1~b1.orig.tar.gz
+ 998600f8e3495734421ef994ef9ac29b2a6aaf91e1287846720b139810dd5314 15376 cinder_2015.1~b1-0ubuntu5.debian.tar.xz
+
+Package: firefox
+Binary: firefox, firefox-dbg, firefox-dev, firefox-mozsymbols, firefox-testsuite, firefox-globalmenu, firefox-locale-af, firefox-locale-an, firefox-locale-ar, firefox-locale-as, firefox-locale-ast, firefox-locale-az, firefox-locale-be, firefox-locale-bg, firefox-locale-bn, firefox-locale-br, firefox-locale-bs, firefox-locale-ca, firefox-locale-cs, firefox-locale-csb, firefox-locale-cy, firefox-locale-da, firefox-locale-de, firefox-locale-el, firefox-locale-en, firefox-locale-eo, firefox-locale-es, firefox-locale-et, firefox-locale-eu, firefox-locale-fa, firefox-locale-fi, firefox-locale-fr, firefox-locale-fy, firefox-locale-ga, firefox-locale-gd, firefox-locale-gl, firefox-locale-gu, firefox-locale-he, firefox-locale-hi, firefox-locale-hr, firefox-locale-hsb, firefox-locale-hu, firefox-locale-hy, firefox-locale-id, firefox-locale-is, firefox-locale-it, firefox-locale-ja, firefox-locale-ka, firefox-locale-kk, firefox-locale-km, firefox-locale-kn, firefox-locale-ko,
+ firefox-locale-ku, firefox-locale-lg, firefox-locale-lt, firefox-locale-lv, firefox-locale-mai, firefox-locale-mk, firefox-locale-ml, firefox-locale-mn, firefox-locale-mr, firefox-locale-ms, firefox-locale-nb, firefox-locale-nl, firefox-locale-nn, firefox-locale-nso, firefox-locale-oc, firefox-locale-or, firefox-locale-pa, firefox-locale-pl, firefox-locale-pt, firefox-locale-ro, firefox-locale-ru, firefox-locale-si, firefox-locale-sk, firefox-locale-sl, firefox-locale-sq, firefox-locale-sr, firefox-locale-sv, firefox-locale-sw, firefox-locale-ta, firefox-locale-te, firefox-locale-th, firefox-locale-tr, firefox-locale-uk, firefox-locale-vi, firefox-locale-xh, firefox-locale-zh-hans, firefox-locale-zh-hant,
+ firefox-locale-zu
+Version: 35.0+build3-0ubuntu1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: cdbs, locales, debhelper (>= 7), autotools-dev, autoconf2.13, quilt, zip, libx11-dev, libxt-dev, libxext-dev, libgtk2.0-dev (>= 2.14), libglib2.0-dev (>= 2.18), libpango1.0-dev (>= 1.14.0), libfontconfig1-dev, libfreetype6-dev (>= 2.0.1), libgconf2-dev (>= 1.2.1), libgnomeui-dev (>= 2.2.0), libstartup-notification0-dev, libasound2-dev, libcurl4-openssl-dev, libdbus-glib-1-dev (>= 0.60), libgstreamer1.0-dev | libgstreamer0.10-dev, libgstreamer-plugins-base1.0-dev | libgstreamer-plugins-base0.10-dev, hardening-wrapper, lsb-release, libiw-dev, mesa-common-dev, libnotify-dev (>= 0.4), libxrender-dev, libpulse-dev, yasm (>= 1.1), unzip, dbus-x11, xvfb, python (>= 2.7), libffi-dev (>= 3.0.9) [arm64]
+Architecture: any
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/f/firefox
+Files:
+ 651764a9b2ed356c0f4143aed6cda12c 7898 firefox_35.0+build3-0ubuntu1.dsc
+ c0087802019867a7a01e515967a85a27 191590724 firefox_35.0+build3.orig.tar.bz2
+ b4d236b1b4176ac55ba90b9001ee1a43 223936 firefox_35.0+build3-0ubuntu1.debian.tar.xz
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/firefox/firefox.vivid
+Testsuite: autopkgtest
+Package-List:
+ firefox deb web optional arch=any
+ firefox-dbg deb debug extra arch=any
+ firefox-dev deb devel extra arch=any
+ firefox-globalmenu deb oldlibs extra arch=any
+ firefox-locale-af deb web optional arch=any
+ firefox-locale-an deb web optional arch=any
+ firefox-locale-ar deb web optional arch=any
+ firefox-locale-as deb web optional arch=any
+ firefox-locale-ast deb web optional arch=any
+ firefox-locale-az deb web optional arch=any
+ firefox-locale-be deb web optional arch=any
+ firefox-locale-bg deb web optional arch=any
+ firefox-locale-bn deb web optional arch=any
+ firefox-locale-br deb web optional arch=any
+ firefox-locale-bs deb web optional arch=any
+ firefox-locale-ca deb web optional arch=any
+ firefox-locale-cs deb web optional arch=any
+ firefox-locale-csb deb web optional arch=any
+ firefox-locale-cy deb web optional arch=any
+ firefox-locale-da deb web optional arch=any
+ firefox-locale-de deb web optional arch=any
+ firefox-locale-el deb web optional arch=any
+ firefox-locale-en deb web optional arch=any
+ firefox-locale-eo deb web optional arch=any
+ firefox-locale-es deb web optional arch=any
+ firefox-locale-et deb web optional arch=any
+ firefox-locale-eu deb web optional arch=any
+ firefox-locale-fa deb web optional arch=any
+ firefox-locale-fi deb web optional arch=any
+ firefox-locale-fr deb web optional arch=any
+ firefox-locale-fy deb web optional arch=any
+ firefox-locale-ga deb web optional arch=any
+ firefox-locale-gd deb web optional arch=any
+ firefox-locale-gl deb web optional arch=any
+ firefox-locale-gu deb web optional arch=any
+ firefox-locale-he deb web optional arch=any
+ firefox-locale-hi deb web optional arch=any
+ firefox-locale-hr deb web optional arch=any
+ firefox-locale-hsb deb web optional arch=any
+ firefox-locale-hu deb web optional arch=any
+ firefox-locale-hy deb web optional arch=any
+ firefox-locale-id deb web optional arch=any
+ firefox-locale-is deb web optional arch=any
+ firefox-locale-it deb web optional arch=any
+ firefox-locale-ja deb web optional arch=any
+ firefox-locale-ka deb web optional arch=any
+ firefox-locale-kk deb web optional arch=any
+ firefox-locale-km deb web optional arch=any
+ firefox-locale-kn deb web optional arch=any
+ firefox-locale-ko deb web optional arch=any
+ firefox-locale-ku deb web optional arch=any
+ firefox-locale-lg deb web optional arch=any
+ firefox-locale-lt deb web optional arch=any
+ firefox-locale-lv deb web optional arch=any
+ firefox-locale-mai deb web optional arch=any
+ firefox-locale-mk deb web optional arch=any
+ firefox-locale-ml deb web optional arch=any
+ firefox-locale-mn deb web optional arch=any
+ firefox-locale-mr deb web optional arch=any
+ firefox-locale-ms deb web optional arch=any
+ firefox-locale-nb deb web optional arch=any
+ firefox-locale-nl deb web optional arch=any
+ firefox-locale-nn deb web optional arch=any
+ firefox-locale-nso deb web optional arch=any
+ firefox-locale-oc deb web optional arch=any
+ firefox-locale-or deb web optional arch=any
+ firefox-locale-pa deb web optional arch=any
+ firefox-locale-pl deb web optional arch=any
+ firefox-locale-pt deb web optional arch=any
+ firefox-locale-ro deb web optional arch=any
+ firefox-locale-ru deb web optional arch=any
+ firefox-locale-si deb web optional arch=any
+ firefox-locale-sk deb web optional arch=any
+ firefox-locale-sl deb web optional arch=any
+ firefox-locale-sq deb web optional arch=any
+ firefox-locale-sr deb web optional arch=any
+ firefox-locale-sv deb web optional arch=any
+ firefox-locale-sw deb web optional arch=any
+ firefox-locale-ta deb web optional arch=any
+ firefox-locale-te deb web optional arch=any
+ firefox-locale-th deb web optional arch=any
+ firefox-locale-tr deb web optional arch=any
+ firefox-locale-uk deb web optional arch=any
+ firefox-locale-vi deb web optional arch=any
+ firefox-locale-xh deb web optional arch=any
+ firefox-locale-zh-hans deb web optional arch=any
+ firefox-locale-zh-hant deb web optional arch=any
+ firefox-locale-zu deb web optional arch=any
+ firefox-mozsymbols deb debug extra arch=amd64,i386,armel
+ firefox-testsuite deb misc extra arch=any
+Checksums-Sha1:
+ fa63e4650452f1b8946dfc97332b028f6b6f2287 7898 firefox_35.0+build3-0ubuntu1.dsc
+ f3e9c46190e7edcbd860449946eab3ae3b98fb44 191590724 firefox_35.0+build3.orig.tar.bz2
+ 460c290d06f900b5343ce5eec99d469f3e31fa27 223936 firefox_35.0+build3-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ a0a4f825d484c5569c1d9883774f3d5a565d08e4d18103c2e287ad6ed786abab 7898 firefox_35.0+build3-0ubuntu1.dsc
+ 6c7ee3e6518639b201b7c96b7c7dc015d489080421691fc0bdacbedccdab2bf6 191590724 firefox_35.0+build3.orig.tar.bz2
+ 9dc2f0f1bacf7d6ab1ab1baa0fdcb1ccfe94babbf680541c35bf20feea21a9c4 223936 firefox_35.0+build3-0ubuntu1.debian.tar.xz
+
+Package: flac
+Binary: flac, libflac8, libflac-doc, libflac-dev, libflac++6, libflac++-dev
+Version: 1.3.1-1
+Priority: optional
+Section: sound
+Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, docbook-to-man, doxygen, libogg-dev
+Architecture: any all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/f/flac
+Files:
+ eae1ea8ed0d116a70d6114033987e180 2256 flac_1.3.1-1.dsc
+ b9922c9a0378c88d3e901b234f852698 941848 flac_1.3.1.orig.tar.xz
+ 54389084a5f28f60a4fddb8c2538be99 19684 flac_1.3.1-1.debian.tar.xz
+Uploaders: Joshua Kwan <joshk@triplehelix.org>, Fabian Greffrath <fabian+debian@greffrath.com>
+Homepage: http://xiph.org/flac/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-multimedia/flac.git;a=summary
+Vcs-Git: git://anonscm.debian.org/pkg-multimedia/flac.git
+Package-List:
+ flac deb sound optional arch=any
+ libflac++-dev deb libdevel optional arch=any
+ libflac++6 deb libs optional arch=any
+ libflac-dev deb libdevel optional arch=any
+ libflac-doc deb doc optional arch=all
+ libflac8 deb libs optional arch=any
+Checksums-Sha1:
+ a9769c536307978d806c32e23806520e2f455e3a 2256 flac_1.3.1-1.dsc
+ 38e17439d11be26207e4af0ff50973815694b26f 941848 flac_1.3.1.orig.tar.xz
+ 8b90322d24f5bad2d4e26773554431f1ae91d33b 19684 flac_1.3.1-1.debian.tar.xz
+Checksums-Sha256:
+ 65c9bcdedd9d7cf2e8bdaa8de4c1468ad412e9cd79f195306f48e122ba7d19cf 2256 flac_1.3.1-1.dsc
+ 4773c0099dba767d963fd92143263be338c48702172e8754b9bc5103efe1c56c 941848 flac_1.3.1.orig.tar.xz
+ 3ca678fb4bf060035d72e0939d8dfc7ab7d1120311f5cf42b0760c478f7c835e 19684 flac_1.3.1-1.debian.tar.xz
+
+Package: gnome-system-monitor
+Binary: gnome-system-monitor
+Version: 3.14.1-1
+Priority: optional
+Section: gnome
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: appdata-tools, cdbs, debhelper (>= 8), desktop-file-utils, dh-autoreconf, docbook-to-man, gnome-common, gnome-pkg-tools (>= 0.10), gsettings-desktop-schemas-dev, intltool (>= 0.35.0), libglib2.0-dev (>= 2.37.3), libglibmm-2.4-dev (>= 2.27.0), libgtk-3-dev (>= 3.12.0), libgtkmm-3.0-dev (>= 3.3.18), libgtop2-dev (>= 2.28.2), librsvg2-dev (>= 2.35.0), libwnck-3-dev (>= 2.91.0), libsystemd-login-dev (>= 44) [linux-any], libxml2-dev, pkg-config (>= 0.19), yelp-tools
+Architecture: any
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/g/gnome-system-monitor
+Files:
+ 5db2d24d0a103b69744831d26a0232d6 2169 gnome-system-monitor_3.14.1-1.dsc
+ 1dde2e2a7d557b713e2f1fbff9ee0774 852712 gnome-system-monitor_3.14.1.orig.tar.xz
+ 3a2adb3ec804949e84786730d96b34d4 9384 gnome-system-monitor_3.14.1-1.debian.tar.xz
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Laurent Bigonville <bigon@debian.org>
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-system-monitor
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-system-monitor
+Package-List:
+ gnome-system-monitor deb gnome optional arch=any
+Checksums-Sha1:
+ 938f1a0cda48a51fd9e4b92be0905fc8c31704cf 2169 gnome-system-monitor_3.14.1-1.dsc
+ 31a8b03a798350e8b87d0b5dde73170c0156fd2b 852712 gnome-system-monitor_3.14.1.orig.tar.xz
+ a97bf8e496fff5bd1e95c58dd3a8bab6eb575360 9384 gnome-system-monitor_3.14.1-1.debian.tar.xz
+Checksums-Sha256:
+ 759e936cf814db3397fe3b4d934f7170374d39806bd763094911078b1299c8d3 2169 gnome-system-monitor_3.14.1-1.dsc
+ 948be34a5c3e91acd4a1af0c7711020dd76d274aac547d5836910f2fde09a5e6 852712 gnome-system-monitor_3.14.1.orig.tar.xz
+ 8c85b3078f453b9db278ce2e6ae6597cbef170217f95b73809c7f79b5515fc13 9384 gnome-system-monitor_3.14.1-1.debian.tar.xz
+
+Package: jmock
+Binary: libjmock-java, libjmock-java-doc
+Version: 1.2.0-3
+Section: libs
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), default-jdk, javahelper
+Build-Depends-Indep: junit (>= 3.8.2), libcglib3-java, maven-repo-helper
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/j/jmock
+Files:
+ d6150afb6cba66d2c53539c4d5aeeff4 2030 jmock_1.2.0-3.dsc
+ 3920232a3312f71516d667387ba53969 31966 jmock_1.2.0.orig.tar.gz
+ 07eb38c905f74898ab613da8f1e1cf90 5168 jmock_1.2.0-3.debian.tar.xz
+Uploaders: Emmanuel Bourg <ebourg@apache.org>
+Homepage: http://www.jmock.org
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-java/trunk/jmock/
+Vcs-Svn: svn://anonscm.debian.org/pkg-java/trunk/jmock
+Package-List:
+ libjmock-java deb java optional arch=all
+ libjmock-java-doc deb doc optional arch=all
+Checksums-Sha1:
+ b737b1a1e84d0ca517efb63c77b85ca645c9bbe9 2030 jmock_1.2.0-3.dsc
+ 491f0f5700ab1007a26544dada1aa1b010738b29 31966 jmock_1.2.0.orig.tar.gz
+ 9b0fc5061c95761f34f66506cafc6cc1b0097d8a 5168 jmock_1.2.0-3.debian.tar.xz
+Checksums-Sha256:
+ 8cdcc44fc72b91dc813b6f63ce7e6095b5147a7b295d5e9ca4eedb666dd001b7 2030 jmock_1.2.0-3.dsc
+ 1d2eb30e4a864881062748d923a4a840b80c83f8837ff961604b25f86d77f96e 31966 jmock_1.2.0.orig.tar.gz
+ a4f61157344e2065285a34312f7ba0624eb01d0c01bca7aa0ff7276b821dad77 5168 jmock_1.2.0-3.debian.tar.xz
+
+Package: keystone
+Binary: python-keystone, keystone, keystone-doc
+Version: 1:2015.1~b1-0ubuntu3
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Monty Taylor <mordred@inaugust.com>
+Build-Depends: debhelper (>= 9~), dh-systemd, openstack-pkg-tools (>= 21ubuntu5~), pep8, po-debconf, python-all (>= 2.6), python-babel (>= 1.3), python-dogpile.cache (>= 0.5.3), python-eventlet (>= 0.15.2), python-fixtures (>= 0.3.14), python-greenlet (>= 0.3.2), python-iso8601 (>= 0.1.9), python-jsonschema (>= 2.0.0), python-keystoneclient (>= 1:0.11.1), python-keystonemiddleware (>= 1.0.0), python-kombu (>= 2.4.8), python-nose, python-lockfile (>= 0.8), python-ldappool, python-lxml, python-memcache, python-migrate (>= 0.9.1), python-mock, python-netaddr (>= 0.7.6), python-oauthlib (>= 0.6), python-oslo.i18n, python-oslo.concurrency (>= 0.3.0), python-oslo.config (>= 1:1.4.0), python-oslo.db (>= 1.1.0), python-oslo.messaging (>= 1.4.0), python-oslo.serialization (>= 1.0.0), python-oslosphinx, python-oslotest (>= 1.2.0), python-oslo.utils (>= 1.1.0), python-passlib, python-paste, python-pastedeploy (>= 1.5.0), python-pbr (>= 0.6), python-pysaml2, python-posix-ipc, python-pycadf (>= 0.6.0), python-pymongo, python-requests (>= 2.2.0), python-routes (>= 1.12.3), python-setuptools, python-stevedore (>= 1.1.0), python-six (>= 1.7.0), python-sphinx, python-sqlalchemy (>= 0.9.7), python-testtools (>= 0.9.36), python-testscenarios (>= 0.4), python-webob (>= 1.2.3), python-webtest, subunit, testrepository
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/k/keystone
+Files:
+ fb376af054e96dfc126e365c55517df5 3463 keystone_2015.1~b1-0ubuntu3.dsc
+ 52e64a0c236ebd94bbb3fb51b8b1fd67 836621 keystone_2015.1~b1.orig.tar.gz
+ 08f21ab960087065767aa079e1c03336 15124 keystone_2015.1~b1-0ubuntu3.debian.tar.xz
+Uploaders: Soren Hansen <soren@ubuntu.com>
+Homepage: http://launchpad.net/keystone
+Vcs-Browser: http://bazaar.launchpad.net/~ubuntu-server-dev/keystone/kilo/files
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-server-dev/keystone/kilo
+Testsuite: autopkgtest
+Package-List:
+ keystone deb python extra arch=all
+ keystone-doc deb doc extra arch=all
+ python-keystone deb python extra arch=all
+Checksums-Sha1:
+ 65ffbc77abc98650fff5bcef8e578db3b3111a93 3463 keystone_2015.1~b1-0ubuntu3.dsc
+ 9fdb06151d13b38ee81a40fecae3e4fe164d60ec 836621 keystone_2015.1~b1.orig.tar.gz
+ 2f39a7b9731e95186c6a24f0158ecb5fc1e0c797 15124 keystone_2015.1~b1-0ubuntu3.debian.tar.xz
+Checksums-Sha256:
+ c4d0e180916456c98eceb6b087a0d8bd5c70d2b01540bf1ddbdbb1a641ba534e 3463 keystone_2015.1~b1-0ubuntu3.dsc
+ ae93b55b0d33ee3ec8b729087b015f3d08e109181eb777b4f142b9b149afe143 836621 keystone_2015.1~b1.orig.tar.gz
+ e906b44a6f5f2f2556c4f150edc2ad332dfab0c9d8f8b64edc06d1149f6f4b18 15124 keystone_2015.1~b1-0ubuntu3.debian.tar.xz
+Python-Version: >= 2.6
+
+Package: libinline-c-perl
+Binary: libinline-c-perl
+Version: 0.64-1
+Section: misc
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 8)
+Build-Depends-Indep: libfile-copy-recursive-perl, libfile-sharedir-install-perl (>= 0.06), libinline-perl (>= 0.77), libio-all-perl, libparse-recdescent-perl, libpegex-perl, libtest-warn-perl (>= 0.23), libyaml-libyaml-perl, perl
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/libi/libinline-c-perl
+Files:
+ f70a2bc2cf533958c54bad109c0fbacc 2384 libinline-c-perl_0.64-1.dsc
+ da6acfa2dea9a38371701bbb68178544 71745 libinline-c-perl_0.64.orig.tar.gz
+ 1c8c77ff2751308dfb19fc35bf7ab407 2692 libinline-c-perl_0.64-1.debian.tar.xz
+Uploaders: gregor herrmann <gregoa@debian.org>
+Homepage: https://metacpan.org/release/Inline-C
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libinline-c-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libinline-c-perl.git
+Testsuite: autopkgtest-pkg-perl
+Package-List:
+ libinline-c-perl deb perl optional arch=all
+Checksums-Sha1:
+ c3abc6b21e38621508472c246583a3fa6f68f48c 2384 libinline-c-perl_0.64-1.dsc
+ 3e5464cd07d4f424abc50176c9e379d0f7a534c0 71745 libinline-c-perl_0.64.orig.tar.gz
+ 3d09fde452ba9a57acdb9c094284b71de24c5a32 2692 libinline-c-perl_0.64-1.debian.tar.xz
+Checksums-Sha256:
+ dce068370f57fec9ccd2f14e53d56b062641118503f939cbbafe54dda413769c 2384 libinline-c-perl_0.64-1.dsc
+ 84d00f83ce578a6317aa3b39f9ad57dcbbeb43983de8a6ced828839dfc0dc90d 71745 libinline-c-perl_0.64.orig.tar.gz
+ ebae82850d46cf87ff93793737ded32a2b3af99b18ede2d2338ddb8d8bfa6a25 2692 libinline-c-perl_0.64-1.debian.tar.xz
+
+Package: libmime-types-perl
+Binary: libmime-types-perl
+Version: 2.09-3
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 8)
+Build-Depends-Indep: perl, libmojolicious-perl
+Architecture: all
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/libm/libmime-types-perl
+Files:
+ 64d9c3c8c3824fe96fb724db07a6ac3a 2234 libmime-types-perl_2.09-3.dsc
+ 99952df4f4a1e2e31eb80d98b6197774 56101 libmime-types-perl_2.09.orig.tar.gz
+ a19bb7189162678cbb0ca3b621c7880c 4304 libmime-types-perl_2.09-3.debian.tar.xz
+Uploaders: Jonathan Yu <jawnsy@cpan.org>, gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>, Ansgar Burchardt <ansgar@debian.org>, Salvatore Bonaccorso <carnil@debian.org>
+Homepage: http://perl.overmeer.net/mimetypes/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libmime-types-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libmime-types-perl.git
+Testsuite: autopkgtest-pkg-perl
+Package-List:
+ libmime-types-perl deb perl optional arch=all
+Checksums-Sha1:
+ 790564bb7f89068b7da8d9c3da363ae4bdc75152 2234 libmime-types-perl_2.09-3.dsc
+ c58c706cc9a6bb5481a585eee6b85b582ba480cb 56101 libmime-types-perl_2.09.orig.tar.gz
+ fe0f283c54a69710dcdf7c94c6905da2f2744ebd 4304 libmime-types-perl_2.09-3.debian.tar.xz
+Checksums-Sha256:
+ c927892203ff14454876cece49163c2d57650de5804ea4a1e06f7fd4ed051e8a 2234 libmime-types-perl_2.09-3.dsc
+ 2cccaf8fa5e3963f45106188923c98666402948a00cd9c0a15cc06d6d317fa68 56101 libmime-types-perl_2.09.orig.tar.gz
+ f0eceff080850150597d33064fee5e6c99017359f43745e8746cbfe5ef2efe34 4304 libmime-types-perl_2.09-3.debian.tar.xz
+
+Package: libmoose-perl
+Binary: libmoose-perl
+Version: 2.1213-1
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9.20120312~), libclass-load-perl, libclass-load-xs-perl, libcpan-meta-check-perl (>= 0.007), libdata-optlist-perl (>= 0.107), libdatetime-format-mysql-perl, libdbm-deep-perl, libdevel-globaldestruction-perl, libdevel-partialdump-perl (>= 0.14), libdevel-stacktrace-perl (>= 1.3300), libdist-checkconflicts-perl, libeval-closure-perl, libio-string-perl, liblist-moreutils-perl (>= 0.28), liblocale-us-perl, libmodule-refresh-perl, libmodule-runtime-perl (>= 0.014), libmodule-runtime-conflicts-perl, libmro-compat-perl, libpackage-deprecationmanager-perl (>= 0.11), libpackage-stash-perl (>= 0.32), libpackage-stash-xs-perl, libpadwalker-perl, libparams-coerce-perl, libparams-util-perl, libregexp-common-perl, libsub-exporter-perl, libsub-name-perl (>= 0.05), libsuper-perl, libtask-weaken-perl, libtest-cleannamespaces-perl, libtest-deep-perl, libtest-fatal-perl, libtest-leaktrace-perl, libtest-memory-cycle-perl, libtest-output-perl, libtest-requires-perl, libtest-warn-perl, libtry-tiny-perl, liburi-perl, libwww-perl, perl (>= 5.15.3), perl (>= 5.15.7) | libcpan-meta-requirements-perl
+Architecture: any
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/libm/libmoose-perl
+Files:
+ 95633a3e5251725f9155ac40f71c038c 3668 libmoose-perl_2.1213-1.dsc
+ 64f0b1141e0b11accc87d27af48640d6 785414 libmoose-perl_2.1213.orig.tar.gz
+ 6604160ed2e300b47bff25ddd662ee08 13104 libmoose-perl_2.1213-1.debian.tar.xz
+Uploaders: Krzysztof Krzyżaniak (eloy) <eloy@debian.org>, Salvatore Bonaccorso <carnil@debian.org>, gregor herrmann <gregoa@debian.org>, Damyan Ivanov <dmn@debian.org>, Rene Mayorga <rmayorga@debian.org>, Brian Cassidy <brian.cassidy@gmail.com>, Jose Luis Rivas <ghostbar38@gmail.com>, Ryan Niebur <ryan@debian.org>, Niko Tyni <ntyni@debian.org>, Ansgar Burchardt <ansgar@debian.org>, Jonathan Yu <jawnsy@cpan.org>, Iulian Udrea <iulian@ubuntu.com>, Alessandro Ghedini <ghedo@debian.org>
+Homepage: https://metacpan.org/release/Moose
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libmoose-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libmoose-perl.git
+Testsuite: autopkgtest-pkg-perl
+Package-List:
+ libmoose-perl deb perl optional arch=any
+Checksums-Sha1:
+ 3a9ec7d9964e557f2601f7368be7ef7fa0279049 3668 libmoose-perl_2.1213-1.dsc
+ 8f199e28be343610cf0c34ee0512ec977d7f151e 785414 libmoose-perl_2.1213.orig.tar.gz
+ 75624282eab8cc86c61de3757d5df6edc114e338 13104 libmoose-perl_2.1213-1.debian.tar.xz
+Checksums-Sha256:
+ 846548b3a2f393a483712f197bae2902c5d430d3de9159384099217f79362b00 3668 libmoose-perl_2.1213-1.dsc
+ 0f3b196ae67dc1daaa43c44ae7703f27c4f92c391ad3e252a90e90c50c851e03 785414 libmoose-perl_2.1213.orig.tar.gz
+ a525379f76a1ff164501fa964c99818309383b06bb74c05f84d458083d6cdd22 13104 libmoose-perl_2.1213-1.debian.tar.xz
+
+Package: libsub-name-perl
+Binary: libsub-name-perl
+Version: 0.12-1
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: perl, debhelper (>= 9.20120312~), libdevel-checkbin-perl
+Architecture: any
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/libs/libsub-name-perl
+Files:
+ ed659822df455cd44d05fc69295b7be3 2211 libsub-name-perl_0.12-1.dsc
+ 421afad5e34c0b4f753d578d99be535f 25498 libsub-name-perl_0.12.orig.tar.gz
+ a4e6c73f1b012e39de7bf0242570d277 2864 libsub-name-perl_0.12-1.debian.tar.xz
+Uploaders: Krzysztof Krzyżaniak (eloy) <eloy@debian.org>, Ansgar Burchardt <ansgar@debian.org>
+Homepage: https://metacpan.org/release/Sub-Name
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libsub-name-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libsub-name-perl.git
+Package-List:
+ libsub-name-perl deb perl optional arch=any
+Checksums-Sha1:
+ c19d3b68581b7df37cc166aeea059cbcd3dfb303 2211 libsub-name-perl_0.12-1.dsc
+ 0b7c752ce1194e0986e369da05b8ecb66c2fc86f 25498 libsub-name-perl_0.12.orig.tar.gz
+ 9a8ab5006aa1139f0dd65da4975f1fc73dcb5758 2864 libsub-name-perl_0.12-1.debian.tar.xz
+Checksums-Sha256:
+ 4a8bf910d7c5b1256b4ff33b472502853bfbff0c0bf20e3c93744da748605cc3 2211 libsub-name-perl_0.12-1.dsc
+ 06c4a2fcfb7223eeea6cc2b3f507e51f02fbf982e0c0ff1061deefb32f62b4e9 25498 libsub-name-perl_0.12.orig.tar.gz
+ f9f13bd8b80d3f7adb75e1e79f0eea82bd26bd6422c24bf7d5e6313941ced9bf 2864 libsub-name-perl_0.12-1.debian.tar.xz
+
+Package: libtest-strict-perl
+Binary: libtest-strict-perl
+Version: 0.25-1
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 8)
+Build-Depends-Indep: perl, libdevel-cover-perl, libmoose-autobox-perl, libtest-pod-perl, libtest-pod-coverage-perl, perl (>= 5.19.6) | libtest-simple-perl (>= 1.000000)
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/libt/libtest-strict-perl
+Files:
+ 9b74ea88645ff12ef9087f7924b20f58 2454 libtest-strict-perl_0.25-1.dsc
+ be576df9a020a6bf5facd9bf3a3ba85a 11730 libtest-strict-perl_0.25.orig.tar.gz
+ c614dab703754c2f457c9d07d64fe31d 2608 libtest-strict-perl_0.25-1.debian.tar.xz
+Uploaders: Jeremiah C. Foster <jeremiah@jeremiahfoster.com>, Ansgar Burchardt <ansgar@debian.org>, Fabrizio Regalli <fabreg@fabreg.it>, Florian Schlichting <fsfs@debian.org>
+Homepage: https://metacpan.org/release/Test-Strict
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libtest-strict-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libtest-strict-perl.git
+Package-List:
+ libtest-strict-perl deb perl optional arch=all
+Checksums-Sha1:
+ bb12fd9203a7099eb4e763bf59f7d1979c9093bb 2454 libtest-strict-perl_0.25-1.dsc
+ b6228a3ceba31d0ef5ac2ca8fa83b5dfbf0d0c9e 11730 libtest-strict-perl_0.25.orig.tar.gz
+ b3f8b3f99154e609e5aeb6010d4f81245a1fc1a0 2608 libtest-strict-perl_0.25-1.debian.tar.xz
+Checksums-Sha256:
+ abeb2126413f935066062ab5444377651a42090581b514cb0240119123adc9ce 2454 libtest-strict-perl_0.25-1.dsc
+ fcaa27b8b28b9ef1b63fb7edede2724b6562f93eddd21fffdb834fdfd814e30c 11730 libtest-strict-perl_0.25.orig.tar.gz
+ 6c9d4d9bf8d52cd87021ca8bd6215f37fd6f004def14f0330fae4e3de129b77e 2608 libtest-strict-perl_0.25-1.debian.tar.xz
+
+Package: libyaml-perl
+Binary: libyaml-perl
+Version: 1.13-1
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 8)
+Build-Depends-Indep: perl, libtest-yaml-perl
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/liby/libyaml-perl
+Files:
+ ec8a9f12f6f688a895f376b8ee5d1f63 2284 libyaml-perl_1.13-1.dsc
+ 3bda8716c873050c8238f45c276b6c37 80167 libyaml-perl_1.13.orig.tar.gz
+ 0fc9a8317d4b7fecdd6a4385ddb8238e 5264 libyaml-perl_1.13-1.debian.tar.xz
+Uploaders: gregor herrmann <gregoa@debian.org>, Rene Mayorga <rmayorga@debian.org>, Jonathan Yu <jawnsy@cpan.org>, Damyan Ivanov <dmn@debian.org>, Iulian Udrea <iulian@ubuntu.com>
+Homepage: https://metacpan.org/release/YAML
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libyaml-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libyaml-perl.git
+Testsuite: autopkgtest-pkg-perl
+Package-List:
+ libyaml-perl deb perl optional arch=all
+Checksums-Sha1:
+ 4113b0681e406aaebe14d7bb31b20c6c03ee66c7 2284 libyaml-perl_1.13-1.dsc
+ 3c44ae903fd5ee8f020348725baabe7c43f2324d 80167 libyaml-perl_1.13.orig.tar.gz
+ 33342c18cab15f63423e06abb321f4b4300bfc3c 5264 libyaml-perl_1.13-1.debian.tar.xz
+Checksums-Sha256:
+ fc14896f47811fe158e9043fd7ada454138291b1308731e176e939775170a221 2284 libyaml-perl_1.13-1.dsc
+ 187f4d52b23dcf35baa69303eef17b4690fd20bec70cc7cc38cf477918d6bd7b 80167 libyaml-perl_1.13.orig.tar.gz
+ 3ee53ded9e1c889ebfb81cdf10b3dfeeea5efcbd2f43f5fb346d1cad01aeff85 5264 libyaml-perl_1.13-1.debian.tar.xz
+
+Package: libyaml-tiny-perl
+Binary: libyaml-tiny-perl
+Version: 1.64-1
+Section: perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9.20140227~), libmodule-build-tiny-perl, perl
+Build-Depends-Indep: libjson-maybexs-perl, perl (>= 5.13.9) | libjson-pp-perl, perl (>= 5.19.5) | libtest-simple-perl (>= 0.99)
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/liby/libyaml-tiny-perl
+Files:
+ 48b258b60bb1f1727bbd6435d049d770 2332 libyaml-tiny-perl_1.64-1.dsc
+ 5e55c51b46c918ed76b43d29ac4e47b4 71644 libyaml-tiny-perl_1.64.orig.tar.gz
+ 9e39c2a1676c6079fd01e3f336c19f19 3784 libyaml-tiny-perl_1.64-1.debian.tar.xz
+Uploaders: Damyan Ivanov <dmn@debian.org>
+Homepage: https://metacpan.org/release/YAML-Tiny
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-perl/packages/libyaml-tiny-perl.git
+Vcs-Git: git://anonscm.debian.org/pkg-perl/packages/libyaml-tiny-perl.git
+Testsuite: autopkgtest-pkg-perl
+Package-List:
+ libyaml-tiny-perl deb perl optional arch=all
+Checksums-Sha1:
+ a670693eaa06639ae1b3d347e43a929f7225d5fb 2332 libyaml-tiny-perl_1.64-1.dsc
+ 4f099b00e7ae2d82295803c6cf520f5b83db7fd7 71644 libyaml-tiny-perl_1.64.orig.tar.gz
+ 4a9eb32887e141a3f0c7d78c6db3d20b8767991d 3784 libyaml-tiny-perl_1.64-1.debian.tar.xz
+Checksums-Sha256:
+ e04195a51b52d541e5c2d7a89ff0ac49703194109af24eb622cae3e0358330ec 2332 libyaml-tiny-perl_1.64-1.dsc
+ ff984f5a05e4990962c232da2e0c6c5cafb58fd18f5a59e6499e0f985ceb16d7 71644 libyaml-tiny-perl_1.64.orig.tar.gz
+ 504b528daeee79281d9920d68a54198fd0f2920f92ec4dd0063d1a031f07e31c 3784 libyaml-tiny-perl_1.64-1.debian.tar.xz
+
+Package: ntfs-3g
+Binary: ntfs-3g, ntfs-3g-dbg, ntfs-3g-dev, ntfs-3g-udeb
+Version: 1:2014.2.15AR.3-1
+Priority: standard
+Section: otherosfs
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, chrpath, libfuse-dev, libgcrypt20-dev, libgpg-error-dev, libgnutls28-dev, pkg-config
+Architecture: linux-any kfreebsd-any
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/n/ntfs-3g
+Files:
+ c5acd2391c206f2c056cb864df599fa8 2134 ntfs-3g_2014.2.15AR.3-1.dsc
+ 3bd2e558272ddeb28fd9b5bf30b44fb4 1223054 ntfs-3g_2014.2.15AR.3.orig.tar.gz
+ f7edf61b5a43ccd65ae296a5a2cb5a69 21440 ntfs-3g_2014.2.15AR.3-1.debian.tar.xz
+Homepage: http://www.tuxera.com/community/ntfs-3g-advanced/
+Package-List:
+ ntfs-3g deb otherosfs optional arch=linux-any,kfreebsd-any
+ ntfs-3g-dbg deb debug extra arch=linux-any,kfreebsd-any
+ ntfs-3g-dev deb libdevel optional arch=linux-any,kfreebsd-any
+ ntfs-3g-udeb udeb debian-installer optional arch=linux-any
+Checksums-Sha1:
+ 22ced1c0b7a591d3174981fcb04511076b8c82d2 2134 ntfs-3g_2014.2.15AR.3-1.dsc
+ cf165aebe6f73333910a80e1c2bcc2bf1439116a 1223054 ntfs-3g_2014.2.15AR.3.orig.tar.gz
+ 54f4ceefb3d790792755766c4443f1f51c54b57b 21440 ntfs-3g_2014.2.15AR.3-1.debian.tar.xz
+Checksums-Sha256:
+ 9bc1d1915aa59854f25678b9c2e8fb1cf301865104e56398bc0b65e76cf22dd6 2134 ntfs-3g_2014.2.15AR.3-1.dsc
+ 9b0c71de489e45b072966a7c4d29515de66d2a765d9001e8558a16aff9ca9d1b 1223054 ntfs-3g_2014.2.15AR.3.orig.tar.gz
+ 410eb9925e1b9eb404dcd64d989c0c053ab3825fb2c9f835a73fb5922275c6de 21440 ntfs-3g_2014.2.15AR.3-1.debian.tar.xz
+
+Package: nunit
+Binary: nunit-console, nunit-gui, libnunit-core2.6.3-cil, libnunit-core-interfaces2.6.3-cil, libnunit-console-runner2.6.3-cil, libnunit-framework2.6.3-cil, libnunit-mocks2.6.3-cil, libnunit-util2.6.3-cil, libnunit-cil-dev, libnunit-doc, monodoc-nunit-manual, nunit
+Version: 2.6.3+dfsg-1
+Priority: optional
+Section: devel
+Maintainer: Debian CLI Libraries Team <pkg-cli-libs-team@lists.alioth.debian.org>
+Build-Depends: cli-common-dev (>= 0.5.7), debhelper (>= 7.0.50~)
+Build-Depends-Indep: mono-devel (>= 2.4.3), mono-xbuild, monodoc-base
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/n/nunit
+Files:
+ d07a304f85b2862b19737c248347f7b7 2531 nunit_2.6.3+dfsg-1.dsc
+ 735815555f04162cbac670d5f800652f 3681876 nunit_2.6.3+dfsg.orig.tar.gz
+ 0cc826030ffc9af55e77dc39f983be95 10000 nunit_2.6.3+dfsg-1.debian.tar.xz
+Uploaders: Mirco Bauer <meebey@debian.org>, Julian Taylor <jtaylor.debian@googlemail.com>
+Homepage: http://www.nunit.org/
+Vcs-Browser: http://git.debian.org/?p=pkg-cli-libs/packages/nunit.git
+Vcs-Git: git://git.debian.org/pkg-cli-libs/packages/nunit.git
+Package-List:
+ libnunit-cil-dev deb devel optional arch=all
+ libnunit-console-runner2.6.3-cil deb cli-mono optional arch=all
+ libnunit-core-interfaces2.6.3-cil deb cli-mono optional arch=all
+ libnunit-core2.6.3-cil deb cli-mono optional arch=all
+ libnunit-doc deb doc optional arch=all
+ libnunit-framework2.6.3-cil deb cli-mono optional arch=all
+ libnunit-mocks2.6.3-cil deb cli-mono optional arch=all
+ libnunit-util2.6.3-cil deb cli-mono optional arch=all
+ monodoc-nunit-manual deb doc optional arch=all
+ nunit deb devel optional arch=all
+ nunit-console deb devel optional arch=all
+ nunit-gui deb devel optional arch=all
+Checksums-Sha1:
+ e622d9b1cf005a6e42e2cf9938f6b9fd42b264da 2531 nunit_2.6.3+dfsg-1.dsc
+ 2e80a3588815cbf952fe7bf6b7765c912b6c7d1b 3681876 nunit_2.6.3+dfsg.orig.tar.gz
+ 935b7c2c273a87f17937c54662493b6b0f3c989d 10000 nunit_2.6.3+dfsg-1.debian.tar.xz
+Checksums-Sha256:
+ cd3757099075f084bc8fc69af2a42ee6d76125a155287f5d3faa5aeca2a21a44 2531 nunit_2.6.3+dfsg-1.dsc
+ 9ce94f9652150992c3f70277ef068832f2e65a98aa0d0171048b407e133a6839 3681876 nunit_2.6.3+dfsg.orig.tar.gz
+ bb9fc56e150dfcb8b383dfffbf05f8b78dfaf6b23fe4fa84e42401a6eb8982a4 10000 nunit_2.6.3+dfsg-1.debian.tar.xz
+
+Package: pygments
+Binary: python-pygments, python3-pygments, python-pygments-doc
+Version: 2.0.1+dfsg-1
+Priority: optional
+Section: python
+Maintainer: Piotr Ożarowski <piotr@debian.org>
+Build-Depends: debhelper (>= 9)
+Build-Depends-Indep: dh-python, python-all (>= 2.6.6-3), python3-all, python3-setuptools, python-setuptools (>= 0.6b3), python-docutils, python-jinja2, python-sphinx
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/p/pygments
+Files:
+ f0d8ae6fd182015103fa321791abd016 2294 pygments_2.0.1+dfsg-1.dsc
+ 81a7b53bc120eee6b22a27325582f000 936249 pygments_2.0.1+dfsg.orig.tar.gz
+ 59950ea1a7554ceae8fc2658ef8ea103 6024 pygments_2.0.1+dfsg-1.debian.tar.xz
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Homepage: http://pygments.org/
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/pygments/trunk/
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/pygments/trunk/
+Testsuite: autopkgtest
+Package-List:
+ python-pygments deb python optional arch=all
+ python-pygments-doc deb doc extra arch=all
+ python3-pygments deb python optional arch=all
+Checksums-Sha1:
+ 0ecfaa098427e0ad6f79da8daec7d669a3291b2d 2294 pygments_2.0.1+dfsg-1.dsc
+ 4d697edf6fa3f9c5bd58be4554fa01679f35b471 936249 pygments_2.0.1+dfsg.orig.tar.gz
+ d9f9be7249e1e1cead68796539c52ae2e4a0689d 6024 pygments_2.0.1+dfsg-1.debian.tar.xz
+Checksums-Sha256:
+ 2fc35330d77d18594a3be49befdb2c62bb60eee8b55a1f2dd1aa633c96e93acd 2294 pygments_2.0.1+dfsg-1.dsc
+ 44eee854675525dbf251373a495a33de46321aecd907466372b75e8233511bb4 936249 pygments_2.0.1+dfsg.orig.tar.gz
+ e7b6fede448738af133e218cd7ef306a0ca4500e6971bc0abc2a7c932d1cf384 6024 pygments_2.0.1+dfsg-1.debian.tar.xz
+
+Package: pyopenssl
+Binary: python-openssl, python-openssl-doc, python3-openssl
+Version: 0.14-1
+Section: interpreters
+Maintainer: Sandro Tosi <morph@debian.org>
+Build-Depends: debhelper (>= 9), python-all, python3-all, dh-python, libssl-dev (>= 0.9.8), openssl, python-sphinx (>= 1.0.7+dfsg), python-setuptools, python3-setuptools, python-cryptography, python3-cryptography, python-six, python3-six
+Architecture: all
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/p/pyopenssl
+Files:
+ 130ee46c6c4a4467dab6c993d91955dc 1663 pyopenssl_0.14-1.dsc
+ 8579ff3a1d858858acfba5f046a4ddf7 128005 pyopenssl_0.14.orig.tar.gz
+ 8bfbd64c691c6ee81f7d91f0e59d9867 8132 pyopenssl_0.14-1.debian.tar.xz
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Homepage: https://github.com/pyca/pyopenssl
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/pyopenssl/trunk/
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/pyopenssl/trunk/
+Package-List:
+ python-openssl deb python optional arch=all
+ python-openssl-doc deb doc optional arch=all
+ python3-openssl deb python optional arch=all
+Checksums-Sha1:
+ f2d96c2845baf747bf91235972d6491571cb9dc4 1663 pyopenssl_0.14-1.dsc
+ eb51f23f29703b647b0f194beaa9b2412c05e0f6 128005 pyopenssl_0.14.orig.tar.gz
+ cbc4337d06ef5b38dbc8d32073091a576ff0d3bb 8132 pyopenssl_0.14-1.debian.tar.xz
+Checksums-Sha256:
+ 4a7f69c97d652f8ebedfe4da432393b2ec7464cb637acee78dbce5cc16ddd47b 1663 pyopenssl_0.14-1.dsc
+ a99db8e59c120138ad8a72eecedcc24b4510d2eed3ce48213b7e32f22cc4ee6e 128005 pyopenssl_0.14.orig.tar.gz
+ e6a895f1eea9387eec61c5ea8dac38da9ee685696e15d71ec805b0f00cbc2657 8132 pyopenssl_0.14-1.debian.tar.xz
+Python-Version: all
+
+Package: pyqt5
+Binary: python3-pyqt5, python3-pyqt5-dbg, python3-dbus.mainloop.pyqt5, python3-dbus.mainloop.pyqt5-dbg, python3-pyqt5.enginio, python3-pyqt5.enginio-dbg, python3-pyqt5.qtopengl, python3-pyqt5.qtopengl-dbg, python3-pyqt5.qtsql, python3-pyqt5.qtsql-dbg, python3-pyqt5.qtwebkit, python3-pyqt5.qtwebkit-dbg, python3-pyqt5.qtwebsockets, python3-pyqt5.qtwebsockets-dbg, python3-pyqt5.qtxmlpatterns, python3-pyqt5.qtxmlpatterns-dbg, python3-pyqt5.qtsvg, python3-pyqt5.qtsvg-dbg, python3-pyqt5.qtmultimedia, python3-pyqt5.qtmultimedia-dbg, python3-pyqt5.qtquick, python3-pyqt5.qtquick-dbg, python3-pyqt5.qtserialport, python3-pyqt5.qtserialport-dbg, python3-pyqt5.qtsensors, python3-pyqt5.qtsensors-dbg, python3-pyqt5.qtx11extras, python3-pyqt5.qtx11extras-dbg, python3-pyqt5.qtpositioning, python3-pyqt5.qtpositioning-dbg, pyqt5-dev, pyqt5-doc, pyqt5-examples, pyqt5-dev-tools, python-pyqt5, python-pyqt5-dbg, python-dbus.mainloop.pyqt5, python-dbus.mainloop.pyqt5-dbg, python-pyqt5.enginio,
+ python-pyqt5.enginio-dbg, python-pyqt5.qtopengl, python-pyqt5.qtopengl-dbg, python-pyqt5.qtsql, python-pyqt5.qtsql-dbg, python-pyqt5.qtwebkit, python-pyqt5.qtwebkit-dbg, python-pyqt5.qtwebsockets, python-pyqt5.qtwebsockets-dbg, python-pyqt5.qtxmlpatterns, python-pyqt5.qtxmlpatterns-dbg, python-pyqt5.qtsvg, python-pyqt5.qtsvg-dbg, python-pyqt5.qtmultimedia, python-pyqt5.qtmultimedia-dbg, python-pyqt5.qtquick, python-pyqt5.qtquick-dbg, python-pyqt5.qtserialport, python-pyqt5.qtserialport-dbg, python-pyqt5.qtsensors, python-pyqt5.qtsensors-dbg, python-pyqt5.qtx11extras, python-pyqt5.qtx11extras-dbg, python-pyqt5.qtpositioning,
+ python-pyqt5.qtpositioning-dbg
+Version: 5.4+dfsg-1~ubuntu1
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 9), fdupes, libdbus-1-dev (>= 1.0.2), libenginio1-dev (>= 5.3), libglib2.0-dev, libgstreamer0.10-dev, libgstreamer-plugins-base0.10-dev, libicu-dev, libpulse-dev, libqt5opengl5-dev (>= 5.3), libqt5sensors5-dev (>= 5.3), libqt5serialport5-dev (>= 5.3), libqt5svg5-dev (>= 5.3), libqt5webkit5-dev (>= 5.3), libqt5websockets5-dev (>= 5.3), libqt5xmlpatterns5-dev (>= 5.3), libqt5x11extras5-dev (>= 5.3), libsqlite3-dev, libudev-dev [linux-any], libxml2-dev, libxslt1-dev, python3-all-dbg, python3-all-dev (>= 3.3.2-5~), python3-dbus, python3-dbus-dbg, python3-sip-dbg, python3-sip-dev (>= 4.16.4), python-all-dbg, python-all-dev (>= 2.6.6-3~), python-dbus, python-dbus-dbg, python-sip-dbg, python-sip-dev (>= 4.16.4), python3-sphinx, python-dbus-dev, qtdeclarative5-dev (>= 5.3), qtmultimedia5-dev (>= 5.3), qtpositioning5-dev (>= 5.3), qttools5-dev (>= 5.3)
+Architecture: any all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/p/pyqt5
+Files:
+ 1c852fe6b06f6f58e746f4b2ebb99b08 7404 pyqt5_5.4+dfsg-1~ubuntu1.dsc
+ 968d07d8830f01e123e70b66d0273636 3125339 pyqt5_5.4+dfsg.orig.tar.gz
+ 5e7e6a845f4513290173b25a644f23de 16322 pyqt5_5.4+dfsg-1~ubuntu1.debian.tar.gz
+Uploaders: Dmitry Shachnev <mitya57@debian.org>, Scott Kitterman <scott@kitterman.com>
+Homepage: http://www.riverbankcomputing.co.uk/software/pyqt/
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/pyqt5/trunk/
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/pyqt5/trunk/
+Package-List:
+ pyqt5-dev deb python optional
+ pyqt5-dev-tools deb python optional
+ pyqt5-doc deb doc optional
+ pyqt5-examples deb python optional
+ python-dbus.mainloop.pyqt5 deb python optional
+ python-dbus.mainloop.pyqt5-dbg deb debug extra
+ python-pyqt5 deb python optional
+ python-pyqt5-dbg deb debug extra
+ python-pyqt5.enginio deb python optional
+ python-pyqt5.enginio-dbg deb debug extra
+ python-pyqt5.qtmultimedia deb python optional
+ python-pyqt5.qtmultimedia-dbg deb debug extra
+ python-pyqt5.qtopengl deb python optional
+ python-pyqt5.qtopengl-dbg deb debug extra
+ python-pyqt5.qtpositioning deb python optional
+ python-pyqt5.qtpositioning-dbg deb debug extra
+ python-pyqt5.qtquick deb python optional
+ python-pyqt5.qtquick-dbg deb debug extra
+ python-pyqt5.qtsensors deb python optional
+ python-pyqt5.qtsensors-dbg deb debug extra
+ python-pyqt5.qtserialport deb python optional
+ python-pyqt5.qtserialport-dbg deb debug extra
+ python-pyqt5.qtsql deb python optional
+ python-pyqt5.qtsql-dbg deb debug extra
+ python-pyqt5.qtsvg deb python optional
+ python-pyqt5.qtsvg-dbg deb debug extra
+ python-pyqt5.qtwebkit deb python optional
+ python-pyqt5.qtwebkit-dbg deb debug extra
+ python-pyqt5.qtwebsockets deb python optional
+ python-pyqt5.qtwebsockets-dbg deb debug extra
+ python-pyqt5.qtx11extras deb python optional
+ python-pyqt5.qtx11extras-dbg deb debug extra
+ python-pyqt5.qtxmlpatterns deb python optional
+ python-pyqt5.qtxmlpatterns-dbg deb debug extra
+ python3-dbus.mainloop.pyqt5 deb python optional
+ python3-dbus.mainloop.pyqt5-dbg deb debug extra
+ python3-pyqt5 deb python optional
+ python3-pyqt5-dbg deb debug extra
+ python3-pyqt5.enginio deb python optional
+ python3-pyqt5.enginio-dbg deb debug extra
+ python3-pyqt5.qtmultimedia deb python optional
+ python3-pyqt5.qtmultimedia-dbg deb debug extra
+ python3-pyqt5.qtopengl deb python optional
+ python3-pyqt5.qtopengl-dbg deb debug extra
+ python3-pyqt5.qtpositioning deb python optional
+ python3-pyqt5.qtpositioning-dbg deb debug extra
+ python3-pyqt5.qtquick deb python optional
+ python3-pyqt5.qtquick-dbg deb debug extra
+ python3-pyqt5.qtsensors deb python optional
+ python3-pyqt5.qtsensors-dbg deb debug extra
+ python3-pyqt5.qtserialport deb python optional
+ python3-pyqt5.qtserialport-dbg deb debug extra
+ python3-pyqt5.qtsql deb python optional
+ python3-pyqt5.qtsql-dbg deb debug extra
+ python3-pyqt5.qtsvg deb python optional
+ python3-pyqt5.qtsvg-dbg deb debug extra
+ python3-pyqt5.qtwebkit deb python optional
+ python3-pyqt5.qtwebkit-dbg deb debug extra
+ python3-pyqt5.qtwebsockets deb python optional
+ python3-pyqt5.qtwebsockets-dbg deb debug extra
+ python3-pyqt5.qtx11extras deb python optional
+ python3-pyqt5.qtx11extras-dbg deb debug extra
+ python3-pyqt5.qtxmlpatterns deb python optional
+ python3-pyqt5.qtxmlpatterns-dbg deb debug extra
+Checksums-Sha1:
+ 3bdf77e615108f840a7a585b84133ab9690a50e1 7404 pyqt5_5.4+dfsg-1~ubuntu1.dsc
+ 1d4007dc9d19410006cd648cea5657f6459fbb92 3125339 pyqt5_5.4+dfsg.orig.tar.gz
+ d3692c7449675dc214a7aca2e94656d61491eae3 16322 pyqt5_5.4+dfsg-1~ubuntu1.debian.tar.gz
+Checksums-Sha256:
+ 4d740e43a6ad454dd012b59371fd058b65516c9c2ae4a3cca68434bdd4ace5d5 7404 pyqt5_5.4+dfsg-1~ubuntu1.dsc
+ 9770ff008c68c705b73d32d2444dec187572e27ec4f20ae77c50d718dc41ea65 3125339 pyqt5_5.4+dfsg.orig.tar.gz
+ bb55586417d16e3e8ebf91d9963516a61d53e5a7c866d3d5f1256eafa22d12af 16322 pyqt5_5.4+dfsg-1~ubuntu1.debian.tar.gz
+Testsuite: autopkgtest
+
+Package: python-django-compressor
+Binary: python-compressor
+Version: 1.4-2ubuntu3
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), openstack-pkg-tools, python-all (>= 2.6.6-3~), python-setuptools
+Build-Depends-Indep: python-appconf, python-bs4, python-coverage, python-django (>= 1.6), python-html5lib, python-jingo, python-jinja2, python-lxml, python-mock, python-nose, python-unittest2
+Architecture: all
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-django-compressor
+Files:
+ 61428db9c19d9872bd877ba814ac0472 2422 python-django-compressor_1.4-2ubuntu3.dsc
+ 462078bc6b0904f280ae554eda29b3b7 85028 python-django-compressor_1.4.orig.tar.xz
+ a7b17fe89436e8541b17f2cebd1f6a61 4988 python-django-compressor_1.4-2ubuntu3.debian.tar.xz
+Uploaders: Thomas Goirand <zigo@debian.org>,
+Homepage: http://pypi.python.org/pypi/django_compressor/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-django-compressor.git;a=summary
+Vcs-Git: git://anonscm.debian.org/openstack/python-django-compressor.git
+Package-List:
+ python-compressor deb python optional arch=all
+Checksums-Sha1:
+ 4cd3e0adb9edfda4abbadc68abefe5b1d9616aa1 2422 python-django-compressor_1.4-2ubuntu3.dsc
+ cb32d91261c36f6b6bbee08a381e5c05fc7726ec 85028 python-django-compressor_1.4.orig.tar.xz
+ 137244511623455b0b6c632ab1c7848d5be19d64 4988 python-django-compressor_1.4-2ubuntu3.debian.tar.xz
+Checksums-Sha256:
+ eecdd1f8df31536690dfa39751d1f335c2ff2a1ff4d6942381bfb4d6c7757d12 2422 python-django-compressor_1.4-2ubuntu3.dsc
+ 80ae406f6eda4d744c8a47444a781ba31946ba3ff60622f8180925ae5b89ac62 85028 python-django-compressor_1.4.orig.tar.xz
+ 9e02286125b68ab219c87f0b294430db82c39f375736b816bdf113c9c35fc17c 4988 python-django-compressor_1.4-2ubuntu3.debian.tar.xz
+
+Package: python-greenlet
+Binary: python-greenlet-dbg, python-greenlet-doc, python-greenlet-dev, python-greenlet, python3-greenlet
+Version: 0.4.5-1
+Priority: extra
+Section: python
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Build-Depends: dpkg-dev (>= 1.16.1~), debhelper (>= 7.0.50~), python-all-dev, python-all-dbg, python3-all-dev, python3-all-dbg, python-setuptools, python3-setuptools, python-sphinx, python3-sphinx
+Architecture: any all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-greenlet
+Files:
+ 57d5f10b711afaea778d8a616372381f 2192 python-greenlet_0.4.5-1.dsc
+ a24bc9c0e8bc76d095b59abc5dc092eb 53565 python-greenlet_0.4.5.orig.tar.gz
+ c53b0c3a051f1a9966b19d4fd6231ea9 5640 python-greenlet_0.4.5-1.debian.tar.xz
+Homepage: http://pypi.python.org/pypi/greenlet
+Package-List:
+ python-greenlet deb python extra arch=any
+ python-greenlet-dbg deb debug extra arch=any
+ python-greenlet-dev deb python extra arch=any
+ python-greenlet-doc deb doc extra arch=all
+ python3-greenlet deb python extra arch=any
+Checksums-Sha1:
+ 6865a938e3bd991915e5fc5b8dae555927d6293f 2192 python-greenlet_0.4.5-1.dsc
+ f48d3732474e5a43a653d7c20d49c7cfa814f0fb 53565 python-greenlet_0.4.5.orig.tar.gz
+ 852a0941c9822cc6447e7f4d3a4922fca788c53d 5640 python-greenlet_0.4.5-1.debian.tar.xz
+Checksums-Sha256:
+ f803d3dbfec179d13d6bdf85a51db573710b30cd0a570de6c0c7cf34cb315255 2192 python-greenlet_0.4.5-1.dsc
+ f24ad7876df2803832eb70eaed33885679940758a8492b01bf4370284d0f0f90 53565 python-greenlet_0.4.5.orig.tar.gz
+ bc62e883ebc0e9231152e458321c7d23f5152aa38e804cffec4a85c3b53238a4 5640 python-greenlet_0.4.5-1.debian.tar.xz
+
+Package: python-oauthlib
+Binary: python-oauthlib, python3-oauthlib
+Version: 0.6.3-1
+Section: python
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-python, python-all (>= 2.6.6-3), python-crypto, python-jwt, python-mock, python-nose, python-setuptools (>= 0.6b3), python-unittest2, python3-all, python3-crypto, python3-jwt, python3-mock, python3-nose, python3-setuptools
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-oauthlib
+Files:
+ b05db9ce21dc857f250aac0c99b8d4ff 2306 python-oauthlib_0.6.3-1.dsc
+ 3ecba28f991ee58db2aeda8b4e2b56b1 100950 python-oauthlib_0.6.3.orig.tar.gz
+ fc0ff41d3f23aebd77c15c1cf14fec5a 2848 python-oauthlib_0.6.3-1.debian.tar.xz
+Uploaders: Daniele Tricoli <eriol@mornie.org>
+Homepage: https://github.com/idan/oauthlib
+Vcs-Browser: http://anonscm.debian.org/viewvc/python-modules/packages/python-oauthlib/trunk/
+Vcs-Svn: svn://anonscm.debian.org/python-modules/packages/python-oauthlib/trunk/
+Package-List:
+ python-oauthlib deb python optional arch=all
+ python3-oauthlib deb python optional arch=all
+Checksums-Sha1:
+ e19bc7f0443969dcb034e4682c0377b96f61203a 2306 python-oauthlib_0.6.3-1.dsc
+ 79d09df798f7a72dd02a5e2fd990a61d2172ae16 100950 python-oauthlib_0.6.3.orig.tar.gz
+ 9c877b2235070fefc2e018ab9b1bef280648a731 2848 python-oauthlib_0.6.3-1.debian.tar.xz
+Checksums-Sha256:
+ cf93edc2576ae17502ce31ecf6ddac0988a0dd49c9a938f500cef707822b1ac3 2306 python-oauthlib_0.6.3-1.dsc
+ 0a11ab2311f7a29d0079fe529bde9503fec9a2bdd52db834cf8a284a8c1c52f9 100950 python-oauthlib_0.6.3.orig.tar.gz
+ f9a084593ceddb2810eb889c48ef005b9c9db3429cf1af25540f373ec8f41254 2848 python-oauthlib_0.6.3-1.debian.tar.xz
+
+Package: python-tooz
+Binary: python-tooz, python3-tooz, python-tooz-doc
+Version: 0.4-1
+Section: misc
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), openstack-pkg-tools, python-all (>= 2.6.6-3~), python-pbr (>= 0.6), python-setuptools, python-sphinx (>= 1.1.2), python3-all, python3-pbr (>= 0.6), python3-setuptools
+Build-Depends-Indep: memcached, net-tools, python-babel (>= 1.3), python-iso8601, python-kazoo (>= 1.3.1), python-msgpack, python-oslo.config, python-pymemcache (>= 1.2), python-retrying, python-six (>= 1.7.0), python-stevedore (>= 0.14), python-subunit, python-sysv-ipc, python-testscenarios (>= 0.4), python-testtools (>= 0.9.32), python-zake (>= 0.1.6), python3-babel (>= 1.3), python3-iso8601, python3-kazoo (>= 1.3.1), python3-msgpack, python3-oslo.config, python3-pymemcache (>= 1.2), python3-retrying, python3-six (>= 1.7.0), python3-stevedore (>= 0.14), python3-subunit, python3-sysv-ipc, python3-testscenarios (>= 0.4), python3-testtools (>= 0.9.32), python3-zake (>= 0.1.6), subunit, testrepository (>= 0.0.17)
+Architecture: all
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-tooz
+Files:
+ 88c0ea4e628828a45d3e09732dda9b38 2974 python-tooz_0.4-1.dsc
+ 9dd022331f1b1575ff111c5d3f9a450b 27348 python-tooz_0.4.orig.tar.xz
+ a97b9b3bf71b9d49fca3f38dcc7ce729 3384 python-tooz_0.4-1.debian.tar.xz
+Uploaders: Julien Danjou <acid@debian.org>, Thomas Goirand <zigo@debian.org>, Mehdi Abaakouk <sileht@sileht.net>, Gonéri Le Bouder <goneri@debian.org>
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-tooz.git
+Vcs-Git: git://anonscm.debian.org/openstack/python-tooz.git
+Package-List:
+ python-tooz deb python optional arch=all
+ python-tooz-doc deb doc optional arch=all
+ python3-tooz deb python optional arch=all
+Checksums-Sha1:
+ c8337bf282b3cfa9bd27dde5beeab96c0133c5b1 2974 python-tooz_0.4-1.dsc
+ a15796108c6a95887ba8ff617253dd399d736a0d 27348 python-tooz_0.4.orig.tar.xz
+ b287b5d9549bb49abccc1c40c017f591a4a53389 3384 python-tooz_0.4-1.debian.tar.xz
+Checksums-Sha256:
+ 161cece5768f3053332a0e4cc2f049db00fac64483adba7cccb59f7cd8d68af3 2974 python-tooz_0.4-1.dsc
+ 587804863c4aa9e9c2a95e09cd8ce608bbb9da3ab00228f18ee7c95a4c550a53 27348 python-tooz_0.4.orig.tar.xz
+ 3c46a71280afd66c97692c3dd837eb0ec69f6f2277ffd0b24521e7f7f9281a7a 3384 python-tooz_0.4-1.debian.tar.xz
+
+Package: rake
+Binary: rake
+Version: 10.3.2-2
+Section: devel
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), gem2deb (>= 0.3.0~), ruby-minitest, ruby-session, ruby-flexmock, ruby-hoe
+Architecture: all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/r/rake
+Files:
+ 419b79bc6bd2e2f2fca74a25d63b4a41 2102 rake_10.3.2-2.dsc
+ 2005b4ecd01e372a89cab9ad4fd9c988 130432 rake_10.3.2.orig.tar.gz
+ e85e80b6e803900b3c2688bd242d1979 8244 rake_10.3.2-2.debian.tar.xz
+Uploaders:  Antonio Terceiro <terceiro@debian.org>, Paul van Tilburg <paulvt@debian.org>, Caitlin Matos <caitlin.matos@zoho.com>
+Homepage: https://github.com/jimweirich/rake
+Vcs-Browser: http://anonscm.debian.org/gitweb?p=pkg-ruby-extras/rake.git;a=summary
+Vcs-Git: git://anonscm.debian.org/pkg-ruby-extras/rake.git
+Testsuite: autopkgtest
+Package-List:
+ rake deb ruby optional arch=all
+Checksums-Sha1:
+ 81f48025de7c34c525c341cef900b32062a8e07a 2102 rake_10.3.2-2.dsc
+ 85fb6843d83492c318bea3dcac70cfd9768800e8 130432 rake_10.3.2.orig.tar.gz
+ 277628d947d45ac0ce1d62ab93694f1d97d99517 8244 rake_10.3.2-2.debian.tar.xz
+Checksums-Sha256:
+ aa5a2879b4bc5affaff0e7a7e0e2cc7b1d1c20498cb73a18dc4a9932e49e308c 2102 rake_10.3.2-2.dsc
+ e8428af5ee7dbffa556ad296749079551ede9c0b4737e5115d063204cbebb0e7 130432 rake_10.3.2.orig.tar.gz
+ 72cb059a239e34dbe064f2775b208d8f6cb83833c909c100df6714f225744b18 8244 rake_10.3.2-2.debian.tar.xz
+Ruby-Versions: all
+
+Package: sssd
+Binary: sssd, sssd-common, sssd-ad, sssd-ad-common, sssd-dbus, sssd-ipa, sssd-krb5, sssd-krb5-common, sssd-ldap, sssd-proxy, sssd-tools, libnss-sss, libpam-sss, libipa-hbac0, libipa-hbac-dev, libsss-idmap0, libsss-idmap-dev, libsss-nss-idmap0, libsss-nss-idmap-dev, libsss-sudo, python-libipa-hbac, python-libsss-nss-idmap, python-sss
+Version: 1.11.7-2
+Section: utils
+Maintainer: Debian SSSD Team <pkg-sssd-devel@lists.alioth.debian.org>
+Build-Depends: autopoint, debhelper (>= 9), dh-apparmor, dh-autoreconf, dh-systemd (>= 1.5), dnsutils, docbook-xml, docbook-xsl, dpkg-dev (>= 1.16.1~), krb5-config, libc-ares-dev, libcollection-dev, libdbus-1-dev, libdhash-dev, libglib2.0-dev, libini-config-dev, libkeyutils-dev [linux-any], libkrb5-dev (>= 1.12), libldap2-dev, libldb-dev, libltdl-dev, libnl-3-dev [linux-any], libnl-route-3-dev [linux-any], libnspr4-dev, libnss3-dev, libpam0g-dev | libpam-dev, libpcre3-dev, libpopt-dev, libsasl2-dev, libselinux1-dev [linux-any], libsemanage1-dev [linux-any], libtalloc-dev, libtdb-dev, libtevent-dev, libxml2-utils, lsb-release, python-dev (>= 2.6.6-3~), quilt, samba-dev (>= 2:4.1.13), xml-core, xsltproc
+Architecture: any
+Standards-Version: 3.9.5
+Format: 1.0
+Directory: pool/main/s/sssd
+Files:
+ f04cb8adddc9b5862aff585b03dbbdfb 3708 sssd_1.11.7-2.dsc
+ 2277cb3cb17449c5765f4d0b6627826d 3661227 sssd_1.11.7.orig.tar.gz
+ 9ae4d2f518a758c4ff2f426562247603 49213 sssd_1.11.7-2.diff.gz
+Uploaders: Timo Aaltonen <tjaalton@debian.org>
+Homepage: https://fedorahosted.org/sssd/
+Vcs-Browser: http://anonscm.debian.org/cgit/pkg-sssd/sssd.git
+Vcs-Git: git://anonscm.debian.org/pkg-sssd/sssd.git
+Package-List:
+ libipa-hbac-dev deb libdevel extra arch=any
+ libipa-hbac0 deb libs extra arch=any
+ libnss-sss deb utils extra arch=any
+ libpam-sss deb utils extra arch=any
+ libsss-idmap-dev deb libdevel extra arch=any
+ libsss-idmap0 deb libs extra arch=any
+ libsss-nss-idmap-dev deb libdevel extra arch=any
+ libsss-nss-idmap0 deb libs extra arch=any
+ libsss-sudo deb libs extra arch=any
+ python-libipa-hbac deb python extra arch=any
+ python-libsss-nss-idmap deb python extra arch=any
+ python-sss deb python extra arch=any
+ sssd deb metapackages extra arch=any
+ sssd-ad deb utils extra arch=any
+ sssd-ad-common deb utils extra arch=any
+ sssd-common deb utils extra arch=any
+ sssd-dbus deb utils extra arch=any
+ sssd-ipa deb utils extra arch=any
+ sssd-krb5 deb utils extra arch=any
+ sssd-krb5-common deb utils extra arch=any
+ sssd-ldap deb utils extra arch=any
+ sssd-proxy deb utils extra arch=any
+ sssd-tools deb utils extra arch=any
+Checksums-Sha1:
+ e412023e56eb2e4ab711dede500262d71a74acba 3708 sssd_1.11.7-2.dsc
+ 92fb5c8fd5a6bfd7520d7271d84b695177332f49 3661227 sssd_1.11.7.orig.tar.gz
+ edb1ea67fc1c21c9367a4228394647e8199f2175 49213 sssd_1.11.7-2.diff.gz
+Checksums-Sha256:
+ 03d12756e2bf3c35a147b8cf20688e47a2f22d5a7d14168e77159ea07c6da4f7 3708 sssd_1.11.7-2.dsc
+ ff12d5730a6d7d08fe11140aa58e544900b75c63902b7a07bbbc12d6a99cb5b5 3661227 sssd_1.11.7.orig.tar.gz
+ 123592957f758950d7de778afdbe837990a94fb8b170a74ffc0be5decebd81b5 49213 sssd_1.11.7-2.diff.gz
+
+Package: syslinux
+Binary: syslinux, syslinux-efi, extlinux, isolinux, pxelinux, syslinux-common, syslinux-utils
+Version: 3:6.03+dfsg-5
+Priority: optional
+Section: utils
+Maintainer: Daniel Baumann <mail@daniel-baumann.ch>
+Build-Depends: debhelper (>= 9), e2fslibs-dev, gcc-multilib [amd64], libc6-dev-i386 [amd64], nasm, python, uuid-dev
+Architecture: amd64 i386 all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/s/syslinux
+Files:
+ 3ed4d687f2f922cb7195ef24ed015242 2306 syslinux_6.03+dfsg-5.dsc
+ 613e89a11dc8746a87def6ac5fe48efa 7202936 syslinux_6.03+dfsg.orig.tar.xz
+ 1b8d7c7eedb998d569584f267fde17e6 29656 syslinux_6.03+dfsg-5.debian.tar.xz
+Homepage: http://www.syslinux.org/
+Vcs-Browser: http://daniel-baumann.ch/gitweb/?p=debian/packages/syslinux.git
+Vcs-Git: git://daniel-baumann.ch/git/debian/packages/syslinux.git
+Package-List:
+ extlinux deb admin optional arch=amd64,i386
+ isolinux deb admin optional arch=all
+ pxelinux deb admin optional arch=all
+ syslinux deb admin optional arch=amd64,i386
+ syslinux-common deb admin optional arch=all
+ syslinux-efi deb admin optional arch=all
+ syslinux-utils deb admin optional arch=amd64,i386
+Checksums-Sha1:
+ 87539738d51d995d8a2d6ee7333965a22e3f291e 2306 syslinux_6.03+dfsg-5.dsc
+ 6700388819fe821270f26fd311a89da34aa73f7b 7202936 syslinux_6.03+dfsg.orig.tar.xz
+ 373b02b13188420dcfc8aa061b85dc6559a81066 29656 syslinux_6.03+dfsg-5.debian.tar.xz
+Checksums-Sha256:
+ 35e42bccb2234dce2c2c27603806317f74012a8d186211a75744ce88d1f379ec 2306 syslinux_6.03+dfsg-5.dsc
+ 2fafb6a605eba845db29769633385ba8b1e992f61af81956a326133f06adff6f 7202936 syslinux_6.03+dfsg.orig.tar.xz
+ 17c94dbae4c61c4c11a408321786aeac77b24a659627ae934aaef6f2d6ae0beb 29656 syslinux_6.03+dfsg-5.debian.tar.xz
+
+Package: xauth
+Binary: xauth
+Version: 1:1.0.9-1ubuntu1
+Section: x11
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Build-Depends: debhelper (>= 8), dh-autoreconf, quilt, pkg-config, libx11-dev (>= 2:1.0.0), libxext-dev (>= 1:1.0.0), libxmuu-dev (>= 1:1.0.1), xutils-dev (>= 1:7.5+4), cmdtest
+Architecture: any
+Standards-Version: 3.9.2
+Format: 1.0
+Directory: pool/main/x/xauth
+Files:
+ 2d9fc83ab19b9db13d6d48565e1dbc4f 2033 xauth_1.0.9-1ubuntu1.dsc
+ def3b4588504ee3d8ec7be607826df02 197309 xauth_1.0.9.orig.tar.gz
+ 199c69642dc9d84aeea131001d4c8ac9 9092 xauth_1.0.9-1ubuntu1.diff.gz
+Vcs-Browser: http://git.debian.org/?p=pkg-xorg/app/xauth.git
+Vcs-Git: git://git.debian.org/git/pkg-xorg/app/xauth
+Package-List:
+ xauth deb x11 optional arch=any
+Checksums-Sha1:
+ 25c913795731dc83c92ac684e6e6524b75daa5fa 2033 xauth_1.0.9-1ubuntu1.dsc
+ 9d9a2f6c669bf54a1f201b32e3eab3ff393b0ed0 197309 xauth_1.0.9.orig.tar.gz
+ 64693af35b47d59205c6ccfb7eb5523ec7fa1618 9092 xauth_1.0.9-1ubuntu1.diff.gz
+Checksums-Sha256:
+ af51ba462793575c4109e9e845d3146ab4e12047b94ae3f1938c56b339bdd8d0 2033 xauth_1.0.9-1ubuntu1.dsc
+ 0709070caf23ba2fb99536907b75be1fe31853999c62d3e87a6a8d26ba8a8cdb 197309 xauth_1.0.9.orig.tar.gz
+ 9ca54f507d50cbefbd66cdafc15eedb51c8ead5edfa020438b5b23f8da7dad95 9092 xauth_1.0.9-1ubuntu1.diff.gz
+
+Package: xinit
+Binary: xinit
+Version: 1.3.4-1
+Section: x11
+Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Build-Depends: debhelper (>= 5.0.0), pkg-config, libx11-dev (>= 2:1.0.0), quilt, automake, x11proto-core-dev (>= 7.0.17), xutils-dev (>= 1:7.7+3)
+Architecture: any
+Standards-Version: 3.9.5
+Format: 1.0
+Directory: pool/main/x/xinit
+Files:
+ 86134e75a3acf4499f6892f618b7d833 1550 xinit_1.3.4-1.dsc
+ 91c5697345016ec7841f5e5fccbe7a4c 219410 xinit_1.3.4.orig.tar.gz
+ 5d45a098e5155b2fad3aa133157ddad0 20664 xinit_1.3.4-1.diff.gz
+Uploaders: Cyril Brulebois <kibi@debian.org>
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-xorg/app/xinit.git
+Vcs-Git: git://anonscm.debian.org/pkg-xorg/app/xinit
+Package-List:
+ xinit deb x11 optional arch=any
+Checksums-Sha1:
+ 74a032b72e192e71e24c6a0d7b3f278df13e6dc0 1550 xinit_1.3.4-1.dsc
+ 78d6457ba69f07ae1a727a88ae12fb3897874f72 219410 xinit_1.3.4.orig.tar.gz
+ f58641d3cd4db2aeedf770fc8c3f6f170af31db4 20664 xinit_1.3.4-1.diff.gz
+Checksums-Sha256:
+ feae82532260087dbfb20df542bc22d26bb7af9a50353538737225e7d00a1cfa 1550 xinit_1.3.4-1.dsc
+ 754c284875defa588951c1d3d2b20897d3b84918d0a97cb5a4724b00c0da0746 219410 xinit_1.3.4.orig.tar.gz
+ 362ee2a7930fce5ac94058c519cf4c3a5cf1c90ef5981b9a95665bec10bb4a29 20664 xinit_1.3.4-1.diff.gz
+
+Package: zope.interface
+Binary: python-zope.interface, python-zope.interface-dbg, python3-zope.interface, python3-zope.interface-dbg
+Version: 4.1.1-3.1
+Priority: optional
+Section: python
+Maintainer: Debian/Ubuntu Zope Team <pkg-zope-developers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-python, python-all-dev (>= 2.6.6-3~), python-all-dbg, python-setuptools, python-zope.event, python3-all-dev, python3-all-dbg, python3-setuptools, python3-zope.event
+Architecture: any
+Standards-Version: 3.9.5
+Format: 3.0 (quilt)
+Directory: pool/main/z/zope.interface
+Files:
+ 27317211427cd4276c30031848fbfa5b 2520 zope.interface_4.1.1-3.1.dsc
+ 7a47e05dfbd8d8b707c029c1ca13a4b8 150186 zope.interface_4.1.1.orig.tar.gz
+ 8455febbb42d31854228698473439295 5184 zope.interface_4.1.1-3.1.debian.tar.xz
+Uploaders: Brian Sutherland <brian@vanguardistas.net>, Fabio Tranchitella <kobold@debian.org>, Barry Warsaw <barry@debian.org>
+Homepage: http://pypi.python.org/pypi/zope.interface
+Vcs-Browser: http://svn.debian.org/viewsvn/pkg-zope/zope.interface/trunk
+Vcs-Svn: svn://anonscm.debian.org/pkg-zope/zope.interface/trunk
+Testsuite: autopkgtest
+Package-List:
+ python-zope.interface deb zope optional arch=any
+ python-zope.interface-dbg deb debug extra arch=any
+ python3-zope.interface deb zope optional arch=any
+ python3-zope.interface-dbg deb debug extra arch=any
+Checksums-Sha1:
+ 6caa2f7b1357b721ecc9549786619d15353359bd 2520 zope.interface_4.1.1-3.1.dsc
+ 849acb3ed5070c9792088a7a673b4286bb1062f6 150186 zope.interface_4.1.1.orig.tar.gz
+ 6ad48664ef3b05e43339eabdf64fca619823049a 5184 zope.interface_4.1.1-3.1.debian.tar.xz
+Checksums-Sha256:
+ 09db211c1fec00b1ae8cc663c1d9064527c7fadcc43da9aa2923c7c0f4c1e1fd 2520 zope.interface_4.1.1-3.1.dsc
+ 29bdc8cb9e5e8293588a3a78f45870ac3b03b0493865c0297990c204b5605281 150186 zope.interface_4.1.1.orig.tar.gz
+ f8feaf8f9d1c970a0423bd076c5f3ee035b64cdebfd9ca007052beb90b0a278c 5184 zope.interface_4.1.1-3.1.debian.tar.xz
+
