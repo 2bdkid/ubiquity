@@ -1,3 +1,12 @@
+partman-lvm (105) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * Don't list free devices that are too small (less than 4MB). They're
+    not going to be useful at all, and they're also likely to simply be
+    alignment artifacts that we can't use anyway. Closes: #775683
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 26 Jan 2015 08:15:59 +0100
+
 partman-lvm (103) unstable; urgency=low
 
   [ Updated translations ]
