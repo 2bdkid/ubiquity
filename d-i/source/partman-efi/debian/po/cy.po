@@ -3,28 +3,28 @@
 #
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
-# Catalan messages for debian-installer.
-# Copyright 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2012 Software in the Public Interest, Inc.
+# translation of Debian Installer templates to Welsh
+# Copyright (C) 2004-2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Jordi Mallach <jordi@debian.org>, 2002, 2003, 2004, 2006, 2007, 2008, 2010, 2012.
-# Guillem Jover <guillem@debian.org>, 2005, 2007.
+#
+# Jonathan Price <mynamesnotclive@notclive.co.uk>, 2008.
 #
 # Translations from iso-codes:
-# Alastair McKinstry <mckinstry@computer.org>, 2001.
-# Free Software Foundation, Inc., 2002,2004,2006
-# Orestes Mas i Casals <orestes@tsc.upc.es>, 2004-2006. (orestes: He usat la nomenclatura de http://www.traduim.com/)
-# Softcatalà <info@softcatala.org>, 2000-2001
-# Toni Hermoso Pulido <toniher@softcatala.cat>, 2010.
-# Traductor: Jordi Ferré <jordiferre@catalonia.altranet.fr>
+#   Alastair McKinstry <mckinstry@debian.org>, 2004.
+#   - translations from ICU-3.0
+#   Dafydd Harries <daf@muse.19inch.net>, 2002,2004,2006.
+#   Free Software Foundation, Inc., 2002,2004
+#   Alastair McKinstry <mckinstry@computer.org>, 2001
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: debian-installer wheezy\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: partman-efi@packages.debian.org\n"
 "POT-Creation-Date: 2014-11-13 22:01+0000\n"
-"PO-Revision-Date: 2012-10-18 18:34+0200\n"
-"Last-Translator: Jordi Mallach <jordi@debian.org>\n"
-"Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
-"Language: ca\n"
+"PO-Revision-Date: 2012-10-18 14:11-0000\n"
+"Last-Translator: Dafydd Tomos <l10n@da.fydd.org>\n"
+"Language-Team: Welsh <>\n"
+"Language: cy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -41,13 +41,13 @@ msgid ""
 "Most installations place the EFI partition on the first primary partition of "
 "the same hard disk that holds the root file system."
 msgstr ""
-"Per a iniciar el sistema nou, el microprogramari al vostre sistema Itanium "
-"carrega el carregador des de la seua partició EFI privada del disc dur. "
-"Aleshores el carregador inicia el sistema operatiu des d'aquesta mateixa "
-"partició. Una partició EFI té un sistema de fitxers FAT16 formatat en ella i "
-"el senyalador d'arrencable establert. La majoria de les instal·lacions "
-"ubiquen la partició EFI a la primera partició primària del mateix disc on "
-"està el sistema de fitxers arrel."
+"Er mwyn cychwyn eich system newydd, mae'r cadarnwedd ar eich system Itanium "
+"yn llwytho'r llwythwr ymgychwyn o'i rhaniad EFI preifat ar y disg galed. Yna "
+"mae'r llwythwr ymgychwyn yn llwytho'r system weithredu o'r un rhaniad. Mae "
+"gan rhaniad EFI system ffeiliau FAT16 wedi ei fformatio arni a'r faner "
+"cychwynadwy wedi ei osod. Mae'r rhan fwyaf o sefydliadau yn gosod y rhaniad "
+"EFI ar raniad cynradd cyntaf yr un disg galed sy'n dal y system ffeiliau "
+"gwraidd."
 
 #. Type: text
 #. Description
@@ -58,21 +58,21 @@ msgstr ""
 #: ../partman-efi.templates:2001 ../partman-efi.templates:4001
 #, fuzzy
 msgid "EFI System Partition"
-msgstr "Partició d'arrencada EFI"
+msgstr "Rhaniad ymgychwyn EFI"
 
 #. Type: boolean
 #. Description
 #. :sl5:
 #: ../partman-efi.templates:3001
 msgid "Go back to the menu and resume partitioning?"
-msgstr "Voleu tornar al menú i continuar amb la partició?"
+msgstr "Mynd yn ôl i'r ddewislen a mynd ymlaen gyda rhaniadu?"
 
 #. Type: boolean
 #. Description
 #. :sl5:
 #: ../partman-efi.templates:3001
 msgid "No EFI partition was found."
-msgstr "No s'ha trobat cap partició EFI."
+msgstr "Ni chanfuwyd rhaniad EFI."
 
 #. Type: text
 #. Description
@@ -95,7 +95,7 @@ msgstr "EFI-fat16"
 #. :sl5:
 #: ../partman-efi.templates:8001
 msgid "EFI partition too small"
-msgstr "La partició EFI és massa petita"
+msgstr "Mae'r rhaniad EFI yn rhy fach"
 
 #. Type: error
 #. Description
@@ -106,8 +106,8 @@ msgid ""
 "EFI System Partitions on this architecture cannot be created with a size "
 "less than 35 MB. Please make the EFI System Partition larger."
 msgstr ""
-"Les particions d'arrencada EFI en aquesta arquitectura no poden tindre una "
-"mida inferior als 35MB. Feu la partició d'arrencada EFI més gran."
+"Ni ellir creu rhaniadau ymgychwyn EFI ar y pensaernïaeth hwn gyda maint yn "
+"llai na 35MB. Gwnewch eich rhaniad ymgychwyn EFI yn fwy."
 
 #. Type: boolean
 #. Description
@@ -115,7 +115,7 @@ msgstr ""
 #: ../partman-efi.templates:9001
 #, fuzzy
 msgid "Force UEFI installation?"
-msgstr "Avorta la instal·lació"
+msgstr "Terfynu'r sefydliad"
 
 #. Type: boolean
 #. Description

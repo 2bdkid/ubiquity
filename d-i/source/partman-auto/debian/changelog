@@ -1,3 +1,16 @@
+partman-auto (118ubuntu5) vivid; urgency=medium
+
+  * Re-add recipes-ppc64el symlink. It was mistakenly dropped in the
+    last upload because I failed to notice it hadn't been committed.
+
+ -- dann frazier <dannf@ubuntu.com>  Mon, 02 Feb 2015 20:55:38 -0700
+
+partman-auto (118ubuntu4) vivid; urgency=medium
+
+  * Add arm64/efi recipe, reusing amd64/efi. (From Debian)
+
+ -- dann frazier <dannf@ubuntu.com>  Mon, 02 Feb 2015 19:37:10 -0700
+
 partman-auto (118ubuntu3) trusty; urgency=medium
 
   * Increase the EFI System Partition size slightly to ensure that it's at
