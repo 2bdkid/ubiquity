@@ -1,11 +1,20 @@
-partman-auto/text/multi_scheme ::
+partman-auto/text/home_scheme ::
 
 8 1 1 prep
 	$primary{ }
 	$bootable{ }
 	method{ prep } .
 
-570 3000 5000 $default_filesystem
+128 512 256 ext2
+	$defaultignore{ }
+	$primary{ }
+	method{ format }
+	format{ }
+	use_filesystem{ }
+	filesystem{ ext2 }
+	mountpoint{ /boot } .
+
+500 4000 7000 $default_filesystem
 	$lvmok{ }
 	$primary{ }
 	method{ format }
@@ -14,29 +23,13 @@ partman-auto/text/multi_scheme ::
 	$default_filesystem{ }
 	mountpoint{ / } .
 
-70 1500 3000 $default_filesystem
-	$lvmok{ }
-	method{ format }
-	format{ }
-	use_filesystem{ }
-	$default_filesystem{ }
-	mountpoint{ /var } .
-
 96 512 300% linux-swap
 	$lvmok{ }
 	$reusemethod{ }
 	method{ swap }
 	format{ } .
 
-20 300 400 $default_filesystem
-	$lvmok{ }
-	method{ format }
-	format{ }
-	use_filesystem{ }
-	$default_filesystem{ }
-	mountpoint{ /tmp } .
-
-300 3000 -1 $default_filesystem
+100 10000 -1 $default_filesystem
 	$lvmok{ }
 	method{ format }
 	format{ }
