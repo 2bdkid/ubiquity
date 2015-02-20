@@ -1,3 +1,18 @@
+ubiquity (2.21.12) vivid; urgency=medium
+
+  * Clean up after NetworkManager's system-connections files in prepare job
+    for oem-config: we shouldn't keep wireless connections (or any, really)
+    on the system that may have been setup by OEM, unless done *after* running
+    oem-prepare. (LP: #1418105)
+  * Force the GTK-based installer to be visible when starting, this should fix
+    it being running but hidden on some Xubuntu only-ubiquity installs, which
+    meant users had to Alt-Tab to it and switch language for it to appear.
+    (LP: #1423161)
+  * Automatic update of included source packages: grub-installer
+    1.78ubuntu25.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Fri, 20 Feb 2015 17:15:16 -0500
+
 ubiquity (2.21.11) vivid; urgency=medium
 
   * Be sure to include the top level linux-signed-* metapackage in our

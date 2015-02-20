@@ -113,7 +113,7 @@ grub_probe () {
 		apt-install grub-common
 		is_grub_common_installed=true
 	fi
-	$chroot $ROOT grub-probe $@
+	$chroot $ROOT grub-probe $@ | head -n1
 }
 
 device_map=$ROOT/boot/grub/device.map
