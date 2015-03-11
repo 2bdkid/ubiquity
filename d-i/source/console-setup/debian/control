@@ -4,103 +4,18 @@ Priority: optional
 Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Anton Zinoviev <zinoviev@debian.org>, Christian Perrier <bubulle@debian.org>
-Build-Depends-Indep: perl, libxml-parser-perl, xkb-data (>= 1.6), xkb-data-i18n, keymapper (>= 0.5.3-7)
-Build-Depends: debhelper (>= 7), po-debconf, bdfresize, liblocale-gettext-perl,
- language-pack-af,
- language-pack-an,
- language-pack-ar,
- language-pack-as,
- language-pack-ast,
- language-pack-az,
- language-pack-be,
- language-pack-bg,
- language-pack-bn,
- language-pack-bo,
- language-pack-br,
- language-pack-bs,
- language-pack-ca,
- language-pack-crh,
- language-pack-cs,
- language-pack-cy,
- language-pack-da,
- language-pack-de,
- language-pack-dz,
- language-pack-el,
- language-pack-en,
- language-pack-eo,
- language-pack-es,
- language-pack-et,
- language-pack-eu,
- language-pack-fa,
- language-pack-fi,
- language-pack-fr,
- language-pack-ga,
- language-pack-gd,
- language-pack-gl,
- language-pack-gu,
- language-pack-he,
- language-pack-hi,
- language-pack-hr,
- language-pack-hu,
- language-pack-id,
- language-pack-is,
- language-pack-it,
- language-pack-ja,
- language-pack-ka,
- language-pack-kk,
- language-pack-km,
- language-pack-kn,
- language-pack-ko,
- language-pack-ku,
- language-pack-lt,
- language-pack-lv,
- language-pack-mai,
- language-pack-mk,
- language-pack-ml,
- language-pack-mn,
- language-pack-mr,
- language-pack-ms,
- language-pack-my,
- language-pack-nb,
- language-pack-nds,
- language-pack-ne,
- language-pack-nl,
- language-pack-nn,
- language-pack-oc,
- language-pack-or,
- language-pack-pa,
- language-pack-pl,
- language-pack-pt,
- language-pack-ro,
- language-pack-ru,
- language-pack-si,
- language-pack-sk,
- language-pack-sl,
- language-pack-sq,
- language-pack-sr,
- language-pack-sv,
- language-pack-ta,
- language-pack-te,
- language-pack-tg,
- language-pack-th,
- language-pack-tr,
- language-pack-ug,
- language-pack-uk,
- language-pack-uz,
- language-pack-vi,
- language-pack-xh,
- language-pack-zh-hans,
- language-pack-zh-hant,
-Standards-Version: 3.8.3
-XS-Debian-Vcs-Browser: http://git.debian.org/?p=d-i/console-setup.git
-XS-Debian-Vcs-Git: git://git.debian.org/d-i/console-setup.git
+Build-Depends-Indep: xkb-data (>= 1.6), xkb-data-i18n, keymapper (>= 0.5.3-7), sharutils, locales
+Build-Depends: perl, debhelper (>= 9), po-debconf, libxml-parser-perl, bdfresize, liblocale-gettext-perl
+Standards-Version: 3.9.1
+XS-Debian-Vcs-Browser: http://anonscm.debian.org/gitweb/?p=d-i/console-setup.git
+XS-Debian-Vcs-Git: git://anonscm.debian.org/d-i/console-setup.git
 Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/console-setup/ubuntu
 
 Package: keyboard-configuration
 Section: utils
 Architecture: all
-Depends: debconf (>= 1.5.34), ${misc:Depends}, liblocale-gettext-perl
-Conflicts: console-setup (<< 1.47), console-setup-mini (<< 1.47)
+Depends: debconf (>= 1.5.34), ${misc:Depends}, liblocale-gettext-perl, initscripts
+Breaks: console-setup (<< 1.71), console-setup-mini (<< 1.47)
 Replaces: console-setup (<< 1.47), console-setup-mini (<< 1.47)
 Description: system-wide keyboard preferences
  This package maintains the keyboard preferences in
@@ -111,20 +26,19 @@ Description: system-wide keyboard preferences
 Package: console-setup
 Section: utils
 Architecture: all
-Depends: debconf (>= 1.5.34), xkb-data (>= 0.9), keyboard-configuration, initramfs-tools (>= 0.85eubuntu12), kbd (>= 1.15-1ubuntu3), ${misc:Depends}
+Depends: debconf (>= 1.5.34), console-setup-linux, xkb-data (>= 0.9), keyboard-configuration (= ${source:Version}), initramfs-tools (>= 0.85eubuntu12), ${misc:Depends}
 Suggests: lsb-base (>= 3.0-6), locales
-Conflicts: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6), console-terminus
-Provides: console-terminus
-Replaces: console-terminus
+Conflicts: console-setup-mini
+Breaks: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
 Description: console font and keymap setup program
- This package provides the Linux console with the same
- keyboard configuration scheme as the X Window System. As a result,
- there is no need to duplicate or change the keyboard files just to
- make simple customizations such as the use of dead keys, the key
- functioning as AltGr or Compose key, the key(s) to switch between
- Latin and non-Latin mode, etc.
+ This package provides the console with the same keyboard
+ configuration scheme as the X Window System. As a result, there is no
+ need to duplicate or change the keyboard files just to make simple
+ customizations such as the use of dead keys, the key functioning as
+ AltGr or Compose key, the key(s) to switch between Latin and
+ non-Latin mode, etc.
  .
- The package also contains console fonts supporting many of the
+ The package also installs console fonts supporting many of the
  world's languages.  It provides an unified set of font faces - the
  classic VGA, the simplistic Fixed, and the cleaned Terminus,
  TerminusBold and TerminusBoldVGA.
@@ -134,32 +48,38 @@ Section: utils
 Priority: extra
 Architecture: all
 Recommends: kbd | console-tools
-Depends: debconf (>= 0.5) | debconf-2.0, keyboard-configuration, ${misc:Depends}
+Depends: console-setup-linux, debconf (>= 0.5) | debconf-2.0, keyboard-configuration (= ${source:Version}), ${misc:Depends}
 Suggests: lsb-base (>= 3.0-6)
-Conflicts: console-setup, console-terminus, lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
-Description: console font and keymap setup program - reduced version
- This package provides the Linux console with the same
- keyboard configuration scheme as the X Window System. As a result,
- there is no need to duplicate or change the keyboard files just to
- make simple customizations such as the use of dead keys, the key
- functioning as AltGr or Compose key, the key(s) to switch between
- Latin and non-Latin mode, etc.
+Conflicts: console-setup
+Breaks: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
+Description: console font and keymap setup program - reduced version for Linux
+ This package provides the console with the same keyboard
+ configuration scheme as the X Window System. As a result, there is no
+ need to duplicate or change the keyboard files just to make simple
+ customizations such as the use of dead keys, the key functioning as
+ AltGr or Compose key, the key(s) to switch between Latin and
+ non-Latin mode, etc.
  .
- The package also contains console fonts supporting many of the
- world's languages.  It provides a unified set of font faces - the
- classic VGA, the simplistic Fixed, and the clean Terminus,
- TerminusBold, and TerminusBoldVGA.
- .
- This package can be useful for
- handhelds or other devices with small storage space.
- .
- The package supports only UTF-8. Legacy 8-bit encodings are not
- supported.
+ This package can be useful for handhelds or other devices with small
+ storage space.
 
-Package: bdf2psf
-Architecture: all
+Package: console-setup-linux
 Section: utils
 Priority: optional
+Architecture: all
+Depends: kbd (>= 1.15-1ubuntu3), keyboard-configuration (= ${source:Version}), ${misc:Depends}
+Suggests: console-setup
+Breaks: console-terminus, console-cyrillic (<= 0.9-11), console-setup (<< 1.71)
+Replaces: console-terminus, console-setup (<< 1.71)
+Provides: console-terminus
+Description: Linux specific part of console-setup
+ This package includes fonts in psf format and definitions of various
+ 8-bit charmaps.
+
+Package: bdf2psf
+Section: utils
+Priority: optional
+Architecture: all
 Depends: perl, ${misc:Depends}
 Description: font converter to generate console fonts from BDF source fonts
  This package provides a command-line converter that can be used in
@@ -182,12 +102,12 @@ Description: font converter to generate console fonts from BDF source fonts
 Package: console-setup-udeb
 Section: debian-installer
 Priority: extra
-Depends: console-setup-ekmap, archdetect, cdebconf-udeb, kbd-udeb, cdebconf-newt-detect-keys, ${misc:Depends}
+Depends: archdetect, cdebconf-udeb, kbd-udeb | kbdcontrol-udeb | hurd-udeb, cdebconf-newt-detect-keys, ${misc:Depends}
 Provides: keyboard-setup
 Architecture: all
 Description: Configure the keyboard
- This is an experimental replacement of kbd-chooser.
-XC-Package-Type: udeb
+ Keyboard configurator for Debian Installer based on console-setup
+Package-Type: udeb
 XB-Installer-Menu-Item: 1200
 
 Package: console-setup-amiga-ekmap
@@ -196,8 +116,8 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for Amiga keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for Amiga keyboards
+Package-Type: udeb
 
 Package: console-setup-ataritt-ekmap
 Provides: console-setup-ekmap
@@ -205,8 +125,8 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for Atari TT keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for Atari TT keyboards
+Package-Type: udeb
 
 Package: console-setup-macintoshold-ekmap
 Provides: console-setup-ekmap
@@ -214,8 +134,8 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for old-style Macintosh keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for old-style Macintosh keyboards
+Package-Type: udeb
 
 Package: console-setup-pc-ekmap
 Provides: console-setup-ekmap
@@ -223,8 +143,8 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for PC keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for PC keyboards
+Package-Type: udeb
 
 Package: console-setup-sun4-ekmap
 Provides: console-setup-ekmap
@@ -232,8 +152,8 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for Sun4 keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for Sun4 keyboards
+Package-Type: udeb
 
 Package: console-setup-sun5-ekmap
 Provides: console-setup-ekmap
@@ -241,14 +161,47 @@ Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: encoded keyboard layouts for Sun5 keyboards
-XC-Package-Type: udeb
+Description: encoded Linux keyboard layouts for Sun5 keyboards
+Package-Type: udeb
 
-Package: console-setup-fonts-udeb
+Package: console-setup-pc-ekbd
+Provides: console-setup-ekmap
 Section: debian-installer
 Priority: extra
 Depends: ${misc:Depends}
 Architecture: all
-Description: console fonts for Debian Installer
-XC-Package-Type: udeb
+Description: encoded FreeBSD keyboard layouts for PC keyboards
+Package-Type: udeb
+
+Package: console-setup-linux-fonts-udeb
+Section: debian-installer
+Priority: extra
+Depends: ${misc:Depends}, kbd-udeb
+Architecture: all
+Description: Linux console fonts for Debian Installer
+Package-Type: udeb
+
+Package: console-setup-freebsd-fonts-udeb
+Section: debian-installer
+Priority: extra
+Depends: ${misc:Depends}
+Architecture: all
+Description: FreeBSD console fonts for Debian Installer
+Package-Type: udeb
+
+Package: console-setup-linux-charmaps-udeb
+Section: debian-installer
+Priority: extra
+Depends: ${misc:Depends}
+Architecture: all
+Description: Linux 8-bit charmaps for console-setup-udeb
+Package-Type: udeb
+
+Package: console-setup-freebsd-charmaps-udeb
+Section: debian-installer
+Priority: extra
+Depends: ${misc:Depends}
+Architecture: all
+Description: FreeBSD 8-bit charmaps for console-setup-udeb
+Package-Type: udeb
 

@@ -1,3 +1,11 @@
+grub-installer (1.78ubuntu26) vivid; urgency=medium
+
+  * Revert changes from 1.78ubuntu25:
+    * grub_probe(): return a single line in BTRFS multi-disk RAID configurations
+      - It breaks bootloader install on LVM. (LP: #1427821)
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 10 Mar 2015 15:33:01 -0400
+
 grub-installer (1.78ubuntu25) vivid; urgency=medium
 
   * grub_probe(): return a single line in BTRFS multi-disk RAID configurations

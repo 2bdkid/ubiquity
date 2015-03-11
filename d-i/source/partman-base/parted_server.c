@@ -1799,7 +1799,7 @@ command_get_file_system()
                 if (fstype == NULL) {
                         oprintf("none\n");
                 } else {
-                        if (0 == strncmp(part->fs_type->name, "linux-swap", 10))
+                        if (0 == strncmp(fstype->name, "linux-swap", 10))
                                 oprintf("linux-swap\n");
                         else
                                 oprintf("%s\n", fstype->name);

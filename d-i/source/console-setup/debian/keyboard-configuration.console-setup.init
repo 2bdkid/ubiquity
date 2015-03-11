@@ -18,6 +18,13 @@ set -e
 
 test -f /usr/bin/loadkeys || exit 0
 
+if [ -f /etc/default/locale ]; then
+    # In order to permit auto-detection of the charmap when
+    # console-setup-mini operates without configuration file.
+    . /etc/default/locale
+    export LANG
+fi
+
 if [ -f /lib/lsb/init-functions ]; then
     . /lib/lsb/init-functions
 else
@@ -35,7 +42,7 @@ else
 fi
 
 case "$1" in
-    stop)
+    stop|status)
         # console-setup isn't a daemon
         ;;
     start|force-reload|restart|reload)
@@ -46,8 +53,9 @@ case "$1" in
 	fi
 	;;
     *)
-        echo 'Usage: /etc/init.d/console-setup {start|reload|restart|force-reload|stop}'
+        echo 'Usage: /etc/init.d/console-setup {start|reload|restart|force-reload|stop|status}'
         exit 1
         ;;
 esac
 
+exit 0
