@@ -1,3 +1,17 @@
+partman-base (181ubuntu2) vivid; urgency=medium
+
+  [ Mauricio Faria de Oliveira ]
+  * Fix multipath support: (LP: #1430074)
+    - lib/base.sh: is_multipath_part(): Use 'p' (not '-part') as multipath
+      disk-partition separator.
+    - lib/base.sh: humandev(): Use 'p' (not '-part') as multipath
+      disk-partition separator.
+    - lib/base.sh: humandev(): Accept spaces in multipath WWID.
+    - init.d/parted: part_of_multipath(): Update grep expression for more
+      recent output of 'multipath -l'.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 17 Mar 2015 00:06:34 -0400
+
 partman-base (181ubuntu1) vivid; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

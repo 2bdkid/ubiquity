@@ -1,3 +1,17 @@
+grub-installer (1.78ubuntu27) vivid; urgency=medium
+
+  [ Mauricio Faria de Oliveira ]
+  * grub-installer: Use 'p' (not '-part') as multipath disk-partition
+    separator. This fixes the check of whether the boot file system is on
+    multipath (i.e., $disc_offered is a multipath partition). (LP: #1430074)
+  * Better handle PReP partitions on ppc64el: (LP: #1415918)
+    - prep-bootdev: add '-l' option to list all PReP partitions.  With this,
+      it's possible to do more things to select a PReP partition.
+    - grub-installer [ppc64el]: bootdev/wipe_bootdev: prefer PReP partition in
+      the same disk as the boot file system partition ($disc_offered).
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 17 Mar 2015 00:25:13 -0400
+
 grub-installer (1.78ubuntu26) vivid; urgency=medium
 
   * Revert changes from 1.78ubuntu25:
