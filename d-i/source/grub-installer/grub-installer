@@ -1024,6 +1024,12 @@ make_device_map () {
 }
 
 make_active_partition () {
+	if [ "$grub_package" != "grub-pc" ]; then
+	# only do this for grub-pc since on EFI $bootdev is a dummy argument
+	# and looking for a partition table on the wrong or non existing disk
+	# crashes the installer LP:#1303790
+		return
+	fi
 	bootdisk=
 	bootpart=
 	case $bootdev in
