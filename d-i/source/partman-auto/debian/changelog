@@ -1,3 +1,11 @@
+partman-auto (125ubuntu2) vivid; urgency=medium
+
+  * Use fat32 rather than free as a filesystem type for the efi partitions
+    for amd64, arm64, i386; otherwise it's seen as an ext2 partition by
+    partman-efi, which causes errors or missing settings. (LP: #1428877)
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 14 Apr 2015 11:29:20 -0500
+
 partman-auto (125ubuntu1) vivid; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:
