@@ -1,3 +1,21 @@
+user-setup (1.48ubuntu5) vivid; urgency=medium
+
+  * Fix typo in previous upload: AutomaticLogin line for gdm was containing
+    an extra slash.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Thu, 16 Apr 2015 13:37:08 -0500
+
+user-setup (1.48ubuntu4) vivid; urgency=medium
+
+  [ Jörn Schönyan ]
+  * Handle SDDM autologin with other DMs than Plasma (LP: #1423103)
+
+  [ Tim Lunn ]
+  * Don't set TimedLogin, this gets set when Auto login is selected
+    in ubiquity but there is no UI to unset it (LP: #1412791)
+
+ -- Tim Lunn <tim@feathertop.org>  Wed, 15 Apr 2015 14:39:37 -0500
+
 user-setup (1.48ubuntu3) utopic; urgency=medium
 
   [ KDEUSER56 / Rohan Garg ]
