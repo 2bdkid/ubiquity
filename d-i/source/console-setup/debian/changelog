@@ -1,3 +1,13 @@
+console-setup (1.108ubuntu5) vivid; urgency=medium
+
+  * Reinstate checking for XKBLAYOUT being in the config file: this handles
+    the cases where installs done with ubiquity don't have their debconf seen
+    flag set for model/layout questions. If layout is already configure, lower
+    the corresponding question's priority to medium so we don't ask it again.
+    (LP: #1446231)
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 21 Apr 2015 17:19:21 -0400
+
 console-setup (1.108ubuntu4) vivid; urgency=medium
 
   * Add systemd unit for console-setup. That avoids waiting for $remote_fs
