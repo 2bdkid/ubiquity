@@ -196,10 +196,9 @@ class Wizard(BaseFrontend):
             elif isinstance(widget, gtkwidgets.StateBox):
                 label = widget.label
 
-            # If we're runing Orca, we want to be able to read labels.
             if label:
-                label.set_property('can-focus', self.screen_reader)
-                label.set_selectable(self.screen_reader)
+                label.set_selectable(True)
+                label.set_property('can-focus', False)
 
         BaseFrontend.__init__(self, distro)
         self.previous_excepthook = sys.excepthook

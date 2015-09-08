@@ -1,3 +1,12 @@
+user-setup (1.48ubuntu6) wily; urgency=medium
+
+  * Update autologin LightDM confgiguration to used [Seat:*] sections instead of
+    deprecated [SeatDefaults]
+  * Fix autologin LightDM confgiguration to not set innapropriate setting
+    autologin-session to an invalid value (LP: #1484083)
+
+ -- Robert Ancell <robert.ancell@canonical.com>  Tue, 18 Aug 2015 17:00:03 +1200
+
 user-setup (1.48ubuntu5) vivid; urgency=medium
 
   * Fix typo in previous upload: AutomaticLogin line for gdm was containing

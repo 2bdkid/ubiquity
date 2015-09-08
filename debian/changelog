@@ -1,3 +1,34 @@
+ubiquity (2.21.28) wily; urgency=medium
+
+  [ Sean Davis ]
+  * bin/ubiquity-dm: Draw the ubiquity desktop with feh under
+    Xfce environments (LP: #1437180)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Automatic update of included source packages: apt-setup
+    1:0.80ubuntu8, base-installer 1.144ubuntu2, flash-kernel
+    3.0~rc.4ubuntu55, hw-detect 1.95ubuntu7, partconf 1.48, partman-base
+    187ubuntu1, partman-basicmethods 60, partman-jfs 46, partman-lvm
+    110, partman-newworld 33, partman-xfs 56, user-setup 1.48ubuntu6.
+  * Update timezone map to add North Korea (Pyongyang time). (LP: #1462688)
+  * Fix instances of PEP8 warning: W503 line break before binary operator.
+  * Ignore the PEP8 error E402 (imports at beginning of file). There are a few
+    instances where we need to set sys.path to where ubiquity files are.
+  * Fix some more style errors from PEP8.
+  * autogen.sh: Use any available version of automake/aclocal.
+
+  [ Luke Yelavich ]
+  * ubiquity/frontend/gtk_ui.py: We do not want to be able to focus labels
+    with Orca at all. It negatively affects the install experience and
+    tab/shift tab flow through the installer pages, and prevents Orca
+    presenting label relationships with other widgets
+
+  [ Max Brustkern ]
+  * Update the automated autopilot installation in the vm: get the updated
+    sources.list picked up by hooks by being in the right location.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 08 Sep 2015 10:58:17 -0400
+
 ubiquity (2.21.27) wily; urgency=medium
 
   * Automatic update of included source packages: choose-mirror
