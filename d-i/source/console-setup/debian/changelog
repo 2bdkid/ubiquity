@@ -1,3 +1,10 @@
+console-setup (1.108ubuntu6) wily; urgency=medium
+
+  * debian/control: allow dracut to be installable by adding an alternate
+    depends on linux-initramfs-tool for console-setup.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 08 Sep 2015 22:36:52 -0400
+
 console-setup (1.108ubuntu5) vivid; urgency=medium
 
   * Reinstate checking for XKBLAYOUT being in the config file: this handles
