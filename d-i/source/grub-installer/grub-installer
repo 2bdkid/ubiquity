@@ -324,7 +324,7 @@ case $prefix in
     /dev/loop)
 	disc_offered_devfs="$bootfs"
 	;;
-    /dev/[hmsv]d[a-z0-9]|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*|/dev/fio[a-z]|/dev/nvme[0-9]n[0-9])
+    /dev/[hmsv]d[a-z0-9]*|/dev/xvd[a-z]|/dev/cciss/c[0-9]d[0-9]*|/dev/ida/c[0-9]d[0-9]*|/dev/rs/c[0-9]d[0-9]*|/dev/mmcblk[0-9]|/dev/ad[0-9]*|/dev/da[0-9]*|/dev/fio[a-z]|/dev/nvme[0-9]n[0-9])
 	disc_offered_devfs="$prefix"
 	;;
     *)
