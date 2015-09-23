@@ -331,10 +331,10 @@ EOF
 autologin-user=$USER\n\
 autologin-user-timeout=0"
 				if ! grep -qs '^autologin-user' $LightDMCustomFile; then
-					if ! grep -qs '^\[Seat:*\]' $LightDMCustomFile; then
+					if ! grep -qs '^\[Seat:\*\]' $LightDMCustomFile; then
 						echo '[Seat:*]' >> $LightDMCustomFile
 					fi
-					sed -i "s/\[Seat:*\]/\[Seat:*\]\n$AutologinParameters/" $LightDMCustomFile
+					sed -i "s/\[Seat:\*\]/\[Seat:\*\]\n$AutologinParameters/" $LightDMCustomFile
 				#oem config scenario
 				else
 					sed -i "s/^\(\(str  *\)\?autologin-user\)=.*$/\1=$USER/g;" $ROOT/etc/lightdm/lightdm.conf
