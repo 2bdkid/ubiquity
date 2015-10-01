@@ -48,7 +48,7 @@ while :; do
 		select_zone=1
 		# If the zone was automatically detected, then skip asking
 		# the user to select a timezone, otherwise ask. 
-		if [ -n "$detected" ]; then
+		if [ -n "$detected" ] && [ "$detected" != "None" ]; then
 			db_get tzsetup/detected
 			if [ "$RET" = true ]; then
 				select_zone=0
