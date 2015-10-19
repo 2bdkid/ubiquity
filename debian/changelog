@@ -1,3 +1,12 @@
+ubiquity (2.21.35) wily; urgency=medium
+
+  * scripts/plugininstall.py: Ignore ':arch' in package names when deciding
+    which packages to keep after installing. We keep track of installed
+    packages without arch, so should remove it when doing this comparison.
+    (LP: #1503297)
+
+ -- Iain Lane <iain.lane@canonical.com>  Mon, 19 Oct 2015 17:31:46 +0100
+
 ubiquity (2.21.34) wily; urgency=medium
 
   [ Mathieu Trudel-Lapierre ]
