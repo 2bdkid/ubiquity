@@ -1,3 +1,12 @@
+grub-installer (1.78ubuntu30) wily; urgency=medium
+
+  * Multipath device names have changed; so since multipath-tools 0.5.0 rather
+    than mpath[0-9]+p[0-9]+, they are now named mpath[a-z]+[0-9]+. Fix this so
+    grub-installer has a chance of properly installing on multipath devices
+    when not using grub-ieee1275.
+
+ -- Mathieu Trudel-Lapierre <mathieu-tl@ubuntu.com>  Tue, 20 Oct 2015 14:06:44 +0100
+
 grub-installer (1.78ubuntu29) wily; urgency=medium
 
   * Properly handle systems on which there may be more than 26 disks, and our
