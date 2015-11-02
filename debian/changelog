@@ -1,3 +1,14 @@
+ubiquity (2.21.38) xenial; urgency=medium
+
+  * d-i/sources.list: switch to xenial.
+  * scripts/plugininstall.py: Ensure /etc/mtab is a symlink to
+    /proc/self/mounts. Same fix as in finish-install 2.58.
+    (Closes: #802184, #802187; LP: #1511376)
+  * Automatic update of included source packages: choose-mirror
+    2.65ubuntu1, partman-lvm 111.
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Sun, 01 Nov 2015 21:21:28 -0600
+
 ubiquity (2.21.37) wily; urgency=medium
 
   * Fix the :arch ignoring bits harder, by doing the same change as 2.21.35

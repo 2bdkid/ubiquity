@@ -264,6 +264,7 @@ static int cross_validate_release(struct release_t *release) {
 
 	free(t_release.name);
 	free(t_release.suite);
+	free(t_release.archs);
 
 	return ret;
 }
@@ -318,9 +319,9 @@ static int get_release(struct release_t *release, const char *name) {
 	char *command;
 	FILE *f = NULL;
 	char *wget_options, *hostname, *directory;
-	char line[80];
+	char line[BUFFER_LENGTH];
 	char *p;
-	char buf[SUITE_LENGTH];
+	char buf[BUFFER_LENGTH];
 
 	if (base_on_cd && ! manual_entry) {
 		/* We have the base system on the CD, so instead of trying
@@ -361,7 +362,7 @@ static int get_release(struct release_t *release, const char *name) {
 	}
 
 	wget_options = get_wget_options();
-	command = xasprintf("wget %s %s://%s%s/dists/%s/Release -O - | grep -E '^(Suite|Codename):'",
+	command = xasprintf("wget %s %s://%s%s/dists/%s/Release -O - | grep -E '^(Suite|Codename|Architectures):'",
 			    wget_options, protocol, hostname, directory, name);
 	di_log(DI_LOG_LEVEL_DEBUG, "command: %s", command);
 	f = popen(command, "r");
@@ -377,12 +378,14 @@ static int get_release(struct release_t *release, const char *name) {
 			if (line[strlen(line) - 1] == '\n')
 				line[strlen(line) - 1] = '\0';
 			if ((value = strstr(line, ": ")) != NULL) {
-				strncpy(buf, value + 2, SUITE_LENGTH - 1);
-				buf[SUITE_LENGTH - 1] = '\0';
+				strncpy(buf, value + 2, BUFFER_LENGTH - 1);
+				buf[BUFFER_LENGTH - 1] = '\0';
 				if (strncmp(line, "Codename:", 9) == 0)
 					release->name = strdup(buf);
 				if (strncmp(line, "Suite:", 6) == 0)
 					release->suite = strdup(buf);
+				if (strncmp(line, "Architectures:", 14) == 0)
+					release->archs = strdup(buf);
 			}
 		}
 		if (release->name != NULL && strcmp(release->name, name) == 0)
@@ -393,6 +396,16 @@ static int get_release(struct release_t *release, const char *name) {
 		if ((release->name != NULL || release->suite != NULL) &&
 		    !(release->status & IS_VALID))
 			log_invalid_release(name, "Suite or Codename");
+
+		/* Does the release include this arch? */
+		if (release->archs != NULL && strstr(release->archs, ARCH_TEXT) == NULL) {
+			/* No:  disregard this release */
+			log_invalid_release(name, "Architectures");
+			release->status &= ~IS_VALID;
+			free(release->archs);
+			free(release->name);
+			release->name = NULL;
+		}
 
 		/* Cross-validate the Release file */
 		if (release->status & IS_VALID)
@@ -498,6 +511,7 @@ static int find_releases(void) {
 		free(default_suite);
 		free(release.name);
 		free(release.suite);
+		free(release.archs);
 
 		debconf_input(debconf, "critical", DEBCONF_BASE "bad");
 		if (debconf_go(debconf) == 30)
@@ -764,9 +778,18 @@ static int validate_mirror(void) {
 	} else {
 		/* check if manually entered mirror is basically ok */
 		debconf_get(debconf, host);
-		if (debconf->value == NULL || strcmp(debconf->value, "") == 0 ||
-		    strchr(debconf->value, '/') != NULL)
+		if (debconf->value == NULL || strcmp(debconf->value, "") == 0)
 			valid = 0;
+		else {
+			const char *host_value = debconf->value;
+			char *scheme_end = strstr(host_value, "://");
+			if (scheme_end != NULL) {
+				host_value = scheme_end + sizeof("://") - 1;
+				debconf_set(debconf, host, host_value);
+			}
+			if (strchr(host_value, '/') != NULL)
+				valid = 0;
+		}
 		debconf_get(debconf, dir);
 		if (debconf->value == NULL || strcmp(debconf->value, "") == 0)
 			valid = 0;
@@ -1033,6 +1056,7 @@ int main (int argc, char **argv) {
 	for (i=0; releases[i].name != NULL; i++) {
 		free(releases[i].name);
 		free(releases[i].suite);
+		free(releases[i].archs);
 	}
 
 	return (state >= 0) ? 0 : 10; /* backed all the way out */
