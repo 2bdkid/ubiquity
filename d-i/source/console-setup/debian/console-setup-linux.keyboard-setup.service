@@ -1,0 +1,14 @@
+[Unit]
+Description=Set the console keyboard layout
+DefaultDependencies=no
+Before=local-fs-pre.target
+Wants=local-fs-pre.target
+ConditionPathExists=/bin/setupcon
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/keyboard-setup.sh start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

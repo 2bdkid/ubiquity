@@ -94,30 +94,13 @@ printf STDERR "Compiling compact keymaps for %s...\n", $model;
 for my $layout (values %KeyboardNames::layouts) {
     next if ($layout eq 'nec/jp');
     next if ($layout eq 'nec_vndr/jp');
-    my $actual_layout = (($layout eq 'lt') ? 'lt,lt'
-			 : (($layout eq 'me') ? 'me,me'
-			    : (($layout eq 'rs') ? 'rs,rs'
-			       : (($nonlatin =~ / $layout /)
-			          ? "us,$layout" : $layout))));
+    my $actual_layout = (($layout eq 'rs') ? 'rs,rs'
+			 : (($layout eq 'lt') ? 'lt,lt'
+			    : (($nonlatin =~ / $layout /)
+			       ? "us,$layout" : $layout)));
     for my $variant ('', values %{$KeyboardNames::variants{$layout}}) {
 	my $actual_variant;
-	if ($actual_layout eq 'lt,lt') {
-	    if ($variant eq 'us') {
-		$actual_variant = "us,basic";
-	    } else {
-		$actual_variant = "$variant,us";
-	    }
-	} elsif ($actual_layout eq 'me,me') {
-	    if ($variant =~ /latin/) {
-		$actual_variant = "$variant,$variant";
-	    } elsif ($variant eq 'cyrillicyz') {
-		$actual_variant = "latinyz,$variant";
-	    } elsif ($variant eq 'cyrillicalternatequotes') {
-		$actual_variant = "latinalternatequotes,$variant";
-	    } else {
-		$actual_variant = "basic,$variant";
-	    }
-	} elsif ($actual_layout eq 'rs,rs') {
+	if ($actual_layout eq 'rs,rs') {
 	    if ($variant =~ /latin/) {
 		$actual_variant = "$variant,$variant";
 	    } elsif ($variant eq 'yz') {
@@ -137,7 +120,8 @@ for my $layout (values %KeyboardNames::layouts) {
 	    execute ("./ckbcomp $freebsd -compact -I. -I${xkbdir} -rules xorg"
 		     ." -model $model"
 		     ." -layout $actual_layout -variant $actual_variant"
-		     ." >$dir/$model-$layout:$variant.new")
+		     ." >$dir/$model-$layout:$variant.new"
+                     ." 2>>ckbcomp.log")
 		and die "$0: ckbcomp failed\n" if (! -f "$dir/$model-$layout:$variant.new");
 	    checkrename "$dir/$model-$layout:$variant.new", "$dir/$model-$layout:$variant";
 	}
@@ -197,8 +181,8 @@ while (keys %kmaps) {
     my $mink1 = '';
     my $mink2 = '';
     my $minsub = 10000000;
-    for $k1 (keys %kmaps) {
-	for $k2 (keys %kmaps) {
+    for $k1 (sort keys %kmaps) {
+	for $k2 (sort keys %kmaps) {
 	    next if ($k1 eq $k2);
 	    if ($matrice{$k1}{$k2} < $minsub) {
 		$mink1 = $k1;
@@ -208,7 +192,7 @@ while (keys %kmaps) {
 	}
     }
     if ($mink1 eq '') {
-        for $k2 (keys %kmaps) {
+        for $k2 (sort keys %kmaps) {
             $mink1 = $k2;
             last;
         }
@@ -219,7 +203,7 @@ while (keys %kmaps) {
 
 printf STDERR "Dumping the encoded keymaps for %s...\n", $model;
 
-for $k1 (keys %reduce) {
+for $k1 (sort keys %reduce) {
     my $kmap1 = $keymaps{$k1};
     $k2 = $reduce{$k1};
     if ($k2 ne '') {
@@ -309,7 +293,7 @@ my %keycodes = (
 my $keycodes =  (defined $keycodes {$model}
 		 ? $keycodes {$model}
 		 : 'xfree86');
-for my $option (keys %options) {
+for my $option (sort keys %options) {
     my $layout = '';
     for my $mod (@{$options{$option}}) {
 	$layout = $layout . "+stdmodifiers($mod)";

@@ -49,7 +49,7 @@ main_build:
 debian/kbdnames.gz: main_build
 	( cd Keyboard \
 	&& ./kbdnames-maker KeyboardNames.pl \
-		| grep -v '^C[*]' | grep -v '[*]model[*]' | sort | gzip -9 ) >$@
+		| grep -v '^C[*]' | grep -v '[*]model[*]' | sort | gzip -9n ) >$@
 
 build: build-arch build-indep
 build-arch: build-stamp
@@ -76,6 +76,22 @@ install-linux: build
 	dh_prep -p console-setup-linux
 	$(MAKE) etcdir=debian/console-setup-linux/etc \
 		prefix=debian/console-setup-linux/usr install-common-linux
+	dh_install -p console-setup-linux \
+		90-console-setup.rules lib/udev/rules.d/
+	dh_systemd_enable -p console-setup-linux \
+		--name keyboard-setup
+	dh_systemd_enable -p console-setup-linux \
+		--name console-setup
+	dh_installinit -p console-setup-linux \
+		--no-start --name keyboard-setup.sh
+	dh_installinit -p console-setup-linux \
+		--no-start --name console-setup.sh
+	dh_systemd_start -p console-setup-linux \
+		--no-start --name keyboard-setup
+	dh_systemd_start -p console-setup-linux \
+		--no-start --name console-setup
+	sed -i 's/RUNLEVEL/2 3 4 5/' \
+		debian/console-setup-linux/etc/init.d/console-setup.sh
 
 .PHONY : install-freebsd
 install-freebsd: build
@@ -84,6 +100,20 @@ install-freebsd: build
 	dh_prep -p console-setup-freebsd
 	$(MAKE) etcdir=debian/console-setup-freebsd/etc \
 		prefix=debian/console-setup-freebsd/usr install-common-freebsd
+	dh_systemd_enable -p console-setup-freebsd \
+		--name keyboard-setup
+	dh_systemd_enable -p console-setup-freebsd \
+		--name console-setup
+	dh_installinit -p console-setup-freebsd \
+		--no-start --name keyboard-setup.sh
+	dh_installinit -p console-setup-freebsd \
+		--no-start --name console-setup.sh
+	dh_systemd_start -p console-setup-freebsd \
+		--no-start --name keyboard-setup
+	dh_systemd_start -p console-setup-freebsd \
+		--no-start --name console-setup
+	sed -i 's/RUNLEVEL/S/' \
+		debian/console-setup-freebsd/etc/init.d/console-setup.sh
 
 .PHONY : install-main
 install-main: build
@@ -151,7 +181,6 @@ endif
 		debian/keyboard-configuration/usr/share/apport/package-hooks/source_console-setup.py
 	dh_install -pkeyboard-configuration console-setup-tty lib/udev
 	dh_installudev -pkeyboard-configuration --priority=85
-
 
 .PHONY : install-bdf2psf
 install-bdf2psf: build

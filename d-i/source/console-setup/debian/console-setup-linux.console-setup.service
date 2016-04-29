@@ -1,0 +1,14 @@
+[Unit]
+Description=Set console font and keymap
+DefaultDependencies=no
+After=console-screen.service kbd.service local-fs.target
+Before=system-getty.slice
+ConditionPathExists=/bin/setupcon
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/console-setup.sh start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=sysinit.target

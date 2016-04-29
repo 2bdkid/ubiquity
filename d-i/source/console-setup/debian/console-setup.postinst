@@ -123,6 +123,11 @@ EOF
     db_set console-setup/store_defaults_in_debconf_db true
 fi
 
+# The second setupcon may start background processes inheriting file
+# descriptors from debconf.
+db_stop
+
+# We redirect the output so that postinst does not block when ScrollLock is on
 # This works even if we are not on the console
 setupcon --save-only || true
 if type plymouth >/dev/null && plymouth --ping; then

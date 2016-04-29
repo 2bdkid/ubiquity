@@ -15,7 +15,7 @@ build-mini-linux : $(gzipped_ekmaps) charmap_functions.sh pc105.tree
 build-mini-freebsd : $(gzipped_ekbds) charmap_functions.sh
 
 %.gz : %
-	gzip -9 <$< >$@
+	gzip -9n <$< >$@
 
 %.ekmap : 
 	./kbdcompiler $(@:%.ekmap=%) KeyboardNames.pl $(xkbdir) >$@
@@ -68,7 +68,7 @@ dkey_files : $(dkey_files)
 clean:
 	-rm -f *~
 	-rm -rf compose $(compose_files) $(dkey_files)
-	-rm -rf linux-keymaps freebsd-keymaps keymaps tree-keymaps
+	-rm -rf linux-keymaps freebsd-keymaps keymaps ckbcomp.log
 	-rm -f keymaps.dir names.list
 	-rm -f charmap_functions.sh
 	-rm -f $(gzipped_ekmaps) $(gzipped_ekbds)

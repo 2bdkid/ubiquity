@@ -15,7 +15,7 @@ gziped_acmfiles = $(addsuffix .gz, $(acmfiles))
 gziped_acmfiles : $(gziped_acmfiles)
 
 %.gz : %
-	gzip -9 <$< >$@
+	gzip -9n <$< >$@
 
 build-common: gziped_acmfiles
 	cd Keyboard && $(MAKE) build
