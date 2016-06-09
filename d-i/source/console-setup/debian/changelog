@@ -1,3 +1,35 @@
+console-setup (1.142ubuntu4) yakkety; urgency=medium
+
+  * debian/keyboard-configuration.postinst: we shouldn't fail if
+    dpkg-maintscript-helpers can't figure out the package for removal of
+    console-setup and keyboard-setup init scripts -- in ubiquity we won't have
+    the outer checked directory /lib/debian-installer.d; and we won't have any
+    files to remove on account of likely being a new install. (LP: #1578285)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 08 Jun 2016 14:39:12 -0400
+
+console-setup (1.142ubuntu3) yakkety; urgency=medium
+
+  * Replace initscripts dependency with init-system-helpers (>= 1.29~), to
+    allow dropping initscripts at some point. (Closes: #804988)
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Mon, 30 May 2016 08:15:32 +0200
+
+console-setup (1.142ubuntu2) yakkety; urgency=medium
+
+  * Unbreak my last console-setup upload:
+    - debian/control: We want the locales package, not locales-all.
+    - Use keymapper to generate decision trees for a restricted subset of
+      the pc105 model.
+  * debian/rules: enable the setvtrgb.service correctly.
+  * debian/rules: remove keyboard-configuration trying to install console-setup
+    since it's now in console-setup.
+  * debian/keyboard-configuration.links: removed.
+  * debian/control: fix Breaks/Replaces so the initscript move to the
+    console-setup-linux package from keyboard-configuration goes smoothly.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 29 Apr 2016 23:38:34 -0400
+
 console-setup (1.142ubuntu1) yakkety; urgency=medium
 
   * Merge from Debian unstable; remaining changes:

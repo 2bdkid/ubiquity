@@ -113,9 +113,9 @@ fi
 
 if ! [ -d /lib/debian-installer.d ]; then
     dpkg-maintscript-helper rm_conffile \
-                            /etc/init.d/keyboard-setup 1.138~ -- "$@"
+                            /etc/init.d/keyboard-setup 1.138~ -- "$@" || true
     dpkg-maintscript-helper rm_conffile \
-                            /etc/init.d/console-setup 1.138~ -- "$@"
+                            /etc/init.d/console-setup 1.138~ -- "$@" || true
 fi
 
 #DEBHELPER#

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Anton Zinoviev <zinoviev@debian.org>, Christian Perrier <bubulle@debian.org>
-Build-Depends-Indep: xkb-data (>= 1.6), locales-all, sharutils
+Build-Depends-Indep: xkb-data (>= 1.6), keymapper (>= 0.5.3-7), locales, sharutils
 Build-Depends: perl, debhelper (>= 9), po-debconf, libxml-parser-perl, bdfresize, liblocale-gettext-perl, dh-systemd
 Standards-Version: 3.9.1
 XS-Debian-Vcs-Browser: https://anonscm.debian.org/cgit/d-i/console-setup.git
@@ -71,11 +71,11 @@ Section: utils
 Priority: optional
 Architecture: all
 Multi-Arch: foreign
-Depends: kbd (>= 1.15-1ubuntu3), keyboard-configuration (= ${source:Version}), ${misc:Depends}, initscripts
+Depends: kbd (>= 1.15-1ubuntu3), keyboard-configuration (= ${source:Version}), ${misc:Depends}, init-system-helpers (>= 1.29~)
 Suggests: console-setup
 Conflicts: console-setup-freebsd
-Breaks: console-terminus, console-cyrillic (<= 0.9-11), console-setup (<< 1.71)
-Replaces: console-terminus, console-setup (<< 1.71)
+Breaks: console-terminus, console-cyrillic (<= 0.9-11), console-setup (<< 1.71), keyboard-configuration (<< 1.138)
+Replaces: console-terminus, console-setup (<< 1.71), keyboard-configuration (<< 1.138)
 Provides: console-terminus
 Description: Linux specific part of console-setup
  This package includes fonts in psf format and definitions of various

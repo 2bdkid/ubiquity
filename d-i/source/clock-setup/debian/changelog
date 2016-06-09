@@ -1,3 +1,10 @@
+clock-setup (0.126ubuntu2) yakkety; urgency=medium
+
+  * finish-install.d/10clock-setup: guard against rcS not existing on disk
+    when we try to update it. (LP: #1587555)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 08 Jun 2016 13:42:48 -0400
+
 clock-setup (0.126ubuntu1) xenial; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:

@@ -82,14 +82,20 @@ install-linux: build
 		--name keyboard-setup
 	dh_systemd_enable -p console-setup-linux \
 		--name console-setup
+	dh_systemd_enable -p console-setup-linux \
+		--name setvtrgb
 	dh_installinit -p console-setup-linux \
 		--no-start --name keyboard-setup.sh
 	dh_installinit -p console-setup-linux \
 		--no-start --name console-setup.sh
+	dh_installinit -p console-setup-linux \
+		--no-start --name setvtrgb
 	dh_systemd_start -p console-setup-linux \
 		--no-start --name keyboard-setup
 	dh_systemd_start -p console-setup-linux \
 		--no-start --name console-setup
+	dh_systemd_start -p console-setup-linux \
+		--no-start --name setvtrgb
 	sed -i 's/RUNLEVEL/2 3 4 5/' \
 		debian/console-setup-linux/etc/init.d/console-setup.sh
 
@@ -131,8 +137,6 @@ install-main: build
 	dh_installinit -pconsole-setup \
 		--no-start --name console-font
 ifneq (,$(filter console-setup-linux, $(shell dh_listpackages)))
-	dh_installinit -pconsole-setup-linux \
-		--no-start --name setvtrgb
 	install -m 644 debian/vtrgb debian/console-setup-linux/etc/console-setup/
 	install -m 644 debian/vtrgb.vga debian/console-setup-linux/etc/console-setup/
 endif
@@ -162,9 +166,6 @@ endif
 		usr/share/console-setup/
 	dh_link -pkeyboard-configuration usr/share/X11/xkb/rules/xorg.lst \
 		usr/share/doc/keyboard-configuration/xorg.lst
-	# no upstart job for keyboard-setup
-	dh_installinit -pkeyboard-configuration \
-		--no-start --name console-setup -- start 49 S .
 	install -d debian/keyboard-configuration/usr/share/initramfs-tools/hooks \
 		debian/keyboard-configuration/usr/share/initramfs-tools/scripts/init-top \
 		debian/keyboard-configuration/usr/share/initramfs-tools/scripts/panic
