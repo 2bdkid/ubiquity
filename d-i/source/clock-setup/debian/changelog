@@ -1,3 +1,28 @@
+clock-setup (0.128ubuntu1) yakkety; urgency=low
+
+  * Merge from Debian unstable. (LP: #1593217) Remaining changes: 
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Pass --noadjfile to hwclock.
+
+ -- Dave Chiluk <chiluk@ubuntu.com>  Sun, 16 Jun 2016 08:56:21 +0100
+
+clock-setup (0.128) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Use HTTPS for Vcs-* URLs, and link to cgit rather than gitweb.
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 07 Feb 2016 18:56:21 +0100
+
+clock-setup (0.127) unstable; urgency=medium
+
+  [ Ben Hutchings ]
+  * Revert "Disable e2fsck superblock time check if RTC is set to local time".
+    This is no longer needed since e2fsprogs version 1.42.13.
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 22 Jan 2016 07:50:17 +0100
+
 clock-setup (0.126ubuntu2) yakkety; urgency=medium
 
   * finish-install.d/10clock-setup: guard against rcS not existing on disk

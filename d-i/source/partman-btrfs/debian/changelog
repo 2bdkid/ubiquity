@@ -1,3 +1,31 @@
+partman-btrfs (21ubuntu1) yakkety; urgency=low
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Add support for creating and mounting btrfs subvolumes corresponding
+      to / and /home, in case of a btrfs rootfs.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 07 Jul 2016 20:54:27 -0400
+
+partman-btrfs (21) unstable; urgency=medium
+
+  [ Nicholas D Steeves ]
+  * Change dependency on btrfs-tools to btrfs-progs.
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 26 Apr 2016 06:42:46 +0200
+
+partman-btrfs (20) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Use HTTPS for Vcs-* URLs, and link to cgit rather than gitweb.
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 07 Feb 2016 19:13:19 +0100
+
+partman-btrfs (19) unstable; urgency=medium
+
+  * Set btrfs fstab passno to zero, as there is no btrfs fsck scripts.
+
+ -- Dimitri John Ledkov <xnox@debian.org>  Sun, 08 Nov 2015 15:01:42 +0000
+
 partman-btrfs (18ubuntu1) xenial; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:
@@ -373,3 +401,4 @@ partman-btrfs (1) unstable; urgency=low
   * Added error messages if /boot is on btrfs.
 
  -- Colin Watson <cjwatson@debian.org>  Mon, 14 Jun 2010 14:08:21 +0100
+
