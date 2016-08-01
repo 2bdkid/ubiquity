@@ -405,7 +405,7 @@ Machine: linux,dummy-virt
 ## ARMv8 Foundation Model
 Machine: Foundation-v8A
 
-# RaspberryPi2+
+# Raspberry Pi 2 (BCM2709)
 Machine: BCM2709
 Machine: Raspberry Pi 2 Model B
 Machine: Raspberry Pi 2 Model B Rev 1.1
@@ -416,4 +416,17 @@ Boot-Kernel-Path: /boot/firmware/vmlinuz
 Boot-Initrd-Path: /boot/firmware/initrd.img
 Boot-Script-Path: /boot/firmware/uboot.env
 DTB-Id: bcm2709-rpi-2-b.dtb
+# XXX we should copy the entire overlay dtbs dir too
+
+# Raspberry Pi 3 (BCM2710)
+Machine: BCM2710
+Machine: Raspberry Pi 3 Model B
+Machine: Raspberry Pi 3 Model B Rev 1.2
+U-Boot-Script-Name: bootscr.rpi3
+Required-Packages: u-boot-tools
+Boot-Dtb-Path: /boot/firmware/bcm2710-rpi-3-b.dtb
+Boot-Kernel-Path: /boot/firmware/vmlinuz
+Boot-Initrd-Path: /boot/firmware/initrd.img
+Boot-Script-Path: /boot/firmware/boot.scr
+DTB-Id: bcm2710-rpi-3-b.dtb
 # XXX we should copy the entire overlay dtbs dir too
