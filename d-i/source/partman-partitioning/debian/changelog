@@ -1,3 +1,36 @@
+partman-partitioning (112ubuntu1) yakkety; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Add PATH, RAWMINSIZE, RAWPREFSIZE, and RAWMAXSIZE substitutions to
+      partman-partitioning/new_size in support of ubiquity's resize widget.
+    - Check that minimum filesystem sizes reported by tune2fs and ntfsresize
+      are between the minimum partition size and the current partition size;
+      if not, refuse to resize the partition at all.
+    - Save the swap size for ubiquity.
+    - On systems with only GPT disks, check that an EFI System Partition or
+      a BIOS Boot Partition exists, as appropriate.
+    - Detect "fsl" subarch for powerpc and set partition map to GPT.
+    - On s390x use msdos partition table by default, unless partman
+      advises dasd.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 12 Aug 2016 09:52:51 +0100
+
+partman-partitioning (112) unstable; urgency=medium
+
+  [ Aurelien Jarno ]
+  [ Aurelien Jarno]
+  * Default to msdos partition label on mips, mipsel and mips64el. We
+    don't support hardware requiring other partition labels anymore.
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 23 May 2016 15:18:46 +0200
+
+partman-partitioning (111) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Use HTTPS for Vcs-* URLs, and link to cgit rather than gitweb.
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 07 Feb 2016 18:31:43 +0100
+
 partman-partitioning (110ubuntu4) xenial; urgency=medium
 
   [ Viktor Mihajlovski ]

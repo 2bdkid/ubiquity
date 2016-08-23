@@ -21,16 +21,13 @@
 
 from __future__ import print_function
 
-import fcntl
 import gzip
 import os
 import platform
 import pwd
 import re
 import shutil
-import socket
 import stat
-import struct
 import subprocess
 import sys
 import syslog
@@ -47,15 +44,6 @@ from ubiquity import install_misc, misc, osextras, plugin_manager
 from ubiquity.components import apt_setup, check_kernels, hw_detect
 
 
-INTERFACES_TEXT = """\
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-# The loopback network interface
-auto lo
-iface lo inet loopback"""
-
-
 HOSTS_TEXT = """\
 
 # The following lines are desirable for IPv6 capable hosts
@@ -64,12 +52,6 @@ fe00::0 ip6-localnet
 ff00::0 ip6-mcastprefix
 ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters"""
-
-
-IFTAB_TEXT = """\
-# This file assigns persistent names to network interfaces.
-# See iftab(5) for syntax.
-"""
 
 
 def cleanup_after(func):
@@ -449,12 +431,6 @@ class Install(install_misc.InstallBase):
                         os.symlink(linkto, targetpath)
                     else:
                         shutil.copy2(path, targetpath)
-        else:
-            if not os.path.exists('/etc/network/interfaces'):
-                # Make sure there's at least something here so that ifupdown
-                # doesn't get upset at boot.
-                with open('/etc/network/interfaces', 'w') as interfaces:
-                    print(INTERFACES_TEXT, file=interfaces)
 
         try:
             hostname = self.db.get('netcfg/get_hostname')
@@ -490,50 +466,6 @@ class Install(install_misc.InstallBase):
             if self.target != '/':
                 shutil.copy2(
                     persistent_net, self.target_file(persistent_net[1:]))
-        else:
-            # TODO cjwatson 2006-03-30: from <bits/ioctls.h>; ugh, but no
-            # binding available
-            SIOCGIFHWADDR = 0x8927
-            # <net/if_arp.h>
-            ARPHRD_ETHER = 1
-
-            if_names = {}
-            sock = socket.socket(socket.SOCK_DGRAM)
-            interfaces = install_misc.get_all_interfaces()
-            for i in range(len(interfaces)):
-                if_names[interfaces[i]] = struct.unpack(
-                    'H6s', fcntl.ioctl(
-                        sock.fileno(), SIOCGIFHWADDR,
-                        struct.pack('256s', interfaces[i].encode()))[16:24])
-            sock.close()
-
-            with open(self.target_file('etc/iftab'), 'w') as iftab:
-                print(IFTAB_TEXT, file=iftab)
-
-                for i in range(len(interfaces)):
-                    dup = False
-
-                    if_name = if_names[interfaces[i]]
-                    if if_name is None or if_name[0] != ARPHRD_ETHER:
-                        continue
-
-                    for j in range(len(interfaces)):
-                        if i == j or if_names[interfaces[j]] is None:
-                            continue
-                        if if_name[1] != if_names[interfaces[j]][1]:
-                            continue
-
-                        if if_names[interfaces[j]][0] == ARPHRD_ETHER:
-                            dup = True
-
-                    if dup:
-                        continue
-
-                    line = (interfaces[i] + " mac " +
-                            ':'.join(['%02x' % if_name[1][c]
-                                      for c in range(6)]))
-                    line += " arp %d" % if_name[0]
-                    print(line, file=iftab)
 
     def run_plugin(self, plugin):
         """Run a single install plugin."""
