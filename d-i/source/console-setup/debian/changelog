@@ -1,3 +1,13 @@
+console-setup (1.142ubuntu5) yakkety; urgency=medium
+
+  * debian/console-setup-linux.setvtrgb.service: add condition to only
+    execute when /dev/tty0 exists. This is the same condition as used by
+    getty@.service unit to prevent attempting setting up VT when none are
+    present. This is a common case on serial only architectures and
+    virtual machines. Resolves degraded boots on s390x/ppc64el.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 26 Sep 2016 13:31:08 +0100
+
 console-setup (1.142ubuntu4) yakkety; urgency=medium
 
   * debian/keyboard-configuration.postinst: we shouldn't fail if

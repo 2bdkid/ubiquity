@@ -1,3 +1,11 @@
+hw-detect (1.117ubuntu3) yakkety; urgency=medium
+
+  * {hw-,disk-,net}detect.sh, check-missing-firmware.sh: use 'modprobe -b'
+    in order to honor module blacklisting from kernel cmdline parameters.
+    (LP: #1602717)
+
+ -- Mauricio Faria de Oliveira <mauricfo@linux.vnet.ibm.com>  Thu, 29 Sep 2016 09:52:10 -0400
+
 hw-detect (1.117ubuntu2) xenial; urgency=medium
 
   * Enable disk-detect/multipath/enable by default on s390x.

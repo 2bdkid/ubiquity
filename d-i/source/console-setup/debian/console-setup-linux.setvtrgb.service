@@ -4,6 +4,7 @@ DefaultDependencies=no
 After=systemd-user-sessions.service plymouth-quit-wait.service
 Before=system-getty.slice
 ConditionPathExists=/sbin/setvtrgb
+ConditionPathExists=/dev/tty0
 
 [Service]
 Type=oneshot
