@@ -1,3 +1,27 @@
+partman-auto (134ubuntu6) zesty; urgency=medium
+
+  * Ignore swap partitions in default installation types, thus use
+    swapfile for non-lvm installations.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 30 Nov 2016 16:03:19 +0000
+
+partman-auto (134ubuntu5) zesty; urgency=medium
+
+  * Mark /boot partition to be ignored for lvm auto-partitioning for
+    ppc64el. LP: #1639801
+  * Switch /boot partition from ext2 to ext4, to match all over
+    configurations. This is only relevant for full disk encryption
+    installations.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 18 Nov 2016 16:41:48 +0000
+
+partman-auto (134ubuntu4) zesty; urgency=medium
+
+  * Mark /boot partition to be ignored for lvm auto-partitioning in the
+    default and efi recipes. LP: #1639801
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Nov 2016 12:39:33 +0000
+
 partman-auto (134ubuntu3) yakkety; urgency=medium
 
   * lib/auto-shared.sh: take 2; list Software RAID devices on NVMe disks.

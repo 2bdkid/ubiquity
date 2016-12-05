@@ -149,7 +149,7 @@ def grub_options():
         @return empty list or a list of ['/dev/sda1','Ubuntu Hardy 8.04'] """
     from ubiquity.parted_server import PartedServer
 
-    l = []
+    ret = []
     try:
         oslist = {}
         subp = subprocess.Popen(
@@ -172,9 +172,9 @@ def grub_options():
             if dev and mod:
                 if size.isdigit():
                     size = format_size(int(size))
-                    l.append([dev, '%s (%s)' % (mod, size)])
+                    ret.append([dev, '%s (%s)' % (mod, size)])
                 else:
-                    l.append([dev, mod])
+                    ret.append([dev, mod])
             for part in p.partitions():
                 ostype = ''
                 if part[4] == 'linux-swap':
@@ -186,12 +186,12 @@ def grub_options():
                     pass
                 elif part[5] in oslist.keys():
                     ostype = oslist[part[5]]
-                l.append([part[5], ostype])
+                ret.append([part[5], ostype])
     except:
         import traceback
         for line in traceback.format_exc().split('\n'):
             syslog.syslog(syslog.LOG_ERR, line)
-    return l
+    return ret
 
 
 @raise_privileges
@@ -497,6 +497,7 @@ def get_release():
             get_release.release_info = ReleaseInfo(name='Ubuntu', version='')
     return get_release.release_info
 
+
 get_release.release_info = None
 
 
@@ -525,6 +526,7 @@ def get_release_name():
             get_release_name.release_name = 'Ubuntu'
     return get_release_name.release_name
 
+
 get_release_name.release_name = ''
 
 
@@ -541,6 +543,7 @@ def get_install_medium():
                 syslog.LOG_ERR, "Unable to determine install medium.")
             get_install_medium.medium = 'CD'
     return get_install_medium.medium
+
 
 get_install_medium.medium = ''
 
@@ -875,6 +878,7 @@ def install_size():
         min_disk_size = max_size
 
     return min_disk_size
+
 
 min_install_size = None
 

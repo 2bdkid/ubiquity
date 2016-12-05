@@ -585,18 +585,18 @@ class PageGtk(PageBase):
     def set_grub_options(self, default, grub_installable):
         from gi.repository import Gtk, GObject
         self.grub_options = misc.grub_options()
-        l = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
-        self.grub_device_entry.set_model(l)
+        ret = Gtk.ListStore(GObject.TYPE_STRING, GObject.TYPE_STRING)
+        self.grub_device_entry.set_model(ret)
         selected = False
         for opt in self.grub_options:
             path = opt[0]
             if grub_installable.get(path, False):
-                i = l.append(opt)
+                i = ret.append(opt)
                 if path == default:
                     self.grub_device_entry.set_active_iter(i)
                     selected = True
         if not selected:
-            i = l.append([default, ''])
+            i = ret.append([default, ''])
             self.grub_device_entry.set_active_iter(i)
 
     def get_grub_choice(self):
@@ -1670,6 +1670,7 @@ class Page(plugin.Plugin):
             '^partman-target/choose_method$',
             ('^partman-basicfilesystems/'
              '(fat_mountpoint|mountpoint|mountpoint_manual)$'),
+            '^partman-basicfilesystems/no_swap$',
             '^partman-uboot/mountpoint$',
             '^partman/exception_handler$',
             '^partman/exception_handler_note$',
@@ -3133,6 +3134,10 @@ class Page(plugin.Plugin):
 
         elif question == 'partman-crypto/weak_passphrase':
             self.preseed_bool(question, True, seen=False)
+            return True
+
+        elif question == 'partman-basicfilesystems/no_swap':
+            self.preseed_bool(question, False, seen=False)
             return True
 
         elif question.startswith('partman-crypto/passphrase'):

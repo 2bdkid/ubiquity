@@ -202,7 +202,7 @@ auto_lvm_prepare() {
 	fi
 
 	case $archdetect in
-	    powerpc/prep)
+	    */efi|amd64/*|i386/*|powerpc/prep|ppc64el/prep|s390x/*)
 		: ;;
 	    *)
 		# TODO: make check more explicit, mountpoint{ / }?

@@ -1,3 +1,25 @@
+partman-btrfs (23ubuntu1) zesty; urgency=medium
+
+  * Resynchronise with Debian.  Remaining changes:
+    - Add support for creating and mounting btrfs subvolumes corresponding
+      to / and /home, in case of a btrfs rootfs.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 12 Oct 2016 11:11:57 +0000
+
+partman-btrfs (23) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Polish (pl.po) by Michał Kułach
+  * Portuguese (Brazil) (pt_BR.po) by Adriano Rafael Gomes
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 12 Oct 2016 05:53:58 +0200
+
+partman-btrfs (22) unstable; urgency=medium
+
+  * On s390x, zipl bootloader cannot handle /boot on btrfs. LP: #1609140
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 04 Oct 2016 13:52:18 +0100
+
 partman-btrfs (21ubuntu2) yakkety; urgency=medium
 
   * Mark fstab.d/btrfs as executable, otherwise partman fails to install
