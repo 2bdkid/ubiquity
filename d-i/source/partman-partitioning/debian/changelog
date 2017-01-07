@@ -1,3 +1,35 @@
+partman-partitioning (114ubuntu1) zesty; urgency=low
+
+  [ Ubuntu Merge-o-Matic ]
+  * Merge from Debian unstable.  Remaining changes:
+    - Add PATH, RAWMINSIZE, RAWPREFSIZE, and RAWMAXSIZE substitutions to
+      partman-partitioning/new_size in support of ubiquity's resize widget.
+    - Check that minimum filesystem sizes reported by tune2fs and ntfsresize
+      are between the minimum partition size and the current partition size;
+      if not, refuse to resize the partition at all.
+    - Save the swap size for ubiquity.
+    - On systems with only GPT disks, check that an EFI System Partition or
+      a BIOS Boot Partition exists, as appropriate.
+    - Detect "fsl" subarch for powerpc and set partition map to GPT.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 06 Dec 2016 14:18:27 +0100
+
+partman-partitioning (114) unstable; urgency=medium
+
+  [ Viktor Mihajlovski ]
+  * In case a disk is identified as type=dasd, make sure to preserve
+    this in the disk label. (Closes: #815916)
+    Requires partman-base 190.
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 16 Nov 2016 06:47:57 +0100
+
+partman-partitioning (113) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 15 Aug 2016 10:42:14 +0200
+
 partman-partitioning (112ubuntu1) yakkety; urgency=medium
 
   * Resynchronise with Debian.  Remaining changes:
