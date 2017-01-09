@@ -564,6 +564,16 @@ char *get_ifdsc(struct debconfclient *client, const char *if_name)
                     CMD_SUCCESS && client->value != NULL) {
                 return strdup(client->value);
             }
+	    /* If using systemd-udevd stable names try that as well
+	       Those have two character prefix, then one character for
+	       subtype. */
+	    if (strlen(template) > 19) {
+		template[19] = '\0';
+		if (debconf_metaget(client, template, "description") ==
+                    CMD_SUCCESS && client->value != NULL) {
+		    return strdup(client->value);
+		}
+	    }
         } else {
             strcpy(template, "netcfg/internal-wifi");
             debconf_metaget(client, template, "description");

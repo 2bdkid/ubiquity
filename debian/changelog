@@ -1,3 +1,15 @@
+ubiquity (17.04.3) zesty; urgency=medium
+
+  * Automatic update of included source packages: netcfg 1.138ubuntu3.
+  * kde_ui.py: Fix QMessageBox warning call to use "StandardButtons" ORed list
+    of Retry/Ignore/Cancel buttons rather than each as new arguments, as the
+    latter form is obsolete and breaks the Kubuntu installer. (LP: #1650767)
+  * debian/rules: add ./ to the path for KeyboardNames.pl when we go to build
+    kbdnames.gz; otherwise it looks as though kbdnames-maker won't find our
+    list of keyboard models, layouts and variants. (LP: #1650767)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 09 Jan 2017 16:38:01 -0500
+
 ubiquity (17.04.2) zesty; urgency=medium
 
   [ David Mohammed ]
