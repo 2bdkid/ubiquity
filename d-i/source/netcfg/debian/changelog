@@ -1,3 +1,14 @@
+netcfg (1.138ubuntu4) zesty; urgency=medium
+ 
+  * Do now show an empty option 4 when using netcfg, without a wifi-card,
+    and when automatic configuration fails. This is achieved by
+    substituting all choices into the question, from two internal select
+    templates of identical options but wifireconf one. This resolves UX
+    bug without changing translation strings or fuzzing any of the
+    existing translations. LP: #1558271
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 10 Jan 2017 15:47:43 +0000
+ 
 netcfg (1.138ubuntu3) zesty; urgency=medium
 
   * Also use short stable systemd-udev names to discover descriptions for

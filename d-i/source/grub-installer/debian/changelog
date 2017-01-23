@@ -1,3 +1,10 @@
+grub-installer (1.128ubuntu7) zesty; urgency=medium
+
+  * grub-installer: deal with NVMe devices (or other devices with a partition
+    separator) being used to back the PReP partition on ppc64el. (LP: #1656048)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 13 Jan 2017 16:19:30 -0500
+
 grub-installer (1.128ubuntu6) yakkety; urgency=medium
 
   * grub-installer: remove grub/grub-legacy code. We only do variants of grub2.
