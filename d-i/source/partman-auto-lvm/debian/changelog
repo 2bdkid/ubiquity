@@ -1,3 +1,12 @@
+partman-auto-lvm (59ubuntu3) zesty; urgency=medium
+
+  * lib/auto-lvm.sh: Pass method on to choose_recipe() and decode_recipe()
+    when auto_lvm_prepare() is called. This allows crypto installs to be
+    run as "crypto" method (as they should), rather than "lvm", and thus
+    possibly different partitioning recipes. (LP: #1659448)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 26 Jan 2017 16:32:06 -0500
+
 partman-auto-lvm (59ubuntu2) zesty; urgency=medium
 
   * Do not ask no_boot question on efi, amd64, i386, ppc64el/prep and

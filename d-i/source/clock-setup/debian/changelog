@@ -1,3 +1,33 @@
+clock-setup (0.131ubuntu1) zesty; urgency=medium
+
+  * Merge from Debian unstable. (LP: #1660362) Remaining changes: 
+    - Default to ntp.ubuntu.com for the NTP server.
+    - Ask the UTC question, defaulting to true, even if we appear to be the
+      only OS (unless clock-setup/utc-auto is preseeded to true).
+    - Pass --noadjfile to hwclock.
+
+ -- Dave Chiluk <chiluk@ubuntu.com>  Mon, 30 Jan 2017 15:58:35 -0600
+
+clock-setup (0.131) unstable; urgency=medium
+
+  * Really drop Otavio. Sigh...
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 07 Dec 2016 07:44:17 +0100
+
+clock-setup (0.130) unstable; urgency=medium
+
+  * Drop Otavio Salvador from Uploaders. Thank you for your work
+    within the D-I team. Closes: #847257
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 07 Dec 2016 07:37:03 +0100
+
+clock-setup (0.129) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 14 Aug 2016 14:17:14 +0200
+
 clock-setup (0.128ubuntu1) yakkety; urgency=low
 
   * Merge from Debian unstable. (LP: #1593217) Remaining changes: 
