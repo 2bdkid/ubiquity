@@ -714,7 +714,7 @@ Country: RO Romania
 IPv6: no
 
 Site: ftp.roedu.net
-Type: Push-Primary
+Type: leaf
 Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390 s390x sparc
 Archive-ftp: /debian/
 Archive-http: /debian/
@@ -730,28 +730,22 @@ Sponsor: Romanian Education Network Iasi Branch http://www.iasi.roedu.net/
 Bandwidth: 310Mbps
 IPv6: yes
 
-Site: lug.mtu.edu
-Type: Push-Primary
-Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390 s390x sparc
+Site: mirrors.lug.mtu.edu
+Type: leaf
+Archive-architecture: ALL amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390x
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
 CDImage-ftp: /debian-cd/
 CDImage-http: /debian-cd/
 CDImage-rsync: debian-cd/
-Old-ftp: /debian-archive/
-Old-http: /debian-archive/
-Old-rsync: debian-archive/
 IPv6: yes
-Archive-upstream: syncproxy.wna.debian.org
-CDImage-upstream: mirror.us.leaseweb.net
-Updates: four
-Maintainer: lug-server-admins-l@mtu.edu
+Archive-upstream: syncproxy.cna.debian.org
+CDImage-upstream: cdimage.debian.org
+Updates: push
+Maintainer: MTU Linux Users Group <lug-server-admins-l@mtu.edu>
 Country: US United States
-Location: Michigan Technological University Houghton, MI
-Sponsor: Michigan Technological University http://mtu.edu
-Comment: On MERIT Network and Internet2
-Bandwidth:  1 Gbps
+Location: Houghton, Michigan
 
 Site: ftp.kr.debian.org
 Alias: ftp.kaist.ac.kr
@@ -1271,7 +1265,7 @@ Archive-ftp: /debian/
 CDImage-http: /debian-cd/
 CDImage-rsync: debian-cd/
 CDImage-ftp: /debian-cd/
-IPv6: no
+IPv6: yes
 Archive-upstream: ftp.kr.debian.org
 CDImage-upstream: ftp.cuhk.edu.hk
 Updates: push
@@ -1860,7 +1854,7 @@ X-Security-rsync: debian-security/
 X-Security-upstream: security.debian.org
 IPv6: no
 Updates: push
-Maintainer: Mahyuddin Susanto <udienz@gmail.com>, <udienz@unej.ac.id>, it.staff@uj.ac.id
+Maintainer: Mahyuddin Susanto <udienz@gmail.com>, it.staff@uj.ac.id
 Country: ID Indonesia
 Location: Jember, East Java
 Sponsor: Jember University http://www.unej.ac.id/
@@ -2530,7 +2524,7 @@ Sponsor: Orange Business Services / France Telecom http://www.orange-business.co
 IPv6: yes
 
 Site: ftp.irb.hr
-Type: Push-Secondary
+Type: leaf
 Archive-architecture: amd64 armhf i386 s390x
 Archive-ftp: /debian/
 Archive-http: /debian/
@@ -3499,7 +3493,7 @@ Bandwidth: 1Gbps
 
 Site: mirrors.ocf.berkeley.edu
 Type: leaf
-Archive-architecture: amd64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390x sparc
+Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390x 
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
@@ -3510,7 +3504,7 @@ CDImage-rsync: debian-cd/
 CDImage-upstream: mirrors.kernel.org
 IPv6: yes
 Updates: four
-Maintainer: Chris Kuehl <ckuehl@ocf.berkeley.edu>
+Maintainer: Jason Perrin <jvperrin@ocf.berkeley.edu>
 Country: US United States
 Location: Berkeley, California
 Sponsor: Open Computing Facility http://ocf.berkeley.edu/
@@ -3668,17 +3662,18 @@ Location: Southfield, MI, USA
 Sponsor: Nexcess http://www.nexcess.net/
 Bandwitdh: 1Gbps
 
-Site: debian.mirror.gtcomm.net
+Site: debian.mirror.globo.tech
+Aliases: debian.mirror.gtcomm.net
 Type: leaf
-Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390 s390x sparc
+Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390x
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-upstream: mirror.csclub.uwaterloo.ca
 IPv6: no
 Updates: four
-Maintainer: Anthony Levesque <alevesque@gtcomm.net>
+Maintainer: Philippe Talbot <support@globo.tech>
 Country: CA Canada
-Sponsor: GloboTech Communications http://www.gtcomm.net/
+Sponsor: GloboTech Communications http://www.globo.tech/
 Bandwidth: 1Gbps
 
 Site: mirror.crucial.com.au
@@ -4273,7 +4268,7 @@ Bandwidth: 100Mbps
 
 Site: debian.mirror.netelligent.ca
 Type: leaf
-Archive-architecture: amd64 i386
+Archive-architecture:  amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390x
 Archive-ftp: /debian/
 Archive-http: /debian/
 Archive-rsync: debian/
@@ -4281,9 +4276,9 @@ X-CDImage-ftp: /debian-cd/
 X-CDImage-http: /debian-cd/
 CDImage-rsync: debian-cd/
 IPv6: no
-Archive-upstream: ftp.ca.debian.org
-CDImage-upstream: mirror.its.dal.ca
-Updates: twice
+Archive-upstream: debian.mirror.rafal.ca
+CDImage-upstream: cdimage.debian.org
+Updates: four
 Maintainer: Paulius G <paulius@netelligent.ca>, support@netelligent.ca
 Country: CA Canada
 Location: Montreal, Canada
@@ -5247,14 +5242,14 @@ IPv6: yes
 Site: ftp.man.poznan.pl
 Type: leaf
 Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390 s390x sparc
-Archive-ftp: /pub/linux/debian/debian/
-Archive-http: /pub/linux/debian/debian/
+Archive-ftp: /pub/linux/debian/
+Archive-http: /linux/debian/
 Archive-upstream: ftp.pl.debian.org
 Maintainer: Michal Kosiedowski <kat@man.poznan.pl>
 Country: PL Poland
 Location: Poznan
 Sponsor: Poznan Supercomputing and Networking Center http://www.psnc.pl/
-Updates: once
+Updates: four
 Bandwidth: 1Gbps
 IPv6: yes
 
@@ -7394,25 +7389,6 @@ Country: MK Macedonia, Republic of
 Location: Skopje
 Sponsor: Makedonski Telekom http://www.t-home.mk/
 
-Site: ftp.hawo.stw.uni-erlangen.de
-Type: leaf
-Archive-architecture: amd64 armel armhf hurd-i386 i386 ia64 kfreebsd-amd64 kfreebsd-i386 mips mipsel powerpc s390 s390x sparc 
-Archive-ftp: /debian/
-Archive-http: /debian/
-Archive-rsync: debian/
-CDImage-ftp: /debian-cd/
-CDImage-http: /debian-cd/
-CDImage-rsync: debian-cd/
-IPv6: yes
-Archive-upstream: ftp.de.debian.org
-CDImage-upstream: ftp.de.debian.org
-Updates: push
-Maintainer: HaWo NOC <noc@hawo-net.de>
-Country: DE Germany
-Location: Erlangen, Bavaria
-Sponsor: Studentenwohnheim Hartmannstraße http://www.hawo.stw.uni-erlangen.de
-Comment: Uplink: 1 Gb/s. Parties: Every thursday starting 20:30 in the basement of Hartmannstr. 129, 91058 Erlangen. Next to the mirror server. (Tours available on request, just ask for the NOC)
-
 Site: mirror.satellite-service.ru
 Type: leaf
 Archive-architecture: amd64 i386 
@@ -7792,10 +7768,58 @@ Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfre
 Archive-ftp: /debian/
 Archive-http: /debian/
 IPv6: no
-Archive-upstream: ftp.nl.debian.org
-Updates: four
+Archive-upstream: syncproxy2.eu.debian.org
+Updates: push
 Maintainer: Imre Gergely <webmaster@upcbiz.ro>
 Country: RO Romania
 Location: Cluj-Napoca
 Sponsor: UPC Romania http://upc.ro
 Comment: Bandwidth: 1000mbps
+
+
+Site: mirrors.pidginhost.com
+Type: leaf
+Archive-architecture: amd64 i386
+Archive-ftp: /debian/
+Archive-http: /debian/
+Archive-rsync: debian/
+CDImage-ftp: /debian-cd/
+CDImage-http: /debian-cd/
+CDImage-rsync: debian-cd/
+IPv6: yes
+Archive-upstream: ftp.ro.debian.org
+CDImage-upstream: mirrors.ocf.berkeley.edu
+Updates: four
+Maintainer: Octavian Dinu <octavian.dinu@pidginhost.com>
+Country: RO Romania
+Location: Bucharest
+Sponsor: Pidgin Host https://www.pidginhost.com
+
+Site: mirror.intergrid.com.au
+Type: leaf
+Archive-architecture: amd64 i386
+Archive-http: /debian/
+IPv6: no
+Archive-upstream: mirror.waia.asn.au
+Updates: four
+Maintainer: Javed Ali <javed.ali@intergrid.com.au>
+Country: AU Australia
+Location: Sydney
+Sponsor: Intergrid https://intergrid.com.au
+
+Site: mirror.sjc02.svwh.net
+Type: leaf
+Archive-architecture: amd64 arm64 armel armhf hurd-i386 i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64el s390x 
+Archive-http: /debian/
+Archive-rsync: debian/
+CDImage-http: /debian-cd/
+CDImage-rsync: debian-cd/
+IPv6: yes
+Archive-upstream: mirrors.kernel.org
+CDImage-upstream: mirrors.kernel.org
+Updates: four
+Maintainer: Daniel Ballenger <dballenger@svwh.net>
+Country: US United States
+Location: San Jose, CA United States
+Sponsor: Silicon Valley Web Hosting LLC http://svwh.net
+
