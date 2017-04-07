@@ -1,3 +1,11 @@
+hw-detect (1.117ubuntu4) zesty; urgency=medium
+
+  * disk-detect.sh: unconditionally modprobe dm-service-time and
+    dm-queue-length multipath path selector modules alongside dm-round-robin.
+    (LP: #1673350)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 27 Mar 2017 21:23:41 -0400
+
 hw-detect (1.117ubuntu3) yakkety; urgency=medium
 
   * {hw-,disk-,net}detect.sh, check-missing-firmware.sh: use 'modprobe -b'

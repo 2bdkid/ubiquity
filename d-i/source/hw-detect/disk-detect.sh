@@ -294,8 +294,9 @@ if [ "$RET" = true ]; then
 		if ! dmsetup targets | cut -d' ' -f1 | grep -q '^multipath$'; then
 			module_probe dm-multipath || true
 		fi
-		# No way to check whether this is loaded already?
 		log-output -t disk-detect modprobe -v -b dm-round-robin || true
+		log-output -t disk-detect modprobe -v -b dm-service-time || true
+		log-output -t disk-detect modprobe -v -b dm-queue-length || true
 
 		# ensure multipath and sg3 udev rules are run before we probe.
 		if [ -x /bin/udevadm ]; then

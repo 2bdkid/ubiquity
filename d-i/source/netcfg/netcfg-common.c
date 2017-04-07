@@ -34,6 +34,7 @@
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <string.h>
+#include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -1395,11 +1396,14 @@ void reap_old_files (void)
 {
     static char* remove[] =
         { INTERFACES_FILE, HOSTS_FILE, HOSTNAME_FILE, NETWORKS_FILE,
-          RESOLV_FILE, DHCLIENT_CONF, DOMAIN_FILE, 0 };
+          DHCLIENT_CONF, DOMAIN_FILE, 0 };
     char **ptr = remove;
 
     while (*ptr)
         unlink(*ptr++);
+
+    if (!is_resolvconf_used())
+        unlink(RESOLV_FILE);
 }
 
 /* Convert a space-separated list of nameservers in a single string (as might
@@ -1796,4 +1800,19 @@ char *strtrim(char *s)
 		s++;
 
 	return s;
+}
+
+/* Check if /etc/resolv.conf symlinks to /run/resolvconf/resolv.conf. */
+int is_resolvconf_used()
+{
+	int resolvconf_used = 0;
+
+	char *path = realpath(RESOLV_FILE, NULL);
+
+	if (path) {
+		resolvconf_used = !strcmp(path, RESOLVCONF_FILE);
+		free(path);
+	}
+
+	return resolvconf_used;
 }
