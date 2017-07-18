@@ -1133,8 +1133,8 @@ void netcfg_write_loopback (void)
     lo.name = LO_IF;
     lo.loopback = 1;
     
-    netcfg_write_interface(NULL);
-    netcfg_write_interface(&lo);
+    netcfg_write_interface(NULL, NULL);
+    netcfg_write_interface(NULL, &lo);
 }
 
 /*

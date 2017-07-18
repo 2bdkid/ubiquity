@@ -527,7 +527,7 @@ case $ARCH:$grub_package in
 	for prep_p in $(/usr/lib/grub-installer/prep-bootdev -l); do
 		prep_dev=$(split_device $prep_p)
 		offered=$(split_device $disc_offered)
-		if [ "${prep_dev%% *}" = "${disc_offered%% *}" ]; then
+		if [ "${prep_dev%% *}" = "${offered%% *}" ]; then
 			wipe_bootdev=$prep_p
 			break
 		fi

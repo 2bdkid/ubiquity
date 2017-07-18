@@ -2,6 +2,7 @@
 #define _NETCFG_H_
 
 #define INTERFACES_FILE "/etc/network/interfaces"
+#define NETPLAN_YAML    "/etc/netplan/01-netcfg.yaml"
 #define HOSTS_FILE      "/etc/hosts"
 #define HOSTNAME_FILE   "/etc/hostname"
 #define NETWORKS_FILE   "/etc/networks"
@@ -267,7 +268,7 @@ extern int nc_v6_interface_configured(const struct netcfg_interface *interface, 
 extern int nc_v6_get_config_flags(struct debconfclient *client, struct netcfg_interface *interface);
 
 /* write_interfaces.c */
-extern int netcfg_write_interface(const struct netcfg_interface *interface);
+extern int netcfg_write_interface(struct debconfclient *client, const struct netcfg_interface *interface);
 
 /* rdnssd.c */
 extern int start_rdnssd(struct debconfclient *client);

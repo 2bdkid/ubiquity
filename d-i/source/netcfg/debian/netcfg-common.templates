@@ -415,3 +415,9 @@ _Choices: ${essid_list} Enter ESSID manually
 _Description: Wireless network:
  Select the wireless network to use during the installation process.
 
+Template: netcfg/do_not_use_netplan
+Type: boolean
+Default: false
+Description: for internal use; can be preseeded
+ Set to false to fallback to ifupdown.
+

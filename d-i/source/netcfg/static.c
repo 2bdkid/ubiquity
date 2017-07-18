@@ -680,7 +680,7 @@ int netcfg_get_static(struct debconfclient *client, struct netcfg_interface *ifa
                 }
                 netcfg_write_common(iface->ipaddress, hostname, domain);
                 netcfg_write_loopback();
-                netcfg_write_interface(iface);
+                netcfg_write_interface(client, iface);
                 netcfg_write_resolvconf_options(domain, iface);
                 netcfg_write_resolv(domain, iface);
             }
