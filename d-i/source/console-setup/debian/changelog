@@ -1,3 +1,19 @@
+console-setup (1.142ubuntu7) artful; urgency=medium
+
+  * Do the same as ubuntu6 in Keyboard/compose_translator too.
+  * Cherry-pick b887014dc243d3966bbb6bda975803798df7c33f from Samuel Thibaut
+    and 6800af170ff5017b67b7e0b85b61a6176eb56361 from Gregor Hermann, as well
+    as fixing Keyboard/kbdnames - perl doesn't look at `.' any more.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Mon, 21 Aug 2017 10:48:31 +0100
+
+console-setup (1.142ubuntu6) artful; urgency=medium
+
+  * Use pragma utf8 instead of the deprecated encoding pragma. Shamelessly
+    copied from Debian's 1.143 change by Anton Zinoviev.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 04 Aug 2017 15:23:53 -0400
+
 console-setup (1.142ubuntu5) yakkety; urgency=medium
 
   * debian/console-setup-linux.setvtrgb.service: add condition to only

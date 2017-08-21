@@ -18,13 +18,13 @@ build-mini-freebsd : $(gzipped_ekbds) charmap_functions.sh
 	gzip -9n <$< >$@
 
 %.ekmap : 
-	./kbdcompiler $(@:%.ekmap=%) KeyboardNames.pl $(xkbdir) >$@
+	./kbdcompiler $(@:%.ekmap=%) ./KeyboardNames.pl $(xkbdir) >$@
 
 %.tree : %.ekmap.gz keymaptree.use
-	./keymaptree -output $@ -useonly "$$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')" -names KeyboardNames.pl $(@:%.tree=%)
+	./keymaptree -output $@ -useonly "$$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')" -names ./KeyboardNames.pl $(@:%.tree=%)
 
 %.ekbd : 
-	./kbdcompiler freebsd-$(@:%.ekbd=%) KeyboardNames.pl $(xkbdir) >$@
+	./kbdcompiler freebsd-$(@:%.ekbd=%) ./KeyboardNames.pl $(xkbdir) >$@
 
 charmap_functions.sh : $(acmfiles)
 	./make_charmap_functions ../acm $(charmaps) >$@

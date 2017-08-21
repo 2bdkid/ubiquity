@@ -48,7 +48,7 @@ main_build:
 
 debian/kbdnames.gz: main_build
 	( cd Keyboard \
-	&& ./kbdnames-maker KeyboardNames.pl \
+	&& ./kbdnames-maker ./KeyboardNames.pl \
 		| grep -v '^C[*]' | grep -v '[*]model[*]' | sort | gzip -9n ) >$@
 
 build: build-arch build-indep
