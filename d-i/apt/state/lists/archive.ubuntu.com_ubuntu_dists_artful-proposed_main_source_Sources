@@ -1,0 +1,2257 @@
+Package: automat
+Binary: python-automat, python3-automat
+Version: 0.6.0-1
+Priority: optional
+Section: misc
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-python, python-all (>= 2.6.6-3), python-setuptools (>= 0.6b3), python-setuptools-scm, python-characteristic, python-six, python-attr, python3-all, python3-setuptools (>= 0.6b3), python3-setuptools-scm, python3-characteristic, python3-six, python3-attr
+Architecture: all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/a/automat
+Files:
+ 8f1507006c3fef240eb354739205f899 2377 automat_0.6.0-1.dsc
+ ad7bba58d262d8956d732330cb5ef53d 31767 automat_0.6.0.orig.tar.gz
+ d9528b56bbdf62aaf79730fb951c335f 2732 automat_0.6.0-1.debian.tar.xz
+Uploaders: Free Ekanayaka <freee@debian.org>
+Homepage: https://github.com/freeekanayaka/systemfixtures
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/automat.git
+Vcs-Git: git://anonscm.debian.org/python-modules/packages/automat.git
+Testsuite: autopkgtest
+Testsuite-Triggers: graphviz, python-twisted-core, python3-graphviz, python3-twisted
+Package-List:
+ python-automat deb python optional arch=all
+ python3-automat deb python optional arch=all
+Checksums-Sha1:
+ 408353b4376e5dc756aaf49f7e4572d22af48499 2377 automat_0.6.0-1.dsc
+ 69eefbc610ab3a81978c982a226358c50a614efe 31767 automat_0.6.0.orig.tar.gz
+ d3608083516971a59eda30becf928a9927c30855 2732 automat_0.6.0-1.debian.tar.xz
+Checksums-Sha256:
+ f86719efaaa6c5891615da588ea4e9db944446a2a6fc217a018fd3e1a6a560de 2377 automat_0.6.0-1.dsc
+ 3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8 31767 automat_0.6.0.orig.tar.gz
+ 0b94086d0bea5eefcb4bb41e90c1b08938d906dd8a567baa4b6484a3c6a01449 2732 automat_0.6.0-1.debian.tar.xz
+
+Package: bzr
+Binary: bzr, python-bzrlib, python-bzrlib-dbg, python-bzrlib.tests, bzr-doc
+Version: 2.7.0+bzr6622-6build1
+Priority: optional
+Section: devel
+Maintainer: Debian Bazaar Maintainers <pkg-bazaar-maint@lists.alioth.debian.org>
+Build-Depends: bash-completion, ca-certificates, cython-dbg (>= 0.25.2-2), debhelper (>= 9), fdupes, openssl, python (>= 2.6.6-3), python-all-dbg (>= 2.6.6-3), python-all-dev (>= 2.6.6-3), python-configobj (>= 4.7.2+ds-2), python-docutils, python-lzma-dbg [!m68k !powerpcspe !sh4], python-medusa, python-meliae-dbg, python-paramiko (<< 1.12.0) | python-paramiko (>= 1.14.1), python-pycurl-dbg, python-sphinx (>= 1.0.7+dfsg), python-subunit, python-testtools (>= 0.9.5~)
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/b/bzr
+Files:
+ 18e543829c1cacf31c4cbe92150bda57 2872 bzr_2.7.0+bzr6622-6build1.dsc
+ 2a80387c6da55a8f635ba08073b76994 10948360 bzr_2.7.0+bzr6622.orig.tar.gz
+ 7befa883c7021d8bc5688a469bdfcd55 90540 bzr_2.7.0+bzr6622-6build1.debian.tar.xz
+Uploaders: Wouter van Heyst <larstiq@larstiq.dyndns.org>, Andrew Starr-Bochicchio <asb@debian.org>, Jelmer Vernooĳ <jelmer@debian.org>, Vincent Ladeuil <v.ladeuil+lp@free.fr>
+Homepage: http://bazaar-vcs.org
+Vcs-Browser: https://bzr.debian.org/loggerhead/pkg-bazaar/bzr/2.7/
+Vcs-Bzr: https://anonscm.debian.org/bzr/pkg-bazaar/bzr/2.7/
+Testsuite: autopkgtest
+Testsuite-Triggers: ca-certificates, python-lzma, python-medusa, python-meliae, python-pycurl, python-subunit
+Package-List:
+ bzr deb vcs optional arch=all
+ bzr-doc deb doc optional arch=all
+ python-bzrlib deb python optional arch=any
+ python-bzrlib-dbg deb debug extra arch=any
+ python-bzrlib.tests deb python optional arch=all
+Checksums-Sha1:
+ 05cd42a5046e4ce3ff27645702bc41d9340d82d7 2872 bzr_2.7.0+bzr6622-6build1.dsc
+ 1ca34f1e6ead0d1cc1eb610f0ab8b417db324d4c 10948360 bzr_2.7.0+bzr6622.orig.tar.gz
+ 7bdb1fab1701e91a3bb33b23904a0810627a1ddc 90540 bzr_2.7.0+bzr6622-6build1.debian.tar.xz
+Checksums-Sha256:
+ 9092d2eabb69d96164bc775c3b312bce13804afa307f2885724ea9dac0776ec8 2872 bzr_2.7.0+bzr6622-6build1.dsc
+ 08bba3e76cba9beb6b686e71253045beeab9db94753ddbcafa0f8ed1cba377ff 10948360 bzr_2.7.0+bzr6622.orig.tar.gz
+ c40e031989723de8dc4d70bd145d12cdeeffbb9f916859e4b5e27bf7b3b73851 90540 bzr_2.7.0+bzr6622-6build1.debian.tar.xz
+
+Package: clutter-1.0
+Binary: libclutter-1.0-0, libclutter-1.0-common, libclutter-1.0-dev, libclutter-1.0-doc, clutter-1.0-tests, gir1.2-clutter-1.0
+Version: 1.26.2+dfsg-3
+Priority: optional
+Section: libs
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10), autopoint, dbus <!nocheck>, gnome-pkg-tools, libgl1-mesa-dev (>= 7.1~rc3-1~), libcairo2-dev (>= 1.14.0), libcogl-dev (>= 1.21.2), libcogl-pango-dev (>= 1.14.0), libcogl-path-dev, libpango1.0-dev (>= 1.30), libglib2.0-dev (>= 2.44.0), libjson-glib-dev (>= 0.12.0), libdrm-dev [!hurd-any], libxext-dev, libxdamage-dev, libxcomposite-dev (>= 1:0.4), libxi-dev, gtk-doc-tools (>= 1.20), xauth <!nocheck>, xsltproc, xvfb <!nocheck>, libgirepository1.0-dev (>= 1.35.8), gobject-introspection (>= 1.39.0), libatk1.0-dev (>= 2.5.3), libgdk-pixbuf2.0-dev (>= 2.0), libgtk-3-dev (>= 3.16), libinput-dev (>= 0.19.0) [linux-any], libudev-dev (>= 136) [linux-any], libgudev-1.0-dev [linux-any], libxkbcommon-dev
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/c/clutter-1.0
+Files:
+ 4725dbd275b7cec3c08415ef02342d7f 3300 clutter-1.0_1.26.2+dfsg-3.dsc
+ d74c679d1c772adef6cdd35ffaa7dd90 3557688 clutter-1.0_1.26.2+dfsg.orig.tar.xz
+ 2cae34b87ed23c0a5e654b2d019c430e 21088 clutter-1.0_1.26.2+dfsg-3.debian.tar.xz
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>, Sjoerd Simons <sjoerd@debian.org>, Rico Tzschichholz <ricotz@ubuntu.com>
+Homepage: http://www.clutter-project.org/
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/clutter-1.0/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/clutter-1.0
+Testsuite: autopkgtest
+Testsuite-Triggers: dbus, gnome-desktop-testing, libgl1-mesa-dri, xauth, xvfb
+Package-List:
+ clutter-1.0-tests deb misc extra arch=any
+ gir1.2-clutter-1.0 deb introspection optional arch=any
+ libclutter-1.0-0 deb libs optional arch=any
+ libclutter-1.0-common deb libs optional arch=all
+ libclutter-1.0-dev deb libdevel optional arch=any
+ libclutter-1.0-doc deb doc optional arch=all
+Checksums-Sha1:
+ 558ab80509d3e498ffe6c49ec7d555bb5e339cca 3300 clutter-1.0_1.26.2+dfsg-3.dsc
+ fbf7f13bb1d4b9325409d5182d068115a5b4e801 3557688 clutter-1.0_1.26.2+dfsg.orig.tar.xz
+ de0b138022d8fd5aade298d848bf3fa20a4b1397 21088 clutter-1.0_1.26.2+dfsg-3.debian.tar.xz
+Checksums-Sha256:
+ c20d321503a9175a797e7ef3456b3a91d07b043d2ed5210563e1db08655fa7a7 3300 clutter-1.0_1.26.2+dfsg-3.dsc
+ 681f17e958f66322af0d76a37870792a4ea6d7218cad791f99a9d739bb7d0341 3557688 clutter-1.0_1.26.2+dfsg.orig.tar.xz
+ 36c81868d9418a2bdcb2c098c6ecb8748a9bd763ae4a57c9e8bf2cdb673473b0 21088 clutter-1.0_1.26.2+dfsg-3.debian.tar.xz
+
+Package: cmd2
+Binary: python-cmd2, python3-cmd2
+Version: 0.7.4-1
+Priority: optional
+Section: python
+Maintainer: Federico Ceratto <federico@debian.org>
+Build-Depends: debhelper (>= 9~)
+Build-Depends-Indep: dh-python, python-all (>= 2.6.6-3~), python-pyperclip, python-setuptools, python3-all, python3-pyperclip, python3-setuptools
+Architecture: all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/c/cmd2
+Files:
+ 2b8b6d28c307a2983d0fcb073a404026 2029 cmd2_0.7.4-1.dsc
+ 81c9b43067799e6d56431fdaf664d9cf 64040 cmd2_0.7.4.orig.tar.gz
+ 5438478488ad5f7133055fbb708e7f38 2692 cmd2_0.7.4-1.debian.tar.xz
+Homepage: https://bitbucket.org/catherinedevlin/cmd2
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/cmd2.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/cmd2.git
+Package-List:
+ python-cmd2 deb python optional arch=all
+ python3-cmd2 deb python optional arch=all
+Checksums-Sha1:
+ 110fe09ad5c6b77bae0c7538f3b9a2eae332ac80 2029 cmd2_0.7.4-1.dsc
+ 6eca76986990f45ff18406668ee4834de5c557e7 64040 cmd2_0.7.4.orig.tar.gz
+ c9e43bb7275ec704a23a992328dbd403336a959f 2692 cmd2_0.7.4-1.debian.tar.xz
+Checksums-Sha256:
+ ea55383715d795e38b0f44032717256907f882fa0b718de0f346dc74edf5fd79 2029 cmd2_0.7.4-1.dsc
+ c8e305effb691b9a37ad1ec23f12ab61a55f6bf8008367cf6cb6ff3b48ed5ed0 64040 cmd2_0.7.4.orig.tar.gz
+ d79736d767a0069bbb62da12619fd97871680a3d7fa23959f4b74af26b9f8b06 2692 cmd2_0.7.4-1.debian.tar.xz
+
+Package: crmsh
+Binary: crmsh, crmsh-doc
+Version: 3.0.1-1
+Priority: extra
+Section: misc
+Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10), asciidoc, dh-python, docbook-xml, docbook-xsl, dos2unix, libxml2-utils, pkg-config, python-all (>= 2.6.6-3~), python-dateutil, python-pygments, python-setuptools, xsltproc
+Architecture: all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/c/crmsh
+Files:
+ 071e21f28f0a3b78e562a20cd84a4ef7 2371 crmsh_3.0.1-1.dsc
+ 20e5f90f69b9f995d30ce3fbf2c1fb27 947261 crmsh_3.0.1.orig.tar.gz
+ 971061a78530f5f9385c4d4f0ced1011 26520 crmsh_3.0.1-1.debian.tar.xz
+Uploaders:  Richard B Winters <rik@mmogp.com>, Adrian Vondendriesch <adrian.vondendriesch@credativ.de>, Valentin Vidic <Valentin.Vidic@CARNet.hr>
+Homepage: http://crmsh.github.io/
+Vcs-Browser: https://anonscm.debian.org/cgit/debian-ha/crmsh.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/debian-ha/crmsh.git
+Testsuite: autopkgtest
+Testsuite-Triggers: booth, booth-pacemaker, corosync, csync2, dmidecode, ntp, openssh-server, pacemaker, ufw
+Package-List:
+ crmsh deb admin extra arch=all
+ crmsh-doc deb doc extra arch=all
+Checksums-Sha1:
+ a417b12fe97569d3032de999f13772c83f51edc7 2371 crmsh_3.0.1-1.dsc
+ 197d5d245f2cdf936d31520f9348b9697d13a2da 947261 crmsh_3.0.1.orig.tar.gz
+ ab2dc84d6fdbb551ee2b6425eaa6014412c2c32b 26520 crmsh_3.0.1-1.debian.tar.xz
+Checksums-Sha256:
+ e8d1dd3bad4d5170cbf4a1efaabaf14eb9621f6b5d13288fb5ae4134a38697bb 2371 crmsh_3.0.1-1.dsc
+ de10df384d3a5b5700cce96b9e907c2e5c17bffc376bc65503f50219d9812b15 947261 crmsh_3.0.1.orig.tar.gz
+ 1260720570dc297870936dbb4a2ffb266e9ee1a15bd5a9fa24667308a2b4607c 26520 crmsh_3.0.1-1.debian.tar.xz
+
+Package: cryptsetup
+Binary: cryptsetup, cryptsetup-bin, libcryptsetup4, libcryptsetup-dev, cryptsetup-udeb, libcryptsetup4-udeb
+Version: 2:1.7.3-4ubuntu1
+Priority: important
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Cryptsetup Team <pkg-cryptsetup-devel@lists.alioth.debian.org>
+Build-Depends: libgcrypt20-dev (>= 1.6.1), libdevmapper-dev (>= 2:1.02.24-4), libpopt-dev, uuid-dev, libselinux1-dev, libsepol1-dev, libtool (>= 2.2), autoconf, automake (>= 1:1.12), pkg-config, autopoint, gettext, debhelper (>= 9.20120410~), xsltproc, docbook-xml, docbook-xsl (>= 1.74.3+dfsg), dpkg-dev (>= 1.15.1), po-debconf, dh-strip-nondeterminism
+Architecture: linux-any
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/c/cryptsetup
+Files:
+ 39dfb856bb802419b769b087a0a202ee 2810 cryptsetup_1.7.3-4ubuntu1.dsc
+ f0458f83d21cdf7952cbddb7a77a5c58 1102318 cryptsetup_1.7.3.orig.tar.gz
+ 96799a17ca7fa6865a5055d75252fe00 102648 cryptsetup_1.7.3-4ubuntu1.debian.tar.xz
+Uploaders: Jonas Meurer <mejo@debian.org>, Guilhem Moulin <guilhem@guilhem.org>
+Homepage: https://gitlab.com/cryptsetup/cryptsetup
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-cryptsetup/cryptsetup.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-cryptsetup/cryptsetup.git
+Package-List:
+ cryptsetup deb admin optional arch=linux-any
+ cryptsetup-bin deb admin optional arch=linux-any
+ cryptsetup-udeb udeb debian-installer optional arch=linux-any
+ libcryptsetup-dev deb libdevel optional arch=linux-any
+ libcryptsetup4 deb libs optional arch=linux-any
+ libcryptsetup4-udeb udeb debian-installer optional arch=linux-any
+Checksums-Sha1:
+ 6e4c308ba6009cd5d928f57412cdaf7f82593ad8 2810 cryptsetup_1.7.3-4ubuntu1.dsc
+ c4857db034822efe9fa62cee932a7dcde97fb228 1102318 cryptsetup_1.7.3.orig.tar.gz
+ 9624b70165d7e5ce27fa997f3192c15125ccd3b3 102648 cryptsetup_1.7.3-4ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 5293b8a88f2004c786143fe8428e2b6443777dfa8c92af4c31104150ccebaa6b 2810 cryptsetup_1.7.3-4ubuntu1.dsc
+ 58921825d268701af151e4de034f508aa8cb4d9f2e1c11847f4f8ae82866043d 1102318 cryptsetup_1.7.3.orig.tar.gz
+ 2634314ae7808bfa6e1d7343be8d437d6d7edfa797fdf82ad1fdac146b7e6029 102648 cryptsetup_1.7.3-4ubuntu1.debian.tar.xz
+
+Package: curl
+Binary: curl, libcurl3, libcurl3-gnutls, libcurl3-nss, libcurl4-openssl-dev, libcurl4-gnutls-dev, libcurl4-nss-dev, libcurl4-doc
+Version: 7.55.1-1ubuntu1
+Priority: standard
+Section: web
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Alessandro Ghedini <ghedo@debian.org>
+Build-Depends: debhelper (>= 9.20141010~), autoconf, automake, ca-certificates, dpkg-dev (>= 1.17.14~), groff-base, libgnutls28-dev, libidn2-0-dev, libkrb5-dev, libldap2-dev, libnss3-dev, libpsl-dev, librtmp-dev (>= 2.4+20131018.git79459a2-3~), libssl1.0-dev | libssl-dev (<< 1.1), libtool, openssh-server <!nocheck>, python:native, quilt, stunnel4 <!nocheck>, zlib1g-dev
+Build-Conflicts: autoconf2.13, automake1.4
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 3.0 (quilt)
+Directory: pool/main/c/curl
+Files:
+ 86ba2c9cf0aac65673fac85880e481e6 2756 curl_7.55.1-1ubuntu1.dsc
+ 3b832160a8c9c40075fd71191960307c 3736406 curl_7.55.1.orig.tar.gz
+ 717f25b75ac3beffcf824b0c606ae3ae 31736 curl_7.55.1-1ubuntu1.debian.tar.xz
+Uploaders: Ian Jackson <ijackson@chiark.greenend.org.uk>
+Homepage: http://curl.haxx.se
+Vcs-Browser: https://anonscm.debian.org/gitweb/?p=collab-maint/curl.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/curl.git
+Package-List:
+ curl deb web optional arch=any
+ libcurl3 deb libs optional arch=any
+ libcurl3-gnutls deb libs optional arch=any
+ libcurl3-nss deb libs optional arch=any
+ libcurl4-doc deb doc optional arch=all
+ libcurl4-gnutls-dev deb libdevel optional arch=any
+ libcurl4-nss-dev deb libdevel optional arch=any
+ libcurl4-openssl-dev deb libdevel optional arch=any
+Checksums-Sha1:
+ 09df0184c9b7e713e6ccf664c88ef1b11303350d 2756 curl_7.55.1-1ubuntu1.dsc
+ 6ba5bd47ed5fca42cd68ae315a4e49b38f0fb0ab 3736406 curl_7.55.1.orig.tar.gz
+ a7c003061f0b0966f816858f9304ae5392d0182c 31736 curl_7.55.1-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 4b7f185a02e4cd177e51c9642265ed66b512ea80c7a7e4dbe28ec2f6a913939a 2756 curl_7.55.1-1ubuntu1.dsc
+ 09576ea5e66672648d83dce3af16d0cb294d4cba2b5d166ade39655c495f4a20 3736406 curl_7.55.1.orig.tar.gz
+ 32a44886f4ad573888b64d874285f15d55b29bc2faba90bfdbbd7aff3a16e684 31736 curl_7.55.1-1ubuntu1.debian.tar.xz
+
+Package: defusedxml
+Binary: python-defusedxml, python3-defusedxml
+Version: 0.5.0-1ubuntu1
+Priority: optional
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Python Modules Packaging Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: python-all (>= 2.6.6-3), python3-all, debhelper (>= 9), dh-python, python-setuptools, python3-setuptools
+Architecture: all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/d/defusedxml
+Files:
+ d7c2f9c2ba9d04e2e354b4fff75eb57a 2272 defusedxml_0.5.0-1ubuntu1.dsc
+ 7ff1501366c6d1dcd2de8514dc2b755e 60405 defusedxml_0.5.0.orig.tar.gz
+ 202f594d4b4c6c84ece23cf0977d6576 89668 defusedxml_0.5.0-1ubuntu1.debian.tar.xz
+Uploaders: Luke Faraone <lfaraone@debian.org>, Jelmer Vernooĳ <jelmer@debian.org>
+Homepage: https://pypi.python.org/pypi/defusedxml
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/defusedxml.git
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/defusedxml.git
+Package-List:
+ python-defusedxml deb python optional arch=all
+ python3-defusedxml deb python optional arch=all
+Checksums-Sha1:
+ 24aeec5c67c55fcdadbd26b081096f927b5d38ca 2272 defusedxml_0.5.0-1ubuntu1.dsc
+ 70ff80a849bbc2e9241daa1debda9f43e7fbdff0 60405 defusedxml_0.5.0.orig.tar.gz
+ f81b12e58ad9cbffedd94743e7bf6197bd8bcead 89668 defusedxml_0.5.0-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 053ec3c34cd46a2a8f9513180622110fa9331b3092fcfcacbb8bbb370345de0b 2272 defusedxml_0.5.0-1ubuntu1.dsc
+ 24d7f2f94f7f3cb6061acb215685e5125fbcdc40a857eff9de22518820b0a4f4 60405 defusedxml_0.5.0.orig.tar.gz
+ b44231646f08618496da99bc7b014524e9ac0d789eb174f4765cd154ee0971c2 89668 defusedxml_0.5.0-1ubuntu1.debian.tar.xz
+
+Package: elfutils
+Binary: elfutils, libelf1, libelf-dev, libdw-dev, libdw1, libasm1, libasm-dev
+Version: 0.168-1
+Priority: important
+Section: libs
+Maintainer: Kurt Roeckx <kurt@roeckx.be>
+Build-Depends: debhelper (>= 9), autotools-dev, autoconf, automake, bzip2, zlib1g-dev, libbz2-dev, liblzma-dev, m4, gettext, gawk, dpkg-dev (>= 1.16.1~), gcc-multilib [any-amd64 sparc64] <!nocheck>, libc6-dbg [powerpc powerpcspe ppc64 ppc64el armel armhf arm64 sparc64], flex, bison
+Build-Conflicts: autoconf2.13, automake1.4
+Architecture: any
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/e/elfutils
+Files:
+ 0bff5a8b0f6ba938b660826f365ec8de 2549 elfutils_0.168-1.dsc
+ 52adfa40758d0d39e5d5c57689bf38d6 6840399 elfutils_0.168.orig.tar.bz2
+ 7305e2dd0db220864ad7aa674d47c0e2 473 elfutils_0.168.orig.tar.bz2.asc
+ 76f927edf68a4d0e784f3e34fc8b54f6 39964 elfutils_0.168-1.debian.tar.xz
+Homepage: https://sourceware.org/elfutils/
+Package-List:
+ elfutils deb utils optional arch=any
+ libasm-dev deb libdevel optional arch=any
+ libasm1 deb libs optional arch=any
+ libdw-dev deb libdevel optional arch=any
+ libdw1 deb libs optional arch=any
+ libelf-dev deb libdevel optional arch=any
+ libelf1 deb libs optional arch=any
+Checksums-Sha1:
+ 0867044ad2916bf3d5c2db274469562edc076de3 2549 elfutils_0.168-1.dsc
+ 53e486ddba572cf872d32e9aad4d7d7aa6e767ff 6840399 elfutils_0.168.orig.tar.bz2
+ 5326af61e2ecf811ef1ede808f9e788219295fc3 473 elfutils_0.168.orig.tar.bz2.asc
+ 098c14df4c0f3fbc918ac06ffb27b5c07baa6055 39964 elfutils_0.168-1.debian.tar.xz
+Checksums-Sha256:
+ b29e03a3d515d9accd52019ff7c75762ae5e61285453518ff90d538e9878ad7f 2549 elfutils_0.168-1.dsc
+ b88d07893ba1373c7dd69a7855974706d05377766568a7d9002706d5de72c276 6840399 elfutils_0.168.orig.tar.bz2
+ f455fc014b59a0d80ab921935d20f26e64f411a424d4be29ec5bf3a1378f3002 473 elfutils_0.168.orig.tar.bz2.asc
+ 5517922b1025d32903759c46f9a1f656e3e367c5ea036dc54b32cbbe68a5f300 39964 elfutils_0.168-1.debian.tar.xz
+
+Package: evolution-data-server
+Binary: evolution-data-server, evolution-data-server-common, evolution-data-server-tests, evolution-data-server-dev, evolution-data-server-doc, libedataserver-1.2-22, libedataserver1.2-dev, gir1.2-edataserver-1.2, libedataserverui-1.2-1, libedataserverui1.2-dev, gir1.2-edataserverui-1.2, libcamel-1.2-60, libcamel1.2-dev, gir1.2-camel-1.2, libebook-1.2-19, libebook1.2-dev, gir1.2-ebook-1.2, libedata-book-1.2-25, libedata-book1.2-dev, gir1.2-ebookcontacts-1.2, libebook-contacts-1.2-2, libebook-contacts1.2-dev, libecal-1.2-19, libecal1.2-dev, libedata-cal-1.2-28, libedata-cal1.2-dev, libebackend-1.2-10, libebackend1.2-dev, evolution-data-server-online-accounts
+Version: 3.25.92-1ubuntu2
+Priority: optional
+Section: gnome
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Evolution Maintainers <pkg-evolution-maintainers@lists.alioth.debian.org>
+Build-Depends: cmake, debhelper (>= 10), dpkg-dev (>= 1.17.14), libtool, intltool (>= 0.35.5), libdb-dev, libglib2.0-dev (>= 2.40), libglib2.0-doc (>= 2.40), libgdata-dev (>= 0.10), libgirepository1.0-dev (>= 0.9.12), libsecret-1-dev (>= 0.5), libgcr-3-dev (>= 3.4), libgoa-1.0-dev (>= 3.8), libgtk-3-dev (>= 3.10), libgweather-3-dev (>= 3.10), libical-dev (>= 2.0), libicu-dev, libjson-glib-dev (>= 1.0.4), libkrb5-dev, libldap2-dev, liboauth-dev (>= 0.9.4), librest-dev (>= 0.7), libnss3-dev, libnspr4-dev, libsoup2.4-dev (>= 2.42), libsqlite3-dev (>= 3.7.17), libwebkit2gtk-4.0-dev, libxml2-dev (>= 2.0.0), gtk-doc-tools (>= 1.14), gobject-introspection (>= 0.9.12-4~), gperf, gnome-pkg-tools, pkg-config (>= 0.16), valac (>= 0.22), gnome-common (>= 3.6.0), libphonenumber-dev [!hppa !hurd-any !kfreebsd-amd64 !kfreebsd-i386], db-util <!nocheck>, dbus <!nocheck>
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 3.0 (quilt)
+Directory: pool/main/e/evolution-data-server
+Files:
+ 755781fcc0e6776528de6e9cceaa40a0 5489 evolution-data-server_3.25.92-1ubuntu2.dsc
+ b0d320f6370ed93cc1e3ed25ba5cd17c 4397508 evolution-data-server_3.25.92.orig.tar.xz
+ 972153f3e730723a1a73fade7dd837ce 49524 evolution-data-server_3.25.92-1ubuntu2.debian.tar.xz
+Uploaders: Jordi Mallach <jordi@debian.org>, Josselin Mouette <joss@debian.org>, Sjoerd Simons <sjoerd@debian.org>, Laurent Bigonville <bigon@debian.org>, Andreas Henriksson <andreas@fatal.se>, Michael Biebl <biebl@debian.org>, Jeremy Bicha <jbicha@debian.org>
+Homepage: https://wiki.gnome.org/Apps/Evolution
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-evolution/unstable/evolution-data-server
+Vcs-Svn: svn://anonscm.debian.org/pkg-evolution/unstable/evolution-data-server
+Testsuite: autopkgtest
+Testsuite-Triggers: dbus, dbus-test-runner, gnome-desktop-testing, locales-all, python3, python3-gi, xauth, xvfb
+Package-List:
+ evolution-data-server deb gnome optional arch=any
+ evolution-data-server-common deb gnome optional arch=all
+ evolution-data-server-dev deb devel optional arch=any
+ evolution-data-server-doc deb doc optional arch=all
+ evolution-data-server-online-accounts deb oldlibs optional arch=all
+ evolution-data-server-tests deb gnome optional arch=any
+ gir1.2-camel-1.2 deb introspection optional arch=any
+ gir1.2-ebook-1.2 deb introspection optional arch=any
+ gir1.2-ebookcontacts-1.2 deb introspection optional arch=any
+ gir1.2-edataserver-1.2 deb introspection optional arch=any
+ gir1.2-edataserverui-1.2 deb introspection optional arch=any
+ libcamel-1.2-60 deb libs optional arch=any
+ libcamel1.2-dev deb libdevel optional arch=any
+ libebackend-1.2-10 deb libs optional arch=any
+ libebackend1.2-dev deb libdevel optional arch=any
+ libebook-1.2-19 deb libs optional arch=any
+ libebook-contacts-1.2-2 deb libs optional arch=any
+ libebook-contacts1.2-dev deb libdevel optional arch=any
+ libebook1.2-dev deb libdevel optional arch=any
+ libecal-1.2-19 deb libs optional arch=any
+ libecal1.2-dev deb libdevel optional arch=any
+ libedata-book-1.2-25 deb libs optional arch=any
+ libedata-book1.2-dev deb libdevel optional arch=any
+ libedata-cal-1.2-28 deb libs optional arch=any
+ libedata-cal1.2-dev deb libdevel optional arch=any
+ libedataserver-1.2-22 deb libs optional arch=any
+ libedataserver1.2-dev deb libdevel optional arch=any
+ libedataserverui-1.2-1 deb libs optional arch=any
+ libedataserverui1.2-dev deb libdevel optional arch=any
+Checksums-Sha1:
+ 4a6700e4d70cff564494acdc69306db5dd32a45a 5489 evolution-data-server_3.25.92-1ubuntu2.dsc
+ 8d625616ec272527dfb4ea186f0b12a3a34d7c48 4397508 evolution-data-server_3.25.92.orig.tar.xz
+ 4d41ccf661614d234162ae29da977e0c6a55ad70 49524 evolution-data-server_3.25.92-1ubuntu2.debian.tar.xz
+Checksums-Sha256:
+ 3c6786fe55d55929ba00877b0ccea8e5116878fb99a39630060e4e0897812c7b 5489 evolution-data-server_3.25.92-1ubuntu2.dsc
+ 9990a4b93bd628e6797516fee08a0e4a56086f43602d9e700dfa929695836f15 4397508 evolution-data-server_3.25.92.orig.tar.xz
+ a86e94de06319299b9cca6bfbaa4fa71a2fcd7209f9cce7b2e84e6e85ddb72ac 49524 evolution-data-server_3.25.92-1ubuntu2.debian.tar.xz
+
+Package: firefox
+Binary: firefox, firefox-dbg, firefox-dev, firefox-mozsymbols, firefox-testsuite, firefox-globalmenu, firefox-locale-af, firefox-locale-an, firefox-locale-ar, firefox-locale-as, firefox-locale-ast, firefox-locale-az, firefox-locale-be, firefox-locale-bg, firefox-locale-bn, firefox-locale-br, firefox-locale-bs, firefox-locale-ca, firefox-locale-cak, firefox-locale-cs, firefox-locale-csb, firefox-locale-cy, firefox-locale-da, firefox-locale-de, firefox-locale-el, firefox-locale-en, firefox-locale-eo, firefox-locale-es, firefox-locale-et, firefox-locale-eu, firefox-locale-fa, firefox-locale-fi, firefox-locale-fr, firefox-locale-fy, firefox-locale-ga, firefox-locale-gd, firefox-locale-gl, firefox-locale-gn, firefox-locale-gu, firefox-locale-he, firefox-locale-hi, firefox-locale-hr, firefox-locale-hsb, firefox-locale-hu, firefox-locale-hy, firefox-locale-id, firefox-locale-is, firefox-locale-it, firefox-locale-ja, firefox-locale-ka, firefox-locale-kab, firefox-locale-kk,
+ firefox-locale-km, firefox-locale-kn, firefox-locale-ko, firefox-locale-ku, firefox-locale-lg, firefox-locale-lt, firefox-locale-lv, firefox-locale-mai, firefox-locale-mk, firefox-locale-ml, firefox-locale-mn, firefox-locale-mr, firefox-locale-ms, firefox-locale-my, firefox-locale-nb, firefox-locale-nl, firefox-locale-nn, firefox-locale-nso, firefox-locale-oc, firefox-locale-or, firefox-locale-pa, firefox-locale-pl, firefox-locale-pt, firefox-locale-ro, firefox-locale-ru, firefox-locale-si, firefox-locale-sk, firefox-locale-sl, firefox-locale-sq, firefox-locale-sr, firefox-locale-sv, firefox-locale-sw, firefox-locale-ta, firefox-locale-te, firefox-locale-th, firefox-locale-tr, firefox-locale-uk, firefox-locale-ur, firefox-locale-uz, firefox-locale-vi, firefox-locale-xh, firefox-locale-zh-hans, firefox-locale-zh-hant,
+ firefox-locale-zu
+Version: 54.0+build3-0ubuntu1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: cdbs, locales, debhelper (>= 7), autotools-dev, autoconf2.13, quilt, zip, libx11-dev, libx11-xcb-dev, libxt-dev, libxext-dev, libgtk2.0-dev (>= 2.14), libgtk-3-dev (>= 3.4), libglib2.0-dev (>= 2.18), libpango1.0-dev (>= 1.14.0), libfontconfig1-dev, libfreetype6-dev (>= 2.0.1), libgconf2-dev (>= 1.2.1), libgnomeui-dev (>= 2.2.0), libstartup-notification0-dev, libasound2-dev, libcurl4-openssl-dev, libdbus-glib-1-dev (>= 0.60), lsb-release, libiw-dev, mesa-common-dev, libnotify-dev (>= 0.4), libxrender-dev, libpulse-dev, yasm (>= 1.1), unzip, dbus-x11, xvfb, python (>= 2.7), libffi-dev (>= 3.0.9) [powerpc ppc64el s390x], cargo (>= 0.16), rustc (>= 1.15.1)
+Architecture: any
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/f/firefox
+Files:
+ a1f8f2d8217807e2b23b16672680861a 8249 firefox_54.0+build3-0ubuntu1.dsc
+ 8ad2761675e4eb225e5d7c692febcc3b 301845521 firefox_54.0+build3.orig.tar.bz2
+ 778899433c3335a2362d1feb24b3538a 221188 firefox_54.0+build3-0ubuntu1.debian.tar.xz
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/firefox/firefox.artful
+Package-List:
+ firefox deb web optional arch=any
+ firefox-dbg deb debug extra arch=any
+ firefox-dev deb oldlibs extra arch=any
+ firefox-globalmenu deb oldlibs extra arch=any
+ firefox-locale-af deb web optional arch=any
+ firefox-locale-an deb web optional arch=any
+ firefox-locale-ar deb web optional arch=any
+ firefox-locale-as deb web optional arch=any
+ firefox-locale-ast deb web optional arch=any
+ firefox-locale-az deb web optional arch=any
+ firefox-locale-be deb web optional arch=any
+ firefox-locale-bg deb web optional arch=any
+ firefox-locale-bn deb web optional arch=any
+ firefox-locale-br deb web optional arch=any
+ firefox-locale-bs deb web optional arch=any
+ firefox-locale-ca deb web optional arch=any
+ firefox-locale-cak deb web optional arch=any
+ firefox-locale-cs deb web optional arch=any
+ firefox-locale-csb deb web optional arch=any
+ firefox-locale-cy deb web optional arch=any
+ firefox-locale-da deb web optional arch=any
+ firefox-locale-de deb web optional arch=any
+ firefox-locale-el deb web optional arch=any
+ firefox-locale-en deb web optional arch=any
+ firefox-locale-eo deb web optional arch=any
+ firefox-locale-es deb web optional arch=any
+ firefox-locale-et deb web optional arch=any
+ firefox-locale-eu deb web optional arch=any
+ firefox-locale-fa deb web optional arch=any
+ firefox-locale-fi deb web optional arch=any
+ firefox-locale-fr deb web optional arch=any
+ firefox-locale-fy deb web optional arch=any
+ firefox-locale-ga deb web optional arch=any
+ firefox-locale-gd deb web optional arch=any
+ firefox-locale-gl deb web optional arch=any
+ firefox-locale-gn deb web optional arch=any
+ firefox-locale-gu deb web optional arch=any
+ firefox-locale-he deb web optional arch=any
+ firefox-locale-hi deb web optional arch=any
+ firefox-locale-hr deb web optional arch=any
+ firefox-locale-hsb deb web optional arch=any
+ firefox-locale-hu deb web optional arch=any
+ firefox-locale-hy deb web optional arch=any
+ firefox-locale-id deb web optional arch=any
+ firefox-locale-is deb web optional arch=any
+ firefox-locale-it deb web optional arch=any
+ firefox-locale-ja deb web optional arch=any
+ firefox-locale-ka deb web optional arch=any
+ firefox-locale-kab deb web optional arch=any
+ firefox-locale-kk deb web optional arch=any
+ firefox-locale-km deb web optional arch=any
+ firefox-locale-kn deb web optional arch=any
+ firefox-locale-ko deb web optional arch=any
+ firefox-locale-ku deb web optional arch=any
+ firefox-locale-lg deb web optional arch=any
+ firefox-locale-lt deb web optional arch=any
+ firefox-locale-lv deb web optional arch=any
+ firefox-locale-mai deb web optional arch=any
+ firefox-locale-mk deb web optional arch=any
+ firefox-locale-ml deb web optional arch=any
+ firefox-locale-mn deb web optional arch=any
+ firefox-locale-mr deb web optional arch=any
+ firefox-locale-ms deb web optional arch=any
+ firefox-locale-my deb web optional arch=any
+ firefox-locale-nb deb web optional arch=any
+ firefox-locale-nl deb web optional arch=any
+ firefox-locale-nn deb web optional arch=any
+ firefox-locale-nso deb web optional arch=any
+ firefox-locale-oc deb web optional arch=any
+ firefox-locale-or deb web optional arch=any
+ firefox-locale-pa deb web optional arch=any
+ firefox-locale-pl deb web optional arch=any
+ firefox-locale-pt deb web optional arch=any
+ firefox-locale-ro deb web optional arch=any
+ firefox-locale-ru deb web optional arch=any
+ firefox-locale-si deb web optional arch=any
+ firefox-locale-sk deb web optional arch=any
+ firefox-locale-sl deb web optional arch=any
+ firefox-locale-sq deb web optional arch=any
+ firefox-locale-sr deb web optional arch=any
+ firefox-locale-sv deb web optional arch=any
+ firefox-locale-sw deb web optional arch=any
+ firefox-locale-ta deb web optional arch=any
+ firefox-locale-te deb web optional arch=any
+ firefox-locale-th deb web optional arch=any
+ firefox-locale-tr deb web optional arch=any
+ firefox-locale-uk deb web optional arch=any
+ firefox-locale-ur deb web optional arch=any
+ firefox-locale-uz deb web optional arch=any
+ firefox-locale-vi deb web optional arch=any
+ firefox-locale-xh deb web optional arch=any
+ firefox-locale-zh-hans deb web optional arch=any
+ firefox-locale-zh-hant deb web optional arch=any
+ firefox-locale-zu deb web optional arch=any
+ firefox-mozsymbols deb debug extra arch=amd64,i386,armel
+ firefox-testsuite deb misc extra arch=any
+Checksums-Sha1:
+ a41836d82c46b25cedc8fb86d14bc9e4f4656b50 8249 firefox_54.0+build3-0ubuntu1.dsc
+ 1ec4f3f8cb3c43b640e1429b3207ace0d526b189 301845521 firefox_54.0+build3.orig.tar.bz2
+ 127b780aad1de975132c4660174498ea982d2133 221188 firefox_54.0+build3-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 1a699edf3e09f1779b761924a39f229c7f1374df3094966b0f0b2d6ccdca56df 8249 firefox_54.0+build3-0ubuntu1.dsc
+ 38e5eb658d44e9bb6d799854677fcc1b18a808350e81ab55598352366078a0b8 301845521 firefox_54.0+build3.orig.tar.bz2
+ 4e75ff901fa9a8dfa481376d82f54038a6c704dc5d7b20e5e7c23aa791e6c176 221188 firefox_54.0+build3-0ubuntu1.debian.tar.xz
+
+Package: gdm3
+Binary: gdm3, libgdm1, libgdm-dev, gir1.2-gdm-1.0
+Version: 3.25.90.1-0ubuntu3
+Priority: optional
+Section: gnome
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: gnome-pkg-tools (>= 0.16.3), debhelper (>= 10), dconf-cli (>= 0.19.90), intltool (>= 0.40.0), libdbus-glib-1-dev (>= 0.74) [!linux-any], libglib2.0-dev (>= 2.36.0), libgtk-3-dev (>= 2.91.1), libpango1.0-dev (>= 1.3.0), libcanberra-gtk3-dev (>= 0.4), libfontconfig1-dev (>= 2.5.0), libaccountsservice-dev (>= 0.6.35), gnome-settings-daemon-dev (>= 3.24), gnome-settings-daemon (>= 3.24), libnss3-dev (>= 3.11.1), libxcb1-dev, libx11-dev, libxau-dev, libxt-dev, libxext-dev, check (>= 0.9.10-2~), libgirepository1.0-dev (>= 0.9.12), gobject-introspection (>= 0.10.7-1~), libpam0g-dev, libkeyutils-dev [linux-any], libxdmcp-dev, libwrap0-dev, libxft-dev, libxi-dev, libxinerama-dev, libplymouth-dev [linux-any] | plymouth-dev [linux-any], yelp-tools, libselinux1-dev [linux-any], libattr1-dev [linux-any], iso-codes, libaudit-dev [linux-any], docbook-xml, gsettings-desktop-schemas, libsystemd-dev [linux-any], xserver-xorg-dev
+Architecture: linux-any
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/g/gdm3
+Files:
+ 78f5a7ebdfb9335fe4dd5b75e8967a15 3065 gdm3_3.25.90.1-0ubuntu3.dsc
+ 97b7ad9af4381e9da630ee7694005439 1115632 gdm3_3.25.90.1.orig.tar.xz
+ 0898b005ef0fe51a5193305e53825d5b 91288 gdm3_3.25.90.1-0ubuntu3.debian.tar.xz
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Laurent Bigonville <bigon@debian.org>, Michael Biebl <biebl@debian.org>
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/gdm/ubuntu
+Package-List:
+ gdm3 deb gnome optional arch=linux-any
+ gir1.2-gdm-1.0 deb introspection optional arch=linux-any
+ libgdm-dev deb libdevel optional arch=linux-any
+ libgdm1 deb libs optional arch=linux-any
+Checksums-Sha1:
+ e03cff18c858021d37761f2fbc4a3658e23ae0d1 3065 gdm3_3.25.90.1-0ubuntu3.dsc
+ ef9ab48ea3a2c5883a02c28a5e278777fe127c17 1115632 gdm3_3.25.90.1.orig.tar.xz
+ aca436bc3b46b683c322c9c748de0bc807db9c3a 91288 gdm3_3.25.90.1-0ubuntu3.debian.tar.xz
+Checksums-Sha256:
+ 235a8474d4037301360b43e7249ad3590e7dc33c3580adc1bdd4b3cd24f18820 3065 gdm3_3.25.90.1-0ubuntu3.dsc
+ 9625539494d158b478dd816ab21eafc7c927a35f8fda1cec06172dc590869d86 1115632 gdm3_3.25.90.1.orig.tar.xz
+ c051db39761639d9fa2b93a157173e87e7f7f863d68587b06ac5183f1e292bcc 91288 gdm3_3.25.90.1-0ubuntu3.debian.tar.xz
+
+Package: glib2.0
+Binary: libglib2.0-0, libglib2.0-tests, libglib2.0-udeb, libglib2.0-bin, libglib2.0-dev, libglib2.0-dev-bin, libglib2.0-data, libglib2.0-doc, libgio-fam
+Version: 2.53.6-1ubuntu2
+Priority: standard
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10.3~), dh-exec, dh-python, pkg-config (>= 0.16.0), gettext, automake, autotools-dev, gnome-pkg-tools (>= 0.11), dpkg-dev (>= 1.17.14), libelf-dev (>= 0.142), libmount-dev (>= 2.28) [linux-any], libpcre3-dev (>= 1:8.35), gtk-doc-tools (>= 1.20), libselinux1-dev [linux-any], linux-libc-dev [linux-any], libgamin-dev [!linux-any] | libfam-dev [!linux-any], zlib1g-dev, desktop-file-utils <!nocheck>, dbus <!nocheck>, shared-mime-info <!nocheck>, tzdata <!nocheck>, xterm <!nocheck>, python3:any (>= 2.7.5-5~), python3-dbus <!nocheck>, python3-gi <!nocheck>, libxml2-utils, xsltproc, docbook-xml, docbook-xsl, libffi-dev (>= 3.0.0)
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/g/glib2.0
+Files:
+ 0985a04eeecc84b2430002b7adebabb9 2790 glib2.0_2.53.6-1ubuntu2.dsc
+ 8aebcb8b0d93754f6c32530a53f38cfb 7805744 glib2.0_2.53.6.orig.tar.xz
+ e9f4fd39700fccd41efd841dd1d1a495 74400 glib2.0_2.53.6-1ubuntu2.debian.tar.xz
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@ubuntu.com>, Matthias Klumpp <mak@debian.org>
+Homepage: http://www.gtk.org/
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/glib2.0/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/glib2.0/
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, dbus, dbus-x11, gnome-desktop-testing, xauth, xvfb
+Package-List:
+ libgio-fam deb libs optional arch=hurd-any,kfreebsd-any
+ libglib2.0-0 deb libs optional arch=any
+ libglib2.0-bin deb misc optional arch=any
+ libglib2.0-data deb libs optional arch=all
+ libglib2.0-dev deb libdevel optional arch=any
+ libglib2.0-dev-bin deb libdevel optional arch=any
+ libglib2.0-doc deb doc optional arch=all
+ libglib2.0-tests deb libs optional arch=any
+ libglib2.0-udeb udeb debian-installer optional arch=any profile=!noudeb
+Checksums-Sha1:
+ d3493880093f97d6f2219a3f4981954b03a296d9 2790 glib2.0_2.53.6-1ubuntu2.dsc
+ e1d6727aa52ba690651f29ea3e88d6d85afe2661 7805744 glib2.0_2.53.6.orig.tar.xz
+ 9942776fd10caa4324ad3d6d93ce643ab6f5fbca 74400 glib2.0_2.53.6-1ubuntu2.debian.tar.xz
+Checksums-Sha256:
+ b6d768fc2f3465e3502e9f0b8f8cf41676042007a711c3d4d0597a78da274b67 2790 glib2.0_2.53.6-1ubuntu2.dsc
+ e01296a9119c09d2dccb37ad09f5eaa1e0c5570a473d8fed04fc759ace6fb6cc 7805744 glib2.0_2.53.6.orig.tar.xz
+ a0ccc29a4501da00dcf4c1e5d3773069d6db7a864e4bf13ff19441424d538c89 74400 glib2.0_2.53.6-1ubuntu2.debian.tar.xz
+
+Package: glibc
+Binary: libc-bin, libc-dev-bin, libc-l10n, glibc-doc, glibc-source, locales, locales-all, nscd, multiarch-support, libc6, libc6-dev, libc6-dbg, libc6-pic, libc6-udeb, libc6.1, libc6.1-dev, libc6.1-dbg, libc6.1-pic, libc6.1-udeb, libc0.3, libc0.3-dev, libc0.3-dbg, libc0.3-pic, libc0.3-udeb, libc0.1, libc0.1-dev, libc0.1-dbg, libc0.1-pic, libc0.1-udeb, libc6-i386, libc6-dev-i386, libc6-sparc, libc6-dev-sparc, libc6-sparc64, libc6-dev-sparc64, libc6-s390, libc6-dev-s390, libc6-amd64, libc6-dev-amd64, libc6-powerpc, libc6-dev-powerpc, libc6-ppc64, libc6-dev-ppc64, libc6-mips32, libc6-dev-mips32, libc6-mipsn32, libc6-dev-mipsn32, libc6-mips64, libc6-dev-mips64, libc6-armhf, libc6-dev-armhf, libc6-armel, libc6-dev-armel, libc0.1-i386, libc0.1-dev-i386, libc6-x32, libc6-dev-x32, libc6-xen, libc0.3-xen, libc6.1-alphaev67
+Version: 2.24-17ubuntu1
+Priority: important
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Build-Depends: gettext, dpkg (>= 1.18.7), dpkg-dev (>= 1.17.14), xz-utils, file, quilt, autoconf, gawk, debhelper (>= 9.20160709), rdfind, symlinks, netbase, gperf, linux-libc-dev (>= 3.9) [linux-any], systemtap-sdt-dev [linux-any], libaudit-dev [linux-any], libcap-dev [linux-any], libselinux-dev [linux-any], mig (>= 1.5-3) [hurd-i386], gnumach-dev (>= 2:1.8+git20170102-1~) [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] | hurd-headers-dev [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] <!stage1> | libihash-dev [hurd-i386] <!stage1>, kfreebsd-kernel-headers [kfreebsd-any], binutils (>= 2.21), g++-6, g++-6-multilib [amd64 armhf armel i386 kfreebsd-amd64 mips mipsel mipsn32 mipsn32el mips64 mips64el powerpc ppc64 s390x sparc sparc64 x32], g++-6 (>= 6.1.1-1~) [hurd-i386 i386 kfreebsd-i386], libc-bin (>= 2.24) <cross>
+Build-Depends-Indep: perl, po-debconf (>= 1.0)
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/g/glibc
+Files:
+ 9d6c2869e207e03be0b2270dac3d48ea 8694 glibc_2.24-17ubuntu1.dsc
+ 8f474d3df178e862b9ef80e97feaa6ea 13921912 glibc_2.24.orig.tar.xz
+ 8843e555b42ce34cd59b391a72aba63c 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+Uploaders: Clint Adams <clint@debian.org>, Aurelien Jarno <aurel32@debian.org>, Adam Conrad <adconrad@0c3.net>, Samuel Thibault <sthibault@debian.org>
+Homepage: http://www.gnu.org/software/libc/libc.html
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-glibc/glibc.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-glibc/glibc.git
+Testsuite: autopkgtest
+Testsuite-Triggers: binutils, fakeroot, gcc-6, linux-libc-dev
+Package-List:
+ glibc-doc deb doc optional arch=all profile=!stage1
+ glibc-source deb devel optional arch=all profile=!stage1
+ libc-bin deb libs required arch=any profile=!stage1 essential=yes
+ libc-dev-bin deb libdevel optional arch=any profile=!stage1
+ libc-l10n deb localization standard arch=all profile=!stage1
+ libc0.1 deb libs required arch=kfreebsd-amd64,kfreebsd-i386 profile=!stage1
+ libc0.1-dbg deb debug optional arch=kfreebsd-amd64,kfreebsd-i386 profile=!stage1
+ libc0.1-dev deb libdevel optional arch=kfreebsd-amd64,kfreebsd-i386
+ libc0.1-dev-i386 deb libdevel optional arch=kfreebsd-amd64 profile=!nobiarch
+ libc0.1-i386 deb libs optional arch=kfreebsd-amd64 profile=!stage1,!nobiarch
+ libc0.1-pic deb libdevel optional arch=kfreebsd-amd64,kfreebsd-i386 profile=!stage1
+ libc0.1-udeb udeb debian-installer optional arch=kfreebsd-amd64,kfreebsd-i386 profile=!stage1
+ libc0.3 deb libs required arch=hurd-i386 profile=!stage1
+ libc0.3-dbg deb debug optional arch=hurd-i386 profile=!stage1
+ libc0.3-dev deb libdevel optional arch=hurd-i386
+ libc0.3-pic deb libdevel optional arch=hurd-i386 profile=!stage1
+ libc0.3-udeb udeb debian-installer optional arch=hurd-i386 profile=!stage1
+ libc0.3-xen deb libs optional arch=hurd-i386 profile=!stage1
+ libc6 deb libs required arch=amd64,arm64,armel,armhf,hppa,i386,m68k,mips,mipsel,mipsn32,mipsn32el,mips64,mips64el,nios2,powerpc,powerpcspe,ppc64,ppc64el,sparc,sparc64,s390x,sh3,sh4,x32 profile=!stage1
+ libc6-amd64 deb libs optional arch=i386,x32 profile=!stage1,!nobiarch
+ libc6-armel deb libs optional arch=armhf profile=!stage1,!nobiarch
+ libc6-armhf deb libs optional arch=armel profile=!stage1,!nobiarch
+ libc6-dbg deb debug optional arch=amd64,arm64,armel,armhf,hppa,i386,m68k,mips,mipsel,mipsn32,mipsn32el,mips64,mips64el,nios2,powerpc,powerpcspe,ppc64,ppc64el,sparc,sparc64,s390x,sh3,sh4,x32 profile=!stage1
+ libc6-dev deb libdevel optional arch=amd64,arm64,armel,armhf,hppa,i386,m68k,mips,mipsel,mipsn32,mipsn32el,mips64,mips64el,nios2,powerpc,powerpcspe,ppc64,ppc64el,sparc,sparc64,s390x,sh3,sh4,x32
+ libc6-dev-amd64 deb libdevel optional arch=i386,x32 profile=!nobiarch
+ libc6-dev-armel deb libdevel optional arch=armhf profile=!nobiarch
+ libc6-dev-armhf deb libdevel optional arch=armel profile=!nobiarch
+ libc6-dev-i386 deb libdevel optional arch=amd64,x32 profile=!nobiarch
+ libc6-dev-mips32 deb libdevel optional arch=mipsn32,mipsn32el,mips64,mips64el profile=!nobiarch
+ libc6-dev-mips64 deb libdevel optional arch=mips,mipsel,mipsn32,mipsn32el profile=!nobiarch
+ libc6-dev-mipsn32 deb libdevel optional arch=mips,mipsel,mips64,mips64el profile=!nobiarch
+ libc6-dev-powerpc deb libdevel optional arch=ppc64 profile=!nobiarch
+ libc6-dev-ppc64 deb libdevel optional arch=powerpc profile=!nobiarch
+ libc6-dev-s390 deb libdevel optional arch=s390x profile=!nobiarch
+ libc6-dev-sparc deb libdevel optional arch=sparc64 profile=!nobiarch
+ libc6-dev-sparc64 deb libdevel optional arch=sparc profile=!nobiarch
+ libc6-dev-x32 deb libdevel optional arch=amd64,i386 profile=!nobiarch
+ libc6-i386 deb libs optional arch=amd64,x32 profile=!stage1,!nobiarch
+ libc6-mips32 deb libs optional arch=mipsn32,mipsn32el,mips64,mips64el profile=!stage1,!nobiarch
+ libc6-mips64 deb libs optional arch=mips,mipsel,mipsn32,mipsn32el profile=!stage1,!nobiarch
+ libc6-mipsn32 deb libs optional arch=mips,mipsel,mips64,mips64el profile=!stage1,!nobiarch
+ libc6-pic deb libdevel optional arch=amd64,arm64,armel,armhf,hppa,i386,m68k,mips,mipsel,mipsn32,mipsn32el,mips64,mips64el,nios2,powerpc,powerpcspe,ppc64,ppc64el,sparc,sparc64,s390x,sh3,sh4,x32 profile=!stage1
+ libc6-powerpc deb libs optional arch=ppc64 profile=!stage1,!nobiarch
+ libc6-ppc64 deb libs optional arch=powerpc profile=!stage1,!nobiarch
+ libc6-s390 deb libs optional arch=s390x profile=!stage1,!nobiarch
+ libc6-sparc deb libs optional arch=sparc64 profile=!stage1,!nobiarch
+ libc6-sparc64 deb libs optional arch=sparc profile=!stage1,!nobiarch
+ libc6-udeb udeb debian-installer optional arch=amd64,arm64,armel,armhf,hppa,i386,m68k,mips,mipsel,mipsn32,mipsn32el,mips64,mips64el,nios2,powerpc,powerpcspe,ppc64,ppc64el,sparc,sparc64,s390x,sh3,sh4,x32 profile=!stage1
+ libc6-x32 deb libs optional arch=amd64,i386 profile=!stage1,!nobiarch
+ libc6-xen deb libs optional arch=i386 profile=!stage1
+ libc6.1 deb libs required arch=alpha profile=!stage1
+ libc6.1-alphaev67 deb libs optional arch=alpha profile=!stage1
+ libc6.1-dbg deb debug optional arch=alpha profile=!stage1
+ libc6.1-dev deb libdevel optional arch=alpha
+ libc6.1-pic deb libdevel optional arch=alpha profile=!stage1
+ libc6.1-udeb udeb debian-installer optional arch=alpha profile=!stage1
+ locales deb localization standard arch=all profile=!stage1
+ locales-all deb localization optional arch=any profile=!stage1
+ multiarch-support deb oldlibs optional arch=any profile=!stage1
+ nscd deb admin optional arch=any profile=!stage1
+Checksums-Sha1:
+ 53dcecd45991deaa344eabea5f526fb6474fe675 8694 glibc_2.24-17ubuntu1.dsc
+ 268ddebc9e6ff56f70bc813f2800f7565de7fa47 13921912 glibc_2.24.orig.tar.xz
+ 6716daad299505bd0df6f8e6971bf8c088a39055 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 69355581a17ebd15b5e0f3e9e37067b7021ffa0312368f41d1c67c6e45f5e93d 8694 glibc_2.24-17ubuntu1.dsc
+ ed71e8afd2b270f7947a2cea2457a31e1ca4fac08e2731d80edd7ec1730ec84f 13921912 glibc_2.24.orig.tar.xz
+ 0146a1be4d0a65f4215cd8ac3d437404fff82bc665ae39739072d9a0f94b773c 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+
+Package: gnome-mines
+Binary: gnome-mines
+Version: 1:3.25.92-1
+Priority: optional
+Section: games
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: appstream-util, debhelper (>= 10), gnome-pkg-tools (>= 0.6), intltool (>= 0.50.0), libglib2.0-dev (>= 2.40.0), libgnome-games-support-1-dev, libgtk-3-dev (>= 3.12.0), librsvg2-dev (>= 2.32.0), valac (>= 0.24), yelp-tools
+Architecture: any
+Standards-Version: 4.1.0
+Format: 3.0 (quilt)
+Directory: pool/main/g/gnome-mines
+Files:
+ 5b7e4064468b5d7b0a2966c2ad86424d 2243 gnome-mines_3.25.92-1.dsc
+ ffd06959c369963120bde4c5369fabef 3691244 gnome-mines_3.25.92.orig.tar.xz
+ 410eac9bd3a221fba4179c01d07537ee 27520 gnome-mines_3.25.92-1.debian.tar.xz
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
+Homepage: https://wiki.gnome.org/Apps/Mines
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-mines/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-mines
+Package-List:
+ gnome-mines deb games optional arch=any
+Checksums-Sha1:
+ b49d312ebaefcca87780492b4ff0ffac16cd8ff9 2243 gnome-mines_3.25.92-1.dsc
+ 8999226d24f2f32576691322d30ad93c4da23bac 3691244 gnome-mines_3.25.92.orig.tar.xz
+ 21c4621bc99ddd95579e36cdb5d87c4cb602449d 27520 gnome-mines_3.25.92-1.debian.tar.xz
+Checksums-Sha256:
+ da827135bf499a3aeb1e96d3bcdc9f1e165d4bd4f2e125947e5d13616b2063f7 2243 gnome-mines_3.25.92-1.dsc
+ 9547f892e2d8a92a1c39f18e92eb07cb015b51fdbf620b1ac9fad5fee0daf6ba 3691244 gnome-mines_3.25.92.orig.tar.xz
+ 57bea467eecbb476bd02228463fd771ac619afae1cbf9383d5c5c677afde0659 27520 gnome-mines_3.25.92-1.debian.tar.xz
+
+Package: init-system-helpers
+Binary: init-system-helpers, init
+Version: 1.49ubuntu1
+Priority: important
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), perl:any
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (native)
+Directory: pool/main/i/init-system-helpers
+Files:
+ bbbe99d08bd3c16d7c1fde952dd49b3c 2027 init-system-helpers_1.49ubuntu1.dsc
+ 50bfb60ab0c8952cbbee866a1143e8ed 43008 init-system-helpers_1.49ubuntu1.tar.xz
+Uploaders: Michael Biebl <biebl@debian.org>, Martin Pitt <mpitt@debian.org>, Felipe Sateler <fsateler@debian.org>
+Vcs-Browser: https://anonscm.debian.org/git/collab-maint/init-system-helpers.git
+Vcs-Git: https://anonscm.debian.org/git/collab-maint/init-system-helpers.git
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, cpanminus
+Package-List:
+ init deb metapackages important arch=any
+ init-system-helpers deb admin required arch=all essential=yes
+Checksums-Sha1:
+ ead500f87178bd809b9f02db4d2f214f07f8ca75 2027 init-system-helpers_1.49ubuntu1.dsc
+ 467299c9210547fc122fddec417697f139083789 43008 init-system-helpers_1.49ubuntu1.tar.xz
+Checksums-Sha256:
+ 5c6d580900af449464a4762cbd357a1a3ccb88476710ecb96958be9b8419405d 2027 init-system-helpers_1.49ubuntu1.dsc
+ c6fe39f2e5c7436492693e138ef6911add3d61ebe87b6f67d90cdeed1dfaef0f 43008 init-system-helpers_1.49ubuntu1.tar.xz
+
+Package: lapack
+Binary: liblapack3, liblapacke, liblapacke-dev, libtmglib3, libtmglib-dev, liblapack-dev, liblapack-pic, liblapack-test, liblapack-doc, libblas3, libblas-common, libblas-dev, libblas-test, liblapack-doc-man
+Version: 3.7.1-1ubuntu4
+Priority: optional
+Section: libs
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10)
+Build-Depends-Indep: doxygen, graphviz
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/l/lapack
+Files:
+ 7cc981b4a2fe7296a162495c433d9d38 2859 lapack_3.7.1-1ubuntu4.dsc
+ dcdeeed73de152c4643ccc5b1aeb453c 9137261 lapack_3.7.1.orig.tar.gz
+ d18951bbe518004b29aab2943a203e39 19960 lapack_3.7.1-1ubuntu4.debian.tar.xz
+Uploaders: Sébastien Villemot <sebastien@debian.org>
+Homepage: http://www.netlib.org/lapack/
+Vcs-Browser: https://anonscm.debian.org/cgit/debian-science/packages/lapack.git
+Vcs-Git: https://anonscm.debian.org/git/debian-science/packages/lapack.git
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, gfortran, python
+Build-Depends-Arch: gfortran, python
+Package-List:
+ libblas-common deb libs optional arch=any
+ libblas-dev deb libdevel optional arch=any
+ libblas-test deb devel extra arch=any
+ libblas3 deb libs optional arch=any
+ liblapack-dev deb libdevel optional arch=any
+ liblapack-doc deb doc optional arch=all
+ liblapack-doc-man deb oldlibs extra arch=all
+ liblapack-pic deb libdevel optional arch=any
+ liblapack-test deb devel extra arch=any
+ liblapack3 deb libs optional arch=any
+ liblapacke deb libs optional arch=any
+ liblapacke-dev deb libdevel optional arch=any
+ libtmglib-dev deb libdevel optional arch=any
+ libtmglib3 deb libs optional arch=any
+Checksums-Sha1:
+ 2ee556dcc75299d6013c64cb48e5964f8fa9dfdc 2859 lapack_3.7.1-1ubuntu4.dsc
+ 84c4f7163b52b1bf1f6ca2193f6f48ed3dec0fab 9137261 lapack_3.7.1.orig.tar.gz
+ 9ed775a84aad1c98f32113fc2cadef03a9f40f1a 19960 lapack_3.7.1-1ubuntu4.debian.tar.xz
+Checksums-Sha256:
+ d880fc8810724afee6fa67df424a5f5ced5e0db9072a955b6a1c699e34b2b6ab 2859 lapack_3.7.1-1ubuntu4.dsc
+ f6c53fd9f56932f3ddb3d5e24c1c07e4cd9b3b08e7f89de9c867125eecc9a1c8 9137261 lapack_3.7.1.orig.tar.gz
+ 35569c640881ab7050464c73639bf5ddb07bde76cb730a265a29e6970b2cf145 19960 lapack_3.7.1-1ubuntu4.debian.tar.xz
+
+Package: libgd2
+Binary: libgd-tools, libgd-dev, libgd3
+Version: 2.2.5-1
+Priority: optional
+Section: oldlibs
+Maintainer: GD team <pkg-gd-devel@lists.alioth.debian.org>
+Build-Depends: autotools-dev, debhelper (>= 9), libpng-dev, libz-dev, libjpeg-dev, libfreetype6-dev, libxpm-dev, libx11-dev, libxt-dev, libfontconfig-dev, libwebp-dev, libtiff-dev, dh-autoreconf, html2text
+Architecture: any
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/libg/libgd2
+Files:
+ 9f82c49fbb6f820ad64ec2802e56a935 2293 libgd2_2.2.5-1.dsc
+ d851cf184ccb9272b728ccb938c25b25 3326856 libgd2_2.2.5.orig.tar.gz
+ 9fc83f818bc85323ceec4e3ca7458ccb 24224 libgd2_2.2.5-1.debian.tar.xz
+Uploaders: Ondřej Surý <ondrej@debian.org>
+Homepage: http://www.libgd.org/
+Vcs-Browser: http://anonscm.debian.org/gitweb?p=collab-maint/libgd2.git;a=summary
+Vcs-Git: git://anonscm.debian.org/collab-maint/libgd2.git
+Package-List:
+ libgd-dev deb libdevel optional arch=any
+ libgd-tools deb graphics optional arch=any
+ libgd3 deb libs optional arch=any
+Checksums-Sha1:
+ 0de4692f8c342fcf71aafefb632349d9b0f97b15 2293 libgd2_2.2.5-1.dsc
+ 281af8e7e9c798d368caf8758b983c4d8c24d9ec 3326856 libgd2_2.2.5.orig.tar.gz
+ cabdf1b07190505392cda696f03f85a0860e48fe 24224 libgd2_2.2.5-1.debian.tar.xz
+Checksums-Sha256:
+ 78f922a04dc83615ce07922218da1c3bb9175569b9dbe6f6c6e5e637d283da18 2293 libgd2_2.2.5-1.dsc
+ 150e6952af874bbccb33cf0f87288b41a8fd54f0ce4cff914ef90a80ef9d0162 3326856 libgd2_2.2.5.orig.tar.gz
+ 963f4654a3633e6593b16c050c03742d80e515fc7a3b01d17539764c7fe898bc 24224 libgd2_2.2.5-1.debian.tar.xz
+
+Package: libgphoto2
+Binary: libgphoto2-dev, libgphoto2-dev-doc, libgphoto2-port12, libgphoto2-6, libgphoto2-l10n
+Version: 2.5.14-1
+Priority: optional
+Section: libs
+Maintainer: Debian PhotoTools Maintainers <pkg-phototools-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10), dh-autoreconf, doxygen, graphviz, libdbus-1-dev, libexif-dev (>= 0.5.9), libgd-dev, libgpmg1-dev [linux-any], libjpeg-dev, libltdl-dev, libtool, libusb-1.0-0-dev [!hurd-i386], libxml2-dev, pkg-config, rdfind, symlinks, zlib1g-dev
+Build-Conflicts: liblockdev1-dev
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/libg/libgphoto2
+Files:
+ 22af67ef902989cdfba903596e7c38c1 2630 libgphoto2_2.5.14-1.dsc
+ 65acb6cbd2b4f3f46829599f5dabd89c 6992238 libgphoto2_2.5.14.orig.tar.bz2
+ 2c454b06d240ae3e7bf073af2837edd9 107912 libgphoto2_2.5.14-1.debian.tar.xz
+Uploaders: Herbert Parentes Fortes Neto <hpfn@debian.org>, Frederic Peters <fpeters@debian.org>, Gürkan Sengün <gurkan@phys.ethz.ch>
+Homepage: https://github.com/gphoto/libgphoto2/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-phototools/libgphoto2.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-phototools/libgphoto2.git
+Package-List:
+ libgphoto2-6 deb libs optional arch=any
+ libgphoto2-dev deb libdevel optional arch=any
+ libgphoto2-dev-doc deb doc optional arch=all
+ libgphoto2-l10n deb localization optional arch=all
+ libgphoto2-port12 deb libs optional arch=any
+Checksums-Sha1:
+ 1aba8032711180eb1059bc5c0d6a05ce0aae1d5c 2630 libgphoto2_2.5.14-1.dsc
+ ad4eba1cf5a334437e52ab12a34fffa4e3d709c3 6992238 libgphoto2_2.5.14.orig.tar.bz2
+ 51dd27d1adb0ed629f263fac017f51ff0345bee4 107912 libgphoto2_2.5.14-1.debian.tar.xz
+Checksums-Sha256:
+ 1795bddca082d0cd7b761ff9b2d0419c90c3834704c6f457fdac5c10c0a18e1f 2630 libgphoto2_2.5.14-1.dsc
+ d3ce70686fb87d6791b9adcbb6e5693bfbe1cfef9661c23c75eb8a699ec4e274 6992238 libgphoto2_2.5.14.orig.tar.bz2
+ 98c87ddfa8e4f20be8b5958838cd6f1de96d7013bd5e9122664dcdb654898df5 107912 libgphoto2_2.5.14-1.debian.tar.xz
+
+Package: libimobiledevice
+Binary: libimobiledevice6, libimobiledevice-dev, libimobiledevice6-dbg, python-imobiledevice, libimobiledevice-utils, libimobiledevice-doc
+Version: 1.2.0+dfsg-3.1ubuntu2
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: gtkpod Maintainers <pkg-gtkpod-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-python, libgnutls28-dev, libgcrypt20-dev, libusb-1.0-0-dev (>= 1.0.3) [linux-any], libglib2.0-dev (>= 2.14.1), libplist-dev (>= 1.11), libplist++-dev (>= 1.11), python-all-dev (>= 2.6.6-3~), cython (>= 0.17.0), libusbmuxd-dev (>= 1.0.9), libtasn1-6-dev (>= 1.1), libreadline-dev, python-plist (>= 1.8-2~), dh-autoreconf
+Architecture: any all
+Standards-Version: 3.9.6
+Format: 3.0 (quilt)
+Directory: pool/main/libi/libimobiledevice
+Files:
+ 3cbf232d9a6950728bc179b903664696 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
+ c61c9b5710a65de64624da0302a22e9b 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
+ 7e654d1234a73b8ca7ebfb02a7f106b8 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
+Uploaders: Julien Lavergne <julien.lavergne@gmail.com>
+Homepage: http://libimobiledevice.org/
+Vcs-Browser: http://git.debian.org/?p=pkg-gtkpod/packages/libimobiledevice.git
+Vcs-Git: git://git.debian.org/git/pkg-gtkpod/packages/libimobiledevice.git
+Package-List:
+ libimobiledevice-dev deb libdevel optional arch=any
+ libimobiledevice-doc deb doc optional arch=all
+ libimobiledevice-utils deb utils optional arch=any
+ libimobiledevice6 deb libs optional arch=any
+ libimobiledevice6-dbg deb debug extra arch=any
+ python-imobiledevice deb python optional arch=any
+Checksums-Sha1:
+ 55cccc051d9164fec6704ae0650e6fccd8074680 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
+ 9b71e4ee8c175f264c632b508454b6bd0e1b2c03 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
+ b7f27755de1523d2ecb812938f792c04ca14d3be 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
+Checksums-Sha256:
+ 8949164fdc492244dbdfb9a6f3051f118f5c1805ca21a06a60f12d6aaff22e9b 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
+ 6b792802c515e537509272549e269675d11d23eb6c6179f87d7212fc27587dd7 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
+ bc0bd2d1f80f0f912b33047ca3cb9493f4877d93bcec1113d96281b2a9c5babc 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
+
+Package: libreoffice
+Binary: libreoffice, libreoffice-l10n-za, libreoffice-l10n-in, libreoffice-core, libreoffice-common, libreoffice-java-common, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-draw, libreoffice-math, libreoffice-base-core, libreoffice-base, libreoffice-style-oxygen, libreoffice-style-breeze, libreoffice-style-tango, libreoffice-style-hicontrast, libreoffice-style-sifr, libreoffice-style-galaxy, libreoffice-style-elementary, libreoffice-gnome, python3-uno, libreoffice-officebean, libreoffice-script-provider-python, libreoffice-script-provider-bsh, libreoffice-script-provider-js, libreoffice-avmedia-backend-gstreamer, libreoffice-avmedia-backend-vlc, libreoffice-sdbc-hsqldb, libreoffice-base-drivers, uno-libs3, ure, libreoffice-ogltrans, libreoffice-wiki-publisher, libreoffice-report-builder, libreoffice-report-builder-bin, libreoffice-nlpsolver, fonts-opensymbol, libreoffice-dev, libreoffice-dev-common, libreoffice-dev-doc, libreofficekit-dev,
+ libreoffice-gtk2, libreoffice-systray, libreoffice-gtk3, gir1.2-lokdocview-0.1, liblibreofficekitgtk, libreofficekit-data, libreoffice-kde, libreoffice-sdbc-postgresql, libreoffice-mysql-connector, libreoffice-evolution, libreoffice-subsequentcheckbase, libreoffice-librelogo, libreoffice-gtk, libreoffice-style-human,
+ libreoffice-pdfimport
+Version: 1:5.4.1-0ubuntu1
+Priority: optional
+Section: editors
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Build-Depends: ant (>= 1.7.0) [!hppa !ia64 !mips64 !s390 !sparc], ant-optional (>= 1.7.0) [!hppa !ia64 !mips64 !s390 !sparc], autoconf, automake, bc, binutils (>= 2.23) [mips mipsel], bison, bzip2, debhelper (>= 10), default-jdk (>= 1:1.6) [!hppa !mips64 !s390 !sparc], default-jdk (>= 2:1.7-52.1) [kfreebsd-any], default-jdk (>= 2:1.8-55) [sparc64], default-libmysqlclient-dev, dh-apparmor, dh-python, dpkg-dev (>= 1.18.2~), fastjar, flex (>= 2.3.35), fontconfig [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-crosextra-carlito [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-dejavu [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-liberation [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, g++ (>= 4:7) [m68k], gcc (>= 4:7) [m68k], gdb [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, gettext, ghostscript [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, gobject-introspection (>= 1.32.0), gperf, imagemagick [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, java-common (>= 0.49), javahelper (>= 0.37~), junit4 (>= 4.8.2-2) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, kdelibs5-dev (>= 4:4.3.4), libabw-dev (>= 0.1), libarchive-zip-perl [!hppa !ia64 !mips64 !s390 !sparc], libavahi-client-dev, libbluetooth-dev [linux-any], libboost-date-time-dev (>= 1.58), libboost-dev (>= 1.58), libboost-filesystem-dev (>= 1.58), libboost-iostreams-dev (>= 1.58), libboost-locale-dev (>= 1.58), libc0.1 (>= 2.10.2-7) [kfreebsd-any], libc6 (>= 2.17-6) [mips mipsel], libcairo2-dev, libcdr-dev (>= 0.1), libclucene-dev (>= 2.3.3.4-4.1), libcmis-dev (>= 0.5.0-3ubuntu1), libcppunit-dev (>= 1.14) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, libcups2-dev, libcurl4-gnutls-dev, libdbus-glib-1-dev (>= 0.70), libdconf-dev (>= 0.15.2), libe-book-dev, libe-book-dev (>= 0.1.2) <!nocheck>, libebook1.2-dev, libeot-dev, libepoxy-dev (>= 1.2), libetonyek-dev, libetonyek-dev (>= 0.1.5) <!nocheck>, libexpat1-dev, libexttextcat-dev (>= 3.4.1), libfontconfig1-dev, libfreehand-dev (>= 0.1), libfreetype6-dev (>= 2.2.0), libgirepository1.0-dev (>= 1.32), libgl1-mesa-dev, libglib2.0-dev (>= 2.38.0), libglm-dev (>= 0.9.6.3), libgpg-error-dev, libgpgme-dev, libgpgmepp-dev, libgraphite2-dev (>= 0.9.3), libgstreamer-plugins-base1.0-dev, libgstreamer1.0-dev, libgtk-3-dev (>= 3.8.0), libgtk2.0-dev (>= 2.18.0), libharfbuzz-dev (>= 0.9.42), libhsqldb1.8.0-java (>> 1.8.0.10) [!hppa !ia64 !mips64 !s390 !sparc], libhunspell-dev (>= 1.1.5-2), libhyphen-dev (>= 2.4), libice-dev, libicu-dev (>= 52), libjpeg-dev, liblangtag-dev (>= 0.4), liblcms2-dev, libldap2-dev, liblpsolve55-dev (>= 5.5.0.13-5+b1), libmdds-dev (>= 1.2), libmspub-dev (>= 0.1), libmwaw-dev (>= 0.3.1), libmwaw-dev (>= 0.3.11) <!nocheck>, libmysqlcppconn-dev (>= 1.1.7-4), libmythes-dev (>= 2:1.2), libneon27-gnutls-dev, libnspr4-dev, libnss3-dev (>= 3.12.3), libodfgen-dev (>= 0.1), liborcus-dev (>= 0.12), libpagemaker-dev, libpng-dev, libpoppler-cpp-dev, libpoppler-dev (>= 0.12.0), libpoppler-private-dev, libpq-dev (>= 9.0~), libqt4-dev (>= 4:4.8), librdf0-dev (>= 1.0.16-2), librevenge-dev, libsane-dev, libsm-dev, libsuitesparse-dev (>= 1:3.4.0), libvisio-dev (>= 0.1), libwpd-dev (>= 0.10), libwpg-dev (>= 0.3), libwps-dev (>= 0.4), libwps-dev (>= 0.4.6) <!nocheck>, libx11-dev, libxaw7-dev, libxext-dev, libxinerama-dev, libxkbfile-dev, libxml2-dev (>= 2.8), libxml2-utils, libxmlsec1-dev (>= 1.2.24), libxrandr-dev, libxrender-dev, libxslt1-dev, libxt-dev, libxtst-dev, locales [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, lp-solve (>= 5.5.0.13-5+b1), maven-repo-helper, pkg-config, pstoedit [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, python3, python3-dev (>= 3.3), ucpp, unixodbc-dev (>= 2.2.11), unzip, x11proto-render-dev, xsltproc, zip, zlib1g-dev
+Build-Depends-Indep: doxygen (>= 1.8.4) <!nodoc>, libbsh-java, libcommons-logging-java [!hppa !ia64 !mips64 !s390 !sparc], rdfind, symlinks
+Build-Conflicts: amd-libopencl1, g++-4.6 (= 4.6.1-10), g++-4.6 (= 4.6.1-11), g++-4.7 (<< 4.7.1-3), nvidia-glx-dev, nvidia-glx-legacy-dev, nvidia-libopencl1
+Architecture: alpha amd64 arm64 armel armhf hppa i386 ia64 kfreebsd-amd64 kfreebsd-i386 m68k mips mipsel mips64 mips64el powerpc powerpcspe ppc64 ppc64el s390 s390x sparc sparc64 all
+Standards-Version: 4.0.1
+Format: 3.0 (quilt)
+Directory: pool/main/libr/libreoffice
+Files:
+ e95c4546b9811bbc1131120c6d64d738 16402 libreoffice_5.4.1-0ubuntu1.dsc
+ 227487d7e36a93123b02aae09ec3816c 1810132 libreoffice_5.4.1.orig-helpcontent2.tar.xz
+ 7a7ac2def138a944f2a528474f670b4d 193657240 libreoffice_5.4.1.orig-tarballs.tar.xz
+ 15e3aa5b03bfb0396caacbd389aaf2b9 136212060 libreoffice_5.4.1.orig-translations.tar.xz
+ 44a5724347eead2103a0d193b2b89426 171272644 libreoffice_5.4.1.orig.tar.xz
+ 2f7c8205149879481b857454372c280c 2167132 libreoffice_5.4.1-0ubuntu1.debian.tar.xz
+Uploaders: Rene Engelhard <rene@debian.org>, Chris Halls <halls@debian.org>
+Homepage: http://www.libreoffice.org
+Vcs-Browser: https://git.launchpad.net/~libreoffice/ubuntu/+source/libreoffice
+Vcs-Git: https://git.launchpad.net/~libreoffice/ubuntu/+source/libreoffice -b ubuntu-artful-5.4
+Testsuite: autopkgtest
+Testsuite-Triggers: python3
+Package-List:
+ fonts-opensymbol deb fonts optional arch=all
+ gir1.2-lokdocview-0.1 deb introspection optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ liblibreofficekitgtk deb gnome optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice deb metapackages optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-avmedia-backend-gstreamer deb misc optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-avmedia-backend-vlc deb misc optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-base deb database optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-base-core deb editors optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-base-drivers deb database optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-calc deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-common deb editors optional arch=all
+ libreoffice-core deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-dev deb devel optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-dev-common deb devel optional arch=all
+ libreoffice-dev-doc deb doc optional arch=all
+ libreoffice-draw deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-evolution deb gnome optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-gnome deb gnome optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-gtk deb oldlibs extra arch=all
+ libreoffice-gtk2 deb gnome optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-gtk3 deb gnome optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-impress deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-java-common deb editors optional arch=all
+ libreoffice-kde deb kde optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-l10n-in deb metapackages optional arch=all
+ libreoffice-l10n-za deb metapackages optional arch=all
+ libreoffice-librelogo deb misc optional arch=all
+ libreoffice-math deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-mysql-connector deb misc optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-nlpsolver deb math optional arch=all
+ libreoffice-officebean deb java optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-ogltrans deb graphics optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-pdfimport deb oldlibs optional arch=all
+ libreoffice-report-builder deb misc optional arch=all
+ libreoffice-report-builder-bin deb misc optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-script-provider-bsh deb java optional arch=all
+ libreoffice-script-provider-js deb web optional arch=all
+ libreoffice-script-provider-python deb python optional arch=all
+ libreoffice-sdbc-hsqldb deb database optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-sdbc-postgresql deb misc optional arch=alpha,amd64,arm64,armel,armhf,i386,m68k,mips,mipsel,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc64,kfreebsd-amd64,kfreebsd-i386
+ libreoffice-style-breeze deb editors optional arch=all
+ libreoffice-style-elementary deb editors optional arch=all
+ libreoffice-style-galaxy deb editors optional arch=all
+ libreoffice-style-hicontrast deb editors optional arch=all
+ libreoffice-style-human deb oldlibs extra arch=all
+ libreoffice-style-oxygen deb editors optional arch=all
+ libreoffice-style-sifr deb editors optional arch=all
+ libreoffice-style-tango deb editors optional arch=all
+ libreoffice-subsequentcheckbase deb libs optional arch=all
+ libreoffice-systray deb misc optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreoffice-wiki-publisher deb misc optional arch=all
+ libreoffice-writer deb editors optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ libreofficekit-data deb web optional arch=all
+ libreofficekit-dev deb libdevel optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ python3-uno deb python optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ uno-libs3 deb libs optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+ ure deb libs optional arch=alpha,amd64,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,m68k,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390,s390x,sparc,sparc64
+Checksums-Sha1:
+ 4b634af0e5415e92170a3ee7a91d7553103f90a9 16402 libreoffice_5.4.1-0ubuntu1.dsc
+ 59830159dcbc4f8b795092b89856fe32412c6337 1810132 libreoffice_5.4.1.orig-helpcontent2.tar.xz
+ 43083a56fe8c7c4d0daf0345a620207d2397ea9f 193657240 libreoffice_5.4.1.orig-tarballs.tar.xz
+ 6dfdf5a3c8d84e778f648be29f45bc9b4bbb39a5 136212060 libreoffice_5.4.1.orig-translations.tar.xz
+ f5adb47ba300b844107eb43891482a2b7ee1e805 171272644 libreoffice_5.4.1.orig.tar.xz
+ 2408099fa28f6e94f86e9ba0d29f0c76aac4403d 2167132 libreoffice_5.4.1-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ a819de436ffc48268a9ce0fa24f20d8a555960ac6b792c9ef30a30fcfa3bc526 16402 libreoffice_5.4.1-0ubuntu1.dsc
+ b5a5d52b7542a6983bf21ea9d30bc550f8a3af28a6d903537feb9bae167c85e9 1810132 libreoffice_5.4.1.orig-helpcontent2.tar.xz
+ 602e5471e229a9a6fff96870857ced11e693a449972d6b9571b03dc90d0c4db2 193657240 libreoffice_5.4.1.orig-tarballs.tar.xz
+ ffff27d73f43daca409a9c491e1c52650e97f4ef954cd8e024f365c82a04a5bd 136212060 libreoffice_5.4.1.orig-translations.tar.xz
+ 351638fc80f831ee16711b667a1faf1011eaa466322384e90ed88d12d7d437ce 171272644 libreoffice_5.4.1.orig.tar.xz
+ f0740bc963028da655631f79912b0f94a09f6cde3feac9a80ee75c49a399e41e 2167132 libreoffice_5.4.1-0ubuntu1.debian.tar.xz
+
+Package: libreoffice-l10n
+Binary: libreoffice-l10n-af, libreoffice-l10n-am, libreoffice-l10n-ar, libreoffice-l10n-as, libreoffice-l10n-ast, libreoffice-l10n-be, libreoffice-l10n-bg, libreoffice-l10n-bn, libreoffice-l10n-br, libreoffice-l10n-bs, libreoffice-l10n-ca, libreoffice-l10n-cs, libreoffice-l10n-cy, libreoffice-l10n-da, libreoffice-l10n-de, libreoffice-l10n-dz, libreoffice-l10n-el, libreoffice-l10n-en-gb, libreoffice-l10n-en-za, libreoffice-l10n-eo, libreoffice-l10n-es, libreoffice-l10n-et, libreoffice-l10n-eu, libreoffice-l10n-fa, libreoffice-l10n-fi, libreoffice-l10n-fr, libreoffice-l10n-ga, libreoffice-l10n-gd, libreoffice-l10n-gl, libreoffice-l10n-gu, libreoffice-l10n-gug, libreoffice-l10n-he, libreoffice-l10n-hi, libreoffice-l10n-hr, libreoffice-l10n-hu, libreoffice-l10n-id, libreoffice-l10n-is, libreoffice-l10n-it, libreoffice-l10n-ja, libreoffice-l10n-ka, libreoffice-l10n-kk, libreoffice-l10n-km, libreoffice-l10n-kmr-latn, libreoffice-l10n-kn, libreoffice-l10n-ko, libreoffice-l10n-lt,
+ libreoffice-l10n-lv, libreoffice-l10n-mk, libreoffice-l10n-mn, libreoffice-l10n-ml, libreoffice-l10n-mr, libreoffice-l10n-nb, libreoffice-l10n-ne, libreoffice-l10n-nl, libreoffice-l10n-nn, libreoffice-l10n-nr, libreoffice-l10n-nso, libreoffice-l10n-oc, libreoffice-l10n-om, libreoffice-l10n-or, libreoffice-l10n-pa-in, libreoffice-l10n-pl, libreoffice-l10n-pt, libreoffice-l10n-pt-br, libreoffice-l10n-ro, libreoffice-l10n-ru, libreoffice-l10n-rw, libreoffice-l10n-si, libreoffice-l10n-sk, libreoffice-l10n-sl, libreoffice-l10n-sr, libreoffice-l10n-ss, libreoffice-l10n-st, libreoffice-l10n-sv, libreoffice-l10n-ta, libreoffice-l10n-te, libreoffice-l10n-tg, libreoffice-l10n-th, libreoffice-l10n-tn, libreoffice-l10n-tr, libreoffice-l10n-ts, libreoffice-l10n-ug, libreoffice-l10n-uk, libreoffice-l10n-uz, libreoffice-l10n-ve, libreoffice-l10n-vi, libreoffice-l10n-xh, libreoffice-l10n-zh-cn, libreoffice-l10n-zh-tw, libreoffice-l10n-zu, libreoffice-help-en-us, libreoffice-help-ca,
+ libreoffice-help-cs, libreoffice-help-da, libreoffice-help-de, libreoffice-help-dz, libreoffice-help-el, libreoffice-help-en-gb, libreoffice-help-es, libreoffice-help-et, libreoffice-help-eu, libreoffice-help-fi, libreoffice-help-fr, libreoffice-help-gl, libreoffice-help-hi, libreoffice-help-hu, libreoffice-help-it, libreoffice-help-ja, libreoffice-help-km, libreoffice-help-ko, libreoffice-help-nl, libreoffice-help-om, libreoffice-help-pl, libreoffice-help-pt, libreoffice-help-pt-br, libreoffice-help-ru, libreoffice-help-sk, libreoffice-help-sl, libreoffice-help-sv, libreoffice-help-tr, libreoffice-help-vi, libreoffice-help-zh-cn,
+ libreoffice-help-zh-tw
+Version: 1:5.4.1-0ubuntu1
+Priority: optional
+Section: editors
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian LibreOffice Maintainers <debian-openoffice@lists.debian.org>
+Build-Depends: autoconf, automake, bc, bison, bzip2, fastjar, flex (>= 2.3.35), gperf, libc0.1 (>= 2.10.2-7) [kfreebsd-any], libcups2-dev, libfontconfig1-dev, libfreetype6-dev (>= 2.2.0), libgl1-mesa-dev, libice-dev, libsm-dev, libx11-dev, libxaw7-dev, libxext-dev, libxinerama-dev, libxkbfile-dev, libxrender-dev, libxt-dev, libxtst-dev, pkg-config, unzip, x11proto-render-dev, xsltproc, zip, zlib1g-dev, binutils (>= 2.23) [mips mipsel], libc6 (>= 2.17-6) [mips mipsel], gcc (>= 4:7) [m68k], g++ (>= 4:7) [m68k], libpoppler-dev (>= 0.12.0), libpoppler-private-dev, libpoppler-cpp-dev, libgraphite2-dev (>= 0.9.3), libharfbuzz-dev (>= 0.9.42), libexttextcat-dev (>= 3.4.1), libjpeg-dev, libxml2-dev (>= 2.8), libxml2-utils, libxslt1-dev, libxmlsec1-dev (>= 1.2.24), libexpat1-dev, unixodbc-dev (>= 2.2.11), libsane-dev, libpng-dev, libcurl4-gnutls-dev, python3, python3-dev (>= 3.3), dh-python, debhelper (>= 10), dpkg-dev (>= 1.18.2~), locales [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, gdb [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fontconfig [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-liberation [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-crosextra-carlito [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, fonts-dejavu [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, libcppunit-dev (>= 1.14) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, pstoedit [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, imagemagick [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, ghostscript [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, junit4 (>= 4.8.2-2) [!hppa !kfreebsd-amd64 !kfreebsd-i386 !m68k !mips !mips64 !powerpc !powerpcspe !ppc64 !s390 !s390x !sparc !sparc64] <!nocheck>, maven-repo-helper, java-common (>= 0.49), default-jdk (>= 1:1.6) [!hppa !mips64 !s390 !sparc], default-jdk (>= 2:1.7-52.1) [kfreebsd-any], default-jdk (>= 2:1.8-55) [sparc64], ant (>= 1.7.0) [!hppa !ia64 !mips64 !s390 !sparc], ant-optional (>= 1.7.0) [!hppa !ia64 !mips64 !s390 !sparc], javahelper (>= 0.37~), libnss3-dev (>= 3.12.3), libnspr4-dev, ucpp, libhunspell-dev (>= 1.1.5-2), libhyphen-dev (>= 2.4), libboost-dev (>= 1.58), libboost-date-time-dev (>= 1.58), libboost-iostreams-dev (>= 1.58), libboost-filesystem-dev (>= 1.58), libboost-locale-dev (>= 1.58), libmdds-dev (>= 1.2), liborcus-dev (>= 0.12), libclucene-dev (>= 2.3.3.4-4.1), librevenge-dev, libwpd-dev (>= 0.10), libmythes-dev (>= 2:1.2), libwps-dev (>= 0.4), libwps-dev (>= 0.4.6) <!nocheck>, libwpg-dev (>= 0.3), libvisio-dev (>= 0.1), libcdr-dev (>= 0.1), libmspub-dev (>= 0.1), libmwaw-dev (>= 0.3.1), libmwaw-dev (>= 0.3.11) <!nocheck>, libodfgen-dev (>= 0.1), libetonyek-dev, libetonyek-dev (>= 0.1.5) <!nocheck>, libfreehand-dev (>= 0.1), libabw-dev (>= 0.1), libpagemaker-dev, libe-book-dev, libe-book-dev (>= 0.1.2) <!nocheck>, libcmis-dev (>= 0.5.0-3ubuntu1), dh-apparmor, libeot-dev, liblcms2-dev, libldap2-dev, liblangtag-dev (>= 0.4), libicu-dev (>= 52), libcairo2-dev, kdelibs5-dev (>= 4:4.3.4), libqt4-dev (>= 4:4.8), default-libmysqlclient-dev, libmysqlcppconn-dev (>= 1.1.7-4), libgtk2.0-dev (>= 2.18.0), libgtk-3-dev (>= 3.8.0), libglib2.0-dev (>= 2.38.0), gobject-introspection (>= 1.32.0), libgirepository1.0-dev (>= 1.32), libebook1.2-dev, libpq-dev (>= 9.0~), libxrandr-dev, libhsqldb1.8.0-java (>> 1.8.0.10) [!hppa !ia64 !mips64 !s390 !sparc], libarchive-zip-perl [!hppa !ia64 !mips64 !s390 !sparc], liblpsolve55-dev (>= 5.5.0.13-5+b1), lp-solve (>= 5.5.0.13-5+b1), libsuitesparse-dev (>= 1:3.4.0), libdbus-glib-1-dev (>= 0.70), libbluetooth-dev [linux-any], libavahi-client-dev, libgstreamer1.0-dev, libgstreamer-plugins-base1.0-dev, libneon27-gnutls-dev, librdf0-dev (>= 1.0.16-2), libepoxy-dev (>= 1.2), libglm-dev (>= 0.9.6.3), libgpgmepp-dev, libgpgme-dev, libgpg-error-dev, gettext, libdconf-dev (>= 0.15.2)
+Build-Depends-Indep: fdupes, imagemagick, xml-core, rdfind, symlinks, doxygen (>= 1.8.4) <!nodoc>, libcommons-logging-java [!hppa !ia64 !mips64 !s390 !sparc], libbsh-java
+Architecture: all
+Standards-Version: 3.9.4
+Format: 3.0 (quilt)
+Directory: pool/main/libr/libreoffice-l10n
+Files:
+ f6d3a346a7327d24275288e0521da5aa 16337 libreoffice-l10n_5.4.1-0ubuntu1.dsc
+ 227487d7e36a93123b02aae09ec3816c 1810132 libreoffice-l10n_5.4.1.orig-helpcontent2.tar.xz
+ 7a7ac2def138a944f2a528474f670b4d 193657240 libreoffice-l10n_5.4.1.orig-tarballs.tar.xz
+ 15e3aa5b03bfb0396caacbd389aaf2b9 136212060 libreoffice-l10n_5.4.1.orig-translations.tar.xz
+ 44a5724347eead2103a0d193b2b89426 171272644 libreoffice-l10n_5.4.1.orig.tar.xz
+ 998232ab2dd7e6594420f5f1e5ae9908 2042556 libreoffice-l10n_5.4.1-0ubuntu1.debian.tar.xz
+Uploaders: Rene Engelhard <rene@debian.org>
+Homepage: http://www.libreoffice.org
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-openoffice/libreoffice.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/pkg-openoffice/libreoffice.git
+Package-List:
+ libreoffice-help-ca deb doc optional arch=all
+ libreoffice-help-cs deb doc optional arch=all
+ libreoffice-help-da deb doc optional arch=all
+ libreoffice-help-de deb doc optional arch=all
+ libreoffice-help-dz deb doc optional arch=all
+ libreoffice-help-el deb doc optional arch=all
+ libreoffice-help-en-gb deb doc optional arch=all
+ libreoffice-help-en-us deb doc optional arch=all
+ libreoffice-help-es deb doc optional arch=all
+ libreoffice-help-et deb doc optional arch=all
+ libreoffice-help-eu deb doc optional arch=all
+ libreoffice-help-fi deb doc optional arch=all
+ libreoffice-help-fr deb doc optional arch=all
+ libreoffice-help-gl deb doc optional arch=all
+ libreoffice-help-hi deb doc optional arch=all
+ libreoffice-help-hu deb doc optional arch=all
+ libreoffice-help-it deb doc optional arch=all
+ libreoffice-help-ja deb doc optional arch=all
+ libreoffice-help-km deb doc optional arch=all
+ libreoffice-help-ko deb doc optional arch=all
+ libreoffice-help-nl deb doc optional arch=all
+ libreoffice-help-om deb doc optional arch=all
+ libreoffice-help-pl deb doc optional arch=all
+ libreoffice-help-pt deb doc optional arch=all
+ libreoffice-help-pt-br deb doc optional arch=all
+ libreoffice-help-ru deb doc optional arch=all
+ libreoffice-help-sk deb doc optional arch=all
+ libreoffice-help-sl deb doc optional arch=all
+ libreoffice-help-sv deb doc optional arch=all
+ libreoffice-help-tr deb doc optional arch=all
+ libreoffice-help-vi deb doc optional arch=all
+ libreoffice-help-zh-cn deb doc optional arch=all
+ libreoffice-help-zh-tw deb doc optional arch=all
+ libreoffice-l10n-af deb localization optional arch=all
+ libreoffice-l10n-am deb localization optional arch=all
+ libreoffice-l10n-ar deb localization optional arch=all
+ libreoffice-l10n-as deb localization optional arch=all
+ libreoffice-l10n-ast deb localization optional arch=all
+ libreoffice-l10n-be deb localization optional arch=all
+ libreoffice-l10n-bg deb localization optional arch=all
+ libreoffice-l10n-bn deb localization optional arch=all
+ libreoffice-l10n-br deb localization optional arch=all
+ libreoffice-l10n-bs deb localization optional arch=all
+ libreoffice-l10n-ca deb localization optional arch=all
+ libreoffice-l10n-cs deb localization optional arch=all
+ libreoffice-l10n-cy deb localization optional arch=all
+ libreoffice-l10n-da deb localization optional arch=all
+ libreoffice-l10n-de deb localization optional arch=all
+ libreoffice-l10n-dz deb localization optional arch=all
+ libreoffice-l10n-el deb localization optional arch=all
+ libreoffice-l10n-en-gb deb localization optional arch=all
+ libreoffice-l10n-en-za deb localization optional arch=all
+ libreoffice-l10n-eo deb localization optional arch=all
+ libreoffice-l10n-es deb localization optional arch=all
+ libreoffice-l10n-et deb localization optional arch=all
+ libreoffice-l10n-eu deb localization optional arch=all
+ libreoffice-l10n-fa deb localization optional arch=all
+ libreoffice-l10n-fi deb localization optional arch=all
+ libreoffice-l10n-fr deb localization optional arch=all
+ libreoffice-l10n-ga deb localization optional arch=all
+ libreoffice-l10n-gd deb localization optional arch=all
+ libreoffice-l10n-gl deb localization optional arch=all
+ libreoffice-l10n-gu deb localization optional arch=all
+ libreoffice-l10n-gug deb localization optional arch=all
+ libreoffice-l10n-he deb localization optional arch=all
+ libreoffice-l10n-hi deb localization optional arch=all
+ libreoffice-l10n-hr deb localization optional arch=all
+ libreoffice-l10n-hu deb localization optional arch=all
+ libreoffice-l10n-id deb localization optional arch=all
+ libreoffice-l10n-is deb localization optional arch=all
+ libreoffice-l10n-it deb localization optional arch=all
+ libreoffice-l10n-ja deb localization optional arch=all
+ libreoffice-l10n-ka deb localization optional arch=all
+ libreoffice-l10n-kk deb localization optional arch=all
+ libreoffice-l10n-km deb localization optional arch=all
+ libreoffice-l10n-kmr-latn deb localization optional arch=all
+ libreoffice-l10n-kn deb localization optional arch=all
+ libreoffice-l10n-ko deb localization optional arch=all
+ libreoffice-l10n-lt deb localization optional arch=all
+ libreoffice-l10n-lv deb localization optional arch=all
+ libreoffice-l10n-mk deb localization optional arch=all
+ libreoffice-l10n-ml deb localization optional arch=all
+ libreoffice-l10n-mn deb localization optional arch=all
+ libreoffice-l10n-mr deb localization optional arch=all
+ libreoffice-l10n-nb deb localization optional arch=all
+ libreoffice-l10n-ne deb localization optional arch=all
+ libreoffice-l10n-nl deb localization optional arch=all
+ libreoffice-l10n-nn deb localization optional arch=all
+ libreoffice-l10n-nr deb localization optional arch=all
+ libreoffice-l10n-nso deb localization optional arch=all
+ libreoffice-l10n-oc deb localization optional arch=all
+ libreoffice-l10n-om deb localization optional arch=all
+ libreoffice-l10n-or deb localization optional arch=all
+ libreoffice-l10n-pa-in deb localization optional arch=all
+ libreoffice-l10n-pl deb localization optional arch=all
+ libreoffice-l10n-pt deb localization optional arch=all
+ libreoffice-l10n-pt-br deb localization optional arch=all
+ libreoffice-l10n-ro deb localization optional arch=all
+ libreoffice-l10n-ru deb localization optional arch=all
+ libreoffice-l10n-rw deb localization optional arch=all
+ libreoffice-l10n-si deb localization optional arch=all
+ libreoffice-l10n-sk deb localization optional arch=all
+ libreoffice-l10n-sl deb localization optional arch=all
+ libreoffice-l10n-sr deb localization optional arch=all
+ libreoffice-l10n-ss deb localization optional arch=all
+ libreoffice-l10n-st deb localization optional arch=all
+ libreoffice-l10n-sv deb localization optional arch=all
+ libreoffice-l10n-ta deb localization optional arch=all
+ libreoffice-l10n-te deb localization optional arch=all
+ libreoffice-l10n-tg deb localization optional arch=all
+ libreoffice-l10n-th deb localization optional arch=all
+ libreoffice-l10n-tn deb localization optional arch=all
+ libreoffice-l10n-tr deb localization optional arch=all
+ libreoffice-l10n-ts deb localization optional arch=all
+ libreoffice-l10n-ug deb localization optional arch=all
+ libreoffice-l10n-uk deb localization optional arch=all
+ libreoffice-l10n-uz deb localization optional arch=all
+ libreoffice-l10n-ve deb localization optional arch=all
+ libreoffice-l10n-vi deb localization optional arch=all
+ libreoffice-l10n-xh deb localization optional arch=all
+ libreoffice-l10n-zh-cn deb localization optional arch=all
+ libreoffice-l10n-zh-tw deb localization optional arch=all
+ libreoffice-l10n-zu deb localization optional arch=all
+Checksums-Sha1:
+ cd87416d5c8f6d067484372b2019daaa8e9d5e40 16337 libreoffice-l10n_5.4.1-0ubuntu1.dsc
+ 59830159dcbc4f8b795092b89856fe32412c6337 1810132 libreoffice-l10n_5.4.1.orig-helpcontent2.tar.xz
+ 43083a56fe8c7c4d0daf0345a620207d2397ea9f 193657240 libreoffice-l10n_5.4.1.orig-tarballs.tar.xz
+ 6dfdf5a3c8d84e778f648be29f45bc9b4bbb39a5 136212060 libreoffice-l10n_5.4.1.orig-translations.tar.xz
+ f5adb47ba300b844107eb43891482a2b7ee1e805 171272644 libreoffice-l10n_5.4.1.orig.tar.xz
+ e97aa5c8f1c2caff257ef6209c3375aa628170a2 2042556 libreoffice-l10n_5.4.1-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ bda50d862b2819c744156d376678531164e6a5bc3fbc33327bf67bec558f106f 16337 libreoffice-l10n_5.4.1-0ubuntu1.dsc
+ b5a5d52b7542a6983bf21ea9d30bc550f8a3af28a6d903537feb9bae167c85e9 1810132 libreoffice-l10n_5.4.1.orig-helpcontent2.tar.xz
+ 602e5471e229a9a6fff96870857ced11e693a449972d6b9571b03dc90d0c4db2 193657240 libreoffice-l10n_5.4.1.orig-tarballs.tar.xz
+ ffff27d73f43daca409a9c491e1c52650e97f4ef954cd8e024f365c82a04a5bd 136212060 libreoffice-l10n_5.4.1.orig-translations.tar.xz
+ 351638fc80f831ee16711b667a1faf1011eaa466322384e90ed88d12d7d437ce 171272644 libreoffice-l10n_5.4.1.orig.tar.xz
+ 1fcdb905588f30fc9a108c1325ca1786b3c5af3a32f62c00432ffb8629601336 2042556 libreoffice-l10n_5.4.1-0ubuntu1.debian.tar.xz
+
+Package: linux
+Binary: linux-source-4.12.0, linux-doc, linux-headers-4.12.0-13, linux-libc-dev, linux-tools-common, linux-tools-4.12.0-13, linux-cloud-tools-common, linux-cloud-tools-4.12.0-13, linux-image-4.12.0-13-generic, linux-image-extra-4.12.0-13-generic, linux-headers-4.12.0-13-generic, linux-image-4.12.0-13-generic-dbgsym, linux-tools-4.12.0-13-generic, linux-cloud-tools-4.12.0-13-generic, linux-udebs-generic, linux-image-4.12.0-13-generic-lpae, linux-image-extra-4.12.0-13-generic-lpae, linux-headers-4.12.0-13-generic-lpae, linux-image-4.12.0-13-generic-lpae-dbgsym, linux-tools-4.12.0-13-generic-lpae, linux-cloud-tools-4.12.0-13-generic-lpae, linux-udebs-generic-lpae, linux-image-4.12.0-13-lowlatency, linux-image-extra-4.12.0-13-lowlatency, linux-headers-4.12.0-13-lowlatency, linux-image-4.12.0-13-lowlatency-dbgsym, linux-tools-4.12.0-13-lowlatency, linux-cloud-tools-4.12.0-13-lowlatency, linux-udebs-lowlatency
+Version: 4.12.0-13.14
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 9), dh-systemd, cpio, kernel-wedge, kmod <!stage1>, makedumpfile [amd64 i386] <!stage1>, libelf-dev <!stage1>, libnewt-dev <!stage1>, libiberty-dev <!stage1>, rsync <!stage1>, libdw-dev <!stage1>, libpci-dev <!stage1>, pkg-config <!stage1>, flex <!stage1>, bison <!stage1>, libunwind8-dev [amd64 arm64 armhf i386 ppc64el] <!stage1>, liblzma-dev <!stage1>, openssl <!stage1>, libssl-dev <!stage1>, libaudit-dev <!stage1>, bc <!stage1>, python-dev <!stage1>, gawk <!stage1>, libudev-dev <!stage1>, autoconf <!stage1>, automake <!stage1>, libtool <!stage1>, uuid-dev <!stage1>, binutils-dev <!stage1>, libnuma-dev [amd64 arm64 i386 ppc64el s390x] <!stage1>
+Build-Depends-Indep: xmlto <!stage1>, docbook-utils <!stage1>, ghostscript <!stage1>, transfig <!stage1>, bzip2 <!stage1>, sharutils <!stage1>, asciidoc <!stage1>
+Architecture: all i386 amd64 armhf arm64 x32 ppc64el s390x
+Standards-Version: 3.9.4.0
+Format: 1.0
+Directory: pool/main/l/linux
+Files:
+ c818385eb2caeebf4bd147e4d9e3a2fe 6053 linux_4.12.0-13.14.dsc
+ 509e91431e449f4a318ddf2122096d6d 151882917 linux_4.12.0.orig.tar.gz
+ ca21d77069440886c253a2601f532399 6701395 linux_4.12.0-13.14.diff.gz
+Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux/+git/zesty
+Testsuite: autopkgtest
+Package-List:
+ linux-cloud-tools-4.12.0-13 deb devel optional arch=i386,amd64,armhf profile=!stage1
+ linux-cloud-tools-4.12.0-13-generic deb devel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-cloud-tools-4.12.0-13-generic-lpae deb devel optional arch=armhf profile=!stage1
+ linux-cloud-tools-4.12.0-13-lowlatency deb devel optional arch=i386,amd64 profile=!stage1
+ linux-cloud-tools-common deb kernel optional arch=all profile=!stage1
+ linux-doc deb doc optional arch=all profile=!stage1
+ linux-headers-4.12.0-13 deb devel optional arch=all profile=!stage1
+ linux-headers-4.12.0-13-generic deb devel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-headers-4.12.0-13-generic-lpae deb devel optional arch=armhf profile=!stage1
+ linux-headers-4.12.0-13-lowlatency deb devel optional arch=i386,amd64 profile=!stage1
+ linux-image-4.12.0-13-generic deb kernel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-image-4.12.0-13-generic-dbgsym deb devel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-image-4.12.0-13-generic-lpae deb kernel optional arch=armhf profile=!stage1
+ linux-image-4.12.0-13-generic-lpae-dbgsym deb devel optional arch=armhf profile=!stage1
+ linux-image-4.12.0-13-lowlatency deb kernel optional arch=i386,amd64 profile=!stage1
+ linux-image-4.12.0-13-lowlatency-dbgsym deb devel optional arch=i386,amd64 profile=!stage1
+ linux-image-extra-4.12.0-13-generic deb kernel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-image-extra-4.12.0-13-generic-lpae deb kernel optional arch=armhf profile=!stage1
+ linux-image-extra-4.12.0-13-lowlatency deb kernel optional arch=i386,amd64 profile=!stage1
+ linux-libc-dev deb devel optional arch=i386,amd64,armhf,arm64,x32,ppc64el,s390x
+ linux-source-4.12.0 deb devel optional arch=all profile=!stage1
+ linux-tools-4.12.0-13 deb devel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-tools-4.12.0-13-generic deb devel optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-tools-4.12.0-13-generic-lpae deb devel optional arch=armhf profile=!stage1
+ linux-tools-4.12.0-13-lowlatency deb devel optional arch=i386,amd64 profile=!stage1
+ linux-tools-common deb kernel optional arch=all profile=!stage1
+ linux-udebs-generic udeb debian-installer optional arch=i386,amd64,armhf,arm64,ppc64el,s390x profile=!stage1
+ linux-udebs-generic-lpae udeb debian-installer optional arch=armhf profile=!stage1
+ linux-udebs-lowlatency udeb debian-installer optional arch=i386,amd64 profile=!stage1
+Checksums-Sha1:
+ 440c8f08a3f73112f79175b6fb6ede2165ccb8d8 6053 linux_4.12.0-13.14.dsc
+ b24657375dfd59620039ecadced160c4daaeebb4 151882917 linux_4.12.0.orig.tar.gz
+ 1f92c37f7a2f472d71b9ffd72591bc6c503e05f4 6701395 linux_4.12.0-13.14.diff.gz
+Checksums-Sha256:
+ 5c01d9fe34467b395dcb8874fca3393acc8b7e4553b6e8b73a1e05de0a01fd0c 6053 linux_4.12.0-13.14.dsc
+ 540232262061143c288b22bdda80937323b2689d4c8e9b873405a78c54d030f1 151882917 linux_4.12.0.orig.tar.gz
+ 3f774d6eb9f5099a18f2ebb80cd268dc9cc82c4a48512027c468f0e1189238cf 6701395 linux_4.12.0-13.14.diff.gz
+
+Package: linux-meta
+Binary: linux-source, linux-crashdump, linux-headers-generic, linux-image-generic, linux-tools-generic, linux-cloud-tools-generic, linux-generic, linux-headers-generic-lpae, linux-image-generic-lpae, linux-tools-generic-lpae, linux-generic-lpae, linux-headers-lowlatency, linux-image-lowlatency, linux-tools-lowlatency, linux-cloud-tools-lowlatency, linux-lowlatency, linux-headers-powerpc-e500mc, linux-image-powerpc-e500mc, linux-tools-powerpc-e500mc, linux-powerpc-e500mc, linux-headers-powerpc-smp, linux-image-powerpc-smp, linux-tools-powerpc-smp, linux-powerpc-smp, linux-headers-powerpc64-emb, linux-image-powerpc64-emb, linux-tools-powerpc64-emb, linux-powerpc64-emb, linux-headers-powerpc64-smp, linux-image-powerpc64-smp, linux-tools-powerpc64-smp, linux-powerpc64-smp, linux-signed-image-generic, linux-signed-generic, linux-signed-image-lowlatency, linux-signed-lowlatency, linux-headers-virtual, linux-image-virtual, linux-tools-virtual, linux-cloud-tools-virtual,
+ linux-virtual,
+ linux-image-extra-virtual
+Version: 4.12.0.13.14
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: dpkg (>= 1.13.19), debhelper (>= 9), gawk, linux-headers-4.12.0-13, linux-headers-4.12.0-13-generic
+Architecture: all i386 amd64 armhf ppc64el s390x arm64 powerpc
+Standards-Version: 3.9.8
+Format: 3.0 (native)
+Directory: pool/main/l/linux-meta
+Files:
+ 1cfb1657eb94aed5f2092f56626c9b1b 5320 linux-meta_4.12.0.13.14.dsc
+ d0e739a89f9ae8a415ef02fd2556a2d6 10532 linux-meta_4.12.0.13.14.tar.xz
+Vcs-Git: git://git.launchpad.net/~ubuntu-kernel/ubuntu/+source/linux-meta/+git/artful
+Package-List:
+ linux-cloud-tools-generic deb kernel optional arch=i386,amd64
+ linux-cloud-tools-lowlatency deb kernel optional arch=i386,amd64
+ linux-cloud-tools-virtual deb kernel optional arch=i386,amd64
+ linux-crashdump deb devel optional arch=i386,amd64,armhf,ppc64el,s390x
+ linux-generic deb kernel optional arch=i386,amd64,armhf,arm64,powerpc,ppc64el,s390x
+ linux-generic-lpae deb kernel optional arch=armhf
+ linux-headers-generic deb kernel optional arch=i386,amd64,armhf,arm64,powerpc,ppc64el,s390x
+ linux-headers-generic-lpae deb kernel optional arch=armhf
+ linux-headers-lowlatency deb kernel optional arch=i386,amd64
+ linux-headers-powerpc-e500mc deb kernel optional arch=powerpc
+ linux-headers-powerpc-smp deb kernel optional arch=powerpc
+ linux-headers-powerpc64-emb deb kernel optional arch=powerpc
+ linux-headers-powerpc64-smp deb oldlibs optional arch=powerpc
+ linux-headers-virtual deb kernel optional arch=i386,amd64,arm64,powerpc,ppc64el,s390x
+ linux-image-extra-virtual deb kernel optional arch=i386,amd64,arm64,powerpc,ppc64el,s390x
+ linux-image-generic deb kernel optional arch=i386,amd64,armhf,arm64,powerpc,ppc64el,s390x
+ linux-image-generic-lpae deb kernel optional arch=armhf
+ linux-image-lowlatency deb kernel optional arch=i386,amd64
+ linux-image-powerpc-e500mc deb kernel optional arch=powerpc
+ linux-image-powerpc-smp deb kernel optional arch=powerpc
+ linux-image-powerpc64-emb deb kernel optional arch=powerpc
+ linux-image-powerpc64-smp deb oldlibs optional arch=powerpc
+ linux-image-virtual deb kernel optional arch=i386,amd64,arm64,powerpc,ppc64el,s390x
+ linux-lowlatency deb kernel optional arch=i386,amd64
+ linux-powerpc-e500mc deb kernel optional arch=powerpc
+ linux-powerpc-smp deb kernel optional arch=powerpc
+ linux-powerpc64-emb deb kernel optional arch=powerpc
+ linux-powerpc64-smp deb oldlibs optional arch=powerpc
+ linux-signed-generic deb kernel optional arch=amd64
+ linux-signed-image-generic deb kernel optional arch=amd64
+ linux-signed-image-lowlatency deb kernel optional arch=amd64
+ linux-signed-lowlatency deb kernel optional arch=amd64
+ linux-source deb devel optional arch=all
+ linux-tools-generic deb kernel optional arch=i386,amd64,armhf,arm64,powerpc,ppc64el,s390x
+ linux-tools-generic-lpae deb kernel optional arch=armhf
+ linux-tools-lowlatency deb kernel optional arch=i386,amd64
+ linux-tools-powerpc-e500mc deb kernel optional arch=powerpc
+ linux-tools-powerpc-smp deb kernel optional arch=powerpc
+ linux-tools-powerpc64-emb deb kernel optional arch=powerpc
+ linux-tools-powerpc64-smp deb oldlibs optional arch=powerpc
+ linux-tools-virtual deb kernel optional arch=i386,amd64,arm64,powerpc,ppc64el,s390x
+ linux-virtual deb kernel optional arch=i386,amd64,arm64,powerpc,ppc64el,s390x
+Checksums-Sha1:
+ 0893f3f1bbc71d83b6d202cacfcf35aade4864ed 5320 linux-meta_4.12.0.13.14.dsc
+ d246551a94a64101f4bd7d0bb09305ee7302379c 10532 linux-meta_4.12.0.13.14.tar.xz
+Checksums-Sha256:
+ 7dd58a89815177a0ac591b73b6d03de27b020ddb0df6bb3cae611f84bd1b2af9 5320 linux-meta_4.12.0.13.14.dsc
+ b143a6543410c862c41562d68416155a23cb83c045b24c0dddb0635852428ed7 10532 linux-meta_4.12.0.13.14.tar.xz
+
+Package: linux-signed
+Binary: linux-signed-image-4.12.0-13-generic, linux-signed-image-4.12.0-13-lowlatency, kernel-signed-image-4.12.0-13-generic-di
+Version: 4.12.0-13.14
+Priority: optional
+Section: utils
+Maintainer: Canonical Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 9), lsb-release, python3, python3-apt, sbsigntool, linux-image-4.12.0-13-generic (>= 4.12.0-13.14), linux-image-4.12.0-13-lowlatency (>= 4.12.0-13.14)
+Architecture: linux-amd64
+Standards-Version: 3.9.4
+Format: 3.0 (native)
+Directory: pool/main/l/linux-signed
+Files:
+ cc0204ab08e05f36c052dcf51b220f1d 1891 linux-signed_4.12.0-13.14.dsc
+ 0eda9e136e3713a182de454c24767673 12224 linux-signed_4.12.0-13.14.tar.xz
+Package-List:
+ kernel-signed-image-4.12.0-13-generic-di udeb debian-installer extra arch=linux-amd64
+ linux-signed-image-4.12.0-13-generic deb utils optional arch=linux-amd64
+ linux-signed-image-4.12.0-13-lowlatency deb utils optional arch=linux-amd64
+Checksums-Sha1:
+ 1700ecfd6c3a20f1585e192c8504d1f9e0aae6b6 1891 linux-signed_4.12.0-13.14.dsc
+ 8c0f9f66381d934ae86167d3bf5bfed62eb41092 12224 linux-signed_4.12.0-13.14.tar.xz
+Checksums-Sha256:
+ 503f7ce31e4512edb62aea236d0fec067d62a591a2cd355d4802767f638ab266 1891 linux-signed_4.12.0-13.14.dsc
+ 67e833553a23434237157a92b8125573b7d294b789d0ad6778773eeeb5dfdfae 12224 linux-signed_4.12.0-13.14.tar.xz
+
+Package: llvm-toolchain-4.0
+Binary: clang-4.0, clang-format-4.0, clang-tidy-4.0, clang-4.0-doc, libclang1-4.0, libclang1-4.0-dbg, libclang-4.0-dev, libclang-common-4.0-dev, libfuzzer-4.0-dev, python-clang-4.0, clang-4.0-examples, libllvm4.0, libllvm4.0-dbg, llvm-4.0, llvm-4.0-runtime, llvm-4.0-dev, llvm-4.0-tools, libllvm-4.0-ocaml-dev, llvm-4.0-doc, llvm-4.0-examples, lld-4.0, liblld-4.0, liblld-4.0-dbg, liblld-4.0-dev, lldb-4.0, liblldb-4.0, liblldb-4.0-dbg, python-lldb-4.0, liblldb-4.0-dev
+Version: 1:4.0.1-4~build1
+Priority: optional
+Section: misc
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect, cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9), lsb-release, patchutils, diffstat, xz-utils, python-dev, libedit-dev, libncurses5-dev, swig, python-six, python-sphinx, binutils-dev, libjsoncpp-dev, lcov, procps, help2man, zlib1g-dev, ocaml-nox [amd64 arm64 armel armhf i386], ocaml-findlib [amd64 arm64 armel armhf i386], libctypes-ocaml-dev [amd64 arm64 armel armhf i386], dh-ocaml [amd64 arm64 armel armhf i386], g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32]
+Build-Conflicts: libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev, ocaml, oprofile
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/l/llvm-toolchain-4.0
+Files:
+ 4d5a2f67672764f3284fb56b462b5674 7297 llvm-toolchain-4.0_4.0.1-4~build1.dsc
+ 6877d41c04b0396918df09a69cb34471 615648 llvm-toolchain-4.0_4.0.1.orig-clang-tools-extra.tar.bz2
+ 269dffecdcde287d66f31820ae579e25 12035514 llvm-toolchain-4.0_4.0.1.orig-clang.tar.bz2
+ 4275f08d2f0d7fd2580052f67a31c135 1833519 llvm-toolchain-4.0_4.0.1.orig-compiler-rt.tar.bz2
+ ae7990b806c5d0bc97c3d013c64c0fdd 623475 llvm-toolchain-4.0_4.0.1.orig-lld.tar.bz2
+ 7d0cba6028f8af71143f908a4f00dd6a 11060792 llvm-toolchain-4.0_4.0.1.orig-lldb.tar.bz2
+ 6f00892e1fdebd94754aed90be1cf6fb 3359646 llvm-toolchain-4.0_4.0.1.orig-polly.tar.bz2
+ 7f618083724aa00cf7293b44adb9d1a9 24762852 llvm-toolchain-4.0_4.0.1.orig.tar.bz2
+ 6caa182dad15b63522bf24bcc690ff39 64324 llvm-toolchain-4.0_4.0.1-4~build1.debian.tar.xz
+Uploaders: Sylvestre Ledru <sylvestre@debian.org>
+Homepage: http://www.llvm.org/
+Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/4.0/
+Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/4.0/
+Package-List:
+ clang-4.0 deb devel optional arch=any
+ clang-4.0-doc deb doc optional arch=all
+ clang-4.0-examples deb doc optional arch=any
+ clang-format-4.0 deb devel optional arch=any
+ clang-tidy-4.0 deb devel optional arch=any
+ libclang-4.0-dev deb libdevel optional arch=any
+ libclang-common-4.0-dev deb libdevel optional arch=any
+ libclang1-4.0 deb devel optional arch=any
+ libclang1-4.0-dbg deb debug extra arch=any
+ libfuzzer-4.0-dev deb libdevel optional arch=linux-any
+ liblld-4.0 deb libs optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblld-4.0-dbg deb debug extra arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblld-4.0-dev deb libdevel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblldb-4.0 deb libs optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ liblldb-4.0-dbg deb debug extra arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ liblldb-4.0-dev deb libdevel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ libllvm-4.0-ocaml-dev deb ocaml optional arch=amd64,arm64,armel,armhf,i386
+ libllvm4.0 deb libs optional arch=any
+ libllvm4.0-dbg deb debug extra arch=any
+ lld-4.0 deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ lldb-4.0 deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ llvm-4.0 deb devel optional arch=any
+ llvm-4.0-dev deb devel optional arch=any
+ llvm-4.0-doc deb doc optional arch=all
+ llvm-4.0-examples deb doc optional arch=all
+ llvm-4.0-runtime deb devel optional arch=any
+ llvm-4.0-tools deb devel optional arch=any
+ python-clang-4.0 deb python optional arch=any
+ python-lldb-4.0 deb python optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+Checksums-Sha1:
+ c6e1b91fe3fb4f648c40a9b0501dcc024a7ade1c 7297 llvm-toolchain-4.0_4.0.1-4~build1.dsc
+ c958f7fe44f09ce136f59b8cfb641ae8c10d1662 615648 llvm-toolchain-4.0_4.0.1.orig-clang-tools-extra.tar.bz2
+ a8e44fb0c0a3b965b8dc28bd83284d9b13aa2da2 12035514 llvm-toolchain-4.0_4.0.1.orig-clang.tar.bz2
+ dbfcfe614d987d9522144ff7d496be7ff0d4bfc2 1833519 llvm-toolchain-4.0_4.0.1.orig-compiler-rt.tar.bz2
+ 1c955a2d8d7751e11eb4485911088c9498957e16 623475 llvm-toolchain-4.0_4.0.1.orig-lld.tar.bz2
+ a7e52535d7064fa72d94eb52e58b83677db3b9e1 11060792 llvm-toolchain-4.0_4.0.1.orig-lldb.tar.bz2
+ 6b56b73ae86f0aa42d6ca7e5a70b9f5629a632a1 3359646 llvm-toolchain-4.0_4.0.1.orig-polly.tar.bz2
+ 45db21e7ace048dc383d0f92f33a3ab1cc82712d 24762852 llvm-toolchain-4.0_4.0.1.orig.tar.bz2
+ 1ba658382be0996fcba6331c3d94e3b19bc15a5e 64324 llvm-toolchain-4.0_4.0.1-4~build1.debian.tar.xz
+Checksums-Sha256:
+ 3a61e764e63d3173ea4510ed4da819958b68da9f95e8d763c74b506f0f8aa8d2 7297 llvm-toolchain-4.0_4.0.1-4~build1.dsc
+ 0d3e69df0dcf31ab6f010ea3bf395cb2ba1652e9f48f48481018c35a33024665 615648 llvm-toolchain-4.0_4.0.1.orig-clang-tools-extra.tar.bz2
+ 6109cc668b13b9dd7fdeca80b1445c280bf873de55a129025f0d70d7cb8b1bc1 12035514 llvm-toolchain-4.0_4.0.1.orig-clang.tar.bz2
+ 7e2cd489cc3aa37e9846a072f206af8d7b9c15b48ddb46f7f7e8ab03d9f4ba52 1833519 llvm-toolchain-4.0_4.0.1.orig-compiler-rt.tar.bz2
+ 537eda117953536df02a90d3bdc88477f60fde59242106609480730731be8175 623475 llvm-toolchain-4.0_4.0.1.orig-lld.tar.bz2
+ f7250232d39765f7f29ce1e9e9bcc1abd93bd9db90fa6aba5abf7cf413b2613e 11060792 llvm-toolchain-4.0_4.0.1.orig-lldb.tar.bz2
+ 97922fcdaba2eb88d02d60da4371ce4f0947aab136df95614627e6e477c4a0d8 3359646 llvm-toolchain-4.0_4.0.1.orig-polly.tar.bz2
+ 10ea465493475891add1dc0c109458869afa29899210eb259d8a4ae3ec1d500d 24762852 llvm-toolchain-4.0_4.0.1.orig.tar.bz2
+ 01e559a36212f0b99cddf92788ac6776fd5c5f54eef95aa051db11e0f63826ba 64324 llvm-toolchain-4.0_4.0.1-4~build1.debian.tar.xz
+
+Package: llvm-toolchain-5.0
+Binary: clang-5.0, clang-format-5.0, clang-tidy-5.0, clang-5.0-doc, libclang1-5.0, libclang1-5.0-dbg, libclang-5.0-dev, libclang-common-5.0-dev, libfuzzer-5.0-dev, python-clang-5.0, clang-5.0-examples, libllvm5.0, libllvm5.0-dbg, llvm-5.0, llvm-5.0-runtime, llvm-5.0-dev, llvm-5.0-tools, libllvm-5.0-ocaml-dev, llvm-5.0-doc, llvm-5.0-examples, lld-5.0, liblld-5.0, liblld-5.0-dbg, liblld-5.0-dev, lldb-5.0, liblldb-5.0, liblldb-5.0-dbg, python-lldb-5.0, liblldb-5.0-dev
+Version: 1:5.0~+rc5-2~build1
+Priority: optional
+Section: misc
+Maintainer: LLVM Packaging Team <pkg-llvm-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9.0), flex, bison, dejagnu, tcl, expect, cmake, perl, libtool, chrpath, texinfo, sharutils, libffi-dev (>= 3.0.9), lsb-release, patchutils, diffstat, xz-utils, python-dev, libedit-dev, libncurses5-dev, swig, python-six, python-sphinx, binutils-dev, libjsoncpp-dev, pkg-config, lcov, procps, help2man, zlib1g-dev, ocaml-nox [amd64 arm64 armel armhf i386], ocaml-findlib [amd64 arm64 armel armhf i386], libctypes-ocaml-dev [amd64 arm64 armel armhf i386], dh-ocaml [amd64 arm64 armel armhf i386], g++-multilib [amd64 i386 kfreebsd-amd64 mips mips64 mips64el mipsel powerpc ppc64 s390 s390x sparc sparc64 x32]
+Build-Conflicts: libllvm-3.4-ocaml-dev, libllvm-3.5-ocaml-dev, libllvm-3.8-ocaml-dev, libllvm-3.9-ocaml-dev, ocaml, oprofile
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/l/llvm-toolchain-5.0
+Files:
+ f8095c28854b139ca5d56a06996dd50d 7384 llvm-toolchain-5.0_5.0~+rc5-2~build1.dsc
+ e64d88d4c99278858840171c34b74cf1 681423 llvm-toolchain-5.0_5.0~+rc5.orig-clang-tools-extra.tar.bz2
+ 806b19f11523b9679827a4c75e342663 12695256 llvm-toolchain-5.0_5.0~+rc5.orig-clang.tar.bz2
+ f731d6e519ef6abfef1a43ef46bb14f6 1987302 llvm-toolchain-5.0_5.0~+rc5.orig-compiler-rt.tar.bz2
+ 5679cb879e6389b69a80937e2fc3b7a6 713799 llvm-toolchain-5.0_5.0~+rc5.orig-lld.tar.bz2
+ 25846db09ae51d8ebf0490a0696ec3e1 11138176 llvm-toolchain-5.0_5.0~+rc5.orig-lldb.tar.bz2
+ 67497bbf5bd68db4ec05d629d66cc046 3075022 llvm-toolchain-5.0_5.0~+rc5.orig-polly.tar.bz2
+ aa99dea9ca7ff476deaf788c3f476cb0 27783751 llvm-toolchain-5.0_5.0~+rc5.orig.tar.bz2
+ 010c5eae1fdb5a4809bf65116d579294 64936 llvm-toolchain-5.0_5.0~+rc5-2~build1.debian.tar.xz
+Uploaders: Sylvestre Ledru <sylvestre@debian.org>
+Homepage: http://www.llvm.org/
+Vcs-Browser: https://svn.debian.org/viewsvn/pkg-llvm/llvm-toolchain/branches/5.0/
+Vcs-Svn: svn://anonscm.debian.org/svn/pkg-llvm/llvm-toolchain/branches/5.0/
+Package-List:
+ clang-5.0 deb devel optional arch=any
+ clang-5.0-doc deb doc optional arch=all
+ clang-5.0-examples deb doc optional arch=any
+ clang-format-5.0 deb devel optional arch=any
+ clang-tidy-5.0 deb devel optional arch=any
+ libclang-5.0-dev deb libdevel optional arch=any
+ libclang-common-5.0-dev deb libdevel optional arch=any
+ libclang1-5.0 deb devel optional arch=any
+ libclang1-5.0-dbg deb debug extra arch=any
+ libfuzzer-5.0-dev deb libdevel optional arch=linux-any
+ liblld-5.0 deb libs optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblld-5.0-dbg deb debug extra arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblld-5.0-dev deb libdevel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ liblldb-5.0 deb libs optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ liblldb-5.0-dbg deb debug extra arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ liblldb-5.0-dev deb libdevel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ libllvm-5.0-ocaml-dev deb ocaml optional arch=amd64,arm64,armel,armhf,i386
+ libllvm5.0 deb libs optional arch=any
+ libllvm5.0-dbg deb debug extra arch=any
+ lld-5.0 deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,ppc64,sh4,sparc64,x32,mips,mipsel
+ lldb-5.0 deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,alpha,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+ llvm-5.0 deb devel optional arch=any
+ llvm-5.0-dev deb devel optional arch=any
+ llvm-5.0-doc deb doc optional arch=all
+ llvm-5.0-examples deb doc optional arch=all
+ llvm-5.0-runtime deb devel optional arch=any
+ llvm-5.0-tools deb devel optional arch=any
+ python-clang-5.0 deb python optional arch=any
+ python-lldb-5.0 deb python optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,s390,sparc,hppa,m68k,powerpcspe,sh4,x32,mips,mipsel,arm64
+Checksums-Sha1:
+ 37c4fbed1dd62320b8f27a4c4f106a72488c12f1 7384 llvm-toolchain-5.0_5.0~+rc5-2~build1.dsc
+ 59f5d16254837a5cffc189015f2066dbbebd8e75 681423 llvm-toolchain-5.0_5.0~+rc5.orig-clang-tools-extra.tar.bz2
+ bf25d1750e725d1c7d355845f4c92d0bbf9909da 12695256 llvm-toolchain-5.0_5.0~+rc5.orig-clang.tar.bz2
+ faaa81e89318985999ad390ee69fabafa8894394 1987302 llvm-toolchain-5.0_5.0~+rc5.orig-compiler-rt.tar.bz2
+ 0dcfc9aa0c1b592bdb72e7fa7dd8598b8c415bd2 713799 llvm-toolchain-5.0_5.0~+rc5.orig-lld.tar.bz2
+ a486fd04408417f3894c31db7f55ed5dffb0676e 11138176 llvm-toolchain-5.0_5.0~+rc5.orig-lldb.tar.bz2
+ 62ab2b037be138ada6e4036be3bf7cf89fed8289 3075022 llvm-toolchain-5.0_5.0~+rc5.orig-polly.tar.bz2
+ d91311ab420fb56e2f2c1d3259782adb2d86dbbf 27783751 llvm-toolchain-5.0_5.0~+rc5.orig.tar.bz2
+ 3e66fd307811a95012a11127abcbc350e178f68d 64936 llvm-toolchain-5.0_5.0~+rc5-2~build1.debian.tar.xz
+Checksums-Sha256:
+ 4a9563f72fdb2ce4762bdbc5973e7af0254e73d5d6742d1b9b45a32167a73815 7384 llvm-toolchain-5.0_5.0~+rc5-2~build1.dsc
+ c792d596890facc80119fd024189899fa996282931c503e30e21c59b3c4397d6 681423 llvm-toolchain-5.0_5.0~+rc5.orig-clang-tools-extra.tar.bz2
+ 3777accb969984fe995ebd9c6bcf4a626e7fd18ed356fc2958e23e3dc46b92e4 12695256 llvm-toolchain-5.0_5.0~+rc5.orig-clang.tar.bz2
+ c30807a0881403e3d0eaec4a0298e51ef2e338f14a6818e452f66b3ebcedf12d 1987302 llvm-toolchain-5.0_5.0~+rc5.orig-compiler-rt.tar.bz2
+ f5ba220fd9bbe724d40c75dd41f2c756745f7e14acd2b9423bc3a96a5a6610ae 713799 llvm-toolchain-5.0_5.0~+rc5.orig-lld.tar.bz2
+ cd1126e1636d7d231752ca71c7d3c3e6c3913abca452a5ec8f666ee88f952d44 11138176 llvm-toolchain-5.0_5.0~+rc5.orig-lldb.tar.bz2
+ 5c27322855b48740d97c7821c3bf9ca034605a6ca3428c81895d9d2353307704 3075022 llvm-toolchain-5.0_5.0~+rc5.orig-polly.tar.bz2
+ 56164e0e78f47dc18f2f814287c983dcd6182827ffef7c98d4e32772c23547b1 27783751 llvm-toolchain-5.0_5.0~+rc5.orig.tar.bz2
+ 44b05554befc8cebda5f39a9dfcdb36c28ed3359fa15c76d8a6355ac8d0fc0ca 64936 llvm-toolchain-5.0_5.0~+rc5-2~build1.debian.tar.xz
+
+Package: lxml
+Binary: python-lxml, python-lxml-dbg, python3-lxml, python3-lxml-dbg, python-lxml-doc
+Version: 3.8.0-2
+Priority: optional
+Section: python
+Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 9), dh-python, python-all-dev (>= 2.6.6-1~), python-all-dbg, python3-all-dev (>= 3.3.3), python3-all-dbg, python-pyrex (>= 0.9.4.1), libxml2-dev, libxslt1-dev, zlib1g-dev, python-setuptools, python3-setuptools (>= 0.6.29), python-bs4, python3-bs4, python-html5lib, python3-html5lib, cython, cython-dbg, cython3, cython3-dbg, python2.7-dev (>= 2.7.14~rc1-1), python3.6-dev (>= 3.6.2-3)
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 1.0
+Directory: pool/main/l/lxml
+Files:
+ 8a885d831a2c4ebb98bc7a97e5d400af 2249 lxml_3.8.0-2.dsc
+ e54e2fae44d684d6b9c636fe189e93ff 3795205 lxml_3.8.0.orig.tar.gz
+ a889b41bcec277ff4ef03d9a32936dad 7605 lxml_3.8.0-2.diff.gz
+Homepage: http://lxml.de/
+Package-List:
+ python-lxml deb python optional arch=any
+ python-lxml-dbg deb debug extra arch=any
+ python-lxml-doc deb doc extra arch=all
+ python3-lxml deb python optional arch=any
+ python3-lxml-dbg deb debug extra arch=any
+Checksums-Sha1:
+ e0e94460438770d30782f95a56cbacc8c9a9c5ef 2249 lxml_3.8.0-2.dsc
+ 9cc81a0b1559a21812cde9c42ca90ccd5c95e138 3795205 lxml_3.8.0.orig.tar.gz
+ 4498a8442acce31d356c76aec207289957c4258b 7605 lxml_3.8.0-2.diff.gz
+Checksums-Sha256:
+ 6666f32436b688afc51ea78eaa3d0a0282a1e5c5ea8d58393cbd779d391163c8 2249 lxml_3.8.0-2.dsc
+ 736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96 3795205 lxml_3.8.0.orig.tar.gz
+ 4db0d6a9e2d8d268b4a01faf3b28126e942184e3d1d23391892a29877fad7c5b 7605 lxml_3.8.0-2.diff.gz
+
+Package: nagios-nrpe
+Binary: nagios-nrpe-server, nagios-nrpe-plugin
+Version: 3.2.0-4ubuntu1
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Nagios Maintainer Group <pkg-nagios-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, dh-systemd, libssl-dev, libwrap0-dev, openssl
+Architecture: any
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/n/nagios-nrpe
+Files:
+ f2ea6c331f7a49ad40ca861d2904ddd9 1898 nagios-nrpe_3.2.0-4ubuntu1.dsc
+ 3b9e3e56a5459ed63be09d3540a97867 517774 nagios-nrpe_3.2.0.orig.tar.gz
+ 804ab7aeba12667372aa86401df471fa 15404 nagios-nrpe_3.2.0-4ubuntu1.debian.tar.xz
+Uploaders: Bas Couwenberg <sebastic@debian.org>
+Homepage: https://github.com/NagiosEnterprises/nrpe
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-nagios/pkg-nrpe.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-nagios/pkg-nrpe.git
+Testsuite: autopkgtest
+Package-List:
+ nagios-nrpe-plugin deb net optional arch=any
+ nagios-nrpe-server deb net optional arch=any
+Checksums-Sha1:
+ 00fb4acb5700c37a706cc81a03a9edb1f9338cd5 1898 nagios-nrpe_3.2.0-4ubuntu1.dsc
+ 13cf146f6a879812977d0a00fcd9d82d5e08f3cf 517774 nagios-nrpe_3.2.0.orig.tar.gz
+ 57ae2ebfff309b0941db1a1f2ba1a84e93b78e04 15404 nagios-nrpe_3.2.0-4ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 6565c7afa8dac16b9b6d2c64aa9bcb3b5c13c9a7ad25a3ec465d4cb3a1269da3 1898 nagios-nrpe_3.2.0-4ubuntu1.dsc
+ 82fd7a112255f6147d2abcc836b9efe74ca85c9915956e1e22966cf159db16cf 517774 nagios-nrpe_3.2.0.orig.tar.gz
+ 7d97a67c592a036a162436feed51f3d0fae49a420dff8acb984483f11dd9ed3b 15404 nagios-nrpe_3.2.0-4ubuntu1.debian.tar.xz
+
+Package: nmap
+Binary: nmap, zenmap, ndiff
+Version: 7.60-1
+Priority: extra
+Section: net
+Maintainer: Debian Security Tools Packaging Team <pkg-security-team@lists.alioth.debian.org>
+Build-Depends: bison, debhelper (>= 10), dh-python, flex, libgtk2.0-dev, liblinear-dev, liblua5.3-dev, libpcap0.8-dev, libpcre3-dev, libssh2-1-dev, libssl-dev, lua-lpeg-dev, python (>= 2.3.5-7)
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/n/nmap
+Files:
+ e2140776d078202ec74902d91c307b01 2154 nmap_7.60-1.dsc
+ 4e454266559ddf2c4e2109866c62560c 10394925 nmap_7.60.orig.tar.bz2
+ 0db37baeddfa76c8c087ec3de99489ca 13804 nmap_7.60-1.debian.tar.xz
+Uploaders: Hilko Bengen <bengen@debian.org>, Samuel Henrique <samueloph@gmail.com>
+Homepage: http://nmap.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-security/nmap.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-security/nmap.git
+Package-List:
+ ndiff deb net extra arch=all
+ nmap deb net extra arch=any
+ zenmap deb net extra arch=all
+Checksums-Sha1:
+ 6454628346057cd089a3108f850ba97d3078a281 2154 nmap_7.60-1.dsc
+ 5d36a55ce772ec24f7f50ab52780f932ee20529f 10394925 nmap_7.60.orig.tar.bz2
+ 2aa1f2c9f2271665e46139ca4b5aeec2d0ee784f 13804 nmap_7.60-1.debian.tar.xz
+Checksums-Sha256:
+ 9d4011c53f4ada87247d3d8f7e45521debb011b704213ab374f8ea77c11c1232 2154 nmap_7.60-1.dsc
+ a8796ecc4fa6c38aad6139d9515dc8113023a82e9d787e5a5fb5fa1b05516f21 10394925 nmap_7.60.orig.tar.bz2
+ 4d2dac89247986b6f0f821688c08a30bd8f61f1c6c77cc71ac77559a02a2de71 13804 nmap_7.60-1.debian.tar.xz
+
+Package: pacemaker
+Binary: pacemaker-common, pacemaker-resource-agents, pacemaker, pacemaker-cli-utils, pacemaker-remote, pacemaker-doc, libcib4, libcib-dev, libcrmcluster4, libcrmcluster-dev, libcrmcommon3, libcrmcommon-dev, libcrmservice3, libcrmservice-dev, liblrmd1, liblrmd-dev, libpe-rules2, libpe-status10, libpengine10, libpengine-dev, libstonithd2, libstonithd-dev, libtransitioner2
+Version: 1.1.17-1ubuntu1
+Priority: optional
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian HA Maintainers <debian-ha-maintainers@lists.alioth.debian.org>
+Build-Depends: cluster-glue-dev, dctrl-tools, debhelper (>= 10), dh-autoreconf, dh-exec, dh-systemd, docbook-xsl, help2man, libbz2-dev, libcfg-dev (>= 1.99), libcmap-dev (>= 1.99), libcpg-dev (>= 1.99), libdbus-1-dev, libesmtp-dev, libglib2.0-dev, libgnutls28-dev, libltdl-dev, libncurses5-dev, libpam0g-dev, libqb-dev (>= 0.17.1), libquorum-dev (>= 1.99), libsensors4-dev, libsnmp-dev, libxml2-dev, libxml2-utils, libxslt1-dev, pkg-config, systemd [linux-any], uuid-dev, xsltproc
+Build-Depends-Indep: asciidoc, doxygen, graphviz, inkscape, publican
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/p/pacemaker
+Files:
+ cba93cfa49ada0c9cb34be188379f8c8 3687 pacemaker_1.1.17-1ubuntu1.dsc
+ 62a0b4312020cd5a23efa0269a58dc11 5185244 pacemaker_1.1.17.orig.tar.gz
+ f845d379879b85659dc8d8a777e14d40 43580 pacemaker_1.1.17-1ubuntu1.debian.tar.xz
+Uploaders:  Richard B Winters <rik@mmogp.com>, Ferenc Wágner <wferi@debian.org>, Adrian Vondendriesch <adrian.vondendriesch@credativ.de>,
+Homepage: http://www.clusterlabs.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/debian-ha/pacemaker.git
+Vcs-Git: https://alioth.debian.org/anonscm/git/debian-ha/pacemaker.git
+Testsuite: autopkgtest
+Package-List:
+ libcib-dev deb libdevel optional arch=any
+ libcib4 deb libs optional arch=any
+ libcrmcluster-dev deb libdevel optional arch=any
+ libcrmcluster4 deb libs optional arch=any
+ libcrmcommon-dev deb libdevel optional arch=any
+ libcrmcommon3 deb libs optional arch=any
+ libcrmservice-dev deb libdevel optional arch=any
+ libcrmservice3 deb libs optional arch=any
+ liblrmd-dev deb libdevel optional arch=any
+ liblrmd1 deb libs optional arch=any
+ libpe-rules2 deb libs optional arch=any
+ libpe-status10 deb libs optional arch=any
+ libpengine-dev deb libdevel optional arch=any
+ libpengine10 deb libs optional arch=any
+ libstonithd-dev deb libdevel optional arch=any
+ libstonithd2 deb libs optional arch=any
+ libtransitioner2 deb libs optional arch=any
+ pacemaker deb admin optional arch=any
+ pacemaker-cli-utils deb admin optional arch=any
+ pacemaker-common deb admin optional arch=all
+ pacemaker-doc deb doc optional arch=all
+ pacemaker-remote deb admin optional arch=any
+ pacemaker-resource-agents deb admin optional arch=all
+Checksums-Sha1:
+ 1799f55e525da72c5c4751c83156092aff3464fd 3687 pacemaker_1.1.17-1ubuntu1.dsc
+ 73cc8afc03f8d4d2c8b9a0124672df926751cd2a 5185244 pacemaker_1.1.17.orig.tar.gz
+ 99422716a5e935e0a37bee4754b58731e217d4d1 43580 pacemaker_1.1.17-1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 50e57bbb4023b645fceb37e3480fd8c13e30812d0d1765a305fa5bb16afe8006 3687 pacemaker_1.1.17-1ubuntu1.dsc
+ 96e04751e85a266e2daa8c590000a151ff37f0bb7b873d77e38534299d399803 5185244 pacemaker_1.1.17.orig.tar.gz
+ 8a4f8da8d49b51e7e7ce83820fb65b36011b1764694d0fa28b014bdcb5086de9 43580 pacemaker_1.1.17-1ubuntu1.debian.tar.xz
+
+Package: poppler
+Binary: libpoppler68, libpoppler-dev, libpoppler-private-dev, libpoppler-glib8, libpoppler-glib-dev, libpoppler-glib-doc, gir1.2-poppler-0.18, libpoppler-qt4-4, libpoppler-qt4-dev, libpoppler-qt5-1, libpoppler-qt5-dev, libpoppler-cpp0v5, libpoppler-cpp-dev, poppler-utils
+Version: 0.57.0-2ubuntu1
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian freedesktop.org maintainers <pkg-freedesktop-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10), dpkg (>= 1.16.1), libglib2.0-dev (>= 2.41), libfontconfig1-dev, libqt4-dev (>= 4:4.7.0), libcairo2-dev (>= 1.10.0), libjpeg-dev, libpng-dev, libtiff-dev, liblcms2-dev, libfreetype6-dev, gtk-doc-tools (>= 1.14), pkg-config (>= 0.18), libgirepository1.0-dev (>= 1.42.0-2~), gobject-introspection (>= 1.42.0-2~), qtbase5-dev, zlib1g-dev, libnss3-dev, libglib2.0-doc, libcairo2-doc
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/p/poppler
+Files:
+ 90a793b2245ca26975eca31f1f56311e 3494 poppler_0.57.0-2ubuntu1.dsc
+ bc5a191741604552c90d484103229374 1703300 poppler_0.57.0.orig.tar.xz
+ bcecdecf182fcc424fc2117f4c19fad7 33344 poppler_0.57.0-2ubuntu1.debian.tar.xz
+Uploaders: Josselin Mouette <joss@debian.org>, Loic Minier <lool@dooz.org>, Pino Toscano <pino@debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>,
+Homepage: http://poppler.freedesktop.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-freedesktop/poppler.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-freedesktop/poppler.git
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, cups-filters, pkg-config
+Package-List:
+ gir1.2-poppler-0.18 deb introspection optional arch=any
+ libpoppler-cpp-dev deb libdevel optional arch=any
+ libpoppler-cpp0v5 deb libs optional arch=any
+ libpoppler-dev deb libdevel optional arch=any
+ libpoppler-glib-dev deb libdevel optional arch=any
+ libpoppler-glib-doc deb doc optional arch=all
+ libpoppler-glib8 deb libs optional arch=any
+ libpoppler-private-dev deb libdevel optional arch=any
+ libpoppler-qt4-4 deb libs optional arch=any
+ libpoppler-qt4-dev deb libdevel optional arch=any
+ libpoppler-qt5-1 deb libs optional arch=any
+ libpoppler-qt5-dev deb libdevel optional arch=any
+ libpoppler68 deb libs optional arch=any
+ poppler-utils deb utils optional arch=any
+Checksums-Sha1:
+ 60eadb217d92506dc82766ddaf85b4541bcfa44a 3494 poppler_0.57.0-2ubuntu1.dsc
+ 128f175a81a7c25c4c67b353391b8cae506db2ae 1703300 poppler_0.57.0.orig.tar.xz
+ d9deabe57a5e2f880150d8b8d26aeb8f34e1af46 33344 poppler_0.57.0-2ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 6bbd54197a8e3a70ce3fb1cc403703b8526ecc0004bcd1e94158f8bc99815841 3494 poppler_0.57.0-2ubuntu1.dsc
+ 0ea37de71b7db78212ebc79df59f99b66409a29c2eac4d882dae9f2397fe44d8 1703300 poppler_0.57.0.orig.tar.xz
+ 3689f4d875e19691f7c31023585c2588750760d75f16d693a6b86c856a4ec08c 33344 poppler_0.57.0-2ubuntu1.debian.tar.xz
+
+Package: ppc64-diag
+Binary: ppc64-diag-doc, ppc64-diag
+Version: 2.7.4-1
+Priority: standard
+Section: misc
+Maintainer: Frédéric Bonnard <frediz@linux.vnet.ibm.com>
+Build-Depends: debhelper (>= 9.0.0), dh-autoreconf, dh-systemd, flex, bison, librtas-dev, librtasevent-dev, libservicelog-dev, libncurses5-dev, libvpd-dev, libudev-dev, doxygen
+Architecture: powerpc ppc64 ppc64el
+Standards-Version: 4.0.1
+Format: 3.0 (quilt)
+Directory: pool/main/p/ppc64-diag
+Files:
+ fdefa9f419d9ea3673dc2fc6d1dfe6c7 1982 ppc64-diag_2.7.4-1.dsc
+ 1cc143242bbab3f2121feb38440883c0 800415 ppc64-diag_2.7.4.orig.tar.gz
+ 4df8a42e22e4891fbbd7b443c2631909 8336 ppc64-diag_2.7.4-1.debian.tar.xz
+Homepage: http://sourceforge.net/projects/linux-diag/files/ppc64-diag/
+Package-List:
+ ppc64-diag deb misc extra arch=powerpc,ppc64,ppc64el
+ ppc64-diag-doc deb doc extra arch=powerpc,ppc64,ppc64el
+Checksums-Sha1:
+ c289af8aea4dda87c23d59c90c71c23d4cec4db5 1982 ppc64-diag_2.7.4-1.dsc
+ 1fb28e9b78d358b057283b14492b705991288902 800415 ppc64-diag_2.7.4.orig.tar.gz
+ c90bd338709d14c56b2f1b53289c9467897369e9 8336 ppc64-diag_2.7.4-1.debian.tar.xz
+Checksums-Sha256:
+ 154306f12452866a99aa0d54f68d9202433fa6fcfbc5d2b719398fbaf5d9c050 1982 ppc64-diag_2.7.4-1.dsc
+ 5a2350c07ef870b8ea50997f1b3d06d49b4f26610e63a7bd091e4b8a438e116d 800415 ppc64-diag_2.7.4.orig.tar.gz
+ fc407c95fd472085c258ab10597d073c663262df09f26a67c79abe30006ec5bf 8336 ppc64-diag_2.7.4-1.debian.tar.xz
+
+Package: python-attrs
+Binary: python-attr, python3-attr, pypy-attr, python-attr-doc
+Version: 17.2.0-1
+Priority: optional
+Section: misc
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), dh-python, pypy, pypy-setuptools, python-all, python-hypothesis, python-pytest, python-setuptools, python-six, python-sphinx-rtd-theme, python-zope.interface, python3-all, python3-doc, python3-hypothesis, python3-pytest, python3-setuptools, python3-six, python3-sphinx, python3-zope.interface
+Architecture: all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-attrs
+Files:
+ ef569ffaab24cbe80fe445547673662e 2456 python-attrs_17.2.0-1.dsc
+ 85bf614fa2b9d8d88b93dcd043ba453f 70313 python-attrs_17.2.0.orig.tar.gz
+ 6539c7d9f42d6d6c541d0dba169e066d 4212 python-attrs_17.2.0-1.debian.tar.xz
+Uploaders: Tristan Seligmann <mithrandi@debian.org>
+Homepage: https://attrs.readthedocs.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/python-attrs.git
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/python-attrs.git
+Testsuite: autopkgtest
+Testsuite-Triggers: python-hypothesis, python-pytest, python-six, python-zope.interface, python3-hypothesis, python3-pytest, python3-six, python3-zope.interface
+Package-List:
+ pypy-attr deb python optional arch=all
+ python-attr deb python optional arch=all
+ python-attr-doc deb doc extra arch=all
+ python3-attr deb python optional arch=all
+Checksums-Sha1:
+ 689b73c493f9474d9b369cd1bae257d1c17be5b8 2456 python-attrs_17.2.0-1.dsc
+ d8c4c3268524de54410fbe4f3a32db9c9de0c843 70313 python-attrs_17.2.0.orig.tar.gz
+ d83ed03fe8c5ea331c43e1d7a73d00f25ff9cbf8 4212 python-attrs_17.2.0-1.debian.tar.xz
+Checksums-Sha256:
+ 21e770040a50addcaf8093ece6dfef7f31fe36801598f5481413c1ccb45979cf 2456 python-attrs_17.2.0-1.dsc
+ c1937773b2ea4d50f720082cd4edf784b8435d096f929b64711c42eb62d03398 70313 python-attrs_17.2.0.orig.tar.gz
+ c195ad58fdcbf427d9fb7461eed02154893352d9f963de1efdd5598cfcccc807 4212 python-attrs_17.2.0-1.debian.tar.xz
+
+Package: python-numpy
+Binary: python-numpy, python-numpy-dbg, python3-numpy, python3-numpy-dbg, python-numpy-doc
+Version: 1:1.12.1-3.1ubuntu1
+Priority: optional
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Sandro Tosi <morph@debian.org>
+Build-Depends: cython, debhelper (>= 8.9.7~), dh-python, gfortran (>= 4:4.2), libblas-dev [!arm !m68k], liblapack-dev [!arm !m68k], python-all-dbg, python-all-dev, python-nose (>= 1.0), python-tz, python3-all-dbg, python3-all-dev, python3-nose (>= 1.0), python3-tz, python-setuptools, python3-setuptools, python2.7-dev (>= 2.7.14~rc1-1), python3.6-dev (>= 3.6.2-3)
+Build-Depends-Indep: python-docutils, python-sphinx (>= 1.0.7+dfsg)
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-numpy
+Files:
+ c72c6ac42e0aa2edcd62c6e3a1b15dcf 3006 python-numpy_1.12.1-3.1ubuntu1.dsc
+ c10439139789aa1be9d5a6c81050bba8 4344068 python-numpy_1.12.1.orig.tar.gz
+ d9ef407fd477c73025a35923583efeed 144680 python-numpy_1.12.1-3.1ubuntu1.debian.tar.xz
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Homepage: http://www.numpy.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/python-numpy.git
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/python-numpy.git
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, gfortran, libatlas3-base, libfftw3-dev, libopenblas-base, python-all, python-all-dbg, python-all-dev, python-nose, python-tz, python3-all, python3-all-dbg, python3-all-dev, python3-nose, python3-tz
+Package-List:
+ python-numpy deb python optional arch=any
+ python-numpy-dbg deb debug extra arch=any
+ python-numpy-doc deb doc optional arch=all
+ python3-numpy deb python optional arch=any
+ python3-numpy-dbg deb debug extra arch=any
+Checksums-Sha1:
+ e791ed0b2fc5fabcab92fd6343e616cf9c096eef 3006 python-numpy_1.12.1-3.1ubuntu1.dsc
+ 582568e43126d9e1f57755caa1bb774e3967b960 4344068 python-numpy_1.12.1.orig.tar.gz
+ 016abb8b64b67c83f78c638175b585c63f448517 144680 python-numpy_1.12.1-3.1ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 39906fb98379ffcb340d51e0ac78cc06e621aaef16f0b025e44f8614d38362a2 3006 python-numpy_1.12.1-3.1ubuntu1.dsc
+ c13f5cab98eb75545b211d738588d297d8219deced16bc61593e4e89098a913f 4344068 python-numpy_1.12.1.orig.tar.gz
+ 84c0e0b53b77f5ebb180a5586f14f400bd405bf49ca87e94e56a388bca4728ef 144680 python-numpy_1.12.1-3.1ubuntu1.debian.tar.xz
+
+Package: python-stdlib-extensions
+Binary: python-tk, python-gdbm, python-tk-dbg, python-gdbm-dbg
+Version: 2.7.14~rc1-1
+Priority: optional
+Section: python
+Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 9), python-all-dev (>= 2.7.11-1~), python-all-dbg, tk8.6-dev, blt-dev (>= 2.4z-9), libgdbm-dev
+Build-Conflicts: tcl8.4-dev, tcl8.5-dev, tk8.4-dev, tk8.5-dev
+Architecture: any
+Standards-Version: 3.9.8
+Format: 1.0
+Directory: pool/main/p/python-stdlib-extensions
+Files:
+ a71b4558ef89b61dd7d54d852363de20 1846 python-stdlib-extensions_2.7.14~rc1-1.dsc
+ e7e5b1746eeca8ba147fd00516802caf 54386 python-stdlib-extensions_2.7.14~rc1-1.tar.gz
+Package-List:
+ python-gdbm deb python optional arch=any
+ python-gdbm-dbg deb debug extra arch=any
+ python-tk deb python optional arch=any
+ python-tk-dbg deb debug extra arch=any
+Checksums-Sha1:
+ 0e5287e4133342cc98c2b42be7c2293abf3132e2 1846 python-stdlib-extensions_2.7.14~rc1-1.dsc
+ 924861a89e98dd33bf15e205ed8231c2434a5b74 54386 python-stdlib-extensions_2.7.14~rc1-1.tar.gz
+Checksums-Sha256:
+ 8eae01415edec6a69d6e80ec8d17536ea664859ca819fcf86149aa9952ea4c8c 1846 python-stdlib-extensions_2.7.14~rc1-1.dsc
+ 7a902ae45a9da77bda4608e4c7772e1c92914e9b1bbac938347858c56a091a2e 54386 python-stdlib-extensions_2.7.14~rc1-1.tar.gz
+Python-Version: 2.7
+
+Package: python-zunclient
+Binary: python-zunclient, python3-zunclient
+Version: 0.4.0-0ubuntu1
+Priority: optional
+Section: python
+Maintainer: James Page <james.page@ubuntu.com>
+Build-Depends: debhelper (>= 9), dh-python, openstack-pkg-tools, python-all (>= 2.6.6-3), python-pbr (>= 2.0.0), python-setuptools, python3-all, python3-pbr (>= 2.0.0), python3-setuptools
+Build-Depends-Indep: python-ddt (>= 1.0.1), python-docker (>= 1.9.0), python-keystoneauth1 (>= 3.1.0), python-openstackclient (>= 3.3.0), python-openstackdocstheme (>= 1.16.0), python-os-testr (>= 0.8.0), python-osc-lib (>= 1.7.0), python-oslo.i18n (>= 2.1.0), python-oslo.utils (>= 3.20.0), python-oslotest (>= 1.10.0), python-osprofiler (>= 1.4.0), python-prettytable (>= 0.7.1), python-subunit (>= 0.0.18), python-tempest (>= 1:16.1.0), python-testrepository (>= 0.0.18), python-testresources (>= 0.2.4), python-testscenarios (>= 0.4), python-testtools (>= 1.4.0), python-websocket (>= 0.32.0), python3-ddt (>= 1.0.1), python3-docker (>= 1.9.0), python3-keystoneauth1 (>= 3.1.0), python3-openstackclient (>= 3.3.0), python3-openstackdocstheme (>= 1.16.0), python3-os-testr (>= 0.8.0), python3-osc-lib (>= 1.7.0), python3-oslo.i18n (>= 2.1.0), python3-oslo.utils (>= 3.20.0), python3-oslotest (>= 1.10.0), python3-osprofiler (>= 1.4.0), python3-prettytable (>= 0.7.1), python3-subunit (>= 0.0.18), python3-tempest (>= 1:16.1.0), python3-testrepository (>= 0.0.18), python3-testresources (>= 0.2.4), python3-testscenarios (>= 0.4), python3-testtools (>= 1.4.0), python3-websocket (>= 0.32.0)
+Architecture: all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-zunclient
+Files:
+ fe2e04b2708ed33dd88a1e3f21b4c63a 3375 python-zunclient_0.4.0-0ubuntu1.dsc
+ 15444a79915e922e06ad67099b24728a 81489 python-zunclient_0.4.0.orig.tar.gz
+ 97d50e75a04c1be259651b61fe49c783 3676 python-zunclient_0.4.0-0ubuntu1.debian.tar.xz
+Homepage: https://github.com/openstack/python-zunclient
+Vcs-Browser: https://git.launchpad.net/~ubuntu-server-dev/ubuntu/+source/python-zunclient
+Vcs-Git: git://git.launchpad.net/~ubuntu-server-dev/ubuntu/+source/python-zunclient
+Package-List:
+ python-zunclient deb python optional arch=all
+ python3-zunclient deb python optional arch=all
+Checksums-Sha1:
+ e8e787acf0e5b82bfd99cecd26b20ea9a04417ae 3375 python-zunclient_0.4.0-0ubuntu1.dsc
+ 0cb035119e92bbf6e54c16cdb84bf24d8397a7bf 81489 python-zunclient_0.4.0.orig.tar.gz
+ 604d66e6044ab68c5a7814a16096ab519a06e704 3676 python-zunclient_0.4.0-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ fbe27cdea2212653f68198bf431b8c4fa0318675388c24a67e4082f3cb762e2f 3375 python-zunclient_0.4.0-0ubuntu1.dsc
+ e9c52c6160af6dd52478fbc4b0bed019df1c8130f4a6423afe6c82b5865abc46 81489 python-zunclient_0.4.0.orig.tar.gz
+ b3741b91b549b67b5d44c9f8b5b9bc97f43b8c67edaf8d7c6430e88d242f4349 3676 python-zunclient_0.4.0-0ubuntu1.debian.tar.xz
+
+Package: python2.7
+Binary: python2.7, libpython2.7-stdlib, python2.7-minimal, libpython2.7-minimal, libpython2.7, python2.7-examples, python2.7-dev, libpython2.7-dev, libpython2.7-testsuite, idle-python2.7, python2.7-doc, python2.7-dbg, libpython2.7-dbg
+Version: 2.7.14~rc1-2ubuntu1
+Priority: optional
+Section: python
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.17.11), quilt, autoconf, autotools-dev, lsb-release, sharutils, libreadline-dev, libtinfo-dev, libncursesw5-dev (>= 5.3), tk-dev, blt-dev (>= 2.4z), libssl-dev, zlib1g-dev, libbz2-dev, libexpat1-dev, libbluetooth-dev [linux-any] <!profile.nobluetooth>, locales [!armel !avr32 !hppa !ia64 !mipsel], libsqlite3-dev, libffi-dev (>= 3.0.5) [!or1k !avr32], libgpm2 [linux-any], mime-support, netbase, net-tools, bzip2, time, libdb-dev (<< 1:6.0), libgdbm-dev, python:any, help2man, xvfb, xauth
+Build-Depends-Indep: python3-sphinx
+Build-Conflicts: autoconf2.13, hardening-wrapper, python-cxx-dev, python-xml, python2.7-xml, tcl8.4-dev, tk8.4-dev
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 1.0
+Directory: pool/main/p/python2.7
+Files:
+ 3a5354ee18b4dd66cc5e31aac7e473a7 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ 51dc2952393a1f00f8bfb02dca5f9ea8 17002056 python2.7_2.7.14~rc1.orig.tar.gz
+ 2db85fa4fe5fb23105cbb38d599a0c5d 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
+Vcs-Browser: https://code.launchpad.net/~doko/python/pkg2.7-debian
+Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg2.7-debian
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, locales, python-gdbm, python-gdbm-dbg
+Package-List:
+ idle-python2.7 deb python optional arch=all
+ libpython2.7 deb libs optional arch=any
+ libpython2.7-dbg deb debug extra arch=any
+ libpython2.7-dev deb libdevel optional arch=any
+ libpython2.7-minimal deb python optional arch=any
+ libpython2.7-stdlib deb python optional arch=any
+ libpython2.7-testsuite deb libdevel optional arch=all
+ python2.7 deb python optional arch=any
+ python2.7-dbg deb debug extra arch=any
+ python2.7-dev deb python optional arch=any
+ python2.7-doc deb doc optional arch=all
+ python2.7-examples deb python optional arch=all
+ python2.7-minimal deb python optional arch=any
+Checksums-Sha1:
+ fef001ff1a56345207a44eeaf99ce37c02dd0aec 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ 7cf3a830619a3f6f46508614ca39c48c0d1d869f 17002056 python2.7_2.7.14~rc1.orig.tar.gz
+ 9c5319f9f617007866637dd424a44eef37d5e4ce 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
+Checksums-Sha256:
+ 197c76c90450a3cdb6f813d764ee058b8056bde493b1d2f372be12bef0e5938a 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ 4d1ca11c5451e1b7cafcabc2003cf80fb3745bac45ba51c39b855b0011a27408 17002056 python2.7_2.7.14~rc1.orig.tar.gz
+ 4a2bda8ba70c5bb1e2bfcfa6c32492165728a6616f14720b71d3e4277e69c4f3 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
+
+Package: python3-stdlib-extensions
+Binary: python3-tk, python3-gdbm, python3-tk-dbg, python3-gdbm-dbg
+Version: 3.6.2-1ubuntu1
+Priority: standard
+Section: python
+Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 9), libpython3-all-dev, libpython3-all-dbg, python3-all-dev:any, python3-all-dbg:any, libpython3.6-dev, libpython3.6-dbg, python3.6-dev:any, python3.6-dbg:any, tk-dev, blt-dev (>= 2.4z-9), libgdbm-dev
+Build-Conflicts: tcl8.4-dev, tcl8.5-dev, tk8.4-dev, tk8.5-dev
+Architecture: any
+Standards-Version: 4.1.0
+Format: 1.0
+Directory: pool/main/p/python3-stdlib-extensions
+Files:
+ 73465ce5f3da1dd7fceb80bd65464f22 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
+ 1720fe100d63b74be18353401e37257a 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
+Package-List:
+ python3-gdbm deb python optional arch=any
+ python3-gdbm-dbg deb debug extra arch=any
+ python3-tk deb python optional arch=any
+ python3-tk-dbg deb debug extra arch=any
+Checksums-Sha1:
+ bf574cf010f73c3dadb9b430e026d765e7c7a38e 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
+ 7543601d36e1b6077856386e34a28eb24f28d3d7 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
+Checksums-Sha256:
+ f90e8a39e27c7dad1921fa31d62bf305b13c716b9ad5d5c69d818c7f5916d2b8 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
+ 3deba8ef2494391377a524d5dc12d0223843c13c078a717c7d9d59bb137e0742 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
+
+Package: python3.6
+Binary: python3.6, python3.6-venv, libpython3.6-stdlib, python3.6-minimal, libpython3.6-minimal, libpython3.6, python3.6-examples, python3.6-dev, libpython3.6-dev, libpython3.6-testsuite, idle-python3.6, python3.6-doc, python3.6-dbg, libpython3.6-dbg
+Version: 3.6.2-3
+Priority: important
+Section: misc
+Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 9), dpkg-dev (>= 1.17.11), quilt, autoconf, lsb-release, sharutils, libreadline-dev, libncursesw5-dev (>= 5.3), zlib1g-dev, libbz2-dev, liblzma-dev, libgdbm-dev, libdb-dev, tk-dev, blt-dev (>= 2.4z), libssl-dev, libexpat1-dev, libmpdec-dev (>= 2.4), libbluetooth-dev [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], locales [!armel !avr32 !hppa !ia64 !mipsel], libsqlite3-dev, libffi-dev (>= 3.0.5) [!or1k !avr32], libgpm2 [!hurd-i386 !kfreebsd-i386 !kfreebsd-amd64], mime-support, netbase, bzip2, time, python3:any, net-tools, xvfb, xauth
+Build-Depends-Indep: python3-sphinx
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/p/python3.6
+Files:
+ 35b2317a976475ea4817b0857b34bdd4 3351 python3.6_3.6.2-3.dsc
+ 2c68846471994897278364fc18730dd9 16907204 python3.6_3.6.2.orig.tar.xz
+ 9fec4c85d2ca708638475fd7fce797e8 202444 python3.6_3.6.2-3.debian.tar.xz
+Vcs-Browser: https://code.launchpad.net/~doko/python/pkg3.6-debian
+Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg3.6-debian
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential, gdb, locales, python3-gdbm, python3-gdbm-dbg
+Package-List:
+ idle-python3.6 deb python optional arch=all
+ libpython3.6 deb libs optional arch=any
+ libpython3.6-dbg deb debug extra arch=any
+ libpython3.6-dev deb libdevel optional arch=any
+ libpython3.6-minimal deb python optional arch=any
+ libpython3.6-stdlib deb python optional arch=any
+ libpython3.6-testsuite deb libdevel optional arch=all
+ python3.6 deb python optional arch=any
+ python3.6-dbg deb debug extra arch=any
+ python3.6-dev deb python optional arch=any
+ python3.6-doc deb doc optional arch=all
+ python3.6-examples deb python optional arch=all
+ python3.6-minimal deb python optional arch=any
+ python3.6-venv deb python optional arch=any
+Checksums-Sha1:
+ 45dc28b9b0adb27782328fbc843328e471aa2518 3351 python3.6_3.6.2-3.dsc
+ 4f92a045de9231b93dfbed50c66bb12cf03ac59a 16907204 python3.6_3.6.2.orig.tar.xz
+ 97e171768b49a1fbfb4d7db495a5e2e18551081d 202444 python3.6_3.6.2-3.debian.tar.xz
+Checksums-Sha256:
+ cf480ba0cffea536d11f45ec2bba1c0fe721f0486540a613d8a6fc8ab0e8914a 3351 python3.6_3.6.2-3.dsc
+ 9229773be41ed144370f47f0f626a1579931f5a390f1e8e3853174d52edd64a9 16907204 python3.6_3.6.2.orig.tar.xz
+ 8b263d6600d084aa4aa3e9519504d43b490b13500c19d1ad171904cf368acd72 202444 python3.6_3.6.2-3.debian.tar.xz
+
+Package: qemu
+Binary: qemu, qemu-system, qemu-block-extra, qemu-system-common, qemu-system-misc, qemu-system-arm, qemu-system-mips, qemu-system-ppc, qemu-system-sparc, qemu-system-x86, qemu-user, qemu-user-static, qemu-user-binfmt, qemu-utils, qemu-guest-agent, qemu-kvm, qemu-system-aarch64, qemu-system-s390x
+Version: 1:2.10+dfsg-0ubuntu1
+Priority: optional
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian QEMU Team <pkg-qemu-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), device-tree-compiler, texinfo, python:any, acpica-tools, libaio-dev [linux-any], libasound2-dev [linux-any], libattr1-dev, libbluetooth-dev [linux-any], libbrlapi-dev, libcap-dev [linux-any], libcap-ng-dev [linux-any], libcurl4-gnutls-dev, libfdt-dev, gnutls-dev, libiscsi-dev (>> 1.9.0~), libncursesw5-dev, libnuma-dev [i386 amd64 ia64 mips mipsel powerpc powerpcspe x32 ppc64 ppc64el arm64 sparc hppa s390x], libcacard-dev, libpixman-1-dev, libpulse-dev, librados-dev [linux-any], librbd-dev [linux-any], libsasl2-dev, libsdl1.2-dev (>> 1.2.1), libseccomp-dev (>= 2.3.0) [linux-amd64 linux-i386 linux-ppc64el], libspice-server-dev (>= 0.12.2~) [linux-amd64 linux-i386], libspice-protocol-dev (>= 0.12.3~) [linux-amd64 linux-i386], libusb-1.0-0-dev (>= 2:1.0.13~) [linux-any], libusbredirparser-dev (>= 0.6~) [linux-any], libx11-dev, libxen-dev [linux-amd64 linux-i386], linux-libc-dev (>= 2.6.34) [linux-any], uuid-dev, xfslibs-dev [linux-any], zlib1g-dev, libjpeg-dev, libpng-dev
+Build-Conflicts: oss4-dev
+Architecture: any
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/q/qemu
+Files:
+ 18983a6d97686ff4c57e1610ba9c0b2f 6400 qemu_2.10+dfsg-0ubuntu1.dsc
+ 50ff3b08cc6b5ba1d5effd53ffb2dafa 8401724 qemu_2.10+dfsg.orig.tar.xz
+ 9b9e82eafcea1ba320abf5b29dae00d4 92764 qemu_2.10+dfsg-0ubuntu1.debian.tar.xz
+Uploaders: Aurelien Jarno <aurel32@debian.org>, Riku Voipio <riku.voipio@iki.fi>, Vagrant Cascadian <vagrant@debian.org>, Michael Tokarev <mjt@tls.msk.ru>
+Homepage: http://www.qemu.org/
+Vcs-Browser: https://anonscm.debian.org/gitweb/?p=pkg-qemu/qemu.git;a=shortlog;h=refs/heads/ubuntu-utopic
+Vcs-Git: git://anonscm.debian.org/pkg-qemu/qemu.git -b ubuntu-artful-2.10
+Package-List:
+ qemu deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-block-extra deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64,x32
+ qemu-guest-agent deb otherosfs optional arch=any
+ qemu-kvm deb otherosfs optional arch=i386,amd64,x32,armhf,armel,arm64,powerpc,ppc64,ppc64el,s390x
+ qemu-system deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-aarch64 deb otherosfs optional arch=arm64
+ qemu-system-arm deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-common deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-mips deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-misc deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-ppc deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-s390x deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-sparc deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-system-x86 deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-user deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-user-binfmt deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64
+ qemu-user-static deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,mips,mipsel,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64,x32
+ qemu-utils deb otherosfs optional arch=amd64,arm,arm64,armel,armhf,hppa,i386,ia64,kfreebsd-amd64,kfreebsd-i386,mips,mipsel,mips64,mips64el,powerpc,powerpcspe,ppc64,ppc64el,s390x,sparc,sparc64,x32
+Checksums-Sha1:
+ 04106dc0e1c5a48442a5bc83ac94b75918b0bf81 6400 qemu_2.10+dfsg-0ubuntu1.dsc
+ 62a7a643aafa831eb39f26214d2665b0c3e224ba 8401724 qemu_2.10+dfsg.orig.tar.xz
+ e1fc20286235f083e1953e04fa2704a654ca0b42 92764 qemu_2.10+dfsg-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 8fe382bceea39d110f93cbf3f453868b22c3eea1a6437612093bc854da680f6b 6400 qemu_2.10+dfsg-0ubuntu1.dsc
+ 204059a59774745d2366f2700c148bccb2712803406b3c2607052194101c1193 8401724 qemu_2.10+dfsg.orig.tar.xz
+ ac9e30ea41bab501dad10828cec847e86d26b30380cd443f9ddb6092696c0119 92764 qemu_2.10+dfsg-0ubuntu1.debian.tar.xz
+Debian-Vcs-Browser: https://anonscm.debian.org/gitweb/?p=pkg-qemu/qemu.git
+Debian-Vcs-Git: git://anonscm.debian.org/pkg-qemu/qemu.git
+
+Package: shotwell
+Binary: shotwell, shotwell-common, shotwell-dbg
+Version: 0.26.2-0ubuntu1
+Priority: optional
+Section: gnome
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jörg Frings-Fürst <debian@jff-webhosting.net>
+Build-Depends: appstream-util, debhelper (>= 10), desktop-file-utils, dh-translations, gnome-doc-utils, itstool, libappstream-glib-dev, libexif-dev (>= 0.6.16), libgcr-3-dev, libgdata-dev, libgee-0.8-dev (>= 0.10), libgexiv2-dev (>= 0.10.4), libglib2.0-dev (>= 2.40), libgphoto2-dev (>= 2.5.4), libgstreamer-plugins-base1.0-dev (>= 1.0.0), libgstreamer1.0-dev (>= 1.0.0), libgtk-3-dev (>= 3.14), libgudev-1.0-dev (>= 145), libicu-dev, libjson-glib-dev, libraw-dev (>= 0.14), librest-dev (>= 0.7), libsoup2.4-dev (>= 2.26.0), libsqlite3-dev (>= 3.5.9), libwebkit2gtk-4.0-dev, libxml2 (>= 2.6.32), libunity-dev, python-scour, m4, valac (>= 0.22.0)
+Architecture: linux-any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/s/shotwell
+Files:
+ 460e5be0da764619a612335b5cbab7ec 2824 shotwell_0.26.2-0ubuntu1.dsc
+ 37a7b1c54242a8cbd00b85785b5941bd 5575388 shotwell_0.26.2.orig.tar.xz
+ 3760e459cc28b776eb27c583d3903f74 229004 shotwell_0.26.2-0ubuntu1.debian.tar.xz
+Homepage: https://wiki.gnome.org/Apps/Shotwell
+Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/shotwell.git/
+Vcs-Git: https://anonscm.debian.org/cgit/collab-maint/shotwell.git/
+Testsuite: autopkgtest
+Testsuite-Triggers: at-spi2-core, autopilot-desktop, dbus-x11, libautopilot-gtk, umockdev, xvfb
+Package-List:
+ shotwell deb gnome optional arch=linux-any
+ shotwell-common deb gnome optional arch=all
+ shotwell-dbg deb debug extra arch=linux-any
+Checksums-Sha1:
+ bbe1cbaf397c2d49ce8b49bccc1cb1372783e178 2824 shotwell_0.26.2-0ubuntu1.dsc
+ 2114397bd2941767b83c370282c82ee0f4964478 5575388 shotwell_0.26.2.orig.tar.xz
+ cd130c42665e9c2db575aaf5b58fb35d0590176d 229004 shotwell_0.26.2-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ e10c2373290e723c48646f3b5ffa78b7a68be020392bcebc916e6a78c59cc90a 2824 shotwell_0.26.2-0ubuntu1.dsc
+ 4f65283d54772ef6344b8e8acb242f06b7f5b3f8e42ccb292b02c06a8dc2323b 5575388 shotwell_0.26.2.orig.tar.xz
+ 0835fdffec516305161811718b7051f2f20083681470dbe4c0b3d252f966d660 229004 shotwell_0.26.2-0ubuntu1.debian.tar.xz
+
+Package: systemd
+Binary: systemd, systemd-sysv, systemd-container, systemd-journal-remote, systemd-coredump, systemd-tests, libpam-systemd, libnss-myhostname, libnss-mymachines, libnss-resolve, libnss-systemd, libsystemd0, libsystemd-dev, udev, libudev1, libudev-dev, udev-udeb, libudev1-udeb
+Version: 234-2ubuntu10
+Priority: important
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10.4~), pkg-config, xsltproc, docbook-xsl, docbook-xml, m4, meson (>= 0.40.0), intltool, gperf, gnu-efi [amd64 i386 arm64], libcap-dev (>= 1:2.24-9~), libpam0g-dev, libapparmor-dev (>= 2.9.0-3+exp2) <!stage1>, libidn11-dev <!stage1>, libiptc-dev <!stage1> | iptables-dev <!stage1>, libaudit-dev <!stage1>, libdbus-1-dev (>= 1.3.2) <!nocheck>, libcryptsetup-dev (>= 2:1.6.0) <!stage1>, libselinux1-dev (>= 2.1.9), libacl1-dev, liblzma-dev, liblz4-dev (>= 0.0~r125), liblz4-tool <!nocheck>, libbz2-dev <!stage1>, zlib1g-dev <!stage1> | libz-dev <!stage1>, libcurl4-gnutls-dev <!stage1> | libcurl-dev <!stage1>, libmicrohttpd-dev <!stage1>, libgnutls28-dev <!stage1>, libgcrypt20-dev, libkmod-dev (>= 15), libblkid-dev (>= 2.24), libmount-dev (>= 2.27.1), libseccomp-dev (>= 2.3.1) [amd64 arm64 armel armhf i386 mips mipsel mips64 mips64el x32 powerpc ppc64 ppc64el s390x], libdw-dev (>= 0.158) <!stage1>, libpolkit-gobject-1-dev <!stage1>, linux-base <!nocheck>, acl <!nocheck>, python3:native, python3-lxml:native, python3-pyparsing <!nocheck>, tzdata <!nocheck>, libcap2-bin <!nocheck>, iproute2 <!nocheck>
+Architecture: linux-any
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/s/systemd
+Files:
+ 74bcf97b96f4e5db677eadbd2d32c976 4122 systemd_234-2ubuntu10.dsc
+ 2d8f6ebded3462ac0d1a6275e54db561 4800186 systemd_234.orig.tar.gz
+ dcf1b988551753ce7109924e64e9fe4c 140348 systemd_234-2ubuntu10.debian.tar.xz
+Uploaders: Michael Biebl <biebl@debian.org>, Marco d'Itri <md@linux.it>, Sjoerd Simons <sjoerd@debian.org>, Martin Pitt <mpitt@debian.org>
+Homepage: https://www.freedesktop.org/wiki/Software/systemd
+Vcs-Browser: https://anonscm.debian.org/git/pkg-systemd/systemd.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-systemd/systemd.git
+Testsuite: autopkgtest
+Package-List:
+ libnss-myhostname deb admin optional arch=linux-any
+ libnss-mymachines deb admin optional arch=linux-any
+ libnss-resolve deb admin optional arch=linux-any
+ libnss-systemd deb admin optional arch=linux-any
+ libpam-systemd deb admin standard arch=linux-any
+ libsystemd-dev deb libdevel optional arch=linux-any
+ libsystemd0 deb libs optional arch=linux-any
+ libudev-dev deb libdevel optional arch=linux-any
+ libudev1 deb libs important arch=linux-any
+ libudev1-udeb udeb debian-installer optional arch=linux-any profile=!noudeb
+ systemd deb admin important arch=linux-any
+ systemd-container deb admin optional arch=linux-any profile=!stage1
+ systemd-coredump deb admin optional arch=linux-any profile=!stage1
+ systemd-journal-remote deb admin optional arch=linux-any profile=!stage1
+ systemd-sysv deb admin important arch=linux-any
+ systemd-tests deb admin optional arch=linux-any
+ udev deb admin important arch=linux-any
+ udev-udeb udeb debian-installer optional arch=linux-any profile=!noudeb
+Checksums-Sha1:
+ f3861cf6a21d0badc26d74ae3b480aa952ca6b67 4122 systemd_234-2ubuntu10.dsc
+ a0ff860f21fc71d3628ad187150c16369db1ff4f 4800186 systemd_234.orig.tar.gz
+ 240f24b586757841bbeefc3179146388de96be4f 140348 systemd_234-2ubuntu10.debian.tar.xz
+Checksums-Sha256:
+ 3f7de109d3824369e9119c8fc9073cf976f680a2f8f8b7794cbd9cb86f7cfdbc 4122 systemd_234-2ubuntu10.dsc
+ da3e69d10aa1c983d33833372ad4929037b411ac421fb085c8cee79ae1d80b6a 4800186 systemd_234.orig.tar.gz
+ b6f53a1132e702fce9edfbe3ede7c42f76b62a21a6c3d5fa3e004b09b098d1f0 140348 systemd_234-2ubuntu10.debian.tar.xz
+
+Package: thunderbird
+Binary: thunderbird, thunderbird-gnome-support, thunderbird-dev, thunderbird-dbg, thunderbird-mozsymbols, thunderbird-testsuite, xul-ext-lightning, xul-ext-gdata-provider, thunderbird-globalmenu, xul-ext-calendar-timezones, thunderbird-gnome-support-dbg, thunderbird-locale-bn-bd, thunderbird-locale-en-gb, thunderbird-locale-en-us, thunderbird-locale-es-ar, thunderbird-locale-es-es, thunderbird-locale-fy-nl, thunderbird-locale-ga-ie, thunderbird-locale-nb-no, thunderbird-locale-nn-no, thunderbird-locale-pa-in, thunderbird-locale-pt-br, thunderbird-locale-pt-pt, thunderbird-locale-sv-se, thunderbird-locale-ta-lk, thunderbird-locale-zh-cn, thunderbird-locale-zh-tw, thunderbird-locale-af, thunderbird-locale-ar, thunderbird-locale-ast, thunderbird-locale-be, thunderbird-locale-bg, thunderbird-locale-bn, thunderbird-locale-br, thunderbird-locale-ca, thunderbird-locale-cs, thunderbird-locale-cy, thunderbird-locale-da, thunderbird-locale-de, thunderbird-locale-dsb,
+ thunderbird-locale-el, thunderbird-locale-en, thunderbird-locale-es, thunderbird-locale-et, thunderbird-locale-eu, thunderbird-locale-fi, thunderbird-locale-fr, thunderbird-locale-fy, thunderbird-locale-ga, thunderbird-locale-gd, thunderbird-locale-gl, thunderbird-locale-he, thunderbird-locale-hr, thunderbird-locale-hsb, thunderbird-locale-hu, thunderbird-locale-hy, thunderbird-locale-id, thunderbird-locale-is, thunderbird-locale-it, thunderbird-locale-ja, thunderbird-locale-ka, thunderbird-locale-kab, thunderbird-locale-ko, thunderbird-locale-lt, thunderbird-locale-mk, thunderbird-locale-nb, thunderbird-locale-nl, thunderbird-locale-nn, thunderbird-locale-pa, thunderbird-locale-pl, thunderbird-locale-pt, thunderbird-locale-rm, thunderbird-locale-ro, thunderbird-locale-ru, thunderbird-locale-si, thunderbird-locale-sk, thunderbird-locale-sl, thunderbird-locale-sq, thunderbird-locale-sr, thunderbird-locale-sv, thunderbird-locale-ta, thunderbird-locale-tr,
+ thunderbird-locale-uk, thunderbird-locale-vi, thunderbird-locale-zh-hans,
+ thunderbird-locale-zh-hant
+Version: 1:52.2.1+build1-0ubuntu1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: cdbs (>= 0.4.27), debhelper (>= 7), autotools-dev, autoconf2.13, quilt, zip, libx11-dev, libx11-xcb-dev, libxt-dev, libxext-dev, libgtk2.0-dev (>= 2.14), libgtk-3-dev (>= 3.4), libglib2.0-dev (>= 2.18), libpango1.0-dev (>= 1.14.0), libfontconfig1-dev, libfreetype6-dev (>= 2.0.1), libgconf2-dev (>= 1.2.1), libgnomeui-dev (>= 2.2.0), libstartup-notification0-dev, libasound2-dev, libcurl4-openssl-dev, libdbus-glib-1-dev (>= 0.60), lsb-release, libiw-dev, mesa-common-dev, libnotify-dev, libxrender-dev, libpulse-dev, yasm (>= 1.1), imagemagick, docbook-to-man, libkrb5-dev, unzip, dbus-x11, xvfb, python (>= 2.7), libffi-dev (>= 3.0.9)
+Architecture: any all
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/t/thunderbird
+Files:
+ 5147687b0b808da0d6521e87b2945faa 8452 thunderbird_52.2.1+build1-0ubuntu1.dsc
+ 2ab8318066eb07705fcad4651ef70d8c 297467969 thunderbird_52.2.1+build1.orig.tar.bz2
+ dfed87e783ecb039dfc1d9df7e8f0b0b 211276 thunderbird_52.2.1+build1-0ubuntu1.debian.tar.xz
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/thunderbird/thunderbird.zesty
+Package-List:
+ thunderbird deb mail optional arch=any
+ thunderbird-dbg deb debug extra arch=any
+ thunderbird-dev deb devel optional arch=any
+ thunderbird-globalmenu deb oldlibs extra arch=any
+ thunderbird-gnome-support deb gnome optional arch=any
+ thunderbird-gnome-support-dbg deb web optional arch=any
+ thunderbird-locale-af deb web optional arch=any
+ thunderbird-locale-ar deb web optional arch=any
+ thunderbird-locale-ast deb web optional arch=any
+ thunderbird-locale-be deb web optional arch=any
+ thunderbird-locale-bg deb web optional arch=any
+ thunderbird-locale-bn deb web optional arch=any
+ thunderbird-locale-bn-bd deb web optional arch=all
+ thunderbird-locale-br deb web optional arch=any
+ thunderbird-locale-ca deb web optional arch=any
+ thunderbird-locale-cs deb web optional arch=any
+ thunderbird-locale-cy deb web optional arch=any
+ thunderbird-locale-da deb web optional arch=any
+ thunderbird-locale-de deb web optional arch=any
+ thunderbird-locale-dsb deb web optional arch=any
+ thunderbird-locale-el deb web optional arch=any
+ thunderbird-locale-en deb web optional arch=any
+ thunderbird-locale-en-gb deb web optional arch=all
+ thunderbird-locale-en-us deb web optional arch=all
+ thunderbird-locale-es deb web optional arch=any
+ thunderbird-locale-es-ar deb web optional arch=all
+ thunderbird-locale-es-es deb web optional arch=all
+ thunderbird-locale-et deb web optional arch=any
+ thunderbird-locale-eu deb web optional arch=any
+ thunderbird-locale-fi deb web optional arch=any
+ thunderbird-locale-fr deb web optional arch=any
+ thunderbird-locale-fy deb web optional arch=any
+ thunderbird-locale-fy-nl deb web optional arch=all
+ thunderbird-locale-ga deb web optional arch=any
+ thunderbird-locale-ga-ie deb web optional arch=all
+ thunderbird-locale-gd deb web optional arch=any
+ thunderbird-locale-gl deb web optional arch=any
+ thunderbird-locale-he deb web optional arch=any
+ thunderbird-locale-hr deb web optional arch=any
+ thunderbird-locale-hsb deb web optional arch=any
+ thunderbird-locale-hu deb web optional arch=any
+ thunderbird-locale-hy deb web optional arch=any
+ thunderbird-locale-id deb web optional arch=any
+ thunderbird-locale-is deb web optional arch=any
+ thunderbird-locale-it deb web optional arch=any
+ thunderbird-locale-ja deb web optional arch=any
+ thunderbird-locale-ka deb web optional arch=any
+ thunderbird-locale-kab deb web optional arch=any
+ thunderbird-locale-ko deb web optional arch=any
+ thunderbird-locale-lt deb web optional arch=any
+ thunderbird-locale-mk deb web optional arch=any
+ thunderbird-locale-nb deb web optional arch=any
+ thunderbird-locale-nb-no deb web optional arch=all
+ thunderbird-locale-nl deb web optional arch=any
+ thunderbird-locale-nn deb web optional arch=any
+ thunderbird-locale-nn-no deb web optional arch=all
+ thunderbird-locale-pa deb web optional arch=any
+ thunderbird-locale-pa-in deb web optional arch=all
+ thunderbird-locale-pl deb web optional arch=any
+ thunderbird-locale-pt deb web optional arch=any
+ thunderbird-locale-pt-br deb web optional arch=all
+ thunderbird-locale-pt-pt deb web optional arch=all
+ thunderbird-locale-rm deb web optional arch=any
+ thunderbird-locale-ro deb web optional arch=any
+ thunderbird-locale-ru deb web optional arch=any
+ thunderbird-locale-si deb web optional arch=any
+ thunderbird-locale-sk deb web optional arch=any
+ thunderbird-locale-sl deb web optional arch=any
+ thunderbird-locale-sq deb web optional arch=any
+ thunderbird-locale-sr deb web optional arch=any
+ thunderbird-locale-sv deb web optional arch=any
+ thunderbird-locale-sv-se deb web optional arch=all
+ thunderbird-locale-ta deb web optional arch=any
+ thunderbird-locale-ta-lk deb web optional arch=all
+ thunderbird-locale-tr deb web optional arch=any
+ thunderbird-locale-uk deb web optional arch=any
+ thunderbird-locale-vi deb web optional arch=any
+ thunderbird-locale-zh-cn deb web optional arch=all
+ thunderbird-locale-zh-hans deb web optional arch=any
+ thunderbird-locale-zh-hant deb web optional arch=any
+ thunderbird-locale-zh-tw deb web optional arch=all
+ thunderbird-mozsymbols deb debug extra arch=amd64,i386,armel
+ thunderbird-testsuite deb misc extra arch=any
+ xul-ext-calendar-timezones deb oldlibs extra arch=any
+ xul-ext-gdata-provider deb web optional arch=any
+ xul-ext-lightning deb web optional arch=any
+Checksums-Sha1:
+ db933755567e88647ad5bad296890fca25c7450f 8452 thunderbird_52.2.1+build1-0ubuntu1.dsc
+ a95cc1e84bbfcb5a6f4e992ead80cbe4b223ca89 297467969 thunderbird_52.2.1+build1.orig.tar.bz2
+ 6b22944df7a1d824f616dc56273d8ca7d5e4b434 211276 thunderbird_52.2.1+build1-0ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 22d442da7444fe8ed3be897f150e506572e96f8c9766a2eff253fe4c72102f1c 8452 thunderbird_52.2.1+build1-0ubuntu1.dsc
+ 197b205ada9c1ec0ce9c9fb97f8db0efdd269ff50dbc15172f75186c861e14a8 297467969 thunderbird_52.2.1+build1.orig.tar.bz2
+ 8bc1fe1664ecbd52903bafa15d1227243347136c34afc9970f908aaa59fdb1d3 211276 thunderbird_52.2.1+build1-0ubuntu1.debian.tar.xz
+
+Package: twisted
+Binary: python3-twisted, python3-twisted-bin, python3-twisted-bin-dbg, python-twisted-bin, python-twisted-bin-dbg, python-twisted-core, python-twisted-conch, python-twisted-mail, python-twisted-names, python-twisted-news, python-twisted-runner, python-twisted-runner-dbg, python-twisted-web, python-twisted-words, twisted-doc, python-twisted
+Version: 17.5.0-1
+Priority: optional
+Section: net
+Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 7.0.50~), dh-python, patch, python-all-dev, python-all-dbg, python-zope.interface-dbg (>= 4.0.2), python-setuptools, python-incremental, python-constantly, python-automat (>= 0.6.0), python-hyperlink, python-doc, python3-all-dev, python3-all-dbg, python3-zope.interface (>= 4.0.2), python3-setuptools, python3-incremental, python3-constantly, python3-automat (>= 0.6.0), python3-hyperlink, python3-doc
+Build-Depends-Indep: python3-sphinx
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/t/twisted
+Files:
+ b44dd9b13a97de26a6d44cf583ca1eb4 3517 twisted_17.5.0-1.dsc
+ cd5c287802dcbaf7be15cf937c922b71 2993816 twisted_17.5.0.orig.tar.bz2
+ dac259ebc8eec007bf03c741918ea952 19400 twisted_17.5.0-1.debian.tar.xz
+Uploaders: Matthias Klose <doko@debian.org>, Free Ekanayaka <freee@debian.org>
+Homepage: https://github.com/waylan/Python-Markdown
+Vcs-Browser: https://anonscm.debian.org/cgit/python-modules/packages/twisted.git
+Vcs-Git: https://anonscm.debian.org/git/python-modules/packages/twisted.git
+Testsuite: autopkgtest
+Package-List:
+ python-twisted deb python extra arch=all
+ python-twisted-bin deb python optional arch=any
+ python-twisted-bin-dbg deb debug extra arch=any
+ python-twisted-conch deb python optional arch=all
+ python-twisted-core deb python optional arch=all
+ python-twisted-mail deb python optional arch=all
+ python-twisted-names deb python optional arch=all
+ python-twisted-news deb python optional arch=all
+ python-twisted-runner deb python optional arch=all
+ python-twisted-runner-dbg deb debug extra arch=all
+ python-twisted-web deb python optional arch=all
+ python-twisted-words deb python optional arch=all
+ python3-twisted deb python optional arch=all
+ python3-twisted-bin deb python optional arch=any
+ python3-twisted-bin-dbg deb debug extra arch=any
+ twisted-doc deb doc extra arch=all
+Checksums-Sha1:
+ 16a07b90162fd0c8d017f8d27dc148eaa57180a5 3517 twisted_17.5.0-1.dsc
+ 51e8b9ea7573f1f1154fb4fb7b04ba84af654647 2993816 twisted_17.5.0.orig.tar.bz2
+ c0d1d86f8cdf2a58bbb66ba5efa391d729401189 19400 twisted_17.5.0-1.debian.tar.xz
+Checksums-Sha256:
+ 70558895a255c6cdd450baa65b2d0a9e8f77ff291c2c7047563fecca32848c10 3517 twisted_17.5.0-1.dsc
+ f198a494f0df2482f7c5f99d7f3eef33d22763ffc76641b36fec476b878002ea 2993816 twisted_17.5.0.orig.tar.bz2
+ 6516ef0c7529538925018ab0650cb0f452644792b64236518039e96358bec614 19400 twisted_17.5.0-1.debian.tar.xz
+
+Package: xorg-server
+Binary: xserver-xorg-core, xserver-xorg-core-udeb, xserver-xorg-dev, xdmx, xdmx-tools, xnest, xvfb, xserver-xephyr, xserver-common, xmir, xserver-xorg-xmir, xorg-server-source, xwayland, xserver-xorg-legacy
+Version: 2:1.19.3-1ubuntu6
+Priority: optional
+Section: x11
+Maintainer: Ubuntu X-SWAT <ubuntu-x@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Build-Depends: debhelper (>= 9), po-debconf, dpkg-dev (>= 1.16.1), quilt, lsb-release, pkg-config, bison, flex, xauth, xutils-dev (>= 1:7.6+4), xfonts-utils (>= 1:7.5+1), x11proto-bigreqs-dev (>= 1:1.1.0), x11proto-composite-dev (>= 1:0.4), x11proto-core-dev (>= 7.0.31), x11proto-damage-dev (>= 1.1), x11proto-fixes-dev (>= 1:5.0), x11proto-fonts-dev (>= 2.1.3), x11proto-kb-dev (>= 1.0.3), x11proto-xinerama-dev, x11proto-randr-dev (>= 1.5.0), x11proto-record-dev (>= 1.13.99.1), x11proto-render-dev (>= 2:0.11), x11proto-resource-dev (>= 1.2.0), x11proto-scrnsaver-dev, x11proto-video-dev, x11proto-xcmisc-dev (>= 1.2.0), x11proto-xext-dev (>= 7.2.99.901), x11proto-xf86bigfont-dev (>= 1.2.0), x11proto-xf86dga-dev (>= 2.0.99.1), x11proto-xf86vidmode-dev (>= 2.2.99.1), x11proto-present-dev, x11proto-dri3-dev, xtrans-dev (>= 1.3.5), libxau-dev (>= 1:1.0.5-2), x11proto-input-dev (>= 2.3), x11proto-dri2-dev (>= 2.8), libxdmcp-dev (>= 1:0.99.1), libxfont-dev (>= 1:2.0.1), libxkbfile-dev (>= 1:0.99.1), libpixman-1-dev (>= 0.27.2), libpciaccess-dev (>= 0.12.901), libgcrypt-dev, nettle-dev, libudev-dev (>= 151-3) [linux-any], libselinux1-dev (>= 2.0.80) [linux-any], libaudit-dev [linux-any], x11proto-xf86dri-dev (>= 2.1.0), libdrm-dev (>= 2.4.46) [!hurd-i386], x11proto-gl-dev (>= 1.4.17), libgl1-mesa-dev (>= 9.2), libxmuu-dev (>= 1:0.99.1), libxext-dev (>= 1:0.99.1), libx11-dev (>= 2:1.6), libxrender-dev (>= 1:0.9.0), libxi-dev (>= 2:1.6.99.1), x11proto-dmx-dev (>= 1:2.2.99.1), libdmx-dev (>= 1:1.0.1), libxpm-dev (>= 1:3.5.3), libxaw7-dev (>= 1:0.99.1), libxt-dev (>= 1:0.99.1), libxmu-dev (>= 1:0.99.1), libxtst-dev (>= 1:0.99.1), libxres-dev (>= 1:0.99.1), libxfixes-dev (>= 1:3.0.0), libxv-dev, libxinerama-dev, libxshmfence-dev (>= 1.1) [!hurd-i386], libepoxy-dev [linux-any kfreebsd-any], libegl1-mesa-dev [linux-any kfreebsd-any], libgbm-dev (>= 10.2) [linux-any kfreebsd-any], libxcb1-dev, libxcb-xkb-dev, libxcb-shape0-dev, libxcb-render0-dev, libxcb-render-util0-dev, libxcb-util0-dev, libxcb-image0-dev, libxcb-icccm4-dev, libxcb-shm0-dev, libxcb-keysyms1-dev, libxcb-randr0-dev, libxcb-xv0-dev, libxcb-glx0-dev, libxcb-xf86dri0-dev (>= 1.6), xkb-data, x11-xkb-utils, libbsd-dev, libwayland-dev [linux-any], wayland-protocols (>= 1.9) [linux-any], libdbus-1-dev (>= 1.0) [linux-any], libsystemd-dev [linux-any], libmirclient-dev (>= 0.13.1) [!powerpc !ppc64el !s390x], mir-client-platform-mesa-dev
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 1.0
+Directory: pool/main/x/xorg-server
+Files:
+ a8ada1156575799134019017412eed68 5092 xorg-server_1.19.3-1ubuntu6.dsc
+ a7a51420874af84d90720b60de7936be 8451117 xorg-server_1.19.3.orig.tar.gz
+ c3cddc4cfb1425db74084690b35ec3a3 270574 xorg-server_1.19.3-1ubuntu6.diff.gz
+Homepage: https://www.x.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-xorg/xserver/xorg-server.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-xorg/xserver/xorg-server.git
+Package-List:
+ xdmx deb x11 optional arch=any
+ xdmx-tools deb x11 optional arch=any
+ xmir deb x11 optional arch=amd64,arm64,armhf,i386
+ xnest deb x11 optional arch=any
+ xorg-server-source deb x11 optional arch=all
+ xserver-common deb x11 optional arch=all
+ xserver-xephyr deb x11 optional arch=any
+ xserver-xorg-core deb x11 optional arch=any
+ xserver-xorg-core-udeb udeb debian-installer optional arch=any
+ xserver-xorg-dev deb x11 optional arch=any
+ xserver-xorg-legacy deb x11 extra arch=any
+ xserver-xorg-xmir deb x11 optional arch=all
+ xvfb deb x11 optional arch=any
+ xwayland deb x11 optional arch=linux-any
+Checksums-Sha1:
+ d09fd3b930f002985461d54245669432ddd9a414 5092 xorg-server_1.19.3-1ubuntu6.dsc
+ 30009ac9da414389afc30b5d61576a793778b639 8451117 xorg-server_1.19.3.orig.tar.gz
+ ee48b0b8851e2607b82c4bd0e827e090db636d69 270574 xorg-server_1.19.3-1ubuntu6.diff.gz
+Checksums-Sha256:
+ ae9c650fba4979f3e4282d3ceed89f011ce7f4c35e0db8582989f3ba462af6da 5092 xorg-server_1.19.3-1ubuntu6.dsc
+ 8f93b98f1ac9fbd87515bfe329a069b48bbec98e5329584ab5fbf759a0953b8d 8451117 xorg-server_1.19.3.orig.tar.gz
+ a3fd8ac1d0546f9b4842f1ba8c02e7df527bcbfa4a72288982ffb7fd0b6b51dc 270574 xorg-server_1.19.3-1ubuntu6.diff.gz
+

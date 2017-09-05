@@ -7,7 +7,7 @@ ConditionPathExists=/bin/setupcon
 
 [Service]
 Type=oneshot
-ExecStart=/etc/init.d/keyboard-setup.sh start
+ExecStart=/lib/console-setup/keyboard-setup.sh
 RemainAfterExit=yes
 
 [Install]

@@ -3,7 +3,6 @@
 # Provides:          keyboard-setup.sh
 # Required-Start:    mountkernfs
 # Required-Stop:
-# Should-Start:      keymap udev
 # X-Start-Before:    checkroot
 # Default-Start:     S
 # Default-Stop:
@@ -37,24 +36,11 @@ if [ -f /bin/setupcon ]; then
                 }
             fi
 	    log_action_begin_msg "Setting up keyboard layout"
-            if \
-                [ -x /etc/console-setup/cached_setup_keyboard.sh ] \
-                    && /etc/console-setup/cached_setup_keyboard.sh
-            then
+            if /lib/console-setup/keyboard-setup.sh; then
 	        log_action_end_msg 0
-            else
-                if [ -f /etc/default/locale ]; then
-                    # In order to permit auto-detection of the charmap when
-                    # console-setup-mini operates without configuration file.
-                    . /etc/default/locale
-                    export LANG
-                fi
-                if setupcon -k; then
-	            log_action_end_msg 0
-	        else
-	            log_action_end_msg $?
-	        fi
-            fi
+	    else
+	        log_action_end_msg $?
+	    fi
 	    ;;
         *)
             echo 'Usage: /etc/init.d/keyboard-setup {start|reload|restart|force-reload|stop|status}'

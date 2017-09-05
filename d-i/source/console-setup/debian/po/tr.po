@@ -28,8 +28,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2014-07-14 18:35-0700\n"
-"PO-Revision-Date: 2016-02-12 14:46+0200\n"
+"POT-Creation-Date: 2017-08-07 10:00-0400\n"
+"PO-Revision-Date: 2016-07-25 23:45+0300\n"
 "Last-Translator: Mert Dirik <mertdirik@gmail.com>\n"
 "Language-Team: Debian L10N Turkish\n"
 "Language: tr\n"
@@ -960,12 +960,12 @@ msgstr "Brezilya dili"
 msgid "British English"
 msgstr "Britanya İngilizcesi"
 
-# console-keymaps-acorn, Bulgarian
+# console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
-msgid "Bulgarian"
-msgstr "Bulgarca"
+msgid "Bulgarian (BDS layout)"
+msgstr "Bulgarca (BDS düzeni)"
 
 # console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
@@ -973,6 +973,12 @@ msgstr "Bulgarca"
 #: ../keyboard-configuration.templates:16001
 msgid "Bulgarian (phonetic layout)"
 msgstr "Bulgarca (fonetik düzeni)"
+
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Burmese"
+msgstr "Burmaca"
 
 # console-keymaps-acorn, Canadian
 #. Type: select
@@ -1257,6 +1263,12 @@ msgstr "Norveççe"
 msgid "Persian"
 msgstr "Persce"
 
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Philippines"
+msgstr "Filipinler"
+
 # console-keymaps-acorn, Polish
 #. Type: select
 #. Choices
@@ -1422,8 +1434,10 @@ msgstr "Kullanılacak klavye düzeni:"
 #. Type: boolean
 #. Description
 #: ../keyboard-configuration.templates:22001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Detect keyboard layout?"
-msgstr "Klavye düzeni saptansın mı?"
+msgstr "Klavye düzeni:"
 
 #. Type: boolean
 #. Description
@@ -1433,20 +1447,22 @@ msgid ""
 "keys. If you do not want to do this, you will be able to select your "
 "keyboard layout from a list."
 msgstr ""
-"Klavye yerleşiminizin saptanmasını bir dizi tuşa basarak deneyebilirsiniz. "
-"Bunu yapmak istemiyorsanız klavye yerleşiminizi bir listeden seçebilirsiniz."
 
 #. Type: detect-keyboard
 #. Description
 #: ../keyboard-configuration.templates:23001
+#, fuzzy
+#| msgid "The default for the keyboard layout"
 msgid "Detecting your keyboard layout"
-msgstr "Klavye yerleşiminiz saptanıyor"
+msgstr "Öntanımlı klavye düzeni"
 
 #. Type: note
 #. Description
 #: ../keyboard-configuration.templates:24001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Keyboard layout detection complete"
-msgstr "Klavye yerleşimi saptama tamamlandı"
+msgstr "Klavye düzeni:"
 
 #. Type: note
 #. Description
@@ -1456,17 +1472,3 @@ msgid ""
 "\"${LAYOUT}\". If this is not correct, you can go back and select your "
 "layout from the full list instead."
 msgstr ""
-"Dokunduğunuz tuşlara göre klavye yerleşiminiz \"${LAYOUT}\" olarak "
-"görünüyor. Bu doğru değilse geri gidip yerleşiminizi tam listeden "
-"seçebilirsiniz."
-
-# console-keymaps-acorn, Bulgarian (phonetic layout)
-#, fuzzy
-#~ msgid "Bulgarian (BDS layout)"
-#~ msgstr "Bulgarca (fonetik düzeni)"
-
-#~ msgid "Burmese"
-#~ msgstr "Burmaca"
-
-#~ msgid "Philippines"
-#~ msgstr "Filipinler"

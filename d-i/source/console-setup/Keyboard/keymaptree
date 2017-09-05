@@ -23,7 +23,7 @@ output=''
 models=''
 useonly="$(< keymaptree.use grep -v '^#' | xargs | sed 's/ /,/g')"
 skip=''
-names='./KeyboardNames.pl'
+names='KeyboardNames.pl'
 
 while [ "$1" ]; do
     case "$1" in
@@ -53,7 +53,7 @@ Legal options are:
                     (comma-separated)
 -skip               Exclude these keymaps from the decision tree
                     (comma-separated)
--names              Use this file instead of ./KeyboardNames.pl
+-names              Use this file instead of KeyboardNames.pl
 EOF
 	    exit 0
 	    ;;

@@ -280,6 +280,13 @@ Bootloader-sets-root: yes
 DTB-Kernel-Version: 3.11
 DTB-Id: omap4-panda-es.dtb
 
+Machine: QCT APQ8064 CDP
+Kernel-Flavors: link-sbc-apq8064
+Method: android
+Android-Boot-Device: /dev/disk/by-partlabel/boot
+Required-Packages: abootimg
+Bootloader-sets-root: yes
+
 Machine: QNAP TS-109/TS-209
 Kernel-Flavors: orion5x
 Machine-Id: 1565

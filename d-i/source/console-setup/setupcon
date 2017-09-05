@@ -450,7 +450,7 @@ if which uname >/dev/null; then
         *Linux*) kernel=linux ;;
         *FreeBSD*) kernel=freebsd ;;
         *)
-            echo 'Unknown kernel (only Linux and FreeBSD are supported).' >&2
+            echo 'setupcon: Unknown kernel (only Linux and FreeBSD are supported).' >&2
             exit 1
             ;;
     esac
@@ -459,7 +459,7 @@ fi
 # do_save
 if [ -n "$do_save" ]; then
     if [ ! -d /usr/share ]; then
-        echo It seems /usr is not mounted.  Will not save files in /etc. >&2
+        echo setupcon: It seems /usr is not mounted.  Will not save files in /etc. >&2
         do_save=''
     fi
 fi
@@ -539,7 +539,7 @@ if [ "$do_font" ]; then
             elif which setfont >/dev/null ; then
                 do_font=linuxkbd
             else
-                echo "Neither setfont nor consolechars is accessible. No font will be configured." >&2
+                echo "setupcon: Neither setfont nor consolechars is accessible. No font will be configured." >&2
                 do_font=''
             fi
             ;;
@@ -547,7 +547,7 @@ if [ "$do_font" ]; then
             if which vidcontrol >/dev/null ; then
                 do_font=freebsd
             else
-                echo "vidcontrol is not accessible. No font will be configured." >&2
+                echo "setupcon: vidcontrol is not accessible. No font will be configured." >&2
                 do_font=''
             fi
             ;;
@@ -613,7 +613,7 @@ if [ "$CHARMAP" != UTF-8 -a "$kernel" = freebsd ]; then
         report "Ignoring the CODESET specification ($CODESET)."
         CODESET=`findfile share/syscons/scrnmaps ${CHARMAP}_*.scm`
         if [ -n "$do_font" -a -z "$CODESET" ]; then
-            echo Unsupported charmap $CHARMAP >&2
+            echo setupcon: Unsupported charmap $CHARMAP >&2
             exit 1
         fi
         CODESET=${CODESET%%*/}
@@ -677,6 +677,7 @@ CONSOLE_MAP=${CONSOLE_MAP:-$ACM}
 FONTFILES=''
 if [ "$FONT" ]; then
     for f in $FONT; do
+        FONTFILES="$FONTFILES `findfile $fontdir $f`"
         RES=`findfile $fontdir $f`
         if [ -z "$RES" ]; then
             fdec="${f%.gz}"
@@ -716,7 +717,7 @@ with 8 pixel width matrix.  Please install the setfont utility from the package
             ;;
     esac
     if [ -n "$do_font" -a -z "$FONTFILES" ]; then
-        echo Unable to find the required font.  No font will be configured. >&2
+        echo setupcon: Unable to find the required font.  No font will be configured. >&2
         do_font=''
     fi
 fi
@@ -732,7 +733,7 @@ if \
     [ -n "$do_kbd$do_save$savekbdfile$setupdir$do_printonly" \
          -a -z "$XKBMODEL" ]
 then
-    echo The keyboard model is unknown, assuming \'pc105\'.  Keyboard may be configured incorrectly. >&2
+    echo setupcon: The keyboard model is unknown, assuming \'pc105\'.  Keyboard may be configured incorrectly. >&2
     XKBMODEL='pc105'
 fi
 [ -n "$XKBMODEL" -o -z "$savekbdfile" ] || exit 1
@@ -750,7 +751,7 @@ if [ "$do_kbd" ]; then
             if which loadkeys >/dev/null; then
                 do_kbd=linux
             else
-                echo loadkeys is not accessible. Keyboard will not be configured.>&2
+                echo setupcon: loadkeys is not accessible. Keyboard will not be configured.>&2
                 do_kbd=''
             fi
             ;;
@@ -758,7 +759,7 @@ if [ "$do_kbd" ]; then
             if which kbdcontrol >/dev/null; then
                 do_kbd=freebsd
             else
-                echo kbdcontrol is not accessible. Keyboard will not be configured.>&2
+                echo setupcon: kbdcontrol is not accessible. Keyboard will not be configured.>&2
                 do_kbd=''
             fi
             ;;
@@ -802,7 +803,7 @@ esac
 case "$backspace" in
     del) report BackSpace is ^? ;;
     bs) report BackSpace is ^h ;;
-    *) echo Wrong BackSpace option >&2 ;;
+    *) echo setupcon: Wrong BackSpace option >&2 ;;
 esac
 
 # do_term
@@ -820,10 +821,10 @@ fi
 # cached
 case "$kernel" in
     linux)
-        cached=/etc/console-setup/cached$VARIANT.kmap.gz
+        cached=/etc/console-setup/cached_${CHARMAP}_$backspace$VARIANT.kmap.gz
         ;;
     freebsd)
-        cached=/etc/console-setup/cached$VARIANT.kbd
+        cached=/etc/console-setup/cached_${CHARMAP}_$backspace$VARIANT.kbd
         ;;
 esac
 
@@ -839,12 +840,12 @@ fi
 [ "$XKBMODEL" ] || savekbdfile=''
 if [ "$kernel" = linux ] && ! which gzip >/dev/null; then
     savekbdfile=''
-    echo gzip is not accessible.  Will not save cached keyboard map. >&2
+    echo setupcon: gzip is not accessible.  Will not save cached keyboard map. >&2
 fi
 
 # KMAP
 if [ -n "$KMAP" -a ! -f "$KMAP" ]; then
-    echo $KMAP does not exist. >&2
+    echo setupcon: $KMAP does not exist. >&2
     KMAP=''
 fi
 
@@ -859,7 +860,7 @@ for i in /etc/console-setup $CONSOLE_MAP $FONTFILES $FONTMAPFILE $savekbdfile; d
             ! touch /etc/console-setup/cached_rwtest 2>/dev/null \
                 || ! rm /etc/console-setup/cached_rwtest 2>/dev/null
         then
-            echo /etc/console-setup is not writable.  No files will be saved there. >&2
+            echo setupcon: /etc/console-setup is not writable.  No files will be saved there. >&2
             do_save=''
         fi
         break
@@ -894,7 +895,7 @@ fi
 if [ "$savekbdfile" ]; then
     case "$kernel" in
         linux)
-            tempfile || { echo Can not create temporary file >&2; exit 1; }
+            tempfile || { echo setupcon: Can not create temporary file >&2; exit 1; }
             {
 	        $installdir/bin/ckbcomp -backspace "$backspace" $acm_option \
                     $rules_option -model "$XKBMODEL" \
@@ -946,7 +947,7 @@ $commands_f
 
 if ls /dev/fb* >/dev/null 2>/dev/null; then
     for i in /dev/vcs[0-9]*; do
-        {
+        { :
             $commands_f
         } < /dev/tty\${i#/dev/vcs} > /dev/tty\${i#/dev/vcs}
     done
@@ -955,7 +956,7 @@ fi
 mkdir -p /run/console-setup
 > /run/console-setup/font-loaded
 for i in /dev/vcs[0-9]*; do
-    {
+    { :
 $commands_t
     } < /dev/tty\${i#/dev/vcs} > /dev/tty\${i#/dev/vcs}
 done
@@ -963,7 +964,7 @@ EOF
         cat >/etc/console-setup/cached_setup_terminal.sh <<EOF
 #!/bin/sh
 
-{
+{ :
 $commands_t
 } < /dev/tty\${1#vcs} > /dev/tty\${1#vcs}
 EOF
@@ -980,7 +981,7 @@ fi
 
 if [ "$do_check" ]; then
     if ! test_console; then
-	echo We are not on the console, the console is left unconfigured. >&2
+	echo setupcon: We are not on the console, the console is left unconfigured. >&2
 	exit 0
     fi
 fi
@@ -1079,6 +1080,46 @@ if [ "$do_term" ]; then
     fi
 fi
 
+# Setup the system beep
+case "$do_term" in
+    linux*)
+        SETTERM=''
+        if [ -n "$BEEP" ]; then
+            # we use hardcoded ESC sequences instead of setterm
+            # because we TERM is unset in scripts run by udev
+            case "$BEEP" in
+                default) ;;
+                standard)
+                    # --bfreq 750 --blength 100
+                    SETTERM='\033[11;100]\033[10;750]' ;;
+                short)
+                    # --bfreq 750 --blength 40
+                    SETTERM='\033[11;40]\033[10;750]' ;;
+                shortest)
+                    # --bfreq 750 --blength 9
+                    SETTERM='\033[11;9]\033[10;750]' ;;
+                polite)
+                    # --bfreq 130 --blength 9
+                    SETTERM='\033[11;9]\033[10;130]' ;;
+                attention)
+                    # --bfreq 130 --blength 600
+                    SETTERM='\033[11;600]\033[10;130]' ;;
+                annoying)
+                    # --bfreq 550 --blength 1000
+                    SETTERM='\033[11;1000]\033[10;550]' ;;
+                off)
+                    # --blength 0
+                    SETTERM='\033[11;0]' ;;
+                *)
+                    echo setupcon: Unrecognised setting BEEP="$BEEP" >&2 ;;
+            esac
+
+            if [ "$SETTERM" ]; then
+                run out FORK printf "$SETTERM"
+            fi
+        fi
+        ;;
+esac
 
 ###########################################################################
 ### INPUT
@@ -1130,7 +1171,7 @@ if [ "$KMAP" ]; then
         freebsd) run in '' kbdcontrol -l "$KMAP" ;;
     esac
 else
-    tempfile || { echo Can not create temporary file >&2; exit 1; }
+    tempfile || { echo setupcon: Can not create temporary file >&2; exit 1; }
     case "$do_kbd" in
         linux)
 	    $installdir/bin/ckbcomp -backspace "$backspace" $acm_option \
@@ -1242,7 +1283,7 @@ if [ "$setupdir" ]; then
     echo '#!/bin/sh' >"$setupdir"/bin/setupcon
     echo '# A micro-version of setupcon with static configuration.' >>"$setupdir"/bin/setupcon
     chmod +x "$setupdir"/bin/setupcon
-    tempfile || { echo Can not create temporary file >&2; exit 1; }
+    tempfile || { echo setupcon: Can not create temporary file >&2; exit 1; }
     printf "%s" "$SETUP" |
     while read -r cmd args; do
         which "$cmd" >>$TMPFILE || true

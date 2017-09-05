@@ -59,9 +59,8 @@ sub execute {
 }
 
 sub ensuredir {
-    if (! -d $_[0]) {
-	mkdir $_[0] or die "$0: $_[0]: $!\n";
-    }
+    mkdir $_[0];
+    die "$0: $_[0]: $!\n" if (! -d $_[0]);
 }
 
 sub checkrename {
@@ -110,6 +109,12 @@ for my $layout (values %KeyboardNames::layouts) {
 	    } else {
 		$actual_variant = "latin,$variant";
 	    }
+	} elsif ($actual_layout eq 'lt,lt') {
+	    if ($variant eq 'us') {
+		$actual_variant = "us,basic";
+	    } else {
+		$actual_variant = "$variant,us";
+	    }
 	} elsif ($actual_layout =~ /,/) {
 	    $actual_variant = ",$variant";
 	} else {
@@ -117,16 +122,21 @@ for my $layout (values %KeyboardNames::layouts) {
 	}
         $actual_variant = "'$actual_variant'";
 	if (! -f "$dir/$model-$layout:$variant") {
-	    execute ("./ckbcomp $freebsd -compact -I. -I${xkbdir} -rules xorg"
+            my $cmd = "./ckbcomp $freebsd -compact -I. -I${xkbdir} -rules xorg"
 		     ." -model $model"
 		     ." -layout $actual_layout -variant $actual_variant"
 		     ." >$dir/$model-$layout:$variant.new"
-                     ." 2>>ckbcomp.log")
-		and die "$0: ckbcomp failed\n" if (! -f "$dir/$model-$layout:$variant.new");
+                     ." 2>>ckbcomp.log";
+            execute ("echo '" .$cmd ."' >>ckbcomp.log");
+	    execute ($cmd) and die "$0: ckbcomp failed\n" if (! -f "$dir/$model-$layout:$variant.new");
 	    checkrename "$dir/$model-$layout:$variant.new", "$dir/$model-$layout:$variant";
 	}
 	if (-f "$dir/$model-$layout:$variant") {
-            if (!$supported || index($supported, " $layout($variant) ") ge 0) {
+            if ($supported) {
+                if (index($supported, " $layout($variant) ") ge 0) {
+                    read_temp_kmap "$layout:$variant";
+                }
+            } else {
                 read_temp_kmap "$layout:$variant";
             }
 	}

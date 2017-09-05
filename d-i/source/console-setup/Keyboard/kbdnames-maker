@@ -59,12 +59,12 @@ for my $mo (</usr/share/locale/*/LC_MESSAGES/xkeyboard-config.mo>) {
     }
     for my $layout (sort keys %KeyboardNames::layouts) {
 	my $name = $KeyboardNames::layouts{$layout};
-	my $local_layout;
-	if ($layout eq 'Switzerland') {
-	    $local_layout = $iso3166->get($layout);
-	} else {
-	    $local_layout = $d->get($layout);
-	}
+	my $local_layout = $d->get($layout);
+        if ($layout eq 'Switzerland') {
+            $local_layout = $iso3166->get($layout);
+        } else {
+            $local_layout = $d->get($layout);
+        }
 	print "$lang*layout*$name*$local_layout\n";
 	print "$lang*variant*$name**$local_layout\n";
 	for my $variant (sort keys %{$KeyboardNames::variants{$name}}) {

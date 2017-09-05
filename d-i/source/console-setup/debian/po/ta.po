@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2014-07-14 18:35-0700\n"
+"POT-Creation-Date: 2017-08-07 10:00-0400\n"
 "PO-Revision-Date: 2015-05-09 16:28+0630\n"
 "Last-Translator: Dr.T.Vasudevan <drtvasudevan@gmail.com>\n"
 "Language-Team: Tamil <<gnome-tamil-translation@googlegroups.com>>\n"
@@ -939,12 +939,13 @@ msgstr "ப்ரேசிலியன்"
 msgid "British English"
 msgstr "ப்ரிட்டிஷ் ஆங்கிலம்"
 
-# console-keymaps-acorn, Bulgarian
+# console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
-msgid "Bulgarian"
-msgstr "பல்கேரியன் "
+#, fuzzy
+msgid "Bulgarian (BDS layout)"
+msgstr "பல்கேரியன்  (phonetic அமைப்பு)"
 
 # console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
@@ -952,6 +953,12 @@ msgstr "பல்கேரியன் "
 #: ../keyboard-configuration.templates:16001
 msgid "Bulgarian (phonetic layout)"
 msgstr "பல்கேரியன்  (phonetic அமைப்பு)"
+
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Burmese"
+msgstr "பர்மீஸ்"
 
 # console-keymaps-acorn, Canadian
 #. Type: select
@@ -1234,6 +1241,12 @@ msgstr "நார்வேஜியன்"
 msgid "Persian"
 msgstr "பெர்சியன்"
 
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Philippines"
+msgstr "பிலிபைன்ஸ்"
+
 # console-keymaps-acorn, Polish
 #. Type: select
 #. Choices
@@ -1398,8 +1411,10 @@ msgstr "பயன் படுத்த விசைப் பலகை அம�
 #. Type: boolean
 #. Description
 #: ../keyboard-configuration.templates:22001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Detect keyboard layout?"
-msgstr "விசைப்பலகையின் அமைப்பைக் கண்டறியவா?"
+msgstr "விசைப்பலகை இடஅமைவு:"
 
 #. Type: boolean
 #. Description
@@ -1413,14 +1428,18 @@ msgstr ""
 #. Type: detect-keyboard
 #. Description
 #: ../keyboard-configuration.templates:23001
+#, fuzzy
+#| msgid "The default for the keyboard layout"
 msgid "Detecting your keyboard layout"
-msgstr "விசைப்பலகையின் அமைப்புக் கண்டறியப்படுகிறது"
+msgstr "முன்னிருப்பு விசைப்பலகை இடஅமைவு "
 
 #. Type: note
 #. Description
 #: ../keyboard-configuration.templates:24001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Keyboard layout detection complete"
-msgstr "விசைப்பலகையின் அமைப்பு கண்டறிதல் முடிவடைந்தது"
+msgstr "விசைப்பலகை இடஅமைவு:"
 
 #. Type: note
 #. Description
@@ -1430,14 +1449,3 @@ msgid ""
 "\"${LAYOUT}\". If this is not correct, you can go back and select your "
 "layout from the full list instead."
 msgstr ""
-
-# console-keymaps-acorn, Bulgarian (phonetic layout)
-#, fuzzy
-#~ msgid "Bulgarian (BDS layout)"
-#~ msgstr "பல்கேரியன்  (phonetic அமைப்பு)"
-
-#~ msgid "Burmese"
-#~ msgstr "பர்மீஸ்"
-
-#~ msgid "Philippines"
-#~ msgstr "பிலிபைன்ஸ்"

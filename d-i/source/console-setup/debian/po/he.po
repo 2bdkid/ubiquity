@@ -33,7 +33,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer_packages_po_sublevel1_he\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2014-07-14 18:35-0700\n"
+"POT-Creation-Date: 2017-08-07 10:00-0400\n"
 "PO-Revision-Date: 2015-08-19 22:08+0200\n"
 "Last-Translator: Lior Kaplan <kaplan@debian.org>\n"
 "Language-Team: Hebrew <debian-hebrew-common@lists.alioth.debian.org>\n"
@@ -938,12 +938,13 @@ msgstr "ברזילאית"
 msgid "British English"
 msgstr "אנגלית בריטית"
 
-# console-keymaps-acorn, Bulgarian
+# console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
-msgid "Bulgarian"
-msgstr "בולגרית"
+#, fuzzy
+msgid "Bulgarian (BDS layout)"
+msgstr "בולגרית (פריסה פונטית)"
 
 # console-keymaps-acorn, Bulgarian (phonetic layout)
 #. Type: select
@@ -951,6 +952,12 @@ msgstr "בולגרית"
 #: ../keyboard-configuration.templates:16001
 msgid "Bulgarian (phonetic layout)"
 msgstr "בולגרית (פריסה פונטית)"
+
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Burmese"
+msgstr "בורמזית"
 
 # console-keymaps-acorn, Canadian
 #. Type: select
@@ -1234,6 +1241,12 @@ msgstr "נורבגית"
 msgid "Persian"
 msgstr "פרסית"
 
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Philippines"
+msgstr "פיליפינית"
+
 # console-keymaps-acorn, Polish
 #. Type: select
 #. Choices
@@ -1398,8 +1411,10 @@ msgstr "מפת תווים לשימוש:"
 #. Type: boolean
 #. Description
 #: ../keyboard-configuration.templates:22001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Detect keyboard layout?"
-msgstr "האם לזהות פריסת מקלדת?"
+msgstr "פריסת מקלדת:"
 
 #. Type: boolean
 #. Description
@@ -1409,20 +1424,22 @@ msgid ""
 "keys. If you do not want to do this, you will be able to select your "
 "keyboard layout from a list."
 msgstr ""
-"באפשרותך לקבוע את פריסת המקלדת על ידי הקשה על סדרת מקשים. אם אינך מעוניין "
-"לעשות זאת, באפשרותך לבחור את פריסת המקלדת שלך מתוך רשימה."
 
 #. Type: detect-keyboard
 #. Description
 #: ../keyboard-configuration.templates:23001
+#, fuzzy
+#| msgid "The default for the keyboard layout"
 msgid "Detecting your keyboard layout"
-msgstr "פריסת המקלדת שלך מזוהה"
+msgstr "ברירת המחדל עבור פריסת המקלדת"
 
 #. Type: note
 #. Description
 #: ../keyboard-configuration.templates:24001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Keyboard layout detection complete"
-msgstr "זיהוי פריסת המקלדת הושלם"
+msgstr "פריסת מקלדת:"
 
 #. Type: note
 #. Description
@@ -1432,16 +1449,3 @@ msgid ""
 "\"${LAYOUT}\". If this is not correct, you can go back and select your "
 "layout from the full list instead."
 msgstr ""
-"בהתבסס על המקשים שהקשת, פריסת המקלדת שלך היא \"${LAYOUT}\". אם החלטה זו "
-"שגויה, באפשרותך לחזור ולבחור את פריסת המקלדת שלך מתוך הרשימה המלאה."
-
-# console-keymaps-acorn, Bulgarian (phonetic layout)
-#, fuzzy
-#~ msgid "Bulgarian (BDS layout)"
-#~ msgstr "בולגרית (פריסה פונטית)"
-
-#~ msgid "Burmese"
-#~ msgstr "בורמזית"
-
-#~ msgid "Philippines"
-#~ msgstr "פיליפינית"

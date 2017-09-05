@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2014-07-14 18:35-0700\n"
+"POT-Creation-Date: 2017-08-07 10:00-0400\n"
 "PO-Revision-Date: 2016-03-03 21:22+0000\n"
 "Last-Translator:  Miguel Figueiredo <elmig@debianpt.org>\n"
 "Language-Team:  Portuguese <traduz@debianpt.org>\n"
@@ -944,14 +944,20 @@ msgstr "Inglês Britânico"
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
-msgid "Bulgarian"
-msgstr "Búlgaro"
+msgid "Bulgarian (BDS layout)"
+msgstr "Búlgaro (layout BDS)"
 
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
 msgid "Bulgarian (phonetic layout)"
 msgstr "Búlgaro (layout phonetic)"
+
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
+msgid "Burmese"
+msgstr "Birmanês"
 
 #. Type: select
 #. Choices
@@ -1220,6 +1226,12 @@ msgstr "Persa"
 #. Type: select
 #. Choices
 #: ../keyboard-configuration.templates:16001
+msgid "Philippines"
+msgstr "Filipino"
+
+#. Type: select
+#. Choices
+#: ../keyboard-configuration.templates:16001
 msgid "Polish"
 msgstr "Polaco"
 
@@ -1370,8 +1382,10 @@ msgstr "Mapa de teclado a utilizar:"
 #. Type: boolean
 #. Description
 #: ../keyboard-configuration.templates:22001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Detect keyboard layout?"
-msgstr "Detectar disposição do teclado?"
+msgstr "Disposição do teclado:"
 
 #. Type: boolean
 #. Description
@@ -1381,21 +1395,22 @@ msgid ""
 "keys. If you do not want to do this, you will be able to select your "
 "keyboard layout from a list."
 msgstr ""
-"Pode tentar que a disposição do seu teclado seja detectada pressionando uma "
-"série de teclas. Se não quiser fazer isto, poderá escolher a disposição do "
-"seu teclado através de uma lista."
 
 #. Type: detect-keyboard
 #. Description
 #: ../keyboard-configuration.templates:23001
+#, fuzzy
+#| msgid "The default for the keyboard layout"
 msgid "Detecting your keyboard layout"
-msgstr "A detectar a disposição do seu teclado"
+msgstr "O predefinido para a disposição do teclado"
 
 #. Type: note
 #. Description
 #: ../keyboard-configuration.templates:24001
+#, fuzzy
+#| msgid "Keyboard layout:"
 msgid "Keyboard layout detection complete"
-msgstr "Detecção da disposição do teclado completa"
+msgstr "Disposição do teclado:"
 
 #. Type: note
 #. Description
@@ -1405,15 +1420,3 @@ msgid ""
 "\"${LAYOUT}\". If this is not correct, you can go back and select your "
 "layout from the full list instead."
 msgstr ""
-"Baseado nas teclas que pressionou, a disposição do seu teclado aparenta ser "
-"\"${LAYOUT}\". Se não está correto, pode voltar e escolher a disposição do "
-"seu teclado na lista."
-
-#~ msgid "Bulgarian (BDS layout)"
-#~ msgstr "Búlgaro (layout BDS)"
-
-#~ msgid "Burmese"
-#~ msgstr "Birmanês"
-
-#~ msgid "Philippines"
-#~ msgstr "Filipino"

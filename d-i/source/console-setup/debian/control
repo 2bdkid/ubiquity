@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
 XSBC-Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
 Uploaders: Anton Zinoviev <zinoviev@debian.org>, Christian Perrier <bubulle@debian.org>
-Build-Depends-Indep: xkb-data (>= 1.6), keymapper (>= 0.5.3-7), locales, sharutils
+Build-Depends-Indep: xkb-data (>= 1.6), keymapper (>= 0.5.3-7), locales-all, sharutils
 Build-Depends: perl, debhelper (>= 9), po-debconf, libxml-parser-perl, bdfresize, liblocale-gettext-perl, dh-systemd
 Standards-Version: 3.9.1
 XS-Debian-Vcs-Browser: https://anonscm.debian.org/cgit/d-i/console-setup.git
@@ -15,7 +15,8 @@ Package: keyboard-configuration
 Section: utils
 Architecture: all
 Multi-Arch: foreign
-Depends: debconf (>= 1.5.34), ${misc:Depends}, liblocale-gettext-perl
+Depends: ${misc:Depends}, liblocale-gettext-perl
+Pre-Depends: debconf (>= 1.5.34)
 Breaks: console-setup (<< 1.71), console-setup-mini (<< 1.47)
 Replaces: console-setup (<< 1.47), console-setup-mini (<< 1.47)
 Description: system-wide keyboard preferences
@@ -28,7 +29,8 @@ Package: console-setup
 Section: utils
 Architecture: all
 Multi-Arch: foreign
-Depends: debconf (>= 1.5.34), console-setup-linux, xkb-data (>= 0.9), keyboard-configuration (= ${source:Version}), initramfs-tools (>= 0.85eubuntu12) | linux-initramfs-tool, ${misc:Depends}
+Pre-Depends: debconf (>= 1.5.34)
+Depends: console-setup-linux | console-setup-freebsd | hurd, xkb-data (>= 0.9), keyboard-configuration (= ${source:Version}), initramfs-tools (>= 0.85eubuntu12) | linux-initramfs-tool, ${misc:Depends}
 Suggests: lsb-base (>= 3.0-6), locales
 Conflicts: console-setup-mini
 Breaks: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
@@ -51,7 +53,7 @@ Priority: extra
 Architecture: all
 Multi-Arch: foreign
 Recommends: kbd | console-tools
-Depends: console-setup-linux, debconf (>= 0.5) | debconf-2.0, keyboard-configuration (= ${source:Version}), ${misc:Depends}
+Depends: console-setup-linux | console-setup-freebsd, debconf (>= 0.5) | debconf-2.0, keyboard-configuration (= ${source:Version}), ${misc:Depends}
 Suggests: lsb-base (>= 3.0-6)
 Conflicts: console-setup
 Breaks: lsb-core (<< 2.0-6), lsb (<< 2.0-6), lsb-base (<< 3.0-6)
@@ -71,7 +73,7 @@ Section: utils
 Priority: optional
 Architecture: all
 Multi-Arch: foreign
-Depends: kbd (>= 1.15-1ubuntu3), keyboard-configuration (= ${source:Version}), ${misc:Depends}, init-system-helpers (>= 1.29~)
+Depends: kbd (>= 0.99-12) | console-tools (>= 1:0.2.3-16), keyboard-configuration (= ${source:Version}), ${misc:Depends}, init-system-helpers (>= 1.29~) | initscripts
 Suggests: console-setup
 Conflicts: console-setup-freebsd
 Breaks: console-terminus, console-cyrillic (<= 0.9-11), console-setup (<< 1.71), keyboard-configuration (<< 1.138)
