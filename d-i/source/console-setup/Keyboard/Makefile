@@ -87,5 +87,5 @@ maintainer-clean .PHONY : $~maintainer-clean
 $~maintainer-clean: $~clean
 	cd $(kbddir) && ./xmlreader $(xkbdir)/rules/xorg.xml >KeyboardNames.pl
 
-$./KeyboardNames.pl:
+KeyboardNames.pl $./KeyboardNames.pl:
 	$(kbddir)/xmlreader $(xkbdir)/rules/xorg.xml >$@

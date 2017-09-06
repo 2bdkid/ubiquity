@@ -1,3 +1,17 @@
+console-setup (1.166ubuntu4) artful; urgency=medium
+
+  * Keyboard/Makefile: Add a rule to make KeyboardNames.pl, needed by ubiquity
+    (see Debian Bug#874474)
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 06 Sep 2017 13:39:01 +0100
+
+console-setup (1.166ubuntu3) artful; urgency=medium
+
+  * debian/keyboard-configuration.config: re-lower the priority for the layout
+    question that got garbled in the merge.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 05 Sep 2017 14:58:49 -0400
+
 console-setup (1.166ubuntu2) artful; urgency=medium
 
   * debian/control: drop console-setup-freebsd: we don't keep it around since

@@ -31,6 +31,131 @@ Checksums-Sha256:
  3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8 31767 automat_0.6.0.orig.tar.gz
  0b94086d0bea5eefcb4bb41e90c1b08938d906dd8a567baa4b6484a3c6a01449 2732 automat_0.6.0-1.debian.tar.xz
 
+Package: bind9
+Binary: bind9, bind9utils, bind9-doc, host, bind9-host, libbind-dev, libbind9-140, libdns162, libirs141, libisc160, liblwres141, libisccc140, libisccfg140, dnsutils, lwresd, libbind-export-dev, libdns-export162, libdns-export162-udeb, libisc-export160, libisc-export160-udeb, libisccfg-export140, libisccc-export140, libisccc-export140-udeb, libisccfg-export140-udeb, libirs-export141, libirs-export141-udeb
+Version: 1:9.10.3.dfsg.P4-12.6ubuntu1
+Priority: important
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Build-Depends: debhelper (>= 9), dh-exec, libkrb5-dev, libssl1.0-dev, libtool, bison, libdb-dev (>> 4.6), libjson-c-dev, libldap2-dev, libxml2-dev, libcap2-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], libgeoip-dev (>= 1.4.6.dfsg-5), dpkg-dev (>= 1.16.1~), python3, dh-systemd, autotools-dev, dh-autoreconf
+Build-Conflicts: libdb4.2-dev
+Architecture: any all
+Standards-Version: 3.9.7
+Format: 3.0 (quilt)
+Directory: pool/main/b/bind9
+Files:
+ a4adb67759f9838684006799c927d2bd 3866 bind9_9.10.3.dfsg.P4-12.6ubuntu1.dsc
+ 909aa9f0c48b7c2d0d604ea78d9fc607 8641072 bind9_9.10.3.dfsg.P4.orig.tar.gz
+ e859f745c12cd83aef8fc3f1ea8c1790 92824 bind9_9.10.3.dfsg.P4-12.6ubuntu1.debian.tar.xz
+Uploaders: Michael Gilbert <mgilbert@debian.org>, Robie Basak <robie.basak@canonical.com>
+Vcs-Browser: https://anonscm.debian.org/git/pkg-bind/pkg-bind.git
+Vcs-Git: git://anonscm.debian.org/git/pkg-bind/pkg-bind.git
+Package-List:
+ bind9 deb net optional arch=any
+ bind9-doc deb doc optional arch=all
+ bind9-host deb net standard arch=any
+ bind9utils deb net optional arch=any
+ dnsutils deb net standard arch=any
+ host deb net standard arch=all
+ libbind-dev deb libdevel optional arch=any
+ libbind-export-dev deb libdevel optional arch=any
+ libbind9-140 deb libs standard arch=any
+ libdns-export162 deb libs optional arch=any
+ libdns-export162-udeb udeb debian-installer optional arch=any
+ libdns162 deb libs standard arch=any
+ libirs-export141 deb libs optional arch=any
+ libirs-export141-udeb udeb debian-installer optional arch=any
+ libirs141 deb libs standard arch=any
+ libisc-export160 deb libs optional arch=any
+ libisc-export160-udeb udeb debian-installer optional arch=any
+ libisc160 deb libs standard arch=any
+ libisccc-export140 deb libs optional arch=any
+ libisccc-export140-udeb udeb debian-installer optional arch=any
+ libisccc140 deb libs optional arch=any
+ libisccfg-export140 deb libs optional arch=any
+ libisccfg-export140-udeb udeb debian-installer optional arch=any
+ libisccfg140 deb libs standard arch=any
+ liblwres141 deb libs standard arch=any
+ lwresd deb net optional arch=any
+Checksums-Sha1:
+ 8c76da5b22a94000691b5eab6b91bb32439fdbc7 3866 bind9_9.10.3.dfsg.P4-12.6ubuntu1.dsc
+ 36d20fd54a67b1fbcb65277887bf150070207210 8641072 bind9_9.10.3.dfsg.P4.orig.tar.gz
+ 40f6ebb399a40ad7ba4782f5853be6bb1a3b91e5 92824 bind9_9.10.3.dfsg.P4-12.6ubuntu1.debian.tar.xz
+Checksums-Sha256:
+ 436312651caea35c5927b0dfb35bc366bd724afdee0696ade63401504bcd4bce 3866 bind9_9.10.3.dfsg.P4-12.6ubuntu1.dsc
+ 895077c868d06eea39c1526624f2278a3b51a3358b5aa50f48a0f1c16a7ab6e6 8641072 bind9_9.10.3.dfsg.P4.orig.tar.gz
+ 8050c40951733e9cc9f5b0d5a35263acee7851a9bb5c0426761831f83fa7e2d7 92824 bind9_9.10.3.dfsg.P4-12.6ubuntu1.debian.tar.xz
+
+Package: binutils
+Binary: binutils-for-host, binutils-for-build, binutils, libbinutils, binutils-dev, binutils-multiarch, binutils-multiarch-dev, binutils-hppa64-linux-gnu, binutils-doc, binutils-source, binutils-common, binutils-x86-64-linux-gnu, binutils-i686-linux-gnu, binutils-aarch64-linux-gnu, binutils-arm-linux-gnueabihf, binutils-arm-linux-gnueabi, binutils-mips-linux-gnu, binutils-mipsel-linux-gnu, binutils-mips64el-linux-gnuabi64, binutils-powerpc64le-linux-gnu, binutils-s390x-linux-gnu, binutils-alpha-linux-gnu, binutils-hppa-linux-gnu, binutils-m68k-linux-gnu, binutils-mips64-linux-gnuabi64, binutils-powerpc-linux-gnu, binutils-powerpc-linux-gnuspe, binutils-powerpc64-linux-gnu, binutils-sh4-linux-gnu, binutils-sparc64-linux-gnu, binutils-x86-64-linux-gnux32, binutils-i686-gnu, binutils-x86-64-kfreebsd-gnu, binutils-i686-kfreebsd-gnu, binutils-mips64-linux-gnuabin32, binutils-mips64el-linux-gnuabin32
+Version: 2.29-9ubuntu1
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: autoconf (>= 2.64), dpkg-dev (>= 1.17.11), bison, flex, gettext, texinfo, dejagnu, quilt, chrpath, python3:any, file, xz-utils, lsb-release, zlib1g-dev
+Build-Conflicts: libelf-dev
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 1.0
+Directory: pool/main/b/binutils
+Files:
+ 8885dc14ffaaa07b0cda1af635b815dc 5296 binutils_2.29-9ubuntu1.dsc
+ 77a8b99de0481589a871062702df4e59 38885604 binutils_2.29.orig.tar.gz
+ 86bd03daa5716fd878a6d0e64d8d10a6 279679 binutils_2.29-9ubuntu1.diff.gz
+Uploaders: James Troup <binutils@elmo.tasta.io>
+Homepage: https://www.gnu.org/software/binutils/
+Vcs-Browser: https://code.launchpad.net/~doko/binutils/pkg-2.29-debian
+Vcs-Bzr: http://bazaar.launchpad.net/~doko/binutils/pkg-2.29-debian
+Testsuite: autopkgtest
+Testsuite-Triggers: build-essential
+Package-List:
+ binutils deb devel optional arch=any
+ binutils-aarch64-linux-gnu deb devel extra arch=arm64,amd64,i386,x32
+ binutils-alpha-linux-gnu deb devel extra arch=alpha,amd64,i386,x32
+ binutils-arm-linux-gnueabi deb devel extra arch=armel,amd64,i386,x32,arm64
+ binutils-arm-linux-gnueabihf deb devel extra arch=armhf,amd64,i386,x32,arm64
+ binutils-common deb devel optional arch=any
+ binutils-dev deb devel extra arch=any
+ binutils-doc deb doc optional arch=all
+ binutils-for-build deb devel optional arch=all
+ binutils-for-host deb devel optional arch=any
+ binutils-hppa-linux-gnu deb devel extra arch=hppa,amd64,i386,x32
+ binutils-hppa64-linux-gnu deb devel optional arch=amd64,i386,x32,hppa
+ binutils-i686-gnu deb devel extra arch=hurd-i386
+ binutils-i686-kfreebsd-gnu deb devel extra arch=kfreebsd-i386
+ binutils-i686-linux-gnu deb devel extra arch=i386
+ binutils-m68k-linux-gnu deb devel extra arch=m68k,amd64,i386,x32
+ binutils-mips-linux-gnu deb devel extra arch=mips,amd64,i386,x32
+ binutils-mips64-linux-gnuabi64 deb devel extra arch=mips64,amd64,i386,x32
+ binutils-mips64-linux-gnuabin32 deb devel extra arch=mipsn32,amd64,i386,x32
+ binutils-mips64el-linux-gnuabi64 deb devel extra arch=mips64el,amd64,i386,x32
+ binutils-mips64el-linux-gnuabin32 deb devel extra arch=mipsn32el,amd64,i386,x32
+ binutils-mipsel-linux-gnu deb devel extra arch=mipsel,amd64,i386,x32
+ binutils-multiarch deb devel extra arch=any
+ binutils-multiarch-dev deb devel extra arch=any
+ binutils-powerpc-linux-gnu deb devel extra arch=powerpc,amd64,i386,x32,ppc64el
+ binutils-powerpc-linux-gnuspe deb devel extra arch=powerpcspe,amd64,i386,x32
+ binutils-powerpc64-linux-gnu deb devel extra arch=ppc64,amd64,i386,x32,ppc64el
+ binutils-powerpc64le-linux-gnu deb devel extra arch=ppc64el,amd64,i386,x32,ppc64
+ binutils-s390x-linux-gnu deb devel extra arch=s390x,amd64,i386,x32
+ binutils-sh4-linux-gnu deb devel extra arch=sh4,amd64,i386,x32
+ binutils-source deb devel optional arch=all
+ binutils-sparc64-linux-gnu deb devel extra arch=sparc64,amd64,i386,x32
+ binutils-x86-64-kfreebsd-gnu deb devel extra arch=kfreebsd-amd64
+ binutils-x86-64-linux-gnu deb devel extra arch=amd64
+ binutils-x86-64-linux-gnux32 deb devel extra arch=x32
+ libbinutils deb devel optional arch=any
+Checksums-Sha1:
+ 0f85b5b5533aa27aa9e68315bf616c511f6c42be 5296 binutils_2.29-9ubuntu1.dsc
+ 9be8328b6c119c2daec3702b0a91fa9675cd35ab 38885604 binutils_2.29.orig.tar.gz
+ 848d66988f83583b0eb01d72de5d9204387d31ee 279679 binutils_2.29-9ubuntu1.diff.gz
+Checksums-Sha256:
+ 6d58a8f37d0030a1f94090630f96d0cf26791a838d9e14a04b5187524a024fad 5296 binutils_2.29-9ubuntu1.dsc
+ 172e8c89472cf52712fd23a9f14e9bca6182727fb45b0f8f482652a83d5a11b4 38885604 binutils_2.29.orig.tar.gz
+ 2406b0630eb301eb15f21ea04755ab7f017a75f566dbd8516704a610a1572ee5 279679 binutils_2.29-9ubuntu1.diff.gz
+
 Package: bzr
 Binary: bzr, python-bzrlib, python-bzrlib-dbg, python-bzrlib.tests, bzr-doc
 Version: 2.7.0+bzr6622-6build1
@@ -134,6 +259,51 @@ Checksums-Sha256:
  ea55383715d795e38b0f44032717256907f882fa0b718de0f346dc74edf5fd79 2029 cmd2_0.7.4-1.dsc
  c8e305effb691b9a37ad1ec23f12ab61a55f6bf8008367cf6cb6ff3b48ed5ed0 64040 cmd2_0.7.4.orig.tar.gz
  d79736d767a0069bbb62da12619fd97871680a3d7fa23959f4b74af26b9f8b06 2692 cmd2_0.7.4-1.debian.tar.xz
+
+Package: console-setup
+Binary: keyboard-configuration, console-setup, console-setup-mini, console-setup-linux, bdf2psf, console-setup-udeb, console-setup-amiga-ekmap, console-setup-ataritt-ekmap, console-setup-macintoshold-ekmap, console-setup-pc-ekmap, console-setup-sun4-ekmap, console-setup-sun5-ekmap, console-setup-pc-ekbd, console-setup-linux-fonts-udeb, console-setup-freebsd-fonts-udeb, console-setup-linux-charmaps-udeb, console-setup-freebsd-charmaps-udeb
+Version: 1.166ubuntu4
+Priority: important
+Section: utils
+Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
+Original-Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Build-Depends: perl, debhelper (>= 9), po-debconf, libxml-parser-perl, bdfresize, liblocale-gettext-perl, dh-systemd
+Build-Depends-Indep: xkb-data (>= 1.6), keymapper (>= 0.5.3-7), locales-all, sharutils
+Architecture: all
+Standards-Version: 3.9.1
+Format: 3.0 (native)
+Directory: pool/main/c/console-setup
+Files:
+ cf89d83fde30df8d1c6eed1c2f3c5238 3401 console-setup_1.166ubuntu4.dsc
+ 62a5b2a8ff361dfc7c1e76f11814734a 1703832 console-setup_1.166ubuntu4.tar.xz
+Uploaders: Anton Zinoviev <zinoviev@debian.org>, Christian Perrier <bubulle@debian.org>
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/console-setup/ubuntu
+Package-List:
+ bdf2psf deb utils optional arch=all
+ console-setup deb utils optional arch=all
+ console-setup-amiga-ekmap udeb debian-installer extra arch=all
+ console-setup-ataritt-ekmap udeb debian-installer extra arch=all
+ console-setup-freebsd-charmaps-udeb udeb debian-installer extra arch=all
+ console-setup-freebsd-fonts-udeb udeb debian-installer extra arch=all
+ console-setup-linux deb utils optional arch=all
+ console-setup-linux-charmaps-udeb udeb debian-installer extra arch=all
+ console-setup-linux-fonts-udeb udeb debian-installer extra arch=all
+ console-setup-macintoshold-ekmap udeb debian-installer extra arch=all
+ console-setup-mini deb utils extra arch=all
+ console-setup-pc-ekbd udeb debian-installer extra arch=all
+ console-setup-pc-ekmap udeb debian-installer extra arch=all
+ console-setup-sun4-ekmap udeb debian-installer extra arch=all
+ console-setup-sun5-ekmap udeb debian-installer extra arch=all
+ console-setup-udeb udeb debian-installer extra arch=all
+ keyboard-configuration deb utils optional arch=all
+Checksums-Sha1:
+ 5d2a638c87cb98857872648b23f130a192ccc4eb 3401 console-setup_1.166ubuntu4.dsc
+ 9d4b7b4d4172fcfedb38e51655d94bed8bf59876 1703832 console-setup_1.166ubuntu4.tar.xz
+Checksums-Sha256:
+ d6a75bf356022c7aefc13e5efa27f970761b54704bc21be6962ecc209acbac70 3401 console-setup_1.166ubuntu4.dsc
+ b06539c00a4df655fc3b014cb9cb846bdcaa4737a1e473576fdeb59368788020 1703832 console-setup_1.166ubuntu4.tar.xz
+Debian-Vcs-Browser: https://anonscm.debian.org/cgit/d-i/console-setup.git
+Debian-Vcs-Git: https://anonscm.debian.org/git/d-i/console-setup.git
 
 Package: crmsh
 Binary: crmsh, crmsh-doc
@@ -277,21 +447,20 @@ Checksums-Sha256:
 
 Package: elfutils
 Binary: elfutils, libelf1, libelf-dev, libdw-dev, libdw1, libasm1, libasm-dev
-Version: 0.168-1
+Version: 0.170-0ubuntu2
 Priority: important
 Section: libs
 Maintainer: Kurt Roeckx <kurt@roeckx.be>
 Build-Depends: debhelper (>= 9), autotools-dev, autoconf, automake, bzip2, zlib1g-dev, libbz2-dev, liblzma-dev, m4, gettext, gawk, dpkg-dev (>= 1.16.1~), gcc-multilib [any-amd64 sparc64] <!nocheck>, libc6-dbg [powerpc powerpcspe ppc64 ppc64el armel armhf arm64 sparc64], flex, bison
 Build-Conflicts: autoconf2.13, automake1.4
 Architecture: any
-Standards-Version: 3.9.8
+Standards-Version: 4.1.0
 Format: 3.0 (quilt)
 Directory: pool/main/e/elfutils
 Files:
- 0bff5a8b0f6ba938b660826f365ec8de 2549 elfutils_0.168-1.dsc
- 52adfa40758d0d39e5d5c57689bf38d6 6840399 elfutils_0.168.orig.tar.bz2
- 7305e2dd0db220864ad7aa674d47c0e2 473 elfutils_0.168.orig.tar.bz2.asc
- 76f927edf68a4d0e784f3e34fc8b54f6 39964 elfutils_0.168-1.debian.tar.xz
+ cd89718ab13ab6808b8e69ace3122f61 2313 elfutils_0.170-0ubuntu2.dsc
+ 03599aee98c9b726c7a732a2dd0245d5 8358001 elfutils_0.170.orig.tar.bz2
+ 7eb7dce6a30c3acc9dce58a82a532f81 37484 elfutils_0.170-0ubuntu2.debian.tar.xz
 Homepage: https://sourceware.org/elfutils/
 Package-List:
  elfutils deb utils optional arch=any
@@ -302,15 +471,13 @@ Package-List:
  libelf-dev deb libdevel optional arch=any
  libelf1 deb libs optional arch=any
 Checksums-Sha1:
- 0867044ad2916bf3d5c2db274469562edc076de3 2549 elfutils_0.168-1.dsc
- 53e486ddba572cf872d32e9aad4d7d7aa6e767ff 6840399 elfutils_0.168.orig.tar.bz2
- 5326af61e2ecf811ef1ede808f9e788219295fc3 473 elfutils_0.168.orig.tar.bz2.asc
- 098c14df4c0f3fbc918ac06ffb27b5c07baa6055 39964 elfutils_0.168-1.debian.tar.xz
+ ea64f98d00bc9a0699eb6b7ce6ef8aefa5487bf3 2313 elfutils_0.170-0ubuntu2.dsc
+ aff6feac0ff69eb7b240babdf2918f640eadb032 8358001 elfutils_0.170.orig.tar.bz2
+ 5c270b4f61e0f902b009930b405b01683bbb736d 37484 elfutils_0.170-0ubuntu2.debian.tar.xz
 Checksums-Sha256:
- b29e03a3d515d9accd52019ff7c75762ae5e61285453518ff90d538e9878ad7f 2549 elfutils_0.168-1.dsc
- b88d07893ba1373c7dd69a7855974706d05377766568a7d9002706d5de72c276 6840399 elfutils_0.168.orig.tar.bz2
- f455fc014b59a0d80ab921935d20f26e64f411a424d4be29ec5bf3a1378f3002 473 elfutils_0.168.orig.tar.bz2.asc
- 5517922b1025d32903759c46f9a1f656e3e367c5ea036dc54b32cbbe68a5f300 39964 elfutils_0.168-1.debian.tar.xz
+ 35438684b7b5bc12854d563f0396fdb68dabb20ae3ef1a3cfa6f40f06751caa4 2313 elfutils_0.170-0ubuntu2.dsc
+ 1f844775576b79bdc9f9c717a50058d08620323c1e935458223a12f249c9e066 8358001 elfutils_0.170.orig.tar.bz2
+ 59a08780279c95df8d552593d63c474b44a1cca7267d93df25e5c125bfdabdaf 37484 elfutils_0.170-0ubuntu2.debian.tar.xz
 
 Package: evolution-data-server
 Binary: evolution-data-server, evolution-data-server-common, evolution-data-server-tests, evolution-data-server-dev, evolution-data-server-doc, libedataserver-1.2-22, libedataserver1.2-dev, gir1.2-edataserver-1.2, libedataserverui-1.2-1, libedataserverui1.2-dev, gir1.2-edataserverui-1.2, libcamel-1.2-60, libcamel1.2-dev, gir1.2-camel-1.2, libebook-1.2-19, libebook1.2-dev, gir1.2-ebook-1.2, libedata-book-1.2-25, libedata-book1.2-dev, gir1.2-ebookcontacts-1.2, libebook-contacts-1.2-2, libebook-contacts1.2-dev, libecal-1.2-19, libecal1.2-dev, libedata-cal-1.2-28, libedata-cal1.2-dev, libebackend-1.2-10, libebackend1.2-dev, evolution-data-server-online-accounts
@@ -497,6 +664,488 @@ Checksums-Sha256:
  38e5eb658d44e9bb6d799854677fcc1b18a808350e81ab55598352366078a0b8 301845521 firefox_54.0+build3.orig.tar.bz2
  4e75ff901fa9a8dfa481376d82f54038a6c704dc5d7b20e5e7c23aa791e6c176 221188 firefox_54.0+build3-0ubuntu1.debian.tar.xz
 
+Package: gcc-6
+Binary: gcc-6-base, libgcc-6-dev, libgcc4, libgcc4-dbg, lib64gcc-6-dev, lib32gcc-6-dev, libhfgcc-6-dev, libsfgcc-6-dev, libn32gcc-6-dev, libx32gcc-6-dev, gcc-6, gcc-6-multilib, gcc-6-test-results, gcc-6-plugin-dev, gcc-6-hppa64-linux-gnu, cpp-6, cpp-6-doc, gcc-6-locales, g++-6, g++-6-multilib, libasan3, libasan3-dbg, lib32asan3, lib32asan3-dbg, lib64asan3, lib64asan3-dbg, libx32asan3, libx32asan3-dbg, libhfasan3, libhfasan3-dbg, libsfasan3, libsfasan3-dbg, libmpx2, libmpx2-dbg, lib32mpx2, lib32mpx2-dbg, lib64mpx2, lib64mpx2-dbg, libgccjit-6-doc, libgccjit-6-dev, gobjc++-6, gobjc++-6-multilib, gobjc-6, gobjc-6-multilib, libobjc-6-dev, lib64objc-6-dev, lib32objc-6-dev, libn32objc-6-dev, libx32objc-6-dev, libhfobjc-6-dev, libsfobjc-6-dev, gfortran-6, gfortran-6-multilib, gfortran-6-doc, libgfortran-6-dev, lib64gfortran-6-dev, lib32gfortran-6-dev, libn32gfortran-6-dev, libx32gfortran-6-dev, libhfgfortran-6-dev, libsfgfortran-6-dev, libgfortran3, libgfortran3-dbg, lib64gfortran3,
+ lib64gfortran3-dbg, lib32gfortran3, lib32gfortran3-dbg, libn32gfortran3, libn32gfortran3-dbg, libx32gfortran3, libx32gfortran3-dbg, libhfgfortran3, libhfgfortran3-dbg, libsfgfortran3, libsfgfortran3-dbg, gccgo-6, gccgo-6-multilib, gccgo-6-doc, libgo9, libgo9-dbg, lib64go9, lib64go9-dbg, lib32go9, lib32go9-dbg, libn32go9, libn32go9-dbg, libx32go9, libx32go9-dbg, gcj-6, gcj-6-jdk, gcj-6-jre-headless, gcj-6-jre, libgcj17, gcj-6-jre-lib, libgcj17-awt, libgcj17-dev, libgcj17-dbg, gcj-6-source, libgcj-doc, libstdc++-6-dev, libstdc++-6-pic, libstdc++6-6-dbg, lib32stdc++-6-dev, lib32stdc++6-6-dbg, lib64stdc++-6-dev, lib64stdc++6-6-dbg, libn32stdc++-6-dev, libn32stdc++6-6-dbg, libx32stdc++-6-dev, libx32stdc++6-6-dbg, libhfstdc++-6-dev, libhfstdc++6-6-dbg, libsfstdc++-6-dev, libsfstdc++6-6-dbg, libstdc++-6-doc, gnat-6, gnat-6-sjlj, libgnat-6, libgnat-6-dbg, libgnatvsn6-dev, libgnatvsn6, libgnatvsn6-dbg, libgnatprj6-dev, libgnatprj6, libgnatprj6-dbg, gnat-6-doc, gdc-6,
+ gdc-6-multilib, libgphobos-6-dev, libgphobos68, libgphobos68-dbg, lib64gphobos-6-dev, lib64gphobos68, lib64gphobos68-dbg, lib32gphobos-6-dev, lib32gphobos68, lib32gphobos68-dbg, libx32gphobos-6-dev, libx32gphobos68, libx32gphobos68-dbg, libhfgphobos-6-dev, libhfgphobos68, libhfgphobos68-dbg, libsfgphobos-6-dev, libsfgphobos68, libsfgphobos68-dbg, gcc-6-doc,
+ gcc-6-source
+Version: 6.4.0-5ubuntu2
+Section: devel
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Build-Depends: debhelper (>= 9.20141010), dpkg-dev (>= 1.17.14), g++-multilib [amd64 armel armhf i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32] <!cross>, g++-6 [arm64] <!cross>, libc6.1-dev (>= 2.13-0ubuntu6) [alpha ia64] | libc0.3-dev (>= 2.13-0ubuntu6) [hurd-i386] | libc0.1-dev (>= 2.13-0ubuntu6) [kfreebsd-i386 kfreebsd-amd64] | libc6-dev (>= 2.13-0ubuntu6), libc6-dev (>= 2.13-31) [armel armhf], libc6-dev-amd64 [i386 x32], libc6-dev-sparc64 [sparc], libc6-dev-sparc [sparc64], libc6-dev-s390 [s390x], libc6-dev-s390x [s390], libc6-dev-i386 [amd64 x32], libc6-dev-powerpc [ppc64], libc6-dev-ppc64 [powerpc], libc0.1-dev-i386 [kfreebsd-amd64], lib32gcc1 [amd64 ppc64 kfreebsd-amd64 mipsn32 mipsn32el mips64 mips64el s390x sparc64 x32], libn32gcc1 [mips mipsel mips64 mips64el], lib64gcc1 [i386 mips mipsel mipsn32 mipsn32el powerpc sparc s390 x32], libc6-dev-mips64 [mips mipsel mipsn32 mipsn32el], libc6-dev-mipsn32 [mips mipsel mips64 mips64el], libc6-dev-mips32 [mipsn32 mipsn32el mips64 mips64el], libc6-dev-x32 [amd64 i386], libx32gcc1 [amd64 i386], libc6-dev-armhf [armel], libhfgcc1 [armel], libc6-dev-armel [armhf], libsfgcc1 [armhf], libc6.1-dbg [alpha ia64] | libc0.3-dbg [hurd-i386] | libc0.1-dbg [kfreebsd-i386 kfreebsd-amd64] | libc6-dbg, kfreebsd-kernel-headers (>= 0.84) [kfreebsd-any], linux-libc-dev [m68k], m4, libtool, autoconf2.64, gcc-7-base, libunwind7-dev (>= 0.98.5-6) [ia64], libatomic-ops-dev [ia64], autogen, gawk, lzma, xz-utils, patchutils, zlib1g-dev, systemtap-sdt-dev [linux-any kfreebsd-any hurd-any], binutils:native (>= 2.28-3) | binutils-multiarch:native (>= 2.28-3), binutils-hppa64-linux-gnu:native (>= 2.28-3) [hppa amd64 i386 x32], gperf (>= 3.0.1), bison (>= 1:2.3), flex, gettext, gdb:native, texinfo (>= 4.3), locales, sharutils, procps, libantlr-java, python:native, libffi-dev, fastjar, libmagic-dev, libecj-java (>= 3.3.0-2), zip, libasound2-dev [!hurd-any !kfreebsd-any], libxtst-dev, libxt-dev, libgtk2.0-dev (>= 2.4.4-2), libart-2.0-dev, libcairo2-dev, gnat-6:native [!m32r !sh3 !sh3eb !sh4eb !powerpcspe !m68k !mips64 !x32], g++-6:native, netbase, libisl-dev, libmpc-dev (>= 1.0), libmpfr-dev (>= 3.0.0-9~), libgmp-dev (>= 2:5.0.1~), lib32z1-dev [amd64 kfreebsd-amd64], lib64z1-dev [i386], libx32z1-dev [amd64 kfreebsd-amd64 i386], dejagnu [!m68k !hurd-amd64 !hurd-i386 !hurd-alpha !kfreebsd-amd64 !kfreebsd-i386 !kfreebsd-alpha], realpath (>= 1.9.12), chrpath, lsb-release, quilt, pkg-config, libgc-dev, g++-6-alpha-linux-gnu [alpha] <cross>, gobjc-6-alpha-linux-gnu [alpha] <cross>, gfortran-6-alpha-linux-gnu [alpha] <cross>, gcj-6-alpha-linux-gnu [alpha] <cross>, gdc-6-alpha-linux-gnu [alpha] <cross>, gccgo-6-alpha-linux-gnu [alpha] <cross>, gnat-6-alpha-linux-gnu [alpha] <cross>, g++-6-x86-64-linux-gnu [amd64] <cross>, gobjc-6-x86-64-linux-gnu [amd64] <cross>, gfortran-6-x86-64-linux-gnu [amd64] <cross>, gcj-6-x86-64-linux-gnu [amd64] <cross>, gdc-6-x86-64-linux-gnu [amd64] <cross>, gccgo-6-x86-64-linux-gnu [amd64] <cross>, gnat-6-x86-64-linux-gnu [amd64] <cross>, g++-6-arm-linux-gnueabi [armel] <cross>, gobjc-6-arm-linux-gnueabi [armel] <cross>, gfortran-6-arm-linux-gnueabi [armel] <cross>, gcj-6-arm-linux-gnueabi [armel] <cross>, gdc-6-arm-linux-gnueabi [armel] <cross>, gccgo-6-arm-linux-gnueabi [armel] <cross>, gnat-6-arm-linux-gnueabi [armel] <cross>, g++-6-arm-linux-gnueabihf [armhf] <cross>, gobjc-6-arm-linux-gnueabihf [armhf] <cross>, gfortran-6-arm-linux-gnueabihf [armhf] <cross>, gcj-6-arm-linux-gnueabihf [armhf] <cross>, gdc-6-arm-linux-gnueabihf [armhf] <cross>, gccgo-6-arm-linux-gnueabihf [armhf] <cross>, gnat-6-arm-linux-gnueabihf [armhf] <cross>, g++-6-aarch64-linux-gnu [arm64] <cross>, gobjc-6-aarch64-linux-gnu [arm64] <cross>, gfortran-6-aarch64-linux-gnu [arm64] <cross>, gcj-6-aarch64-linux-gnu [arm64] <cross>, gdc-6-aarch64-linux-gnu [arm64] <cross>, gccgo-6-aarch64-linux-gnu [arm64] <cross>, gnat-6-aarch64-linux-gnu [arm64] <cross>, g++-6-i686-linux-gnu [i386] <cross>, gobjc-6-i686-linux-gnu [i386] <cross>, gfortran-6-i686-linux-gnu [i386] <cross>, gcj-6-i686-linux-gnu [i386] <cross>, gdc-6-i686-linux-gnu [i386] <cross>, gccgo-6-i686-linux-gnu [i386] <cross>, gnat-6-i686-linux-gnu [i386] <cross>, g++-6-mips-linux-gnu [mips] <cross>, gobjc-6-mips-linux-gnu [mips] <cross>, gfortran-6-mips-linux-gnu [mips] <cross>, gcj-6-mips-linux-gnu [mips] <cross>, gdc-6-mips-linux-gnu [mips] <cross>, gccgo-6-mips-linux-gnu [mips] <cross>, gnat-6-mips-linux-gnu [mips] <cross>, g++-6-mipsel-linux-gnu [mipsel] <cross>, gobjc-6-mipsel-linux-gnu [mipsel] <cross>, gfortran-6-mipsel-linux-gnu [mipsel] <cross>, gcj-6-mipsel-linux-gnu [mipsel] <cross>, gdc-6-mipsel-linux-gnu [mipsel] <cross>, gccgo-6-mipsel-linux-gnu [mipsel] <cross>, gnat-6-mipsel-linux-gnu [mipsel] <cross>, g++-6-mips64-linux-gnuabi64 [mips64] <cross>, gobjc-6-mips64-linux-gnuabi64 [mips64] <cross>, gfortran-6-mips64-linux-gnuabi64 [mips64] <cross>, gcj-6-mips64-linux-gnuabi64 [mips64] <cross>, gdc-6-mips64-linux-gnuabi64 [mips64] <cross>, gccgo-6-mips64-linux-gnuabi64 [mips64] <cross>, g++-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gobjc-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gfortran-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gcj-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gdc-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gccgo-6-mips64el-linux-gnuabi64 [mips64el] <cross>, gnat-6-mips64el-linux-gnuabi64 [mips64el] <cross>, g++-6-powerpc-linux-gnu [powerpc] <cross>, gobjc-6-powerpc-linux-gnu [powerpc] <cross>, gfortran-6-powerpc-linux-gnu [powerpc] <cross>, gcj-6-powerpc-linux-gnu [powerpc] <cross>, gdc-6-powerpc-linux-gnu [powerpc] <cross>, gccgo-6-powerpc-linux-gnu [powerpc] <cross>, gnat-6-powerpc-linux-gnu [powerpc] <cross>, g++-6-powerpc64-linux-gnu [ppc64] <cross>, gobjc-6-powerpc64-linux-gnu [ppc64] <cross>, gfortran-6-powerpc64-linux-gnu [ppc64] <cross>, gcj-6-powerpc64-linux-gnu [ppc64] <cross>, gdc-6-powerpc64-linux-gnu [ppc64] <cross>, gccgo-6-powerpc64-linux-gnu [ppc64] <cross>, gnat-6-powerpc64-linux-gnu [ppc64] <cross>, g++-6-powerpc64le-linux-gnu [ppc64el] <cross>, gobjc-6-powerpc64le-linux-gnu [ppc64el] <cross>, gfortran-6-powerpc64le-linux-gnu [ppc64el] <cross>, gcj-6-powerpc64le-linux-gnu [ppc64el] <cross>, gdc-6-powerpc64le-linux-gnu [ppc64el] <cross>, gccgo-6-powerpc64le-linux-gnu [ppc64el] <cross>, gnat-6-powerpc64le-linux-gnu [ppc64el] <cross>, g++-6-m68k-linux-gnu [m68k] <cross>, gobjc-6-m68k-linux-gnu [m68k] <cross>, gfortran-6-m68k-linux-gnu [m68k] <cross>, gcj-6-m68k-linux-gnu [m68k] <cross>, gdc-6-m68k-linux-gnu [m68k] <cross>, g++-6-sh4-linux-gnu [sh4] <cross>, gobjc-6-sh4-linux-gnu [sh4] <cross>, gfortran-6-sh4-linux-gnu [sh4] <cross>, gcj-6-sh4-linux-gnu [sh4] <cross>, g++-6-sparc64-linux-gnu [sparc64] <cross>, gobjc-6-sparc64-linux-gnu [sparc64] <cross>, gfortran-6-sparc64-linux-gnu [sparc64] <cross>, gcj-6-sparc64-linux-gnu [sparc64] <cross>, gdc-6-sparc64-linux-gnu [sparc64] <cross>, gccgo-6-sparc64-linux-gnu [sparc64] <cross>, g++-6-s390x-linux-gnu [s390x] <cross>, gobjc-6-s390x-linux-gnu [s390x] <cross>, gfortran-6-s390x-linux-gnu [s390x] <cross>, gcj-6-s390x-linux-gnu [s390x] <cross>, gdc-6-s390x-linux-gnu [s390x] <cross>, gccgo-6-s390x-linux-gnu [s390x] <cross>, gnat-6-s390x-linux-gnu [s390x] <cross>, g++-6-x86-64-linux-gnux32 [x32] <cross>, gobjc-6-x86-64-linux-gnux32 [x32] <cross>, gfortran-6-x86-64-linux-gnux32 [x32] <cross>, gcj-6-x86-64-linux-gnux32 [x32] <cross>, gdc-6-x86-64-linux-gnux32 [x32] <cross>, gccgo-6-x86-64-linux-gnux32 [x32] <cross>
+Build-Depends-Indep: doxygen (>= 1.7.2), graphviz (>= 2.2), ghostscript, texlive-latex-base, xsltproc, libxml2-utils, docbook-xsl-ns
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 1.0
+Directory: pool/main/g/gcc-6
+Files:
+ ee35f42b6117332851c5d773d786e7b8 21662 gcc-6_6.4.0-5ubuntu2.dsc
+ 7ca30ad41af93693ea1c6ff1452295ad 79187679 gcc-6_6.4.0.orig.tar.gz
+ f836609f271655909122152cbd30fad0 1537728 gcc-6_6.4.0-5ubuntu2.diff.gz
+Uploaders: Matthias Klose <doko@debian.org>
+Homepage: http://gcc.gnu.org/
+Vcs-Browser: http://svn.debian.org/viewsvn/gcccvs/branches/sid/gcc-6/
+Vcs-Svn: svn://anonscm.debian.org/gcccvs/branches/sid/gcc-6
+Package-List:
+ cpp-6 deb interpreters optional arch=any
+ cpp-6-doc deb doc optional arch=all
+ g++-6 deb devel optional arch=any
+ g++-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gcc-6 deb devel optional arch=any
+ gcc-6-base deb libs required arch=any
+ gcc-6-doc deb doc optional arch=all
+ gcc-6-hppa64-linux-gnu deb devel optional arch=hppa,amd64,i386,x32
+ gcc-6-locales deb devel optional arch=all
+ gcc-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gcc-6-plugin-dev deb devel optional arch=any
+ gcc-6-source deb devel optional arch=all
+ gcc-6-test-results deb devel extra arch=any
+ gccgo-6 deb devel optional arch=any
+ gccgo-6-doc deb doc optional arch=all
+ gccgo-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gcj-6 deb java optional arch=any
+ gcj-6-jdk deb java optional arch=any
+ gcj-6-jre deb java optional arch=any
+ gcj-6-jre-headless deb java optional arch=any
+ gcj-6-jre-lib deb java optional arch=all
+ gcj-6-source deb java optional arch=all
+ gdc-6 deb devel optional arch=any
+ gdc-6-multilib deb devel optional arch=any
+ gfortran-6 deb devel optional arch=any
+ gfortran-6-doc deb doc optional arch=all
+ gfortran-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gnat-6 deb devel optional arch=any
+ gnat-6-doc deb doc optional arch=all
+ gnat-6-sjlj deb devel extra arch=any
+ gobjc++-6 deb devel optional arch=any
+ gobjc++-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gobjc-6 deb devel optional arch=any
+ gobjc-6-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ lib32asan3 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32asan3-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gcc-6-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran-6-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran3 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran3-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32go9 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32go9-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos-6-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos68 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos68-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32mpx2 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32mpx2-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32objc-6-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32stdc++-6-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32stdc++6-6-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib64asan3 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64asan3-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gcc-6-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran-6-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran3 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran3-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64go9 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64go9-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos-6-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos68 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos68-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64mpx2 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64mpx2-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64objc-6-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64stdc++-6-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64stdc++6-6-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ libasan3 deb libs optional arch=any
+ libasan3-dbg deb debug extra arch=any
+ libgcc-6-dev deb libdevel optional arch=any
+ libgcc4 deb libs required arch=hppa
+ libgcc4-dbg deb debug extra arch=hppa
+ libgccjit-6-dev deb libdevel optional arch=any
+ libgccjit-6-doc deb doc extra arch=all
+ libgcj-doc deb doc optional arch=all
+ libgcj17 deb libs optional arch=any
+ libgcj17-awt deb libs optional arch=any
+ libgcj17-dbg deb debug extra arch=any
+ libgcj17-dev deb libdevel optional arch=any
+ libgfortran-6-dev deb libdevel optional arch=any
+ libgfortran3 deb libs optional arch=any
+ libgfortran3-dbg deb debug extra arch=any
+ libgnat-6 deb libs optional arch=any
+ libgnat-6-dbg deb debug extra arch=any
+ libgnatprj6 deb libs optional arch=any
+ libgnatprj6-dbg deb debug extra arch=any
+ libgnatprj6-dev deb libdevel extra arch=any
+ libgnatvsn6 deb libs optional arch=any
+ libgnatvsn6-dbg deb debug extra arch=any
+ libgnatvsn6-dev deb libdevel extra arch=any
+ libgo9 deb libs optional arch=any
+ libgo9-dbg deb debug extra arch=any
+ libgphobos-6-dev deb libdevel optional arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libgphobos68 deb libs optional arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libgphobos68-dbg deb debug extra arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libhfasan3 deb libs extra arch=armel
+ libhfasan3-dbg deb debug extra arch=armel
+ libhfgcc-6-dev deb libdevel optional arch=armel
+ libhfgfortran-6-dev deb libdevel optional arch=armel
+ libhfgfortran3 deb libs optional arch=armel
+ libhfgfortran3-dbg deb debug extra arch=armel
+ libhfgphobos-6-dev deb libdevel optional arch=armel
+ libhfgphobos68 deb libs optional arch=armel
+ libhfgphobos68-dbg deb debug extra arch=armel
+ libhfobjc-6-dev deb libdevel optional arch=armel
+ libhfstdc++-6-dev deb libdevel optional arch=armel
+ libhfstdc++6-6-dbg deb debug extra arch=armel
+ libmpx2 deb libs optional arch=any
+ libmpx2-dbg deb debug extra arch=any
+ libn32gcc-6-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32gfortran-6-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32gfortran3 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32gfortran3-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32go9 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32go9-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32objc-6-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32stdc++-6-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32stdc++6-6-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libobjc-6-dev deb libdevel optional arch=any
+ libsfasan3 deb libs extra arch=armhf
+ libsfasan3-dbg deb debug extra arch=armhf
+ libsfgcc-6-dev deb libdevel optional arch=armhf
+ libsfgfortran-6-dev deb libdevel optional arch=armhf
+ libsfgfortran3 deb libs optional arch=armhf
+ libsfgfortran3-dbg deb debug extra arch=armhf
+ libsfgphobos-6-dev deb libdevel optional arch=armhf
+ libsfgphobos68 deb libs optional arch=armhf
+ libsfgphobos68-dbg deb debug extra arch=armhf
+ libsfobjc-6-dev deb libdevel optional arch=armhf
+ libsfstdc++-6-dev deb libdevel optional arch=armhf
+ libsfstdc++6-6-dbg deb debug extra arch=armhf
+ libstdc++-6-dev deb libdevel optional arch=any
+ libstdc++-6-doc deb doc optional arch=all
+ libstdc++-6-pic deb libdevel extra arch=any
+ libstdc++6-6-dbg deb debug extra arch=any
+ libx32asan3 deb libs optional arch=amd64,i386
+ libx32asan3-dbg deb debug extra arch=amd64,i386
+ libx32gcc-6-dev deb libdevel optional arch=amd64,i386
+ libx32gfortran-6-dev deb libdevel optional arch=amd64,i386
+ libx32gfortran3 deb libs optional arch=amd64,i386
+ libx32gfortran3-dbg deb debug extra arch=amd64,i386
+ libx32go9 deb libs optional arch=amd64,i386
+ libx32go9-dbg deb debug extra arch=amd64,i386
+ libx32gphobos-6-dev deb libdevel optional arch=amd64,i386
+ libx32gphobos68 deb libs optional arch=amd64,i386
+ libx32gphobos68-dbg deb debug extra arch=amd64,i386
+ libx32objc-6-dev deb libdevel optional arch=amd64,i386
+ libx32stdc++-6-dev deb libdevel optional arch=amd64,i386
+ libx32stdc++6-6-dbg deb debug extra arch=amd64,i386
+Checksums-Sha1:
+ d6a5199053d263b1c094c5d68653726529cab1c3 21662 gcc-6_6.4.0-5ubuntu2.dsc
+ 40c8094a176bd19db68ada4e8b260484e4ffe5fa 79187679 gcc-6_6.4.0.orig.tar.gz
+ 6eb186a4f7a168d1f6e0e37be44b948edf3872a6 1537728 gcc-6_6.4.0-5ubuntu2.diff.gz
+Checksums-Sha256:
+ f7300a0454fbd062d4ced53549998d2ba944035da4ceb50abb2055a05b20f595 21662 gcc-6_6.4.0-5ubuntu2.dsc
+ 2fe5980f8b0211921efd4add9a216160e5ab632aafd463e531872251d98fb316 79187679 gcc-6_6.4.0.orig.tar.gz
+ 32f9c5093f45c51f9f1cd0aa2f6d9eed4be8fbc3c1a1c486a0d67887257eace2 1537728 gcc-6_6.4.0-5ubuntu2.diff.gz
+
+Package: gcc-7
+Binary: gcc-7-base, libgcc1, libgcc1-dbg, libgcc2, libgcc2-dbg, libgcc-7-dev, libgcc4, libgcc4-dbg, lib64gcc1, lib64gcc1-dbg, lib64gcc-7-dev, lib32gcc1, lib32gcc1-dbg, lib32gcc-7-dev, libhfgcc1, libhfgcc1-dbg, libhfgcc-7-dev, libsfgcc1, libsfgcc1-dbg, libsfgcc-7-dev, libn32gcc1, libn32gcc1-dbg, libn32gcc-7-dev, libx32gcc1, libx32gcc1-dbg, libx32gcc-7-dev, gcc-7, gcc-7-multilib, gcc-7-test-results, gcc-7-plugin-dev, gcc-7-hppa64-linux-gnu, cpp-7, cpp-7-doc, gcc-7-locales, g++-7, g++-7-multilib, libgomp1, libgomp1-dbg, lib32gomp1, lib32gomp1-dbg, lib64gomp1, lib64gomp1-dbg, libn32gomp1, libn32gomp1-dbg, libx32gomp1, libx32gomp1-dbg, libhfgomp1, libhfgomp1-dbg, libsfgomp1, libsfgomp1-dbg, libitm1, libitm1-dbg, lib32itm1, lib32itm1-dbg, lib64itm1, lib64itm1-dbg, libx32itm1, libx32itm1-dbg, libhfitm1, libhfitm1-dbg, libsfitm1, libsfitm1-dbg, libatomic1, libatomic1-dbg, lib32atomic1, lib32atomic1-dbg, lib64atomic1, lib64atomic1-dbg, libn32atomic1, libn32atomic1-dbg, libx32atomic1,
+ libx32atomic1-dbg, libhfatomic1, libhfatomic1-dbg, libsfatomic1, libsfatomic1-dbg, libasan4, libasan4-dbg, lib32asan4, lib32asan4-dbg, lib64asan4, lib64asan4-dbg, libx32asan4, libx32asan4-dbg, libhfasan4, libhfasan4-dbg, libsfasan4, libsfasan4-dbg, liblsan0, liblsan0-dbg, lib32lsan0, lib32lsan0-dbg, libx32lsan0, libx32lsan0-dbg, libtsan0, libtsan0-dbg, libubsan0, libubsan0-dbg, lib32ubsan0, lib32ubsan0-dbg, lib64ubsan0, lib64ubsan0-dbg, libx32ubsan0, libx32ubsan0-dbg, libhfubsan0, libhfubsan0-dbg, libsfubsan0, libsfubsan0-dbg, libcilkrts5, libcilkrts5-dbg, lib32cilkrts5, lib32cilkrts5-dbg, lib64cilkrts5, lib64cilkrts5-dbg, libx32cilkrts5, libx32cilkrts5-dbg, libhfcilkrts5, libhfcilkrts5-dbg, libsfcilkrts5, libsfcilkrts5-dbg, libmpx2, libmpx2-dbg, lib32mpx2, lib32mpx2-dbg, lib64mpx2, lib64mpx2-dbg, libquadmath0, libquadmath0-dbg, lib32quadmath0, lib32quadmath0-dbg, lib64quadmath0, lib64quadmath0-dbg, libx32quadmath0, libx32quadmath0-dbg, libhfquadmath0,
+ libhfquadmath0-dbg, libsfquadmath0, libsfquadmath0-dbg, libcc1-0, libgccjit0, libgccjit0-dbg, libgccjit-7-doc, libgccjit-7-dev, gobjc++-7, gobjc++-7-multilib, gobjc-7, gobjc-7-multilib, libobjc-7-dev, lib64objc-7-dev, lib32objc-7-dev, libn32objc-7-dev, libx32objc-7-dev, libhfobjc-7-dev, libsfobjc-7-dev, libobjc4, libobjc4-dbg, lib64objc4, lib64objc4-dbg, lib32objc4, lib32objc4-dbg, libn32objc4, libn32objc4-dbg, libx32objc4, libx32objc4-dbg, libhfobjc4, libhfobjc4-dbg, libsfobjc4, libsfobjc4-dbg, gfortran-7, gfortran-7-multilib, gfortran-7-doc, libgfortran-7-dev, lib64gfortran-7-dev, lib32gfortran-7-dev, libn32gfortran-7-dev, libx32gfortran-7-dev, libhfgfortran-7-dev, libsfgfortran-7-dev, libgfortran4, libgfortran4-dbg, lib64gfortran4, lib64gfortran4-dbg, lib32gfortran4, lib32gfortran4-dbg, libn32gfortran4, libn32gfortran4-dbg, libx32gfortran4, libx32gfortran4-dbg, libhfgfortran4, libhfgfortran4-dbg, libsfgfortran4, libsfgfortran4-dbg, gccgo-7, gccgo-7-multilib,
+ gccgo-7-doc, libgo11, libgo11-dbg, lib64go11, lib64go11-dbg, lib32go11, lib32go11-dbg, libn32go11, libn32go11-dbg, libx32go11, libx32go11-dbg, libstdc++6, lib32stdc++6, lib64stdc++6, libn32stdc++6, libx32stdc++6, libhfstdc++6, libsfstdc++6, libstdc++-7-dev, libstdc++-7-pic, libstdc++6-7-dbg, lib32stdc++-7-dev, lib32stdc++6-7-dbg, lib64stdc++-7-dev, lib64stdc++6-7-dbg, libn32stdc++-7-dev, libn32stdc++6-7-dbg, libx32stdc++-7-dev, libx32stdc++6-7-dbg, libhfstdc++-7-dev, libhfstdc++6-7-dbg, libsfstdc++-7-dev, libsfstdc++6-7-dbg, libstdc++-7-doc, gnat-7, gnat-7-sjlj, libgnat-7, libgnat-7-dbg, libgnatvsn7-dev, libgnatvsn7, libgnatvsn7-dbg, gnat-7-doc, gdc-7, gdc-7-multilib, libgphobos-7-dev, libgphobos71, libgphobos71-dbg, lib64gphobos-7-dev, lib64gphobos71, lib64gphobos71-dbg, lib32gphobos-7-dev, lib32gphobos71, lib32gphobos71-dbg, libx32gphobos-7-dev, libx32gphobos71, libx32gphobos71-dbg, libhfgphobos-7-dev, libhfgphobos71, libhfgphobos71-dbg, libsfgphobos-7-dev,
+ libsfgphobos71, libsfgphobos71-dbg, gccbrig-7, libhsail-rt-7-dev, libhsail-rt0, libhsail-rt0-dbg, fixincludes, gcc-7-doc, gcc-7-offload-nvptx, libgomp-plugin-nvptx1,
+ gcc-7-source
+Version: 7.2.0-4ubuntu1
+Priority: important
+Section: devel
+Maintainer: Ubuntu Core developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Build-Depends: debhelper (>= 9.20141010), dpkg-dev (>= 1.17.14), g++-multilib [amd64 armel armhf i386 kfreebsd-amd64 mips mips64 mips64el mipsel mipsn32 mipsn32el powerpc ppc64 s390 s390x sparc sparc64 x32] <!cross>, libc6.1-dev (>= 2.13-0ubuntu6) [alpha ia64] | libc0.3-dev (>= 2.13-0ubuntu6) [hurd-i386] | libc0.1-dev (>= 2.13-0ubuntu6) [kfreebsd-i386 kfreebsd-amd64] | libc6-dev (>= 2.13-0ubuntu6), libc6-dev (>= 2.13-31) [armel armhf], libc6-dev-amd64 [i386 x32], libc6-dev-sparc64 [sparc], libc6-dev-sparc [sparc64], libc6-dev-s390 [s390x], libc6-dev-s390x [s390], libc6-dev-i386 [amd64 x32], libc6-dev-powerpc [ppc64], libc6-dev-ppc64 [powerpc], libc0.1-dev-i386 [kfreebsd-amd64], lib32gcc1 [amd64 ppc64 kfreebsd-amd64 mipsn32 mipsn32el mips64 mips64el s390x sparc64 x32], libn32gcc1 [mips mipsel mips64 mips64el], lib64gcc1 [i386 mips mipsel mipsn32 mipsn32el powerpc sparc s390 x32], libc6-dev-mips64 [mips mipsel mipsn32 mipsn32el], libc6-dev-mipsn32 [mips mipsel mips64 mips64el], libc6-dev-mips32 [mipsn32 mipsn32el mips64 mips64el], libc6-dev-x32 [amd64 i386], libx32gcc1 [amd64 i386], libc6-dev-armhf [armel], libhfgcc1 [armel], libc6-dev-armel [armhf], libsfgcc1 [armhf], libc6.1-dbg [alpha ia64] | libc0.3-dbg [hurd-i386] | libc0.1-dbg [kfreebsd-i386 kfreebsd-amd64] | libc6-dbg, kfreebsd-kernel-headers (>= 0.84) [kfreebsd-any], linux-libc-dev [m68k], m4, libtool, autoconf2.64, libunwind7-dev (>= 0.98.5-6) [ia64], libatomic-ops-dev [ia64], autogen <!nocheck>, gawk, lzma, xz-utils, patchutils, zlib1g-dev, systemtap-sdt-dev [linux-any kfreebsd-any hurd-any], binutils:native (>= 2.28) | binutils-multiarch:native (>= 2.28), binutils-hppa64-linux-gnu:native (>= 2.28) [hppa amd64 i386 x32], gperf (>= 3.0.1), bison (>= 1:2.3), flex, gettext, gdb:native, nvptx-tools [amd64], texinfo (>= 4.3), locales, sharutils, procps, gnat-7:native [!m32r !sh3 !sh3eb !sh4eb !m68k], g++-7:native, netbase, libisl-dev, libmpc-dev (>= 1.0), libmpfr-dev (>= 3.0.0-9~), libgmp-dev (>= 2:5.0.1~), lib32z1-dev [amd64 kfreebsd-amd64], lib64z1-dev [i386], libx32z1-dev [amd64 kfreebsd-amd64 i386], dejagnu [!m68k !hurd-amd64 !hurd-i386 !hurd-alpha !kfreebsd-amd64 !kfreebsd-i386 !kfreebsd-alpha], realpath (>= 1.9.12), chrpath, lsb-release, quilt, pkg-config, libgc-dev, g++-7-alpha-linux-gnu [alpha] <cross>, gobjc-7-alpha-linux-gnu [alpha] <cross>, gfortran-7-alpha-linux-gnu [alpha] <cross>, gdc-7-alpha-linux-gnu [alpha] <cross>, gccgo-7-alpha-linux-gnu [alpha] <cross>, gnat-7-alpha-linux-gnu [alpha] <cross>, g++-7-x86-64-linux-gnu [amd64] <cross>, gobjc-7-x86-64-linux-gnu [amd64] <cross>, gfortran-7-x86-64-linux-gnu [amd64] <cross>, gdc-7-x86-64-linux-gnu [amd64] <cross>, gccgo-7-x86-64-linux-gnu [amd64] <cross>, gnat-7-x86-64-linux-gnu [amd64] <cross>, g++-7-arm-linux-gnueabi [armel] <cross>, gobjc-7-arm-linux-gnueabi [armel] <cross>, gfortran-7-arm-linux-gnueabi [armel] <cross>, gdc-7-arm-linux-gnueabi [armel] <cross>, gccgo-7-arm-linux-gnueabi [armel] <cross>, gnat-7-arm-linux-gnueabi [armel] <cross>, g++-7-arm-linux-gnueabihf [armhf] <cross>, gobjc-7-arm-linux-gnueabihf [armhf] <cross>, gfortran-7-arm-linux-gnueabihf [armhf] <cross>, gdc-7-arm-linux-gnueabihf [armhf] <cross>, gccgo-7-arm-linux-gnueabihf [armhf] <cross>, gnat-7-arm-linux-gnueabihf [armhf] <cross>, g++-7-aarch64-linux-gnu [arm64] <cross>, gobjc-7-aarch64-linux-gnu [arm64] <cross>, gfortran-7-aarch64-linux-gnu [arm64] <cross>, gdc-7-aarch64-linux-gnu [arm64] <cross>, gccgo-7-aarch64-linux-gnu [arm64] <cross>, gnat-7-aarch64-linux-gnu [arm64] <cross>, g++-7-i686-linux-gnu [i386] <cross>, gobjc-7-i686-linux-gnu [i386] <cross>, gfortran-7-i686-linux-gnu [i386] <cross>, gdc-7-i686-linux-gnu [i386] <cross>, gccgo-7-i686-linux-gnu [i386] <cross>, gnat-7-i686-linux-gnu [i386] <cross>, g++-7-mips-linux-gnu [mips] <cross>, gobjc-7-mips-linux-gnu [mips] <cross>, gfortran-7-mips-linux-gnu [mips] <cross>, gdc-7-mips-linux-gnu [mips] <cross>, gccgo-7-mips-linux-gnu [mips] <cross>, gnat-7-mips-linux-gnu [mips] <cross>, g++-7-mipsel-linux-gnu [mipsel] <cross>, gobjc-7-mipsel-linux-gnu [mipsel] <cross>, gfortran-7-mipsel-linux-gnu [mipsel] <cross>, gdc-7-mipsel-linux-gnu [mipsel] <cross>, gccgo-7-mipsel-linux-gnu [mipsel] <cross>, gnat-7-mipsel-linux-gnu [mipsel] <cross>, g++-7-mips64-linux-gnuabi64 [mips64] <cross>, gobjc-7-mips64-linux-gnuabi64 [mips64] <cross>, gfortran-7-mips64-linux-gnuabi64 [mips64] <cross>, gdc-7-mips64-linux-gnuabi64 [mips64] <cross>, gccgo-7-mips64-linux-gnuabi64 [mips64] <cross>, gnat-7-mips64-linux-gnuabi64 [mips64] <cross>, g++-7-mips64el-linux-gnuabi64 [mips64el] <cross>, gobjc-7-mips64el-linux-gnuabi64 [mips64el] <cross>, gfortran-7-mips64el-linux-gnuabi64 [mips64el] <cross>, gdc-7-mips64el-linux-gnuabi64 [mips64el] <cross>, gccgo-7-mips64el-linux-gnuabi64 [mips64el] <cross>, gnat-7-mips64el-linux-gnuabi64 [mips64el] <cross>, g++-7-powerpc-linux-gnu [powerpc] <cross>, gobjc-7-powerpc-linux-gnu [powerpc] <cross>, gfortran-7-powerpc-linux-gnu [powerpc] <cross>, gdc-7-powerpc-linux-gnu [powerpc] <cross>, gccgo-7-powerpc-linux-gnu [powerpc] <cross>, gnat-7-powerpc-linux-gnu [powerpc] <cross>, g++-7-powerpc-linux-gnuspe [powerpcspe] <cross>, gobjc-7-powerpc-linux-gnuspe [powerpcspe] <cross>, gfortran-7-powerpc-linux-gnuspe [powerpcspe] <cross>, gdc-7-powerpc-linux-gnuspe [powerpcspe] <cross>, gccgo-7-powerpc-linux-gnuspe [powerpcspe] <cross>, gnat-7-powerpc-linux-gnuspe [powerpcspe] <cross>, g++-7-powerpc64-linux-gnu [ppc64] <cross>, gobjc-7-powerpc64-linux-gnu [ppc64] <cross>, gfortran-7-powerpc64-linux-gnu [ppc64] <cross>, gdc-7-powerpc64-linux-gnu [ppc64] <cross>, gccgo-7-powerpc64-linux-gnu [ppc64] <cross>, gnat-7-powerpc64-linux-gnu [ppc64] <cross>, g++-7-powerpc64le-linux-gnu [ppc64el] <cross>, gobjc-7-powerpc64le-linux-gnu [ppc64el] <cross>, gfortran-7-powerpc64le-linux-gnu [ppc64el] <cross>, gdc-7-powerpc64le-linux-gnu [ppc64el] <cross>, gccgo-7-powerpc64le-linux-gnu [ppc64el] <cross>, gnat-7-powerpc64le-linux-gnu [ppc64el] <cross>, g++-7-m68k-linux-gnu [m68k] <cross>, gobjc-7-m68k-linux-gnu [m68k] <cross>, gfortran-7-m68k-linux-gnu [m68k] <cross>, gdc-7-m68k-linux-gnu [m68k] <cross>, g++-7-sh4-linux-gnu [sh4] <cross>, gobjc-7-sh4-linux-gnu [sh4] <cross>, gfortran-7-sh4-linux-gnu [sh4] <cross>, gnat-7-sh4-linux-gnu [sh4] <cross>, g++-7-sparc64-linux-gnu [sparc64] <cross>, gobjc-7-sparc64-linux-gnu [sparc64] <cross>, gfortran-7-sparc64-linux-gnu [sparc64] <cross>, gdc-7-sparc64-linux-gnu [sparc64] <cross>, gccgo-7-sparc64-linux-gnu [sparc64] <cross>, gnat-7-sparc64-linux-gnu [sparc64] <cross>, g++-7-s390x-linux-gnu [s390x] <cross>, gobjc-7-s390x-linux-gnu [s390x] <cross>, gfortran-7-s390x-linux-gnu [s390x] <cross>, gdc-7-s390x-linux-gnu [s390x] <cross>, gccgo-7-s390x-linux-gnu [s390x] <cross>, gnat-7-s390x-linux-gnu [s390x] <cross>, g++-7-x86-64-linux-gnux32 [x32] <cross>, gobjc-7-x86-64-linux-gnux32 [x32] <cross>, gfortran-7-x86-64-linux-gnux32 [x32] <cross>, gdc-7-x86-64-linux-gnux32 [x32] <cross>, gccgo-7-x86-64-linux-gnux32 [x32] <cross>, gnat-7-x86-64-linux-gnux32 [x32] <cross>
+Build-Depends-Indep: doxygen (>= 1.7.2), graphviz (>= 2.2), ghostscript, texlive-latex-base, xsltproc, libxml2-utils, docbook-xsl-ns
+Architecture: any all
+Standards-Version: 4.1.0
+Format: 1.0
+Directory: pool/main/g/gcc-7
+Files:
+ 1394cafa94b97d751ec657b5aa55c1a5 30453 gcc-7_7.2.0-4ubuntu1.dsc
+ 21b8145b8a4b2b97239cd67033f14b0a 73406637 gcc-7_7.2.0.orig.tar.gz
+ 9bd70fbb3d711873ad3c2286ff892986 2846111 gcc-7_7.2.0-4ubuntu1.diff.gz
+Uploaders: Matthias Klose <doko@debian.org>
+Homepage: http://gcc.gnu.org/
+Vcs-Browser: http://svn.debian.org/viewsvn/gcccvs/branches/sid/gcc-7/
+Vcs-Svn: svn://anonscm.debian.org/gcccvs/branches/sid/gcc-7
+Package-List:
+ cpp-7 deb interpreters optional arch=any
+ cpp-7-doc deb doc optional arch=all
+ fixincludes deb devel optional arch=any
+ g++-7 deb devel optional arch=any
+ g++-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gcc-7 deb devel optional arch=any
+ gcc-7-base deb libs required arch=any
+ gcc-7-doc deb doc optional arch=all
+ gcc-7-hppa64-linux-gnu deb devel optional arch=hppa,amd64,i386,x32
+ gcc-7-locales deb devel optional arch=all
+ gcc-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gcc-7-offload-nvptx deb devel optional arch=amd64
+ gcc-7-plugin-dev deb devel optional arch=any
+ gcc-7-source deb devel optional arch=all
+ gcc-7-test-results deb devel extra arch=any
+ gccbrig-7 deb devel optional arch=any
+ gccgo-7 deb devel optional arch=any
+ gccgo-7-doc deb doc optional arch=all
+ gccgo-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gdc-7 deb devel optional arch=any
+ gdc-7-multilib deb devel optional arch=any
+ gfortran-7 deb devel optional arch=any
+ gfortran-7-doc deb doc optional arch=all
+ gfortran-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gnat-7 deb devel optional arch=any
+ gnat-7-doc deb doc optional arch=all
+ gnat-7-sjlj deb devel extra arch=any
+ gobjc++-7 deb devel optional arch=any
+ gobjc++-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ gobjc-7 deb devel optional arch=any
+ gobjc-7-multilib deb devel optional arch=amd64,armel,armhf,i386,kfreebsd-amd64,mips,mips64,mips64el,mipsel,mipsn32,mipsn32el,powerpc,ppc64,s390,s390x,sparc,sparc64,x32
+ lib32asan4 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32asan4-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32atomic1 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32atomic1-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32cilkrts5 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32cilkrts5-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gcc-7-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gcc1 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gcc1-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran-7-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran4 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gfortran4-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32go11 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32go11-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gomp1 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gomp1-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos-7-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos71 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32gphobos71-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32itm1 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32itm1-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32lsan0 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32lsan0-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32mpx2 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32mpx2-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32objc-7-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32objc4 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32objc4-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32quadmath0 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32quadmath0-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32stdc++-7-dev deb libdevel optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32stdc++6 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32stdc++6-7-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32ubsan0 deb libs optional arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib32ubsan0-dbg deb debug extra arch=amd64,ppc64,kfreebsd-amd64,s390x,sparc64,x32,mipsn32,mipsn32el,mips64,mips64el
+ lib64asan4 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64asan4-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64atomic1 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64atomic1-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64cilkrts5 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64cilkrts5-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gcc-7-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gcc1 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gcc1-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran-7-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran4 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gfortran4-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64go11 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64go11-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gomp1 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gomp1-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos-7-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos71 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64gphobos71-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64itm1 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64itm1-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64mpx2 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64mpx2-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64objc-7-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64objc4 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64objc4-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64quadmath0 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64quadmath0-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64stdc++-7-dev deb libdevel optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64stdc++6 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64stdc++6-7-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64ubsan0 deb libs optional arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ lib64ubsan0-dbg deb debug extra arch=i386,powerpc,sparc,s390,mips,mipsel,mipsn32,mipsn32el,x32
+ libasan4 deb libs optional arch=any
+ libasan4-dbg deb debug extra arch=any
+ libatomic1 deb libs optional arch=any
+ libatomic1-dbg deb debug extra arch=any
+ libcc1-0 deb libs optional arch=any
+ libcilkrts5 deb libs optional arch=any
+ libcilkrts5-dbg deb debug extra arch=any
+ libgcc-7-dev deb libdevel optional arch=any
+ libgcc1 deb libs required arch=any
+ libgcc1-dbg deb debug extra arch=any
+ libgcc2 deb libs required arch=m68k
+ libgcc2-dbg deb debug extra arch=m68k
+ libgcc4 deb libs required arch=hppa
+ libgcc4-dbg deb debug extra arch=hppa
+ libgccjit-7-dev deb libdevel optional arch=any
+ libgccjit-7-doc deb doc extra arch=all
+ libgccjit0 deb libs optional arch=any
+ libgccjit0-dbg deb debug extra arch=any
+ libgfortran-7-dev deb libdevel optional arch=any
+ libgfortran4 deb libs optional arch=any
+ libgfortran4-dbg deb debug extra arch=any
+ libgnat-7 deb libs optional arch=any
+ libgnat-7-dbg deb debug extra arch=any
+ libgnatvsn7 deb libs optional arch=any
+ libgnatvsn7-dbg deb debug extra arch=any
+ libgnatvsn7-dev deb libdevel extra arch=any
+ libgo11 deb libs optional arch=any
+ libgo11-dbg deb debug extra arch=any
+ libgomp-plugin-nvptx1 deb libs optional arch=amd64
+ libgomp1 deb libs optional arch=any
+ libgomp1-dbg deb debug extra arch=any
+ libgphobos-7-dev deb libdevel optional arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libgphobos71 deb libs optional arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libgphobos71-dbg deb debug extra arch=amd64,armel,armhf,i386,x32,kfreebsd-amd64,kfreebsd-i386
+ libhfasan4 deb libs extra arch=armel
+ libhfasan4-dbg deb debug extra arch=armel
+ libhfatomic1 deb libs optional arch=armel
+ libhfatomic1-dbg deb debug extra arch=armel
+ libhfcilkrts5 deb libs optional arch=armel
+ libhfcilkrts5-dbg deb debug extra arch=armel
+ libhfgcc-7-dev deb libdevel optional arch=armel
+ libhfgcc1 deb libs optional arch=armel
+ libhfgcc1-dbg deb debug extra arch=armel
+ libhfgfortran-7-dev deb libdevel optional arch=armel
+ libhfgfortran4 deb libs optional arch=armel
+ libhfgfortran4-dbg deb debug extra arch=armel
+ libhfgomp1 deb libs optional arch=armel
+ libhfgomp1-dbg deb debug extra arch=armel
+ libhfgphobos-7-dev deb libdevel optional arch=armel
+ libhfgphobos71 deb libs optional arch=armel
+ libhfgphobos71-dbg deb debug extra arch=armel
+ libhfitm1 deb libs optional arch=armel
+ libhfitm1-dbg deb debug extra arch=armel
+ libhfobjc-7-dev deb libdevel optional arch=armel
+ libhfobjc4 deb libs optional arch=armel
+ libhfobjc4-dbg deb debug extra arch=armel
+ libhfquadmath0 deb libs optional arch=armel
+ libhfquadmath0-dbg deb debug extra arch=armel
+ libhfstdc++-7-dev deb libdevel optional arch=armel
+ libhfstdc++6 deb libs optional arch=armel
+ libhfstdc++6-7-dbg deb debug extra arch=armel
+ libhfubsan0 deb libs optional arch=armel
+ libhfubsan0-dbg deb debug extra arch=armel
+ libhsail-rt-7-dev deb libdevel optional arch=any
+ libhsail-rt0 deb libs optional arch=any
+ libhsail-rt0-dbg deb debug extra arch=any
+ libitm1 deb libs optional arch=any
+ libitm1-dbg deb debug extra arch=any
+ liblsan0 deb libs optional arch=any
+ liblsan0-dbg deb debug extra arch=any
+ libmpx2 deb libs optional arch=any
+ libmpx2-dbg deb debug extra arch=any
+ libn32atomic1 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32atomic1-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32gcc-7-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32gcc1 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32gcc1-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32gfortran-7-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32gfortran4 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32gfortran4-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32go11 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32go11-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32gomp1 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32gomp1-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32objc-7-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32objc4 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32objc4-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libn32stdc++-7-dev deb libdevel optional arch=mips,mipsel,mips64,mips64el
+ libn32stdc++6 deb libs optional arch=mips,mipsel,mips64,mips64el
+ libn32stdc++6-7-dbg deb debug extra arch=mips,mipsel,mips64,mips64el
+ libobjc-7-dev deb libdevel optional arch=any
+ libobjc4 deb libs optional arch=any
+ libobjc4-dbg deb debug extra arch=any
+ libquadmath0 deb libs optional arch=any
+ libquadmath0-dbg deb debug extra arch=any
+ libsfasan4 deb libs extra arch=armhf
+ libsfasan4-dbg deb debug extra arch=armhf
+ libsfatomic1 deb libs optional arch=armhf
+ libsfatomic1-dbg deb debug extra arch=armhf
+ libsfcilkrts5 deb libs optional arch=armhf
+ libsfcilkrts5-dbg deb debug extra arch=armhf
+ libsfgcc-7-dev deb libdevel optional arch=armhf
+ libsfgcc1 deb libs optional arch=armhf
+ libsfgcc1-dbg deb debug extra arch=armhf
+ libsfgfortran-7-dev deb libdevel optional arch=armhf
+ libsfgfortran4 deb libs optional arch=armhf
+ libsfgfortran4-dbg deb debug extra arch=armhf
+ libsfgomp1 deb libs optional arch=armhf
+ libsfgomp1-dbg deb debug extra arch=armhf
+ libsfgphobos-7-dev deb libdevel optional arch=armhf
+ libsfgphobos71 deb libs optional arch=armhf
+ libsfgphobos71-dbg deb debug extra arch=armhf
+ libsfitm1 deb libs optional arch=armhf
+ libsfitm1-dbg deb debug extra arch=armhf
+ libsfobjc-7-dev deb libdevel optional arch=armhf
+ libsfobjc4 deb libs optional arch=armhf
+ libsfobjc4-dbg deb debug extra arch=armhf
+ libsfquadmath0 deb libs optional arch=armhf
+ libsfquadmath0-dbg deb debug extra arch=armhf
+ libsfstdc++-7-dev deb libdevel optional arch=armhf
+ libsfstdc++6 deb libs optional arch=armhf
+ libsfstdc++6-7-dbg deb debug extra arch=armhf
+ libsfubsan0 deb libs optional arch=armhf
+ libsfubsan0-dbg deb debug extra arch=armhf
+ libstdc++-7-dev deb libdevel optional arch=any
+ libstdc++-7-doc deb doc optional arch=all
+ libstdc++-7-pic deb libdevel extra arch=any
+ libstdc++6 deb libs important arch=any
+ libstdc++6-7-dbg deb debug extra arch=any
+ libtsan0 deb libs optional arch=any
+ libtsan0-dbg deb debug extra arch=any
+ libubsan0 deb libs optional arch=any
+ libubsan0-dbg deb debug extra arch=any
+ libx32asan4 deb libs optional arch=amd64,i386
+ libx32asan4-dbg deb debug extra arch=amd64,i386
+ libx32atomic1 deb libs optional arch=amd64,i386
+ libx32atomic1-dbg deb debug extra arch=amd64,i386
+ libx32cilkrts5 deb libs optional arch=amd64,i386
+ libx32cilkrts5-dbg deb debug extra arch=amd64,i386
+ libx32gcc-7-dev deb libdevel optional arch=amd64,i386
+ libx32gcc1 deb libs optional arch=amd64,i386
+ libx32gcc1-dbg deb debug extra arch=amd64,i386
+ libx32gfortran-7-dev deb libdevel optional arch=amd64,i386
+ libx32gfortran4 deb libs optional arch=amd64,i386
+ libx32gfortran4-dbg deb debug extra arch=amd64,i386
+ libx32go11 deb libs optional arch=amd64,i386
+ libx32go11-dbg deb debug extra arch=amd64,i386
+ libx32gomp1 deb libs optional arch=amd64,i386
+ libx32gomp1-dbg deb debug extra arch=amd64,i386
+ libx32gphobos-7-dev deb libdevel optional arch=amd64,i386
+ libx32gphobos71 deb libs optional arch=amd64,i386
+ libx32gphobos71-dbg deb debug extra arch=amd64,i386
+ libx32itm1 deb libs optional arch=amd64,i386
+ libx32itm1-dbg deb debug extra arch=amd64,i386
+ libx32lsan0 deb libs optional arch=amd64,i386
+ libx32lsan0-dbg deb debug extra arch=amd64,i386
+ libx32objc-7-dev deb libdevel optional arch=amd64,i386
+ libx32objc4 deb libs optional arch=amd64,i386
+ libx32objc4-dbg deb debug extra arch=amd64,i386
+ libx32quadmath0 deb libs optional arch=amd64,i386
+ libx32quadmath0-dbg deb debug extra arch=amd64,i386
+ libx32stdc++-7-dev deb libdevel optional arch=amd64,i386
+ libx32stdc++6 deb libs optional arch=amd64,i386
+ libx32stdc++6-7-dbg deb debug extra arch=amd64,i386
+ libx32ubsan0 deb libs optional arch=amd64,i386
+ libx32ubsan0-dbg deb debug extra arch=amd64,i386
+Checksums-Sha1:
+ f48452c584b3dbd661fa4c23e935ada09d3f66bd 30453 gcc-7_7.2.0-4ubuntu1.dsc
+ 11a6fe6b038f3aef87e6b1040c80fa2dcd4dfd21 73406637 gcc-7_7.2.0.orig.tar.gz
+ c7b6d1baf4be547c4dccca82df7d6d52276c5829 2846111 gcc-7_7.2.0-4ubuntu1.diff.gz
+Checksums-Sha256:
+ 51c6d5caf0f64bb48d108eff5dfa55ef717e5ac09677df21b1ad8278456db057 30453 gcc-7_7.2.0-4ubuntu1.dsc
+ aa50238ecb3a1ae463739e0ff5d31bb2fdf4e339456403bd58b765f57f237aa3 73406637 gcc-7_7.2.0.orig.tar.gz
+ 74f9834ffbfc5349a449b4f68cd4e259100743cc9f97122f99c1c01869eaa779 2846111 gcc-7_7.2.0-4ubuntu1.diff.gz
+
 Package: gdm3
 Binary: gdm3, libgdm1, libgdm-dev, gir1.2-gdm-1.0
 Version: 3.25.90.1-0ubuntu3
@@ -572,21 +1221,21 @@ Checksums-Sha256:
 
 Package: glibc
 Binary: libc-bin, libc-dev-bin, libc-l10n, glibc-doc, glibc-source, locales, locales-all, nscd, multiarch-support, libc6, libc6-dev, libc6-dbg, libc6-pic, libc6-udeb, libc6.1, libc6.1-dev, libc6.1-dbg, libc6.1-pic, libc6.1-udeb, libc0.3, libc0.3-dev, libc0.3-dbg, libc0.3-pic, libc0.3-udeb, libc0.1, libc0.1-dev, libc0.1-dbg, libc0.1-pic, libc0.1-udeb, libc6-i386, libc6-dev-i386, libc6-sparc, libc6-dev-sparc, libc6-sparc64, libc6-dev-sparc64, libc6-s390, libc6-dev-s390, libc6-amd64, libc6-dev-amd64, libc6-powerpc, libc6-dev-powerpc, libc6-ppc64, libc6-dev-ppc64, libc6-mips32, libc6-dev-mips32, libc6-mipsn32, libc6-dev-mipsn32, libc6-mips64, libc6-dev-mips64, libc6-armhf, libc6-dev-armhf, libc6-armel, libc6-dev-armel, libc0.1-i386, libc0.1-dev-i386, libc6-x32, libc6-dev-x32, libc6-xen, libc0.3-xen, libc6.1-alphaev67
-Version: 2.24-17ubuntu1
+Version: 2.26-0ubuntu1
 Priority: important
 Section: libs
 Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 Original-Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
-Build-Depends: gettext, dpkg (>= 1.18.7), dpkg-dev (>= 1.17.14), xz-utils, file, quilt, autoconf, gawk, debhelper (>= 9.20160709), rdfind, symlinks, netbase, gperf, linux-libc-dev (>= 3.9) [linux-any], systemtap-sdt-dev [linux-any], libaudit-dev [linux-any], libcap-dev [linux-any], libselinux-dev [linux-any], mig (>= 1.5-3) [hurd-i386], gnumach-dev (>= 2:1.8+git20170102-1~) [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] | hurd-headers-dev [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] <!stage1> | libihash-dev [hurd-i386] <!stage1>, kfreebsd-kernel-headers [kfreebsd-any], binutils (>= 2.21), g++-6, g++-6-multilib [amd64 armhf armel i386 kfreebsd-amd64 mips mipsel mipsn32 mipsn32el mips64 mips64el powerpc ppc64 s390x sparc sparc64 x32], g++-6 (>= 6.1.1-1~) [hurd-i386 i386 kfreebsd-i386], libc-bin (>= 2.24) <cross>
+Build-Depends: gettext, dpkg (>= 1.18.7), dpkg-dev (>= 1.17.14), xz-utils, file, quilt, autoconf, gawk, debhelper (>= 10), rdfind, symlinks, netbase, gperf, linux-libc-dev (>= 3.9) [linux-any], systemtap-sdt-dev [linux-any], libaudit-dev [linux-any], libcap-dev [linux-any], libselinux-dev [linux-any], mig (>= 1.5-3) [hurd-i386], gnumach-dev (>= 2:1.8+git20170102-1~) [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] | hurd-headers-dev [hurd-i386], hurd-dev (>= 1:0.5.git20140320~) [hurd-i386] <!stage1> | libihash-dev [hurd-i386] <!stage1>, kfreebsd-kernel-headers [kfreebsd-any], binutils (>= 2.21), g++-6, g++-6-multilib [amd64 armhf armel i386 kfreebsd-amd64 mips mipsel mipsn32 mipsn32el mips64 mips64el powerpc ppc64 s390x sparc sparc64 x32], g++-6 (>= 6.1.1-1~) [hurd-i386 i386 kfreebsd-i386], python3:native <!nocheck>, libc-bin (>= 2.26) <cross>
 Build-Depends-Indep: perl, po-debconf (>= 1.0)
 Architecture: any all
-Standards-Version: 3.9.8
+Standards-Version: 4.0.1
 Format: 3.0 (quilt)
 Directory: pool/main/g/glibc
 Files:
- 9d6c2869e207e03be0b2270dac3d48ea 8694 glibc_2.24-17ubuntu1.dsc
- 8f474d3df178e862b9ef80e97feaa6ea 13921912 glibc_2.24.orig.tar.xz
- 8843e555b42ce34cd59b391a72aba63c 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+ c367779d2f8cd06df4dd9986a31c53b5 8688 glibc_2.26-0ubuntu1.dsc
+ 1384b8d204fa80ca8cb802af2a55b63f 15207960 glibc_2.26.orig.tar.xz
+ cbf6be34b95be335bcc0e8e0dcf5a5aa 957912 glibc_2.26-0ubuntu1.debian.tar.xz
 Uploaders: Clint Adams <clint@debian.org>, Aurelien Jarno <aurel32@debian.org>, Adam Conrad <adconrad@0c3.net>, Samuel Thibault <sthibault@debian.org>
 Homepage: http://www.gnu.org/software/libc/libc.html
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-glibc/glibc.git
@@ -655,43 +1304,88 @@ Package-List:
  multiarch-support deb oldlibs optional arch=any profile=!stage1
  nscd deb admin optional arch=any profile=!stage1
 Checksums-Sha1:
- 53dcecd45991deaa344eabea5f526fb6474fe675 8694 glibc_2.24-17ubuntu1.dsc
- 268ddebc9e6ff56f70bc813f2800f7565de7fa47 13921912 glibc_2.24.orig.tar.xz
- 6716daad299505bd0df6f8e6971bf8c088a39055 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+ a4eaf5925de2c57043f5258564fd1b75ae3d0ac9 8688 glibc_2.26-0ubuntu1.dsc
+ 923915293aeb46968b0709c45ccc202f16d6b7b2 15207960 glibc_2.26.orig.tar.xz
+ b104b7faf18b4a6f396728bf41d86afeab897cf3 957912 glibc_2.26-0ubuntu1.debian.tar.xz
 Checksums-Sha256:
- 69355581a17ebd15b5e0f3e9e37067b7021ffa0312368f41d1c67c6e45f5e93d 8694 glibc_2.24-17ubuntu1.dsc
- ed71e8afd2b270f7947a2cea2457a31e1ca4fac08e2731d80edd7ec1730ec84f 13921912 glibc_2.24.orig.tar.xz
- 0146a1be4d0a65f4215cd8ac3d437404fff82bc665ae39739072d9a0f94b773c 1078948 glibc_2.24-17ubuntu1.debian.tar.xz
+ 2dd815f24008fa6992392bc832ee2b9654dcbcc924a7d28c691519e192eedac2 8688 glibc_2.26-0ubuntu1.dsc
+ cdfbf4634e016f2b8f279634329baf8a721aa2549cf016e75cea7db938d2dd6e 15207960 glibc_2.26.orig.tar.xz
+ 70a935386bb1805bc8fedeb4c2296696de56f42e924d02bfd4d8936b7e8c3bfa 957912 glibc_2.26-0ubuntu1.debian.tar.xz
 
-Package: gnome-mines
-Binary: gnome-mines
-Version: 1:3.25.92-1
+Package: gnome-online-accounts
+Binary: gnome-online-accounts, libgoa-1.0-0b, libgoa-1.0-dev, libgoa-backend-1.0-1, libgoa-backend-1.0-dev, libgoa-1.0-common, libgoa-1.0-doc, gir1.2-goa-1.0
+Version: 3.25.92-1ubuntu1
 Priority: optional
-Section: games
+Section: gnome
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Build-Depends: appstream-util, debhelper (>= 10), gnome-pkg-tools (>= 0.6), intltool (>= 0.50.0), libglib2.0-dev (>= 2.40.0), libgnome-games-support-1-dev, libgtk-3-dev (>= 3.12.0), librsvg2-dev (>= 2.32.0), valac (>= 0.24), yelp-tools
-Architecture: any
+Build-Depends: debhelper (>= 10), gnome-common, gnome-pkg-tools (>= 0.10), gobject-introspection (>= 0.9.12-4~), gtk-doc-tools, intltool (>= 0.50.1), libgcr-3-dev, libgirepository1.0-dev (>= 0.9.3), libglib2.0-dev (>= 2.52), libglib2.0-doc, libgtk-3-dev (>= 3.19.12), libjson-glib-dev, libkrb5-dev, librest-dev, libsecret-1-dev, libsoup2.4-dev (>= 2.42), libtelepathy-glib-dev, libwebkit2gtk-4.0-dev (>= 2.7.2), valac
+Architecture: any all
 Standards-Version: 4.1.0
 Format: 3.0 (quilt)
-Directory: pool/main/g/gnome-mines
+Directory: pool/main/g/gnome-online-accounts
 Files:
- 5b7e4064468b5d7b0a2966c2ad86424d 2243 gnome-mines_3.25.92-1.dsc
- ffd06959c369963120bde4c5369fabef 3691244 gnome-mines_3.25.92.orig.tar.xz
- 410eac9bd3a221fba4179c01d07537ee 27520 gnome-mines_3.25.92-1.debian.tar.xz
-Uploaders: Andreas Henriksson <andreas@fatal.se>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
-Homepage: https://wiki.gnome.org/Apps/Mines
-Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-mines/
-Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-mines
+ 93a2fa2c25ee22fc9008d90ac609c6cb 3005 gnome-online-accounts_3.25.92-1ubuntu1.dsc
+ 462fd80b17d00eb0263af67b9d0b045f 1423628 gnome-online-accounts_3.25.92.orig.tar.xz
+ 38f0dc8e1c38871b3e095aef4d9813bf 12980 gnome-online-accounts_3.25.92-1ubuntu1.debian.tar.xz
+Uploaders: Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
+Homepage: https://wiki.gnome.org/Projects/GnomeOnlineAccounts
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/gnome-online-accounts/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/gnome-online-accounts
 Package-List:
- gnome-mines deb games optional arch=any
+ gir1.2-goa-1.0 deb introspection optional arch=any
+ gnome-online-accounts deb gnome optional arch=any
+ libgoa-1.0-0b deb libs optional arch=any
+ libgoa-1.0-common deb libs optional arch=all
+ libgoa-1.0-dev deb libdevel optional arch=any
+ libgoa-1.0-doc deb doc optional arch=all
+ libgoa-backend-1.0-1 deb libs optional arch=any
+ libgoa-backend-1.0-dev deb libdevel optional arch=any
 Checksums-Sha1:
- b49d312ebaefcca87780492b4ff0ffac16cd8ff9 2243 gnome-mines_3.25.92-1.dsc
- 8999226d24f2f32576691322d30ad93c4da23bac 3691244 gnome-mines_3.25.92.orig.tar.xz
- 21c4621bc99ddd95579e36cdb5d87c4cb602449d 27520 gnome-mines_3.25.92-1.debian.tar.xz
+ 49640e4c9fd5adbac632b93ffdb987ccba107d0e 3005 gnome-online-accounts_3.25.92-1ubuntu1.dsc
+ 4843cc9afa8cc96c7106fb24674dc0f510218975 1423628 gnome-online-accounts_3.25.92.orig.tar.xz
+ 199b416923b14ea70bd00be83a8f7a311177923e 12980 gnome-online-accounts_3.25.92-1ubuntu1.debian.tar.xz
 Checksums-Sha256:
- da827135bf499a3aeb1e96d3bcdc9f1e165d4bd4f2e125947e5d13616b2063f7 2243 gnome-mines_3.25.92-1.dsc
- 9547f892e2d8a92a1c39f18e92eb07cb015b51fdbf620b1ac9fad5fee0daf6ba 3691244 gnome-mines_3.25.92.orig.tar.xz
- 57bea467eecbb476bd02228463fd771ac619afae1cbf9383d5c5c677afde0659 27520 gnome-mines_3.25.92-1.debian.tar.xz
+ f687dbe00fffeb1806f3d59f9b49be27a45238b239c3e4ecde09f064c04b8e76 3005 gnome-online-accounts_3.25.92-1ubuntu1.dsc
+ 414b75b6b6dacda01b06d2c09e24d9a50427b2dc8aaf6b184562117de21bfa27 1423628 gnome-online-accounts_3.25.92.orig.tar.xz
+ 39ef132240d0c9375d6053abfd92dd3cd485e2a0723c27055294f30573cca0be 12980 gnome-online-accounts_3.25.92-1ubuntu1.debian.tar.xz
+
+Package: gnome-software
+Binary: gnome-software, gnome-software-common, gnome-software-plugin-flatpak, gnome-software-plugin-limba, gnome-software-plugin-snap, gnome-packagekit-session, gnome-software-dev, gnome-software-doc, ubuntu-software
+Version: 3.25.91-1ubuntu4
+Priority: optional
+Section: misc
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Build-Depends: appstream, appstream-util, debhelper (>= 10.4), docbook-xsl, gnome-pkg-tools (>= 0.10), gsettings-desktop-schemas-dev (>= 3.18), gtk-doc-tools, intltool (>= 0.35.0), libappstream-glib-dev (>= 0.7.0~), libflatpak-dev (>= 0.6.12) [linux-any], libfwupd-dev (>= 0.9.3) [amd64 arm64 armhf i386], libglib2.0-dev (>= 2.46), libgnome-desktop-3-dev (>= 3.18), libgtk-3-dev (>= 3.20), libgtkspell3-3-dev (>= 3.0), libgudev-1.0-dev [linux-any], libjson-glib-dev, liblimba-dev (>= 0.5.6) [linux-any], liboauth-dev, libpackagekit-glib2-dev (>= 1.1.4), libpolkit-gobject-1-dev, libsecret-1-dev, libsoup2.4-dev (>= 2.52), libsnapd-glib-dev (>= 1.16), libsqlite3-dev, libxml2-utils, meson (>= 0.37), pkg-config, valgrind, xsltproc
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/g/gnome-software
+Files:
+ 8dc389c5281d7dd58fdcc2f604e01e12 2911 gnome-software_3.25.91-1ubuntu4.dsc
+ cd3e8830325a3a5e612d6a046c0bc137 5080292 gnome-software_3.25.91.orig.tar.xz
+ 8a14e9ab719b69300bb56005135cd63e 44124 gnome-software_3.25.91-1ubuntu4.debian.tar.xz
+Uploaders: Matthias Klumpp <mak@debian.org>, Iain Lane <laney@debian.org>, Laurent Bigonville <bigon@debian.org>, Matthias Klumpp <mak@debian.org>, Sebastien Bacher <seb128@debian.org>
+Homepage: https://wiki.gnome.org/Apps/Software
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/experimental/gnome-software/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/experimental/gnome-software/
+Package-List:
+ gnome-packagekit-session deb oldlibs extra arch=all
+ gnome-software deb gnome optional arch=any
+ gnome-software-common deb gnome optional arch=all
+ gnome-software-dev deb libdevel optional arch=any
+ gnome-software-doc deb doc optional arch=all
+ gnome-software-plugin-flatpak deb gnome optional arch=linux-any
+ gnome-software-plugin-limba deb gnome optional arch=linux-any
+ gnome-software-plugin-snap deb gnome optional arch=linux-any
+ ubuntu-software deb gnome optional arch=all
+Checksums-Sha1:
+ 44a04c67126dd7baea52ff8a4a2ae1328ae7c55f 2911 gnome-software_3.25.91-1ubuntu4.dsc
+ 97007f8a2ad4186caaadac0c7f2c69a0e403ceac 5080292 gnome-software_3.25.91.orig.tar.xz
+ b0e53a8d2d289a8c7e36f53c07ec572eec300c69 44124 gnome-software_3.25.91-1ubuntu4.debian.tar.xz
+Checksums-Sha256:
+ 23148602d5f9948fdc6a354eab4dc22b98a9c25efb6c164d82b620cb5fb2d1c9 2911 gnome-software_3.25.91-1ubuntu4.dsc
+ e98497976d37ede5e7d9e4caa76afa14226778c938e5a7d6e9d64e4863786cb5 5080292 gnome-software_3.25.91.orig.tar.xz
+ 2130dd7c3e57831d0c727172280b2e46b010b0d81417a1823d5bdc4927bf9e59 44124 gnome-software_3.25.91-1ubuntu4.debian.tar.xz
 
 Package: init-system-helpers
 Binary: init-system-helpers, init
@@ -722,6 +1416,40 @@ Checksums-Sha1:
 Checksums-Sha256:
  5c6d580900af449464a4762cbd357a1a3ccb88476710ecb96958be9b8419405d 2027 init-system-helpers_1.49ubuntu1.dsc
  c6fe39f2e5c7436492693e138ef6911add3d61ebe87b6f67d90cdeed1dfaef0f 43008 init-system-helpers_1.49ubuntu1.tar.xz
+
+Package: java-common
+Binary: java-common, default-jre, default-jre-headless, default-jdk, default-jdk-headless, default-jdk-doc, default-java-plugin, gcj-native-helper
+Version: 0.59ubuntu1
+Priority: optional
+Section: misc
+Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 10)
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (native)
+Directory: pool/main/j/java-common
+Files:
+ 8fbc01111a239b71f836a975fa5e0502 2162 java-common_0.59ubuntu1.dsc
+ 547a444c7da4e8fcf77305dac7bb551d 13188 java-common_0.59ubuntu1.tar.xz
+Uploaders: Matthias Klose <doko@debian.org>
+Homepage: https://wiki.debian.org/Java/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-java/java-common.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-java/java-common.git
+Package-List:
+ default-java-plugin deb java optional arch=any
+ default-jdk deb java optional arch=any
+ default-jdk-doc deb doc optional arch=any
+ default-jdk-headless deb java optional arch=any
+ default-jre deb java optional arch=any
+ default-jre-headless deb java optional arch=any
+ gcj-native-helper deb java optional arch=any
+ java-common deb java optional arch=all
+Checksums-Sha1:
+ 2834f39c214a464518fd85bfeba46811bbe603f7 2162 java-common_0.59ubuntu1.dsc
+ 5e9145f3452a65ee1fb0846ef4ba8ef68b05fde9 13188 java-common_0.59ubuntu1.tar.xz
+Checksums-Sha256:
+ d98ab06e9109a6e77bdd01e39e83336468991c106305636e3266cfbcc1e88532 2162 java-common_0.59ubuntu1.dsc
+ dd7077bd2baeeb09e56bea580a2d1f34744ae80ebbc53a5f313d64c7ff225dc8 13188 java-common_0.59ubuntu1.tar.xz
 
 Package: lapack
 Binary: liblapack3, liblapacke, liblapacke-dev, libtmglib3, libtmglib-dev, liblapack-dev, liblapack-pic, liblapack-test, liblapack-doc, libblas3, libblas-common, libblas-dev, libblas-test, liblapack-doc-man
@@ -837,41 +1565,34 @@ Checksums-Sha256:
  d3ce70686fb87d6791b9adcbb6e5693bfbe1cfef9661c23c75eb8a699ec4e274 6992238 libgphoto2_2.5.14.orig.tar.bz2
  98c87ddfa8e4f20be8b5958838cd6f1de96d7013bd5e9122664dcdb654898df5 107912 libgphoto2_2.5.14-1.debian.tar.xz
 
-Package: libimobiledevice
-Binary: libimobiledevice6, libimobiledevice-dev, libimobiledevice6-dbg, python-imobiledevice, libimobiledevice-utils, libimobiledevice-doc
-Version: 1.2.0+dfsg-3.1ubuntu2
+Package: libnss-db
+Binary: libnss-db
+Version: 2.2.3pre1-6build1
 Priority: optional
-Section: libs
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-Original-Maintainer: gtkpod Maintainers <pkg-gtkpod-devel@lists.alioth.debian.org>
-Build-Depends: debhelper (>= 9), dh-python, libgnutls28-dev, libgcrypt20-dev, libusb-1.0-0-dev (>= 1.0.3) [linux-any], libglib2.0-dev (>= 2.14.1), libplist-dev (>= 1.11), libplist++-dev (>= 1.11), python-all-dev (>= 2.6.6-3~), cython (>= 0.17.0), libusbmuxd-dev (>= 1.0.9), libtasn1-6-dev (>= 1.1), libreadline-dev, python-plist (>= 1.8-2~), dh-autoreconf
-Architecture: any all
-Standards-Version: 3.9.6
+Section: admin
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Build-Depends: autoconf, automake, autotools-dev, libtool, gettext, autopoint, libdb-dev (>> 4.6), libselinux1-dev [linux-any], debhelper (>> 9), dh-autoreconf, libc6-dev (>= 2.26)
+Architecture: any
+Standards-Version: 3.9.8
 Format: 3.0 (quilt)
-Directory: pool/main/libi/libimobiledevice
+Directory: pool/main/libn/libnss-db
 Files:
- 3cbf232d9a6950728bc179b903664696 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
- c61c9b5710a65de64624da0302a22e9b 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
- 7e654d1234a73b8ca7ebfb02a7f106b8 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
-Uploaders: Julien Lavergne <julien.lavergne@gmail.com>
-Homepage: http://libimobiledevice.org/
-Vcs-Browser: http://git.debian.org/?p=pkg-gtkpod/packages/libimobiledevice.git
-Vcs-Git: git://git.debian.org/git/pkg-gtkpod/packages/libimobiledevice.git
+ dd3e55a3dcc3a10f4c9685a1083e09c0 2025 libnss-db_2.2.3pre1-6build1.dsc
+ b4440ba2865d28e9068e465426c19ede 235360 libnss-db_2.2.3pre1.orig.tar.gz
+ 533f979972ba0d17e815df6e8faa0355 15000 libnss-db_2.2.3pre1-6build1.debian.tar.xz
+Homepage: http://www.gnu.org/software/libc/
+Vcs-Browser: http://svn.debian.org/wsvn/cvsdebuild/libnss-db/
+Vcs-Svn: svn://svn.debian.org/cvsdebuild/libnss-db
 Package-List:
- libimobiledevice-dev deb libdevel optional arch=any
- libimobiledevice-doc deb doc optional arch=all
- libimobiledevice-utils deb utils optional arch=any
- libimobiledevice6 deb libs optional arch=any
- libimobiledevice6-dbg deb debug extra arch=any
- python-imobiledevice deb python optional arch=any
+ libnss-db deb admin standard arch=any
 Checksums-Sha1:
- 55cccc051d9164fec6704ae0650e6fccd8074680 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
- 9b71e4ee8c175f264c632b508454b6bd0e1b2c03 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
- b7f27755de1523d2ecb812938f792c04ca14d3be 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
+ ec58362bd50ff26f41aea67ac44ac2a47946adb9 2025 libnss-db_2.2.3pre1-6build1.dsc
+ e6e1b5dcfb2168c9fd765c4659900c7859a11c39 235360 libnss-db_2.2.3pre1.orig.tar.gz
+ a595cc5baf2b81dba021598697157bd3e4fdd85c 15000 libnss-db_2.2.3pre1-6build1.debian.tar.xz
 Checksums-Sha256:
- 8949164fdc492244dbdfb9a6f3051f118f5c1805ca21a06a60f12d6aaff22e9b 2846 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.dsc
- 6b792802c515e537509272549e269675d11d23eb6c6179f87d7212fc27587dd7 605446 libimobiledevice_1.2.0+dfsg.orig.tar.bz2
- bc0bd2d1f80f0f912b33047ca3cb9493f4877d93bcec1113d96281b2a9c5babc 15192 libimobiledevice_1.2.0+dfsg-3.1ubuntu2.debian.tar.xz
+ bb184d831ab10e93014f9c59694365bb5ac0343bb48829b3b72ba5af5634d349 2025 libnss-db_2.2.3pre1-6build1.dsc
+ 0c5d677a49c7bf6b9318bf40adf335839a668d1c7509e9b1915bd22a9e0ac694 235360 libnss-db_2.2.3pre1.orig.tar.gz
+ a7e421c29af3e7f9ff8130d02aa4444e037c6b293f79e098360b911dc01433d7 15000 libnss-db_2.2.3pre1-6build1.debian.tar.xz
 
 Package: libreoffice
 Binary: libreoffice, libreoffice-l10n-za, libreoffice-l10n-in, libreoffice-core, libreoffice-common, libreoffice-java-common, libreoffice-writer, libreoffice-calc, libreoffice-impress, libreoffice-draw, libreoffice-math, libreoffice-base-core, libreoffice-base, libreoffice-style-oxygen, libreoffice-style-breeze, libreoffice-style-tango, libreoffice-style-hicontrast, libreoffice-style-sifr, libreoffice-style-galaxy, libreoffice-style-elementary, libreoffice-gnome, python3-uno, libreoffice-officebean, libreoffice-script-provider-python, libreoffice-script-provider-bsh, libreoffice-script-provider-js, libreoffice-avmedia-backend-gstreamer, libreoffice-avmedia-backend-vlc, libreoffice-sdbc-hsqldb, libreoffice-base-drivers, uno-libs3, ure, libreoffice-ogltrans, libreoffice-wiki-publisher, libreoffice-report-builder, libreoffice-report-builder-bin, libreoffice-nlpsolver, fonts-opensymbol, libreoffice-dev, libreoffice-dev-common, libreoffice-dev-doc, libreofficekit-dev,
@@ -1475,6 +2196,56 @@ Checksums-Sha256:
  736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96 3795205 lxml_3.8.0.orig.tar.gz
  4db0d6a9e2d8d268b4a01faf3b28126e942184e3d1d23391892a29877fad7c5b 7605 lxml_3.8.0-2.diff.gz
 
+Package: mesa
+Binary: libxatracker2, libxatracker-dev, libgbm1, libgbm-dev, libegl1-mesa, libegl1-mesa-dev, libwayland-egl1-mesa, libgles2-mesa, libgles2-mesa-dev, libglapi-mesa, libgl1-mesa-glx, libgl1-mesa-dri, libgl1-mesa-dev, mesa-common-dev, libosmesa6, libosmesa6-dev, mesa-va-drivers, mesa-vdpau-drivers, mesa-vulkan-drivers, mesa-opencl-icd
+Version: 17.2.0-0ubuntu1
+Priority: optional
+Section: libs
+Maintainer: Ubuntu X-SWAT <ubuntu-x@lists.ubuntu.com>
+Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
+Build-Depends: debhelper (>= 9), dh-autoreconf, quilt (>= 0.40), pkg-config, libdrm-dev (>= 2.4.82) [!hurd-any], libx11-dev, x11proto-gl-dev (>= 1.4.14), libxxf86vm-dev, libexpat1-dev, libsensors4-dev [!hurd-any], libxfixes-dev, libxdamage-dev, libxext-dev, libva-dev (>= 1.6.0) [linux-any kfreebsd-any], libvdpau-dev (>= 1.1.1) [linux-any kfreebsd-any], libvulkan-dev [amd64 arm64 armel armhf i386 mips mips64el mipsel powerpc ppc64 ppc64el sparc64 x32], autoconf, automake, libtool, x11proto-dri2-dev (>= 2.6), x11proto-dri3-dev (>= 1.0), x11proto-present-dev (>= 1.0), linux-libc-dev (>= 2.6.31) [linux-any], libx11-xcb-dev, libxcb-dri2-0-dev (>= 1.8), libxcb-glx0-dev (>= 1.8.1), libxcb-xfixes0-dev, libxcb-dri3-dev, libxcb-present-dev, libxcb-randr0-dev, libxcb-sync-dev, libxshmfence-dev (>= 1.1), libmirclient-dev (>= 0.26.2) [linux-any], mir-client-platform-mesa-dev [linux-any], python, python-mako, flex, bison, llvm-5.0-dev (>= 1:4.0~) [amd64 arm64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64 sparc64 ppc64el], libelf-dev [amd64 arm64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64 sparc64 ppc64el], libwayland-dev (>= 1.11.0) [linux-any], libclang-5.0-dev (>= 1:4.0~) [amd64 arm64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64 sparc64 ppc64el], libclc-dev (>= 0.2.0+git20170330-3) [amd64 arm64 armel armhf i386 kfreebsd-amd64 kfreebsd-i386 mips mips64el mipsel powerpc ppc64 sparc64 ppc64el], wayland-protocols (>= 1.9), zlib1g-dev
+Architecture: any
+Standards-Version: 4.0.0
+Format: 1.0
+Directory: pool/main/m/mesa
+Files:
+ 1b019390ba1e1b0e8b7791e118c3fde2 4915 mesa_17.2.0-0ubuntu1.dsc
+ ab2f88789054212cae1083e8bdb1ac23 17717892 mesa_17.2.0.orig.tar.gz
+ 95005b95f0defcca62be1c9de0d9d276 151881 mesa_17.2.0-0ubuntu1.diff.gz
+Uploaders: Andreas Boll <andreas.boll.dev@gmail.com>
+Homepage: https://mesa3d.org/
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-xorg/lib/mesa.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-xorg/lib/mesa.git
+Package-List:
+ libegl1-mesa deb libs optional arch=any
+ libegl1-mesa-dev deb libdevel optional arch=any
+ libgbm-dev deb libdevel optional arch=linux-any,kfreebsd-any
+ libgbm1 deb libs optional arch=linux-any,kfreebsd-any
+ libgl1-mesa-dev deb libdevel optional arch=any
+ libgl1-mesa-dri deb libs optional arch=any
+ libgl1-mesa-glx deb libs optional arch=any
+ libglapi-mesa deb libs optional arch=any
+ libgles2-mesa deb libs optional arch=any
+ libgles2-mesa-dev deb libdevel optional arch=any
+ libosmesa6 deb libs optional arch=any
+ libosmesa6-dev deb libdevel optional arch=any
+ libwayland-egl1-mesa deb libs optional arch=linux-any
+ libxatracker-dev deb libdevel optional arch=amd64,i386,x32
+ libxatracker2 deb libs optional arch=amd64,i386,x32
+ mesa-common-dev deb libdevel optional arch=any
+ mesa-opencl-icd deb libs optional arch=amd64,arm64,armel,armhf,i386,kfreebsd-amd64,kfreebsd-i386,mips,mips64el,mipsel,powerpc,ppc64,sparc64,ppc64el
+ mesa-va-drivers deb libs optional arch=linux-any,kfreebsd-any
+ mesa-vdpau-drivers deb libs optional arch=linux-any,kfreebsd-any
+ mesa-vulkan-drivers deb libs optional arch=amd64,arm64,armel,armhf,i386,mips,mips64el,mipsel,powerpc,ppc64,ppc64el,sparc64,x32
+Checksums-Sha1:
+ e4924ebb8690578ebccf290d6421834a7267e0bc 4915 mesa_17.2.0-0ubuntu1.dsc
+ ec8ece30ec0d3f85c2db29851a4c97b3cd6b2c10 17717892 mesa_17.2.0.orig.tar.gz
+ 3215c9fd64a3afdabec528f88758a8441914d7e9 151881 mesa_17.2.0-0ubuntu1.diff.gz
+Checksums-Sha256:
+ 8d212a1ae9510ff99b0477062a60910408dd759604e147ff36f6937ce38dca1e 4915 mesa_17.2.0-0ubuntu1.dsc
+ 9484ad96b4bb6cda5bbf1aef52dfa35183dc21aa6258a2991c245996c2fdaf85 17717892 mesa_17.2.0.orig.tar.gz
+ 4efd8d40b2b8b1e7c8c63766679d03dac62ada8fadf2cfff2f019eae0b013620 151881 mesa_17.2.0-0ubuntu1.diff.gz
+
 Package: nagios-nrpe
 Binary: nagios-nrpe-server, nagios-nrpe-plugin
 Version: 3.2.0-4ubuntu1
@@ -1594,6 +2365,41 @@ Checksums-Sha256:
  96e04751e85a266e2daa8c590000a151ff37f0bb7b873d77e38534299d399803 5185244 pacemaker_1.1.17.orig.tar.gz
  8a4f8da8d49b51e7e7ce83820fb65b36011b1764694d0fa28b014bdcb5086de9 43580 pacemaker_1.1.17-1ubuntu1.debian.tar.xz
 
+Package: perl
+Binary: perl-base, perl-doc, perl-debug, libperl5.26, libperl-dev, perl-modules-5.26, perl
+Version: 5.26.0-7
+Section: perl
+Maintainer: Niko Tyni <ntyni@debian.org>
+Build-Depends: file, cpio, libdb-dev, libgdbm-dev, netbase <!nocheck>, procps [!hurd-any] <!nocheck>, zlib1g-dev | libz-dev, libbz2-dev, dpkg-dev (>= 1.17.14), libc6-dev (>= 2.19-9) [s390x]
+Architecture: any all
+Standards-Version: 3.9.8
+Format: 3.0 (quilt)
+Directory: pool/main/p/perl
+Files:
+ e4b77020c64b8eea885145cb1f9ff431 2316 perl_5.26.0-7.dsc
+ 8c6995718e4cb62188f0d5e3488cd91f 11961692 perl_5.26.0.orig.tar.xz
+ 9860a7602f030de573730456b8b75580 159872 perl_5.26.0-7.debian.tar.xz
+Uploaders: Dominic Hargreaves <dom@earth.li>
+Homepage: http://dev.perl.org/perl5/
+Vcs-Browser: https://anonscm.debian.org/cgit/perl/perl.git
+Vcs-Git: https://anonscm.debian.org/git/perl/perl.git -b debian-5.26
+Package-List:
+ libperl-dev deb libdevel optional arch=any
+ libperl5.26 deb libs optional arch=any
+ perl deb perl standard arch=any
+ perl-base deb perl required arch=any
+ perl-debug deb devel extra arch=any
+ perl-doc deb doc optional arch=all
+ perl-modules-5.26 deb perl standard arch=all
+Checksums-Sha1:
+ ab55054e52b7213763f5b973c7eba57b2954a45e 2316 perl_5.26.0-7.dsc
+ 50f14ebdaa509ff5ef9b32ad388a1e6237c882dd 11961692 perl_5.26.0.orig.tar.xz
+ 9a5a8359c48a093f101854d0caad1e4b1135a0d8 159872 perl_5.26.0-7.debian.tar.xz
+Checksums-Sha256:
+ 01dbadf24433a8ba13674d857e941e14a32c05dc589e69114594888a372449ea 2316 perl_5.26.0-7.dsc
+ 9bf2e3d0d72aad77865c3bdbc20d3b576d769c5c255c4ceb30fdb9335266bf55 11961692 perl_5.26.0.orig.tar.xz
+ e09a84b297609e49c793bbd9851d98438dff31f4ce4da0f43982f73cfca51018 159872 perl_5.26.0-7.debian.tar.xz
+
 Package: poppler
 Binary: libpoppler68, libpoppler-dev, libpoppler-private-dev, libpoppler-glib8, libpoppler-glib-dev, libpoppler-glib-doc, gir1.2-poppler-0.18, libpoppler-qt4-4, libpoppler-qt4-dev, libpoppler-qt5-1, libpoppler-qt5-dev, libpoppler-cpp0v5, libpoppler-cpp-dev, poppler-utils
 Version: 0.57.0-2ubuntu1
@@ -1639,34 +2445,6 @@ Checksums-Sha256:
  6bbd54197a8e3a70ce3fb1cc403703b8526ecc0004bcd1e94158f8bc99815841 3494 poppler_0.57.0-2ubuntu1.dsc
  0ea37de71b7db78212ebc79df59f99b66409a29c2eac4d882dae9f2397fe44d8 1703300 poppler_0.57.0.orig.tar.xz
  3689f4d875e19691f7c31023585c2588750760d75f16d693a6b86c856a4ec08c 33344 poppler_0.57.0-2ubuntu1.debian.tar.xz
-
-Package: ppc64-diag
-Binary: ppc64-diag-doc, ppc64-diag
-Version: 2.7.4-1
-Priority: standard
-Section: misc
-Maintainer: Frédéric Bonnard <frediz@linux.vnet.ibm.com>
-Build-Depends: debhelper (>= 9.0.0), dh-autoreconf, dh-systemd, flex, bison, librtas-dev, librtasevent-dev, libservicelog-dev, libncurses5-dev, libvpd-dev, libudev-dev, doxygen
-Architecture: powerpc ppc64 ppc64el
-Standards-Version: 4.0.1
-Format: 3.0 (quilt)
-Directory: pool/main/p/ppc64-diag
-Files:
- fdefa9f419d9ea3673dc2fc6d1dfe6c7 1982 ppc64-diag_2.7.4-1.dsc
- 1cc143242bbab3f2121feb38440883c0 800415 ppc64-diag_2.7.4.orig.tar.gz
- 4df8a42e22e4891fbbd7b443c2631909 8336 ppc64-diag_2.7.4-1.debian.tar.xz
-Homepage: http://sourceforge.net/projects/linux-diag/files/ppc64-diag/
-Package-List:
- ppc64-diag deb misc extra arch=powerpc,ppc64,ppc64el
- ppc64-diag-doc deb doc extra arch=powerpc,ppc64,ppc64el
-Checksums-Sha1:
- c289af8aea4dda87c23d59c90c71c23d4cec4db5 1982 ppc64-diag_2.7.4-1.dsc
- 1fb28e9b78d358b057283b14492b705991288902 800415 ppc64-diag_2.7.4.orig.tar.gz
- c90bd338709d14c56b2f1b53289c9467897369e9 8336 ppc64-diag_2.7.4-1.debian.tar.xz
-Checksums-Sha256:
- 154306f12452866a99aa0d54f68d9202433fa6fcfbc5d2b719398fbaf5d9c050 1982 ppc64-diag_2.7.4-1.dsc
- 5a2350c07ef870b8ea50997f1b3d06d49b4f26610e63a7bd091e4b8a438e116d 800415 ppc64-diag_2.7.4.orig.tar.gz
- fc407c95fd472085c258ab10597d073c663262df09f26a67c79abe30006ec5bf 8336 ppc64-diag_2.7.4-1.debian.tar.xz
 
 Package: python-attrs
 Binary: python-attr, python3-attr, pypy-attr, python-attr-doc
@@ -1802,7 +2580,7 @@ Checksums-Sha256:
 
 Package: python2.7
 Binary: python2.7, libpython2.7-stdlib, python2.7-minimal, libpython2.7-minimal, libpython2.7, python2.7-examples, python2.7-dev, libpython2.7-dev, libpython2.7-testsuite, idle-python2.7, python2.7-doc, python2.7-dbg, libpython2.7-dbg
-Version: 2.7.14~rc1-2ubuntu1
+Version: 2.7.14~rc1-3ubuntu1
 Priority: optional
 Section: python
 Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
@@ -1815,9 +2593,9 @@ Standards-Version: 3.9.8
 Format: 1.0
 Directory: pool/main/p/python2.7
 Files:
- 3a5354ee18b4dd66cc5e31aac7e473a7 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ 1dcf59bf23319ceae9b45034f1ffa7ff 3452 python2.7_2.7.14~rc1-3ubuntu1.dsc
  51dc2952393a1f00f8bfb02dca5f9ea8 17002056 python2.7_2.7.14~rc1.orig.tar.gz
- 2db85fa4fe5fb23105cbb38d599a0c5d 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
+ 3e62849dc59bf047ff51d3d8e37772fa 285418 python2.7_2.7.14~rc1-3ubuntu1.diff.gz
 Vcs-Browser: https://code.launchpad.net/~doko/python/pkg2.7-debian
 Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg2.7-debian
 Testsuite: autopkgtest
@@ -1837,40 +2615,13 @@ Package-List:
  python2.7-examples deb python optional arch=all
  python2.7-minimal deb python optional arch=any
 Checksums-Sha1:
- fef001ff1a56345207a44eeaf99ce37c02dd0aec 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ 7c948e3f81f5e7bd4678f7bfd3325f732bd74984 3452 python2.7_2.7.14~rc1-3ubuntu1.dsc
  7cf3a830619a3f6f46508614ca39c48c0d1d869f 17002056 python2.7_2.7.14~rc1.orig.tar.gz
- 9c5319f9f617007866637dd424a44eef37d5e4ce 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
+ b8487bab793bad4bb6649c52e9430e9f189b9d1a 285418 python2.7_2.7.14~rc1-3ubuntu1.diff.gz
 Checksums-Sha256:
- 197c76c90450a3cdb6f813d764ee058b8056bde493b1d2f372be12bef0e5938a 3452 python2.7_2.7.14~rc1-2ubuntu1.dsc
+ a2139a9f80f200f7bd7ced5f5d7c94592bd8f6fc5756d3bb808faeb61018bf58 3452 python2.7_2.7.14~rc1-3ubuntu1.dsc
  4d1ca11c5451e1b7cafcabc2003cf80fb3745bac45ba51c39b855b0011a27408 17002056 python2.7_2.7.14~rc1.orig.tar.gz
- 4a2bda8ba70c5bb1e2bfcfa6c32492165728a6616f14720b71d3e4277e69c4f3 284223 python2.7_2.7.14~rc1-2ubuntu1.diff.gz
-
-Package: python3-stdlib-extensions
-Binary: python3-tk, python3-gdbm, python3-tk-dbg, python3-gdbm-dbg
-Version: 3.6.2-1ubuntu1
-Priority: standard
-Section: python
-Maintainer: Matthias Klose <doko@debian.org>
-Build-Depends: debhelper (>= 9), libpython3-all-dev, libpython3-all-dbg, python3-all-dev:any, python3-all-dbg:any, libpython3.6-dev, libpython3.6-dbg, python3.6-dev:any, python3.6-dbg:any, tk-dev, blt-dev (>= 2.4z-9), libgdbm-dev
-Build-Conflicts: tcl8.4-dev, tcl8.5-dev, tk8.4-dev, tk8.5-dev
-Architecture: any
-Standards-Version: 4.1.0
-Format: 1.0
-Directory: pool/main/p/python3-stdlib-extensions
-Files:
- 73465ce5f3da1dd7fceb80bd65464f22 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
- 1720fe100d63b74be18353401e37257a 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
-Package-List:
- python3-gdbm deb python optional arch=any
- python3-gdbm-dbg deb debug extra arch=any
- python3-tk deb python optional arch=any
- python3-tk-dbg deb debug extra arch=any
-Checksums-Sha1:
- bf574cf010f73c3dadb9b430e026d765e7c7a38e 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
- 7543601d36e1b6077856386e34a28eb24f28d3d7 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
-Checksums-Sha256:
- f90e8a39e27c7dad1921fa31d62bf305b13c716b9ad5d5c69d818c7f5916d2b8 1916 python3-stdlib-extensions_3.6.2-1ubuntu1.dsc
- 3deba8ef2494391377a524d5dc12d0223843c13c078a717c7d9d59bb137e0742 105708 python3-stdlib-extensions_3.6.2-1ubuntu1.tar.gz
+ eff1114abf6f7ef457eba5c66e1cef28a26d42637bc25fee0fc24c627925b1f7 285418 python2.7_2.7.14~rc1-3ubuntu1.diff.gz
 
 Package: python3.6
 Binary: python3.6, python3.6-venv, libpython3.6-stdlib, python3.6-minimal, libpython3.6-minimal, libpython3.6, python3.6-examples, python3.6-dev, libpython3.6-dev, libpython3.6-testsuite, idle-python3.6, python3.6-doc, python3.6-dbg, libpython3.6-dbg
@@ -1966,6 +2717,58 @@ Checksums-Sha256:
  ac9e30ea41bab501dad10828cec847e86d26b30380cd443f9ddb6092696c0119 92764 qemu_2.10+dfsg-0ubuntu1.debian.tar.xz
 Debian-Vcs-Browser: https://anonscm.debian.org/gitweb/?p=pkg-qemu/qemu.git
 Debian-Vcs-Git: git://anonscm.debian.org/pkg-qemu/qemu.git
+
+Package: samba
+Binary: samba, samba-libs, samba-common, samba-common-bin, smbclient, samba-testsuite, registry-tools, libparse-pidl-perl, samba-dev, python-samba, samba-dsdb-modules, samba-vfs-modules, libsmbclient, libsmbclient-dev, winbind, libpam-winbind, libnss-winbind, libwbclient0, libwbclient-dev, ctdb
+Version: 2:4.6.7+dfsg-1ubuntu2
+Priority: optional
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Samba Maintainers <pkg-samba-maint@lists.alioth.debian.org>
+Build-Depends: bison, debhelper (>> 10), dh-python, dh-systemd (>= 1.5), docbook-xml, docbook-xsl, flex, libacl1-dev, libaio-dev [linux-any], libarchive-dev, libattr1-dev, libavahi-client-dev, libavahi-common-dev, libblkid-dev, libbsd-dev, libcap-dev [linux-any], libcephfs-dev [linux-any], libcmocka-dev (>= 1.0), libcups2-dev, libdbus-1-dev, libgnutls28-dev, libgpgme11-dev, libldap2-dev, libldb-dev (>= 2:1.1.29~), libncurses5-dev, libpam0g-dev, libparse-yapp-perl, libpcap-dev [hurd-i386 kfreebsd-any], libpopt-dev, libreadline-dev, libsystemd-dev [linux-any], libtalloc-dev (>= 2.1.9~), libtdb-dev (>= 1.3.12~), libtevent-dev (>= 0.9.31~), perl, pkg-config, po-debconf, python-all-dev (>= 2.6.6-3), python-dnspython, python-ldb (>= 2:1.1.29~), python-ldb-dev (>= 2:1.1.29~), python-talloc-dev (>= 2.1.9~), python-tdb (>= 1.3.12~), python-testtools, python3, xfslibs-dev [linux-any], xsltproc, zlib1g-dev (>= 1:1.2.3)
+Architecture: any all
+Standards-Version: 4.0.0
+Format: 3.0 (quilt)
+Directory: pool/main/s/samba
+Files:
+ c79f0d9e6de365955e3f8c946a99abf4 4210 samba_4.6.7+dfsg-1ubuntu2.dsc
+ dcff42d742790a407a3bd2ed04047b14 21129864 samba_4.6.7+dfsg.orig.tar.gz
+ 5c906743259cb4c87b7918a04cf2ab27 230620 samba_4.6.7+dfsg-1ubuntu2.debian.tar.xz
+Uploaders: Steve Langasek <vorlon@debian.org>, Jelmer Vernooĳ <jelmer@debian.org>, Ivo De Decker <ivodd@debian.org>, Mathieu Parent <sathieu@debian.org>, Andrew Bartlett <abartlet+debian@catalyst.net.nz>
+Homepage: http://www.samba.org
+Vcs-Browser: https://anonscm.debian.org/cgit/pkg-samba/samba.git
+Vcs-Git: https://anonscm.debian.org/git/pkg-samba/samba.git
+Testsuite: autopkgtest
+Testsuite-Triggers: cifs-utils, coreutils, systemd
+Package-List:
+ ctdb deb net optional arch=any
+ libnss-winbind deb net optional arch=any
+ libpam-winbind deb net optional arch=any
+ libparse-pidl-perl deb perl optional arch=any
+ libsmbclient deb libs optional arch=any
+ libsmbclient-dev deb libdevel extra arch=any
+ libwbclient-dev deb libdevel optional arch=any
+ libwbclient0 deb libs optional arch=any
+ python-samba deb python optional arch=any
+ registry-tools deb net optional arch=any
+ samba deb net optional arch=any
+ samba-common deb net optional arch=all
+ samba-common-bin deb net optional arch=any
+ samba-dev deb devel optional arch=any
+ samba-dsdb-modules deb libs optional arch=any
+ samba-libs deb libs optional arch=any
+ samba-testsuite deb net optional arch=any
+ samba-vfs-modules deb net optional arch=any
+ smbclient deb net optional arch=any
+ winbind deb net optional arch=any
+Checksums-Sha1:
+ c7ded3de0a00e4e2d3dc63e3eff6e8cd5aec2cca 4210 samba_4.6.7+dfsg-1ubuntu2.dsc
+ 9c7823ef943abc9295deced67bb6f4593f4aeb35 21129864 samba_4.6.7+dfsg.orig.tar.gz
+ 008e1314f10a9ff55c3939f94ae48917c9778bc7 230620 samba_4.6.7+dfsg-1ubuntu2.debian.tar.xz
+Checksums-Sha256:
+ 792376ddfccd8f58cf2f11bc539302f89af3c4bc8d57ab23a429ab212ce22f68 4210 samba_4.6.7+dfsg-1ubuntu2.dsc
+ 6c344863ce673ce053a92d26f047d43ad96dfc361e3976ad41ce3282ff8b5998 21129864 samba_4.6.7+dfsg.orig.tar.gz
+ b519b306c315a795e2518e8a342b741399f439269be89daec1c196e3a88a7b04 230620 samba_4.6.7+dfsg-1ubuntu2.debian.tar.xz
 
 Package: shotwell
 Binary: shotwell, shotwell-common, shotwell-dbg
@@ -2211,6 +3014,101 @@ Checksums-Sha256:
  70558895a255c6cdd450baa65b2d0a9e8f77ff291c2c7047563fecca32848c10 3517 twisted_17.5.0-1.dsc
  f198a494f0df2482f7c5f99d7f3eef33d22763ffc76641b36fec476b878002ea 2993816 twisted_17.5.0.orig.tar.bz2
  6516ef0c7529538925018ab0650cb0f452644792b64236518039e96358bec614 19400 twisted_17.5.0-1.debian.tar.xz
+
+Package: ubiquity
+Binary: ubiquity, ubiquity-ubuntu-artwork, ubiquity-frontend-gtk, ubiquity-frontend-kde, ubiquity-frontend-debconf, oem-config, oem-config-gtk, oem-config-kde, oem-config-debconf, oem-config-check, oem-config-udeb, oem-config-remaster
+Version: 17.10.5
+Section: admin
+Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
+Build-Depends: adwaita-icon-theme, apt, autopoint, bf-utf-source, check, dctrl-tools, debconf-utils, debhelper (>= 9), devio, dh-autoreconf, dh-di (>= 3), dh-systemd, dpkg-dev (>= 1.15.7), gir1.2-nma-1.0, gir1.2-soup-2.4, gir1.2-timezonemap-1.0, gir1.2-webkit2-4.0, gir1.2-xkl-1.0, gobject-introspection, imagemagick, intltool (>= 0.40.0), intltool-debian (>= 0.30+20040212), iso-codes, isoquery, keymapper (>= 0.5.3-7), libbogl-dev, libcairo2-dev, libdebconfclient0-dev (>= 0.68), libdebian-installer4-dev (>= 0.76), libgirepository1.0-dev, libglib2.0-dev, libgtk-3-dev (>= 3.20), libido3-0.1-dev, libindicator3-dev, libiw-dev (>= 27+28pre9), liblocale-gettext-perl, libparted-dev (>= 2.2), librsvg2-bin, libsubunit-dev, locales, pep8, pkg-config, po-debconf (>= 1.0), pyflakes3 (>= 0.7.2), python-gi-dev, python-scour, python3-all (>= 3.1), python3-apt (>= 0.7.100.3~), python3-cairo, python3-dbus, python3-debconf, python3-gi, python3-gi-cairo, python3-icu (>= 1.0), python3-mock (>= 0.7.0), python3-pam, tzdata, ubuntu-artwork, udev, wget, xkb-data (>= 0.9), xkb-data-i18n, xvfb
+Architecture: any all
+Standards-Version: 3.9.4
+Format: 3.0 (native)
+Directory: pool/main/u/ubiquity
+Files:
+ 137ade9ee4e35dafb15fd67aba1d10da 3486 ubiquity_17.10.5.dsc
+ 518d98bcdc4ab9521572ccdd1849cf01 7959248 ubiquity_17.10.5.tar.xz
+Uploaders: Colin Watson <cjwatson@ubuntu.com>, Evan Dandrea <ev@ubuntu.com>
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-installer/ubiquity/trunk
+Testsuite: autopkgtest
+Testsuite-Triggers: humanity-icon-theme, python3-mock, xvfb
+Package-List:
+ oem-config deb admin optional arch=all
+ oem-config-check udeb debian-installer standard arch=all
+ oem-config-debconf deb admin optional arch=all
+ oem-config-gtk deb admin optional arch=all
+ oem-config-kde deb admin optional arch=all
+ oem-config-remaster deb admin optional arch=all
+ oem-config-udeb udeb debian-installer optional arch=all
+ ubiquity deb admin optional arch=any
+ ubiquity-frontend-debconf deb admin optional arch=any
+ ubiquity-frontend-gtk deb admin optional arch=amd64,arm64,armhf,i386,powerpc,ppc64el
+ ubiquity-frontend-kde deb admin optional arch=all
+ ubiquity-ubuntu-artwork deb admin optional arch=all
+Checksums-Sha1:
+ 1fa54bf1d186f0ec2eab185376750420645358ac 3486 ubiquity_17.10.5.dsc
+ 2f213f0116d19431981d9482fb73e1477da5b65c 7959248 ubiquity_17.10.5.tar.xz
+Checksums-Sha256:
+ 6e915ca1fa0660f3036b6a695748b4665518e831665b78c7d85f66439b5a5b21 3486 ubiquity_17.10.5.dsc
+ 3658d0b8dac2c021e4161aa6afb753d94ac40fc55ed26fd5db74f3dbb4d21a74 7959248 ubiquity_17.10.5.tar.xz
+
+Package: update-manager
+Binary: update-manager-core, python3-update-manager, update-manager, update-manager-text, update-manager-kde
+Version: 1:17.10.8
+Priority: standard
+Section: gnome
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: debhelper (>= 9), python3-all (>= 3.3.0-2), python3-distutils-extra (>= 2.38), python3-dbus, python3-gi (>= 3.8), python3-yaml, gir1.2-gtk-3.0, lsb-release, apt-clone (>= 0.2.3~ubuntu1)
+Build-Depends-Indep: libxml-parser-perl, intltool
+Architecture: all
+Standards-Version: 3.8.0
+Format: 1.0
+Directory: pool/main/u/update-manager
+Files:
+ caa3dda7485e998ee82f7a896af0f63e 1467 update-manager_17.10.8.dsc
+ 88d2f260edb2f0fbc475b80f3d3da91f 3161342 update-manager_17.10.8.tar.gz
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/update-manager/main
+Testsuite: autopkgtest
+Testsuite-Triggers: aptdaemon, pep8, pyflakes, python3-mock, python3-nose, xvfb
+Package-List:
+ python3-update-manager deb python optional arch=all
+ update-manager deb gnome optional arch=all
+ update-manager-core deb admin optional arch=all
+ update-manager-kde deb kde optional arch=all
+ update-manager-text deb admin optional arch=all
+Checksums-Sha1:
+ 6a9ae002a71e3bdcaf9d4bede1f5437e5922195d 1467 update-manager_17.10.8.dsc
+ 494e369117149a51c750253397e9b03b4eddd911 3161342 update-manager_17.10.8.tar.gz
+Checksums-Sha256:
+ e948925985aecf3de7b725d639d3420f2a354f8f233baacc2d421270baf7e825 1467 update-manager_17.10.8.dsc
+ 7b971d63fddaba0badd73bd38266eb5b1067bc1c904ca82ac68f96fa959eb2fb 3161342 update-manager_17.10.8.tar.gz
+
+Package: update-notifier
+Binary: update-notifier, update-notifier-common
+Version: 3.185
+Priority: optional
+Section: gnome
+Maintainer: Michael Vogt <michael.vogt@ubuntu.com>
+Build-Depends: debhelper (>= 7.0.50~), libgtk-3-dev, libglib2.0-dev (>= 2.34), intltool, libnotify-dev (>= 0.7), libgudev-1.0-dev, libx11-dev, autotools-dev, libappindicator3-dev, po-debconf, python3, python3-apt, python3-debian, python3-mock
+Architecture: any all
+Standards-Version: 3.9.4
+Format: 3.0 (native)
+Directory: pool/main/u/update-notifier
+Files:
+ 99f71968f42cd98abd1a1de5bfe01852 1225 update-notifier_3.185.dsc
+ c9e8ac167827ca2355053e67bfc09bc8 324580 update-notifier_3.185.tar.xz
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-core-dev/update-notifier/ubuntu
+Testsuite: autopkgtest
+Testsuite-Triggers: pep8, pyflakes, python3-mock, python3-nose
+Package-List:
+ update-notifier deb gnome optional arch=any
+ update-notifier-common deb gnome optional arch=all
+Checksums-Sha1:
+ b6ebb3582b323c4804d62024d7681fe7e31e45aa 1225 update-notifier_3.185.dsc
+ 5845278cd7e50c3abc54461782a1426693ba4384 324580 update-notifier_3.185.tar.xz
+Checksums-Sha256:
+ b8efe6bebce3dd980fd00271b469d80758a8f0d0cbf912c72aa74ede3a1cb896 1225 update-notifier_3.185.dsc
+ b55ae5d31e1b408b075c756de4e3b469dee057ca59003a17189af377259d8300 324580 update-notifier_3.185.tar.xz
 
 Package: xorg-server
 Binary: xserver-xorg-core, xserver-xorg-core-udeb, xserver-xorg-dev, xdmx, xdmx-tools, xnest, xvfb, xserver-xephyr, xserver-common, xmir, xserver-xorg-xmir, xorg-server-source, xwayland, xserver-xorg-legacy
