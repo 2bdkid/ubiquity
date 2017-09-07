@@ -1,3 +1,17 @@
+ubiquity (17.10.7) artful; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  * Mark the files for oem-config as trusted so they are properly handled by
+    nautilus. (LP: #1712581)
+
+  [ Iain Lane ]
+  * ubi-console-setup.py: Set DPKG_MAINTSCRIPT_{NAME,PACKAGE} variables for
+    our manual running of keyboard-configuration.postinst. This script now
+    runs dpkg-maintscript-helper to remove an old conffile. That code won't
+    fire in ubiquity, but we still need to not error out. (LP: #1715605)
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 07 Sep 2017 11:02:30 -0400
+
 ubiquity (17.10.6) artful; urgency=medium
 
   [ David Mohammed ]
