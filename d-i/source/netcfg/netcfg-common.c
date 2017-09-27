@@ -1403,7 +1403,8 @@ void reap_old_files (void)
         unlink(*ptr++);
 
     if (!is_resolvconf_used())
-        unlink(RESOLV_FILE);
+	    if (!is_resolved_used())
+		unlink(RESOLV_FILE);
 }
 
 /* Convert a space-separated list of nameservers in a single string (as might
@@ -1815,4 +1816,19 @@ int is_resolvconf_used()
 	}
 
 	return resolvconf_used;
+}
+
+/* Check if /etc/resolv.conf symlinks to /run/systemd/resolve/stub-resolv.conf. */
+int is_resolved_used()
+{
+	int resolved_used = 0;
+
+	char *path = realpath(RESOLV_FILE, NULL);
+
+	if (path) {
+		resolved_used = !strcmp(path, RESOLVED_FILE);
+		free(path);
+	}
+
+	return resolved_used;
 }

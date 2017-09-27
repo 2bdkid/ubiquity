@@ -1,3 +1,11 @@
+console-setup (1.166ubuntu5) artful; urgency=medium
+
+  * Don't use console-setup-tty or its udev rule. This dates back to lucid and
+    now systemd is apparently able to handle this correctly. It's now actively
+    breaking graphical sessions. (LP: #1710637) 
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 18 Sep 2017 16:36:50 -0400
+
 console-setup (1.166ubuntu4) artful; urgency=medium
 
   * Keyboard/Makefile: Add a rule to make KeyboardNames.pl, needed by ubiquity

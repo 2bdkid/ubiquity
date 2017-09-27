@@ -8,6 +8,7 @@
 #define NETWORKS_FILE   "/etc/networks"
 #define RESOLV_FILE     "/etc/resolv.conf"
 #define RESOLVCONF_FILE "/run/resolvconf/resolv.conf"
+#define RESOLVED_FILE   "/run/systemd/resolve/stub-resolv.conf"
 #define DHCLIENT_CONF   "/etc/dhclient.conf"
 #define DOMAIN_FILE     "/tmp/domain_name"
 #define NTP_SERVER_FILE "/tmp/dhcp-ntp-servers"
@@ -203,6 +204,7 @@ extern int nameserver_count (const struct netcfg_interface *interface);
 
 extern int read_resolv_conf_nameservers (char *resolv_conf_file, struct netcfg_interface *interface);
 extern int is_resolvconf_used();
+extern int is_resolved_used();
 
 extern void sigchld_handler (int sig __attribute__ ((unused)));
 
