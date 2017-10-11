@@ -1,3 +1,18 @@
+console-setup (1.166ubuntu7) artful; urgency=medium
+
+  * Drop dependency from console-setup to initramfs-tools |
+    linux-initramfs-tool; this was a versioned dependency used for upgrades,
+    now long obsolete.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Thu, 05 Oct 2017 12:04:08 -0700
+
+console-setup (1.166ubuntu6) artful; urgency=medium
+
+  * debian/control: we also need xkb-data-i18n as a Build-Depends-Indep to
+    build a complete set of translated keyboard layout/variant names.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 28 Sep 2017 17:46:56 -0400
+
 console-setup (1.166ubuntu5) artful; urgency=medium
 
   * Don't use console-setup-tty or its udev rule. This dates back to lucid and
