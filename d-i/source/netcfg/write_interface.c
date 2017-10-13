@@ -164,6 +164,27 @@ static int nc_wi_slaac(const struct netcfg_interface *interface, FILE *fd)
 	return 1;
 }
 
+/* Write nameservers for netplan
+ */
+static int nc_wi_netplan_write_nameservers(const struct netcfg_interface *interface, FILE *fd, const char *domain)
+{
+	int i;
+
+	if (empty_str(domain))
+		return 1;
+
+	fprintf(fd, "      nameservers:\n");
+	fprintf(fd, "          search: [ %s ]\n", domain);
+	fprintf(fd, "          addresses:\n");
+	for (i = 0; i < NETCFG_NAMESERVERS_MAX; i++) {
+		if (!empty_str(interface->nameservers[i])) {
+			fprintf(fd, "              - %s\n", interface->nameservers[i]);
+		}
+	}
+
+	return 1;
+}
+
 /* Write out a static IPv4 config stanza for the given interface
  */
 static int nc_wi_static_ipv4(const struct netcfg_interface *interface, FILE *fd)
@@ -182,7 +203,7 @@ static int nc_wi_static_ipv4(const struct netcfg_interface *interface, FILE *fd)
 	return 1;
 }
 
-static int nc_wi_netplan_static_ipv4(const struct netcfg_interface *interface, FILE *fd)
+static int nc_wi_netplan_static_ipv4(const struct netcfg_interface *interface, FILE *fd, const char *domain)
 {
 	fprintf(fd, "      addresses: [ %s/%i ]\n", interface->ipaddress,
 	        empty_str(interface->pointopoint) ? interface->masklen : 32);
@@ -190,7 +211,7 @@ static int nc_wi_netplan_static_ipv4(const struct netcfg_interface *interface, F
 		fprintf(fd, "      gateway4: %s\n",
 		        empty_str(interface->pointopoint) ? interface->gateway : interface->pointopoint);
 
-	return 1;
+	return nc_wi_netplan_write_nameservers(interface, fd, domain);
 }
 
 /* Write out a static IPv6 config stanza for the given interface
@@ -207,13 +228,13 @@ static int nc_wi_static_ipv6(const struct netcfg_interface *interface, FILE *fd)
 	return 1;
 }
 
-static int nc_wi_netplan_static_ipv6(const struct netcfg_interface *interface, FILE *fd)
+static int nc_wi_netplan_static_ipv6(const struct netcfg_interface *interface, FILE *fd, const char *domain)
 {
 	fprintf(fd, "      addresses: [ %s/%i ]\n", interface->ipaddress, interface->masklen);
 	if (!empty_str(interface->gateway))
 		fprintf(fd, "      gateway6: %s\n", interface->gateway);
 
-	return 1;
+	return nc_wi_netplan_write_nameservers(interface, fd, domain);
 }
 
 static int nc_wi_write_eni(const struct netcfg_interface *interface, FILE *fd)
@@ -258,7 +279,7 @@ static int nc_wi_write_eni(const struct netcfg_interface *interface, FILE *fd)
 	return rv;
 }
 
-static int nc_wi_write_netplan_yaml(const struct netcfg_interface *interface, FILE *fd, off_t size)
+static int nc_wi_write_netplan_yaml(const struct netcfg_interface *interface, FILE *fd, off_t size, const char *domain)
 {
 	int rv;
 
@@ -310,10 +331,10 @@ static int nc_wi_write_netplan_yaml(const struct netcfg_interface *interface, FI
 	/* Write all other static addresses */
 	if (interface->address_family == AF_INET) {
 		di_debug("Writing static IPv4 stanza for %s", interface->name);
-		rv = nc_wi_netplan_static_ipv4(interface, fd);
-	} else if (interface->address_family == AF_INET) {
+		rv = nc_wi_netplan_static_ipv4(interface, fd, domain);
+	} else if (interface->address_family == AF_INET6) {
 		di_debug("Writing static IPv6 stanza for %s", interface->name);
-		rv = nc_wi_netplan_static_ipv6(interface, fd);
+		rv = nc_wi_netplan_static_ipv6(interface, fd, domain);
 	}
 
 	if (rv && interface && is_wireless_iface(interface->name)) {
@@ -346,7 +367,7 @@ void unlink_config_tmp_file(int use_netplan)
  * returned, the interfaces file will not have been modified, and errno will
  * contain the details.
  */
-int netcfg_write_interface(struct debconfclient *client, const struct netcfg_interface *interface)
+int netcfg_write_interface(struct debconfclient *client, const struct netcfg_interface *interface, const char *domain)
 {
 	FILE *fd;
 	int rv;
@@ -449,7 +470,7 @@ int netcfg_write_interface(struct debconfclient *client, const struct netcfg_int
 	rv = 1;
 
 	if (use_netplan) {
-		rv = nc_wi_write_netplan_yaml(interface, fd, stat_buf.st_size);
+		rv = nc_wi_write_netplan_yaml(interface, fd, stat_buf.st_size, domain);
 	} else {
 		rv = nc_wi_write_eni(interface, fd);
 	}

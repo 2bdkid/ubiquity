@@ -270,7 +270,7 @@ extern int nc_v6_interface_configured(const struct netcfg_interface *interface, 
 extern int nc_v6_get_config_flags(struct debconfclient *client, struct netcfg_interface *interface);
 
 /* write_interfaces.c */
-extern int netcfg_write_interface(struct debconfclient *client, const struct netcfg_interface *interface);
+extern int netcfg_write_interface(struct debconfclient *client, const struct netcfg_interface *interface, const char *domain);
 
 /* rdnssd.c */
 extern int start_rdnssd(struct debconfclient *client);

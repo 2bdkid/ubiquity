@@ -1,3 +1,11 @@
+netcfg (1.142ubuntu5) artful; urgency=medium
+
+  * Make sure we write nameservers and search domains correctly when using
+    netplan to drive network configuration. (LP: #1721798)
+  * Fix writing IPv6 static config in the netplan case.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Thu, 12 Oct 2017 09:31:02 -0400
+
 netcfg (1.142ubuntu4) artful; urgency=medium
 
   * Add resolved support. LP: #1714167

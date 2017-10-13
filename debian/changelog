@@ -1,3 +1,14 @@
+ubiquity (17.10.10) artful; urgency=medium
+
+  * tests/test_misc.py: Rip out the test for 'ta' keymap. It's been regularly
+    broken just because gsettings is returning values out of order (and
+    not all of the variants show every time). We already test a few other
+    keymaps, so no need to test all of them.
+  * Automatic update of included source packages: debian-installer-utils
+    1.113ubuntu2, netcfg 1.142ubuntu5.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 13 Oct 2017 10:03:04 -0400
+
 ubiquity (17.10.9) artful; urgency=medium
 
   [ Sebastien Bacher ]
