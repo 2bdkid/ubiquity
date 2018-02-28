@@ -265,8 +265,8 @@ class PageKde(PreparePageBase):
             from PyQt5 import uic
             from PyQt5 import QtGui
             self.page = uic.loadUi('/usr/share/ubiquity/qt/stepPrepare.ui')
-            self.minimal_install_vbox = self.page.minimal_install_vbox
             self.prepare_minimal_install = self.page.prepare_minimal_install
+            self.label_minimal_install = self.page.label_minimal_install
             self.prepare_download_updates = self.page.prepare_download_updates
             self.prepare_nonfree_software = self.page.prepare_nonfree_software
             self.prepare_foss_disclaimer = self.page.prepare_foss_disclaimer
@@ -290,6 +290,9 @@ class PageKde(PreparePageBase):
             except Exception as e:
                 # TODO use an inconsistent state?
                 print('unable to set up power source watch:', e)
+            if not os.path.exists(minimal_install_rlist_path):
+                self.label_minimal_install.hide()
+                self.prepare_minimal_install.hide()
             try:
                 self.prepare_network_connection = StateBox(self.page)
             except Exception as e:
@@ -299,8 +302,6 @@ class PageKde(PreparePageBase):
             self.debug('Could not create prepare page: %s', e)
             self.page = None
         self.set_using_secureboot(False)
-        self.minimal_install_vbox.set_visible(
-            os.path.exists(minimal_install_rlist_path))
         self.plugin_widgets = self.page
 
     def show_insufficient_space_page(self, required, free):

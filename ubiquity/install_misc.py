@@ -44,7 +44,10 @@ import debconf
 from ubiquity import misc, osextras
 from ubiquity.casper import get_casper
 
-minimal_install_rlist_path = "/cdrom/casper/filesystem.manifest-minimal-remove"
+minimal_install_rlist_path = os.path.join(
+    '/cdrom',
+    get_casper('LIVE_MEDIA_PATH', 'casper').lstrip('/'),
+    'filesystem.manifest-minimal-remove')
 
 
 def debconf_disconnect():
