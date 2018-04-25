@@ -18,6 +18,10 @@ if systemd-detect-virt --quiet --container; then
     exit 0
 fi
 
+# Pretend we're running from kernel postinst to activate
+# the same guard against mismatched kernel versions:
+export FK_KERNEL_HOOK_SCRIPT='postinst.d'
+
 abi="$1"
 # ignored
 _initrd="$2"
