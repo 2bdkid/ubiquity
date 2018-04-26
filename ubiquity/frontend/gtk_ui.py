@@ -254,6 +254,22 @@ class Wizard(BaseFrontend):
             if 'access=v3' in fp.read():
                 self.screen_reader = True
 
+        if 'UBIQUITY_ONLY' in os.environ:
+            # do not run this as root. The API pretends to be synchronous but
+            # it is actually asynchronous. If you become root before it
+            # finishes then D-Bus will reject our connection due to a
+            # mismatched user between the requestor and the owner of the
+            # session bus.
+
+            # handle orca only in ubiquity-dm where there is no gnome-session
+            self.a11y_settings = Gio.Settings.new(
+                "org.gnome.desktop.a11y.applications")
+            self.a11y_settings.connect("changed::screen-reader-enabled",
+                                       on_screen_reader_enabled_changed)
+            # enable if needed and a key read is needed to connect the signal
+            on_screen_reader_enabled_changed(self.a11y_settings,
+                                             "screen-reader-enabled")
+
         # set default language
         self.locale = i18n.reset_locale(self)
 
@@ -723,15 +739,6 @@ class Wizard(BaseFrontend):
         self.disable_powermgr()
 
         if 'UBIQUITY_ONLY' in os.environ:
-            # handle orca only in ubiquity-dm where there is no gnome-session
-            self.a11y_settings = Gio.Settings.new(
-                "org.gnome.desktop.a11y.applications")
-            self.a11y_settings.connect("changed::screen-reader-enabled",
-                                       on_screen_reader_enabled_changed)
-            # enable if needed and a key read is needed to connect the signal
-            on_screen_reader_enabled_changed(self.a11y_settings,
-                                             "screen-reader-enabled")
-
             self.disable_logout_indicator()
             if 'UBIQUITY_DEBUG' not in os.environ:
                 self.disable_terminal()

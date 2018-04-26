@@ -1,3 +1,29 @@
+ubiquity (18.04.14) bionic; urgency=medium
+
+  * Revert the previous upload. It didn't actually *fix* all cases, just
+    papered over them. If the race was lost, the screen reader still didn't
+    work in ubiquity-dm mode.
+  * Move the Gio.Settings code into the constructor of the wizard. This runs
+    with dropped privileges (uid = 0, euid = 999) whereas run() runs as root
+    (uid = 0, euid = 0). When run as 0 / 0, dconf creates its
+    XDG_RUNTIME_DIR/dconf/user database as root. We need to ensure that it
+    runs in a context with dropped privileges. (LP: #1767067)
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 26 Apr 2018 15:46:32 +0100
+
+ubiquity (18.04.13) bionic; urgency=medium
+
+  [ Dimitri John Ledkov ]
+  * Remove dconf/user before Try Ubuntu.
+    Just, in case it has the wrong permissions, i.e. root and thus breaks
+    user running gnome session / shell / "Try Ubuntu".
+
+  [ Colin Watson ]
+  * Automatic update of included source packages: flash-kernel 3.90ubuntu3,
+    netcfg 1.142ubuntu7.
+
+ -- Colin Watson <cjwatson@ubuntu.com>  Thu, 26 Apr 2018 15:06:50 +0100
+
 ubiquity (18.04.12) bionic; urgency=medium
 
   [ Didier Roche ]
