@@ -1,3 +1,19 @@
+ubiquity (18.10.1) cosmic; urgency=medium
+
+  [ Iain Lane ]
+  * Bump sources to cosmic
+  * Automatic update of included source packages: bterm-unifont 1.5,
+    choose-mirror 2.78ubuntu4, preseed 1.71ubuntu8.
+
+  [ Andrea Azzarone ]
+  * misc.py: Restore the corrent euid in regain_privileges_save. Calling
+    regain_privileges_save should restore the effective user-id to the one
+    before the call  to drop_privileges_save. We need to call os.setresuid and
+    os.setresgid twice to avoid permission issues when calling os.setgroups.
+    (LP: #1751252)
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 08 May 2018 12:07:44 +0100
+
 ubiquity (18.04.14) bionic; urgency=medium
 
   * Revert the previous upload. It didn't actually *fix* all cases, just
