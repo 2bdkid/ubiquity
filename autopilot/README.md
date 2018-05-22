@@ -71,7 +71,7 @@ On a local machine with the runner
 
  * Install the following dependencies:
 
-        $ sudo apt-get install bsdtar qemu-system-x86 bzr xz-utils cpio
+        $ sudo apt-get install bsdtar qemu-system-x86 bzr xz-utils cpio git
 
  * Download a desktop image from *http//cdimage.ubuntu.com/*
 
@@ -104,7 +104,7 @@ Execute the tasks below on the slave:
 
  * Branch ubiquity trunk:
 
-        $ bzr branch lp:ubiquity
+        $ git clone https://git.launchpad.net/ubiquity
 
  * Branch ubuntu-qa-tools (to get the script `dl-ubuntu-test-iso`)
 

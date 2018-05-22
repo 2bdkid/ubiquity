@@ -36,11 +36,30 @@ file="$1"
 if [ ! -e /cdrom/.disk/cd_type ] || [ ! -e /var/lib/install-cd.id ]; then
 	exit 0
 fi
-# multi-arch CDs have cd_type 'non_complete'
-# KDE/Xfce CDs and multi-arch DVDs have '/single' postfix in cd_type
-# bluray CDs have cd_type 'bluray'
+
+# Various different image types look different here:
+#
+# Image Type                       cd_type
+###################################################
+# netinst                          "not_complete"
+# full CD sets (default desktop)   "full_cd"
+# desktop-specific CD images       "full_cd/single"
+# DVD                              "dvd"
+# bluray                           "bluray"
+# multi-arch CD/DVD                "not_complete"
+# live                             "live"
+#
+# It can make sense to offer to scan more media here in most cases,
+# but... on live or blu-ray it's unlikely to help; the
+# desktop-specific image is designed specifically to work with only a
+# single image. Hopefully the following makes sense.
+#
+# Images written to USB pen drives still need better support
+# too... :-(
 cd_type=$(cat /cdrom/.disk/cd_type)
-if [ "$cd_type" != full_cd ] && [ "$cd_type" != dvd ]; then
+if [ "$cd_type" = "full_cd/single" ] || \
+	[ "$cd_type" = "bluray" ] || \
+	[ "$cd_type" = "live" ]; then
 	exit 0
 fi
 

@@ -47,7 +47,7 @@ else
 	echo "# are provided as examples, but you should amend them as appropriate" >> $file
 	echo "# for your mirror of choice." >> $file
 	echo "#" >> $file
-	echo "# deb http://ftp.debian.org/debian/ ${codename}-backports $dists" >> $file
+	echo "# deb http://deb.debian.org/debian/ ${codename}-backports $dists" >> $file
 fi
 if db_get netcfg/dhcp_options && \
    [ "$RET" = "Do not configure the network at this time" ]; then
@@ -78,7 +78,7 @@ fi
 if [ -n "$protocol" ] && [ -n "$host" ]; then
 	echo "$deb_src $protocol://${host}${directory} ${codename}-backports $dists" >> $file
 else
-	echo "# deb-src http://ftp.debian.org/debian/ ${codename}-backports $dists" >> $file
+	echo "# deb-src http://deb.debian.org/debian/ ${codename}-backports $dists" >> $file
 fi
 
 exit $CODE

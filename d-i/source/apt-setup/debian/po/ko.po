@@ -7,7 +7,7 @@
 # Copyright (C) 2003,2004,2005,2008 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 #
-# Changwoo Ryu <cwryu@debian.org>, 2010, 2011, 2012, 2014.
+# Changwoo Ryu <cwryu@debian.org>, 2010-2012, 2014-2015, 2017.
 #
 # Translations from iso-codes:
 # Copyright (C)
@@ -27,8 +27,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2015-01-11 23:02+0000\n"
-"PO-Revision-Date: 2014-03-16 15:04+0900\n"
+"POT-Creation-Date: 2017-10-23 22:02+0000\n"
+"PO-Revision-Date: 2017-02-11 12:13+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team:  Korean <debian-l10n-korean@lists.debian.org>\n"
 "Language: ko\n"
@@ -82,12 +82,19 @@ msgstr "보안 업데이트 저장소를 검사하는 중입니다..."
 msgid "Scanning the release updates repository..."
 msgstr "릴리스 업데이트 저장소를 읽는 중입니다..."
 
+#. Type: text
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:7001
+msgid "Scanning the backports repository..."
+msgstr "백포팅 저장소를 읽는 중입니다..."
+
 #. Type: select
 #. Choices
 #. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-setup-udeb.templates:7001 ../apt-mirror-setup.templates:4001
+#: ../apt-setup-udeb.templates:8001 ../apt-mirror-setup.templates:4001
 msgid "Retry"
 msgstr "다시 시도"
 
@@ -96,13 +103,13 @@ msgstr "다시 시도"
 #. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-setup-udeb.templates:7001 ../apt-mirror-setup.templates:4001
+#: ../apt-setup-udeb.templates:8001 ../apt-mirror-setup.templates:4001
 msgid "Ignore"
 msgstr "무시"
 
 #. Type: select
 #. Description
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid "Downloading local repository key failed:"
 msgstr "로컬 저장소 키 다운로드가 실패했습니다:"
 
@@ -110,7 +117,7 @@ msgstr "로컬 저장소 키 다운로드가 실패했습니다:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
 "repository at ${MIRROR}:"
@@ -120,7 +127,7 @@ msgstr ""
 
 #. Type: select
 #. Description
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid ""
 "This may be a problem with your network, or with the server hosting this "
 "key. You can choose to retry the download, or ignore the problem and "
@@ -164,14 +171,7 @@ msgstr ""
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl1:
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:11001 ../apt-setup-udeb.templates:12001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "보안 업데이트(${SEC_HOST} 호스트에서)"
 
@@ -186,12 +186,19 @@ msgid "release updates"
 msgstr "릴리스 업데이트"
 
 #. Type: multiselect
-#. Description
+#. Choices
+#. SEC_HOST is a host name (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl1:
+#: ../apt-setup-udeb.templates:11001
+msgid "backported software"
+msgstr "백포팅 소프트웨어"
+
 #. Type: multiselect
 #. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:11002 ../apt-setup-udeb.templates:12002
+#. :sl1:
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "사용할 서비스:"
 
@@ -209,10 +216,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl1:
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:11002 ../apt-setup-udeb.templates:12002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -237,37 +241,43 @@ msgstr ""
 "버전도 들어있습니다. 이 서비스는 stable과 oldstable 릴리스에서만 제공합니다."
 
 #. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
+#. Description
+#. :sl1:
+#: ../apt-setup-udeb.templates:11002
+msgid ""
+"Backported software are adapted from the development version to work with "
+"this release. Although this software has not gone through such complete "
+"testing as that contained in the release, it includes newer versions of some "
+"applications which may provide useful features. Enabling backports here does "
+"not cause any of them to be installed by default; it only allows you to "
+"manually select backports to use."
+msgstr ""
+"이 릴리스에서 동작하도록 개발버전에서 백포팅한 소프트웨어가 있습니다. 릴리스"
+"한 배포판에 들어 있는 소프트웨어만큼 철저한 테스트 과정을 거치지는 않았지만 "
+"몇 가지 기능이 추가되는 등 더 최신 버전의 소프트웨어입니다. 여기서 백포팅을 "
+"사용하더라도 기본으로 설치하지는 않습니다. 수동으로 백포팅을 선택할 수 있게"
+"만 합니다."
+
+#. Type: boolean
+#. Description
+#. :sl3:
 #: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "보안 업데이트 (${SEC_HOST} 호스트에서)"
+msgid "Enable source repositories in APT?"
+msgstr "APT에 소스 저장소를 사용합니까?"
 
-#. Type: multiselect
+#. Type: boolean
 #. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
+#. :sl3:
+#: ../apt-setup-udeb.templates:12001
 msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
+"By default source repositories are listed in /etc/apt/sources.list (with "
+"appropriate \"deb-src\" lines) so that \"apt-get source\" works. However, if "
+"you don't need this feature, you can disable those entries and save some "
+"bandwidth during \"apt-get update\" operations."
 msgstr ""
-"데비안은 릴리스에 대한 두 가지 업데이트 서비스가 있습니다. 하나는 보안 업데이"
-"트이고 또 하나는 유동 업데이트입니다."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""
+"기본값으로 소스 저장소를 /etc/apt/sources.list에 (적절한 \"deb-src\" 줄로) 넣"
+"습니다. 하지만, 이 기능이 필요하지 않을 경우 이 항목을 넣지 않고 \"apt-get "
+"update\" 동작할 때 네트워크 대역폭을 아낄 수 있습니다."
 
 #. Type: text
 #. Description
@@ -784,22 +794,35 @@ msgstr ""
 "어 있는 소프트웨어만큼 철저한 테스트 과정을 거치지는 않았지만 몇 가지 기능이 "
 "추가되는 등 더 최신 버전의 소프트웨어입니다."
 
-#~ msgid "Scanning the backports repository..."
-#~ msgstr "백포팅 저장소를 읽는 중입니다..."
+#. Type: multiselect
+#. Choices
+#. SEC_HOST, and PARTNER_HOST are host names (e.g.
+#. security.ubuntu.com)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#. :sl2:
+#: ../apt-setup-udeb.templates:12001
+#, fuzzy
+msgid "partner archive (from ${PARTNER_HOST}))"
+msgstr "보안 업데이트 (${SEC_HOST} 호스트에서)"
 
-#~ msgid "backported software"
-#~ msgstr "백포팅 소프트웨어"
+#. Type: multiselect
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:12002
+#, fuzzy
+msgid ""
+"Ubuntu has some additional services that provide updates to releases and add-"
+"on packages."
+msgstr ""
+"데비안은 릴리스에 대한 두 가지 업데이트 서비스가 있습니다. 하나는 보안 업데이"
+"트이고 또 하나는 유동 업데이트입니다."
 
-#~ msgid ""
-#~ "Backported software are adapted from the development version to work with "
-#~ "this release. Although this software has not gone through such complete "
-#~ "testing as that contained in the release, it includes newer versions of "
-#~ "some applications which may provide useful features. Enabling backports "
-#~ "here does not cause any of them to be installed by default; it only "
-#~ "allows you to manually select backports to use."
-#~ msgstr ""
-#~ "이 릴리스에서 동작하도록 개발버전에서 백포팅한 소프트웨어가 있습니다. 릴리"
-#~ "스한 배포판에 들어 있는 소프트웨어만큼 철저한 테스트 과정을 거치지는 않았"
-#~ "지만 몇 가지 기능이 추가되는 등 더 최신 버전의 소프트웨어입니다. 여기서 백"
-#~ "포팅을 사용하더라도 기본으로 설치하지는 않습니다. 수동으로 백포팅을 선택"
-#~ "할 수 있게만 합니다."
+#. Type: multiselect
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:12002
+msgid ""
+"The partner archive contains software provided by Canonical's partners as a "
+"service to Ubuntu users."
+msgstr ""

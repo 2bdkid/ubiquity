@@ -17,4 +17,13 @@ fi
 if [ "$disable_cdrom_entries" = "true" ]; then
 	logger -t finish-install "Disabling CDROM entries in sources.list"
 	sed -i "/^deb cdrom:/s/^/#/" /target/etc/apt/sources.list
+	cat >> /target/etc/apt/sources.list <<EOF
+
+# This system was installed using small removable media
+# (e.g. netinst, live or single CD). The matching "deb cdrom"
+# entries were disabled at the end of the installation process.
+# For information about how to configure apt package sources,
+# see the sources.list(5) manual.
+EOF
+	log-output -t finish-install chroot /target apt-get update
 fi

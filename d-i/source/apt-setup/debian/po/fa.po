@@ -6,7 +6,7 @@
 # Persian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# , 2005.
+# Nima Sahraneshin <unix.nima@gmail.com>, 2018.
 #
 # Translations from iso-codes:
 #   Alastair McKinstry - further translations from ICU-3.0
@@ -23,14 +23,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fa\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2015-01-11 23:02+0000\n"
-"PO-Revision-Date: 2012-09-18 10:30+0330\n"
-"Last-Translator: Hamid <hamid.r1988@gmail.com>\n"
+"POT-Creation-Date: 2017-10-23 22:02+0000\n"
+"PO-Revision-Date: 2018-01-13 19:58+0000\n"
+"Last-Translator: nima sahraneshin <unix.nima@gmail.com>\n"
 "Language-Team: Debian-l10n-persian <debian-l10n-persian@lists.debian.org>\n"
-"Language: \n"
+"Language: fa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 
 #. Type: text
 #. Description
@@ -78,12 +79,20 @@ msgstr "بررسی مخزن به روز رسانی‌های امنیتی ..."
 msgid "Scanning the release updates repository..."
 msgstr "در حال پویش مخزن به‌روزرسانی‌های انتشار..."
 
+#. Type: text
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:7001
+#, fuzzy
+msgid "Scanning the backports repository..."
+msgstr "در حال پویش مخزن به‌روزرسانی‌های انتشار..."
+
 #. Type: select
 #. Choices
 #. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-setup-udeb.templates:7001 ../apt-mirror-setup.templates:4001
+#: ../apt-setup-udeb.templates:8001 ../apt-mirror-setup.templates:4001
 msgid "Retry"
 msgstr "دوباره سعی کنید"
 
@@ -92,31 +101,31 @@ msgstr "دوباره سعی کنید"
 #. :sl2:
 #. These are choices of actions so this is, at least in English,
 #. an infinitive form
-#: ../apt-setup-udeb.templates:7001 ../apt-mirror-setup.templates:4001
+#: ../apt-setup-udeb.templates:8001 ../apt-mirror-setup.templates:4001
 msgid "Ignore"
 msgstr "نادید بگیر"
 
 #. Type: select
 #. Description
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid "Downloading local repository key failed:"
-msgstr "دریافت کلید مخازن محلی شکست خورد: "
+msgstr "دریافت کلید مخازن محلی شکست خورد:"
 
 #. Type: select
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
 "repository at ${MIRROR}:"
 msgstr ""
-"نصاب نتوانست کلید عمومی را که برای امضای مخازن محلی در ${MIRROR} است را "
-"دریافت کند: "
+"نصب کننده نتوانست کلید عمومی را که برای امضای مخازن محلی در ${MIRROR}است را "
+"دریافت کند:"
 
 #. Type: select
 #. Description
-#: ../apt-setup-udeb.templates:7002
+#: ../apt-setup-udeb.templates:8002
 msgid ""
 "This may be a problem with your network, or with the server hosting this "
 "key. You can choose to retry the download, or ignore the problem and "
@@ -161,14 +170,7 @@ msgstr ""
 #. Translators: the *entire* string should be under 55 columns
 #. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl1:
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:11001 ../apt-setup-udeb.templates:12001
+#: ../apt-setup-udeb.templates:11001
 msgid "security updates (from ${SEC_HOST})"
 msgstr "به‌روزرسانی‌های امنیتی (از ${SEC_HOST})"
 
@@ -183,12 +185,19 @@ msgid "release updates"
 msgstr "به‌روزرسانی‌های انتشار"
 
 #. Type: multiselect
-#. Description
+#. Choices
+#. SEC_HOST is a host name (e.g. security.debian.org)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
 #. :sl1:
+#: ../apt-setup-udeb.templates:11001
+msgid "backported software"
+msgstr "نرم‌افزار انتقال داده‌شده به نسخه قبل"
+
 #. Type: multiselect
 #. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:11002 ../apt-setup-udeb.templates:12002
+#. :sl1:
+#: ../apt-setup-udeb.templates:11002
 msgid "Services to use:"
 msgstr "خدمت‌ها برای استفاده:"
 
@@ -206,10 +215,7 @@ msgstr ""
 #. Type: multiselect
 #. Description
 #. :sl1:
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:11002 ../apt-setup-udeb.templates:12002
+#: ../apt-setup-udeb.templates:11002
 msgid ""
 "Security updates help to keep your system secured against attacks. Enabling "
 "this service is strongly recommended."
@@ -233,34 +239,41 @@ msgstr ""
 "سرویس،تنها برای انتشارهای پایدار و پایدار قدیمی، موجود است."
 
 #. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
+#. Description
+#. :sl1:
+#: ../apt-setup-udeb.templates:11002
+msgid ""
+"Backported software are adapted from the development version to work with "
+"this release. Although this software has not gone through such complete "
+"testing as that contained in the release, it includes newer versions of some "
+"applications which may provide useful features. Enabling backports here does "
+"not cause any of them to be installed by default; it only allows you to "
+"manually select backports to use."
+msgstr ""
+"نرم‌افزار انتقال داده‌شده به نسخه قبل، از نسخه در حال توسعه گرفته و سازگار "
+"شده‌اند تا با این انتشار کار کنند. \n"
+"این نرم‌افزارها آزمایش معمول را بشکل کامل پشت سر نگذاشته‌اند، اما شامل نسخه‌های "
+"جدید بعضی از نرم‌افزارهای کاربردی هستند که ممکن است امکانات قابل استفاده‌ای را "
+"فراهم نماید. فعال کردن این حالت باعث نمی‌شود تا هیچ‌کدام از آن‌ها بشکل پیش‌فرض "
+"نصب شوند و تنها به شما اجازه می‌دهد تا بشکل دستی آن‌ها را برای استفاده انتخاب "
+"کنید."
+
+#. Type: boolean
+#. Description
+#. :sl3:
 #: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "به‌روزهای امنیتی (از ${SEC_HOST})"
+msgid "Enable source repositories in APT?"
+msgstr ""
 
-#. Type: multiselect
+#. Type: boolean
 #. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
+#. :sl3:
+#: ../apt-setup-udeb.templates:12001
 msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr "دبیان دو خدمت دارد که به‌روزها را برای انتشارها فراهم می‌کنند: امنیتی و "
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
+"By default source repositories are listed in /etc/apt/sources.list (with "
+"appropriate \"deb-src\" lines) so that \"apt-get source\" works. However, if "
+"you don't need this feature, you can disable those entries and save some "
+"bandwidth during \"apt-get update\" operations."
 msgstr ""
 
 #. Type: text
@@ -786,31 +799,33 @@ msgstr ""
 "شامل‌اند، عبور نکرده است اما نسخه‌های جدیدتر بعضی از نرم‌افزارهای کاربردی را "
 "داراست که ممکن است امکانات قابل استفاده‌ای را فراهم نماید."
 
+#. Type: multiselect
+#. Choices
+#. SEC_HOST, and PARTNER_HOST are host names (e.g.
+#. security.ubuntu.com)
+#. Translators: the *entire* string should be under 55 columns
+#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
+#. :sl2:
+#: ../apt-setup-udeb.templates:12001
 #, fuzzy
-#~| msgid "Scanning the release updates repository..."
-#~ msgid "Scanning the backports repository..."
-#~ msgstr "در حال پویش مخزن به‌روزرسانی‌های انتشار..."
+msgid "partner archive (from ${PARTNER_HOST}))"
+msgstr "به‌روزهای امنیتی (از ${SEC_HOST})"
 
+#. Type: multiselect
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:12002
 #, fuzzy
-#~| msgid "Use backported software?"
-#~ msgid "backported software"
-#~ msgstr "از نرم‌افزارهای backported استفاده شود؟"
+msgid ""
+"Ubuntu has some additional services that provide updates to releases and add-"
+"on packages."
+msgstr "دبیان دو خدمت دارد که به‌روزها را برای انتشارها فراهم می‌کنند: امنیتی و "
 
-#, fuzzy
-#~| msgid ""
-#~| "Some software has been backported from the development tree to work with "
-#~| "this release. Although this software has not gone through such complete "
-#~| "testing as that contained in the release, it includes newer versions of "
-#~| "some applications which may provide useful features."
-#~ msgid ""
-#~ "Backported software are adapted from the development version to work with "
-#~ "this release. Although this software has not gone through such complete "
-#~ "testing as that contained in the release, it includes newer versions of "
-#~ "some applications which may provide useful features. Enabling backports "
-#~ "here does not cause any of them to be installed by default; it only "
-#~ "allows you to manually select backports to use."
-#~ msgstr ""
-#~ "برخی نرم‌افزارها از شاخهٔ توسعه backport شده‌اند تا با این انتشار کار کنند. "
-#~ "اگرچه این نرم‌افزارها از میان آنچنان آزمایش کاملی، مانند آنهایی که در "
-#~ "انتشار شامل‌اند، عبور نکرده است اما نسخه‌های جدیدتر بعضی از نرم‌افزارهای "
-#~ "کاربردی را داراست که ممکن است امکانات قابل استفاده‌ای را فراهم نماید."
+#. Type: multiselect
+#. Description
+#. :sl2:
+#: ../apt-setup-udeb.templates:12002
+msgid ""
+"The partner archive contains software provided by Canonical's partners as a "
+"service to Ubuntu users."
+msgstr ""

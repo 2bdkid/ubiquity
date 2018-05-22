@@ -31,7 +31,7 @@ fi
 echo $$>${LOCKFILE}
 
 # The following variables can be overridden with a configuration file
-TSBRANCH=lp:ubiquity
+TSBRANCH=https://git.launchpad.net/ubiquity
 EXTRAPACKAGES=""
 ARTIFACTS=""
 AP_OPTS="-v"
@@ -97,7 +97,7 @@ else
     exit 1
 fi
 
-PACKAGES="bzr ssh python3-autopilot libautopilot-gtk python3-xlib \
+PACKAGES="git ssh python3-autopilot libautopilot-gtk python3-xlib \
     recordmydesktop"
 
 export DEBIAN_FRONTEND=noninteractive
@@ -222,7 +222,7 @@ setup_tests() {
         sudo chmod 777 $TSEXPORT
     else
         echo "I: Branch $TSBRANCH"
-        bzr export $TSEXPORT $TSBRANCH
+        git clone --depth 1 $TSBRANCH $TSEXPORT
     fi
 
     if [ -e "$AP_TESTSUITES" ]; then
@@ -233,7 +233,6 @@ setup_tests() {
 Image Id:      $(cat /cdrom/.disk/info)
 Ubiquity:      $(dpkg-query -f '${Version}' -W ubiquity)
 Test branch:   ${TSBRANCH}
-Test revno:    $(bzr revno $TSBRANCH)
 EOF
     
     cat<<EOF

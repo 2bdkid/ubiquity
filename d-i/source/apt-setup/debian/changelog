@@ -1,3 +1,328 @@
+apt-setup (1:0.141ubuntu1) cosmic; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when checking
+      /cdrom/.disk/base_installable.
+    - Set the mirror verification timeout to 30 seconds.
+    - Adjust services-select for Ubuntu, removing volatile and adding
+      partner (apt-setup/partner) and extras (apt-setup/extras).
+    - Always disable the CD at the end of installation if any mirrors are
+      present, even if it's a complete CD.
+    - Pre-populate apt's lists directory with signed Release files for
+      archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
+      against downgrade attacks right from initial installation.
+    - Run 'apt-get update' for all sources.list lines produced by a single
+      generator in one go, and don't comment out sources.list lines if it
+      fails.
+    - Make the path to security updates configurable, as well as the host.
+    - Remove restricted from cdrom entry if apt-setup/restricted is false.
+    - Make sure apt-cdrom doesn't unmount the CD if cd_type ends with
+      /single.
+    - Enable all network sources, including security updates, even if the
+      network is unconfigured.
+    - Honour apt-setup/restricted, apt-setup/universe, and
+      apt-setup/multiverse when writing -backports lines.
+    - Run 'apt-get update', without downloading package lists or cleaning up
+      old files, after moving the sources.list generated during base system
+      installation back into place.
+    - If OVERRIDE_LEAVE_CD_MOUNTED is set, don't unmount /cdrom; this is a
+      bad idea in a live CD environment!
+    - Enable backports by default now that we have NotAutomatic enabled and
+      working.
+    - Add Release files.
+    - generators/50mirror.ubuntu: universe incorrectly mentions some software
+      being unfree, which is not true. Remove that mention from the notice we
+      write to sources.list. Patch from Dan Watkins. (LP: #1590358)
+    - Allow setting apt-setup/enable-source-repositories=true to control
+      deb-src entries.
+  * Replace xenial Release and Release.gpg files with those for cosmic.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 18 May 2018 23:09:32 -0400
+
+apt-setup (1:0.141) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Welsh (cy.po) by Huw Waters
+  * Indonesian (id.po) by Andika Triwidada
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 22 Mar 2018 12:14:40 +0100
+
+apt-setup (1:0.140) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Yaron Shahrabani
+  * Indonesian (id.po) by Al Qalit
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 10 Feb 2018 16:49:19 +0100
+
+apt-setup (1:0.139) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 05 Feb 2018 06:48:13 +0100
+
+apt-setup (1:0.138) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Norwegian Nynorsk (nn.po) by Petter Reinholdtsen
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 29 Jan 2018 19:46:17 +0100
+
+apt-setup (1:0.137) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * If installing from a single-desktop single CD image, comment it out
+    from sources.list after installation like we do with the netinst
+    images.
+  * When commenting sources like this, add a helpful comment in
+    sources.list too.
+
+  [ Updated translations ]
+  * Tajik (tg.po) by Victor Ibragimov
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 20 Jan 2018 07:56:21 +0100
+
+apt-setup (1:0.135) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Panjabi (pa.po) by Aman ALam
+  * Serbian (sr.po) by Filipovic Dragan
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 12 Jan 2018 06:22:05 +0100
+
+apt-setup (1:0.134) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Nepali (ne.po) by Jeewal Kunwar
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 27 Dec 2017 08:37:37 +0100
+
+apt-setup (1:0.133) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Esperanto (eo.po) by Felipe Castro
+  * Swedish (sv.po) by Anders Jonsson
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 08 Dec 2017 06:49:48 +0100
+
+apt-setup (1:0.132) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Lithuanian (lt.po) by Rimas Kudelis
+  * Norwegian Nynorsk (nn.po) by Allan Nordhøy
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 27 Nov 2017 07:40:54 +0100
+
+apt-setup (1:0.131) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Catalan (ca.po) by Jordi Mallach
+  * Greek (el.po) by Sotirios Vrachas
+  * Estonian (et.po) by Kristjan Räts
+  * Swedish (sv.po) by Anders Jonsson
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 22 Nov 2017 07:35:20 +0100
+
+apt-setup (1:0.130) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Slovenian (sl.po) by Vanja Cvelbar
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 17 Oct 2017 06:38:12 +0200
+
+apt-setup (1:0.129) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Greek (el.po) by Sotirios Vrachas
+  * Albanian (sq.po) by Silva Arapi
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 12 Sep 2017 06:40:21 +0200
+
+apt-setup (1:0.128) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Galician (gl.po) by Jorge Barreiro
+  * Simplified Chinese (zh_CN.po) by Yangfl
+  * Traditional Chinese (zh_TW.po) by Yao Wei (魏銘廷)
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 20 Jun 2017 07:50:26 +0200
+
+apt-setup (1:0.127) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Switch default hostname from ftp.debian.org to deb.debian.org in the
+    following generators (Closes: #860472):
+     - 92updates
+     - 93backports
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 21 Apr 2017 06:42:16 +0200
+
+apt-setup (1:0.126) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Italian (it.po) by Milo Casagrande
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 19 Feb 2017 08:46:32 +0100
+
+apt-setup (1:0.125) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Korean (ko.po) by Changwoo Ryu
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 13 Feb 2017 07:17:01 +0100
+
+apt-setup (1:0.124) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Spanish (es.po) by Javier Fernández-Sanguino Peña
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 30 Jan 2017 19:03:46 +0100
+
+apt-setup (1:0.123) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * Tweak which images will offer to scan more discs
+  * Add myself to uploaders.
+
+ -- Steve McIntyre <93sam@debian.org>  Wed, 21 Dec 2016 16:29:39 +0000
+
+apt-setup (1:0.122) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+
+ -- Christian Perrier <bubulle@debian.org>  Tue, 22 Nov 2016 07:40:44 +0100
+
+apt-setup (1:0.121) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Polish (pl.po) by Michał Kułach
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 09 Oct 2016 07:43:45 +0200
+
+apt-setup (1:0.120) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Danish (da.po) by Joe Hansen
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 21 Sep 2016 07:56:40 +0200
+
+apt-setup (1:0.119) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Danish (da.po) by Joe Hansen
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 18 Sep 2016 08:30:35 +0200
+
+apt-setup (1:0.118) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 30 Jul 2016 11:31:11 +0200
+
+apt-setup (1:0.117) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Russian (ru.po) by Yuri Kozlov
+  * Ukrainian (uk.po) by Anton Gladky
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 17 Jul 2016 19:06:59 +0200
+
+apt-setup (1:0.116) unstable; urgency=medium
+
+  * Rebuild with translation files that include complete information
+    about translator and last update information.
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 05 Jun 2016 15:37:23 +0200
+
+apt-setup (1:0.115) unstable; urgency=medium
+
+  * Rebuild with translations back in place
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 29 May 2016 16:19:10 +0200
+
+apt-setup (1:0.114) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Serbian (sr.po) by Dragan Filipović
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 28 May 2016 12:17:45 +0200
+
+apt-setup (1:0.113) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Serbian (sr.po) by Dragan Filipović
+
+ -- Christian Perrier <bubulle@debian.org>  Fri, 22 Apr 2016 06:44:32 +0200
+
+apt-setup (1:0.112) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Turkish (tr.po) by Mert Dirik
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 15 Feb 2016 06:57:06 +0100
+
+apt-setup (1:0.111) unstable; urgency=medium
+
+  [ Colin Watson ]
+  * Use HTTPS for Vcs-* URLs, and link to cgit rather than gitweb.
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 04 Feb 2016 07:13:47 +0100
+
+apt-setup (1:0.110) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Swedish (sv.po) by Martin Bagge / brother
+
+ -- Christian Perrier <bubulle@debian.org>  Thu, 28 Jan 2016 09:50:57 +0100
+
+apt-setup (1:0.109) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Dutch (nl.po) by Frans Spiesschaert
+
+ -- Christian Perrier <bubulle@debian.org>  Sat, 23 Jan 2016 08:39:43 +0100
+
+apt-setup (1:0.108) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Japanese (ja.po) by Kenshi Muto
+
+ -- Christian Perrier <bubulle@debian.org>  Mon, 11 Jan 2016 19:09:35 +0100
+
+apt-setup (1:0.107) unstable; urgency=medium
+
+  [ Julien Cristau ]
+  * Use /debian-security path on security.debian.org.
+
+  [ Updated translations ]
+  * Belarusian (be.po) by Viktar Siarheichyk
+  * Czech (cs.po) by Miroslav Kure
+  * Portuguese (Brazil) (pt_BR.po) by Adriano Rafael Gomes
+
+ -- Christian Perrier <bubulle@debian.org>  Wed, 23 Dec 2015 07:49:10 +0100
+
+apt-setup (1:0.105) unstable; urgency=medium
+
+  [ Updated translations ]
+  * Croatian (hr.po) by Tomislav Krznar
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 13 Dec 2015 08:46:02 +0100
+
 apt-setup (1:0.104ubuntu5) yakkety; urgency=medium
 
   * generators/50mirror.ubuntu: universe incorrectly mentions some software
@@ -3015,3 +3340,4 @@ apt-setup (1:0.1) unstable; urgency=low
     infrastructure yet, although the templates are there.
 
  -- Joey Hess <joeyh@debian.org>  Thu, 27 Oct 2005 18:29:39 -0400
+
