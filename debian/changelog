@@ -1,3 +1,16 @@
+ubiquity (18.10.3) cosmic; urgency=medium
+
+  * Don't record telemetry data when doing stage 2 (user mode) as it keeps an
+    unused /target directory (LP: #1773321) Also, record OEM types
+    (LP: #1765693)
+  * Switch to use uptime instead of time.time() which is sensitive to
+    BIOS time reset after NTP sync, leading to negative values.
+    (LP: #1771966)
+  * Ignore .git file from built package and remove .bzr artefacts
+  * update manifest
+
+ -- Didier Roche <didrocks@ubuntu.com>  Mon, 28 May 2018 16:02:33 +0200
+
 ubiquity (18.10.2) cosmic; urgency=medium
 
   * Update Vcs-* for git migration
