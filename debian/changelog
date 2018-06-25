@@ -1,5 +1,31 @@
+ubiquity (18.10.4) cosmic; urgency=medium
+
+  [ Chen-Han Hsiao (Stanley) ]
+  * Add efivars to mountpoints loaded at bootloader install time.
+    (LP: #1772374)
+
+  [ Steve Langasek ]
+  * scripts/plugininstall.py: don't hard-code a resume partition in
+    /etc/initramfs-tools/conf.d/resume at install time.  In bionic and later,
+    initramfs-tools will autodetect an appropriate resume partition at
+    initramfs generation time, so ubiquity's resume setting is redundant and
+    possibly wrong.  LP: #1768230.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Make sure that grub-pc is not removed after installation for both EFI and
+    legacy BIOS cases as we now technically need it even for EFI installs.
+    (LP: #1775743)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Automatic update of included source packages: grub-installer
+    1.128ubuntu9.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Mon, 25 Jun 2018 13:57:40 -0400
+
 ubiquity (18.10.3) cosmic; urgency=medium
 
+  [ Didier Roche ]
+  * Only record OEM config when installing
   * Don't record telemetry data when doing stage 2 (user mode) as it keeps an
     unused /target directory (LP: #1773321) Also, record OEM types
     (LP: #1765693)

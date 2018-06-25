@@ -1,3 +1,11 @@
+grub-installer (1.128ubuntu9) cosmic; urgency=medium
+
+  * grub-installer: install grub-pc for EFI setups and make sure we're
+    not purging it earlier in case it got installed. It's needed to make sure
+    the right maintainer scripts are run and the ESP populated. (LP: #1775743)
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Tue, 19 Jun 2018 10:25:14 +0200
+
 grub-installer (1.128ubuntu8) zesty; urgency=medium
 
   * Fix a typo in PReP bootdev selection code; we should not skip over a valid
