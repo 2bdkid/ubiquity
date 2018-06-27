@@ -1,3 +1,17 @@
+grub-installer (1.128ubuntu11) cosmic; urgency=medium
+
+  * grub-installer: actually also do not purge grub-gfxpayload-lists as it's
+    yet another dependency of grub-pc.
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Wed, 27 Jun 2018 16:03:38 +0200
+
+grub-installer (1.128ubuntu10) cosmic; urgency=medium
+
+  * grub-installer: do not purge grub-pc-bin as well as it's a dependency of
+    grub-pc.
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Mon, 25 Jun 2018 18:28:07 +0200
+
 grub-installer (1.128ubuntu9) cosmic; urgency=medium
 
   * grub-installer: install grub-pc for EFI setups and make sure we're
