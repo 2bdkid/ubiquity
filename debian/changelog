@@ -1,3 +1,35 @@
+ubiquity (18.10.6) cosmic; urgency=medium
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Automatic update of included source packages: partman-auto
+    134ubuntu9, partman-efi 71ubuntu3. (LP: #1766945)
+
+  [ Adam Conrad ]
+  * d-i/sources.list: Always include *-updates, so it doesn't need to
+    be fixed on stable branches for the first SRU every single time.
+
+  [ Mathieu Trudel-Lapierre ]
+  * debian/ubiquity.templates: revise Secure Boot messages to clarify that we
+    are not actually disabling Secure Boot anymore, but instead configuring it
+    with a generated Machine-Owner Key.
+  * d-i/lists/amd64, d-i/Makefile: add shim-signed to packages' we include from
+    the archive; we'll need update-secureboot-policy from it.
+  * d-i/get-sources, d-i/update-control:
+    - adjust for downloading, but not building, shim-signed
+    - make sure we use the right Dpkg status file.
+    - clean up the binary blobs we don't need from shim-signed.
+  * debian/ubiquity.dirs-amd64: ensure we create /usr/lib/ubiquity/shim-signed.
+  * scripts/simple-plugins: create MOK key and start enrollment in firmware if
+    the option to configure SecureBoot was selected and a password entered.
+  * scripts/plugininstall.py: copy generated MOK to the target.
+  * Automatic update of included source packages: console-setup
+    1.178ubuntu4, grub-installer 1.128ubuntu12, partman-efi 71ubuntu4,
+    shim-signed 1.36.
+  * Automatic update of included source packages: console-setup
+    1.178ubuntu5, localechooser 2.71ubuntu3.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Tue, 24 Jul 2018 22:29:28 -0400
+
 ubiquity (18.10.5) cosmic; urgency=medium
 
   * Automatic update of included source packages: grub-installer
