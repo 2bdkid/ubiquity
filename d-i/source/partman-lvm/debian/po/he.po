@@ -28,7 +28,7 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: partman-lvm@packages.debian.org\n"
 "POT-Creation-Date: 2014-09-15 22:01+0000\n"
-"PO-Revision-Date: 2018-03-19 21:38+0000\n"
+"PO-Revision-Date: 2018-06-14 08:38+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew (https://www.transifex.com/yaron/teams/79473/he/)\n"
 "Language: he\n"
@@ -202,8 +202,8 @@ msgid ""
 "partitioning scheme has to be written to disk. These changes cannot be "
 "undone."
 msgstr ""
-"לפני שניתן יהיה להגדיר את מנהל המחיצות הלוגיות, השינויים שנעשו בהגדרת "
-"המחיצות צריכים להיכתב לדיסק. שינויים אלה אינם הפיכים."
+"בטרם האפשרות להגדרת מנהל הכרכים, יש לכתוב את ההרכב הנוכחי לכונן. לא ניתן "
+"לשחזר לאחר החלת השינויים האלה."
 
 #. Type: boolean
 #. Description
@@ -224,7 +224,7 @@ msgstr ""
 #. :sl3:
 #: ../partman-lvm.templates:19001
 msgid "Keep current partition layout and configure LVM?"
-msgstr "לשמור את הפריסה הקיימת של המחיצות ולהגדיר את מנהל המחיצות הלוגיות?"
+msgstr "לשמור את פריסת המחיצות הנוכחית ולהגדיר את מנהל המחיצות הלוגיות?"
 
 #. Type: boolean
 #. Description
@@ -236,9 +236,9 @@ msgid ""
 "decide if you are satisfied with the current partitioning scheme in these "
 "disks before continuing."
 msgstr ""
-"אחרי שמנהל המחיצות הלוגיות מוגדר, אסור לעשות שינויים במחיצות שבכוננים "
-"המכילים כרכים פיזיים. עליך לוודא כי החלוקה הנוכחית למחיצות הכוננים האלו "
-"נושאת חן בעיניך."
+"אחרי שמנהל המחיצות הלוגיות מוגדר, אסור לעשות שינויים במחיצות בכוננים המכילים "
+"כרכים פיזיים. עליך לוודא כי החלוקה הנוכחית למחיצות הכוננים האלו נושאת חן "
+"בעיניך."
 
 #. Type: error
 #. Description
@@ -252,7 +252,7 @@ msgstr "שגיאה בהגדרת מנהל מחיצות לוגיות (LVM)"
 #. :sl3:
 #: ../partman-lvm.templates:20001
 msgid "An error occurred while writing the changes to the disks."
-msgstr "שגיאה קרתה בזמן כתיבת השינויים לדיסקים."
+msgstr "אירעה שגיאה בעת כתיבת השינויים לכוננים."
 
 #. Type: error
 #. Description
@@ -375,7 +375,7 @@ msgstr "לא נבחרו כרכים פיזיים"
 msgid ""
 "No physical volumes were selected. The creation of a new volume group has "
 "been aborted."
-msgstr "לא נבחרו כרכים פיזיים. בוטלה יצירת קבוצת כרכים חדשה."
+msgstr "לא נבחרו כרכים פיזיים. יצירת קבוצת כרכים חדשה בוטלה."
 
 #. Type: error
 #. Description
@@ -389,7 +389,7 @@ msgstr "לא נבחר שם לקבוצת הכרכים"
 #. :sl3:
 #: ../partman-lvm.templates:29001
 msgid "No name for the volume group has been entered. Please enter a name."
-msgstr "לא הוקלד שם עבור קבוצת הכרכים. נא להכניס שם."
+msgstr "לא הוקלד שם עבור קבוצת הכרכים. נא להקליד שם."
 
 #. Type: error
 #. Description
@@ -421,7 +421,7 @@ msgstr "שם קבוצת הכרכים חופף לשם אחד ההתקנים"
 msgid ""
 "The selected volume group name overlaps with an existing device name. Please "
 "choose a different name."
-msgstr "השם שנבחר לקבוצת הכרכים חופף עם שם התקן קיים. נא לבחור שם אחר."
+msgstr "השם שנבחר לקבוצת הכרכים חופף לשם התקן קיים. נא לבחור שם אחר."
 
 #. Type: error
 #. Description
@@ -585,7 +585,7 @@ msgstr "נא לבחור התקנים שברצונך להוסיף לקבוצת ה
 msgid ""
 "No physical volumes were selected. Extension of the volume group has been "
 "aborted."
-msgstr "לא נבחרו כרכים פיזיים. בוטלה הרחבת קבוצת הכרכים."
+msgstr "לא נבחרו כרכים פיזיים. הרחבת קבוצת הכרכים בוטלה."
 
 #. Type: error
 #. Description
@@ -644,7 +644,7 @@ msgstr "נא לבחור את ההתקנים שברצונך להסיר מקבוצ
 #: ../partman-lvm.templates:45001
 msgid ""
 "No physical volumes were selected. Reduction of the volume group was aborted."
-msgstr "לא נבחרו כרכים פיזיים. צמצום קבוצת הכרכים בוטלה."
+msgstr "לא נבחרו כרכים פיזיים. צמצום קבוצת הכרכים בוטל."
 
 #. Type: error
 #. Description
@@ -671,8 +671,8 @@ msgid ""
 "create more physical volumes and volume groups, or reduce an existing volume "
 "group."
 msgstr ""
-"לא נמצאו קבוצות נפחים פנויות ליצירת נפח לוגי חדש. צור עוד נפחים פיזיים "
-"וקבוצות נפחים, או צמצם קבוצת נפחים קיימת."
+"לא נמצאו קבוצות כרכים פנויות ליצירת כרך לוגי חדש. יש ליצור כרכים פיזיים "
+"נוספים וקבוצות כרכים עליהם או לצמצם קבוצת כרכים קיימת."
 
 #. Type: string
 #. Description
@@ -748,15 +748,14 @@ msgstr "גודל כרך לוגי:"
 #. Description
 #. :sl3:
 #: ../partman-lvm.templates:52001
-#, fuzzy
 msgid ""
 "Please enter the size of the new logical volume. The size may be entered in "
 "the following formats: 10K (Kilobytes), 10M (Megabytes), 10G (Gigabytes), "
 "10T (Terabytes). The default unit is Megabytes."
 msgstr ""
-"הכנס את הגודל של הנפח הלוגי החדש. את הגודל אפשר להכניס במבנים הבאים: 10K "
-"(Kilobytes), 10M (Megabytes), 10G (Gigabytes), 10T (Terabytes). יחידה ברירת "
-"המחדל היא Megabytes."
+"נא להקליד את גודל הכרך הלוגי החדש. את הגודל ניתן להקליד בצורות הבאות: 10K "
+"(קילובתים), 10M (מגה בתים), 10G (גיגה בתים), 10T (טרה בתים). יחידת בררת "
+"המחדל היא מגה בתים (M)."
 
 #. Type: error
 #. Description
@@ -880,7 +879,6 @@ msgstr "שם לא חוקי עבור כרך לוגי או קבוצת כרכים"
 #. Description
 #. :sl3:
 #: ../partman-lvm.templates:61001
-#, fuzzy
 msgid ""
 "Logical volume or volume group names may only contain alphanumeric "
 "characters, hyphen, plus, period, and underscore. They must be 128 "
@@ -888,10 +886,10 @@ msgid ""
 "\" are not allowed. In addition, logical volume names cannot begin with "
 "\"snapshot\"."
 msgstr ""
-"השמות של נפחים לוגיים או קבוצות נפחים יכולים להכיל רק תווים אלפא נומריים, "
-"מקף, פלוס, נקודה, וקו תחתון. הם חייבים להיות בעלי 128 תווים או פחות ואינם "
-"יכולים להתחיל במקף. השמות \".\" ו-\"..\" אסורים. בנוסף, השמות של נפחים "
-"לוגיים אינם יכולים להתחיל עם \"snapshot\"."
+"השמות של כרכים לוגיים או קבוצות כרכים יכולים להכיל רק תווים אלפא נומריים, "
+"מקף, פלוס, נקודה, וקו תחתון. עליהם להיות עד אורך של 128 תווים ואינם יכולים "
+"להתחיל במקף. השימוש בשמות „.” ו־„..” אסור. בנוסף, שמות של כרכים לוגיים אינם "
+"יכולים להתחיל בביטוי „snapshot”."
 
 #. Type: error
 #. Description
@@ -954,23 +952,22 @@ msgstr ""
 #. :sl3:
 #: ../partman-lvm.templates:63001
 msgid "Unable to automatically remove LVM data"
-msgstr "לא מצליח להסיר אוטומטית את המידע של מנהל מחיצות לוגיות"
+msgstr "לא ניתן להסיר אוטומטית את המידע של מנהל המחיצות הלוגיות"
 
 #. Type: error
 #. Description
 #. :sl3:
 #: ../partman-lvm.templates:63001
-#, fuzzy
 msgid ""
 "Because the volume group(s) on the selected device also consist of physical "
 "volumes on other devices, it is not considered safe to remove its LVM data "
 "automatically. If you wish to use this device for partitioning, please "
 "remove its LVM data first."
 msgstr ""
-"מאחר וקבוצות הנפחים על ההתקן שנבחר מורכבות גם מנפחים פיזיים על התקנים אחרים, "
-"הסרה של המידע של מנהל מחיצות לוגיות בצורה אוטומטית אינה נחשבת לבטוחה. אם "
-"ברצונך להשתמש בהתקן זה לחלוקה למחיצות, אנא קודם הסר את המידע של מנהל מחיצות "
-"לוגיות."
+"כיוון שקבוצות הכרכים בהתקן הנבחר מורכבות מכרכים פיזיים בהתקנים אחרים, הסרה "
+"אוטומטית של נתוני מנהל המחיצות הלוגיות נחשבת לפעולה בלתי בטוחה. אם ברצונך "
+"להשתמש בהתקן הזה לצורך חלוקה למחיצות, נא להסיר ממנו את נתוני מנהל המחיצות "
+"הלוגיות תחילה."
 
 #. Type: note
 #. Description
@@ -989,7 +986,7 @@ msgid ""
 "other partition is underused. The Logical Volume Manager (LVM) can help with "
 "this."
 msgstr ""
-"מצב נפוץ עבור מנהלי מערכות הוא, שמחיצת דיסק כלשהי (בדרך כלל החשובה ביותר) "
+"מצב נפוץ עבור מנהלי מערכות הוא שמחיצה כלשהי בכונן (בדרך כלל החשובה ביותר) "
 "התמלאה, בעוד שיש מקום פנוי בשפע במחיצה אחרת . מנהל מחיצות לוגיות (LVM) יכול "
 "לסייע במצב כזה."
 
@@ -997,7 +994,6 @@ msgstr ""
 #. Description
 #. :sl3:
 #: ../partman-lvm.templates:64001
-#, fuzzy
 msgid ""
 "LVM allows combining disk or partition devices (\"physical volumes\") to "
 "form a virtual disk (\"volume group\"), which can then be divided into "
@@ -1006,24 +1002,23 @@ msgid ""
 "volume group at any time, and logical volumes can be resized up to the "
 "amount of unallocated space in the volume group."
 msgstr ""
-"מנהל מחיצות לוגיות (LVM) מאפשר צירוף דיסקים או התקנים ברי-חלוקה למחיצות "
-"(\"נפחים פיזיים\") לבניית ,דיסק וירטואלי, (\"קבוצת נפחים\"), שניתן לאחר מכן "
-"לחלוקה למחיצות וירטואליות (\"נפחים לוגיים\"). דיסקים וירטואליים ונפחים "
-"לוגיים יכולים להתפרש על פני דיסקים פיזיים רבים. ניתן לצרף נפחים פיזיים לדיסק "
-"וירטואלי בכל זמן, וניתן לשנות נפחים של נפחים לוגיים עד לנפח של המרחב הפנוי "
-"בדיסק הוירטואלי."
+"מנהל מחיצות לוגיות (LVM) מאפשר שילוב של כוננים או התקנים עם יכולת חלוקה "
+"למחיצות („כרכים פיזיים”) לכדי כונן וירטואלי („קבוצת כרכים”), אותה ניתן לחלק "
+"למחיצות וירטואליות („כרכים וירטואליים”). קבוצות כרכים ומחיצות וירטואליות "
+"יכולות להשתרע על פני מספר כוננים פיזיים. ניתן להוסיף כוננים פיזיים חדשים "
+"לקבוצת כרכים בכל עת, כמו כן, ניתן לשנות את גודלם של כרכים לוגיים עד לתקורת "
+"השטח שטרם הוקצה בקבוצת הכרכים."
 
 #. Type: note
 #. Description
 #. :sl3:
 #: ../partman-lvm.templates:64001
-#, fuzzy
 msgid ""
 "The items on the LVM configuration menu can be used to edit volume groups "
 "and logical volumes. After you return to the main partition manager screen, "
 "logical volumes will be displayed in the same way as ordinary partitions, "
 "and should be treated as such."
 msgstr ""
-"ניתן להשתמש בסעיפים בתפריט הגדרות מנהל מחיצות לוגיות לעריכת קבוצות נפחים "
-"ונפחים לוגיים. אחרי חזרתך למסך הראשי של מנהל המחיצות, נפחים לוגיים יוצגו "
-"באותה הצורה כמו מחיצות רגילות ויש להתייחס אליהם בהתאם."
+"ניתן להשתמש בפריטים בתפריט תצורת מנהל המחיצות הלוגיות לטובת עריכת קבוצות "
+"כרכים וכרכים לוגיים. לאחר החזרה לתפריט מנהל החלוקה למחיצות, יופיעו הכרכים "
+"הלוגיים באותו האופן כמו מחיצות רגילות והיחס אליהם יהיה דומה."

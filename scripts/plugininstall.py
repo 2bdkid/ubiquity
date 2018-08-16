@@ -831,10 +831,6 @@ class Install(install_misc.InstallBase):
                     'ssl-cert']
         arch, subarch = install_misc.archdetect()
 
-        # this postinst installs EFI application and cleans old entries
-        if arch in ('amd64', 'i386') and subarch == 'efi':
-            packages.append('fwupdate')
-
         try:
             for package in packages:
                 install_misc.reconfigure(self.target, package)

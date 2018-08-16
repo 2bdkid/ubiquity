@@ -1,3 +1,24 @@
+console-setup (1.178ubuntu8) cosmic; urgency=medium
+
+  * keyboard-configuration.config: Only treat missing XKBOPTIONS as empty.
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Wed, 08 Aug 2018 17:32:23 -0600
+
+console-setup (1.178ubuntu7) cosmic; urgency=medium
+
+  * keyboard-configuration.config: While sourcing config files to re-seed
+    debconf, load missing variables as empty values of same (LP: #1762952)
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Wed, 08 Aug 2018 16:50:48 -0600
+
+console-setup (1.178ubuntu6) cosmic; urgency=medium
+
+  * keyboard-configuration.{config,templates}: There is no good default for
+    layout toggling, stop pretending there is.  Console users can set one
+    with dpkg-reconfigure or editing /etc/defaults/keyboard (LP: #1762952)
+
+ -- Adam Conrad <adconrad@ubuntu.com>  Wed, 25 Jul 2018 05:50:59 -0600
+
 console-setup (1.178ubuntu5) cosmic; urgency=medium
 
   * Revert to 1.178ubuntu2, as 1.178ubuntu[34] caused an installer regression.
