@@ -323,12 +323,12 @@ class Install(install_misc.InstallBase):
         cache = Cache()
 
         # Python standard library.
-        re_minimal = re.compile('^python\d+\.\d+-minimal$')
+        re_minimal = re.compile(r'^python\d+\.\d+-minimal$')
         python_installed = sorted([
             pkg[:-8] for pkg in cache.keys()
             if re_minimal.match(pkg) and cache[pkg].is_installed])
         for python in python_installed:
-            re_file = re.compile('^/usr/lib/%s/.*\.py$' % python)
+            re_file = re.compile(r'^/usr/lib/%s/.*\.py$' % python)
             files = [
                 f for f in cache['%s-minimal' % python].installed_files
                 if (re_file.match(f) and

@@ -111,7 +111,7 @@ def get_all_interfaces():
         ifs_file.readline()
 
         for line in ifs_file:
-            name = re.match('(.*?(?::\d+)?):', line.strip()).group(1)
+            name = re.match(r'(.*?(?::\d+)?):', line.strip()).group(1)
             if name == 'lo':
                 continue
             ifs.append(name)

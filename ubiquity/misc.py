@@ -447,7 +447,7 @@ def os_prober():
             if res[2] == 'Ubuntu':
                 version = [v for v in re.findall('[0-9.]*', res[1]) if v][0]
                 # Get rid of the superfluous (development version) (11.04)
-                text = re.sub('\s*\(.*\).*', '', res[1])
+                text = re.sub(r'\s*\(.*\).*', '', res[1])
                 _os_prober_oslist[res[0]] = text
                 _os_prober_osvers[res[0]] = version
             else:
@@ -647,7 +647,7 @@ def dmimodel():
             model = proc.communicate()[0]
         if 'apple' in manufacturer:
             # MacBook4,1 - strip the 4,1
-            model = re.sub('[^a-zA-Z\s]', '', model)
+            model = re.sub(r'[^a-zA-Z\s]', '', model)
         # Replace each gap of non-alphanumeric characters with a dash.
         # Ensure the resulting string does not begin or end with a dash.
         model = re.sub('[^a-zA-Z0-9]+', '-', model).rstrip('-').lstrip('-')

@@ -2058,7 +2058,7 @@ class Page(plugin.Plugin):
                 final = current_version in ubuntu
                 try:
                     new_version = re.split(
-                        ".*([0-9]{2}\.[0-9]{2}).*", release.version)
+                        r".*([0-9]{2}\.[0-9]{2}).*", release.version)
 
                     if current_version == '' or len(new_version) < 2:
                         return None
