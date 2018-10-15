@@ -239,6 +239,7 @@ class Wizard(BaseFrontend):
         self.finished_installing = False
         self.finished_pages = False
         self.parallel_db = None
+        self.parallel_db_install = None
         self.timeout_id = None
         self.screen_reader = False
         self.orca_process = None
@@ -1673,11 +1674,27 @@ class Wizard(BaseFrontend):
             dbfilter = partman_commit.PartmanCommit(self, db=self.parallel_db)
             dbfilter.start(auto_process=True)
 
-        # FIXME OH DEAR LORD.  Use isinstance.
-        elif finished_step == 'ubiquity.components.partman_commit':
-            dbfilter = install.Install(self, db=self.parallel_db)
+        elif finished_step == 'ubi-timezone':
+            # Flush changes to the database so that when the parallel db
+            # starts, it does so with the most recent changes.
+            self.stop_debconf()
+            self.start_debconf()
+            from ubiquity.debconfcommunicator import DebconfCommunicator
+            if self.parallel_db_install is not None:
+                # we're coming back through again.
+                self.parallel_db_install.shutdown()
+            env = os.environ.copy()
+            # debconf-apt-progress, start_debconf()
+            env['DEBCONF_DB_REPLACE'] = 'configdb'
+            env['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
+            self.parallel_db_install = DebconfCommunicator('ubiquity',
+                                                           cloexec=True,
+                                                           env=env)
+            # Start the actual install
+            dbfilter = install.Install(self, db=self.parallel_db_install)
             dbfilter.start(auto_process=True)
 
+        # FIXME OH DEAR LORD.  Use isinstance.
         elif finished_step == 'ubiquity.components.install':
             self.finished_installing = True
             if self.finished_pages:

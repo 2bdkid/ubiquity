@@ -1,3 +1,19 @@
+ubiquity (18.10.10) cosmic; urgency=medium
+
+  [ Michael Hudson-Doyle ]
+  * Mask ubiquity.service in a system installed with oem-config/enabled=true,
+    as this prevents getty@tty1.service from running. (LP: #1789920)
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Update translations from Launchpad.
+  * Automatic update of included source packages: partman-partitioning
+    120ubuntu2, shim-signed 1.38.
+
+  [ Iain Lane ]
+  * gtk, kde: Start installing after ubi-timezone. (LP: #1797579)
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Mon, 15 Oct 2018 14:28:09 +0100
+
 ubiquity (18.10.9) cosmic; urgency=medium
 
   * Fix ubiquity's use of regexes with escaped characters to satisfy new

@@ -1,3 +1,13 @@
+partman-partitioning (120ubuntu2) cosmic; urgency=medium
+
+  * On EFI systems, make sure there's an ESP partition present regardless of
+    whether there's GPT or non-GPT partitions. We need to assume the user is
+    unaware of the consequences. (LP: #1783996)
+  * Change the wording of the missing ESP partition text to fit more all the
+    cases we are trying to handle.
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Wed, 10 Oct 2018 16:41:48 +0200
+
 partman-partitioning (120ubuntu1) bionic; urgency=low
 
   * Merge from Debian unstable.  Remaining changes:
