@@ -1,3 +1,18 @@
+ubiquity (18.10.11) cosmic; urgency=medium
+
+  * kde, gtk: Wait for both timezone and partman_commit before installing.
+    We were racing starting the installation with committing the partition
+    table changes, if you were fast enough at the timezone selection page.
+    What we need to do is wait until both timezone selection *and*
+    partman_commit have finished before.
+    This is a little bit delicate, because the user setup page, which comes
+    after the timezone page, writes to debconf and so we have to be careful
+    not to restart it after the user setup page is shown. We do that after
+    finishing timezone selection, since this writes to debconf. It is not
+    needed after partman_commit, because it only reads. (LP: #1798005)
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 16 Oct 2018 12:33:12 +0100
+
 ubiquity (18.10.10) cosmic; urgency=medium
 
   [ Michael Hudson-Doyle ]

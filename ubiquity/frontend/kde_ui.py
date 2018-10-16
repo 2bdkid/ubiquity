@@ -302,6 +302,8 @@ class Wizard(BaseFrontend):
         self.previous_partitioning_page = self.step_index("stepPartAuto")
         self.installing = False
         self.installing_no_return = False
+        self.partitioned = False
+        self.timezone_set = False
         self.returncode = 0
         self.backup = False
         self.history = []
@@ -309,7 +311,6 @@ class Wizard(BaseFrontend):
         self.finished_installing = False
         self.finished_pages = False
         self.parallel_db = None
-        self.parallel_db_install = None
 
         self.set_busy_cursor(True)
 
@@ -1284,6 +1285,29 @@ class Wizard(BaseFrontend):
         else:
             return False
 
+    def maybe_start_installing(self):
+        if not (self.partitioned and self.timezone_set):
+            syslog.syslog(
+                'Not installing yet, partitioned: %s, timezone_set %s' %
+                (self.partitioned, self.timezone_set))
+            return
+
+        syslog.syslog('Starting the installation')
+
+        from ubiquity.debconfcommunicator import DebconfCommunicator
+        if self.parallel_db is not None:
+            self.parallel_db.shutdown()
+        env = os.environ.copy()
+        # debconf-apt-progress, start_debconf()
+        env['DEBCONF_DB_REPLACE'] = 'configdb'
+        env['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
+        self.parallel_db = DebconfCommunicator('ubiquity',
+                                               cloexec=True,
+                                               env=env)
+        # Start the actual install
+        dbfilter = install.Install(self, db=self.parallel_db)
+        dbfilter.start(auto_process=True)
+
     def find_next_step(self, finished_step):
         # TODO need to handle the case where debconffilters launched from
         # here crash.  Factor code out of dbfilter_handle_status.
@@ -1318,24 +1342,16 @@ class Wizard(BaseFrontend):
             dbfilter.start(auto_process=True)
 
         elif finished_step == 'ubi-timezone':
+            self.timezone_set = True
             # Flush changes to the database so that when the parallel db
             # starts, it does so with the most recent changes.
             self.stop_debconf()
             self.start_debconf()
-            from ubiquity.debconfcommunicator import DebconfCommunicator
-            if self.parallel_db_install is not None:
-                # we're coming back through again.
-                self.parallel_db_install.shutdown()
-            env = os.environ.copy()
-            # debconf-apt-progress, start_debconf()
-            env['DEBCONF_DB_REPLACE'] = 'configdb'
-            env['DEBCONF_DB_OVERRIDE'] = 'Pipe{infd:none outfd:none}'
-            self.parallel_db_install = DebconfCommunicator('ubiquity',
-                                                           cloexec=True,
-                                                           env=env)
-            # Start the actual install
-            dbfilter = install.Install(self, db=self.parallel_db_install)
-            dbfilter.start(auto_process=True)
+            self.maybe_start_installing()
+
+        elif finished_step == 'ubiquity.components.partman_commit':
+            self.partitioned = True
+            self.maybe_start_installing()
 
         # FIXME OH DEAR LORD.  Use isinstance.
         elif finished_step == 'ubiquity.components.install':
