@@ -438,6 +438,7 @@ class Install(install_misc.InstallBase):
 
                 # Is the path blacklisted?
                 if (not stat.S_ISDIR(st.st_mode) and
+                        '/' in relpath and
                         '/%s' % relpath in self.blacklist):
                     if debug:
                         syslog.syslog('Not copying %s' % relpath)
