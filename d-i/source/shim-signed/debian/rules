@@ -6,6 +6,10 @@ SHIM_VERSION := $(shell dpkg-query -f '$${Version}\n' -W shim)
 ifeq ($(DEB_TARGET_ARCH),amd64)
 export EFI_ARCH := X64
 endif
+ifeq ($(DEB_TARGET_ARCH),arm64)
+export EFI_ARCH := AA64
+endif
+export SHIM_BASE = shim$(shell echo $(EFI_ARCH) | tr A-Z a-z).efi
 
 %:
 	dh $@

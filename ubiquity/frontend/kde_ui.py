@@ -177,7 +177,10 @@ class Wizard(BaseFrontend):
         # Let's not do that here, we kind of really do need more privileges...
         QtCore.QCoreApplication.setSetuidAllowed(True)
 
-        self.app = QtWidgets.QApplication([])
+        # NB: This *must* have at least one string in argv. Quoting the Qt docs
+        #   > In addition, argc must be greater than zero and argv must contain
+        #   > at least one valid character string.
+        self.app = QtWidgets.QApplication(sys.argv)
         # The "hicolor" icon theme gets picked when Ubiquity is running as a
         # DM. This causes some icons to be missing. Hardcode the theme name to
         # prevent that.
