@@ -1,3 +1,11 @@
+ubiquity (19.04.4) disco; urgency=medium
+
+  * When installing non-free packages, also iterate and install any
+    apt-installed marked packages which may include non-free drivers
+    detected by ubuntu-drivers. LP: #1793671
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 20 Dec 2018 11:22:12 +1100
+
 ubiquity (19.04.3.1) disco; urgency=medium
 
   * Automatic update of included source packages: shim-signed 1.39.

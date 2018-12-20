@@ -1148,6 +1148,8 @@ class Install(install_misc.InstallBase):
         if self.db.get('ubiquity/use_nonfree') == 'true':
             self.db.progress('INFO', 'ubiquity/install/nonfree')
             packages = self.db.get('ubiquity/nonfree_package').split()
+            # also install recorded non-free packages
+            packages.extend(install_misc.query_recorded_installed())
             self.do_install(packages)
 
     def install_extras(self):
@@ -1165,6 +1167,7 @@ class Install(install_misc.InstallBase):
         if not found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
 
+        # this will not install non-free packages due to above divert
         self.do_install(install_misc.query_recorded_installed())
 
         if found_cdrom:
