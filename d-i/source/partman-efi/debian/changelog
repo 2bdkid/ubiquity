@@ -1,3 +1,13 @@
+partman-efi (71ubuntu5) disco; urgency=medium
+
+  * check.d/efi: Make sure we block on a missing EFI partition no matter what
+    architecture, not just for ia64. One could attempt to install on EFI x86
+    and will need an ESP to be able to install GRUB. (LP: #1803031)
+  * debian/partman-efi.templates: Make the no_efi template clearer, so that it
+    clearly explains why an EFI System partition is important.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 08 Feb 2019 17:04:09 -0500
+
 partman-efi (71ubuntu4) cosmic; urgency=medium
 
   * Clean-up leftover checks for the no longer used ignore_uefi file.

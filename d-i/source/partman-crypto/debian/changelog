@@ -1,3 +1,61 @@
+partman-crypto (101ubuntu1) disco; urgency=medium
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Disable partition erasing by default, as it's very slow and only of
+      moderate value.
+    - Warn that the passphrase cannot be recovered if lost.
+    - Add an "Activate existing encrypted volumes" option to the
+      partman-crypto main menu.
+    - lib/crypto-base.sh: don't regard zram devices as "unsafe", since we
+      know these are entirely RAM-backed.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 11 Feb 2019 11:29:24 -0800
+
+partman-crypto (101) unstable; urgency=medium
+  * Team upload
+
+  [ Updated translations ]
+  * Greek (el.po) by Vangelis Skarmoutsos
+  * Finnish (fi.po) by Juhani Numminen
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Romanian (ro.po) by Andrei POPESCU
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sat, 09 Feb 2019 09:16:38 +0100
+
+partman-crypto (100ubuntu1) disco; urgency=low
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Disable partition erasing by default, as it's very slow and only of
+      moderate value.
+    - Warn that the passphrase cannot be recovered if lost.
+    - Add an "Activate existing encrypted volumes" option to the
+      partman-crypto main menu.
+    - lib/crypto-base.sh: don't regard zram devices as "unsafe", since we
+      know these are entirely RAM-backed.
+  * Migrate Ubuntu branches to git, update debian/control accordingly.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Sat, 02 Feb 2019 21:57:08 -0800
+
+partman-crypto (100) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Arabic (ar.po) by ButterflyOfFire
+  * Latvian (lv.po) by Tranzistors
+
+ -- Holger Wansing <hwansing@mailbox.org>  Wed, 31 Oct 2018 21:09:07 +0100
+
+partman-crypto (99) unstable; urgency=medium
+
+  [ Cyril Brulebois ]
+  * Update Vcs-{Browser,Git} to point to salsa (alioth's replacement).
+
+  [ Michael Schaller ]
+  * Set discard option on LUKS containers. (Closes: #902912)
+
+ -- Philipp Kern <pkern@debian.org>  Tue, 31 Jul 2018 12:14:13 +0200
+
 partman-crypto (98ubuntu1) cosmic; urgency=low
 
   * Merge from Debian unstable.  Remaining changes:

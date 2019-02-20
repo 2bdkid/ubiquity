@@ -1,3 +1,11 @@
+netcfg (1.142ubuntu8) disco; urgency=medium
+
+  * write_interfaces.c: Make sure ifupdown gets pulled in if someone preseeds
+    netcfg/do_not_use_netplan=true; otherwise they would have config written
+    but nothing to apply it at boot.
+
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Fri, 15 Feb 2019 14:35:12 -0500
+
 netcfg (1.142ubuntu7) bionic; urgency=medium
 
   * Write out nameservers without a domain, for example when preseeding a

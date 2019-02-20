@@ -1,3 +1,24 @@
+ubiquity (19.04.5) disco; urgency=medium
+
+  [ Brian Murray ]
+  * Remove code related to encrypting home since it is unused and so every
+    debug log file doesn't have messages regarding ecryptfs being deprecated.
+
+  [ Dimitri John Ledkov ]
+  * Automatic update of included source packages: console-setup
+    1.178ubuntu10, flash-kernel 3.90ubuntu5, netcfg 1.142ubuntu8,
+    partman-crypto 101ubuntu1, partman-efi 71ubuntu5, partman-jfs 55,
+    partman-lvm 127, partman-xfs 66.
+
+  * ubiquity-frontend-gtk: drop libindicator3-7 from depends to
+    suggests. ubiquity-dm supports multiple desktop environments some of
+    which use indicators, with libindicator and launch them into the
+    panel. However, none of these are in main nor on the gnome-shell based
+    images. And images that do use panel with indicators are shipping
+    libindicator3-7 anyway.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 20 Feb 2019 23:43:23 +0100
+
 ubiquity (19.04.4) disco; urgency=medium
 
   * When installing non-free packages, also iterate and install any

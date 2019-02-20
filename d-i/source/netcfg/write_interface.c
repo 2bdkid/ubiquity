@@ -390,6 +390,7 @@ int netcfg_write_interface(struct debconfclient *client, const struct netcfg_int
 	} else {
 		use_netplan = 0;
 		config_file_path = INTERFACES_FILE;
+		di_exec_shell_log("apt-install ifupdown");
 	}
 
 	di_warning("Using %s", config_file_path);
