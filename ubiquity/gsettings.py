@@ -68,6 +68,8 @@ def get(schema, key, user=None):
     # Parse ints
     if value.isdigit():
         return int(value)
+    if value.startswith('uint32'):  # uint32 100
+        return int(value.split()[1])
 
     # Parse booleans
     if value == 'false':

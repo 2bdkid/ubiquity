@@ -950,7 +950,8 @@ class Wizard(BaseFrontend):
 
         if self.pagesindex == 0:
             self.allow_go_backward(False)
-        elif self.pages[self.pagesindex - 1].module.NAME == 'partman':
+        elif 'partman' in [page.module.NAME for page in
+                           self.pages[:self.pagesindex - 1]]:
             # We're past partitioning.  Unless the install fails, there is no
             # going back.
             self.allow_go_backward(False)

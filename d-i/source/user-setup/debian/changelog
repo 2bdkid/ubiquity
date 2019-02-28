@@ -1,3 +1,11 @@
+user-setup (1.63ubuntu6) disco; urgency=medium
+
+  * Mount /proc before calling adduser --encrypt-home. This calls into
+    ecryptfs, which requires a /proc in order to find out where sysfs is
+    mounted. (LP: #1817689)
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 27 Feb 2019 16:48:22 +0000
+
 user-setup (1.63ubuntu5) bionic; urgency=medium
 
   * Lower priority of the encrypt home question, as ecryptfs has been

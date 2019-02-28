@@ -1,3 +1,20 @@
+ubiquity (19.04.6) disco; urgency=medium
+
+  * Automatic update of included source packages: user-setup
+    1.63ubuntu6.
+  * gtk: Disable screen blanking for Shell.
+    With the switch to GNOME Shell, we're no longer using GNOME Screensaver
+    to handle blanking the screen. Setting the `idle-delay' to 0 disables
+    this for Shell.
+  * gtk, kde: Don't allow going back once we are anywhere past partitioning.
+    The effect of this is that proceeding backwards from usersetup to
+    timezone is not permitted any more. This is a harmful thing to be able
+    to do because the timezone step 'resets' debconf after it finishes, and
+    this might break an ongoing installation.
+    https://bugs.launchpad.net/ubuntu/+source/ubiquity/+bug/1799097
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 28 Feb 2019 10:59:39 +0000
+
 ubiquity (19.04.5) disco; urgency=medium
 
   [ Brian Murray ]

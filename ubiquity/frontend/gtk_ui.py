@@ -587,6 +587,29 @@ class Wizard(BaseFrontend):
 
         gsettings.set(gs_schema, gs_key, gs_value)
 
+    def disable_screen_blanking(self):
+        gs_schema = 'org.gnome.desktop.session'
+        gs_key = 'idle-delay'
+        gs_previous = '%s/%s' % (gs_schema, gs_key)
+        if gs_previous in self.gsettings_previous:
+            return
+
+        gs_value = gsettings.get(gs_schema, gs_key)
+        self.gsettings_previous[gs_previous] = gs_value
+
+        if gs_value:
+            gsettings.set(gs_schema, gs_key, 0)
+
+        atexit.register(self.enable_screen_blanking)
+
+    def enable_screen_blanking(self):
+        gs_schema = 'org.gnome.desktop.session'
+        gs_key = 'idle-delay'
+        gs_previous = '%s/%s' % (gs_schema, gs_key)
+        gs_value = self.gsettings_previous[gs_previous]
+
+        gsettings.set(gs_schema, gs_key, gs_value)
+
     def disable_powermgr(self):
         gs_schema = 'org.gnome.settings-daemon.plugins.power'
         gs_key = 'active'
@@ -738,6 +761,7 @@ class Wizard(BaseFrontend):
 
         self.disable_volume_manager()
         self.disable_screensaver()
+        self.disable_screen_blanking()
         self.disable_powermgr()
 
         if 'UBIQUITY_ONLY' in os.environ:
@@ -1351,7 +1375,8 @@ class Wizard(BaseFrontend):
 
         if self.pagesindex == 0:
             self.allow_go_backward(False)
-        elif self.pages[self.pagesindex - 1].module.NAME == 'partman':
+        elif 'partman' in [page.module.NAME for page in
+                           self.pages[:self.pagesindex - 1]]:
             # We're past partitioning.  Unless the install fails, there is no
             # going back.
             self.allow_go_backward(False)
