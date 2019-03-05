@@ -183,7 +183,7 @@ iscan_line(char **str, int expect_leading_newline)
         if (c == EOF || c == '\n')
                 *str = calloc(1, 1);
         else
-                iscanf("%a[^\n]", str);
+                iscanf("%m[^\n]", str);
 }
 
 void
@@ -1184,7 +1184,7 @@ scan_device_name()
 {
         if (device_name != NULL)
                 free(device_name);
-        if (1 != iscanf("%as", &device_name))
+        if (1 != iscanf("%ms", &device_name))
                 critical_error("Expected device identifier.");
         dev = device_named(device_name);
         disk = disk_named(device_name);
@@ -1204,7 +1204,7 @@ command_open()
         log("command_open()");
         char *device;
         scan_device_name();
-        if (1 != iscanf("%as", &device))
+        if (1 != iscanf("%ms", &device))
                 critical_error("Expected device name.");
         log("Request to open %s", device_name);
         open_out();
@@ -1269,7 +1269,7 @@ command_virtual()
                 critical_error("The device %s is not opened.", device_name);
         log("command_virtual()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("is virtual partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -1478,7 +1478,7 @@ command_partition_info()
                 critical_error("The device %s is not opened.", device_name);
         log("command_partition_info()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("command_partition_info: info for partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -1508,7 +1508,7 @@ command_get_chs()
                 critical_error("The device %s is not opened.", device_name);
         log("command_get_chs()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("command_get_chs: Cyl/Head/Sec for partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -1574,7 +1574,7 @@ command_valid_flags()
                 critical_error("The device %s is not opened.", device_name);
         log("command_valid_flags()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         part = partition_with_id(disk, id);
         oprintf("OK\n");
@@ -1604,7 +1604,7 @@ command_get_flags()
                 critical_error("The device %s is not opened.", device_name);
         log("command_get_flags()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         part = partition_with_id(disk, id);
         if (part == NULL || !ped_partition_is_active(part))
@@ -1634,7 +1634,7 @@ command_set_flags()
         log("command_set_flags()");
         change_named(device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         part = partition_with_id(disk, id);
         if (part == NULL || !ped_partition_is_active(part))
@@ -1704,7 +1704,7 @@ command_set_name()
         if (!ped_disk_type_check_feature(disk->type,
                                          PED_DISK_TYPE_PARTITION_NAME))
                 critical_error("This label doesn't support partition names.");
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         part = partition_with_id(disk, id);
         if (part == NULL || !ped_partition_is_active(part))
@@ -1789,7 +1789,7 @@ command_get_file_system()
                 critical_error("The device %s is not opened.", device_name);
         log("command_get_file_system()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("command_get_file_system: File system for partition %s", id);
         part = partition_with_id(disk, id);
@@ -1825,7 +1825,7 @@ command_change_file_system()
         if (dev == NULL)
                 critical_error("The device %s is not opened.", device_name);
         open_out();
-        if (2 != iscanf("%as %as", &id, &s_fstype))
+        if (2 != iscanf("%ms %ms", &id, &s_fstype))
                 critical_error("Expected partition id and file system");
         log("command_change_file_system(%s,%s)", id, s_fstype);
         part = partition_with_id(disk, id);
@@ -1875,7 +1875,7 @@ command_new_label()
         log("command_new_label()");
         change_named(device_name);
         open_out();
-        if (1 != iscanf("%as", &str))
+        if (1 != iscanf("%ms", &str))
                 critical_error("Expected label type");
         type = ped_disk_type_get(str);
         if (type == NULL)
@@ -1923,7 +1923,7 @@ command_new_partition()
         log("command_new_partition()");
         change_named(device_name);
         open_out();
-        n = iscanf("%as %as %lli-%lli %as %lli", &s_type, &s_fs_type,
+        n = iscanf("%ms %ms %lli-%lli %ms %lli", &s_type, &s_fs_type,
                    &range_start, &range_end, &position, &length);
         if (n != 6)
                 critical_error
@@ -1992,7 +1992,7 @@ command_delete_partition()
         log("command_delete_partition()");
         change_named(device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("Deleting partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -2024,7 +2024,7 @@ command_resize_partition()
         log("command_resize_partition()");
         change_named(device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("Resizing partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -2064,7 +2064,7 @@ command_virtual_resize_partition()
         log("command_virtual_resize_partition()");
         change_named(device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("Resizing partition with id %s", id);
         part = partition_with_id(disk, id);
@@ -2103,7 +2103,7 @@ command_get_resize_range()
         assert(disk != NULL);
         log("command_get_resize_range()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         deactivate_exception_handler();
         part = partition_with_id(disk, id);
@@ -2170,7 +2170,7 @@ command_get_virtual_resize_range()
         assert(disk != NULL);
         log("command_get_virtual_resize_range()");
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         deactivate_exception_handler();
         part = partition_with_id(disk, id);
@@ -2227,7 +2227,7 @@ command_is_busy()
         if (dev == NULL)
                 critical_error("The device %s is not opened.", device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         log("command_is_busy: busy check for id %s", id);
         part = partition_with_id(disk, id);
@@ -2251,7 +2251,7 @@ command_alignment_offset()
         if (dev == NULL)
                 critical_error("The device %s is not opened.", device_name);
         open_out();
-        if (1 != iscanf("%as", &id))
+        if (1 != iscanf("%ms", &id))
                 critical_error("Expected partition id");
         part = partition_with_id(disk, id);
         oprintf("OK\n");
@@ -2383,7 +2383,7 @@ main_loop()
         while (1) {
                 log("main_loop: iteration %i", iteration++);
                 open_in();
-                if (1 != iscanf("%as", &str))
+                if (1 != iscanf("%ms", &str))
                         critical_error("No data in infifo.");
                 log("Read command: %s", str);
                 /* Keep partman-command in sync with changes here. */
