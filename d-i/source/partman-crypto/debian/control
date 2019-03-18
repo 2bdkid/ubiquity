@@ -12,7 +12,7 @@ Vcs-Git: git://git.launchpad.net/~ubuntu-core-dev/ubuntu/+source/partman-crypto
 Package: partman-crypto
 Package-Type: udeb
 Architecture: any
-Depends: partman-base (>= 134), partman-lvm (>= 62), cdebconf-udeb (>= 0.133), di-utils (>= 1.68), ${shlibs:Depends}, ${misc:Depends}
+Depends: partman-base (>= 134), partman-lvm (>= 62), cdebconf-udeb (>= 0.133), di-utils (>= 1.68), s390-tools-zkey-udeb [s390x], ${shlibs:Depends}, ${misc:Depends}
 Description: Add to partman support for block device encryption
 
 Package: partman-crypto-dm

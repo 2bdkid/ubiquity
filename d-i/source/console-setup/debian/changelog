@@ -1,3 +1,18 @@
+console-setup (1.178ubuntu11) disco; urgency=medium
+
+  * kbdnames-maker: Call `{bind,}textdomain` after switching locale.
+    There's a change in perl 5.28 to use `uselocale()` & friends instead of
+    gettext directly, to support thread safety. Apparently this causes the
+    results of `gettext()` calls to be cached now where they weren't before,
+    and this breaks our keyboard name generation. For example, we have
+    `en_GB*model*sun_type6_jp*Sun Type 6 (Japonesa)` instead of
+    `en_GB*model*sun_type6_jp*Sun Type 6 (Japanese)`, and many many other
+    examples.  Calling `bindtextdomain()` and then `textdomain()` after
+    changing locale causes the cache to be invalidated and we get correct
+    results again. LP: #1817453
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Fri, 15 Mar 2019 12:34:06 +0000
+
 console-setup (1.178ubuntu10) disco; urgency=medium
 
   * No-change rebuild to pick up any new keyboard data. Resolves crash

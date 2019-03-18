@@ -46,3 +46,9 @@ if grep -q " device-mapper$" /proc/misc; then
 		apt-install cryptsetup || true
 	fi
 fi
+
+if type zkey >/dev/null 2>&1 && zkey list | grep -q key; then
+	apt-install s390-tools-zkey || true
+	mkdir -p /target/etc/zkey/repository
+	cp /etc/zkey/repository/* /target/etc/zkey/repository
+fi
