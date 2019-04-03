@@ -3,14 +3,17 @@ set -e
 
 . /usr/share/debconf/confmodule
 if [ "$1" = "prepare" ]; then
+    FREEONLY="--free-only"
     db_input high ubiquity/use_nonfree || true
     db_get ubiquity/use_nonfree
     if [ "$RET" = "true" ]; then
-        env -u DEBIAN_HAS_FRONTEND -u DEBCONF_REDIR \
-            DEBCONF_DB_REPLACE=configdb DEBCONF_DB_OVERRIDE="Pipe{infd:none outfd:none}" \
-            ubuntu-drivers autoinstall --package-list /run/ubuntu-drivers.autoinstall || \
-		logger -t ubiquity "ubuntu-drivers autoinstall failed with code: $?"
+	    FREEONLY=""
     fi
+    env -u DEBIAN_HAS_FRONTEND -u DEBCONF_REDIR \
+        DEBCONF_DB_REPLACE=configdb DEBCONF_DB_OVERRIDE="Pipe{infd:none outfd:none}" \
+        ubuntu-drivers autoinstall $FREEONLY --package-list /run/ubuntu-drivers.autoinstall || \
+            logger -t ubiquity "ubuntu-drivers autoinstall failed with code: $?"
+
     db_input high ubiquity/secureboot_key || true
     db_get ubiquity/secureboot_key
     if [ -n "$RET" ]; then
