@@ -7,13 +7,6 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # #
 # This file is distributed under the same license as debian-installer.
-# Holger Wansing <linux@wansing-online.de>, 2008 - 2016.
-# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006, 2007, 2008.
-# Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
-# Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
-# Bastian Blank <waldi@debian.org>, 2003.
-# Jan Luebbe <jluebbe@lasnet.de>, 2003.
-# Thorsten Sauter <tsauter@gmx.net>, 2003.
 # #
 # Console-setup strings translations:
 # (identified by "./console-setup.templates")
@@ -23,6 +16,14 @@
 # Copyright (C) 2008-2011 Holger Wansing
 # #
 # Translations from iso-codes:
+# Translations taken from ICU SVN on 2007-09-09
+# Holger Wansing <linux@wansing-online.de>, 2008 - 2017, 2018.
+# Jens Seidel <jensseidel@users.sf.net>, 2005, 2006, 2007, 2008.
+# Dennis Stampfer <seppy@debian.org>, 2003, 2004, 2005.
+# Alwin Meschede <ameschede@gmx.de>, 2003, 2004.
+# Bastian Blank <waldi@debian.org>, 2003.
+# Jan Luebbe <jluebbe@lasnet.de>, 2003.
+# Thorsten Sauter <tsauter@gmx.net>, 2003.
 # Alastair McKinstry <mckinstry@computer.org>, 2001.
 # Björn Ganslandt <bganslan@gmx.net>, 2000, 2001.
 # Bruno Haible <bruno@clisp.org>, 2004, 2007.
@@ -32,14 +33,13 @@
 # Simon Hürlimann <simon.huerlimann@access.unizh.ch>, 2004.
 # Stefan Siegel <siegel@mandrakesoft.com>, 2001.
 # Tobias Quathamer <toddy@debian.org>, 2006, 2007, 2008, 2009, 2010.
-# Translations taken from ICU SVN on 2007-09-09
 # Wolfgang Rohdewald <wolfgang@rohdewald.de>, 2005.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: console-setup@packages.debian.org\n"
-"POT-Creation-Date: 2016-02-29 19:44+0300\n"
-"PO-Revision-Date: 2016-11-23 20:25+0100\n"
+"POT-Creation-Date: 2018-03-10 23:15+0100\n"
+"PO-Revision-Date: 2018-10-15 16:44+0200\n"
 "Last-Translator: Holger Wansing <linux@wansing-online.de>\n"
 "Language-Team: German <debian-l10n-german@lists.debian.org>\n"
 "Language: de\n"
@@ -102,8 +102,22 @@ msgstr "# Kyrillisch - nicht-slawische Sprachen"
 #. Choices
 #. :sl3:
 #: ../console-setup.templates:5001
+msgid ". Cyrillic - non-Slavic languages (for blind users)"
+msgstr ". Kyrillisch - nicht-slawische Sprachen (für Blinde)"
+
+#. Type: select
+#. Choices
+#. :sl3:
+#: ../console-setup.templates:5001
 msgid "# Cyrillic - Slavic languages (also Bosnian and Serbian Latin)"
 msgstr "# Kyrillisch - slawisch (auch Bosnisch und Serbisch-Latein)"
+
+#. Type: select
+#. Choices
+#. :sl3:
+#: ../console-setup.templates:5001
+msgid ". Cyrillic - Slavic languages (for blind users)"
+msgstr ". Kyrillisch - slawische Sprachen (für Blinde)"
 
 #. Type: select
 #. Choices
@@ -125,6 +139,13 @@ msgstr "# Georgisch"
 #: ../console-setup.templates:5001
 msgid "# Greek"
 msgstr "# Griechisch"
+
+#. Type: select
+#. Choices
+#. :sl3:
+#: ../console-setup.templates:5001
+msgid ". Greek (for blind users)"
+msgstr ". Griechisch (für Blinde)"
 
 #. Type: select
 #. Choices
@@ -1105,7 +1126,7 @@ msgstr "Griechisch"
 #. Choices
 #: ../keyboard-configuration.templates:16001
 msgid "Gujarati"
-msgstr "Gujarati-Sprache"
+msgstr "Gujarati"
 
 #. Type: select
 #. Choices

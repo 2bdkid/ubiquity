@@ -542,7 +542,7 @@ install_kernel_linux () {
 		fi
 	else
 		warning "Failed to get debconf answer 'base-installer/kernel/linux/link_in_boot'."
-		link_in_boot=no
+		link_in_boot=yes
 	fi
 
 	# Create configuration file for kernel-package

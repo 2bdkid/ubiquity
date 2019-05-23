@@ -1,3 +1,27 @@
+ubiquity (19.10.2) eoan; urgency=medium
+
+  * Remove wallpaper subdir from Makefile.am.
+  * Fix test_misc, cn now has a second altgr-pinyin variant.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 23 May 2019 14:17:49 +0100
+
+ubiquity (19.10.1) eoan; urgency=medium
+
+  * Switch sources to eoan.
+  * Automatic update of included source packages: apt-setup
+    1:0.141ubuntu3, base-installer 1.158ubuntu5, choose-mirror
+    2.78ubuntu6, console-setup 1.191ubuntu3, flash-kernel 3.98ubuntu1,
+    partman-jfs 57, partman-lvm 130, preseed 1.71ubuntu10, tzsetup
+    1:0.94ubuntu2.
+  * Drop wallpaper app, unused since 2.13.13.
+    (raring, git diff 076d364 4ebb6c1)
+  * Move panel app into a separate package, to be used on frontend-gtk
+    based flavours that ship/show indicators in maybe|only-ubiquity
+    modes. Currently: budgie, mate, studio. These flavours must seed the
+    new ubiquity-frontend-gtk-panel into live. LP: #1830201
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 23 May 2019 13:29:43 +0100
+
 ubiquity (19.04.9) disco; urgency=medium
 
   * KDE front end: PartitionModel.py - Remove code depreciated in port from
