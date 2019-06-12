@@ -143,7 +143,7 @@ class TestFrontend(unittest.TestCase):
                 ['dpkg-architecture', '-qDEB_HOST_ARCH'],
                 stdout=subprocess.PIPE,
                 universal_newlines=True).communicate()[0].strip()
-            if deb_host_arch not in ('amd64', 'i386'):
+            if deb_host_arch not in ('amd64', 'arm64', 'i386'):
                 # grub-installer not available, but this template won't be
                 # displayed anyway.
                 whitelist.append('grub_device_label')

@@ -208,8 +208,8 @@ class TestPage(TestPageBase):
         self.assertEqual(no_detected, head)
 
 
-@unittest.skipUnless(os.environ['DEB_HOST_ARCH'] in ('amd64', 'i386'),
-                     'GRUB-related tests are only relevant on x86')
+@unittest.skipUnless(os.environ['DEB_HOST_ARCH'] in ('amd64', 'arm64', 'i386'),
+                     'GRUB-related tests are only relevant on EFI')
 class TestPageGrub(TestPageBase):
     def test_maybe_update_dont_install(self):
         self.page.install_bootloader = False
@@ -772,8 +772,9 @@ class TestPageGtk(unittest.TestCase):
                      '/dev/vda1', '/dev/vda2', '/dev/vdb1'),
                     ('Virtio Block Device (108 GB)',
                      'Virtio Block Device (801 GB)')))
-    @unittest.skipUnless(os.environ['DEB_HOST_ARCH'] in ('amd64', 'i386'),
-                         'GRUB-related tests are only relevant on x86')
+    @unittest.skipUnless(os.environ['DEB_HOST_ARCH'] in (
+        'amd64', 'arm64', 'i386'),
+        'GRUB-related tests are only relevant on EFI')
     def test_boot_loader_installation_combobox(self):
         self.gtk.set_grub_options('/dev/vda', {
             '/dev/vda': True,

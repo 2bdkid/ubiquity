@@ -1644,7 +1644,7 @@ class Page(plugin.Plugin):
         if (self.db.get('ubiquity/install_bootloader') == 'true' and
                 'UBIQUITY_NO_BOOTLOADER' not in os.environ):
             arch, subarch = archdetect()
-            if arch in ('amd64', 'i386'):
+            if arch in ('amd64', 'arm64', 'i386'):
                 self.install_bootloader = True
                 self.ui.show_bootloader_options()
 

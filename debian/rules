@@ -201,14 +201,6 @@ endif
 		d-i/source/debian-installer-utils/post-base-installer.d/10register-module \
 		> debian/oem-config/usr/lib/ubiquity/debian-installer-utils/register-module.post-base-installer-oem
 	chmod +x debian/oem-config/usr/lib/ubiquity/debian-installer-utils/register-module.post-base-installer-oem
-ifneq (,$(filter armel armhf,$(DEB_HOST_ARCH)))
-	install d-i/source/flash-kernel/debian/flash-kernel-installer.postinst \
-		debian/ubiquity/usr/lib/ubiquity/flash-kernel/flash-kernel-installer
-endif
-ifeq ($(DEB_HOST_ARCH),powerpc)
-	install d-i/source/yaboot-installer/debian/postinst \
-		debian/ubiquity/usr/lib/ubiquity/yaboot-installer/yaboot-installer
-endif
 ifeq ($(DEB_HOST_ARCH),amd64)
 	install d-i/source/shim-signed/openssl.cnf \
 		debian/ubiquity/usr/lib/ubiquity/shim-signed/openssl.cnf
