@@ -1,3 +1,10 @@
+apt-setup (1:0.141ubuntu4) eoan; urgency=medium
+
+  * Don't enable i386 multiarch support on install, since Ubuntu is dropping
+    i386 as an architecture.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Tue, 18 Jun 2019 12:55:03 -0700
+
 apt-setup (1:0.141ubuntu3) eoan; urgency=medium
 
   * Replace apt-key call by direct inclusion of trusted.gpg.d
