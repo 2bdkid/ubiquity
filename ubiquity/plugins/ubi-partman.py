@@ -992,7 +992,7 @@ class PageGtk(PageBase):
                 # Bad things happen if the current size is out of bounds.
                 min_size_mb = min(min_size_mb, cur_size_mb)
                 max_size_mb = max(cur_size_mb, max_size_mb)
-        if max_size_mb is not 0:
+        if max_size_mb != 0:
             self.partition_size_spinbutton.set_adjustment(
                 Gtk.Adjustment(value=max_size_mb, upper=max_size_mb,
                                step_increment=1, page_increment=100))
@@ -2139,8 +2139,8 @@ class Page(plugin.Plugin):
             pass
         elif ('resize' in self.extra_options and
               'biggest_free' in self.extra_options):
-                self.debug('Partman: dropping resize option.')
-                del self.extra_options['resize']
+            self.debug('Partman: dropping resize option.')
+            del self.extra_options['resize']
 
         resize_option = ('resize' in self.extra_options or
                          'biggest_free' in self.extra_options)

@@ -1389,7 +1389,8 @@ class Install(install_misc.InstallBase):
 
         if arch in ('amd64', 'arm64', 'i386'):
             for pkg in ('grub', 'grub-efi', 'grub-efi-amd64',
-                        'grub-efi-arm64',
+                        'grub-efi-arm64', 'grub-efi-arm64-signed',
+                        'flash-kernel', 'aarch64-laptops-support',
                         'grub-efi-amd64-signed', 'shim-signed', 'mokutil',
                         'lilo'):
                 if pkg not in keep:

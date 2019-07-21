@@ -285,6 +285,9 @@ class Install(install_misc.InstallBase):
                 keep.add('grub-efi-amd64')
                 keep.add('grub-efi-arm64')
                 keep.add('grub-efi-amd64-signed')
+                keep.add('grub-efi-arm64-signed')
+                keep.add('flash-kernel')
+                keep.add('aarch64-laptops-support')
                 keep.add('shim-signed')
                 keep.add('mokutil')
                 try:

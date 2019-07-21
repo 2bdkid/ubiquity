@@ -1,3 +1,11 @@
+partman-auto-lvm (59ubuntu4) eoan; urgency=medium
+
+  * Switch default VG name to vg$hostname, since $hostname-vg gets encoded
+    doubledashed in /dev/mapper/. Also switch fallback VG name to
+    vgubuntu. LP: #1782507
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 21 Jun 2019 01:45:12 +0100
+
 partman-auto-lvm (59ubuntu3) zesty; urgency=medium
 
   * lib/auto-lvm.sh: Pass method on to choose_recipe() and decode_recipe()
