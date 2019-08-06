@@ -1,3 +1,17 @@
+partman-base (206ubuntu5) eoan; urgency=medium
+
+  * Move superblock wiping code from command_new_label to command_commit, as
+    the disk is not supposed to be written to until the latter is called.
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Tue, 06 Aug 2019 12:04:16 +1200
+
+partman-base (206ubuntu4) eoan; urgency=medium
+
+  * parted_server.c: Wipe all known superblocks from device in
+    command_new_label. (LP: #1828558)
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Fri, 02 Aug 2019 12:31:05 +1200
+
 partman-base (206ubuntu3) eoan; urgency=medium
 
   * Revert previous upload, it is intentional to use non-part names, to
