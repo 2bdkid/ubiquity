@@ -392,6 +392,9 @@ def unmount_target():
     for path in paths:
         misc.execute_root('fuser', '-cv', path)
         misc.execute_root('umount', path)
+    if os.path.exists("/sbin/zpool"):
+        misc.execute_root('umount', '/target/boot/grub')
+        misc.execute_root('/sbin/zpool', 'export', '-a')
 
 
 def prepend_path(directory):

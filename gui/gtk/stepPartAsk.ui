@@ -189,7 +189,7 @@
                   <object class="GtkLabel" id="use_crypto_desc">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">24</property>
+                    <property name="margin_left">48</property>
                     <property name="xalign">0</property>
                     <property name="yalign">0</property>
                     <property name="label" translatable="yes">&lt;span size="small"&gt;You’ll choose a security key in the next step.&lt;/span&gt;</property>
@@ -208,8 +208,9 @@
                     <property name="label" translatable="yes">Encrypt the new Ubuntu installation for security</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="margin_left">24</property>
                     <property name="receives_default">False</property>
-                    <property name="margin_top">21</property>
+                    <property name="margin_top">9</property>
                     <property name="xalign">0</property>
                     <property name="draw_indicator">True</property>
                     <signal name="clicked" handler="on_crypto_lvm_toggled" swapped="no"/>
@@ -225,7 +226,7 @@
                   <object class="GtkLabel" id="use_lvm_desc">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">24</property>
+                    <property name="margin_left">48</property>
                     <property name="xalign">0</property>
                     <property name="yalign">0</property>
                     <property name="label" translatable="yes">&lt;span size="small"&gt;This will set up Logical Volume Management. It allows taking snapshots and easier partition resizing.&lt;/span&gt;</property>
@@ -244,6 +245,7 @@
                     <property name="label" translatable="yes">Use LVM with the new Ubuntu installation</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <property name="margin_left">24</property>
                     <property name="receives_default">False</property>
                     <property name="margin_top">9</property>
                     <property name="xalign">0</property>
@@ -257,27 +259,47 @@
                     <property name="height">1</property>
                   </packing>
                 </child>
+
                 <child>
-                  <object class="GtkAlignment" id="alignment2">
+                  <object class="GtkLabel" id="use_zfs_desc">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_top">15</property>
-                    <property name="left_padding">25</property>
-                    <property name="right_padding">25</property>
-                    <child>
-                      <object class="GtkHSeparator" id="hseparator1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
+                    <property name="margin_left">24</property>
+                    <property name="xalign">0</property>
+                    <property name="yalign">0</property>
+                    <property name="label" translatable="yes">&lt;span foreground="darkred"&gt;Warning:&lt;/span&gt; This will delete all your files on all operating systems.
+This is experimental and may cause data loss. Do not use on production systems.</property>
+                    <property name="use_markup">True</property>
+                    <property name="wrap">True</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">12</property>
+                    <property name="top_attach">14</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
                 </child>
+                <child>
+                  <object class="GtkRadioButton" id="use_zfs">
+                    <property name="label" translatable="yes">EXPERIMENTAL: Erase disk and use ZFS</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="margin_top">9</property>
+                    <property name="xalign">0</property>
+                    <property name="active">True</property>
+                    <property name="draw_indicator">True</property>
+                    <property name="group">reuse_partition</property>
+                    <signal name="clicked" handler="part_ask_option_changed" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">13</property>
+                    <property name="width">1</property>
+                    <property name="height">1</property>
+                  </packing>
+                </child>
+
                 <child>
                   <object class="GtkLabel" id="custom_partitioning_desc">
                     <property name="visible">True</property>
@@ -291,7 +313,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">14</property>
+                    <property name="top_attach">16</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -311,7 +333,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">13</property>
+                    <property name="top_attach">15</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>

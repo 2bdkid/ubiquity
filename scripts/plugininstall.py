@@ -222,6 +222,9 @@ class Install(install_misc.InstallBase):
         else:
             self.install_extras()
 
+        # Configure zsys
+        self.configure_zsys()
+
         self.next_region()
         self.db.progress('INFO', 'ubiquity/install/bootloader')
         self.copy_mok()
@@ -949,6 +952,12 @@ class Install(install_misc.InstallBase):
 
             for bind in binds:
                 misc.execute('umount', '-f', self.target + bind)
+
+    def configure_zsys(self):
+        """ Configure zsys """
+        use_zfs = self.db.get('ubiquity/use_zfs')
+        if use_zfs:
+            misc.execute_root('/usr/share/ubiquity/zsys-setup', 'finalize')
 
     def copy_mok(self):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:

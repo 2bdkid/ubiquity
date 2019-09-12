@@ -200,6 +200,10 @@ class PageGtk(PageBase):
             self.partition_toolbar.child_set_property(wdg, 'homogeneous',
                                                       False)
 
+        zpool_exists = os.path.exists('/sbin/zpool')
+        self.use_zfs.set_visible(zpool_exists)
+        self.use_zfs_desc.set_visible(zpool_exists)
+
         # GtkBuilder signal mapping is broken (LP: # 852054).
         self.part_auto_hidden_label.connect(
             'activate-link', self.part_auto_hidden_label_activate_link)
@@ -290,7 +294,9 @@ class PageGtk(PageBase):
         replace = self.replace_partition.get_active()
         resize = self.resize_use_free.get_active()
         custom = self.custom_partitioning.get_active()
-        use_device = self.use_device.get_active()
+        use_zfs = self.use_zfs.get_active()
+        # ZFS is installed on entire drive.
+        use_device = self.use_device.get_active() or use_zfs
         biggest_free = 'biggest_free' in self.extra_options
         crypto = self.use_crypto.get_active()
         disks = self.extra_options.get('use_device', [])
@@ -321,7 +327,9 @@ class PageGtk(PageBase):
         # Currently we support crypto only in use_disk
         # TODO dmitrij.ledkov 2012-07-25 no way to go back and return
         # to here? This needs to be addressed in the design document.
-        if crypto and use_device and self.current_page == self.page_ask:
+        if (crypto and use_device and
+                self.current_page == self.page_ask and
+                not use_zfs):
             self.show_crypto_page()
             self.plugin_is_install = one_disk
             return True
@@ -448,7 +456,7 @@ class PageGtk(PageBase):
         elif (self.resize_use_free.get_active() and
                 'biggest_free' in self.extra_options):
             return True
-        elif (self.use_device.get_active() and
+        elif ((self.use_device.get_active() or self.use_zfs.get_active()) and
               len(self.extra_options['use_device'][1]) == 1):
             return True
         else:
@@ -471,6 +479,8 @@ class PageGtk(PageBase):
         use_device = self.use_device.get_active()
         self.use_lvm.set_sensitive(use_device)
         self.use_crypto.set_sensitive(use_device)
+        self.use_lvm_desc.set_sensitive(use_device)
+        self.use_crypto_desc.set_sensitive(use_device)
 
     def initialize_resize_mode(self):
         disk_id = self.get_current_disk_partman_id()
@@ -666,6 +676,8 @@ class PageGtk(PageBase):
                 opt_widget.hide()
                 opt_desc.hide()
 
+        self.use_zfs_desc.set_markup(fmt % self.use_zfs_desc.get_label())
+
         # Process the default selection
         self.part_ask_option_changed(None)
 
@@ -693,15 +705,17 @@ class PageGtk(PageBase):
                 return (choice, '%s B' % self.resizewidget.get_size(),
                         'resize_use_free')
 
-        elif self.use_device.get_active():
+        elif self.use_device.get_active() or self.use_zfs.get_active():
             def choose_recipe():
                 # TODO dmitrij.ledkov 2012-07-23: RAID recipe?
 
                 have_lvm = 'some_device_lvm' in self.extra_options
-                want_lvm = self.use_lvm.get_active()
+                want_lvm = (self.use_lvm.get_active() and
+                            not self.use_zfs.get_active())
 
                 have_crypto = 'some_device_crypto' in self.extra_options
-                want_crypto = self.use_crypto.get_active()
+                want_crypto = (self.use_crypto.get_active() and
+                               not self.use_zfs.get_active())
 
                 if not ((want_crypto and have_crypto) or
                         (want_lvm and have_lvm)):
@@ -3244,7 +3258,13 @@ class Page(plugin.Plugin):
                 self.ui.get_autopartition_choice()
             self.preseed_as_c(self.current_question, autopartition_choice,
                               seen=False)
-            telemetry.get().set_partition_method(method)
+            telemetry_method = method
+            if self.ui.use_zfs.get_active() and method == 'use_device':
+                self.db.set('ubiquity/use_zfs', 'true')
+                telemetry_method = "use_zfs"
+            else:
+                self.db.set('ubiquity/use_zfs', 'false')
+            telemetry.get().set_partition_method(telemetry_method)
             # Don't exit partman yet.
         else:
             self.finish_partitioning = True

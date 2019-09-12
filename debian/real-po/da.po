@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2018-03-28 08:52-0400\n"
-"PO-Revision-Date: 2018-04-01 18:06+0000\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"PO-Revision-Date: 2019-09-27 19:42+0000\n"
+"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2018-10-15 08:24+0000\n"
-"X-Generator: Launchpad (build 18790)\n"
+"X-Launchpad-Export-Date: 2019-10-02 15:53+0000\n"
+"X-Generator: Launchpad (build 19066)\n"
 "Language: \n"
 "X-Poedit-Language: Danish\n"
 
@@ -65,9 +65,9 @@ msgid ""
 "for this batch of systems. This name will be saved on the installed system "
 "and can be used to help with bug reports."
 msgstr ""
-"Du er ved at installere i systemforhandlertilstand. Indtast venligst et "
-"unikt navn for denne mængde af systemer. Navnet vil blive gemt på det "
-"installerede system og bruges til hjælp med fejlrapporter."
+"Du er ved at installere i systemleverandørtilstand. Indtast venligst et "
+"unikt navn for denne gruppe af systemer. Navnet vil blive gemt på det "
+"installerede system og kan anvendes til hjælp med fejlrapporter."
 
 #. Type: text
 #. Description
@@ -90,8 +90,7 @@ msgid ""
 "your current operating system.  This shouldn't take too long."
 msgstr ""
 "Eller hvis du er klar, kan du installere ${RELEASE} ved siden af (eller i "
-"stedet for) dit nuværende operativsystem. Dette burde ikke tage særlig lang "
-"tid."
+"stedet for) dit nuværende styresystem. Det burde ikke tage særlig lang tid."
 
 #. Type: text
 #. Description
@@ -115,7 +114,7 @@ msgid ""
 "href=\"update\">update this installer</a>."
 msgstr ""
 "Du har mulighed for at læse <a href=\"release-notes\">udgivelsesnoterne</a> "
-"eller <a href=\"update\">opdatere denne installation</a>."
+"eller <a href=\"update\">opdatere installationen</a>."
 
 #. Type: text
 #. Description
@@ -129,7 +128,7 @@ msgstr ""
 #: ../ubiquity.templates:15001
 msgid "You may wish to <a href=\"update\">update this installer</a>."
 msgstr ""
-"Du har mulighed for at <a href=\"update\">opdatere denne installation</a>."
+"Du har mulighed for at <a href=\"update\">opdatere installationen</a>."
 
 #. Type: text
 #. Description
@@ -204,8 +203,8 @@ msgid ""
 "&lt;small&gt;If more than one person will use this computer, you can set up "
 "multiple accounts after installation.&lt;/small&gt;"
 msgstr ""
-"&lt;small&gt;Hvis mere end én person kommer til at bruge denne computer, kan "
-"du indstille flere konti efter installationen.&lt;/small&gt;"
+"&lt;small&gt;Hvis mere end én person kommer til at bruge computeren, kan du "
+"indstille flere konti efter installationen.&lt;/small&gt;"
 
 #. Type: text
 #. Description
@@ -874,11 +873,12 @@ msgid ""
 "electronics suppliers), to check whether the hard disk is old and in need of "
 "replacement, or to move the system to a cooler environment."
 msgstr ""
-"Dette skyldes ofte fejl på cd/dvd-disken, i drevet eller på harddisken. Det "
-"kan hjælpe at rengøre cd/dvd'en, at brænde cd/dvd'en ved en lavere "
-"hastighed, at rense cd/dvd-drevets linse (rensesæt kan ofte købes i "
-"elektronikforretninger), at tjekke om harddisken er gammel og bør udskiftes "
-"eller at flytte systemet til et køligere miljø."
+"Dette skyldes ofte en fejlbehæftet CD/DVD-skive eller -drev eller en "
+"fejlbehæftet harddisk. Det kan hjælpe at rense CD/DVD'en, at brænde "
+"CD/DVD'en ved en lavere hastighed, at rense linsen i CD/DVD-drevet (rensesæt "
+"kan oftest anskaffes ved elektronik- eller radioforhandlere), at tjekke om "
+"harddisken er gammel og trænger til udskiftning eller prøve at flytte "
+"systemet til køligere omgivelser."
 
 #. Type: select
 #. Description
@@ -1349,8 +1349,8 @@ msgid ""
 "Please choose the language to use for the install process. This language "
 "will be the default language for this computer."
 msgstr ""
-"Vælg venligst det sprog der skal benyttes til installationsprocessen. Dette "
-"sprog vil blive standardsproget for denne computer."
+"Vælg venligst det sprog der skal benyttes under installationsprocessen. "
+"Sproget bliver computerens standardsprog."
 
 #. Type: text
 #. Description
@@ -1359,8 +1359,8 @@ msgid ""
 "Please choose the language used for the configuration process. This language "
 "will be the default language for this computer."
 msgstr ""
-"Vælg venligst hvilket sprog der skal bruges under konfigurationsprocessen. "
-"Dette sprog vil være det forvalgte sprog på denne computer."
+"Vælg venligst det sprog der skal benyttes under konfigurationsprocessen. "
+"Sproget bliver computerens standardsprog."
 
 #. Type: text
 #. Description
@@ -1403,7 +1403,7 @@ msgid ""
 "party software, download updates, automatically detect your timezone, and "
 "install full support for your language."
 msgstr ""
-"Hvis du forbinder denne computer til et trådløst netværk, kan du installere "
+"Hvis du forbinder computeren til et trådløst netværk, kan du installere "
 "tredjepartsprogrammer, hente opdateringer, automatisk få bestemt din "
 "tidszone samt installere fuld understøttelse for dit sprog."
 
@@ -1523,7 +1523,7 @@ msgstr ""
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:224001
 msgid "This computer has only ${SIZE}."
-msgstr "Denne computer har kun ${SIZE}."
+msgstr "Computeren har kun ${SIZE}."
 
 #. Type: text
 #. Description
@@ -1544,8 +1544,8 @@ msgid ""
 "This software is subject to license terms included with its documentation. "
 "Some is proprietary."
 msgstr ""
-"Dette program er genstand for licensvilkår, der ses i dets dokumentation. "
-"Dele af det er proprietær."
+"Softwaren er underlagt licensvilkår, der kan ses dokumentation. Noget af det "
+"er proprietært."
 
 #. Type: text
 #. Description
@@ -1567,7 +1567,7 @@ msgstr "Hent opdateringer mens ${RELEASE} installeres"
 #. Description
 #: ../ubiquity.templates:230001
 msgid "This saves time after installation."
-msgstr "Dette sparer tid efter installationen."
+msgstr "Det sparer tid efter installationen."
 
 #. Type: text
 #. Description
@@ -1734,7 +1734,7 @@ msgid ""
 "which operating system you want each time the computer starts up."
 msgstr ""
 "Dokumenter, musik og andre personlige filer vil blive bibeholdt. Du kan "
-"vælge hvilket operativsystem, du vil bruge hver gang computeren tændes."
+"vælge hvilket styresystem, du vil bruge hver gang computeren tændes."
 
 #. Type: text
 #. Description
@@ -1866,7 +1866,7 @@ msgid ""
 msgstr ""
 "<span foreground=\"darkred\">Advarsel:</span> Dette vil slette alle dine "
 "programmer, dokumenter, billeder, musik og alle andre filer i alle "
-"operativsystemer."
+"styresystemer."
 
 #. Type: text
 #. Description
@@ -1880,7 +1880,7 @@ msgstr "Installer ${DISTRO} side om side med dem"
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:266001
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr "Denne computer har ${OS} installeret. Hvad vil du gøre?"
+msgstr "Computeren har ${OS} installeret. Hvad vil du gøre?"
 
 #. Type: text
 #. Description
@@ -1890,7 +1890,7 @@ msgstr "Denne computer har ${OS} installeret. Hvad vil du gøre?"
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
-msgstr "Denne computer har ${OS1} og ${OS2} installeret. Hvad vil du gøre?"
+msgstr "Computeren har ${OS1} og ${OS2} installeret. Hvad vil du gøre?"
 
 #. Type: text
 #. Description
@@ -1899,8 +1899,8 @@ msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
 msgstr ""
-"Denne computer har i øjeblikket flere operativsystemer installeret på sig. "
-"Hvad vil du gøre?"
+"Computeren har i øjeblikket flere styresystemer installeret på sig. Hvad vil "
+"du gøre?"
 
 #. Type: text
 #. Description
@@ -1909,8 +1909,7 @@ msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
 msgstr ""
-"Der blev ikke fundet nogen operativsystemer på denne computer. Hvad vil du "
-"gøre?"
+"Der blev ikke fundet nogen styresystemer på computeren. Hvad vil du gøre?"
 
 #. Type: text
 #. Description

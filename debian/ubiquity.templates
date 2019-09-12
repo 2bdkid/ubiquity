@@ -1432,6 +1432,23 @@ Type: text
 _Description:
  This will set up Logical Volume Management. It allows taking snapshots and easier partition resizing.
 
+Template: ubiquity/text/use_zfs
+Type: text
+_Description:
+ EXPERIMENTAL: Erase disk and use ZFS
+
+Template: ubiquity/text/use_zfs_desc
+Type: text
+_Description:
+ <span foreground="darkred">Warning:</span> This will delete all your files on all operating systems.
+ This is experimental and may cause data loss. Do not use on production systems.
+
+Template: ubiquity/use_zfs
+Type: boolean
+Default: false
+Description: for internal use; can be preseeded
+ This will set up ZFS and configure it for zsys.
+
 Template: ubiquity/text/verified_crypto_label
 Type: text
 _Description:

@@ -1668,6 +1668,11 @@ class Wizard(BaseFrontend):
                 (self.partitioned, self.timezone_set))
             return
 
+        # Setup zfs layout
+        use_zfs = self.db.get('ubiquity/use_zfs')
+        if use_zfs == 'true':
+            misc.execute_root('/usr/share/ubiquity/zsys-setup', 'init')
+
         syslog.syslog('Starting the installation')
 
         from ubiquity.debconfcommunicator import DebconfCommunicator

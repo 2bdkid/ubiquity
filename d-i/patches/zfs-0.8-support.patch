@@ -1,0 +1,35 @@
+
+Description: Support for ZFS 0.8.
+ udevadm is failing on ZFS 0.8, exiting. grub-installer is then assuming /boot is
+ on lvm.
+ The zpool cache file is now always on /etc/zfs of a given system and not in then
+ pool dataset mountpoint subdirectory.
+Author: Jean-Baptiste lallement <jean-baptiste.lallement@canonical.com>
+Author: Didier Roche <didrocks@ubuntu.com>
+--- a/source/grub-installer/grub-installer	2019-09-10 10:29:48.173927414 +0200
++++ b/source/grub-installer/grub-installer	2019-09-10 10:30:24.188444745 +0200
+@@ -232,9 +232,9 @@ is_removable () {
+ 		return
+ 	fi
+ 	if type udevadm >/dev/null 2>&1; then
+-		bus="$(udevadm info -q env -n $removabledevice)"
++		bus="$(udevadm info -q env -n $removabledevice || true)"
+ 	else
+-		bus="$(udevinfo -q env -n $removabledevice)"
++		bus="$(udevinfo -q env -n $removabledevice || true)"
+ 	fi
+ 	bus="$(echo "$bus" | grep ^ID_BUS= | sed 's/^ID_BUS=//')"
+ 	case $bus in
+@@ -1241,12 +1241,6 @@ fi
+ db_progress STEP 1
+ db_progress INFO grub-installer/progress/step_config_loader
+ 
+-if [ "$bootfstype" = "zfs" ] || [ "$rootfstype" = "zfs" ] ; then
+-	# Required by update-grub on ZFS
+-	mkdir -p $ROOT/boot/zfs
+-	cp /boot/zfs/zpool.cache $ROOT/boot/zfs/
+-fi
+-
+ # Delete for idempotency
+ rm -f $ROOT/boot/grub/$menu_file
+ update_grub
