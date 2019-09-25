@@ -4,7 +4,11 @@
 
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
+ifeq ($(DEB_HOST_ARCH),amd64)
+MULTIARCH := i386
+else
 MULTIARCH :=
+endif
 
 ifeq (,$(filter-out amd64 i386,$(DEB_HOST_ARCH)))
 SECURITYHOST := security.ubuntu.com
