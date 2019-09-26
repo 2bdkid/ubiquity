@@ -536,6 +536,9 @@ EndSection
                        '/usr/lib/gnome-settings-daemon/gsd-media-keys',
                        '/usr/lib/gnome-settings-daemon/gsd-power']
 
+                if not osextras.find_on_path('gnome-shell'):
+                    gsd += ['/usr/lib/gnome-settings-daemon/gsd-xsettings']
+
                 if osextras.find_on_path(msd):
                     extras.append(subprocess.Popen(
                         [msd], stdin=null, stdout=logfile, stderr=logfile,
