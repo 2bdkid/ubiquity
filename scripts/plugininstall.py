@@ -1414,7 +1414,8 @@ class Install(install_misc.InstallBase):
             cache = self.restricted_cache
             for pkg in cache.keys():
                 if (cache[pkg].is_installed and
-                        cache[pkg].section.startswith('restricted/')):
+                        cache[pkg].candidate.section.startswith(
+                            'restricted/')):
                     difference.add(pkg)
             del cache
 

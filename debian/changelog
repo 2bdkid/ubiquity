@@ -1,3 +1,18 @@
+ubiquity (19.10.13) eoan; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  * scripts/install.py: Replaced removed property Package.section by
+    Version.section (LP: #1845593)
+
+  [ Iain Lane ]
+  * nm.py: Stop referencing udevadm by absolute path
+    systemd 242-6ubuntu1 dropped a `/sbin/ubiquity` compatibility symlink
+    that we were referencing by absolute path. This broke ubiquity when run
+    on a system with a wireless adapter. Fix this by not referencing an
+    absolute path but using normal $PATH lookup instead. (LP: #1845730)
+
+ -- Iain Lane <iain.lane@canonical.com>  Fri, 27 Sep 2019 09:44:57 +0200
+
 ubiquity (19.10.12) eoan; urgency=medium
 
   * ubiquity-dm: Still start gsd-xsettings for non-gnome-shell desktops.
