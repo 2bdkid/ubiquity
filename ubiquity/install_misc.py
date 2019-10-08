@@ -526,8 +526,9 @@ def broken_packages(cache):
 
 def mark_install(cache, pkg):
     cachedpkg = get_cache_pkg(cache, pkg)
-    if (cachedpkg is not None and
-            (not cachedpkg.is_installed or cachedpkg.is_upgradable)):
+    if cachedpkg is None:
+        return
+    if not cachedpkg.is_installed or cachedpkg.is_upgradable:
         apt_error = False
         try:
             cachedpkg.mark_install()
@@ -548,6 +549,8 @@ def mark_install(cache, pkg):
                 cache.clear()
                 raise InstallStepError(
                     "Unable to install '%s' due to conflicts." % pkg)
+    else:
+        cachedpkg.mark_auto(False)
 
 
 def expand_dependencies_simple(cache, keep, to_remove, recommends=True):

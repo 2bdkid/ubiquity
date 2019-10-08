@@ -1,3 +1,19 @@
+ubiquity (19.10.16) eoan; urgency=medium
+
+  [ Iain Lane ]
+  * Drop zfs-0.8-support.patch. We're goind to do this via the main
+    grub-installer package in the archive instead.
+  * ubi-partman.py: Handle ZFS option not being implemented on KDE frontend
+    (LP: #1847228)
+  * Automatic update of included source packages: grub-installer
+    1.128ubuntu14. (LP: #1847211)
+
+  [ Michael Hudson-Doyle ]
+  * ubiquity/install_misc.py:do_install: mark any already-installed packages
+    as manually installed. (LP: #1841672)
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 08 Oct 2019 17:16:13 +0100
+
 ubiquity (19.10.15) eoan; urgency=medium
 
   [ Jean-Baptiste Lallement ]

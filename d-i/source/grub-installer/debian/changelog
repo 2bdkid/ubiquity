@@ -1,3 +1,19 @@
+grub-installer (1.128ubuntu14) eoan; urgency=medium
+
+  * When running on a ZFS filesystem udevadm returns an error
+    which can be ignored. (LP: #1847228)
+  * On zfs 0.8 cache is in /etc, do not attempt to copy it from
+    /boot/zfs when it doesn't exist.
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@canonical.com>  Tue, 08 Oct 2019 11:24:14 +0200
+
+grub-installer (1.128ubuntu13) eoan; urgency=medium
+
+  [ Cherrypick 1.165 Colin Watson ]
+  * On Linux, mount/unmount /run to work around #918590. LP: #1838525
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 25 Sep 2019 16:51:02 +0100
+
 grub-installer (1.128ubuntu12) cosmic; urgency=medium
 
   [ Hans van den Bogert ]

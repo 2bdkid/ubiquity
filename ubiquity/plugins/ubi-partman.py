@@ -3259,11 +3259,14 @@ class Page(plugin.Plugin):
             self.preseed_as_c(self.current_question, autopartition_choice,
                               seen=False)
             telemetry_method = method
-            if self.ui.use_zfs.get_active() and method == 'use_device':
-                self.db.set('ubiquity/use_zfs', 'true')
-                telemetry_method = "use_zfs"
-            else:
-                self.db.set('ubiquity/use_zfs', 'false')
+            try:
+                if self.ui.use_zfs.get_active() and method == 'use_device':
+                    telemetry_method = "use_zfs"
+            except AttributeError:  # zfs not implemented on this frontend
+                pass
+
+            self.db.set('ubiquity/use_zfs',
+                        'true' if telemetry_method == 'use_zfs' else 'false')
             telemetry.get().set_partition_method(telemetry_method)
             # Don't exit partman yet.
         else:
