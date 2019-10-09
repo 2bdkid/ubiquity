@@ -408,10 +408,6 @@ elif [ "${COMMAND}" = "finalize" ]; then
 		echo "W: zsys init didn't succeed. Not proceeding with command: ${COMMAND}. Aborting!"
 		exit 1
 	fi
-	mount -o bind /run "${TARGET}/run"
-	echo "I: Installing missing packages in $TARGET"
-	apt-install zfsutils-linux zfs-initramfs
-	umount "${TARGET}/run" || true
 
 	# Activate zfs generator.
 	# After enabling the generator we should run zfs set canmount=on DATASET
