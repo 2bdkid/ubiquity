@@ -1,3 +1,11 @@
+partman-auto (134ubuntu11) eoan; urgency=medium
+
+  * lib/auto-shared.sh: skip installer disk when it's mounted as a
+    partition too, as the current casper tries to do by default when
+    presented with a multi-partition el-torito hybrid image. LP: #1845571
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 10 Oct 2019 02:50:54 +0100
+
 partman-auto (134ubuntu10) cosmic; urgency=medium
 
   * recipes-amd64-efi/*: enforce creating ESP on a primary partition, as
