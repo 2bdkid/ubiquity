@@ -1,3 +1,26 @@
+ubiquity (19.10.19) eoan; urgency=medium
+
+  [ Sebastien Bacher ]
+  * Update the 'Skip' string to '_Skip', matching  the change done to
+    ubiquity.ui some years ago. The template needs to be manual updated which
+    wasn't done at the time, should make it translatable again (LP: #1731070)
+
+  [ Mathieu Trudel-Lapierre ]
+  * Update translations from Launchpad.
+  * debian/real-po/templates.pot: update template using debconf-updatepo.
+
+  [ Jean-Baptiste Lallement ]
+  * Switch zpool sync property back to standard after installation
+  * zfsutils-linux and zfs-initramfs moved to the live task, don't remove them
+    at the end of installation (LP: #1847739)
+  * Change partition types to Solaris Boot and Root types
+
+  [ Didier Roche ]
+  * As we are not going to own in the end org.zsys, move our identifier tags
+    to com.ubuntu.zsys (LP: #1847711)
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@canonical.com>  Fri, 11 Oct 2019 12:05:23 +0200
+
 ubiquity (19.10.18) eoan; urgency=medium
 
   * Automatic update of included source packages: partman-auto

@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2018-05-07 13:05+0000\n"
 "Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
-"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-02 15:52+0000\n"
-"X-Generator: Launchpad (build 19066)\n"
+"X-Launchpad-Export-Date: 2019-10-10 18:13+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"Language: lt\n"
 
 #. Type: text
 #. Description
@@ -215,7 +215,8 @@ msgstr "Privalo prasidėti mažąja raide."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Gali būti sudarytas tik iš mažųjų raidžių, skaitmenų, brūkšnelių ir "
 "pabraukimo brūkšnių."
@@ -1036,12 +1037,12 @@ msgstr "Šie paketai yra sugadintoje būsenoje:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Tai gali būti dėl to, kad naudojamas senas įdiegimo programos atvaizdis, "
 "arba dėl klaidos kažkuriame iš aukščiau išvardintų programų paketų. "
@@ -1160,7 +1161,8 @@ msgstr "Užverkite visas programas, kurios naudoja failus iš šių vietų."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Ar norite,  kad įdiegimo programa vėl pabandytų atjungti šiuos skirsnius?"
 
@@ -1626,18 +1628,10 @@ msgstr "Papildomos galimybės:"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
-#, fuzzy
-#| msgid ""
-#| "Installing third-party drivers requires turning off Secure Boot. To do "
-#| "this, you need to choose a security key now, and enter it when the system "
-#| "restarts."
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
-"Nuosavybinių valdyklių įdiegimui reikia išjungti UEFI saugųjį paleidimą "
-"(Secure Boot). Tai padarysite dabar įrašydami naują slaptažodį ir po "
-"sistemos įdiegimo (kompiuteriui įsijungiant), šį slaptažodį įvesdami."
 
 #. Type: text
 #. Description
@@ -1949,19 +1943,11 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:275001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#| "programs, documents, photos, music, and any other files in all operating "
-#| "systems."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
-"<span foreground=\"darkred\">Įspėjimas:</span> Bus ištrintos visos "
-"programos, dokumentai, nuotraukos, muzika bei visi kiti visų operacinių "
-"sistemų failai."
 
 #. Type: text
 #. Description
@@ -2088,44 +2074,22 @@ msgstr "UEFI saugusis paleidimas (Secure Boot)"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "You have chosen to enable third-party software as part of your install, "
-#| "which for this system includes hardware drivers for graphics and/or wi-fi "
-#| "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
-#| "is not compatible with the use of these third-party drivers."
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
-"Jūs, kaip savo įdiegimo dalį, pasirinkote įjungti trečiųjų šalių programinę "
-"įrangą, kurioje yra šiai sistemai numatytos aparatinės įrangos valdyklės, "
-"skirtos vaizdo ir/ar belaidžio ryšio aparatinei įrangai. Be to jūsų "
-"sistemoje yra įjungtas UEFI saugusis paleidimas. UEFI saugusis paleidimas "
-"nėra suderinamas su šių trečiųjų šalių valdyklių naudojimu."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "After installation completes, Ubuntu will assist you in disabling UEFI "
-#| "Secure Boot. To ensure that this change is being made by you as an "
-#| "authorized user, and not by an attacker, you must choose a password now "
-#| "and then use the same password after reboot to confirm the change."
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
-"Po to, kai įdiegimas bus užbaigtas, Ubuntu padės jums išjungti UEFI saugųjį "
-"paleidimą. Norint užtikrinti, kad šis pakeitimas yra atliekamas jūsų, kaip "
-"įgalioto naudotojo, o ne kaip užpuoliko, dabar privalote pasirinkti "
-"slaptažodį, o tuomet, po paleidimo naudoti tą patį slaptažodį, kad "
-"patvirtintumėte pakeitimą."
 
 #. Type: text
 #. Description
@@ -2211,8 +2175,40 @@ msgstr ""
 msgid "Removing packages"
 msgstr "Šalinami paketai"
 
+#~ msgid "Upgrade ${CURDISTRO} to ${VER}"
+#~ msgstr "Atnaujinti ${CURDISTRO} į ${VER}"
+
 #~ msgid "Encrypt my home folder"
 #~ msgstr "Užšifruoti mano asmeninį aplanką"
 
-#~ msgid "Upgrade ${CURDISTRO} to ${VER}"
-#~ msgstr "Atnaujinti ${CURDISTRO} į ${VER}"
+#~ msgid ""
+#~ "After installation completes, Ubuntu will assist you in disabling UEFI "
+#~ "Secure Boot. To ensure that this change is being made by you as an "
+#~ "authorized user, and not by an attacker, you must choose a password now and "
+#~ "then use the same password after reboot to confirm the change."
+#~ msgstr ""
+#~ "Po to, kai įdiegimas bus užbaigtas, Ubuntu padės jums išjungti UEFI saugųjį "
+#~ "paleidimą. Norint užtikrinti, kad šis pakeitimas yra atliekamas jūsų, kaip "
+#~ "įgalioto naudotojo, o ne kaip užpuoliko, dabar privalote pasirinkti "
+#~ "slaptažodį, o tuomet, po paleidimo naudoti tą patį slaptažodį, kad "
+#~ "patvirtintumėte pakeitimą."
+
+#~ msgid ""
+#~ "You have chosen to enable third-party software as part of your install, "
+#~ "which for this system includes hardware drivers for graphics and/or wi-fi "
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
+#~ "not compatible with the use of these third-party drivers."
+#~ msgstr ""
+#~ "Jūs, kaip savo įdiegimo dalį, pasirinkote įjungti trečiųjų šalių programinę "
+#~ "įrangą, kurioje yra šiai sistemai numatytos aparatinės įrangos valdyklės, "
+#~ "skirtos vaizdo ir/ar belaidžio ryšio aparatinei įrangai. Be to jūsų "
+#~ "sistemoje yra įjungtas UEFI saugusis paleidimas. UEFI saugusis paleidimas "
+#~ "nėra suderinamas su šių trečiųjų šalių valdyklių naudojimu."
+
+#~ msgid ""
+#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
+#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ msgstr ""
+#~ "Nuosavybinių valdyklių įdiegimui reikia išjungti UEFI saugųjį paleidimą "
+#~ "(Secure Boot). Tai padarysite dabar įrašydami naują slaptažodį ir po "
+#~ "sistemos įdiegimo (kompiuteriui įsijungiant), šį slaptažodį įvesdami."

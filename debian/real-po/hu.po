@@ -9,14 +9,14 @@ msgstr ""
 "POT-Creation-Date: 2019-10-07 14:38+0100\n"
 "PO-Revision-Date: 2018-04-03 01:02+0000\n"
 "Last-Translator: Gabor Kelemen <kelemeng@openscope.org>\n"
-"Language-Team: Debian L10n Hungarian <debian-l10n-hungarian@lists.debian."
-"org>\n"
-"Language: \n"
+"Language-Team: Debian L10n Hungarian <debian-l10n-"
+"hungarian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-02 15:52+0000\n"
-"X-Generator: Launchpad (build 19066)\n"
+"X-Launchpad-Export-Date: 2019-10-10 18:13+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"Language: \n"
 
 #. Type: text
 #. Description
@@ -213,7 +213,8 @@ msgstr "Kisbetűvel kell kezdődnie."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Csak kisbetűket, számjegyeket, kötőjeleket és aláhúzásokat tartalmazhat."
 
@@ -1035,12 +1036,12 @@ msgstr "A következő csomagok törött állapotban vannak:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Ezt egy régi telepítő-lemezkép használata, vagy a fenti csomagok egyikének "
 "hibája okozhatja. További részletek a /var/log/syslog fájlban találhatók. A "
@@ -1154,12 +1155,14 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:164001
 msgid "Please close any applications using these mount points."
-msgstr "Zárjon be minden, a kérdéses csatolási pontokat használó alkalmazást."
+msgstr ""
+"Zárjon be minden, a kérdéses csatolási pontokat használó alkalmazást."
 
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Kívánja, hogy a telepítő újra megpróbálja leválasztani ezeket a partíciókat?"
 
@@ -1620,18 +1623,10 @@ msgstr "Egyéb lehetőségek"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
-#, fuzzy
-#| msgid ""
-#| "Installing third-party drivers requires turning off Secure Boot. To do "
-#| "this, you need to choose a security key now, and enter it when the system "
-#| "restarts."
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
-"A harmadik féltől származó illesztőprogramok telepítéséhez ki kell kapcsolni "
-"a Biztonságos rendszerindítást. Ehhez először válasszon egy biztonsági "
-"kulcsot, majd a rendszer újraindítása utána adja azt meg."
 
 #. Type: text
 #. Description
@@ -1871,7 +1866,8 @@ msgstr "Ezen a számítógépen jelenleg ${OS} van. Mi történjen vele?"
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
-msgstr "Ezen a számítógépen jelenleg ${OS1} és ${OS2} van. Mi történjen velük?"
+msgstr ""
+"Ezen a számítógépen jelenleg ${OS1} és ${OS2} van. Mi történjen velük?"
 
 #. Type: text
 #. Description
@@ -1941,19 +1937,11 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:275001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#| "programs, documents, photos, music, and any other files in all operating "
-#| "systems."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
-"<span foreground=\"darkred\">Figyelmeztetés:</span> Ez törölni fogja az "
-"összes programját, dokumentumát, fényképét, zenéjét és minden más fájlját "
-"minden operációs rendszere alatt."
 
 #. Type: text
 #. Description
@@ -2080,44 +2068,22 @@ msgstr "UEFI biztonságos rendszerindítás"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "You have chosen to enable third-party software as part of your install, "
-#| "which for this system includes hardware drivers for graphics and/or wi-fi "
-#| "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
-#| "is not compatible with the use of these third-party drivers."
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
-"Kiválasztotta, hogy szeretne feltelepíteni harmadik féltől származó "
-"szoftvereket a telepítés közben a videokártyához és/vagy a Wi-Fi-hez. "
-"Viszont a rendszerén engedélyezve van a UEFI biztonságos rendszerindítás. A "
-"UEFI biztonságos rendszerindítás nem támogatja a harmadik féltől származó "
-"illesztőprogramok telepítését."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "After installation completes, Ubuntu will assist you in disabling UEFI "
-#| "Secure Boot. To ensure that this change is being made by you as an "
-#| "authorized user, and not by an attacker, you must choose a password now "
-#| "and then use the same password after reboot to confirm the change."
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
-"A telepítés után az Ubuntu segít a UEFI biztonságos rendszerindítás "
-"kikapcsolásában. Annak érdekében, hogy biztosak lehessünk benne, hogy ezt a "
-"változtatást Ön, mint hitelesített felhasználó kezdeményezte és nem egy "
-"támadó, most adjon meg egy jelszót, amit majd az újraindítás után újból meg "
-"kell adnia."
 
 #. Type: text
 #. Description
@@ -2208,3 +2174,35 @@ msgstr "Csomagok eltávolítása"
 
 #~ msgid "Upgrade ${CURDISTRO} to ${VER}"
 #~ msgstr "${CURDISTRO} frissítése erre a verzióra: ${VER}"
+
+#~ msgid ""
+#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
+#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ msgstr ""
+#~ "A harmadik féltől származó illesztőprogramok telepítéséhez ki kell kapcsolni "
+#~ "a Biztonságos rendszerindítást. Ehhez először válasszon egy biztonsági "
+#~ "kulcsot, majd a rendszer újraindítása utána adja azt meg."
+
+#~ msgid ""
+#~ "You have chosen to enable third-party software as part of your install, "
+#~ "which for this system includes hardware drivers for graphics and/or wi-fi "
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
+#~ "not compatible with the use of these third-party drivers."
+#~ msgstr ""
+#~ "Kiválasztotta, hogy szeretne feltelepíteni harmadik féltől származó "
+#~ "szoftvereket a telepítés közben a videokártyához és/vagy a Wi-Fi-hez. "
+#~ "Viszont a rendszerén engedélyezve van a UEFI biztonságos rendszerindítás. A "
+#~ "UEFI biztonságos rendszerindítás nem támogatja a harmadik féltől származó "
+#~ "illesztőprogramok telepítését."
+
+#~ msgid ""
+#~ "After installation completes, Ubuntu will assist you in disabling UEFI "
+#~ "Secure Boot. To ensure that this change is being made by you as an "
+#~ "authorized user, and not by an attacker, you must choose a password now and "
+#~ "then use the same password after reboot to confirm the change."
+#~ msgstr ""
+#~ "A telepítés után az Ubuntu segít a UEFI biztonságos rendszerindítás "
+#~ "kikapcsolásában. Annak érdekében, hogy biztosak lehessünk benne, hogy ezt a "
+#~ "változtatást Ön, mint hitelesített felhasználó kezdeményezte és nem egy "
+#~ "támadó, most adjon meg egy jelszót, amit majd az újraindítás után újból meg "
+#~ "kell adnia."

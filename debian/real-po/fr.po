@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2019-10-07 14:38+0100\n"
-"PO-Revision-Date: 2018-09-25 03:29+0000\n"
-"Last-Translator: Olivier Febwin <febwin@free.fr>\n"
+"PO-Revision-Date: 2019-10-08 07:41+0000\n"
+"Last-Translator: Olivier Tilloy <olivier.tilloy@canonical.com>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
-"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-02 15:53+0000\n"
-"X-Generator: Launchpad (build 19066)\n"
+"X-Launchpad-Export-Date: 2019-10-10 18:12+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"Language: fr\n"
 
 #. Type: text
 #. Description
@@ -207,8 +207,8 @@ msgid ""
 "multiple accounts after installation.&lt;/small&gt;"
 msgstr ""
 "&lt;small&gt;Si plusieurs personnes sont susceptibles d'utiliser cet "
-"ordinateur, vous pouvez configurer plusieurs comptes après l'installation."
-"&lt;/small&gt;"
+"ordinateur, vous pouvez configurer plusieurs comptes après "
+"l'installation.&lt;/small&gt;"
 
 #. Type: text
 #. Description
@@ -219,7 +219,8 @@ msgstr "Doit commencer par une lettre minuscule."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Ne peut contenir que des lettres minuscules, des chiffres, des tirets et des "
 "traits de soulignement."
@@ -888,8 +889,8 @@ msgstr ""
 #: ../ubiquity.templates:121001
 msgid "The following file did not match its source copy on the CD/DVD:"
 msgstr ""
-"Le fichier suivant ne correspond pas à sa copie originale présente sur le CD/"
-"DVD :"
+"Le fichier suivant ne correspond pas à sa copie originale présente sur le "
+"CD/DVD :"
 
 #. Type: text
 #. Description
@@ -1050,12 +1051,12 @@ msgstr "Les paquets suivants sont cassés :"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Ceci peut être dû à l’utilisation d’une ancienne image du programme "
 "d'installation, ou bien à un bogue dans certains paquets listés ci-dessus. "
@@ -1178,7 +1179,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Voulez-vous que le programme d’installation essaye à nouveau de démonter ces "
 "partitions ?"
@@ -1464,8 +1466,9 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>%d partitions plus petites sont masquées, utilisez <a href="
-"\"\">l’outil de partitionnement avancé</a>  pour plus de contrôle</small>"
+"<small>%d partitions plus petites sont masquées, utilisez <a "
+"href=\"\">l’outil de partitionnement avancé</a>  pour plus de "
+"contrôle</small>"
 
 #. Type: text
 #. Description
@@ -1647,18 +1650,13 @@ msgstr "Autres options"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
-#, fuzzy
-#| msgid ""
-#| "Installing third-party drivers requires turning off Secure Boot. To do "
-#| "this, you need to choose a security key now, and enter it when the system "
-#| "restarts."
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
-"Installer des pilotes tiers requiert de désactiver le Secure Boot. Pour "
-"cela, vous devez choisir maintenant une clé de sécurité, puis l'utiliser "
-"lorsque le système redémarre."
+"L’installation de pilotes de périphériques tiers nécessite la configuration "
+"du démarrage sécurisé. Pour ce faire, vous devez choisir une clé de sécurité "
+"maintenant, et vous devrez la saisir au démarrage du système."
 
 #. Type: text
 #. Description
@@ -1966,24 +1964,20 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:274001
 msgid "EXPERIMENTAL: Erase disk and use ZFS"
-msgstr ""
+msgstr "EXPÉRIMENTAL : effacer le disque et utiliser ZFS"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:275001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#| "programs, documents, photos, music, and any other files in all operating "
-#| "systems."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
-"<span foreground=\"darkred\">Avertissement :</span> Ceci supprimera tous vos "
-"logiciels, documents, photos, musiques et autres fichiers de tous les "
-"systèmes d’exploitation."
+"<span foreground=\"darkred\">Attention :</span> Cette opération effacera "
+"tous vos fichiers sur tous les systèmes d’exploitation. Cette option est "
+"expérimentale et pourrait entraîner une perte de données. Ne l’utilisez pas "
+"sur des systèmes en production."
 
 #. Type: text
 #. Description
@@ -2111,43 +2105,32 @@ msgstr "Secure Boot UEFI"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "You have chosen to enable third-party software as part of your install, "
-#| "which for this system includes hardware drivers for graphics and/or wi-fi "
-#| "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
-#| "is not compatible with the use of these third-party drivers."
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
-"Vous avez choisi d'activer l'installation de logiciels tiers, ce qui inclut "
-"pour ce système des pilotes pour cartes graphiques et/ou Wi-Fi. Le Secure "
-"Boot UEFI de votre système est également activé. Le Secure Boot UEFI n'est "
-"pas compatible avec l'utilisation de ces pilotes tiers."
+"Vous avez choisi d’installer des logiciels tiers, ce qui pour ce système "
+"inclut des pilotes de périphériques graphiques et/ou Wi-Fi. Le démarrage "
+"sécurisé par UEFI est également activé sur votre système, et doit être "
+"configuré pour permettre l’utilisation de ces pilotes de périphériques tiers."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "After installation completes, Ubuntu will assist you in disabling UEFI "
-#| "Secure Boot. To ensure that this change is being made by you as an "
-#| "authorized user, and not by an attacker, you must choose a password now "
-#| "and then use the same password after reboot to confirm the change."
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
-"Après la fin de l'installation, Ubuntu vous assistera pour désactiver le "
-"Secure Boot UEFI. Afin de garantir que cette modification est bien réalisée "
-"par vous même en tant qu'utilisateur autorisé, et pas par un intrus, vous "
-"devez choisir à présent un mot de passe et utiliser le même mot de passe "
-"après redémarrage pour confirmer la modification."
+"Une fois l’installation terminée, Ubuntu vous guidera pour configurer le "
+"démarrage sécurisé par UEFI. Pour garantir que ce changement est fait par "
+"vous en tant qu’utilisateur autorisé, et non par une personne "
+"malintentionnée, vous devez choisir un mot de passe maintenant, et vous "
+"devrez utiliser ce même mot de passe après le redémarrage pour confirmer le "
+"changement."
 
 #. Type: text
 #. Description
@@ -2239,3 +2222,34 @@ msgstr "Suppression des paquets"
 
 #~ msgid "Upgrade ${CURDISTRO} to ${VER}"
 #~ msgstr "Mettre ${CURDISTRO} à niveau vers ${VER}"
+
+#~ msgid ""
+#~ "You have chosen to enable third-party software as part of your install, "
+#~ "which for this system includes hardware drivers for graphics and/or wi-fi "
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
+#~ "not compatible with the use of these third-party drivers."
+#~ msgstr ""
+#~ "Vous avez choisi d'activer l'installation de logiciels tiers, ce qui inclut "
+#~ "pour ce système des pilotes pour cartes graphiques et/ou Wi-Fi. Le Secure "
+#~ "Boot UEFI de votre système est également activé. Le Secure Boot UEFI n'est "
+#~ "pas compatible avec l'utilisation de ces pilotes tiers."
+
+#~ msgid ""
+#~ "After installation completes, Ubuntu will assist you in disabling UEFI "
+#~ "Secure Boot. To ensure that this change is being made by you as an "
+#~ "authorized user, and not by an attacker, you must choose a password now and "
+#~ "then use the same password after reboot to confirm the change."
+#~ msgstr ""
+#~ "Après la fin de l'installation, Ubuntu vous assistera pour désactiver le "
+#~ "Secure Boot UEFI. Afin de garantir que cette modification est bien réalisée "
+#~ "par vous même en tant qu'utilisateur autorisé, et pas par un intrus, vous "
+#~ "devez choisir à présent un mot de passe et utiliser le même mot de passe "
+#~ "après redémarrage pour confirmer la modification."
+
+#~ msgid ""
+#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
+#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ msgstr ""
+#~ "Installer des pilotes tiers requiert de désactiver le Secure Boot. Pour "
+#~ "cela, vous devez choisir maintenant une clé de sécurité, puis l'utiliser "
+#~ "lorsque le système redémarre."

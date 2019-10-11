@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2018-02-06 13:33+0000\n"
 "Last-Translator: helix84 <Unknown>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
-"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-02 15:52+0000\n"
-"X-Generator: Launchpad (build 19066)\n"
+"X-Launchpad-Export-Date: 2019-10-10 18:12+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"Language: sk\n"
 
 #. Type: text
 #. Description
@@ -212,7 +212,8 @@ msgstr "Musí začínať malým písmenom."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Môže obsahovať len malé písmená, číslice, pomlčky a podtržníky."
 
 #. Type: text
@@ -412,7 +413,8 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:60001
 msgid "Choose a different device to install the bootloader on:"
-msgstr "Vyberte iné zariadenie, na ktoré chcete nainštalovať zavádzač systému:"
+msgstr ""
+"Vyberte iné zariadenie, na ktoré chcete nainštalovať zavádzač systému:"
 
 #. Type: text
 #. Description
@@ -1030,12 +1032,12 @@ msgstr "Nasledovné balíky sú v stave pokazené:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Táto chyba mohla nastať kvôli použitiu starej verzie inštalátora alebo kvôli "
 "chybe v niektorom z balíčkov vypísaných vyššie. Ďalšie podrobnosti môžete "
@@ -1155,7 +1157,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr "Chcete, aby sa inštalátor opäť pokúsil tieto oblasti odpojiť?"
 
 #. Type: boolean
@@ -1455,8 +1458,8 @@ msgid ""
 "%d partitions will be deleted, use the <a href=\"\">advanced partitioning "
 "tool</a> for more control"
 msgstr ""
-"%d oblastí bude zmazaných, lepšiu kontrolu dosiahnete použitím <a href="
-"\"\">pokročilého rozdeľovacieho nástroja</a>"
+"%d oblastí bude zmazaných, lepšiu kontrolu dosiahnete použitím <a "
+"href=\"\">pokročilého rozdeľovacieho nástroja</a>"
 
 #. Type: text
 #. Description
@@ -1465,8 +1468,8 @@ msgid ""
 "1 partition will be deleted, use the <a href=\"\">advanced partitioning "
 "tool</a> for more control"
 msgstr ""
-"1 oblasť bude zmazaná, lepšiu kontrolu dosiahnete použitím <a href="
-"\"\">pokročilého rozdeľovacieho nástroja</a>"
+"1 oblasť bude zmazaná, lepšiu kontrolu dosiahnete použitím <a "
+"href=\"\">pokročilého rozdeľovacieho nástroja</a>"
 
 #. Type: text
 #. Description
@@ -1609,18 +1612,10 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
-#, fuzzy
-#| msgid ""
-#| "Installing third-party drivers requires turning off Secure Boot. To do "
-#| "this, you need to choose a security key now, and enter it when the system "
-#| "restarts."
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
-"Inštalovanie ovládačov od tretích strán vyžaduje vypnutie Secure Boot. To "
-"urobíte tak, že si teraz zvolíte bezpečnostný kľúč a zadáte ho po reštarte "
-"systému."
 
 #. Type: text
 #. Description
@@ -1930,18 +1925,11 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:275001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#| "programs, documents, photos, music, and any other files in all operating "
-#| "systems."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
-"<span foreground=\"darkred\">Upozornenie:</span> Týmto sa zmažú všetky vaše "
-"programy, dokumenty, fotografie, hudba a ostatné súbory."
 
 #. Type: text
 #. Description
@@ -2068,42 +2056,22 @@ msgstr "UEFI Secure Boot"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "You have chosen to enable third-party software as part of your install, "
-#| "which for this system includes hardware drivers for graphics and/or wi-fi "
-#| "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
-#| "is not compatible with the use of these third-party drivers."
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
-"Zvolili ste v rámci vašej inštalácie povoliť softvér od tretích strán, ktorý "
-"na tomto systéme predstavuje ovládače grafiky alebo hardvéru Wi-Fi. Váš "
-"systém má zároveň zapnutý UEFI Secure Boot. Použitie UEFI Secure Boot nie je "
-"kompatibilné s týmito ovládačmi od tretích strán."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "After installation completes, Ubuntu will assist you in disabling UEFI "
-#| "Secure Boot. To ensure that this change is being made by you as an "
-#| "authorized user, and not by an attacker, you must choose a password now "
-#| "and then use the same password after reboot to confirm the change."
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
-"Po dokončení inštalácie vám Ubuntu pomôže vypnúť UEFI Secure Boot. Kvôli "
-"zaisteniu, že túto zmenu vykonávate vy ako autorizovaný používateľ a nie "
-"útočník, musíte si teraz zvoliť heslo a následne po reštarte použiť rovnaké "
-"heslo na potvrdenie zmien."
 
 #. Type: text
 #. Description
@@ -2193,3 +2161,33 @@ msgstr "Odstraňujú sa balíky"
 
 #~ msgid "Upgrade ${CURDISTRO} to ${VER}"
 #~ msgstr "Aktualizovať ${CURDISTRO} na ${VER}"
+
+#~ msgid ""
+#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
+#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ msgstr ""
+#~ "Inštalovanie ovládačov od tretích strán vyžaduje vypnutie Secure Boot. To "
+#~ "urobíte tak, že si teraz zvolíte bezpečnostný kľúč a zadáte ho po reštarte "
+#~ "systému."
+
+#~ msgid ""
+#~ "You have chosen to enable third-party software as part of your install, "
+#~ "which for this system includes hardware drivers for graphics and/or wi-fi "
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
+#~ "not compatible with the use of these third-party drivers."
+#~ msgstr ""
+#~ "Zvolili ste v rámci vašej inštalácie povoliť softvér od tretích strán, ktorý "
+#~ "na tomto systéme predstavuje ovládače grafiky alebo hardvéru Wi-Fi. Váš "
+#~ "systém má zároveň zapnutý UEFI Secure Boot. Použitie UEFI Secure Boot nie je "
+#~ "kompatibilné s týmito ovládačmi od tretích strán."
+
+#~ msgid ""
+#~ "After installation completes, Ubuntu will assist you in disabling UEFI "
+#~ "Secure Boot. To ensure that this change is being made by you as an "
+#~ "authorized user, and not by an attacker, you must choose a password now and "
+#~ "then use the same password after reboot to confirm the change."
+#~ msgstr ""
+#~ "Po dokončení inštalácie vám Ubuntu pomôže vypnúť UEFI Secure Boot. Kvôli "
+#~ "zaisteniu, že túto zmenu vykonávate vy ako autorizovaný používateľ a nie "
+#~ "útočník, musíte si teraz zvoliť heslo a následne po reštarte použiť rovnaké "
+#~ "heslo na potvrdenie zmien."

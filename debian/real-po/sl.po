@@ -11,12 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2018-09-30 16:25+0000\n"
 "Last-Translator: Sasa Batistic <Unknown>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
-"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2019-10-02 15:52+0000\n"
-"X-Generator: Launchpad (build 19066)\n"
+"X-Launchpad-Export-Date: 2019-10-10 18:12+0000\n"
+"X-Generator: Launchpad (build af2eefe214bd95389a09b7c956720881bab16807)\n"
+"Language: sl\n"
 
 #. Type: text
 #. Description
@@ -214,7 +214,8 @@ msgstr "Začeti se mora z malo črko."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Lahko vsebuje samo male črke, številke, vezaje ter podčrtaje."
 
 #. Type: text
@@ -1034,12 +1035,12 @@ msgstr "Naslednji paketi vsebujejo napake:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Do tega je morda prišlo zaradi uporabe starega odtisa namestilnika ali "
 "napake v katerem izmed zgoraj navedenih paketov. Več podrobnosti boste našli "
@@ -1158,7 +1159,8 @@ msgstr "Zaprite vse programe, ki uporabljajo te priklopne točke."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr "Ali želite, da namestilnik ponovno poskusi odklopiti te razdelke?"
 
 #. Type: boolean
@@ -1438,8 +1440,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>%d majhnih razdelkov je skritih. Za več nadzora uporabite <a href="
-"\"\">napredno orodje razdelkov</a>.</small>"
+"<small>%d majhnih razdelkov je skritih. Za več nadzora uporabite <a "
+"href=\"\">napredno orodje razdelkov</a>.</small>"
 
 #. Type: text
 #. Description
@@ -1448,8 +1450,8 @@ msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>1 majhen razdelek je skrit. Za več nadzora uporabite <a href="
-"\"\">napredno orodje razdelkov</a>.</small>"
+"<small>1 majhen razdelek je skrit. Za več nadzora uporabite <a "
+"href=\"\">napredno orodje razdelkov</a>.</small>"
 
 #. Type: text
 #. Description
@@ -1618,18 +1620,10 @@ msgstr "Druge možnosti"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
-#, fuzzy
-#| msgid ""
-#| "Installing third-party drivers requires turning off Secure Boot. To do "
-#| "this, you need to choose a security key now, and enter it when the system "
-#| "restarts."
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
-"Namestitev gonilnikov tretjih oseb zahteva izklop Varnega zagona. Da to "
-"storite, sedaj izberite varnostni ključ in ga vnesite ob ponovnem zagonu "
-"sistema."
 
 #. Type: text
 #. Description
@@ -1938,19 +1932,11 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:275001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#| "programs, documents, photos, music, and any other files in all operating "
-#| "systems."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
-"<span foreground=\"darkred\">Opozorilo:</span> To bo izbrisalo vse vaše "
-"programe, dokumente, fotografije, glasbo in vse druge datoteke na vseh "
-"operacijskih sistemih."
 
 #. Type: text
 #. Description
@@ -2078,42 +2064,22 @@ msgstr "Varni zagon UEFI"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "You have chosen to enable third-party software as part of your install, "
-#| "which for this system includes hardware drivers for graphics and/or wi-fi "
-#| "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
-#| "is not compatible with the use of these third-party drivers."
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
-"Izbrali ste omogočanje programske opreme tretjih oseb kot del svoje "
-"namestitve, kar pri tem sistemu vključuje gonilnike za grafiko in/ali Wi-Fi. "
-"Vaš sistem ima tudi omogočen Varni zagon UEFI. Varni zagon UEFI ni združljiv "
-"z uporabo teh gonilnikov tretjih oseb."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:296001
-#, fuzzy
-#| msgid ""
-#| "After installation completes, Ubuntu will assist you in disabling UEFI "
-#| "Secure Boot. To ensure that this change is being made by you as an "
-#| "authorized user, and not by an attacker, you must choose a password now "
-#| "and then use the same password after reboot to confirm the change."
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
-"Ko se namestitev konča, vam bo Ubuntu pomagal pri onemogočanju Varnega "
-"zagona UEFI. Zaradi zagotovitve, da ste to naredili vi kot pooblaščeni "
-"uporabnik in ne napadalec, morate sedaj izbrati geslo in ga uporabiti po "
-"ponovnem zagonu, da potrdite spremembo."
 
 #. Type: text
 #. Description
@@ -2203,3 +2169,33 @@ msgstr "Odstranjevanje paketov"
 
 #~ msgid "Upgrade ${CURDISTRO} to ${VER}"
 #~ msgstr "Nadgradi ${CURDISTRO} na ${VER}"
+
+#~ msgid ""
+#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
+#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ msgstr ""
+#~ "Namestitev gonilnikov tretjih oseb zahteva izklop Varnega zagona. Da to "
+#~ "storite, sedaj izberite varnostni ključ in ga vnesite ob ponovnem zagonu "
+#~ "sistema."
+
+#~ msgid ""
+#~ "After installation completes, Ubuntu will assist you in disabling UEFI "
+#~ "Secure Boot. To ensure that this change is being made by you as an "
+#~ "authorized user, and not by an attacker, you must choose a password now and "
+#~ "then use the same password after reboot to confirm the change."
+#~ msgstr ""
+#~ "Ko se namestitev konča, vam bo Ubuntu pomagal pri onemogočanju Varnega "
+#~ "zagona UEFI. Zaradi zagotovitve, da ste to naredili vi kot pooblaščeni "
+#~ "uporabnik in ne napadalec, morate sedaj izbrati geslo in ga uporabiti po "
+#~ "ponovnem zagonu, da potrdite spremembo."
+
+#~ msgid ""
+#~ "You have chosen to enable third-party software as part of your install, "
+#~ "which for this system includes hardware drivers for graphics and/or wi-fi "
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
+#~ "not compatible with the use of these third-party drivers."
+#~ msgstr ""
+#~ "Izbrali ste omogočanje programske opreme tretjih oseb kot del svoje "
+#~ "namestitve, kar pri tem sistemu vključuje gonilnike za grafiko in/ali Wi-Fi. "
+#~ "Vaš sistem ima tudi omogočen Varni zagon UEFI. Varni zagon UEFI ni združljiv "
+#~ "z uporabo teh gonilnikov tretjih oseb."

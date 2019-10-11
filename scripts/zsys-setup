@@ -175,8 +175,8 @@ format_disk() {
 
 		cat > /tmp/sfdisk.cfg <<EOF
 ${partprefix}${partgrub}  :   size=    50M, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4
-${partprefix}${partbpool} :   size=     2G, type=516E7CBA-6ECF-11D6-8FF8-00022D09712B
-${partprefix}${partrpool} :                 type=516E7CBA-6ECF-11D6-8FF8-00022D09712B
+${partprefix}${partbpool} :   size=     2G, type=6A82CB45-1DD2-11B2-99A6-080020736631
+${partprefix}${partrpool} :                 type=6A85CF4D-1DD2-11B2-99A6-080020736631
 EOF
 		sfdiskopts="--append"
 	else
@@ -262,11 +262,11 @@ init_zfs() {
 	zfs create rpool/USERDATA -o canmount=off -o mountpoint=/
 
 	# Set zsys properties
-	zfs set org.zsys:bootfs='yes' "rpool/ROOT/ubuntu_${UUID_ORIG}"
-	zfs set org.zsys:last-used=$(date +%s) "rpool/ROOT/ubuntu_${UUID_ORIG}"
-	zfs set org.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/srv"
-	zfs set org.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/usr"
-	zfs set org.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/var"
+	zfs set com.ubuntu.zsys:bootfs='yes' "rpool/ROOT/ubuntu_${UUID_ORIG}"
+	zfs set com.ubuntu.zsys:last-used=$(date +%s) "rpool/ROOT/ubuntu_${UUID_ORIG}"
+	zfs set com.ubuntu.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/srv"
+	zfs set com.ubuntu.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/usr"
+	zfs set com.ubuntu.zsys:bootfs='no' "rpool/ROOT/ubuntu_${UUID_ORIG}/var"
 }
 
 move_user () {
@@ -403,6 +403,9 @@ elif [ "${COMMAND}" = "finalize" ]; then
 	# The code below can be removed once zfs is seeded on desktop images
 	#
 	# We need network up at this point and resolv.conf
+	echo "I: Installing ZFS utils into ${TARGET}"
+	apt-install zfsutils-linux 2>/dev/null
+	apt-install zfs-initramfs 2>/dev/null
 
 	if [ ! -f "$INIT_FLAG" ]; then
 		echo "W: zsys init didn't succeed. Not proceeding with command: ${COMMAND}. Aborting!"
@@ -428,6 +431,11 @@ elif [ "${COMMAND}" = "finalize" ]; then
 	done
 
 	move_user "${TARGET}" root /root "${UUID_ORIG}"
+
+	echo "I: Changing sync mode of rpool to standard"
+	zfs set sync=standard rpool
+
+	echo "I: ZFS setup complete"
 else
 	echo "E: Unknown command: $COMMAND"
 	exit 1
