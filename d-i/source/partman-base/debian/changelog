@@ -1,3 +1,14 @@
+partman-base (206ubuntu6) eoan; urgency=medium
+
+  * init.d/parted: even if parsing partitions fails, ensure that the block
+    device that has /cdrom mounted is marked as
+    installation_medium. Unless of course partman/filter_mounted is
+    preseeded to false. Currently our isos are built such that partman
+    fails to detect partititions, but blkid/sfdisk/kernel can. LP:
+    #1847944
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 14 Oct 2019 12:26:06 +0100
+
 partman-base (206ubuntu5) eoan; urgency=medium
 
   * Move superblock wiping code from command_new_label to command_commit, as

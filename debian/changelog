@@ -1,3 +1,21 @@
+ubiquity (19.10.20) eoan; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  * zsys-setup: Force a re-read of the partition table before using the disk
+    (LP: #1847748)
+
+  [ Iain Lane ]
+  * zsys-setup: Mark packages to kept in the init phase, rather than finalize.
+    Finalize runs after ubiquity has removed files from packages which it has
+    decided the target system isn't going to need. It's too late for us to try
+    to save things then. (LP: #1847898)
+
+  [ Dimitri John Ledkov ]
+  * Automatic update of included source packages: partman-auto
+    134ubuntu12, partman-base 206ubuntu6 (LP: #1847944)
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 14 Oct 2019 14:31:19 +0100
+
 ubiquity (19.10.19) eoan; urgency=medium
 
   [ Sebastien Bacher ]

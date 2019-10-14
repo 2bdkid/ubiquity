@@ -1,3 +1,12 @@
+partman-auto (134ubuntu12) eoan; urgency=medium
+
+  * lib/auto-shared.sh: drop /cdrom check completely, and instead rely on
+    partman-base/init.d/parted to correctly detect installation_medium
+    devices, even when parted fails to parse the block device partition
+    table. LP: #1847944
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 14 Oct 2019 12:25:11 +0100
+
 partman-auto (134ubuntu11) eoan; urgency=medium
 
   * lib/auto-shared.sh: skip installer disk when it's mounted as a
