@@ -23,6 +23,7 @@ from __future__ import print_function
 
 import gzip
 import io
+import itertools
 import os
 import platform
 import pwd
@@ -1162,8 +1163,26 @@ class Install(install_misc.InstallBase):
         if not found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
 
-        # this will not install non-free packages due to above divert
-        self.do_install(install_misc.query_recorded_installed())
+        # this will install free & non-free things, but not things
+        # that have multiarch Depends or Recommends. Instead, those
+        # will be installed by install_restricted_extras() later
+        # because this function runs before i386 foreign arch is
+        # enabled
+        cache = Cache()
+        filtered_extra_packages = install_misc.query_recorded_installed()
+        for package in filtered_extra_packages.copy():
+            pkg = cache.get(package)
+            if not pkg:
+                continue
+            candidate = pkg.candidate
+            dependencies = candidate.dependencies + candidate.recommends
+            all_deps = itertools.chain.from_iterable(dependencies)
+            for dep in all_deps:
+                if ':' in dep.name:
+                    filtered_extra_packages.remove(package)
+                    break
+
+        self.do_install(filtered_extra_packages)
 
         if found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)

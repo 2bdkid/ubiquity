@@ -161,6 +161,8 @@ format_disk() {
 	partgrub="$2"
 	partbpool="$3"
 	partrpool="$4"
+	ss="$5"
+	partswap=$(( partbpool - 1 ))
 	partext=$(( partgrub + 1 ))
 	sfdiskopts=""
 	partprefix="${disk}${PARTBASE}"
@@ -175,6 +177,7 @@ format_disk() {
 
 		cat > /tmp/sfdisk.cfg <<EOF
 ${partprefix}${partgrub}  :   size=    50M, type=0FC63DAF-8483-4772-8E79-3D69D8477DE4
+${partprefix}${partswap}  :   size= ${ss}M, type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F
 ${partprefix}${partbpool} :   size=     2G, type=6A82CB45-1DD2-11B2-99A6-080020736631
 ${partprefix}${partrpool} :                 type=6A85CF4D-1DD2-11B2-99A6-080020736631
 EOF
@@ -185,6 +188,7 @@ EOF
 		cat > /tmp/sfdisk.cfg <<EOF
 ${partprefix}${partgrub}  : start=        $start, size=    50M, type=83, bootable
 ${partprefix}${partext}   :                                   type=5
+${partprefix}${partswap}  :                     size= ${ss}M, type=82
 ${partprefix}${partbpool} :                     size=     2G, type=a5
 ${partprefix}${partrpool} :                                   type=a5
 EOF
@@ -195,6 +199,7 @@ EOF
 
 	# Force a re-read of the partition table
 	echo "I: Re-reading partition table"
+	partx --add "${disk}" 2>/dev/null || true
 	partx --show "${disk}"
 }
 
@@ -346,34 +351,42 @@ elif [ "${COMMAND}" = "init" ]; then
 		# The layout is
 		# 1: ESP
 		# 2: grub
-		# 3: bpool
-		# 4: rpool
-		PARTBPOOL=3
-		PARTRPOOL=4
+		# 3: swap
+		# 4: bpool
+		# 5: rpool
+		PARTSWAP=3
+		PARTBPOOL=4
+		PARTRPOOL=5
 	else
 		# MBR pools are on extended partition
 		# The layout is:
 		# 1: grub
 		# 2: Extended
-		# 5: bpool
-		# 6: rpool
-		PARTBPOOL=5
-		PARTRPOOL=6
+		# 5: swap
+		# 6: bpool
+		# 7: rpool
+		PARTSWAP=5
+		PARTBPOOL=6
+		PARTRPOOL=7
 	fi
 
-	# Swap files are not supported on ZFS, we use a ZFS volume instead
+	# Swap files are not supported on ZFS, we use a swap partition instead:
 	SWAPFILE="$(grep "^${TARGET}" /proc/swaps |awk '{print $1}')"
-	SWAPSIZE=0
+	# Give us a minimum swap partition size of 4MB in case we decide on
+	# no swap, just to keep the partition layout stable:
+	SWAPSIZE=4194304
 
-	# Disable swap
+	# Disable swap and get the swap volume size:
 	if [ -n "${SWAPFILE}" ]; then
 		SWAPSIZE=$(stat -c%s "${SWAPFILE}")
 		echo "I: Found swapfile with size ${SWAPSIZE}. Disabling"
 		swapoff "${SWAPFILE}"
 	fi
+	# Convert to MiB to align the size on the size of a block
+	SWAPVOLSIZE=$(( SWAPSIZE / 1024 / 1024 ))
 
 	prepare_target "${TARGET}"
-	format_disk "${DISK}" "${PARTGRUB}" "${PARTBPOOL}" "${PARTRPOOL}"
+	format_disk "${DISK}" "${PARTGRUB}" "${PARTBPOOL}" "${PARTRPOOL}" "${SWAPVOLSIZE}"
 	init_zfs "${TARGET}" "${DISK}${PARTBASE}${PARTBPOOL}" "${DISK}${PARTBASE}${PARTRPOOL}"
 	init_system_partitions "${TARGET}" "${DISK}${PARTBASE}1" "${DISK}${PARTBASE}${PARTGRUB}"
 
@@ -388,19 +401,12 @@ elif [ "${COMMAND}" = "init" ]; then
 	grubuuid=$(blkid -s UUID -o value "${DISK}${PARTBASE}${PARTGRUB}")
 	echo "UUID=${grubuuid}\t/boot/grub\text4\terrors=remount-ro\t0\t1" >> "${TARGET}/etc/fstab"
 
-	# Recreate swap file if there was one
 	if [ -n "${SWAPFILE}" ]; then
-		# Convert to MiB to align the size on the size of a block
-		volsize=$(( SWAPSIZE / 1024 / 1024 ))
-		echo "I: Creating swapfile with size ${volsize}MiB"
-		zfs create -V ${volsize}M -b $(getconf PAGESIZE) -o compression=zle \
-			-o logbias=throughput -o sync=always \
-			-o primarycache=metadata -o secondarycache=none \
-			rpool/swap
-
-		mkswap -f /dev/zvol/rpool/swap
-		echo "/dev/zvol/rpool/swap\tnone\tswap\tdiscard\t0\t0" >> "${TARGET}/etc/fstab"
-		swapon -av
+		SWAPDEVICE="${DISK}${PARTBASE}${PARTSWAP}"
+		mkswap -f "${SWAPDEVICE}"
+		SWAPID=$(blkid -s UUID -o value "${SWAPDEVICE}")
+		printf "UUID=${SWAPID}\tnone\tswap\tdiscard\t0\t0\n" >> "${TARGET}/etc/fstab"
+		swapon -v "${SWAPDEVICE}"
 	fi
 
 	echo "I: Marking ZFS utilities to be kept in the target system"
