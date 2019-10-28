@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2018-09-06 03:48+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
+"Language: ms\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:36+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: ms\n"
 
 #. Type: text
 #. Description
@@ -121,8 +121,8 @@ msgstr ""
 #: ../ubiquity.templates:14001
 msgid "You may wish to read the <a href=\"release-notes\">release notes</a>."
 msgstr ""
-"Anda mungkin ingin membaca <a href=\"release-notes\">nota-nota "
-"perlepasan</a>."
+"Anda mungkin ingin membaca <a href=\"release-notes\">nota-nota perlepasan</"
+"a>."
 
 #. Type: text
 #. Description
@@ -215,8 +215,7 @@ msgstr "Mesti bermula dengan huruf kecil."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Hanya boleh mengandungi huruf kecil, digit, hypen, dan garis bawah."
 
 #. Type: text
@@ -568,7 +567,7 @@ msgstr "Padam"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Kembali Ke Asal"
 
@@ -1042,12 +1041,12 @@ msgstr "Pakej berikut berada dalam keadaan tidak lengkap::"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Ini mungkin disebabkan penggunaan imej pemasangan yang agak lama, atau "
 "disebabkan pepijat dalam sesetengah pakej disenaraikan diatas. Keterangan "
@@ -1167,8 +1166,7 @@ msgstr "Sila tutup apa-apa aplikasi yang menggunakan titik pautan."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Adakah anda ingin pemasang untuk mencuba menyahpaut bahagian sekali lagi?"
 
@@ -1864,8 +1862,7 @@ msgstr "Pasang ${DISTRO} bersama-sama"
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #: ../ubiquity.templates:264001
 msgid "This computer currently has ${OS} on it. What would you like to do?"
-msgstr ""
-"Komputer ini mempunyai ${OS} didalamnya. Apa yang anda ingin lakukan?"
+msgstr "Komputer ini mempunyai ${OS} didalamnya. Apa yang anda ingin lakukan?"
 
 #. Type: text
 #. Description
@@ -1956,18 +1953,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Bersambung."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Sahkan kunci keselamatan:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Pilih kunci keselamatan:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -1977,13 +2020,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Mana-mana fail diluar ${RELEASE} tidak akan disulitkan."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -1995,61 +2038,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "Untuk lebih selamat:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Tulis ganti ruang cakera kosong"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Pemasangan mengambil masa lebih lama."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Kumpulan volum:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Pilihan Penyulitan"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Volum fizikal:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Sulitkan sekatan ini (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2059,25 +2102,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Pengurusan Volum Logikal"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Pilihan penyulitan..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "But Selamat UEFI"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2087,7 +2130,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2097,7 +2140,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2111,9 +2154,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "Kunci SecureBoot untuk MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2187,8 +2237,9 @@ msgstr "Membuang pakej-pakej"
 #~ msgstr "Tatar ${CURDISTRO} ke ${VER}"
 
 #~ msgid ""
-#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
-#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ "Installing third-party drivers requires turning off Secure Boot. To do "
+#~ "this, you need to choose a security key now, and enter it when the system "
+#~ "restarts."
 #~ msgstr ""
 #~ "Pemasangan pemacu pihak-ketiga memerlukan But Selamat atau Secur Boot "
 #~ "dimatikan. Untuk membuatnya, anda perlu pilih satu kunci keselamatan "
@@ -2197,23 +2248,23 @@ msgstr "Membuang pakej-pakej"
 #~ msgid ""
 #~ "You have chosen to enable third-party software as part of your install, "
 #~ "which for this system includes hardware drivers for graphics and/or wi-fi "
-#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
-#~ "not compatible with the use of these third-party drivers."
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
+#~ "is not compatible with the use of these third-party drivers."
 #~ msgstr ""
-#~ "Anda telah memilih untuk benarkan perisian pihak-ketiga sebagai sebahagian "
-#~ "dari pemasangan anda, yang mana sistem ini menyertakan pemacu perkakasan "
-#~ "untuk perkakasan grafik dan/atau wi-fi. Sistem anda juga telah membenarkan "
-#~ "But Selamat UEFI. But Selamat UEFI tidak serasi dengan penggunaan pemacu "
-#~ "pihak-ketiga."
+#~ "Anda telah memilih untuk benarkan perisian pihak-ketiga sebagai "
+#~ "sebahagian dari pemasangan anda, yang mana sistem ini menyertakan pemacu "
+#~ "perkakasan untuk perkakasan grafik dan/atau wi-fi. Sistem anda juga telah "
+#~ "membenarkan But Selamat UEFI. But Selamat UEFI tidak serasi dengan "
+#~ "penggunaan pemacu pihak-ketiga."
 
 #~ msgid ""
 #~ "After installation completes, Ubuntu will assist you in disabling UEFI "
 #~ "Secure Boot. To ensure that this change is being made by you as an "
-#~ "authorized user, and not by an attacker, you must choose a password now and "
-#~ "then use the same password after reboot to confirm the change."
+#~ "authorized user, and not by an attacker, you must choose a password now "
+#~ "and then use the same password after reboot to confirm the change."
 #~ msgstr ""
 #~ "Selepas pemasangan selesai, Ubuntu akan membantu anda melumpuhkan But "
 #~ "Selamat UEFI. Untuk memastikan perubahan ini dibuat oleh anda sebagai "
 #~ "pengguna yang mendapat keizinan, dan bukannya pihak penyerang, anda mesti "
-#~ "memilih satu kata laluan sekarang dan guna kata laluan tersebut selepas but "
-#~ "semula untuk mengesahkan perubahan."
+#~ "memilih satu kata laluan sekarang dan guna kata laluan tersebut selepas "
+#~ "but semula untuk mengesahkan perubahan."

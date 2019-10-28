@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2018-03-29 21:02+0000\n"
 "Last-Translator: Simos Xenitellis  <Unknown>\n"
 "Language-Team: <en@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:36+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: \n"
 
 #. Type: text
 #. Description
@@ -114,16 +114,16 @@ msgid ""
 "href=\"update\">update this installer</a>."
 msgstr ""
 "Ίσως θα θέλατε να διαβάσετε τις <a href=\"release-notes\">σημειώσεις "
-"έκδοσης</a> ή να <a href=\"update\">ενημερώσετε το πρόγραμμα "
-"εγκατάστασης</a>."
+"έκδοσης</a> ή να <a href=\"update\">ενημερώσετε το πρόγραμμα εγκατάστασης</"
+"a>."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:14001
 msgid "You may wish to read the <a href=\"release-notes\">release notes</a>."
 msgstr ""
-"Ίσως θέλετε να διαβάσετε τις <a href=\"release-notes\">σημειώσεις "
-"έκδοσης</a>."
+"Ίσως θέλετε να διαβάσετε τις <a href=\"release-notes\">σημειώσεις έκδοσης</"
+"a>."
 
 #. Type: text
 #. Description
@@ -205,8 +205,8 @@ msgid ""
 "multiple accounts after installation.&lt;/small&gt;"
 msgstr ""
 "&lt;small&gt;Αν ο υπολογιστής χρησιμοποιείται από περισσότερα από ένα άτομα, "
-"τότε μπορείτε να δημιουργήσετε πολλαπλούς λογαριασμούς μετά την "
-"εγκατάταση.&lt;/small&gt;"
+"τότε μπορείτε να δημιουργήσετε πολλαπλούς λογαριασμούς μετά την εγκατάταση."
+"&lt;/small&gt;"
 
 #. Type: text
 #. Description
@@ -217,8 +217,7 @@ msgstr "Πρέπει να ξεκινά με πεζό γράμμα."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Μπορεί να περιέχει μόνο πεζά γράμματα, αριθμητικά ψηφία, παύλες και κάτω "
 "παύλες."
@@ -576,7 +575,7 @@ msgstr "Διαγραφή"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Επαναφορά"
 
@@ -1056,12 +1055,12 @@ msgstr "Τα παρακάτω πακέτα είναι κατεστραμμένα
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Αυτό ίσως να οφείλεται στη χρήση παλαιότερης εικόνας του εγκαταστάτη ή σε "
 "σφάλμα σε κάποιο από τα πακέτα που αναφέρονται παραπάνω. Ίσως να υπάρχουν "
@@ -1183,8 +1182,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Θα θέλατε ο εγκαταστάτης να προσπαθήσει ξανά να αποπροσαρτήσει τις "
 "συγκεκριμένες κατατμήσεις;"
@@ -1470,9 +1468,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>Υπάρχουν %d μικρότερες κρυφές κατατμήσεις, χρησιμοποιήστε το <a "
-"href=\"\">εργαλείο κατάτμησης για προχωρημένους</a> για περισσότερο "
-"έλεγχο</small>"
+"<small>Υπάρχουν %d μικρότερες κρυφές κατατμήσεις, χρησιμοποιήστε το <a href="
+"\"\">εργαλείο κατάτμησης για προχωρημένους</a> για περισσότερο έλεγχο</small>"
 
 #. Type: text
 #. Description
@@ -1481,9 +1478,8 @@ msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>Υπάρχει 1 μικρότερη κρυφή κατάτμηση, χρησιμοποιήστε το <a "
-"href=\"\">εργαλείο κατάτμησης για προχωρημένους</a> για περισσότερο "
-"έλεγχο</small>"
+"<small>Υπάρχει 1 μικρότερη κρυφή κατάτμηση, χρησιμοποιήστε το <a href="
+"\"\">εργαλείο κατάτμησης για προχωρημένους</a> για περισσότερο έλεγχο</small>"
 
 #. Type: text
 #. Description
@@ -1982,18 +1978,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Έγινε σύνδεση."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Επιβεβαίωση κλειδιού ασφαλείας:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Επιλογή κλειδιού ασφαλείας:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -2004,13 +2046,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Αρχεία εκτός του ${RELEASE} δε θα κρυπτογραφηθούν."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -2022,61 +2064,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "Για περισσότερη ασφάλεια:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Επανεγγραφή κενού χώρου στο δίσκο"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Η εγκατάσταση μπορεί να διαρκέσει πολύ περισσότερο."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Ομάδες τόμων:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Επιλογές κρυπτογράφησης"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Φυσικοί τόμοι:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Κρυπτογράφηση κατάτμηση (μέσω LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "ΜΒ"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2086,25 +2128,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Διαχείριση λογικών τόμων (LVM)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Επιλογές κρυπτογράφησης..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2114,7 +2156,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2124,7 +2166,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2139,9 +2181,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "Κλειδί SecureBoot για το MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2211,37 +2260,38 @@ msgstr "Αφαίρεση πακέτων"
 #~ msgstr "Αναβάθμιση του ${CURDISTRO} σε ${VER}"
 
 #~ msgid ""
-#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
-#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ "Installing third-party drivers requires turning off Secure Boot. To do "
+#~ "this, you need to choose a security key now, and enter it when the system "
+#~ "restarts."
 #~ msgstr ""
-#~ "Για την εγκατάσταση αρθρωμάτων πυρήνα από τρίτους πρέπει να απενεργοποιηθεί "
-#~ "το Secure Boot. Για να το κάνετε, πρέπει να επιλέξετε ένα κλειδί τώρα και να "
-#~ "το εισάγετε όταν ο υπολογιστής σας επανεκκινηθεί."
+#~ "Για την εγκατάσταση αρθρωμάτων πυρήνα από τρίτους πρέπει να "
+#~ "απενεργοποιηθεί το Secure Boot. Για να το κάνετε, πρέπει να επιλέξετε ένα "
+#~ "κλειδί τώρα και να το εισάγετε όταν ο υπολογιστής σας επανεκκινηθεί."
 
 #~ msgid ""
 #~ "You have chosen to enable third-party software as part of your install, "
 #~ "which for this system includes hardware drivers for graphics and/or wi-fi "
-#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
-#~ "not compatible with the use of these third-party drivers."
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
+#~ "is not compatible with the use of these third-party drivers."
 #~ msgstr ""
 #~ "Έχετε επιλέξει να ενεργοποιηθεί λογισμικό τρίτων κατά τη διάρκεια της "
-#~ "εγκατάστασης. Στην παρούσα εγκατάσταση, περιλαμβάνει και οδηγούς υλικού για "
-#~ "γραφική και/ή για συσκευές Wi-Fi. Το σύστημά σας έχει ενεργό το UEFI Secure "
-#~ "Boot. Το UEFI Secure Boot δεν είναι συμβατό με τη χρήση αυτών των οδηγών "
-#~ "υλικού από τρίτους."
+#~ "εγκατάστασης. Στην παρούσα εγκατάσταση, περιλαμβάνει και οδηγούς υλικού "
+#~ "για γραφική και/ή για συσκευές Wi-Fi. Το σύστημά σας έχει ενεργό το UEFI "
+#~ "Secure Boot. Το UEFI Secure Boot δεν είναι συμβατό με τη χρήση αυτών των "
+#~ "οδηγών υλικού από τρίτους."
 
 #~ msgid ""
 #~ "After installation completes, Ubuntu will assist you in disabling UEFI "
 #~ "Secure Boot. To ensure that this change is being made by you as an "
-#~ "authorized user, and not by an attacker, you must choose a password now and "
-#~ "then use the same password after reboot to confirm the change."
+#~ "authorized user, and not by an attacker, you must choose a password now "
+#~ "and then use the same password after reboot to confirm the change."
 #~ msgstr ""
 #~ "Μετά την ολοκλήρωση της εγκατάστασης, το Ubuntu θα σας βοηθήσει να "
-#~ "απενεργοποιήσετε το UEFI Secure Boot. Για να είναι σίγουρο ότι αυτή η αλλαγή "
-#~ "γίνεται πραγματικά από εσάς και όχι από κάποιο κακόβουλό χρήστη, πρέπει να "
-#~ "επιλέξετε μια κωδική λέξη τώρα. Αυτή η κωδική λέξη θα ζητηθεί κατά την "
-#~ "επανεκκίνηση ώστε να επιβεβαιωθεί ότι η απενεργοποίηση του UEFI Secure Boot "
-#~ "γίνεται πράγματι από εσάς."
+#~ "απενεργοποιήσετε το UEFI Secure Boot. Για να είναι σίγουρο ότι αυτή η "
+#~ "αλλαγή γίνεται πραγματικά από εσάς και όχι από κάποιο κακόβουλό χρήστη, "
+#~ "πρέπει να επιλέξετε μια κωδική λέξη τώρα. Αυτή η κωδική λέξη θα ζητηθεί "
+#~ "κατά την επανεκκίνηση ώστε να επιβεβαιωθεί ότι η απενεργοποίηση του UEFI "
+#~ "Secure Boot γίνεται πράγματι από εσάς."
 
 #~ msgid "Encrypt my home folder"
 #~ msgstr "Κρυπτογράφηση προσωπικού φακέλου"

@@ -1,3 +1,22 @@
+ubiquity (20.04.1) focal; urgency=medium
+
+  * zfs:
+    - Added an advanced features dialog to the partitioning page. LVM, LVM
+      with encryption and experimental ZFS support have been moved to this
+      dialog.
+    - Fix tag name from org.zsys to com.ubuntu.zsys.
+    - Use version 5000 for bpool with some features disabled to stay
+      compatible with grub and prevent users from upgrading and breaking their
+      systems.
+    - The partman confirmation dialog now displays the final layout of the
+      partition that will be created instead of the true but confusing message
+      from partman telling that an ext4 partition will be created (LP: #1847719)
+    - Calculate the size of bpool to be 500M < 5% partition size < 2G
+    - Always create an ESP and moved grub to the ESP.
+    - Updated translation templates.
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@ubuntu.com>  Mon, 28 Oct 2019 09:07:57 +0100
+
 ubiquity (19.10.21) eoan; urgency=medium
 
   [ Dimitri John Ledkov ]
@@ -7,10 +26,7 @@ ubiquity (19.10.21) eoan; urgency=medium
   [ Mathieu Trudel-Lapierre ]
   * Updated translations from Launchpad.
 
-  [ Adam Conrad ]
-  * Rewrite zsys-setup swap handling to use a swap partition (LP: #1847628)
-
- -- Adam Conrad <adconrad@ubuntu.com>  Wed, 16 Oct 2019 17:36:10 +0100
+ -- Mathieu Trudel-Lapierre <cyphermox@ubuntu.com>  Wed, 16 Oct 2019 10:01:56 -0400
 
 ubiquity (19.10.20) eoan; urgency=medium
 

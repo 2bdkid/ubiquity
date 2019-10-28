@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2018-02-06 13:32+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <debian-user-icelandic@lists.debian.org>\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:36+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: is\n"
 
 #. Type: text
 #. Description
@@ -215,8 +215,7 @@ msgstr "Verður að byrja á litlum staf."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Má einungis innihalda lágstafi, tölustafi, bandstrik eða undirstrik."
 
 #. Type: text
@@ -564,7 +563,7 @@ msgstr "Eyða"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Afturkalla"
 
@@ -1036,16 +1035,16 @@ msgstr "Eftirtaldir pakkar eru laskaðir:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Þetta gæti verið vegna notkunar á gamalli uppsetningarmynd, eða vegna villu "
-"í einhverjum af ofangreindum pökkum. Nánari upplýsingar er hægt að finna í "
-"/var/log/syslog. Uppsetningarforritið mun samt reyna að halda áfram, en gæti "
+"í einhverjum af ofangreindum pökkum. Nánari upplýsingar er hægt að finna í /"
+"var/log/syslog. Uppsetningarforritið mun samt reyna að halda áfram, en gæti "
 "strandað síðar og verður ófært um að setja inn né taka út aðra pakka "
 "(hugsanlega ekki sjálft sig heldur) á kerfinu. Þú ættir fyrst að leita að "
 "nýrri útgáfu af uppsetningarmyndinni eða hafa samband við útgefandann."
@@ -1157,8 +1156,7 @@ msgstr "Lokaðu forritum sem nota þessa tengipunkta."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Viltu láta uppsetningarforritið reyna að aftengja þessar disksneiðar aftur?"
 
@@ -1424,8 +1422,7 @@ msgstr "Veldu drif:"
 #. Description
 #: ../ubiquity.templates:212001
 msgid "Allocate drive space by dragging the divider below:"
-msgstr ""
-"Úthlutaðu diskplássi með því að draga til aðgreininn hér fyrir neðan:"
+msgstr "Úthlutaðu diskplássi með því að draga til aðgreininn hér fyrir neðan:"
 
 #. Type: text
 #. Description
@@ -1472,8 +1469,8 @@ msgid ""
 "1 partition will be deleted, use the <a href=\"\">advanced partitioning "
 "tool</a> for more control"
 msgstr ""
-"1 disksneið verður eytt, notaðu <a href=\"\">ítarlega "
-"disksneiðingartólið</a> fyrir frekari stillingar"
+"1 disksneið verður eytt, notaðu <a href=\"\">ítarlega disksneiðingartólið</"
+"a> fyrir frekari stillingar"
 
 #. Type: text
 #. Description
@@ -1863,8 +1860,7 @@ msgstr ""
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr ""
-"Þessi tölva er þegar með nokkur stýrikerfi. Hvað myndirðu vilja gera?"
+msgstr "Þessi tölva er þegar með nokkur stýrikerfi. Hvað myndirðu vilja gera?"
 
 #. Type: text
 #. Description
@@ -1934,18 +1930,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Tengt."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Staðfesta öryggis lykil:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Veldu öryggis lykil:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -1955,13 +1997,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Allar skrár utan ${RELEASE} verða ekki dulritaðar."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -1973,61 +2015,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "Fyrir meira öryggi:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Skrifa yfir tómt diskpláss"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Uppsetningin gæti tekið mikið lengri tíma."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Sýndardiskar (volume groups):"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Dulkóðunarstillingar"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Veraldleg flæmi:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Dulkóða þessa disksneið (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2037,25 +2079,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Röklegur Flæmi Stjóri (LVM)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Dulkóðunarstillingar..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot ræsing"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2065,7 +2107,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2075,7 +2117,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2085,9 +2127,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "SecureBoot-lykill fyrir MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2129,10 +2178,10 @@ msgid ""
 "administrative privileges using 'sudo'. You will then be able to make any "
 "additional modifications you require to the system."
 msgstr ""
-"Þegar þú ræsir nýja kerfið getur þú skráð þig inn sem notandinn „oem‟ "
-"(frumframleiðandi) með lykilorðinu sem þú valdir hér fyrr; þessi notandi "
-"hefur kerfisstjóraréttindi með því að nota „sudo‟. Þú getur því gert allar "
-"þær viðbótarbreytingar á kerfinu sem þú kannt að þurfa eða þig lystir."
+"Þegar þú ræsir nýja kerfið getur þú skráð þig inn sem notandinn "
+"„oem‟ (frumframleiðandi) með lykilorðinu sem þú valdir hér fyrr; þessi "
+"notandi hefur kerfisstjóraréttindi með því að nota „sudo‟. Þú getur því gert "
+"allar þær viðbótarbreytingar á kerfinu sem þú kannt að þurfa eða þig lystir."
 
 #. Type: text
 #. Description

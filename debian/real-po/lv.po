@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2018-04-11 17:22+0000\n"
 "Last-Translator: Rūdolfs Mazurs <Unknown>\n"
 "Language-Team: Latvian <lata-l10n@googlegroups.com>\n"
+"Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:36+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: lv\n"
 
 #. Type: text
 #. Description
@@ -215,8 +215,7 @@ msgstr "Jāsākas ar mazo burtu."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Drīkst saturēt tikai mazos burtus, ciparus, defisi un pasvītrojuma zīmi."
 
@@ -294,8 +293,7 @@ msgstr "Nedrīkst sākties vai beigties ar defisi."
 #. Description
 #: ../ubiquity.templates:41001
 msgid "May not start or end with a dot, or contain the sequence \"..\"."
-msgstr ""
-"Nedrīkst sākties vai beigties ar punktu vai saturēt fragmentu \"..\"."
+msgstr "Nedrīkst sākties vai beigties ar punktu vai saturēt fragmentu \"..\"."
 
 #. Type: text
 #. Description
@@ -566,7 +564,7 @@ msgstr "Dzēst"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Atgriezt"
 
@@ -1039,20 +1037,19 @@ msgstr "Šīs pakotnes ir bojātas:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Tā varētu gadīties, ja izmantojat vecu instalatora programmu, vai arī kādā "
-"no instalējamajām pakotnēm ir kļūda. Papildu informācija atrodama "
-"/var/log/syslog žurnāla datnē. Instalators mēģinās tomēr turpināt, bet darba "
-"gaitā var rasties kļūmes un, iespējams, vairs neizdosies instalēt vai noņemt "
-"citas pakotnes. Vispirms vajadzētu pārbaudīt, vai nav pieejama jaunāka "
-"instalatora versija, un, ja tādas nav, nosūtīt kļūdas paziņojumu "
-"izplatītājam."
+"no instalējamajām pakotnēm ir kļūda. Papildu informācija atrodama /var/log/"
+"syslog žurnāla datnē. Instalators mēģinās tomēr turpināt, bet darba gaitā "
+"var rasties kļūmes un, iespējams, vairs neizdosies instalēt vai noņemt citas "
+"pakotnes. Vispirms vajadzētu pārbaudīt, vai nav pieejama jaunāka instalatora "
+"versija, un, ja tādas nav, nosūtīt kļūdas paziņojumu izplatītājam."
 
 #. Type: error
 #. Description
@@ -1163,8 +1160,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr "Vai vēlaties, lai instalators mēģinātu vēlreiz atmontēt nodalījumus?"
 
 #. Type: boolean
@@ -1487,8 +1483,7 @@ msgstr "Sadalīt lielāko nodalījumu"
 #. Description
 #: ../ubiquity.templates:220001
 msgid "For best results, please ensure that this computer:"
-msgstr ""
-"Vislabākie rezultāti sagaidāmi, ja datoram izpildīsies šie nosacījumi:"
+msgstr "Vislabākie rezultāti sagaidāmi, ja datoram izpildīsies šie nosacījumi:"
 
 #. Type: text
 #. Description
@@ -1875,8 +1870,7 @@ msgstr "Uz šī datora pašlaik ir ${OS1} un ${OS2}. Ko vēlaties darīt?"
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
-msgstr ""
-"Uz šī datora pašlaik ir vairākas operētājsistēmas. Ko vēlaties darīt?"
+msgstr "Uz šī datora pašlaik ir vairākas operētājsistēmas. Ko vēlaties darīt?"
 
 #. Type: text
 #. Description
@@ -1944,18 +1938,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Pieslēgts"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Apstipriniet drošības atslēgu:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Izvēlieties drošības atslēgu:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -1965,13 +2005,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Visas datnes ārpus  ${RELEASE} netiks šifrētas."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -1983,61 +2023,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "Vairāk drošībai:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Pārrakstīt tukšo diska vietu"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Instalēšana var aizņemt daudz vairāk laika."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Sējumu grupas:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Šifrēšanas opcijas"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Fiziskie sējumi:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Šifrēt šo nodalījumu (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2047,25 +2087,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Loģisko sējumu pārvaldība"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Šifrēšanas opcijas..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2075,7 +2115,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2085,7 +2125,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2099,9 +2139,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "SecureBoot atslēga MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2174,8 +2221,9 @@ msgstr "Noņem pakotnes"
 #~ msgstr "Uzlabot ${CURDISTRO} uz ${VER}"
 
 #~ msgid ""
-#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
-#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ "Installing third-party drivers requires turning off Secure Boot. To do "
+#~ "this, you need to choose a security key now, and enter it when the system "
+#~ "restarts."
 #~ msgstr ""
 #~ "Lai instalētu trešās puses draiverus, jāizslēdz Secure Boot (drošā "
 #~ "startēšana). Lai to izdarītu, jums tagad jāizvēlas drošības atslēga un tā "
@@ -2184,20 +2232,20 @@ msgstr "Noņem pakotnes"
 #~ msgid ""
 #~ "You have chosen to enable third-party software as part of your install, "
 #~ "which for this system includes hardware drivers for graphics and/or wi-fi "
-#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
-#~ "not compatible with the use of these third-party drivers."
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
+#~ "is not compatible with the use of these third-party drivers."
 #~ msgstr ""
 #~ "Jūs savā instalācijā izvēlējāties ieslēgt trešās puses programmatūru, kas "
-#~ "iekļauj grafikas un vai wi-fi aparatūru. Jūsu sistēmā arī ir ieslēgts UEFI "
-#~ "Secure Boot. Tas nav savietojams ar trešās puses draiveriem."
+#~ "iekļauj grafikas un vai wi-fi aparatūru. Jūsu sistēmā arī ir ieslēgts "
+#~ "UEFI Secure Boot. Tas nav savietojams ar trešās puses draiveriem."
 
 #~ msgid ""
 #~ "After installation completes, Ubuntu will assist you in disabling UEFI "
 #~ "Secure Boot. To ensure that this change is being made by you as an "
-#~ "authorized user, and not by an attacker, you must choose a password now and "
-#~ "then use the same password after reboot to confirm the change."
+#~ "authorized user, and not by an attacker, you must choose a password now "
+#~ "and then use the same password after reboot to confirm the change."
 #~ msgstr ""
 #~ "Pēc instalēšanas Ubuntu jums palīdzēs izslēgt UEFI Secure Boot. Lai "
 #~ "pārliecinātos, ka šīs izmaiņas veic pilnvarots lietotājs nevis uzbrucējs, "
-#~ "jums jāizvēlas parole tagad un pēc pārstartēšanas jāizmanto tā pati parole, "
-#~ "lai pastiprinātu izmaiņas."
+#~ "jums jāizvēlas parole tagad un pēc pārstartēšanas jāizmanto tā pati "
+#~ "parole, lai pastiprinātu izmaiņas."

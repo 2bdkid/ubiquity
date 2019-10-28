@@ -1449,6 +1449,38 @@ Default: false
 Description: for internal use; can be preseeded
  This will set up ZFS and configure it for zsys.
 
+Template: ubiquity/text/advanced_features_dialog
+Type: text
+_Description: Advanced Features
+
+Template: ubiquity/text/advanced_features_radio_none
+Type: text
+_Description: None
+
+Template: ubiquity/text/advanced_features_desc
+Type: text
+_Description: None selected
+
+Template: ubiquity/text/advanced_features_selected
+Type: text
+_Description: Advanced features...
+
+Template: ubiquity/text/advanced_features_none_selected
+Type: text
+_Description: None selected
+
+Template: ubiquity/text/advanced_features_lvm_selected
+Type: text
+_Description: LVM selected
+
+Template: ubiquity/text/advanced_features_crypto_selected
+Type: text
+_Description: LVM and encryption selected
+
+Template: ubiquity/text/advanced_features_zfs_selected
+Type: text
+_Description: ZFS selected
+
 Template: ubiquity/text/verified_crypto_label
 Type: text
 _Description:
@@ -1565,3 +1597,8 @@ _Description:
 Template: ubiquity/secureboot_key
 Type: password
 _Description: SecureBoot key for MokPW
+
+Template: ubiquity/text/partman_confirm_zfs
+Type: text
+_Description:
+ partition #%(partid)s as %(parttype)s used for %(partusage)s

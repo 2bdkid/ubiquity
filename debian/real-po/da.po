@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2019-10-12 13:48+0000\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:37+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: \n"
 "X-Poedit-Language: Danish\n"
 
 #. Type: text
@@ -127,8 +127,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:15001
 msgid "You may wish to <a href=\"update\">update this installer</a>."
-msgstr ""
-"Du har mulighed for at <a href=\"update\">opdatere installationen</a>."
+msgstr "Du har mulighed for at <a href=\"update\">opdatere installationen</a>."
 
 #. Type: text
 #. Description
@@ -215,8 +214,7 @@ msgstr "Skal starte med et lille bogstav."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Må kun indeholde små bogstaver, tal,  bindestreger og bundstreg."
 
 #. Type: text
@@ -567,7 +565,7 @@ msgstr "Slet"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Forkast ændringer"
 
@@ -872,8 +870,8 @@ msgid ""
 "replacement, or to move the system to a cooler environment."
 msgstr ""
 "Dette skyldes ofte en fejlbehæftet CD/DVD-skive eller -drev eller en "
-"fejlbehæftet harddisk. Det kan hjælpe at rense CD/DVD'en, at brænde "
-"CD/DVD'en ved en lavere hastighed, at rense linsen i CD/DVD-drevet (rensesæt "
+"fejlbehæftet harddisk. Det kan hjælpe at rense CD/DVD'en, at brænde CD/"
+"DVD'en ved en lavere hastighed, at rense linsen i CD/DVD-drevet (rensesæt "
 "kan oftest anskaffes ved elektronik- eller radioforhandlere), at tjekke om "
 "harddisken er gammel og trænger til udskiftning eller prøve at flytte "
 "systemet til køligere omgivelser."
@@ -1043,12 +1041,12 @@ msgstr "Følgende pakker er i en beskadiget tilstand:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Dette kan skyldes, at du bruger et gammelt installationsaftryk, eller at der "
 "er en fejl i nogle af pakkerne, som er listet ovenfor. Yderligere detaljer "
@@ -1169,8 +1167,7 @@ msgstr "Luk venligst alle programmer, som bruger disse monteringspunkter."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Ønsker du at installationsprogrammet skal prøve at afmontere disse "
 "partitioner igen?"
@@ -1960,18 +1957,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Tilsluttet."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Bekræft sikkerhedsnøglen:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Vælg en sikkerhedsnøgle:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -1982,13 +2025,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Enhver fil som ligger uden for ${RELEASE} bliver ikke krypteret."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -2000,61 +2043,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "For øget sikkerhed:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Overskriv tom diskplads"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Installationen kan tage meget længere tid."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM ..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Diskenhedsgrupper:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Indstillinger for kryptering"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Fysiske diskenheder:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Kryptér denne partition (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2064,25 +2107,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Logisk diskenhedshåndtering (LVM)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Indstillinger for kryptering ..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2090,13 +2133,13 @@ msgid ""
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
 "Du har valgt at medtage tredjepartsprogrammer som en del af din "
-"installation, hvilket for dette system inkluderer drivere til grafikkort "
-"og/eller trådløst netværkskort. UEFI Secure Boot er aktiveret på dit system. "
+"installation, hvilket for dette system inkluderer drivere til grafikkort og/"
+"eller trådløst netværkskort. UEFI Secure Boot er aktiveret på dit system. "
 "UEFI Secure Boot skal konfigureres for at tredjepartsdriverne kan bruges."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2110,7 +2153,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2125,9 +2168,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "SecureBoot-nøgle til MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2196,24 +2246,25 @@ msgstr "Fjerner pakker"
 #~ msgstr "Opgrader ${CURDISTRO} til ${VER}"
 
 #~ msgid ""
-#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
-#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ "Installing third-party drivers requires turning off Secure Boot. To do "
+#~ "this, you need to choose a security key now, and enter it when the system "
+#~ "restarts."
 #~ msgstr ""
-#~ "Installation af drivere fra tredjepart kræver at Secure Boot slås fra. For "
-#~ "at gøre dette, så er det et krav, at du vælger sikkerhedsnøgle nu, og "
+#~ "Installation af drivere fra tredjepart kræver at Secure Boot slås fra. "
+#~ "For at gøre dette, så er det et krav, at du vælger sikkerhedsnøgle nu, og "
 #~ "angiver denne når systemet genstarter."
 
 #~ msgid ""
 #~ "After installation completes, Ubuntu will assist you in disabling UEFI "
 #~ "Secure Boot. To ensure that this change is being made by you as an "
-#~ "authorized user, and not by an attacker, you must choose a password now and "
-#~ "then use the same password after reboot to confirm the change."
+#~ "authorized user, and not by an attacker, you must choose a password now "
+#~ "and then use the same password after reboot to confirm the change."
 #~ msgstr ""
 #~ "Når installationen er fuldført, så vil Ubuntu hjælpe dig med at frakoble "
 #~ "UEFI Secure Boot. For at sikre, at denne ændring foretages af dig som "
 #~ "godkendt bruger, og ikke af en ondsindet person, så skal du nu vælge et "
-#~ "kodeord, og dernæst benytte det samme kodeord efter genstart for at bekræfte "
-#~ "ændringen."
+#~ "kodeord, og dernæst benytte det samme kodeord efter genstart for at "
+#~ "bekræfte ændringen."
 
 #~ msgid "Encrypt my home folder"
 #~ msgstr "Kryptér min hjemmemappe"
@@ -2221,10 +2272,11 @@ msgstr "Fjerner pakker"
 #~ msgid ""
 #~ "You have chosen to enable third-party software as part of your install, "
 #~ "which for this system includes hardware drivers for graphics and/or wi-fi "
-#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
-#~ "not compatible with the use of these third-party drivers."
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
+#~ "is not compatible with the use of these third-party drivers."
 #~ msgstr ""
 #~ "Du har valgt at benytte programmer fra tredjepart som en del af din "
-#~ "installation, hvilket for dette system omfatter hardwaredrivere til grafik- "
-#~ "og/eller wi-fi-hardware. Dit system anvender også UEFI Secure Boot. UEFI "
-#~ "Secure Boot er ikke kompatibel med brugen af disse drivere fra tredjepart."
+#~ "installation, hvilket for dette system omfatter hardwaredrivere til "
+#~ "grafik- og/eller wi-fi-hardware. Dit system anvender også UEFI Secure "
+#~ "Boot. UEFI Secure Boot er ikke kompatibel med brugen af disse drivere fra "
+#~ "tredjepart."

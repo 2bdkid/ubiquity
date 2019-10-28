@@ -1,6 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkDialog" id="advanced_features_dialog">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Advanced Features</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="advanced_features_box1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">24</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="advanced_features_buttonbox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="advanced_features_cancelbutton">
+                <property name="label">_Cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="advanced_features_okbutton">
+                <property name="label">_OK</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_underline">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="advanced_features_box2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkRadioButton" id="advanced_features_radio_none">
+                <property name="label" translatable="yes">None</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="margin_top">9</property>
+                <signal name="clicked" handler="advanced_features_option_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="use_lvm">
+                <property name="label" translatable="yes">Set up the system as an LVM volume group</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="margin_top">9</property>
+                <property name="group">advanced_features_radio_none</property>
+                <signal name="clicked" handler="advanced_features_option_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="use_crypto">
+                <property name="label" translatable="yes">Encrypt the volume group for security</property>
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="draw_indicator">True</property>
+                <property name="margin_left">24</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="use_crypto_desc">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">48</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="use_markup">True</property>
+                <property name="wrap">True</property>
+                <property name="label" translatable="yes">&lt;span size="small"&gt;You'll choose a security key in the next step&lt;/span&gt;</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkRadioButton" id="use_zfs">
+                <property name="label" translatable="yes">Use ZFS (experimental)</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">False</property>
+                <property name="active">True</property>
+                <property name="draw_indicator">True</property>
+                <property name="margin_top">9</property>
+                <property name="group">advanced_features_radio_none</property>
+                <signal name="clicked" handler="advanced_features_option_changed" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-6">advanced_features_cancelbutton</action-widget>
+      <action-widget response="-5">advanced_features_okbutton</action-widget>
+    </action-widgets>
+  </object>
+
   <object class="GtkAlignment" id="stepPartAsk">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -185,118 +348,60 @@
                     <property name="height">1</property>
                   </packing>
                 </child>
-                <child>
-                  <object class="GtkLabel" id="use_crypto_desc">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">48</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
-                    <property name="label" translatable="yes">&lt;span size="small"&gt;You’ll choose a security key in the next step.&lt;/span&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">9</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkCheckButton" id="use_crypto">
-                    <property name="label" translatable="yes">Encrypt the new Ubuntu installation for security</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin_left">24</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_top">9</property>
-                    <property name="xalign">0</property>
-                    <property name="draw_indicator">True</property>
-                    <signal name="clicked" handler="on_crypto_lvm_toggled" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">8</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="use_lvm_desc">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">48</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
-                    <property name="label" translatable="yes">&lt;span size="small"&gt;This will set up Logical Volume Management. It allows taking snapshots and easier partition resizing.&lt;/span&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">11</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkCheckButton" id="use_lvm">
-                    <property name="label" translatable="yes">Use LVM with the new Ubuntu installation</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="margin_left">24</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_top">9</property>
-                    <property name="xalign">0</property>
-                    <property name="draw_indicator">True</property>
-                    <signal name="clicked" handler="on_crypto_lvm_toggled" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">10</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
 
                 <child>
-                  <object class="GtkLabel" id="use_zfs_desc">
+                  <object class="GtkBox" id="gtkbox1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">24</property>
-                    <property name="xalign">0</property>
-                    <property name="yalign">0</property>
-                    <property name="label" translatable="yes">&lt;span foreground="darkred"&gt;Warning:&lt;/span&gt; This will delete all your files on all operating systems.
-This is experimental and may cause data loss. Do not use on production systems.</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
+                    <child>
+                      <object class="GtkButton" id="advanced_features_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="margin_left">24</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <signal name="clicked" handler="on_advanced_features_clicked" swapped="no"/>
+                        <child>
+                          <object class="GtkLabel" id="advanced_features_selected">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Advanced features...</property>
+                            <property name="use_markup">True</property>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                        <property name="left_attach">0</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="advanced_features_desc">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">None selected</property>
+                        <property name="margin_left">9</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">14</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkRadioButton" id="use_zfs">
-                    <property name="label" translatable="yes">EXPERIMENTAL: Erase disk and use ZFS</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">False</property>
-                    <property name="margin_top">9</property>
-                    <property name="xalign">0</property>
-                    <property name="active">True</property>
-                    <property name="draw_indicator">True</property>
-                    <property name="group">reuse_partition</property>
-                    <signal name="clicked" handler="part_ask_option_changed" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">13</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
+                    <property name="top_attach">8</property>
+
                   </packing>
                 </child>
 
@@ -313,7 +418,7 @@ This is experimental and may cause data loss. Do not use on production systems.<
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">16</property>
+                    <property name="top_attach">10</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>
@@ -333,7 +438,7 @@ This is experimental and may cause data loss. Do not use on production systems.<
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">15</property>
+                    <property name="top_attach">9</property>
                     <property name="width">1</property>
                     <property name="height">1</property>
                   </packing>

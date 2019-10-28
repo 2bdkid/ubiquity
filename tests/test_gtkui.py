@@ -106,6 +106,8 @@ class TestFrontend(unittest.TestCase):
                 'cancelbutton2', 'okbutton2', 'okbutton3',
                 'partition_dialog_okbutton', 'cancelbutton3',
                 'grub_fail_okbutton',
+                'advanced_features_cancelbutton',
+                'advanced_features_okbutton',
                 # These are calculated and set as the partitioning options are
                 # being calculated.
                 'reuse_partition_desc', 'reuse_partition',
@@ -113,6 +115,7 @@ class TestFrontend(unittest.TestCase):
                 'resize_use_free_desc', 'resize_use_free',
                 'use_device_desc', 'use_device', 'part_ask_heading',
                 'custom_partitioning_desc', 'custom_partitioning',
+                'advanced_features_selected',
                 # Pulled straight from debconf when the installation medium is
                 # already mounted.
                 'part_advanced_warning_message',

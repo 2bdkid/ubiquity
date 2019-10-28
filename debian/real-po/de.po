@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2019-10-10 17:48-0400\n"
+"POT-Creation-Date: 2019-11-12 16:36+0100\n"
 "PO-Revision-Date: 2019-10-13 18:23+0000\n"
 "Last-Translator: Torsten Franz <Unknown>\n"
 "Language-Team: Debian German <debian-l10n-german@lists.debian.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2019-10-16 13:36+0000\n"
 "X-Generator: Launchpad (build 186023fa645d8be19d403a76064f0643f510db2f)\n"
-"Language: \n"
 
 #. Type: text
 #. Description
@@ -216,8 +216,7 @@ msgstr "Es muss mit einem Kleinbuchstaben beginnen."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Es darf nur Kleinbuchstaben, Zahlen, Bindestriche und Unterstriche enthalten."
 
@@ -574,7 +573,7 @@ msgstr "Löschen"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:83001 ../ubiquity.templates:289001
+#: ../ubiquity.templates:83001 ../ubiquity.templates:297001
 msgid "Revert"
 msgstr "Zurücksetzen"
 
@@ -1053,12 +1052,12 @@ msgstr "Die folgenden Pakete sind defekt:"
 #: ../ubiquity.templates:145001 ../ubiquity.templates:146001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Der Fehler könnte durch die Verwendung eines veralteten "
 "Installationsprogramms verursacht worden sein oder aufgrund eines Fehlers in "
@@ -1182,8 +1181,7 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:164001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Möchten Sie, dass das Installationsprogramm erneut versucht, die Partitionen "
 "auszuhängen?"
@@ -1472,9 +1470,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>%d kleinere Partitionen werden versteckt, verwenden Sie das <a "
-"href=\"\">erweiterte Partitionierungswerkzeug</a> für weitere "
-"Optionen</small>"
+"<small>%d kleinere Partitionen werden versteckt, verwenden Sie das <a href="
+"\"\">erweiterte Partitionierungswerkzeug</a> für weitere Optionen</small>"
 
 #. Type: text
 #. Description
@@ -1483,9 +1480,8 @@ msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>1 kleinere Partition wird versteckt, verwenden Sie das <a "
-"href=\"\">erweiterte Partitionierungswerkzeug</a> für weitere "
-"Optionen</small>"
+"<small>1 kleinere Partition wird versteckt, verwenden Sie das <a href="
+"\"\">erweiterte Partitionierungswerkzeug</a> für weitere Optionen</small>"
 
 #. Type: text
 #. Description
@@ -1987,18 +1983,64 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:277001
+msgid "Advanced Features"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:278001
+msgid "None"
+msgstr ""
+
+#. Type: text
+#. Description
+#. Type: text
+#. Description
+#: ../ubiquity.templates:279001 ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Connected."
+msgid "None selected"
+msgstr "Verbunden."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:280001
+msgid "Advanced features..."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:282001
+msgid "LVM selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:283001
+msgid "LVM and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:284001
+msgid "ZFS selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:285001
 msgid "Confirm the security key:"
 msgstr "Bitte den Sicherheitsschlüssel bestätigen:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:286001
 msgid "Choose a security key:"
 msgstr "Bitte einen Sicherheitsschlüssel auswählen:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:287001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -2009,13 +2051,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
+#: ../ubiquity.templates:288001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Jede Datei außerhalb von ${RELEASE} wird nicht verschlüsselt."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:289001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -2028,61 +2070,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:282001
+#: ../ubiquity.templates:290001
 msgid "For more security:"
 msgstr "Für mehr Sicherheit:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:291001
 msgid "Overwrite empty disk space"
 msgstr "Freien Speicherplatz überschreiben"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:292001
 msgid "The installation may take much longer."
 msgstr "Die Installation kann um einiges länger dauern."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:285001
+#: ../ubiquity.templates:293001
 msgid "LVM..."
 msgstr "LVM …"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:294001
 msgid "Volume groups:"
 msgstr "Laufwerksgruppen:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:287001
+#: ../ubiquity.templates:295001
 msgid "Encryption Options"
 msgstr "Verschlüsselungseinstellungen"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:296001
 msgid "Physical volumes:"
 msgstr "Physikalische Laufwerke"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:298001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Diese Partition verschlüsseln (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:299001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:300001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2092,25 +2134,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:301001
 msgid "Logical Volume Management"
 msgstr "Logische Laufwerksverwaltung"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:302001
 msgid "Encryption options..."
 msgstr "Verschlüsselungseinstellungen …"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:303001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2125,7 +2167,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2140,7 +2182,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:304001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2154,9 +2196,16 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:305001
 msgid "SecureBoot key for MokPW"
 msgstr "SecureBoot-Schlüssel für MokPW"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:306001
+#, no-c-format
+msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2229,33 +2278,35 @@ msgstr "Pakete werden entfernt"
 #~ msgstr "${CURDISTRO} auf die Version ${VER} aktualisieren"
 
 #~ msgid ""
-#~ "Installing third-party drivers requires turning off Secure Boot. To do this, "
-#~ "you need to choose a security key now, and enter it when the system restarts."
+#~ "Installing third-party drivers requires turning off Secure Boot. To do "
+#~ "this, you need to choose a security key now, and enter it when the system "
+#~ "restarts."
 #~ msgstr ""
 #~ "Die Installation von Treibern von Drittanbietern erfordert das Abschalten "
-#~ "von Secure Boot. Um das zu tun, müssen Sie jetzt einen Sicherheitsschlüssel "
-#~ "wählen, den Sie nach dem Neustart des Systems eingeben müssen."
+#~ "von Secure Boot. Um das zu tun, müssen Sie jetzt einen "
+#~ "Sicherheitsschlüssel wählen, den Sie nach dem Neustart des Systems "
+#~ "eingeben müssen."
 
 #~ msgid ""
 #~ "After installation completes, Ubuntu will assist you in disabling UEFI "
 #~ "Secure Boot. To ensure that this change is being made by you as an "
-#~ "authorized user, and not by an attacker, you must choose a password now and "
-#~ "then use the same password after reboot to confirm the change."
+#~ "authorized user, and not by an attacker, you must choose a password now "
+#~ "and then use the same password after reboot to confirm the change."
 #~ msgstr ""
 #~ "Nach erfolgreichem Abschluss der Installation wird Ubuntu Ihnen beim "
-#~ "Deaktivieren von »UEFI Secure Boot« helfen. Um sicherzustellen, dass diese "
-#~ "Änderung nur von Ihnen als legitimen Benutzer durchgeführt wird und nicht "
-#~ "von einem Angreifer, müssen Sie jetzt ein Passwort festlegen, welches Sie "
-#~ "nach dem Neustart zum Bestätigen der Änderung benötigen."
+#~ "Deaktivieren von »UEFI Secure Boot« helfen. Um sicherzustellen, dass "
+#~ "diese Änderung nur von Ihnen als legitimen Benutzer durchgeführt wird und "
+#~ "nicht von einem Angreifer, müssen Sie jetzt ein Passwort festlegen, "
+#~ "welches Sie nach dem Neustart zum Bestätigen der Änderung benötigen."
 
 #~ msgid ""
 #~ "You have chosen to enable third-party software as part of your install, "
 #~ "which for this system includes hardware drivers for graphics and/or wi-fi "
-#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot is "
-#~ "not compatible with the use of these third-party drivers."
+#~ "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
+#~ "is not compatible with the use of these third-party drivers."
 #~ msgstr ""
-#~ "Sie haben Drittanbieterprogramme als Komponente der Installation ausgewählt. "
-#~ "Für dieses System beinhaltet das Treiber für Grafikkarten und/oder WLAN-"
-#~ "Geräte. Ebenfalls ist das UEFI-Secure-Boot-Verfahren aktiviert. UEFI Secure "
-#~ "Boot ist nicht mit dem Einsatz der zu installierenden Drittanbieterprogramme "
-#~ "kompatibel."
+#~ "Sie haben Drittanbieterprogramme als Komponente der Installation "
+#~ "ausgewählt. Für dieses System beinhaltet das Treiber für Grafikkarten und/"
+#~ "oder WLAN-Geräte. Ebenfalls ist das UEFI-Secure-Boot-Verfahren aktiviert. "
+#~ "UEFI Secure Boot ist nicht mit dem Einsatz der zu installierenden "
+#~ "Drittanbieterprogramme kompatibel."
