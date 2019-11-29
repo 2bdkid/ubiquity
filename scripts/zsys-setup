@@ -235,7 +235,7 @@ format_disk() {
 		partext4=$(( partesp + 1 ))
 	fi
 
-	size_percent=$(expr \( $(blockdev --getsize64 ${disk}${partext4}) / 1024 / 1024 \) \* 5 / 100)
+	size_percent=$(expr \( $(blockdev --getsize64 ${partprefix}${partext4}) / 1024 / 1024 \) \* 5 / 100)
 	bpool_size=500
 	[ ${size_percent} -gt ${bpool_size} ] && bpool_size=${size_percent}
 	[ ${bpool_size} -gt 2048 ] && bpool_size=2048

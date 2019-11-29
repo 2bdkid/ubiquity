@@ -162,9 +162,16 @@ class Controller(ubiquity.frontend.base.Controller):
 
 def on_screen_reader_enabled_changed(gsettings, key):
     # handle starting orca only, it exits itself when the key is false
-    if (key == "screen-reader-enabled" and gsettings.get_boolean(key) and
-       osextras.find_on_path('orca')):
-        subprocess.Popen(['orca'], preexec_fn=misc.drop_all_privileges)
+    if key == "screen-reader-enabled":
+        # Besides starting orca, also make sure the screen-reader-enabled
+        # setting gets passed to the target system.
+        if (gsettings.get_boolean(key) and osextras.find_on_path('orca')):
+            # Enable
+            subprocess.Popen(['orca'], preexec_fn=misc.drop_all_privileges)
+            os.environ['UBIQUITY_A11Y_PROFILE'] = 'screen-reader'
+        elif 'UBIQUITY_A11Y_PROFILE' in os.environ:
+            # Disable
+            del os.environ['UBIQUITY_A11Y_PROFILE']
 
 
 class Wizard(BaseFrontend):
