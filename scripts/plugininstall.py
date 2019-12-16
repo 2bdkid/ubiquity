@@ -1008,6 +1008,12 @@ class Install(install_misc.InstallBase):
         with cache.actiongroup():
             install_misc.get_remove_list(cache, to_remove, recursive)
 
+        with cache.actiongroup():
+            for cachedpkg in cache:
+                if cachedpkg.is_auto_removable and not cachedpkg.marked_delete:
+                    syslog.syslog("Autopurge %s" % cachedpkg.name)
+                    cachedpkg.mark_delete(auto_fix=False, purge=True)
+
         self.db.progress('SET', 1)
         self.progress_region(1, 5)
         fetchprogress = install_misc.DebconfAcquireProgress(
