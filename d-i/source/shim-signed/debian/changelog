@@ -1,3 +1,17 @@
+shim-signed (1.41) focal; urgency=medium
+
+  * Update to the signed 15+1552672080.a4a1fbe-0ubuntu1 binary from Microsoft.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 05 Feb 2020 13:04:08 -0800
+
+shim-signed (1.40) focal; urgency=medium
+
+  * Pass --timeout -1 to mokutil so that users don't end up with broken
+    systems by missing MokManager on reboot after install.  LP: #1856422.
+  * Add a versioned dependency on the mokutil that introduces --timeout.
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Sat, 14 Dec 2019 20:26:42 -0800
+
 shim-signed (1.39) disco; urgency=medium
 
   * debian/source_shim-signed.py: Correct EFI architecture name for arm64.

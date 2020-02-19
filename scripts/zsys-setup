@@ -184,7 +184,7 @@ get_layout() {
 	fi
 
 	partesp=1
-	if in_efi_mode; then
+	if is_gpt "${disk}"; then
 		# No extended partition on EFI + GPT
 		# The layout is
 		# 1: ESP
@@ -240,22 +240,29 @@ format_disk() {
 	[ ${size_percent} -gt ${bpool_size} ] && bpool_size=${size_percent}
 	[ ${bpool_size} -gt 2048 ] && bpool_size=2048
 
-	if in_efi_mode; then
+	if is_gpt "${disk}"; then
 		# Improvement: Delete all the partitions but the ESP
 		# There should be only 1 or 2 partitions but it can be made generic
-		sfdisk --delete "${disk}" ${partswap}
+		if ! esp_exists "${disk}"; then
+			start=$(sfdisk -l "${disk}"|grep "^${partprefix}${partesp}"|awk '{print $2}')
+			cat > "${sfdisktmp}" <<EOF
+${partprefix}${partesp}   : start= ${start}, size=    512M,        type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B, bootable
+EOF
+		else
+			sfdisk --delete "${disk}" ${partswap}
+		fi
 
-		cat > "${sfdisktmp}" <<EOF
+		cat >> "${sfdisktmp}" <<EOF
 ${partprefix}${partswap}  :   size= ${ss}M,         type=0657FD6D-A4AB-43C4-84E5-0933C84B4F4F
 ${partprefix}${partbpool} :   size= ${bpool_size}M, type=6A82CB45-1DD2-11B2-99A6-080020736631
 ${partprefix}${partrpool} :                         type=6A85CF4D-1DD2-11B2-99A6-080020736631
 EOF
 		sfdiskopts="--append"
 	else
-		if ! esp_exists; then
+		if ! esp_exists "${disk}"; then
 			start=$(sfdisk -l "${disk}"|grep "^${partprefix}${partesp}"|awk '{print $2}')
 			cat > "${sfdisktmp}" <<EOF
-${partprefix}${partesp}   : start= $start, size=    512M,        type=ef, bootable
+${partprefix}${partesp}   : start= ${start}, size=    512M,        type=ef, bootable
 EOF
 		else
 			sfdisk --delete "${disk}" ${partswap}
@@ -406,7 +413,11 @@ in_efi_mode() {
 }
 
 esp_exists() {
-    grep -q "\s${ESP}\s" /proc/mounts
+	sfdisk -d "${1}" | grep -q 'type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B'
+}
+
+is_gpt() {
+	sfdisk -d "${1}" | awk '/^label:/ {print $2}'|grep -q gpt
 }
 
 check_prerequisites ${REQUIREDPKGS}
@@ -431,7 +442,7 @@ EOF
 	cat > "${PARTITION_LAYOUT}" <<EOF
 disk:${DISK}
 EOF
-	if ! in_efi_mode || ! esp_exists; then
+	if ! in_efi_mode || ! esp_exists "${DISK}"; then
 		cat >> "${PARTITION_LAYOUT}" <<EOF
 part:vfat:ESP:${DISK}${PARTBASE}${PARTESP}
 EOF

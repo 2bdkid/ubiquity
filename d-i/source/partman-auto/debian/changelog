@@ -1,3 +1,10 @@
+partman-auto (134ubuntu13) focal; urgency=medium
+
+  * recipes: always create ESP partition, in case SeaBIOS boot is switched
+    to UEFI boot.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 17 Feb 2020 11:55:05 +0000
+
 partman-auto (134ubuntu12) eoan; urgency=medium
 
   * lib/auto-shared.sh: drop /cdrom check completely, and instead rely on

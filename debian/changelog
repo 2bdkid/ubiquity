@@ -1,3 +1,23 @@
+ubiquity (20.04.5) focal; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  * zsys-setup: Drives bigger than 2TB use GPT but if the machine has been
+    booted in legacy mode the ESP is not created. Rely on the label type
+    instead of the firmware to know how to partition the disk (LP: #1856863).
+    Thanks to Pablo Mendez Hernandez for the investigation.
+
+  [ Iain Lane ]
+  * Automatic update of included source packages: choose-mirror
+    2.78ubuntu7, console-setup 1.194ubuntu2, partman-basicmethods 70,
+    partman-jfs 58, partman-lvm 132, preseed 1.71ubuntu11, shim-signed
+    1.41.
+
+  [ Dimitri John Ledkov ]
+  * Automatic update of included source packages: partman-auto
+    134ubuntu13.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 19 Feb 2020 20:15:17 +0000
+
 ubiquity (20.04.4) focal; urgency=medium
 
   * When removing packages, also remove automatically installed packages that
