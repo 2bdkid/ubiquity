@@ -57,8 +57,9 @@ Usage: $(basename "$0") [COMMAND] [OPTIONS...]
     Prepares a zsys compatible ZFS system.
 
 Commands:
-    init		Initialize the pools and datasets
-	finalize	Finalize the installation after the system has been installed
+    layout      Get layout to display before formatting to ubiquity. Give the chosen disk as argument
+    init        Initialize the pools and datasets
+    finalize    Finalize the installation after the system has been installed
 Options:
     -h, --help      This help
     -d, --debug     Enable debug mode
@@ -88,6 +89,10 @@ while true ; do
 done
 
 COMMAND=$( echo $1| tr '[:upper:]' '[:lower:]' )
+EXTRAARG=""
+if [ $# -gt 1 ]; then
+    EXTRAARG="${2}"
+fi
 
 check_prerequisites() {
     # Check and set requirements to run this script
@@ -102,10 +107,10 @@ check_prerequisites() {
     #   Exit program is a requirement is not met
     echo "I: Checking system requirements"
 
-	if [ $(id -u) -ne 0 ]; then
-		echo "E: Script must be executed as root. Exiting!"
-		exit 1
-	fi
+    if [ $(id -u) -ne 0 ]; then
+        echo "E: Script must be executed as root. Exiting!"
+        exit 1
+    fi
 
     for pkg in $@; do
         if ! dpkg-query -W -f'${Status}' "${pkg}"|grep -q "install ok installed" 2>/dev/null; then
@@ -164,23 +169,39 @@ prepare_target() {
 get_layout() {
 	# Returns disk, base name of the partition and partition numbers to create
 	target="$1"
+	disk="$2"
 
-	# The entire disk has been formatted with use_device
-	# There is either one ext4 partition or one ext4 and one ESP
-	part="$(grep -E "\s${target}\s" /proc/mounts | awk '{print $1}')"
-	disk=""
-	partbase=""
+	if [ -z "${disk}" ]; then
+		# The entire disk has been formatted with use_device
+		# There is either one ext4 partition or one ext4 and one ESP
+		part="$(grep -E "\s${target}\s" /proc/mounts | awk '{print $1}')"
+		partbase=""
 
-	if [ -n "${part}" ]; then
-		disk="$(lsblk -lns -o TYPE,PATH ${part}| grep disk| awk '{print $2}')"
-		if [ -z "${disk}" ]; then
-			echo "E: Couldn't identify disk for partition ${part}. Exiting!"
-			exit 1
+		if [ -n "${part}" ]; then
+			disk="$(lsblk -lns -o TYPE,PATH ${part}| grep disk| awk '{print $2}')"
+			if [ -z "${disk}" ]; then
+				echo "E: Couldn't identify disk for partition ${part}. Exiting!"
+				exit 1
+			fi
+			# Some disks have letters in the partition number like /dev/nvme0n1p1
+			# In this case we want to retrieve 'p' so we deal only with partition number
+			# in the rest of the script and prepend the base.
+			partbase="$(echo ${part} | sed -e 's/[0-9]*$//' | sed -e "s#${disk}##")"
 		fi
-		# Some disks have letters in the partition number like /dev/nvme0n1p1
-		# In this case we want to retrieve 'p' so we deal only with partition number
-		# in the rest of the script and prepend the base.
-		partbase="$(echo ${part} | sed -e 's/[0-9]*$//' | sed -e "s#${disk}##")"
+	else
+		# The only purpose of this code is to display a friendly message in ubiquity to show the user
+		# what partitioning will be performed. However, on first call, the disk is not yet partitioned
+		# and collecting the information about disk partitioning would require to query partman. But we
+		# don't want to add this extra complexity just to display a message. Instead we hardcode the
+		# extension of the partition name depending on the type of disk, basically it's 'p' for anything
+		# else than standard drives (eg nvme01pX)
+		case "${disk}" in
+			/dev/sd*|/dev/hd*|/dev/vd*)
+				partbase=""
+				;;
+			*)
+				partbase="p"
+		esac
 	fi
 
 	partesp=1
@@ -219,7 +240,6 @@ format_disk() {
 	ss="$6"
 	partswap=$(( partbpool - 1 ))
 	partext=$(( partesp + 1 ))
-	sfdiskopts=""
 	partprefix="${disk}${partbase}"
 
 	sfdisktmp="${ZSYSTMP}/sfdisk.cfg"
@@ -228,14 +248,8 @@ format_disk() {
 	echo "I: Formatting disk $disk with partitions ESP:${partesp} ext:${partext} swap:${partswap} bpool:${partbpool} rpool:${partrpool}"
 
 	# bpool size: 500M < 5% of ZFS allocated space < 2G
-	# partext4 is the ext4 partition created by partman.
-	# Its id is 2 or 1 depending on being on and EFI system of not.
-	partext4=1
-	if in_efi_mode; then
-		partext4=$(( partesp + 1 ))
-	fi
-
-	size_percent=$(expr \( $(blockdev --getsize64 ${partprefix}${partext4}) / 1024 / 1024 \) \* 5 / 100)
+	# partswap is partition 2 on GPT systems and first extended partition on MBR.
+	size_percent=$(expr \( $(blockdev --getsize64 ${partprefix}${partswap}) / 1024 / 1024 \) \* 5 / 100)
 	bpool_size=500
 	[ ${size_percent} -gt ${bpool_size} ] && bpool_size=${size_percent}
 	[ ${bpool_size} -gt 2048 ] && bpool_size=2048
@@ -257,7 +271,6 @@ ${partprefix}${partswap}  :   size= ${ss}M,         type=0657FD6D-A4AB-43C4-84E5
 ${partprefix}${partbpool} :   size= ${bpool_size}M, type=6A82CB45-1DD2-11B2-99A6-080020736631
 ${partprefix}${partrpool} :                         type=6A85CF4D-1DD2-11B2-99A6-080020736631
 EOF
-		sfdiskopts="--append"
 	else
 		if ! esp_exists "${disk}"; then
 			start=$(sfdisk -l "${disk}"|grep "^${partprefix}${partesp}"|awk '{print $2}')
@@ -269,15 +282,13 @@ EOF
 		fi
 
 		cat >> "${sfdisktmp}" <<EOF
-${partprefix}${partext}   :                                      type=5
 ${partprefix}${partswap}  :                size= ${ss}M,         type=82
 ${partprefix}${partbpool} :                size= ${bpool_size}M, type=a5
 ${partprefix}${partrpool} :                                      type=a5
 EOF
 
 	fi
-
-	cat "${sfdisktmp}" | sfdisk ${sfdiskopts} "${disk}"
+	cat "${sfdisktmp}" | sfdisk --append "${disk}"
 
 	# Force a re-read of the partition table
 	echo "I: Re-reading partition table"
@@ -326,7 +337,6 @@ init_zfs() {
 		-o feature@large_blocks=enabled \
 		-o feature@lz4_compress=enabled \
 		-o feature@spacemap_histogram=enabled \
-		-o feature@userobj_accounting=enabled \
 		-O compression=lz4 \
 		-O acltype=posixacl \
 		-O xattr=sa \
@@ -395,10 +405,6 @@ init_system_partitions() {
 
 	# ESP
 	mkdir -p "${target}/boot/efi"
-	if ! in_efi_mode; then
-		echo "I: Creating ESP"
-		mkfs.vfat "${partefi}"
-	fi
 	mount -t vfat "${partefi}" "${target}/boot/efi"
 	mkdir -p "${target}/boot/efi/grub"
 
@@ -408,12 +414,14 @@ init_system_partitions() {
 	mount -o bind "${target}/boot/efi/grub" "${target}/boot/grub"
 }
 
-in_efi_mode() {
-    [ -d /proc/efi ] || [ -d /sys/firmware/efi ]
-}
-
 esp_exists() {
-	sfdisk -d "${1}" | grep -q 'type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B'
+	if is_gpt "${1}"; then
+		parttype="C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
+	else
+		# FIXME: Currently partman-auto set the type of EFI on MBR as W95 (b) instead of EFI (ef)
+		parttype="b"
+	fi
+	sfdisk -d "${1}" | grep -q "type=${parttype}"
 }
 
 is_gpt() {
@@ -431,7 +439,7 @@ elif [ "${COMMAND}" = "layout" ]; then
 	# Just displays de layout that will be created without any change to the disk.
 	# At this stage we don't now yet the size of the partition that will be created.
 	IFS="|" read ERR DISK PARTBASE PARTESP PARTSWAP PARTBPOOL PARTRPOOL<<EOF
-$(get_layout ${TARGET})
+$(get_layout ${TARGET} "${EXTRAARG}")
 EOF
 
 	if [ "${ERR}" != "OK" ]; then
@@ -442,7 +450,7 @@ EOF
 	cat > "${PARTITION_LAYOUT}" <<EOF
 disk:${DISK}
 EOF
-	if ! in_efi_mode || ! esp_exists "${DISK}"; then
+	if ! esp_exists "${DISK}"; then
 		cat >> "${PARTITION_LAYOUT}" <<EOF
 part:vfat:ESP:${DISK}${PARTBASE}${PARTESP}
 EOF
@@ -458,7 +466,7 @@ elif [ "${COMMAND}" = "init" ]; then
 	rm -f "${INIT_FLAG}"
 
 	IFS="|" read ERR DISK PARTBASE PARTESP PARTSWAP PARTBPOOL PARTRPOOL<<EOF
-$(get_layout ${TARGET})
+$(get_layout ${TARGET} "")
 EOF
 
 	if [ "${ERR}" != "OK" ]; then
@@ -517,6 +525,7 @@ EOF
 	echo "I: Marking ZFS utilities to be kept in the target system"
 	apt-install zfsutils-linux 2>/dev/null
 	apt-install zfs-initramfs 2>/dev/null
+	apt-install zsys 2>/dev/null
 
 	touch "$INIT_FLAG"
 elif [ "${COMMAND}" = "finalize" ]; then

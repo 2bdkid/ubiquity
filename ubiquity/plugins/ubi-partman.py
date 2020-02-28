@@ -3303,7 +3303,12 @@ class Page(plugin.Plugin):
         """Update the description in the partman dialog to display custom
            messages"""
 
-        misc.execute_root('/usr/share/ubiquity/zsys-setup', 'layout')
+        disks = re.findall(r"\(([^)]+)\)", description)
+        device = ""
+        if disks:
+            device = "/dev/" + disks[0]
+
+        misc.execute_root('/usr/share/ubiquity/zsys-setup', 'layout', device)
 
         zsys_layout = '/tmp/zsys-setup/layout'
         lines = description.splitlines()
