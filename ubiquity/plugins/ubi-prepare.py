@@ -22,6 +22,7 @@ from __future__ import print_function
 import os
 import subprocess
 import sys
+import syslog
 
 from ubiquity import i18n, misc, osextras, plugin, upower
 from ubiquity.install_misc import (archdetect, is_secure_boot,
@@ -413,6 +414,19 @@ class Page(plugin.Plugin):
         self.ui.set_minimal_install(minimal_install)
         self.apply_debconf_branding()
         self.setup_sufficient_space()
+
+        # wait for it to finish
+        if self.frontend.ubuntu_drivers:
+            self.frontend.ubuntu_drivers.communicate()
+            self.frontend.ubuntu_drivers = None
+
+        # output whether there are OEM packages for this system
+        try:
+            with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
+                syslog.syslog(F'ubuntu-drivers list-oem finished with: "{" ".join(f.read().splitlines())}"')
+        except FileNotFoundError:
+            syslog.syslog('ubuntu-drivers list-oem finished with no available packages')
+
         command = ['/usr/share/ubiquity/simple-plugins', 'prepare']
         questions = ['ubiquity/use_nonfree']
         return command, questions

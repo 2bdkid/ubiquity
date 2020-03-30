@@ -1,3 +1,51 @@
+ubiquity (20.04.7) focal; urgency=medium
+
+  [ Sebastien Bacher ]
+  * debian/control:
+    - don't build-depends on xkb-data-i18n which has been merged back
+      to xkb-data now
+
+  [ Hugh Chao ]
+  * Add a preseed option which can let oem project reboot before OOBE i
+    (LP: #1867711)
+
+  [ Rik Mills ]
+  * bin/ubiquity-dm: Switch the default KDE Plasma wallpaper looked for
+    from .png to .jpg, as Plasma 5.18 switched default extension for
+    that release. Fixes no background on the Try/Install screen for
+    Kubuntu. (LP: #1863073)
+
+  [ Iain Lane ]
+  * In GNOME 3.36 the `gnome-session-x11-services.target` unit gained some
+    dependencies that aren't satisfied in the ubiquity-dm environment. So
+    GNOME Shell starting up this unit doesn't work any more: go back to the
+    old way of starting it directly. (LP: #1869331)
+  * ubiquity-dm: gnome-settings-daemon binaries have moved under /usr/libexec
+    and adjust the paths accordingly.
+  * ubiquity.json: Specify the path to the new theme GResource used by GNOME
+    Shell
+  * simple-plugins: Clean up the ubuntu-drivers.autoinstall file before each
+    run.  This file is only ever appended to. The list is computed (passing
+    --free-only and/or --no-oem) when leaving the prepare page. So we
+    currently have the situation that if you revisit the page after having
+    left it, the file is not updated with any new choices but is only appended
+    to. Make sure it is written fresh each time, by removing it before running
+    ubuntu-drivers.
+  * prepare: Detect whether there are OEM enablement package for the system.
+    Record this so that it can be used later on when actually installing.
+    Installation can be disabled by preseeding ubiquity/install_oem.
+  * plugininstall: If we've installed any OEM metapackages, update & upgrade them.
+    This is the same as what `ubuntu-drivers autoinstall' is doing. We need
+    this to try to ensure that the metapackage is upgraded in the target -
+    if we're online when installing. (LP: #1866035)
+
+  [ Jean-Baptiste Lallement ]
+  * Updated changelog
+  * Automatic update of included source packages: console-setup
+    1.194ubuntu3.
+
+ -- Iain Lane <iain.lane@canonical.com>  Mon, 30 Mar 2020 12:46:20 +0100
+
 ubiquity (20.04.6) focal; urgency=medium
 
   [ Jean-Baptiste Lallement ]

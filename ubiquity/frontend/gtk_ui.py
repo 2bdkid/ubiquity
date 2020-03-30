@@ -240,6 +240,7 @@ class Wizard(BaseFrontend):
         self.installing_no_return = False
         self.partitioned = False
         self.timezone_set = False
+        self.ubuntu_drivers = None
         self.returncode = 0
         self.history = []
         self.builder = Gtk.Builder()
@@ -402,6 +403,17 @@ class Wizard(BaseFrontend):
             subprocess.Popen(
                 ['canberra-gtk-play', '--id=system-ready'],
                 preexec_fn=misc.drop_all_privileges)
+
+        with misc.raised_privileges():
+            if osextras.find_on_path('ubuntu-drivers'):
+                self.ubuntu_drivers = subprocess.Popen(
+                    ['ubuntu-drivers',
+                     'list-oem',
+                     '--package-list',
+                     '/run/ubuntu-drivers-oem.autoinstall'],
+                    stdin=subprocess.DEVNULL,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.DEVNULL)
 
     def all_children(self, parent):
         if isinstance(parent, Gtk.Container):

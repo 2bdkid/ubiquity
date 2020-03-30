@@ -1062,6 +1062,12 @@ Type: boolean
 Default: false
 Description: for internal use; use non-free software.
 
+Template: ubiquity/install_oem
+Type: boolean
+Default: true
+Description: for internal use; can be preseeded
+ Install hardware enablement packages for this device, if available.
+
 Template: ubiquity/nonfree_package
 Type: text
 Default: ubuntu-restricted-addons

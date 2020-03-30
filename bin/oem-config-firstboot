@@ -91,6 +91,12 @@ for try in $(seq 1 $TRY); do
 		/bin/systemctl disable oem-config.service || true
 		/bin/systemctl disable oem-config.target || true
 		rm -f /lib/systemd/system/oem-config.* || true
+		RET="$(echo GET oem-config/reboot | debconf-communicate)" || true
+		if [ "${RET#* }" = true ]; then
+			/usr/bin/grub-editenv - unset recordfail || true
+			/usr/sbin/update-grub || true
+			/bin/systemctl reboot || true
+		fi
 		/bin/systemctl --no-block isolate graphical.target || true
 		exit 0
 	elif [ "$CODE" -eq 10 ]; then

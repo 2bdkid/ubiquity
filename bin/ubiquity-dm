@@ -530,14 +530,12 @@ EndSection
 
                 msd = '/usr/bin/mate-settings-daemon'
                 usd = '/usr/lib/unity-settings-daemon/unity-settings-daemon'
-                gsd = ['/usr/lib/gnome-settings-daemon/gsd-a11y-keyboard',
-                       '/usr/lib/gnome-settings-daemon/gsd-a11y-settings',
-                       '/usr/lib/gnome-settings-daemon/gsd-clipboard',
-                       '/usr/lib/gnome-settings-daemon/gsd-media-keys',
-                       '/usr/lib/gnome-settings-daemon/gsd-power']
-
-                if not osextras.find_on_path('gnome-shell'):
-                    gsd += ['/usr/lib/gnome-settings-daemon/gsd-xsettings']
+                gsd = ['/usr/libexec/gsd-a11y-keyboard',
+                       '/usr/libexec/gsd-a11y-settings',
+                       '/usr/libexec/gsd-clipboard',
+                       '/usr/libexec/gsd-media-keys',
+                       '/usr/libexec/gsd-power',
+                       '/usr/libexec/gsd-xsettings']
 
                 if osextras.find_on_path(msd):
                     extras.append(subprocess.Popen(
@@ -556,9 +554,10 @@ EndSection
                     # At this point we're sure the usd xsettings plugin is
                     # available, we can continue setting up the session.
 
-                elif os.path.isdir("/usr/lib/gnome-settings-daemon"):
+                elif (osextras.find_on_path('gnome-shell') or
+                        osextras.find_on_path('budgie-wm')):
                     for gsdbinary in gsd:
-                        if osextras.find_on_path(gsdbinary):
+                        if os.path.exists(gsdbinary):
                             extras.append(subprocess.Popen(
                                 [gsdbinary],
                                 stdin=null, stdout=logfile, stderr=logfile,
@@ -704,7 +703,7 @@ EndSection
             if 'access=v1' not in proc_cmdline:
                 log('paint background')
                 path = \
-                    '/usr/share/wallpapers/Next/contents/images/2560x1600.png'
+                    '/usr/share/wallpapers/Next/contents/images/2560x1600.jpg'
                 extras.append(subprocess.Popen(
                     ['ubiquity-qtsetbg', path],
                     stdin=null, stdout=logfile, stderr=logfile,

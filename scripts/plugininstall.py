@@ -37,7 +37,7 @@ import textwrap
 import traceback
 
 import apt_pkg
-from apt.cache import Cache
+from apt.cache import Cache, FetchFailedException
 import debconf
 
 sys.path.insert(0, '/usr/lib/ubiquity')
@@ -1189,6 +1189,27 @@ class Install(install_misc.InstallBase):
                     break
 
         self.do_install(filtered_extra_packages)
+
+        if self.db.get('ubiquity/install_oem') == 'true':
+            try:
+                # If we installed any OEM metapackages, we should try to update /
+                # upgrade them to their versions in the OEM archive.
+                with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
+                    oem_pkgs = set(f.read().splitlines())
+                    for oem_pkg in oem_pkgs:
+                        target_sources_list = self.target_file("etc/apt/sources.list.d/{}.list".format(oem_pkg))
+                        if not os.path.exists(target_sources_list):
+                            continue
+
+                        try:
+                            cache.update(sources_list=target_sources_list)
+                            cache.open()
+                        except FetchFailedException:
+                            syslog.syslog("Failed to apt update {}".format(target_sources_list))
+                            oem_pkgs.discard(oem_pkg)
+                    self.do_install(oem_pkgs)
+            except FileNotFoundError:
+                pass
 
         if found_cdrom:
             os.rename("%s.apt-setup" % sources_list, sources_list)
