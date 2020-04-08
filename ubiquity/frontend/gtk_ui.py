@@ -150,8 +150,8 @@ class Controller(ubiquity.frontend.base.Controller):
             self._wizard.navigation_control.hide()
         self._wizard.refresh()
 
-    def toggle_next_button(self, label='gtk-go-forward'):
-        self._wizard.toggle_next_button(label)
+    def toggle_next_button(self, label='gtk-go-forward', suggested=False):
+        self._wizard.toggle_next_button(label, suggested=suggested)
 
     def toggle_skip_button(self, label='skip'):
         self._wizard.toggle_skip_button(label)
@@ -227,7 +227,9 @@ class Wizard(BaseFrontend):
         self.language_questions = ('live_installer', 'quit', 'back', 'next',
                                    'warning_dialog', 'warning_dialog_label',
                                    'cancelbutton', 'exitbutton',
-                                   'install_button', 'restart_to_continue')
+                                   'install_button',
+                                   'restart_button',
+                                   'restart_to_continue')
         self.current_page = None
         self.backup = None
         self.allowed_change_step = True
@@ -1325,12 +1327,18 @@ class Wizard(BaseFrontend):
     def page_name(self, step_index):
         return self.steps.get_nth_page(step_index).get_name()
 
-    def toggle_next_button(self, label='gtk-go-forward'):
+    def toggle_next_button(self, label='gtk-go-forward', suggested=False):
         if label != 'gtk-go-forward':
             self.next.set_label(self.get_string(label))
         else:
             self.next.set_label(label)
             self.translate_widget(self.next)
+
+        style_context = self.next.get_style_context()
+        if suggested:
+            style_context.add_class('suggested-action')
+        else:
+            style_context.remove_class('suggested-action')
 
     def toggle_skip_button(self, label='skip'):
         self.skip.set_label(self.get_string(label))
@@ -1374,11 +1382,15 @@ class Wizard(BaseFrontend):
                         hasattr(page.ui, 'plugin_on_skip_clicked'))
                     cur.show()
                     is_install = page.ui.get('plugin_is_install')
+                    is_restart = \
+                        page.ui.get('plugin_is_restart')
                     break
         if not cur:
             return False
 
-        if is_install and not self.oem_user_config:
+        if is_restart and not self.oem_user_config:
+            self.toggle_next_button('restart_button', suggested=True)
+        elif is_install and not self.oem_user_config:
             self.toggle_next_button('install_button')
         else:
             self.toggle_next_button()

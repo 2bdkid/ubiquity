@@ -132,6 +132,7 @@ class PageGtk(PageBase):
         builder.connect_signals(self)
 
         self.page_ask = builder.get_object('stepPartAsk')
+        self.page_bitlocker = builder.get_object('stepBitlocker')
         self.page_auto = builder.get_object('stepPartAuto')
         self.page_advanced = builder.get_object('stepPartAdvanced')
         self.page_crypto = builder.get_object('stepPartCrypto')
@@ -169,7 +170,7 @@ class PageGtk(PageBase):
         self.partition_mount_combo.get_child().set_activates_default(True)
 
         self.plugin_optional_widgets = [self.page_auto, self.page_advanced,
-                                        self.page_crypto]
+                                        self.page_crypto, self.page_bitlocker]
         self.current_page = self.page_ask
 
         # Set some parameters that do not change between runs of the plugin
@@ -323,6 +324,9 @@ class PageGtk(PageBase):
                 selected.set_active(True)
             self.use_crypto.set_active(crypto_selected)
 
+    def should_show_bitlocker_page(self):
+        return os.environ.get('SHOW_BITLOCKER_UI', '0') == '1'
+
     def plugin_on_next_clicked(self):
         reuse = self.reuse_partition.get_active()
         replace = self.replace_partition.get_active()
@@ -337,6 +341,20 @@ class PageGtk(PageBase):
         if disks:
             disks = disks[1]
         one_disk = len(disks) == 1
+
+        if self.current_page == self.page_bitlocker:
+            self.controller._wizard.do_reboot()
+            return True
+
+        if resize and self.should_show_bitlocker_page():
+            title = self.controller.get_string('ubiquity/text/bitlocker_header')
+            self.set_page_title(title)
+            self.current_page = self.page_bitlocker
+            self.controller.go_to_page(self.current_page)
+            self.controller.toggle_next_button('restart_button', suggested=True)
+            self.plugin_is_restart = True
+            self.plugin_is_install = False
+            return True
 
         if custom:
             self.set_page_title(self.custom_partitioning.get_label())

@@ -48,6 +48,55 @@
       </object>
     </child>
   </object>
+  <object class="GtkAlignment" id="stepRST">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="top_padding">20</property>
+    <property name="bottom_padding">20</property>
+    <property name="left_padding">20</property>
+    <property name="right_padding">20</property>
+    <child>
+      <object class="GtkBox" id="using_rst">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="no_show_all">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="label_using_rst">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">6</property>
+            <property name="label" translatable="yes">This computer uses Intel RST (Rapid Storage Technology). You need to turn off RST before installing Ubuntu. For instructions, open this page on a phone or other device: &lt;a href="https://help.ubuntu.com/rst"&gt;help.ubuntu.com/rst&lt;/a&gt;</property>
+            <property name="use_markup">True</property>
+            <property name="max_width_chars">100</property>
+            <property name="wrap">True</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkImage" id="rst_qrcode">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_top">6</property>
+            <property name="pixbuf">../pixmaps/qr-help-ubuntu-com-rst.png</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkAlignment" id="stepPrepare">
     <property name="visible">True</property>
     <property name="can_focus">False</property>

@@ -93,6 +93,17 @@ endif
 	dh_installmenu
 
 	$(MAKE) install DESTDIR=`pwd`/debian/tmp
+	# Would probably be better to do this in the upstream buildsystem
+
+	# help.ubuntu.com/rst
+	qrencode -m 0 -s 5 -t PNG -l H -o debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-rst-input.png "https://help.ubuntu.com/rst"
+	convert debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-rst-input.png -transparent white debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-rst.png
+	rm debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-rst-input.png
+
+	# help.ubuntu.com/bitlocker
+	qrencode -m 0 -s 5 -t PNG -l H -o debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-bitlocker-input.png "https://help.ubuntu.com/bitlocker"
+	convert debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-bitlocker-input.png -transparent white debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-bitlocker.png
+	rm debian/tmp/usr/share/ubiquity/pixmaps/qr-help-ubuntu-com-bitlocker-input.png
 
 	$(MAKE) -C d-i install
 

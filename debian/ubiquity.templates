@@ -238,6 +238,12 @@ Template: ubiquity/text/part_advanced_heading_label
 Type: text
 _Description: Prepare partitions
 
+Template: ubiquity/text/restart_button
+Type: text
+# This is used as a button label, and should be translated as an action.
+# Omit the [ ... ] from the translation.
+_Description: _Restart[ action ]
+
 Template: ubiquity/text/install_button
 Type: text
 # This is used as a button label, and should be translated as an action.
@@ -1140,6 +1146,23 @@ Template: ubiquity/text/sorry
 Type: text
 _Description:
  Sorry
+
+Template: ubiquity/text/rst_header
+Type: text
+# RST means "Rapid Storage Technology". Don't translate it.
+_Description: Turn off RST
+
+Template: ubiquity/text/label_using_rst
+Type: text
+_Description: This computer uses Intel RST (Rapid Storage Technology). You need to turn off RST before installing Ubuntu. For instructions, open this page on a phone or other device: <a href="https://help.ubuntu.com/rst">help.ubuntu.com/rst</a>
+
+Template: ubiquity/text/bitlocker_header
+Type: text
+_Description: Turn off BitLocker
+
+Template: ubiquity/text/label_using_bitlocker
+Type: text
+_Description: This computer uses Windows BitLocker encryption. You need to turn off BitLocker in Windows before installing Ubuntu. For instructions, open this page on a phone or other device: <a href="https://help.ubuntu.com/bitlocker">help.ubuntu.com/bitlocker</a>
 
 Template: ubiquity/text/required_space
 Type: text

@@ -508,7 +508,7 @@ EOF
 
 	if ! grep -q "boot/efi" "${TARGET}/etc/fstab"; then
 		espuuid=$(blkid -s UUID -o value "${DISK}${PARTBASE}${PARTESP}")
-		echo "UUID=${espuuid}\t/boot/efi\tvfat\tumask=0077\t0\t1" >> "${TARGET}/etc/fstab"
+		echo "UUID=${espuuid}\t/boot/efi\tvfat\tumask=0022,fmask=0022,dmask=0022\t0\t1" >> "${TARGET}/etc/fstab"
 	fi
 
 	# Bind mount grub from ESP to the expected location
@@ -521,6 +521,8 @@ EOF
 		printf "UUID=${SWAPID}\tnone\tswap\tdiscard\t0\t0\n" >> "${TARGET}/etc/fstab"
 		swapon -v "${SWAPDEVICE}"
 	fi
+	# Make /boot/{grub,efi} world readable
+	sed -i 's#\(.*boot/efi.*\)umask=0077\(.*\)#\1umask=0022,fmask=0022,dmask=0022\2#' "${TARGET}/etc/fstab"
 
 	echo "I: Marking ZFS utilities to be kept in the target system"
 	apt-install zfsutils-linux 2>/dev/null

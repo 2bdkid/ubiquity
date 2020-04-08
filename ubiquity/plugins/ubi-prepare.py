@@ -60,6 +60,7 @@ class PreparePageBase(plugin.PluginUI):
         self.prepare_sufficient_space.set_state(state)
 
     def plugin_translate(self, lang):
+        self.rst_title_text = i18n.get_string('rst_header', lang)
         return
 
 
@@ -111,9 +112,11 @@ class PageGtk(PreparePageBase):
 
         self.prepare_page = builder.get_object('stepPrepare')
         self.insufficient_space_page = builder.get_object('stepNoSpace')
+        self.rst_page = builder.get_object('stepRST')
         self.current_page = self.prepare_page
         self.plugin_widgets = self.prepare_page
-        self.plugin_optional_widgets = [self.insufficient_space_page]
+        self.plugin_optional_widgets = [self.insufficient_space_page,
+                                        self.rst_page]
 
     def plugin_get_current_page(self):
         return self.current_page
@@ -125,6 +128,22 @@ class PageGtk(PreparePageBase):
         self.label_free_space.set_label(free)
 
         self.controller.go_to_page(self.current_page)
+
+    def show_rst_page(self):
+        for page in self.controller._wizard.pages:
+            if page.module.NAME == NAME:
+                page.title = 'ubiquity/text/rst_header'
+                break
+        self.current_page = self.rst_page
+        self.controller.go_to_page(self.current_page)
+        return True
+
+    def plugin_on_next_clicked(self):
+        if self.current_page != self.rst_page:
+            return
+
+        self.controller._wizard.do_reboot()
+        return True
 
     def set_using_secureboot(self, secureboot):
         self.using_secureboot = secureboot
@@ -305,6 +324,9 @@ class PageKde(PreparePageBase):
         self.set_using_secureboot(False)
         self.plugin_widgets = self.page
 
+    def show_rst_page(self):
+        return False
+
     def show_insufficient_space_page(self, required, free):
         from PyQt5 import QtWidgets
         QtWidgets.QMessageBox.critical(self.page,
@@ -413,7 +435,6 @@ class Page(plugin.Plugin):
         minimal_install = self.db.get('ubiquity/minimal_install') == 'true'
         self.ui.set_minimal_install(minimal_install)
         self.apply_debconf_branding()
-        self.setup_sufficient_space()
 
         # wait for it to finish
         if self.frontend.ubuntu_drivers:
@@ -427,6 +448,13 @@ class Page(plugin.Plugin):
         except FileNotFoundError:
             syslog.syslog('ubuntu-drivers list-oem finished with no available packages')
 
+        if self.should_show_rst_page():
+            if not self.ui.show_rst_page():
+                self.setup_sufficient_space()
+            else:
+                self.ui.plugin_is_restart = True
+        else:
+            self.setup_sufficient_space()
         command = ['/usr/share/ubiquity/simple-plugins', 'prepare']
         questions = ['ubiquity/use_nonfree']
         return command, questions
@@ -436,6 +464,11 @@ class Page(plugin.Plugin):
         for template in ['ubiquity/text/required_space',
                          'ubiquity/text/free_space']:
             self.db.subst(template, 'RELEASE', release.name)
+
+    def should_show_rst_page(self):
+        # XXX: replace this with proper detection logic; refer to
+        # setup_sufficient_space()
+        return os.environ.get('SHOW_RST_UI', '0') == '1'
 
     def setup_sufficient_space(self):
         # TODO move into prepare.

@@ -1,3 +1,24 @@
+ubiquity (20.04.10) focal; urgency=medium
+
+  [ Sebastien Bacher ]
+  * Updated translations from launchpad. (LP: #1870156)
+
+  [ Jean-Baptiste Lallement ]
+  * zsys-setup: Make /boot/grub world-readable.
+
+  [ Iain Lane ]
+  * The following two changes are *not* exposed. They are mainly to extract
+    the strings for translators to work on. A followup upload will expose the
+    UI when necessary.
+  * Add the UI for a "Turn off RST" page.
+    It's not hooked up yet - this is waiting for another change, but we can
+    get on with translating it.
+  * Add the UI for a "you need to disable Bitlocker" page.
+    As in the previous commit, this is disabled unless a special environment
+    variable is set.
+
+ -- Iain Lane <iain.lane@canonical.com>  Wed, 08 Apr 2020 17:44:59 +0100
+
 ubiquity (20.04.9) focal; urgency=medium
 
   * kde: Set ubuntu_drivers to None.  We don't actually run this here (but
