@@ -325,7 +325,8 @@ class PageGtk(PageBase):
             self.use_crypto.set_active(crypto_selected)
 
     def should_show_bitlocker_page(self):
-        return os.environ.get('SHOW_BITLOCKER_UI', '0') == '1'
+        return ('bitlocker' in self.extra_options or
+                os.environ.get('SHOW_BITLOCKER_UI', '0') == '1')
 
     def plugin_on_next_clicked(self):
         reuse = self.reuse_partition.get_active()
@@ -436,7 +437,9 @@ class PageGtk(PageBase):
         return False
 
     def plugin_on_back_clicked(self):
-        if self.current_page in [self.page_auto, self.page_crypto]:
+        if self.current_page in [self.page_auto,
+                                 self.page_bitlocker,
+                                 self.page_crypto]:
             title = self.controller.get_string(self.plugin_title)
             self.controller._wizard.page_title.set_markup(
                 '<span size="xx-large">%s</span>' % title)
@@ -2220,6 +2223,7 @@ class Page(plugin.Plugin):
 
         resize_option = ('resize' in self.extra_options or
                          'biggest_free' in self.extra_options)
+        bitlocker = 'bitlocker' in self.extra_options
 
         # Irrespective of os_counts
         # We always have the manual partitioner, and it always has the same
@@ -2296,8 +2300,8 @@ class Page(plugin.Plugin):
                 opt = PartitioningOption(title, desc)
                 options['use_device'] = opt
 
-                if wubi_option or resize_option:
-                    if resize_option:
+                if wubi_option or resize_option or bitlocker:
+                    if resize_option or bitlocker:
                         q = 'ubiquity/partitioner/single_os_resize'
                     else:
                         q = 'ubiquity/partitioner/ubuntu_inside'
@@ -2343,7 +2347,7 @@ class Page(plugin.Plugin):
 
             if wubi_option:
                 pass
-            elif resize_option:
+            elif resize_option or bitlocker:
                 q = 'ubiquity/partitioner/multiple_os_resize'
                 self.db.subst(q, 'DISTRO', release.name)
                 title = self.description(q)
@@ -2445,6 +2449,9 @@ class Page(plugin.Plugin):
 
                         if partition[4] == 'ntfs':
                             ntfs_partitions.append(partition[5])
+
+                        if partition[4] == 'BitLocker':
+                            self.extra_options['bitlocker'] = True
 
                     layout[disk] = ret
                     if try_for_wubi and partition_table_full:

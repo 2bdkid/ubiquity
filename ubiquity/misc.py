@@ -312,6 +312,24 @@ def partition_to_disk(partition):
     return udevadm_disk.get('DEVNAME', partition)
 
 
+@raise_privileges
+def is_bitlocker_partition_encrypted(devpath):
+    """Check if partition is BitLocker encryption."""
+    subp = subprocess.Popen(
+        ['blkid', '--match-tag', 'TYPE', devpath],
+        stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        universal_newlines=True)
+    result = subp.communicate()[0].split()
+    if result:
+        for line in result:
+            if devpath in line:
+                continue
+            name, value = line.split('=', 1)
+            if 'TYPE' in name and 'BitLocker' in value[1:-1]:
+                return True
+    return False
+
+
 def is_boot_device_removable(boot=None):
     if boot:
         return is_removable(boot)

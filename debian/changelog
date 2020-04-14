@@ -1,3 +1,22 @@
+ubiquity (20.04.11) focal; urgency=medium
+
+  [ Shih-Yuan Lee (FourDollars) ]
+  * Add the detection logic for Intel RST RAID. (LP: #1864965)
+
+  [ Iain Lane ]
+  * ubi-partman: Make 'back' work from the RST page.  Previously it went back
+    to the prepare page. We actually want to go back to the partitioning page.
+  * Implement bitlocker UI. Check if a partition has type 'BitLocker', and
+    show the error page if it does and we're trying to resize.  Thanks to
+    Woodrow Shen and Shih-Yuan Lee for their work here too. (LP: #1872718)
+  * Automatic update of included source packages: shim-signed 1.40.
+
+  [ Rik Mills ]
+  * KDE: Kubuntu has dropped the KDE PIM suite from the default install
+    for 20.04. Remove KDE PIM mention from the software selection page.
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 14 Apr 2020 18:57:04 +0100
+
 ubiquity (20.04.10) focal; urgency=medium
 
   [ Sebastien Bacher ]

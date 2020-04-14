@@ -94,7 +94,7 @@ class PartAuto(QtWidgets.QWidget):
         release_name = misc.get_release().name
 
         bId = 0
-        if 'resize' in extra_options:
+        if 'resize' in extra_options and 'bitlocker' not in extra_options:
             button = QtWidgets.QRadioButton(
                 self.resizeChoice, self.autopart_selection_frame)
             self.autopart_selection_frame.layout().addWidget(button)

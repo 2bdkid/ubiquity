@@ -19,6 +19,7 @@
 
 from __future__ import print_function
 
+import glob
 import os
 import subprocess
 import sys
@@ -466,8 +467,11 @@ class Page(plugin.Plugin):
             self.db.subst(template, 'RELEASE', release.name)
 
     def should_show_rst_page(self):
-        # XXX: replace this with proper detection logic; refer to
-        # setup_sufficient_space()
+        search = '/sys/module/ahci/drivers/pci:ahci/*/remapped_nvme'
+        for remapped_nvme in glob.glob(search):
+            with open(remapped_nvme, 'r') as f:
+                if int(f.read()) > 0:
+                    return True
         return os.environ.get('SHOW_RST_UI', '0') == '1'
 
     def setup_sufficient_space(self):
