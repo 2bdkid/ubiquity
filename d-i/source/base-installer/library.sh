@@ -358,12 +358,8 @@ kernel_update_list () {
 	(set +e;
 	# Hack to get the metapackages in the right order; should be
 	# replaced by something better at some point.
-	chroot /target apt-cache search ^linux-signed- | grep '^linux-signed-\(generic\|server\|virtual\|preempt\|rt\|xen\)';
-	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|server\|virtual\|preempt\|rt\|xen\|power\|cell\|omap\|omap4\|keystone\)';
-	chroot /target apt-cache search ^linux-signed-image- | grep -v '^linux-signed-image-[2-9]\.';
+	chroot /target apt-cache search ^linux- | grep '^linux-\(amd64\|686\|k7\|generic\|lowlatency\|server\|virtual\|preempt\|rt\|xen\|oem-20.04\|power\|cell\|omap\|omap4\|keystone\)';
 	chroot /target apt-cache search ^linux-image- | grep -v '^linux-image-[2-9]\.';
-	chroot /target apt-cache search '^linux-signed-image-[2-9]\.' | sort -r;
-	chroot /target apt-cache search '^linux-image-[2-9]\.' | sort -r;
 	chroot /target apt-cache search ^kfreebsd-image;
 	chroot /target apt-cache search ^gnumach-image) | \
 	cut -d" " -f1 | uniq > "$KERNEL_LIST.unfiltered"

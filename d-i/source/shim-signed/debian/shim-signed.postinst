@@ -66,10 +66,11 @@ case $1 in
 	case $bootloader_id in
 	    kubuntu) bootloader_id=ubuntu ;;
 	esac
-	if [ "$bootloader_id" ] && [ -d "/boot/efi/EFI/$bootloader_id" ] \
-	   && which grub-install >/dev/null 2>&1
-	then
-	    grub-install --target=${grubarch} --auto-nvram
+	# Check /boot/grub to see if we previously installed to an ESP. We don't
+	# want to trigger the install code just by installing the package,
+	# normally the installer installs grub itself first.
+	if [ -e /boot/grub/${grubarch}/core.efi ]; then
+	    /usr/lib/grub/grub-multi-install --target=${grubarch} --auto-nvram
             if dpkg --compare-versions "$2" lt-nl "1.22~"; then
                 rm -f /boot/efi/EFI/ubuntu/MokManager.efi
             fi

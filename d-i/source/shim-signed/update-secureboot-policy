@@ -108,7 +108,8 @@ toggle_validation()
     local again="$2"
 
     echo "Enabling shim validation."
-    printf '%s\n%s\n' "$key" "$again" | mokutil --timeout -1 --enable-validation >/dev/null || true
+    printf '%s\n%s\n' "$key" "$again" | mokutil --enable-validation >/dev/null || true
+    mokutil --timeout -1 >/dev/null || true
 }
 
 enroll_mok()
@@ -117,7 +118,8 @@ enroll_mok()
     local again="$2"
 
     echo "Adding '$SB_KEY' to shim:"
-    printf '%s\n%s\n' "$key" "$again" | mokutil --timeout -1 --import "$SB_KEY" >/dev/null || true
+    printf '%s\n%s\n' "$key" "$again" | mokutil --import "$SB_KEY" >/dev/null || true
+    mokutil --timeout -1 >/dev/null || true
 }
 
 do_it()

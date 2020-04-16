@@ -1,3 +1,17 @@
+base-installer (1.158ubuntu7) focal; urgency=medium
+
+  * Fix testsuite.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 15 Apr 2020 13:26:55 +0100
+
+base-installer (1.158ubuntu6) focal; urgency=medium
+
+  * Update kernel flavours to the ones currently offered. Filter out
+    non-existent flavours. Filter out transitional 18.04 flavours. Filter
+    out single ABI kernels. LP: #1871523
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Tue, 14 Apr 2020 23:47:21 +0100
+
 base-installer (1.158ubuntu5) eoan; urgency=medium
 
   * Use link_in_boot true on all Ubuntu arches.

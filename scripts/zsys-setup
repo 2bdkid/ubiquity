@@ -10,7 +10,7 @@
 # rpool/ROOT/ubuntu_${UUID}/var -o canmount=off
 # rpool/ROOT/ubuntu_${UUID}/var/games
 # rpool/ROOT/ubuntu_${UUID}/var/lib
-# rpool/ROOT/ubuntu_${UUID}/var/lib/AccountServices
+# rpool/ROOT/ubuntu_${UUID}/var/lib/AccountsService
 # rpool/ROOT/ubuntu_${UUID}/var/lib/apt
 # rpool/ROOT/ubuntu_${UUID}/var/lib/dpkg
 # rpool/ROOT/ubuntu_${UUID}/var/log
@@ -355,7 +355,7 @@ init_zfs() {
 	# System dataset
 	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var" -o canmount=off
 	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib"
-	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib/AccountServices"
+	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib/AccountsService"
 	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib/apt"
 	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib/dpkg"
 	zfs create "rpool/ROOT/ubuntu_${UUID_ORIG}/var/lib/NetworkManager"

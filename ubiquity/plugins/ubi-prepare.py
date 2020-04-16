@@ -42,15 +42,24 @@ OEM = False
 
 class PreparePageBase(plugin.PluginUI):
     plugin_title = 'ubiquity/text/prepare_heading_label'
+    download_updates = True
+    download_updates_enabled = True
 
     def __init__(self, *args, **kwargs):
         plugin.PluginUI.__init__(self)
 
     def plugin_set_online_state(self, state):
+        # if we're disabling, remember what it was before so we can re-enable
+        # properly if network comes back
+        if self.prepare_network_connection.get_state() and not state:
+            self.download_updates = self.get_download_updates()
         self.prepare_network_connection.set_state(state)
         self.enable_download_updates(state)
+        self.download_updates_enabled = state
         if not state:
             self.set_download_updates(False)
+        else:
+            self.set_download_updates(self.download_updates)
 
     def set_sufficient_space(self, state, required, free):
         if not state:
@@ -431,8 +440,9 @@ class Page(plugin.Plugin):
             if is_secure_boot():
                 self.ui.set_using_secureboot(True)
 
-        download_updates = self.db.get('ubiquity/download_updates') == 'true'
-        self.ui.set_download_updates(download_updates)
+        self.ui.download_updates = self.db.get('ubiquity/download_updates') == 'true'
+        if self.ui.download_updates_enabled:
+            self.ui.set_download_updates(self.ui.download_updates)
         minimal_install = self.db.get('ubiquity/minimal_install') == 'true'
         self.ui.set_minimal_install(minimal_install)
         self.apply_debconf_branding()

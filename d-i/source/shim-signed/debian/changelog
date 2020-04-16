@@ -1,3 +1,22 @@
+shim-signed (1.40.3) focal; urgency=medium
+
+  * Depend on the correct version of grub-signed (LP: #1871895)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 09 Apr 2020 20:48:31 +0200
+
+shim-signed (1.40.2) focal; urgency=medium
+
+  * Install grub to multiple ESPs (LP: #1871821)
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 09 Apr 2020 13:05:53 +0200
+
+shim-signed (1.40.1) focal; urgency=medium
+
+  * Pass --timeout -1 to mokutil in a separate mokutil run (LP: #1869187),
+    thanks to Aleksander Miera for the patch.
+
+ -- Julian Andres Klode <juliank@ubuntu.com>  Thu, 09 Apr 2020 09:57:51 +0200
+
 shim-signed (1.40) focal; urgency=medium
 
   * Pass --timeout -1 to mokutil so that users don't end up with broken
