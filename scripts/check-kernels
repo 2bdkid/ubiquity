@@ -108,8 +108,40 @@ if [ -z "$compatible" ] && [ -z "$install_new" ]; then
 	done
 fi
 
+OEM_KERNEL=linux-oem-20.04
+wants_oem_kernel() {
+	if [ "$(apt-cache search -n "^${OEM_KERNEL}\$")" ]; then
+        test -e /run/ubuntu-drivers-oem.autoinstall || return 1
+        for pkg in $(cat /run/ubuntu-drivers-oem.autoinstall); do
+            case $pkg in
+                oem-*-meta)
+                    oem_kernel="$(apt-cache show "$pkg" | grep-dctrl -v -XF Ubuntu-OEM-Kernel-Flavour default)"
+                    if [ -n "$oem_kernel" ]; then
+                        return
+                    fi
+                    ;;
+            esac
+        done
+    fi
+    return 1
+}
+
+if wants_oem_kernel; then
+    if [ -n "$compatible" ]; then
+        incompatible="${incompatible:+$incompatible }$compatible"
+        compatible="${OEM_KERNEL}"
+    fi
+    install_new="${install_new:+$install_new }${OEM_KERNEL}"
+fi
+
 kernel_to_headers () {
 	echo "$1" | sed 's/linux\(-signed\|\)\(-image\|\)/linux-headers/'
+}
+kernel_image_to_meta () {
+    echo "$1" | sed -n 's/^linux-image-/linux-/p' | xargs dpkg-query -W -f'${Package}\n' 2>/dev/null
+}
+kernel_image_to_modules () {
+    echo "$1" | sed -n 's/^linux-image-/linux-modules-/p' | xargs dpkg-query -W -f'${Package}\n' 2>/dev/null
 }
 
 if [ -z "$compatible" ] && [ -z "$install_new" ]; then
@@ -119,10 +151,9 @@ else
 	mkdir -p /var/lib/ubiquity
 	for kernel in $install_new; do
 		echo "$kernel" >>/var/lib/ubiquity/install-kernels
-		kernel_to_headers "$kernel" >>/var/lib/ubiquity/install-kernels
 	done
 	for kernel in $compatible; do
-		apt-install "$kernel" "$(kernel_to_headers "$kernel")"
+		apt-install "$(kernel_image_to_meta "$kernel")"
 	done
 	for kernel in $incompatible; do
 		echo "$kernel" >> /var/lib/ubiquity/remove-kernels
@@ -135,6 +166,8 @@ else
 			;;
 		    *)
 			kernel_to_headers "$kernel" >>/var/lib/ubiquity/remove-kernels
+			kernel_image_to_meta "$kernel" >>/var/lib/ubiquity/remove-kernels
+			kernel_image_to_modules "$kernel" >>/var/lib/ubiquity/remove-kernels            
 			;;
 		esac
 	done

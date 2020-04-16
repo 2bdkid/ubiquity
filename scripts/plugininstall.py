@@ -94,6 +94,7 @@ class Install(install_misc.InstallBase):
             write=io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8'))
 
         self.kernel_version = platform.release()
+        self.re_kernel_version = re.compile(r'^linux-image-\d.*')
 
         # Get langpacks from install
         self.langpacks = []
@@ -677,7 +678,7 @@ class Install(install_misc.InstallBase):
             return None
         for dep in dependencies:
             name = dep[0].target_pkg.name
-            if name.startswith('linux-image-2.'):
+            if self.re_kernel_version.match(name):
                 return name
             elif name.startswith('linux-'):
                 return self.traverse_for_kernel(cache, name)
@@ -714,7 +715,7 @@ class Install(install_misc.InstallBase):
                     if kernel.startswith('linux-image-2.'):
                         new_kernel_pkg = kernel
                         new_kernel_version = kernel[12:]
-                    elif kernel.startswith('linux-generic-'):
+                    elif kernel.startswith('linux-'):
                         # Traverse dependencies to find the real kernel image.
                         cache = Cache()
                         kernel = self.traverse_for_kernel(cache, kernel)
@@ -1196,7 +1197,7 @@ class Install(install_misc.InstallBase):
                 # upgrade them to their versions in the OEM archive.
                 with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
                     oem_pkgs = set(f.read().splitlines())
-                    for oem_pkg in oem_pkgs:
+                    for oem_pkg in oem_pkgs.copy():
                         target_sources_list = self.target_file("etc/apt/sources.list.d/{}.list".format(oem_pkg))
                         if not os.path.exists(target_sources_list):
                             continue
@@ -1207,7 +1208,8 @@ class Install(install_misc.InstallBase):
                         except FetchFailedException:
                             syslog.syslog("Failed to apt update {}".format(target_sources_list))
                             oem_pkgs.discard(oem_pkg)
-                    self.do_install(oem_pkgs)
+                    if oem_pkgs:
+                        self.do_install(oem_pkgs)
             except FileNotFoundError:
                 pass
 

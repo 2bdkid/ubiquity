@@ -1,3 +1,23 @@
+ubiquity (20.04.13) focal; urgency=medium
+
+  [ Steve Langasek ]
+  * Always invoke mokutil with --timeout -1 so that users don't miss the key
+    enrollment on reboot and end up with broken dkms modules.  LP: #1856422.
+
+  [ Iain Lane ]
+  * plugininstall: Don't modify oem_pkgs while we're iterating over it
+    (LP: #1873146)
+  * plugininstall: Don't bother calling do_install() if there's no packages
+
+  [ Dimitri John Ledkov ]
+  * Correctly install oem kernel flavour, when desired.
+  * When validating new kernel, allow kernel version higher than 2.x
+  * When keeping existing kernel, do not mark kernel image as manually
+    instally, only the meta.
+  * When removing a kernel, remove modules and meta.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 16 Apr 2020 22:56:34 +0100
+
 ubiquity (20.04.12) focal; urgency=medium
 
   [ Iain Lane ]
