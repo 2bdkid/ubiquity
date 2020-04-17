@@ -29,8 +29,15 @@ if db_get base-installer/kernel/altmeta && [ "$RET" ]; then
 	preferred_kernels="$(echo "$preferred_kernels" | sed "s/$/-$RET/"; \
 			     echo "$preferred_kernels")"
 fi
+
+# for kernels that are not on livefs, i.e. from the internet or cd-rom
+# pool, i.e. linux-generic
+# do not repeat it in compatible
 install_new=
+# for kernels that are preinstalled in the livefs
+# must match linux-image-*
 compatible=
+# for kernels that we want to purge from target
 incompatible=
 
 # TODO cjwatson 2009-10-19: Nasty hack for PAE-capable systems; see
@@ -129,7 +136,7 @@ wants_oem_kernel() {
 if wants_oem_kernel; then
     if [ -n "$compatible" ]; then
         incompatible="${incompatible:+$incompatible }$compatible"
-        compatible="${OEM_KERNEL}"
+        compatible=""
     fi
     install_new="${install_new:+$install_new }${OEM_KERNEL}"
 fi
