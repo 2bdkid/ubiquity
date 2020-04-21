@@ -906,4 +906,9 @@ def install_size():
 
 min_install_size = None
 
+
+def launch_uri(uri):
+    subprocess.Popen(['sensible-browser', uri], close_fds=True,
+                     preexec_fn=drop_all_privileges)
+
 # vim:ai:et:sts=4:tw=80:sw=4:

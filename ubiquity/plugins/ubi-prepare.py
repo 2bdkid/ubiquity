@@ -123,10 +123,15 @@ class PageGtk(PreparePageBase):
         self.prepare_page = builder.get_object('stepPrepare')
         self.insufficient_space_page = builder.get_object('stepNoSpace')
         self.rst_page = builder.get_object('stepRST')
+        self.rst_label = builder.get_object('label_using_rst')
+        self.rst_label.connect('activate-link', self.on_link_clicked)
         self.current_page = self.prepare_page
         self.plugin_widgets = self.prepare_page
         self.plugin_optional_widgets = [self.insufficient_space_page,
                                         self.rst_page]
+
+    def on_link_clicked(self, widget, uri):
+        misc.launch_uri(uri)
 
     def plugin_get_current_page(self):
         return self.current_page

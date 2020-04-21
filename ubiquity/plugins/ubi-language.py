@@ -373,10 +373,8 @@ class PageGtk(PageBase):
                     self.release_notes_label.hide()
             self.updating_installer = False
         elif uri == 'release-notes':
-            import subprocess
             uri = self.release_notes_url.replace('${LANG}', lang)
-            subprocess.Popen(['sensible-browser', uri], close_fds=True,
-                             preexec_fn=misc.drop_all_privileges)
+            misc.launch_uri(uri)
         return True
 
 

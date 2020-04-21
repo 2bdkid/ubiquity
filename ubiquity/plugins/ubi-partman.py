@@ -136,6 +136,8 @@ class PageGtk(PageBase):
         self.page_auto = builder.get_object('stepPartAuto')
         self.page_advanced = builder.get_object('stepPartAdvanced')
         self.page_crypto = builder.get_object('stepPartCrypto')
+        self.bitlocker_label = builder.get_object('label_using_bitlocker')
+        self.bitlocker_label.connect('activate-link', self.on_link_clicked)
 
         # Get all objects + add internal child(s)
         all_widgets = builder.get_object_ids()
@@ -207,6 +209,9 @@ class PageGtk(PageBase):
 
         # Define a list to save grub imformation
         self.grub_options = []
+
+    def on_link_clicked(self, widget, uri):
+        misc.launch_uri(uri)
 
     def update_branded_strings(self):
         release = misc.get_release()
