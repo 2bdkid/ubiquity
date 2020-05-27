@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-04-08 09:24+0100\n"
-"PO-Revision-Date: 2020-02-18 13:00+0000\n"
+"PO-Revision-Date: 2020-04-16 07:54+0000\n"
 "Last-Translator: Timo Jyrinki <Unknown>\n"
 "Language-Team: Finnish <debian-l10n-finnish@lists.debian.org>\n"
-"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-04 15:49+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-04-22 09:36+0000\n"
+"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"Language: fi\n"
 
 #. Type: text
 #. Description
@@ -119,7 +119,8 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:14001
 msgid "You may wish to read the <a href=\"release-notes\">release notes</a>."
-msgstr "Voit halutessasi lukea <a href=\"release-notes\">julkaisumuistion</a>."
+msgstr ""
+"Voit halutessasi lukea <a href=\"release-notes\">julkaisumuistion</a>."
 
 #. Type: text
 #. Description
@@ -213,7 +214,8 @@ msgstr "Aloitettava pienellä kirjaimella."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Saa sisältää vain pieniä kirjaimia, numeroita sekä ala- ja väliviivoja."
 
@@ -377,10 +379,8 @@ msgstr "Valmistele osiot"
 #. This is used as a button label, and should be translated as an action.
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:55001
-#, fuzzy
-#| msgid "_Install Now[ action ]"
 msgid "_Restart[ action ]"
-msgstr "Asenna nyt"
+msgstr "_Käynnistä uudelleen"
 
 #. Type: text
 #. Description
@@ -1047,12 +1047,12 @@ msgstr "Seuraavat paketit ovat rikkinäisessä tilassa:"
 #: ../ubiquity.templates:146001 ../ubiquity.templates:147001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Tämä voi johtua vanhasta asentimesta tai virheestä jossain luetelluista "
 "paketeista. Lisätietoja saattaa olla tiedostossa /var/log/syslog. "
@@ -1170,7 +1170,8 @@ msgstr "Sulje kaikki sovellukset, jotka käyttävät näitä liitoskohtia."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:165001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr "Haluatko asennusohjelman yrittävän osioiden irrottamista uudelleen?"
 
 #. Type: boolean
@@ -1511,7 +1512,7 @@ msgstr "Pahoittelut"
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:224001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Sammuta RST"
 
 #. Type: text
 #. Description
@@ -1519,15 +1520,19 @@ msgstr ""
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Tämä tietokone käyttää Intel RST:tä (Rapid Storage Technology). Sinun tulee "
+"sammuttaa RST, ennen kuin asennat Ubuntun. Lue ohjeet esimerkiksi "
+"puhelimellasi tai jollain toisella laitteella: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:226001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Sammuta BitLocker"
 
 #. Type: text
 #. Description
@@ -1535,9 +1540,13 @@ msgstr ""
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Tämä tietokone käyttää Windowsin BitLocker-salausta. Sinun tulee sammuttaa "
+"BitLocker, ennen kuin asennat Ubuntun. Lue ohjeet esimerkiksi puhelimellasi "
+"tai jollain toisella laitteella: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1653,8 +1662,8 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:244001
 msgid ""
-"Web browser, utilities, office software, plus additional "
-"internet applications and media players."
+"Web browser, utilities, office software, plus additional internet "
+"applications and media players."
 msgstr ""
 "Verkkoselain, apuohjelmat, toimisto-ohjelmisto, KDE:n henkilökohtaisen "
 "tiedonhallinnan ohjelmistokokonaisuus sekä lisäsovelluksia internetin ja "
@@ -2004,7 +2013,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:283001
 msgid "Advanced Features"
-msgstr "Edistyneet ominaisuudet"
+msgstr "Edistyneet asetukset"
 
 #. Type: text
 #. Description
@@ -2024,7 +2033,7 @@ msgstr "Ei valintoja"
 #. Description
 #: ../ubiquity.templates:286001
 msgid "Advanced features..."
-msgstr "Edistyneet ominaisuudet..."
+msgstr "Edistyneet asetukset..."
 
 #. Type: text
 #. Description
@@ -2286,3 +2295,11 @@ msgstr ""
 #: ../oem-config.templates:3001
 msgid "Removing packages"
 msgstr "Poistetaan paketteja"
+
+#~ msgid ""
+#~ "Web browser, utilities, office software, KDE PIM suite plus additional "
+#~ "internet applications and media players."
+#~ msgstr ""
+#~ "Verkkoselain, apuohjelmat, toimisto-ohjelmisto, KDE:n henkilökohtaisen "
+#~ "tiedonhallinnan ohjelmistokokonaisuus sekä lisäsovelluksia internetin ja "
+#~ "median käyttöön."

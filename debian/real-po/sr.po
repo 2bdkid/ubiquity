@@ -1,21 +1,21 @@
 # Serbian messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2010—2016.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2010—2016, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-04-08 09:24+0100\n"
-"PO-Revision-Date: 2019-11-21 05:21+0000\n"
+"PO-Revision-Date: 2020-04-20 12:48+0000\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
-"Language-Team: српски <gnome-sr@googlegroups.org>\n"
-"Language: sr\n"
+"Language-Team: Serbian <(nothing)>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-04 15:48+0000\n"
-"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+"X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
+"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"Language: sr\n"
 
 #. Type: text
 #. Description
@@ -213,7 +213,8 @@ msgstr "Мора почети малим словом."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Може да садржи само мала слова, цифре, цртице, и подвлаке."
 
 #. Type: text
@@ -379,10 +380,8 @@ msgstr "Припрема партиција"
 #. This is used as a button label, and should be translated as an action.
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:55001
-#, fuzzy
-#| msgid "_Install Now[ action ]"
 msgid "_Restart[ action ]"
-msgstr "_Инсталирај сада"
+msgstr "_Поново покрени"
 
 #. Type: text
 #. Description
@@ -463,7 +462,7 @@ msgstr "Како желите да наставите?"
 #. Description
 #: ../ubiquity.templates:67001
 msgid "_Skip"
-msgstr ""
+msgstr "_Прескочи"
 
 #. Type: title
 #. Description
@@ -1047,20 +1046,20 @@ msgstr "Следећи пакети су оштећени:"
 #: ../ubiquity.templates:146001 ../ubiquity.templates:147001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Ово може бити због коришћења старог одраза инсталера или може бити због "
-"грешке у неком од пакета наведених горе. Више детаља је доступно у „/var/log/"
-"syslog“. Инсталер ће покушати да настави упркос овоме, али може пасти "
-"касније и неће моћи да инсталира или уклони друге пакете (можда не и самога "
-"себе) са инсталираног система. Требало би да прво потражите новију верзију "
-"одраза вашег инсталера или, ако не успете у томе, да пријавите проблем вашем "
-"добављачу."
+"грешке у неком од пакета наведених горе. Више детаља је доступно у "
+"„/var/log/syslog“. Инсталер ће покушати да настави упркос овоме, али може "
+"пасти касније и неће моћи да инсталира или уклони друге пакете (можда не и "
+"самога себе) са инсталираног система. Требало би да прво потражите новију "
+"верзију одраза вашег инсталера или, ако не успете у томе, да пријавите "
+"проблем вашем добављачу."
 
 #. Type: error
 #. Description
@@ -1171,7 +1170,8 @@ msgstr "Затворите све програме који користе ов�
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:165001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Да ли бисте желели да инсталер још једном проба да демонтира ове партиције?"
 
@@ -1245,7 +1245,7 @@ msgstr "Бежична"
 #. Description
 #: ../ubiquity.templates:179001
 msgid "Software"
-msgstr ""
+msgstr "Програми"
 
 #. Type: text
 #. Description
@@ -1389,7 +1389,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:201001
 msgid "Updates and other software"
-msgstr ""
+msgstr "Освежења и други програми"
 
 #. Type: text
 #. Description
@@ -1510,7 +1510,7 @@ msgstr "Извините"
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:224001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Искључи „RST“"
 
 #. Type: text
 #. Description
@@ -1518,15 +1518,19 @@ msgstr ""
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Овај рачунар користи Интелову БСТ (Брзо Смештајну Технологију). Треба да "
+"искључите БСТ пре него инсталирате Убунту. За упутства, отворите ову "
+"страницу на телефону или другом уређају: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:226001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Искључи „BitLocker“"
 
 #. Type: text
 #. Description
@@ -1534,9 +1538,13 @@ msgstr ""
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Овај рачунар користи Виндоуз шифровање закључавача бита. Треба да искључите "
+"Закључавача бита пре него инсталирате Убунту. За упутства, отворите ову "
+"страницу на телефону или другом уређају: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1584,6 +1592,8 @@ msgid ""
 "Install third-party software for graphics and Wi-Fi hardware and additional "
 "media formats"
 msgstr ""
+"Инсталирајте програме трећих страна за графички и бежични хардвер и додатне "
+"медијске записе"
 
 #. Type: text
 #. Description
@@ -1607,57 +1617,60 @@ msgstr "Није доступно јер нема Интернет везе."
 #. Description
 #: ../ubiquity.templates:237001
 msgid "What apps would you like to install to start with?"
-msgstr ""
+msgstr "Које програме желите да инсталирате за почетак?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
 msgid "Which applications would you like to start with?"
-msgstr ""
+msgstr "Са којим програмима желите да почињете?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
 msgid "Minimal installation"
-msgstr ""
+msgstr "Минимална инсталација"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
 msgid "Web browser and basic utilities."
-msgstr ""
+msgstr "Веб прегледник и основна и помагала."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:241001
 msgid "Web browser plus basic utilities and applications."
-msgstr ""
+msgstr "Веб прегледник плус основна помагала и програми."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:242001
 msgid "Normal installation"
-msgstr ""
+msgstr "Уобичајена инсталација"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:243001
 msgid "Web browser, utilities, office software, games, and media players."
 msgstr ""
+"Веб прегледник, помагала, канцеларијски програми, игрице и пуштачи медија."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:244001
 msgid ""
-"Web browser, utilities, office software, plus additional "
-"internet applications and media players."
+"Web browser, utilities, office software, plus additional internet "
+"applications and media players."
 msgstr ""
+"Веб прегледник, помагала, канцеларијски програми, плус додатни интернет "
+"програми и пуштачи медија."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:245001
 msgid "Other options"
-msgstr ""
+msgstr "Друге опције"
 
 #. Type: text
 #. Description
@@ -1666,6 +1679,9 @@ msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
+"Инсталирање управљачких програма трећих страна захтева подешавање безбедног "
+"подизања система. Да урадите ово, сада треба да изаберете кључ безбедности, "
+"и да га унесете са поновним покретањем система."
 
 #. Type: text
 #. Description
@@ -1974,7 +1990,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:280001
 msgid "EXPERIMENTAL: Erase disk and use ZFS"
-msgstr ""
+msgstr "ЕКСПЕРИМЕНТАЛНО: Обриши диск и користи „ZFS“"
 
 #. Type: text
 #. Description
@@ -1984,18 +2000,21 @@ msgid ""
 "on all operating systems. This is experimental and may cause data loss. Do "
 "not use on production systems."
 msgstr ""
+"<span foreground=\"darkred\">Упозорење:</span> Ово ће обрисати све ваше "
+"датотеке на свим оперативним системима. Ово је експериментално и може "
+"довести до губитка података. Немојте користити на радним системима."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:283001
 msgid "Advanced Features"
-msgstr ""
+msgstr "Напредне могућности"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:284001
 msgid "None"
-msgstr ""
+msgstr "Ништа"
 
 #. Type: text
 #. Description
@@ -2003,31 +2022,31 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:285001 ../ubiquity.templates:287001
 msgid "None selected"
-msgstr ""
+msgstr "Ништа није изабрано"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:286001
 msgid "Advanced features..."
-msgstr ""
+msgstr "Напредне могућности..."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:288001
 msgid "LVM selected"
-msgstr ""
+msgstr "„LVM“ је изабрано"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:289001
 msgid "LVM and encryption selected"
-msgstr ""
+msgstr "„LVM“ и шифровање је изабрано"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:290001
 msgid "ZFS selected"
-msgstr ""
+msgstr "„ZFS“ је изабрано"
 
 #. Type: text
 #. Description
@@ -2160,6 +2179,11 @@ msgid ""
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
+"Изабрали сте омогућите програме трећих страна као део ваше инсталације, која "
+"за овај систем обухвата хардверске управљачке програме за графичку и/или "
+"картицу бежичне мреже. На вашем систему је такође омогућено УЕФИ Безбедно "
+"подизање система. УЕФИ Безбедно подизање система треба да буде подешено да "
+"допусти коришћење ових управљачких програма трећих страна."
 
 #. Type: text
 #. Description
@@ -2170,6 +2194,11 @@ msgid ""
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
+"Након завршене инсталације, Убунту ће вам помоћи у подешавању УЕФИ Безбедног "
+"подизања система. Да будете сигурни да сте ту измену ви направили као "
+"овлашћени корисник, а не неки нападач, сада морате да изаберете лозинку а "
+"касније да користите ту исту лозинку након поновног подизања система да "
+"потврдите измену."
 
 #. Type: text
 #. Description
@@ -2198,6 +2227,7 @@ msgstr "Кључ Безбедног подизања за МокПВ"
 #, no-c-format
 msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
 msgstr ""
+"партиција „#%(partid)s“ као „%(parttype)s“ се користи за „%(partusage)s“"
 
 #. Type: title
 #. Description

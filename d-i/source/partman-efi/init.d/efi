@@ -3,32 +3,8 @@
 # This script sets method "efi" for all fat16/fat32 partitions that
 # have the bootable flag set.
 
-ARCH="$(archdetect)"
-
-# Give the kernel a chance to create /proc/efi if appropriate.
-modprobe efivars >/dev/null 2>&1 || true
-
-in_efi_mode() {
-    [ -d /proc/efi ] || [ -d /sys/firmware/efi ]
-}
-
-if in_efi_mode; then
-	> /var/lib/partman/efi
-else
-	case $ARCH in
-	    i386/mac|amd64/mac)
-		# Intel Macs have an EFI partition, regardless of
-		# whether we're currently booted using BIOS
-		# compatibility or not (if we are, we won't be able to
-		# talk to EFI directly).
-		> /var/lib/partman/efi
-		;;
-	    *)
-		rm -f /var/lib/partman/efi
-		exit 0
-		;;
-	esac
-fi
+# It's 2020, always create ESP
+> /var/lib/partman/efi
 
 . /lib/partman/lib/base.sh
 

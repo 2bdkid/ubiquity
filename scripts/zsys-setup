@@ -309,6 +309,7 @@ init_zfs() {
 	# rpool
 	zpool create -f \
 		-o ashift=12 \
+		-o autotrim=on \
 		-O compression=lz4 \
 		-O acltype=posixacl \
 		-O xattr=sa \
@@ -325,6 +326,7 @@ init_zfs() {
 	# Then only features supported by grub are enabled.
 	zpool create -f \
 		-o ashift=12 \
+		-o autotrim=on \
 		-d \
 		-o feature@async_destroy=enabled \
 		-o feature@bookmarks=enabled \
