@@ -1,3 +1,10 @@
+partman-partitioning (120ubuntu3) groovy; urgency=medium
+
+  * Default to GPT on amd64 for any fresh disk installs, be it bios or EFI.
+    LP: #1796260
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Thu, 28 May 2020 17:55:46 +0100
+
 partman-partitioning (120ubuntu2) cosmic; urgency=medium
 
   * On EFI systems, make sure there's an ESP partition present regardless of

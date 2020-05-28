@@ -382,19 +382,21 @@ def unmount_target():
     if not TARGET:
         return
     paths = []
+    pools = set()
     with open('/proc/mounts') as mounts:
         for line in mounts:
-            path = line.split(' ')[1]
+            source, path, fstype = line.split(' ')[:3]
             if path == TARGET or path.startswith(TARGET + '/'):
                 paths.append(path)
+                if fstype == 'zfs':
+                    pools.add(source.split('/')[0])
     paths.sort()
     paths.reverse()
     for path in paths:
         misc.execute_root('fuser', '-cv', path)
         misc.execute_root('umount', path)
-    if os.path.exists("/sbin/zpool"):
-        misc.execute_root('umount', '/target/boot/grub')
-        misc.execute_root('/sbin/zpool', 'export', '-a')
+    for pool in pools:
+        misc.execute_root('/sbin/zpool', 'export', pool)
 
 
 def prepend_path(directory):

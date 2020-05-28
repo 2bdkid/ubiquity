@@ -305,6 +305,14 @@ init_zfs() {
 	# Now we can create the pools and dataset
 	UUID_ORIG=$(head -100 /dev/urandom | tr -dc 'a-z0-9' |head -c6)
 
+    # Use stable uuid for partition when available as device name can change
+    # Let udev finish its job before proceeding with zpool creation
+    udevadm settle
+    bpooluuid=$(blkid -s PARTUUID -o value $partbpool)
+    [ -n "$bpooluuid" -a -e "/dev/disk/by-partuuid/$bpooluuid" ] && partbpool=/dev/disk/by-partuuid/$bpooluuid
+    rpooluuid=$(blkid -s PARTUUID -o value  $partrpool)
+    [ -n "$rpooluuid" -a -e "/dev/disk/by-partuuid/$rpooluuid" ] && partrpool=/dev/disk/by-partuuid/$rpooluuid
+
 	# Pools
 	# rpool
 	zpool create -f \
