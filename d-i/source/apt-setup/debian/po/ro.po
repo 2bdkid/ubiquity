@@ -20,6 +20,7 @@
 #
 # Eddy Petrișor <eddy.petrisor@gmail.com>, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Jobava <jobaval10n@gmail.com>, 2018.
+# Andrei Popescu <andreimpopescu@gmail.com>, 2018, 2020.
 #
 # Translations from iso-codes:
 # Alastair McKinstry <mckinstry@debian.org>, 2004
@@ -36,9 +37,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2018-01-05 19:24+0000\n"
-"Last-Translator: Jobava <jobaval10n@gmail.com>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-04-25 16:34+0300\n"
+"Last-Translator: Andrei POPESCU <andreimpopescu@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -128,6 +129,7 @@ msgstr "Descărcarea cheii pentru depozitul local a eșuat:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -299,8 +301,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Se examinează CD-ROM-ul..."
+msgid "Scanning the installation media..."
+msgstr "Se scanează mediul de instalare..."
 
 #. Type: error
 #. Description
@@ -312,13 +314,16 @@ msgstr "Problemă la configurarea apt"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
-"O încercare de configurare pentru ca apt să instaleze pachete adiționale de "
-"pe CD a eșuat."
+"O încercare de a configura apt să instaleze pachete adiționale de pe mediul "
+"de instalare a eșuat."
 
 #. Type: boolean
 #. Description
@@ -334,30 +339,30 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Se examinează un alt CD sau DVD?"
+msgid "Scan extra installation media?"
+msgstr "Să se scaneze medii de instalare suplimentare?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "CD-ul sau DVD-ul dumneavoastră a fost examinat; poartă eticheta:"
+msgid "Scanning your installation media finds the label:"
+msgstr "Scanarea mediilor de instalare a găsit eticheta:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"Acum puteți să examinați alte CD-uri sau DVD-uri care ar putea fi folosite "
-"de managerul de pachete (apt). În mod normal, acestea ar trebui să fie parte "
-"din același set din care face parte și CD-ul/DVD-ul de instalare. Dacă nu "
-"aveți alte CD-uri sau DVD-uri, acest pas poate fi omis."
+"Acum puteți să examinați alte medii de instalare pentru a fi folosite de "
+"managerul de pachete (apt). În mod normal, acestea ar trebui să fie parte "
+"din același set ca și cel folosit pentru inițializare. Dacă nu aveți medii "
+"suplimentare acest pas poate fi omis."
 
 #. Type: boolean
 #. Description
@@ -366,53 +371,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "Dacă doriți să examinați un alt CD sau DVD, introduceți-l acum."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "Dacă doriți să scanați alt mediu acesta trebuie introdus acum."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "A fost examinat CD-ul sau DVD-ul cu eticheta:"
+msgid "The image with the following label has been scanned:"
+msgstr "Imaginea cu următoarea etichetă a fost scanată:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "CD-ul sau DVD-ul cu eticheta de mai jos a fost deja examinat:"
+msgid "The image with the following label has already been scanned:"
+msgstr "Imaginea cu eticheta următoare a fost deja scanată:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "Înlocuiți-l acum dacă doriți să examinați un alt CD sau DVD."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "Înlocuiți-l acum dacă doriți să examinați altul."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"O încercare de a configura apt să instaleze pachete adiționale de pe CD/DVD "
-"a eșuat."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "Asigurați-vă că CD-ul/DVD-ul a fost introdus corect."
+msgid "Please check that the media has been inserted correctly."
+msgstr "Verificați că mediul a fost introdus corect."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Schimbare de mediu de instalare"
@@ -420,15 +412,9 @@ msgstr "Schimbare de mediu de instalare"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/:Introduceți discul etichetat '${LABEL}' în unitatea '/cdrom/' și "
-"apăsați enter."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "Introduceți mediul etichetat '${LABEL}' și apăsați enter."
 
 #. Type: text
 #. Description
@@ -446,10 +432,10 @@ msgstr "Se dezactivează CD-ul netinst din sources.list..."
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"Dacă instalați de pe un CD netinst și optați să nu folosiți un sit "
+"Dacă instalați de pe o imagine CD netinst și optați să nu folosiți un sit "
 "alternativ veți rămâne doar cu un sistem de bază minimal."
 
 #. Type: text
@@ -457,22 +443,23 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"Instalați de pe un CD netinst, care în sine permite doar instalarea unui "
-"sistem de bază minimal. Folosiți un sit alternativ pentru a instala un "
-"sistem mai complet."
+"Instalarea se face de pe o imagine CD netinst, care în sine permite doar "
+"instalarea unui sistem de bază minimal. Folosiți un sit alternativ pentru a "
+"instala un sistem mai complet."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr ""
-"Faceți instalarea de pe un CD; acesta conține un selecție limitată de "
+"Instalarea se face de pe o imagine care conține o selecție limitată de "
 "pachete."
 
 #. Type: text
@@ -482,13 +469,13 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"Ați examinat %i CD-uri. Deși acestea conțin o colecție apreciabilă de "
-"pachete, este posibil ca unele pachete încă să lipsească (unele fiind "
-"pachete necesare pentru a suporta alte limbi decât limba engleză)."
+"Ați examinat %i imagini. Deși acestea conțin o selecție apreciabilă de "
+"pachete, este posibil ca unele pachete să lipsească (în special pachete "
+"necesare pentru suportul altor limbi decât limba engleză)."
 
 #. Type: text
 #. Description
@@ -497,10 +484,10 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"Ați examinat %i CD-uri. Deși acestea conțin o colecție mare de pachete, este "
+"Ați scanat %i imagini. Deși acestea conțin o selecție mare de pachete, este "
 "posibil ca unele pachete să lipsească."
 
 #. Type: text
@@ -519,11 +506,11 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"Instalați de pe un DVD. Deși acesta conține o colecție mare de pachete, este "
-"posibil ca unele pachete încă să lipsească."
+"Instalați de pe o imagine DVD. Deși aceasta conține o selecție mare de "
+"pachete, este posibil ca unele pachete să lipsească."
 
 #. Type: text
 #. Description
@@ -584,8 +571,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Vă rugăm să alegeți dacă totuși doriți să le aveți disponibile."
 
@@ -630,8 +616,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -650,12 +635,14 @@ msgstr "Schimbă situl alternativ"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Descărcarea unui fișier a eșuat:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -681,11 +668,12 @@ msgstr "Se folosește un sit alternativ?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
-"Pentru suplimentarea programelor existente pe CD se poate folosi un sit "
-"alternativ. Folosirea acestuia poate chiar să aducă versiuni mai noi ale "
-"programelor disponibile."
+"Pentru suplimentarea programelor existente pe mediul de instalare se poate "
+"folosi un sit alternativ. Folosirea acestuia ar putea oferi versiuni mai noi "
+"ale programelor disponibile."
 
 #. Type: boolean
 #. Description
@@ -821,36 +809,3 @@ msgstr ""
 "cu această lansare. Deși aceste programe nu au trecut prin teste așa de "
 "complete ca cele din versiunea lansată, ele conțin versiuni mai noi ale unor "
 "aplicații care ar putea oferi capabilități utile."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "actualizări de securitate (de la ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian are două servicii care furnizează actualizări pentru versiunile "
-"lansate: serviciul de securitate și cel volatil."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

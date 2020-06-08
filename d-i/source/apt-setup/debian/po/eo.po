@@ -9,7 +9,7 @@
 #
 # Samuel Gimeno <sgimeno@gmail.com>, 2005.
 # Serge Leblanc <serge.leblanc@wanadoo.fr>, 2005, 2006, 2007.
-# Felipe Castro <fefcas@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2017.
+# Felipe Castro <fefcas@gmail.com>, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2017, 2018, 2020.
 #
 # Translations from iso-codes:
 # Alastair McKInstry <mckinstry@computer.org>, 2001,2002.
@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2017-12-01 00:46+0000\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-01-03 17:56+0000\n"
 "Last-Translator: Felipe Castro <fefcas@gmail.com>\n"
 "Language-Team: Esperanto <debian-l10n-esperanto@lists.debian.org>\n"
 "Language: eo\n"
@@ -112,6 +112,7 @@ msgstr "Elŝuto de loka deponej-ŝlosilo malsukcesis:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -280,8 +281,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Skanado de la lumdisko..."
+msgid "Scanning the installation media..."
+msgstr "Skanado de la instala aŭdovidaĵo..."
 
 #. Type: error
 #. Description
@@ -293,13 +294,16 @@ msgstr "'apt'-akomodada problemo"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
 "Malsukcesis la provo agordi 'apt' por ke ĝi instalu aldonajn pakojn el la "
-"lumdisko."
+"aŭdovidaĵo."
 
 #. Type: boolean
 #. Description
@@ -315,30 +319,30 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Ĉu oni skanu alian lumdiskon?"
+msgid "Scan extra installation media?"
+msgstr "Ĉu skani kroman instalan aŭdovidaĵon?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Via instalada lumdisko estis skanita; ĝia etikedo estas:"
+msgid "Scanning your installation media finds the label:"
+msgstr "Skano de via instala aŭdovidaĵo trovis tiun ĉi etikedon:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"Nun, vi povas skani aldonajn lumdiskojn aŭ lumdiskegojn uzotajn de la pak-"
-"administrilo (apt). Ordinare ili devas aparteni al la sama aro de la "
-"instalada lumdisko. Se vi ne posedas aliajn disponeblajn lumdiskojn, vi "
-"povas preterpasi ĉi tiun etapon."
+"Nun, vi povas skani aldonajn aŭdovidaĵojn uzotajn de la pak-administrilo "
+"(apt). Ordinare ili devas aparteni al la sama aro el tiu kiun vi uzis por "
+"praŝargi. Se vi ne posedas aliajn disponeblajn aŭdovidaĵojn, vi povas "
+"preterpasi ĉi tiun etapon."
 
 #. Type: boolean
 #. Description
@@ -347,52 +351,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "Se vi deziras skani alian lumdiskon, bonvolu enmeti ĝin nun."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "Se vi deziras skani aldonan aŭdovidaĵon, bonvolu enmeti alian nun."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "La lumdisko kun la jena etikedo estis skanita:"
+msgid "The image with the following label has been scanned:"
+msgstr "La instalkopio kun la jena etikedo estas skanata:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "La lumdisko kun la jena etikedo jam estis skanita:"
+msgid "The image with the following label has already been scanned:"
+msgstr "La instalkopio kun la jena etikedo jam estas skanita:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "Bonvolu nun anstataŭigi ĝin, se vi deziras skani alian lumdisk(eg)on."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "Bonvolu nun anstataŭigi ĝin, se vi deziras skani alian."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"Provo agordi 'APT' por instali aldonajn pakojn el lumdisko malsukcesis."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "Bonvolu kontroli ĉu la lumdisko estis enmetita ĝuste."
+msgid "Please check that the media has been inserted correctly."
+msgstr "Bonvolu kontroli ĉu la aŭdovidaĵo estis enmetita ĝuste."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Ŝanĝo de datumarujo"
@@ -400,15 +392,11 @@ msgstr "Ŝanĝo de datumarujo"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
 msgstr ""
-"/cdrom/:Bonvolu enmeti la diskon etikeditan: '${LABEL}' en la diskturnilo '/"
-"cdrom/' kaj premu la klavon 'Enter'."
+"Bonvolu enmeti la aŭdovidaĵon etikeditan '${LABEL}' kaj premu la klavon "
+"'Enter'."
 
 #. Type: text
 #. Description
@@ -426,10 +414,10 @@ msgstr "Malaktivado de la lumdisko 'netinst' en la dosiero 'sources.list'..."
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"Se vi instalas la sistemon per lumdisko 'netinst' kaj vi ne uzas la retan "
+"Se vi instalas la sistemon per aŭdovidaĵo 'netinst' kaj vi ne uzas la retan "
 "spegularkivon, tiam la instalota sistemo estos nur baza kaj mininuma."
 
 #. Type: text
@@ -437,21 +425,24 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"Vi plenumas instaladon per lumdisko 'netinst' permesanta nur instaladon de "
-"mininuma baza sistemo. Uzu spegularkivon por instali pli kompletan sistemon."
+"Vi plenumas instaladon per lumdiska instalkopio 'netinst' permesanta nur "
+"instaladon de mininuma baza sistemo. Uzu spegularkivon por instali pli "
+"kompletan sistemon."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr ""
-"Vi plenumas instaladon per lumdisko enhavanta malampleksan kolekton de pakoj."
+"Vi plenumas instaladon per instalkopio enhavanta malampleksan kolekton de "
+"pakoj."
 
 #. Type: text
 #. Description
@@ -460,11 +451,11 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"Vi skanis %i lumdiskojn. Kvankam multaj pakoj ĉeestas, kelkaj povas manki "
+"Vi skanis %i instalkopiojn. Kvankam multaj pakoj ĉeestas, kelkaj povas manki "
 "(ĉefe, pakoj ebligantaj uzadon de diversaj lingvoj)."
 
 #. Type: text
@@ -474,10 +465,10 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"Vi skanis %i lumdiskojn. Kvankam multaj pakoj ĉeestas, kelkaj povas manki."
+"Vi skanis %i instalkopiojn. Kvankam multaj pakoj ĉeestas, kelkaj povas manki."
 
 #. Type: text
 #. Description
@@ -495,11 +486,11 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"Vi plenumas instaladon per lumdiskego. Eĉ se ĝi enhavas ampleksan kolekton "
-"de pakoj, kelkaj povas manki."
+"Vi plenumas instaladon per lumdiskega instalkopio. Eĉ se ĝi enhavas "
+"ampleksan kolekton de pakoj, kelkaj povas manki."
 
 #. Type: text
 #. Description
@@ -560,8 +551,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Bonvolu elekti ĉu vi deziras disponi ĝin ĉiel ajn."
 
@@ -606,8 +596,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -626,12 +615,14 @@ msgstr "Ŝanĝi spegularkivon"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Elŝutado de dosiero malsukcesis:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -656,10 +647,11 @@ msgstr "Ĉu uzi retan spegularkivon?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
-"Reta spegularkivo povas suplementi la programaron, kiu estas inkluzivitan "
-"en  la lumdisko. Tio povas ankaŭ disponigi pli novajn versiojn de "
+"Reta spegularkivo povas suplementi la programaron, kiu estas inkluzivitan en "
+"la instala aŭdovidaĵo. Tio povas ankaŭ disponigi pli novajn versiojn de "
 "programaroj."
 
 #. Type: boolean
@@ -792,36 +784,3 @@ msgstr ""
 "tiu ĉi eldono. Kvankam tiu ĉi programaro ne estis testita samzorge kiel tiu "
 "de la eldono, ĝi povas enteni novajn versiojn de kelkaj aplikaĵoj kiuj povas "
 "provizi utilajn apartaĵojn."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "sekurigaj ĝisdatigoj (el ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debiano posedas du servojn provizantajn freŝdatajn eldonojn: sekuriga kaj "
-"nepermanenta."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2016-01-09 18:53+0900\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2018-10-17 18:49+0900\n"
 "Last-Translator:  Kenshi Muto <kmuto@debian.org>\n"
 "Language-Team: Debian L10n Japanese <debian-japanese@lists.debian.org>\n"
 "Language: ja\n"
@@ -116,6 +116,7 @@ msgstr "ローカルリポジトリのキーのダウンロード中に失敗し
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -284,8 +285,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "CD-ROM を検査しています..."
+#, fuzzy
+msgid "Scanning the installation media..."
+msgstr "インストールを終了しています"
 
 #. Type: error
 #. Description
@@ -297,9 +299,13 @@ msgstr "apt の設定の問題"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
+#, fuzzy
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
 "CD から追加パッケージをインストールするための apt 設定の試行に失敗しました。"
@@ -318,25 +324,27 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "別の CD や DVD を検査しますか?"
+#, fuzzy
+msgid "Scan extra installation media?"
+msgstr "インストールの完了"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "インストール CD または DVD を検査しました; ラベルは:"
+msgid "Scanning your installation media finds the label:"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
+#, fuzzy
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
 "ここで、パッケージマネージャ (apt) によって使われる追加の CD または DVD の検"
 "査を選択できます。通常、これらはインストール CD/DVD と同じセットになっている"
@@ -350,53 +358,45 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
+#, fuzzy
+msgid "If you wish to scan more media, please insert another one now."
 msgstr "別の CD や DVD を検査したければ、それを今挿入してください。"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
+#, fuzzy
+msgid "The image with the following label has been scanned:"
 msgstr "以下のラベルを持つ CD または DVD を検査済みです:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
+#, fuzzy
+msgid "The image with the following label has already been scanned:"
 msgstr "以下のラベルを持つ CD または DVD を検査済みです:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
+#, fuzzy
+msgid "Please replace it now, if you wish to scan another."
 msgstr "別の CD や DVD を検査したければ、それに今交換してください。"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"CD/DVD から追加パッケージをインストールするための apt 設定の試行に失敗しまし"
-"た。"
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
+#, fuzzy
+msgid "Please check that the media has been inserted correctly."
 msgstr "正しく CD/DVD が挿入されていることを確認してください。"
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "メディアの変更"
@@ -404,15 +404,12 @@ msgstr "メディアの変更"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
+#, fuzzy
+msgid "Please insert the media labeled '${LABEL}' and press enter."
 msgstr ""
-"/cdrom/: '/cdrom/' ドライブにラベル: '${LABEL}' のディスクを挿入し、Enter "
-"キーを押してください。"
+"/cdrom/: '/cdrom/' ドライブにラベル '${LABEL}' のディスクを挿入し、Enter キー"
+"を押してください。"
 
 #. Type: text
 #. Description
@@ -429,9 +426,10 @@ msgstr "sources.list 内の netinst CD 行を無効にしています..."
 #. Description
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
 "netinst CD からインストールしており、ミラーを使うことを選ばない場合には、非常"
 "に小さな基本システムのみという形で終わることになります。"
@@ -440,8 +438,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
+#, fuzzy
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
@@ -453,8 +452,10 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
+#, fuzzy
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr "限られたパッケージ群を収録している CD からインストールしています。"
 
 #. Type: text
@@ -462,9 +463,9 @@ msgstr "限られたパッケージ群を収録している CD からインス�
 #. :sl1:
 #. The value of %i can be 2 or 3
 #: ../apt-cdrom-setup.templates:12001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
@@ -477,9 +478,9 @@ msgstr ""
 #. :sl1:
 #. The value of %i can be from 4 to 8
 #: ../apt-cdrom-setup.templates:13001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
 "%i 枚の CD を検査しました。これらはたくさんのパッケージを収録していますが、そ"
@@ -500,8 +501,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
+#, fuzzy
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
 "DVD からインストールしています。DVD はたくさんのパッケージを収録しています"
@@ -567,8 +569,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "利用できるようにしたいかどうかを選んでください。"
 
@@ -613,8 +614,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -633,12 +633,14 @@ msgstr "ミラーの変更"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "ファイルのダウンロード中に失敗しました:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -662,9 +664,11 @@ msgstr "ネットワークミラーを使いますか?"
 #. Description
 #. :sl1:
 #: ../apt-mirror-setup.templates:5001
+#, fuzzy
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "ネットワークミラーは CD-ROM に収録されているソフトウェアを補完するのに利用で"
 "きます。これは利用可能なソフトウェアのより新しいバージョンとなることもありま"
@@ -803,36 +807,3 @@ msgstr ""
 "トされています。これらのソフトウェアはリリース版に含まれているほど完全にテス"
 "トされたものではありませんが、アプリケーションのより新しい (便利な機能を提供"
 "するかもしれない) バージョンを含んでいます。"
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "セキュリティアップデート (${SEC_HOST} から)"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian には、リリース版の更新を提供する 2 つのサービスがあります: セキュリ"
-"ティと volatile です。"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

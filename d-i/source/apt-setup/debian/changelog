@@ -1,3 +1,282 @@
+apt-setup (1:0.157ubuntu2) groovy; urgency=medium
+
+  * Add InRelease file support.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 03 Jun 2020 12:28:01 +0100
+
+apt-setup (1:0.157ubuntu1) groovy; urgency=medium
+
+  * Merge from Debian unstable.  Remaining changes:
+    - Install the Ubuntu mirror generator instead of Debian's.
+    - Set apt-setup/security_host to security.ubuntu.com, or
+      ports.ubuntu.com on ports architectures; adjust directory and
+      distribution to match.
+    - Add security sources for restricted, universe, and multiverse,
+      commented out unless the respective components are enabled. Disable
+      security generator checks for contrib and non-free.
+    - For CD installs, leave the sources.list created by apt-setup in
+      /etc/apt/sources.list.apt-setup, and restore the sources.list created
+      during base installation for the rest of the installation.
+    - Honour OVERRIDE_BASE_INSTALLABLE when checking
+      /cdrom/.disk/base_installable.
+    - Set the mirror verification timeout to 30 seconds.
+    - Adjust services-select for Ubuntu, removing volatile and adding
+      partner (apt-setup/partner) and extras (apt-setup/extras).
+    - Always disable the CD at the end of installation if any mirrors are
+      present, even if it's a complete CD.
+    - Pre-populate apt's lists directory with signed Release files for
+      archive.ubuntu.com (and mirrors) and security.ubuntu.com, to protect
+      against downgrade attacks right from initial installation.
+    - Run 'apt-get update' for all sources.list lines produced by a single
+      generator in one go, and don't comment out sources.list lines if it
+      fails.
+    - Make the path to security updates configurable, as well as the host.
+    - Remove restricted from cdrom entry if apt-setup/restricted is false.
+    - Make sure apt-cdrom doesn't unmount the CD if cd_type ends with
+      /single.
+    - Enable all network sources, including security updates, even if the
+      network is unconfigured.
+    - Honour apt-setup/restricted, apt-setup/universe, and
+      apt-setup/multiverse when writing -backports lines.
+    - Run 'apt-get update', without downloading package lists or cleaning up
+      old files, after moving the sources.list generated during base system
+      installation back into place.
+    - If OVERRIDE_LEAVE_CD_MOUNTED is set, don't unmount /cdrom; this is a
+      bad idea in a live CD environment!
+    - Enable backports by default now that we have NotAutomatic enabled and
+      working.
+    - Add Release files.
+    - generators/50mirror.ubuntu: universe incorrectly mentions some software
+      being unfree, which is not true. Remove that mention from the notice we
+      write to sources.list. Patch from Dan Watkins. (LP: #1590358)
+    - Allow setting apt-setup/enable-source-repositories=true to control
+      deb-src entries.
+    - Ship current Release and Release.gpg files.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 29 May 2020 01:00:41 +0100
+
+apt-setup (1:0.157) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Updated translations ]
+  * Estonian (et.po) by Kristjan Räts
+  * Hebrew (he.po) by Yaron Shahrabani
+  * Croatian (hr.po) by gogogogi
+  * Korean (ko.po) by Changwoo Ryu
+  * Dutch (nl.po) by Frans Spiesschaert
+  * Portuguese (Brazil) (pt_BR.po) by Adriano Rafael Gomes
+  * Romanian (ro.po) by Andrei POPESCU
+  * Tamil (ta.po) by Jeyanthinath MuthuRam
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sat, 09 May 2020 23:37:46 +0200
+
+apt-setup (1:0.156) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Updated translations ]
+  * Estonian (et.po) by Mario
+  * Galician (gl.po) by anonymous
+  * Lithuanian (lt.po) by Tautvydas Zukauskas
+  * Marathi (mr.po) by Prachi Joshi
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sat, 07 Mar 2020 21:41:08 +0100
+
+apt-setup (1:0.155) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Samuel Thibault ]
+  * generators/50mirror: unreleased does not support sources yet.
+
+  [ Updated translations ]
+  * Czech (cs.po) by Miroslav Kure
+  * Esperanto (eo.po) by Felipe Castro
+  * Hebrew (he.po) by Yaron Shahrabani
+  * Croatian (hr.po) by Milo Ivir
+  * Marathi (mr.po) by Prachi Joshi
+  * Norwegian Bokmal (nb.po) by Petter Reinholdtsen
+  * Punjabi (Gurmukhi) (pa.po) by Aman ALam
+  * Serbian (sr.po) by Filipovic Dragan
+  * Simplified Chinese (zh_CN.po) by 玉堂白鹤
+
+ -- Holger Wansing <hwansing@mailbox.org>  Tue, 28 Jan 2020 21:25:38 +0100
+
+apt-setup (1:0.154) unstable; urgency=medium
+
+  [ Holger Wansing ]
+  * Update generation of apt sources lines for security (starting with
+    bullseye, that changed from <dist>/updates to <dist>-security).
+    Thanks to Philip Hands for the patch! (Closes: #935540, #942238)
+
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 28 Nov 2019 10:56:04 +0100
+
+apt-setup (1:0.153) unstable; urgency=medium
+
+  * Team upload.
+
+  * Rephrase templates, to rename "CD"/"CD-ROM" into "installation media".
+
+  [ Updated translations ]
+  * German (de.po) by Holger Wansing
+  * Indonesian (id.po) by Andika Triwidada
+  * Icelandic (is.po) by Sveinn í Felli
+  * Portuguese (pt.po) by Miguel Figueiredo
+  * Traditional Chinese (zh_TW.po) by Walter Cheuk
+
+ -- Holger Wansing <hwansing@mailbox.org>  Sun, 06 Oct 2019 20:49:39 +0200
+
+apt-setup (1:0.152) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Yaron Shahrabani
+
+  [ Philip Hands ]
+  * Update the Salsa CI config.
+
+  [ Karsten Merker ]
+  * Enable the "unreleased" suite for architectures in the Debian-Ports
+    archive when configuring a network mirror.
+
+ -- Karsten Merker <merker@debian.org>  Tue, 20 Aug 2019 23:28:43 +0200
+
+apt-setup (1:0.151) unstable; urgency=medium
+
+  [ Moritz Mühlenhoff ]
+  * When preseeding a local repository via apt-setup/localX/repository,
+    the repository key for Secure Apt needs to be configured with
+    apt-setup/localX/key. This key used to be set up with apt-key, but
+    its use is deprecated and apt's former dependency on gnupg has been
+    demoted to a Suggests, rendering apt-key non-functional in d-i.
+    Apply a patch by Lars Kollstedt (thanks!) which adds the repository
+    key(s) to /etc/apt/trusted.gpg.d, following the approach used by
+    pbuilder (Closes: #851774, #928931):
+     - .asc suffix if the key file seems to be armoured ASCII (i.e. it
+       contains a “-----BEGIN PGP PUBLIC KEY BLOCK-----” line);
+     - .gpg suffix otherwise. Please note that only “GPG key public ring”
+       are supported by APT, newer “keybox database” format isn't at the
+       moment.
+
+  [ Updated translations ]
+  * Arabic (ar.po) by ButterflyOfFire
+  * Hindi (hi.po) by KushagraKarira
+  * Croatian (hr.po) by gogogogi
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 12 Jul 2019 10:49:08 +0200
+
+apt-setup (1:0.150) unstable; urgency=medium
+
+  * Team upload
+
+  * Remove Christian Perrier from Uploaders, with many thanks for all
+    his contributions over the years! (Closes: #927494)
+
+  [ Updated translations ]
+  * Hebrew (he.po) by Yaron Shahrabani
+
+ -- Holger Wansing <hwansing@mailbox.org>  Tue, 28 May 2019 07:09:04 +0200
+
+apt-setup (1:0.149) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Ukrainian (uk.po) by Anton Gladky
+
+ -- Holger Wansing <hwansing@mailbox.org>  Thu, 28 Mar 2019 22:21:19 +0100
+
+apt-setup (1:0.148) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Punjabi (pa.po) by Aman ALam
+  * Vietnamese (vi.po) by Trần Ngọc Quân
+
+ -- Holger Wansing <hwansing@mailbox.org>  Mon, 04 Mar 2019 23:09:07 +0100
+
+apt-setup (1:0.147) unstable; urgency=medium
+
+  [ Steve McIntyre ]
+  * Tweak how media sets are used in generators/41cdset. Live and
+    full_cd/single media already won't prompt for more media. Re-arrange
+    to make all "bluray" media work the same way. Will help with Debian
+    Edu standalone media without affecting other uses. Closes: #919982
+
+ -- Steve McIntyre <93sam@debian.org>  Mon, 11 Feb 2019 17:11:49 +0000
+
+apt-setup (1:0.146) unstable; urgency=medium
+
+  * Team upload
+
+  * Fix missing space and superfluous colon in templates file (and sync
+    translations).
+
+  [ Updated translations ]
+  * German (de.po) by Holger Wansing
+  * Finnish (fi.po) by Juhani Numminen
+  * Hebrew (he.po) by Yaron Shahrabani
+  * Kazakh (kk.po) by Baurzhan Muftakhidinov
+  * Traditional Chinese (zh_TW.po) by Louies
+
+ -- Holger Wansing <hwansing@mailbox.org>  Fri, 08 Feb 2019 17:22:44 +0100
+
+apt-setup (1:0.145) unstable; urgency=medium
+
+  * Team upload
+
+  [ Holger Wansing ]
+  * Remove trailing whitespaces from changelog file, to fix lintian tag.
+
+  [ Updated translations ]
+  * Persian (fa.po) by Nima Sahraneshin
+  * Finnish (fi.po) by Juhani Numminen
+
+ -- Holger Wansing <hwansing@mailbox.org>  Thu, 10 Jan 2019 23:20:27 +0100
+
+apt-setup (1:0.144) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Asturian (ast.po) by Xuacu Saturio
+  * Latvian (lv.po) by Tranzistors
+  * Marathi (mr.po) by Nayan Nakhare
+
+ -- Holger Wansing <hwansing@mailbox.org>  Tue, 30 Oct 2018 18:18:41 +0100
+
+apt-setup (1:0.143) unstable; urgency=medium
+
+  * Team upload
+
+  [ Updated translations ]
+  * Finnish (fi.po) by Juhani Numminen
+  * French (fr.po) by Alban Vidal
+  * Galician (gl.po) by mantinan
+  * Hindi (hi.po) by Himanshu Awasthi
+
+  [ Holger Wansing ]
+  * Change deprecated Priority: extra into optional.
+
+ -- Holger Wansing <hwansing@mailbox.org>  Thu, 27 Sep 2018 17:36:02 +0200
+
+apt-setup (1:0.142) unstable; urgency=medium
+
+  * Team upload
+
+  [ Cyril Brulebois ]
+  * Update Vcs-{Browser,Git} to point to salsa (alioth's replacement).
+
+  [ Updated translations ]
+  * Finnish (fi.po)
+  * Hebrew (he.po) by Yaron Shahrabani
+  * Telugu (te.po) by Praveen Illa
+
+ -- Holger Wansing <hwansing@mailbox.org>  Fri, 10 Aug 2018 20:45:59 +0200
+
 apt-setup (1:0.141ubuntu5) eoan; urgency=medium
 
   * Re-add i386 multiarch support, since i386 is not being dropped
@@ -22,7 +301,7 @@ apt-setup (1:0.141ubuntu3) eoan; urgency=medium
 apt-setup (1:0.141ubuntu2) cosmic; urgency=medium
 
   * Restore execute bits on generators/91security and
-    finish-install.d/10apt-cdrom-setup. 
+    finish-install.d/10apt-cdrom-setup.
 
  -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Mon, 20 Aug 2018 21:58:36 +1200
 
@@ -940,7 +1219,7 @@ apt-setup (1:0.69) unstable; urgency=low
 apt-setup (1:0.68) unstable; urgency=low
 
   * Team upload
-  
+
   [ Updated translations ]
   * Malayalam (ml.po) by Praveen
 
@@ -1499,7 +1778,7 @@ apt-setup (1:0.49) unstable; urgency=low
   * Bengali (bn.po) by Israt Jahan
   * Catalan (ca.po) by Jordi Mallach
   * Icelandic (is.po) by Sveinn í Felli
-  
+
  -- Otavio Salvador <otavio@debian.org>  Fri, 12 Nov 2010 09:39:59 -0200
 
 apt-setup (1:0.48ubuntu1) natty; urgency=low
@@ -1593,7 +1872,7 @@ apt-setup (1:0.47) unstable; urgency=low
   * Panjabi (pa.po) by A S Alam
   * Portuguese (Brazil) (pt_BR.po) by Felipe Augusto van de Wiel (faw)
   * Telugu (te.po) by Arjuna Rao Chavala
-  
+
  -- Otavio Salvador <otavio@debian.org>  Mon, 20 Sep 2010 01:06:01 -0300
 
 apt-setup (1:0.46) unstable; urgency=low
@@ -1889,7 +2168,7 @@ apt-setup (1:0.42) unstable; urgency=low
   * Slovak (sk.po) by Ivan Masár
   * Turkish (tr.po) by Mert Dirik
   * Simplified Chinese (zh_CN.po) by Deng Xiyue
-       
+
  -- Otavio Salvador <otavio@ossystems.com.br>  Tue, 21 Jul 2009 12:13:34 -0300
 
 apt-setup (1:0.41ubuntu2) karmic; urgency=low

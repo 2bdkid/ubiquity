@@ -4,7 +4,7 @@
 # DO NOT MODIFY THIS FILE DIRECTLY: SUCH CHANGES WILL BE LOST
 #
 # Thai translation of debian-installer.
-# Copyright (C) 2006-2015 Software in the Public Interest, Inc.
+# Copyright (C) 2006-2017 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Theppitak Karoonboonyanan <theppitak@gmail.com>, 2006-2015.
 #
@@ -16,14 +16,14 @@
 #   Alastair McKinstry <mckinstry@computer.org>, 2002, 2004
 # Translations from KDE:
 #   Thanomsub Noppaburana <donga@midaassets.com>
-# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2005-2015
+# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2005-2017
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2015-11-29 16:55+0700\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2017-02-26 23:19+0700\n"
 "Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
 "Language: th\n"
@@ -112,6 +112,7 @@ msgstr "ดาวน์โหลดกุญแจของคลังแพก
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -277,8 +278,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "กำลังสำรวจข้อมูลในซีดีรอม..."
+#, fuzzy
+msgid "Scanning the installation media..."
+msgstr "กำลังสิ้นสุดการติดตั้ง"
 
 #. Type: error
 #. Description
@@ -290,9 +292,13 @@ msgstr "เกิดปัญหาระหว่างตั้งค่า ap
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
+#, fuzzy
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr "ตั้งค่า apt เพื่อการติดตั้งแพกเกจเพิ่มเติมจากซีดีรอมไม่สำเร็จ"
 
@@ -310,25 +316,27 @@ msgstr "ตั้งค่า apt เพื่อการติดตั้ง�
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "จะสำรวจข้อมูลซีดีหรือดีวีดีแผ่นอื่นอีกหรือไม่?"
+#, fuzzy
+msgid "Scan extra installation media?"
+msgstr "ติดตั้ง SILO ไม่สำเร็จ"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "แผ่นซีดีหรือดีวีดีติดตั้งของคุณผ่านการสำรวจข้อมูลเรียบร้อย ป้ายชื่อแผ่นคือ:"
+msgid "Scanning your installation media finds the label:"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
+#, fuzzy
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
 "คุณสามารถเลือกสำรวจข้อมูลแผ่นซีดีหรือดีวีดีเพิ่มเติม เพื่อใช้กับโปรแกรมจัดการแพกเกจ (apt) ได้ "
 "โดยปกติแล้ว แผ่นเหล่านี้จะอยู่ในชุดเดียวกับแผ่นซีดี/ดีวีดีติดตั้ง ถ้าคุณไม่มีซีดีหรือดีวีดีแผ่นอื่นอีกแล้ว "
@@ -341,51 +349,45 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
+#, fuzzy
+msgid "If you wish to scan more media, please insert another one now."
 msgstr "ถ้าคุณต้องการสำรวจข้อมูลซีดีหรือดีวีดีแผ่นอื่นเพิ่ม ก็กรุณาใส่แผ่นได้"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
+#, fuzzy
+msgid "The image with the following label has been scanned:"
 msgstr "สำรวจข้อมูลแผ่นซีดีหรือดีวีดีชื่อต่อไปนี้เรียบร้อยแล้ว:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
+#, fuzzy
+msgid "The image with the following label has already been scanned:"
 msgstr "ได้สำรวจข้อมูลแผ่นซีดีหรือดีวีดีชื่อต่อไปนี้ไปแล้ว:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
+#, fuzzy
+msgid "Please replace it now, if you wish to scan another."
 msgstr "กรุณาใส่แผ่นอื่นแทนถ้าคุณต้องการสำรวจข้อมูลซีดีหรือดีวีดีแผ่นอื่นเพิ่ม"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr "ตั้งค่า apt เพื่อการติดตั้งแพกเกจเพิ่มเติมจากซีดี/ดีวีดีไม่สำเร็จ"
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
+#, fuzzy
+msgid "Please check that the media has been inserted correctly."
 msgstr "กรุณาตรวจสอบให้แน่ใจ ว่าคุณได้ใส่แผ่นซีดี/ดีวีดีอย่างถูกต้อง"
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "เปลี่ยนแผ่น"
@@ -393,13 +395,10 @@ msgstr "เปลี่ยนแผ่น"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr "/cdrom/:กรุณาใส่แผ่นชื่อ: '${LABEL}' ลงในไดรว์ '/cdrom/' แล้วกด enter"
+#, fuzzy
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "/cdrom/: กรุณาใส่แผ่นชื่อ '${LABEL}' ลงในไดรว์ '/cdrom/' แล้วกด enter"
 
 #. Type: text
 #. Description
@@ -416,9 +415,10 @@ msgstr "กำลังปิดการใช้งานซีดี netinst 
 #. Description
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
 "ถ้าคุณกำลังติดตั้งจากแผ่นซีดี netinst แต่เลือกที่จะไม่ใช้แหล่งสำเนาในเครือข่าย "
 "คุณจะได้เพียงระบบพื้นฐานที่จำกัดมากๆ"
@@ -427,8 +427,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
+#, fuzzy
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
@@ -439,8 +440,10 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
+#, fuzzy
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr "คุณกำลังติดตั้งจากซีดี ซึ่งมีแพกเกจจำนวนจำกัด"
 
 #. Type: text
@@ -448,9 +451,9 @@ msgstr "คุณกำลังติดตั้งจากซีดี ซ�
 #. :sl1:
 #. The value of %i can be 2 or 3
 #: ../apt-cdrom-setup.templates:12001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
@@ -462,9 +465,9 @@ msgstr ""
 #. :sl1:
 #. The value of %i can be from 4 to 8
 #: ../apt-cdrom-setup.templates:13001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
 "คุณได้สำรวจข้อมูลซีดี %i แผ่น ซึ่งถึงแม้จะมีแพกเกจเป็นจำนวนมาก แต่บางแพกเกจก็อาจขาดหายไป"
@@ -483,8 +486,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
+#, fuzzy
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
 "คุณกำลังติดตั้งจากดีวีดี ถึงแม้แผ่นดีวีดีจะมีแพกเกจเป็นจำนวนมาก แต่บางแพกเกจก็อาจขาดหายไป"
@@ -549,8 +553,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "กรุณาเลือกว่าคุณต้องการจะให้มีซอฟต์แวร์เหล่านี้ไว้ติดตั้งหรือไม่"
 
@@ -594,8 +597,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -614,12 +616,14 @@ msgstr "เปลี่ยนแหล่งสำเนา"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "ดาวน์โหลดแฟ้มไม่สำเร็จ:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -642,9 +646,11 @@ msgstr "จะใช้แหล่งสำเนาในเครือข่
 #. Description
 #. :sl1:
 #: ../apt-mirror-setup.templates:5001
+#, fuzzy
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "แหล่งสำเนาในเครือข่าย สามารถใช้เป็นแหล่งเสริมสำหรับซอฟต์แวร์ที่ไม่ได้รวมมาในซีดีรอม "
 "รวมทั้งสามารถใช้ปรับรุ่นซอฟต์แวร์เป็นรุ่นใหม่ๆ ได้ด้วย"
@@ -778,36 +784,3 @@ msgstr ""
 "ซอฟต์แวร์บางตัวถูกย้ายกลับมาจากสายงานพัฒนา เพื่อให้ทำงานกับรุ่นนี้ได้ "
 "แม้ซอฟต์แวร์เหล่านี้จะไม่ได้ผ่านกระบวนการทดสอบอย่างสมบูรณ์เหมือนที่อยู่ในรุ่นแจกจ่าย "
 "แต่ก็มีโปรแกรมรุ่นใหม่ๆ ที่อาจมีความสามารถที่เป็นประโยชน์"
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "ปรับรุ่นแก้ปัญหาความปลอดภัย (จาก ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"เดเบียนมีบริการสองแหล่งสำหรับปรับรุ่นแพกเกจเพิ่มเติมจากรุ่นต่างๆ ที่ออก "
-"คือการปรับรุ่นเพื่อแก้ปัญหาระบบรักษาความปลอดภัย และสำหรับแพกเกจที่มีการเปลี่ยนแปลงบ่อย"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

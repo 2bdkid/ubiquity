@@ -429,7 +429,7 @@ esp_exists() {
 		parttype="C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
 	else
 		# FIXME: Currently partman-auto set the type of EFI on MBR as W95 (b) instead of EFI (ef)
-		parttype="b"
+		parttype="ef"
 	fi
 	sfdisk -d "${1}" | grep -q "type=${parttype}"
 }

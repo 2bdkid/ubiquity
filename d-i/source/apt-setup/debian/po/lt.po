@@ -19,21 +19,23 @@
 # Gediminas Paulauskas <menesis@delfi.lt>, 2000-2001.
 # Alastair McKinstry <mckinstry@computer.org>, 2001,2002.
 # Kęstutis Biliūnas <kebil@kaunas.init.lt>, 2004, 2006, 2008, 2009, 2010.
-# Rimas Kudelis <rq@akl.lt>, 2012, 2017.
+# Rimas Kudelis <rq@akl.lt>, 2012, 2017, 2018.
+# Tautvydas Zukauskas <tautzuk@tutanota.com>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2017-11-26 20:23+0000\n"
-"Last-Translator: Rimas Kudelis <rq@akl.lt>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-02-16 17:50+0000\n"
+"Last-Translator: Tautvydas Zukauskas <tautzuk@tutanota.com>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || n"
-"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n % 10 == 1 && (n % 100 < 11 || n % 100 > "
+"19)) ? 0 : ((n % 10 >= 2 && n % 10 <= 9 && (n % 100 < 11 || n % 100 > 19)) ? "
+"1 : 2);\n"
 
 #. Type: text
 #. Description
@@ -116,6 +118,7 @@ msgstr "Vietinės saugyklos rakto parsiųsti nepavyko:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -283,8 +286,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Apžvelgiamas CD..."
+msgid "Scanning the installation media..."
+msgstr "Skenuojama diegimo laikmena..."
 
 #. Type: error
 #. Description
@@ -296,11 +299,15 @@ msgstr "Apt konfigūravimo problema"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
-msgstr "Bandymas sukonfigūruoti apt papildomų paketų įdiegimui iš CD nepavyko."
+msgstr ""
+"Bandymas sukonfigūruoti apt papildomų paketų įdiegimui iš laikmenos nepavyko."
 
 #. Type: boolean
 #. Description
@@ -316,30 +323,30 @@ msgstr "Bandymas sukonfigūruoti apt papildomų paketų įdiegimui iš CD nepavy
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Ar apžvelgti kita CD arba DVD?"
+msgid "Scan extra installation media?"
+msgstr "Skenuoti papildomą diegimo laikmeną?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Jūsų įdiegimo CD arba DCD apžvelgtas: jo žymuo yra:"
+msgid "Scanning your installation media finds the label:"
+msgstr "Skenuojant jūsų diegimo laikmeną randama etiketė:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"Dabar Jūs galite atlikti papildomų CD arba DVD diskų apžvalgą, kad paketų "
-"tvarkyklė (apt) galėtų juos naudoti. Paprastai, jie turėtų būti iš to pačio "
-"rinkinio, kaip ir įdiegimo diskas. Jei papildomų diskų neturite, praleiskite "
-"šį žingsnį."
+"Dabar Jūs galite atlikti papildomų laikmneų apžvalgą, kad paketų tvarkyklė "
+"(apt) galėtų juos naudoti. Paprastai, jie turėtų būti iš to pačio rinkinio, "
+"kaip ir įdiegimo laikmena. Jei papildomų laikmenų neturite, praleiskite šį "
+"žingsnį."
 
 #. Type: boolean
 #. Description
@@ -348,52 +355,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "Jei Jūs pageidaujate apžvelgti kitą CD arba DVD, įdėkite jį dabar."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "Jei Jūs pageidaujate apžvelgti kitą laikmeną, įdėkite ją dabar."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "Apžvelgtas CD arba DVD, kurio žymuo yra:"
+msgid "The image with the following label has been scanned:"
+msgstr "Apžvelgta laikmena, kurio žymuo yra:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "Taip pat apžvelgtas CD arba DVD, kurio žymuo yra:"
+msgid "The image with the following label has already been scanned:"
+msgstr "Taip pat apžvelgta laikmena, kurios žymuo yra:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "Pakeiskite diską dabar, jei norite apžvelgti kitą CD arba DVD."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "Pakeiskite ją dabar, jei norite apžvelgti kitą laikmeną."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"Bandymas sukonfigūruoti apt papildomų paketų įdiegimui iš CD/DVD nepavyko."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "Patikrinkite ar CD/DVD įdėtas teisingai."
+msgid "Please check that the media has been inserted correctly."
+msgstr "Patikrinkite ar laikmena įdėta teisingai."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Laikmenos keitimas"
@@ -401,15 +396,9 @@ msgstr "Laikmenos keitimas"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/:Įdėkite diską su žyme „${LABEL}“ į įrenginį „/cdrom/“ ir nuspauskite "
-"klavišą <Įvesti>."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "Įdėkite laikmeną su žyme „${LABEL}“ ir nuspauskite klavišą enter."
 
 #. Type: text
 #. Description
@@ -427,10 +416,10 @@ msgstr "Pašalinamas „netinst CD“ iš sources.list..."
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"Jei diegiate iš „netinst“ disko ir pasirinksite nenaudoti paketų archyvo "
+"Jei diegiate iš „netinst“ atvaizdo ir pasirinksite nenaudoti paketų archyvo "
 "serverio, bus įdiegta tik labai minimali bazinė sistema."
 
 #. Type: text
@@ -438,11 +427,11 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"Jūs diegiate iš „netinst“ disko, kuris leis turėti tik labai minimalią "
+"Jūs diegiate iš „netinst“ atvaizdo, kuris leis turėti tik labai minimalią "
 "bazinę sistemą. Pilnesnės sistemos įdiegimui naudokite paketų archyvo "
 "serverį."
 
@@ -451,8 +440,9 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
-msgstr "Jūs diegiate iš CD, kuris turi ribotą paketų pasirinkimą."
+"You are installing from an image which contains a limited selection of "
+"packages."
+msgstr "Jūs diegiate iš atvaizdo, kuris turi ribotą paketų pasirinkimą."
 
 #. Type: text
 #. Description
@@ -461,13 +451,13 @@ msgstr "Jūs diegiate iš CD, kuris turi ribotą paketų pasirinkimą."
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"Jūs atlikote %i CD apžvalgą. Nors tai sudaro nemažą kiekį paketų, vis dėlto "
-"kai kurių paketų gali pritrūkti (ypač paketų, reikalingų kitų kalbų nei "
-"anglų, palaikymui)."
+"Jūs atlikote %i atvaizdo apžvalgą. Nors tai sudaro nemažą kiekį paketų, vis "
+"dėlto kai kurių paketų gali pritrūkti (ypač paketų, reikalingų kitų kalbų "
+"nei anglų, palaikymui)."
 
 #. Type: text
 #. Description
@@ -476,11 +466,11 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"Jūs atlikote %i CD apžvalgą. Nors tai sudaro nemažą kiekį paketų, vis dėlto "
-"kai kurių paketų gali pritrūkti."
+"Jūs atlikote %i atvaizdo apžvalgą. Nors tai sudaro nemažą kiekį paketų, vis "
+"dėlto kai kurių paketų gali pritrūkti."
 
 #. Type: text
 #. Description
@@ -498,11 +488,11 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"Jūs diegiate iš DVD disko. Nors DVD talpina didelį kiekį paketų, vis dėlto "
-"kai kurių paketų gali pritrūkti."
+"Jūs diegiate iš DVD atvaizdo. Nors jis talpina didelį kiekį paketų, vis "
+"dėlto kai kurių paketų gali pritrūkti."
 
 #. Type: text
 #. Description
@@ -564,8 +554,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr ""
 "Pasirinkite, ar vis tik norite, kad ši programinė įranga būtų Jums prieinama."
@@ -611,8 +600,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -632,12 +620,14 @@ msgstr "Keisti archyvo serverį"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Veiksmas įvykus failo atsisiuntimo klaidai:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -663,11 +653,12 @@ msgstr "Ar naudoti paketų archyvo serverį iš tinklo?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "Paketų archyvo serveris iš tinklo gali būti naudojamas kaip programinės "
-"įrangos, pateikiamos įdiegimo diske, papildymas. Taip pat jame gali būti "
-"naujesnė programinė įranga."
+"įrangos, pateikiamos įdiegimo laikmenoje, papildymas. Taip pat jame gali "
+"būti naujesnė programinė įranga."
 
 #. Type: boolean
 #. Description
@@ -802,36 +793,3 @@ msgstr ""
 "laidą. Nors ji nėra praėjusi pilno testavimo ciklo, kaip kitos programos "
 "šioje laidoje, tačiau turi naujesnes versijas ir gali turėti naudingų "
 "savybių."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "saugumo atnaujinimai (iš ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian'as turi du servisus, tiekiančius atnaujinimus savo laidoms: saugumo "
-"ir lakiuosius."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

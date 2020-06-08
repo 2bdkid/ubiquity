@@ -25,6 +25,25 @@ ask_no_mirror() {
 	fi
 }
 
+is_ports_architecture() {
+	case "$(chroot /target /usr/bin/dpkg --print-architecture)" in
+		alpha|hppa|hurd-i386|ia64|kfreebsd-amd64|kfreebsd-i386|m68k|powerpc|ppc64|riscv64|sh4|sparc64|x32)
+			log "Debian-Ports architecture detected"
+			return 0
+			;;
+		*)
+			return 1
+			;;
+	esac
+}
+
+# For architectures in the Debian-Ports archive, sources.list has to include
+# an additional entry for the "unreleased" suite.
+unset use_unreleased
+if is_ports_architecture; then
+	use_unreleased=yes
+fi
+
 # Ask if a mirror should be used if the base system can be installed from CD
 # Default value and priority vary with the CD type used and number of CDs
 # that has been scanned in 41cdset
@@ -238,6 +257,9 @@ while [ ! "$done" ]; do
 	esac
 
 	echo "deb $protocol://$hostname$directory $codename $dists" > $file
+	if [ -n "${use_unreleased}" ]; then
+		echo "deb $protocol://$hostname$directory unreleased main" >> $file
+	fi
 	
 	if apt-setup-verify --from $PROGRESS_FROM --to $PROGRESS_TO $file; then
 		done=1
@@ -262,3 +284,7 @@ if [ "$RET" = false ]; then
 fi
 
 echo "$deb_src $protocol://$hostname$directory $codename $dists" >> $file
+if [ -n "${use_unreleased}" ]; then
+	echo "# 'unreleased' does not support sources yet" >> $file
+	echo "# $deb_src $protocol://$hostname$directory unreleased main" >> $file
+fi

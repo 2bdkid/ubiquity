@@ -1,3 +1,16 @@
+ubiquity (20.10.3) groovy; urgency=medium
+
+  [ Jean-Baptiste ]
+  * zsys-setup: Fixed partition type of EFI partition Partman has been updated
+    to use 'ef' instead of 'b' as partition type of the EFI partition on MBR
+    system.  This breaks zsys installation script and this patch fixes it.
+
+  [ Dimitri John Ledkov ]
+  * Automatic update of included source packages: apt-setup
+    1:0.157ubuntu2, partman-swapfile 2.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 08 Jun 2020 01:23:03 +0100
+
 ubiquity (20.10.2) groovy; urgency=medium
 
   [ Jean-Baptiste Lallement ]

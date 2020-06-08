@@ -7,6 +7,7 @@
 # Tamil messages for debian-installer.
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
+# Jeyanthinath MuthuRam <jeyanthinath10@gmail.com>, 2020.
 #
 #
 # Translations from iso-codes:
@@ -21,9 +22,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ta\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2015-05-09 16:28+0630\n"
-"Last-Translator: Dr.T.Vasudevan <drtvasudevan@gmail.com>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-03-26 10:46+0000\n"
+"Last-Translator: Jeyanthinath MuthuRam <jeyanthinath10@gmail.com>\n"
 "Language-Team: Tamil <<gnome-tamil-translation@googlegroups.com>>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
@@ -113,6 +114,7 @@ msgstr "உள்ளமை பெட்டக விசையை பதிவி
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -275,8 +277,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "குறுந்தட்டு படிநினைவகம் ஆராயப்படுகிறது..."
+msgid "Scanning the installation media..."
+msgstr "நிறுவல் மீடியாவை ஸ்கேன் செய்கிறது..."
 
 #. Type: error
 #. Description
@@ -288,9 +290,13 @@ msgstr "ஆப்ட் வடிவமைப்பு பிரச்சின�
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
+#, fuzzy
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
 "ஆப்ட் ஐ குறுந் தட்டிலிருந்து கூடுதல் தொகுப்புகளை நிறுவ வடிவமைக்கும் முயற்சி "
@@ -310,25 +316,27 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "இன்னொரு குறுந்தட்டு (சிடி அல்லது டிவிடி) ஐ ஆராய வேண்டுமா?"
+#, fuzzy
+msgid "Scan extra installation media?"
+msgstr "ஸைலோ நிறுவல் தோல்வியடைந்தது."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "உங்கள் நிறுவல் குறுந்தட்டு (சிடி அல்லது டிவிடி) ஆராயப்பட்டது. அதன் அடையாளம்:"
+msgid "Scanning your installation media finds the label:"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
+#, fuzzy
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
 "இப்போது உங்களுக்கு பொதி மேலாண்மை நிரல் (ஆப்ட்) பயன்படுத்த கூடுதல் குறுந்தட்டு (சிடி "
 "அல்லது டிவிடி) ஐ ஆராய தேர்வு உள்ளது. சாதாரணமாக இவை நிறுவல் குறுந்தட்டு (சிடி அல்லது "
@@ -342,7 +350,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
+#, fuzzy
+msgid "If you wish to scan more media, please insert another one now."
 msgstr ""
 "இன்னொரு குறுந்தட்டு (சிடி அல்லது டிவிடி) ஐ ஆராய வேண்டும் எனில் அதை இப்போது உள்ளிடவும்."
 
@@ -350,14 +359,16 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
+#, fuzzy
+msgid "The image with the following label has been scanned:"
 msgstr "பின் வரும் அடையாளம் கொண்ட குறுந்தட்டு (சிடி அல்லது டிவிடி) ஆராயப்பட்டது:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
+#, fuzzy
+msgid "The image with the following label has already been scanned:"
 msgstr ""
 "பின் வரும் அடையாளம் கொண்ட குறுந்தட்டு (சிடி அல்லது டிவிடி) ஏற்கெனவே ஆராயப்பட்டுவிட்டது:"
 
@@ -365,7 +376,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
+#, fuzzy
+msgid "Please replace it now, if you wish to scan another."
 msgstr ""
 "நீங்கள் மற்றொரு குறுந்தட்டை (சிடி அல்லது டிவிடி) வருட விரும்பினால் அதை இப்போது "
 "மாற்றுங்கள்."
@@ -374,25 +386,13 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"ஆப்ட் ஐ குறுந் தட்டிலிருந்து (சிடி/ டிவிடி) கூடுதல் தொகுப்புகளை நிறுவ வடிவமைக்கும் "
-"முயற்சி தோல்வியுற்றது."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
+#, fuzzy
+msgid "Please check that the media has been inserted correctly."
 msgstr "சிடி அல்லது டிவிடி ஐ சரியாக அமைத்திருக்கிறீர்களா என்பதை உறுதி செய்துகொள்ளவும்."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "ஊடக மாற்றம்"
@@ -400,12 +400,9 @@ msgstr "ஊடக மாற்றம்"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
+#, fuzzy
+msgid "Please insert the media labeled '${LABEL}' and press enter."
 msgstr ""
 "/cdrom/: '${LABEL}'  என அடையாளமிடப்பட்ட வட்டை '/cdrom/'  இயக்கியில் இடவும். பின் "
 "என்டர் விசையை அழுத்தவும்."
@@ -425,9 +422,10 @@ msgstr "வலை நிறுவல் குறுந்தட்டை மூ
 #. Description
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
 "நீங்கள் வலைநிறுவி குறுந் தட்டிலிருந்து (netinst CD) நிறுவி இணைப்பதிப்பை பயன் "
 "படுத்தவில்லை எனில் மிகக் குறைந்த அடிப்படை அமைப்பு மட்டுமே உங்களுக்கு கிடைக்கும்."
@@ -436,8 +434,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
+#, fuzzy
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
@@ -448,8 +447,10 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
+#, fuzzy
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr "நீங்கள் மட்டுப்படுத்தப்பட்ட தொகுப்புகள் உள்ள குறுந்தட்டிலிருந்து நிறுவுகிறீர்கள்."
 
 #. Type: text
@@ -457,9 +458,9 @@ msgstr "நீங்கள் மட்டுப்படுத்தப்ப�
 #. :sl1:
 #. The value of %i can be 2 or 3
 #: ../apt-cdrom-setup.templates:12001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
@@ -472,9 +473,9 @@ msgstr ""
 #. :sl1:
 #. The value of %i can be from 4 to 8
 #: ../apt-cdrom-setup.templates:13001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
 "நீங்கள் %i  குறுந்தட்டுகளை வருடிப்பார்துள்ளீர்கள். இவை மிகப் பெரிய தொகுப்பு தேர்வை "
@@ -495,8 +496,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
+#, fuzzy
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
 "நீங்கள் ஒரு டிவிடி (DVD) இல் இருந்து நிறுவுகிறீர்கள். இதில் பெரும் பொதித்தேர்வு "
@@ -561,8 +563,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "அவை எப்படியும் கிடைக்கப் பெற வேண்டுமா என தேர்ந்தெடுங்கள்."
 
@@ -606,8 +607,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -626,12 +626,14 @@ msgstr "இணைப்பதிப்பை மாற்றுக"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "ஒரு கோப்பை பதிவிறக்க இயலவில்லை:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -655,9 +657,11 @@ msgstr "வலைப்பின்னல் இணைப்பதிப்ப�
 #. Description
 #. :sl1:
 #: ../apt-mirror-setup.templates:5001
+#, fuzzy
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "குறுந்தட்டு படிநினைவகத்தில் உள்ள மென் பொருட்களுடன் கூடிதலாக வலைப்பின்னல் இணைப்பதிப்பை "
 "பயன்படுத்தலாம். இதனால் மென் பொருட்களின் புதிய பதிப்புகள் கிடைக்கப் பெறலாம்."
@@ -792,34 +796,3 @@ msgstr ""
 "சில மென் பொருட்கள் வளரும் தொகுப்புகளிலிருந்து இந்த வெளியீட்டுடன் வேலை செய்யும் படி இணக்கப் "
 "பட்டுள்ளன. இவை மற்றவை போல் விரிவாக பரிசோதிக்கப் படவில்லை.ஆனால் இவற்றில் உள்ள புதிய "
 "பதிப்புகள் சில நல்ல பயன்பாடுகளைத் தரக்கூடும்."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "(${SEC_HOST}இலிருந்து) பாதுகாப்பு இற்றைப்படுத்தல்"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr "டெபியன் இரண்டு இற்றைப்படுத்தல் சேவைகளை கொண்டுள்ளது.: பாதுகாப்பு மற்றும் தற்காலிக."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

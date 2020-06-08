@@ -21,21 +21,21 @@
 # Meni Livne <livne@kde.org>, 2000.
 # Meital Bourvine <meitalbourvine@gmail.com>, 2007.
 # Lior Kaplan <kaplan@debian.org>, 2004-2007, 2008, 2010, 2011, 2015, 2017.
-# Yaron Shahrabani <sh.yaron@gmail.com>, 2018.
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2018, 2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2018-02-06 08:37+0000\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-03-13 14:33+0000\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew (https://www.transifex.com/yaron/teams/79473/he/)\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Type: text
 #. Description
@@ -53,7 +53,7 @@ msgstr "הגדרת מנהל החבילות"
 #. :sl1:
 #: ../apt-setup-udeb.templates:2001
 msgid "Configuring apt"
-msgstr "הגדרת apt"
+msgstr "apt מוגדר"
 
 #. Type: text
 #. Description
@@ -67,28 +67,28 @@ msgstr "מתבצעת הרצה של ${SCRIPT}…"
 #. :sl2:
 #: ../apt-setup-udeb.templates:4001
 msgid "Scanning local repositories..."
-msgstr "סריקת מאגרים מקומיים..."
+msgstr "מאגרים מקומיים נסרקים…"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../apt-setup-udeb.templates:5001
 msgid "Scanning the security updates repository..."
-msgstr "סורק את מאגר עדכוני האבטחה..."
+msgstr "מאגר עדכוני האבטחה נסרק…"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../apt-setup-udeb.templates:6001
 msgid "Scanning the release updates repository..."
-msgstr "סורק את מאגר העדכונים לגרסה..."
+msgstr "מאגר העדכונים לגרסה נסרק…"
 
 #. Type: text
 #. Description
 #. :sl2:
 #: ../apt-setup-udeb.templates:7001
 msgid "Scanning the backports repository..."
-msgstr "סורק את מאגר ההתאמות לסביבה ישנה..."
+msgstr "מאגר ההתאמות לסביבה ישנה נסרק…"
 
 #. Type: select
 #. Choices
@@ -97,7 +97,7 @@ msgstr "סורק את מאגר ההתאמות לסביבה ישנה..."
 #. an infinitive form
 #: ../apt-setup-udeb.templates:8001 ../apt-mirror-setup.templates:4001
 msgid "Retry"
-msgstr "נסה שנית"
+msgstr "ניסיון חוזר"
 
 #. Type: select
 #. Choices
@@ -118,6 +118,7 @@ msgstr "הורדת מפתח למאגר מקומי נכשלה:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -235,10 +236,10 @@ msgid ""
 "the usability of the software. It also provides regression fixes. This "
 "service is only available for stable and oldstable releases."
 msgstr ""
-"עדכוני גרסה מספקים גרסאות עדכניות יותר של תוכנה שמשתנה בתדירות גבוהה, ומצב "
-"שבו הגרסה האחרונה אינה מותקנת יכול להוריד את השימושיות של התוכנה. כמו כן "
-"ישנם תיקונים עבור נסיגות ביכולות התוכנה. שירות זה זמין רק עבור הגרסה היציבה "
-"והיציבה הקודמת של הפרוייקט."
+"עדכוני גרסה מספקים גרסאות עדכניות יותר לתכניות שמשתנות בתדירות גבוהה שבהן "
+"שימוש בגרסה מיושנת עשוי להגביל את תכונות התכנית. העדכונים גם מספקים תיקונים "
+"לתקלות חוזרות. שירות זה זמין רק לגרסה היציבה (stable) ולגרסה היציבה המיושנת "
+"(oldstable)."
 
 #. Type: multiselect
 #. Description
@@ -252,12 +253,12 @@ msgid ""
 "not cause any of them to be installed by default; it only allows you to "
 "manually select backports to use."
 msgstr ""
-"תוכנות, שעברו התאמה לסביבה ישנה, הן תוכנות שהוסבו מגרסת הפיתוח כדי לעבוד "
-"בגרסה הנוכחית. למרות שתוכנות אלה לא עברו בדיקות מקיפות כמו התוכנות בגרסה "
-"הנוכחית, הן כוללות גרסאות חדשות של כמה יישומים, שיכולים להוסיף תכונות "
-"שימושיות. אם תאפשרוכאן התקנת תוכנות, שעברו התאמה לסביבה ישנה, הדבר לא יגרום "
-"לאף אחת מהן להיות מותקנת כברירת מחדל. זה רק יאפשר לכם לבחור ידנית באלו "
-"תוכנות, שעברו התאמה לסביבה ישנה, להשתמש."
+"תכניות שהוסבו לגרסאות מיושנות עוברות אימוץ מגרסת הפיתוח כדי שיעבדו עם הגרסה "
+"הזאת. למרות שהתכנית הזאת לא עברה מסלול בדיקות שלם כמו זה שחל על התכנית "
+"שנכללה בגרסה, המאגר כולל גרסאות חדשות יותר של יישומים כלשהם שעשויים לספק "
+"תכונות שימושיות. הפעלת מאגר התכניות שהוסבו לגרסאות ישנות (backports) דרך כאן "
+"לא גורר התקנה של תכנית כלשהי כבררת מחדל, ההפעלה רק מאפשר לבחור באיזו גרסה "
+"מהמאגר להשתמש."
 
 #. Type: boolean
 #. Description
@@ -285,8 +286,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "התקליטור נסרק…"
+msgid "Scanning the installation media..."
+msgstr "אמצעי ההתקנה נסרק…"
 
 #  Type: title
 #  Description
@@ -300,11 +301,14 @@ msgstr "בעיה בהגדרות apt"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
-msgstr "נכשל הניסיון להגדיר את apt כך שיתקין חבילות נוספות מהתקליטור."
+msgstr "נכשל הניסיון להגדיר את apt כך שיתקין חבילות נוספות מאמצעי ההתקנה."
 
 #. Type: boolean
 #. Description
@@ -320,29 +324,29 @@ msgstr "נכשל הניסיון להגדיר את apt כך שיתקין חביל
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "לסרוק CD או DVD נוסף?"
+msgid "Scan extra installation media?"
+msgstr "לסרוק אמצעי התקנה נוספים?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "ה־CD או ה־DVD ההתקנה נסרק. התווית שלו היא:"
+msgid "Scanning your installation media finds the label:"
+msgstr "סריקת אמצעי ההתקנה שלך העלתה את התווית:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"ניתן כעת לסרוק CDים ו-DVDים נוספים לשימוש ע\"י מנהל החבילות (apt). בדרך כלל "
-"אלו אמורים להיות חלק מסט התקליטורים, שממנו בא תקליטור ההתקנה. אם אין "
-"תקליטורים נוספים, ניתן פשוט לדלג על שלב זה."
+"ניתן כעת לסרוק אמצעי התקנה נוספים לשימוש מנהל החבילות (apt). בדרך כלל אלו "
+"אמורים להיות חלק מאותה הערכה שדרכה העלית את המחשב. אם אין אמצעי התקנה "
+"נוספים, ניתן פשוט לדלג על שלב זה."
 
 #. Type: boolean
 #. Description
@@ -351,51 +355,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "כדי לסרוק CD או DVD נוסף, נא להכניס אותו כעת."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "כדי לסרוק אמצעי התקנה נוסף, נא להכניס אחד כעת."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "ה־CD או ה־DVD עם התווית הבאה נסרק:"
+msgid "The image with the following label has been scanned:"
+msgstr "קובץ הדמות עם התווית הבאה נסרק:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "ה־CD או ה־DVD עם התווית הבאה כבר נסרק:"
+msgid "The image with the following label has already been scanned:"
+msgstr "קובץ הדמות עם התווית הבאה כבר נסרק:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "נא להחליף אותו כעת אם ברצונך לסרוק עוד CD או DVD."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "נא להחליף אותו כעת אם ברצונך לסרוק עוד אחד."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr "הניסיון להגדיר את apt לטובת התקנה של חבילות נוספות מה־CD/DVD נכשל."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "נא לבדוק שה־CD/DVD הוכנס בצורה תקינה."
+msgid "Please check that the media has been inserted correctly."
+msgstr "נא לבדוק שאמצעי ההתקנה מחובר בצורה תקינה."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "החלפת מדיה"
@@ -403,15 +396,9 @@ msgstr "החלפת מדיה"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/: נא להכניס את התקליטור עם התווית: '${LABEL}' לכונן '/cdrom/' וללחוץ "
-"על המקש enter."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "נא לחבר את אמצעי ההתקנה עם התווית ‚${LABEL}’ וללחוץ על enter."
 
 #. Type: text
 #. Description
@@ -419,7 +406,7 @@ msgstr ""
 #. finish-install progress bar item
 #: ../apt-cdrom-setup.templates:8001
 msgid "Disabling netinst CD in sources.list..."
-msgstr "תקליטור ההתקנה מהרשת מושבת ברשימת המקורות…"
+msgstr "תקליטור ההתקנה מהרשת מושבת ברשימת המקורות (sources.list)…"
 
 #. Type: text
 #. Description
@@ -429,31 +416,33 @@ msgstr "תקליטור ההתקנה מהרשת מושבת ברשימת המקו�
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"אם ההתקנה מתבצעת מתקליטור של התקנה מהרשת (netinst CD), ובחרת לא להשתמש באתר "
-"מראה, המערכת שתתקבל בסיום ההתקנה תהיה מערכת בסיסית מינימלית מאוד."
+"אם ההתקנה מתבצעת מדמות תקליטור התקנה מהרשת (netinst CD) ובחירתך היא שלא "
+"להשתמש באתר מראה, המערכת שתתקבל בסיום ההתקנה תהיה מערכת בסיסית מזערית מאוד."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"אתה מתקין באמצעות תקליטור התקנה מהרשת (netinst CD), שמאפשר בעצמו רק התקנה של "
-"מערכת בסיסית מינימלית מאוד. השתמש באתר מראה כדי להתקין מערכת יותר שלמה."
+"התקנה זו מתבצעת באמצעות דמות תקליטור התקנה מהרשת (netinst CD) שכיחידה עצמאית "
+"מציע רק התקנה של מערכת בסיסית מזערית מאוד. כדאי להשתמש באתר מראה כדי להתקין "
+"מערכת מלאה יותר."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
-msgstr "התקנה זו מתבצעת מתקליטור שמכיל מבחר מצומצם של חבילות."
+"You are installing from an image which contains a limited selection of "
+"packages."
+msgstr "התקנה זו מתבצעת מקובץ דמות שמכיל מבחר מצומצם של חבילות."
 
 #. Type: text
 #. Description
@@ -462,12 +451,12 @@ msgstr "התקנה זו מתבצעת מתקליטור שמכיל מבחר מצו
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"%i תקליטורים נסרקו. למרות שהם מכילים מבחר הוגן של חבילות, חלק מהחבילות חסרות "
-"(בעיקר כאלה הנדרשות לתמיכה בשפות שאינן אנגלית)."
+"%i אמצעי התקנה נסרקו. למרות שהם מכילים מבחר הוגן של חבילות, חלק מהחבילות "
+"חסרות (בעיקר כאלה הנדרשות לתמיכה בשפות שאינן אנגלית)."
 
 #. Type: text
 #. Description
@@ -476,10 +465,10 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"%i תקליטורים נסרקו. על אף שהם מכילים כמות נרחבת של חבילות, יתכן שחלק מהן "
+"%i קובצי דמות נסרקו. על אף שהם מכילים כמות נרחבת של חבילות, יתכן שחלק מהן "
 "תהיינה חסרות."
 
 #. Type: text
@@ -498,11 +487,11 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"התקנה זו מתבצעת מ־DVD. על אף שה־DVD מכיל מבחר רחב של חבילות, יתכן שחלק מהן "
-"תהיינה חסרות."
+"התקנה זו מתבצעת מקובץ דמות של DVD. על אף שהוא מכיל מבחר רחב של חבילות, יתכן "
+"שחלק מהן תהיינה חסרות."
 
 #. Type: text
 #. Description
@@ -555,9 +544,9 @@ msgid ""
 "to install it. This software has varying licenses which may prevent you from "
 "using, modifying, or sharing it."
 msgstr ""
-"חלק מהתוכנה הלא חופשית עובדת עם דביאן. למרות שתוכנה זאת אינה חלק מדביאן, "
-"כלים סטנדרטים של דביאן יכולים לשמש כדי להתקין אותה. לתוכנה זאת יש רישיונות "
-"שונים שיכולים למנוע ממך להשתמש, לשנות או לשתף אותה."
+"ישנם רכיבי תכנה בלתי חופשיים שהוסבו לצורך עבודה עם דביאן. למרות שתכניות אלה "
+"אינן חלק מדביאן, ניתן להשתמש בכלים התקניים של דביאן כדי להתקין אותן. לתכניות "
+"אלה תנאי רישוי מגוונים שעשויים למנוע ממך להשתמש בהן, לשנות אותן או לשתף אותן."
 
 #  Type: boolean
 #  Description
@@ -568,8 +557,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "נא לבחור האם התכנית תהיה זמינה בכל מקרה."
 
@@ -596,9 +584,9 @@ msgid ""
 "software is not a part of Debian, but standard Debian tools can be used to "
 "install it."
 msgstr ""
-"חלק מתוכנה נוספת עובדת עם דביאן. למרות שזאת תוכנה חופשית, היא תלויה בתוכנה "
-"לא חופשית לצורך פעולתה. תכונה זאת אינה חלק מדביאן אבל כלים סטנדרטים של דביאן "
-"יכולים לשמש לצורך התקנתה."
+"ישנם רכיבי תכנה שהוסבו לצורך עבודה עם דביאן. למרות שמדובר בתכנה חופשית היא "
+"תלויה בתכנה בלתי חופשית כדי לפעול. תכניות שכאלה אינן חלק מדביאן אך ניתן "
+"להשתמש בכלים התקניים של דביאן כדי להתקין אותן."
 
 #  Type: boolean
 #  Description
@@ -621,8 +609,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -637,16 +624,18 @@ msgstr "נא לבחור האם להנגיש לך תכנה מסוג זה."
 #. an infinitive form
 #: ../apt-mirror-setup.templates:4001
 msgid "Change mirror"
-msgstr "שנה אתר מראה"
+msgstr "החלפת אתר מראה"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "הורדת קובץ נכשלה:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -654,9 +643,9 @@ msgid ""
 "different mirror, or ignore the problem and continue without all the "
 "packages from this mirror."
 msgstr ""
-"תוכנית ההתקנה נכשלה בגישה לאתר המראה. זאת יכולה להיות בעיה ברשת שלך, או עם "
-"אתר המראה. ניתן לבחור לנסות שוב את ההורדה, לבחור אתר מראה אחר או להתעלם "
-"ולהמשיך ללא חבילות מאתר מראה זה."
+"תכנית ההתקנה נכשלה בגישה לאתר המראה. זאת יכולה להיות בעיה ברשת שלך, או באתר "
+"המראה. ניתן לבחור לנסות שוב את ההורדה, לבחור אתר מראה אחר או להתעלם ולהמשיך "
+"ללא חבילות מאתר מראה זה."
 
 #. Type: boolean
 #. Description
@@ -671,10 +660,11 @@ msgstr "להשתמש באתר מראה מקוון?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
-"ניתן להשתמש באתר מראה כדי להשלים מעבר לתכניות שכלולות בתקליטור. הגדרה זאת "
-"תנגיש לך גרסאות חדשות יותר של תכניות."
+"ניתן להשתמש באתר מראה כדי להשלים מעבר לתכניות שכלולות באמצעי ההתקנה. הגדרה "
+"זאת תנגיש לך גרסאות חדשות יותר של תכניות."
 
 #. Type: boolean
 #. Description
@@ -696,7 +686,7 @@ msgstr "לא נבחר אתר מראה."
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Use restricted software?"
-msgstr "להשתמש בתוכנה מוגבלת ?"
+msgstr "להשתמש בתכנה מוגבלת?"
 
 #. Type: boolean
 #. Description
@@ -709,9 +699,9 @@ msgid ""
 "can be used to install it. This software has varying licenses which may "
 "prevent you from using, modifying, or sharing it."
 msgstr ""
-"מספר תוכנות לא חופשיות זמינות בצורת חבילות. למרות שתוכנה זאת אינה חלק מההפצה "
-"הראשית, ניתן להשתמש בכלים לניהול חבילות כדי להתקין אותה. לתוכנות אלה יש "
-"רישיונות שונים, שעלולים למנוע ממך להשתמש, לשנות או לחלוק אותן."
+"מספר תכניות לא חופשיות זמינות בצורת חבילות. למרות שתכניות אלו אינן חלק "
+"מההפצה הראשית, ניתן להשתמש בכלים לניהול חבילות כדי להתקין אותן. לתכניות אלו "
+"ישנם מגוון רישיונות, שעלולים למנוע ממך להשתמש, לשנות או לשתף אותן עם אחרים."
 
 #. Type: boolean
 #. Description
@@ -719,7 +709,7 @@ msgstr ""
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:2001
 msgid "Use software from the \"universe\" component?"
-msgstr "להשתמש בתוכנה מרכיב \"universe\" ?"
+msgstr "להשתמש בתכניות מהרכיב „universe”?"
 
 #. Type: boolean
 #. Description
@@ -740,7 +730,7 @@ msgstr ""
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:3001
 msgid "Use software from the \"multiverse\" component?"
-msgstr "להשתמש בתוכנה מרכיב \"multiverse\" ?"
+msgstr "להשתמש בתכניות מהרכיב „multiverse”?"
 
 #  Type: boolean
 #  Description
@@ -756,9 +746,9 @@ msgid ""
 "cases) patent restrictions which may prevent you from using, modifying, or "
 "sharing it."
 msgstr ""
-"מספר תוכנות לא חופשיות זמינות בצורת חבילות. למרות שתוכנה זאת אינה חלק מההפצה "
-"הראשית, ניתן להשתמש בכלים לניהול חבילות כדי להתקין אותה. לתוכנות אלה יש "
-"רישיונות שונים והגבלות פטנטים, שעלולים למנוע ממך להשתמש, לשנות או לחלוק אותן."
+"מספר תכניות לא חופשיות זמינות בצורת חבילות. למרות שתכנית זאת אינה חלק מההפצה "
+"הראשית, ניתן להשתמש בכלים לניהול חבילות כדי להתקין אותה. לתכניות אלו יש "
+"רישיונות שונים והגבלות פטנטים, שעלולים למנוע ממך להשתמש, לשנות או לשתף אותן."
 
 #. Type: boolean
 #. Description
@@ -766,7 +756,7 @@ msgstr ""
 #. :sl2:
 #: ../apt-mirror-setup.templates-ubuntu:4001
 msgid "Use software from the \"partner\" repository?"
-msgstr "להשתמש בתוכנה ממאגר \"partner\"?"
+msgstr "להשתמש בתכניות מהמאגר „partner”?"
 
 #. Type: boolean
 #. Description
@@ -778,8 +768,9 @@ msgid ""
 "repository. This software is not part of Ubuntu, but is offered by Canonical "
 "and the respective vendors as a service to Ubuntu users."
 msgstr ""
-"תוכנה נוספת זמינה ממאגר \"partner\" של חב' קנוניקל.  תוכנה זו אינה חלק מ-"
-"Ubuntu, אבל מוצעת על ידי קנוניקל והספקים בתור שרות למשתמשי Ubuntu."
+"מגוון תכניות נוספות זמינות מהמאגר „partner” מבית Canonical. תכניות אלו אינן "
+"חלק מאובונטו אך הן מוצעות על ידי Canonical ומגוון ספקים נוספים לרווחת משתמשי "
+"אובונטו."
 
 #. Type: boolean
 #. Description
@@ -803,34 +794,3 @@ msgstr ""
 "מספר תוכנות נוספות הוסבו לאחור מעץ הפיתוח כדי לעבור עם הגרסה הנוכחית. למרות "
 "שתוכנות אלה לא עברו בדיקות מקיפות כמו התוכנות בגרסה הנוכחית, הן מכילות "
 "גרסאות חדשות של חלק מהתוכנות ואולי מציגות יכולות חדשות."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "עדכוני אבטחה (מהשרת ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr "לדביאן ישנם שני שירותי עדכון: עדכוני אבטחה ועדכונים תכופים (volatile)."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

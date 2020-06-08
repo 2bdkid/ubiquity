@@ -14,5 +14,6 @@ do
 		
 		wget -O "${host}/${dist}/Release" http://$host/${ubuntu_path}dists/$dist/Release
 		wget -O "${host}/${dist}/Release.gpg" http://$host/${ubuntu_path}dists/$dist/Release.gpg
+		wget -O "${host}/${dist}/InRelease" http://$host/${ubuntu_path}dists/$dist/InRelease
 	done
 done

@@ -24,9 +24,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eu\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2012-05-06 15:56+0200\n"
-"Last-Translator: Piarres Beobide <pi@beobide.net>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2019-08-28 18:10+0000\n"
+"Last-Translator: leela <53352@protonmail.com>\n"
 "Language-Team: debian-l10n-eu@lists.debian.org\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
@@ -117,6 +117,7 @@ msgstr "Huts egin du biltegi lokaleko gakoa deskargatzean:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -281,8 +282,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "CD-ROMa eskaneatzen..."
+#, fuzzy
+msgid "Scanning the installation media..."
+msgstr "Instalazioa amaitzen"
 
 #. Type: error
 #. Description
@@ -294,9 +296,13 @@ msgstr "apt-ren konfigurazio arazoa"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
+#, fuzzy
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr "Huts egin du apt konfiguratzean pakete gehigarriak CDtik instalatzeko."
 
@@ -314,25 +320,27 @@ msgstr "Huts egin du apt konfiguratzean pakete gehigarriak CDtik instalatzeko."
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Beste CD edo DVD bat irakurri?"
+#, fuzzy
+msgid "Scan extra installation media?"
+msgstr "Huts egin du SILO instalatzean"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Instalazioko CD edo DVDa irakurri da, hau da bere etiketa:"
+msgid "Scanning your installation media finds the label:"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
+#, fuzzy
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
 "Orain pakete-kudeatzaileak (apt) erabiltzeko CD edo DVD gehigarriak "
 "irakurtzeko aukera duzu. Normalean instalazioko CD/DVD bilduma berdinekoak "
@@ -346,52 +354,45 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
+#, fuzzy
+msgid "If you wish to scan more media, please insert another one now."
 msgstr "Beste CD edo DVD bat irakurtzea nahi baduzu, sar ezazu orain."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
+#, fuzzy
+msgid "The image with the following label has been scanned:"
 msgstr "Hurrengo etiketa duen CD edo DVDa irakurri da:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
+#, fuzzy
+msgid "The image with the following label has already been scanned:"
 msgstr "Hurrengo etiketa duen CD edo DVDa dagoeneko irakurrita dago:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
+#, fuzzy
+msgid "Please replace it now, if you wish to scan another."
 msgstr "Ordeztu ezazu beste CD edo DVD bat irakurtzea nahi baduzu."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"Huts egin du apt konfiguratzean CD/DVDtik pakete gehigarriak instalatzeko."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
+#, fuzzy
+msgid "Please check that the media has been inserted correctly."
 msgstr "Ziurtatu CD/DVDa behar bezala sarturik dagoela."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Euskarri aldaketa"
@@ -399,14 +400,11 @@ msgstr "Euskarri aldaketa"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
+#, fuzzy
+msgid "Please insert the media labeled '${LABEL}' and press enter."
 msgstr ""
-"/cdrom/: sartu etiketa hau duen diskoa: '${LABEL}' '/cdrom/' gailuan eta "
+"/cdrom/: sartu etiketa hau duen diskoa '${LABEL}' '/cdrom/' gailuan eta "
 "sakatu Sartu tekla."
 
 #. Type: text
@@ -424,9 +422,10 @@ msgstr "Netinst CDa sources.list-ean desgaitzen..."
 #. Description
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
 "Netinst CD batetik instalatzen ari bazara eta ispilurik ez erabiltzea "
 "aukeratuz gero, gutxieneko oinarrizko-sistema izango duzu amaitzean."
@@ -435,8 +434,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
+#, fuzzy
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
@@ -447,8 +447,10 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
+#, fuzzy
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr "Paketeen hautapen mugatua duen CD batetik instalatzen ari zara."
 
 #. Type: text
@@ -456,9 +458,9 @@ msgstr "Paketeen hautapen mugatua duen CD batetik instalatzen ari zara."
 #. :sl1:
 #. The value of %i can be 2 or 3
 #: ../apt-cdrom-setup.templates:12001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
@@ -471,9 +473,9 @@ msgstr ""
 #. :sl1:
 #. The value of %i can be from 4 to 8
 #: ../apt-cdrom-setup.templates:13001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
 "%i CD eskaneatu dituzu. Nahiz eta hauek pakete bilduma luze bat duten, baten "
@@ -494,8 +496,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
+#, fuzzy
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
 "DVD batetik instalatzen ari zara. Nahiz eta DVDak pakete bilduma handi bat "
@@ -561,8 +564,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Aukeratu eskuragarri izan nahi dituzun edo ez."
 
@@ -607,8 +609,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -627,12 +628,14 @@ msgstr "Aldatu ispilua"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Huts egin du fitxategia deskargatzean:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -656,9 +659,11 @@ msgstr "Sareko ispilua erabili?"
 #. Description
 #. :sl1:
 #: ../apt-mirror-setup.templates:5001
+#, fuzzy
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "Sareko ispilu bat erabil daiteke CD-ROMean dagoen softwarearen osagai gisa. "
 "Honela gainera softwareen bertsio berrienak eskuragarri egongo lirateke."
@@ -794,36 +799,3 @@ msgstr ""
 "Zenbait software garapen adarretik bertsio honekin lan egin ahal izateko "
 "migratu izan da. Nahiz eta software hauei proba guztiak ez aplikatu, "
 "ezaugarri erabilgarriak dituzten aplikazio batzuen bertsio berrienak ditu."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "Segurtasun eguneraketak (${SEC_HOST}(e)tik)"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian-ek bi zerbitzu ditu argitalpenak eguneratzeko: segurtasuna eta "
-"hegazkorra."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

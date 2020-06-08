@@ -7,13 +7,13 @@
 # Copyright (C) 2003 Software in the Public Interest, Inc.
 # This file is distributed under the same license as debian-installer.
 # Peter Mann <peter.mann@tuke.sk>
-# Ivan Masár <helix84@centrum.sk>, 2007, 2008, 2009, 2010, 2011, 2013, 2014, 2015.
+# Ivan Masár <helix84@centrum.sk>, 2007, 2008, 2009, 2010, 2011, 2013, 2014, 2015, 2017.
 # Translations from iso-codes:
 # (translations from drakfw)
 # Alastair McKinstry <mckinstry@computer.org>, 2001, 2002.
 # Copyright (C) 2002 Free Software Foundation, Inc.
 # Free Software Foundation, Inc., 2004
-# Ivan Masár <helix84@centrum.sk>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
+# Ivan Masár <helix84@centrum.sk>, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2017.
 # Translations taken from sk.wikipedia.org on 2008-06-17
 # Pavol Cvengros <orpheus@hq.alert.sk>, 2001.
 # Peter Mann <Peter.Mann@tuke.sk>, 2004, 2006.
@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2015-11-22 12:51+0200\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2018-04-16 09:18+0200\n"
 "Last-Translator: Ivan Masár <helix84@centrum.sk>\n"
 "Language-Team: x\n"
 "Language: sk\n"
@@ -116,6 +116,7 @@ msgstr "Stiahnutie kľúča lokálneho zdroja softvéru zlyhalo:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -285,8 +286,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Prehľadáva sa CD-ROM..."
+#, fuzzy
+msgid "Scanning the installation media..."
+msgstr "Dokončuje sa inštalácia"
 
 #. Type: error
 #. Description
@@ -298,9 +300,13 @@ msgstr "Chyba pri nastavení apt"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
+#, fuzzy
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr "Zlyhal pokus o nastavenie apt pre inštaláciu ďalších balíkov z CD."
 
@@ -318,25 +324,27 @@ msgstr "Zlyhal pokus o nastavenie apt pre inštaláciu ďalších balíkov z CD.
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Prehľadať ďalšie CD či DVD?"
+#, fuzzy
+msgid "Scan extra installation media?"
+msgstr "Inštalácia SILO zlyhala"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Vaše inštalačné CD alebo DVD bolo prehľadané; jeho označenie je:"
+msgid "Scanning your installation media finds the label:"
+msgstr ""
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
+#, fuzzy
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
 "Teraz máte možnosť nechať prehľadať ďalšie CD alebo DVD, ktoré správca "
 "balíčkov (apt) použije. Bežne sa nachádzajú v rovnakej sade ako inštalačné "
@@ -349,7 +357,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
+#, fuzzy
+msgid "If you wish to scan more media, please insert another one now."
 msgstr ""
 "Ak chcete nechať prehľadať ďalšie CD alebo DVD, teraz ho prosím vložte."
 
@@ -357,44 +366,37 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
+#, fuzzy
+msgid "The image with the following label has been scanned:"
 msgstr "CD alebo DVD s týmto označením bolo prehľadané:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
+#, fuzzy
+msgid "The image with the following label has already been scanned:"
 msgstr "CD alebo DVD s týmto označením už bolo prehľadané:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
+#, fuzzy
+msgid "Please replace it now, if you wish to scan another."
 msgstr "Ak si želáte prehľadať ďalšie CD alebo DVD, teraz ho prosím vymeňte."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr "Zlyhal pokus nastaviť apt pre inštaláciu ďalších balíkov z CD/DVD."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
+#, fuzzy
+msgid "Please check that the media has been inserted correctly."
 msgstr "Prosím, uistite sa, že CD/DVD bolo vložené správne."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Výmena nosiča"
@@ -402,14 +404,11 @@ msgstr "Výmena nosiča"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
+#, fuzzy
+msgid "Please insert the media labeled '${LABEL}' and press enter."
 msgstr ""
-"/cdrom/:Prosím, vložte disk s označením: '${LABEL}' do jednotky '/cdrom/' a "
+"/cdrom/: Prosím, vložte disk s označením '${LABEL}' do jednotky '/cdrom/' a "
 "stlačte Enter."
 
 #. Type: text
@@ -427,9 +426,10 @@ msgstr "Odstraňuje sa použitie netinst CD v sources.list..."
 #. Description
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
+#, fuzzy
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
 "Ak si pri inštalácii z „netinst“ CD nezvolíte použitie sieťového zrkadla, "
 "skončíte s veľmi obmedzeným základným systémom."
@@ -438,8 +438,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
+#, fuzzy
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
@@ -451,8 +452,10 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
+#, fuzzy
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr "Inštalujete z CD, ktoré obsahuje obmedzený výber balíkov."
 
 #. Type: text
@@ -460,9 +463,9 @@ msgstr "Inštalujete z CD, ktoré obsahuje obmedzený výber balíkov."
 #. :sl1:
 #. The value of %i can be 2 or 3
 #: ../apt-cdrom-setup.templates:12001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
@@ -475,9 +478,9 @@ msgstr ""
 #. :sl1:
 #. The value of %i can be from 4 to 8
 #: ../apt-cdrom-setup.templates:13001
-#, no-c-format
+#, fuzzy, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
 "Nechali ste prehľadať %i CD nosičov. Hoci tieto obsahujú veľký výber "
@@ -498,8 +501,9 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
+#, fuzzy
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
 "Inštalujete z DVD. Hoci DVD obsahujú veľký výber balíkov, niektoré môžu "
@@ -564,8 +568,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Rozhodnite sa, či chcete používať tento softvér."
 
@@ -610,8 +613,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -630,12 +632,14 @@ msgstr "Zmeniť zrkadlo archívu"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Stiahnutie súboru zlyhalo:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -660,9 +664,11 @@ msgstr "Použiť sieťové zrkadlo archívu?"
 #. Description
 #. :sl1:
 #: ../apt-mirror-setup.templates:5001
+#, fuzzy
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
 "Sieťové zrkadlo sa môže použiť na rozšírenie programov dostupných na CD o "
 "ďalšie programy. Takisto sa sprístupnia novšie verzie dostupných programov."
@@ -797,36 +803,3 @@ msgstr ""
 "fungovali v tejto verzii distribúcie. Hoci tieto programy neprešli takým "
 "dôkladným testovaním ako programy obsiahnuté v distribúcii, často obsahujú "
 "novšie verzie s užitočnými vlastnosťami."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "bezpečnostné aktualizácie (z ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian má dve služby poskytujúce aktualizované balíky: bezpečnostné "
-"„security“ aktualizácie a rýchle „volatile“ aktualizácie."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

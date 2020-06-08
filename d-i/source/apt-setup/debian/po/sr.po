@@ -25,8 +25,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2018-01-11 20:47+0000\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2019-12-05 21:45+0000\n"
 "Last-Translator: Filipovic Dragan <filipovic@tutanota.com>\n"
 "Language-Team: Serbian <debian-l10n-serbian@lists.debian.org>\n"
 "Language: sr\n"
@@ -117,6 +117,7 @@ msgstr "Преузимање кључа за локални репозитори
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -284,8 +285,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Скенирање CD-ROM..."
+msgid "Scanning the installation media..."
+msgstr "Скенирање инсталационог медија..."
 
 #. Type: error
 #. Description
@@ -297,13 +298,16 @@ msgstr "проблем са конфигурисањем apt-а"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
-"Покушај да се исконфигурише apt да би инсталирао додатне пакетеса CD-а није "
-"успео."
+"Покушај да се исконфигурише apt да би инсталирао додатне пакете са медија "
+"није успео."
 
 #. Type: boolean
 #. Description
@@ -319,30 +323,30 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Скенирати други CD или DVD?"
+msgid "Scan extra installation media?"
+msgstr "Скенирај додатни инсталациони медиј?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Ваш инсталациони CD или DVD је скениран; његова ознака је:"
+msgid "Scanning your installation media finds the label:"
+msgstr "Скенирањем вашег инстал. медија пронађена је налепница:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"Сада имате могућност да скенирате додатне CD-eве или DVD-eве које користи "
-"управљач пакетима (програм „apt“). Обично су ови CD-eви и DVD-eви из истог "
-"сета као и инсталациони CD/DVD. Ако немате никаквих додатних CD-eва или DVD-"
-"eва онда можете једноставно прескочити овај корак."
+"Сада имате могућност да скенирате додатне медије које користи управљач "
+"пакетима (програм (apt). Обично би требало да су из истог сета као већ "
+"подигнути. Ако немате никаквих додатних медија онда можете једноставно "
+"прескочити овај корак."
 
 #. Type: boolean
 #. Description
@@ -351,53 +355,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "Ако желите да скенирате неки други CD или DVD, убаците га сада."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "Ако желите да скенирате више медија, убаците их сада."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "Скениран је CD или DVD са следећом ознаком:"
+msgid "The image with the following label has been scanned:"
+msgstr "Скенирана је слика са следећом ознаком:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "CD или DVD са следећом ознаком је већ претходно био скениран:"
+msgid "The image with the following label has already been scanned:"
+msgstr "Слика са следећом ознаком је већ претходно била скенирана:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "Замените га одмах уколико желите да скенирате неки други CD или DVD."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "Замените га одмах уколико желите поново да скенирате."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"Покушај да се конфигурише „apt“ да би инсталирао додатне пакете са CD/DVD-а "
-"није успео."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "Проверите да ли је CD/DVD исправно убачен."
+msgid "Please check that the media has been inserted correctly."
+msgstr "Проверите да ли је медиј исправно убачен."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Замена медијума"
@@ -405,15 +396,9 @@ msgstr "Замена медијума"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/:Убаците диск означен као: „${LABEL}“ у уређај „/cdrom/“ и притисните "
-"тастер ENTER."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "Убаците медиј означен као '${LABEL}' и притисните тастер enter."
 
 #. Type: text
 #. Description
@@ -431,10 +416,10 @@ msgstr "Искључивање „netinst“ CD у „sources.list“ фајлу
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"Ако инсталирате са „netinst“ CD-а и одаберете да не користите мирор, на "
+"Ако инсталирате са netinst CD слике и одаберете да не користите мирор, на "
 "крају ћете остати са веома минималним основним системом."
 
 #. Type: text
@@ -442,21 +427,21 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"Инсталирате са „netinst“ CD-а који обезбеђује само инсталирање врло "
-"минималног основног система. Да би сте инсталирали комплетнији систем "
-"користите мирор."
+"Инсталирате са netinst CD-а који обезбеђује само инсталирање врло минималног "
+"основног система. Да би сте инсталирали комплетнији систем користите мирор."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
-msgstr "Инсталирате са CD-а који садржи ограничен избор пакета."
+"You are installing from an image which contains a limited selection of "
+"packages."
+msgstr "Инсталирате са слике која садржи ограничен избор пакета."
 
 #. Type: text
 #. Description
@@ -465,12 +450,13 @@ msgstr "Инсталирате са CD-а који садржи ограниче
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"Скенирали сте %i CD-а. Иако они садрже добар избор пакета, неки пакети можда "
-"недостају (посебно они потребни за подршку другим језицима осим енглеског)."
+"Скенирали сте %i слике. Иако они садрже добар избор пакета, неки пакети "
+"можда недостају (посебно они потребни за подршку другим језицима осим "
+"енглеског)."
 
 #. Type: text
 #. Description
@@ -479,10 +465,10 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"Скенирали сте %i CD-ова. Иако они садрже велики избор пакета, неки пакети "
+"Скенирали сте %i слике. Иако они садрже велики избор пакета, неки пакети "
 "можда недостају."
 
 #. Type: text
@@ -501,10 +487,10 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"Инсталирате са DVD-а. Иако DVD садржи велики избор пакета, неки пакети можда "
+"Инсталирате са DVD слике. Иако садржи велики избор пакета, неки пакети можда "
 "недостају."
 
 #. Type: text
@@ -566,8 +552,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Изаберите да ли желите да и даље буде доступан."
 
@@ -611,8 +596,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -631,12 +615,14 @@ msgstr "Промени мирор"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Преузимање фајла није успело:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -662,10 +648,11 @@ msgstr "Користити мрежни мирор?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
-"Мрежни мирор се може употребити да замени софтвер који је укључен на CD-у. "
-"Може такође обезбедити новије верзије софтвера."
+"Мрежни мирор се може употребити да замени софтвер који је укључен на "
+"инсталационом медију. Може такође обезбедити новије верзије софтвера."
 
 #. Type: boolean
 #. Description
@@ -798,36 +785,3 @@ msgstr ""
 "Мада такав софтвер није прошао кроз комплетно тестирањекао софтвер који је "
 "укључен у ово издање, он обухвата новије верзије неких апликација које могу "
 "имати корисне карактеристике."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "безбедносне закрпе (са ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian има два сервиса који обезбеђују ажуриране пакете: безбедносне закрпе "
-"и непостојане пакете."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

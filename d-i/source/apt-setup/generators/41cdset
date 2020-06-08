@@ -57,11 +57,17 @@ fi
 # Images written to USB pen drives still need better support
 # too... :-(
 cd_type=$(cat /cdrom/.disk/cd_type)
-if [ "$cd_type" = "full_cd/single" ] || \
-	[ "$cd_type" = "bluray" ] || \
-	[ "$cd_type" = "live" ]; then
+case "$cd_type" in
+    live)
 	exit 0
-fi
+	;;
+    full_cd/single)
+	exit 0
+	;;
+    bluray*)
+	exit 0
+	;;
+esac
 
 get_label() {
 	LC_ALL=C $logoutput --pass-stdout $chroot $ROOT \

@@ -28,15 +28,17 @@
 #   Mai Hao Hui <mhh@126.com>, 2001 (translations from galeon)
 # YunQiang Su <wzssyqa@gmail.com>, 2010, 2011, 2012, 2013.
 # Yangfl <mmyangfl@gmail.com>, 2017.
+# Boyuan Yang <073plan@gmail.com>, 2018, 2019.
+# 玉堂白鹤 <yjwork@qq.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2017-06-11 18:20+0800\n"
-"Last-Translator: Yangfl <mmyangfl@gmail.com>\n"
-"Language-Team:  <debian-l10n-chinese@lists.debian.org>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2020-01-18 06:21+0000\n"
+"Last-Translator: 玉堂白鹤 <yjwork@qq.com>\n"
+"Language-Team: <debian-l10n-chinese@lists.debian.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -124,6 +126,7 @@ msgstr "下载本地仓库密钥失败："
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -280,8 +283,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "正在扫描光盘..."
+msgid "Scanning the installation media..."
+msgstr "正在扫描安装介质……"
 
 #. Type: error
 #. Description
@@ -293,11 +296,14 @@ msgstr "Apt 设置问题"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
-msgstr "尝试配置 apt 从光盘安装额外的软件包失败。"
+msgstr "尝试配置 apt 从介质安装额外的软件包失败。"
 
 #. Type: boolean
 #. Description
@@ -313,29 +319,28 @@ msgstr "尝试配置 apt 从光盘安装额外的软件包失败。"
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "要扫描其他 CD 或 DVD 吗？"
+msgid "Scan extra installation media?"
+msgstr "扫描额外的安装介质？"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "已经扫描完您的安装 CD 或 DVD；它的标记为："
+msgid "Scanning your installation media finds the label:"
+msgstr "扫描您的安装介质时找到标签："
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"现在您可以选择扫描其他 CD 或 DVD 以供软件包管理器 (apt) 使用。一般来说，这些 "
-"CD/DVD 是和安装 CD/DVD 在同一套里面的。如果您没有任何其他的 CD 或 DVD，可以直"
-"接跳过这一步。"
+"现在您可以选择扫描其他介质以供软件包管理器 (apt) 使用。一般来说，这些和您引导"
+"启动的在同一套里面。如果您没有任何其他的介质，可以直接跳过这一步。"
 
 #. Type: boolean
 #. Description
@@ -344,51 +349,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "如果您想要扫描其他 CD 或 DVD，现在请将其插入。"
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "如果您想要扫描更多介质，请立即插入另一个。"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "已经扫描了有下列标记的 CD 或 DVD："
+msgid "The image with the following label has been scanned:"
+msgstr "已经扫描了有下列标记的镜像："
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "下列标记的 CD 或 DVD 之前已经扫描过了："
+msgid "The image with the following label has already been scanned:"
+msgstr "下列标记的镜像之前已经扫描过了："
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "如果您想要扫描其他的 CD 或 DVD，现在请将其替换。"
+msgid "Please replace it now, if you wish to scan another."
+msgstr "如果您想要扫描其他的，现在请将其替换。"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr "尝试配置 apt 从 CD/DVD 安装额外的软件包失败。"
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "请确保 CD/DVD 已被正确插入。"
+msgid "Please check that the media has been inserted correctly."
+msgstr "请确保介质已被正确插入。"
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "更换介质"
@@ -396,14 +390,9 @@ msgstr "更换介质"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/：请将标记为“${LABEL}”的光盘插入驱动器 /cdrom/ 中，然后按下 Enter。"
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "请将标记为“${LABEL}”的介质插入，然后按下 Enter。"
 
 #. Type: text
 #. Description
@@ -421,31 +410,32 @@ msgstr "正在 sources.list 里禁用 netinst CD..."
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"如果您正在用网络安装 (netinst) 光盘进行安装并且选择不使用镜像，您将只能装上一"
-"个非常小的基本系统。"
+"如果您正在用网络安装 (netinst) CD 镜像进行安装并且选择不使用镜像站点，您将只"
+"能装上一个非常小的基本系统。"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"您正在从网络安装 (netinst) 光盘进行安装，而网络安装光盘只能安装一个非常小的基"
-"本系统。您可以使用镜像来安装一个更完备的系统。"
+"您正在从网络安装 (netinst) 光盘镜像进行安装，而网络安装光盘只能安装一个非常小"
+"的基本系统。您可以使用镜像来安装一个更完备的系统。"
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
-msgstr "您正在从 CD 进行安装，而其中只包含有限的一部分软件包。"
+"You are installing from an image which contains a limited selection of "
+"packages."
+msgstr "您正在从镜像进行安装，而其中只包含有限的一部分软件包。"
 
 #. Type: text
 #. Description
@@ -454,12 +444,12 @@ msgstr "您正在从 CD 进行安装，而其中只包含有限的一部分软�
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"您已经扫描了 %i 张 CD。虽然其中包含了相当多的软件包，但是仍然可能缺少一些 (特"
-"别是那些用于支持英语以外的语言的软件包)。"
+"您已经扫描了 %i 个镜像。虽然其中包含了相当多的软件包，但是仍然可能缺少一些 "
+"(特别是那些用于支持英语以外的语言的软件包)。"
 
 #. Type: text
 #. Description
@@ -468,10 +458,11 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"您已经扫描了 %i 张 CD。虽然其中包含了很大一部分软件包，但是仍然可能有所遗漏。"
+"您已经扫描了 %i 份镜像。虽然其中包含了很大一部分软件包，但是仍然可能有所遗"
+"漏。"
 
 #. Type: text
 #. Description
@@ -487,10 +478,10 @@ msgstr "注意使用镜像将导致在下一步安装过程中下载大量的数
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"您正在从 DVD 进行安装。虽然 DVD 里包含了很大一部分软件包，但是仍然可能有所遗"
+"您正在从 DVD 镜像进行安装。虽然它提供了很大一部分软件包，但是仍然可能有所遗"
 "漏。"
 
 #. Type: text
@@ -551,8 +542,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "请您选择是否想使用它们。"
 
@@ -596,8 +586,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -616,12 +605,14 @@ msgstr "更换镜像"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "下载文件失败："
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -646,8 +637,9 @@ msgstr "使用网络镜像吗？"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
-msgstr "网络镜像可以用来补充光盘所带的软件，也可以用来提供较新版本的软件。"
+"the installation media. This may also make newer versions of software "
+"available."
+msgstr "网络镜像可以用来补充安装介质所带的软件。也可以用来提供较新版本的软件。"
 
 #. Type: boolean
 #. Description
@@ -774,34 +766,3 @@ msgstr ""
 "有些软件由开发中的版本向后移植到这个发行版中。虽然这些软件不象正式发布中包含"
 "的软件一样经过了详尽的测试，但是它们包括一些应用程序的新版本，因而可能会提供"
 "一些有用的功能。"
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "安全更新 (来自 ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr "Debian 有两个为已发布版本提供更新的服务：security (安全) 和 volatile。"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""

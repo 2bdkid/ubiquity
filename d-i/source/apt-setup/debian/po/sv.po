@@ -18,13 +18,15 @@
 # Christian Rose <menthos@menthos.com>, 2004.
 # Daniel Nylander <po@danielnylander.se>, 2007.
 # Martin Bagge <martin.bagge@bthstudent.se>, 2008, 2016.
+# Anders Jonsson <anders.jonsson@norsjovallen.se>, 2018.
+# Mattias Münster <mattiasmun@gmail.com>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: apt-setup@packages.debian.org\n"
-"POT-Creation-Date: 2017-10-23 22:02+0000\n"
-"PO-Revision-Date: 2017-11-29 09:45+0000\n"
-"Last-Translator: Anders Jonsson <anders.jonsson@norsjovallen.se>\n"
+"POT-Creation-Date: 2019-11-02 22:41+0100\n"
+"PO-Revision-Date: 2019-10-08 08:56+0000\n"
+"Last-Translator: Mattias Münster <mattiasmun@gmail.com>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -113,6 +115,7 @@ msgstr "Hämtningen av lokal förrådsnyckel misslyckades:"
 #. Description
 #. You should end this with a colon. A non-translatable variable
 #. follows with the mirror URL
+#. :sl2:
 #: ../apt-setup-udeb.templates:8002
 msgid ""
 "The installer failed to download the public key used to sign the local "
@@ -284,8 +287,8 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:1001
-msgid "Scanning the CD-ROM..."
-msgstr "Söker igenom cd-skivan..."
+msgid "Scanning the installation media..."
+msgstr "Skannar installationsmediet..."
 
 #. Type: error
 #. Description
@@ -297,13 +300,16 @@ msgstr "Konfigurationsproblem med apt"
 #. Type: error
 #. Description
 #. :sl2:
-#: ../apt-cdrom-setup.templates:2001
+#. Type: boolean
+#. Description
+#. :sl1:
+#: ../apt-cdrom-setup.templates:2001 ../apt-cdrom-setup.templates:6001
 msgid ""
-"An attempt to configure apt to install additional packages from the CD "
+"An attempt to configure apt to install additional packages from the media "
 "failed."
 msgstr ""
-"Ett försök att konfigurera apt att installera ytterligare paket från cd-"
-"skivan misslyckades."
+"Ett försök att konfigurera apt att installera ytterligare paket från mediet "
+"misslyckades."
 
 #. Type: boolean
 #. Description
@@ -319,30 +325,30 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
 #: ../apt-cdrom-setup.templates:5001 ../apt-cdrom-setup.templates:6001
-msgid "Scan another CD or DVD?"
-msgstr "Sök igenom en annan cd eller dvd-skiva?"
+msgid "Scan extra installation media?"
+msgstr "Skanna extra installationsmedia?"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
-msgid "Your installation CD or DVD has been scanned; its label is:"
-msgstr "Din installationsskiva har sökts igenom; dess etikett är:"
+msgid "Scanning your installation media finds the label:"
+msgstr "Skanning av ditt installationsmedia hittar etiketten:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001
 msgid ""
-"You now have the option to scan additional CDs or DVDs for use by the "
-"package manager (apt). Normally these should be from the same set as the "
-"installation CD/DVD. If you do not have any additional CDs or DVDs "
-"available, this step can just be skipped."
+"You now have the option of scanning additional media for use by the package "
+"manager (apt). Normally these should be from the same set as the one you "
+"booted from. If you do not have any additional media, this step can just be "
+"skipped."
 msgstr ""
-"Du har nu möjligheten att söka igenom ytterligare cd eller dvd-skivor för "
-"användning i pakethanteraren (apt). Oftast bör dessa vara från samma "
-"uppsättning installationsskivor. Detta steg kan hoppas över om du inte har "
-"några ytterligare cd- eller dvd-skivor tillgängliga."
+"Du har nu möjligheten att söka igenom ytterligare media för användning av "
+"pakethanteraren (apt). Oftast bör dessa vara från samma uppsättning som den "
+"du startade från. Detta steg kan hoppas över om du inte har några "
+"ytterligare media tillgängliga."
 
 #. Type: boolean
 #. Description
@@ -351,53 +357,40 @@ msgstr ""
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:3001 ../apt-cdrom-setup.templates:4001
-msgid "If you wish to scan another CD or DVD, please insert it now."
-msgstr "Mata in nästa cd eller dvd-skiva om du önskar att söka igenom den."
+msgid "If you wish to scan more media, please insert another one now."
+msgstr "Mata in fler media om du önskar att söka igenom dem."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:4001
-msgid "The CD or DVD with the following label has been scanned:"
-msgstr "Skivan med följande etikett har sökts igenom:"
+msgid "The image with the following label has been scanned:"
+msgstr "Avbildningen med följande etikett har sökts igenom:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "The CD or DVD with the following label has already been scanned:"
-msgstr "Skivan med följande etikett har redan sökts igenom:"
+msgid "The image with the following label has already been scanned:"
+msgstr "Avbildningen med följande etikett har redan sökts igenom:"
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:5001
-msgid "Please replace it now if you wish to scan another CD or DVD."
-msgstr "Ersätt den nu om du vill söka igenom en annan cd eller dvd-skiva."
+msgid "Please replace it now, if you wish to scan another."
+msgstr "Ersätt den nu, om du vill söka igenom en annan."
 
 #. Type: boolean
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:6001
-msgid ""
-"An attempt to configure apt to install additional packages from the CD/DVD "
-"failed."
-msgstr ""
-"Ett försök att konfigurera apt att installera ytterligare paket från cd/dvd-"
-"skivan misslyckades."
-
-#. Type: boolean
-#. Description
-#. :sl1:
-#: ../apt-cdrom-setup.templates:6001
-msgid "Please check that the CD/DVD has been inserted correctly."
-msgstr "Kontrollera att cd/dvd-skivan har matats in korrekt."
+msgid "Please check that the media has been inserted correctly."
+msgstr "Kontrollera att mediet har matats in korrekt."
 
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
 msgid "Media change"
 msgstr "Mediabyte"
@@ -405,15 +398,9 @@ msgstr "Mediabyte"
 #. Type: text
 #. Description
 #. :sl1:
-#. This template uses the same text as used in the package apt for apt-cdrom
-#. Do not translate "/cdrom/" (the mount point)
 #: ../apt-cdrom-setup.templates:7001
-msgid ""
-"/cdrom/:Please insert the disc labeled: '${LABEL}' in the drive '/cdrom/' "
-"and press enter."
-msgstr ""
-"/cdrom/:Mata in skivan med etiketten: \"${LABEL}\" i enheten \"/cdrom/\" och "
-"tryck på Enter."
+msgid "Please insert the media labeled '${LABEL}' and press enter."
+msgstr "Vänligen sätt in mediet märkt '${LABEL}' och tryck på enter."
 
 #. Type: text
 #. Description
@@ -431,24 +418,24 @@ msgstr "Inaktiverar cd-skiva för nätverkinstallation i sources.list..."
 #. :sl2:
 #: ../apt-cdrom-setup.templates:9001 ../apt-mirror-setup.templates:6001
 msgid ""
-"If you are installing from a netinst CD and choose not to use a mirror, you "
-"will end up with only a very minimal base system."
+"If you are installing from a netinst CD image and choose not to use a "
+"mirror, you will end up with only a very minimal base system."
 msgstr ""
-"Om du installerar från en cd-skiva för nätverksinstallation och du väljer "
-"att inte använda en spegelserver kommer det att resultera i att du får ett "
-"mycket minimalt grundsystem."
+"Om du installerar från en cd-avbildning för nätverksinstallation och du "
+"väljer att inte använda en spegelserver, kommer det att resultera i att du "
+"får ett mycket minimalt grundsystem."
 
 #. Type: text
 #. Description
 #. :sl1:
 #: ../apt-cdrom-setup.templates:10001
 msgid ""
-"You are installing from a netinst CD, which by itself only allows "
+"You are installing from a netinst CD image, which by itself only allows "
 "installation of a very minimal base system. Use a mirror to install a more "
 "complete system."
 msgstr ""
-"Du installerar från en cd-skiva för nätverksinstallation, som i sig endast "
-"tillåter installation av ett mycket minimalt grundsystem. Använd en "
+"Du installerar från en cd-avbildning för nätverksinstallation, som i sig "
+"endast tillåter installation av ett mycket minimalt grundsystem. Använd en "
 "spegelserver för att installera ett mer komplett system."
 
 #. Type: text
@@ -456,9 +443,10 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:11001
 msgid ""
-"You are installing from a CD, which contains a limited selection of packages."
+"You are installing from an image which contains a limited selection of "
+"packages."
 msgstr ""
-"Du installerar från en cd-skiva som innehåller ett begränsat antal paket."
+"Du installerar från en avbildning som innehåller ett begränsat antal paket."
 
 #. Type: text
 #. Description
@@ -467,12 +455,12 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:12001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a fair selection of "
+"You have scanned %i images. Even though these contain a fair selection of "
 "packages, some may be missing (notably some packages needed to support "
 "languages other than English)."
 msgstr ""
-"Du har sökt igenom %i cd-skivor. Även om dvd-skivan innehåller ett stort "
-"paketurval kan vissa paket saknas (speciellt några paket som behövs för att "
+"Du har sökt igenom %i avbildningar. Även om de innehåller ett stort "
+"paketurval, kan vissa paket saknas (speciellt några paket som behövs för att "
 "ge annat språkstöd än engelska)."
 
 #. Type: text
@@ -482,11 +470,11 @@ msgstr ""
 #: ../apt-cdrom-setup.templates:13001
 #, no-c-format
 msgid ""
-"You have scanned %i CDs. Even though these contain a large selection of "
+"You have scanned %i images. Even though these contain a large selection of "
 "packages, some may be missing."
 msgstr ""
-"Du har sökt igenom %i skivor. Även om dessa innehåller ett stort antal paket "
-"så kanske några saknas."
+"Du har sökt igenom %i avbildningar. Även om dessa innehåller ett stort antal "
+"paket så kanske några saknas."
 
 #. Type: text
 #. Description
@@ -504,10 +492,10 @@ msgstr ""
 #. :sl1:
 #: ../apt-cdrom-setup.templates:15001
 msgid ""
-"You are installing from a DVD. Even though the DVD contains a large "
+"You are installing from a DVD image. Even though it contains a large "
 "selection of packages, some may be missing."
 msgstr ""
-"Du installerar från en dvd-skiva. Även om dvd-skivan innehåller ett stort "
+"Du installerar från en DVD-avbildning. Även om den innehåller ett stort "
 "antal paket så kanske några saknas."
 
 #. Type: text
@@ -571,8 +559,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:2001
-#: ../apt-mirror-setup.templates-ubuntu:1001
+#: ../apt-mirror-setup.templates:2001 ../apt-mirror-setup.templates-ubuntu:1001
 msgid "Please choose whether you want to have it available anyway."
 msgstr "Välj om du vill ha den tillgänglig ändå."
 
@@ -617,8 +604,7 @@ msgstr ""
 #. Description
 #. This template is used by the Ubuntu version of d-i.
 #. :sl2:
-#: ../apt-mirror-setup.templates:3001
-#: ../apt-mirror-setup.templates-ubuntu:2001
+#: ../apt-mirror-setup.templates:3001 ../apt-mirror-setup.templates-ubuntu:2001
 #: ../apt-mirror-setup.templates-ubuntu:3001
 #: ../apt-mirror-setup.templates-ubuntu:4001
 #: ../apt-mirror-setup.templates-ubuntu:5001
@@ -638,12 +624,14 @@ msgstr "Byt spegel"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid "Downloading a file failed:"
 msgstr "Hämtningen av en fil misslyckades:"
 
 #. Type: select
 #. Description
+#. :sl2:
 #: ../apt-mirror-setup.templates:4002
 msgid ""
 "The installer failed to access the mirror. This may be a problem with your "
@@ -669,10 +657,11 @@ msgstr "Använd en nätverksspegel?"
 #: ../apt-mirror-setup.templates:5001
 msgid ""
 "A network mirror can be used to supplement the software that is included on "
-"the CD-ROM. This may also make newer versions of software available."
+"the installation media. This may also make newer versions of software "
+"available."
 msgstr ""
-"En nätverksspegel kan användas för att komplettera programvaran som "
-"inkluderats på cd-skivan. Detta kan även göra nyare versioner av programvara "
+"En nätverksspegel kan användas för att komplettera programvaran som ingår i "
+"installationsmediet. Detta kan även göra nyare versioner av programvara "
 "tillgänglig."
 
 #. Type: boolean
@@ -807,36 +796,3 @@ msgstr ""
 "fungera med den här utgåvan. Även om den här programvaran inte har genomgått "
 "kompletta tester såsom de andra paketen i utgåvan inkluderar den nyare "
 "versioner av vissa program som kan tillhandahålla användbara funktioner."
-
-#. Type: multiselect
-#. Choices
-#. SEC_HOST, and PARTNER_HOST are host names (e.g.
-#. security.ubuntu.com)
-#. Translators: the *entire* string should be under 55 columns
-#. including host name. In short, KEEP THIS SHORT and, yes, that's tricky
-#. :sl2:
-#: ../apt-setup-udeb.templates:12001
-#, fuzzy
-msgid "partner archive (from ${PARTNER_HOST}))"
-msgstr "säkerhetsuppdateringar (från ${SEC_HOST})"
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-#, fuzzy
-msgid ""
-"Ubuntu has some additional services that provide updates to releases and add-"
-"on packages."
-msgstr ""
-"Debian har två tjänster som tillhandahåller uppdateringar till utgåvor: "
-"security (säkerhet) och volatile (flyktiga)."
-
-#. Type: multiselect
-#. Description
-#. :sl2:
-#: ../apt-setup-udeb.templates:12002
-msgid ""
-"The partner archive contains software provided by Canonical's partners as a "
-"service to Ubuntu users."
-msgstr ""
