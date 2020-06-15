@@ -78,7 +78,6 @@ Package: ubiquity
 Architecture: any
 Depends: adduser,
          apt-clone,
-         archdetect-deb,
          cryptsetup,
          dbus-x11,
          dpkg-repack,
@@ -97,6 +96,7 @@ Depends: adduser,
          python3-pam,
          rdate,
          sbsigntool [amd64],
+         shim-signed [amd64],
          ubiquity-artwork-${mangled-version},
          ubiquity-casper,
          ubiquity-frontend-${mangled-version},
@@ -111,6 +111,8 @@ Recommends: btrfs-progs,
             grub-pc [any-amd64 any-i386] | grub [any-amd64 any-i386] | grub-efi-amd64 [any-amd64] | grub-efi-arm64 [arm64] | grub-efi-ia32 [any-i386],
             lvm2,
             ubuntu-drivers-common (>= 0.6.3)
+Breaks: archdetect-deb
+Replaces: archdetect-deb
 Description: Ubuntu live CD installer
  This is a simple live CD installer designed to integrate well with Debian-
  and Ubuntu-based systems, and to reuse code from d-i for ease of

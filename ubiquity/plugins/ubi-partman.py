@@ -319,9 +319,11 @@ class PageGtk(PageBase):
             elif self.use_lvm.get_active():
                 label = self.controller.get_string('advanced_features_lvm_selected')
                 if self.use_crypto.get_active():
-                    label = self.controller.get_string('advanced_features_crypto_selected')
+                    label = self.controller.get_string('advanced_features_lvm_crypto_selected')
             elif self.use_zfs.get_active():
                 label = self.controller.get_string('advanced_features_zfs_selected')
+                if self.use_crypto.get_active():
+                    label = self.controller.get_string('advanced_features_zfs_crypto_selected')
             self.advanced_features_desc.set_text(label)
         else:
             # Restore previous selection
@@ -385,9 +387,7 @@ class PageGtk(PageBase):
         # Currently we support crypto only in use_disk
         # TODO dmitrij.ledkov 2012-07-25 no way to go back and return
         # to here? This needs to be addressed in the design document.
-        if (crypto and use_device and
-                self.current_page == self.page_ask and
-                not use_zfs):
+        if (crypto and use_device and self.current_page == self.page_ask):
             self.show_crypto_page()
             self.plugin_is_install = one_disk
             return True
@@ -544,11 +544,11 @@ class PageGtk(PageBase):
         if not widget.get_active():
             return
 
-        use_lvm = self.use_lvm.get_active()
-        if not use_lvm:
+        use_volume_manager = self.use_lvm.get_active() or self.use_zfs.get_active()
+        if not use_volume_manager:
             self.use_crypto.set_active(False)
-        self.use_crypto.set_sensitive(use_lvm)
-        self.use_crypto_desc.set_sensitive(use_lvm)
+        self.use_crypto.set_sensitive(use_volume_manager)
+        self.use_crypto_desc.set_sensitive(use_volume_manager)
 
     def initialize_resize_mode(self):
         disk_id = self.get_current_disk_partman_id()
@@ -1015,6 +1015,16 @@ class PageGtk(PageBase):
 
         for widget in ['password_grid', 'crypto_label', 'crypto_warning',
                        'verified_crypto_label', 'crypto_extra_label',
+                       'crypto_overwrite_space', 'crypto_extra_time']:
+            getattr(getattr(self, widget), action)()
+
+    def show_overwrite_space(self, show_hide):
+        if show_hide:
+            action = 'show'
+        else:
+            action = 'hide'
+
+        for widget in ['crypto_extra_label',
                        'crypto_overwrite_space', 'crypto_extra_time']:
             getattr(getattr(self, widget), action)()
 
@@ -1563,6 +1573,7 @@ class PageGtk(PageBase):
         self.current_page = self.page_crypto
         self.move_crypto_widgets()
         self.show_encryption_passphrase(True)
+        self.show_overwrite_space(not(self.use_crypto.get_active() and self.use_zfs.get_active()))
         self.controller.go_to_page(self.current_page)
         self.controller.toggle_next_button('install_button')
         self.info_loop(None)
@@ -3387,6 +3398,9 @@ class Page(plugin.Plugin):
             self.db.set('ubiquity/use_zfs',
                         'true' if telemetry_method == 'use_zfs' else 'false')
             telemetry.get().set_partition_method(telemetry_method)
+            keystore_key = self.ui.get_crypto_keys()
+            if keystore_key:
+                self.db.set('ubiquity/zfs_keystore_key', keystore_key)
             # Don't exit partman yet.
         else:
             self.finish_partitioning = True

@@ -107,11 +107,6 @@ for subdir in .svn Fonts Keyboard/acm Keyboard/ckb Keyboard/locale; do
 	rm -rf "$SOURCEDIR/console-setup/$subdir"
 done
 
-# We don't need binary blobs from shim-signed.
-for subdir in MicCorUEFCA2011_2011-06-27.crt shimx64.efi.signed; do
-	rm -rf "$SOURCEDIR/shim-signed/$subdir"
-done
-
 # Add a warning to budding hackers.
 cat > "$SOURCEDIR/README" <<EOF
 The files in this directory are updated automatically from the distribution

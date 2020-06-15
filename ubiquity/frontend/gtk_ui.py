@@ -1702,7 +1702,13 @@ class Wizard(BaseFrontend):
         # Setup zfs layout
         use_zfs = self.db.get('ubiquity/use_zfs')
         if use_zfs == 'true':
+            env = os.environ.copy()
+            zfs_keystore_key = self.db.get('ubiquity/zfs_keystore_key')
+            if zfs_keystore_key:
+                os.environ['ZFS_KS_KEY'] = zfs_keystore_key
             misc.execute_root('/usr/share/ubiquity/zsys-setup', 'init')
+            os.environ.clear()
+            os.environ.update(env)
 
         syslog.syslog('Starting the installation')
 

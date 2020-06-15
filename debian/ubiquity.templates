@@ -1464,13 +1464,12 @@ _Description:
 Template: ubiquity/text/use_zfs
 Type: text
 _Description:
- EXPERIMENTAL: Erase disk and use ZFS
+ Erase disk and use ZFS
 
 Template: ubiquity/text/use_zfs_desc
 Type: text
 _Description:
  <span foreground="darkred">Warning:</span> This will delete all your files on all operating systems.
- This is experimental and may cause data loss. Do not use on production systems.
 
 Template: ubiquity/use_zfs
 Type: boolean
@@ -1502,13 +1501,17 @@ Template: ubiquity/text/advanced_features_lvm_selected
 Type: text
 _Description: LVM selected
 
-Template: ubiquity/text/advanced_features_crypto_selected
+Template: ubiquity/text/advanced_features_lvm_crypto_selected
 Type: text
 _Description: LVM and encryption selected
 
 Template: ubiquity/text/advanced_features_zfs_selected
 Type: text
 _Description: ZFS selected
+
+Template: ubiquity/text/advanced_features_zfs_crypto_selected
+Type: text
+_Description: ZFS and encryption selected
 
 Template: ubiquity/text/verified_crypto_label
 Type: text
@@ -1631,3 +1634,7 @@ Template: ubiquity/text/partman_confirm_zfs
 Type: text
 _Description:
  partition #%(partid)s as %(parttype)s used for %(partusage)s
+
+Template: ubiquity/zfs_keystore_key
+Type: password
+_Description: Key to secure the keystore on ZFS installations

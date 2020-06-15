@@ -45,8 +45,7 @@ def generate_config():
     config['stepPrepare'] = {}
     stepPrepare = config['stepPrepare']
     stepPrepare['page_title'] = \
-        '<span size="xx-large">Updates and other software</span>'\
-        .format(distro_flavor)
+        '<span size="xx-large">Updates and other software</span>'
     stepPrepare['prepare_best_results'] = \
         'For best results, please ensure that this computer:'
     stepPrepare['prepare_foss_disclaimer'] = \

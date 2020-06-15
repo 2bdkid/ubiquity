@@ -1,3 +1,31 @@
+ubiquity (20.10.4) groovy; urgency=medium
+
+  [ Dimitri John Ledkov ]
+  * d-i: drop distro patch of partman-swapfile, included in v2
+  * d-i: vendorize archdetect binary, to remove hw-detect
+  * Do not vendorize shim-signed scripts, simply use shim-signed scripts
+    that are installed in live session already anyway.
+  * ubiquity-dm: start gsd-keyboard for keyboard indicator (LP: #1847307)
+  * autopilot: pacify new pyflakes
+
+  [ Jean-Baptiste Lallement ]
+  * Calculate partition number instead of reusing swap
+  * Add partition for key store.
+  * Add creation of the key store
+  * Key store on ZVol
+  * Encryption is enabled with --encrypt|-e
+  * Added encrypted swap on ZFS systems
+  * Use env instead argument to enable encryption
+  * Properly calculate position of extended partition
+  * force key when zfs encryption is activated.
+  * Properly unmount target and its friends on zfs installation.
+  * Add ZFS encryption UI
+  * partition table is always GPT
+  * Various fixes in zsys-setup
+  * Moved keystore to /run/
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Mon, 15 Jun 2020 18:18:40 +0100
+
 ubiquity (20.10.3) groovy; urgency=medium
 
   [ Jean-Baptiste ]

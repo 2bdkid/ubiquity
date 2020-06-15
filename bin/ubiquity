@@ -395,6 +395,14 @@ def unmount_target():
     for path in paths:
         misc.execute_root('fuser', '-cv', path)
         misc.execute_root('umount', path)
+    keystore_mapper = "/dev/mapper/keystore-rpool"
+    if os.path.exists(keystore_mapper):
+        misc.execute_root('umount', keystore_mapper)
+        misc.execute_root('cryptsetup', 'luksClose', keystore_mapper)
+    swap_mapper = "/dev/mapper/cryptoswap"
+    if os.path.exists(swap_mapper):
+        misc.execute_root('swapoff', swap_mapper)
+        misc.execute_root('cryptsetup', 'luksClose', swap_mapper)
     for pool in pools:
         misc.execute_root('/sbin/zpool', 'export', pool)
 
