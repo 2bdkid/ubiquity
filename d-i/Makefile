@@ -20,8 +20,7 @@ update:
 		echo "You need dpkg-dev >= 1.14.8 installed to do this." >&2; \
 		exit 1; \
 	}
-	./get-sources update
-	./get-sources $(shell sort -u $(LISTDIR)/*)
+	./update-manifest
 	./update-control
 ifdef UPDATE_LOCAL
 	mv manifest.old manifest
@@ -31,9 +30,6 @@ endif
 
 check:
 	./check-manifest
-
-maintainer-clean:
-	rm -rf $(SOURCEDIR)
 
 build:
 	set -e; for package in $(PACKAGES); do \
@@ -51,7 +47,8 @@ clean:
 		fi; \
 	done
 	$(MAKE) -C $(SOURCEDIR)/console-setup/Keyboard clean
-	rm -f $(SOURCEDIR)/*.deb $(SOURCEDIR)/*.udeb
+	git restore $(SOURCEDIR)/console-setup || :
+	rm -f $(SOURCEDIR)/*.deb $(SOURCEDIR)/*.udeb $(SOURCEDIR)/*.ddeb
 	rm -f manifest.old
 	rm -rf udeb-control templates
 
