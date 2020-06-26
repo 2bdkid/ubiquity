@@ -1,3 +1,19 @@
+ubiquity (20.10.6) groovy; urgency=medium
+
+  [ Michael Hudson-Doyle ]
+  * grub-installer: allow invoker to override architecture
+  * grub-installer: do not be fancy trying to determine which grub-efi package to install
+  * grub-installer: always pass --target x86_64-efi to grub-install on adm64/efi
+  * ubiquity: run grub-installer again to install ESP on amd64/legacy
+
+  [ Dimitri John Ledkov ]
+  * releasing package grub-installer version 1.128ubuntu15
+  * d-i: add docs about subtree merging of changes
+  * Automatic update of included source packages: grub-installer
+    1.128ubuntu15.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 26 Jun 2020 21:44:20 +0100
+
 ubiquity (20.10.5) groovy; urgency=medium
 
   * Switch from apt-get source, to git subtree for vendorized d-i sources.

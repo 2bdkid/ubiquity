@@ -1,3 +1,12 @@
+grub-installer (1.128ubuntu15) groovy; urgency=medium
+
+  [ Michael Hudson-Doyle ]
+  * allow invoker to override architecture
+  * do not be fancy trying to determine which grub-efi package to install
+  * always pass --target x86_64-efi to grub-install on adm64/efi
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Fri, 26 Jun 2020 21:23:11 +0100
+
 grub-installer (1.128ubuntu14) eoan; urgency=medium
 
   * When running on a ZFS filesystem udevadm returns an error

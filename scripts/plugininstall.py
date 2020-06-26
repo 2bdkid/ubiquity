@@ -945,6 +945,13 @@ class Install(install_misc.InstallBase):
                                 self.db.set('grub-installer/bootdev', response)
                         else:
                             break
+                    if arch == 'amd64' and subarch != 'efi':
+                        dbfilter = grubinstaller.GrubInstaller(
+                            None, self.db, extra_args=['amd64/efi'])
+                        ret = dbfilter.run_command(auto_process=True)
+                        if ret != 0:
+                            raise install_misc.InstallStepError(
+                                "GrubInstaller failed with code %d" % ret)
                 else:
                     raise install_misc.InstallStepError(
                         "No bootloader installer found")

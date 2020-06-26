@@ -8,9 +8,14 @@ set -e
 if [ "$1" ]; then
 	ROOT="$1"
 	chroot=chroot
+	shift
 else
 	ROOT=
 	chroot=
+fi
+
+if [ "$1" ]; then
+	ARCH="$1"
 fi
 
 . /usr/share/grub-installer/functions.sh
@@ -37,7 +42,7 @@ debug () {
 	[ -z "${DEBCONF_DEBUG}" ] || log "debug: $@"
 }
 
-ARCH="$(archdetect)"
+ARCH="${ARCH:-$(archdetect)}"
 info "architecture: $ARCH"
 
 umount_dirs=
@@ -494,17 +499,7 @@ case $ARCH in
 	if [ -f /var/lib/partman/ignore_uefi ]; then
 		grub_package="grub-pc"
 	else
-		grub_package="grub-efi"
-		# Override the package choice if we can figure out the
-		# right package to use directly
-		if [ -f /sys/firmware/efi/fw_platform_size ] ; then
-			SIZE=$(cat /sys/firmware/efi/fw_platform_size)
-			if [ $SIZE -eq 64 ] ; then
-				grub_package="grub-efi-amd64-signed"
-			elif [ $SIZE -eq 32 ] ; then
-				grub_package="grub-efi-ia32"
-			fi
-		fi
+		grub_package="grub-efi-amd64-signed"
 		if [ ! -d /target/boot/efi ]; then
 			# No EFI System Partition, so presumably the partitioner
 			# believed this to be unnecessary, perhaps because we're
@@ -1093,6 +1088,10 @@ EOF
 			# install even if it requires blocklists
 			grub_install_params="$grub_install_params --force"
 		fi
+
+		if [ "$ARCH" = "amd64/efi" ] ; then
+		        grub_install_params="$grub_install_params --target x86_64-efi"
+                fi
 
 		CODE=0
 		case $ARCH:$grub_package in
