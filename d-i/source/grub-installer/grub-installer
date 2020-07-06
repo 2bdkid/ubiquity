@@ -641,7 +641,7 @@ db_progress INFO grub-installer/progress/step_install
 # to grub legacy, or vice-versa
 case "$grub_package" in
     grub-pc)
-	log-output -t grub-installer $chroot $ROOT dpkg -P grub-efi grub-efi-amd64-bin grub-efi-amd64 grub-efi-amd64-signed grub-efi-ia32-bin grub-efi-ia32
+	log-output -t grub-installer $chroot $ROOT dpkg -P grub-efi grub-efi-amd64 grub-efi-ia32-bin grub-efi-ia32
 	;;
     grub-efi)
 	log-output -t grub-installer $chroot $ROOT dpkg -P grub-efi-amd64-signed

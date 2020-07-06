@@ -545,9 +545,7 @@ EOF
 
 	if [ -n "${SWAPFILE}" ]; then
 		swap_device="${DISK}${PARTBASE}${PARTSWAP}"
-		if [ ${ENCRYPTION} -eq 0 ]; then
-			swap_dev_fstab="UUID=$(blkid -s UUID -o value "${swap_device}")"
-		else
+		if [ ${ENCRYPTION} -eq 1 ]; then
 			# Format swap as Luks
 			swap_name="cryptoswap"
 			touch ${ZSYSTMP}/swap.keyfile
@@ -562,6 +560,10 @@ EOF
 			swap_dev_fstab="${swap_device}"
 		fi
 		mkswap -f "${swap_device}"
+		if [ ${ENCRYPTION} -eq 0 ]; then
+            # for unencrypted swap, this has to be after mkswap to read the right device id
+			swap_dev_fstab="UUID=$(blkid -s UUID -o value "${swap_device}")"
+        fi
 		printf "${swap_dev_fstab}\tnone\tswap\tsw\t0\t0\n" >> "${TARGET}/etc/fstab"
 		swapon -v "${swap_device}"
 	fi
