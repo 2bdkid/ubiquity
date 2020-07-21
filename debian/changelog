@@ -1,3 +1,11 @@
+ubiquity (20.10.9) groovy; urgency=medium
+
+  * gtk_ui, prepare: Run 'apt update' before installing OEM metapackages. We
+    need to pick up any which might have been released after the ISO was
+    created. (LP: #1888241)
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 21 Jul 2020 15:29:51 +0100
+
 ubiquity (20.10.8) groovy; urgency=medium
 
   [ Michael Hudson-Doyle ]

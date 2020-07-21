@@ -255,6 +255,7 @@ class Wizard(BaseFrontend):
         self.screen_reader = False
         self.orca_process = None
         self.a11y_settings = None
+        self.have_apt_updated = False
 
         # To get a "busy mouse":
         self.watch = Gdk.Cursor.new(Gdk.CursorType.WATCH)
@@ -406,8 +407,47 @@ class Wizard(BaseFrontend):
                 ['canberra-gtk-play', '--id=system-ready'],
                 preexec_fn=misc.drop_all_privileges)
 
+        self.save_oem_metapackages_list()
+
+    def save_oem_metapackages_list(self, wait_finished=False):
+        ''' If we can, update the apt indexes. Then run 'ubuntu-drivers
+        list-oem' to find any OEM metapackages for this system. If we've
+        already done this with updated apt indexes before, there's no point
+        running again, so just return. '''
+
+        # We already did it
+        if self.have_apt_updated:
+            syslog.syslog(syslog.LOG_INFO, "We've already apt updated and "
+                          "run, not doing so again.")
+            return
+
         with misc.raised_privileges():
+            try:
+                import apt
+                syslog.syslog(syslog.LOG_INFO, "Trying to update apt indexes "
+                              "to run ubuntu-drivers against fresh data.")
+                cache = apt.cache.Cache()
+                cache.update()
+                cache.open()
+                self.have_apt_updated = True
+            except apt.cache.FetchFailedException:
+                syslog.syslog(syslog.LOG_INFO,
+                              "Failed to update apt indexes; offline? "
+                              "Continuing without.")
+            except apt.cache.LockFailedException:
+                syslog.syslog(syslog.LOG_WARNING,
+                              "Failed to update apt indexes, permission "
+                              "denied: running under test?")
+
             if osextras.find_on_path('ubuntu-drivers'):
+                # We already ran, were offline then, and are still offline, no
+                # point running again.
+                if os.path.exists('/run/ubuntu-drivers-oem.autoinstall') and \
+                        not self.have_apt_updated:
+                    return
+
+                # It's either the first run or a subsequent one but we now
+                # managed to update the apt indexes.
                 self.ubuntu_drivers = subprocess.Popen(
                     ['ubuntu-drivers',
                      'list-oem',
@@ -416,6 +456,10 @@ class Wizard(BaseFrontend):
                     stdin=subprocess.DEVNULL,
                     stdout=subprocess.PIPE,
                     stderr=subprocess.DEVNULL)
+
+                if wait_finished:
+                    self.ubuntu_drivers.communicate()
+                    self.ubuntu_drivers = None
 
     def all_children(self, parent):
         if isinstance(parent, Gtk.Container):

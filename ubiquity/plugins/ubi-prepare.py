@@ -462,7 +462,15 @@ class Page(plugin.Plugin):
             with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
                 syslog.syslog(F'ubuntu-drivers list-oem finished with: "{" ".join(f.read().splitlines())}"')
         except FileNotFoundError:
-            syslog.syslog('ubuntu-drivers list-oem finished with no available packages')
+            syslog.syslog("ubuntu-drivers list-oem finished with no available packages. Maybe we need to apt update? "
+                          "Doing that and trying again.")
+            # We only do this when we really have to since it could be slow: apt update & re-run of ubuntu-drivers
+            self.frontend.save_oem_metapackages_list(wait_finished=True)
+            try:
+                with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
+                    syslog.syslog(F'ubuntu-drivers list-oem finished with: "{" ".join(f.read().splitlines())}"')
+            except FileNotFoundError:
+                syslog.syslog("No, we didn't find any OEM packages again.")
 
         if self.should_show_rst_page():
             if not self.ui.show_rst_page():
