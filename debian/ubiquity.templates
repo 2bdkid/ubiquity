@@ -656,6 +656,10 @@ Template: ubiquity/install/bootloader
 Type: text
 _Description: Configuring boot loader...
 
+Template: ubiquity/install/activedirectory
+Type: text
+_Description: Configuring Active Directory...
+
 Template: ubiquity/install/apt_clone_save
 Type: text
 _Description: Saving installed packages...
@@ -763,12 +767,11 @@ _Description: Error copying bluetooth configuration
  continue, but the bluetooth configuration will have to be set up again in the
  installed system.
 
-Template: ubiquity/install/broken_apt_clone
+Template: ubiquity/install/broken_active_directory
 Type: error
-_Description: Error restoring installed applications
- An error occurred while restoring previously-installed applications.  The
- installation will continue, but you may have to manually reinstall some
- applications after the computer reboots.
+_Description: Error configuring connection to Active Directory
+ Sorry, Active Directory can't be set up at the moment. Once your system is up
+ and running, visit help.ubuntu.com/activedirectory for help.
 
 Template: ubiquity/install/md5_check
 Type: boolean
@@ -1385,7 +1388,7 @@ Type: text
 # CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
 _Description: Reinstall ${CURDISTRO}
  Documents, music, and other personal files will be kept. Installed software
- will be kept where possible. System-wide settings will be cleared.
+ and system-wide settings will be cleared.
 
 Template: ubiquity/partitioner/multiple_os_format
 Type: text
@@ -1638,3 +1641,72 @@ _Description:
 Template: ubiquity/zfs_keystore_key
 Type: password
 _Description: Key to secure the keystore on ZFS installations
+
+Template: ubiquity/login_use_directory
+Type: text
+_Description: Authenticate against a directory
+
+Template: ubiquity/directory_domain
+Type: text
+_Description: Active Directory domain name
+
+Template: ubiquity/directory_user
+Type: text
+_Description: Administrator to join the domain
+
+Template: ubiquity/directory_passwd
+Type: password
+_Description: Administrator password to join the domain
+
+Template: ubiquity/text/login_directory
+Type: text
+_Description:
+ Use Active Directory
+
+Template: ubiquity/text/login_directory_extra_label
+Type: text
+_Description:
+  You'll enter domain and other details in the next step.
+
+Template: ubiquity/text/domain_label
+Type: text
+_Description:
+ Domain:
+
+Template: ubiquity/text/domain_name_error_label
+Type: text
+_Description:
+ You must enter a domain name
+
+Template: ubiquity/text/directory_testbutton
+Type: text
+_Description:
+ Test Connection
+
+Template: ubiquity/text/domain_user_label
+Type: text
+_Description:
+ Domain Administrator:
+
+Template: ubiquity/text/domain_user_error_label
+Type: text
+_Description:
+ You must enter a user name
+
+Template: ubiquity/text/domain_passwd_label
+Type: text
+_Description:
+ Password:
+
+Template: ubiquity/text/directory_information_title
+Type: text
+_Description: Configure Active Directory
+
+Template: ubiquity/text/hostname_error
+Type: text
+_Description: That name already exists on the network.
+
+Template: ubiquity/text/domain_connection_error
+Type: text
+_Description: Failed to connect to domain.
+

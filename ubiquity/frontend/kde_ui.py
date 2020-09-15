@@ -169,7 +169,7 @@ class Wizard(BaseFrontend):
         # We also need to indicate version as otherwise KDElibs3 compatibility
         # might kick in such as in QIconLoader.cpp:QString fallbackTheme.
         # http://goo.gl/6LkM7X
-        os.environ["KDE_SESSION_VERSION"] = "4"
+        os.environ["KDE_SESSION_VERSION"] = "5"
         # Pretty much all of the above but for Qt5
         os.environ["QT_QPA_PLATFORMTHEME"] = "kde"
 

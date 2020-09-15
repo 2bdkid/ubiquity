@@ -1,3 +1,17 @@
+ubiquity (20.10.10) groovy; urgency=medium
+
+  [ Didier Roche ]
+  [ Jean-Baptiste Lallement ]
+  * AD integration for GTK UI.
+  * bump KDE_SESSION_VERSION to 5 to fix xdg-open on Kubuntu (LP: #1890173)
+
+  [ Brian Murray ]
+  * Do not try to keep installed software when reinstalling Ubuntu as the
+    process was error prone (LP: 1152399) and did not provide a quailty
+    experience. (LP: #1798369)
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@ubuntu.com>  Tue, 15 Sep 2020 17:06:15 +0200
+
 ubiquity (20.10.9) groovy; urgency=medium
 
   * gtk_ui, prepare: Run 'apt update' before installing OEM metapackages. We

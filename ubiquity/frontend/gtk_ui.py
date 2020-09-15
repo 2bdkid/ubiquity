@@ -1887,13 +1887,21 @@ class Wizard(BaseFrontend):
             msg = title
         dialog = Gtk.MessageDialog(
             self.live_installer, Gtk.DialogFlags.MODAL,
-            Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, msg)
+            Gtk.MessageType.ERROR, Gtk.ButtonsType.OK, "")
         dialog.set_title(title)
+        dialog.set_markup(msg)
+        for label in dialog.get_message_area().get_children():
+            if not isinstance(label, Gtk.Label):
+                continue
+            label.connect('activate-link', self.on_link_clicked)
         dialog.run()
         self.set_busy_cursor(saved_busy_cursor)
         dialog.hide()
         if fatal:
             self.return_to_partitioning()
+
+    def on_link_clicked(self, widget, uri):
+        misc.launch_uri(uri)
 
     def toggle_grub_fail(self, unused_widget):
         if self.grub_no_new_device.get_active():

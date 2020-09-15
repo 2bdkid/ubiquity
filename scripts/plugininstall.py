@@ -228,6 +228,10 @@ class Install(install_misc.InstallBase):
         self.configure_zsys()
 
         self.next_region()
+        self.db.progress('INFO', 'ubiquity/install/activedirectory')
+        self.configure_active_directory()
+
+        self.next_region()
         self.db.progress('INFO', 'ubiquity/install/bootloader')
         self.copy_mok()
         self.configure_bootloader()
@@ -247,17 +251,6 @@ class Install(install_misc.InstallBase):
         if 'UBIQUITY_OEM_USER_CONFIG' not in os.environ:
             self.install_restricted_extras()
 
-        self.db.progress('INFO', 'ubiquity/install/apt_clone_restore')
-        try:
-            self.apt_clone_restore()
-        except Exception:
-            syslog.syslog(
-                syslog.LOG_WARNING,
-                'Could not restore packages from the previous install:')
-            for line in traceback.format_exc().split('\n'):
-                syslog.syslog(syslog.LOG_WARNING, line)
-            self.db.input('critical', 'ubiquity/install/broken_apt_clone')
-            self.db.go()
         try:
             self.copy_network_config()
         except Exception:
@@ -968,6 +961,72 @@ class Install(install_misc.InstallBase):
         if use_zfs:
             misc.execute_root('/usr/share/ubiquity/zsys-setup', 'finalize')
 
+    def configure_active_directory(self):
+        """ Join Active Directory domain and enable pam_mkhomedir """
+        use_directory = self.db.get('ubiquity/login_use_directory')
+        if use_directory != 'true':
+            return
+
+        from socket import gethostname
+        hostname_cur = gethostname()
+        hostname_new = ''
+        with open(self.target_file('etc/hostname'), 'r') as f:
+            hostname_new = f.read().strip()
+
+        # Set hostname for AD to determine FQDN (no fqdn option in realm join, only adcli)
+        misc.execute_root('hostname', hostname_new)
+
+        directory_domain = self.db.get('ubiquity/directory_domain')
+        directory_user = self.db.get('ubiquity/directory_user')
+        directory_passwd = self.db.get('ubiquity/directory_passwd')
+
+        binds = ("/proc", "/sys", "/dev", "/run")
+        try:
+            for bind in binds:
+                misc.execute('mount', '--bind', bind, self.target + bind)
+            # join AD on host (services are running on host)
+            if not self.join_domain(hostname_new, directory_domain, directory_user, directory_passwd):
+                self.db.input('critical', 'ubiquity/install/broken_active_directory')
+                self.db.go()
+        finally:
+            for bind in binds:
+                misc.execute('umount', '-f', self.target + bind)
+            # Reset hostname
+            misc.execute_root('hostname', hostname_cur)
+
+        # Enable pam_mkhomedir
+        try:
+            subprocess.check_call(['chroot', self.target, 'pam-auth-update',
+                                   '--package', '--enable', 'mkhomedir'],
+                                  preexec_fn=install_misc.debconf_disconnect)
+        except subprocess.CalledProcessError:
+            self.db.input('critical', 'ubiquity/install/broken_active_directory')
+            self.db.go()
+
+    def join_domain(self, hostname, directory_domain, directory_user, directory_passwd):
+        """ Join an Active Directory domain """
+        log_args = ['log-output', '-t', 'ubiquity']
+        log_args.extend(['realm', 'join', '--install', self.target,
+                         '--user', directory_user, '--computer-name', hostname,
+                         '--unattended', directory_domain])
+        try:
+            p = subprocess.run(log_args, input=directory_passwd, timeout=60, encoding="utf-8")
+        except TimeoutError as e:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
+            syslog.syslog(syslog.LOG_ERR, "Command timed out(%s): %s" % (e.errno, e.strerror))
+            return False
+        except IOError as e:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
+            syslog.syslog(syslog.LOG_ERR, "OS error(%s): %s" % (e.errno, e.strerror))
+            return False
+
+        if p.returncode != 0:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
+            return False
+
+        syslog.syslog(' '.join(log_args))
+        return True
+
     def copy_mok(self):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             return
@@ -1509,31 +1568,6 @@ class Install(install_misc.InstallBase):
                 for line in installed:
                     print(line, file=fp)
 
-    def apt_clone_restore(self):
-        if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
-            return
-        import lsb_release
-        working = self.target_file('ubiquity-apt-clone')
-        working = os.path.join(working,
-                               'apt-clone-state-%s.tar.gz' % os.uname()[1])
-        codename = lsb_release.get_distro_information()['CODENAME']
-        if not os.path.exists(working):
-            return
-        install_misc.chroot_setup(self.target)
-        binds = ("/proc", "/sys", "/dev", "/run")
-        try:
-            for bind in binds:
-                misc.execute('mount', '--bind', bind, self.target + bind)
-            restore_cmd = [
-                'apt-clone', 'restore-new-distro',
-                working, codename, '--destination', self.target]
-            subprocess.check_call(
-                restore_cmd, preexec_fn=install_misc.debconf_disconnect)
-        finally:
-            install_misc.chroot_cleanup(self.target)
-            for bind in binds:
-                misc.execute('umount', '-f', self.target + bind)
-
     def copy_network_config(self):
         if 'UBIQUITY_OEM_USER_CONFIG' in os.environ:
             return
@@ -1703,12 +1737,6 @@ class Install(install_misc.InstallBase):
                 with open(tf, 'w') as oem_id_file:
                     print(oem_id, file=oem_id_file)
         except (debconf.DebconfError, IOError):
-            pass
-        try:
-            path = self.target_file('ubiquity-apt-clone')
-            if os.path.exists(path):
-                shutil.move(path, self.target_file('var/log/installer'))
-        except IOError:
             pass
 
     def save_random_seed(self):

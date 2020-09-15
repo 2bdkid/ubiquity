@@ -41,6 +41,7 @@ class UserSetupTests(unittest.TestCase):
         error_msg = 'That name already exists on the network.'
         self.gtk.resolver = UbiquityMockResolver.MockResolver(
             hostname='myhostname')
+        self.gtk.plugin_translate('en')
         self.gtk.hostname_ok.show()
         self.gtk.hostname.set_text('myhostname')
         self.gtk.hostname_error = mock.Mock()

@@ -65,6 +65,8 @@ class Install(FilteredCommand):
             return True
         elif question == 'apt-setup/security-updates-failed':
             fatal = False
+        elif question == 'ubiquity/install/broken_active_directory':
+            fatal = False
         else:
             fatal = True
         self.frontend.error_dialog(self.description(question),
