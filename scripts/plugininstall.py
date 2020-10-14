@@ -784,15 +784,6 @@ class Install(install_misc.InstallBase):
             script += '-oem'
         misc.execute(script)
 
-        osextras.unlink_force(self.target_file('etc/popularity-contest.conf'))
-        try:
-            participate = self.db.get('popularity-contest/participate')
-            install_misc.set_debconf(
-                self.target, 'popularity-contest/participate', participate,
-                self.db)
-        except debconf.DebconfError:
-            pass
-
         osextras.unlink_force(self.target_file('etc/papersize'))
         subprocess.call(['log-output', '-t', 'ubiquity', 'chroot', self.target,
                          'ucf', '--purge', '/etc/papersize'],
@@ -824,7 +815,6 @@ class Install(install_misc.InstallBase):
             pass
 
         packages = ['linux-image-' + self.kernel_version,
-                    'popularity-contest',
                     'libpaper1',
                     'ssl-cert']
         arch, subarch = install_misc.archdetect()

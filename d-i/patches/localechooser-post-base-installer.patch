@@ -12,7 +12,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
  EXTRAS=""
  if db_get localechooser/supported-locales; then
  	EXTRAS="$(echo "$RET" | sed 's/,//g')"
-@@ -36,29 +39,136 @@
+@@ -36,29 +39,137 @@
  	# different location may imply a different dialect of the language.
  	# In such cases, make LANG reflect the selected language (for
  	# messages, character types, and collation) and make the other
@@ -120,6 +120,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
 +		    IT) deflang=it ;;
 +		    MA) deflang=ar ;;
 +		    MK) deflang=mk ;;
++		    MM) deflang=my ;;
 +		    NG) deflang=en ;;
 +		    NL) deflang=nl ;;
 +		    NZ) deflang=en ;;

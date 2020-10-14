@@ -102,7 +102,6 @@ def get_translations(languages=None, core_names=[], extra_prefixes=[]):
             'partman-target/no_root',
             'partman-target/text/method',
             'grub-installer/bootdev',
-            'popularity-contest/participate',
         ))
         prefixes = reduce(lambda x, y: x + '|' + y, extra_prefixes, prefixes)
 

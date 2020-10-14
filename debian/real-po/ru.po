@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2020-04-08 09:24+0100\n"
+"POT-Creation-Date: 2020-10-01 17:47+0200\n"
 "PO-Revision-Date: 2020-04-15 02:28+0000\n"
 "Last-Translator: Igor Zubarev <igor.zubarev@gmail.com>\n"
 "Language-Team: Russian <debian-l10n-russian@lists.debian.org>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
 "X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
-"Language: ru\n"
 
 #. Type: text
 #. Description
@@ -46,7 +46,7 @@ msgstr "Перезагрузите для продолжения"
 #. This is used as a window title.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:7001 ../ubiquity.templates:184001
+#: ../ubiquity.templates:7001 ../ubiquity.templates:185001
 msgid "Install"
 msgstr "Установка"
 
@@ -214,8 +214,7 @@ msgstr "Должен начинаться со строчной буквы."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Может содержать только строчные буквы, цифры, дефисы и символы подчёркивания."
 
@@ -573,7 +572,7 @@ msgstr "Удалить"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:84001 ../ubiquity.templates:303001
+#: ../ubiquity.templates:84001 ../ubiquity.templates:305001
 msgid "Revert"
 msgstr "Вернуть"
 
@@ -957,78 +956,86 @@ msgstr "Настройка загрузчика..."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
+#, fuzzy
+#| msgid "Configuring time zone..."
+msgid "Configuring Active Directory..."
+msgstr "Настройка часового пояса..."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:135001
 msgid "Saving installed packages..."
 msgstr "Сохранение установленных пакетов..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:135001
+#: ../ubiquity.templates:136001
 msgid "Restoring previously installed packages..."
 msgstr "Восстановление ранее установленных пакетов..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:136001
+#: ../ubiquity.templates:137001
 msgid "Installing additional packages..."
 msgstr "Установка дополнительных пакетов..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:137001
+#: ../ubiquity.templates:138001
 msgid "Checking for packages to install..."
 msgstr "Проверка пакетов для установки..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:138001
+#: ../ubiquity.templates:139001
 msgid "Removing extra packages..."
 msgstr "Удаление дополнительных пакетов..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:139001
+#: ../ubiquity.templates:140001
 msgid "Checking for packages to remove..."
 msgstr "Выбор пакетов для удаления..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:140001
+#: ../ubiquity.templates:141001
 msgid "Downloading packages (${TIME} remaining)..."
 msgstr "Загрузка пакетов (осталось ${TIME})..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:141001
+#: ../ubiquity.templates:142001
 msgid "Downloading package lists..."
 msgstr "Загружаются списки пакетов..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:142001
+#: ../ubiquity.templates:143001
 msgid "Downloading package lists (${TIME} remaining)..."
 msgstr "Загрузка списков пакетов (осталось ${TIME})..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:144001
+#: ../ubiquity.templates:145001
 msgid "Error installing ${PACKAGE}"
 msgstr "Ошибка при установке ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:145001
+#: ../ubiquity.templates:146001
 msgid "Error removing ${PACKAGE}"
 msgstr "Ошибка при удалении ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001
+#: ../ubiquity.templates:147001
 msgid "Error while installing packages"
 msgstr "Ошибка при установке пакетов"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001
+#: ../ubiquity.templates:147001
 msgid "An error occurred while installing packages:"
 msgstr "В процессе установки пакетов произошла ошибка:"
 
@@ -1036,7 +1043,7 @@ msgstr "В процессе установки пакетов произошла
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001 ../ubiquity.templates:147001
+#: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid "The following packages are in a broken state:"
 msgstr "Эти пакеты повреждены:"
 
@@ -1044,15 +1051,15 @@ msgstr "Эти пакеты повреждены:"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001 ../ubiquity.templates:147001
+#: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Это могло случиться по причине использования устаревшего установочного "
 "образа или из-за ошибки в некоторых пакетах, перечисленных выше. Более "
@@ -1065,25 +1072,25 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:147001
+#: ../ubiquity.templates:148001
 msgid "Error while removing packages"
 msgstr "Ошибка при удалении пакетов"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:147001
+#: ../ubiquity.templates:148001
 msgid "An error occurred while removing packages:"
 msgstr "Произошла ошибка при удалении пакетов:"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:148001
+#: ../ubiquity.templates:149001
 msgid "Error copying network configuration"
 msgstr "Ошибка копирования сетевых настроек"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:148001
+#: ../ubiquity.templates:149001
 msgid ""
 "An error occurred while copying the network settings.  The installation will "
 "continue, but the network configuration will have to be set up again in the "
@@ -1094,13 +1101,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:149001
+#: ../ubiquity.templates:150001
 msgid "Error copying bluetooth configuration"
 msgstr "Ошибка при копировании конфигурации bluetooth"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:149001
+#: ../ubiquity.templates:150001
 msgid ""
 "An error occurred while copying the bluetooth settings.  The installation "
 "will continue, but the bluetooth configuration will have to be set up again "
@@ -1112,49 +1119,45 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:150001
-msgid "Error restoring installed applications"
-msgstr "Произошла ошибка при восстановлении установленных приложений"
+#: ../ubiquity.templates:151001
+msgid "Error configuring connection to Active Directory"
+msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:150001
+#: ../ubiquity.templates:151001
 msgid ""
-"An error occurred while restoring previously-installed applications.  The "
-"installation will continue, but you may have to manually reinstall some "
-"applications after the computer reboots."
+"Sorry, Active Directory can't be set up at the moment. Once your system is "
+"up and running, visit help.ubuntu.com/activedirectory for help."
 msgstr ""
-"Произошла ошибка при восстановлении ранее установленных приложений. "
-"Установка будет продолжена, но вы должны будете переустановить некоторые "
-"приложения после перезагрузки компьютера."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:154001
+#: ../ubiquity.templates:155001
 msgid "Calculating files to skip copying..."
 msgstr "Подсчёт пропускаемых файлов..."
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:155001
+#: ../ubiquity.templates:156001
 msgid "Installing language packs"
 msgstr "Установка языковых пакетов"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:156001
+#: ../ubiquity.templates:157001
 msgid "Downloading language packs (${TIME} remaining)..."
 msgstr "Загрузка языковых пакетов (осталось ${TIME})..."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid "Failed to unmount partitions"
 msgstr "Не удалось отключить разделы"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid ""
 "The installer needs to commit changes to partition tables, but cannot do so "
 "because partitions on the following mount points could not be unmounted:"
@@ -1164,27 +1167,26 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid "Please close any applications using these mount points."
 msgstr ""
 "Пожалуйста, закройте все приложения, использующие эти точки подключения."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+#: ../ubiquity.templates:166001
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr "Вы хотите, чтобы установщик еще раз попытался отключить эти разделы?"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid "Do you want to return to the partitioner?"
 msgstr "Вернуться к этапу разметки?"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid ""
 "Some of the partitions you created are too small.  Please make the following "
 "partitions at least this large:"
@@ -1194,7 +1196,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid ""
 "If you do not go back to the partitioner and increase the size of these "
 "partitions, the installation may fail."
@@ -1204,7 +1206,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:173001
+#: ../ubiquity.templates:174001
 msgid "System Configuration"
 msgstr "Настройка системы"
 
@@ -1212,25 +1214,25 @@ msgstr "Настройка системы"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:174001 ../ubiquity.templates:257001
+#: ../ubiquity.templates:175001 ../ubiquity.templates:258001
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:175001
+#: ../ubiquity.templates:176001
 msgid "Network configuration"
 msgstr "Конфигурация сети"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:176001
+#: ../ubiquity.templates:177001
 msgid "Software selection"
 msgstr "Выбор программ"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:177001
+#: ../ubiquity.templates:178001
 msgid "Language"
 msgstr "Язык"
 
@@ -1238,111 +1240,111 @@ msgstr "Язык"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:178001 ../ubiquity.templates:202001
+#: ../ubiquity.templates:179001 ../ubiquity.templates:203001
 msgid "Wireless"
 msgstr "Беспроводная сеть"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:179001
+#: ../ubiquity.templates:180001
 msgid "Software"
 msgstr "Приложения"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:180001
+#: ../ubiquity.templates:181001
 msgid "Timezone"
 msgstr "Часовой пояс"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:181001
+#: ../ubiquity.templates:182001
 msgid "Keyboard"
 msgstr "Клавиатура"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:182001
+#: ../ubiquity.templates:183001
 msgid "Disk Setup"
 msgstr "Разметка диска"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:183001
+#: ../ubiquity.templates:184001
 msgid "User Info"
 msgstr "Сведения о пользователе"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:185001
+#: ../ubiquity.templates:186001
 msgid "installation process"
 msgstr "процесс установки"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:187001
+#: ../ubiquity.templates:188001
 msgid "Checking for installer updates"
 msgstr "Поиск обновлённой версии установщика"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:188001
+#: ../ubiquity.templates:189001
 msgid "Reading package information"
 msgstr "Чтение информации о пакете"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:189001
+#: ../ubiquity.templates:190001
 msgid "Updating package information"
 msgstr "Обновление информации о пакете"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:190001
+#: ../ubiquity.templates:191001
 msgid "File ${INDEX} of ${TOTAL} at ${SPEED}/s"
 msgstr "Файл ${INDEX} из ${TOTAL} на скорости ${SPEED}/с"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:191001
+#: ../ubiquity.templates:192001
 msgid "File ${INDEX} of ${TOTAL}"
 msgstr "Файл ${INDEX} из ${TOTAL}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:192001
+#: ../ubiquity.templates:193001
 msgid "Installing update"
 msgstr "Установка обновления"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:193001
+#: ../ubiquity.templates:194001
 msgid "Error updating installer"
 msgstr "Ошибка обновления программы установки"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:193001
+#: ../ubiquity.templates:194001
 msgid "The installer encountered an error while trying to update itself:"
 msgstr "Программа установки обнаружила ошибку при обновлении:"
 
 #. Type: text
 #. Description
 #. Translated acronym for Universal Serial Bus.
-#: ../ubiquity.templates:194001
+#: ../ubiquity.templates:195001
 msgid "USB disk"
 msgstr "USB-диск"
 
 #. Type: text
 #. Description
 #. Translated acronym for Compact Disc.
-#: ../ubiquity.templates:195001
+#: ../ubiquity.templates:196001
 msgid "CD"
 msgstr "CD"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:196001
+#: ../ubiquity.templates:197001
 msgid ""
 "Please choose the language to use for the install process. This language "
 "will be the default language for this computer."
@@ -1352,7 +1354,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:197001
+#: ../ubiquity.templates:198001
 msgid ""
 "Please choose the language used for the configuration process. This language "
 "will be the default language for this computer."
@@ -1364,13 +1366,13 @@ msgstr ""
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:198001 ../ubiquity.templates:199001
+#: ../ubiquity.templates:199001 ../ubiquity.templates:200001
 msgid "Installation failed"
 msgstr "Установка не удалась"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:198001
+#: ../ubiquity.templates:199001
 msgid ""
 "The installer encountered an unrecoverable error.  A desktop session will "
 "now be run so that you may investigate the problem or try installing again."
@@ -1380,20 +1382,20 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:199001
+#: ../ubiquity.templates:200001
 msgid "The installer encountered an unrecoverable error and will now reboot."
 msgstr ""
 "Установщик столкнулся с неисправимой ошибкой, сейчас последует перезагрузка."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:201001
+#: ../ubiquity.templates:202001
 msgid "Updates and other software"
 msgstr "Обновления и другие программы"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:203001
+#: ../ubiquity.templates:204001
 msgid ""
 "Connecting this computer to a wi-fi network allows you to install third-"
 "party software, download updates, automatically detect your timezone, and "
@@ -1405,49 +1407,51 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:204001
+#. Type: text
+#. Description
+#: ../ubiquity.templates:205001 ../ubiquity.templates:327001
 msgid "Password:"
 msgstr "Пароль:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:205001
+#: ../ubiquity.templates:206001
 msgid "Display password"
 msgstr "Отображать пароль"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:206001
+#: ../ubiquity.templates:207001
 msgid "I don't want to connect to a wi-fi network right now"
 msgstr "На данный момент я не хочу подключатся к wifi-сети"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:207001
+#: ../ubiquity.templates:208001
 msgid "Connect to this network"
 msgstr "Подключиться к этой сети"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:213001
+#: ../ubiquity.templates:214001
 msgid "Select drive:"
 msgstr "Выберите диск:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:214001
+#: ../ubiquity.templates:215001
 msgid "Allocate drive space by dragging the divider below:"
 msgstr "Распределите место на диске, перемещая разделитель ниже:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:215001
+#: ../ubiquity.templates:216001
 msgid "The entire disk will be used:"
 msgstr "Диск будет использован целиком:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:216001
+#: ../ubiquity.templates:217001
 #, no-c-format
 msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
@@ -1458,7 +1462,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:217001
+#: ../ubiquity.templates:218001
 msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
@@ -1468,7 +1472,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:218001
+#: ../ubiquity.templates:219001
 #, no-c-format
 msgid ""
 "%d partitions will be deleted, use the <a href=\"\">advanced partitioning "
@@ -1479,7 +1483,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:219001
+#: ../ubiquity.templates:220001
 msgid ""
 "1 partition will be deleted, use the <a href=\"\">advanced partitioning "
 "tool</a> for more control"
@@ -1489,86 +1493,86 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:220001
+#: ../ubiquity.templates:221001
 msgid "Split Largest Partition"
 msgstr "Разделить наибольший раздел"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:222001
+#: ../ubiquity.templates:223001
 msgid "For best results, please ensure that this computer:"
 msgstr ""
 "Для достижения наилучшего результата убедитесь в том, что этот компьютер:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:223001
+#: ../ubiquity.templates:224001
 msgid "Sorry"
 msgstr "Извините"
 
 #. Type: text
 #. Description
 #. RST means "Rapid Storage Technology". Don't translate it.
-#: ../ubiquity.templates:224001
+#: ../ubiquity.templates:225001
 msgid "Turn off RST"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:225001
+#: ../ubiquity.templates:226001
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a "
-"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity.templates:226001
-msgid "Turn off BitLocker"
+"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
+"com/rst</a>"
 msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
+msgid "Turn off BitLocker"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:228001
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a "
-"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
+"\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
 
 #. Type: text
 #. Description
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #. RELEASE is a variable substituted into this string, the Ubuntu flavor'
-#: ../ubiquity.templates:228001
+#: ../ubiquity.templates:229001
 msgid "You need at least ${SIZE} disk space to install ${RELEASE}."
 msgstr "Необходимо не менее ${SIZE} места на диске для установки ${RELEASE}."
 
 #. Type: text
 #. Description
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
-#: ../ubiquity.templates:229001
+#: ../ubiquity.templates:230001
 msgid "This computer has only ${SIZE}."
 msgstr "На этом компьютере только ${SIZE}."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:230001
+#: ../ubiquity.templates:231001
 msgid "is plugged in to a power source"
 msgstr "подключен к источнику электропитания"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:231001
+#: ../ubiquity.templates:232001
 msgid "is connected to the Internet"
 msgstr "подключен к Интернету"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:232001
+#: ../ubiquity.templates:233001
 msgid ""
 "This software is subject to license terms included with its documentation. "
 "Some is proprietary."
@@ -1578,7 +1582,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:233001
+#: ../ubiquity.templates:234001
 msgid ""
 "Install third-party software for graphics and Wi-Fi hardware and additional "
 "media formats"
@@ -1588,67 +1592,67 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:234001
+#: ../ubiquity.templates:235001
 msgid "Download updates while installing ${RELEASE}"
 msgstr "Загрузить обновления во время установки ${RELEASE}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:235001
+#: ../ubiquity.templates:236001
 msgid "This saves time after installation."
 msgstr "Это сохранит вам время после установки."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:236001
+#: ../ubiquity.templates:237001
 msgid "Not available because there is no Internet connection."
 msgstr "Недоступно, так как отсутствует подключение к Интернету."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:237001
+#: ../ubiquity.templates:238001
 msgid "What apps would you like to install to start with?"
 msgstr "Какие приложения вы хотите установить для начала?"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:238001
+#: ../ubiquity.templates:239001
 msgid "Which applications would you like to start with?"
 msgstr "С какими приложениями вы бы хотели начать?"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:239001
+#: ../ubiquity.templates:240001
 msgid "Minimal installation"
 msgstr "Минимальная установка"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:240001
+#: ../ubiquity.templates:241001
 msgid "Web browser and basic utilities."
 msgstr "Веб-браузер и основные утилиты."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:241001
+#: ../ubiquity.templates:242001
 msgid "Web browser plus basic utilities and applications."
 msgstr "Веб-браузер плюс базовые утилиты и приложения."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:242001
+#: ../ubiquity.templates:243001
 msgid "Normal installation"
 msgstr "Обычная установка"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:243001
+#: ../ubiquity.templates:244001
 msgid "Web browser, utilities, office software, games, and media players."
 msgstr "Веб-браузер, утилиты, офисные приложения, игры и медиапроигрыватели."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:244001
+#: ../ubiquity.templates:245001
 msgid ""
 "Web browser, utilities, office software, plus additional internet "
 "applications and media players."
@@ -1658,13 +1662,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:245001
+#: ../ubiquity.templates:246001
 msgid "Other options"
 msgstr "Другие опции"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:246001
+#: ../ubiquity.templates:247001
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
@@ -1675,25 +1679,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:250001
+#: ../ubiquity.templates:251001
 msgid "Layout:"
 msgstr "Раскладка:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:251001
+#: ../ubiquity.templates:252001
 msgid "Variant:"
 msgstr "Вариант:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:252001
+#: ../ubiquity.templates:253001
 msgid "Below is an image of your current layout:"
 msgstr "Образец раскладки:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:253001
+#: ../ubiquity.templates:254001
 msgid ""
 "Select your location, so that the system can use appropriate display "
 "conventions for your country, fetch updates from sites close to you, and set "
@@ -1705,19 +1709,19 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:254001
+#: ../ubiquity.templates:255001
 msgid "Time Zone:"
 msgstr "Часовой пояс:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:255001
+#: ../ubiquity.templates:256001
 msgid "Region:"
 msgstr "Область:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:256001
+#: ../ubiquity.templates:257001
 msgid "[type here to change]"
 msgstr "[ввод текста]"
 
@@ -1725,14 +1729,14 @@ msgstr "[ввод текста]"
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:259001
+#: ../ubiquity.templates:260001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "Заменить ${OS} на ${DISTRO}"
 
 #. Type: text
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:259001
+#: ../ubiquity.templates:260001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all of your "
 "${OS} programs, documents, photos, music, and any other files."
@@ -1744,7 +1748,7 @@ msgstr ""
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:260001
+#: ../ubiquity.templates:261001
 msgid "Install ${DISTRO} alongside ${OS}"
 msgstr "Установить ${DISTRO} рядом с ${OS}"
 
@@ -1756,8 +1760,8 @@ msgstr "Установить ${DISTRO} рядом с ${OS}"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:260001 ../ubiquity.templates:261001
-#: ../ubiquity.templates:264001 ../ubiquity.templates:269001
+#: ../ubiquity.templates:261001 ../ubiquity.templates:262001
+#: ../ubiquity.templates:265001 ../ubiquity.templates:270001
 msgid ""
 "Documents, music, and other personal files will be kept. You can choose "
 "which operating system you want each time the computer starts up."
@@ -1769,20 +1773,20 @@ msgstr ""
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:261001
+#: ../ubiquity.templates:262001
 msgid "Install ${DISTRO} inside ${OS}"
 msgstr "Установить ${DISTRO} внутри ${OS}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:262001
+#: ../ubiquity.templates:263001
 msgid "Something else"
 msgstr "Другой вариант"
 
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:262001
+#: ../ubiquity.templates:263001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
 "for ${DISTRO}."
@@ -1793,14 +1797,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:263001
+#: ../ubiquity.templates:264001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr "Удалить ${CURDISTRO} и совершить переустановку"
 
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:263001
+#: ../ubiquity.templates:264001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
@@ -1813,7 +1817,7 @@ msgstr ""
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. VER is a variable substituted into this string, and may be '11.04'
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:264001
+#: ../ubiquity.templates:265001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
 msgstr "Установить ${DISTRO} ${VER} рядом с ${CURDISTRO}"
 
@@ -1823,13 +1827,13 @@ msgstr "Установить ${DISTRO} ${VER} рядом с ${CURDISTRO}"
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:265001 ../ubiquity.templates:268001
+#: ../ubiquity.templates:266001 ../ubiquity.templates:269001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "Стереть диск и установить ${DISTRO}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:265001
+#: ../ubiquity.templates:266001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
@@ -1839,7 +1843,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:266001
+#: ../ubiquity.templates:267001
 msgid "Erase everything and reinstall"
 msgstr "Удалить все и запустить переустановку"
 
@@ -1847,7 +1851,7 @@ msgstr "Удалить все и запустить переустановку"
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:266001
+#: ../ubiquity.templates:267001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and other files in both ${OS} and "
@@ -1860,16 +1864,21 @@ msgstr ""
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:267001
+#: ../ubiquity.templates:268001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "Переустановить ${CURDISTRO}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:267001
+#: ../ubiquity.templates:268001
+#, fuzzy
+#| msgid ""
+#| "Documents, music, and other personal files will be kept. Installed "
+#| "software will be kept where possible. System-wide settings will be "
+#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
-"will be kept where possible. System-wide settings will be cleared."
+"and system-wide settings will be cleared."
 msgstr ""
 "Документы, музыка и другие личные файлы будут сохранены. Установленное "
 "программное обеспечение будет сохранено настолько, насколько это возможно. "
@@ -1877,7 +1886,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:268001
+#: ../ubiquity.templates:269001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and any other files in all operating "
@@ -1889,14 +1898,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:269001
+#: ../ubiquity.templates:270001
 msgid "Install ${DISTRO} alongside them"
 msgstr "Установить ${DISTRO} рядом с ними"
 
 #. Type: text
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:270001
+#: ../ubiquity.templates:271001
 msgid "This computer currently has ${OS} on it. What would you like to do?"
 msgstr ""
 "На этом компьютере в данный момент установлена система ${OS}. Что вы желаете "
@@ -1906,7 +1915,7 @@ msgstr ""
 #. Description
 #. OS1 is a variable substituted into this string, and may be 'Windows 7'
 #. OS2 is a variable substituted into this string, and may be 'Mac OS X'
-#: ../ubiquity.templates:271001
+#: ../ubiquity.templates:272001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
@@ -1916,7 +1925,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:272001
+#: ../ubiquity.templates:273001
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
@@ -1926,7 +1935,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:273001
+#: ../ubiquity.templates:274001
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
@@ -1936,37 +1945,37 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:274001
+#: ../ubiquity.templates:275001
 msgid "Before:"
 msgstr "До:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:275001
+#: ../ubiquity.templates:276001
 msgid "After:"
 msgstr "После:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:276001
+#: ../ubiquity.templates:277001
 msgid "Encrypt the new ${RELEASE} installation for security"
 msgstr "Зашифровать новую установку ${RELEASE} в целях безопасности"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:277001
+#: ../ubiquity.templates:278001
 msgid "You will choose a security key in the next step."
 msgstr "Ключ безопасности можно будет выбрать позднее."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:279001
 msgid "Use LVM with the new ${RELEASE} installation"
 msgstr "Использовать LVM при новой установке ${RELEASE}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:280001
 msgid ""
 "This will set up Logical Volume Management. It allows taking snapshots and "
 "easier partition resizing."
@@ -1977,31 +1986,35 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
-msgid "EXPERIMENTAL: Erase disk and use ZFS"
+#: ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "EXPERIMENTAL: Erase disk and use ZFS"
+msgid "Erase disk and use ZFS"
 msgstr "Экспериментальное: Стереть диск и использовать ZFS"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:282001
+#, fuzzy
+#| msgid ""
+#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
+#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
-"on all operating systems. This is experimental and may cause data loss. Do "
-"not use on production systems."
+"on all operating systems."
 msgstr ""
-"<span foreground=\"darkred\">Предупреждение:</span> Это удалит все ваши "
-"файлы во всех операционных системах. Это экспериментально и может привести к "
-"потере данных. Не использовать в производственных системах."
+"<span foreground=\"darkred\">Внимание:</span> Это действие удалит все файлы "
+"на диске."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:284001
 msgid "Advanced Features"
 msgstr "Дополнительные возможности"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:285001
 msgid "None"
 msgstr "Нет"
 
@@ -2009,49 +2022,57 @@ msgstr "Нет"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:285001 ../ubiquity.templates:287001
+#: ../ubiquity.templates:286001 ../ubiquity.templates:288001
 msgid "None selected"
 msgstr "Ничего не выбрано"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:287001
 msgid "Advanced features..."
 msgstr "Дополнительные возможности..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:289001
 msgid "LVM selected"
 msgstr "Выбран LVM"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:289001
+#: ../ubiquity.templates:290001
 msgid "LVM and encryption selected"
 msgstr "Выбрано LVM и шифрование"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:291001
 msgid "ZFS selected"
 msgstr "Выбрана ZFS"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:292001
+#, fuzzy
+#| msgid "LVM and encryption selected"
+msgid "ZFS and encryption selected"
+msgstr "Выбрано LVM и шифрование"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:293001
 msgid "Confirm the security key:"
 msgstr "Подтвердите ключ безопасности:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:294001
 msgid "Choose a security key:"
 msgstr "Выберите ключ безопасности:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:295001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -2061,13 +2082,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:296001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Любые файлы вне ${RELEASE} не будут зашифрованы."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:297001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -2079,61 +2100,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:298001
 msgid "For more security:"
 msgstr "Для большей безопасности:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:299001
 msgid "Overwrite empty disk space"
 msgstr "Перезаписать пустое дисковое пространство"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:298001
+#: ../ubiquity.templates:300001
 msgid "The installation may take much longer."
 msgstr "Установка может занять значительно больше времени."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:299001
+#: ../ubiquity.templates:301001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:300001
+#: ../ubiquity.templates:302001
 msgid "Volume groups:"
 msgstr "Группы логических дисков:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:301001
+#: ../ubiquity.templates:303001
 msgid "Encryption Options"
 msgstr "Параметры шифрования"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:302001
+#: ../ubiquity.templates:304001
 msgid "Physical volumes:"
 msgstr "Физические диски:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:304001
+#: ../ubiquity.templates:306001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Зашифровать этот раздел (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:305001
+#: ../ubiquity.templates:307001
 msgid "MB"
 msgstr "МБ"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:306001
+#: ../ubiquity.templates:308001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2143,25 +2164,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:307001
+#: ../ubiquity.templates:309001
 msgid "Logical Volume Management"
 msgstr "Управление логическими дисками"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:308001
+#: ../ubiquity.templates:310001
 msgid "Encryption options..."
 msgstr "Параметры шифрования..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:309001
+#: ../ubiquity.templates:311001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2176,7 +2197,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2191,7 +2212,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2205,17 +2226,115 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:311001
+#: ../ubiquity.templates:313001
 msgid "SecureBoot key for MokPW"
 msgstr "Ключ SecureBoot для MokPW"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:312001
+#: ../ubiquity.templates:314001
 #, no-c-format
 msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
 msgstr ""
 "раздел #%(partid)s в качестве %(parttype)s используется для %(partusage)s"
+
+#. Type: password
+#. Description
+#: ../ubiquity.templates:315001
+msgid "Key to secure the keystore on ZFS installations"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:316001
+msgid "Authenticate against a directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:317001
+msgid "Active Directory domain name"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:318001
+msgid "Administrator to join the domain"
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../ubiquity.templates:319001
+msgid "Administrator password to join the domain"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:320001
+msgid "Use Active Directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:321001
+#, fuzzy
+#| msgid "You will choose a security key in the next step."
+msgid " You'll enter domain and other details in the next step."
+msgstr "Ключ безопасности можно будет выбрать позднее."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:322001
+msgid "Domain:"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:323001
+msgid "You must enter a domain name"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:324001
+#, fuzzy
+#| msgid "Connecting..."
+msgid "Test Connection"
+msgstr "Соединение…"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:325001
+msgid "Domain Administrator:"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:326001
+#, fuzzy
+#| msgid "Your computer's name:"
+msgid "You must enter a user name"
+msgstr "Имя вашего компьютера:"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:328001
+msgid "Configure Active Directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:329001
+msgid "That name already exists on the network."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:330001
+#, fuzzy
+#| msgid "Failed to unmount partitions"
+msgid "Failed to connect to domain."
+msgstr "Не удалось отключить разделы"
 
 #. Type: title
 #. Description
@@ -2281,9 +2400,30 @@ msgstr ""
 msgid "Removing packages"
 msgstr "Удаление пакетов"
 
+#~ msgid "Error restoring installed applications"
+#~ msgstr "Произошла ошибка при восстановлении установленных приложений"
+
+#~ msgid ""
+#~ "An error occurred while restoring previously-installed applications.  The "
+#~ "installation will continue, but you may have to manually reinstall some "
+#~ "applications after the computer reboots."
+#~ msgstr ""
+#~ "Произошла ошибка при восстановлении ранее установленных приложений. "
+#~ "Установка будет продолжена, но вы должны будете переустановить некоторые "
+#~ "приложения после перезагрузки компьютера."
+
+#~ msgid ""
+#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your "
+#~ "files on all operating systems. This is experimental and may cause data "
+#~ "loss. Do not use on production systems."
+#~ msgstr ""
+#~ "<span foreground=\"darkred\">Предупреждение:</span> Это удалит все ваши "
+#~ "файлы во всех операционных системах. Это экспериментально и может "
+#~ "привести к потере данных. Не использовать в производственных системах."
+
 #~ msgid ""
 #~ "Web browser, utilities, office software, KDE PIM suite plus additional "
 #~ "internet applications and media players."
 #~ msgstr ""
-#~ "Веб-браузер, утилиты, офисное программное обеспечение, комплект KDE PIM плюс "
-#~ "дополнительные интернет-приложения и медиаплееры."
+#~ "Веб-браузер, утилиты, офисное программное обеспечение, комплект KDE PIM "
+#~ "плюс дополнительные интернет-приложения и медиаплееры."

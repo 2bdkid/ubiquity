@@ -84,6 +84,8 @@ class PageBase(plugin.PluginUI):
             else:
                 self.suffix = '-desktop'
         self.allow_password_empty = False
+        self.hostname_error_text = ""
+        self.domain_connection_error_text = ""
 
     def set_fullname(self, value):
         """Set the user's full name."""

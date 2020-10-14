@@ -6,16 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
-"POT-Creation-Date: 2020-04-08 09:24+0100\n"
+"POT-Creation-Date: 2020-10-01 17:47+0200\n"
 "PO-Revision-Date: 2020-04-15 02:29+0000\n"
 "Last-Translator: Mirza Šehalić <msehalic1@etf.unsa.ba>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2020-04-22 09:36+0000\n"
 "X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
-"Language: bs\n"
 
 #. Type: text
 #. Description
@@ -46,7 +46,7 @@ msgstr "Ponovo pokrenite za nastavak"
 #. This is used as a window title.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:7001 ../ubiquity.templates:184001
+#: ../ubiquity.templates:7001 ../ubiquity.templates:185001
 msgid "Install"
 msgstr "Instalacija"
 
@@ -119,8 +119,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:14001
 msgid "You may wish to read the <a href=\"release-notes\">release notes</a>."
-msgstr ""
-"Možda želite pročitati <a href=\"release-notes\">napomene izdanja</a>."
+msgstr "Možda želite pročitati <a href=\"release-notes\">napomene izdanja</a>."
 
 #. Type: text
 #. Description
@@ -214,8 +213,7 @@ msgstr "Mora početi malim slovom."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid ""
-"May only contain lower-case letters, digits, hyphens, and underscores."
+msgid "May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr "Može sadržati samo mala slova, cifre, crtice i donje crte ."
 
 #. Type: text
@@ -575,7 +573,7 @@ msgstr "Obriši"
 #. An action, displayed on a button or as a menu item.
 #. Type: text
 #. Description
-#: ../ubiquity.templates:84001 ../ubiquity.templates:303001
+#: ../ubiquity.templates:84001 ../ubiquity.templates:305001
 msgid "Revert"
 msgstr "Vrati"
 
@@ -959,78 +957,86 @@ msgstr "Podešavam program za učitavanja operativnog sistema..."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
+#, fuzzy
+#| msgid "Configuring time zone..."
+msgid "Configuring Active Directory..."
+msgstr "Podešavam vremensku zonu..."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:135001
 msgid "Saving installed packages..."
 msgstr "Snimanje instaliranih paketa..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:135001
+#: ../ubiquity.templates:136001
 msgid "Restoring previously installed packages..."
 msgstr "Obnova prethodno instaliranih paketa..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:136001
+#: ../ubiquity.templates:137001
 msgid "Installing additional packages..."
 msgstr "Instaliram dodatne pakete..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:137001
+#: ../ubiquity.templates:138001
 msgid "Checking for packages to install..."
 msgstr "Provjeravam koje pakete treba da instaliram..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:138001
+#: ../ubiquity.templates:139001
 msgid "Removing extra packages..."
 msgstr "Uklanjam dodatne pakete..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:139001
+#: ../ubiquity.templates:140001
 msgid "Checking for packages to remove..."
 msgstr "Provjeravam pakete za uklanjanje..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:140001
+#: ../ubiquity.templates:141001
 msgid "Downloading packages (${TIME} remaining)..."
 msgstr "Preuzimam pakete (preostalo vrijeme: ${TIME})..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:141001
+#: ../ubiquity.templates:142001
 msgid "Downloading package lists..."
 msgstr "Preuzimam liste paketa..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:142001
+#: ../ubiquity.templates:143001
 msgid "Downloading package lists (${TIME} remaining)..."
 msgstr "Preuzimam liste paketa (preostalo vrijeme: ${TIME})..."
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:144001
+#: ../ubiquity.templates:145001
 msgid "Error installing ${PACKAGE}"
 msgstr "Greška prilikom instaliranja paketa ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:145001
+#: ../ubiquity.templates:146001
 msgid "Error removing ${PACKAGE}"
 msgstr "Greška prilikom uklanjanja paketa ${PACKAGE}"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001
+#: ../ubiquity.templates:147001
 msgid "Error while installing packages"
 msgstr "Greška prilikom instalacije paketa"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001
+#: ../ubiquity.templates:147001
 msgid "An error occurred while installing packages:"
 msgstr "Došlo je do greške prilikom instaliranja paketa:"
 
@@ -1038,7 +1044,7 @@ msgstr "Došlo je do greške prilikom instaliranja paketa:"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001 ../ubiquity.templates:147001
+#: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid "The following packages are in a broken state:"
 msgstr "Sljedeći paketi su u neispravnom stanju:"
 
@@ -1046,15 +1052,15 @@ msgstr "Sljedeći paketi su u neispravnom stanju:"
 #. Description
 #. Type: error
 #. Description
-#: ../ubiquity.templates:146001 ../ubiquity.templates:147001
+#: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in "
-"/var/log/syslog. The installer will try to continue anyway, but may fail at "
-"a later point, and will not be able to install or remove other packages "
-"(possibly including itself) from the installed system. You should first look "
-"for newer versions of your installer image, or failing that report the "
-"problem to your distributor."
+"in some of the packages listed above. More details may be found in /var/log/"
+"syslog. The installer will try to continue anyway, but may fail at a later "
+"point, and will not be able to install or remove other packages (possibly "
+"including itself) from the installed system. You should first look for newer "
+"versions of your installer image, or failing that report the problem to your "
+"distributor."
 msgstr ""
 "Ovo se može desiti jer koristite stariju instalacionu sliku (ISO), ili zbog "
 "greške u navedenom paketu. Može detalja se može pronaći u /var/log/syslog. "
@@ -1066,25 +1072,25 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:147001
+#: ../ubiquity.templates:148001
 msgid "Error while removing packages"
 msgstr "Greška prilikom uklanjanja paketa"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:147001
+#: ../ubiquity.templates:148001
 msgid "An error occurred while removing packages:"
 msgstr "Došlo je do greške prilikom uklanjanja paketa:"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:148001
+#: ../ubiquity.templates:149001
 msgid "Error copying network configuration"
 msgstr "Greška u kopiranju postavki mreže"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:148001
+#: ../ubiquity.templates:149001
 msgid ""
 "An error occurred while copying the network settings.  The installation will "
 "continue, but the network configuration will have to be set up again in the "
@@ -1095,13 +1101,13 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:149001
+#: ../ubiquity.templates:150001
 msgid "Error copying bluetooth configuration"
 msgstr "Greška u kopiranju Bluetooth konfiguracije"
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:149001
+#: ../ubiquity.templates:150001
 msgid ""
 "An error occurred while copying the bluetooth settings.  The installation "
 "will continue, but the bluetooth configuration will have to be set up again "
@@ -1113,49 +1119,45 @@ msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:150001
-msgid "Error restoring installed applications"
-msgstr "Greška u obnovi instaliranih aplikacija"
+#: ../ubiquity.templates:151001
+msgid "Error configuring connection to Active Directory"
+msgstr ""
 
 #. Type: error
 #. Description
-#: ../ubiquity.templates:150001
+#: ../ubiquity.templates:151001
 msgid ""
-"An error occurred while restoring previously-installed applications.  The "
-"installation will continue, but you may have to manually reinstall some "
-"applications after the computer reboots."
+"Sorry, Active Directory can't be set up at the moment. Once your system is "
+"up and running, visit help.ubuntu.com/activedirectory for help."
 msgstr ""
-"Greška pri vraćanju prethodno instaliranih aplikacija. Instalacija će se "
-"nastaviti, ali možda ćete morati da ručno instalirate neke aplikacije nakon "
-"što se računar restartuje."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:154001
+#: ../ubiquity.templates:155001
 msgid "Calculating files to skip copying..."
 msgstr "Proračun datoteka radi preskakanja kopiranja..."
 
 #. Type: title
 #. Description
-#: ../ubiquity.templates:155001
+#: ../ubiquity.templates:156001
 msgid "Installing language packs"
 msgstr "Instaliram jezičke pakete..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:156001
+#: ../ubiquity.templates:157001
 msgid "Downloading language packs (${TIME} remaining)..."
 msgstr "Preuzimam jezičke pakete (preostalo vremena: ${TIME})"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid "Failed to unmount partitions"
 msgstr "Nemogu demontirati particije"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid ""
 "The installer needs to commit changes to partition tables, but cannot do so "
 "because partitions on the following mount points could not be unmounted:"
@@ -1166,27 +1168,26 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
+#: ../ubiquity.templates:166001
 msgid "Please close any applications using these mount points."
 msgstr "Molim, zatvorite sve aplikacije koje koriste ove tačke montiranja."
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:165001
-msgid ""
-"Would you like the installer to try to unmount these partitions again?"
+#: ../ubiquity.templates:166001
+msgid "Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Da li želite da program za instalaciju proba da ponovo otkači ove particije?"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid "Do you want to return to the partitioner?"
 msgstr "Da li želite da se vratite na program za particionisanje?"
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid ""
 "Some of the partitions you created are too small.  Please make the following "
 "partitions at least this large:"
@@ -1196,7 +1197,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../ubiquity.templates:171001
+#: ../ubiquity.templates:172001
 msgid ""
 "If you do not go back to the partitioner and increase the size of these "
 "partitions, the installation may fail."
@@ -1206,7 +1207,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:173001
+#: ../ubiquity.templates:174001
 msgid "System Configuration"
 msgstr "Konfiguracija sistema"
 
@@ -1214,25 +1215,25 @@ msgstr "Konfiguracija sistema"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:174001 ../ubiquity.templates:257001
+#: ../ubiquity.templates:175001 ../ubiquity.templates:258001
 msgid "Welcome"
 msgstr "Dobrodošli"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:175001
+#: ../ubiquity.templates:176001
 msgid "Network configuration"
 msgstr "Konfiguracijar mreže"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:176001
+#: ../ubiquity.templates:177001
 msgid "Software selection"
 msgstr "Izbor programa"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:177001
+#: ../ubiquity.templates:178001
 msgid "Language"
 msgstr "Jezik"
 
@@ -1240,111 +1241,111 @@ msgstr "Jezik"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:178001 ../ubiquity.templates:202001
+#: ../ubiquity.templates:179001 ../ubiquity.templates:203001
 msgid "Wireless"
 msgstr "Bežična mreža"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:179001
+#: ../ubiquity.templates:180001
 msgid "Software"
 msgstr "Softver"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:180001
+#: ../ubiquity.templates:181001
 msgid "Timezone"
 msgstr "Vremenska zona"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:181001
+#: ../ubiquity.templates:182001
 msgid "Keyboard"
 msgstr "Tastatura"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:182001
+#: ../ubiquity.templates:183001
 msgid "Disk Setup"
 msgstr "Postavljanje diska"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:183001
+#: ../ubiquity.templates:184001
 msgid "User Info"
 msgstr "Podaci o korisniku"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:185001
+#: ../ubiquity.templates:186001
 msgid "installation process"
 msgstr "instalacioni proces"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:187001
+#: ../ubiquity.templates:188001
 msgid "Checking for installer updates"
 msgstr "Provjeravam nadogradnje instalacijskog sistema"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:188001
+#: ../ubiquity.templates:189001
 msgid "Reading package information"
 msgstr "Čitanje informacije paketa"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:189001
+#: ../ubiquity.templates:190001
 msgid "Updating package information"
 msgstr "Nadograđujem informacije paketa"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:190001
+#: ../ubiquity.templates:191001
 msgid "File ${INDEX} of ${TOTAL} at ${SPEED}/s"
 msgstr "Fajl ${INDEX} od ${TOTAL} pri ${SPEED}/s"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:191001
+#: ../ubiquity.templates:192001
 msgid "File ${INDEX} of ${TOTAL}"
 msgstr "Fajl ${INDEX} od ${TOTAL}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:192001
+#: ../ubiquity.templates:193001
 msgid "Installing update"
 msgstr "Instaliram ažuriranja"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:193001
+#: ../ubiquity.templates:194001
 msgid "Error updating installer"
 msgstr "Greška u nadogradnji instalacijskog sistema"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:193001
+#: ../ubiquity.templates:194001
 msgid "The installer encountered an error while trying to update itself:"
 msgstr "Instalacijski sistem naišao na grešku pri pokušaju da se nadogradi:"
 
 #. Type: text
 #. Description
 #. Translated acronym for Universal Serial Bus.
-#: ../ubiquity.templates:194001
+#: ../ubiquity.templates:195001
 msgid "USB disk"
 msgstr "USB disk"
 
 #. Type: text
 #. Description
 #. Translated acronym for Compact Disc.
-#: ../ubiquity.templates:195001
+#: ../ubiquity.templates:196001
 msgid "CD"
 msgstr "CD"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:196001
+#: ../ubiquity.templates:197001
 msgid ""
 "Please choose the language to use for the install process. This language "
 "will be the default language for this computer."
@@ -1354,7 +1355,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:197001
+#: ../ubiquity.templates:198001
 msgid ""
 "Please choose the language used for the configuration process. This language "
 "will be the default language for this computer."
@@ -1366,13 +1367,13 @@ msgstr ""
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:198001 ../ubiquity.templates:199001
+#: ../ubiquity.templates:199001 ../ubiquity.templates:200001
 msgid "Installation failed"
 msgstr "Instalacija nije uspjela"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:198001
+#: ../ubiquity.templates:199001
 msgid ""
 "The installer encountered an unrecoverable error.  A desktop session will "
 "now be run so that you may investigate the problem or try installing again."
@@ -1383,20 +1384,19 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:199001
+#: ../ubiquity.templates:200001
 msgid "The installer encountered an unrecoverable error and will now reboot."
-msgstr ""
-"Instaler je naišao na ne popravljivu grešku i restartovati će sistem."
+msgstr "Instaler je naišao na ne popravljivu grešku i restartovati će sistem."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:201001
+#: ../ubiquity.templates:202001
 msgid "Updates and other software"
 msgstr "Ažuriranja i drugi softveri"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:203001
+#: ../ubiquity.templates:204001
 msgid ""
 "Connecting this computer to a wi-fi network allows you to install third-"
 "party software, download updates, automatically detect your timezone, and "
@@ -1408,49 +1408,51 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:204001
+#. Type: text
+#. Description
+#: ../ubiquity.templates:205001 ../ubiquity.templates:327001
 msgid "Password:"
 msgstr "Šifra:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:205001
+#: ../ubiquity.templates:206001
 msgid "Display password"
 msgstr "Pokaži šifru"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:206001
+#: ../ubiquity.templates:207001
 msgid "I don't want to connect to a wi-fi network right now"
 msgstr "Ne želim se prijaviti na bežičnu mrežu u ovom trenutku"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:207001
+#: ../ubiquity.templates:208001
 msgid "Connect to this network"
 msgstr "Poveži se na ovu mrežu"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:213001
+#: ../ubiquity.templates:214001
 msgid "Select drive:"
 msgstr "Odaberite pogon:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:214001
+#: ../ubiquity.templates:215001
 msgid "Allocate drive space by dragging the divider below:"
 msgstr "Alocirajte prostor na disku prevlačući djelilac."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:215001
+#: ../ubiquity.templates:216001
 msgid "The entire disk will be used:"
 msgstr "Cijeli disk će se koristiti:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:216001
+#: ../ubiquity.templates:217001
 #, no-c-format
 msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
@@ -1461,7 +1463,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:217001
+#: ../ubiquity.templates:218001
 msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
@@ -1471,7 +1473,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:218001
+#: ../ubiquity.templates:219001
 #, no-c-format
 msgid ""
 "%d partitions will be deleted, use the <a href=\"\">advanced partitioning "
@@ -1482,7 +1484,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:219001
+#: ../ubiquity.templates:220001
 msgid ""
 "1 partition will be deleted, use the <a href=\"\">advanced partitioning "
 "tool</a> for more control"
@@ -1492,85 +1494,85 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:220001
+#: ../ubiquity.templates:221001
 msgid "Split Largest Partition"
 msgstr "Razdvoji najveću particiju"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:222001
+#: ../ubiquity.templates:223001
 msgid "For best results, please ensure that this computer:"
 msgstr "Za najbolje rezultate osigurajte da ovaj kompjuter"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:223001
+#: ../ubiquity.templates:224001
 msgid "Sorry"
 msgstr "Izvinite"
 
 #. Type: text
 #. Description
 #. RST means "Rapid Storage Technology". Don't translate it.
-#: ../ubiquity.templates:224001
+#: ../ubiquity.templates:225001
 msgid "Turn off RST"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:225001
+#: ../ubiquity.templates:226001
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a "
-"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
-msgstr ""
-
-#. Type: text
-#. Description
-#: ../ubiquity.templates:226001
-msgid "Turn off BitLocker"
+"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
+"com/rst</a>"
 msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
+msgid "Turn off BitLocker"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:228001
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a "
-"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
+"\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
 
 #. Type: text
 #. Description
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #. RELEASE is a variable substituted into this string, the Ubuntu flavor'
-#: ../ubiquity.templates:228001
+#: ../ubiquity.templates:229001
 msgid "You need at least ${SIZE} disk space to install ${RELEASE}."
 msgstr "Potrebno je ${SIZE} prostora na disku za instalaciju ${RELEASE}."
 
 #. Type: text
 #. Description
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
-#: ../ubiquity.templates:229001
+#: ../ubiquity.templates:230001
 msgid "This computer has only ${SIZE}."
 msgstr "Ovaj  računar posjeduje samo ${SIZE}."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:230001
+#: ../ubiquity.templates:231001
 msgid "is plugged in to a power source"
 msgstr "je priključen na izvor napajanja"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:231001
+#: ../ubiquity.templates:232001
 msgid "is connected to the Internet"
 msgstr "je priljučen na Internet"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:232001
+#: ../ubiquity.templates:233001
 msgid ""
 "This software is subject to license terms included with its documentation. "
 "Some is proprietary."
@@ -1580,7 +1582,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:233001
+#: ../ubiquity.templates:234001
 msgid ""
 "Install third-party software for graphics and Wi-Fi hardware and additional "
 "media formats"
@@ -1590,68 +1592,68 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:234001
+#: ../ubiquity.templates:235001
 msgid "Download updates while installing ${RELEASE}"
 msgstr "Preuzmi nadogradnje prilikom instalacije ${RELEASE}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:235001
+#: ../ubiquity.templates:236001
 msgid "This saves time after installation."
 msgstr "Ovo štedi vrijeme nakon instalacije."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:236001
+#: ../ubiquity.templates:237001
 msgid "Not available because there is no Internet connection."
 msgstr "Nije dostupno jer nije uspostavljena Internet veza"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:237001
+#: ../ubiquity.templates:238001
 msgid "What apps would you like to install to start with?"
 msgstr "Koje aplikacije želite instalirati za početak?"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:238001
+#: ../ubiquity.templates:239001
 msgid "Which applications would you like to start with?"
 msgstr "S kojim aplikacijama želite započeti?"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:239001
+#: ../ubiquity.templates:240001
 msgid "Minimal installation"
 msgstr "Minimalna instalacija"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:240001
+#: ../ubiquity.templates:241001
 msgid "Web browser and basic utilities."
 msgstr "Web pretraživač i osnovna pomagala."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:241001
+#: ../ubiquity.templates:242001
 msgid "Web browser plus basic utilities and applications."
 msgstr "Web pretraživač plus osnovna pomagala i aplikacije."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:242001
+#: ../ubiquity.templates:243001
 msgid "Normal installation"
 msgstr "Normalna instalacija"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:243001
+#: ../ubiquity.templates:244001
 msgid "Web browser, utilities, office software, games, and media players."
 msgstr ""
 "Web pretraživač, pomagala, uredski softver, igre i medijski reproduktori."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:244001
+#: ../ubiquity.templates:245001
 msgid ""
 "Web browser, utilities, office software, plus additional internet "
 "applications and media players."
@@ -1661,13 +1663,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:245001
+#: ../ubiquity.templates:246001
 msgid "Other options"
 msgstr "Ostale opcije"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:246001
+#: ../ubiquity.templates:247001
 msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
@@ -1675,25 +1677,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:250001
+#: ../ubiquity.templates:251001
 msgid "Layout:"
 msgstr "Raspored:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:251001
+#: ../ubiquity.templates:252001
 msgid "Variant:"
 msgstr "Varijanta:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:252001
+#: ../ubiquity.templates:253001
 msgid "Below is an image of your current layout:"
 msgstr "Ispod je slika trenutnog izgleda:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:253001
+#: ../ubiquity.templates:254001
 msgid ""
 "Select your location, so that the system can use appropriate display "
 "conventions for your country, fetch updates from sites close to you, and set "
@@ -1705,19 +1707,19 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:254001
+#: ../ubiquity.templates:255001
 msgid "Time Zone:"
 msgstr "Vremenska zona:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:255001
+#: ../ubiquity.templates:256001
 msgid "Region:"
 msgstr "Regija:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:256001
+#: ../ubiquity.templates:257001
 msgid "[type here to change]"
 msgstr "[unesi ovdje za izmjene]"
 
@@ -1725,14 +1727,14 @@ msgstr "[unesi ovdje za izmjene]"
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:259001
+#: ../ubiquity.templates:260001
 msgid "Replace ${OS} with ${DISTRO}"
 msgstr "Zamjena ${OS} sa ${DISTRO}"
 
 #. Type: text
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:259001
+#: ../ubiquity.templates:260001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all of your "
 "${OS} programs, documents, photos, music, and any other files."
@@ -1744,7 +1746,7 @@ msgstr ""
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:260001
+#: ../ubiquity.templates:261001
 msgid "Install ${DISTRO} alongside ${OS}"
 msgstr "Instaliraj ${DISTRO} pored ${OS}"
 
@@ -1756,8 +1758,8 @@ msgstr "Instaliraj ${DISTRO} pored ${OS}"
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:260001 ../ubiquity.templates:261001
-#: ../ubiquity.templates:264001 ../ubiquity.templates:269001
+#: ../ubiquity.templates:261001 ../ubiquity.templates:262001
+#: ../ubiquity.templates:265001 ../ubiquity.templates:270001
 msgid ""
 "Documents, music, and other personal files will be kept. You can choose "
 "which operating system you want each time the computer starts up."
@@ -1769,20 +1771,20 @@ msgstr ""
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:261001
+#: ../ubiquity.templates:262001
 msgid "Install ${DISTRO} inside ${OS}"
 msgstr "Instaliraj ${DISTRO} unutar ${OS}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:262001
+#: ../ubiquity.templates:263001
 msgid "Something else"
 msgstr "Nešto drugo"
 
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:262001
+#: ../ubiquity.templates:263001
 msgid ""
 "You can create or resize partitions yourself, or choose multiple partitions "
 "for ${DISTRO}."
@@ -1793,14 +1795,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:263001
+#: ../ubiquity.templates:264001
 msgid "Erase ${CURDISTRO} and reinstall"
 msgstr "Obriši ${CURDISTRO} i reinstaliraj"
 
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:263001
+#: ../ubiquity.templates:264001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
@@ -1813,7 +1815,7 @@ msgstr ""
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
 #. VER is a variable substituted into this string, and may be '11.04'
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:264001
+#: ../ubiquity.templates:265001
 msgid "Install ${DISTRO} ${VER} alongside ${CURDISTRO}"
 msgstr "Instaliraj ${DISTRO} ${VER} pored ${CURDISTRO}"
 
@@ -1823,13 +1825,13 @@ msgstr "Instaliraj ${DISTRO} ${VER} pored ${CURDISTRO}"
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:265001 ../ubiquity.templates:268001
+#: ../ubiquity.templates:266001 ../ubiquity.templates:269001
 msgid "Erase disk and install ${DISTRO}"
 msgstr "Brisanje diska i instaliranje ${DISTRO}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:265001
+#: ../ubiquity.templates:266001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
@@ -1839,7 +1841,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:266001
+#: ../ubiquity.templates:267001
 msgid "Erase everything and reinstall"
 msgstr "Briši sve i ponovo instaliraj"
 
@@ -1847,7 +1849,7 @@ msgstr "Briši sve i ponovo instaliraj"
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:266001
+#: ../ubiquity.templates:267001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and other files in both ${OS} and "
@@ -1860,16 +1862,21 @@ msgstr ""
 #. Type: text
 #. Description
 #. CURDISTRO is a variable substituted into this string, and may be 'Ubuntu 10.10'
-#: ../ubiquity.templates:267001
+#: ../ubiquity.templates:268001
 msgid "Reinstall ${CURDISTRO}"
 msgstr "Ponovo instaliraj ${CURDISTRO}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:267001
+#: ../ubiquity.templates:268001
+#, fuzzy
+#| msgid ""
+#| "Documents, music, and other personal files will be kept. Installed "
+#| "software will be kept where possible. System-wide settings will be "
+#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
-"will be kept where possible. System-wide settings will be cleared."
+"and system-wide settings will be cleared."
 msgstr ""
 "Dokumenti, muzika, i druge lične datoteke biti će sačuvani. Instalirani "
 "programi će biti sačuvan kada je to moguće. Sistemske postavke će biti "
@@ -1877,7 +1884,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:268001
+#: ../ubiquity.templates:269001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "programs, documents, photos, music, and any other files in all operating "
@@ -1890,14 +1897,14 @@ msgstr ""
 #. Type: text
 #. Description
 #. DISTRO is a variable substituted into this string, and may be 'Ubuntu'
-#: ../ubiquity.templates:269001
+#: ../ubiquity.templates:270001
 msgid "Install ${DISTRO} alongside them"
 msgstr "Instaliraj ${DISTRO} pored njega"
 
 #. Type: text
 #. Description
 #. OS is a variable substituted into this string, and may be 'Windows 7'
-#: ../ubiquity.templates:270001
+#: ../ubiquity.templates:271001
 msgid "This computer currently has ${OS} on it. What would you like to do?"
 msgstr "Ovaj računar trenutno ima ${OS} na sebi. Šta želite uraditi?"
 
@@ -1905,16 +1912,15 @@ msgstr "Ovaj računar trenutno ima ${OS} na sebi. Šta želite uraditi?"
 #. Description
 #. OS1 is a variable substituted into this string, and may be 'Windows 7'
 #. OS2 is a variable substituted into this string, and may be 'Mac OS X'
-#: ../ubiquity.templates:271001
+#: ../ubiquity.templates:272001
 msgid ""
 "This computer currently has ${OS1} and ${OS2} on it. What would you like to "
 "do?"
-msgstr ""
-"Ovaj računar trenutno ima${OS1} i ${OS2} na sebi. Šta želite uraditi?"
+msgstr "Ovaj računar trenutno ima${OS1} i ${OS2} na sebi. Šta želite uraditi?"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:272001
+#: ../ubiquity.templates:273001
 msgid ""
 "This computer currently has multiple operating systems on it. What would you "
 "like to do?"
@@ -1924,7 +1930,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:273001
+#: ../ubiquity.templates:274001
 msgid ""
 "This computer currently has no detected operating systems. What would you "
 "like to do?"
@@ -1934,37 +1940,37 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:274001
+#: ../ubiquity.templates:275001
 msgid "Before:"
 msgstr "Prije:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:275001
+#: ../ubiquity.templates:276001
 msgid "After:"
 msgstr "Poslije:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:276001
+#: ../ubiquity.templates:277001
 msgid "Encrypt the new ${RELEASE} installation for security"
 msgstr "Šifruj novu ${RELEASE} instalaciju radi sigurnosti"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:277001
+#: ../ubiquity.templates:278001
 msgid "You will choose a security key in the next step."
 msgstr "U sljedećem koraku ćete odabrati sigurnosni ključ."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:278001
+#: ../ubiquity.templates:279001
 msgid "Use LVM with the new ${RELEASE} installation"
 msgstr "Koristi LVM sa novom ${RELEASE} instalacijom"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:279001
+#: ../ubiquity.templates:280001
 msgid ""
 "This will set up Logical Volume Management. It allows taking snapshots and "
 "easier partition resizing."
@@ -1974,28 +1980,35 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:280001
-msgid "EXPERIMENTAL: Erase disk and use ZFS"
-msgstr ""
+#: ../ubiquity.templates:281001
+#, fuzzy
+#| msgid "Erase disk and install ${DISTRO}"
+msgid "Erase disk and use ZFS"
+msgstr "Brisanje diska i instaliranje ${DISTRO}"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:281001
+#: ../ubiquity.templates:282001
+#, fuzzy
+#| msgid ""
+#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
+#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
-"on all operating systems. This is experimental and may cause data loss. Do "
-"not use on production systems."
+"on all operating systems."
 msgstr ""
+"<span foreground=\"darkred\">Upozorenje:</span> To će obrisati sve datoteke "
+"na disku."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:283001
+#: ../ubiquity.templates:284001
 msgid "Advanced Features"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:284001
+#: ../ubiquity.templates:285001
 msgid "None"
 msgstr ""
 
@@ -2003,49 +2016,55 @@ msgstr ""
 #. Description
 #. Type: text
 #. Description
-#: ../ubiquity.templates:285001 ../ubiquity.templates:287001
+#: ../ubiquity.templates:286001 ../ubiquity.templates:288001
 msgid "None selected"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:286001
+#: ../ubiquity.templates:287001
 msgid "Advanced features..."
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:288001
+#: ../ubiquity.templates:289001
 msgid "LVM selected"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:289001
+#: ../ubiquity.templates:290001
 msgid "LVM and encryption selected"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:290001
+#: ../ubiquity.templates:291001
 msgid "ZFS selected"
 msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:291001
+#: ../ubiquity.templates:292001
+msgid "ZFS and encryption selected"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:293001
 msgid "Confirm the security key:"
 msgstr "Potvrdi sigurnosni ključ:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:292001
+#: ../ubiquity.templates:294001
 msgid "Choose a security key:"
 msgstr "Odaberi sigurnosni ključ:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:293001
+#: ../ubiquity.templates:295001
 msgid ""
 "Disk encryption protects your files in case you lose your computer. It "
 "requires you to enter a security key each time the computer starts up."
@@ -2055,13 +2074,13 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:294001
+#: ../ubiquity.templates:296001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
 msgstr "Datoteke izvan ${RELEASE} neće biti šifrovane."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:295001
+#: ../ubiquity.templates:297001
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> If you lose this security key, "
 "all data will be lost. If you need to, write down your key and keep it in a "
@@ -2073,61 +2092,61 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:296001
+#: ../ubiquity.templates:298001
 msgid "For more security:"
 msgstr "Za više sigurnosti:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:297001
+#: ../ubiquity.templates:299001
 msgid "Overwrite empty disk space"
 msgstr "Prepiši prazni prostor na disku"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:298001
+#: ../ubiquity.templates:300001
 msgid "The installation may take much longer."
 msgstr "Instalacija može trajati mnogo duže."
 
 #. Type: text
 #. description
-#: ../ubiquity.templates:299001
+#: ../ubiquity.templates:301001
 msgid "LVM..."
 msgstr "LVM..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:300001
+#: ../ubiquity.templates:302001
 msgid "Volume groups:"
 msgstr "Grupe particija:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:301001
+#: ../ubiquity.templates:303001
 msgid "Encryption Options"
 msgstr "Opcije za šifriranje"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:302001
+#: ../ubiquity.templates:304001
 msgid "Physical volumes:"
 msgstr "Fizičke particije:"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:304001
+#: ../ubiquity.templates:306001
 msgid "Encrypt this partition (LUKS)"
 msgstr "Šifriraj ovu particiju (LUKS)"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:305001
+#: ../ubiquity.templates:307001
 msgid "MB"
 msgstr "MB"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:306001
+#: ../ubiquity.templates:308001
 msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
@@ -2137,25 +2156,25 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:307001
+#: ../ubiquity.templates:309001
 msgid "Logical Volume Management"
 msgstr "Logical Volume Management"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:308001
+#: ../ubiquity.templates:310001
 msgid "Encryption options..."
 msgstr "Opcije šifriranja..."
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:309001
+#: ../ubiquity.templates:311001
 msgid "UEFI Secure Boot"
 msgstr "UEFI Secure Boot"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "You have chosen to enable third-party software as part of your install, "
 "which for this system includes hardware drivers for graphics and/or wi-fi "
@@ -2165,7 +2184,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "After installation completes, Ubuntu will assist you in configuring UEFI "
 "Secure Boot. To ensure that this change is being made by you as an "
@@ -2175,7 +2194,7 @@ msgstr ""
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:310001
+#: ../ubiquity.templates:312001
 msgid ""
 "<span foreground=\"darkred\">Warning</span>: If you choose not to install "
 "these drivers, or if you proceed but do not confirm the password upon "
@@ -2189,16 +2208,114 @@ msgstr ""
 
 #. Type: password
 #. Description
-#: ../ubiquity.templates:311001
+#: ../ubiquity.templates:313001
 msgid "SecureBoot key for MokPW"
 msgstr "SecureBoot ključ za MokPW"
 
 #. Type: text
 #. Description
-#: ../ubiquity.templates:312001
+#: ../ubiquity.templates:314001
 #, no-c-format
 msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
 msgstr ""
+
+#. Type: password
+#. Description
+#: ../ubiquity.templates:315001
+msgid "Key to secure the keystore on ZFS installations"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:316001
+msgid "Authenticate against a directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:317001
+msgid "Active Directory domain name"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:318001
+msgid "Administrator to join the domain"
+msgstr ""
+
+#. Type: password
+#. Description
+#: ../ubiquity.templates:319001
+msgid "Administrator password to join the domain"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:320001
+msgid "Use Active Directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:321001
+#, fuzzy
+#| msgid "You will choose a security key in the next step."
+msgid " You'll enter domain and other details in the next step."
+msgstr "U sljedećem koraku ćete odabrati sigurnosni ključ."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:322001
+msgid "Domain:"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:323001
+msgid "You must enter a domain name"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:324001
+#, fuzzy
+#| msgid "Connecting..."
+msgid "Test Connection"
+msgstr "Povezivanje..."
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:325001
+msgid "Domain Administrator:"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:326001
+#, fuzzy
+#| msgid "Your computer's name:"
+msgid "You must enter a user name"
+msgstr "Ime vašeg računara:"
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:328001
+msgid "Configure Active Directory"
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:329001
+msgid "That name already exists on the network."
+msgstr ""
+
+#. Type: text
+#. Description
+#: ../ubiquity.templates:330001
+#, fuzzy
+#| msgid "Failed to unmount partitions"
+msgid "Failed to connect to domain."
+msgstr "Nemogu demontirati particije"
 
 #. Type: title
 #. Description
@@ -2263,6 +2380,18 @@ msgstr ""
 #: ../oem-config.templates:3001
 msgid "Removing packages"
 msgstr "Uklanjanje paketa"
+
+#~ msgid "Error restoring installed applications"
+#~ msgstr "Greška u obnovi instaliranih aplikacija"
+
+#~ msgid ""
+#~ "An error occurred while restoring previously-installed applications.  The "
+#~ "installation will continue, but you may have to manually reinstall some "
+#~ "applications after the computer reboots."
+#~ msgstr ""
+#~ "Greška pri vraćanju prethodno instaliranih aplikacija. Instalacija će se "
+#~ "nastaviti, ali možda ćete morati da ručno instalirate neke aplikacije "
+#~ "nakon što se računar restartuje."
 
 #~ msgid ""
 #~ "Web browser, utilities, office software, KDE PIM suite plus additional "
