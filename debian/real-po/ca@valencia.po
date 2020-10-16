@@ -10,12 +10,12 @@ msgstr ""
 "PO-Revision-Date: 2019-11-21 05:24+0000\n"
 "Last-Translator: David Planella <david.planella@gmail.com>\n"
 "Language-Team: Catalan\n"
-"Language: ca-XV\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
-"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"X-Launchpad-Export-Date: 2020-10-15 21:36+0000\n"
+"X-Generator: Launchpad (build 781851f4dc11c93bc506eb54e6a0d35c919a1ce6)\n"
+"Language: ca-XV\n"
 
 #. Type: text
 #. Description
@@ -213,7 +213,8 @@ msgstr "Ha de començar amb una lletra en minúscula."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Pot contindre lletres en minúscula, xifres, guionets i caràcters de "
 "subratllat."
@@ -292,7 +293,8 @@ msgstr "No pot començar ni acabar amb un guionet."
 #. Description
 #: ../ubiquity.templates:41001
 msgid "May not start or end with a dot, or contain the sequence \"..\"."
-msgstr "No pot començar ni acabar amb un punt, ni contindre la seqüència «..»."
+msgstr ""
+"No pot començar ni acabar amb un punt, ni contindre la seqüència «..»."
 
 #. Type: text
 #. Description
@@ -960,10 +962,8 @@ msgstr "S'està configurant el carregador..."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
-#, fuzzy
-#| msgid "Configuring time zone..."
 msgid "Configuring Active Directory..."
-msgstr "S'està configurant el fus horari..."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -1058,12 +1058,12 @@ msgstr "Els paquets següents estan en un estat trencat:"
 #: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Això pot ser degut al fet que s'estiga utilitzant una imatge d'instal·lació "
 "vella, o bé a un error en algun dels paquets llistats ací sobre. Podeu "
@@ -1178,7 +1178,8 @@ msgstr "Tanqueu les aplicacions que empren estos punts de muntatge:"
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:166001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Voleu que l'instal·lador prove de desmuntar estes particions una altra "
 "vegada?"
@@ -1207,7 +1208,7 @@ msgid ""
 "partitions, the installation may fail."
 msgstr ""
 "Si no torneu al partidor i incrementeu la mida d'estes particions, pot ser "
-"que \alle la instal·lació."
+"que lle la instal·lació."
 
 #. Type: text
 #. Description
@@ -1463,8 +1464,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>Hi ha %d particions més petites ocultes. Utilitzeu l'<a href="
-"\"\">eina de partiment avançada</a> per tindre'n més control</small>"
+"<small>Hi ha %d particions més petites ocultes. Utilitzeu l'<a "
+"href=\"\">eina de partiment avançada</a> per tindre'n més control</small>"
 
 #. Type: text
 #. Description
@@ -1507,7 +1508,8 @@ msgstr "Parteix la partició més gran"
 #. Description
 #: ../ubiquity.templates:223001
 msgid "For best results, please ensure that this computer:"
-msgstr "Per obtindre els millors resultats, assegureu-vos que este ordinador:"
+msgstr ""
+"Per obtindre els millors resultats, assegureu-vos que este ordinador:"
 
 #. Type: text
 #. Description
@@ -1528,8 +1530,8 @@ msgstr ""
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
 
 #. Type: text
@@ -1544,8 +1546,8 @@ msgstr ""
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
 
 #. Type: text
@@ -1872,18 +1874,10 @@ msgstr "Torna a instal·lar el sistema operatiu ${CURDISTRO}"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:268001
-#, fuzzy
-#| msgid ""
-#| "Documents, music, and other personal files will be kept. Installed "
-#| "software will be kept where possible. System-wide settings will be "
-#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
 "and system-wide settings will be cleared."
 msgstr ""
-"Els documents, música i altres fitxers personals es mantindran. El "
-"programari instal·lat es mantindrà si és possible. Els paràmetres que "
-"afecten tot el sistema es netejaran."
 
 #. Type: text
 #. Description
@@ -1983,24 +1977,16 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:281001
-#, fuzzy
-#| msgid "Erase disk and install ${DISTRO}"
 msgid "Erase disk and use ZFS"
-msgstr "Esborra el disc i instal·la el sistema operatiu ${DISTRO}"
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:282001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
-#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems."
 msgstr ""
-"<span foreground=\"darkred\">Avís:</span> esta acció suprimirà tots els "
-"fitxers del disc."
 
 #. Type: text
 #. Description
@@ -2254,10 +2240,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:321001
-#, fuzzy
-#| msgid "You will choose a security key in the next step."
 msgid " You'll enter domain and other details in the next step."
-msgstr "En el pas següent triareu la clau de seguretat."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2274,10 +2258,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:324001
-#, fuzzy
-#| msgid "Connecting..."
 msgid "Test Connection"
-msgstr "S'està connectant..."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2288,10 +2270,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:326001
-#, fuzzy
-#| msgid "Your computer's name:"
 msgid "You must enter a user name"
-msgstr "El nom del vostre ordinador:"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2308,10 +2288,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:330001
-#, fuzzy
-#| msgid "Failed to unmount partitions"
 msgid "Failed to connect to domain."
-msgstr "No s'han pogut desmuntar les particions"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2388,3 +2366,11 @@ msgstr "S'estan suprimint els paquets"
 #~ "S'ha produït un error en restaurar les aplicacions instal·lades "
 #~ "anteriorment. La instal·lació continuarà, però haureu de reinstal·lar "
 #~ "manualment algunes aplicacions després de reiniciar l'ordinador."
+
+#~ msgid ""
+#~ "Documents, music, and other personal files will be kept. Installed software "
+#~ "will be kept where possible. System-wide settings will be cleared."
+#~ msgstr ""
+#~ "Els documents, música i altres fitxers personals es mantindran. El "
+#~ "programari instal·lat es mantindrà si és possible. Els paràmetres que "
+#~ "afecten tot el sistema es netejaran."

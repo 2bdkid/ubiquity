@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-10-01 17:47+0200\n"
-"PO-Revision-Date: 2020-04-15 02:26+0000\n"
-"Last-Translator: Rodrigo Lledó <rodhos92@gmail.com>\n"
+"PO-Revision-Date: 2020-10-15 20:53+0000\n"
+"Last-Translator: Adolfo Jayme <fitoschido@gmail.com>\n"
 "Language-Team: Debian Spanish <debian-l10n-spanish@lists.debian.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
-"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"X-Launchpad-Export-Date: 2020-10-15 21:36+0000\n"
+"X-Generator: Launchpad (build 781851f4dc11c93bc506eb54e6a0d35c919a1ce6)\n"
+"Language: \n"
 
 #. Type: text
 #. Description
@@ -215,7 +215,8 @@ msgstr "Debe comenzar con una letra minúscula."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Solo puede contener letras minúsculas, números, guiones y guiones bajos."
 
@@ -293,13 +294,15 @@ msgstr "No puede empezar o terminar con un guion."
 #. Description
 #: ../ubiquity.templates:41001
 msgid "May not start or end with a dot, or contain the sequence \"..\"."
-msgstr "No puede empezar o terminar con un punto o contener la secuencia «..»."
+msgstr ""
+"No puede empezar o terminar con un punto o contener la secuencia «..»."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:42001
 msgid "You are running in debugging mode. Do not use a valuable password!"
-msgstr "Está funcionando en modo de depuración. No use una contraseña valiosa."
+msgstr ""
+"Está funcionando en modo de depuración. No use una contraseña valiosa."
 
 #. Type: text
 #. Description
@@ -820,7 +823,8 @@ msgstr "La instalación ha fallado"
 #: ../ubiquity.templates:118001 ../ubiquity.templates:119001
 #: ../ubiquity.templates:120001 ../ubiquity.templates:121001
 msgid "The installer encountered an error copying files to the hard disk:"
-msgstr "El instalador encontró un error al copiar los archivos al disco duro:"
+msgstr ""
+"El instalador encontró un error al copiar los archivos al disco duro:"
 
 #. Type: error
 #. Description
@@ -885,7 +889,8 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:122001
 msgid "The following file did not match its source copy on the CD/DVD:"
-msgstr "El siguiente archivo no coincide con su copia de origen en el CD/DVD:"
+msgstr ""
+"El siguiente archivo no coincide con su copia de origen en el CD/DVD:"
 
 #. Type: text
 #. Description
@@ -956,10 +961,8 @@ msgstr "Configurando el gestor de arranque..."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
-#, fuzzy
-#| msgid "Configuring time zone..."
 msgid "Configuring Active Directory..."
-msgstr "Configurando el huso horario…"
+msgstr "Configurando Active Directory…"
 
 #. Type: text
 #. Description
@@ -1054,12 +1057,12 @@ msgstr "Los siguientes paquetes están dañados:"
 #: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Esto puede deberse a que se está usando una imagen antigua del instalador o "
 "a un error en algunos de los paquetes listados a continuación. Puede "
@@ -1121,7 +1124,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:151001
 msgid "Error configuring connection to Active Directory"
-msgstr ""
+msgstr "Error al configurar la conexión con Active Directory"
 
 #. Type: error
 #. Description
@@ -1130,6 +1133,9 @@ msgid ""
 "Sorry, Active Directory can't be set up at the moment. Once your system is "
 "up and running, visit help.ubuntu.com/activedirectory for help."
 msgstr ""
+"Por el momento no se puede configurar Active Directory. Una vez que el "
+"sistema esté instalado, visite help.ubuntu.com/activedirectory para obtener "
+"ayuda."
 
 #. Type: text
 #. Description
@@ -1175,7 +1181,8 @@ msgstr "Cierre cualquier aplicación que esté usando estos puntos de montaje."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:166001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "¿Quiere que el instalador intente desmontar de nuevo estas particiones?"
 
@@ -1460,8 +1467,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>Se ocultaron %d particiones más pequeñas; utilice la <a href="
-"\"\">herramienta de particionado avanzada</a> para mayor control</small>"
+"<small>Se ocultaron %d particiones más pequeñas; utilice la <a "
+"href=\"\">herramienta de particionado avanzada</a> para mayor control</small>"
 
 #. Type: text
 #. Description
@@ -1470,8 +1477,8 @@ msgid ""
 "<small>1 smaller partition is hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>Se ocultó 1 partición más pequeña; utilice la <a href="
-"\"\">herramienta de particionado avanzada</a> para mayor control</small>"
+"<small>Se ocultó 1 partición más pequeña; utilice la <a "
+"href=\"\">herramienta de particionado avanzada</a> para mayor control</small>"
 
 #. Type: text
 #. Description
@@ -1525,13 +1532,13 @@ msgstr "Desactivar RST"
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
 "Este equipo utiliza RST (tecnología de almacenamiento rápido, siglas en "
 "inglés) de Intel. Debe desactivar RST antes de instalar Ubuntu. Para saber "
-"cómo hacerlo, abra esta página en un teléfono u otro dispositivo: <a href="
-"\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
+"cómo hacerlo, abra esta página en un teléfono u otro dispositivo: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
@@ -1545,13 +1552,13 @@ msgstr "Desactivar BitLocker"
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
 "Este equipo utiliza el cifrado BitLocker de Windows. Debe desactivar "
 "BitLocker en Windows antes de instalar Ubuntu. Para saber cómo hacerlo, abra "
-"esta página en un teléfono u otro dispositivo: <a href=\"https://help.ubuntu."
-"com/bitlocker\">help.ubuntu.com/bitlocker</a>"
+"esta página en un teléfono u otro dispositivo: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1724,7 +1731,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:255001
 msgid "Time Zone:"
-msgstr "Zona horaria:"
+msgstr "Huso horario:"
 
 #. Type: text
 #. Description
@@ -1754,7 +1761,7 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all of your "
 "${OS} programs, documents, photos, music, and any other files."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos sus "
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos sus "
 "programas, documentos, fotos, música y demás archivos de ${OS}."
 
 #. Type: text
@@ -1822,7 +1829,7 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your "
 "${CURDISTRO} programs, documents, photos, music, and any other files."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos sus "
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos sus "
 "programas, documentos, fotos, música y demás archivos de ${CURDISTRO}."
 
 #. Type: text
@@ -1851,8 +1858,8 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete any files on "
 "the disk."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos los archivos "
-"del disco."
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos los "
+"archivos del disco."
 
 #. Type: text
 #. Description
@@ -1870,7 +1877,7 @@ msgid ""
 "programs, documents, photos, music, and other files in both ${OS} and "
 "${CURDISTRO}."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos sus "
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos sus "
 "programas, documentos, fotos, música y demás archivos de ${OS} y "
 "${CURDISTRO}."
 
@@ -1884,18 +1891,12 @@ msgstr "Reinstalar ${CURDISTRO}"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:268001
-#, fuzzy
-#| msgid ""
-#| "Documents, music, and other personal files will be kept. Installed "
-#| "software will be kept where possible. System-wide settings will be "
-#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
 "and system-wide settings will be cleared."
 msgstr ""
-"Se conservarán los documentos, música y demás archivos personales. El "
-"software instalado se conservará cuando sea posible. Se restablecerán las "
-"configuraciones que afectan a todo el sistema."
+"Se conservarán los documentos, la música y otros archivos personales. Se "
+"eliminarán los programas instalados y la configuración a nivel del sistema."
 
 #. Type: text
 #. Description
@@ -1905,7 +1906,7 @@ msgid ""
 "programs, documents, photos, music, and any other files in all operating "
 "systems."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos sus "
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos sus "
 "programas, documentos, fotos, música y demás archivos en todos los sistemas "
 "operativos."
 
@@ -1970,7 +1971,7 @@ msgstr "Después:"
 #. Description
 #: ../ubiquity.templates:277001
 msgid "Encrypt the new ${RELEASE} installation for security"
-msgstr "Cifrar la instalación de ${RELEASE} para mayor seguridad"
+msgstr "Cifrar la instalación de ${RELEASE} por seguridad"
 
 #. Type: text
 #. Description
@@ -1997,24 +1998,18 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:281001
-#, fuzzy
-#| msgid "EXPERIMENTAL: Erase disk and use ZFS"
 msgid "Erase disk and use ZFS"
-msgstr "EXPERIMENTAL: borrar el disco y usar ZFS"
+msgstr "Borrar disco y utilizar ZFS"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:282001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
-#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Esto eliminará todos los archivos "
-"del disco."
+"<span foreground=\"darkred\">Atención:</span> esto eliminará todos sus "
+"archivos en todos los sistemas operativos."
 
 #. Type: text
 #. Description
@@ -2063,10 +2058,8 @@ msgstr "ZFS seleccionado"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:292001
-#, fuzzy
-#| msgid "LVM and encryption selected"
 msgid "ZFS and encryption selected"
-msgstr "LVM y cifrado seleccionado"
+msgstr "ZFS y cifrado seleccionados"
 
 #. Type: text
 #. Description
@@ -2104,9 +2097,9 @@ msgid ""
 "all data will be lost. If you need to, write down your key and keep it in a "
 "safe place elsewhere."
 msgstr ""
-"<span foreground=\"darkred\">Aviso:</span> Si pierde esta clave de "
+"<span foreground=\"darkred\">Atención:</span> si pierde esta clave de "
 "seguridad, perderá todos los datos. Si es necesario, escriba su clave y "
-"guárdela en un lugar seguro en otro sitio."
+"guárdela en un lugar seguro y apartado."
 
 #. Type: text
 #. Description
@@ -2228,7 +2221,7 @@ msgid ""
 "reboot, Ubuntu will still be able to boot on your system but these third-"
 "party drivers will not be available for your hardware."
 msgstr ""
-"<span foreground=\"darkred\">Atención</span>: Si elige no instalar los "
+"<span foreground=\"darkred\">Atención</span>: si elige no instalar los "
 "controladores de terceros, o si continúa pero no confirma la contraseña tras "
 "el reinicio, Ubuntu podrá continuar con el arranque pero los controladores "
 "no estarán disponibles para su hardware."
@@ -2250,99 +2243,91 @@ msgstr "partición #%(partid)s como %(parttype)s usada para %(partusage)s"
 #. Description
 #: ../ubiquity.templates:315001
 msgid "Key to secure the keystore on ZFS installations"
-msgstr ""
+msgstr "Clave para proteger el almacén de claves en instalaciones ZFS"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:316001
 msgid "Authenticate against a directory"
-msgstr ""
+msgstr "Autenticar ante un directorio"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:317001
 msgid "Active Directory domain name"
-msgstr ""
+msgstr "Nombre de dominio de Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:318001
 msgid "Administrator to join the domain"
-msgstr ""
+msgstr "Administrador para incorporarse al dominio"
 
 #. Type: password
 #. Description
 #: ../ubiquity.templates:319001
 msgid "Administrator password to join the domain"
-msgstr ""
+msgstr "Contraseña de administrador para incorporarse al dominio"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:320001
 msgid "Use Active Directory"
-msgstr ""
+msgstr "Utilizar Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:321001
-#, fuzzy
-#| msgid "You will choose a security key in the next step."
 msgid " You'll enter domain and other details in the next step."
-msgstr "Deberá elegir una clave de seguridad en el siguiente paso."
+msgstr " Deberá proveer el dominio y otros datos en el siguiente paso."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:322001
 msgid "Domain:"
-msgstr ""
+msgstr "Dominio:"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:323001
 msgid "You must enter a domain name"
-msgstr ""
+msgstr "Debe proporcionar un nombre de dominio"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:324001
-#, fuzzy
-#| msgid "Connecting..."
 msgid "Test Connection"
-msgstr "Conectando…"
+msgstr "Probar conexión"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:325001
 msgid "Domain Administrator:"
-msgstr ""
+msgstr "Administrador de dominio"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:326001
-#, fuzzy
-#| msgid "Your computer's name:"
 msgid "You must enter a user name"
-msgstr "El nombre de su equipo:"
+msgstr "Debe proporcionar un nombre de usuario"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:328001
 msgid "Configure Active Directory"
-msgstr ""
+msgstr "Configurar Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:329001
 msgid "That name already exists on the network."
-msgstr ""
+msgstr "Ese nombre ya existe en la red"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:330001
-#, fuzzy
-#| msgid "Failed to unmount partitions"
 msgid "Failed to connect to domain."
-msgstr "Error al desmontar particiones"
+msgstr "No se pudo conectar con el dominio."
 
 #. Type: title
 #. Description
@@ -2421,17 +2406,21 @@ msgstr "Desinstalando paquetes"
 #~ "aplicaciones después de reiniciar el equipo."
 
 #~ msgid ""
-#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#~ "files on all operating systems. This is experimental and may cause data "
-#~ "loss. Do not use on production systems."
+#~ "Documents, music, and other personal files will be kept. Installed software "
+#~ "will be kept where possible. System-wide settings will be cleared."
 #~ msgstr ""
-#~ "<span foreground=\"darkred\">Aviso:</span> esto borrará todos sus "
-#~ "archivos en todos los sistemas operativos. Esto es experimental y podría "
-#~ "causar pérdida de datos. No lo use en sistemas de producción."
+#~ "Se conservarán los documentos, música y demás archivos personales. El "
+#~ "software instalado se conservará cuando sea posible. Se restablecerán las "
+#~ "configuraciones que afectan a todo el sistema."
+
+#~ msgid "EXPERIMENTAL: Erase disk and use ZFS"
+#~ msgstr "EXPERIMENTAL: borrar el disco y usar ZFS"
 
 #~ msgid ""
-#~ "Web browser, utilities, office software, KDE PIM suite plus additional "
-#~ "internet applications and media players."
+#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
+#~ "on all operating systems. This is experimental and may cause data loss. Do "
+#~ "not use on production systems."
 #~ msgstr ""
-#~ "Navegador web, utilidades, paquete de oficina, paquete PIM de KDE, "
-#~ "reproductores multimedia y otros programas de Internet."
+#~ "<span foreground=\"darkred\">Aviso:</span> esto borrará todos sus archivos "
+#~ "en todos los sistemas operativos. Esto es experimental y podría causar "
+#~ "pérdida de datos. No lo use en sistemas de producción."

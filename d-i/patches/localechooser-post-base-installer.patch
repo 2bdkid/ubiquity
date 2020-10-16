@@ -12,7 +12,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
  EXTRAS=""
  if db_get localechooser/supported-locales; then
  	EXTRAS="$(echo "$RET" | sed 's/,//g')"
-@@ -36,29 +39,137 @@
+@@ -36,29 +39,138 @@
  	# different location may imply a different dialect of the language.
  	# In such cases, make LANG reflect the selected language (for
  	# messages, character types, and collation) and make the other
@@ -118,6 +118,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
 +		    # and migrants are likely to use English.
 +		    IE) deflang=en ;;
 +		    IT) deflang=it ;;
++		    KE) deflang=sw ;;
 +		    MA) deflang=ar ;;
 +		    MK) deflang=mk ;;
 +		    MM) deflang=my ;;
@@ -155,9 +156,9 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
 +fi
 +
  # Enable translations
- if [ "$LOCALE" != "C" ] || [ "$EXTRAS" ]; then
+ if [ "$LOCALE" != "C" ] && [ "$LOCALE" != "C.UTF-8" ] || [ "$EXTRAS" ]; then
  	apt-install locales || true
-@@ -103,6 +213,7 @@
+@@ -115,6 +227,7 @@
  		LC_TELEPHONE LC_MEASUREMENT LC_IDENTIFICATION; do
  		set_field /target/etc/default/locale "$category" "$LOCALE"
  	done
@@ -165,7 +166,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
  fi
  
  # For languages that have no chance to be displayed at the Linux console
-@@ -113,7 +224,7 @@
+@@ -125,7 +238,7 @@
  # For language with multiple entries such as pt/pt_BR or zh_CN/zh_TW
  # we don't really care about the entry we will match as the level will always
  # be the same
@@ -174,7 +175,7 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
  	cut -f 2-3 -d\; | \
  	grep "$LANGUAGECODE" | \
  	head -n 1 | \
-@@ -134,7 +245,25 @@
+@@ -146,7 +259,25 @@
  		# locale is supposed to have a meaningful existence.
  		mkdir -p "/target/usr/share/locale-langpack/${loc%_*}"
  	done
@@ -200,4 +201,4 @@ Index: b/source/localechooser/post-base-installer.d/05localechooser
 +	log-output -t localechooser chroot /target rm -rf $added_dirs || true
  }
  
- if [ "$LOCALE" != C ]; then
+ if [ "$LOCALE" != C ] && [ "$LOCALE" != "C.UTF-8" ]; then

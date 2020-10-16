@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-10-01 17:47+0200\n"
-"PO-Revision-Date: 2020-04-15 02:28+0000\n"
-"Last-Translator: Kristoffer Grundström <hamnisdude@gmail.com>\n"
+"PO-Revision-Date: 2020-10-09 19:03+0000\n"
+"Last-Translator: Gunnar Hjalmarsson <Unknown>\n"
 "Language-Team: Swedish <debian-l10n-swedish@lists.debian.org>\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
-"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"X-Launchpad-Export-Date: 2020-10-15 21:36+0000\n"
+"X-Generator: Launchpad (build 781851f4dc11c93bc506eb54e6a0d35c919a1ce6)\n"
+"Language: sv\n"
 
 #. Type: text
 #. Description
@@ -214,7 +214,8 @@ msgstr "Måste börja med en gemen bokstav."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Får endast innehålla gemena bokstäver, siffror, bindestreck och understreck."
 
@@ -380,7 +381,7 @@ msgstr "Förbered partitioner"
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:55001
 msgid "_Restart[ action ]"
-msgstr ""
+msgstr "_Starta om"
 
 #. Type: text
 #. Description
@@ -960,10 +961,8 @@ msgstr "Konfigurerar starthanterare..."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
-#, fuzzy
-#| msgid "Configuring time zone..."
 msgid "Configuring Active Directory..."
-msgstr "Konfigurerar tidszon..."
+msgstr "Konfigurerar Active Directory..."
 
 #. Type: text
 #. Description
@@ -1058,12 +1057,12 @@ msgstr "Följande paket är i ett trasigt tillstånd:"
 #: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Det här kan bero på användningen av en gammal installationsavbild, eller det "
 "kan bero på ett fel i några av de paket som listas ovan. Mer information kan "
@@ -1125,7 +1124,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:151001
 msgid "Error configuring connection to Active Directory"
-msgstr ""
+msgstr "Fel vid konfiguration av anslutning till Active Directory"
 
 #. Type: error
 #. Description
@@ -1134,6 +1133,8 @@ msgid ""
 "Sorry, Active Directory can't be set up at the moment. Once your system is "
 "up and running, visit help.ubuntu.com/activedirectory for help."
 msgstr ""
+"Tyvärr kan Active Directory inte konfigureras för tillfället. När ditt "
+"system är igång, besök help.ubuntu.com/activedirectory för hjälp."
 
 #. Type: text
 #. Description
@@ -1179,7 +1180,8 @@ msgstr "Stäng de program som använder dessa monteringspunkter."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:166001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Vill du att installationsprogrammet ska försöka att avmontera dessa "
 "partitioner igen?"
@@ -1524,7 +1526,7 @@ msgstr "Beklagar"
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:225001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Slå av RST"
 
 #. Type: text
 #. Description
@@ -1532,15 +1534,19 @@ msgstr ""
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Den här datorn använder Intel RST (Rapid Storage Technology). Du måste "
+"stänga av RST innan du installerar Ubuntu. För instruktioner, öppna den här "
+"sidan på en telefon eller annan enhet: <a "
+"href=\"https://help.ubuntu.com/rst\"> help.ubuntu.com/rst </a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Slå av Bitlocker"
 
 #. Type: text
 #. Description
@@ -1548,9 +1554,13 @@ msgstr ""
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Den här datorn använder Windows BitLocker-kryptering. Du måste stänga av "
+"BitLocker i Windows innan du installerar Ubuntu. För instruktioner, öppna "
+"den här sidan på en telefon eller annan enhet: <a "
+"href=\"https://help.ubuntu.com/bitlocker\"> help.ubuntu.com/bitlocker </a>"
 
 #. Type: text
 #. Description
@@ -1683,6 +1693,9 @@ msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
+"Att installera drivrutiner från tredjepart kräver konfiguration av Secure "
+"Boot. För att göra det här behöver du välja en säkerhetsnyckel nu och ange "
+"den när systemet startar om."
 
 #. Type: text
 #. Description
@@ -1878,18 +1891,12 @@ msgstr "Installera om ${CURDISTRO}"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:268001
-#, fuzzy
-#| msgid ""
-#| "Documents, music, and other personal files will be kept. Installed "
-#| "software will be kept where possible. System-wide settings will be "
-#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
 "and system-wide settings will be cleared."
 msgstr ""
-"Dokument, musik och andra personliga filer kommer att behållas. Installerade "
-"program kommer att behållas där det är möjligt. Systeminställningar kommer "
-"att försvinna."
+"Dokument, musik och andra personliga filer sparas. Installerad programvara "
+"och systemomfattande inställningar rensas."
 
 #. Type: text
 #. Description
@@ -1990,36 +1997,30 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:281001
-#, fuzzy
-#| msgid "Erase disk and install ${DISTRO}"
 msgid "Erase disk and use ZFS"
-msgstr "Radera disken och installera ${DISTRO}"
+msgstr "Radera disk och använd ZFS"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:282001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
-#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems."
 msgstr ""
-"<span foreground=\"darkred\">Varning:</span> Detta kommer att ta bort alla "
-"filer på disken."
+"<span foreground = \"darkred\">Varning: </span> Detta tar bort alla dina "
+"filer på alla operativsystem."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:284001
 msgid "Advanced Features"
-msgstr ""
+msgstr "Avancerade funktioner"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:285001
 msgid "None"
-msgstr ""
+msgstr "Inget"
 
 #. Type: text
 #. Description
@@ -2027,37 +2028,37 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:286001 ../ubiquity.templates:288001
 msgid "None selected"
-msgstr ""
+msgstr "Inget valt"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:287001
 msgid "Advanced features..."
-msgstr ""
+msgstr "Avancerade funktioner..."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:289001
 msgid "LVM selected"
-msgstr ""
+msgstr "LVM Valt"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:290001
 msgid "LVM and encryption selected"
-msgstr ""
+msgstr "LVM och kryptering valt"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:291001
 msgid "ZFS selected"
-msgstr ""
+msgstr "ZFS valt"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:292001
 msgid "ZFS and encryption selected"
-msgstr ""
+msgstr "ZFS och kryptering har valts"
 
 #. Type: text
 #. Description
@@ -2190,6 +2191,11 @@ msgid ""
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
+"Du har valt att aktivera mjukvara från tredjepart som en del av din "
+"installation vilket för det här systemet inkluderar hårdvarudrivrutiner för "
+"grafik och/eller wifi-hårdvara. Ditt system har även UEFI Secure Boot "
+"aktiverat. UEFI Secure Boot behöver vara konfigurerat att tillåta användning "
+"av dessa drivrutiner från tredjepart."
 
 #. Type: text
 #. Description
@@ -2200,6 +2206,11 @@ msgid ""
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
+"Efter att installationen har slutförts så kommer Ubuntu assistera dig med "
+"att konfigurera UEFI Secure Boot. För att säkerställa att den här ändringen "
+"görs av dig som en auktoriserad användare och inte av en attackerare måste "
+"du välja ett lösenord nu och sedan använda samma lösenord efter omstart för "
+"att bekräfta ändringen."
 
 #. Type: text
 #. Description
@@ -2227,105 +2238,97 @@ msgstr "SecureBoot-nyckel för MokPW"
 #: ../ubiquity.templates:314001
 #, no-c-format
 msgid "partition #%(partid)s as %(parttype)s used for %(partusage)s"
-msgstr ""
+msgstr "partition #%(partid)s av typen %(parttype)s använd som %(partusage)s"
 
 #. Type: password
 #. Description
 #: ../ubiquity.templates:315001
 msgid "Key to secure the keystore on ZFS installations"
-msgstr ""
+msgstr "Nyckel för att säkra nyckelknippan på ZFS-installationer"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:316001
 msgid "Authenticate against a directory"
-msgstr ""
+msgstr "Autentisera mot en katalog"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:317001
 msgid "Active Directory domain name"
-msgstr ""
+msgstr "Active Directory-domännamn"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:318001
 msgid "Administrator to join the domain"
-msgstr ""
+msgstr "Administratör för att gå med i domänen"
 
 #. Type: password
 #. Description
 #: ../ubiquity.templates:319001
 msgid "Administrator password to join the domain"
-msgstr ""
+msgstr "Administratörslösenord för att gå med i domänen"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:320001
 msgid "Use Active Directory"
-msgstr ""
+msgstr "Använd Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:321001
-#, fuzzy
-#| msgid "You will choose a security key in the next step."
 msgid " You'll enter domain and other details in the next step."
-msgstr "Du väljer säkerhetsnyckel i nästa steg."
+msgstr " Du anger domän och andra detaljer i nästa steg."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:322001
 msgid "Domain:"
-msgstr ""
+msgstr "Domän:"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:323001
 msgid "You must enter a domain name"
-msgstr ""
+msgstr "Du måste ange ett domännamn"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:324001
-#, fuzzy
-#| msgid "Connecting..."
 msgid "Test Connection"
-msgstr "Ansluter..."
+msgstr "Testa anslutning"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:325001
 msgid "Domain Administrator:"
-msgstr ""
+msgstr "Domänadministratör:"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:326001
-#, fuzzy
-#| msgid "Your computer's name:"
 msgid "You must enter a user name"
-msgstr "Din dators namn:"
+msgstr "Du måste ange ett användarnamn"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:328001
 msgid "Configure Active Directory"
-msgstr ""
+msgstr "Konfigurera Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:329001
 msgid "That name already exists on the network."
-msgstr ""
+msgstr "Det namnet finns redan i nätverket."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:330001
-#, fuzzy
-#| msgid "Failed to unmount partitions"
 msgid "Failed to connect to domain."
-msgstr "Misslyckades med att avmontera partitioner."
+msgstr "Det gick inte att ansluta till domänen."
 
 #. Type: title
 #. Description
@@ -2381,9 +2384,9 @@ msgid ""
 "ask the end user various configuration questions the next time it boots."
 msgstr ""
 "När systemet är konfigurerat enligt dina önskemål kan du köra \"oem-config-"
-"prepare\". Det här gör att systemet tar bort den temporära användaren \"oem"
-"\" och ställer några olika konfigurationsfrågor till slutanvändaren nästa "
-"gång systemet startas upp."
+"prepare\". Det här gör att systemet tar bort den temporära användaren "
+"\"oem\" och ställer några olika konfigurationsfrågor till slutanvändaren "
+"nästa gång systemet startas upp."
 
 #. Type: text
 #. Description
@@ -2391,21 +2394,22 @@ msgstr ""
 msgid "Removing packages"
 msgstr "Tar bort paket"
 
-#~ msgid "Error restoring installed applications"
-#~ msgstr "Fel vid återställning av installerade program"
-
 #~ msgid ""
 #~ "An error occurred while restoring previously-installed applications.  The "
 #~ "installation will continue, but you may have to manually reinstall some "
 #~ "applications after the computer reboots."
 #~ msgstr ""
 #~ "Ett fel inträffade vid återställning av tidigare installerade program. "
-#~ "Installationen kommer att fortsätta men du kanske måste installera om "
-#~ "några program manuellt efter att datorn har startats om."
+#~ "Installationen kommer att fortsätta men du kanske måste installera om några "
+#~ "program manuellt efter att datorn har startats om."
+
+#~ msgid "Error restoring installed applications"
+#~ msgstr "Fel vid återställning av installerade program"
 
 #~ msgid ""
-#~ "Web browser, utilities, office software, KDE PIM suite plus additional "
-#~ "internet applications and media players."
+#~ "Documents, music, and other personal files will be kept. Installed software "
+#~ "will be kept where possible. System-wide settings will be cleared."
 #~ msgstr ""
-#~ "Webbläsare, verktyg, kontorsprogram, KDE PIM-svit samt ytterligare "
-#~ "internetprogram och mediaspelare."
+#~ "Dokument, musik och andra personliga filer kommer att behållas. Installerade "
+#~ "program kommer att behållas där det är möjligt. Systeminställningar kommer "
+#~ "att försvinna."

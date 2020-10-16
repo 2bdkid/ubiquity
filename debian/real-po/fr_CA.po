@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: ubiquity\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-10-01 17:47+0200\n"
-"PO-Revision-Date: 2020-04-15 02:30+0000\n"
-"Last-Translator: Launchpad Translations Administrators <Unknown>\n"
+"PO-Revision-Date: 2020-08-31 14:23+0000\n"
+"Last-Translator: AO <Unknown>\n"
 "Language-Team: French (Canada) <fr_CA@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-04-22 09:37+0000\n"
-"X-Generator: Launchpad (build aad6b57d58e2f621954298e262c1cc904860f5d2)\n"
+"X-Launchpad-Export-Date: 2020-10-15 21:36+0000\n"
+"X-Generator: Launchpad (build 781851f4dc11c93bc506eb54e6a0d35c919a1ce6)\n"
+"Language: \n"
 
 #. Type: text
 #. Description
@@ -114,17 +114,17 @@ msgid ""
 "You may wish to read the <a href=\"release-notes\">release notes</a> or <a "
 "href=\"update\">update this installer</a>."
 msgstr ""
-"Si vous le souhaitez, vous pouvez consulter lire les <a href=\"release-notes"
-"\">notes de version</a> ou  <a href=\"update\">mettre à jour ce programme "
-"d’installation</a>."
+"Si vous le souhaitez, vous pouvez consulter lire les <a href=\"release-"
+"notes\">notes de version</a> ou  <a href=\"update\">mettre à jour ce "
+"programme d’installation</a>."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:14001
 msgid "You may wish to read the <a href=\"release-notes\">release notes</a>."
 msgstr ""
-"Si vous le souhaitez, vous pouvez consulter les <a href=\"release-notes"
-"\">notes de version</a>."
+"Si vous le souhaitez, vous pouvez consulter les <a href=\"release-"
+"notes\">notes de version</a>."
 
 #. Type: text
 #. Description
@@ -219,7 +219,8 @@ msgstr "Doit commencer par une lettre minuscule."
 #. Type: text
 #. Description
 #: ../ubiquity.templates:29001
-msgid "May only contain lower-case letters, digits, hyphens, and underscores."
+msgid ""
+"May only contain lower-case letters, digits, hyphens, and underscores."
 msgstr ""
 "Ne peut comprendre que des lettres minuscules, des chiffres, des tirets et "
 "des traits de soulignement."
@@ -390,7 +391,7 @@ msgstr "Préparer dles partitions"
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:55001
 msgid "_Restart[ action ]"
-msgstr ""
+msgstr "_Redémarrer"
 
 #. Type: text
 #. Description
@@ -972,10 +973,8 @@ msgstr "Configuration du chargeur d’amorçage…"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:134001
-#, fuzzy
-#| msgid "Configuring time zone..."
 msgid "Configuring Active Directory..."
-msgstr "Configuration du fuseau horaire…"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -1070,12 +1069,12 @@ msgstr "Les paquets suivants sont brisés :"
 #: ../ubiquity.templates:147001 ../ubiquity.templates:148001
 msgid ""
 "This may be due to using an old installer image, or it may be due to a bug "
-"in some of the packages listed above. More details may be found in /var/log/"
-"syslog. The installer will try to continue anyway, but may fail at a later "
-"point, and will not be able to install or remove other packages (possibly "
-"including itself) from the installed system. You should first look for newer "
-"versions of your installer image, or failing that report the problem to your "
-"distributor."
+"in some of the packages listed above. More details may be found in "
+"/var/log/syslog. The installer will try to continue anyway, but may fail at "
+"a later point, and will not be able to install or remove other packages "
+"(possibly including itself) from the installed system. You should first look "
+"for newer versions of your installer image, or failing that report the "
+"problem to your distributor."
 msgstr ""
 "Ceci peut être causé par l'utilisation d'une ancienne image de l'installeur, "
 "ou par à un bogue dans certains paquets listés ci-dessus. De plus amples "
@@ -1192,7 +1191,8 @@ msgstr "Veuillez fermer toute application utilisant ces points de montage."
 #. Type: boolean
 #. Description
 #: ../ubiquity.templates:166001
-msgid "Would you like the installer to try to unmount these partitions again?"
+msgid ""
+"Would you like the installer to try to unmount these partitions again?"
 msgstr ""
 "Souhaitez-vous que le programme d’installation ressaie de démonter ces "
 "partitions?"
@@ -1481,8 +1481,8 @@ msgid ""
 "<small>%d smaller partitions are hidden, use the <a href=\"\">advanced "
 "partitioning tool</a> for more control</small>"
 msgstr ""
-"<small>%d partitions plus petites sont cachées. Utiliser <a href="
-"\"\">l’outil avancé de partitionnement</a> pour plus de contrôle</small>"
+"<small>%d partitions plus petites sont cachées. Utiliser <a "
+"href=\"\">l’outil avancé de partitionnement</a> pour plus de contrôle</small>"
 
 #. Type: text
 #. Description
@@ -1539,7 +1539,7 @@ msgstr "Désolé"
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:225001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Désactiver RST"
 
 #. Type: text
 #. Description
@@ -1547,15 +1547,19 @@ msgstr ""
 msgid ""
 "This computer uses Intel RST (Rapid Storage Technology). You need to turn "
 "off RST before installing Ubuntu. For instructions, open this page on a "
-"phone or other device: <a href=\"https://help.ubuntu.com/rst\">help.ubuntu."
-"com/rst</a>"
+"phone or other device: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Cet ordinateur utilise RST (technologie de stockage rapide d’Intel). Vous "
+"devez désactiver RST avant d’installer Ubuntu. Pour obtenir des "
+"instructions, ouvrez cette page sur un téléphone ou un autre appareil : <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Désactiver BitLocker"
 
 #. Type: text
 #. Description
@@ -1563,9 +1567,13 @@ msgstr ""
 msgid ""
 "This computer uses Windows BitLocker encryption. You need to turn off "
 "BitLocker in Windows before installing Ubuntu. For instructions, open this "
-"page on a phone or other device: <a href=\"https://help.ubuntu.com/bitlocker"
-"\">help.ubuntu.com/bitlocker</a>"
+"page on a phone or other device: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Cet ordinateur utilise le chiffrement BitLocker de Windows. Vous devez "
+"désactiver BitLocker dans Windows avant d'installer Ubuntu. Pour obtenir des "
+"instructions, ouvrez cette page sur un téléphone ou un autre appareil : <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1901,18 +1909,10 @@ msgstr "Réinstaller ${CURDISTRO}"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:268001
-#, fuzzy
-#| msgid ""
-#| "Documents, music, and other personal files will be kept. Installed "
-#| "software will be kept where possible. System-wide settings will be "
-#| "cleared."
 msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
 "and system-wide settings will be cleared."
 msgstr ""
-"Les documents, musique et autres fichiers personnels seront gardés. Les "
-"logiciels installés seront si possible gardés. Les paramètres du système "
-"seront effacés."
 
 #. Type: text
 #. Description
@@ -1988,7 +1988,8 @@ msgstr "Après :"
 #. Description
 #: ../ubiquity.templates:277001
 msgid "Encrypt the new ${RELEASE} installation for security"
-msgstr "Chiffrer la nouvelle installation de ${RELEASE} pour plus de sécurité"
+msgstr ""
+"Chiffrer la nouvelle installation de ${RELEASE} pour plus de sécurité"
 
 #. Type: text
 #. Description
@@ -2015,24 +2016,16 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:281001
-#, fuzzy
-#| msgid "EXPERIMENTAL: Erase disk and use ZFS"
 msgid "Erase disk and use ZFS"
-msgstr "EXPÉRIMENTAL : effacer le disque et utiliser ZFS"
+msgstr ""
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:282001
-#, fuzzy
-#| msgid ""
-#| "<span foreground=\"darkred\">Warning:</span> This will delete any files "
-#| "on the disk."
 msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems."
 msgstr ""
-"<span foreground=\"darkred\">Avertissement :</span> ceci supprimera tous les "
-"fichiers sur le disque."
 
 #. Type: text
 #. Description
@@ -2081,10 +2074,8 @@ msgstr "ZFS est sélectionné"
 #. Type: text
 #. Description
 #: ../ubiquity.templates:292001
-#, fuzzy
-#| msgid "LVM and encryption selected"
 msgid "ZFS and encryption selected"
-msgstr "LVM et chiffrement sont sélectionnés"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2305,10 +2296,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:321001
-#, fuzzy
-#| msgid "You will choose a security key in the next step."
 msgid " You'll enter domain and other details in the next step."
-msgstr "Vous choisirez une clef de sécurité à l'étape suivante."
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2325,10 +2314,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:324001
-#, fuzzy
-#| msgid "Connecting..."
 msgid "Test Connection"
-msgstr "Connexion…"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2339,10 +2326,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:326001
-#, fuzzy
-#| msgid "Your computer's name:"
 msgid "You must enter a user name"
-msgstr "Le nom de votre ordinateur :"
+msgstr ""
 
 #. Type: text
 #. Description
@@ -2359,10 +2344,8 @@ msgstr ""
 #. Type: text
 #. Description
 #: ../ubiquity.templates:330001
-#, fuzzy
-#| msgid "Failed to unmount partitions"
 msgid "Failed to connect to domain."
-msgstr "Échec lors du démontage de partitions"
+msgstr ""
 
 #. Type: title
 #. Description
@@ -2429,9 +2412,6 @@ msgstr ""
 msgid "Removing packages"
 msgstr "Suppression des paquets"
 
-#~ msgid "Error restoring installed applications"
-#~ msgstr "Erreur lors de la restauration des applications installées"
-
 #~ msgid ""
 #~ "An error occurred while restoring previously-installed applications.  The "
 #~ "installation will continue, but you may have to manually reinstall some "
@@ -2439,22 +2419,29 @@ msgstr "Suppression des paquets"
 #~ msgstr ""
 #~ "Une erreur s’est produite lors de la restauration des applications "
 #~ "précédemment installées. L’installation va continuer mais il vous faudra "
-#~ "peut-être réinstaller certains logiciels manuellement après le "
-#~ "redémarrage de l’ordinateur."
+#~ "peut-être réinstaller certains logiciels manuellement après le redémarrage "
+#~ "de l’ordinateur."
+
+#~ msgid "Error restoring installed applications"
+#~ msgstr "Erreur lors de la restauration des applications installées"
 
 #~ msgid ""
-#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your "
-#~ "files on all operating systems. This is experimental and may cause data "
-#~ "loss. Do not use on production systems."
+#~ "Documents, music, and other personal files will be kept. Installed software "
+#~ "will be kept where possible. System-wide settings will be cleared."
+#~ msgstr ""
+#~ "Les documents, musique et autres fichiers personnels seront gardés. Les "
+#~ "logiciels installés seront si possible gardés. Les paramètres du système "
+#~ "seront effacés."
+
+#~ msgid "EXPERIMENTAL: Erase disk and use ZFS"
+#~ msgstr "EXPÉRIMENTAL : effacer le disque et utiliser ZFS"
+
+#~ msgid ""
+#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
+#~ "on all operating systems. This is experimental and may cause data loss. Do "
+#~ "not use on production systems."
 #~ msgstr ""
 #~ "<span foreground=\"darkred\">Avertissement :</span> Tous les fichiers de "
 #~ "tous vos systèmes d’exploitation seront effacés. Cette option est "
-#~ "expérimentale et pourrait entraîner une perte de données. Ne pas "
-#~ "l’utiliser sur des systèmes de production."
-
-#~ msgid ""
-#~ "Web browser, utilities, office software, KDE PIM suite plus additional "
-#~ "internet applications and media players."
-#~ msgstr ""
-#~ "Navigateur Web, utilitaires, logiciels bureautiques, suite PIM de KDE, "
-#~ "applications Internet supplémentaires et diffuseurs de médias."
+#~ "expérimentale et pourrait entraîner une perte de données. Ne pas l’utiliser "
+#~ "sur des systèmes de production."
