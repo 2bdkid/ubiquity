@@ -706,6 +706,8 @@ def set_indicator_keymaps(lang):
     Gtk
 
     gsettings_key = ['org.gnome.libgnomekbd.keyboard', 'layouts']
+    gsettings_sources = ('org.gnome.desktop.input-sources', 'sources')
+    gsettings_options = ('org.gnome.desktop.input-sources', 'xkb-options')
     lang = lang.split('_')[0]
     variants = []
 
@@ -845,6 +847,23 @@ def set_indicator_keymaps(lang):
         else:
             # Use the system default if no other keymaps can be determined.
             gsettings.set_list(gsettings_key[0], gsettings_key[1], [])
+
+        # Gnome Shell only does keyboard layout conversion from old
+        # gsettings_key once. Recently we started to launch keyboard plugin
+        # during ubiquity-dm, hence if we change that key, we should purge the
+        # state that gsd uses, to determine if it should run the
+        # conversion. Which are a stamp file, and having the new key set.
+        # Ideally, I think ubiquity should be more universal and set the new key
+        # directly, instead of relying on gsd keeping the conversion code
+        # around. But it's too late for 20.10 release.
+        gsettings_stamp = os.path.join(
+            '/home',
+            os.getenv("SUDO_USER", os.getenv("USER", "root")),
+            '.local/share/gnome-settings-daemon/input-sources-converted')
+        if os.path.exists(gsettings_stamp):
+            os.remove(gsettings_stamp)
+        gsettings.unset(*gsettings_sources)
+        gsettings.unset(*gsettings_options)
 
     engine.lock_group(0)
 
