@@ -742,7 +742,7 @@ def set_indicator_keymaps(lang):
     def item_str(s):
         '''Convert a zero-terminated byte array to a proper str'''
         import array
-        s = array.array('B', s).tostring()
+        s = array.array('B', s).tobytes()
         i = s.find(b'\x00')
         return s[:i].decode()
 

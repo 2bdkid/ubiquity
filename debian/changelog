@@ -1,3 +1,10 @@
+ubiquity (21.04.2) hirsute; urgency=medium
+
+  * Fix set_indicator_keymaps to work with Python 3.9 (the .tostring() method
+    on arrays, long deprecated, has now been removed).
+
+ -- Michael Hudson-Doyle <michael.hudson@ubuntu.com>  Mon, 30 Nov 2020 12:41:31 +1300
+
 ubiquity (21.04.1) hirsute; urgency=medium
 
   * Update d-i/sources/choose-mirror, switching from focal to hirsute as the
