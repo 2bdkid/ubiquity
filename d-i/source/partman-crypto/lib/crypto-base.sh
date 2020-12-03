@@ -205,7 +205,7 @@ setup_dmcrypt () {
 }
 
 setup_luks () {
-	local mapping device cipher iv size pass
+	local mapping device cipher iv size pass luksopts
 	mapping=$1
 	device=$2
 	cipher=$3
@@ -234,7 +234,11 @@ setup_luks () {
 	fi
 
 	if [ $zkey_available -eq 0 ]; then
-		log-output -t partman-crypto /sbin/cryptsetup -c $cipher-$iv -h $hash -s $size luksFormat $device $pass
+		if db_get partman-crypto/luksformat_options; then
+			luksopts="$RET"
+			log "Additional options for luksFormat: '$luksopts'"
+		fi
+		log-output -t partman-crypto /sbin/cryptsetup -c $cipher-$iv -h $hash -s $size $luksopts luksFormat $device $pass
 		if [ $? -ne 0 ]; then
 			log "luksFormat failed"
 			return 2

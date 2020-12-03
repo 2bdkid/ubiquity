@@ -1,3 +1,12 @@
+partman-crypto (101ubuntu5) hirsute; urgency=medium
+
+  * Add preseed option 'partman-crypto/luksformat_options' to
+    provide more options for 'cryptsetup luksFormat' (LP: #1898129)
+    - d/partman-crypto.templates: add preseed option.
+    - lib/crypto-base.sh: check for, log, and use it.
+
+ -- Mauricio Faria de Oliveira <mfo@canonical.com>  Thu, 05 Nov 2020 12:24:33 -0300
+
 partman-crypto (101ubuntu4) eoan; urgency=medium
 
   * Drop a big block in finish.d that iterates partman, and then does
