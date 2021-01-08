@@ -141,6 +141,9 @@ class TestFrontend(unittest.TestCase):
                 'disable_secureboot', 'prepare_foss_disclaimer',
                 'label_free_space', 'label_required_space',
                 'label_download_updates',
+                # This one is set by either the wireless and prepare plugins
+                # to indicate status
+                'status_label',
             ]
             deb_host_arch = subprocess.Popen(
                 ['dpkg-architecture', '-qDEB_HOST_ARCH'],

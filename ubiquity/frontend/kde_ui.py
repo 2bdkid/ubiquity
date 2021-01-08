@@ -37,9 +37,8 @@ import syslog
 import traceback
 
 # kde gui specifics
-import sip
-sip.setapi("QVariant", 1)
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5 import QtCore, QtGui, QtWidgets, uic, sip
+sip.enableautoconversion(QtCore.QVariant, False)
 
 from ubiquity import filteredcommand, i18n, misc, telemetry
 from ubiquity.components import partman_commit, install, plugininstall
@@ -1074,6 +1073,12 @@ class Wizard(BaseFrontend):
             return
 
         self.allow_change_step(False)
+        ui = self.pages[self.pagesindex].ui
+        if hasattr(ui, 'plugin_on_next_clicked'):
+            if ui.plugin_on_next_clicked():
+                # Stop processing and return to the page.
+                self.allow_change_step(True)
+                return
 
         if self.dbfilter is not None:
             self.dbfilter.ok_handler()

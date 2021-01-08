@@ -1,3 +1,25 @@
+ubiquity (21.04.4) hirsute; urgency=medium
+
+  [ Jean-Baptiste Lallement ]
+  * Moved from deprecated sip4 to sip from PyQt5 (LP: #1903378) Thanks Rik
+    Mills for the references.
+  * Replaced deprecated module imp by importlib (LP: #1898494)
+
+  [ Shih-Yuan Lee (FourDollars) ]
+  * set() has a random order when looping it that makes the failure of
+    dependencies issue random. Sort the list of package to make it predictable
+    and easier to diagnose dependency issues.
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * Provide some minimal user feedback on the UI when ubuntu-drivers is busy
+    while running in the background. (LP: #1824905)
+
+  [ Gunnar Hjalmarsson ]
+  * d-i/patches/localechooser-post-base-installer.patch:
+    - Set nl (Dutch) as the default Belgian language (LP: #1907914)
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Fri, 08 Jan 2021 18:13:07 +0000
+
 ubiquity (21.04.3) hirsute; urgency=medium
 
   [ Mauricio Faria de Oliveira ]

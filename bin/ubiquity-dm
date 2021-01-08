@@ -5,7 +5,6 @@ from __future__ import print_function
 import errno
 import getpass
 import grp
-import imp
 import os
 import pwd
 import signal
@@ -23,7 +22,6 @@ sys.path.insert(0, '/usr/lib/ubiquity')
 from ubiquity import gsettings, osextras
 from ubiquity.casper import get_casper
 from ubiquity.debconfcommunicator import DebconfCommunicator
-import ubiquity.frontend
 from ubiquity.misc import create_bool, utf8
 
 
@@ -181,16 +179,14 @@ class DM:
         # this lets us find out which window manager etc. to launch. Be
         # careful that importing this here will cause the underlying library
         # to try to talk to the X server, which won't go well.
+        from importlib import util
         frontend_names = ['gtk_ui', 'kde_ui']
         self.frontend = None
         for f in frontend_names:
-            try:
-                imp.find_module(f, ubiquity.frontend.__path__)
+            if util.find_spec('ubiquity.frontend.%s' % f) is not None:
                 self.frontend = f
                 break
-            except ImportError:
-                pass
-        else:
+        if self.frontend is None:
             raise AttributeError('No frontend available; tried %s' %
                                  ', '.join(frontend_names))
 

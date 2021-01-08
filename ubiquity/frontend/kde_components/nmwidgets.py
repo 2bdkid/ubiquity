@@ -24,14 +24,14 @@
 import string
 import syslog
 
+from PyQt5 import QtCore
+from PyQt5 import QtGui, QtWidgets
+
 if __name__ == "__main__":
     # This is done by kde_ui.py. We need to do the same for our test main(),
     # but it must be done *before* importing any PyQt5 module
-    import sip
-    sip.setapi('QVariant', 1)
-
-from PyQt5 import QtCore
-from PyQt5 import QtGui, QtWidgets
+    from PyQt5 import sip
+    sip.enableautoconversion(QtCore.QVariant, False)
 
 from ubiquity import nm
 from ubiquity.nm import QueuedCaller, NetworkStore, NetworkManager

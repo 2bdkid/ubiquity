@@ -1233,7 +1233,7 @@ class Install(install_misc.InstallBase):
         # enabled
         cache = Cache()
         filtered_extra_packages = install_misc.query_recorded_installed()
-        for package in filtered_extra_packages.copy():
+        for package in sorted(filtered_extra_packages):
             pkg = cache.get(package)
             if not pkg:
                 continue
@@ -1245,7 +1245,8 @@ class Install(install_misc.InstallBase):
                     filtered_extra_packages.remove(package)
                     break
 
-        self.do_install(filtered_extra_packages)
+        # An ordered list from the set() to avoid the random dependencies failure.
+        self.do_install(sorted(filtered_extra_packages))
 
         if self.db.get('ubiquity/install_oem') == 'true':
             try:
@@ -1253,7 +1254,7 @@ class Install(install_misc.InstallBase):
                 # upgrade them to their versions in the OEM archive.
                 with open('/run/ubuntu-drivers-oem.autoinstall', 'r') as f:
                     oem_pkgs = set(f.read().splitlines())
-                    for oem_pkg in oem_pkgs.copy():
+                    for oem_pkg in sorted(oem_pkgs):
                         target_sources_list = self.target_file("etc/apt/sources.list.d/{}.list".format(oem_pkg))
                         if not os.path.exists(target_sources_list):
                             continue
@@ -1265,7 +1266,8 @@ class Install(install_misc.InstallBase):
                             syslog.syslog("Failed to apt update {}".format(target_sources_list))
                             oem_pkgs.discard(oem_pkg)
                     if oem_pkgs:
-                        self.do_install(oem_pkgs)
+                        # An ordered list from the set() to avoid the random dependencies failure.
+                        self.do_install(sorted(oem_pkgs))
             except FileNotFoundError:
                 pass
 
