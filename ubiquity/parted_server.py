@@ -20,7 +20,6 @@
 # Simple bindings to allow Python programs to talk to parted_server.
 # I don't recommend attempting to use these outside Ubiquity.
 
-from __future__ import print_function
 from ubiquity import misc
 
 import fcntl

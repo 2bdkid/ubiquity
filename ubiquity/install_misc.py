@@ -20,8 +20,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from __future__ import print_function
-
 import errno
 import fcntl
 import hashlib
@@ -38,6 +36,7 @@ import traceback
 from apt.cache import Cache
 from apt.progress.base import InstallProgress
 from apt.progress.text import AcquireProgress
+import apt
 import apt_pkg
 import debconf
 
@@ -524,33 +523,46 @@ def broken_packages(cache):
     return brokenpkgs
 
 
-def mark_install(cache, pkg):
-    cachedpkg = get_cache_pkg(cache, pkg)
-    if cachedpkg is None:
-        return
-    if not cachedpkg.is_installed or cachedpkg.is_upgradable:
-        apt_error = False
-        try:
-            cachedpkg.mark_install()
-        except SystemError:
-            apt_error = True
-        if cache._depcache.broken_count > 0 or apt_error:
-            brokenpkgs = broken_packages(cache)
-            while brokenpkgs:
-                for brokenpkg in brokenpkgs:
-                    get_cache_pkg(cache, brokenpkg).mark_keep()
-                new_brokenpkgs = broken_packages(cache)
-                if brokenpkgs == new_brokenpkgs:
-                    break  # we can do nothing more
-                brokenpkgs = new_brokenpkgs
+def mark_install(cache, to_install):
+    to_install = sorted(to_install)
 
-            if cache._depcache.broken_count > 0:
-                # We have a conflict we couldn't solve
-                cache.clear()
-                raise InstallStepError(
-                    "Unable to install '%s' due to conflicts." % pkg)
-    else:
-        cachedpkg.mark_auto(False)
+    for pkg in to_install:
+        cachedpkg = get_cache_pkg(cache, pkg)
+        if cachedpkg is None:
+            continue
+        if not cachedpkg.is_installed:
+            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=False)
+        elif cachedpkg.is_upgradable:
+            auto = cachedpkg.is_auto_installed
+            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=False)
+            cachedpkg.mark_auto(auto)
+
+    for pkg in to_install:
+        cachedpkg = get_cache_pkg(cache, pkg)
+        if cachedpkg is None:
+            continue
+        if not cachedpkg.is_installed:
+            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=False)
+        elif cachedpkg.is_upgradable:
+            auto = cachedpkg.is_auto_installed
+            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=False)
+            cachedpkg.mark_auto(auto)
+
+    if cache.broken_count > 0:
+        brokenpkgs = ", ".join(sorted(broken_packages(cache)))
+        syslog.syslog(syslog.LOG_WARNING, f"Try to fix these broken packages: {brokenpkgs}.")
+        for pkg in cache:
+            if pkg.marked_delete:
+                pkg.mark_keep()
+        apt.ProblemResolver(cache).resolve_by_keep()
+
+    if cache.broken_count > 0:
+        brokenpkgs = ", ".join(sorted(broken_packages(cache)))
+        to_install = ", ".join(to_install)
+        # We have a conflict we couldn't solve
+        cache.clear()
+        raise InstallStepError(
+            f"Unable to install {to_install} due to the broken packages: {brokenpkgs}.")
 
 
 def expand_dependencies_simple(cache, keep, to_remove, recommends=True):
@@ -934,8 +946,7 @@ class InstallBase:
                 return
 
             with cache.actiongroup():
-                for pkg in to_install:
-                    mark_install(cache, pkg)
+                mark_install(cache, to_install)
 
             self.db.progress('SET', 1)
             self.progress_region(1, 10)

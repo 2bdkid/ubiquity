@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-from __future__ import print_function
-
 import errno
 import getpass
 import grp
@@ -406,6 +404,24 @@ EndSection
                 stdin=null, stdout=logfile, stderr=logfile,
                 preexec_fn=self.drop_privileges))
 
+        if (
+            osextras.find_on_path("kwin") or
+            osextras.find_on_path("kwin_x11") or
+            osextras.find_on_path("gnome-shell")
+        ) and osextras.find_on_path("dbus-update-activation-environment"):
+            subprocess.Popen(
+                [
+                    "dbus-update-activation-environment",
+                    "--verbose",
+                    "--systemd",
+                    "DISPLAY",
+                ],
+                stdin=null,
+                stdout=logfile,
+                stderr=logfile,
+                preexec_fn=self.drop_privileges,
+            )
+
         # Accessibility infrastructure
         proc_cmdline = []
         with open('/proc/cmdline', 'r') as fp:
@@ -507,8 +523,7 @@ EndSection
                             'dbus-update-activation-environment')):
                         subprocess.Popen(
                             ['dbus-update-activation-environment',
-                             '--verbose', '--systemd', 'XDG_CURRENT_DESKTOP',
-                             'DISPLAY'],
+                             '--verbose', '--systemd', 'XDG_CURRENT_DESKTOP'],
                             stdin=null, stdout=logfile, stderr=logfile,
                             preexec_fn=self.drop_privileges)
 
@@ -700,7 +715,7 @@ EndSection
             if 'access=v1' not in proc_cmdline:
                 log('paint background')
                 path = \
-                    '/usr/share/wallpapers/Next/contents/images/2560x1600.jpg'
+                    '/usr/share/wallpapers/Next/contents/images/2560x1600.png'
                 extras.append(subprocess.Popen(
                     ['ubiquity-qtsetbg', path],
                     stdin=null, stdout=logfile, stderr=logfile,

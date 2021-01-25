@@ -17,8 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-from __future__ import print_function
-
 import glob
 import os
 import subprocess
@@ -84,9 +82,6 @@ class PageGtk(PreparePageBase):
     restricted_package_name = 'ubuntu-restricted-addons'
 
     def __init__(self, controller, *args, **kwargs):
-        if self.is_automatic:
-            self.page = None
-            return
         self.controller = controller
         from ubiquity.gtkwidgets import Builder
         builder = Builder()
@@ -317,9 +312,6 @@ class PageKde(PreparePageBase):
 
     def __init__(self, controller, *args, **kwargs):
         from ubiquity.qtwidgets import StateBox
-        if self.is_automatic:
-            self.page = None
-            return
         self.controller = controller
         try:
             from PyQt5 import uic

@@ -1,3 +1,23 @@
+ubiquity (21.04.5) hirsute; urgency=medium
+
+  [ Mauricio Faria de Oliveira ]
+  * ubiquity/plugins/ubi-prepare.py: let the prepare page run in
+    automatic mode to install 3rd party drivers. (LP: #1895351)
+
+  [ Iain Lane ]
+  * Drop all "from __future__ import print". This was kept 8 years ago when
+    porting to py3, because pyflakes required it at the time to work properly.
+  * ubiquity-dm: Set DISPLAY in the systemd environment for kubuntu too.
+  * netcfg/tests/tests.mk: Disable -Werror=format.
+    Upstream `check` has rewritten the macros, and now they trip these
+    warnings. They should be updated to use ck_assert_* really.
+
+  [ Shih-Yuan Lee (FourDollars) ]
+  * install_misc.py: Use another mechanism to install the packages. (LP:
+    #1908023)
+
+ -- Iain Lane <iain.lane@canonical.com>  Mon, 25 Jan 2021 18:24:07 +0000
+
 ubiquity (21.04.4) hirsute; urgency=medium
 
   [ Jean-Baptiste Lallement ]
