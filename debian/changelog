@@ -1,3 +1,11 @@
+ubiquity (21.04.7) hirsute; urgency=medium
+
+  [ William 'jawn-smith' Wilson ]
+  * Listen on systemd signals in order to wait for sound.target to come
+    up before attempting to play the system ready sound (LP: #1901043)
+
+ -- Brian Murray <brian@ubuntu.com>  Fri, 29 Jan 2021 09:57:20 -0800
+
 ubiquity (21.04.6) hirsute; urgency=medium
 
   * Revert "BD on iproute2" There's a mock 'ip' command which is supposed to

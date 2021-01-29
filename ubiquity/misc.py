@@ -11,6 +11,7 @@ import subprocess
 import syslog
 
 from ubiquity import osextras
+from gi.repository import Gio, GLib, GObject
 
 
 def utf8(s, errors="strict"):
@@ -941,5 +942,98 @@ min_install_size = None
 def launch_uri(uri):
     subprocess.Popen(['sensible-browser', uri], close_fds=True,
                      preexec_fn=drop_all_privileges)
+
+
+class SystemdUnitWatcher:
+    def __init__(self, unit, cb):
+        # try connecting to the bus
+        try:
+            self.system_bus = Gio.bus_get_sync(Gio.BusType.SYSTEM)
+            self.system_bus.call_sync(
+                "org.freedesktop.systemd1",
+                "/org/freedesktop/systemd1",
+                "org.freedesktop.systemd1.Manager",
+                "Subscribe",
+                None,  # parameters
+                None,  # reply type
+                Gio.DBusCallFlags.NONE,
+                -1,  # timeout
+                None,  # cancellable
+            )
+            self.system_bus.call(
+                "org.freedesktop.systemd1",
+                "/org/freedesktop/systemd1",
+                "org.freedesktop.systemd1.Manager",
+                "LoadUnit",
+                GLib.Variant("(s)", (unit,)),  # parameters
+                GLib.VariantType("(o)"),  # reply type
+                Gio.DBusCallFlags.NONE,
+                -1,  # timeout
+                None,  # cancellable
+                self._on_get_unit,
+                cb,  # user_data
+            )
+            self.proxy = None
+            self.properties_changed_signal = None
+        except GLib.Error:
+            pass
+        except IOError:
+            pass
+
+    def stop(self):
+        if self.properties_changed_signal:
+            GObject.signal_handler_disconnect(
+                self.proxy, self.properties_changed_signal
+            )
+            self.properties_changed_signal = None
+        self.proxy = None
+
+    def _on_properties_changed(
+        self, proxy, changed_properties, invalidated_properties, cb
+    ):
+        try:
+            if changed_properties["ActiveState"] == "active":
+                self.stop()
+                cb()
+        except KeyError:  # this property didn't change
+            pass
+
+    def _on_got_unit_proxy(self, conn, res, cb):
+        self.proxy = conn.new_finish(res)
+        self.properties_changed_signal = self.proxy.connect(
+            "g-properties-changed", self._on_properties_changed, cb
+        )
+        active_state = self.proxy.get_cached_property(
+            "ActiveState"
+        ).get_string()
+        if active_state == "active":
+            self.stop()
+            cb()
+
+    def _on_get_unit(self, conn, res, cb):
+        try:
+            object_path_v = conn.call_finish(res)
+            object_path = object_path_v.get_child_value(0).get_string()
+            Gio.DBusProxy.new(
+                conn,
+                Gio.DBusProxyFlags.GET_INVALIDATED_PROPERTIES,
+                None,  # GDBusInterfaceInfo
+                "org.freedesktop.systemd1",
+                object_path,
+                "org.freedesktop.systemd1.Unit",
+                None,  # cancellable
+                self._on_got_unit_proxy,
+                cb,  # user_data
+            )
+        except GLib.Error as e:
+            if (
+                e.matches(Gio.io_error_quark(), Gio.IOErrorEnum.DBUS_ERROR) and
+                Gio.DBusError.get_remote_error(e) ==
+                "org.freedesktop.systemd1.NoSuchUnit"
+            ):
+                pass  # the unit doesn't exist, tweak this to error if desired
+            else:
+                raise
+
 
 # vim:ai:et:sts=4:tw=80:sw=4:

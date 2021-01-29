@@ -400,12 +400,18 @@ class Wizard(BaseFrontend):
             self.live_installer.connect(
                 'key-press-event', self.a11y_profile_keys)
 
+        # Wait for sound.target to become ready
+        self.soundWatcher = misc.SystemdUnitWatcher('sound.target',
+                                                    self.play_system_ready)
+
+        self.save_oem_metapackages_list()
+
+    def play_system_ready(self):
+        # play the system ready sound
         if osextras.find_on_path('canberra-gtk-play'):
             subprocess.Popen(
                 ['canberra-gtk-play', '--id=system-ready'],
                 preexec_fn=misc.drop_all_privileges)
-
-        self.save_oem_metapackages_list()
 
     def save_oem_metapackages_list(self, wait_finished=False):
         ''' If we can, update the apt indexes. Then run 'ubuntu-drivers
