@@ -531,10 +531,10 @@ def mark_install(cache, to_install):
         if cachedpkg is None:
             continue
         if not cachedpkg.is_installed:
-            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=False)
+            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=True)
         elif cachedpkg.is_upgradable:
             auto = cachedpkg.is_auto_installed
-            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=False)
+            cachedpkg.mark_install(auto_fix=False, auto_inst=False, from_user=True)
             cachedpkg.mark_auto(auto)
 
     for pkg in to_install:
@@ -542,10 +542,10 @@ def mark_install(cache, to_install):
         if cachedpkg is None:
             continue
         if not cachedpkg.is_installed:
-            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=False)
+            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=True)
         elif cachedpkg.is_upgradable:
             auto = cachedpkg.is_auto_installed
-            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=False)
+            cachedpkg.mark_install(auto_fix=False, auto_inst=True, from_user=True)
             cachedpkg.mark_auto(auto)
 
     if cache.broken_count > 0:

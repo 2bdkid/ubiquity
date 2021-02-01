@@ -1,3 +1,13 @@
+ubiquity (21.04.8) hirsute; urgency=medium
+
+  * install_misc: Mark all installed packages as manually installed.  When
+    we're marking packages to install, mark them as `from_user=True`, which
+    means manually installed. This prevents them being autoremoved either
+    during installation or afterwards in the target system.  Fixes removal of
+    the OEM kernel resulting in unbootable certified systems. (LP: #1914091)
+
+ -- Iain Lane <iain.lane@canonical.com>  Mon, 01 Feb 2021 17:03:00 +0000
+
 ubiquity (21.04.7) hirsute; urgency=medium
 
   [ William 'jawn-smith' Wilson ]
