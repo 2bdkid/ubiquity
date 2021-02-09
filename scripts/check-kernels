@@ -147,8 +147,15 @@ nvidia_stem="$(wants_nvidia)"
 
 if wants_oem_kernel; then
     if [ -n "$compatible" ]; then
-        incompatible="${incompatible:+$incompatible }$compatible"
+        i="${incompatible:+$incompatible }$compatible"
         compatible=""
+        incompatible=""
+        for incompat in ${i}; do
+            # We want the oem, it's not incompatible with us, don't remove it.
+            if [ "${incompat#*-oem}" = "${incompat}" ]; then
+                incompatible="${incompatible:+$incompatible }$incompat"
+            fi
+        done
     fi
     install_new="${install_new:+$install_new }${OEM_KERNEL}"
     if [ "$nvidia_stem" ]; then
