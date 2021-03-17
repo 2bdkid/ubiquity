@@ -777,6 +777,15 @@ _Description: Error configuring connection to Active Directory
  Sorry, Active Directory can't be set up at the moment. Once your system is up
  and running, visit help.ubuntu.com/activedirectory for help.
 
+Template: ubiquity/install/broken_luks_add_key
+Type: error
+_Description: Error setting LUKS recovery key
+ An error occurred while setting the recovery key.  The
+ installation will continue, but you may have to manually add the recovery
+ key in the installed system with the command:
+ .
+ cryptsetup luksAddKey <device>
+
 Template: ubiquity/install/md5_check
 Type: boolean
 Default: true
@@ -1714,3 +1723,43 @@ Template: ubiquity/text/domain_connection_error
 Type: text
 _Description: Failed to connect to domain.
 
+Template: ubiquity/text/show_recovery_key_location_label
+Type: text
+_Description:
+ Show recovery key:
+
+Template: ubiquity/text/show_recovery_key
+Type: text
+_Description:
+ Display recovery key:
+
+Template: ubiquity/text/recovery_key_warning
+Type: text
+_Description:
+ A recovery key is generated and will be temporarily saved on the live system.
+ You can select an alternate location. Save this file and keep it in a safe
+ place elsewhere before rebooting.
+
+Template: ubiquity/text/recovery_key_location_label
+Type: text
+_Description: Location:
+
+Template: ubiquity/crypto_key
+Type: password
+_Description: Crypto key for LUKS + LVM
+
+Template: ubiquity/recovery_key
+Type: password
+_Description: Recovery key for LUKS + LVM
+
+Template: ubiquity/text/save_recovery_key_info
+Type: text
+_Description:
+ Count not save recovery key:
+ .
+ ${ERRORMSG}
+
+Template: ubiquity/text/recovery_key_filename
+Type: text
+_Description:
+ Enter recovery key filename

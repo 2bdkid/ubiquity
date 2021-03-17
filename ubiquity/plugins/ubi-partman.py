@@ -110,6 +110,9 @@ class PageBase(plugin.PluginUI):
     def get_crypto_keys(self):
         pass
 
+    def get_recovery_keys(self):
+        pass
+
 
 class PageGtk(PageBase):
     plugin_title = 'ubiquity/text/part_auto_heading_label'
@@ -210,6 +213,14 @@ class PageGtk(PageBase):
         # Define a list to save grub imformation
         self.grub_options = []
 
+        from gi.repository import Pango
+        self.recovery_key.modify_font(Pango.font_description_from_string('monospace'))
+        self.generate_recovery_key()
+        default_recovery_key_location = os.path.join(misc.get_live_user_home(), 'recovery.key')
+        self.recovery_key_location.set_text(default_recovery_key_location)
+        self.recovery_key.set_visibility(False)
+        self.recovery_key.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'view-reveal-symbolic')
+
     def on_link_clicked(self, widget, uri):
         misc.launch_uri(uri)
 
@@ -291,6 +302,11 @@ class PageGtk(PageBase):
                                       width, height)
             widget.show()
 
+    def generate_recovery_key(self):
+        from uuid import uuid4
+        key = str(uuid4().int >> 64)[:16]
+        self.recovery_key.set_text(key)
+
     def on_advanced_features_clicked(self, widget):
         from gi.repository import Gtk
 
@@ -330,6 +346,48 @@ class PageGtk(PageBase):
             if selected:
                 selected.set_active(True)
             self.use_crypto.set_active(crypto_selected)
+
+    def on_recovery_key_button_clicked(self, widget):
+        from gi.repository import Gtk
+        label = self.controller.get_string('recovery_key_filename')
+
+        # Set HOME to the live session user's home directory so the
+        # filechooser dialog opens at the right location.
+        orig_home = os.getenv('HOME')
+        live_user_home = misc.get_live_user_home()
+        if live_user_home:
+            os.environ['HOME'] = live_user_home
+        save_recovery_dialog = Gtk.FileChooserDialog(label, widget.get_toplevel(),
+                                                     Gtk.FileChooserAction.SAVE,
+                                                     (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+                                                     Gtk.STOCK_OPEN, Gtk.ResponseType.ACCEPT))
+        save_recovery_dialog.set_do_overwrite_confirmation(True)
+        save_recovery_dialog.set_modal(True)
+        save_recovery_dialog.set_current_name(os.path.basename(self.recovery_key_location.get_text()))
+        save_recovery_dialog.set_filename(self.recovery_key_location.get_text())
+        save_recovery_dialog.connect("response", self.on_save_recovery_selected)
+        save_recovery_dialog.remove_shortcut_folder('/root')
+        save_recovery_dialog.show()
+        if orig_home is not None:
+            os.environ['HOME'] = orig_home
+        else:
+            del os.environ['HOME']
+
+    def on_save_recovery_selected(self, dialog, response_id):
+        from gi.repository import Gtk
+        if response_id == Gtk.ResponseType.ACCEPT:
+            self.recovery_key_location.set_text(dialog.get_filename())
+        dialog.destroy()
+
+    def on_recovery_key_generate_button(self, widget):
+        self.generate_recovery_key()
+
+    def on_recovery_key_toggle_visibility(self, widget, icon_pos, event):
+        from gi.repository import Gtk
+        visibility = self.recovery_key.get_visibility()
+        self.recovery_key.set_visibility(not visibility)
+        self.recovery_key.set_icon_from_icon_name(
+            Gtk.EntryIconPosition.SECONDARY, ('view-conceal-symbolic', 'view-reveal-symbolic')[visibility])
 
     def should_show_bitlocker_page(self):
         return ('bitlocker' in self.extra_options or
@@ -435,6 +493,24 @@ class PageGtk(PageBase):
             self.controller.toggle_next_button('install_button')
             self.plugin_is_install = True
             return True
+
+        recovery_key_location_path = self.recovery_key_location.get_text()
+        if recovery_key_location_path:
+            try:
+                with open(recovery_key_location_path, "w") as f:
+                    f.write(self.recovery_key.get_text())
+            except Exception as exc:
+                save_recovery_key_info = 'ubiquity/text/save_recovery_key_info'
+                msg = self.controller.get_string(save_recovery_key_info).replace('${ERRORMSG}', str(exc))
+
+                from gi.repository import Gtk
+                dialog = Gtk.MessageDialog(
+                    self.current_page.get_toplevel(), Gtk.DialogFlags.MODAL,
+                    Gtk.MessageType.ERROR, Gtk.ButtonsType.CLOSE, None)
+                dialog.set_markup(msg)
+                dialog.run()
+                dialog.destroy()
+                return True
 
         # Return control to partman, which will call
         # get_autopartition_choice and start partitioninging the device.
@@ -1583,6 +1659,9 @@ class PageGtk(PageBase):
             return self.password.get_text()
         else:
             return False
+
+    def get_recovery_keys(self):
+        return self.recovery_key.get_text()
 
 
 class PageKde(PageBase):
@@ -3245,6 +3324,8 @@ class Page(plugin.Plugin):
 
             if do_preseed:
                 self.preseed(question, self.ui.get_crypto_keys())
+                self.preseed('ubiquity/crypto_key', self.ui.get_crypto_keys())
+                self.preseed('ubiquity/recovery_key', self.ui.get_recovery_keys())
                 return True
 
         elif question == 'partman-crypto/mainmenu':

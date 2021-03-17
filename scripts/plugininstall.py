@@ -232,6 +232,7 @@ class Install(install_misc.InstallBase):
         self.next_region()
         self.db.progress('INFO', 'ubiquity/install/bootloader')
         self.copy_mok()
+        self.configure_recovery_key()
         self.configure_bootloader()
 
         self.next_region(size=4)
@@ -875,6 +876,56 @@ class Install(install_misc.InstallBase):
                     else:
                         continue
                 os.symlink(linksrc, linkdst)
+
+    def configure_recovery_key(self):
+        crypto_key = self.db.get('ubiquity/crypto_key')
+        recovery_key = self.db.get('ubiquity/recovery_key')
+        if not crypto_key or not recovery_key:
+            self.clean_crypto_keys()
+            return
+
+        debconf_disk = self.db.get('partman-auto/select_disk')
+        disk = debconf_disk.split('/')[-1].replace('=', '/')
+
+        args = ['lsblk', '-lp', '-oNAME,FSTYPE', disk]
+        lsblk_out = subprocess.check_output(args).decode(sys.stdout.encoding)
+        for line in lsblk_out.splitlines():
+            if 'crypto_LUKS' not in line:
+                continue
+            dev = line.split()[0]
+
+        if not dev:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(args))
+            syslog.syslog(syslog.LOG_ERR, 'determining crypto device failed. Output: %s' % lsblk_out)
+            self.clean_crypto_keys()
+            self.db.input('critical', 'ubiquity/install/broken_luks_add_key')
+            self.db.go()
+            return
+        syslog.syslog(' '.join(args))
+
+        key_args = "%s\n%s" % (crypto_key, recovery_key)
+        try:
+            log_args = ['log-output', '-t', 'ubiquity']
+            log_args.extend(['cryptsetup', 'luksAddKey', dev])
+            p = subprocess.run(log_args, input=key_args, encoding="utf-8")
+        except subprocess.CalledProcessError as e:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
+            syslog.syslog(syslog.LOG_ERR, "cryptsetup failed(%s): %s" % (e.returncode, e.output))
+            return
+        finally:
+            self.clean_crypto_keys()
+
+        if p.returncode != 0:
+            syslog.syslog(syslog.LOG_ERR, ' '.join(log_args))
+            self.db.input('critical', 'ubiquity/install/broken_luks_add_key')
+            self.db.go()
+            return
+
+        syslog.syslog(' '.join(log_args))
+
+    def clean_crypto_keys(self):
+        self.db.set('ubiquity/crypto_key', '')
+        self.db.set('ubiquity/recovery_key', '')
 
     def configure_bootloader(self):
         """Configure and install the boot loader."""

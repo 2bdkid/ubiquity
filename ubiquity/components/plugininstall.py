@@ -65,7 +65,8 @@ class Install(FilteredCommand):
             return True
         elif question == 'apt-setup/security-updates-failed':
             fatal = False
-        elif question == 'ubiquity/install/broken_active_directory':
+        elif (question == 'ubiquity/install/broken_active_directory' or
+              question == 'ubiquity/install/broken_luks_add_key'):
             fatal = False
         else:
             fatal = True

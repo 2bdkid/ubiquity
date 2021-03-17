@@ -130,6 +130,7 @@ class TestFrontend(unittest.TestCase):
                 'page_title',
                 # To be calculated and set
                 'partition_lvm_status',
+                'recovery_key_location',
                 # These are "placeholders" for debconfs impromptu notices
                 'ubi_question_dialog', 'question_label',
                 # Calculated error string

@@ -150,6 +150,14 @@ def raise_privileges(func):
     return helper
 
 
+def get_live_user_home():
+    """Returns live user home directory, even if executed under SUDO or PKEXEC"""
+    uid = os.environ.get('PKEXEC_UID', os.environ.get('SUDO_UID'))
+    if uid is not None:
+        return pwd.getpwuid(int(uid)).pw_dir
+    return os.getenv('HOME', '')
+
+
 @raise_privileges
 def grub_options():
     """ Generates a list of suitable targets for grub-installer
