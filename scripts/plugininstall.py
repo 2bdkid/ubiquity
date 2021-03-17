@@ -953,6 +953,7 @@ class Install(install_misc.InstallBase):
         """ Join Active Directory domain and enable pam_mkhomedir """
         use_directory = self.db.get('ubiquity/login_use_directory')
         if use_directory != 'true':
+            install_misc.record_removed(['adcli', 'krb5-config', 'realmd', 'sssd'], recursive=True)
             return
 
         from socket import gethostname
@@ -976,6 +977,7 @@ class Install(install_misc.InstallBase):
             if not self.join_domain(hostname_new, directory_domain, directory_user, directory_passwd):
                 self.db.input('critical', 'ubiquity/install/broken_active_directory')
                 self.db.go()
+            install_misc.record_removed(['adcli'], recursive=True)
         finally:
             for bind in binds:
                 misc.execute('umount', '-f', self.target + bind)
@@ -1013,6 +1015,24 @@ class Install(install_misc.InstallBase):
             return False
 
         syslog.syslog(' '.join(log_args))
+
+        # Configure krb5 client so access to AD with GPO enabled works out of
+        # the box after installation.
+
+        # Split hostname and domainname
+        krb5conf = os.path.join(self.target, 'etc', 'krb5.conf')
+        dn = ''
+        if '.' in directory_domain:
+            dn = '.'.join(directory_domain.split('.')[1:]).upper()
+        install_misc.set_debconf(self.target, 'krb5-config/default_realm', dn, self.db)
+        install_misc.set_debconf(self.target, 'krb5-config/add_servers_realm', dn, self.db)
+        install_misc.set_debconf(self.target, 'krb5-config/admin_server', directory_domain, self.db)
+        install_misc.set_debconf(self.target, 'krb5-config/kerberos_servers', directory_domain, self.db)
+
+        os.unlink(krb5conf)
+
+        install_misc.reconfigure(self.target, 'krb5-config')
+
         return True
 
     def copy_mok(self):

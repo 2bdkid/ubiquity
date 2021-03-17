@@ -1,3 +1,29 @@
+ubiquity (21.04.11) hirsute; urgency=medium
+
+  [ Didier Roche ]
+  [ Jean-Baptiste Lallement ]
+  * Configure krb5 client so access to AD with GPO enabled works out of the
+    box after installation.
+  * Keep packages required for AD installed. When AD installation is selected
+    we want to keep all the packages used to make it work and remove them
+    otherwise.
+
+  [ Dimitri John Ledkov ]
+  * install_misc: refuse to install packages that have been marked for removal.
+    This should generally fix issues we've been seeing with installations using
+    the OEM metapackages.  (LP: #1914374)
+  * Merge netcfg 171 from Debian into ~ubuntu-installer repo, and subtree
+    pull it in.
+  * Automatic update of included source packages: netcfg 171ubuntu1
+  * Build udebs with !noudeb profile set, to actually build with udebs.
+  * Delete KeyboardNames.pl becuase it is annoying.
+  * Automatic update of included source packages.
+  * Properly drop dh-systemd build-dep from the d-i/update-control script.
+  * Add symlink in netcfg mock_paths with and without _fn suffix, cause
+    check in hirsute-release & hirsute-proposed want one or the other.
+
+ -- Dimitri John Ledkov <xnox@ubuntu.com>  Wed, 17 Mar 2021 02:22:11 +0000
+
 ubiquity (21.04.10) hirsute; urgency=medium
 
   * Drop build-dependency on obsolete dh-systemd

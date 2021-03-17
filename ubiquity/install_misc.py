@@ -227,6 +227,13 @@ def query_recorded_installed():
         with open("/var/lib/ubiquity/apt-installed") as record_file:
             for line in record_file:
                 apt_installed.add(line.strip())
+    apt_removed, apt_removed_recursive = query_recorded_removed()
+    all_removed = apt_removed | apt_removed_recursive
+    if apt_installed & all_removed:
+        syslog.syslog(
+            'Refusing to install %s: marked to be removed later on, so this '
+            'would be redundant.' % (apt_installed & all_removed))
+    apt_installed = apt_installed - all_removed
     return apt_installed
 
 

@@ -71,6 +71,7 @@ class Install(install_misc.InstallBase):
 
         self.select_language_packs(save=True)
         self.select_ecryptfs()
+        self.keep_ad_tools()
         if self.db.get('ubiquity/install/generate-blacklist') == 'true':
             self.db.progress('START', 0, 100, 'ubiquity/install/title')
             self.db.progress('INFO', 'ubiquity/install/blacklist')
@@ -749,6 +750,14 @@ class Install(install_misc.InstallBase):
                                   os.path.join(home, homedir))
                     install_misc.record_installed(['ecryptfs-utils'])
                     break
+
+    def keep_ad_tools(self):
+        """Mark Active Directory tools to be kept for now
+
+        The decision in plugininstall (after the copy starts) will tell us
+        if the user has selected or not AD integration, and so, which tools to remove."""
+
+        install_misc.record_installed(['adcli', 'krb5-config', 'realmd', 'sssd'])
 
 
 if __name__ == '__main__':

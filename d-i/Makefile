@@ -35,7 +35,7 @@ build:
 	set -e; for package in $(PACKAGES); do \
 		if [ -d "$(SOURCEDIR)/$$package" ]; then \
 			(cd "$(SOURCEDIR)/$$package" && \
-			 debian/rules build) || exit 1; \
+			 DEB_BUILD_PROFILES='!noudeb' debian/rules build) || exit 1; \
 		fi; \
 	done
 
@@ -43,7 +43,7 @@ clean:
 	rm -rf $(APTDIR)
 	for dir in $(SOURCEDIR)/*; do \
 		if [ "$${dir##*/}" != console-setup ] && [ -d "$$dir" ]; then \
-			(cd "$$dir" && debian/rules clean) || exit 1; \
+			(cd "$$dir" && DEB_BUILD_PROFILES='!noudeb' debian/rules clean) || exit 1; \
 		fi; \
 	done
 	$(MAKE) -C $(SOURCEDIR)/console-setup/Keyboard clean
@@ -57,7 +57,7 @@ install:
 		if [ -d "$(SOURCEDIR)/$$package" ]; then \
 			(export NO_PKG_MANGLE=1; \
 			 cd "$(SOURCEDIR)/$$package" && \
-			 debian/rules binary && \
+			 DEB_BUILD_PROFILES='!noudeb' debian/rules binary && \
 			 rm -rf debian/*/DEBIAN) || exit 1; \
 		fi; \
 	done
