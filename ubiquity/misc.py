@@ -640,6 +640,8 @@ def format_size(size):
 
 
 def debconf_escape(text):
+    if type(text) is not str:
+        return text
     escaped = text.replace('\\', '\\\\').replace('\n', '\\n')
     return re.sub(r'(\s)', r'\\\1', escaped)
 
