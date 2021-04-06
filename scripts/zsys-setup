@@ -588,7 +588,6 @@ elif [ "${COMMAND}" = "finalize" ]; then
 	# After enabling the generator we should run zfs set canmount=on DATASET
 	# in the chroot for one dataset of each pool to refresh the zfs cache.
 	echo "I: Activating zfs generator"
-	ln -s /usr/lib/zfs-linux/zed.d/history_event-zfs-list-cacher.sh "${TARGET}/etc/zfs/zed.d"
 
 	# Create zpool cache
 	zpool set cachefile= bpool
