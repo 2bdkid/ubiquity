@@ -977,7 +977,7 @@ class Install(install_misc.InstallBase):
                                 self.db.set('grub-installer/bootdev', response)
                         else:
                             break
-                    if arch == 'amd64' and subarch != 'efi':
+                    if arch == 'amd64' and subarch != 'efi' and os.path.ismount("/target/boot/efi"):
                         dbfilter = grubinstaller.GrubInstaller(
                             None, self.db, extra_args=['amd64/efi'])
                         ret = dbfilter.run_command(auto_process=True)
