@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-10-01 17:47+0200\n"
-"PO-Revision-Date: 2020-05-27 14:12+0000\n"
-"Last-Translator: abuyop <Unknown>\n"
+"PO-Revision-Date: 2020-11-16 20:11+0000\n"
+"Last-Translator: MFauzilkamil Zainuddin <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2020-10-15 21:36+0000\n"
-"X-Generator: Launchpad (build 781851f4dc11c93bc506eb54e6a0d35c919a1ce6)\n"
+"X-Launchpad-Export-Date: 2021-04-15 12:52+0000\n"
+"X-Generator: Launchpad (build 929bdb49da44562d032228b8f93c5c598dae8678)\n"
 "Language: ms\n"
 
 #. Type: text
@@ -1521,7 +1521,7 @@ msgstr "Maaf"
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:225001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Matikan RST"
 
 #. Type: text
 #. Description
@@ -1532,12 +1532,16 @@ msgid ""
 "phone or other device: <a "
 "href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Komputer ini menggunakan Intel RST (Rapid Storage Technology). Anda perlu "
+"matikan RST sebelum memasang Ubuntu. Untuk panduan, buka halaman ini dari "
+"telefon bimbit atau peranti lain: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Matikan BitLocker"
 
 #. Type: text
 #. Description
@@ -1548,6 +1552,10 @@ msgid ""
 "page on a phone or other device: <a "
 "href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Komputer ini menggunakan penyulitan Windows BitLocker. Anda perlu matikan "
+"BitLocker dalam Windows sebelum memasang Ubuntu. Untuk panduan, buka halaman "
+"ini dari telefon bimbit atau peranti lain: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1682,6 +1690,9 @@ msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
+"Pemasangan pemandu pihak-ketiga memerlukan konfigurasi Secure Boot. Untuk "
+"itu, anda perlu memilih kunci keselamatan sekarang, dan masukkannya apabila "
+"sistem dimulakan semula."
 
 #. Type: text
 #. Description
@@ -2012,7 +2023,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:286001 ../ubiquity.templates:288001
 msgid "None selected"
-msgstr ""
+msgstr "Tiada satu dipilih"
 
 #. Type: text
 #. Description
@@ -2175,6 +2186,11 @@ msgid ""
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
+"Anda telah memilih untuk menerima perisian pihak ketiga sebagai sebahagian "
+"dari pemasangan, yang mana untuk sistem ini menyertakan pemandu perkakasan "
+"untuk grafik dan/atau perkakasan wi-fi. Sistem anda juga membenarkan UEFI "
+"Secure Boot. UEFI Secure Boot memerlukan konfigurasi untuk membenarkan "
+"penggunaan pemandu pihak ketiga."
 
 #. Type: text
 #. Description
@@ -2185,6 +2201,10 @@ msgid ""
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
+"Setelah pemasangan selesai, Ubuntu akan membantu anda untuk konfigurasi UEFI "
+"Secure Boot. Untuk memastikan perubahan ini dibuat oleh anda sebagai "
+"pengguna sah, dan bukan penyerang, anda mesti memilih katalaluan sekarang "
+"dan guna katalaluan yang sama selepas reboot untuk mengesahkan perubahan."
 
 #. Type: text
 #. Description
@@ -2367,35 +2387,3 @@ msgstr ""
 #: ../oem-config.templates:3001
 msgid "Removing packages"
 msgstr "Membuang pakej-pakej"
-
-#~ msgid "Error restoring installed applications"
-#~ msgstr "Ralat memulihjan aplikasi yang dipasang"
-
-#~ msgid ""
-#~ "An error occurred while restoring previously-installed applications.  The "
-#~ "installation will continue, but you may have to manually reinstall some "
-#~ "applications after the computer reboots."
-#~ msgstr ""
-#~ "Ralat berlaku semasa memulihkan aplikasi yang dipasang terdahulu. Pemasangan "
-#~ "akan diteruskan, tetapi anda mungkin memasang semula beberapa aplikasi "
-#~ "secara manual selepas komputer dibutkan semula."
-
-#~ msgid ""
-#~ "Documents, music, and other personal files will be kept. Installed software "
-#~ "will be kept where possible. System-wide settings will be cleared."
-#~ msgstr ""
-#~ "Dokumen, muzik, dan fail peribadi yang lain akan disimpan. Perisian yang "
-#~ "dipasang akan disimpan di mana mungkin. Tetapan seluruh sistem akan "
-#~ "dihapuskan."
-
-#~ msgid "EXPERIMENTAL: Erase disk and use ZFS"
-#~ msgstr "EKSPERIMENTAL: Padam cakera dan guna ZFS"
-
-#~ msgid ""
-#~ "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
-#~ "on all operating systems. This is experimental and may cause data loss. Do "
-#~ "not use on production systems."
-#~ msgstr ""
-#~ "<span foreground=\"darkred\">Amaran:</span> Ini akan memadam semua fail anda "
-#~ "dalam semua sistem operasi. Ini adalah eksperimental dan mungkin akan "
-#~ "mengakibatkan kehilangan data. Jangan guna dalam sistem produksi."
