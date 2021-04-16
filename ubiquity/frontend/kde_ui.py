@@ -35,8 +35,7 @@ import syslog
 import traceback
 
 # kde gui specifics
-from PyQt5 import QtCore, QtGui, QtWidgets, uic, sip
-sip.enableautoconversion(QtCore.QVariant, False)
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 
 from ubiquity import filteredcommand, i18n, misc, telemetry
 from ubiquity.components import partman_commit, install, plugininstall
