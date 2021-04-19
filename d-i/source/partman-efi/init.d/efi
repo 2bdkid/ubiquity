@@ -10,6 +10,7 @@
 
 gpt_efi_type=c12a7328-f81f-11d2-ba4b-00a0c93ec93b
 msdos_efi_type=0xef
+esp_minimum_size=$((50 * 1024 * 1024))
 
 NUM_ESP=0
 NUM_NO=0
@@ -25,7 +26,9 @@ for dev in /var/lib/partman/devices/*; do
 	partitions=
 	open_dialog PARTITIONS
 	while { read_line num id size type fs path name; [ "$id" ]; }; do
-		if [ "$fs" = fat16 ]; then
+		if [ $size -lt $esp_minimum_size ]; then
+			:
+		elif [ "$fs" = fat16 ]; then
 			partitions="$partitions $id"
 		elif [ "$fs" = fat32 ] && echo "$name" |
                      grep -i "^EFI System Partition" >/dev/null; then
