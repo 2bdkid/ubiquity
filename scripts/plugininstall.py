@@ -886,6 +886,15 @@ class Install(install_misc.InstallBase):
 
         debconf_disk = self.db.get('partman-auto/select_disk')
         disk = debconf_disk.split('/')[-1].replace('=', '/')
+        if not disk:  # disk is not set in manual partitioning mode
+            syslog.syslog(
+                syslog.LOG_ERR,
+                'Determining installation disk failed. '
+                'Setting a recovery key is supported only with partman-auto.')
+            self.clean_crypto_keys()
+            self.db.input('critical', 'ubiquity/install/broken_luks_add_key')
+            self.db.go()
+            return
 
         args = ['lsblk', '-lp', '-oNAME,FSTYPE', disk]
         lsblk_out = subprocess.check_output(args).decode(sys.stdout.encoding)

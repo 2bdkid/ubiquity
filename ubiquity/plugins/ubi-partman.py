@@ -215,7 +215,6 @@ class PageGtk(PageBase):
 
         from gi.repository import Pango
         self.recovery_key.modify_font(Pango.font_description_from_string('monospace'))
-        self.generate_recovery_key()
         default_recovery_key_location = os.path.join(misc.get_live_user_home(), 'recovery.key')
         self.recovery_key_location.set_text(default_recovery_key_location)
         self.recovery_key.set_visibility(False)
@@ -426,6 +425,7 @@ class PageGtk(PageBase):
             self.set_page_title(self.custom_partitioning.get_label())
             self.current_page = self.page_advanced
             self.move_crypto_widgets(auto=False)
+            self.recovery_key.set_text("")
             self.controller.go_to_page(self.current_page)
             self.controller.toggle_next_button('install_button')
             self.plugin_is_install = True
@@ -1649,6 +1649,7 @@ class PageGtk(PageBase):
         self.current_page = self.page_crypto
         self.move_crypto_widgets()
         self.show_encryption_passphrase(True)
+        self.generate_recovery_key()
         self.show_overwrite_space(not(self.use_crypto.get_active() and self.use_zfs.get_active()))
         self.controller.go_to_page(self.current_page)
         self.controller.toggle_next_button('install_button')
