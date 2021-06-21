@@ -574,6 +574,11 @@ class Wizard(BaseFrontend):
             GLib.source_remove(self.timeout_id)
         self.timeout_id = GLib.timeout_add(300, self.check_returncode)
 
+    def set_connectivity_state(self, state):
+        for p in self.pages:
+            if hasattr(p.ui, 'plugin_set_connectivity_state'):
+                p.ui.plugin_set_connectivity_state(state)
+
     def set_online_state(self, state):
         for p in self.pages:
             if hasattr(p.ui, 'plugin_set_online_state'):
@@ -1121,6 +1126,7 @@ class Wizard(BaseFrontend):
         self.allow_go_backward(False)
 
         misc.add_connection_watch(self.network_change)
+        misc.add_connection_watch(self.set_connectivity_state, global_only=False)
 
     def set_window_hints(self, widget):
         if (self.oem_user_config or

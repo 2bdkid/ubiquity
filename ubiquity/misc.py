@@ -880,6 +880,7 @@ def set_indicator_keymaps(lang):
 
 
 NM = 'org.freedesktop.NetworkManager'
+NM_STATE_CONNECTED_SITE = 60
 NM_STATE_CONNECTED_GLOBAL = 70
 
 
@@ -895,23 +896,33 @@ def get_prop(obj, iface, prop):
 
 
 def has_connection():
+    return connection_state() == NM_STATE_CONNECTED_GLOBAL
+
+
+def connection_state():
     import dbus
     bus = dbus.SystemBus()
     manager = bus.get_object(NM, '/org/freedesktop/NetworkManager')
-    state = get_prop(manager, NM, 'State')
-    return state == NM_STATE_CONNECTED_GLOBAL
+    return get_prop(manager, NM, 'State')
 
 
-def add_connection_watch(func):
+def add_connection_watch(func, global_only=True):
     import dbus
 
     def connection_cb(state):
-        func(state == NM_STATE_CONNECTED_GLOBAL)
+        is_connected = False
+        if global_only:
+            if state == NM_STATE_CONNECTED_GLOBAL:
+                is_connected = True
+        else:
+            if state == NM_STATE_CONNECTED_GLOBAL or state == NM_STATE_CONNECTED_SITE:
+                is_connected = True
+        func(is_connected)
 
     bus = dbus.SystemBus()
     bus.add_signal_receiver(connection_cb, 'StateChanged', NM, NM)
     try:
-        func(has_connection())
+        connection_cb(connection_state())
     except dbus.DBusException:
         # We can't talk to NM, so no idea.  Wild guess: we're connected
         # using ssh with X forwarding, and are therefore connected.  This

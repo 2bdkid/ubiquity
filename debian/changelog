@@ -1,3 +1,16 @@
+ubiquity (21.10.2) impish; urgency=medium
+
+  [ Didier Roche ]
+  [ Jean-Baptiste Lallement ]
+  * connectity check: Make a distinction between local and global connection
+    availability. For example, AD can be enabled with a working site
+    connection but no internet, while package download requires a global
+    connection.
+  * revert configuration of Kerberos when AD is enabled. It is not required
+    when all the services are running on Windows.
+
+ -- Jean-Baptiste Lallement <jean-baptiste.lallement@ubuntu.com>  Mon, 21 Jun 2021 12:07:12 +0200
+
 ubiquity (21.10.1) impish; urgency=medium
 
   * choose-mirror: hirsute -> impish

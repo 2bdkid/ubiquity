@@ -1075,24 +1075,6 @@ class Install(install_misc.InstallBase):
             return False
 
         syslog.syslog(' '.join(log_args))
-
-        # Configure krb5 client so access to AD with GPO enabled works out of
-        # the box after installation.
-
-        # Split hostname and domainname
-        krb5conf = os.path.join(self.target, 'etc', 'krb5.conf')
-        dn = ''
-        if '.' in directory_domain:
-            dn = '.'.join(directory_domain.split('.')[1:]).upper()
-        install_misc.set_debconf(self.target, 'krb5-config/default_realm', dn, self.db)
-        install_misc.set_debconf(self.target, 'krb5-config/add_servers_realm', dn, self.db)
-        install_misc.set_debconf(self.target, 'krb5-config/admin_server', directory_domain, self.db)
-        install_misc.set_debconf(self.target, 'krb5-config/kerberos_servers', directory_domain, self.db)
-
-        os.unlink(krb5conf)
-
-        install_misc.reconfigure(self.target, 'krb5-config')
-
         return True
 
     def copy_mok(self):

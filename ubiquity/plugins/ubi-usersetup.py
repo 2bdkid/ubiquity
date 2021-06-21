@@ -514,7 +514,9 @@ class PageGtk(PageBase):
 
         self.controller._wizard.set_page_title(self)
 
-    def plugin_set_online_state(self, state):
+    def plugin_set_connectivity_state(self, state):
+        # For AD we need network connectivity but it can be local and not
+        # necessarily internet connectivity
         if not state:
             self.login_directory.set_active(False)
         self.login_directory.set_sensitive(state)
