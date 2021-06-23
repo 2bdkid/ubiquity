@@ -757,7 +757,7 @@ class Install(install_misc.InstallBase):
         The decision in plugininstall (after the copy starts) will tell us
         if the user has selected or not AD integration, and so, which tools to remove."""
 
-        install_misc.record_installed(['adcli', 'krb5-config', 'realmd', 'sssd'])
+        install_misc.record_installed(['adcli', 'realmd', 'sssd'])
 
 
 if __name__ == '__main__':

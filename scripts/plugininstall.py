@@ -1013,7 +1013,7 @@ class Install(install_misc.InstallBase):
         """ Join Active Directory domain and enable pam_mkhomedir """
         use_directory = self.db.get('ubiquity/login_use_directory')
         if use_directory != 'true':
-            install_misc.record_removed(['adcli', 'krb5-config', 'realmd', 'sssd'], recursive=True)
+            install_misc.record_removed(['adcli', 'realmd', 'sssd'], recursive=True)
             return
 
         from socket import gethostname
