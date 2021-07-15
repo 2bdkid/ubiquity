@@ -9,6 +9,7 @@ import re
 import shutil
 import subprocess
 import syslog
+import json
 
 from ubiquity import osextras
 from gi.repository import Gio, GLib, GObject
@@ -963,6 +964,34 @@ min_install_size = None
 def launch_uri(uri):
     subprocess.Popen(['sensible-browser', uri], close_fds=True,
                      preexec_fn=drop_all_privileges)
+
+
+def is_removable_device(path):
+    """Returns True if path is on a removable device"""
+    lsblk_output = ""
+    cmd = "lsblk -J -o MOUNTPOINT,PATH,RM"
+
+    # Find mount point of path
+    mp = path
+    while not os.path.ismount(mp):
+        mp = os.path.dirname(mp)
+
+    # In ubiquity environment / is the installation media
+    if mp == "/":
+        return True
+
+    # Then search if the corresponding device is removable
+    try:
+        lsblk_output = subprocess.check_output(cmd.split())
+    except subprocess.CalledProcessError:
+        syslog.syslog(syslog.LOG_ERR, "Unable to determine if %s is on a removable device" % path)
+        return False
+
+    devices = json.loads(lsblk_output)
+    for entry in devices["blockdevices"]:
+        if entry["mountpoint"] == mp and entry["rm"]:
+            return True
+    return False
 
 
 class SystemdUnitWatcher:

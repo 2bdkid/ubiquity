@@ -148,7 +148,7 @@ class PageGtk(PageBase):
         for wdg in all_widgets:
             setattr(self, wdg, builder.get_object(wdg))
 
-        # Crypto page
+        # Crypto page, used for both primary and recovery keys
         self.password_strength_pages = {
             'empty': 0,
             'too_short': 1,
@@ -213,12 +213,13 @@ class PageGtk(PageBase):
         # Define a list to save grub imformation
         self.grub_options = []
 
-        from gi.repository import Pango
-        self.recovery_key.modify_font(Pango.font_description_from_string('monospace'))
         default_recovery_key_location = os.path.join(misc.get_live_user_home(), 'recovery.key')
         self.recovery_key_location.set_text(default_recovery_key_location)
         self.recovery_key.set_visibility(False)
         self.recovery_key.set_icon_from_icon_name(Gtk.EntryIconPosition.SECONDARY, 'view-reveal-symbolic')
+        self.verified_recovery_key.set_visibility(False)
+        self.recovery_key_location_warning.set_visible(False)
+        self.enable_recovery_key(False)
 
     def on_link_clicked(self, widget, uri):
         misc.launch_uri(uri)
@@ -285,7 +286,13 @@ class PageGtk(PageBase):
             return
         crypto_widgets += [
             ('verified_crypto_label', 'crypto_label', 'bottom', 1, 1),
-            ('crypto_warning', 'verified_crypto_label', 'bottom', 2, 1),
+            ('recovery_key_enable', 'verified_crypto_label', 'bottom', 1, 1),
+            ('recovery_key_warning', 'recovery_key_enable', 'right', 1, 1),
+            ('recovery_grid', 'recovery_key_warning', 'bottom', 1, 2),
+            ('recovery_key_label', 'recovery_grid', 'left', 1, 1),
+            ('verified_recovery_key_label', 'recovery_key_label', 'bottom', 1, 1),
+            ('recovery_key_location_label', 'verified_recovery_key_label', 'bottom', 1, 1),
+            ('crypto_warning', 'recovery_key_location_label', 'bottom', 2, 1),
             ('crypto_extra_label', 'crypto_warning', 'bottom', 1, 1),
             ('crypto_overwrite_space', 'crypto_extra_label', 'right', 1, 1),
             ('crypto_extra_time', 'crypto_overwrite_space', 'bottom', 1, 1)]
@@ -302,9 +309,12 @@ class PageGtk(PageBase):
             widget.show()
 
     def generate_recovery_key(self):
-        from uuid import uuid4
-        key = str(uuid4().int >> 64)[:16]
+        if not self.recovery_key_enable.get_active():
+            return
+        from secrets import randbelow
+        key = str(randbelow(10**48)).zfill(48)
         self.recovery_key.set_text(key)
+        self.verified_recovery_key.set_text(key)
 
     def on_advanced_features_clicked(self, widget):
         from gi.repository import Gtk
@@ -378,6 +388,9 @@ class PageGtk(PageBase):
             self.recovery_key_location.set_text(dialog.get_filename())
         dialog.destroy()
 
+        is_removable = misc.is_removable_device(self.recovery_key_location.get_text())
+        self.recovery_key_location_warning.set_visible(not is_removable)
+
     def on_recovery_key_generate_button(self, widget):
         self.generate_recovery_key()
 
@@ -385,8 +398,34 @@ class PageGtk(PageBase):
         from gi.repository import Gtk
         visibility = self.recovery_key.get_visibility()
         self.recovery_key.set_visibility(not visibility)
+        self.verified_recovery_key.set_visibility(not visibility)
         self.recovery_key.set_icon_from_icon_name(
             Gtk.EntryIconPosition.SECONDARY, ('view-conceal-symbolic', 'view-reveal-symbolic')[visibility])
+
+    def on_recovery_key_enable_toggled(self, widget):
+        self.enable_recovery_key(widget.get_active())
+
+    def enable_recovery_key(self, enable=False):
+        self.recovery_key_warning.set_sensitive(enable)
+        self.recovery_key_label.set_sensitive(enable)
+        self.recovery_key.set_sensitive(enable)
+        self.recovery_key_generate_button.set_sensitive(enable)
+        self.verified_recovery_key_label.set_sensitive(enable)
+        self.verified_recovery_key.set_sensitive(enable)
+        self.recovery_key_location_label.set_sensitive(enable)
+        self.recovery_key_location_warning.set_sensitive(enable)
+        self.recovery_key_location.set_sensitive(enable)
+        self.recovery_key_button.set_sensitive(enable)
+
+        if enable:
+            self.generate_recovery_key()
+        else:
+            self.recovery_key.set_text("")
+            self.verified_recovery_key.set_text("")
+            self.recovery_strength.set_current_page(
+                self.password_strength_pages['empty'])
+            self.recovery_match.set_current_page(
+                self.password_match_pages['empty'])
 
     def should_show_bitlocker_page(self):
         return ('bitlocker' in self.extra_options or
@@ -1090,8 +1129,15 @@ class PageGtk(PageBase):
             self.partition_dialog_okbutton.set_sensitive(True)
 
         for widget in ['password_grid', 'crypto_label', 'crypto_warning',
-                       'verified_crypto_label', 'crypto_extra_label',
-                       'crypto_overwrite_space', 'crypto_extra_time']:
+                       'verified_crypto_label',
+                       'crypto_extra_label',
+                       'crypto_overwrite_space', 'crypto_extra_time',
+                       'recovery_key_enable', 'recovery_key_warning',
+                       'recovery_grid',
+                       'recovery_key_label',
+                       'verified_recovery_key_label',
+                       'recovery_key_location_label',
+                       'recovery_key_location_warning']:
             getattr(getattr(self, widget), action)()
 
     def show_overwrite_space(self, show_hide):
@@ -1639,6 +1685,28 @@ class PageGtk(PageBase):
             self.password_strength.set_current_page(
                 self.password_strength_pages['empty'])
 
+        # Recovery key
+        recovery = self.recovery_key.get_text()
+        vrecovery = self.verified_recovery_key.get_text()
+
+        if recovery:
+            if recovery != vrecovery:
+                # It's okay to reuse complete since it'll stay False if it's
+                # already false from previous check and switch to False
+                # otherwise.
+                # In either case, we don't want to proceed if the password or
+                # the recovery are invalid.
+                complete = False
+                self.recovery_match.set_current_page(
+                    self.password_match_pages['mismatch'])
+            else:
+                self.recovery_match.set_current_page(
+                    self.password_match_pages['ok'])
+
+            txt = validation.human_password_strength(recovery)[0]
+            self.recovery_strength.set_current_page(
+                self.password_strength_pages[txt])
+
         self.controller.allow_go_forward(complete)
         self.partition_dialog_okbutton.set_sensitive(complete)
         return complete
@@ -1662,7 +1730,10 @@ class PageGtk(PageBase):
             return False
 
     def get_recovery_keys(self):
-        return self.recovery_key.get_text()
+        if self.info_loop(None):
+            return self.recovery_key.get_text()
+        else:
+            return False
 
 
 class PageKde(PageBase):

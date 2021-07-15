@@ -1723,10 +1723,20 @@ Template: ubiquity/text/domain_connection_error
 Type: text
 _Description: Failed to connect to domain.
 
-Template: ubiquity/text/show_recovery_key_location_label
+Template: ubiquity/text/recovery_key_enable
 Type: text
 _Description:
- Show recovery key:
+ Enable recovery key:
+
+Template: ubiquity/text/recovery_key_label
+Type: text
+_Description:
+ Recovery key:
+
+Template: ubiquity/text/verified_recovery_key_label
+Type: text
+_Description:
+ Confirm recovery key:
 
 Template: ubiquity/text/show_recovery_key
 Type: text
@@ -1743,6 +1753,11 @@ _Description:
 Template: ubiquity/text/recovery_key_location_label
 Type: text
 _Description: Location:
+
+Template: ubiquity/text/recovery_key_location_warning
+Type: text
+_Description:
+ It is not recommended to store the key on a non removable device.
 
 Template: ubiquity/crypto_key
 Type: password
@@ -1763,3 +1778,27 @@ Template: ubiquity/text/recovery_key_filename
 Type: text
 _Description:
  Enter recovery key filename
+
+Template: ubiquity/text/recovery_mismatch
+Type: text
+_Description: Passwords do not match
+
+Template: ubiquity/text/recovery_too_short
+Type: text
+_Description: Short password
+
+Template: ubiquity/text/recovery_weak
+Type: text
+_Description: Weak password
+
+Template: ubiquity/text/recovery_fair
+Type: text
+_Description: Fair password
+
+Template: ubiquity/text/recovery_good
+Type: text
+_Description: Good password
+
+Template: ubiquity/text/recovery_strong
+Type: text
+_Description: Strong password
