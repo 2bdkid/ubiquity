@@ -6,6 +6,8 @@ from test.support import run_unittest
 import unittest
 
 import dbus
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, TimezoneMap
 import mock
 

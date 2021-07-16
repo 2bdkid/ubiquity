@@ -1,3 +1,11 @@
+ubiquity (21.10.5) impish; urgency=medium
+
+  * tests/test_gtkwidgets.py, ubiquity/frontend/gtk_ui.py:
+    - use gi.require_version to ensure we import the right gtk bindings
+      (lp: #1936488)
+
+ -- Sebastien Bacher <seb128@ubuntu.com>  Fri, 16 Jul 2021 16:03:27 +0200
+
 ubiquity (21.10.4) impish; urgency=medium
 
   [ Didier Roche ]
