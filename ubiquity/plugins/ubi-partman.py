@@ -288,7 +288,7 @@ class PageGtk(PageBase):
             ('verified_crypto_label', 'crypto_label', 'bottom', 1, 1),
             ('recovery_key_enable', 'verified_crypto_label', 'bottom', 1, 1),
             ('recovery_key_warning', 'recovery_key_enable', 'right', 1, 1),
-            ('recovery_grid', 'recovery_key_warning', 'bottom', 1, 2),
+            ('recovery_grid', 'recovery_key_warning', 'bottom', 1, 3),
             ('recovery_key_label', 'recovery_grid', 'left', 1, 1),
             ('verified_recovery_key_label', 'recovery_key_label', 'bottom', 1, 1),
             ('recovery_key_location_label', 'verified_recovery_key_label', 'bottom', 1, 1),
@@ -1136,9 +1136,10 @@ class PageGtk(PageBase):
                        'recovery_grid',
                        'recovery_key_label',
                        'verified_recovery_key_label',
-                       'recovery_key_location_label',
-                       'recovery_key_location_warning']:
+                       'recovery_key_location_label']:
             getattr(getattr(self, widget), action)()
+        is_removable = misc.is_removable_device(self.recovery_key_location.get_text())
+        self.recovery_key_location_warning.set_visible(not is_removable)
 
     def show_overwrite_space(self, show_hide):
         if show_hide:

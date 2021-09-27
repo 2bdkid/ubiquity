@@ -962,7 +962,7 @@ min_install_size = None
 
 
 def launch_uri(uri):
-    subprocess.Popen(['sensible-browser', uri], close_fds=True,
+    subprocess.Popen(['xdg-open', uri], close_fds=True,
                      preexec_fn=drop_all_privileges)
 
 

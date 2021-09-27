@@ -964,9 +964,7 @@ class Wizard(BaseFrontend):
             request = decision.get_request()
             uri = request.get_uri()
             decision.ignore()
-            subprocess.Popen(['sensible-browser', uri],
-                             close_fds=True,
-                             preexec_fn=misc.drop_all_privileges)
+            misc.launch_uri(uri)
             return True
         return False
 

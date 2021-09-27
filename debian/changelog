@@ -1,3 +1,19 @@
+ubiquity (21.10.6) impish; urgency=medium
+
+  [ Didier Roche ]
+  * debian/ubiquity.templates: fix formatting of error message to not
+    contain markup
+
+  [ Olivier Tilloy ]
+  * ubiquity/frontend/gtk_ui.py, ubiquity/misc.py, debian/control: use
+    xdg-open instead of sensible-browser to open the release notes and
+    other hyperlinks consistently (LP: #1945015)
+
+  [ Yuan-Chen Cheng ]
+  * bin/ubiquity: add pre-install hookdir for oem-config mode
+
+ -- Olivier Tilloy <olivier.tilloy@canonical.com>  Mon, 27 Sep 2021 15:14:25 +0200
+
 ubiquity (21.10.5) impish; urgency=medium
 
   * tests/test_gtkwidgets.py, ubiquity/frontend/gtk_ui.py:
