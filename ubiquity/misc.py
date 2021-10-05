@@ -1086,4 +1086,23 @@ class SystemdUnitWatcher:
                 raise
 
 
+def sudo_wrapper(user):
+    """Return a list of args suitable for use with the subprocess module,
+    to invoke a command as a given user, while preserving a set of useful
+    environment variables. Append the command and list of args to be invoked
+    to the return value of this helper.
+    """
+    preserve_env = [
+        'DBUS_SESSION_BUS_ADDRESS',
+        'XDG_DATA_DIRS',
+        'XDG_RUNTIME_DIR',
+    ]
+    return [
+        'sudo',
+        '--preserve-env={}'.format(','.join(preserve_env)),
+        '-H',
+        '-u', user
+    ]
+
+
 # vim:ai:et:sts=4:tw=80:sw=4:

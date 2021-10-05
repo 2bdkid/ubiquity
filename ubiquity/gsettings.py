@@ -48,8 +48,7 @@ def get(schema, key, user=None):
         user = os.getenv("SUDO_USER", os.getenv("USER", "root"))
 
     subp = subprocess.Popen(
-        ['sudo', '--preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_RUNTIME_DIR',
-         '-H', '-u', user, 'gsettings', 'get', schema, key],
+        misc.sudo_wrapper(user) + ['gsettings', 'get', schema, key],
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
         preexec_fn=misc.drop_all_privileges, universal_newlines=True)
     value = subp.communicate()[0].rstrip('\n')
@@ -106,8 +105,8 @@ def set(schema, key, value, user=None):
         value = "true" if value else "false"
 
     subprocess.call(
-        ['sudo', '--preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_RUNTIME_DIR',
-         '-H', '-u', user, 'gsettings', 'set', schema, key, str(value)],
+        misc.sudo_wrapper(user) +
+        ['gsettings', 'set', schema, key, str(value)],
         preexec_fn=misc.drop_all_privileges)
 
 
@@ -127,6 +126,5 @@ def unset(schema, key, user=None):
         user = os.getenv("SUDO_USER", os.getenv("USER", "root"))
 
     subprocess.call(
-        ['sudo', '--preserve-env=DBUS_SESSION_BUS_ADDRESS,XDG_RUNTIME_DIR',
-         '-H', '-u', user, 'gsettings', 'reset', schema, key],
+        misc.sudo_wrapper(user) + ['gsettings', 'reset', schema, key],
         preexec_fn=misc.drop_all_privileges)

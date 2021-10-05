@@ -1,3 +1,12 @@
+ubiquity (21.10.7) impish; urgency=medium
+
+  * ubiquity/gsettings.py, ubiquity/misc.py, data/ubiquity.desktop.in: also
+    preserve XDG_DATA_DIRS when running ubiquity in a live session, which
+    fixes opening the release notes hyperlink (and all other hyperlinks)
+    with the correct application (firefox vs gedit) (LP: #1945658)
+
+ -- Olivier Tilloy <olivier.tilloy@canonical.com>  Tue, 05 Oct 2021 17:55:29 +0200
+
 ubiquity (21.10.6) impish; urgency=medium
 
   [ Didier Roche ]
