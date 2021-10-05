@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: debian-installer\n"
 "Report-Msgid-Bugs-To: ubiquity@packages.debian.org\n"
 "POT-Creation-Date: 2020-10-01 17:47+0200\n"
-"PO-Revision-Date: 2020-11-16 20:11+0000\n"
-"Last-Translator: dongha <Unknown>\n"
+"PO-Revision-Date: 2021-04-21 12:38+0000\n"
+"Last-Translator: Vu Do Quynh <vdquynh@gmail.com>\n"
 "Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2021-04-15 12:52+0000\n"
-"X-Generator: Launchpad (build 929bdb49da44562d032228b8f93c5c598dae8678)\n"
+"X-Launchpad-Export-Date: 2021-10-05 15:36+0000\n"
+"X-Generator: Launchpad (build d41d323cd49b34518b2141c77ec7b2f852e5f261)\n"
 "Language: vi\n"
 
 #. Type: text
@@ -27,13 +27,13 @@ msgstr "Đang kết nối..."
 #. Description
 #: ../ubiquity.templates:4001
 msgid "Connection failed."
-msgstr ""
+msgstr "Kết nối thất bại."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:5001
 msgid "Connected."
-msgstr ""
+msgstr "Đã kết nối"
 
 #. Type: text
 #. Description
@@ -378,7 +378,7 @@ msgstr "Chuẩn bị các phân vùng"
 #. Omit the [ ... ] from the translation.
 #: ../ubiquity.templates:55001
 msgid "_Restart[ action ]"
-msgstr ""
+msgstr "_Khởi động lại"
 
 #. Type: text
 #. Description
@@ -459,7 +459,7 @@ msgstr "Bạn chọn phương án nào?"
 #. Description
 #: ../ubiquity.templates:67001
 msgid "_Skip"
-msgstr ""
+msgstr "_Bỏ qua"
 
 #. Type: title
 #. Description
@@ -748,7 +748,7 @@ msgstr "Dừng"
 #. Translators, this text will appear on a button, so KEEP IT SHORT
 #: ../ubiquity.templates:110001
 msgid "Continue in UEFI mode"
-msgstr ""
+msgstr "Tiếp tục trong chế độ UEFI"
 
 #. Type: text
 #. Description
@@ -951,7 +951,7 @@ msgstr "Đang cấu hình bộ nạp khởi động..."
 #. Description
 #: ../ubiquity.templates:134001
 msgid "Configuring Active Directory..."
-msgstr ""
+msgstr "Cấu hình Active Directory"
 
 #. Type: text
 #. Description
@@ -1112,7 +1112,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:151001
 msgid "Error configuring connection to Active Directory"
-msgstr ""
+msgstr "Lỗi cấu hình kết nối đến Active Directory"
 
 #. Type: error
 #. Description
@@ -1121,6 +1121,9 @@ msgid ""
 "Sorry, Active Directory can't be set up at the moment. Once your system is "
 "up and running, visit help.ubuntu.com/activedirectory for help."
 msgstr ""
+"Rất tiếc, không thể cấu hình Active Directory ngay bây giờ. Sau khi hệ thống "
+"hoạt động được, vui lòng truy cập help.ubuntu.com/activedirectory để tìm sự "
+"giúp đỡ."
 
 #. Type: text
 #. Description
@@ -1239,7 +1242,7 @@ msgstr "Không dây"
 #. Description
 #: ../ubiquity.templates:180001
 msgid "Software"
-msgstr ""
+msgstr "Phần mềm"
 
 #. Type: text
 #. Description
@@ -1384,7 +1387,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:202001
 msgid "Updates and other software"
-msgstr ""
+msgstr "Các cập nhật và phần mềm khác"
 
 #. Type: text
 #. Description
@@ -1500,14 +1503,14 @@ msgstr "Để có kết quả tốt nhất, hãy chắc chắn rằng máy tính
 #. Description
 #: ../ubiquity.templates:224001
 msgid "Sorry"
-msgstr ""
+msgstr "Xin lỗi"
 
 #. Type: text
 #. Description
 #. RST means "Rapid Storage Technology". Don't translate it.
 #: ../ubiquity.templates:225001
 msgid "Turn off RST"
-msgstr ""
+msgstr "Đã tắt RST"
 
 #. Type: text
 #. Description
@@ -1518,12 +1521,16 @@ msgid ""
 "phone or other device: <a "
 "href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 msgstr ""
+"Máy tính này sử dụng Intel RST (Công nghệ lưu trữ nhanh). Bạn cần phải tắt "
+"RST trước khi cài đặt Ubuntu. Để được hướng dẫn chi tiết, hãy mở trang web "
+"này trên điện thoại hoặc thiết bị khác: <a "
+"href=\"https://help.ubuntu.com/rst\">help.ubuntu.com/rst</a>"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:227001
 msgid "Turn off BitLocker"
-msgstr ""
+msgstr "Tắt BitLocker"
 
 #. Type: text
 #. Description
@@ -1534,6 +1541,10 @@ msgid ""
 "page on a phone or other device: <a "
 "href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 msgstr ""
+"Máy tính này đang dùng Windows BitLocker encryption. Bạn cần tắt BitLocker "
+"trong Windows trước khi ;uốn cài đặt Ubuntu. Bạn có thể tham khảo các chỉ "
+"dẫn trên trang web sau đây: <a "
+"href=\"https://help.ubuntu.com/bitlocker\">help.ubuntu.com/bitlocker</a>"
 
 #. Type: text
 #. Description
@@ -1541,14 +1552,14 @@ msgstr ""
 #. RELEASE is a variable substituted into this string, the Ubuntu flavor'
 #: ../ubiquity.templates:229001
 msgid "You need at least ${SIZE} disk space to install ${RELEASE}."
-msgstr ""
+msgstr "Bạn cần có ít nhất ${SIZE} dung lượng trống để cài ${RELEASE}."
 
 #. Type: text
 #. Description
 #. SIZE is a variable substituted into this string, and may be '3.7 GB'
 #: ../ubiquity.templates:230001
 msgid "This computer has only ${SIZE}."
-msgstr ""
+msgstr "Máy tính chỉ còn ${SIZE}."
 
 #. Type: text
 #. Description
@@ -1569,6 +1580,8 @@ msgid ""
 "This software is subject to license terms included with its documentation. "
 "Some is proprietary."
 msgstr ""
+"Phần mềm này tuân theo các điều khoản cấp phép kèm theo tài liệu của nó. Một "
+"số là độc quyền."
 
 #. Type: text
 #. Description
@@ -1577,66 +1590,70 @@ msgid ""
 "Install third-party software for graphics and Wi-Fi hardware and additional "
 "media formats"
 msgstr ""
+"Cài đặt phần mềm third-party cho phần cứng đồ họa và Wi-Fi và các định dạng "
+"phương tiện bổ sung"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:235001
 msgid "Download updates while installing ${RELEASE}"
-msgstr ""
+msgstr "Tải về các bản cập nhật trong khi cài ${RELEASE}"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:236001
 msgid "This saves time after installation."
-msgstr ""
+msgstr "Việc này sẽ rút ngắn thời gian sau khi cài đặt."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:237001
 msgid "Not available because there is no Internet connection."
-msgstr ""
+msgstr "Không khả dụng vì không có kết nối Internet."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:238001
 msgid "What apps would you like to install to start with?"
-msgstr ""
+msgstr "Bạn muốn cài đặt ứng dụng nào để bắt đầu?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:239001
 msgid "Which applications would you like to start with?"
-msgstr ""
+msgstr "Bạn muốn khởi chạy ứng dụng nào?"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:240001
 msgid "Minimal installation"
-msgstr ""
+msgstr "Bản cài đặt tối thiểu"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:241001
 msgid "Web browser and basic utilities."
-msgstr ""
+msgstr "Trình duyệt và tiện ích cơ bản."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:242001
 msgid "Web browser plus basic utilities and applications."
-msgstr ""
+msgstr "Trình duyệt web cộng với các tiện ích và ứng dụng cơ bản."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:243001
 msgid "Normal installation"
-msgstr ""
+msgstr "Cài đặt thông thường"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:244001
 msgid "Web browser, utilities, office software, games, and media players."
 msgstr ""
+"Trình duyệt web, các tiện ích, phần mềm văn phòng, trò chơi, và trình phát "
+"đa phương tiện."
 
 #. Type: text
 #. Description
@@ -1645,12 +1662,14 @@ msgid ""
 "Web browser, utilities, office software, plus additional internet "
 "applications and media players."
 msgstr ""
+"Trình duyệt web, các tiện ích, phần mềm văn phòng, ứng dụng online và trình "
+"phát đa phương tiện"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:246001
 msgid "Other options"
-msgstr ""
+msgstr "Các tùy chọn khác"
 
 #. Type: text
 #. Description
@@ -1659,6 +1678,9 @@ msgid ""
 "Installing third-party drivers requires configuring Secure Boot. To do this, "
 "you need to choose a security key now, and enter it when the system restarts."
 msgstr ""
+"Bạn cần cấu hình lại Secure Boot nếu muốn cài đặt các third-party driver. Để "
+"được làm như vậy, bạn cần chọn một khóa mật để dùng nó khi hệ thống khởi "
+"động lại."
 
 #. Type: text
 #. Description
@@ -1858,6 +1880,8 @@ msgid ""
 "Documents, music, and other personal files will be kept. Installed software "
 "and system-wide settings will be cleared."
 msgstr ""
+"Các tài liệu, âm nhạc và các tệp cá nhân khác sẽ được lưu giữ. Các phần mềm "
+"đã cài đặt và các thông số cấu hình của hệ thống sẽ bị xóa."
 
 #. Type: text
 #. Description
@@ -1927,7 +1951,7 @@ msgstr "Sau:"
 #. Description
 #: ../ubiquity.templates:277001
 msgid "Encrypt the new ${RELEASE} installation for security"
-msgstr ""
+msgstr "Mã hóa bản cài đặt ${RELEASE} để bảo mật"
 
 #. Type: text
 #. Description
@@ -1939,7 +1963,7 @@ msgstr "Ở bước tiếp theo bạn sẽ phải chọn một khóa bảo mật
 #. Description
 #: ../ubiquity.templates:279001
 msgid "Use LVM with the new ${RELEASE} installation"
-msgstr ""
+msgstr "Sử dụng LVM với bản cài đặt ${RELEASE}"
 
 #. Type: text
 #. Description
@@ -1955,7 +1979,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:281001
 msgid "Erase disk and use ZFS"
-msgstr ""
+msgstr "Xoá ổ đĩa và dùng định dạng ZFS"
 
 #. Type: text
 #. Description
@@ -1964,18 +1988,20 @@ msgid ""
 "<span foreground=\"darkred\">Warning:</span> This will delete all your files "
 "on all operating systems."
 msgstr ""
+"<span foreground=\"darkred\">Coi chừng:</span> Tất cả các tệp thuộc tất cả "
+"các hệ điều hành sẽ bị xóa."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:284001
 msgid "Advanced Features"
-msgstr ""
+msgstr "Các tính năng nâng cao"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:285001
 msgid "None"
-msgstr ""
+msgstr "Không có gì"
 
 #. Type: text
 #. Description
@@ -1983,37 +2009,37 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:286001 ../ubiquity.templates:288001
 msgid "None selected"
-msgstr ""
+msgstr "Không chọn gì"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:287001
 msgid "Advanced features..."
-msgstr ""
+msgstr "Các tính năng nâng cao..."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:289001
 msgid "LVM selected"
-msgstr ""
+msgstr "Đã chọn LVM"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:290001
 msgid "LVM and encryption selected"
-msgstr ""
+msgstr "Đã chọn LVM và mã hoá"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:291001
 msgid "ZFS selected"
-msgstr ""
+msgstr "Đã chọn ZFS"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:292001
 msgid "ZFS and encryption selected"
-msgstr ""
+msgstr "Đã chọn ZFS và mã hoá"
 
 #. Type: text
 #. Description
@@ -2041,7 +2067,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:296001
 msgid "Any files outside of ${RELEASE} will not be encrypted."
-msgstr ""
+msgstr "Bất kỳ tập tin nào ngoài $ {RELEASE} sẽ không được mã hóa."
 
 #. Type: text
 #. Description
@@ -2116,6 +2142,8 @@ msgid ""
 "Logical Volume Management (LVM) lets ${RELEASE} treat multiple physical "
 "volumes as a single volume."
 msgstr ""
+"Logical Volume Management (LVM) cho phép $ {RELEASE} xử lý nhiều volume vật "
+"lý như một volume duy nhất."
 
 #. Type: text
 #. Description
@@ -2133,7 +2161,7 @@ msgstr "Tùy chọn Mã hóa..."
 #. Description
 #: ../ubiquity.templates:311001
 msgid "UEFI Secure Boot"
-msgstr ""
+msgstr "Tính năng khởi động an toàn UEFI"
 
 #. Type: text
 #. Description
@@ -2144,6 +2172,10 @@ msgid ""
 "hardware. Your system also has UEFI Secure Boot enabled. UEFI Secure Boot "
 "needs to be configured to allow the use of these third-party drivers."
 msgstr ""
+"Bạn đã chọn bật hoạt các phần mềm third-party khi cài đặt hệ thống, bao gồm "
+"các phần mềm điều khiển thiết bị đồ họa và wi-fi. Hệ thống của bạn cũng đã "
+"bật UEFI Secure Boot. Bạn cần cấu hình UEFI Secure Boot mới được phép dùng "
+"các phần mềm third-party đó."
 
 #. Type: text
 #. Description
@@ -2154,6 +2186,10 @@ msgid ""
 "authorized user, and not by an attacker, you must choose a password now and "
 "then use the same password after reboot to confirm the change."
 msgstr ""
+"Khi cài đặt đã xong, Ubuntu sẽ giúp bạn cấu hình UEFI Secure Boot. Nhằm bảo "
+"đảm sự thay đổi đó do chính bạn, mà không phải do một người hacker, bạn phải "
+"chọn một mật khẩu bây giờ và sẽ phải dùng mật khẩu đó khi máy tính khởi động "
+"lại để xác nhận sự thay đổi."
 
 #. Type: text
 #. Description
@@ -2164,12 +2200,16 @@ msgid ""
 "reboot, Ubuntu will still be able to boot on your system but these third-"
 "party drivers will not be available for your hardware."
 msgstr ""
+"<span foreground=\"darkred\">Cảnh báo</span>: Nếu bạn chọn không cài đặt các "
+"trình điều khiển này hoặc nếu bạn tiếp tục nhưng không xác nhận mật khẩu khi "
+"khởi động lại, Ubuntu vẫn có thể khởi động trên hệ thống của bạn nhưng các "
+"trình điều khiển bên thứ ba này sẽ không khả dụng cho phần cứng của bạn."
 
 #. Type: password
 #. Description
 #: ../ubiquity.templates:313001
 msgid "SecureBoot key for MokPW"
-msgstr ""
+msgstr "SecureBoot key cho MokPW"
 
 #. Type: text
 #. Description
@@ -2194,7 +2234,7 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:317001
 msgid "Active Directory domain name"
-msgstr ""
+msgstr "Tên miền Active Directory"
 
 #. Type: text
 #. Description
@@ -2212,61 +2252,61 @@ msgstr ""
 #. Description
 #: ../ubiquity.templates:320001
 msgid "Use Active Directory"
-msgstr ""
+msgstr "Dùng Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:321001
 msgid " You'll enter domain and other details in the next step."
-msgstr ""
+msgstr " Bạn sẽ nhập tên miền và những chi tiết khác trong bước tiếp theo."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:322001
 msgid "Domain:"
-msgstr ""
+msgstr "Tên miền:"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:323001
 msgid "You must enter a domain name"
-msgstr ""
+msgstr "Bạn phải nhập vào một tên miền"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:324001
 msgid "Test Connection"
-msgstr ""
+msgstr "Kiểm tra Kết nối"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:325001
 msgid "Domain Administrator:"
-msgstr ""
+msgstr "Người quản trị tên miền"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:326001
 msgid "You must enter a user name"
-msgstr ""
+msgstr "Bạn phải nhập một tên người dùng"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:328001
 msgid "Configure Active Directory"
-msgstr ""
+msgstr "Cấu hình Active Directory"
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:329001
 msgid "That name already exists on the network."
-msgstr ""
+msgstr "Tên này đang tồn tại trên mạng."
 
 #. Type: text
 #. Description
 #: ../ubiquity.templates:330001
 msgid "Failed to connect to domain."
-msgstr ""
+msgstr "Lỗi kết nối với tên miền."
 
 #. Type: title
 #. Description
