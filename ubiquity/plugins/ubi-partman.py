@@ -570,6 +570,7 @@ class PageGtk(PageBase):
             # be marked as Install Now.
             self.controller.allow_go_forward(True)
             self.controller.toggle_next_button()
+            self.plugin_is_restart = False
             self.plugin_is_install = False
             return True
         else:
